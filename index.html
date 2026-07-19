@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#0d1015">
+<title>Mechanical Watch Study Model v3.6</title>
+<style>
+:root{--panel:rgba(16,19,25,.95);--line:rgba(255,255,255,.13);--text:#f5f7fa;--muted:#b5bdc9;--gold:#c9a65c;--blue:#3c6fa6}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0d1015;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif}canvas{display:block;width:100%;height:100%;touch-action:none}
+#top{position:fixed;z-index:20;top:max(10px,env(safe-area-inset-top));left:10px;right:10px;display:flex;justify-content:space-between;pointer-events:none}.pill{pointer-events:auto;color:#fff;background:rgba(13,16,21,.82);border:1px solid var(--line);border-radius:13px;padding:10px 12px;backdrop-filter:blur(8px);font-size:13px}
+#info{position:fixed;z-index:15;top:64px;right:10px;max-width:min(345px,76vw);padding:10px 12px;border:1px solid var(--line);border-radius:13px;background:rgba(13,16,21,.80);backdrop-filter:blur(8px);font-size:12px;line-height:1.5;color:var(--muted);pointer-events:none}#partName{color:#fff;font-weight:700}#partDesc{display:block;margin-top:3px}
+#panel{position:fixed;z-index:30;left:0;right:0;bottom:0;background:var(--panel);border:1px solid var(--line);border-bottom:0;border-radius:18px 18px 0 0;transform:translateY(calc(100% - 56px));transition:transform .24s ease;padding-bottom:max(10px,env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.38)}#panel.open{transform:translateY(0)}#handle{height:56px;display:flex;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.08)}#grab{width:48px;height:5px;border-radius:999px;background:rgba(255,255,255,.3)}#body{max-height:min(80vh,760px);overflow:auto;padding:14px 16px 20px;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 13px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:13px}.metric{padding:9px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.035)}.metric b{display:block;font-size:14px}.metric span{font-size:10px;color:var(--muted)}
+.buttons{display:flex;flex-wrap:wrap;gap:8px}.action{min-height:42px;padding:9px 12px;border:1px solid var(--line);border-radius:11px;background:#292e37;color:#fff}.action.active{background:#725d32;border-color:#a98a4a}.row{margin:12px 0}.row label,.section>label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}input[type=range]{width:100%;height:34px}.section{border-top:1px solid rgba(255,255,255,.09);padding-top:12px;margin-top:12px}.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.checks label{display:flex;align-items:center;justify-content:flex-start;gap:9px;font-size:13px;margin:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);cursor:pointer}.checks label:hover{background:rgba(255,255,255,.065)}.checks input{width:19px;height:19px;margin:0;flex:0 0 auto}.checks span{line-height:1.2}select,input[type=time]{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#292e37;color:#fff}.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;color:var(--muted)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.warn{font-size:11px;line-height:1.45;color:#d8c79c;background:rgba(201,166,92,.08);border:1px solid rgba(201,166,92,.25);border-radius:10px;padding:9px;margin-top:10px}.timeGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.full{grid-column:1/-1}.syncLine{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);margin-top:10px}.syncLine input{width:18px;height:18px}.mini{font-size:11px;color:var(--muted);margin-top:6px}#panel.collapsed{transform:translateX(calc(-100% + 46px));overflow:hidden}#panel.collapsed #body{opacity:0;pointer-events:none}#panel.collapsed #handle{border-bottom:0}#panel.collapsed #grab{display:none}#panelToggle{margin-right:8px}.segmented{display:grid;grid-template-columns:1fr 1fr;gap:7px}.segmented button{min-height:44px;padding:8px;border:1px solid var(--line);border-radius:10px;background:#292e37;color:#fff}.segmented button.active{background:#725d32;border-color:#c9a65c;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}.crownControl{padding:11px;border:1px solid rgba(201,166,92,.28);border-radius:12px;background:rgba(201,166,92,.055)}.reserveHead{display:flex;justify-content:space-between;font-size:12px;margin-top:10px}.reserveTrack{height:10px;border-radius:999px;overflow:hidden;background:#222832;border:1px solid var(--line);margin-top:5px}.reserveFill{height:100%;width:50%;background:linear-gradient(90deg,#8f5b35,#c9a65c,#e7d28f);transition:width .15s linear}.crownHint{font-size:11px;line-height:1.45;color:var(--muted);margin-top:6px}.crownDirection{text-align:center;font-size:12px;color:#d8c79c;min-height:18px}.action:disabled,input:disabled{opacity:.48;cursor:not-allowed}.diagnosticControl{padding:11px;border:1px solid rgba(78,216,232,.25);border-radius:12px;background:rgba(78,216,232,.04)}.escStudy{padding:11px;border:1px solid rgba(201,166,92,.30);border-radius:12px;background:rgba(201,166,92,.045)}.escModes{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.escModes button{min-height:42px;border:1px solid var(--line);border-radius:10px;background:#292e37;color:#fff}.escModes button.active{background:#725d32;border-color:#c9a65c}.phaseLegend{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:9px}.phaseLegend span{font-size:10px;color:var(--muted);padding:5px 7px;border:1px solid rgba(255,255,255,.08);border-radius:7px;background:rgba(255,255,255,.025)}.phaseLegend span.active{color:#fff;border-color:#d7b568;background:rgba(201,166,92,.20);box-shadow:0 0 12px rgba(201,166,92,.14)}.phaseStatus{font-size:12px;line-height:1.45;color:#f0dfb4;margin-top:8px;min-height:34px}.escKey{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px;font-size:10px;color:var(--muted)}.balanceStudy{padding:11px;border:1px solid rgba(105,174,255,.30);border-radius:12px;background:rgba(70,125,190,.055)}.balanceReadout{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.balanceReadout div{padding:8px;border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(255,255,255,.03)}.balanceReadout span{display:block;font-size:9px;color:var(--muted)}.balanceReadout b{display:block;font-size:12px;margin-top:2px;color:#eaf2ff}
+.structureStudy{padding:11px;border:1px solid rgba(188,162,112,.32);border-radius:12px;background:rgba(120,92,45,.055)}.structureReadout{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.structureReadout div{padding:8px;border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(255,255,255,.03)}.structureReadout span{display:block;font-size:9px;color:var(--muted)}.structureReadout b{display:block;font-size:12px;margin-top:2px;color:#fff0c9}.powerStudy{padding:11px;border:1px solid rgba(112,205,155,.30);border-radius:12px;background:rgba(62,142,101,.055)}.powerReadout{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.powerReadout div{padding:8px;border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(255,255,255,.03)}.powerReadout span{display:block;font-size:9px;color:var(--muted)}.powerReadout b{display:block;font-size:12px;margin-top:2px;color:#e6fff0}.simButtons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.simButtons button{min-height:40px;padding:7px;border:1px solid var(--line);border-radius:9px;background:#292e37;color:#fff}.historyWrap{margin-top:10px;padding:7px;border:1px solid rgba(255,255,255,.09);border-radius:10px;background:rgba(4,8,12,.42)}#historyCanvas{display:block;width:100%;height:150px;border-radius:7px}.historyLegend{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;font-size:10px;color:var(--muted)}.historyLegend i{display:inline-block;width:14px;height:3px;border-radius:3px;margin-right:4px;vertical-align:middle}.stateGood{color:#9cf0ba!important}.stateWarn{color:#f4d482!important}.stateStop{color:#ff9c9c!important}@media(min-width:900px){#panel{top:10px;left:10px;right:auto;bottom:auto;width:365px;border-radius:15px;border:1px solid var(--line);transform:none;padding-bottom:0}#panel.collapsed{transform:translateX(calc(-100% + 46px))}#panel.collapsed #body{display:none}#handle{display:none}#body{max-height:calc(100vh - 20px)}#top{left:387px}.mobileOnly{display:none}}
+
+#renderStatus{position:fixed;z-index:50;inset:0;display:flex;align-items:center;justify-content:center;background:#0d1015;color:#e7edf4;font-size:14px;letter-spacing:.02em;transition:opacity .25s ease}#renderStatus.done{opacity:0;pointer-events:none}#renderStatus.error{padding:24px;text-align:center;color:#ffd1d1;background:#170d10}.themeNote{font-size:11px;color:var(--muted);margin-top:6px}
+</style>
+</head>
+<body>
+<div id="renderStatus">3Dモデルを読み込み中…</div>
+<div id="top"><div><button class="pill" id="panelToggle">メニュー</button></div><div class="pill">v3.6｜Stage 7 ムーブメント構造詳細</div></div>
+<div id="info"><b>Stage 7：地板・受・巻上げ機構の構造詳細</b><br>選択部品：<span id="partName">なし</span><span id="partDesc">部品をタップ／クリックすると名称と機能を表示します。</span></div>
+<div id="panel">
+ <div id="handle"><div id="grab"></div><span>Mechanical Watch Study Model v3.6</span></div>
+ <div id="body">
+  <h1>機械式時計 Study Model v3.6</h1>
+  <p class="sub">段階7では、地板の加工座、各受の連続輪郭、支持脚、ねじ座、石座、巻真・時刻合わせ機構の配置を整理しました。厚さ方向の基準と支持関係を表示し、ムーブメントとして成立して見える構造へ近づけています。</p>
+  <div class="metrics"><div class="metric"><b>Stage 7/7</b><span>構造・配置詳細</span></div><div class="metric"><b>2.5 Hz</b><span>18,000振動/時</span></div><div class="metric"><b id="ampMetric">270°</b><span>テンプ振幅</span></div></div>
+  <div class="buttons"><button class="action" id="play">一時停止</button><button class="action" id="reset">輪列側</button><button class="action" id="trainView">輪列拡大</button><button class="action" id="dialView">文字板側</button><button class="action" id="sideView">側面</button><button class="action" id="structureView">厚さ確認</button><button class="action" id="topView">真上</button><button class="action" id="escView">脱進機</button><button class="action" id="balanceView">調速機</button></div>
+  <div class="section crownControl">
+   <label>りゅうず位置 <span id="crownModeLabel">位置1：巻上げ</span></label>
+   <div class="segmented"><button id="crownWind" class="active">位置1<br>巻上げ</button><button id="crownSet">位置2<br>時刻合わせ</button></div>
+   <div class="row"><label>りゅうずを回す <span id="crownTurnV">中立</span></label><input id="crownTurn" type="range" min="-100" max="100" value="0"></div>
+   <div class="crownDirection" id="crownDirection">右へ回すと主ゼンマイを巻き上げます</div>
+   <div class="reserveHead"><span>主ゼンマイ残量</span><b id="reserveV">26.0 / 52 h</b></div>
+   <div class="reserveTrack"><div class="reserveFill" id="reserveFill"></div></div>
+   <div class="crownHint">位置1：正転で巻上げ、逆転はコハゼにより空転します。位置2：テンプを停止し、回転方向に応じて時刻を進め／戻します。</div>
+  </div>
+  <div class="section">
+   <label>表示時刻 <span id="timeDisplay">10:08:30</span></label>
+   <div class="timeGrid">
+    <input id="timeInput" class="full" type="time" step="1" value="10:08:30">
+    <button class="action" id="applyTime">入力時刻に設定</button>
+    <button class="action" id="setNow">現在時刻に設定（1回）</button>
+   </div>
+   <label class="syncLine"><input type="checkbox" id="liveSync">現在時刻へ継続同期</label>
+   <div class="mini">動作モード：<b id="timeMode">手動設定</b></div>
+   <div class="mini">「入力時刻に設定」は入力値から開始、「現在時刻に設定（1回）」は押した瞬間だけ端末時刻へ合わせます。「継続同期」は常に端末時刻へ追従します。</div>
+  </div>
+  <div class="section diagnosticControl">
+   <label>輪列・軸受検証</label>
+   <label class="syncLine"><input type="checkbox" id="meshGuide">噛合い基準線・ピッチ円を表示</label>
+   <label class="syncLine"><input type="checkbox" id="pivotGuide">ほぞ・穴石・軸方向すきまを表示</label>
+   <div class="row"><label>エンドシェイク誇張 <span id="endshakeV">0%</span></label><input id="endshake" type="range" min="0" max="100" value="0"></div>
+   <div class="mini">診断表示は教育用です。エンドシェイク量は見やすさのため実寸より大幅に誇張しています。</div>
+  </div>
+  <div class="section structureStudy">
+   <label>ムーブメント構造表示 <span>Stage 7</span></label>
+   <label class="syncLine"><input type="checkbox" id="machiningToggle" checked>地板・受の加工座を表示</label>
+   <label class="syncLine"><input type="checkbox" id="supportToggle" checked>受の支持脚・ねじ座を表示</label>
+   <label class="syncLine"><input type="checkbox" id="datumToggle">厚さ基準線を表示</label>
+   <div class="structureReadout">
+    <div><span>地板厚</span><b>0.72 mm相当</b></div>
+    <div><span>基準総厚</span><b>4.50 mm</b></div>
+    <div><span>輪列側</span><b>受・輪列・調速機</b></div>
+    <div><span>文字板側</span><b>日の裏・切替機構</b></div>
+   </div>
+   <div class="mini">厚さ値はETA 6498-1の公称総厚を基準にした表示です。個々の部品寸法は教育用近似です。</div>
+  </div>
+  <div class="section balanceStudy">
+   <label>調速機パラメータ <span id="balanceStateV">通常運転</span></label>
+   <label class="syncLine"><input type="checkbox" id="autoAmplitude" checked>主ゼンマイ残量から振幅を自動設定</label>
+   <div class="row"><label>テンプ振幅 <span id="amplitudeV">270°</span></label><input id="amplitude" type="range" min="180" max="320" step="1" value="270" disabled></div>
+   <div class="row"><label>緩急調整 <span id="rateAdjustV">0 s/day</span></label><input id="rateAdjust" type="range" min="-30" max="30" step="1" value="0"></div>
+   <div class="row"><label>ビートエラー <span id="beatErrorV">0.0 ms</span></label><input id="beatError" type="range" min="0" max="2" step="0.1" value="0"></div>
+   <label>姿勢差モデル</label>
+   <select id="positionMode"><option value="dialUp">文字板上</option><option value="dialDown">文字板下</option><option value="crownUp">りゅうず上</option><option value="crownDown">りゅうず下</option></select>
+   <div class="balanceReadout">
+    <div><span>推定振幅</span><b id="estimatedAmplitude">270°</b></div>
+    <div><span>推定歩度</span><b id="estimatedRate">0 s/day</b></div>
+    <div><span>周波数</span><b id="estimatedFrequency">2.500 Hz</b></div>
+   </div>
+   <div class="mini">歩度・姿勢差・振幅低下は教育用の簡易モデルです。製造個体の実測値や校正値ではありません。</div>
+  </div>
+  <div class="section powerStudy">
+   <label>動力・歩度連成モデル <span id="coupledStateV">通常運転</span></label>
+   <div class="row"><label>輪列伝達効率 <span id="trainEfficiencyV">84%</span></label><input id="trainEfficiency" type="range" min="70" max="95" step="1" value="84"></div>
+   <label>時間経過倍率</label>
+   <select id="runtimeScale"><option value="1">1×（実時間）</option><option value="60">60×</option><option value="600">600×</option><option value="3600">3,600×（1秒＝1時間）</option><option value="21600">21,600×（高速試験）</option></select>
+   <div class="simButtons"><button id="fullWind">52時間へ満巻き</button><button id="advance24">24時間経過</button><button id="nearStop">停止直前へ</button><button id="clearHistory">履歴クリア</button></div>
+   <div class="powerReadout">
+    <div><span>香箱有効トルク</span><b id="torqueV">88%</b></div>
+    <div><span>調速機入力</span><b id="driveEnergyV">100%</b></div>
+    <div><span>連成振幅</span><b id="coupledAmpV">270°</b></div>
+    <div><span>連成歩度</span><b id="coupledRateV">0.0 s/day</b></div>
+   </div>
+   <div class="historyWrap"><canvas id="historyCanvas" width="640" height="300"></canvas></div>
+   <div class="historyLegend"><span><i style="background:#d9b764"></i>残量</span><span><i style="background:#70b8ff"></i>振幅</span><span><i style="background:#ff8585"></i>歩度</span></div>
+   <div class="mini">トルク曲線、伝達損失、振幅応答、低振幅時の歩度悪化を統合した教育用モデルです。数値はETAの製造・検査値ではありません。</div>
+  </div>
+  <div class="row"><label>表裏の層分離 <span id="sideSplitV">0%</span></label><input id="sideSplit" type="range" min="0" max="100" value="0"></div>
+  <div class="row"><label>分解表示 <span id="explodeV">0%</span></label><input id="explode" type="range" min="0" max="100" value="0"></div>
+  <div class="row"><label>地板・受の透過率 <span id="opacityV">92%</span></label><input id="opacity" type="range" min="8" max="100" value="92"></div>
+  <div class="row"><label>動作速度 <span id="speedV">1.0×</span></label><input id="speed" type="range" min="20" max="240" value="100"></div>
+  <div class="row"><label>断面クリップ <span id="clipV">OFF</span></label><input id="clip" type="range" min="0" max="100" value="0"></div>
+  <div class="section"><label>背景テーマ</label><select id="backgroundTheme"><option value="navy">深紺スタジオ</option><option value="obsidian">黒曜石</option><option value="walnut">ウォールナット</option><option value="gallery">ライトギャラリー</option></select><div class="themeNote">安定性を優先し、背景色・霧・露出のみを切り替えます。</div></div>
+  <div class="section"><label>機能表示</label><select id="mode"><option value="all">全機構</option><option value="power">動力：香箱→輪列</option><option value="esc">脱進機・調速機</option><option value="wind">巻上げ系</option><option value="motion">表示系・小秒針</option><option value="dial">文字板側・時刻合わせ</option></select></div>
+  <div class="section checks">
+   <label><input type="checkbox" data-group="plate" checked><span>地板</span></label><label><input type="checkbox" data-group="bridge" checked><span>受・上側軸受</span></label><label><input type="checkbox" data-group="train" checked><span>輪列</span></label>
+   <label><input type="checkbox" data-group="esc" checked><span>脱進機</span></label><label><input type="checkbox" data-group="balance" checked><span>テンプ</span></label>
+   <label><input type="checkbox" data-group="wind" checked><span>輪列側巻上げ</span></label><label><input type="checkbox" data-group="dial" checked><span>文字板側機構</span></label><label><input type="checkbox" data-group="motion" checked><span>表示系</span></label><label><input type="checkbox" data-group="diagnostic"><span>診断ガイド</span></label>
+  </div>
+  <div class="section"><div class="legend"><span><i class="dot" style="background:#c9a65c"></i>黄銅歯車</span><span><i class="dot" style="background:#b7c1ce"></i>鋼部品</span><span><i class="dot" style="background:#a51e48"></i>ルビー</span><span><i class="dot" style="background:#565f6b"></i>地板・受</span><span><i class="dot" style="background:#4ed8e8"></i>噛合いガイド</span><span><i class="dot" style="background:#ff9f43"></i>軸受ガイド</span></div><div class="warn">v3.6では動力・歩度連成を維持しつつ、地板の加工座、各受の輪郭、支持脚、ねじ座、石座、巻真・時刻合わせ機構の配置を実物寄りに整理しています。歯形は時計用サイクロイド歯形を厳密計算した製造形状ではなく、ピッチ円と軸間距離を整合させた可視化用近似です。</div></div>
+ </div>
+</div>
+<canvas id="app"></canvas>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from "three";
+import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+
+const renderStatus=document.getElementById('renderStatus');
+window.addEventListener('error',e=>{renderStatus.className='error';renderStatus.textContent='3Dモデルの初期化中にエラーが発生しました：'+(e.message||'不明なエラー')});
+window.addEventListener('unhandledrejection',e=>{renderStatus.className='error';renderStatus.textContent='3Dモデルの読み込みに失敗しました：'+(e.reason?.message||e.reason||'不明なエラー')});
+const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('app'),antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=true;renderer.localClippingEnabled=true;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
+const scene=new THREE.Scene();scene.background=new THREE.Color(0x0d1015);scene.fog=new THREE.Fog(0x0d1015,68,125);
+const backgroundThemes={navy:{bg:0x0d1015,fog:0x0d1015,exposure:1.08},obsidian:{bg:0x050607,fog:0x070809,exposure:1.12},walnut:{bg:0x1b120d,fog:0x140d09,exposure:1.05},gallery:{bg:0x9da3aa,fog:0xa5a9ae,exposure:.82}};
+function applyBackgroundTheme(name){const t=backgroundThemes[name]||backgroundThemes.navy;scene.background.setHex(t.bg);scene.fog.color.setHex(t.fog);renderer.toneMappingExposure=t.exposure}
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,300);const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,2.5,0);controls.minDistance=16;controls.maxDistance=110;controls.zoomSpeed=2.45;controls.panSpeed=1.15;controls.rotateSpeed=.9;controls.touches.ONE=THREE.TOUCH.ROTATE;controls.touches.TWO=THREE.TOUCH.DOLLY_PAN;
+function cameraTo(x,y,z,tx=0,ty=2.5,tz=0){camera.position.set(x,y,z);controls.target.set(tx,ty,tz);controls.update()}cameraTo(2,35,45);
+scene.add(new THREE.HemisphereLight(0xeaf1ff,0x272017,1.8));const key=new THREE.DirectionalLight(0xffffff,2.5);key.position.set(25,38,25);key.castShadow=true;scene.add(key);const rim=new THREE.DirectionalLight(0x9eb8e9,1.1);rim.position.set(-28,18,-24);scene.add(rim);
+
+
+const clipPlane=new THREE.Plane(new THREE.Vector3(-1,0,0),1000);
+const MAT={
+ brass:new THREE.MeshStandardMaterial({color:0xc9a65c,metalness:.84,roughness:.27,clippingPlanes:[clipPlane]}),
+ steel:new THREE.MeshStandardMaterial({color:0xb7c1ce,metalness:.92,roughness:.20,clippingPlanes:[clipPlane]}),
+ dark:new THREE.MeshStandardMaterial({color:0x58616e,metalness:.82,roughness:.31,clippingPlanes:[clipPlane]}),
+ plate:new THREE.MeshStandardMaterial({color:0x565f6b,metalness:.74,roughness:.38,transparent:true,opacity:.92,clippingPlanes:[clipPlane]}),
+ ruby:new THREE.MeshPhysicalMaterial({color:0xa51e48,roughness:.16,metalness:.04,transmission:.12,transparent:true,opacity:.95,clippingPlanes:[clipPlane]}),
+ blue:new THREE.MeshStandardMaterial({color:0x34679e,metalness:.8,roughness:.25,clippingPlanes:[clipPlane]}),
+ hand:new THREE.MeshStandardMaterial({color:0xe7edf4,metalness:.9,roughness:.17,clippingPlanes:[clipPlane]}),
+ red:new THREE.MeshStandardMaterial({color:0xc94a51,metalness:.45,roughness:.3,clippingPlanes:[clipPlane]}),
+ spring:new THREE.LineBasicMaterial({color:0x91a6c0,clippingPlanes:[clipPlane]}),
+ guide:new THREE.MeshBasicMaterial({color:0x4ed8e8,transparent:true,opacity:.78,side:THREE.DoubleSide,clippingPlanes:[clipPlane]}),
+ guideLine:new THREE.LineBasicMaterial({color:0x4ed8e8,transparent:true,opacity:.95,clippingPlanes:[clipPlane]}),
+ pivotGuide:new THREE.MeshStandardMaterial({color:0xff9f43,emissive:0x5b2600,metalness:.15,roughness:.35,transparent:true,opacity:.78,clippingPlanes:[clipPlane]}),
+ jewelSeat:new THREE.MeshStandardMaterial({color:0xb9a477,metalness:.88,roughness:.24,clippingPlanes:[clipPlane]}),
+ lockFace:new THREE.MeshStandardMaterial({color:0x4ed8e8,emissive:0x0a5160,emissiveIntensity:.85,metalness:.12,roughness:.28,transparent:true,opacity:.92,clippingPlanes:[clipPlane]}),
+ impulseFace:new THREE.MeshStandardMaterial({color:0xe6b85c,emissive:0x6d4305,emissiveIntensity:.95,metalness:.28,roughness:.22,transparent:true,opacity:.94,clippingPlanes:[clipPlane]}),
+ dropFace:new THREE.MeshStandardMaterial({color:0xff765e,emissive:0x6b160b,emissiveIntensity:.95,metalness:.10,roughness:.28,transparent:true,opacity:.92,clippingPlanes:[clipPlane]}),
+ safetyFace:new THREE.MeshStandardMaterial({color:0xbf74ff,emissive:0x45116f,emissiveIntensity:1.0,metalness:.08,roughness:.25,transparent:true,opacity:.92,clippingPlanes:[clipPlane]}),
+ machined:new THREE.MeshStandardMaterial({color:0x8c96a1,metalness:.88,roughness:.24,clippingPlanes:[clipPlane]}),
+ boss:new THREE.MeshStandardMaterial({color:0x68727d,metalness:.82,roughness:.30,clippingPlanes:[clipPlane]}),
+ datum:new THREE.MeshBasicMaterial({color:0xf1c66e,transparent:true,opacity:.58,side:THREE.DoubleSide,depthWrite:false,clippingPlanes:[clipPlane]})
+};
+const root=new THREE.Group();scene.add(root);const groups={plate:new THREE.Group(),bridge:new THREE.Group(),train:new THREE.Group(),esc:new THREE.Group(),balance:new THREE.Group(),wind:new THREE.Group(),dial:new THREE.Group(),motion:new THREE.Group(),diagnostic:new THREE.Group()};Object.values(groups).forEach(g=>root.add(g));groups.diagnostic.visible=false;
+const selectable=[];const exploded=[];const partsInfo={};const partRoots=new WeakMap();const machiningDetails=[],supportDetails=[],datumGuides=[];
+function register(obj,name,desc,group){partsInfo[name]=desc;obj.userData.partName=name;obj.userData.group=group;partRoots.set(obj,obj);obj.traverse(c=>{if(c.isMesh||c.isLine){c.userData.partName=name;c.userData.group=group;partRoots.set(c,obj);selectable.push(c);if(c.isMesh){c.castShadow=true;c.receiveShadow=true}}});return obj}
+function labelAssembly(obj,name,desc,group){partsInfo[name]=desc;obj.userData.partName=name;obj.userData.group=group;return obj}
+function explode(obj,v){exploded.push({obj,base:obj.position.clone(),v:new THREE.Vector3(...v)});return obj}
+function cyl(r,h,mat,segments=48){return new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,segments),mat)}
+function screw(r=.25,h=.18){const g=new THREE.Group();const shank=cyl(r*.34,h*1.9,MAT.steel,20);shank.position.y=-h*.34;g.add(shank);const cone=new THREE.Mesh(new THREE.CylinderGeometry(r*.72,r,h*.34,28),MAT.blue);cone.position.y=h*.18;g.add(cone);const head=cyl(r,h*.40,MAT.blue,28);head.position.y=h*.48;g.add(head);const slot=new THREE.Mesh(new THREE.BoxGeometry(r*1.28,h*.12,.055),MAT.dark);slot.position.y=h*.70;g.add(slot);return g}
+function jewel(r=.23,h=.12){return cyl(r,h,MAT.ruby,28)}
+function gearShape(radius,teeth,depth,mat,holes=5,rootRatio=.79,toothRatio=.95){
+ const sh=new THREE.Shape();const pitch=Math.PI*2/teeth;
+ for(let i=0;i<teeth;i++){
+  const c=i*pitch;const pts=[[-.44,rootRatio],[-.24,rootRatio],[-.09,toothRatio],[.09,toothRatio],[.24,rootRatio],[.44,rootRatio]];
+  for(const [u,rr0] of pts){const a=c+u*pitch,rr=radius*rr0,x=rr*Math.cos(a),y=rr*Math.sin(a);if(i===0&&u===-.50)sh.moveTo(x,y);else sh.lineTo(x,y)}
+ }
+ sh.closePath();const center=new THREE.Path();center.absarc(0,0,radius*.16,0,Math.PI*2,false);sh.holes.push(center);
+ if(holes>0){for(let i=0;i<holes;i++){const a=i*Math.PI*2/holes;const h=new THREE.Path();h.absarc(radius*.49*Math.cos(a),radius*.49*Math.sin(a),radius*.16,0,Math.PI*2,false);sh.holes.push(h)}}
+ const geo=new THREE.ExtrudeGeometry(sh,{depth,bevelEnabled:true,bevelSize:.028,bevelThickness:.028,bevelSegments:1,curveSegments:12});geo.rotateX(Math.PI/2);geo.translate(0,depth/2,0);return new THREE.Mesh(geo,mat)
+}
+function arborAssembly(total=1.72,bodyR=.13,pivotR=.065){const g=new THREE.Group();const body=cyl(bodyR,total*.64,MAT.steel,20);g.add(body);const up=cyl(pivotR,total*.22,MAT.steel,16);up.position.y=total*.43;g.add(up);const low=cyl(pivotR,total*.22,MAT.steel,16);low.position.y=-total*.43;g.add(low);const shoulder1=cyl(bodyR*1.45,.10,MAT.steel,20);shoulder1.position.y=.32;g.add(shoulder1);const shoulder2=shoulder1.clone();shoulder2.position.y=-.32;g.add(shoulder2);return g}
+function wheel(name,desc,group,r,teeth,pinionR,pinionLeaves,depth=.28,holes=5){
+ const g=new THREE.Group();const wheelMesh=gearShape(r,teeth,depth*.82,MAT.brass,holes,.79,.95);wheelMesh.position.y=.12;g.add(register(wheelMesh,`${name}・車`,`${desc} 車は${teeth}歯の黄銅製想定。`,group));
+ const pin=gearShape(pinionR,pinionLeaves,depth*.78,MAT.steel,0,.70,.89);pin.position.y=-.26;g.add(register(pin,`${name}・かな`,`${pinionLeaves}枚の鋼製かな。前段の車と噛み合って回転速度とトルクを変換する。`,group));
+ const arbor=arborAssembly(1.78,.13,.058);g.add(register(arbor,`${name}・軸・ほぞ`,'軸肩で歯車高さを決め、細い上下ほぞが穴石内で回転する。',group));
+ const collet=cyl(.25,.12,MAT.steel,24);collet.position.y=.11;g.add(register(collet,`${name}・座`,'車と軸を同心に固定する座部。',group));return g
+}
+function roundedPolygon(points,radius=.46,steps=5){const out=[];for(let i=0;i<points.length;i++){const prev=points[(i-1+points.length)%points.length],cur=points[i],next=points[(i+1)%points.length];const a=new THREE.Vector2(prev[0]-cur[0],prev[1]-cur[1]);const b=new THREE.Vector2(next[0]-cur[0],next[1]-cur[1]);const la=a.length(),lb=b.length();a.normalize();b.normalize();const rr=Math.min(radius,la*.24,lb*.24);const p1=new THREE.Vector2(cur[0]+a.x*rr,cur[1]+a.y*rr),p2=new THREE.Vector2(cur[0]+b.x*rr,cur[1]+b.y*rr);out.push([p1.x,p1.y]);for(let s=1;s<=steps;s++){const t=s/steps,mt=1-t;out.push([mt*mt*p1.x+2*mt*t*cur[0]+t*t*p2.x,mt*mt*p1.y+2*mt*t*cur[1]+t*t*p2.y])}}return out}
+function bridgeShape(points,holes=[]){const rounded=roundedPolygon(points);const sh=new THREE.Shape();sh.moveTo(rounded[0][0],rounded[0][1]);for(let i=1;i<rounded.length;i++)sh.lineTo(rounded[i][0],rounded[i][1]);sh.closePath();holes.forEach(([x,z,r])=>{const p=new THREE.Path();p.absarc(x,z,r,0,Math.PI*2,false);sh.holes.push(p)});return sh}
+function bridge(points,height=.38,holes=[],seats=[]){const g=new THREE.Group();const sh=bridgeShape(points,holes);const geo=new THREE.ExtrudeGeometry(sh,{depth:height,bevelEnabled:true,bevelSize:.11,bevelThickness:.075,bevelSegments:3,curveSegments:16});geo.rotateX(Math.PI/2);geo.translate(0,height/2,0);g.add(new THREE.Mesh(geo,MAT.plate));const topGeo=new THREE.ExtrudeGeometry(sh,{depth:.026,bevelEnabled:false,curveSegments:16});topGeo.rotateX(Math.PI/2);topGeo.translate(0,height+.038,0);const topSkin=new THREE.Mesh(topGeo,MAT.machined);topSkin.scale.set(.995,1,.995);g.add(topSkin);machiningDetails.push(topSkin);seats.forEach(([x,z,r=.40])=>{const seat=new THREE.Mesh(new THREE.TorusGeometry(r,.075,8,36),MAT.machined);seat.rotation.x=Math.PI/2;seat.position.set(x,height+.065,z);g.add(seat);machiningDetails.push(seat);const foot=cyl(r*.62,.44,MAT.boss,28);foot.position.set(x,-.20,z);g.add(foot);supportDetails.push(foot)});return g}
+function jewelSetting(name,desc,x,z,y,group='bridge',r=.23){const g=new THREE.Group();const seat=new THREE.Mesh(new THREE.TorusGeometry(r*1.42,r*.18,8,30),MAT.jewelSeat);seat.rotation.x=Math.PI/2;g.add(seat);const j=jewel(r,.10);j.position.y=.01;g.add(j);const oilSink=new THREE.Mesh(new THREE.TorusGeometry(r*.62,r*.08,8,24),MAT.dark);oilSink.rotation.x=Math.PI/2;oilSink.position.y=.065;g.add(oilSink);g.position.set(x,y,z);groups[group].add(register(g,name,desc,group));return g}
+function addPivot(x,z,y,name,group='bridge'){return jewelSetting(name,'石枠に保持された穴石。細いほぞを低摩擦で支持し、油溜まりが注油点を形成する。',x,z,y,group)}
+function makeHand(length,width,mat){const sh=new THREE.Shape();sh.moveTo(-.45,-width/2);sh.lineTo(length*.72,-width*.28);sh.lineTo(length,0);sh.lineTo(length*.72,width*.28);sh.lineTo(-.45,width/2);sh.closePath();const geo=new THREE.ExtrudeGeometry(sh,{depth:.08,bevelEnabled:true,bevelSize:.025,bevelThickness:.02});geo.rotateX(Math.PI/2);return new THREE.Mesh(geo,mat)}
+function lever(points,width=.24,height=.16,mat=MAT.steel){const g=new THREE.Group();for(let i=0;i<points.length-1;i++){const [x1,z1]=points[i],[x2,z2]=points[i+1];const dx=x2-x1,dz=z2-z1,len=Math.hypot(dx,dz);const m=new THREE.Mesh(new THREE.BoxGeometry(len,height,width),mat);m.position.set((x1+x2)/2,0,(z1+z2)/2);m.rotation.y=-Math.atan2(dz,dx);g.add(m)}return g}
+function extrudedXZ(points,height,mat,bevel=.025){const sh=new THREE.Shape();sh.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)sh.lineTo(points[i][0],points[i][1]);sh.closePath();const geo=new THREE.ExtrudeGeometry(sh,{depth:height,bevelEnabled:bevel>0,bevelSize:bevel,bevelThickness:bevel,bevelSegments:1});geo.rotateX(Math.PI/2);geo.translate(0,height/2,0);return new THREE.Mesh(geo,mat)}
+function orientedPlate(cx,cz,length,width,angle,height,mat){const ux=Math.cos(angle),uz=Math.sin(angle),vx=-uz,vz=ux,hl=length/2,hw=width/2;return extrudedXZ([[cx-ux*hl-vx*hw,cz-uz*hl-vz*hw],[cx+ux*hl-vx*hw,cz+uz*hl-vz*hw],[cx+ux*hl+vx*hw,cz+uz*hl+vz*hw],[cx-ux*hl+vx*hw,cz-uz*hl+vz*hw]],height,mat,.018)}
+function notchedDisc(radius,notchRadius,notchAngle,halfWidth,height,mat){const pts=[];const n=96;for(let i=0;i<n;i++){const a=i/n*Math.PI*2;let d=Math.atan2(Math.sin(a-notchAngle),Math.cos(a-notchAngle));const r=Math.abs(d)<halfWidth?notchRadius+(radius-notchRadius)*Math.min(1,Math.abs(d)/halfWidth):radius;pts.push([r*Math.cos(a),r*Math.sin(a)])}return extrudedXZ(pts,height,mat,.018)}
+function knurledCrown(radius=1.15,width=1.15,ridges=32){const g=new THREE.Group();const core=cyl(radius*.92,width,MAT.steel,48);core.rotation.z=Math.PI/2;g.add(core);for(let i=0;i<ridges;i++){const a=i*Math.PI*2/ridges;const ridge=new THREE.Mesh(new THREE.BoxGeometry(width*.84,.09,.18),MAT.dark);ridge.position.set(0,radius*Math.cos(a),radius*Math.sin(a));ridge.rotation.x=-a;g.add(ridge)}return g}
+function shockAbsorber(name,x,z,y,group='plate'){const g=new THREE.Group();const cup=cyl(.48,.12,MAT.steel,32);g.add(cup);const cap=jewel(.34,.08);cap.position.y=.10;g.add(cap);const springRing=new THREE.Mesh(new THREE.TorusGeometry(.37,.035,8,32),MAT.blue);springRing.rotation.x=Math.PI/2;springRing.position.y=.17;g.add(springRing);g.position.set(x,y,z);groups[group].add(register(g,name,'テンプ軸を上下から支持し、衝撃時には受石を微小変位させて軸先の破損を防ぐ耐震軸受。',group));return g}
+
+// Main plate, machined recesses, bearing seats and support pillars
+const mainPlate=new THREE.Group();
+const plateCore=cyl(18.3,.72,MAT.plate,112);mainPlate.add(register(plateCore,'地板本体','ムーブメント全体の基準となる円形地板。輪列・巻上げ系・脱進機の下側軸受を保持する。','plate'));
+const plateTopStep=cyl(17.92,.055,MAT.machined,112);plateTopStep.position.y=.388;mainPlate.add(register(plateTopStep,'地板上面仕上げ','受の支持面と輪列座を形成する上面加工層。','plate'));machiningDetails.push(plateTopStep);
+const plateBottomStep=cyl(17.96,.05,MAT.machined,112);plateBottomStep.position.y=-.386;mainPlate.add(register(plateBottomStep,'地板文字板側仕上げ','日の裏機構と切替機構の座面を形成する文字板側加工層。','plate'));machiningDetails.push(plateBottomStep);
+const plateEdgeTop=new THREE.Mesh(new THREE.TorusGeometry(18.02,.11,8,112),MAT.machined);plateEdgeTop.rotation.x=Math.PI/2;plateEdgeTop.position.y=.34;mainPlate.add(plateEdgeTop);machiningDetails.push(plateEdgeTop);
+const plateEdgeBottom=plateEdgeTop.clone();plateEdgeBottom.position.y=-.34;mainPlate.add(plateEdgeBottom);machiningDetails.push(plateEdgeBottom);
+mainPlate.position.y=0;groups.plate.add(labelAssembly(mainPlate,'地板一式','基準地板、上下加工面、外周段差、輪列座、巻真溝で構成する。','plate'));explode(mainPlate,[0,-3,0]);
+const platePockets=[[-4.10,1.12,3.42,'香箱座'],[0,0,1.02,'中心車座'],[.92,-3.148,.78,'三番車座'],[0,-5.60,.72,'四番車座'],[2.00,-4.95,.60,'ガンギ車座'],[3.55,-2.70,.58,'アンクル座'],[7.70,1.80,4.18,'テンプ逃げ']];
+platePockets.forEach(([x,z,r,n])=>{const q=cyl(r,.045,MAT.dark,72);q.position.set(x,.414,z);mainPlate.add(register(q,n,'軸受周辺または回転部のために地板上面へ加工した段付き座。','plate'));machiningDetails.push(q);const ring=new THREE.Mesh(new THREE.TorusGeometry(r*.82,.045,7,56),MAT.machined);ring.rotation.x=Math.PI/2;ring.position.set(x,.44,z);mainPlate.add(ring);machiningDetails.push(ring)});
+const stemChannel=new THREE.Mesh(new THREE.BoxGeometry(14.6,.045,.72),MAT.dark);stemChannel.position.set(10.3,-.414,0);mainPlate.add(register(stemChannel,'巻真案内溝','巻真、巻上げピニオン、スライディングピニオンの軸線を案内する文字板側の加工溝。','plate'));machiningDetails.push(stemChannel);
+const keylessPocket=extrudedXZ([[2.0,-4.7],[8.5,-4.8],[11.9,-2.6],[12.0,3.9],[8.3,5.0],[3.0,3.8]],.045,MAT.dark,.12);keylessPocket.position.y=-.438;mainPlate.add(register(keylessPocket,'時刻合わせ機構座','設定レバー、ヨーク、ジャンパー、設定車を収める文字板側の加工座。','plate'));machiningDetails.push(keylessPocket);
+const plateScrewPoints=[[-12,-8],[-14,4],[-7,13],[6,14],[14,5],[13,-8],[0,-14]];
+plateScrewPoints.forEach(([x,z])=>{const sink=new THREE.Mesh(new THREE.TorusGeometry(.36,.07,8,28),MAT.machined);sink.rotation.x=Math.PI/2;sink.position.set(x,.43,z);mainPlate.add(sink);machiningDetails.push(sink);const s=screw(.28,.20);s.position.set(x,.50,z);mainPlate.add(register(s,'地板ねじ','地板や外周固定部を保持する皿座付きねじ。','plate'))})
+
+// Layout loosely based on a large hunter calibre
+const P={barrel:[-4.10,1.12],center:[0,0],third:[.92,-3.148],fourth:[0,-5.60],escape:[2.00,-4.95],pallet:[3.55,-2.70],balance:[7.70,1.80]};
+const barrel=new THREE.Group();barrel.position.set(P.barrel[0],1.38,P.barrel[1]);groups.train.add(barrel);explode(barrel,[-7,4,2]);
+const barrelFloor=cyl(3.28,.16,MAT.dark,72);barrelFloor.position.y=-.38;barrel.add(register(barrelFloor,'香箱胴・底','主ゼンマイの外端を固定し、ばねトルクを香箱車へ伝える回転胴。','train'));
+const barrelWall=new THREE.Mesh(new THREE.TorusGeometry(3.18,.18,12,80),MAT.dark);barrelWall.rotation.x=Math.PI/2;barrelWall.position.y=.02;barrel.add(register(barrelWall,'香箱胴・側壁','主ゼンマイを収容し、外周フックで主ゼンマイ外端を保持する。','train'));
+const barrelWheel=gearShape(3.75,96,.30,MAT.brass,6,.78,.93);barrelWheel.position.y=-.56;barrel.add(register(barrelWheel,'香箱車・一番車','香箱胴と一体で回り、主ゼンマイのトルクを中心かなへ供給する96歯の一番車。','train'));
+const barrelLid=cyl(3.22,.11,MAT.steel,72);barrelLid.position.y=.58;barrel.add(register(barrelLid,'香箱蓋','主ゼンマイを香箱内に保持し、香箱真を中心に案内する蓋。','train'));
+const barrelArbor=cyl(.34,1.64,MAT.steel,24);barrel.add(register(barrelArbor,'香箱真','角穴車と結合し、巻上げ時に主ゼンマイ内端を巻き取る軸。','train'));
+const arborSquare=new THREE.Mesh(new THREE.BoxGeometry(.46,.32,.46),MAT.steel);arborSquare.position.y=.91;barrel.add(register(arborSquare,'香箱真角部','角穴車の角穴と結合して巻上げトルクを香箱真へ伝える。','train'));
+const innerHook=new THREE.Mesh(new THREE.BoxGeometry(.15,.16,.50),MAT.blue);innerHook.position.set(.42,.20,0);barrel.add(register(innerHook,'主ゼンマイ内端フック','主ゼンマイ内端を香箱真へ固定するフック。','train'));
+const outerHook=new THREE.Mesh(new THREE.BoxGeometry(.18,.16,.52),MAT.blue);outerHook.position.set(2.94,.15,0);barrel.add(register(outerHook,'主ゼンマイ外端フック','主ゼンマイ外端を香箱胴へ固定し、ばね反力を香箱へ伝える。','train'));
+const mainSpringSamples=[];for(let i=0;i<260;i++){const u=i/259;mainSpringSamples.push({u})}const mainSpringGeo=new THREE.BufferGeometry();mainSpringGeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(mainSpringSamples.length*3),3));const mainspring=new THREE.Line(mainSpringGeo,MAT.spring);mainspring.position.y=.18;barrel.add(register(mainspring,'主ゼンマイ','香箱真へ巻き取られることで弾性エネルギーを蓄え、香箱胴へトルクを供給する。','train'));
+
+const center=wheel('二番車（中心車）','香箱車96歯から中心かな12枚へ8:1で増速され、1時間に1回転する基準車。','train',2.85,80,.50,12,.30,5);center.position.set(P.center[0],1.50,P.center[1]);groups.train.add(center);explode(center,[-3,5,-1]);
+const third=wheel('三番車','中心車80歯と三番かな10枚の8:1で増速する中間車。','train',2.25,75,.43,10,.27,5);third.position.set(P.third[0],1.54,P.third[1]);groups.train.add(third);explode(third,[1,6,-2]);
+const fourth=wheel('四番車・小秒針車','三番車75歯と四番かな10枚の7.5:1で増速され、1分に1回転する。','train',1.80,60,.37,10,.25,5);fourth.position.set(P.fourth[0],1.57,P.fourth[1]);groups.train.add(fourth);explode(fourth,[2,7,-5]);
+
+// Re-stack train wheels and pinions on alternating axial planes so that
+// each wheel meshes with the next arbor's pinion, while the large wheels
+// themselves no longer visually intersect.
+function setWheelStack(g, wheelY, pinionY, arborTall=1.78, seatY=.11){
+  if(g.children[0]) g.children[0].position.y = wheelY;   // wheel
+  if(g.children[1]) g.children[1].position.y = pinionY;  // pinion
+  if(g.children[2]){ g.children[2].scale.y = arborTall/1.78; g.children[2].position.y = (wheelY+pinionY)*0.18; }
+  if(g.children[3]) g.children[3].position.y = seatY;
+}
+setWheelStack(center,  .28, -.61, 2.10,  .05); // center pinion meshes with barrel wheel, center wheel with third pinion
+setWheelStack(third,  -.09,  .35, 2.08, -.02); // third wheel meshes with fourth pinion
+setWheelStack(fourth,  .26, -.37, 2.00,  .04); // fourth wheel meshes with escape pinion
+
+function makeEscapeWheel(){const g=new THREE.Group();const r=1.55;const sh=new THREE.Shape();const teeth=15;for(let i=0;i<teeth;i++){const a=i*Math.PI*2/teeth;const pts=[[r*.68,a-.12],[r*1.03,a-.04],[r*.86,a+.08],[r*.68,a+.12]];pts.forEach(([rr,aa],k)=>{const x=rr*Math.cos(aa),y=rr*Math.sin(aa);if(i===0&&k===0)sh.moveTo(x,y);else sh.lineTo(x,y)})}sh.closePath();const hole=new THREE.Path();hole.absarc(0,0,.25,0,Math.PI*2,false);sh.holes.push(hole);const geo=new THREE.ExtrudeGeometry(sh,{depth:.18,bevelEnabled:false});geo.rotateX(Math.PI/2);geo.translate(0,.09,0);const escapeBody=new THREE.Mesh(geo,MAT.steel);escapeBody.position.y=.56;g.add(register(escapeBody,'ガンギ車15歯','アンクルにより半歯ずつ解放される軽量な15歯ガンギ車。','esc'));for(let i=0;i<5;i++){const a=i*Math.PI*2/5;const sp=new THREE.Mesh(new THREE.BoxGeometry(1.25,.11,.10),MAT.steel);sp.rotation.y=-a;sp.position.y=.66;g.add(register(sp,'ガンギ車腕','軽量なリムを軸へ結ぶ細い腕。','esc'))}const pin=gearShape(.30,6,.22,MAT.steel,0,.70,.89);pin.position.y=.24;g.add(register(pin,'ガンギかな','四番車60歯と噛み合う6枚かな。四番車の10倍でガンギ車を駆動する。','esc'));g.add(register(arborAssembly(1.64,.12,.052),'ガンギ車軸・ほぞ','軽量なガンギ車を支える細い軸と上下ほぞ。','esc'));return labelAssembly(g,'ガンギ車一式','15歯ガンギ車、6枚かな、軸とほぞで構成する。','esc')}
+const escape=makeEscapeWheel();escape.position.set(P.escape[0],1.62,P.escape[1]);groups.esc.add(escape);explode(escape,[6,8,-2]);
+
+// Stage 4: Swiss lever pallet, contact faces, fork, guard pin and double roller
+const pallet=new THREE.Group();
+const entryArm=lever([[0,0],[-.55,-.55],[-1.15,-.84]],.28,.20,MAT.steel);pallet.add(register(entryArm,'入石側アンクル腕','アンクル真から入石へ力を伝える腕。解錠と衝撃時に入石をガンギ歯へ案内する。','esc'));
+const exitArm=lever([[0,0],[-.34,-.82],[-.40,-1.38]],.28,.20,MAT.steel);pallet.add(register(exitArm,'出石側アンクル腕','アンクル真から出石へ力を伝える腕。反対半周期でロックと衝撃を担う。','esc'));
+const palletHub=cyl(.34,.24,MAT.steel,28);pallet.add(register(palletHub,'アンクル胴・真受部','入石腕、出石腕、フォークを一体化し、アンクル真を中心に小角度で揺動する。','esc'));
+const entryStone=orientedPlate(-1.17,-.88,.64,.30,-.62,.28,MAT.ruby);pallet.add(register(entryStone,'入石（ルビー）','入石側のロック面と衝撃面を持ち、ガンギ歯を停止・解放してエネルギーを受け取る。','esc'));
+const exitStone=orientedPlate(-.39,-1.39,.64,.30,-.62,.28,MAT.ruby);pallet.add(register(exitStone,'出石（ルビー）','出石側のロック面と衝撃面を持ち、次の半周期でガンギ歯と接触する。','esc'));
+const entryLockFace=orientedPlate(-1.32,-.78,.28,.07,-.62,.035,MAT.lockFace);entryLockFace.position.y=.285;pallet.add(register(entryLockFace,'入石ロック面','ガンギ歯先を受け止める面。ドローによりアンクルを制限ピン側へ安定させる。','esc'));
+const entryImpulseFace=orientedPlate(-1.01,-.99,.30,.07,-.62,.035,MAT.impulseFace);entryImpulseFace.position.y=.285;pallet.add(register(entryImpulseFace,'入石衝撃面','解錠後、ガンギ歯から入石へ滑り接触で衝撃を伝える面。','esc'));
+const exitLockFace=orientedPlate(-.54,-1.29,.28,.07,-.62,.035,MAT.lockFace);exitLockFace.position.y=.285;pallet.add(register(exitLockFace,'出石ロック面','反対半周期でガンギ歯を停止し、アンクルを安定位置に保持する面。','esc'));
+const exitImpulseFace=orientedPlate(-.23,-1.50,.30,.07,-.62,.035,MAT.impulseFace);exitImpulseFace.position.y=.285;pallet.add(register(exitImpulseFace,'出石衝撃面','出石側でガンギ歯からアンクルへエネルギーを渡す面。','esc'));
+const forkNeck=lever([[0,0],[2.80,3.04]],.34,.20,MAT.steel);pallet.add(register(forkNeck,'アンクルフォーク幹','アンクル胴からフォークへ運動を伝え、振り石との間で解錠と衝撃を受け渡す。','esc'));
+const forkHornA=lever([[2.78,3.02],[3.14,3.82]],.20,.18,MAT.steel);pallet.add(register(forkHornA,'フォーク角・A','振り石をフォーク口へ導き、外乱時の離脱を抑える角。','esc'));
+const forkHornB=lever([[2.78,3.02],[3.62,3.36]],.20,.18,MAT.steel);pallet.add(register(forkHornB,'フォーク角・B','反対側から振り石を案内し、アンクルとの衝撃伝達を成立させる角。','esc'));
+const forkSlot=new THREE.Mesh(new THREE.BoxGeometry(.54,.07,.22),MAT.dark);forkSlot.position.set(3.31,.12,3.56);forkSlot.rotation.y=-.82;pallet.add(forkSlot);
+const guardPin=cyl(.095,.48,MAT.steel,18);guardPin.position.set(3.15,-.18,3.42);pallet.add(register(guardPin,'ガードピン','安全ローラー外周と切欠きに協働し、振り石がフォーク外にある間のアンクル誤作動を防ぐ。','esc'));
+const palletPivot=cyl(.16,.86,MAT.steel,18);pallet.add(register(palletPivot,'アンクル真・ほぞ','アンクル全体の揺動中心。上下の穴石で支持される。','esc'));
+pallet.position.set(P.pallet[0],1.72,P.pallet[1]);groups.esc.add(labelAssembly(pallet,'アンクル一式','入石・出石、ロック面、衝撃面、フォーク、ガードピンで構成するスイスレバーアンクル。','esc'));explode(pallet,[8,10,2]);
+
+const bankU={x:.678,z:.735},bankP={x:-.735,z:.678};
+function addBankingPin(sign){const pin=cyl(.16,.72,MAT.steel,18);pin.position.set(P.pallet[0]+bankU.x*.88+bankP.x*.44*sign,1.36,P.pallet[1]+bankU.z*.88+bankP.z*.44*sign);groups.esc.add(register(pin,'アンクル制限ピン',sign>0?'入石側のラン・トゥ・バンキング位置を規制する。':'出石側のラン・トゥ・バンキング位置を規制する。','esc'));return pin}
+const bank1=addBankingPin(1),bank2=addBankingPin(-1);
+
+// Balance wheel, impulse roller and safety roller
+const balanceG=new THREE.Group();const balanceR=3.25;
+const balanceWheel=new THREE.Group();const rimB=new THREE.Mesh(new THREE.TorusGeometry(balanceR,.18,12,88),MAT.brass);rimB.rotation.x=Math.PI/2;balanceWheel.add(rimB);for(let i=0;i<3;i++){const s=new THREE.Mesh(new THREE.BoxGeometry(balanceR*1.5,.14,.16),MAT.brass);s.rotation.y=i*Math.PI/3;balanceWheel.add(s)}for(let i=0;i<8;i++){const a=i*Math.PI*2/8;const w=cyl(.16,.20,MAT.steel,18);w.position.set(balanceR*Math.cos(a),0,balanceR*Math.sin(a));balanceWheel.add(w)}balanceG.add(register(balanceWheel,'テンプ輪','慣性を持つ振動子。ヒゲゼンマイと組み合わさり2.5 Hzで往復振動する。','balance'));
+const balanceStaff=cyl(.18,1.42,MAT.steel,20);balanceG.add(register(balanceStaff,'テンプ真','テンプ輪、ヒゲ玉、振り座を同軸に保持し、上下耐震軸受で支持される。','balance'));
+const rollerTable=cyl(.70,.15,MAT.steel,44);rollerTable.position.y=-.31;balanceG.add(register(rollerTable,'振り座・インパルスローラー','振り石を保持し、フォークから受けた衝撃をテンプ真へ伝える上側ローラー。','balance'));
+const towardPallet=Math.atan2(P.pallet[1]-P.balance[1],P.pallet[0]-P.balance[0]);
+const safetyRoller=notchedDisc(.49,.25,towardPallet,.25,.13,MAT.dark);safetyRoller.position.y=-.50;balanceG.add(register(safetyRoller,'安全ローラー・切欠き','ガードピンと協働する下側ローラー。切欠きがフォーク通過時だけアンクルの横断を許す。','balance'));
+const impulseJewel=jewel(.14,.30);impulseJewel.position.set(.57*Math.cos(towardPallet),-.31,.57*Math.sin(towardPallet));balanceG.add(register(impulseJewel,'振り石','フォーク口へ入り、テンプからアンクルを解錠し、続いてアンクルからテンプへ衝撃を受けるルビー。','balance'));
+balanceG.position.set(P.balance[0],1.73,P.balance[1]);groups.balance.add(labelAssembly(balanceG,'テンプ・ダブルローラー一式','テンプ輪、振り座、振り石、安全ローラーと切欠きで構成する調速・安全機構。','balance'));explode(balanceG,[7,12,7]);
+
+const springBase=[];const turns=5.5;for(let i=0;i<300;i++){const u=i/299;const a=u*turns*Math.PI*2;const r=.28+u*2.55;springBase.push({u,a,r})}const springGeo=new THREE.BufferGeometry();springGeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(springBase.length*3),3));const hairspring=new THREE.Line(springGeo,MAT.spring);hairspring.position.set(P.balance[0],2.25,P.balance[1]);groups.balance.add(register(hairspring,'ヒゲゼンマイ','外端を固定し、内端をテンプ軸へ結合した平ひげ。テンプ慣性とばね剛性で固有振動数を定める。','balance'));explode(hairspring,[7,12,7]);
+const regulator=new THREE.Group();const regArm=new THREE.Mesh(new THREE.BoxGeometry(2.6,.16,.22),MAT.steel);regArm.position.x=1.1;regulator.add(regArm);regulator.add(cyl(.42,.18,MAT.brass,28));regulator.position.set(P.balance[0],2.75,P.balance[1]);groups.balance.add(register(regulator,'緩急針','ヒゲゼンマイの有効長を調整し、歩度を微調整する。','balance'));explode(regulator,[7,13,7]);
+// Stage 5: detailed balance and hairspring regulating components.
+const collet=new THREE.Group();
+const colletBody=cyl(.34,.20,MAT.blue,32);collet.add(colletBody);
+const colletSlot=new THREE.Mesh(new THREE.BoxGeometry(.08,.24,.52),MAT.dark);colletSlot.position.x=.25;collet.add(colletSlot);
+collet.position.set(P.balance[0],2.25,P.balance[1]);groups.balance.add(register(collet,'ヒゲ玉','ヒゲゼンマイ内端をテンプ真へ固定する割り入りのカラー。テンプと一体で回転する。','balance'));explode(collet,[7,12,7]);
+
+const springStud=new THREE.Group();
+const studBlock=new THREE.Mesh(new THREE.BoxGeometry(.72,.32,.48),MAT.steel);springStud.add(studBlock);
+const studScrew=screw(.16,.15);studScrew.position.y=.20;springStud.add(studScrew);
+const studPin=cyl(.08,.42,MAT.blue,16);studPin.position.set(-.24,-.20,0);springStud.add(studPin);
+const studAngle=.58;springStud.position.set(P.balance[0]+2.95*Math.cos(studAngle),2.45,P.balance[1]+2.95*Math.sin(studAngle));springStud.rotation.y=-studAngle;groups.balance.add(register(springStud,'ヒゲ持ち・外桩','ヒゲゼンマイ外端をテンプ受へ固定し、外端位置を保持する。','balance'));explode(springStud,[8,13,7]);
+
+const curbAssembly=new THREE.Group();
+const curbArm=new THREE.Mesh(new THREE.BoxGeometry(1.05,.13,.16),MAT.steel);curbArm.position.x=.50;curbAssembly.add(curbArm);
+const curbPinA=cyl(.055,.42,MAT.blue,14);curbPinA.position.set(1.02,-.18,-.11);curbAssembly.add(curbPinA);
+const curbPinB=cyl(.055,.42,MAT.blue,14);curbPinB.position.set(1.02,-.18,.11);curbAssembly.add(curbPinB);
+curbAssembly.position.set(P.balance[0],2.67,P.balance[1]);groups.balance.add(register(curbAssembly,'緩急針ピン一式','2本のピンでヒゲゼンマイ外周部を挟み、有効長を変化させて歩度を調整する。','balance'));explode(curbAssembly,[7,14,7]);
+
+const rateScale=new THREE.Group();
+for(let i=-4;i<=4;i++){const tick=new THREE.Mesh(new THREE.BoxGeometry(i===0?.05:.035,.06,i===0?.42:.26),i===0?MAT.red:MAT.steel);const a=i*.085+.30;tick.position.set(3.92*Math.cos(a),0,3.92*Math.sin(a));tick.rotation.y=-a;rateScale.add(tick)}
+rateScale.position.set(P.balance[0],3.74,P.balance[1]);groups.balance.add(register(rateScale,'緩急目盛','緩急針の位置を視覚的に示す目盛。実機の＋／－方向を簡略表示する。','balance'));explode(rateScale,[8,16,7]);
+
+const balancePivotTop=cyl(.075,.48,MAT.steel,14);balancePivotTop.position.set(P.balance[0],2.34,P.balance[1]);groups.balance.add(register(balancePivotTop,'テンプ上ほぞ','テンプ真上端の細い軸部。上側耐震軸受の穴石で支持される。','balance'));
+const balancePivotBottom=cyl(.075,.48,MAT.steel,14);balancePivotBottom.position.set(P.balance[0],1.12,P.balance[1]);groups.balance.add(register(balancePivotBottom,'テンプ下ほぞ','テンプ真下端の細い軸部。下側耐震軸受の穴石で支持される。','balance'));
+
+
+// Stage 4 contact and safety markers. They are not selectable and are shown only on request.
+function markerSphere(r,mat){return new THREE.Mesh(new THREE.SphereGeometry(r,18,12),mat)}
+const entryMarker=markerSphere(.19,MAT.lockFace);entryMarker.position.set(-1.17,.42,-.88);pallet.add(entryMarker);
+const exitMarker=markerSphere(.19,MAT.lockFace);exitMarker.position.set(-.39,.42,-1.39);pallet.add(exitMarker);
+const forkMarker=markerSphere(.20,MAT.impulseFace);forkMarker.position.set(3.31,.38,3.56);pallet.add(forkMarker);
+const guardMarker=markerSphere(.18,MAT.safetyFace);guardMarker.position.set(3.15,.18,3.42);pallet.add(guardMarker);
+const dropMarker=markerSphere(.18,MAT.dropFace);dropMarker.position.set(P.escape[0]+1.22,2.05,P.escape[1]+.86);groups.esc.add(dropMarker);
+const escMarkers=[entryMarker,exitMarker,forkMarker,guardMarker,dropMarker];escMarkers.forEach(m=>m.visible=false);
+// Winding system: ratchet wheel, crown wheel, click, click spring, stem and crown
+const ratchet=gearShape(2.45,48,.26,MAT.steel,5,.78,.93);ratchet.position.set(P.barrel[0],3.05,P.barrel[1]);groups.wind.add(register(ratchet,'角穴車','香箱真の角部と結合し、丸穴車から受けた巻上げ回転を主ゼンマイへ伝える。','wind'));explode(ratchet,[-7,9,2]);
+const crownWheelRing=cyl(1.83,.08,MAT.brass,48);crownWheelRing.position.set(-.30,3.02,2.62);groups.wind.add(register(crownWheelRing,'丸穴車座','丸穴車を受面上で案内し、安定した回転と軸方向位置を保つ座金。','wind'));explode(crownWheelRing,[-1,9,3]);
+const crownWheel=gearShape(1.65,36,.25,MAT.steel,4,.78,.93);crownWheel.position.set(-.30,3.10,2.62);groups.wind.add(register(crownWheel,'丸穴車','巻上げピニオンから角穴車へ巻上げトルクを伝える。','wind'));explode(crownWheel,[-1,10,3]);
+const clickG=new THREE.Group();const clickArm=new THREE.Mesh(new THREE.BoxGeometry(2.0,.16,.30),MAT.steel);clickArm.position.x=.8;clickG.add(clickArm);clickG.add(cyl(.25,.20,MAT.blue,20));clickG.position.set(-6.90,3.15,3.35);clickG.rotation.y=-.55;groups.wind.add(register(clickG,'コハゼ','角穴車の逆転を歯先で阻止し、主ゼンマイの巻戻りを防ぐ。','wind'));explode(clickG,[-7,11,4]);
+const clickSpring=lever([[0,0],[1.35,.35],[2.15,-.25]],.16,.13,MAT.blue);clickSpring.position.set(-7.85,3.08,4.25);clickSpring.rotation.y=.22;groups.wind.add(register(clickSpring,'コハゼばね','コハゼを角穴車歯先へ押し付け、巻上げ時にクリック動作を生じさせる。','wind'));explode(clickSpring,[-8,10,5]);
+const stem=new THREE.Group();const stemShaft=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,18.2,20),MAT.steel);stemShaft.rotation.z=Math.PI/2;stem.add(stemShaft);const stemSquare=new THREE.Mesh(new THREE.BoxGeometry(2.0,.28,.28),MAT.steel);stemSquare.position.x=-7.0;stem.add(stemSquare);const stemThread=new THREE.Mesh(new THREE.CylinderGeometry(.19,.19,1.1,20),MAT.dark);stemThread.rotation.z=Math.PI/2;stemThread.position.x=8.55;stem.add(stemThread);stem.position.set(10.55,-1.05,0);groups.wind.add(register(stem,'巻真','りゅうずの回転と引出し位置を巻上げ・時刻合わせ機構へ伝える軸。','wind'));explode(stem,[12,4,0]);
+const crown=knurledCrown(1.15,1.15,32);crown.position.set(19.8,-1.05,0);groups.wind.add(register(crown,'りゅうず','位置1で主ゼンマイを巻き、位置2で表示時刻を調整する操作部。外周に滑り止め溝を設けた。','wind'));explode(crown,[15,4,0]);
+
+
+// Dial side and hand-setting mechanism (below the main plate)
+// The ETA technical communication lists the setting lever, winding pinion,
+// sliding pinion, yoke, yoke spring, two setting wheels, minute wheel,
+// setting-lever jumper, driver cannon pinion and hour wheel as distinct parts.
+const dialLayerY=-1.05;
+const driverCannon=new THREE.Group();
+const cannonTube=cyl(.42,.82,MAT.steel,28);driverCannon.add(register(cannonTube,'筒かな管','中心車軸へ弾性圧入され、通常運転では摩擦で追従し、針合わせでは滑る中空管。','dial'));
+const cannonGear=gearShape(.75,12,.20,MAT.steel,0,.70,.89);cannonGear.position.y=-.12;driverCannon.add(register(cannonGear,'筒かな12枚','ミニッツホイール36歯を駆動する12枚かな。','dial'));
+const frictionRing=new THREE.Mesh(new THREE.TorusGeometry(.48,.055,8,40,Math.PI*1.72),MAT.blue);frictionRing.rotation.x=Math.PI/2;frictionRing.position.y=.18;driverCannon.add(register(frictionRing,'筒かな摩擦ばね部','中心車軸を挟み込む弾性部。通常運転トルクを伝えつつ、時刻合わせ時には滑りを許容する。','dial'));
+const slit=new THREE.Mesh(new THREE.BoxGeometry(.08,.42,.50),MAT.dark);slit.position.set(.44,.18,0);driverCannon.add(register(slit,'筒かな割り','圧入部へ弾性を与える割りの可視化。','dial'));
+driverCannon.position.set(0,dialLayerY,0);groups.dial.add(labelAssembly(driverCannon,'駆動筒かな一式','中心車軸へ摩擦結合された筒かな管、12枚かな、弾性部で構成する。','dial'));explode(driverCannon,[0,-7,0]);
+
+const hourWheelDial=gearShape(1.60,40,.17,MAT.brass,5,.78,.93);hourWheelDial.position.set(0,dialLayerY-.42,0);groups.dial.add(register(hourWheelDial,'時針車40歯','ミニッツホイールかな10枚から4:1で減速され、筒かなとの合成で12時間に1回転する。','dial'));explode(hourWheelDial,[0,-8,0]);
+
+const minuteWheelDial=wheel('ミニッツホイール','筒かな12枚→ミニッツホイール36歯で3:1、ミニッツかな10枚→時針車40歯で4:1、合計12:1を構成する。','dial',1.20,36,.35,10,.18,4);minuteWheelDial.position.set(1.95,dialLayerY-.08,0);groups.dial.add(minuteWheelDial);explode(minuteWheelDial,[2,-8,0]);
+
+const settingWheel1=gearShape(1.06,32,.18,MAT.steel,3,.78,.93);settingWheel1.position.set(5.85,dialLayerY,0);groups.dial.add(register(settingWheel1,'設定車1','設定車2とかみ合い、スライディングピニオン側から受けた時刻合わせ回転を設定車列へ伝える。','dial'));explode(settingWheel1,[6,-8,0]);
+const settingWheel2=gearShape(1.06,32,.18,MAT.steel,3,.78,.93);settingWheel2.position.set(3.98,dialLayerY,1.00);groups.dial.add(register(settingWheel2,'設定車2','ミニッツホイールと設定車1の間でかみ合う中間車。時刻合わせ時の回転を日の裏輪列へ伝える。','dial'));explode(settingWheel2,[5,-9,2]);
+
+const windingPinion=gearShape(.82,20,.55,MAT.steel,0,.70,.89);windingPinion.rotation.z=Math.PI/2;windingPinion.position.set(2.15,dialLayerY,0);groups.dial.add(register(windingPinion,'巻上げピニオン','巻真と同軸で回転し、りゅうずを押し込んだ巻上げ位置では丸穴車側へトルクを伝える。','dial'));explode(windingPinion,[12,-7,0]);
+const slidingPinion=gearShape(.86,18,.62,MAT.steel,0,.70,.89);slidingPinion.rotation.z=Math.PI/2;slidingPinion.position.set(3.25,dialLayerY,0);groups.dial.add(register(slidingPinion,'スライディングピニオン','巻真上を軸方向に移動し、巻上げ系と時刻合わせ系を切り替えるクラッチ部品。','dial'));explode(slidingPinion,[10,-8,0]);
+
+const settingLever=lever([[6.8,1.0],[5.1,2.5],[3.2,2.1]],.32,.18,MAT.steel);settingLever.position.y=dialLayerY-.05;groups.dial.add(register(settingLever,'設定レバー','巻真の引出し位置を検出し、時刻合わせ機構の切替を保持する。','dial'));explode(settingLever,[8,-9,3]);
+const yoke=lever([[6.4,-.8],[4.9,-1.9],[3.1,-.55]],.30,.18,MAT.steel);yoke.position.y=dialLayerY-.02;groups.dial.add(register(yoke,'ヨーク','設定レバーの位置に応じてスライディングピニオンを軸方向へ移動させる。','dial'));explode(yoke,[9,-9,-2]);
+const yokeSpring=lever([[5.1,-.45],[4.0,-2.05],[2.8,-1.60]],.16,.13,MAT.blue);yokeSpring.position.y=dialLayerY-.10;groups.dial.add(register(yokeSpring,'ヨークばね','ヨークへ復元力を与え、巻上げ位置と時刻合わせ位置の噛合いを保持する。','dial'));explode(yokeSpring,[7,-10,-2]);
+const jumper=lever([[6.3,3.0],[4.7,4.2],[3.1,3.2]],.28,.16,MAT.blue);jumper.position.y=dialLayerY-.12;groups.dial.add(register(jumper,'設定レバージャンパー','設定レバーを巻上げ位置または時刻合わせ位置へ節度保持する。','dial'));explode(jumper,[7,-10,4]);
+const stopLever=lever([[0,0],[.45,2.3],[.75,4.45]],.15,.13,MAT.blue);stopLever.position.set(6.80,.55,.75);stopLever.rotation.y=-.10;groups.dial.add(register(stopLever,'秒停止レバー','りゅうず位置2でテンプ輪へ接触し、時刻合わせ中の秒表示を停止する。','dial'));explode(stopLever,[7,-7,4]);
+[[5.05,2.45,'設定レバー支点'],[4.90,-1.85,'ヨーク支点'],[4.65,4.15,'ジャンパー固定点'],[3.95,1.42,'設定車2支点'],[5.25,0,'設定車1支点']].forEach(([x,z,n])=>{const boss=cyl(.25,.18,MAT.boss,24);boss.position.set(x,dialLayerY-.18,z);groups.dial.add(register(boss,n,'文字板側機構の回転中心または固定点を形成する地板側の支点座。','dial'));supportDetails.push(boss);const s=screw(.18,.13);s.position.set(x,dialLayerY-.04,z);groups.dial.add(register(s,n+'ねじ','設定機構を地板へ保持する小径ねじ。','dial'))});
+const stemSleeve=new THREE.Mesh(new THREE.CylinderGeometry(.28,.28,3.0,28),MAT.boss);stemSleeve.rotation.z=Math.PI/2;stemSleeve.position.set(1.0,dialLayerY,0);groups.dial.add(register(stemSleeve,'巻真地板軸受','巻真左端を地板内で案内し、巻上げピニオンとの同軸を保持する軸受筒。','dial'));supportDetails.push(stemSleeve);const stemConnector=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,8.7,20),MAT.steel);stemConnector.rotation.z=Math.PI/2;stemConnector.position.set(5.25,dialLayerY,0);groups.dial.add(register(stemConnector,'巻真連結軸','巻上げピニオン、スライディングピニオン、外部の巻真を同一軸線上で連結して見せる可視化用シャフト。','dial'));
+
+// Dial fasteners specified as two parts in the technical communication.
+[[-13.6,-4.0],[-13.6,4.0]].forEach(([x,z],i)=>{const f=new THREE.Group();const tab=new THREE.Mesh(new THREE.BoxGeometry(1.15,.12,.34),MAT.steel);tab.position.x=.42;f.add(tab);f.add(screw(.20,.13));f.position.set(x,dialLayerY-.18,z);groups.dial.add(register(f,`文字板固定具${i+1}`,'文字板脚を地板側面で固定し、文字板の位置決めを行う。','dial'));explode(f,[-12,-8,z>0?4:-4])});
+
+// Lower-side train jewels and bottom shock absorber.
+[[P.center[0],P.center[1],'中心車下受石'],[P.third[0],P.third[1],'三番車下受石'],[P.fourth[0],P.fourth[1],'四番車下受石'],[P.escape[0],P.escape[1],'ガンギ車下受石'],[P.pallet[0],P.pallet[1],'アンクル下受石'],[P.balance[0],P.balance[1],'テンプ下穴石']].forEach(([x,z,n])=>jewelSetting(n,'地板の文字板側に石枠で保持され、各軸の下側ほぞを支持する穴石。',x,z,-.48,'dial'));
+shockAbsorber('下側耐震軸受',P.balance[0],P.balance[1],-.70,'dial');
+
+
+// Stage 7: rounded bridges, machined seats and thickness-direction supports
+const barrelBridge=bridge([[-9.0,5.7],[-7.4,9.0],[-3.1,9.5],[.1,7.0],[.5,3.9],[-.8,.9],[-3.3,-1.1],[-6.8,-1.2],[-9.0,1.5]],.46,[[P.barrel[0],P.barrel[1],.58]],[[-7.0,7.2,.45],[-1.4,5.8,.42],[-7.2,.4,.40]]);barrelBridge.position.y=3.52;groups.bridge.add(register(barrelBridge,'香箱受（石入）','香箱、角穴車、丸穴車を保持する受。丸みのある連続輪郭、上面加工層、支持脚、ねじ座を追加した。','bridge'));explode(barrelBridge,[-7,13,3]);
+const trainWheelBridge=bridge([[-3.2,3.8],[.8,4.5],[4.2,3.4],[5.7,.5],[5.5,-3.8],[3.9,-7.4],[1.0,-8.9],[-2.2,-8.2],[-3.8,-5.0],[-3.9,-.4]],.46,[[P.center[0],P.center[1],.44],[P.third[0],P.third[1],.40],[P.fourth[0],P.fourth[1],.38],[P.escape[0],P.escape[1],.34]],[[-1.8,2.8,.40],[4.4,1.4,.38],[2.8,-7.0,.38],[-2.2,-6.5,.36]]);trainWheelBridge.position.y=3.48;groups.bridge.add(register(trainWheelBridge,'輪列受（石入）','中心車、三番車、四番車、ガンギ車の上側軸受を保持する。輪列に沿う滑らかな受形状へ変更した。','bridge'));explode(trainWheelBridge,[2,14,-2]);
+const palletBridge=bridge([[2.1,-1.0],[4.8,-1.0],[5.5,-1.9],[5.4,-3.5],[4.6,-4.3],[2.4,-4.2],[1.9,-3.3]],.38,[[P.pallet[0],P.pallet[1],.32]],[[5.18,-0.98,.34],[2.20,-4.12,.34]]);palletBridge.position.y=3.38;groups.bridge.add(register(palletBridge,'アンクル受（石入）','アンクル上ほぞを保持する小型受。楕円状の連続輪郭と二点支持を採用した。','bridge'));explode(palletBridge,[5,14,-3]);
+const balanceBridge=bridge([[4.5,4.4],[5.2,6.7],[7.0,7.9],[9.2,7.8],[11.0,6.1],[11.6,3.8],[10.7,1.5],[8.7,.5],[6.1,1.2]],.44,[[P.balance[0],P.balance[1],.55]],[[5.8,5.6,.42],[10.1,4.8,.40]]);balanceBridge.position.y=3.65;groups.bridge.add(register(balanceBridge,'テンプ受・緩急装置','テンプ上軸受とETACHRON緩急装置を片持ちで保持する。曲線輪郭と根元の幅を整えた。','bridge'));explode(balanceBridge,[8,16,5]);
+// Six upper hole jewels: centre, third, fourth, escape, pallet and balance.
+[[P.center[0],P.center[1],3.78,'中心車上受石'],[P.third[0],P.third[1],3.78,'三番車上受石'],[P.fourth[0],P.fourth[1],3.70,'四番車上受石'],[P.escape[0],P.escape[1],3.62,'ガンギ車上受石'],[P.pallet[0],P.pallet[1],3.58,'アンクル上受石'],[P.balance[0],P.balance[1],3.90,'テンプ上穴石']].forEach(([x,z,y,n])=>addPivot(x,z,y,n));
+shockAbsorber('上側耐震軸受',P.balance[0],P.balance[1],4.03,'bridge');
+const bridgeScrewPoints=[[-7.0,7.2],[-1.4,5.8],[-7.2,.4],[-1.8,2.8],[4.4,1.4],[2.8,-7.0],[-2.2,-6.5],[5.18,-0.98],[2.20,-4.12],[5.8,5.6],[10.1,4.8]];
+bridgeScrewPoints.forEach(([x,z])=>{const pillar=cyl(.22,2.78,MAT.boss,24);pillar.position.set(x,1.77,z);groups.plate.add(register(pillar,'受支持柱','地板から受のねじ座まで高さを確保し、輪列の回転空間を形成する支持柱。','plate'));supportDetails.push(pillar);const sink=new THREE.Mesh(new THREE.TorusGeometry(.36,.06,8,28),MAT.machined);sink.rotation.x=Math.PI/2;sink.position.set(x,4.02,z);groups.bridge.add(sink);machiningDetails.push(sink);const s=screw(.28,.20);s.position.set(x,4.05,z);groups.bridge.add(register(s,'受ねじ','香箱受、輪列受、アンクル受、テンプ受を支持柱へ締結する皿座付きねじ。','bridge'))})
+
+// Display works above the movement for explanatory viewing
+const minuteAxis=new THREE.Group();minuteAxis.position.set(0,5.1,0);const minuteHand=makeHand(10.3,.42,MAT.hand);minuteAxis.add(minuteHand);groups.motion.add(register(minuteAxis,'分針','中心車と筒かなを介して1時間に1回転する表示針。','motion'));explode(minuteAxis,[0,17,0]);
+const hourAxis=new THREE.Group();hourAxis.position.set(0,4.92,0);const hourHand=makeHand(7.2,.58,MAT.brass);hourAxis.add(hourHand);groups.motion.add(register(hourAxis,'時針','日の裏車と時針車により、分針の1/12の速度で回転する。','motion'));explode(hourAxis,[0,16,0]);
+const secAxis=new THREE.Group();secAxis.position.set(P.fourth[0],4.95,P.fourth[1]);const secHand=makeHand(3.8,.14,MAT.red);secAxis.add(secHand);groups.motion.add(register(secAxis,'小秒針','四番車軸に直結し、1分に1回転する。','motion'));explode(secAxis,[2,18,-6]);
+const dialRing=new THREE.Mesh(new THREE.TorusGeometry(16.1,.18,10,100),MAT.dark);dialRing.rotation.x=Math.PI/2;dialRing.position.y=4.72;groups.motion.add(register(dialRing,'文字板外周リング','表示位置を把握しやすくするための簡略化した文字板リング。','motion'));explode(dialRing,[0,15,0]);
+for(let i=0;i<12;i++){const a=i*Math.PI*2/12;const m=new THREE.Mesh(new THREE.BoxGeometry(i%3===0?.20:.10,.08,i%3===0?1.0:.55),MAT.hand);m.position.set(14.8*Math.sin(a),4.77,-14.8*Math.cos(a));m.rotation.y=a;groups.motion.add(m)}
+// 12時位置を明確にする専用インデックス。数字は使わず、金色のダブルバーと三角マーカーで示す。
+const twelveMarker=new THREE.Group();
+const twelveBarL=new THREE.Mesh(new THREE.BoxGeometry(.20,.14,1.35),MAT.brass);twelveBarL.position.set(-.22,0,0);
+const twelveBarR=twelveBarL.clone();twelveBarR.position.set(.22,0,0);
+const twelveTriGeo=new THREE.BufferGeometry();twelveTriGeo.setAttribute('position',new THREE.Float32BufferAttribute([-.48,.02,.72,.48,.02,.72,0,.02,1.42],3));twelveTriGeo.computeVertexNormals();
+const twelveTriMat=MAT.brass.clone();twelveTriMat.side=THREE.DoubleSide;const twelveTri=new THREE.Mesh(twelveTriGeo,twelveTriMat);
+twelveMarker.add(twelveBarL,twelveBarR,twelveTri);twelveMarker.position.set(0,4.83,-14.65);twelveMarker.rotation.y=Math.PI;
+groups.motion.add(register(twelveMarker,'12時位置インデックス','文字盤上端の12時方向を示す専用マーカー。時刻表示の基準方向となる。','motion'));explode(twelveMarker,[0,15,1]);
+const smallRing=new THREE.Mesh(new THREE.TorusGeometry(4.5,.10,8,64),MAT.dark);smallRing.rotation.x=Math.PI/2;smallRing.position.set(P.fourth[0],4.76,P.fourth[1]);groups.motion.add(register(smallRing,'小秒針リング','四番車位置と小秒針表示の対応を示す補助リング。','motion'));explode(smallRing,[2,15,-6]);
+
+// Stage 3 diagnostic geometry: pitch circles, centre-distance links, pivots and exaggerated endshake.
+const meshGuides=new THREE.Group(),pivotGuides=new THREE.Group();groups.diagnostic.add(meshGuides,pivotGuides);
+const datumGroup=new THREE.Group();groups.diagnostic.add(datumGroup);
+function datumRing(y,r=18.7){const q=new THREE.Mesh(new THREE.TorusGeometry(r,.035,6,112),MAT.datum);q.rotation.x=Math.PI/2;q.position.y=y;datumGroup.add(q);datumGuides.push(q)}
+[-1.05,-.36,.36,3.48,4.50].forEach(y=>datumRing(y));
+const gaugeLine=new THREE.Mesh(new THREE.BoxGeometry(.06,5.55,.06),MAT.datum);gaugeLine.position.set(-18.9,1.72,0);datumGroup.add(gaugeLine);datumGuides.push(gaugeLine);datumGroup.visible=false;
+function pitchCircle(x,z,r,y=1.22){const q=new THREE.Mesh(new THREE.TorusGeometry(r,.025,6,96),MAT.guide);q.rotation.x=Math.PI/2;q.position.set(x,y,z);meshGuides.add(q);return q}
+function guideLine(a,b,y=1.15){const pts=[new THREE.Vector3(a[0],y,a[1]),new THREE.Vector3(b[0],y,b[1])];const ln=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),MAT.guideLine);meshGuides.add(ln);return ln}
+function pivotGuide(x,z,lower=-.58,upper=3.82){const h=upper-lower;const shaft=cyl(.055,h,MAT.pivotGuide,14);shaft.position.set(x,lower+h/2,z);pivotGuides.add(shaft);const lo=cyl(.22,.045,MAT.pivotGuide,20);lo.position.set(x,lower,z);pivotGuides.add(lo);const up=lo.clone();up.position.y=upper;pivotGuides.add(up)}
+pitchCircle(P.barrel[0],P.barrel[1],3.75);pitchCircle(P.center[0],P.center[1],.50);guideLine(P.barrel,P.center);
+pitchCircle(P.center[0],P.center[1],2.85);pitchCircle(P.third[0],P.third[1],.43);guideLine(P.center,P.third);
+pitchCircle(P.third[0],P.third[1],2.25);pitchCircle(P.fourth[0],P.fourth[1],.37);guideLine(P.third,P.fourth);
+pitchCircle(P.fourth[0],P.fourth[1],1.80);pitchCircle(P.escape[0],P.escape[1],.30);guideLine(P.fourth,P.escape);
+pitchCircle(0,0,.75,dialLayerY-.15);pitchCircle(1.95,0,1.20,dialLayerY-.15);pitchCircle(0,0,1.60,dialLayerY-.47);pitchCircle(1.95,0,.35,dialLayerY-.47);guideLine([0,0],[1.95,0],dialLayerY-.15);pitchCircle(5.85,0,1.06,dialLayerY-.15);pitchCircle(3.98,1.00,1.06,dialLayerY-.15);guideLine([1.95,0],[3.98,1.00],dialLayerY-.15);guideLine([3.98,1.00],[5.85,0],dialLayerY-.15);
+[P.center,P.third,P.fourth,P.escape,P.pallet,P.balance].forEach(([x,z])=>pivotGuide(x,z));
+meshGuides.visible=false;pivotGuides.visible=false;
+
+// Interaction and highlighting
+const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();let selectedRoot=null;let selectedMaterials=[];const selectionLight=new THREE.PointLight(0xffc45e,0,7,2);scene.add(selectionLight);
+function clearSelection(){for(const s of selectedMaterials){s.node.material=s.original;if(s.highlight&&s.highlight.dispose)s.highlight.dispose()}selectedMaterials=[];selectedRoot=null;selectionLight.intensity=0}
+function highlightPart(root){clearSelection();selectedRoot=root;root.traverse(node=>{if(!node.isMesh||!node.material||Array.isArray(node.material))return;const original=node.material;const highlight=original.clone();if(highlight.color)highlight.color.lerp(new THREE.Color(0xffd071),.42);if(highlight.emissive){highlight.emissive.setHex(0x8a4b10);highlight.emissiveIntensity=.72}if(typeof highlight.roughness==='number')highlight.roughness=Math.max(.10,highlight.roughness*.78);highlight.needsUpdate=true;selectedMaterials.push({node,original,highlight});node.material=highlight});const box=new THREE.Box3().setFromObject(root);box.getCenter(selectionLight.position);selectionLight.intensity=1.65}
+function pick(ev){const rect=renderer.domElement.getBoundingClientRect();const x=ev.changedTouches?ev.changedTouches[0].clientX:ev.clientX;const y=ev.changedTouches?ev.changedTouches[0].clientY:ev.clientY;pointer.x=(x-rect.left)/rect.width*2-1;pointer.y=-(y-rect.top)/rect.height*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(selectable,true);if(hits.length){const picked=hits[0].object;const root=partRoots.get(picked)||picked;highlightPart(root);document.getElementById('partName').textContent=picked.userData.partName;document.getElementById('partDesc').textContent=partsInfo[picked.userData.partName]||''}else{clearSelection();document.getElementById('partName').textContent='なし';document.getElementById('partDesc').textContent='部品をタップ／クリックすると名称と機能を表示します。'}}
+renderer.domElement.addEventListener('click',pick);renderer.domElement.addEventListener('touchend',e=>{if(e.changedTouches.length===1)pick(e)},{passive:true});
+
+// UI
+const panel=document.getElementById('panel');
+const panelToggle=document.getElementById('panelToggle');
+function isDesktop(){return innerWidth>=900}
+function togglePanel(){if(isDesktop()){panel.classList.toggle('collapsed')}else{panel.classList.toggle('open')}}
+panelToggle.onclick=togglePanel;
+document.getElementById('handle').onclick=()=>{if(!isDesktop())panel.classList.toggle('open')};
+
+let running=true,speed=1,explodeAmount=0,sideSplitAmount=0,endshakeAmount=0;
+let watchTimeSec=10*3600+8*60+30;
+let trainTimeSec=watchTimeSec,settingSecondHold=watchTimeSec%60;
+let liveSync=false;
+const playBtn=document.getElementById('play');
+const liveSyncInput=document.getElementById('liveSync');
+const timeInput=document.getElementById('timeInput');
+const timeDisplay=document.getElementById('timeDisplay');
+const timeMode=document.getElementById('timeMode');
+const applyTimeBtn=document.getElementById('applyTime');
+const setNowBtn=document.getElementById('setNow');
+const crownWindBtn=document.getElementById('crownWind');
+const crownSetBtn=document.getElementById('crownSet');
+const crownTurnInput=document.getElementById('crownTurn');
+const crownTurnV=document.getElementById('crownTurnV');
+const crownDirection=document.getElementById('crownDirection');
+const crownModeLabel=document.getElementById('crownModeLabel');
+const reserveV=document.getElementById('reserveV');
+const reserveFill=document.getElementById('reserveFill');
+const autoAmplitudeInput=document.getElementById('autoAmplitude');
+const amplitudeInput=document.getElementById('amplitude'),amplitudeV=document.getElementById('amplitudeV');
+const rateAdjustInput=document.getElementById('rateAdjust'),rateAdjustV=document.getElementById('rateAdjustV');
+const beatErrorInput=document.getElementById('beatError'),beatErrorV=document.getElementById('beatErrorV');
+const positionModeInput=document.getElementById('positionMode');
+const estimatedAmplitude=document.getElementById('estimatedAmplitude'),estimatedRate=document.getElementById('estimatedRate'),estimatedFrequency=document.getElementById('estimatedFrequency');
+const balanceStateV=document.getElementById('balanceStateV'),ampMetric=document.getElementById('ampMetric');
+const trainEfficiencyInput=document.getElementById('trainEfficiency'),trainEfficiencyV=document.getElementById('trainEfficiencyV');
+const runtimeScaleInput=document.getElementById('runtimeScale');
+const coupledStateV=document.getElementById('coupledStateV'),torqueV=document.getElementById('torqueV'),driveEnergyV=document.getElementById('driveEnergyV'),coupledAmpV=document.getElementById('coupledAmpV'),coupledRateV=document.getElementById('coupledRateV');
+const historyCanvas=document.getElementById('historyCanvas'),historyCtx=historyCanvas.getContext('2d');
+const machiningToggle=document.getElementById('machiningToggle'),supportToggle=document.getElementById('supportToggle'),datumToggle=document.getElementById('datumToggle');
+let autoAmplitude=true,balanceAmplitudeDeg=270,rateAdjustSecDay=0,beatErrorMs=0,positionMode='dialUp';
+let trainEfficiency=.84,runtimeScale=1,amplitudeState=270,torqueState=0,driveState=0;
+let simulatedElapsedHours=0,lastHistoryHour=-1,historyData=[];
+let crownPosition='wind',crownTransition=0,crownTurnRate=0,crownRotation=0,windingArborAngle=0,settingTrainAngle=0;
+let powerReserveHours=26;
+const crownBaseX=crown.position.x,stemBaseX=stem.position.x,slidingBaseX=slidingPinion.position.x;
+const settingLeverBaseZ=settingLever.position.z,yokeBaseX=yoke.position.x,jumperBaseZ=jumper.position.z;
+
+const positionRateOffsets={dialUp:0,dialDown:2.5,crownUp:-5.0,crownDown:4.0};
+const positionAmplitudeFactors={dialUp:1.00,dialDown:.99,crownUp:.945,crownDown:.935};
+function signed(value,digits=0){const n=Number(value);return `${n>0?'+':''}${n.toFixed(digits)}`}
+function clamp01(v){return Math.max(0,Math.min(1,v))}
+function mainspringTorqueRatio(){
+ const r=clamp01(powerReserveHours/52);if(r<=0)return 0;
+ const lowBand=smoothStep(r/.025);
+ const midBand=.56+.44*Math.pow(r,.45);
+ const fullWindFriction=1-.07*smoothStep((r-.88)/.12);
+ return Math.max(0,midBand*lowBand*fullWindFriction);
+}
+function effectiveDriveRatio(){
+ const torque=mainspringTorqueRatio();
+ const loadFactor=.94+.06*clamp01(torque/.70);
+ const positionFactor=positionAmplitudeFactors[positionMode]||1;
+ return torque*trainEfficiency*loadFactor*positionFactor;
+}
+function targetAmplitudeFromDrive(){
+ if(!autoAmplitude)return balanceAmplitudeDeg;
+ const drive=effectiveDriveRatio();if(drive<=0)return 0;
+ return Math.max(0,Math.min(315,270*Math.sqrt(drive/.74)));
+}
+function currentAmplitude(){return autoAmplitude?amplitudeState:balanceAmplitudeDeg}
+function amplitudeRateDefect(amp){
+ const linear=(amp-270)*.025;
+ const lowCliff=amp<220?-Math.pow(220-amp,2)*.0015:0;
+ const highDefect=amp>300?(amp-300)*.035:0;
+ return linear+lowCliff+highDefect;
+}
+function currentRate(){
+ const amp=currentAmplitude();
+ return rateAdjustSecDay+(positionRateOffsets[positionMode]||0)+amplitudeRateDefect(amp)+beatErrorMs*.35;
+}
+function mechanismPowered(){return powerReserveHours>0&&currentAmplitude()>=95&&effectiveDriveRatio()>.10}
+function operatingState(){
+ if(crownPosition==='set')return {text:'秒停止',cls:'stateWarn'};
+ if(!mechanismPowered())return {text:'停止・入力不足',cls:'stateStop'};
+ if(currentAmplitude()<220)return {text:'低振幅域',cls:'stateWarn'};
+ return {text:'通常運転',cls:'stateGood'};
+}
+function updateBalanceReadout(){
+ const amp=currentAmplitude(),rate=currentRate(),state=operatingState();
+ amplitudeV.textContent=`${Math.round(amp)}°`;estimatedAmplitude.textContent=`${Math.round(amp)}°`;ampMetric.textContent=`${Math.round(amp)}°`;
+ rateAdjustV.textContent=`${signed(rateAdjustSecDay)} s/day`;beatErrorV.textContent=`${beatErrorMs.toFixed(1)} ms`;
+ estimatedRate.textContent=`${signed(rate,1)} s/day`;estimatedFrequency.textContent=`${(2.5*(1+rate/86400)).toFixed(3)} Hz`;
+ balanceStateV.textContent=crownPosition==='set'?'秒停止':autoAmplitude?'連成振幅':'手動振幅';
+ torqueState=mainspringTorqueRatio();driveState=effectiveDriveRatio();
+ trainEfficiencyV.textContent=`${Math.round(trainEfficiency*100)}%`;torqueV.textContent=`${Math.round(torqueState*100)}%`;driveEnergyV.textContent=`${Math.round(driveState/.74*100)}%`;
+ coupledAmpV.textContent=`${Math.round(amp)}°`;coupledRateV.textContent=`${signed(rate,1)} s/day`;
+ coupledStateV.textContent=state.text;coupledStateV.className=state.cls;
+}
+function resetHistory(){historyData=[];simulatedElapsedHours=0;lastHistoryHour=-1;recordHistory(true);drawHistory()}
+function recordHistory(force=false){
+ if(!force&&simulatedElapsedHours-lastHistoryHour<.25)return;
+ lastHistoryHour=simulatedElapsedHours;
+ historyData.push({h:simulatedElapsedHours,reserve:powerReserveHours/52,amp:currentAmplitude(),rate:currentRate()});
+ if(historyData.length>220)historyData.shift();drawHistory();
+}
+function drawHistory(){
+ const c=historyCanvas,ctx=historyCtx,w=c.width,h=c.height;ctx.clearRect(0,0,w,h);
+ ctx.fillStyle='rgba(7,11,16,.88)';ctx.fillRect(0,0,w,h);
+ const l=46,r=14,t=18,b=34,pw=w-l-r,ph=h-t-b;
+ ctx.strokeStyle='rgba(255,255,255,.10)';ctx.lineWidth=1;
+ for(let i=0;i<=4;i++){const y=t+ph*i/4;ctx.beginPath();ctx.moveTo(l,y);ctx.lineTo(w-r,y);ctx.stroke()}
+ if(historyData.length<2){ctx.fillStyle='rgba(255,255,255,.52)';ctx.font='22px sans-serif';ctx.fillText('履歴データを記録中',l+24,t+ph/2);return}
+ const minH=historyData[0].h,maxH=Math.max(minH+.1,historyData[historyData.length-1].h);
+ const x=d=>l+(d.h-minH)/(maxH-minH)*pw;
+ const line=(color,value)=>{ctx.strokeStyle=color;ctx.lineWidth=3;ctx.beginPath();historyData.forEach((d,i)=>{const y=t+(1-clamp01(value(d)))*ph;i?ctx.lineTo(x(d),y):ctx.moveTo(x(d),y)});ctx.stroke()};
+ line('#d9b764',d=>d.reserve);line('#70b8ff',d=>d.amp/320);line('#ff8585',d=>(Math.max(-30,Math.min(30,d.rate))+30)/60);
+ ctx.fillStyle='rgba(255,255,255,.60)';ctx.font='18px sans-serif';ctx.fillText(`${minH.toFixed(1)}h`,l,h-9);ctx.textAlign='right';ctx.fillText(`${maxH.toFixed(1)}h`,w-r,h-9);ctx.textAlign='left';
+ ctx.fillText('100%',4,t+6);ctx.fillText('50%',8,t+ph/2+6);ctx.fillText('0%',16,t+ph+6);
+}
+function jumpSimulation(hours){
+ const h=Math.max(0,hours);powerReserveHours=Math.max(0,powerReserveHours-h);watchTimeSec=normDay(watchTimeSec+h*3600*(1+currentRate()/86400));trainTimeSec=normDay(trainTimeSec+h*3600);simulatedElapsedHours+=h;
+ amplitudeState=targetAmplitudeFromDrive();recordHistory(true);setEditorTime(visibleWatchTime());updateTimeUI();updateBalanceReadout();
+}
+function oscillatorSin(time,freq,errorMs){
+ const cycle=1/freq,half=cycle/2,delta=Math.min(half*.35,Math.max(0,errorMs)/2000),u=((time%cycle)+cycle)%cycle;
+ const split=half+delta;
+ const phase=u<split?Math.PI*u/split:Math.PI+Math.PI*(u-split)/(half-delta);
+ return Math.sin(phase);
+}
+function escapementState(beatValue){const beatIndex=Math.floor(beatValue),side=((beatIndex%2)+2)%2,u=beatValue-beatIndex;let seg=0;if(u>=.45&&u<.57)seg=1;else if(u>=.57&&u<.79)seg=2;else if(u>=.79)seg=3;const start=side===0?-1:1,end=-start;const leverProgress=u<.45?0:u<.79?smoothStep((u-.45)/.34):1;const wheelProgress=u<.55?0:u<.82?smoothStep((u-.55)/.27):1;return {phase:side*4+seg,palletAngle:(start+(end-start)*leverProgress)*.205,advance:beatIndex*.5+.5*wheelProgress,beat:beatValue};}
+function pad2(n){return String(Math.floor(n)).padStart(2,'0')}
+function normDay(s){s%=86400; if(s<0)s+=86400; return s}
+function secondsToInputValue(s){s=normDay(s);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60);return `${pad2(h)}:${pad2(m)}:${pad2(sec)}`}
+function setEditorTime(s){timeInput.value=secondsToInputValue(s)}
+function setWatchTime(s){watchTimeSec=normDay(s);updateTimeUI()}
+function secondsFromDate(d){return d.getHours()*3600+d.getMinutes()*60+d.getSeconds()+d.getMilliseconds()/1000}
+function setWatchTimeFromDate(d,updateEditor=false){const s=secondsFromDate(d);setWatchTime(s);if(updateEditor)setEditorTime(s)}
+function visibleWatchTime(){if(crownPosition!=='set')return watchTimeSec;const base=Math.floor(normDay(watchTimeSec)/60)*60;return normDay(base+settingSecondHold)}
+function updateTimeUI(){timeDisplay.textContent=secondsToInputValue(visibleWatchTime())}
+function refreshControlState(){
+ timeInput.disabled=liveSync;applyTimeBtn.disabled=liveSync;setNowBtn.disabled=liveSync;
+ const setting=crownPosition==='set';playBtn.disabled=liveSync||setting;
+ if(liveSync)playBtn.textContent='実時間同期中';else if(setting)playBtn.textContent='秒停止中';else playBtn.textContent=running?'一時停止':'再生';
+ crownWindBtn.classList.toggle('active',!setting);crownSetBtn.classList.toggle('active',setting);
+ crownModeLabel.textContent=setting?'位置2：時刻合わせ＋秒停止':'位置1：巻上げ';
+ crownDirection.textContent=setting?'右へ回すと時刻を進め、左へ回すと戻します':'右へ回すと主ゼンマイを巻き上げます。左回しは空転します';
+ if(setting)timeMode.textContent='りゅうず位置2：時刻合わせ（秒停止）';
+}
+function setSyncUI(enabled){
+ liveSync=enabled;liveSyncInput.checked=enabled;
+ if(enabled){crownPosition='wind';crownTransition=0;}
+ if(!enabled&&crownPosition!=='set'&&!timeMode.textContent.includes('入力')&&!timeMode.textContent.includes('一回'))timeMode.textContent='手動／一回設定';
+ refreshControlState();
+}
+function setCrownPosition(position){
+ const previous=crownPosition;
+ if(position==='set'&&previous!=='set'){settingSecondHold=normDay(watchTimeSec)%60;}
+ if(position==='wind'&&previous==='set'){watchTimeSec=normDay(Math.floor(normDay(watchTimeSec)/60)*60+settingSecondHold);setEditorTime(watchTimeSec);}
+ crownPosition=position;
+ if(position==='set'){if(liveSync){liveSync=false;liveSyncInput.checked=false;}timeMode.textContent='りゅうず位置2：時刻合わせ（秒停止）';}
+ else if(!liveSync)timeMode.textContent='通常運転／巻上げ位置';
+ refreshControlState();
+}
+function resetCrownTurn(){crownTurnRate=0;crownTurnInput.value=0;crownTurnV.textContent='中立';}
+function applyTimeInput(){
+ const val=timeInput.value;if(!val)return;
+ const p=val.split(':').map(Number);const h=p[0]||0,m=p[1]||0,s=p[2]||0;
+ setSyncUI(false);setWatchTime(h*3600+m*60+s);timeMode.textContent='入力時刻から動作';
+}
+
+playBtn.onclick=e=>{running=!running;e.target.textContent=running?'一時停止':'再生'};
+document.getElementById('reset').onclick=()=>{camera.up.set(0,1,0);cameraTo(2,35,45)};
+document.getElementById('trainView').onclick=()=>{camera.up.set(0,1,0);cameraTo(4,23,27,0,1,-2)};
+document.getElementById('dialView').onclick=()=>{camera.up.set(0,0,-1);cameraTo(2,-35,-45,0,-.4,0)};
+document.getElementById('sideView').onclick=()=>{camera.up.set(0,1,0);cameraTo(48,5,0,0,0,0)};
+document.getElementById('structureView').onclick=()=>{camera.up.set(0,1,0);cameraTo(46,8,18,0,1.6,0);datumToggle.checked=true;datumGroup.visible=true;groups.diagnostic.visible=true;document.querySelector('[data-group="diagnostic"]').checked=true};
+document.getElementById('topView').onclick=()=>{camera.up.set(0,0,-1);cameraTo(0,55,.01,0,1.5,0)};
+document.getElementById('escView').onclick=()=>{camera.up.set(0,1,0);cameraTo(13,12,15,4.6,1.8,-1.4)};
+applyTimeBtn.onclick=applyTimeInput;
+setNowBtn.onclick=()=>{setSyncUI(false);setWatchTimeFromDate(new Date(),true);timeMode.textContent='現在時刻に一回設定'};
+liveSyncInput.onchange=e=>{setSyncUI(e.target.checked);if(liveSync)setWatchTimeFromDate(new Date(),true)};
+crownWindBtn.onclick=()=>setCrownPosition('wind');
+crownSetBtn.onclick=()=>setCrownPosition('set');
+crownTurnInput.oninput=e=>{crownTurnRate=+e.target.value/100;const a=Math.abs(crownTurnRate);crownTurnV.textContent=a<.03?'中立':`${crownTurnRate>0?'正転':'逆転'} ${(a*100).toFixed(0)}%`;};
+['pointerup','pointercancel','touchend','mouseup'].forEach(ev=>window.addEventListener(ev,resetCrownTurn,{passive:true}));
+crownTurnInput.onchange=resetCrownTurn;
+document.getElementById('balanceView').onclick=()=>{camera.up.set(0,1,0);cameraTo(13,10,12,P.balance[0],2.1,P.balance[1])};
+autoAmplitudeInput.onchange=e=>{autoAmplitude=e.target.checked;amplitudeInput.disabled=autoAmplitude;updateBalanceReadout()};
+amplitudeInput.oninput=e=>{balanceAmplitudeDeg=+e.target.value;updateBalanceReadout()};
+rateAdjustInput.oninput=e=>{rateAdjustSecDay=+e.target.value;updateBalanceReadout()};
+beatErrorInput.oninput=e=>{beatErrorMs=+e.target.value;updateBalanceReadout()};
+positionModeInput.onchange=e=>{positionMode=e.target.value;amplitudeState=targetAmplitudeFromDrive();updateBalanceReadout();recordHistory(true)};
+trainEfficiencyInput.oninput=e=>{trainEfficiency=+e.target.value/100;amplitudeState=targetAmplitudeFromDrive();updateBalanceReadout();recordHistory(true)};
+runtimeScaleInput.onchange=e=>{runtimeScale=+e.target.value};
+document.getElementById('fullWind').onclick=()=>{powerReserveHours=52;amplitudeState=targetAmplitudeFromDrive();resetHistory();updateBalanceReadout()};
+document.getElementById('advance24').onclick=()=>jumpSimulation(24);
+document.getElementById('nearStop').onclick=()=>{powerReserveHours=1.4;amplitudeState=targetAmplitudeFromDrive();recordHistory(true);updateBalanceReadout()};
+document.getElementById('clearHistory').onclick=resetHistory;
+
+machiningToggle.onchange=e=>machiningDetails.forEach(o=>o.visible=e.target.checked);
+supportToggle.onchange=e=>supportDetails.forEach(o=>o.visible=e.target.checked);
+datumToggle.onchange=e=>{datumGroup.visible=e.target.checked;groups.diagnostic.visible=meshGuides.visible||pivotGuides.visible||datumGroup.visible;document.querySelector('[data-group="diagnostic"]').checked=groups.diagnostic.visible};
+document.getElementById('meshGuide').onchange=e=>{meshGuides.visible=e.target.checked;groups.diagnostic.visible=meshGuides.visible||pivotGuides.visible||datumGroup.visible;document.querySelector('[data-group="diagnostic"]').checked=groups.diagnostic.visible};
+document.getElementById('pivotGuide').onchange=e=>{pivotGuides.visible=e.target.checked;groups.diagnostic.visible=meshGuides.visible||pivotGuides.visible||datumGroup.visible;document.querySelector('[data-group="diagnostic"]').checked=groups.diagnostic.visible};
+document.getElementById('endshake').oninput=e=>{endshakeAmount=+e.target.value/100;document.getElementById('endshakeV').textContent=e.target.value+'%';if(endshakeAmount>0&&!pivotGuides.visible){pivotGuides.visible=true;groups.diagnostic.visible=true;document.getElementById('pivotGuide').checked=true;document.querySelector('[data-group="diagnostic"]').checked=true}};
+document.getElementById('sideSplit').oninput=e=>{sideSplitAmount=+e.target.value/100;document.getElementById('sideSplitV').textContent=e.target.value+'%'};
+document.getElementById('explode').oninput=e=>{explodeAmount=+e.target.value/100;document.getElementById('explodeV').textContent=e.target.value+'%'};
+document.getElementById('opacity').oninput=e=>{MAT.plate.opacity=+e.target.value/100;document.getElementById('opacityV').textContent=e.target.value+'%'};
+document.getElementById('speed').oninput=e=>{speed=+e.target.value/100;document.getElementById('speedV').textContent=speed.toFixed(1)+'×'};
+document.getElementById('clip').oninput=e=>{const v=+e.target.value;clipPlane.constant=v===0?1000:(v/100*36-18);document.getElementById('clipV').textContent=v===0?'OFF':v+'%'};
+document.getElementById('backgroundTheme').onchange=e=>applyBackgroundTheme(e.target.value);
+document.querySelectorAll('[data-group]').forEach(c=>c.onchange=()=>{groups[c.dataset.group].visible=c.checked;if(c.dataset.group==='diagnostic'){meshGuides.visible=c.checked&&document.getElementById('meshGuide').checked;pivotGuides.visible=c.checked&&document.getElementById('pivotGuide').checked;datumGroup.visible=c.checked&&datumToggle.checked}});
+document.getElementById('mode').onchange=e=>{const v=e.target.value;Object.entries(groups).forEach(([k,g])=>{if(k!=='diagnostic')g.visible=true});groups.diagnostic.visible=meshGuides.visible||pivotGuides.visible||datumGroup.visible;if(v==='power'){groups.balance.visible=groups.wind.visible=groups.dial.visible=groups.motion.visible=false}else if(v==='esc'){groups.train.visible=groups.wind.visible=groups.dial.visible=groups.motion.visible=false}else if(v==='wind'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.motion.visible=false}else if(v==='motion'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.wind.visible=false}else if(v==='dial'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.wind.visible=groups.motion.visible=false}document.querySelectorAll('[data-group]').forEach(c=>c.checked=groups[c.dataset.group].visible)};
+setEditorTime(watchTimeSec);updateTimeUI();setSyncUI(false);setCrownPosition('wind');amplitudeInput.disabled=true;escMarkers.forEach(m=>m.visible=false);amplitudeState=targetAmplitudeFromDrive();updateBalanceReadout();resetHistory();
+
+// Mechanism animation. Stage 7 retains the Stage 6 coupled model and adds refined structural geometry.
+let simPhase=0,last=performance.now();updateMainSpring(powerReserveHours/52);
+function smoothStep(x){x=Math.max(0,Math.min(1,x));return x*x*(3-2*x)}
+function updateMainSpring(ratio){const pos=mainSpringGeo.attributes.position.array;const turns=4.2+ratio*3.0;const outer=2.62-ratio*.72;for(let i=0;i<mainSpringSamples.length;i++){const u=mainSpringSamples[i].u;const a=u*turns*Math.PI*2;const r=.48+u*outer;pos[i*3]=r*Math.cos(a);pos[i*3+1]=0;pos[i*3+2]=r*Math.sin(a)}mainSpringGeo.attributes.position.needsUpdate=true}
+function updateHairSpring(angle){const pos=springGeo.attributes.position.array;for(let i=0;i<springBase.length;i++){const p=springBase[i];const th=p.a+angle*(1-p.u);pos[i*3]=p.r*Math.cos(th);pos[i*3+1]=0;pos[i*3+2]=p.r*Math.sin(th)}springGeo.attributes.position.needsUpdate=true}
+function animate(now){requestAnimationFrame(animate);const dt=Math.min(.05,(now-last)/1000);last=now;
+ const setting=crownPosition==='set';
+ const elapsedSec=dt*(liveSync?1:runtimeScale);
+ const ampTarget=targetAmplitudeFromDrive();
+ const response=1-Math.exp(-elapsedSec/24);amplitudeState+=((autoAmplitude?ampTarget:balanceAmplitudeDeg)-amplitudeState)*response;
+ const powered=mechanismPowered();
+ const rateFactorNow=1+currentRate()/86400;
+ if(liveSync){setWatchTimeFromDate(new Date());if(running&&!setting&&powered){trainTimeSec=normDay(trainTimeSec+dt);powerReserveHours=Math.max(0,powerReserveHours-dt/3600)}}
+ else if(running&&!setting&&powered){watchTimeSec=normDay(watchTimeSec+elapsedSec*rateFactorNow);trainTimeSec=normDay(trainTimeSec+elapsedSec*rateFactorNow);powerReserveHours=Math.max(0,powerReserveHours-elapsedSec/3600);simulatedElapsedHours+=elapsedSec/3600;recordHistory()}
+ const crownDelta=crownTurnRate*dt*8.0;crownRotation+=crownDelta;
+ if(setting&&Math.abs(crownTurnRate)>.001){watchTimeSec=normDay(watchTimeSec+crownTurnRate*dt*7200);settingTrainAngle+=crownDelta;setEditorTime(visibleWatchTime())}
+ if(!setting&&crownTurnRate>0){const woundHours=crownTurnRate*dt*5.2;powerReserveHours=Math.min(52,powerReserveHours+woundHours);windingArborAngle+=crownDelta*.72;recordHistory()}
+ if((running&&!setting&&powered)||liveSync)simPhase+=dt*Math.max(speed,.25);
+ exploded.forEach(p=>p.obj.position.copy(p.base).addScaledVector(p.v,explodeAmount));
+ const es=endshakeAmount*.22;center.position.y+=es;third.position.y-=es*.65;fourth.position.y+=es*.45;escape.position.y-=es*.35;
+ const target=setting?1:0;crownTransition+=(target-crownTransition)*Math.min(1,dt*9);
+ crown.position.x+=crownTransition*1.35;stem.position.x+=crownTransition*.70;slidingPinion.position.x+=-1.55*crownTransition;
+ settingLever.position.z+=.42*crownTransition;yoke.position.x+=-.42*crownTransition;jumper.position.z+=.16*crownTransition;
+ stopLever.rotation.y=-.10+.28*crownTransition;
+ const split=sideSplitAmount*5.5;groups.bridge.position.y=split;groups.train.position.y=split;groups.esc.position.y=split;groups.balance.position.y=split;groups.wind.position.y=split;groups.dial.position.y=-split;groups.motion.position.y=split*1.55;
+ const activeOscillation=!setting&&powered&&(running||liveSync);const freq=2.5;const animT=liveSync?(performance.now()/1000):simPhase;
+ const rateFactor=1+currentRate()/86400;
+ const studyBeat=trainTimeSec*freq*2*rateFactor;const escState=escapementState(studyBeat);
+ const ampRad=THREE.MathUtils.degToRad(currentAmplitude());const balAngle=activeOscillation?ampRad*oscillatorSin(animT*rateFactor,freq,beatErrorMs):0;
+ balanceG.rotation.y=balAngle;collet.rotation.y=balAngle;regulator.rotation.y=.06+rateAdjustSecDay*.0022;curbAssembly.rotation.y=regulator.rotation.y;updateHairSpring(balAngle);
+ const escAngle=-(escState.advance/15)*Math.PI*2;escape.rotation.y=escAngle;pallet.rotation.y=activeOscillation?escState.palletAngle:0;
+ const fourthRot=(trainTimeSec/60)*Math.PI*2;const centerRot=(trainTimeSec/3600)*Math.PI*2;
+ fourth.rotation.y=fourthRot;third.rotation.y=-centerRot*8;center.rotation.y=centerRot;barrel.rotation.y=-centerRot/8;
+ const displaySec=normDay(watchTimeSec),secForHand=setting?settingSecondHold:displaySec%60,minuteProgress=(displaySec/60)%60,hourProgress=(displaySec/3600)%12,twelveOffset=Math.PI/2;
+ secAxis.rotation.y=twelveOffset-(secForHand/60)*Math.PI*2;minuteAxis.rotation.y=twelveOffset-(minuteProgress/60)*Math.PI*2;hourAxis.rotation.y=twelveOffset-(hourProgress/12)*Math.PI*2;
+ const displayCenterRot=(displaySec/3600)*Math.PI*2;driverCannon.rotation.y=displayCenterRot;minuteWheelDial.rotation.y=-displayCenterRot/3;hourWheelDial.rotation.y=displayCenterRot/12;
+ crown.rotation.x=crownRotation;stem.rotation.x=crownRotation;windingPinion.rotation.x=-crownRotation;slidingPinion.rotation.x=crownRotation;
+ if(setting){settingWheel1.rotation.y=-settingTrainAngle;settingWheel2.rotation.y=settingTrainAngle;minuteWheelDial.rotation.y=-displayCenterRot/3+settingTrainAngle*.48;driverCannon.rotation.y=displayCenterRot-settingTrainAngle*.16;hourWheelDial.rotation.y=displayCenterRot/12-settingTrainAngle*.04;crownWheel.rotation.y*=.96;}
+ else{crownWheel.rotation.y=-crownRotation*.58;if(crownTurnRate>0){ratchet.rotation.y=windingArborAngle;barrelArbor.rotation.y=windingArborAngle;arborSquare.rotation.y=windingArborAngle;clickG.rotation.y=-.55+Math.abs(Math.sin(crownRotation*7))*.075}else{clickG.rotation.y=-.55}}
+ clickSpring.rotation.y=.22+(crownTurnRate>0&&!setting?Math.abs(Math.sin(crownRotation*7))*.03:0);
+ updateMainSpring(powerReserveHours/52);reserveV.textContent=`${powerReserveHours.toFixed(1)} / 52 h`;reserveFill.style.width=`${powerReserveHours/52*100}%`;updateBalanceReadout();
+ if(selectedRoot){const b=new THREE.Box3().setFromObject(selectedRoot);b.getCenter(selectionLight.position);selectionLight.intensity=1.45+.18*Math.sin(now*.006)}
+ updateTimeUI();controls.update();renderer.render(scene,camera);if(!renderStatus.classList.contains('done')){renderStatus.classList.add('done')}}requestAnimationFrame(animate);
+window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);if(isDesktop()){panel.classList.remove('open')}else{panel.classList.remove('collapsed')}});if(!isDesktop())panel.classList.remove('collapsed');
+</script>
+</body>
+</html>
