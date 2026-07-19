@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0d1015">
-<title>Mechanical Watch Study Model v3.6</title>
+<title>Mechanical Watch Study Model v3.7</title>
 <style>
 :root{--panel:rgba(16,19,25,.95);--line:rgba(255,255,255,.13);--text:#f5f7fa;--muted:#b5bdc9;--gold:#c9a65c;--blue:#3c6fa6}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0d1015;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif}canvas{display:block;width:100%;height:100%;touch-action:none}
@@ -20,14 +20,14 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
 </head>
 <body>
 <div id="renderStatus">3Dモデルを読み込み中…</div>
-<div id="top"><div><button class="pill" id="panelToggle">メニュー</button></div><div class="pill">v3.6｜Stage 7 ムーブメント構造詳細</div></div>
-<div id="info"><b>Stage 7：地板・受・巻上げ機構の構造詳細</b><br>選択部品：<span id="partName">なし</span><span id="partDesc">部品をタップ／クリックすると名称と機能を表示します。</span></div>
+<div id="top"><div><button class="pill" id="panelToggle">メニュー</button></div><div class="pill">v3.7｜Refactor A 輪列・巻真構造</div></div>
+<div id="info"><b>Refactor A：輪列・日の裏輪列・キーレスワーク</b><br>選択部品：<span id="partName">なし</span><span id="partDesc">部品をタップ／クリックすると名称と機能を表示します。</span></div>
 <div id="panel">
- <div id="handle"><div id="grab"></div><span>Mechanical Watch Study Model v3.6</span></div>
+ <div id="handle"><div id="grab"></div><span>Mechanical Watch Study Model v3.7</span></div>
  <div id="body">
-  <h1>機械式時計 Study Model v3.6</h1>
-  <p class="sub">段階7では、地板の加工座、各受の連続輪郭、支持脚、ねじ座、石座、巻真・時刻合わせ機構の配置を整理しました。厚さ方向の基準と支持関係を表示し、ムーブメントとして成立して見える構造へ近づけています。</p>
-  <div class="metrics"><div class="metric"><b>Stage 7/7</b><span>構造・配置詳細</span></div><div class="metric"><b>2.5 Hz</b><span>18,000振動/時</span></div><div class="metric"><b id="ampMetric">270°</b><span>テンプ振幅</span></div></div>
+  <h1>機械式時計 Study Model v3.7</h1>
+  <p class="sub">Refactor Aでは、歯車のピッチ円・歯先円・歯底円、軸間距離、軸方向レイヤー、回転比を共通設定へ集約しました。巻真系を一本の軸として再構成し、状態別の連動とパレット石周辺の支持クリアランスも整理しています。</p>
+  <div class="metrics"><div class="metric"><b>Refactor A</b><span>輪列・巻真構造</span></div><div class="metric"><b>2.5 Hz</b><span>18,000振動/時</span></div><div class="metric"><b id="ampMetric">270°</b><span>テンプ振幅</span></div></div>
   <div class="buttons"><button class="action" id="play">一時停止</button><button class="action" id="reset">輪列側</button><button class="action" id="trainView">輪列拡大</button><button class="action" id="dialView">文字板側</button><button class="action" id="sideView">側面</button><button class="action" id="structureView">厚さ確認</button><button class="action" id="topView">真上</button><button class="action" id="escView">脱進機</button><button class="action" id="balanceView">調速機</button></div>
   <div class="section crownControl">
    <label>りゅうず位置 <span id="crownModeLabel">位置1：巻上げ</span></label>
@@ -57,7 +57,7 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
    <div class="mini">診断表示は教育用です。エンドシェイク量は見やすさのため実寸より大幅に誇張しています。</div>
   </div>
   <div class="section structureStudy">
-   <label>ムーブメント構造表示 <span>Stage 7</span></label>
+   <label>ムーブメント構造表示 <span>Refactor A</span></label>
    <label class="syncLine"><input type="checkbox" id="machiningToggle" checked>地板・受の加工座を表示</label>
    <label class="syncLine"><input type="checkbox" id="supportToggle" checked>受の支持脚・ねじ座を表示</label>
    <label class="syncLine"><input type="checkbox" id="datumToggle">厚さ基準線を表示</label>
@@ -112,7 +112,7 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
    <label><input type="checkbox" data-group="esc" checked><span>脱進機</span></label><label><input type="checkbox" data-group="balance" checked><span>テンプ</span></label>
    <label><input type="checkbox" data-group="wind" checked><span>輪列側巻上げ</span></label><label><input type="checkbox" data-group="dial" checked><span>文字板側機構</span></label><label><input type="checkbox" data-group="motion" checked><span>表示系</span></label><label><input type="checkbox" data-group="diagnostic"><span>診断ガイド</span></label>
   </div>
-  <div class="section"><div class="legend"><span><i class="dot" style="background:#c9a65c"></i>黄銅歯車</span><span><i class="dot" style="background:#b7c1ce"></i>鋼部品</span><span><i class="dot" style="background:#a51e48"></i>ルビー</span><span><i class="dot" style="background:#565f6b"></i>地板・受</span><span><i class="dot" style="background:#4ed8e8"></i>噛合いガイド</span><span><i class="dot" style="background:#ff9f43"></i>軸受ガイド</span></div><div class="warn">v3.6では動力・歩度連成を維持しつつ、地板の加工座、各受の輪郭、支持脚、ねじ座、石座、巻真・時刻合わせ機構の配置を実物寄りに整理しています。歯形は時計用サイクロイド歯形を厳密計算した製造形状ではなく、ピッチ円と軸間距離を整合させた可視化用近似です。</div></div>
+  <div class="section"><div class="legend"><span><i class="dot" style="background:#c9a65c"></i>黄銅歯車</span><span><i class="dot" style="background:#b7c1ce"></i>鋼部品</span><span><i class="dot" style="background:#a51e48"></i>ルビー</span><span><i class="dot" style="background:#565f6b"></i>地板・受</span><span><i class="dot" style="background:#4ed8e8"></i>噛合いガイド</span><span><i class="dot" style="background:#ff9f43"></i>軸受ガイド</span></div><div class="warn">v3.7ではStage 7までのUIと動力・歩度連成を維持し、輪列・日の裏輪列・巻上げ輪列をピッチ円基準で再配置しました。歯形は製造用サイクロイド歯形ではなく、歯先円・歯底円・歯厚相当値を独立調整できる教育用近似です。</div></div>
  </div>
 </div>
 <canvas id="app"></canvas>
@@ -120,10 +120,12 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
 <script type="module">
 import * as THREE from "three";
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
+import {WATCH_MECHANISM,assertMechanismConfig,resolveMechanismState,rotationFromCenter} from "./js/mechanism-config.js";
 
 const renderStatus=document.getElementById('renderStatus');
 window.addEventListener('error',e=>{renderStatus.className='error';renderStatus.textContent='3Dモデルの初期化中にエラーが発生しました：'+(e.message||'不明なエラー')});
 window.addEventListener('unhandledrejection',e=>{renderStatus.className='error';renderStatus.textContent='3Dモデルの読み込みに失敗しました：'+(e.reason?.message||e.reason||'不明なエラー')});
+const mechanismConfigReport=assertMechanismConfig(WATCH_MECHANISM);
 const renderer=new THREE.WebGLRenderer({canvas:document.getElementById('app'),antialias:true});
 renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.shadowMap.enabled=true;renderer.localClippingEnabled=true;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x0d1015);scene.fog=new THREE.Fog(0x0d1015,68,125);
@@ -175,13 +177,25 @@ function gearShape(radius,teeth,depth,mat,holes=5,rootRatio=.79,toothRatio=.95){
  if(holes>0){for(let i=0;i<holes;i++){const a=i*Math.PI*2/holes;const h=new THREE.Path();h.absarc(radius*.49*Math.cos(a),radius*.49*Math.sin(a),radius*.16,0,Math.PI*2,false);sh.holes.push(h)}}
  const geo=new THREE.ExtrudeGeometry(sh,{depth,bevelEnabled:true,bevelSize:.028,bevelThickness:.028,bevelSegments:1,curveSegments:12});geo.rotateX(Math.PI/2);geo.translate(0,depth/2,0);return new THREE.Mesh(geo,mat)
 }
-function arborAssembly(total=1.72,bodyR=.13,pivotR=.065){const g=new THREE.Group();const body=cyl(bodyR,total*.64,MAT.steel,20);g.add(body);const up=cyl(pivotR,total*.22,MAT.steel,16);up.position.y=total*.43;g.add(up);const low=cyl(pivotR,total*.22,MAT.steel,16);low.position.y=-total*.43;g.add(low);const shoulder1=cyl(bodyR*1.45,.10,MAT.steel,20);shoulder1.position.y=.32;g.add(shoulder1);const shoulder2=shoulder1.clone();shoulder2.position.y=-.32;g.add(shoulder2);return g}
-function wheel(name,desc,group,r,teeth,pinionR,pinionLeaves,depth=.28,holes=5){
- const g=new THREE.Group();const wheelMesh=gearShape(r,teeth,depth*.82,MAT.brass,holes,.79,.95);wheelMesh.position.y=.12;g.add(register(wheelMesh,`${name}・車`,`${desc} 車は${teeth}歯の黄銅製想定。`,group));
- const pin=gearShape(pinionR,pinionLeaves,depth*.78,MAT.steel,0,.70,.89);pin.position.y=-.26;g.add(register(pin,`${name}・かな`,`${pinionLeaves}枚の鋼製かな。前段の車と噛み合って回転速度とトルクを変換する。`,group));
- const arbor=arborAssembly(1.78,.13,.058);g.add(register(arbor,`${name}・軸・ほぞ`,'軸肩で歯車高さを決め、細い上下ほぞが穴石内で回転する。',group));
- const collet=cyl(.25,.12,MAT.steel,24);collet.position.y=.11;g.add(register(collet,`${name}・座`,'車と軸を同心に固定する座部。',group));return g
+function parametricGearShape(profile,depth,mat,holes=5){
+ const sh=new THREE.Shape(),pitch=Math.PI*2/profile.toothCount;
+ const halfPitch=pitch*.5,halfTooth=pitch*profile.toothThicknessLike*.5;
+ for(let i=0;i<profile.toothCount;i++){
+  const c=i*pitch;const pts=[[-halfPitch,profile.dedendumRadius],[-halfTooth*1.35,profile.dedendumRadius],[-halfTooth*.68,profile.addendumRadius],[halfTooth*.68,profile.addendumRadius],[halfTooth*1.35,profile.dedendumRadius],[halfPitch,profile.dedendumRadius]];
+  for(const [offset,radius] of pts){const a=c+offset,x=radius*Math.cos(a),z=radius*Math.sin(a);if(i===0&&offset===-halfPitch)sh.moveTo(x,z);else sh.lineTo(x,z)}
+ }
+ sh.closePath();const center=new THREE.Path();center.absarc(0,0,profile.pitchRadius*.16,0,Math.PI*2,false);sh.holes.push(center);
+ if(holes>0){for(let i=0;i<holes;i++){const a=i*Math.PI*2/holes;const hole=new THREE.Path();hole.absarc(profile.pitchRadius*.49*Math.cos(a),profile.pitchRadius*.49*Math.sin(a),profile.pitchRadius*.16,0,Math.PI*2,false);sh.holes.push(hole)}}
+ const geo=new THREE.ExtrudeGeometry(sh,{depth,bevelEnabled:true,bevelSize:.022,bevelThickness:.022,bevelSegments:1,curveSegments:12});geo.rotateX(Math.PI/2);geo.translate(0,depth/2,0);return new THREE.Mesh(geo,mat)
 }
+function arborAssembly(total=1.72,bodyR=.13,pivotR=.065){const g=new THREE.Group();const body=cyl(bodyR,total*.64,MAT.steel,20);g.add(body);const up=cyl(pivotR,total*.22,MAT.steel,16);up.position.y=total*.43;g.add(up);const low=cyl(pivotR,total*.22,MAT.steel,16);low.position.y=-total*.43;g.add(low);const shoulder1=cyl(bodyR*1.45,.10,MAT.steel,20);shoulder1.position.y=.32;g.add(shoulder1);const shoulder2=shoulder1.clone();shoulder2.position.y=-.32;g.add(shoulder2);return g}
+function wheel(definition,name,desc,group,holes=5){
+ const g=new THREE.Group();const wheelMesh=parametricGearShape(definition.wheel,definition.bodyThickness,MAT.brass,holes);wheelMesh.position.y=definition.layerYWheel;g.add(register(wheelMesh,`${name}・車`,`${desc} 車は${definition.wheel.toothCount}歯で、ピッチ円・歯先円・歯底円を独立定義している。`,group));
+ const pin=parametricGearShape(definition.pinion,definition.pinionThickness,MAT.steel,0);pin.position.y=definition.layerYPinion;g.add(register(pin,`${name}・かな`,`${definition.pinion.toothCount}枚の鋼製かな。前段の車と同じ軸方向噛合い面へ配置する。`,group));
+ const arborMid=(definition.layerYWheel+definition.layerYPinion)/2;const arbor=arborAssembly(2.10,.13,.058);arbor.position.y=arborMid;g.add(register(arbor,`${name}・軸・ほぞ`,'軸肩で歯車高さを決め、細い上下ほぞが穴石内で回転する。',group));
+ const collet=cyl(.25,.12,MAT.steel,24);collet.position.y=definition.layerYWheel;g.add(register(collet,`${name}・座`,'車と軸を同心に固定する座部。',group));return g
+}
+function axialGear(profile,depth,mat){const g=new THREE.Group();const mesh=parametricGearShape(profile,depth,mat,0);mesh.rotation.z=Math.PI/2;g.add(mesh);return g}
 function roundedPolygon(points,radius=.46,steps=5){const out=[];for(let i=0;i<points.length;i++){const prev=points[(i-1+points.length)%points.length],cur=points[i],next=points[(i+1)%points.length];const a=new THREE.Vector2(prev[0]-cur[0],prev[1]-cur[1]);const b=new THREE.Vector2(next[0]-cur[0],next[1]-cur[1]);const la=a.length(),lb=b.length();a.normalize();b.normalize();const rr=Math.min(radius,la*.24,lb*.24);const p1=new THREE.Vector2(cur[0]+a.x*rr,cur[1]+a.y*rr),p2=new THREE.Vector2(cur[0]+b.x*rr,cur[1]+b.y*rr);out.push([p1.x,p1.y]);for(let s=1;s<=steps;s++){const t=s/steps,mt=1-t;out.push([mt*mt*p1.x+2*mt*t*cur[0]+t*t*p2.x,mt*mt*p1.y+2*mt*t*cur[1]+t*t*p2.y])}}return out}
 function bridgeShape(points,holes=[]){const rounded=roundedPolygon(points);const sh=new THREE.Shape();sh.moveTo(rounded[0][0],rounded[0][1]);for(let i=1;i<rounded.length;i++)sh.lineTo(rounded[i][0],rounded[i][1]);sh.closePath();holes.forEach(([x,z,r])=>{const p=new THREE.Path();p.absarc(x,z,r,0,Math.PI*2,false);sh.holes.push(p)});return sh}
 function bridge(points,height=.38,holes=[],seats=[]){const g=new THREE.Group();const sh=bridgeShape(points,holes);const geo=new THREE.ExtrudeGeometry(sh,{depth:height,bevelEnabled:true,bevelSize:.11,bevelThickness:.075,bevelSegments:3,curveSegments:16});geo.rotateX(Math.PI/2);geo.translate(0,height/2,0);g.add(new THREE.Mesh(geo,MAT.plate));const topGeo=new THREE.ExtrudeGeometry(sh,{depth:.026,bevelEnabled:false,curveSegments:16});topGeo.rotateX(Math.PI/2);topGeo.translate(0,height+.038,0);const topSkin=new THREE.Mesh(topGeo,MAT.machined);topSkin.scale.set(.995,1,.995);g.add(topSkin);machiningDetails.push(topSkin);seats.forEach(([x,z,r=.40])=>{const seat=new THREE.Mesh(new THREE.TorusGeometry(r,.075,8,36),MAT.machined);seat.rotation.x=Math.PI/2;seat.position.set(x,height+.065,z);g.add(seat);machiningDetails.push(seat);const foot=cyl(r*.62,.44,MAT.boss,28);foot.position.set(x,-.20,z);g.add(foot);supportDetails.push(foot)});return g}
@@ -210,12 +224,14 @@ const keylessPocket=extrudedXZ([[2.0,-4.7],[8.5,-4.8],[11.9,-2.6],[12.0,3.9],[8.
 const plateScrewPoints=[[-12,-8],[-14,4],[-7,13],[6,14],[14,5],[13,-8],[0,-14]];
 plateScrewPoints.forEach(([x,z])=>{const sink=new THREE.Mesh(new THREE.TorusGeometry(.36,.07,8,28),MAT.machined);sink.rotation.x=Math.PI/2;sink.position.set(x,.43,z);mainPlate.add(sink);machiningDetails.push(sink);const s=screw(.28,.20);s.position.set(x,.50,z);mainPlate.add(register(s,'地板ねじ','地板や外周固定部を保持する皿座付きねじ。','plate'))})
 
-// Layout loosely based on a large hunter calibre
-const P={barrel:[-4.10,1.12],center:[0,0],third:[.92,-3.148],fourth:[0,-5.60],escape:[2.00,-4.95],pallet:[3.55,-2.70],balance:[7.70,1.80]};
+// The complete train layout is derived from pitch radii and mesh angles in
+// mechanism-config.js. P remains a compact view of those validated centres.
+const TRAIN=WATCH_MECHANISM.train,MOTION_WORKS=WATCH_MECHANISM.motionWorks,WINDING_WORKS=WATCH_MECHANISM.windingWorks,KEYLESS=WATCH_MECHANISM.keyless;
+const P={barrel:[TRAIN.barrel.centerX,TRAIN.barrel.centerZ],center:[TRAIN.center.centerX,TRAIN.center.centerZ],third:[TRAIN.third.centerX,TRAIN.third.centerZ],fourth:[TRAIN.fourth.centerX,TRAIN.fourth.centerZ],escape:[TRAIN.escape.centerX,TRAIN.escape.centerZ],pallet:[WATCH_MECHANISM.escapement.palletCenter.x,WATCH_MECHANISM.escapement.palletCenter.z],balance:[WATCH_MECHANISM.escapement.balanceCenter.x,WATCH_MECHANISM.escapement.balanceCenter.z]};
 const barrel=new THREE.Group();barrel.position.set(P.barrel[0],1.38,P.barrel[1]);groups.train.add(barrel);explode(barrel,[-7,4,2]);
 const barrelFloor=cyl(3.28,.16,MAT.dark,72);barrelFloor.position.y=-.38;barrel.add(register(barrelFloor,'香箱胴・底','主ゼンマイの外端を固定し、ばねトルクを香箱車へ伝える回転胴。','train'));
 const barrelWall=new THREE.Mesh(new THREE.TorusGeometry(3.18,.18,12,80),MAT.dark);barrelWall.rotation.x=Math.PI/2;barrelWall.position.y=.02;barrel.add(register(barrelWall,'香箱胴・側壁','主ゼンマイを収容し、外周フックで主ゼンマイ外端を保持する。','train'));
-const barrelWheel=gearShape(3.75,96,.30,MAT.brass,6,.78,.93);barrelWheel.position.y=-.56;barrel.add(register(barrelWheel,'香箱車・一番車','香箱胴と一体で回り、主ゼンマイのトルクを中心かなへ供給する96歯の一番車。','train'));
+const barrelWheel=parametricGearShape(TRAIN.barrel.wheel,TRAIN.barrel.bodyThickness,MAT.brass,6);barrelWheel.position.y=TRAIN.barrel.layerYWheel-barrel.position.y;barrel.add(register(barrelWheel,'香箱車・一番車','香箱胴と一体で回る96歯の一番車。中心かなとの軸間距離は両者のピッチ半径和から決まる。','train'));
 const barrelLid=cyl(3.22,.11,MAT.steel,72);barrelLid.position.y=.58;barrel.add(register(barrelLid,'香箱蓋','主ゼンマイを香箱内に保持し、香箱真を中心に案内する蓋。','train'));
 const barrelArbor=cyl(.34,1.64,MAT.steel,24);barrel.add(register(barrelArbor,'香箱真','角穴車と結合し、巻上げ時に主ゼンマイ内端を巻き取る軸。','train'));
 const arborSquare=new THREE.Mesh(new THREE.BoxGeometry(.46,.32,.46),MAT.steel);arborSquare.position.y=.91;barrel.add(register(arborSquare,'香箱真角部','角穴車の角穴と結合して巻上げトルクを香箱真へ伝える。','train'));
@@ -223,25 +239,12 @@ const innerHook=new THREE.Mesh(new THREE.BoxGeometry(.15,.16,.50),MAT.blue);inne
 const outerHook=new THREE.Mesh(new THREE.BoxGeometry(.18,.16,.52),MAT.blue);outerHook.position.set(2.94,.15,0);barrel.add(register(outerHook,'主ゼンマイ外端フック','主ゼンマイ外端を香箱胴へ固定し、ばね反力を香箱へ伝える。','train'));
 const mainSpringSamples=[];for(let i=0;i<260;i++){const u=i/259;mainSpringSamples.push({u})}const mainSpringGeo=new THREE.BufferGeometry();mainSpringGeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(mainSpringSamples.length*3),3));const mainspring=new THREE.Line(mainSpringGeo,MAT.spring);mainspring.position.y=.18;barrel.add(register(mainspring,'主ゼンマイ','香箱真へ巻き取られることで弾性エネルギーを蓄え、香箱胴へトルクを供給する。','train'));
 
-const center=wheel('二番車（中心車）','香箱車96歯から中心かな12枚へ8:1で増速され、1時間に1回転する基準車。','train',2.85,80,.50,12,.30,5);center.position.set(P.center[0],1.50,P.center[1]);groups.train.add(center);explode(center,[-3,5,-1]);
-const third=wheel('三番車','中心車80歯と三番かな10枚の8:1で増速する中間車。','train',2.25,75,.43,10,.27,5);third.position.set(P.third[0],1.54,P.third[1]);groups.train.add(third);explode(third,[1,6,-2]);
-const fourth=wheel('四番車・小秒針車','三番車75歯と四番かな10枚の7.5:1で増速され、1分に1回転する。','train',1.80,60,.37,10,.25,5);fourth.position.set(P.fourth[0],1.57,P.fourth[1]);groups.train.add(fourth);explode(fourth,[2,7,-5]);
+const center=wheel(TRAIN.center,'二番車（中心車）','香箱車96歯から中心かな12枚へ8:1で増速され、1時間に1回転する基準車。','train',5);center.position.set(P.center[0],0,P.center[1]);groups.train.add(center);explode(center,[-3,5,-1]);
+const third=wheel(TRAIN.third,'三番車','中心車80歯と三番かな10枚の8:1で増速する中間車。','train',5);third.position.set(P.third[0],0,P.third[1]);groups.train.add(third);explode(third,[1,6,-2]);
+const fourth=wheel(TRAIN.fourth,'四番車・小秒針車','三番車75歯と四番かな10枚の7.5:1で増速され、1分に1回転する。','train',5);fourth.position.set(P.fourth[0],0,P.fourth[1]);groups.train.add(fourth);explode(fourth,[2,7,-5]);
 
-// Re-stack train wheels and pinions on alternating axial planes so that
-// each wheel meshes with the next arbor's pinion, while the large wheels
-// themselves no longer visually intersect.
-function setWheelStack(g, wheelY, pinionY, arborTall=1.78, seatY=.11){
-  if(g.children[0]) g.children[0].position.y = wheelY;   // wheel
-  if(g.children[1]) g.children[1].position.y = pinionY;  // pinion
-  if(g.children[2]){ g.children[2].scale.y = arborTall/1.78; g.children[2].position.y = (wheelY+pinionY)*0.18; }
-  if(g.children[3]) g.children[3].position.y = seatY;
-}
-setWheelStack(center,  .28, -.61, 2.10,  .05); // center pinion meshes with barrel wheel, center wheel with third pinion
-setWheelStack(third,  -.09,  .35, 2.08, -.02); // third wheel meshes with fourth pinion
-setWheelStack(fourth,  .26, -.37, 2.00,  .04); // fourth wheel meshes with escape pinion
-
-function makeEscapeWheel(){const g=new THREE.Group();const r=1.55;const sh=new THREE.Shape();const teeth=15;for(let i=0;i<teeth;i++){const a=i*Math.PI*2/teeth;const pts=[[r*.68,a-.12],[r*1.03,a-.04],[r*.86,a+.08],[r*.68,a+.12]];pts.forEach(([rr,aa],k)=>{const x=rr*Math.cos(aa),y=rr*Math.sin(aa);if(i===0&&k===0)sh.moveTo(x,y);else sh.lineTo(x,y)})}sh.closePath();const hole=new THREE.Path();hole.absarc(0,0,.25,0,Math.PI*2,false);sh.holes.push(hole);const geo=new THREE.ExtrudeGeometry(sh,{depth:.18,bevelEnabled:false});geo.rotateX(Math.PI/2);geo.translate(0,.09,0);const escapeBody=new THREE.Mesh(geo,MAT.steel);escapeBody.position.y=.56;g.add(register(escapeBody,'ガンギ車15歯','アンクルにより半歯ずつ解放される軽量な15歯ガンギ車。','esc'));for(let i=0;i<5;i++){const a=i*Math.PI*2/5;const sp=new THREE.Mesh(new THREE.BoxGeometry(1.25,.11,.10),MAT.steel);sp.rotation.y=-a;sp.position.y=.66;g.add(register(sp,'ガンギ車腕','軽量なリムを軸へ結ぶ細い腕。','esc'))}const pin=gearShape(.30,6,.22,MAT.steel,0,.70,.89);pin.position.y=.24;g.add(register(pin,'ガンギかな','四番車60歯と噛み合う6枚かな。四番車の10倍でガンギ車を駆動する。','esc'));g.add(register(arborAssembly(1.64,.12,.052),'ガンギ車軸・ほぞ','軽量なガンギ車を支える細い軸と上下ほぞ。','esc'));return labelAssembly(g,'ガンギ車一式','15歯ガンギ車、6枚かな、軸とほぞで構成する。','esc')}
-const escape=makeEscapeWheel();escape.position.set(P.escape[0],1.62,P.escape[1]);groups.esc.add(escape);explode(escape,[6,8,-2]);
+function makeEscapeWheel(){const g=new THREE.Group();const profile=TRAIN.escape.wheel,r=profile.pitchRadius,sh=new THREE.Shape(),teeth=profile.toothCount;for(let i=0;i<teeth;i++){const a=i*Math.PI*2/teeth;const pts=[[profile.dedendumRadius,a-.12],[profile.addendumRadius,a-.04],[r*.90,a+.08],[profile.dedendumRadius,a+.12]];pts.forEach(([rr,aa],k)=>{const x=rr*Math.cos(aa),y=rr*Math.sin(aa);if(i===0&&k===0)sh.moveTo(x,y);else sh.lineTo(x,y)})}sh.closePath();const hole=new THREE.Path();hole.absarc(0,0,.25,0,Math.PI*2,false);sh.holes.push(hole);const geo=new THREE.ExtrudeGeometry(sh,{depth:TRAIN.escape.bodyThickness,bevelEnabled:false});geo.rotateX(Math.PI/2);geo.translate(0,TRAIN.escape.bodyThickness/2,0);const escapeBody=new THREE.Mesh(geo,MAT.steel);escapeBody.position.y=TRAIN.escape.layerYWheel;g.add(register(escapeBody,'ガンギ車15歯','アンクルにより半歯ずつ解放される軽量な15歯ガンギ車。','esc'));for(let i=0;i<5;i++){const a=i*Math.PI*2/5;const sp=new THREE.Mesh(new THREE.BoxGeometry(1.25,.11,.10),MAT.steel);sp.rotation.y=-a;sp.position.y=TRAIN.escape.layerYWheel;g.add(register(sp,'ガンギ車腕','軽量なリムを軸へ結ぶ細い腕。','esc'))}const pin=parametricGearShape(TRAIN.escape.pinion,TRAIN.escape.pinionThickness,MAT.steel,0);pin.position.y=TRAIN.escape.layerYPinion;g.add(register(pin,'ガンギかな','四番車60歯と同じ軸方向面で噛み合う6枚かな。四番車の10倍でガンギ車を駆動する。','esc'));const arbor=arborAssembly(1.90,.12,.052);arbor.position.y=(TRAIN.escape.layerYWheel+TRAIN.escape.layerYPinion)/2;g.add(register(arbor,'ガンギ車軸・ほぞ','軽量なガンギ車を支える細い軸と上下ほぞ。','esc'));return labelAssembly(g,'ガンギ車一式','15歯ガンギ車、6枚かな、軸とほぞで構成する。','esc')}
+const escape=makeEscapeWheel();escape.position.set(P.escape[0],0,P.escape[1]);groups.esc.add(escape);explode(escape,[6,8,-2]);
 
 // Stage 4: Swiss lever pallet, contact faces, fork, guard pin and double roller
 const pallet=new THREE.Group();
@@ -313,44 +316,44 @@ const guardMarker=markerSphere(.18,MAT.safetyFace);guardMarker.position.set(3.15
 const dropMarker=markerSphere(.18,MAT.dropFace);dropMarker.position.set(P.escape[0]+1.22,2.05,P.escape[1]+.86);groups.esc.add(dropMarker);
 const escMarkers=[entryMarker,exitMarker,forkMarker,guardMarker,dropMarker];escMarkers.forEach(m=>m.visible=false);
 // Winding system: ratchet wheel, crown wheel, click, click spring, stem and crown
-const ratchet=gearShape(2.45,48,.26,MAT.steel,5,.78,.93);ratchet.position.set(P.barrel[0],3.05,P.barrel[1]);groups.wind.add(register(ratchet,'角穴車','香箱真の角部と結合し、丸穴車から受けた巻上げ回転を主ゼンマイへ伝える。','wind'));explode(ratchet,[-7,9,2]);
-const crownWheelRing=cyl(1.83,.08,MAT.brass,48);crownWheelRing.position.set(-.30,3.02,2.62);groups.wind.add(register(crownWheelRing,'丸穴車座','丸穴車を受面上で案内し、安定した回転と軸方向位置を保つ座金。','wind'));explode(crownWheelRing,[-1,9,3]);
-const crownWheel=gearShape(1.65,36,.25,MAT.steel,4,.78,.93);crownWheel.position.set(-.30,3.10,2.62);groups.wind.add(register(crownWheel,'丸穴車','巻上げピニオンから角穴車へ巻上げトルクを伝える。','wind'));explode(crownWheel,[-1,10,3]);
+const ratchet=parametricGearShape(WINDING_WORKS.ratchet.wheel,WINDING_WORKS.ratchet.bodyThickness,MAT.steel,5);ratchet.position.set(WINDING_WORKS.ratchet.centerX,WINDING_WORKS.ratchet.layerYWheel,WINDING_WORKS.ratchet.centerZ);groups.wind.add(register(ratchet,'角穴車','香箱真の角部と結合し、丸穴車から受けた巻上げ回転を主ゼンマイへ伝える。','wind'));explode(ratchet,[-7,9,2]);
+const crownWheelRing=cyl(WINDING_WORKS.crownWheel.wheel.addendumRadius+.16,.08,MAT.brass,48);crownWheelRing.position.set(WINDING_WORKS.crownWheel.centerX,WINDING_WORKS.crownWheel.layerYWheel-.08,WINDING_WORKS.crownWheel.centerZ);groups.wind.add(register(crownWheelRing,'丸穴車座','丸穴車を受面上で案内し、安定した回転と軸方向位置を保つ座金。','wind'));explode(crownWheelRing,[-1,9,3]);
+const crownWheel=parametricGearShape(WINDING_WORKS.crownWheel.wheel,WINDING_WORKS.crownWheel.bodyThickness,MAT.steel,4);crownWheel.position.set(WINDING_WORKS.crownWheel.centerX,WINDING_WORKS.crownWheel.layerYWheel,WINDING_WORKS.crownWheel.centerZ);groups.wind.add(register(crownWheel,'丸穴車','角穴車とピッチ半径和で配置され、巻上げピニオンから香箱真へトルクを伝える。','wind'));explode(crownWheel,[-1,10,3]);
 const clickG=new THREE.Group();const clickArm=new THREE.Mesh(new THREE.BoxGeometry(2.0,.16,.30),MAT.steel);clickArm.position.x=.8;clickG.add(clickArm);clickG.add(cyl(.25,.20,MAT.blue,20));clickG.position.set(-6.90,3.15,3.35);clickG.rotation.y=-.55;groups.wind.add(register(clickG,'コハゼ','角穴車の逆転を歯先で阻止し、主ゼンマイの巻戻りを防ぐ。','wind'));explode(clickG,[-7,11,4]);
 const clickSpring=lever([[0,0],[1.35,.35],[2.15,-.25]],.16,.13,MAT.blue);clickSpring.position.set(-7.85,3.08,4.25);clickSpring.rotation.y=.22;groups.wind.add(register(clickSpring,'コハゼばね','コハゼを角穴車歯先へ押し付け、巻上げ時にクリック動作を生じさせる。','wind'));explode(clickSpring,[-8,10,5]);
-const stem=new THREE.Group();const stemShaft=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,18.2,20),MAT.steel);stemShaft.rotation.z=Math.PI/2;stem.add(stemShaft);const stemSquare=new THREE.Mesh(new THREE.BoxGeometry(2.0,.28,.28),MAT.steel);stemSquare.position.x=-7.0;stem.add(stemSquare);const stemThread=new THREE.Mesh(new THREE.CylinderGeometry(.19,.19,1.1,20),MAT.dark);stemThread.rotation.z=Math.PI/2;stemThread.position.x=8.55;stem.add(stemThread);stem.position.set(10.55,-1.05,0);groups.wind.add(register(stem,'巻真','りゅうずの回転と引出し位置を巻上げ・時刻合わせ機構へ伝える軸。','wind'));explode(stem,[12,4,0]);
-const crown=knurledCrown(1.15,1.15,32);crown.position.set(19.8,-1.05,0);groups.wind.add(register(crown,'りゅうず','位置1で主ゼンマイを巻き、位置2で表示時刻を調整する操作部。外周に滑り止め溝を設けた。','wind'));explode(crown,[15,4,0]);
+const stem=new THREE.Group();const stemLength=KEYLESS.axis.endX-KEYLESS.axis.startX;const stemShaft=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,stemLength,20),MAT.steel);stemShaft.rotation.z=Math.PI/2;stemShaft.position.x=(KEYLESS.axis.startX+KEYLESS.axis.endX)/2;stem.add(stemShaft);const stemSquare=new THREE.Mesh(new THREE.BoxGeometry(2.45,.28,.28),MAT.steel);stemSquare.position.x=3.25;stem.add(stemSquare);const stemShoulder=new THREE.Mesh(new THREE.CylinderGeometry(.24,.24,.42,24),MAT.blue);stemShoulder.rotation.z=Math.PI/2;stemShoulder.position.x=8.85;stem.add(stemShoulder);const stemThread=new THREE.Mesh(new THREE.CylinderGeometry(.19,.19,1.1,20),MAT.dark);stemThread.rotation.z=Math.PI/2;stemThread.position.x=KEYLESS.axis.endX-.55;stem.add(stemThread);stem.position.set(0,KEYLESS.axis.centerY,KEYLESS.axis.centerZ);groups.wind.add(register(stem,'巻真一体軸','地板内端からりゅうずねじ部まで連続し、角部が巻上げピニオンとスライディングピニオンを同軸に案内する一本の巻真。','wind'));explode(stem,[12,4,0]);
+const crown=knurledCrown(1.15,1.15,32);crown.position.set(KEYLESS.crownX,KEYLESS.axis.centerY,KEYLESS.axis.centerZ);groups.wind.add(register(crown,'りゅうず','巻真端へ直結し、位置1で主ゼンマイを巻き、位置2で表示時刻を調整する操作部。','wind'));explode(crown,[15,4,0]);
 
 
 // Dial side and hand-setting mechanism (below the main plate)
 // The ETA technical communication lists the setting lever, winding pinion,
 // sliding pinion, yoke, yoke spring, two setting wheels, minute wheel,
 // setting-lever jumper, driver cannon pinion and hour wheel as distinct parts.
-const dialLayerY=-1.05;
+const dialLayerY=WATCH_MECHANISM.axialLayers.dial.stemAxis;
 const driverCannon=new THREE.Group();
 const cannonTube=cyl(.42,.82,MAT.steel,28);driverCannon.add(register(cannonTube,'筒かな管','中心車軸へ弾性圧入され、通常運転では摩擦で追従し、針合わせでは滑る中空管。','dial'));
-const cannonGear=gearShape(.75,12,.20,MAT.steel,0,.70,.89);cannonGear.position.y=-.12;driverCannon.add(register(cannonGear,'筒かな12枚','ミニッツホイール36歯を駆動する12枚かな。','dial'));
+const cannonGear=parametricGearShape(MOTION_WORKS.cannon.pinion,MOTION_WORKS.cannon.pinionThickness,MAT.steel,0);driverCannon.add(register(cannonGear,'筒かな12枚','ミニッツホイール36歯と同一面で噛み合う12枚かな。','dial'));
 const frictionRing=new THREE.Mesh(new THREE.TorusGeometry(.48,.055,8,40,Math.PI*1.72),MAT.blue);frictionRing.rotation.x=Math.PI/2;frictionRing.position.y=.18;driverCannon.add(register(frictionRing,'筒かな摩擦ばね部','中心車軸を挟み込む弾性部。通常運転トルクを伝えつつ、時刻合わせ時には滑りを許容する。','dial'));
 const slit=new THREE.Mesh(new THREE.BoxGeometry(.08,.42,.50),MAT.dark);slit.position.set(.44,.18,0);driverCannon.add(register(slit,'筒かな割り','圧入部へ弾性を与える割りの可視化。','dial'));
-driverCannon.position.set(0,dialLayerY,0);groups.dial.add(labelAssembly(driverCannon,'駆動筒かな一式','中心車軸へ摩擦結合された筒かな管、12枚かな、弾性部で構成する。','dial'));explode(driverCannon,[0,-7,0]);
+driverCannon.position.set(MOTION_WORKS.cannon.centerX,MOTION_WORKS.cannon.layerYPinion,MOTION_WORKS.cannon.centerZ);groups.dial.add(labelAssembly(driverCannon,'駆動筒かな一式','中心車軸へ摩擦結合された筒かな管、12枚かな、弾性部で構成する。','dial'));explode(driverCannon,[0,-7,0]);
 
-const hourWheelDial=gearShape(1.60,40,.17,MAT.brass,5,.78,.93);hourWheelDial.position.set(0,dialLayerY-.42,0);groups.dial.add(register(hourWheelDial,'時針車40歯','ミニッツホイールかな10枚から4:1で減速され、筒かなとの合成で12時間に1回転する。','dial'));explode(hourWheelDial,[0,-8,0]);
+const hourWheelDial=parametricGearShape(MOTION_WORKS.hour.wheel,MOTION_WORKS.hour.bodyThickness,MAT.brass,5);hourWheelDial.position.set(MOTION_WORKS.hour.centerX,MOTION_WORKS.hour.layerYWheel,MOTION_WORKS.hour.centerZ);groups.dial.add(register(hourWheelDial,'時針車40歯','ミニッツホイールかな10枚から4:1で減速され、筒かなとの合成で12時間に1回転する。','dial'));explode(hourWheelDial,[0,-8,0]);
 
-const minuteWheelDial=wheel('ミニッツホイール','筒かな12枚→ミニッツホイール36歯で3:1、ミニッツかな10枚→時針車40歯で4:1、合計12:1を構成する。','dial',1.20,36,.35,10,.18,4);minuteWheelDial.position.set(1.95,dialLayerY-.08,0);groups.dial.add(minuteWheelDial);explode(minuteWheelDial,[2,-8,0]);
+const minuteWheelDial=wheel(MOTION_WORKS.minute,'ミニッツホイール','筒かな12枚→ミニッツホイール36歯で3:1、ミニッツかな10枚→時針車40歯で4:1、合計12:1を構成する。','dial',4);minuteWheelDial.position.set(MOTION_WORKS.minute.centerX,0,MOTION_WORKS.minute.centerZ);groups.dial.add(minuteWheelDial);explode(minuteWheelDial,[2,-8,0]);
 
-const settingWheel1=gearShape(1.06,32,.18,MAT.steel,3,.78,.93);settingWheel1.position.set(5.85,dialLayerY,0);groups.dial.add(register(settingWheel1,'設定車1','設定車2とかみ合い、スライディングピニオン側から受けた時刻合わせ回転を設定車列へ伝える。','dial'));explode(settingWheel1,[6,-8,0]);
-const settingWheel2=gearShape(1.06,32,.18,MAT.steel,3,.78,.93);settingWheel2.position.set(3.98,dialLayerY,1.00);groups.dial.add(register(settingWheel2,'設定車2','ミニッツホイールと設定車1の間でかみ合う中間車。時刻合わせ時の回転を日の裏輪列へ伝える。','dial'));explode(settingWheel2,[5,-9,2]);
+const settingWheel1=parametricGearShape(MOTION_WORKS.setting1.wheel,MOTION_WORKS.setting1.bodyThickness,MAT.steel,3);settingWheel1.position.set(MOTION_WORKS.setting1.centerX,MOTION_WORKS.setting1.layerYWheel,MOTION_WORKS.setting1.centerZ);groups.dial.add(register(settingWheel1,'設定車1','設定車2とピッチ円で噛み合い、位置2のスライディングピニオンから時刻合わせ回転を受ける。','dial'));explode(settingWheel1,[6,-8,0]);
+const settingWheel2=parametricGearShape(MOTION_WORKS.setting2.wheel,MOTION_WORKS.setting2.bodyThickness,MAT.steel,3);settingWheel2.position.set(MOTION_WORKS.setting2.centerX,MOTION_WORKS.setting2.layerYWheel,MOTION_WORKS.setting2.centerZ);groups.dial.add(register(settingWheel2,'設定車2','ミニッツホイールと設定車1の間をピッチ半径和で配置し、時刻合わせ回転を日の裏輪列へ伝える。','dial'));explode(settingWheel2,[5,-9,2]);
 
-const windingPinion=gearShape(.82,20,.55,MAT.steel,0,.70,.89);windingPinion.rotation.z=Math.PI/2;windingPinion.position.set(2.15,dialLayerY,0);groups.dial.add(register(windingPinion,'巻上げピニオン','巻真と同軸で回転し、りゅうずを押し込んだ巻上げ位置では丸穴車側へトルクを伝える。','dial'));explode(windingPinion,[12,-7,0]);
-const slidingPinion=gearShape(.86,18,.62,MAT.steel,0,.70,.89);slidingPinion.rotation.z=Math.PI/2;slidingPinion.position.set(3.25,dialLayerY,0);groups.dial.add(register(slidingPinion,'スライディングピニオン','巻真上を軸方向に移動し、巻上げ系と時刻合わせ系を切り替えるクラッチ部品。','dial'));explode(slidingPinion,[10,-8,0]);
+const windingPinion=axialGear(KEYLESS.windingPinion,KEYLESS.windingPinion.bodyThickness,MAT.steel);windingPinion.position.set(KEYLESS.windingPinion.centerX,KEYLESS.windingPinion.layerYWheel,KEYLESS.windingPinion.centerZ);groups.dial.add(register(windingPinion,'巻上げピニオン','巻真角部と同軸で回転し、位置1ではクラッチを介して丸穴車側へトルクを伝える。','dial'));explode(windingPinion,[12,-7,0]);
+const slidingPinion=axialGear(KEYLESS.slidingPinion,KEYLESS.slidingPinion.bodyThickness,MAT.steel);slidingPinion.position.set(KEYLESS.slidingPinion.centerXWind,KEYLESS.slidingPinion.layerYWheel,KEYLESS.slidingPinion.centerZ);groups.dial.add(register(slidingPinion,'スライディングピニオン','巻真角部上を同軸で移動し、位置1の巻上げクラッチと位置2の設定車1を切り替える。','dial'));explode(slidingPinion,[10,-8,0]);
 
 const settingLever=lever([[6.8,1.0],[5.1,2.5],[3.2,2.1]],.32,.18,MAT.steel);settingLever.position.y=dialLayerY-.05;groups.dial.add(register(settingLever,'設定レバー','巻真の引出し位置を検出し、時刻合わせ機構の切替を保持する。','dial'));explode(settingLever,[8,-9,3]);
 const yoke=lever([[6.4,-.8],[4.9,-1.9],[3.1,-.55]],.30,.18,MAT.steel);yoke.position.y=dialLayerY-.02;groups.dial.add(register(yoke,'ヨーク','設定レバーの位置に応じてスライディングピニオンを軸方向へ移動させる。','dial'));explode(yoke,[9,-9,-2]);
 const yokeSpring=lever([[5.1,-.45],[4.0,-2.05],[2.8,-1.60]],.16,.13,MAT.blue);yokeSpring.position.y=dialLayerY-.10;groups.dial.add(register(yokeSpring,'ヨークばね','ヨークへ復元力を与え、巻上げ位置と時刻合わせ位置の噛合いを保持する。','dial'));explode(yokeSpring,[7,-10,-2]);
 const jumper=lever([[6.3,3.0],[4.7,4.2],[3.1,3.2]],.28,.16,MAT.blue);jumper.position.y=dialLayerY-.12;groups.dial.add(register(jumper,'設定レバージャンパー','設定レバーを巻上げ位置または時刻合わせ位置へ節度保持する。','dial'));explode(jumper,[7,-10,4]);
 const stopLever=lever([[0,0],[.45,2.3],[.75,4.45]],.15,.13,MAT.blue);stopLever.position.set(6.80,.55,.75);stopLever.rotation.y=-.10;groups.dial.add(register(stopLever,'秒停止レバー','りゅうず位置2でテンプ輪へ接触し、時刻合わせ中の秒表示を停止する。','dial'));explode(stopLever,[7,-7,4]);
-[[5.05,2.45,'設定レバー支点'],[4.90,-1.85,'ヨーク支点'],[4.65,4.15,'ジャンパー固定点'],[3.95,1.42,'設定車2支点'],[5.25,0,'設定車1支点']].forEach(([x,z,n])=>{const boss=cyl(.25,.18,MAT.boss,24);boss.position.set(x,dialLayerY-.18,z);groups.dial.add(register(boss,n,'文字板側機構の回転中心または固定点を形成する地板側の支点座。','dial'));supportDetails.push(boss);const s=screw(.18,.13);s.position.set(x,dialLayerY-.04,z);groups.dial.add(register(s,n+'ねじ','設定機構を地板へ保持する小径ねじ。','dial'))});
-const stemSleeve=new THREE.Mesh(new THREE.CylinderGeometry(.28,.28,3.0,28),MAT.boss);stemSleeve.rotation.z=Math.PI/2;stemSleeve.position.set(1.0,dialLayerY,0);groups.dial.add(register(stemSleeve,'巻真地板軸受','巻真左端を地板内で案内し、巻上げピニオンとの同軸を保持する軸受筒。','dial'));supportDetails.push(stemSleeve);const stemConnector=new THREE.Mesh(new THREE.CylinderGeometry(.12,.12,8.7,20),MAT.steel);stemConnector.rotation.z=Math.PI/2;stemConnector.position.set(5.25,dialLayerY,0);groups.dial.add(register(stemConnector,'巻真連結軸','巻上げピニオン、スライディングピニオン、外部の巻真を同一軸線上で連結して見せる可視化用シャフト。','dial'));
+[[5.05,2.45,'設定レバー支点'],[4.90,-1.85,'ヨーク支点'],[4.65,4.15,'ジャンパー固定点'],[MOTION_WORKS.setting2.centerX,MOTION_WORKS.setting2.centerZ,'設定車2支点'],[MOTION_WORKS.setting1.centerX,MOTION_WORKS.setting1.centerZ,'設定車1支点']].forEach(([x,z,n])=>{const boss=cyl(.25,.18,MAT.boss,24);boss.position.set(x,dialLayerY-.18,z);groups.dial.add(register(boss,n,'文字板側機構の回転中心または固定点を形成する地板側の支点座。','dial'));supportDetails.push(boss);const s=screw(.18,.13);s.position.set(x,dialLayerY-.04,z);groups.dial.add(register(s,n+'ねじ','設定機構を地板へ保持する小径ねじ。','dial'))});
+const stemSleeve=new THREE.Mesh(new THREE.CylinderGeometry(.28,.28,2.2,28),MAT.boss);stemSleeve.rotation.z=Math.PI/2;stemSleeve.position.set(1.25,KEYLESS.axis.centerY,KEYLESS.axis.centerZ);groups.dial.add(register(stemSleeve,'巻真地板軸受','一本化した巻真の内端を地板内で案内し、両ピニオンとの同軸を保持する軸受筒。','dial'));supportDetails.push(stemSleeve);
 
 // Dial fasteners specified as two parts in the technical communication.
 [[-13.6,-4.0],[-13.6,4.0]].forEach(([x,z],i)=>{const f=new THREE.Group();const tab=new THREE.Mesh(new THREE.BoxGeometry(1.15,.12,.34),MAT.steel);tab.position.x=.42;f.add(tab);f.add(screw(.20,.13));f.position.set(x,dialLayerY-.18,z);groups.dial.add(register(f,`文字板固定具${i+1}`,'文字板脚を地板側面で固定し、文字板の位置決めを行う。','dial'));explode(f,[-12,-8,z>0?4:-4])});
@@ -363,12 +366,13 @@ shockAbsorber('下側耐震軸受',P.balance[0],P.balance[1],-.70,'dial');
 // Stage 7: rounded bridges, machined seats and thickness-direction supports
 const barrelBridge=bridge([[-9.0,5.7],[-7.4,9.0],[-3.1,9.5],[.1,7.0],[.5,3.9],[-.8,.9],[-3.3,-1.1],[-6.8,-1.2],[-9.0,1.5]],.46,[[P.barrel[0],P.barrel[1],.58]],[[-7.0,7.2,.45],[-1.4,5.8,.42],[-7.2,.4,.40]]);barrelBridge.position.y=3.52;groups.bridge.add(register(barrelBridge,'香箱受（石入）','香箱、角穴車、丸穴車を保持する受。丸みのある連続輪郭、上面加工層、支持脚、ねじ座を追加した。','bridge'));explode(barrelBridge,[-7,13,3]);
 const trainWheelBridge=bridge([[-3.2,3.8],[.8,4.5],[4.2,3.4],[5.7,.5],[5.5,-3.8],[3.9,-7.4],[1.0,-8.9],[-2.2,-8.2],[-3.8,-5.0],[-3.9,-.4]],.46,[[P.center[0],P.center[1],.44],[P.third[0],P.third[1],.40],[P.fourth[0],P.fourth[1],.38],[P.escape[0],P.escape[1],.34]],[[-1.8,2.8,.40],[4.4,1.4,.38],[2.8,-7.0,.38],[-2.2,-6.5,.36]]);trainWheelBridge.position.y=3.48;groups.bridge.add(register(trainWheelBridge,'輪列受（石入）','中心車、三番車、四番車、ガンギ車の上側軸受を保持する。輪列に沿う滑らかな受形状へ変更した。','bridge'));explode(trainWheelBridge,[2,14,-2]);
-const palletBridge=bridge([[2.1,-1.0],[4.8,-1.0],[5.5,-1.9],[5.4,-3.5],[4.6,-4.3],[2.4,-4.2],[1.9,-3.3]],.38,[[P.pallet[0],P.pallet[1],.32]],[[5.18,-0.98,.34],[2.20,-4.12,.34]]);palletBridge.position.y=3.38;groups.bridge.add(register(palletBridge,'アンクル受（石入）','アンクル上ほぞを保持する小型受。楕円状の連続輪郭と二点支持を採用した。','bridge'));explode(palletBridge,[5,14,-3]);
+const palletSupports=WATCH_MECHANISM.escapement.bridgeSupports.map(({x,z})=>[x,z,.34]);
+const palletBridge=bridge([[2.1,-1.0],[4.8,-1.0],[5.5,-1.9],[5.4,-3.5],[5.1,-4.45],[3.8,-4.55],[2.0,-3.55],[1.9,-2.0]],.38,[[P.pallet[0],P.pallet[1],.32]],palletSupports);palletBridge.position.y=3.38;groups.bridge.add(register(palletBridge,'アンクル受（石入）','アンクル上ほぞを保持する小型受。支持脚をパレット石の接触包絡外へ逃がし、二点支持を維持する。','bridge'));explode(palletBridge,[5,14,-3]);
 const balanceBridge=bridge([[4.5,4.4],[5.2,6.7],[7.0,7.9],[9.2,7.8],[11.0,6.1],[11.6,3.8],[10.7,1.5],[8.7,.5],[6.1,1.2]],.44,[[P.balance[0],P.balance[1],.55]],[[5.8,5.6,.42],[10.1,4.8,.40]]);balanceBridge.position.y=3.65;groups.bridge.add(register(balanceBridge,'テンプ受・緩急装置','テンプ上軸受とETACHRON緩急装置を片持ちで保持する。曲線輪郭と根元の幅を整えた。','bridge'));explode(balanceBridge,[8,16,5]);
 // Six upper hole jewels: centre, third, fourth, escape, pallet and balance.
 [[P.center[0],P.center[1],3.78,'中心車上受石'],[P.third[0],P.third[1],3.78,'三番車上受石'],[P.fourth[0],P.fourth[1],3.70,'四番車上受石'],[P.escape[0],P.escape[1],3.62,'ガンギ車上受石'],[P.pallet[0],P.pallet[1],3.58,'アンクル上受石'],[P.balance[0],P.balance[1],3.90,'テンプ上穴石']].forEach(([x,z,y,n])=>addPivot(x,z,y,n));
 shockAbsorber('上側耐震軸受',P.balance[0],P.balance[1],4.03,'bridge');
-const bridgeScrewPoints=[[-7.0,7.2],[-1.4,5.8],[-7.2,.4],[-1.8,2.8],[4.4,1.4],[2.8,-7.0],[-2.2,-6.5],[5.18,-0.98],[2.20,-4.12],[5.8,5.6],[10.1,4.8]];
+const bridgeScrewPoints=[[-7.0,7.2],[-1.4,5.8],[-7.2,.4],[-1.8,2.8],[4.4,1.4],[2.8,-7.0],[-2.2,-6.5],...WATCH_MECHANISM.escapement.bridgeSupports.map(({x,z})=>[x,z]),[5.8,5.6],[10.1,4.8]];
 bridgeScrewPoints.forEach(([x,z])=>{const pillar=cyl(.22,2.78,MAT.boss,24);pillar.position.set(x,1.77,z);groups.plate.add(register(pillar,'受支持柱','地板から受のねじ座まで高さを確保し、輪列の回転空間を形成する支持柱。','plate'));supportDetails.push(pillar);const sink=new THREE.Mesh(new THREE.TorusGeometry(.36,.06,8,28),MAT.machined);sink.rotation.x=Math.PI/2;sink.position.set(x,4.02,z);groups.bridge.add(sink);machiningDetails.push(sink);const s=screw(.28,.20);s.position.set(x,4.05,z);groups.bridge.add(register(s,'受ねじ','香箱受、輪列受、アンクル受、テンプ受を支持柱へ締結する皿座付きねじ。','bridge'))})
 
 // Display works above the movement for explanatory viewing
@@ -396,11 +400,11 @@ const gaugeLine=new THREE.Mesh(new THREE.BoxGeometry(.06,5.55,.06),MAT.datum);ga
 function pitchCircle(x,z,r,y=1.22){const q=new THREE.Mesh(new THREE.TorusGeometry(r,.025,6,96),MAT.guide);q.rotation.x=Math.PI/2;q.position.set(x,y,z);meshGuides.add(q);return q}
 function guideLine(a,b,y=1.15){const pts=[new THREE.Vector3(a[0],y,a[1]),new THREE.Vector3(b[0],y,b[1])];const ln=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),MAT.guideLine);meshGuides.add(ln);return ln}
 function pivotGuide(x,z,lower=-.58,upper=3.82){const h=upper-lower;const shaft=cyl(.055,h,MAT.pivotGuide,14);shaft.position.set(x,lower+h/2,z);pivotGuides.add(shaft);const lo=cyl(.22,.045,MAT.pivotGuide,20);lo.position.set(x,lower,z);pivotGuides.add(lo);const up=lo.clone();up.position.y=upper;pivotGuides.add(up)}
-pitchCircle(P.barrel[0],P.barrel[1],3.75);pitchCircle(P.center[0],P.center[1],.50);guideLine(P.barrel,P.center);
-pitchCircle(P.center[0],P.center[1],2.85);pitchCircle(P.third[0],P.third[1],.43);guideLine(P.center,P.third);
-pitchCircle(P.third[0],P.third[1],2.25);pitchCircle(P.fourth[0],P.fourth[1],.37);guideLine(P.third,P.fourth);
-pitchCircle(P.fourth[0],P.fourth[1],1.80);pitchCircle(P.escape[0],P.escape[1],.30);guideLine(P.fourth,P.escape);
-pitchCircle(0,0,.75,dialLayerY-.15);pitchCircle(1.95,0,1.20,dialLayerY-.15);pitchCircle(0,0,1.60,dialLayerY-.47);pitchCircle(1.95,0,.35,dialLayerY-.47);guideLine([0,0],[1.95,0],dialLayerY-.15);pitchCircle(5.85,0,1.06,dialLayerY-.15);pitchCircle(3.98,1.00,1.06,dialLayerY-.15);guideLine([1.95,0],[3.98,1.00],dialLayerY-.15);guideLine([3.98,1.00],[5.85,0],dialLayerY-.15);
+pitchCircle(P.barrel[0],P.barrel[1],TRAIN.barrel.wheel.pitchRadius,TRAIN.barrel.layerYWheel);pitchCircle(P.center[0],P.center[1],TRAIN.center.pinion.pitchRadius,TRAIN.center.layerYPinion);guideLine(P.barrel,P.center,TRAIN.barrel.layerYWheel);
+pitchCircle(P.center[0],P.center[1],TRAIN.center.wheel.pitchRadius,TRAIN.center.layerYWheel);pitchCircle(P.third[0],P.third[1],TRAIN.third.pinion.pitchRadius,TRAIN.third.layerYPinion);guideLine(P.center,P.third,TRAIN.center.layerYWheel);
+pitchCircle(P.third[0],P.third[1],TRAIN.third.wheel.pitchRadius,TRAIN.third.layerYWheel);pitchCircle(P.fourth[0],P.fourth[1],TRAIN.fourth.pinion.pitchRadius,TRAIN.fourth.layerYPinion);guideLine(P.third,P.fourth,TRAIN.third.layerYWheel);
+pitchCircle(P.fourth[0],P.fourth[1],TRAIN.fourth.wheel.pitchRadius,TRAIN.fourth.layerYWheel);pitchCircle(P.escape[0],P.escape[1],TRAIN.escape.pinion.pitchRadius,TRAIN.escape.layerYPinion);guideLine(P.fourth,P.escape,TRAIN.fourth.layerYWheel);
+pitchCircle(MOTION_WORKS.cannon.centerX,MOTION_WORKS.cannon.centerZ,MOTION_WORKS.cannon.pinion.pitchRadius,MOTION_WORKS.cannon.layerYPinion);pitchCircle(MOTION_WORKS.minute.centerX,MOTION_WORKS.minute.centerZ,MOTION_WORKS.minute.wheel.pitchRadius,MOTION_WORKS.minute.layerYWheel);pitchCircle(MOTION_WORKS.hour.centerX,MOTION_WORKS.hour.centerZ,MOTION_WORKS.hour.wheel.pitchRadius,MOTION_WORKS.hour.layerYWheel);pitchCircle(MOTION_WORKS.minute.centerX,MOTION_WORKS.minute.centerZ,MOTION_WORKS.minute.pinion.pitchRadius,MOTION_WORKS.minute.layerYPinion);guideLine([MOTION_WORKS.cannon.centerX,MOTION_WORKS.cannon.centerZ],[MOTION_WORKS.minute.centerX,MOTION_WORKS.minute.centerZ],MOTION_WORKS.minute.layerYWheel);pitchCircle(MOTION_WORKS.setting1.centerX,MOTION_WORKS.setting1.centerZ,MOTION_WORKS.setting1.wheel.pitchRadius,MOTION_WORKS.setting1.layerYWheel);pitchCircle(MOTION_WORKS.setting2.centerX,MOTION_WORKS.setting2.centerZ,MOTION_WORKS.setting2.wheel.pitchRadius,MOTION_WORKS.setting2.layerYWheel);guideLine([MOTION_WORKS.minute.centerX,MOTION_WORKS.minute.centerZ],[MOTION_WORKS.setting2.centerX,MOTION_WORKS.setting2.centerZ],MOTION_WORKS.setting2.layerYWheel);guideLine([MOTION_WORKS.setting2.centerX,MOTION_WORKS.setting2.centerZ],[MOTION_WORKS.setting1.centerX,MOTION_WORKS.setting1.centerZ],MOTION_WORKS.setting1.layerYWheel);
 [P.center,P.third,P.fourth,P.escape,P.pallet,P.balance].forEach(([x,z])=>pivotGuide(x,z));
 meshGuides.visible=false;pivotGuides.visible=false;
 
@@ -453,10 +457,8 @@ const machiningToggle=document.getElementById('machiningToggle'),supportToggle=d
 let autoAmplitude=true,balanceAmplitudeDeg=270,rateAdjustSecDay=0,beatErrorMs=0,positionMode='dialUp';
 let trainEfficiency=.84,runtimeScale=1,amplitudeState=270,torqueState=0,driveState=0;
 let simulatedElapsedHours=0,lastHistoryHour=-1,historyData=[];
-let crownPosition='wind',crownTransition=0,crownTurnRate=0,crownRotation=0,windingArborAngle=0,settingTrainAngle=0;
+let crownPosition='wind',crownTransition=0,crownTurnRate=0,crownRotation=0,windingArborAngle=0,windingCrownWheelAngle=0,settingTrainAngle=0,currentMechanismState='run';
 let powerReserveHours=26;
-const crownBaseX=crown.position.x,stemBaseX=stem.position.x,slidingBaseX=slidingPinion.position.x;
-const settingLeverBaseZ=settingLever.position.z,yokeBaseX=yoke.position.x,jumperBaseZ=jumper.position.z;
 
 const positionRateOffsets={dialUp:0,dialDown:2.5,crownUp:-5.0,crownDown:4.0};
 const positionAmplitudeFactors={dialUp:1.00,dialDown:.99,crownUp:.945,crownDown:.935};
@@ -625,6 +627,7 @@ document.getElementById('backgroundTheme').onchange=e=>applyBackgroundTheme(e.ta
 document.querySelectorAll('[data-group]').forEach(c=>c.onchange=()=>{groups[c.dataset.group].visible=c.checked;if(c.dataset.group==='diagnostic'){meshGuides.visible=c.checked&&document.getElementById('meshGuide').checked;pivotGuides.visible=c.checked&&document.getElementById('pivotGuide').checked;datumGroup.visible=c.checked&&datumToggle.checked}});
 document.getElementById('mode').onchange=e=>{const v=e.target.value;Object.entries(groups).forEach(([k,g])=>{if(k!=='diagnostic')g.visible=true});groups.diagnostic.visible=meshGuides.visible||pivotGuides.visible||datumGroup.visible;if(v==='power'){groups.balance.visible=groups.wind.visible=groups.dial.visible=groups.motion.visible=false}else if(v==='esc'){groups.train.visible=groups.wind.visible=groups.dial.visible=groups.motion.visible=false}else if(v==='wind'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.motion.visible=false}else if(v==='motion'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.wind.visible=false}else if(v==='dial'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.wind.visible=groups.motion.visible=false}document.querySelectorAll('[data-group]').forEach(c=>c.checked=groups[c.dataset.group].visible)};
 setEditorTime(watchTimeSec);updateTimeUI();setSyncUI(false);setCrownPosition('wind');amplitudeInput.disabled=true;escMarkers.forEach(m=>m.visible=false);amplitudeState=targetAmplitudeFromDrive();updateBalanceReadout();resetHistory();
+window.watchModelDiagnostics={config:WATCH_MECHANISM,validation:mechanismConfigReport,getState:()=>currentMechanismState,getMovingParts:()=>WATCH_MECHANISM.motionStates[currentMechanismState]||[]};
 
 // Mechanism animation. Stage 7 retains the Stage 6 coupled model and adds refined structural geometry.
 let simPhase=0,last=performance.now();updateMainSpring(powerReserveHours/52);
@@ -637,17 +640,18 @@ function animate(now){requestAnimationFrame(animate);const dt=Math.min(.05,(now-
  const ampTarget=targetAmplitudeFromDrive();
  const response=1-Math.exp(-elapsedSec/24);amplitudeState+=((autoAmplitude?ampTarget:balanceAmplitudeDeg)-amplitudeState)*response;
  const powered=mechanismPowered();
+ currentMechanismState=resolveMechanismState({running,powered,crownPosition,crownTurnRate,liveSync});
  const rateFactorNow=1+currentRate()/86400;
  if(liveSync){setWatchTimeFromDate(new Date());if(running&&!setting&&powered){trainTimeSec=normDay(trainTimeSec+dt);powerReserveHours=Math.max(0,powerReserveHours-dt/3600)}}
  else if(running&&!setting&&powered){watchTimeSec=normDay(watchTimeSec+elapsedSec*rateFactorNow);trainTimeSec=normDay(trainTimeSec+elapsedSec*rateFactorNow);powerReserveHours=Math.max(0,powerReserveHours-elapsedSec/3600);simulatedElapsedHours+=elapsedSec/3600;recordHistory()}
  const crownDelta=crownTurnRate*dt*8.0;crownRotation+=crownDelta;
- if(setting&&Math.abs(crownTurnRate)>.001){watchTimeSec=normDay(watchTimeSec+crownTurnRate*dt*7200);settingTrainAngle+=crownDelta;setEditorTime(visibleWatchTime())}
- if(!setting&&crownTurnRate>0){const woundHours=crownTurnRate*dt*5.2;powerReserveHours=Math.min(52,powerReserveHours+woundHours);windingArborAngle+=crownDelta*.72;recordHistory()}
+ if(currentMechanismState==='set'){watchTimeSec=normDay(watchTimeSec+crownTurnRate*dt*7200);settingTrainAngle+=crownDelta;setEditorTime(visibleWatchTime())}
+ if(currentMechanismState==='wind'){const woundHours=crownTurnRate*dt*5.2;powerReserveHours=Math.min(52,powerReserveHours+woundHours);windingArborAngle+=crownDelta*WINDING_WORKS.ratchet.gearRatio;windingCrownWheelAngle+=crownDelta*WINDING_WORKS.crownWheel.rotationDirection*WINDING_WORKS.crownWheel.gearRatio;recordHistory()}
  if((running&&!setting&&powered)||liveSync)simPhase+=dt*Math.max(speed,.25);
  exploded.forEach(p=>p.obj.position.copy(p.base).addScaledVector(p.v,explodeAmount));
  const es=endshakeAmount*.22;center.position.y+=es;third.position.y-=es*.65;fourth.position.y+=es*.45;escape.position.y-=es*.35;
  const target=setting?1:0;crownTransition+=(target-crownTransition)*Math.min(1,dt*9);
- crown.position.x+=crownTransition*1.35;stem.position.x+=crownTransition*.70;slidingPinion.position.x+=-1.55*crownTransition;
+ crown.position.x+=crownTransition*KEYLESS.axis.pullOut;stem.position.x+=crownTransition*KEYLESS.axis.pullOut;slidingPinion.position.x+=(KEYLESS.slidingPinion.centerXSet-KEYLESS.slidingPinion.centerXWind)*crownTransition;
  settingLever.position.z+=.42*crownTransition;yoke.position.x+=-.42*crownTransition;jumper.position.z+=.16*crownTransition;
  stopLever.rotation.y=-.10+.28*crownTransition;
  const split=sideSplitAmount*5.5;groups.bridge.position.y=split;groups.train.position.y=split;groups.esc.position.y=split;groups.balance.position.y=split;groups.wind.position.y=split;groups.dial.position.y=-split;groups.motion.position.y=split*1.55;
@@ -657,14 +661,15 @@ function animate(now){requestAnimationFrame(animate);const dt=Math.min(.05,(now-
  const ampRad=THREE.MathUtils.degToRad(currentAmplitude());const balAngle=activeOscillation?ampRad*oscillatorSin(animT*rateFactor,freq,beatErrorMs):0;
  balanceG.rotation.y=balAngle;collet.rotation.y=balAngle;regulator.rotation.y=.06+rateAdjustSecDay*.0022;curbAssembly.rotation.y=regulator.rotation.y;updateHairSpring(balAngle);
  const escAngle=-(escState.advance/15)*Math.PI*2;escape.rotation.y=escAngle;pallet.rotation.y=activeOscillation?escState.palletAngle:0;
- const fourthRot=(trainTimeSec/60)*Math.PI*2;const centerRot=(trainTimeSec/3600)*Math.PI*2;
- fourth.rotation.y=fourthRot;third.rotation.y=-centerRot*8;center.rotation.y=centerRot;barrel.rotation.y=-centerRot/8;
+ const centerRot=(trainTimeSec/3600)*Math.PI*2;
+ barrel.rotation.y=rotationFromCenter(TRAIN.barrel,centerRot);center.rotation.y=rotationFromCenter(TRAIN.center,centerRot);third.rotation.y=rotationFromCenter(TRAIN.third,centerRot);fourth.rotation.y=rotationFromCenter(TRAIN.fourth,centerRot);
  const displaySec=normDay(watchTimeSec),secForHand=setting?settingSecondHold:displaySec%60,minuteProgress=(displaySec/60)%60,hourProgress=(displaySec/3600)%12,twelveOffset=Math.PI/2;
  secAxis.rotation.y=twelveOffset-(secForHand/60)*Math.PI*2;minuteAxis.rotation.y=twelveOffset-(minuteProgress/60)*Math.PI*2;hourAxis.rotation.y=twelveOffset-(hourProgress/12)*Math.PI*2;
- const displayCenterRot=(displaySec/3600)*Math.PI*2;driverCannon.rotation.y=displayCenterRot;minuteWheelDial.rotation.y=-displayCenterRot/3;hourWheelDial.rotation.y=displayCenterRot/12;
+ const displayCenterRot=(displaySec/3600)*Math.PI*2;driverCannon.rotation.y=rotationFromCenter(MOTION_WORKS.cannon,displayCenterRot);minuteWheelDial.rotation.y=rotationFromCenter(MOTION_WORKS.minute,displayCenterRot);hourWheelDial.rotation.y=rotationFromCenter(MOTION_WORKS.hour,displayCenterRot);
  crown.rotation.x=crownRotation;stem.rotation.x=crownRotation;windingPinion.rotation.x=-crownRotation;slidingPinion.rotation.x=crownRotation;
- if(setting){settingWheel1.rotation.y=-settingTrainAngle;settingWheel2.rotation.y=settingTrainAngle;minuteWheelDial.rotation.y=-displayCenterRot/3+settingTrainAngle*.48;driverCannon.rotation.y=displayCenterRot-settingTrainAngle*.16;hourWheelDial.rotation.y=displayCenterRot/12-settingTrainAngle*.04;crownWheel.rotation.y*=.96;}
- else{crownWheel.rotation.y=-crownRotation*.58;if(crownTurnRate>0){ratchet.rotation.y=windingArborAngle;barrelArbor.rotation.y=windingArborAngle;arborSquare.rotation.y=windingArborAngle;clickG.rotation.y=-.55+Math.abs(Math.sin(crownRotation*7))*.075}else{clickG.rotation.y=-.55}}
+ settingWheel1.rotation.y=MOTION_WORKS.setting1.rotationDirection*settingTrainAngle*MOTION_WORKS.setting1.gearRatio;settingWheel2.rotation.y=MOTION_WORKS.setting2.rotationDirection*settingTrainAngle*MOTION_WORKS.setting2.gearRatio;
+ crownWheel.rotation.y=windingCrownWheelAngle;ratchet.rotation.y=windingArborAngle;barrelArbor.rotation.y=windingArborAngle;arborSquare.rotation.y=windingArborAngle;
+ if(currentMechanismState==='wind'){clickG.rotation.y=-.55+Math.abs(Math.sin(crownRotation*7))*.075}else{clickG.rotation.y=-.55}
  clickSpring.rotation.y=.22+(crownTurnRate>0&&!setting?Math.abs(Math.sin(crownRotation*7))*.03:0);
  updateMainSpring(powerReserveHours/52);reserveV.textContent=`${powerReserveHours.toFixed(1)} / 52 h`;reserveFill.style.width=`${powerReserveHours/52*100}%`;updateBalanceReadout();
  if(selectedRoot){const b=new THREE.Box3().setFromObject(selectedRoot);b.getCenter(selectionLight.position);selectionLight.intensity=1.45+.18*Math.sin(now*.006)}

@@ -1,4 +1,3 @@
-[gear-train-refactor.md](https://github.com/user-attachments/files/30159395/gear-train-refactor.md)
 ---
 name: Gear train and keyless works refactor
 about: Refactor gear geometry, axial layers, motion states, and stem connection
