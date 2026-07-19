@@ -41,6 +41,7 @@ export function meshPhaseResidual({ inputPhase, outputPhase, inputTeeth, outputT
 export function gearProfile({
   pitchRadius,
   toothCount,
+  module = (pitchRadius * 2) / toothCount,
   addendum = Math.max(0.075, pitchRadius / toothCount * 2.05),
   dedendum = Math.max(0.09, pitchRadius / toothCount * 2.45),
   toothThicknessLike = 0.46,
@@ -50,12 +51,24 @@ export function gearProfile({
     throw new Error("Gear profiles require a positive pitch radius and at least six teeth.");
   }
   return deepFreeze({
+    module,
     pitchRadius,
+    pitchDiameter: pitchRadius * 2,
     addendumRadius: pitchRadius + addendum,
     dedendumRadius: Math.max(pitchRadius * 0.52, pitchRadius - dedendum),
     toothCount,
     toothThicknessLike,
     boreRadius,
+  });
+}
+
+export function gearProfileFromModule({ module, toothCount, ...options }) {
+  if (!(module > 0)) throw new Error("Module-derived gear profiles require a positive module.");
+  return gearProfile({
+    ...options,
+    module,
+    toothCount,
+    pitchRadius: module * toothCount / 2,
   });
 }
 
@@ -182,15 +195,37 @@ const train = deepFreeze({
   }),
 });
 
+export const MOTION_WORKS_MODULES = deepFreeze({
+  dialTrain: 0.08125,
+  hourReduction: 0.078,
+});
+
+const pitchRadiusFor = (module, toothCount) => module * toothCount / 2;
+const dialTrainRadius = (toothCount) => pitchRadiusFor(MOTION_WORKS_MODULES.dialTrain, toothCount);
+const hourReductionRadius = (toothCount) => pitchRadiusFor(MOTION_WORKS_MODULES.hourReduction, toothCount);
+
 const cannonCenter = deepFreeze({ x: 0, z: 0 });
-const minuteCenter = placeMeshedCenter(cannonCenter, 0.75, 1.20, 0);
-const setting1Center = deepFreeze({ x: 5.40, z: -2.33 });
-const setting2Center = deepFreeze({ x: 3.355316022935179, z: -1.769939794366365 });
+const minuteCenter = placeMeshedCenter(cannonCenter, dialTrainRadius(12), dialTrainRadius(36), 0);
+// The three setting gears remain on the same module as the 36-tooth minute wheel.
+// These angles keep every intended pitch contact exact while clearing the stem,
+// the detached setting input, and all non-neighbouring setting gears.
+const setting2Center = placeMeshedCenter(
+  minuteCenter,
+  dialTrainRadius(36),
+  dialTrainRadius(32),
+  -15 * Math.PI / 180,
+);
+const setting1Center = placeMeshedCenter(
+  setting2Center,
+  dialTrainRadius(32),
+  dialTrainRadius(32),
+  -50 * Math.PI / 180,
+);
 const settingTransferCenter = placeMeshedCenter(
   setting1Center,
-  1.06,
-  0.61,
-  Math.atan2(-1.12, -1.24),
+  dialTrainRadius(32),
+  dialTrainRadius(18),
+  -163 * Math.PI / 180,
 );
 
 const motionWorks = deepFreeze({
@@ -198,7 +233,7 @@ const motionWorks = deepFreeze({
     id: "cannon",
     center: cannonCenter,
     wheel: null,
-    pinion: gearProfile({ pitchRadius: 0.75, toothCount: 12, toothThicknessLike: 0.50, boreRadius: 0.18 }),
+    pinion: gearProfileFromModule({ module: MOTION_WORKS_MODULES.dialTrain, toothCount: 12, toothThicknessLike: 0.50, boreRadius: 0.18 }),
     layerYWheel: AXIAL_LAYERS.dial.cannonToMinute,
     layerYPinion: AXIAL_LAYERS.dial.cannonToMinute,
     bodyThickness: 0.20,
@@ -209,8 +244,8 @@ const motionWorks = deepFreeze({
   minute: arborDefinition({
     id: "minute",
     center: minuteCenter,
-    wheel: gearProfile({ pitchRadius: 1.20, toothCount: 36 }),
-    pinion: gearProfile({ pitchRadius: 0.35, toothCount: 10, toothThicknessLike: 0.50 }),
+    wheel: gearProfileFromModule({ module: MOTION_WORKS_MODULES.dialTrain, toothCount: 36 }),
+    pinion: gearProfileFromModule({ module: MOTION_WORKS_MODULES.hourReduction, toothCount: 10, toothThicknessLike: 0.50 }),
     layerYWheel: AXIAL_LAYERS.dial.cannonToMinute,
     layerYPinion: AXIAL_LAYERS.dial.minuteToHour,
     bodyThickness: 0.148,
@@ -221,7 +256,7 @@ const motionWorks = deepFreeze({
   hour: arborDefinition({
     id: "hour",
     center: cannonCenter,
-    wheel: gearProfile({ pitchRadius: 1.60, toothCount: 40, boreRadius: 0.54 }),
+    wheel: gearProfileFromModule({ module: MOTION_WORKS_MODULES.hourReduction, toothCount: 40, boreRadius: 0.54 }),
     pinion: null,
     layerYWheel: AXIAL_LAYERS.dial.minuteToHour,
     layerYPinion: null,
@@ -233,7 +268,7 @@ const motionWorks = deepFreeze({
   setting1: arborDefinition({
     id: "setting1",
     center: setting1Center,
-    wheel: gearProfile({ pitchRadius: 1.06, toothCount: 32 }),
+    wheel: gearProfileFromModule({ module: MOTION_WORKS_MODULES.dialTrain, toothCount: 32 }),
     pinion: null,
     layerYWheel: AXIAL_LAYERS.dial.settingTrain,
     layerYPinion: null,
@@ -245,7 +280,7 @@ const motionWorks = deepFreeze({
   setting2: arborDefinition({
     id: "setting2",
     center: setting2Center,
-    wheel: gearProfile({ pitchRadius: 1.06, toothCount: 32 }),
+    wheel: gearProfileFromModule({ module: MOTION_WORKS_MODULES.dialTrain, toothCount: 32 }),
     pinion: null,
     layerYWheel: AXIAL_LAYERS.dial.settingTrain,
     layerYPinion: null,
@@ -257,7 +292,7 @@ const motionWorks = deepFreeze({
   settingTransfer: arborDefinition({
     id: "settingTransfer",
     center: settingTransferCenter,
-    wheel: gearProfile({ pitchRadius: 0.61, toothCount: 18, toothThicknessLike: 0.50 }),
+    wheel: gearProfileFromModule({ module: MOTION_WORKS_MODULES.dialTrain, toothCount: 18, toothThicknessLike: 0.50 }),
     pinion: null,
     layerYWheel: AXIAL_LAYERS.dial.settingTrain,
     layerYPinion: null,
@@ -347,92 +382,284 @@ const meshCenterAngle = (input, output) => Math.atan2(
   output.centerX - input.centerX,
 );
 
-const settingPhases = {
+const motionPhases = {
+  center: 0,
+  cannon: 0,
+  fourthArbor: 0,
   crownInput: 0,
   stem: 0,
   slidingClutch: 0,
+  windingClutch: 0,
   settingInput: 0,
-  settingTransfer: 0,
 };
-settingPhases.setting1 = calculateMeshOutputPhase({
-  inputPhase: settingPhases.settingTransfer,
-  inputTeeth: motionWorks.settingTransfer.wheel.toothCount,
-  outputTeeth: motionWorks.setting1.wheel.toothCount,
-  centerAngle: meshCenterAngle(motionWorks.settingTransfer, motionWorks.setting1),
-});
-settingPhases.setting2 = calculateMeshOutputPhase({
-  inputPhase: settingPhases.setting1,
-  inputTeeth: motionWorks.setting1.wheel.toothCount,
-  outputTeeth: motionWorks.setting2.wheel.toothCount,
-  centerAngle: meshCenterAngle(motionWorks.setting1, motionWorks.setting2),
-});
-settingPhases.minute = calculateMeshOutputPhase({
-  inputPhase: settingPhases.setting2,
-  inputTeeth: motionWorks.setting2.wheel.toothCount,
+motionPhases.minute = calculateMeshOutputPhase({
+  inputPhase: motionPhases.cannon,
+  inputTeeth: motionWorks.cannon.pinion.toothCount,
   outputTeeth: motionWorks.minute.wheel.toothCount,
-  centerAngle: meshCenterAngle(motionWorks.setting2, motionWorks.minute),
+  centerAngle: meshCenterAngle(motionWorks.cannon, motionWorks.minute),
 });
-settingPhases.cannon = calculateMeshOutputPhase({
-  inputPhase: settingPhases.minute,
-  inputTeeth: motionWorks.minute.wheel.toothCount,
-  outputTeeth: motionWorks.cannon.pinion.toothCount,
-  centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.cannon),
-});
-settingPhases.hour = calculateMeshOutputPhase({
-  inputPhase: settingPhases.minute,
+motionPhases.hour = calculateMeshOutputPhase({
+  inputPhase: motionPhases.minute,
   inputTeeth: motionWorks.minute.pinion.toothCount,
   outputTeeth: motionWorks.hour.wheel.toothCount,
   centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.hour),
 });
+motionPhases.setting2 = calculateMeshOutputPhase({
+  inputPhase: motionPhases.minute,
+  inputTeeth: motionWorks.minute.wheel.toothCount,
+  outputTeeth: motionWorks.setting2.wheel.toothCount,
+  centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.setting2),
+});
+motionPhases.setting1 = calculateMeshOutputPhase({
+  inputPhase: motionPhases.setting2,
+  inputTeeth: motionWorks.setting2.wheel.toothCount,
+  outputTeeth: motionWorks.setting1.wheel.toothCount,
+  centerAngle: meshCenterAngle(motionWorks.setting2, motionWorks.setting1),
+});
+motionPhases.settingTransfer = calculateMeshOutputPhase({
+  inputPhase: motionPhases.setting1,
+  inputTeeth: motionWorks.setting1.wheel.toothCount,
+  outputTeeth: motionWorks.settingTransfer.wheel.toothCount,
+  centerAngle: meshCenterAngle(motionWorks.setting1, motionWorks.settingTransfer),
+});
+// Hand phases are absolute dial assembly references.  The rigid hand-fit
+// connections below retain the driver-to-hand assembly offset while keeping
+// all three hands at twelve o'clock when the train input angle is zero.
+motionPhases.minuteHand = Math.PI / 2;
+motionPhases.hourHand = Math.PI / 2;
+motionPhases.secondsHand = Math.PI / 2;
 
-export const SETTING_KINEMATIC_NODES = deepFreeze({
-  crownInput: { id: "crownInput", axis: "x", phaseOffset: settingPhases.crownInput },
-  stem: { id: "stem", axis: "x", phaseOffset: settingPhases.stem },
-  slidingClutch: { id: "slidingClutch", axis: "x", phaseOffset: settingPhases.slidingClutch },
-  settingInput: { id: "settingInput", axis: "x", phaseOffset: settingPhases.settingInput },
-  settingTransfer: { id: "settingTransfer", axis: "y", phaseOffset: settingPhases.settingTransfer },
-  setting1: { id: "setting1", axis: "y", phaseOffset: settingPhases.setting1 },
-  setting2: { id: "setting2", axis: "y", phaseOffset: settingPhases.setting2 },
-  minute: { id: "minute", axis: "y", phaseOffset: settingPhases.minute },
-  cannon: { id: "cannon", axis: "y", phaseOffset: settingPhases.cannon },
-  hour: { id: "hour", axis: "y", phaseOffset: settingPhases.hour },
+export const MOTION_WORKS_NODES = deepFreeze(Object.fromEntries([
+  ["center", "y"], ["cannon", "y"], ["minute", "y"], ["hour", "y"],
+  ["setting2", "y"], ["setting1", "y"], ["settingTransfer", "y"],
+  ["fourthArbor", "y"], ["minuteHand", "y"], ["hourHand", "y"], ["secondsHand", "y"],
+  ["crownInput", "x"], ["stem", "x"], ["slidingClutch", "x"],
+  ["windingClutch", "x"], ["settingInput", "x"],
+].map(([id, axis]) => [id, { id, axis, phaseOffset: motionPhases[id] }])));
+
+const meshBand = (input, inputMember, output, outputMember) => ({
+  centerY: layerFor(input, inputMember),
+  thickness: Math.min(
+    inputMember === "wheel" ? input.bodyThickness : input.pinionThickness,
+    outputMember === "wheel" ? output.bodyThickness : output.pinionThickness,
+  ),
 });
 
-export const SETTING_KINEMATIC_CONNECTIONS = deepFreeze([
-  { id: "crown-stem", input: "crownInput", output: "stem", ratio: 1, direction: 1, phaseOffset: settingPhases.stem, activeStates: ["set"], kind: "rigid" },
-  { id: "stem-sliding", input: "stem", output: "slidingClutch", ratio: 1, direction: 1, phaseOffset: settingPhases.slidingClutch, activeStates: ["set"], kind: "square" },
-  { id: "sliding-setting-input", input: "slidingClutch", output: "settingInput", ratio: 1, direction: 1, phaseOffset: settingPhases.settingInput, activeStates: ["set"], kind: "face-clutch" },
-  { id: "setting-input-transfer", input: "settingInput", output: "settingTransfer", ratio: 1, direction: 1, phaseOffset: settingPhases.settingTransfer, activeStates: ["set"], kind: "crown-clutch" },
-  { id: "setting-transfer-setting1", input: "settingTransfer", output: "setting1", ratio: -18 / 32, direction: -1, inputTeeth: 18, outputTeeth: 32, phaseOffset: settingPhases.setting1, activeStates: ["set"], kind: "external-gear" },
-  { id: "setting1-setting2", input: "setting1", output: "setting2", ratio: -32 / 32, direction: -1, inputTeeth: 32, outputTeeth: 32, phaseOffset: settingPhases.setting2, activeStates: ["set"], kind: "external-gear" },
-  { id: "setting2-minute", input: "setting2", output: "minute", ratio: -32 / 36, direction: -1, inputTeeth: 32, outputTeeth: 36, phaseOffset: settingPhases.minute, activeStates: ["set"], kind: "external-gear" },
-  { id: "minute-cannon", input: "minute", output: "cannon", ratio: -36 / 12, direction: -1, inputTeeth: 36, outputTeeth: 12, phaseOffset: settingPhases.cannon, activeStates: ["set"], kind: "external-gear" },
-  { id: "cannon-hour", input: "cannon", output: "hour", ratio: 1 / 12, direction: 1, phaseOffset: settingPhases.hour, activeStates: ["set"], kind: "coaxial-display-reduction" },
-]);
-
-export const SETTING_MESH_PHASE_PAIRS = deepFreeze([
-  { id: "setting-transfer-setting1", input: "settingTransfer", output: "setting1", inputTeeth: 18, outputTeeth: 32, centerAngle: meshCenterAngle(motionWorks.settingTransfer, motionWorks.setting1) },
-  { id: "setting1-setting2", input: "setting1", output: "setting2", inputTeeth: 32, outputTeeth: 32, centerAngle: meshCenterAngle(motionWorks.setting1, motionWorks.setting2) },
-  { id: "setting2-minute", input: "setting2", output: "minute", inputTeeth: 32, outputTeeth: 36, centerAngle: meshCenterAngle(motionWorks.setting2, motionWorks.minute) },
-  { id: "minute-cannon", input: "minute", output: "cannon", inputTeeth: 36, outputTeeth: 12, centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.cannon) },
-  { id: "minute-pinion-hour", input: "minute", output: "hour", inputTeeth: 10, outputTeeth: 40, centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.hour) },
-]);
-
-export function resolveKinematicGains(connections = SETTING_KINEMATIC_CONNECTIONS, state = "set") {
-  const gains = { crownInput: 1 };
-  for (const connection of connections) {
-    if (!connection.activeStates.includes(state) || gains[connection.input] === undefined) continue;
-    gains[connection.output] = gains[connection.input] * connection.ratio;
-  }
-  return gains;
+function motionMeshDefinition({ id, input, inputMember, output, outputMember }) {
+  const inputDefinition = motionWorks[input];
+  const outputDefinition = motionWorks[output];
+  const inputProfile = inputDefinition[inputMember];
+  const outputProfile = outputDefinition[outputMember];
+  return {
+    id,
+    input,
+    inputMember,
+    output,
+    outputMember,
+    module: inputProfile.module,
+    inputTeeth: inputProfile.toothCount,
+    outputTeeth: outputProfile.toothCount,
+    inputPitchRadius: inputProfile.pitchRadius,
+    outputPitchRadius: outputProfile.pitchRadius,
+    centerDistance: inputProfile.pitchRadius + outputProfile.pitchRadius,
+    pressureAngle: 20,
+    toothProfile: "educational-involute-like",
+    phaseOffset: motionPhases[output],
+    centerAngle: meshCenterAngle(inputDefinition, outputDefinition),
+    axialMeshBand: meshBand(inputDefinition, inputMember, outputDefinition, outputMember),
+  };
 }
 
-export function resolveKinematicAngles(inputAngle, state = "set") {
-  const gains = resolveKinematicGains(SETTING_KINEMATIC_CONNECTIONS, state);
-  return Object.fromEntries(Object.entries(SETTING_KINEMATIC_NODES).map(([id, node]) => [
+export const MOTION_WORKS_MESHES = deepFreeze([
+  motionMeshDefinition({ id: "cannon-minute", input: "cannon", inputMember: "pinion", output: "minute", outputMember: "wheel" }),
+  motionMeshDefinition({ id: "minute-pinion-hour", input: "minute", inputMember: "pinion", output: "hour", outputMember: "wheel" }),
+  motionMeshDefinition({ id: "minute-setting2", input: "minute", inputMember: "wheel", output: "setting2", outputMember: "wheel" }),
+  motionMeshDefinition({ id: "setting2-setting1", input: "setting2", inputMember: "wheel", output: "setting1", outputMember: "wheel" }),
+  motionMeshDefinition({ id: "setting1-transfer", input: "setting1", inputMember: "wheel", output: "settingTransfer", outputMember: "wheel" }),
+]);
+
+const connectionMetadata = ({
+  id,
+  input,
+  output,
+  ratio,
+  meshType,
+  permanent,
+  activeStates,
+  phaseOffset = motionPhases[output],
+  sourcePriority,
+  allowsBackdrive = false,
+  allowsSlip = false,
+  ...metadata
+}) => ({
+  id,
+  input,
+  output,
+  ratio,
+  direction: Math.sign(ratio),
+  meshType,
+  kind: meshType,
+  permanent,
+  activeStates,
+  phaseOffset,
+  sourcePriority,
+  allowsBackdrive,
+  allowsSlip,
+  ...metadata,
+});
+
+const externalMeshConnection = (mesh) => connectionMetadata({
+  id: mesh.id,
+  input: mesh.input,
+  output: mesh.output,
+  ratio: -mesh.inputTeeth / mesh.outputTeeth,
+  meshType: "external-gear",
+  permanent: true,
+  activeStates: ["run", "wind", "set"],
+  sourcePriority: ["train", "setting"],
+  allowsBackdrive: true,
+  allowsSlip: false,
+  inputTeeth: mesh.inputTeeth,
+  outputTeeth: mesh.outputTeeth,
+  module: mesh.module,
+  centerDistance: mesh.centerDistance,
+  axialMeshBand: mesh.axialMeshBand,
+});
+
+export const PERMANENT_MOTION_CONNECTIONS = deepFreeze([
+  connectionMetadata({ id: "center-cannon-friction", input: "center", output: "cannon", ratio: 1, meshType: "friction-fit", permanent: true, activeStates: ["run", "wind", "set"], sourcePriority: ["train"], allowsBackdrive: false, allowsSlip: true }),
+  connectionMetadata({ id: "center-fourth-train", input: "center", output: "fourthArbor", ratio: 60, meshType: "train-ratio", permanent: true, activeStates: ["run", "wind", "set"], sourcePriority: ["train"], allowsBackdrive: false, allowsSlip: false }),
+  ...MOTION_WORKS_MESHES.map(externalMeshConnection),
+  connectionMetadata({ id: "cannon-minute-hand", input: "cannon", output: "minuteHand", ratio: 1, meshType: "rigid-hand-fit", permanent: true, activeStates: ["run", "wind", "set"], sourcePriority: ["train", "setting"], allowsBackdrive: false, allowsSlip: false }),
+  connectionMetadata({ id: "hour-pipe-hour-hand", input: "hour", output: "hourHand", ratio: 1, meshType: "rigid-hand-fit", permanent: true, activeStates: ["run", "wind", "set"], sourcePriority: ["train", "setting"], allowsBackdrive: false, allowsSlip: false }),
+  connectionMetadata({ id: "fourth-arbor-seconds-hand", input: "fourthArbor", output: "secondsHand", ratio: 1, meshType: "rigid-hand-fit", permanent: true, activeStates: ["run", "wind", "set"], sourcePriority: ["train"], allowsBackdrive: false, allowsSlip: false }),
+]);
+
+export const CONDITIONAL_CLUTCH_CONNECTIONS = deepFreeze([
+  connectionMetadata({ id: "crown-stem", input: "crownInput", output: "stem", ratio: 1, meshType: "rigid", permanent: false, activeStates: ["run", "wind", "set"], sourcePriority: ["crown"], allowsBackdrive: false, allowsSlip: false }),
+  connectionMetadata({ id: "stem-sliding", input: "stem", output: "slidingClutch", ratio: 1, meshType: "square", permanent: false, activeStates: ["run", "wind", "set"], sourcePriority: ["crown"], allowsBackdrive: false, allowsSlip: false }),
+  connectionMetadata({ id: "sliding-winding", input: "slidingClutch", output: "windingClutch", ratio: 1, meshType: "face-clutch", permanent: false, activeStates: ["run", "wind"], sourcePriority: ["crown"], allowsBackdrive: false, allowsSlip: false }),
+  connectionMetadata({ id: "sliding-setting-input", input: "slidingClutch", output: "settingInput", ratio: 1, meshType: "face-clutch", permanent: false, activeStates: ["set"], sourcePriority: ["crown"], allowsBackdrive: false, allowsSlip: false }),
+  connectionMetadata({ id: "setting-input-transfer", input: "settingInput", output: "settingTransfer", ratio: -1, meshType: "crown-clutch", permanent: false, activeStates: ["set"], sourcePriority: ["setting"], allowsBackdrive: false, allowsSlip: false }),
+]);
+
+export const MOTION_WORKS_CONNECTIONS = deepFreeze([
+  ...PERMANENT_MOTION_CONNECTIONS,
+  ...CONDITIONAL_CLUTCH_CONNECTIONS,
+]);
+
+export const MOTION_WORKS_TOPOLOGY = deepFreeze({
+  nodes: MOTION_WORKS_NODES,
+  permanentConnections: PERMANENT_MOTION_CONNECTIONS,
+  conditionalConnections: CONDITIONAL_CLUTCH_CONNECTIONS,
+  meshes: MOTION_WORKS_MESHES,
+  clutchBoundary: "setting-input-transfer",
+  frictionBoundary: "center-cannon-friction",
+});
+
+function connectionAngleForward(connection, inputAngle, connectionOffsets) {
+  const inputPhase = MOTION_WORKS_NODES[connection.input].phaseOffset;
+  const outputPhase = MOTION_WORKS_NODES[connection.output].phaseOffset;
+  return outputPhase
+    + connection.ratio * (inputAngle - inputPhase)
+    + (connectionOffsets[connection.id] ?? 0);
+}
+
+function connectionAngleReverse(connection, outputAngle, connectionOffsets) {
+  const inputPhase = MOTION_WORKS_NODES[connection.input].phaseOffset;
+  const outputPhase = MOTION_WORKS_NODES[connection.output].phaseOffset;
+  return inputPhase
+    + (outputAngle - outputPhase - (connectionOffsets[connection.id] ?? 0)) / connection.ratio;
+}
+
+export function resolveMotionWorksState({
+  source = "train",
+  trainAngle = 0,
+  crownAngle = 0,
+  crownPosition = source === "setting" ? "set" : "wind",
+  mechanismState = null,
+  running = true,
+  powered = true,
+  previousAngles = {},
+  connectionOffsets = {},
+} = {}) {
+  const state = crownPosition === "set"
+    ? "set"
+    : mechanismState === "wind" ? "wind" : "run";
+  const angles = Object.fromEntries(Object.entries(MOTION_WORKS_NODES).map(([id, node]) => [
     id,
-    node.phaseOffset + (gains[id] ?? 0) * inputAngle,
+    Number.isFinite(previousAngles[id]) ? previousAngles[id] : node.phaseOffset,
   ]));
+  const activeConnections = MOTION_WORKS_CONNECTIONS.filter(({ activeStates }) => activeStates.includes(state));
+  const seeds = source === "setting"
+    ? [["crownInput", MOTION_WORKS_NODES.crownInput.phaseOffset + crownAngle]]
+    : [
+      ["center", MOTION_WORKS_NODES.center.phaseOffset + trainAngle],
+      ["crownInput", MOTION_WORKS_NODES.crownInput.phaseOffset + crownAngle],
+    ];
+  const visited = new Set();
+  const queue = [];
+  for (const [id, angle] of seeds) {
+    angles[id] = angle;
+    visited.add(id);
+    queue.push(id);
+  }
+  while (queue.length) {
+    const id = queue.shift();
+    for (const connection of activeConnections) {
+      if (connection.input === id && !visited.has(connection.output)) {
+        angles[connection.output] = connectionAngleForward(connection, angles[id], connectionOffsets);
+        visited.add(connection.output);
+        queue.push(connection.output);
+      } else if (connection.output === id && connection.allowsBackdrive && !visited.has(connection.input)) {
+        angles[connection.input] = connectionAngleReverse(connection, angles[id], connectionOffsets);
+        visited.add(connection.input);
+        queue.push(connection.input);
+      }
+    }
+  }
+  return {
+    source,
+    state,
+    running,
+    powered,
+    angles,
+    reachedNodes: [...visited],
+    activeConnections: activeConnections.map(({ id }) => id),
+    connectionOffsets: { ...connectionOffsets },
+  };
+}
+
+export function resolveMotionWorksGains(source = "train") {
+  const common = {
+    source,
+    crownPosition: source === "setting" ? "set" : "wind",
+    previousAngles: Object.fromEntries(Object.entries(MOTION_WORKS_NODES).map(([id, node]) => [id, node.phaseOffset])),
+  };
+  const base = resolveMotionWorksState({ ...common, trainAngle: 0, crownAngle: 0 }).angles;
+  const moved = resolveMotionWorksState({
+    ...common,
+    trainAngle: source === "train" ? 1 : 0,
+    crownAngle: source === "setting" ? 1 : 0,
+  }).angles;
+  return Object.fromEntries(Object.keys(MOTION_WORKS_NODES).map((id) => [id, moved[id] - base[id]]));
+}
+
+// Compatibility exports retain the previous public names while routing every
+// caller through the single A.3 resolver.
+export const SETTING_KINEMATIC_NODES = MOTION_WORKS_NODES;
+export const SETTING_KINEMATIC_CONNECTIONS = MOTION_WORKS_CONNECTIONS;
+export const SETTING_MESH_PHASE_PAIRS = MOTION_WORKS_MESHES;
+export function resolveKinematicGains(_connections = MOTION_WORKS_CONNECTIONS, state = "set") {
+  return resolveMotionWorksGains(state === "set" ? "setting" : "train");
+}
+export function resolveKinematicAngles(inputAngle, state = "set") {
+  return resolveMotionWorksState({
+    source: state === "set" ? "setting" : "train",
+    crownPosition: state === "set" ? "set" : "wind",
+    crownAngle: state === "set" ? inputAngle : 0,
+    trainAngle: state === "set" ? 0 : inputAngle,
+  }).angles;
 }
 
 export const DIAL_INTERFERENCE_RULES = deepFreeze({
@@ -450,6 +677,9 @@ export const DIAL_INTERFERENCE_RULES = deepFreeze({
     ["minutePinion", "hourWheel"],
     ["centerShaft", "cannonTube"],
     ["cannonTube", "hourPipe"],
+    ["cannonTube", "minuteHandBoss"],
+    ["hourPipe", "hourHandBoss"],
+    ["fourthArborExtension", "secondsHandBoss"],
   ],
   forbiddenPairs: [
     ["stem", "minuteWheel"], ["stem", "setting1"], ["stem", "setting2"],
@@ -480,8 +710,14 @@ export const CAMERA_PRESETS = deepFreeze({
   reset: { position: [2, 35, 45], target: [0, 2.5, 0], up: [0, 1, 0] },
   train: { position: [4, 23, 27], target: [0, 1, -2], up: [0, 1, 0] },
   dial: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], up: [0, 0, -1] },
-  cannon: { position: [3.6, -11.5, -13.8], target: [0.7, -1.05, -0.15], up: [0, 0, -1] },
+  cannon: { position: [3.0, -7.5, -7.5], target: [1.0, -1.30, -0.10], up: [0, 0, -1] },
   keyless: { position: [8.5, -10.5, -12.5], target: [4.7, -1.05, -3.35], up: [0, 0, -1] },
+  motionWorks: { position: [7.0, -8.0, -7.5], target: [3.0, -1.25, -1.75], up: [0, 0, -1] },
+  minuteHourSide: { position: [7.2, -1.35, 0.55], target: [0.8, -1.35, 0], up: [0, 1, 0] },
+  handMount: { position: [2.4, -5.2, -4.0], target: [0.35, -2.15, -0.05], up: [0, 0, -1] },
+  cannonMount: { position: [2.0, -4.6, -2.5], target: [0.0, -2.18, 0], up: [0, 0, -1] },
+  hourMount: { position: [4.2, -3.5, -0.5], target: [0.0, -2.05, 0], up: [0, 1, 0] },
+  secondsMount: { position: [2.5, -5.0, -8.2], target: [0.0, -2.10, -5.60], up: [0, 0, -1] },
   dialSide: { position: [26, -0.2, -8], target: [3.2, -0.6, -2.1], up: [0, 1, 0] },
   side: { position: [48, 5, 0.25], target: [0, 0, 0], up: [0, 1, 0] },
   structure: { position: [46, 8, 18], target: [0, 1.6, 0], up: [0, 1, 0] },
@@ -545,9 +781,9 @@ export function isTapGesture({
 }
 
 export const MOTION_STATE_PARTS = deepFreeze({
-  run: ["barrel", "center", "third", "fourth", "escape", "cannon", "minute", "hour"],
-  wind: ["crown", "stem", "windingClutch", "slidingClutch", "crownWheel", "ratchet", "barrelArbor"],
-  set: ["crown", "stem", "slidingClutch", "settingInput", "settingTransfer", "setting1", "setting2", "cannon", "minute", "hour"],
+  run: ["barrel", "center", "third", "fourthArbor", "escape", "cannon", "minute", "hour", "setting2", "setting1", "settingTransfer", "minuteHand", "hourHand", "secondsHand"],
+  wind: ["crown", "stem", "windingClutch", "slidingClutch", "crownWheel", "ratchet", "barrelArbor", "cannon", "minute", "hour", "setting2", "setting1", "settingTransfer", "minuteHand", "hourHand", "fourthArbor", "secondsHand"],
+  set: ["crown", "stem", "slidingClutch", "settingInput", "settingTransfer", "setting1", "setting2", "cannon", "minute", "hour", "minuteHand", "hourHand"],
   hack: [],
   stopped: [],
   paused: [],
@@ -585,10 +821,11 @@ export const WATCH_MECHANISM = deepFreeze({
   windingWorks,
   keyless,
   settingKinematics: {
-    nodes: SETTING_KINEMATIC_NODES,
-    connections: SETTING_KINEMATIC_CONNECTIONS,
-    phasePairs: SETTING_MESH_PHASE_PAIRS,
+    nodes: MOTION_WORKS_NODES,
+    connections: MOTION_WORKS_CONNECTIONS,
+    phasePairs: MOTION_WORKS_MESHES,
   },
+  motionWorksTopology: MOTION_WORKS_TOPOLOGY,
   dialInterferenceRules: DIAL_INTERFERENCE_RULES,
   centerAxis: CENTER_AXIS,
   cameraPresets: CAMERA_PRESETS,
@@ -809,13 +1046,17 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
     expected: 0,
   });
 
-  const gains = resolveKinematicGains(config.settingKinematics.connections, "set");
-  for (const nodeId of Object.keys(config.settingKinematics.nodes)) {
+  const requiredConnectionMetadata = [
+    "meshType", "permanent", "activeStates", "input", "output", "ratio",
+    "phaseOffset", "sourcePriority", "allowsBackdrive", "allowsSlip",
+  ];
+  for (const connection of config.settingKinematics.connections) {
+    const missing = requiredConnectionMetadata.filter((key) => !(key in connection));
     checks.push({
-      name: `kinematic:${nodeId}-connected`,
-      ok: Number.isFinite(gains[nodeId]),
-      actual: gains[nodeId],
-      expected: "finite gain from crown input",
+      name: `kinematic:${connection.id}-metadata`,
+      ok: missing.length === 0,
+      actual: missing,
+      expected: requiredConnectionMetadata,
     });
   }
   for (const connection of config.settingKinematics.connections.filter(({ kind }) => kind === "external-gear")) {
@@ -827,6 +1068,19 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
     });
   }
   for (const pair of config.settingKinematics.phasePairs) {
+    const inputDefinition = config.motionWorks[pair.input];
+    const outputDefinition = config.motionWorks[pair.output];
+    const inputProfile = inputDefinition[pair.inputMember];
+    const outputProfile = outputDefinition[pair.outputMember];
+    checks.push({
+      name: `module:${pair.id}-derived-pitch`,
+      ok: Math.abs(inputProfile.module - pair.module) < EPSILON
+        && Math.abs(outputProfile.module - pair.module) < EPSILON
+        && Math.abs(inputProfile.pitchRadius - pair.module * pair.inputTeeth / 2) < EPSILON
+        && Math.abs(outputProfile.pitchRadius - pair.module * pair.outputTeeth / 2) < EPSILON,
+      actual: [inputProfile.module, outputProfile.module, inputProfile.pitchRadius, outputProfile.pitchRadius],
+      expected: [pair.module, pair.module, pair.module * pair.inputTeeth / 2, pair.module * pair.outputTeeth / 2],
+    });
     const residual = meshPhaseResidual({
       inputPhase: config.settingKinematics.nodes[pair.input].phaseOffset,
       outputPhase: config.settingKinematics.nodes[pair.output].phaseOffset,
@@ -840,7 +1094,48 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
       actual: residual,
       expected: 0,
     });
+    const inputAngle = config.settingKinematics.nodes[pair.input].phaseOffset + 0.731;
+    const outputAngle = config.settingKinematics.nodes[pair.output].phaseOffset
+      - pair.inputTeeth / pair.outputTeeth * 0.731;
+    const dynamicResidual = meshPhaseResidual({
+      inputPhase: inputAngle,
+      outputPhase: outputAngle,
+      inputTeeth: pair.inputTeeth,
+      outputTeeth: pair.outputTeeth,
+      centerAngle: pair.centerAngle,
+    });
+    checks.push({
+      name: `phase:${pair.id}-dynamic-tooth-gap`,
+      ok: Math.abs(dynamicResidual) < EPSILON,
+      actual: dynamicResidual,
+      expected: 0,
+    });
   }
+
+  const trainGains = resolveMotionWorksGains("train");
+  const settingGains = resolveMotionWorksGains("setting");
+  for (const [id, expected] of Object.entries({ cannon: 1, minute: -1 / 3, hour: 1 / 12, setting2: 3 / 8, setting1: -3 / 8, settingTransfer: 2 / 3 })) {
+    checks.push({ name: `kinematic:train-${id}-gain`, ok: Math.abs(trainGains[id] - expected) < EPSILON, actual: trainGains[id], expected });
+  }
+  for (const [id, expected] of Object.entries({ settingTransfer: -1, setting1: 9 / 16, setting2: -9 / 16, minute: 1 / 2, cannon: -3 / 2, hour: -1 / 8 })) {
+    checks.push({ name: `kinematic:setting-${id}-gain`, ok: Math.abs(settingGains[id] - expected) < EPSILON, actual: settingGains[id], expected });
+  }
+  const trainReach = resolveMotionWorksState({ source: "train", crownPosition: "wind" }).reachedNodes;
+  const settingReach = resolveMotionWorksState({ source: "setting", crownPosition: "set" }).reachedNodes;
+  checks.push({
+    name: "kinematic:wind-permanent-backdrive",
+    ok: ["setting2", "setting1", "settingTransfer"].every((id) => trainReach.includes(id))
+      && !trainReach.includes("settingInput"),
+    actual: trainReach,
+    expected: "train reaches permanent setting train but not setting input",
+  });
+  checks.push({
+    name: "kinematic:set-friction-isolation",
+    ok: ["settingTransfer", "setting1", "setting2", "minute", "cannon", "hour", "minuteHand", "hourHand"].every((id) => settingReach.includes(id))
+      && ["center", "fourthArbor", "secondsHand", "windingClutch"].every((id) => !settingReach.includes(id)),
+    actual: settingReach,
+    expected: "setting source stops at center-cannon slip boundary",
+  });
 
   const centerAxis = config.centerAxis;
   const coaxialCenters = [config.train.center, config.motionWorks.cannon, config.motionWorks.hour];

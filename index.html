@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0d1015">
-<title>Mechanical Watch Study Model v3.7.2</title>
+<title>Mechanical Watch Study Model v3.7.3</title>
 <style>
 :root{--panel:rgba(16,19,25,.95);--line:rgba(255,255,255,.13);--text:#f5f7fa;--muted:#b5bdc9;--gold:#c9a65c;--blue:#3c6fa6}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0d1015;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif}canvas{display:block;width:100%;height:100%;touch-action:none}
@@ -20,14 +20,14 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
 </head>
 <body>
 <div id="renderStatus">3Dモデルを読み込み中…</div>
-<div id="top"><div><button class="pill" id="panelToggle">メニュー</button></div><div class="pill">v3.7.2｜Refactor A.2 最小機構・実動検証</div></div>
-<div id="info"><b>Refactor A.2：最小構成の文字板側機構</b><br>選択部品：<span id="partName">なし</span><span id="partDesc">部品をタップ／クリックすると名称と機能を表示します。</span></div>
+<div id="top"><div><button class="pill" id="panelToggle">メニュー</button></div><div class="pill">v3.7.3｜Refactor A.3 常時輪列・針連結</div></div>
+<div id="info"><b>Refactor A.3：モジュール整合した常時噛合い列</b><br>選択部品：<span id="partName">なし</span><span id="partDesc">部品をタップ／クリックすると名称と機能を表示します。</span></div>
 <div id="panel">
- <div id="handle"><div id="grab"></div><span>Mechanical Watch Study Model v3.7.2</span></div>
+ <div id="handle"><div id="grab"></div><span>Mechanical Watch Study Model v3.7.3</span></div>
  <div id="body">
-  <h1>機械式時計 Study Model v3.7.2</h1>
-  <p class="sub">Refactor A.2では文字板側の装飾レバーと模式的な長軸を削除し、巻真・二位置クラッチ・設定輪列・日の裏輪列だけで再構成しました。位置2では単一の運動連鎖が実際のThree.jsオブジェクトを駆動します。</p>
-  <div class="metrics"><div class="metric"><b>Refactor A.2</b><span>最小機構・実動検証</span></div><div class="metric"><b>2.5 Hz</b><span>18,000振動/時</span></div><div class="metric"><b id="ampMetric">270°</b><span>テンプ振幅</span></div></div>
+  <h1>機械式時計 Study Model v3.7.3</h1>
+  <p class="sub">Refactor A.3では筒かなから設定中間車までを常時噛合いの一列として再構成し、位置1でも表示輪列から従動させます。位置2だけ設定入力境界を接続し、同じ運動解決器が管・軸と3本の針を駆動します。</p>
+  <div class="metrics"><div class="metric"><b>Refactor A.3</b><span>常時輪列・針連結</span></div><div class="metric"><b>2.5 Hz</b><span>18,000振動/時</span></div><div class="metric"><b id="ampMetric">270°</b><span>テンプ振幅</span></div></div>
   <div class="buttons"><button class="action" id="play">一時停止</button><button class="action" id="reset">輪列側</button><button class="action" id="trainView">輪列拡大</button><button class="action" id="dialView">文字板側</button><button class="action" id="sideView">側面</button><button class="action" id="structureView">厚さ確認</button><button class="action" id="topView">真上</button><button class="action" id="escView">脱進機</button><button class="action" id="balanceView">調速機</button></div>
   <div class="section crownControl">
    <label>りゅうず位置 <span id="crownModeLabel">位置1：巻上げ</span></label>
@@ -57,7 +57,7 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
    <div class="mini">診断表示は教育用です。エンドシェイク量は見やすさのため実寸より大幅に誇張しています。</div>
   </div>
   <div class="section structureStudy">
-   <label>ムーブメント構造表示 <span>Refactor A.2</span></label>
+   <label>ムーブメント構造表示 <span>Refactor A.3</span></label>
    <label class="syncLine"><input type="checkbox" id="machiningToggle" checked>地板・受の加工座を表示</label>
    <label class="syncLine"><input type="checkbox" id="supportToggle" checked>受の支持脚・ねじ座を表示</label>
    <label class="syncLine"><input type="checkbox" id="datumToggle">厚さ基準線を表示</label>
@@ -112,7 +112,7 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
    <label><input type="checkbox" data-group="esc" checked><span>脱進機</span></label><label><input type="checkbox" data-group="balance" checked><span>テンプ</span></label>
    <label><input type="checkbox" data-group="wind" checked><span>輪列側巻上げ</span></label><label><input type="checkbox" data-group="dial" checked><span>文字板側機構</span></label><label><input type="checkbox" data-group="motion" checked><span>表示系</span></label><label><input type="checkbox" data-group="diagnostic"><span>診断ガイド</span></label>
   </div>
-  <div class="section"><div class="legend"><span><i class="dot" style="background:#c9a65c"></i>黄銅歯車</span><span><i class="dot" style="background:#b7c1ce"></i>鋼部品</span><span><i class="dot" style="background:#a51e48"></i>ルビー</span><span><i class="dot" style="background:#565f6b"></i>地板・受</span><span><i class="dot" style="background:#4ed8e8"></i>噛合いガイド</span><span><i class="dot" style="background:#ff9f43"></i>軸受ガイド</span></div><div class="warn">v3.7.2では装飾目的の設定レバー・ヨーク・ジャンパーと模式的な長軸を削除しました。位置2の回転は、りゅうずから筒かな・時針車まで接続された最小の運動連鎖へ直接適用します。歯形とクラッチは教育用近似です。</div></div>
+  <div class="section"><div class="legend"><span><i class="dot" style="background:#c9a65c"></i>黄銅歯車</span><span><i class="dot" style="background:#b7c1ce"></i>鋼部品</span><span><i class="dot" style="background:#a51e48"></i>ルビー</span><span><i class="dot" style="background:#565f6b"></i>地板・受</span><span><i class="dot" style="background:#4ed8e8"></i>噛合いガイド</span><span><i class="dot" style="background:#ff9f43"></i>軸受ガイド</span></div><div class="warn">v3.7.3では歯数とモジュールから全ピッチ径を導出し、位置1・位置2を単一の運動グラフで解決します。設定入力は位置2だけ設定中間車へ接続し、中心車―筒かなの摩擦境界は時刻合わせ中に滑ります。歯形とクラッチは教育用近似です。</div></div>
  </div>
 </div>
 <canvas id="app"></canvas>
@@ -121,7 +121,7 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
 <script type="module">
 import * as THREE from "three";
 import {OrbitControls} from "three/addons/controls/OrbitControls.js";
-import {CAMERA_PRESETS,DIAL_INTERFERENCE_RULES,PICK_OPACITY_THRESHOLD,SETTING_KINEMATIC_CONNECTIONS,SETTING_KINEMATIC_NODES,WATCH_MECHANISM,assertMechanismConfig,choosePickCandidateIndex,isPickCandidate,isTapGesture,resolveKinematicAngles,resolveKinematicGains,resolveMechanismState,rotationFromCenter} from "./js/mechanism-config.js";
+import {CAMERA_PRESETS,DIAL_INTERFERENCE_RULES,MOTION_WORKS_CONNECTIONS,MOTION_WORKS_MESHES,MOTION_WORKS_NODES,MOTION_WORKS_TOPOLOGY,PICK_OPACITY_THRESHOLD,WATCH_MECHANISM,assertMechanismConfig,choosePickCandidateIndex,isPickCandidate,isTapGesture,meshPhaseResidual,normalizeAngle,resolveMechanismState,resolveMotionWorksGains,resolveMotionWorksState,rotationFromCenter} from "./js/mechanism-config.js";
 
 const renderStatus=document.getElementById('renderStatus');
 window.addEventListener('error',e=>{renderStatus.className='error';renderStatus.textContent='3Dモデルの初期化中にエラーが発生しました：'+(e.message||'不明なエラー')});
@@ -132,7 +132,7 @@ renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x0d1015);scene.fog=new THREE.Fog(0x0d1015,68,125);
 const backgroundThemes={navy:{bg:0x0d1015,fog:0x0d1015,exposure:1.08},obsidian:{bg:0x050607,fog:0x070809,exposure:1.12},walnut:{bg:0x1b120d,fog:0x140d09,exposure:1.05},gallery:{bg:0x9da3aa,fog:0xa5a9ae,exposure:.82}};
 function applyBackgroundTheme(name){const t=backgroundThemes[name]||backgroundThemes.navy;scene.background.setHex(t.bg);scene.fog.color.setHex(t.fog);renderer.toneMappingExposure=t.exposure}
-const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,300);const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,2.5,0);controls.minDistance=16;controls.maxDistance=110;controls.zoomSpeed=2.45;controls.panSpeed=1.15;controls.rotateSpeed=.9;controls.touches.ONE=THREE.TOUCH.ROTATE;controls.touches.TWO=THREE.TOUCH.DOLLY_PAN;
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,300);const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.target.set(0,2.5,0);controls.minDistance=4.5;controls.maxDistance=110;controls.zoomSpeed=2.45;controls.panSpeed=1.15;controls.rotateSpeed=.9;controls.touches.ONE=THREE.TOUCH.ROTATE;controls.touches.TWO=THREE.TOUCH.DOLLY_PAN;
 function applyCameraPreset(name){const preset=CAMERA_PRESETS[name];if(!preset)return;camera.position.fromArray(preset.position);camera.up.fromArray(preset.up).normalize();controls.target.fromArray(preset.target);camera.lookAt(controls.target);controls.update()}applyCameraPreset('reset');
 scene.add(new THREE.HemisphereLight(0xeaf1ff,0x272017,1.8));const key=new THREE.DirectionalLight(0xffffff,2.5);key.position.set(25,38,25);key.castShadow=true;scene.add(key);const rim=new THREE.DirectionalLight(0x9eb8e9,1.1);rim.position.set(-28,18,-24);scene.add(rim);const underfill=new THREE.DirectionalLight(0xb7d2ff,1.45);underfill.position.set(14,-28,-22);scene.add(underfill);
 
@@ -252,6 +252,7 @@ const center=wheel(TRAIN.center,'二番車（中心車）','香箱車96歯から
 const centerShaft=cyl(CENTER_AXIS.shaftRadius,CENTER_AXIS.shaftTopY-CENTER_AXIS.shaftBottomY,MAT.steel,24);centerShaft.position.set(-P.center[0],(CENTER_AXIS.shaftTopY+CENTER_AXIS.shaftBottomY)/2,-P.center[1]);center.add(register(centerShaft,'中心車連続軸','中心車から地板の貫通穴を通り、文字板側の筒かな内部まで切れ目なく延びる中心軸。','train'));
 const third=wheel(TRAIN.third,'三番車','中心車80歯と三番かな10枚の8:1で増速する中間車。','train',5);third.position.set(P.third[0],0,P.third[1]);groups.train.add(third);explode(third,[1,6,-2]);
 const fourth=wheel(TRAIN.fourth,'四番車・小秒針車','三番車75歯と四番かな10枚の7.5:1で増速され、1分に1回転する。','train',5);fourth.position.set(P.fourth[0],0,P.fourth[1]);groups.train.add(fourth);explode(fourth,[2,7,-5]);
+const fourthArborDialEndY=-2.39,fourthArborJoinY=.72;const fourthDialArbor=cyl(.075,fourthArborJoinY-fourthArborDialEndY,MAT.steel,18);fourthDialArbor.position.y=(fourthArborJoinY+fourthArborDialEndY)/2;fourth.add(register(fourthDialArbor,'四番車小秒針軸延長','四番車軸から文字板側の小秒針取付ボスまで同軸で連続し、実回転を小秒針へ伝える。','train'));
 
 function makeEscapeWheel(){const g=new THREE.Group();const profile=TRAIN.escape.wheel,r=profile.pitchRadius,sh=new THREE.Shape(),teeth=profile.toothCount;for(let i=0;i<teeth;i++){const a=i*Math.PI*2/teeth;const pts=[[profile.dedendumRadius,a-.12],[profile.addendumRadius,a-.04],[r*.90,a+.08],[profile.dedendumRadius,a+.12]];pts.forEach(([rr,aa],k)=>{const x=rr*Math.cos(aa),y=rr*Math.sin(aa);if(i===0&&k===0)sh.moveTo(x,y);else sh.lineTo(x,y)})}sh.closePath();const hole=new THREE.Path();hole.absarc(0,0,.25,0,Math.PI*2,false);sh.holes.push(hole);const geo=new THREE.ExtrudeGeometry(sh,{depth:TRAIN.escape.bodyThickness,bevelEnabled:false});geo.rotateX(Math.PI/2);geo.translate(0,TRAIN.escape.bodyThickness/2,0);const escapeBody=new THREE.Mesh(geo,MAT.steel);escapeBody.position.y=TRAIN.escape.layerYWheel;g.add(register(escapeBody,'ガンギ車15歯','アンクルにより半歯ずつ解放される軽量な15歯ガンギ車。','esc'));for(let i=0;i<5;i++){const a=i*Math.PI*2/5;const sp=new THREE.Mesh(new THREE.BoxGeometry(1.25,.11,.10),MAT.steel);sp.rotation.y=-a;sp.position.y=TRAIN.escape.layerYWheel;g.add(register(sp,'ガンギ車腕','軽量なリムを軸へ結ぶ細い腕。','esc'))}const pin=parametricGearShape(TRAIN.escape.pinion,TRAIN.escape.pinionThickness,MAT.steel,0);pin.position.y=TRAIN.escape.layerYPinion;g.add(register(pin,'ガンギかな','四番車60歯と同じ軸方向面で噛み合う6枚かな。四番車の10倍でガンギ車を駆動する。','esc'));const arbor=arborAssembly(1.90,.12,.052);arbor.position.y=(TRAIN.escape.layerYWheel+TRAIN.escape.layerYPinion)/2;g.add(register(arbor,'ガンギ車軸・ほぞ','軽量なガンギ車を支える細い軸と上下ほぞ。','esc'));return labelAssembly(g,'ガンギ車一式','15歯ガンギ車、6枚かな、軸とほぞで構成する。','esc')}
 const escape=makeEscapeWheel();escape.position.set(P.escape[0],0,P.escape[1]);groups.esc.add(escape);explode(escape,[6,8,-2]);
@@ -335,16 +336,16 @@ const stem=new THREE.Group();const stemLength=KEYLESS.axis.endX-KEYLESS.axis.sta
 const crown=knurledCrown(1.15,1.15,32);crown.position.set(KEYLESS.crownX,KEYLESS.axis.centerY,KEYLESS.axis.centerZ);groups.wind.add(register(crown,'りゅうず','巻真端へ直結し、位置1で主ゼンマイを巻き、位置2で表示時刻を調整する操作部。','wind'));explode(crown,[15,4,0]);
 
 
-// Refactor A.2 dial side: only the parts in the active setting path remain.
+// Refactor A.3 dial side: module-derived permanent motion works and a clutch boundary.
 const dialLayerY=WATCH_MECHANISM.axialLayers.dial.stemAxis;
 const driverCannon=new THREE.Group();
-const cannonTube=annularDisc(CENTER_AXIS.cannonOuterRadius,CENTER_AXIS.cannonInnerRadius,.82,MAT.steel,48);driverCannon.add(register(cannonTube,'筒かな管','連続する中心車軸を内側へ通し、弾性圧入で通常運転に追従しながら針合わせ時には滑る中空管。','dial'));
+const cannonTubeHeight=1.36;const cannonTube=annularDisc(CENTER_AXIS.cannonOuterRadius,CENTER_AXIS.cannonInnerRadius,cannonTubeHeight,MAT.steel,48);cannonTube.position.y=-cannonTubeHeight/2;driverCannon.add(register(cannonTube,'筒かな管','筒かな12枚から文字板側の分針取付ボスまで連続し、中心車軸へ摩擦結合される中空管。','dial'));
 const cannonGear=parametricGearShape(MOTION_WORKS.cannon.pinion,MOTION_WORKS.cannon.pinionThickness,MAT.steel,0);driverCannon.add(register(cannonGear,'筒かな12枚','ミニッツホイール36歯と同一面で噛み合う12枚かな。','dial'));
 const frictionRing=new THREE.Mesh(new THREE.TorusGeometry(.48,.055,8,40,Math.PI*1.72),MAT.blue);frictionRing.rotation.x=Math.PI/2;frictionRing.position.y=.18;driverCannon.add(register(frictionRing,'筒かな摩擦ばね部','中心車軸を挟み込む弾性部。通常運転トルクを伝えつつ、時刻合わせ時には滑りを許容する。','dial'));
 const slit=new THREE.Mesh(new THREE.BoxGeometry(.08,.42,.50),MAT.dark);slit.position.set(.44,.18,0);driverCannon.add(register(slit,'筒かな割り','圧入部へ弾性を与える割りの可視化。','dial'));
 driverCannon.position.set(MOTION_WORKS.cannon.centerX,MOTION_WORKS.cannon.layerYPinion,MOTION_WORKS.cannon.centerZ);groups.dial.add(labelAssembly(driverCannon,'駆動筒かな一式','中心車軸へ摩擦結合された筒かな管、12枚かな、弾性部で構成する。','dial'));explode(driverCannon,[0,-7,0]);
 
-const hourWheelDial=new THREE.Group();const hourGear=parametricGearShape(MOTION_WORKS.hour.wheel,MOTION_WORKS.hour.bodyThickness,MAT.brass,5);hourWheelDial.add(hourGear);const hourPipe=annularDisc(CENTER_AXIS.hourOuterRadius,CENTER_AXIS.hourInnerRadius,.56,MAT.brass,48);hourPipe.position.y=-.18;hourWheelDial.add(hourPipe);hourWheelDial.position.set(MOTION_WORKS.hour.centerX,MOTION_WORKS.hour.layerYWheel,MOTION_WORKS.hour.centerZ);groups.dial.add(register(hourWheelDial,'中空時針車40歯','筒かなの外側へ同軸に被さる中空管を持ち、ミニッツホイールかな10枚から4:1で減速される。','dial'));explode(hourWheelDial,[0,-8,0]);
+const hourWheelDial=new THREE.Group();const hourGear=parametricGearShape(MOTION_WORKS.hour.wheel,MOTION_WORKS.hour.bodyThickness,MAT.brass,5);hourWheelDial.add(hourGear);const hourPipeHeight=.79;const hourPipe=annularDisc(CENTER_AXIS.hourOuterRadius,CENTER_AXIS.hourInnerRadius,hourPipeHeight,MAT.brass,48);hourPipe.position.y=-hourPipeHeight/2;hourWheelDial.add(hourPipe);hourWheelDial.position.set(MOTION_WORKS.hour.centerX,MOTION_WORKS.hour.layerYWheel,MOTION_WORKS.hour.centerZ);groups.dial.add(register(hourWheelDial,'中空時針車40歯','筒かな管の外側へ同軸に被さる時針管を持ち、10枚ミニッツかなから時針取付ボスまで実回転を伝える。','dial'));explode(hourWheelDial,[0,-8,0]);
 
 const minuteWheelDial=wheel(MOTION_WORKS.minute,'ミニッツホイール','筒かな12枚→ミニッツホイール36歯で3:1、ミニッツかな10枚→時針車40歯で4:1、合計12:1を構成する。','dial',4);minuteWheelDial.position.set(MOTION_WORKS.minute.centerX,0,MOTION_WORKS.minute.centerZ);groups.dial.add(minuteWheelDial);explode(minuteWheelDial,[2,-8,0]);
 
@@ -378,21 +379,21 @@ shockAbsorber('上側耐震軸受',P.balance[0],P.balance[1],4.03,'bridge');
 const bridgeScrewPoints=[[-7.0,7.2],[-1.4,5.8],[-7.2,.4],[-1.8,2.8],[4.4,1.4],[2.8,-7.0],[-2.2,-6.5],...WATCH_MECHANISM.escapement.bridgeSupports.map(({x,z})=>[x,z]),[5.8,5.6],[10.1,4.8]];
 bridgeScrewPoints.forEach(([x,z])=>{const pillar=registerStructuralOpacity(cyl(.22,2.78,MAT.boss,24));pillar.position.set(x,1.77,z);groups.plate.add(register(pillar,'受支持柱','地板から受のねじ座まで高さを確保し、輪列の回転空間を形成する支持柱。','plate'));supportDetails.push(pillar);const sink=registerStructuralOpacity(new THREE.Mesh(new THREE.TorusGeometry(.36,.06,8,28),MAT.machined));sink.rotation.x=Math.PI/2;sink.position.set(x,4.02,z);groups.bridge.add(sink);machiningDetails.push(sink);const s=screw(.28,.20);s.position.set(x,4.05,z);groups.bridge.add(register(s,'受ねじ','香箱受、輪列受、アンクル受、テンプ受を支持柱へ締結する皿座付きねじ。','bridge'))})
 
-// Display works above the movement for explanatory viewing
-const minuteAxis=new THREE.Group();minuteAxis.position.set(0,5.1,0);const minuteHand=makeHand(10.3,.42,MAT.hand);minuteAxis.add(minuteHand);groups.motion.add(register(minuteAxis,'分針','中心車と筒かなを介して1時間に1回転する表示針。','motion'));explode(minuteAxis,[0,17,0]);
-const hourAxis=new THREE.Group();hourAxis.position.set(0,4.92,0);const hourHand=makeHand(7.2,.58,MAT.brass);hourAxis.add(hourHand);groups.motion.add(register(hourAxis,'時針','日の裏車と時針車により、分針の1/12の速度で回転する。','motion'));explode(hourAxis,[0,16,0]);
-const secAxis=new THREE.Group();secAxis.position.set(P.fourth[0],4.95,P.fourth[1]);const secHand=makeHand(3.8,.14,MAT.red);secAxis.add(secHand);groups.motion.add(register(secAxis,'小秒針','四番車軸に直結し、1分に1回転する。','motion'));explode(secAxis,[2,18,-6]);
-const dialRing=new THREE.Mesh(new THREE.TorusGeometry(16.1,.18,10,100),MAT.dark);dialRing.rotation.x=Math.PI/2;dialRing.position.y=4.72;groups.motion.add(register(dialRing,'文字板外周リング','表示位置を把握しやすくするための簡略化した文字板リング。','motion'));explode(dialRing,[0,15,0]);
-for(let i=0;i<12;i++){const a=i*Math.PI*2/12;const m=new THREE.Mesh(new THREE.BoxGeometry(i%3===0?.20:.10,.08,i%3===0?1.0:.55),MAT.hand);m.position.set(14.8*Math.sin(a),4.77,-14.8*Math.cos(a));m.rotation.y=a;groups.motion.add(m)}
+// Display works are now on the dial side and meet the actual tube/arbor ends.
+const minuteAxis=new THREE.Group();minuteAxis.position.set(0,-2.41,0);const minuteHandBoss=annularDisc(.54,CENTER_AXIS.cannonOuterRadius-.02,.12,MAT.steel,40);minuteAxis.add(register(minuteHandBoss,'分針取付ボス','筒かな管外周へ圧入され、管と同じ角度で分針を回す取付部。','motion'));const minuteHand=makeHand(10.3,.42,MAT.hand);minuteAxis.add(minuteHand);groups.motion.add(register(minuteAxis,'分針','筒かな管の実Object3D角へ固定組付けオフセットで拘束された分針。','motion'));explode(minuteAxis,[0,-17,0]);
+const hourAxis=new THREE.Group();hourAxis.position.set(0,-2.26,0);const hourHandBoss=annularDisc(.80,CENTER_AXIS.hourOuterRadius-.02,.12,MAT.brass,40);hourAxis.add(register(hourHandBoss,'時針取付ボス','時針管外周へ圧入され、時針車と同じ角度で時針を回す取付部。','motion'));const hourHand=makeHand(7.2,.58,MAT.brass);hourAxis.add(hourHand);groups.motion.add(register(hourAxis,'時針','時針管の実Object3D角へ固定組付けオフセットで拘束された時針。','motion'));explode(hourAxis,[0,-16,0]);
+const secAxis=new THREE.Group();secAxis.position.set(P.fourth[0],-2.39,P.fourth[1]);const secondsHandBoss=cyl(.18,.14,MAT.red,28);secAxis.add(register(secondsHandBoss,'小秒針取付ボス','文字板側へ延びた四番車軸端へ固定される小秒針ハブ。','motion'));const secHand=makeHand(3.8,.14,MAT.red);secAxis.add(secHand);groups.motion.add(register(secAxis,'小秒針','四番車軸の実Object3D角へ固定組付けオフセットで拘束される。','motion'));explode(secAxis,[2,-18,-6]);
+const dialRing=new THREE.Mesh(new THREE.TorusGeometry(16.1,.18,10,100),MAT.dark);dialRing.rotation.x=Math.PI/2;dialRing.position.y=-2.08;groups.motion.add(register(dialRing,'文字板外周リング','文字板側の管・軸端と同じ面で表示位置を示す簡略リング。','motion'));explode(dialRing,[0,-15,0]);
+for(let i=0;i<12;i++){const a=i*Math.PI*2/12;const m=new THREE.Mesh(new THREE.BoxGeometry(i%3===0?.20:.10,.08,i%3===0?1.0:.55),MAT.hand);m.position.set(14.8*Math.sin(a),-2.10,-14.8*Math.cos(a));m.rotation.y=a;groups.motion.add(m)}
 // 12時位置を明確にする専用インデックス。数字は使わず、金色のダブルバーと三角マーカーで示す。
 const twelveMarker=new THREE.Group();
 const twelveBarL=new THREE.Mesh(new THREE.BoxGeometry(.20,.14,1.35),MAT.brass);twelveBarL.position.set(-.22,0,0);
 const twelveBarR=twelveBarL.clone();twelveBarR.position.set(.22,0,0);
 const twelveTriGeo=new THREE.BufferGeometry();twelveTriGeo.setAttribute('position',new THREE.Float32BufferAttribute([-.48,.02,.72,.48,.02,.72,0,.02,1.42],3));twelveTriGeo.computeVertexNormals();
 const twelveTriMat=MAT.brass.clone();twelveTriMat.side=THREE.DoubleSide;const twelveTri=new THREE.Mesh(twelveTriGeo,twelveTriMat);
-twelveMarker.add(twelveBarL,twelveBarR,twelveTri);twelveMarker.position.set(0,4.83,-14.65);twelveMarker.rotation.y=Math.PI;
-groups.motion.add(register(twelveMarker,'12時位置インデックス','文字盤上端の12時方向を示す専用マーカー。時刻表示の基準方向となる。','motion'));explode(twelveMarker,[0,15,1]);
-const smallRing=new THREE.Mesh(new THREE.TorusGeometry(4.5,.10,8,64),MAT.dark);smallRing.rotation.x=Math.PI/2;smallRing.position.set(P.fourth[0],4.76,P.fourth[1]);groups.motion.add(register(smallRing,'小秒針リング','四番車位置と小秒針表示の対応を示す補助リング。','motion'));explode(smallRing,[2,15,-6]);
+twelveMarker.add(twelveBarL,twelveBarR,twelveTri);twelveMarker.position.set(0,-2.15,-14.65);twelveMarker.rotation.y=Math.PI;
+groups.motion.add(register(twelveMarker,'12時位置インデックス','文字盤上端の12時方向を示す専用マーカー。時刻表示の基準方向となる。','motion'));explode(twelveMarker,[0,-15,1]);
+const smallRing=new THREE.Mesh(new THREE.TorusGeometry(4.5,.10,8,64),MAT.dark);smallRing.rotation.x=Math.PI/2;smallRing.position.set(P.fourth[0],-2.08,P.fourth[1]);groups.motion.add(register(smallRing,'小秒針リング','四番車軸端と小秒針表示の対応を示す補助リング。','motion'));explode(smallRing,[2,-15,-6]);
 
 // Stage 3 diagnostic geometry: pitch circles, centre-distance links, pivots and exaggerated endshake.
 const meshGuides=new THREE.Group(),pivotGuides=new THREE.Group();groups.diagnostic.add(meshGuides,pivotGuides);
@@ -444,7 +445,7 @@ document.getElementById('handle').onclick=()=>{if(!isDesktop())panel.classList.t
 let running=true,speed=1,explodeAmount=0,sideSplitAmount=0,endshakeAmount=0;
 let watchTimeSec=10*3600+8*60+30;
 let trainTimeSec=watchTimeSec,settingSecondHold=watchTimeSec%60;
-let liveSync=false;
+let liveSync=false,liveSyncOffsetSec=0,liveSyncStartOffsetSec=0,liveSyncTransitionStartedAt=0;
 const playBtn=document.getElementById('play');
 const liveSyncInput=document.getElementById('liveSync');
 const timeInput=document.getElementById('timeInput');
@@ -478,36 +479,64 @@ let simulatedElapsedHours=0,lastHistoryHour=-1,historyData=[];
 let crownPosition='wind',crownTransition=0,crownTurnRate=0,crownRotation=0,windingArborAngle=0,windingCrownWheelAngle=0,settingInputAngle=0,currentMechanismState='run';
 let powerReserveHours=26;
 
-const settingObjects={
- crownInput:{object:crown,axis:'x'},stem:{object:stem,axis:'x'},slidingClutch:{object:slidingClutch,axis:'x'},settingInput:{object:settingInput,axis:'x'},
- settingTransfer:{object:settingTransferWheel,axis:'y'},setting1:{object:settingWheel1,axis:'y'},setting2:{object:settingWheel2,axis:'y'},minute:{object:minuteWheelDial,axis:'y'},cannon:{object:driverCannon,axis:'y'},hour:{object:hourWheelDial,axis:'y'}
+const motionObjects={
+ center:{object:center,axis:'y'},cannon:{object:driverCannon,axis:'y'},minute:{object:minuteWheelDial,axis:'y'},hour:{object:hourWheelDial,axis:'y'},
+ settingTransfer:{object:settingTransferWheel,axis:'y'},setting1:{object:settingWheel1,axis:'y'},setting2:{object:settingWheel2,axis:'y'},fourthArbor:{object:fourth,axis:'y'},
+ minuteHand:{object:minuteAxis,axis:'y'},hourHand:{object:hourAxis,axis:'y'},secondsHand:{object:secAxis,axis:'y'},
+ crownInput:{object:crown,axis:'x'},stem:{object:stem,axis:'x'},slidingClutch:{object:slidingClutch,axis:'x'},windingClutch:{object:windingClutch,axis:'x'},settingInput:{object:settingInput,axis:'x'}
 };
-const settingRuntimeConnections=SETTING_KINEMATIC_CONNECTIONS.map(connection=>({...connection,inputObject:settingObjects[connection.input].object,outputObject:settingObjects[connection.output].object}));
-const settingGains=resolveKinematicGains(SETTING_KINEMATIC_CONNECTIONS,'set');let currentKinematicAngles=resolveKinematicAngles(0,'set');
-function applyKinematicState(inputAngle,state='set'){const angles=resolveKinematicAngles(inputAngle,state);for(const [id,binding] of Object.entries(settingObjects)){if(!Number.isFinite(angles[id]))continue;binding.object.rotation[binding.axis]=angles[id]}currentKinematicAngles=angles;return angles}
-function applyDisplayKinematics(displayCenterRot){driverCannon.rotation.y=SETTING_KINEMATIC_NODES.cannon.phaseOffset+displayCenterRot;minuteWheelDial.rotation.y=SETTING_KINEMATIC_NODES.minute.phaseOffset-displayCenterRot/3;hourWheelDial.rotation.y=SETTING_KINEMATIC_NODES.hour.phaseOffset+displayCenterRot/12}
-applyKinematicState(0,'set');
+const motionRuntimeConnections=MOTION_WORKS_CONNECTIONS.map(connection=>({...connection,inputObject:motionObjects[connection.input].object,outputObject:motionObjects[connection.output].object}));
+const motionConnectionOffsets={'center-cannon-friction':0,'setting-input-transfer':0};
+const nodePhaseAngles=Object.fromEntries(Object.entries(MOTION_WORKS_NODES).map(([id,node])=>[id,node.phaseOffset]));
+let currentMotionWorksState={source:'train',state:'run',angles:{...nodePhaseAngles},reachedNodes:[],activeConnections:[]};
+let stateTransitionContinuityReport={transition:'initial',before:{},after:{},deltas:{},maxJump:0};
+const trainMotionGains=resolveMotionWorksGains('train'),settingMotionGains=resolveMotionWorksGains('setting');
+function trainSourceAngle(){return -(trainTimeSec/3600)*Math.PI*2}
+function currentMotionSource(){return crownPosition==='set'?'setting':'train'}
+function applyMotionWorksState(source=currentMotionSource()){
+ const resolved=resolveMotionWorksState({source,trainAngle:trainSourceAngle(),crownAngle:crownRotation,crownPosition,mechanismState:currentMechanismState,running,powered:powerReserveHours>0,previousAngles:currentMotionWorksState.angles,connectionOffsets:motionConnectionOffsets});
+ for(const [id,binding] of Object.entries(motionObjects)){const angle=resolved.angles[id];if(Number.isFinite(angle))binding.object.rotation[binding.axis]=angle}
+ currentMotionWorksState=resolved;settingInputAngle=resolved.angles.settingInput;return resolved;
+}
+applyMotionWorksState('train');
 
 const dialEnvelopes={
  stem:{object:stem,axis:'x',radius:KEYLESS.axis.shaftRadius,halfLength:stemLength/2,offset:[(KEYLESS.axis.startX+KEYLESS.axis.endX)/2,0,0]},
  windingClutch:{object:windingClutch,axis:'x',radius:KEYLESS.windingClutch.radius,halfLength:KEYLESS.windingClutch.width/2+KEYLESS.windingClutch.dogLength,offset:[0,0,0]},
  slidingClutch:{object:slidingClutch,axis:'x',radius:KEYLESS.slidingClutch.radius,halfLength:KEYLESS.slidingClutch.width/2+KEYLESS.slidingClutch.dogLength,offset:[0,0,0]},
  settingInput:{object:settingInput,axis:'x',radius:KEYLESS.settingInput.radius,halfLength:KEYLESS.settingInput.width/2+KEYLESS.settingInput.dogLength,offset:[0,0,0]},
- settingTransfer:{object:settingTransferWheel,axis:'y',radius:MOTION_WORKS.settingTransfer.wheel.addendumRadius,halfLength:MOTION_WORKS.settingTransfer.bodyThickness/2,offset:[0,MOTION_WORKS.settingTransfer.bodyThickness/2,0]},
- setting1:{object:settingWheel1,axis:'y',radius:MOTION_WORKS.setting1.wheel.addendumRadius,halfLength:MOTION_WORKS.setting1.bodyThickness/2,offset:[0,MOTION_WORKS.setting1.bodyThickness/2,0]},
- setting2:{object:settingWheel2,axis:'y',radius:MOTION_WORKS.setting2.wheel.addendumRadius,halfLength:MOTION_WORKS.setting2.bodyThickness/2,offset:[0,MOTION_WORKS.setting2.bodyThickness/2,0]},
- minuteWheel:{object:minuteWheelDial,axis:'y',radius:MOTION_WORKS.minute.wheel.addendumRadius,halfLength:MOTION_WORKS.minute.bodyThickness/2,offset:[0,MOTION_WORKS.minute.layerYWheel+MOTION_WORKS.minute.bodyThickness/2,0]},
- minutePinion:{object:minuteWheelDial,axis:'y',radius:MOTION_WORKS.minute.pinion.addendumRadius,halfLength:MOTION_WORKS.minute.pinionThickness/2,offset:[0,MOTION_WORKS.minute.layerYPinion+MOTION_WORKS.minute.pinionThickness/2,0]},
- cannonPinion:{object:driverCannon,axis:'y',radius:MOTION_WORKS.cannon.pinion.addendumRadius,halfLength:MOTION_WORKS.cannon.pinionThickness/2,offset:[0,MOTION_WORKS.cannon.pinionThickness/2,0]},
- cannonTube:{object:driverCannon,axis:'y',radius:CENTER_AXIS.cannonOuterRadius,halfLength:.41,offset:[0,.41,0]},
- hourWheel:{object:hourWheelDial,axis:'y',radius:MOTION_WORKS.hour.wheel.addendumRadius,halfLength:MOTION_WORKS.hour.bodyThickness/2,offset:[0,MOTION_WORKS.hour.bodyThickness/2,0]},
- hourPipe:{object:hourWheelDial,axis:'y',radius:CENTER_AXIS.hourOuterRadius,halfLength:.28,offset:[0,.10,0]},
+ settingTransfer:{object:settingTransferWheel,axis:'y',radius:MOTION_WORKS.settingTransfer.wheel.addendumRadius,halfLength:MOTION_WORKS.settingTransfer.bodyThickness/2,offset:[0,0,0]},
+ setting1:{object:settingWheel1,axis:'y',radius:MOTION_WORKS.setting1.wheel.addendumRadius,halfLength:MOTION_WORKS.setting1.bodyThickness/2,offset:[0,0,0]},
+ setting2:{object:settingWheel2,axis:'y',radius:MOTION_WORKS.setting2.wheel.addendumRadius,halfLength:MOTION_WORKS.setting2.bodyThickness/2,offset:[0,0,0]},
+ minuteWheel:{object:minuteWheelDial,axis:'y',radius:MOTION_WORKS.minute.wheel.addendumRadius,halfLength:MOTION_WORKS.minute.bodyThickness/2,offset:[0,MOTION_WORKS.minute.layerYWheel,0]},
+ minutePinion:{object:minuteWheelDial,axis:'y',radius:MOTION_WORKS.minute.pinion.addendumRadius,halfLength:MOTION_WORKS.minute.pinionThickness/2,offset:[0,MOTION_WORKS.minute.layerYPinion,0]},
+ cannonPinion:{object:driverCannon,axis:'y',radius:MOTION_WORKS.cannon.pinion.addendumRadius,halfLength:MOTION_WORKS.cannon.pinionThickness/2,offset:[0,0,0]},
+ cannonTube:{object:driverCannon,axis:'y',radius:CENTER_AXIS.cannonOuterRadius,halfLength:cannonTubeHeight/2,offset:[0,-cannonTubeHeight/2,0]},
+ minuteHandBoss:{object:minuteAxis,axis:'y',radius:.54,halfLength:.06,offset:[0,0,0]},
+ hourWheel:{object:hourWheelDial,axis:'y',radius:MOTION_WORKS.hour.wheel.addendumRadius,halfLength:MOTION_WORKS.hour.bodyThickness/2,offset:[0,0,0]},
+ hourPipe:{object:hourWheelDial,axis:'y',radius:CENTER_AXIS.hourOuterRadius,halfLength:hourPipeHeight/2,offset:[0,-hourPipeHeight/2,0]},
+ hourHandBoss:{object:hourAxis,axis:'y',radius:.80,halfLength:.06,offset:[0,0,0]},
+ fourthArborExtension:{object:fourth,axis:'y',radius:.075,halfLength:(fourthArborJoinY-fourthArborDialEndY)/2,offset:[0,(fourthArborJoinY+fourthArborDialEndY)/2,0]},
+ secondsHandBoss:{object:secAxis,axis:'y',radius:.18,halfLength:.07,offset:[0,0,0]},
  centerShaft:{object:centerShaft,axis:'y',radius:CENTER_AXIS.shaftRadius,halfLength:(CENTER_AXIS.shaftTopY-CENTER_AXIS.shaftBottomY)/2,offset:[0,0,0]}
 };
 function envelopeSnapshot(id){const entry=dialEnvelopes[id];entry.object.updateWorldMatrix(true,false);const center=entry.object.localToWorld(new THREE.Vector3(...entry.offset));const extents=entry.axis==='x'?new THREE.Vector3(entry.halfLength,entry.radius,entry.radius):new THREE.Vector3(entry.radius,entry.halfLength,entry.radius);return {id,axis:entry.axis,center,extents,radius:entry.radius,halfLength:entry.halfLength}}
 function envelopeContact(leftId,rightId,tolerance=.015){const left=envelopeSnapshot(leftId),right=envelopeSnapshot(rightId),delta=left.center.clone().sub(right.center);let overlaps;if(left.axis===right.axis){const axial=Math.abs(left.axis==='x'?delta.x:delta.y);const radial=left.axis==='x'?Math.hypot(delta.y,delta.z):Math.hypot(delta.x,delta.z);overlaps=[left.halfLength+right.halfLength-axial,left.radius+right.radius-radial]}else{overlaps=['x','y','z'].map(axis=>left.extents[axis]+right.extents[axis]-Math.abs(delta[axis]))}const intersects=overlaps.every(value=>value>=-tolerance);return {pair:[leftId,rightId],intersects,penetration:intersects?Math.min(...overlaps):Math.min(...overlaps),overlaps}}
 function getInterferenceReport(){scene.updateMatrixWorld(true);const intendedContacts=DIAL_INTERFERENCE_RULES.intendedContacts.map(([left,right])=>envelopeContact(left,right));const forbiddenIntersections=DIAL_INTERFERENCE_RULES.forbiddenPairs.map(([left,right])=>envelopeContact(left,right)).filter(result=>result.intersects);return {state:crownPosition,intendedContacts,forbiddenIntersections,forbiddenCount:forbiddenIntersections.length,envelopes:Object.keys(dialEnvelopes).map(id=>{const snapshot=envelopeSnapshot(id);return {id,axis:snapshot.axis,center:snapshot.center.toArray(),extents:snapshot.extents.toArray()}})}}
-function getPartRotations(){return Object.fromEntries(Object.entries(settingObjects).map(([id,{object,axis}])=>[id,object.rotation[axis]]))}
+function getPartRotations(){const rotations=Object.fromEntries(Object.entries(motionObjects).map(([id,{object,axis}])=>[id,object.rotation[axis]]));return {...rotations,barrel:barrel.rotation.y,third:third.rotation.y,cannonTube:rotations.cannon,minuteWheel:rotations.minute,minutePinion:rotations.minute,hourPipe:rotations.hour,fourth:rotations.fourthArbor,escape:escape.rotation.y,crown:rotations.crownInput}}
+const continuityPartIds=['center','barrel','third','fourthArbor','escape','cannon','minute','hour','setting2','setting1','settingTransfer','minuteHand','hourHand','secondsHand'];
+function transitionSnapshot(){const all=getPartRotations();return Object.fromEntries(continuityPartIds.map(id=>[id,all[id]]))}
+function recordStateTransition(transition,before){const after=transitionSnapshot(),deltas=Object.fromEntries(continuityPartIds.map(id=>[id,normalizeAngle(after[id]-before[id])]));stateTransitionContinuityReport={transition,before,after,deltas,maxJump:Math.max(...Object.values(deltas).map(Math.abs)),source:getMotionSource()};return stateTransitionContinuityReport}
+function getMotionSource(){return {permanentSource:currentMotionSource(),clutchBranch:crownPosition==='set'?'setting':'winding',crownPosition,state:currentMotionWorksState.state,mechanismState:currentMechanismState}}
+function getMotionWorksTopology(){return {clutchBoundary:MOTION_WORKS_TOPOLOGY.clutchBoundary,frictionBoundary:MOTION_WORKS_TOPOLOGY.frictionBoundary,nodes:Object.fromEntries(Object.entries(MOTION_WORKS_NODES).map(([id,node])=>[id,{...node,objectUuid:motionObjects[id]?.object.uuid??null}])),permanentConnections:MOTION_WORKS_TOPOLOGY.permanentConnections.map(connection=>({...connection,inputObjectUuid:motionObjects[connection.input]?.object.uuid??null,outputObjectUuid:motionObjects[connection.output]?.object.uuid??null})),conditionalConnections:MOTION_WORKS_TOPOLOGY.conditionalConnections.map(connection=>({...connection,inputObjectUuid:motionObjects[connection.input]?.object.uuid??null,outputObjectUuid:motionObjects[connection.output]?.object.uuid??null}))}}
+function getClutchConnectionState(){const state=currentMotionWorksState.state;const active=MOTION_WORKS_TOPOLOGY.conditionalConnections.filter(connection=>connection.activeStates.includes(state)).map(connection=>connection.id);return {crownPosition,state,activeConnections:active,settingBoundaryEngaged:crownPosition==='set',windingBoundaryEngaged:crownPosition!=='set',settingInputAngle:settingInput.rotation.x,settingTransferAngle:settingTransferWheel.rotation.y,engagementOffset:motionConnectionOffsets['setting-input-transfer']}}
+function getGearModuleReport(){return MOTION_WORKS_MESHES.map(mesh=>{const input=MOTION_WORKS[mesh.input],output=MOTION_WORKS[mesh.output],actualCenterDistance=Math.hypot(input.centerX-output.centerX,input.centerZ-output.centerZ);return {...mesh,inputPitchDiameter:mesh.inputPitchRadius*2,outputPitchDiameter:mesh.outputPitchRadius*2,actualCenterDistance,centerDistanceError:actualCenterDistance-mesh.centerDistance,moduleError:MOTION_WORKS[mesh.output][mesh.outputMember].module-mesh.module}})}
+function getPermanentMeshAngles(){const rotations=getPartRotations();return MOTION_WORKS_MESHES.map(mesh=>{const inputAngle=rotations[mesh.input],outputAngle=rotations[mesh.output];return {id:mesh.id,input:mesh.input,output:mesh.output,inputAngle,outputAngle,residual:meshPhaseResidual({inputPhase:inputAngle,outputPhase:outputAngle,inputTeeth:mesh.inputTeeth,outputTeeth:mesh.outputTeeth,centerAngle:mesh.centerAngle})}})}
+function getHandCouplingReport(){scene.updateMatrixWorld(true);const entries=[
+ {id:'minute',driver:'cannon',hand:'minuteHand',driverObject:driverCannon,handObject:minuteAxis,driverGeometry:cannonTube,handGeometry:minuteHandBoss,driverEnd:new THREE.Vector3(0,-cannonTubeHeight/2,0)},
+ {id:'hour',driver:'hour',hand:'hourHand',driverObject:hourWheelDial,handObject:hourAxis,driverGeometry:hourPipe,handGeometry:hourHandBoss,driverEnd:new THREE.Vector3(0,-hourPipeHeight/2,0)},
+ {id:'seconds',driver:'fourthArbor',hand:'secondsHand',driverObject:fourth,handObject:secAxis,driverGeometry:fourthDialArbor,handGeometry:secondsHandBoss,driverEnd:new THREE.Vector3(0,-(fourthArborJoinY-fourthArborDialEndY)/2,0)}
+ ];const rotations=getPartRotations();return entries.map(entry=>{const fixedOffset=normalizeAngle(MOTION_WORKS_NODES[entry.hand].phaseOffset-MOTION_WORKS_NODES[entry.driver].phaseOffset),actualOffset=normalizeAngle(rotations[entry.hand]-rotations[entry.driver]);const driverMount=entry.driverGeometry.localToWorld(entry.driverEnd.clone()),handMount=entry.handGeometry.localToWorld(new THREE.Vector3());return {id:entry.id,driver:entry.driver,hand:entry.hand,driverObject:entry.driverObject.uuid,handObject:entry.handObject.uuid,driverGeometry:entry.driverGeometry.uuid,handGeometry:entry.handGeometry.uuid,driverAngle:rotations[entry.driver],handAngle:rotations[entry.hand],fixedOffset,actualOffset,error:normalizeAngle(actualOffset-fixedOffset),mountDistance:driverMount.distanceTo(handMount),driverMount:driverMount.toArray(),handMount:handMount.toArray()}})}
 function getPickLayerReport(){updatePickLayerMembership();const active=selectable.filter(node=>node.layers.test(raycaster.layers));return {activeCount:active.length,diagnosticActive:active.filter(node=>inheritedFlag(node,'diagnostic',false)).length,priorities:[...new Set(active.map(node=>inheritedFlag(node,'pickPriority',0)))].sort()}}
 function pickProjectedPart(partName){scene.updateMatrixWorld(true);const target=selectable.find(node=>node.userData.partName===partName&&visibleHierarchy(node));if(!target)return null;if(!target.geometry.boundingSphere)target.geometry.computeBoundingSphere();const sphere=target.geometry.boundingSphere;const localPoint=sphere.center.clone().add(new THREE.Vector3(sphere.radius*.72,0,0));const projected=target.localToWorld(localPoint).project(camera);const rect=renderer.domElement.getBoundingClientRect();pickAt(rect.left+(projected.x+1)*rect.width/2,rect.top+(1-projected.y)*rect.height/2);return selectedRoot?.userData?.partName||null}
 let frameCounter=0;const frameWaiters=[];function waitForFrames(count=2){const target=frameCounter+Math.max(1,count);return new Promise(resolve=>frameWaiters.push({target,resolve}))}
@@ -597,9 +626,11 @@ function oscillatorSin(time,freq,errorMs){
 function escapementState(beatValue){const beatIndex=Math.floor(beatValue),side=((beatIndex%2)+2)%2,u=beatValue-beatIndex;let seg=0;if(u>=.45&&u<.57)seg=1;else if(u>=.57&&u<.79)seg=2;else if(u>=.79)seg=3;const start=side===0?-1:1,end=-start;const leverProgress=u<.45?0:u<.79?smoothStep((u-.45)/.34):1;const wheelProgress=u<.55?0:u<.82?smoothStep((u-.55)/.27):1;return {phase:side*4+seg,palletAngle:(start+(end-start)*leverProgress)*.205,advance:beatIndex*.5+.5*wheelProgress,beat:beatValue};}
 function pad2(n){return String(Math.floor(n)).padStart(2,'0')}
 function normDay(s){s%=86400; if(s<0)s+=86400; return s}
+function shortestDayDelta(from,to){let delta=normDay(to)-normDay(from);if(delta>43200)delta-=86400;if(delta<-43200)delta+=86400;return delta}
+const LIVE_SYNC_TRANSITION_MS=1500;
 function secondsToInputValue(s){s=normDay(s);const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=Math.floor(s%60);return `${pad2(h)}:${pad2(m)}:${pad2(sec)}`}
 function setEditorTime(s){timeInput.value=secondsToInputValue(s)}
-function setWatchTime(s){watchTimeSec=normDay(s);updateTimeUI()}
+function setWatchTime(s){watchTimeSec=normDay(s);trainTimeSec=watchTimeSec;settingSecondHold=watchTimeSec%60;motionConnectionOffsets['center-cannon-friction']=0;const desired=resolveMotionWorksState({source:'train',trainAngle:trainSourceAngle(),crownAngle:crownRotation,crownPosition:'wind',previousAngles:currentMotionWorksState.angles,connectionOffsets:motionConnectionOffsets});if(crownPosition==='set'){const clutch=MOTION_WORKS_CONNECTIONS.find(connection=>connection.id==='setting-input-transfer'),inputAngle=MOTION_WORKS_NODES.settingInput.phaseOffset+crownRotation;motionConnectionOffsets['setting-input-transfer']=desired.angles.settingTransfer-MOTION_WORKS_NODES.settingTransfer.phaseOffset-clutch.ratio*(inputAngle-MOTION_WORKS_NODES.settingInput.phaseOffset);currentMotionWorksState={...currentMotionWorksState,angles:{...currentMotionWorksState.angles,center:desired.angles.center,fourthArbor:desired.angles.fourthArbor,secondsHand:desired.angles.secondsHand}};applyMotionWorksState('setting')}else applyMotionWorksState('train');updateTimeUI()}
 function secondsFromDate(d){return d.getHours()*3600+d.getMinutes()*60+d.getSeconds()+d.getMilliseconds()/1000}
 function setWatchTimeFromDate(d,updateEditor=false){const s=secondsFromDate(d);setWatchTime(s);if(updateEditor)setEditorTime(s)}
 function visibleWatchTime(){if(crownPosition!=='set')return watchTimeSec;const base=Math.floor(normDay(watchTimeSec)/60)*60;return normDay(base+settingSecondHold)}
@@ -614,19 +645,36 @@ function refreshControlState(){
  if(setting)timeMode.textContent='りゅうず位置2：時刻合わせ（秒停止）';
 }
 function setSyncUI(enabled){
+ const before=transitionSnapshot();
+ if(enabled&&crownPosition==='set')setCrownPosition('wind');
+ if(enabled&&!liveSync){liveSyncOffsetSec=shortestDayDelta(secondsFromDate(new Date()),watchTimeSec);liveSyncStartOffsetSec=liveSyncOffsetSec;liveSyncTransitionStartedAt=performance.now()}
+ if(!enabled){liveSyncOffsetSec=0;liveSyncStartOffsetSec=0;liveSyncTransitionStartedAt=0}
  liveSync=enabled;liveSyncInput.checked=enabled;
- if(enabled){crownPosition='wind';crownTransition=0;}
+ if(enabled)crownTransition=0;
  if(!enabled&&crownPosition!=='set'&&!timeMode.textContent.includes('入力')&&!timeMode.textContent.includes('一回'))timeMode.textContent='手動／一回設定';
- refreshControlState();
+ refreshControlState();return recordStateTransition(enabled?'live-sync-on':'live-sync-off',before);
 }
 function setCrownPosition(position){
  const previous=crownPosition;
- if(position==='set'&&previous!=='set'){settingSecondHold=normDay(watchTimeSec)%60;settingInputAngle=(driverCannon.rotation.y-SETTING_KINEMATIC_NODES.cannon.phaseOffset)/settingGains.cannon;crownRotation=settingInputAngle;applyKinematicState(settingInputAngle,'set')}
- if(position==='wind'&&previous==='set'){watchTimeSec=normDay(Math.floor(normDay(watchTimeSec)/60)*60+settingSecondHold);setEditorTime(watchTimeSec);}
- crownPosition=position;
- if(position==='set'){if(liveSync){liveSync=false;liveSyncInput.checked=false;}timeMode.textContent='りゅうず位置2：時刻合わせ（秒停止）';}
+ if(position===previous)return stateTransitionContinuityReport;
+ const before=transitionSnapshot();
+ if(position==='set'){
+  settingSecondHold=normDay(watchTimeSec)%60;
+  const clutch=MOTION_WORKS_CONNECTIONS.find(connection=>connection.id==='setting-input-transfer');
+  const inputAngle=MOTION_WORKS_NODES.settingInput.phaseOffset+crownRotation;
+  motionConnectionOffsets['setting-input-transfer']=currentMotionWorksState.angles.settingTransfer-MOTION_WORKS_NODES.settingTransfer.phaseOffset-clutch.ratio*(inputAngle-MOTION_WORKS_NODES.settingInput.phaseOffset);
+  crownPosition='set';applyMotionWorksState('setting');
+ }else{
+  const heldCannon=currentMotionWorksState.angles.cannon;
+  const settledWatchTime=visibleWatchTime();
+  watchTimeSec=settledWatchTime;
+  crownPosition='wind';
+  motionConnectionOffsets['center-cannon-friction']=heldCannon-MOTION_WORKS_NODES.cannon.phaseOffset-(trainSourceAngle()-MOTION_WORKS_NODES.center.phaseOffset);
+  applyMotionWorksState('train');setEditorTime(watchTimeSec);
+ }
+ if(position==='set'){if(liveSync){liveSync=false;liveSyncOffsetSec=0;liveSyncStartOffsetSec=0;liveSyncTransitionStartedAt=0;liveSyncInput.checked=false;}timeMode.textContent='りゅうず位置2：時刻合わせ（秒停止）';}
  else if(!liveSync)timeMode.textContent='通常運転／巻上げ位置';
- refreshControlState();
+ refreshControlState();return recordStateTransition(`${previous}->${position}`,before);
 }
 function resetCrownTurn(){crownTurnRate=0;crownTurnInput.value=0;crownTurnV.textContent='中立';}
 function applyTimeInput(){
@@ -645,7 +693,7 @@ document.getElementById('topView').onclick=()=>applyCameraPreset('top');
 document.getElementById('escView').onclick=()=>applyCameraPreset('escapement');
 applyTimeBtn.onclick=applyTimeInput;
 setNowBtn.onclick=()=>{setSyncUI(false);setWatchTimeFromDate(new Date(),true);timeMode.textContent='現在時刻に一回設定'};
-liveSyncInput.onchange=e=>{setSyncUI(e.target.checked);if(liveSync)setWatchTimeFromDate(new Date(),true)};
+liveSyncInput.onchange=e=>{setSyncUI(e.target.checked);if(liveSync){setEditorTime(watchTimeSec);timeMode.textContent='現在時刻へ連続移行・同期'}};
 crownWindBtn.onclick=()=>setCrownPosition('wind');
 crownSetBtn.onclick=()=>setCrownPosition('set');
 crownTurnInput.oninput=e=>{crownTurnRate=+e.target.value/100;const a=Math.abs(crownTurnRate);crownTurnV.textContent=a<.03?'中立':`${crownTurnRate>0?'正転':'逆転'} ${(a*100).toFixed(0)}%`;};
@@ -680,7 +728,7 @@ document.querySelectorAll('[data-group]').forEach(c=>c.onchange=()=>{groups[c.da
 document.getElementById('mode').onchange=e=>{const v=e.target.value;Object.entries(groups).forEach(([k,g])=>{if(k!=='diagnostic')g.visible=true});groups.diagnostic.visible=meshGuides.visible||pivotGuides.visible||datumGroup.visible;if(v==='power'){groups.balance.visible=groups.wind.visible=groups.dial.visible=groups.motion.visible=false}else if(v==='esc'){groups.train.visible=groups.wind.visible=groups.dial.visible=groups.motion.visible=false}else if(v==='wind'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.motion.visible=false}else if(v==='motion'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.wind.visible=false}else if(v==='dial'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.wind.visible=groups.motion.visible=false}document.querySelectorAll('[data-group]').forEach(c=>c.checked=groups[c.dataset.group].visible);if(selectedRoot&&!visibleHierarchy(selectedRoot))clearSelectionInfo();updatePickLayerMembership()};
 setEditorTime(watchTimeSec);updateTimeUI();setSyncUI(false);setCrownPosition('wind');amplitudeInput.disabled=true;escMarkers.forEach(m=>m.visible=false);amplitudeState=targetAmplitudeFromDrive();updateBalanceReadout();resetHistory();
 const initialPageParameters=new URLSearchParams(location.search);if(initialPageParameters.has('mode')){const modeControl=document.getElementById('mode');modeControl.value=initialPageParameters.get('mode');modeControl.dispatchEvent(new Event('change'))}if(initialPageParameters.has('opacity')){const opacity=Math.max(.08,Math.min(1,Number(initialPageParameters.get('opacity'))));applyStructuralOpacity(opacity);document.getElementById('opacity').value=String(Math.round(opacity*100));document.getElementById('opacityV').textContent=`${Math.round(opacity*100)}%`}if(initialPageParameters.get('crown')==='set')setCrownPosition('set');if(initialPageParameters.has('camera'))applyCameraPreset(initialPageParameters.get('camera'));if(initialPageParameters.get('panel')==='collapsed')panel.classList.add('collapsed');if(initialPageParameters.has('select'))waitForFrames(8).then(()=>pickProjectedPart(initialPageParameters.get('select')));
-window.watchModelDiagnostics={config:WATCH_MECHANISM,validation:mechanismConfigReport,getState:()=>currentMechanismState,getMovingParts:()=>WATCH_MECHANISM.motionStates[currentMechanismState]||[],getStructuralOpacity:()=>structuralOpacityRatio,getStructuralTargetCount:()=>structuralOpacityTargets.length,getCrownPosition:()=>crownPosition,getSelection:()=>selectedRoot?.userData?.partName||null,getInputAngle:()=>settingInputAngle,getPartRotations,getKinematicAngles:()=>({...currentKinematicAngles}),getConnectedPath:()=>settingRuntimeConnections.filter(connection=>connection.activeStates.includes(crownPosition==='set'?'set':'wind')).map(connection=>({id:connection.id,input:connection.input,output:connection.output,inputObject:connection.inputObject.uuid,outputObject:connection.outputObject.uuid})),getInterferenceReport,getPickLayerReport,getCameraManipulating:()=>orbitGestureActive,setCrownPosition,setCrownTurnRate:value=>{crownTurnRate=Math.max(-1,Math.min(1,Number(value)||0));crownTurnInput.value=String(crownTurnRate*100)},setStructuralOpacity:applyStructuralOpacity,pickProjectedPart,waitForFrames,applyCameraPreset};
+window.watchModelDiagnostics={config:WATCH_MECHANISM,validation:mechanismConfigReport,getState:()=>currentMechanismState,getMovingParts:()=>WATCH_MECHANISM.motionStates[currentMechanismState]||[],getStructuralOpacity:()=>structuralOpacityRatio,getStructuralTargetCount:()=>structuralOpacityTargets.length,getCrownPosition:()=>crownPosition,getSelection:()=>selectedRoot?.userData?.partName||null,getInputAngle:()=>settingInputAngle,getPartRotations,getKinematicAngles:()=>({...currentMotionWorksState.angles}),getConnectedPath:()=>motionRuntimeConnections.filter(connection=>currentMotionWorksState.activeConnections.includes(connection.id)).map(connection=>({id:connection.id,input:connection.input,output:connection.output,permanent:connection.permanent,inputObject:connection.inputObject.uuid,outputObject:connection.outputObject.uuid})),getMotionWorksTopology,getMotionSource,getPermanentMeshAngles,getClutchConnectionState,getHandCouplingReport,getGearModuleReport,getStateTransitionContinuityReport:()=>({...stateTransitionContinuityReport}),getInterferenceReport,getPickLayerReport,getCameraManipulating:()=>orbitGestureActive,getWatchTime:()=>watchTimeSec,getLiveSyncState:()=>({enabled:liveSync,offsetSec:liveSyncOffsetSec,transitionMs:LIVE_SYNC_TRANSITION_MS,progress:liveSync?Math.min(1,(performance.now()-liveSyncTransitionStartedAt)/LIVE_SYNC_TRANSITION_MS):0}),setWatchTime:value=>{const before=transitionSnapshot();setWatchTime(Number(value)||0);return recordStateTransition('explicit-time',before)},setCrownPosition,setCrownTurnRate:value=>{crownTurnRate=Math.max(-1,Math.min(1,Number(value)||0));crownTurnInput.value=String(crownTurnRate*100)},setRunning:value=>{running=Boolean(value)},setRuntimeScale:value=>{runtimeScale=Math.max(.1,Number(value)||1);runtimeScaleInput.value=String(runtimeScale)},setLiveSync:value=>setSyncUI(Boolean(value)),setStructuralOpacity:applyStructuralOpacity,pickProjectedPart,waitForFrames,applyCameraPreset};
 const browserTestOutput=document.getElementById('browserTestResult');if(new URLSearchParams(location.search).get('browserTest')==='1'){import('./tests/browser-integration.test.js').then(async({runBrowserIntegrationTest})=>{await waitForFrames(3);const result=await runBrowserIntegrationTest(window.watchModelDiagnostics);browserTestOutput.value=JSON.stringify(result);browserTestOutput.textContent=JSON.stringify(result);browserTestOutput.dataset.status=result.ok?'passed':'failed';window.browserIntegrationResult=result}).catch(error=>{const result={ok:false,error:error.stack||error.message||String(error)};browserTestOutput.value=JSON.stringify(result);browserTestOutput.textContent=JSON.stringify(result);browserTestOutput.dataset.status='failed';window.browserIntegrationResult=result})}
 
 // Mechanism animation. Stage 7 retains the Stage 6 coupled model and adds refined structural geometry.
@@ -696,29 +744,25 @@ function animate(now){requestAnimationFrame(animate);const dt=Math.min(.05,(now-
  const powered=mechanismPowered();
  currentMechanismState=resolveMechanismState({running,powered,crownPosition,crownTurnRate,liveSync});
  const rateFactorNow=1+currentRate()/86400;
- if(liveSync){setWatchTimeFromDate(new Date());if(running&&!setting&&powered){trainTimeSec=normDay(trainTimeSec+dt);powerReserveHours=Math.max(0,powerReserveHours-dt/3600)}}
+ if(liveSync){const syncProgress=Math.min(1,(performance.now()-liveSyncTransitionStartedAt)/LIVE_SYNC_TRANSITION_MS);liveSyncOffsetSec=liveSyncStartOffsetSec*(1-smoothStep(syncProgress));if(syncProgress>=1)liveSyncOffsetSec=0;const targetTime=normDay(secondsFromDate(new Date())+liveSyncOffsetSec),deltaTime=shortestDayDelta(watchTimeSec,targetTime);watchTimeSec=targetTime;trainTimeSec=normDay(trainTimeSec+deltaTime);if(running&&!setting&&powered)powerReserveHours=Math.max(0,powerReserveHours-dt/3600)}
  else if(running&&!setting&&powered){watchTimeSec=normDay(watchTimeSec+elapsedSec*rateFactorNow);trainTimeSec=normDay(trainTimeSec+elapsedSec*rateFactorNow);powerReserveHours=Math.max(0,powerReserveHours-elapsedSec/3600);simulatedElapsedHours+=elapsedSec/3600;recordHistory()}
- const crownDelta=crownTurnRate*dt*8.0;crownRotation+=crownDelta;
- if(setting){settingInputAngle+=crownDelta;applyKinematicState(settingInputAngle,'set');watchTimeSec=normDay(watchTimeSec+settingGains.cannon*crownDelta/(Math.PI*2)*3600);setEditorTime(visibleWatchTime())}
+ const crownDelta=crownTurnRate*dt*8.0,beforeCannon=currentMotionWorksState.angles.cannon;crownRotation+=crownDelta;applyMotionWorksState();
+ if(setting){const cannonDelta=currentMotionWorksState.angles.cannon-beforeCannon;watchTimeSec=normDay(watchTimeSec-cannonDelta/(Math.PI*2)*3600);setEditorTime(visibleWatchTime())}
  if(currentMechanismState==='wind'){const woundHours=crownTurnRate*dt*5.2;powerReserveHours=Math.min(52,powerReserveHours+woundHours);windingArborAngle+=crownDelta*WINDING_WORKS.ratchet.gearRatio;windingCrownWheelAngle+=crownDelta*WINDING_WORKS.crownWheel.rotationDirection*WINDING_WORKS.crownWheel.gearRatio;recordHistory()}
  if((running&&!setting&&powered)||liveSync)simPhase+=dt*Math.max(speed,.25);
  exploded.forEach(p=>p.obj.position.copy(p.base).addScaledVector(p.v,explodeAmount));
  const es=endshakeAmount*.22;center.position.y+=es;third.position.y-=es*.65;fourth.position.y+=es*.45;escape.position.y-=es*.35;
  const target=setting?1:0;crownTransition+=(target-crownTransition)*Math.min(1,dt*9);
  crown.position.x+=crownTransition*KEYLESS.axis.pullOut;stem.position.x+=crownTransition*KEYLESS.axis.pullOut;slidingClutch.position.x+=(KEYLESS.slidingClutch.centerXSet-KEYLESS.slidingClutch.centerXWind)*crownTransition;
- const split=sideSplitAmount*5.5;groups.bridge.position.y=split;groups.train.position.y=split;groups.esc.position.y=split;groups.balance.position.y=split;groups.wind.position.y=split;groups.dial.position.y=-split;groups.motion.position.y=split*1.55;
+ const split=sideSplitAmount*5.5;groups.bridge.position.y=split;groups.train.position.y=split;groups.esc.position.y=split;groups.balance.position.y=split;groups.wind.position.y=split;groups.dial.position.y=-split;groups.motion.position.y=-split*1.55;
  const activeOscillation=!setting&&powered&&(running||liveSync);const freq=2.5;const animT=liveSync?(performance.now()/1000):simPhase;
  const rateFactor=1+currentRate()/86400;
  const studyBeat=trainTimeSec*freq*2*rateFactor;const escState=escapementState(studyBeat);
  const ampRad=THREE.MathUtils.degToRad(currentAmplitude());const balAngle=activeOscillation?ampRad*oscillatorSin(animT*rateFactor,freq,beatErrorMs):0;
  balanceG.rotation.y=balAngle;collet.rotation.y=balAngle;regulator.rotation.y=.06+rateAdjustSecDay*.0022;curbAssembly.rotation.y=regulator.rotation.y;updateHairSpring(balAngle);
- const escAngle=-(escState.advance/15)*Math.PI*2;escape.rotation.y=escAngle;pallet.rotation.y=activeOscillation?escState.palletAngle:0;
- const centerRot=(trainTimeSec/3600)*Math.PI*2;
- barrel.rotation.y=rotationFromCenter(TRAIN.barrel,centerRot);center.rotation.y=rotationFromCenter(TRAIN.center,centerRot);third.rotation.y=rotationFromCenter(TRAIN.third,centerRot);fourth.rotation.y=rotationFromCenter(TRAIN.fourth,centerRot);
- const displaySec=normDay(watchTimeSec),secForHand=setting?settingSecondHold:displaySec%60,minuteProgress=(displaySec/60)%60,hourProgress=(displaySec/3600)%12,twelveOffset=Math.PI/2;
- secAxis.rotation.y=twelveOffset-(secForHand/60)*Math.PI*2;minuteAxis.rotation.y=twelveOffset-(minuteProgress/60)*Math.PI*2;hourAxis.rotation.y=twelveOffset-(hourProgress/12)*Math.PI*2;
- const displayCenterRot=(displaySec/3600)*Math.PI*2;if(!setting)applyDisplayKinematics(displayCenterRot);
- if(!setting){crown.rotation.x=crownRotation;stem.rotation.x=crownRotation;slidingClutch.rotation.x=crownRotation;windingClutch.rotation.x=crownRotation}
+ const escAngle=(escState.advance/15)*Math.PI*2;escape.rotation.y=escAngle;pallet.rotation.y=activeOscillation?escState.palletAngle:0;
+ const centerRot=trainSourceAngle();
+ barrel.rotation.y=rotationFromCenter(TRAIN.barrel,centerRot);third.rotation.y=rotationFromCenter(TRAIN.third,centerRot);
  crownWheel.rotation.y=windingCrownWheelAngle;ratchet.rotation.y=windingArborAngle;barrelArbor.rotation.y=windingArborAngle;arborSquare.rotation.y=windingArborAngle;
  if(currentMechanismState==='wind'){clickG.rotation.y=-.55+Math.abs(Math.sin(crownRotation*7))*.075}else{clickG.rotation.y=-.55}
  clickSpring.rotation.y=.22+(crownTurnRate>0&&!setting?Math.abs(Math.sin(crownRotation*7))*.03:0);
