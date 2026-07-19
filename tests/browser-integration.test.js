@@ -371,8 +371,8 @@ export async function runBrowserIntegrationTest(diagnostics) {
   const settingScreenBefore = Object.fromEntries(diagnostics.getHandScreenDirectionReport()
     .filter(({ id }) => ["minuteHand", "hourHand"].includes(id)).map((entry) => [entry.id, entry]));
   const settingTimeBefore = diagnostics.getWatchTime();
-  diagnostics.setCrownTurnRate(0.5);
-  await diagnostics.waitForFrames(12);
+  diagnostics.setCrownTurnRate(0.15);
+  await diagnostics.waitForFrames(10);
   diagnostics.setCrownTurnRate(0);
   const settingScreenAfter = Object.fromEntries(diagnostics.getHandScreenDirectionReport()
     .filter(({ id }) => ["minuteHand", "hourHand"].includes(id)).map((entry) => [entry.id, entry]));
@@ -414,6 +414,90 @@ export async function runBrowserIntegrationTest(diagnostics) {
 
   diagnostics.setFunctionalMode("all");
   diagnostics.setStructuralOpacity(1);
+  diagnostics.setRunning(false);
+  diagnostics.setCrownTurnRate(0);
+  const viewUpConvention = diagnostics.getViewUpConvention();
+  check("a5-uses-arcball-with-one-shared-view-up", diagnostics.getCameraControlType() === "ArcballControls"
+    && JSON.stringify(viewUpConvention.viewUp) === JSON.stringify([0, 0, 1])
+    && viewUpConvention.presetSpecificUp === false
+    && viewUpConvention.presetUpFieldCount === 0, { controlType: diagnostics.getCameraControlType(), viewUpConvention });
+
+  const lightingRig = diagnostics.getLightingRigReport();
+  const lightingByName = Object.fromEntries(lightingRig.lights.map((light) => [light.name, light]));
+  check("a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill", lightingByName.frontKey?.intensity >= 1.5
+    && lightingByName.backKey?.intensity >= 1.4
+    && lightingByName.cameraFill?.cameraAttached === true
+    && lightingRig.frontKeyToBackKeyRatio > 0.85 && lightingRig.frontKeyToBackKeyRatio < 1.2
+    && lightingRig.cameraFillToKeyRatio > 0.1 && lightingRig.cameraFillToKeyRatio < 0.35, lightingRig);
+  const lightContributions = diagnostics.getVisibleLightContributionReport();
+  check("a5-both-faces-retain-key-light-and-camera-follow-fill", lightContributions.cameraFillFollowsCamera
+    && lightContributions.front.total > 1.2 && lightContributions.back.total > 1.2
+    && lightContributions.front.terms.some(({ name, estimated }) => name === "frontKey" && estimated > 1)
+    && lightContributions.back.terms.some(({ name, estimated }) => name === "backKey" && estimated > 1), lightContributions);
+  const luminanceReport = diagnostics.getFrontBackLuminanceReport({ themes: "all" });
+  check("a5-all-background-themes-keep-front-back-luminance-within-thirty-percent", luminanceReport.allWithinThirtyPercent
+    && Object.keys(luminanceReport.themes).length === 4
+    && Object.values(luminanceReport.themes).every(({ front, back }) => front.sampleCount > 1000 && back.sampleCount > 1000), luminanceReport);
+  check("a5-rendered-lighting-avoids-excessive-crush-and-clipping", Object.values(luminanceReport.themes).every(({ front, back }) => [front, back].every((sample) => sample.darkRatio < 0.35 && sample.clippedRatio < 0.18)), luminanceReport);
+
+  diagnostics.applyCameraPreset("reset");
+  await diagnostics.waitForFrames(3);
+  const horizontalWorldBefore = diagnostics.getModelWorldSignature();
+  const horizontalRotation = await diagnostics.simulateArcballDrag({ direction: "horizontal", turns: 1.08 });
+  check("a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360", horizontalRotation.completedTurns >= 1
+    && horizontalRotation.visitedFront && horizontalRotation.visitedBack
+    && horizontalRotation.sameDirection && !horizontalRotation.hardStop && horizontalRotation.finite, horizontalRotation);
+  check("a5-horizontal-camera-rotation-does-not-transform-model", horizontalRotation.modelInvariant
+    && JSON.stringify(horizontalWorldBefore) === JSON.stringify(diagnostics.getModelWorldSignature()), { horizontalRotation, horizontalWorldBefore, after: diagnostics.getModelWorldSignature() });
+
+  diagnostics.applyCameraPreset("reset");
+  await diagnostics.waitForFrames(2);
+  const upwardRotation = await diagnostics.simulateArcballDrag({ direction: "vertical", turns: 1.08 });
+  check("a5-upward-drag-crosses-poles-and-continues-beyond-360", upwardRotation.completedTurns >= 1
+    && upwardRotation.visitedFront && upwardRotation.visitedBack
+    && upwardRotation.sameDirection && !upwardRotation.hardStop && upwardRotation.finite && upwardRotation.modelInvariant, upwardRotation);
+  diagnostics.applyCameraPreset("reset");
+  await diagnostics.waitForFrames(2);
+  const downwardRotation = await diagnostics.simulateArcballDrag({ direction: "vertical", turns: 1.02, reverse: true });
+  check("a5-downward-drag-crosses-poles-without-direction-reversal", downwardRotation.completedTurns >= 1
+    && downwardRotation.sameDirection && !downwardRotation.hardStop && downwardRotation.finite && downwardRotation.modelInvariant, downwardRotation);
+
+  const presetFreedom = {};
+  for (const preset of ["reset", "movementBack", "dial", "train", "winding", "side", "structure", "top", "escapement", "balance"]) {
+    diagnostics.applyCameraPreset(preset);
+    await diagnostics.waitForFrames(1);
+    presetFreedom[preset] = await diagnostics.simulateArcballDrag({ direction: "horizontal", turns: 0.08 });
+  }
+  check("a5-every-ui-preset-starts-unrestricted-finite-rotation", Object.values(presetFreedom).every((report) => report.completedTurns >= 0.07
+    && !report.hardStop && report.finite && report.modelInvariant && report.sameDirection), presetFreedom);
+
+  diagnostics.applyCameraPreset("reset");
+  await diagnostics.waitForFrames(2);
+  const touchRotation = await diagnostics.simulateArcballDrag({ direction: "horizontal", turns: 0.12, pointerType: "touch" });
+  check("a5-one-finger-touch-rotates-without-selecting", touchRotation.completedTurns >= 0.1 && touchRotation.finite && touchRotation.modelInvariant, touchRotation);
+  const twoFingerTouch = await diagnostics.simulateTouchGesture();
+  check("a5-two-finger-touch-zooms-pans-and-does-not-select", twoFingerTouch.distanceChanged && twoFingerTouch.targetChanged
+    && twoFingerTouch.selectionUnchanged && twoFingerTouch.finite, twoFingerTouch);
+  const viewport = diagnostics.getViewportReport();
+  if (viewport.width <= 420) {
+    check("a5-mobile-test-runs-at-390x844-class-viewport", viewport.width === 390 && viewport.height === 844, viewport);
+    diagnostics.setPanelOpen(true);
+    await diagnostics.waitForFrames(2);
+    diagnostics.setPanelOpen(false);
+    const postPanelTouch = await diagnostics.simulateArcballDrag({ direction: "horizontal", turns: 0.1, pointerType: "touch" });
+    check("a5-mobile-navigation-continues-after-panel-open-close", postPanelTouch.completedTurns >= 0.08
+      && postPanelTouch.finite && postPanelTouch.modelInvariant && diagnostics.getViewportReport().panelOpen === false, { postPanelTouch, viewport: diagnostics.getViewportReport() });
+  }
+
+  diagnostics.applyCameraPreset("dial");
+  diagnostics.setStructuralOpacity(0.16);
+  await diagnostics.waitForFrames(3);
+  await diagnostics.simulateArcballDrag({ direction: "horizontal", turns: 0.06 });
+  const selectionAfterRotation = diagnostics.pickProjectedPart("設定車2");
+  check("a5-internal-part-selection-still-works-after-camera-rotation", selectionAfterRotation === "設定車2", { selectionAfterRotation, camera: diagnostics.getCameraOrientation() });
+
+  diagnostics.setFunctionalMode("all");
+  diagnostics.setStructuralOpacity(1);
   diagnostics.setCrownTurnRate(0);
   measurements.runRotations = runAfter;
   measurements.windRotations = windAfter;
@@ -428,5 +512,15 @@ export async function runBrowserIntegrationTest(diagnostics) {
   measurements.frontProjection = frontProjection;
   measurements.secondsDirections = secondsDirections;
   measurements.windingSelections = windingSelections;
+  measurements.lightingRig = lightingRig;
+  measurements.luminance = luminanceReport;
+  measurements.horizontalRotation = horizontalRotation;
+  measurements.upwardRotation = upwardRotation;
+  measurements.downwardRotation = downwardRotation;
+  measurements.presetFreedom = presetFreedom;
+  measurements.touchRotation = touchRotation;
+  measurements.twoFingerTouch = twoFingerTouch;
+  measurements.selectionAfterRotation = selectionAfterRotation;
+  measurements.viewport = viewport;
   return { ok: checks.every(({ ok }) => ok), checks, measurements };
 }

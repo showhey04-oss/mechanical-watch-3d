@@ -17,6 +17,7 @@ import {
   MOTION_WORKS_MODULES,
   MOTION_WORKS_NODES,
   PERMANENT_MOTION_CONNECTIONS,
+  VIEW_UP,
   WATCH_MECHANISM,
   WINDING_CONNECTIONS,
   WINDING_MESHES,
@@ -408,12 +409,33 @@ test("dial interference rules are unique and center tubes remain nested", () => 
   assert.ok(centerAxis.shaftBottomY < motionWorks.hour.layerYWheel);
 });
 
-test("camera presets remain numerically stable", () => {
+test("camera presets share one stable VIEW_UP convention", () => {
+  assert.deepEqual(VIEW_UP, [0, 0, 1]);
+  assert.strictEqual(VIEW_UP, DIAL_UP_VECTOR);
   for (const [name, preset] of Object.entries(CAMERA_PRESETS)) {
-    const upLength = Math.hypot(...preset.up);
+    assert.equal("up" in preset, false, `${name} has no private up`);
     const view = preset.target.map((value, index) => value - preset.position[index]);
-    const dot = Math.abs(view.reduce((sum, value, index) => sum + value * preset.up[index], 0) / Math.hypot(...view));
-    assert.ok(Math.abs(upLength - 1) < 1e-6, `${name} up`);
-    assert.ok(dot < 0.99, `${name} pole`);
+    assert.ok(Math.hypot(...view) > 1e-6, `${name} view distance`);
+    assert.ok(view.every(Number.isFinite), `${name} finite view`);
   }
+});
+
+test("A.5 uses Arcball navigation without rotating the model root", async () => {
+  const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.ok(source.includes('import {ArcballControls} from "three/addons/controls/ArcballControls.js"'));
+  assert.ok(source.includes("new ArcballControls(camera,renderer.domElement,scene)"));
+  assert.equal(source.includes("OrbitControls"), false);
+  assert.equal(source.includes("root.rotation"), false);
+  assert.ok(source.includes("camera.up.fromArray(VIEW_UP)"));
+  for (const api of ["getCameraControlType", "getCameraOrientation", "getCameraQuaternion", "getCameraTarget", "getViewUpConvention", "getRotationFreedomReport", "getLightingRigReport", "getVisibleLightContributionReport", "getFrontBackLuminanceReport", "simulateArcballDrag"]) assert.ok(source.includes(api), api);
+});
+
+test("A.5 lighting keeps two keys and a subordinate camera-follow fill", async () => {
+  const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.ok(source.includes("frontKey.position.set(18,-34,24)"));
+  assert.ok(source.includes("backKey.position.set(-16,35,21)"));
+  assert.ok(source.includes("camera.add(cameraFill)"));
+  assert.ok(source.includes("frontKey=new THREE.DirectionalLight(0xfff4df,1.96)"));
+  assert.ok(source.includes("backKey=new THREE.DirectionalLight(0xe4edff,1.70)"));
+  assert.ok(source.includes("cameraFill=new THREE.PointLight(0xd9e8ff,.38"));
 });

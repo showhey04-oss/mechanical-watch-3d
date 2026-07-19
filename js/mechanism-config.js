@@ -5,6 +5,7 @@ const EPSILON = 1e-6;
 // o'clock and +X is three o'clock, so positive Y rotation is clockwise.
 export const DIAL_FRONT_NORMAL = Object.freeze([0, -1, 0]);
 export const DIAL_UP_VECTOR = Object.freeze([0, 0, 1]);
+export const VIEW_UP = DIAL_UP_VECTOR;
 export const DIAL_RIGHT_VECTOR = Object.freeze([1, 0, 0]);
 export const CLOCKWISE_ROTATION_SIGN = 1;
 
@@ -898,30 +899,31 @@ export const CENTER_AXIS = deepFreeze({
 });
 
 export const CAMERA_PRESETS = deepFreeze({
-  reset: { position: [0, -58, 0], target: [0, -2.10, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "front" },
-  front: { position: [0, -58, 0], target: [0, -2.10, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "front" },
-  dialFront: { position: [0, -58, 0], target: [0, -2.10, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "front" },
-  back: { position: [0, 60, 0], target: [0, 1.50, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "back" },
-  movementBack: { position: [0, 60, 0], target: [0, 1.50, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "back" },
-  movementMechanism: { position: [4, 23, 27], target: [0, 1, -2], up: [0, 1, 0], semanticSide: "back" },
-  dialMechanism: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], up: [0, 0, -1], semanticSide: "front" },
-  train: { position: [4, 23, 27], target: [0, 1, -2], up: [0, 1, 0], semanticSide: "back" },
-  dial: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], up: [0, 0, -1], semanticSide: "front" },
-  winding: { position: [-0.2, -8.8, -8.8], target: [-2.8, 0.7, -2.1], up: [0, 0, -1], semanticSide: "front" },
-  cannon: { position: [3.0, -7.5, -7.5], target: [1.0, -1.30, -0.10], up: [0, 0, -1] },
-  keyless: { position: [8.5, -10.5, -12.5], target: [4.7, -1.05, -3.35], up: [0, 0, -1] },
-  motionWorks: { position: [7.0, -8.0, -7.5], target: [3.0, -1.25, -1.75], up: [0, 0, -1] },
-  minuteHourSide: { position: [7.2, -1.35, 0.55], target: [0.8, -1.35, 0], up: [0, 1, 0] },
-  handMount: { position: [2.4, -5.2, -4.0], target: [0.35, -2.15, -0.05], up: [0, 0, -1] },
-  cannonMount: { position: [2.0, -4.6, -2.5], target: [0.0, -2.18, 0], up: [0, 0, -1] },
-  hourMount: { position: [4.2, -3.5, -0.5], target: [0.0, -2.05, 0], up: [0, 1, 0] },
-  secondsMount: { position: [2.5, -5.0, -8.2], target: [0.0, -2.10, -5.60], up: [0, 0, -1] },
-  dialSide: { position: [26, -0.2, -8], target: [3.2, -0.6, -2.1], up: [0, 1, 0] },
-  side: { position: [48, 5, 0.25], target: [0, 0, 0], up: [0, 1, 0] },
-  structure: { position: [46, 8, 18], target: [0, 1.6, 0], up: [0, 1, 0] },
-  top: { position: [0.25, 55, 0.45], target: [0, 1.5, 0], up: [0, 0, -1] },
-  escapement: { position: [13, 12, 15], target: [4.6, 1.8, -1.4], up: [0, 1, 0] },
-  balance: { position: [13, 10, 12], target: [7.7, 2.1, 1.8], up: [0, 1, 0] },
+  reset: { position: [0, -58, 0.5], target: [0, 0.5, 0], fitRadius: 18.8, semanticSide: "front" },
+  front: { position: [0, -58, 0.5], target: [0, 0.5, 0], fitRadius: 18.8, semanticSide: "front" },
+  dialFront: { position: [0, -58, 0.5], target: [0, 0.5, 0], fitRadius: 18.8, semanticSide: "front" },
+  back: { position: [0, 60, 0.5], target: [0, 0.5, 0], fitRadius: 18.8, semanticSide: "back" },
+  movementBack: { position: [0, 60, 0.5], target: [0, 0.5, 0], fitRadius: 18.8, semanticSide: "back" },
+  movementMechanism: { position: [4, 23, 27], target: [0, 1, -2], semanticSide: "back" },
+  dialMechanism: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], semanticSide: "front" },
+  train: { position: [4, 23, 27], target: [0, 1, -2], semanticSide: "back" },
+  dial: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], semanticSide: "front" },
+  winding: { position: [-0.2, -8.8, -8.8], target: [-2.8, 0.7, -2.1], semanticSide: "front" },
+  cannon: { position: [3.0, -7.5, -7.5], target: [1.0, -1.30, -0.10] },
+  keyless: { position: [8.5, -10.5, -12.5], target: [4.7, -1.05, -3.35] },
+  motionWorks: { position: [7.0, -8.0, -7.5], target: [3.0, -1.25, -1.75] },
+  minuteHourSide: { position: [7.2, -1.35, 0.55], target: [0.8, -1.35, 0] },
+  handMount: { position: [2.4, -5.2, -4.0], target: [0.35, -2.15, -0.05] },
+  cannonMount: { position: [2.0, -4.6, -2.5], target: [0.0, -2.18, 0] },
+  hourMount: { position: [4.2, -3.5, -0.5], target: [0.0, -2.05, 0] },
+  secondsMount: { position: [2.5, -5.0, -8.2], target: [0.0, -2.10, -5.60] },
+  dialSide: { position: [26, -0.2, -8], target: [3.2, -0.6, -2.1] },
+  side: { position: [48, 5, 0.25], target: [0, 0, 0] },
+  leftSide: { position: [-48, 5, 0.25], target: [0, 0, 0] },
+  structure: { position: [46, 8, 18], target: [0, 1.6, 0] },
+  top: { position: [0.25, 55, 0.45], target: [0, 1.5, 0] },
+  escapement: { position: [13, 12, 15], target: [4.6, 1.8, -1.4] },
+  balance: { position: [13, 10, 12], target: [7.7, 2.1, 1.8] },
 });
 
 export const PICK_OPACITY_THRESHOLD = 0.18;
@@ -1035,6 +1037,7 @@ export const WATCH_MECHANISM = deepFreeze({
   motionWorksTopology: MOTION_WORKS_TOPOLOGY,
   dialInterferenceRules: DIAL_INTERFERENCE_RULES,
   centerAxis: CENTER_AXIS,
+  viewUp: VIEW_UP,
   cameraPresets: CAMERA_PRESETS,
   escapement: {
     palletCenter: { x: 3.55, z: -2.70 },
@@ -1480,17 +1483,25 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
     expected: "reset/front on negative Y and movement back on positive Y",
   });
 
+  const viewUpLength = Math.hypot(...config.viewUp);
+  checks.push({
+    name: "camera:shared-view-up",
+    ok: Math.abs(viewUpLength - 1) < EPSILON
+      && config.viewUp.every((value, index) => Math.abs(value - DIAL_UP_VECTOR[index]) < EPSILON)
+      && Object.values(config.cameraPresets).every((preset) => !("up" in preset)),
+    actual: { viewUp: config.viewUp, perPresetUpFields: Object.values(config.cameraPresets).filter((preset) => "up" in preset).length },
+    expected: "one normalized [0,0,1] view-up convention and no preset-specific up fields",
+  });
   for (const [name, preset] of Object.entries(config.cameraPresets)) {
-    const upLength = Math.hypot(...preset.up);
     const view = preset.target.map((value, index) => value - preset.position[index]);
     const viewLength = Math.hypot(...view);
-    const dot = Math.abs(view.reduce((sum, value, index) => sum + value * preset.up[index], 0)
-      / (viewLength * upLength));
+    const dot = Math.abs(view.reduce((sum, value, index) => sum + value * config.viewUp[index], 0)
+      / (viewLength * viewUpLength));
     checks.push({
-      name: `camera:${name}-normalized-up`,
-      ok: Math.abs(upLength - 1) < EPSILON && dot < 0.99,
-      actual: { upLength, viewUpDot: dot },
-      expected: "normalized up vector away from the exact viewing pole",
+      name: `camera:${name}-shared-up-compatible`,
+      ok: viewLength > EPSILON && Number.isFinite(dot),
+      actual: { viewLength, viewUpDot: dot },
+      expected: "finite preset view vector under the shared VIEW_UP convention",
     });
   }
 
