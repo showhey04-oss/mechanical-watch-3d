@@ -39,6 +39,9 @@ export async function runBrowserIntegrationTest(diagnostics) {
   check("position1-display-backdrive-stops-at-setting-input", ["settingInput", "slidingClutch", "stem", "crownInput", "windingClutch"].every((id) => stationary(runBefore, runAfter, id)), {
     deltas: Object.fromEntries(["settingInput", "slidingClutch", "stem", "crownInput", "windingClutch"].map((id) => [id, delta(runBefore, runAfter, id)])),
   });
+  check("normal-run-does-not-backdrive-winding-arbor-chain", ["windingPinion", "crownWheel", "ratchetWheel", "barrelArbor"].every((id) => stationary(runBefore, runAfter, id)), {
+    deltas: Object.fromEntries(["windingPinion", "crownWheel", "ratchetWheel", "barrelArbor"].map((id) => [id, delta(runBefore, runAfter, id)])),
+  });
   check("position1-reports-run-with-permanent-meshes-active", diagnostics.getMotionSource().state === "run", diagnostics.getMotionSource());
   check("fourth-wheel-and-escape-pinion-counter-rotate", changed(runBefore, runAfter, "escape") && delta(runBefore, runAfter, "fourthArbor") * delta(runBefore, runAfter, "escape") < 0, {
     fourthDelta: delta(runBefore, runAfter, "fourthArbor"), escapeDelta: delta(runBefore, runAfter, "escape"),
@@ -53,25 +56,142 @@ export async function runBrowserIntegrationTest(diagnostics) {
   const runMeshReport = diagnostics.getPermanentMeshAngles();
   check("normal-object3d-mesh-phases-remain-engaged", runMeshReport.every(({ residual }) => Math.abs(residual) < 1e-6), runMeshReport);
 
+  const noWindBefore = diagnostics.getPartRotations();
+  const noWindTimeBefore = diagnostics.getWatchTime();
+  await diagnostics.waitForFrames(20);
+  const noWindAfter = diagnostics.getPartRotations();
+  const noWindTimeAfter = diagnostics.getWatchTime();
   const windBefore = diagnostics.getPartRotations();
+  const windTimeBefore = diagnostics.getWatchTime();
+  const windEnergyBefore = diagnostics.getBarrelEnergyState();
   diagnostics.setCrownTurnRate(0.65);
   await diagnostics.waitForFrames(20);
   diagnostics.setCrownTurnRate(0);
   const windAfter = diagnostics.getPartRotations();
+  const windTimeAfter = diagnostics.getWatchTime();
+  const engagedRatchetStateA = diagnostics.getRatchetState();
+  const engagedRatchetAngleA = diagnostics.getPartRotations().ratchetWheel;
   check("position1-winding-branch-rotates", ["crownInput", "stem", "slidingClutch", "windingClutch"].every((id) => changed(windBefore, windAfter, id)), {
     deltas: Object.fromEntries(["crownInput", "stem", "slidingClutch", "windingClutch"].map((id) => [id, delta(windBefore, windAfter, id)])),
   });
+  check("position1-forward-rotates-complete-object3d-winding-path", ["windingPinion", "crownWheel", "ratchetWheel", "barrelArbor"].every((id) => changed(windBefore, windAfter, id)), {
+    deltas: Object.fromEntries(["windingPinion", "crownWheel", "ratchetWheel", "barrelArbor"].map((id) => [id, delta(windBefore, windAfter, id)])),
+  });
+  verifyRatios("position1-forward-winding-ratios-follow-winding-graph", windBefore, windAfter, "crownInput", {
+    stem: 1, slidingClutch: 1, windingClutch: 1, windingPinion: 1,
+    crownWheel: 1 / 4, ratchetWheel: -1 / 6, barrelArbor: -1 / 6,
+  });
+  const windEnergyAfter = diagnostics.getBarrelEnergyState();
+  check("position1-forward-increases-relative-wind-and-power-reserve", windEnergyAfter.powerReserveHours > windEnergyBefore.powerReserveHours
+    && windEnergyAfter.relativeWindAngle > windEnergyBefore.relativeWindAngle
+    && windEnergyAfter.barrelArborAngle < windEnergyBefore.barrelArborAngle
+    && Math.abs(windEnergyAfter.relativeWindAngle - (windEnergyAfter.barrelDrumAngle - windEnergyAfter.barrelArborAngle)) < 1e-9, { windEnergyBefore, windEnergyAfter });
   check("position1-setting-input-remains-disconnected-during-winding", stationary(windBefore, windAfter, "settingInput"), { delta: delta(windBefore, windAfter, "settingInput") });
-  check("position1-setting-train-keeps-display-speed-during-winding", ["settingTransfer", "setting1", "setting2", "minute", "cannon", "hour", "minuteHand", "hourHand"].every((id) => changed(windBefore, windAfter, id)), {
-    deltas: Object.fromEntries(["settingTransfer", "setting1", "setting2", "minute", "cannon", "hour", "minuteHand", "hourHand"].map((id) => [id, delta(windBefore, windAfter, id)])),
+  const windingDisplayParts = ["barrelDrum", "center", "third", "fourthArbor", "escape", "settingTransfer", "setting1", "setting2", "minute", "cannon", "hour", "minuteHand", "hourHand", "secondsHand"];
+  const noWindElapsed = dayDelta(noWindTimeBefore, noWindTimeAfter);
+  const windElapsed = dayDelta(windTimeBefore, windTimeAfter);
+  const displaySpeedReport = Object.fromEntries(windingDisplayParts.map((id) => {
+    const baseline = delta(noWindBefore, noWindAfter, id) / noWindElapsed;
+    const winding = delta(windBefore, windAfter, id) / windElapsed;
+    return [id, { baseline, winding, error: winding - baseline }];
+  }));
+  const windingSpeedTolerance = (id) => id === "escape" ? 0.15 : 1e-7;
+  check("position1-going-train-setting-train-and-hands-keep-speed-during-winding", noWindElapsed > 0 && windElapsed > 0
+    && windingDisplayParts.every((id) => changed(windBefore, windAfter, id) && Math.abs(displaySpeedReport[id].error) < windingSpeedTolerance(id)), {
+    noWindElapsed, windElapsed, displaySpeedReport,
   });
   verifyRatios("winding-does-not-inject-motion-across-setting-boundary", windBefore, windAfter, "cannon", {
     minute: -1 / 3, hour: 1 / 12, setting2: 3 / 8, setting1: -3 / 8, settingTransfer: 2 / 3, minuteHand: 1, hourHand: 1 / 12,
   });
   const windClutch = diagnostics.getClutchConnectionState();
-  check("wind-clutch-state-selects-only-winding-branch", !windClutch.settingBoundaryEngaged && windClutch.windingBoundaryEngaged && windClutch.activeConnections.includes("sliding-winding") && !windClutch.activeConnections.includes("setting-input-transfer"), windClutch);
+  check("wind-clutch-state-selects-only-winding-branch", !windClutch.settingBoundaryEngaged && windClutch.windingBoundaryEngaged && windClutch.activeConnections.includes("winding-sliding-clutch") && !windClutch.activeConnections.includes("setting-input-transfer"), windClutch);
   const windInterference = diagnostics.getInterferenceReport();
   check("wind-forbidden-interference-zero", windInterference.forbiddenCount === 0, windInterference.forbiddenIntersections);
+  const windingContactPairs = new Set([
+    "windingClutch/windingPinion", "windingPinion/crownWheelLower",
+    "crownWheelLower/crownLowerHub", "crownLowerHub/crownArbor",
+    "crownArbor/crownUpperHub", "crownUpperHub/crownWheelUpper",
+    "crownWheelUpper/ratchetWheel", "ratchetWheel/barrelArbor",
+  ]);
+  const windingContacts = windInterference.intendedContacts.filter(({ pair }) => windingContactPairs.has(pair.join("/")));
+  check("winding-actual-envelopes-contact-through-gears-hubs-and-arbor", windingContacts.length === windingContactPairs.size && windingContacts.every(({ intersects }) => intersects), windingContacts);
+  const windingTransmission = diagnostics.getWindingTransmissionReport();
+  check("winding-pitch-contact-module-centre-band-phase-and-square-fit", windingTransmission.orthogonal.contactError < 1e-6
+    && Math.abs(windingTransmission.orthogonal.toothGapPhaseError) < 1e-9
+    && Math.abs(windingTransmission.orthogonal.dynamicPhaseResidual) < 1e-6
+    && Math.abs(windingTransmission.crownRatchet.module[0] - windingTransmission.crownRatchet.module[1]) < 1e-9
+    && Math.abs(windingTransmission.crownRatchet.centerDistanceError) < 1e-6
+    && Math.abs(windingTransmission.crownRatchet.axialBandError) < 1e-6
+    && Math.abs(windingTransmission.crownRatchet.phaseResidual) < 1e-6
+    && Math.abs(windingTransmission.ratchetArbor.angleError) < 1e-7, windingTransmission);
+
+  diagnostics.setCrownTurnRate(0.42);
+  await diagnostics.waitForFrames(7);
+  diagnostics.setCrownTurnRate(0);
+  const engagedRatchetStateB = diagnostics.getRatchetState();
+  const engagedRatchetAngleB = diagnostics.getPartRotations().ratchetWheel;
+
+  const freewheelBefore = diagnostics.getPartRotations();
+  const freewheelEnergyBefore = diagnostics.getBarrelEnergyState();
+  diagnostics.setCrownTurnRate(-0.65);
+  await diagnostics.waitForFrames(18);
+  diagnostics.setCrownTurnRate(0);
+  const freewheelAfter = diagnostics.getPartRotations();
+  const freewheelEnergyAfter = diagnostics.getBarrelEnergyState();
+  const freewheelTransmission = diagnostics.getWindingTransmissionReport();
+  const freewheelMechanismState = diagnostics.getState();
+  const freewheelMovingParts = diagnostics.getMovingParts();
+  const freewheelRunningParts = ["barrelDrum", "center", "third", "fourthArbor", "escape", "cannon", "minute", "hour", "minuteHand", "hourHand", "secondsHand"];
+  check("position1-reverse-freewheels-upstream-and-holds-ratchet-arbor", ["crownInput", "stem", "slidingClutch", "windingClutch", "windingPinion"].every((id) => changed(freewheelBefore, freewheelAfter, id))
+    && ["crownWheel", "ratchetWheel", "barrelArbor"].every((id) => stationary(freewheelBefore, freewheelAfter, id))
+    && freewheelRunningParts.every((id) => changed(freewheelBefore, freewheelAfter, id))
+    && freewheelMechanismState === "freewheel"
+    && freewheelTransmission.blockedAt === "winding-pinion-crown-wheel"
+    && !freewheelTransmission.activeConnections.includes("winding-pinion-crown-wheel")
+    && !freewheelTransmission.reachedNodes.includes("crownWheel")
+    && ["crown-wheel-ratchet-wheel", "ratchet-wheel-barrel-arbor", "barrel-arbor-mainspring", "barrel-drum-mainspring"].every((id) => freewheelTransmission.activeConnections.includes(id))
+    && ["barrel", "center", "third", "fourthArbor", "escape", "cannon", "minute", "hour", "minuteHand", "hourHand", "secondsHand"].every((id) => freewheelMovingParts.includes(id))
+    && ["crownWheel", "ratchetWheel", "barrelArbor"].every((id) => !freewheelMovingParts.includes(id)), {
+    deltas: Object.fromEntries(["crownInput", "stem", "slidingClutch", "windingClutch", "windingPinion", "crownWheel", "ratchetWheel", "barrelArbor"].map((id) => [id, delta(freewheelBefore, freewheelAfter, id)])),
+    runningDeltas: Object.fromEntries(freewheelRunningParts.map((id) => [id, delta(freewheelBefore, freewheelAfter, id)])),
+    freewheelMechanismState, freewheelTransmission, freewheelMovingParts,
+  });
+  check("position1-reverse-does-not-reduce-power-reserve", Math.abs(freewheelEnergyAfter.powerReserveHours - freewheelEnergyBefore.powerReserveHours) < 1e-7, { freewheelEnergyBefore, freewheelEnergyAfter });
+  const freewheelRatchetState = diagnostics.getRatchetState();
+  const runtimeWindingTopology = diagnostics.getWindingTopology();
+  const ratchetPhaseOffset = runtimeWindingTopology.nodes.ratchetWheel.phaseOffset;
+  const ratchetToothCount = diagnostics.config.windingWorks.ratchet.wheel.toothCount;
+  const independentToothPhase = (actualAngle) => {
+    const toothPitch = Math.PI * 2 / ratchetToothCount;
+    return ((actualAngle - ratchetPhaseOffset) / toothPitch % 1 + 1) % 1;
+  };
+  const expectedClickPose = (actualAngle, motionFactor) => {
+    const toothPhase = independentToothPhase(actualAngle);
+    const toothLift = (1 - Math.cos(toothPhase * Math.PI * 2)) / 2;
+    return { clickAngle: -0.55 + toothLift * 0.075 * motionFactor, clickSpringAngle: 0.22 + toothLift * 0.03 * motionFactor };
+  };
+  const engagedClickExpectedA = expectedClickPose(engagedRatchetAngleA, 1);
+  const engagedClickExpectedB = expectedClickPose(engagedRatchetAngleB, 1);
+  const freewheelRatchetAngle = diagnostics.getPartRotations().ratchetWheel;
+  const freewheelClickExpected = expectedClickPose(freewheelRatchetAngle, 0.18);
+  const engagedPhaseA = independentToothPhase(engagedRatchetAngleA);
+  const engagedPhaseB = independentToothPhase(engagedRatchetAngleB);
+  const freewheelPhase = independentToothPhase(freewheelRatchetAngle);
+  check("ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases", engagedRatchetStateA.engaged && engagedRatchetStateB.engaged && freewheelRatchetState.freewheel
+    && Math.abs(normalizeAngle((engagedPhaseB - engagedPhaseA) * Math.PI * 2)) > 0.05
+    && Math.abs(engagedRatchetStateA.toothPhase - engagedPhaseA) < 1e-7
+    && Math.abs(engagedRatchetStateB.toothPhase - engagedPhaseB) < 1e-7
+    && Math.abs(freewheelRatchetState.toothPhase - freewheelPhase) < 1e-7
+    && Math.abs(engagedRatchetStateA.clickAngle - engagedClickExpectedA.clickAngle) < 1e-7
+    && Math.abs(engagedRatchetStateA.clickSpringAngle - engagedClickExpectedA.clickSpringAngle) < 1e-7
+    && Math.abs(engagedRatchetStateB.clickAngle - engagedClickExpectedB.clickAngle) < 1e-7
+    && Math.abs(engagedRatchetStateB.clickSpringAngle - engagedClickExpectedB.clickSpringAngle) < 1e-7
+    && Math.abs(freewheelRatchetState.clickAngle - freewheelClickExpected.clickAngle) < 1e-7
+    && Math.abs(freewheelRatchetState.clickSpringAngle - freewheelClickExpected.clickSpringAngle) < 1e-7, {
+    engagedA: engagedRatchetStateA, engagedAngleA: engagedRatchetAngleA, engagedPhaseA, engagedExpectedA: engagedClickExpectedA,
+    engagedB: engagedRatchetStateB, engagedAngleB: engagedRatchetAngleB, engagedPhaseB, engagedExpectedB: engagedClickExpectedB,
+    freewheel: freewheelRatchetState, freewheelExpected: freewheelClickExpected,
+  });
 
   diagnostics.setCrownPosition("set");
   await diagnostics.waitForFrames(24);
@@ -86,13 +206,13 @@ export async function runBrowserIntegrationTest(diagnostics) {
   check("position2-moves-crown-through-display-and-hands", settingPath.every((id) => changed(setBefore, setAfter, id)), {
     deltas: Object.fromEntries(settingPath.map((id) => [id, delta(setBefore, setAfter, id)])),
   });
-  check("position2-does-not-backdrive-main-train-or-seconds", ["center", "fourthArbor", "secondsHand", "windingClutch"].every((id) => stationary(setBefore, setAfter, id)), {
-    deltas: Object.fromEntries(["center", "fourthArbor", "secondsHand", "windingClutch"].map((id) => [id, delta(setBefore, setAfter, id)])),
+  check("position2-does-not-backdrive-main-train-seconds-or-winding-path", ["center", "fourthArbor", "secondsHand", "windingClutch", "windingPinion", "crownWheel", "ratchetWheel", "barrelArbor"].every((id) => stationary(setBefore, setAfter, id)), {
+    deltas: Object.fromEntries(["center", "fourthArbor", "secondsHand", "windingClutch", "windingPinion", "crownWheel", "ratchetWheel", "barrelArbor"].map((id) => [id, delta(setBefore, setAfter, id)])),
   });
   verifyRatios("position2-object3d-ratios-follow-reversed-permanent-graph", setBefore, setAfter, "crownInput", {
-    stem: 1, slidingClutch: 1, settingInput: 1, settingTransfer: -1,
-    setting1: 9 / 16, setting2: -9 / 16, minute: 1 / 2, cannon: -3 / 2,
-    hour: -1 / 8, minuteHand: -3 / 2, hourHand: -1 / 8,
+    stem: 1, slidingClutch: 1, settingInput: 1, settingTransfer: 1,
+    setting1: -9 / 16, setting2: 9 / 16, minute: -1 / 2, cannon: 3 / 2,
+    hour: 1 / 8, minuteHand: 3 / 2, hourHand: 1 / 8,
   });
   const setHandReport = diagnostics.getHandCouplingReport();
   check("setting-hand-deltas-stay-rigid-to-tubes", setHandReport.every(({ error }) => Math.abs(error) < 1e-7), setHandReport);
@@ -115,7 +235,7 @@ export async function runBrowserIntegrationTest(diagnostics) {
   const handMountContacts = setInterference.intendedContacts.filter(({ pair }) => handMountPairs.has(pair.join("/")));
   check("actual-tube-pipe-arbor-ends-contact-hand-bosses", handMountContacts.length === 3 && handMountContacts.every(({ intersects }) => intersects), handMountContacts);
   const setClutch = diagnostics.getClutchConnectionState();
-  check("set-clutch-state-selects-only-setting-boundary", setClutch.settingBoundaryEngaged && !setClutch.windingBoundaryEngaged && setClutch.activeConnections.includes("setting-input-transfer") && !setClutch.activeConnections.includes("sliding-winding"), setClutch);
+  check("set-clutch-state-selects-only-setting-boundary", setClutch.settingBoundaryEngaged && !setClutch.windingBoundaryEngaged && setClutch.activeConnections.includes("setting-input-transfer") && !setClutch.activeConnections.includes("winding-sliding-clutch"), setClutch);
 
   diagnostics.setRunning(false);
   const position2ExplicitSeconds = 3 * 3600 + 17 * 60 + 23;
@@ -141,11 +261,18 @@ export async function runBrowserIntegrationTest(diagnostics) {
   const explicitSeconds = 6 * 3600 + 41 * 60 + 37;
   const explicitRotations = diagnostics.getPartRotations();
   const absoluteHandErrors = {
-    minuteHand: normalizeAngle(explicitRotations.minuteHand - (Math.PI / 2 - explicitSeconds / 3600 * Math.PI * 2)),
-    hourHand: normalizeAngle(explicitRotations.hourHand - (Math.PI / 2 - explicitSeconds / (12 * 3600) * Math.PI * 2)),
-    secondsHand: normalizeAngle(explicitRotations.secondsHand - (Math.PI / 2 - explicitSeconds / 60 * Math.PI * 2)),
+    minuteHand: normalizeAngle(explicitRotations.minuteHand - (-Math.PI / 2 + explicitSeconds / 3600 * Math.PI * 2)),
+    hourHand: normalizeAngle(explicitRotations.hourHand - (-Math.PI / 2 + explicitSeconds / (12 * 3600) * Math.PI * 2)),
+    secondsHand: normalizeAngle(explicitRotations.secondsHand - (-Math.PI / 2 + explicitSeconds / 60 * Math.PI * 2)),
   };
-  check("explicit-time-sets-all-hands-to-absolute-dial-angles", Object.values(absoluteHandErrors).every((error) => Math.abs(error) < 1e-7), absoluteHandErrors);
+  diagnostics.setWatchTime(23 * 3600 + 59 * 60 + 59);
+  await diagnostics.waitForFrames(3);
+  const reserveBeforeDayWrap = diagnostics.getPowerReserve();
+  diagnostics.setWatchTime(1);
+  await diagnostics.waitForFrames(3);
+  const reserveAfterDayWrap = diagnostics.getPowerReserve();
+  check("explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind", Object.values(absoluteHandErrors).every((error) => Math.abs(error) < 1e-7)
+    && Math.abs(reserveAfterDayWrap - reserveBeforeDayWrap) < 1e-9, { absoluteHandErrors, reserveBeforeDayWrap, reserveAfterDayWrap });
 
   const syncOnBefore = diagnostics.getPartRotations();
   const syncOnReport = diagnostics.setLiveSync(true);
@@ -172,6 +299,88 @@ export async function runBrowserIntegrationTest(diagnostics) {
   check("browser-topology-binds-every-node-to-object3d", Object.values(topology.nodes).every(({ objectUuid }) => Boolean(objectUuid)) && topology.clutchBoundary === "setting-input-transfer", topology);
   check("browser-permanent-topology-declares-run-wind-set", topology.permanentConnections.every(({ activeStates }) => ["run", "wind", "set"].every((state) => activeStates.includes(state))), topology.permanentConnections);
 
+  const windingTopology = diagnostics.getWindingTopology();
+  check("browser-winding-topology-binds-crown-through-mainspring", Object.values(windingTopology.nodes).every(({ objectUuid }) => Boolean(objectUuid))
+    && windingTopology.clutchBoundary === "winding-sliding-clutch"
+    && windingTopology.oneWayBoundary === "winding-pinion-crown-wheel"
+    && windingTopology.energyBoundary === "barrel-arbor-mainspring"
+    && JSON.stringify(windingTopology.energyInputs) === JSON.stringify(["barrelDrum", "barrelArbor"])
+    && windingTopology.connections.filter(({ oneWay }) => oneWay).map(({ id }) => id).join() === windingTopology.oneWayBoundary
+    && ["winding-clutch-pinion", "winding-pinion-crown-wheel", "crown-wheel-ratchet-wheel", "ratchet-wheel-barrel-arbor", "barrel-arbor-mainspring", "barrel-drum-mainspring"].every((id) => windingTopology.connections.some((connection) => connection.id === id)), windingTopology);
+
+  diagnostics.setRunning(false);
+  diagnostics.setCrownPosition("wind");
+  diagnostics.applyCameraPreset("reset");
+  await diagnostics.waitForFrames(4);
+  const frontConvention = diagnostics.getFrontConvention();
+  const frontProjection = diagnostics.getDialProjectionReport();
+  check("reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order", frontConvention.cameraSide === "front" && frontProjection.fit
+    && frontProjection.markers["12"].ndc[1] > frontProjection.center.ndc[1]
+    && frontProjection.markers["3"].ndc[0] > frontProjection.center.ndc[0]
+    && frontProjection.markers["6"].ndc[1] < frontProjection.center.ndc[1]
+    && frontProjection.markers["9"].ndc[0] < frontProjection.center.ndc[0], { frontConvention, frontProjection });
+
+  const handDirectionAt = async (seconds) => {
+    diagnostics.setWatchTime(seconds);
+    await diagnostics.waitForFrames(3);
+    return Object.fromEntries(diagnostics.getHandScreenDirectionReport().map((entry) => [entry.id, entry]));
+  };
+  const noonDirections = await handDirectionAt(12 * 3600);
+  check("front-120000-points-all-hands-to-twelve", ["minuteHand", "hourHand", "secondsHand"].every((id) => Math.abs(normalizeAngle(noonDirections[id].clockAngle)) < 1e-5), noonDirections);
+  const quarterDirections = await handDirectionAt(12 * 3600 + 15 * 60);
+  check("front-121500-points-minute-hand-to-three", Math.abs(normalizeAngle(quarterDirections.minuteHand.clockAngle - Math.PI / 2)) < 1e-5, quarterDirections.minuteHand);
+  const threeDirections = await handDirectionAt(3 * 3600);
+  check("front-030000-points-hour-hand-to-three", Math.abs(normalizeAngle(threeDirections.hourHand.clockAngle - Math.PI / 2)) < 1e-5, threeDirections.hourHand);
+  const secondsDirections = {};
+  for (const second of [0, 15, 30, 45]) secondsDirections[second] = (await handDirectionAt(12 * 3600 + second)).secondsHand;
+  const secondsExpected = { 0: 0, 15: Math.PI / 2, 30: Math.PI, 45: -Math.PI / 2 };
+  check("front-small-seconds-visits-12-3-6-9", Object.entries(secondsExpected).every(([second, expected]) => Math.abs(normalizeAngle(secondsDirections[second].clockAngle - expected)) < 1e-5), secondsDirections);
+  const continuousSecondFive = await handDirectionAt(12 * 3600 + 5);
+  const continuousSecondTen = await handDirectionAt(12 * 3600 + 10);
+  const continuousMinuteFive = await handDirectionAt(12 * 3600 + 5 * 60);
+  const continuousMinuteTen = await handDirectionAt(12 * 3600 + 10 * 60);
+  const continuousHourOne = await handDirectionAt(13 * 3600);
+  const continuousHourTwo = await handDirectionAt(14 * 3600);
+  const clockwiseScreenDeltas = {
+    secondsHand: normalizeAngle(continuousSecondTen.secondsHand.clockAngle - continuousSecondFive.secondsHand.clockAngle),
+    minuteHand: normalizeAngle(continuousMinuteTen.minuteHand.clockAngle - continuousMinuteFive.minuteHand.clockAngle),
+    hourHand: normalizeAngle(continuousHourTwo.hourHand.clockAngle - continuousHourOne.hourHand.clockAngle),
+  };
+  check("front-continuous-time-increase-is-clockwise", Object.values(clockwiseScreenDeltas).every((screenDelta) => screenDelta > 0), {
+    clockwiseScreenDeltas,
+    seconds: { five: continuousSecondFive.secondsHand, ten: continuousSecondTen.secondsHand },
+    minute: { five: continuousMinuteFive.minuteHand, ten: continuousMinuteTen.minuteHand },
+    hour: { one: continuousHourOne.hourHand, two: continuousHourTwo.hourHand },
+  });
+  check("all-screen-direction-samples-keep-rigid-hand-couplings", diagnostics.getHandCouplingReport().every(({ error, mountDistance }) => Math.abs(error) < 1e-7 && mountDistance < 1e-6), diagnostics.getHandCouplingReport());
+
+  await handDirectionAt(12 * 3600 + 15 * 60);
+  const frontQuarter = diagnostics.getHandScreenDirectionReport().find(({ id }) => id === "minuteHand");
+  const worldBeforeBack = diagnostics.getDialProjectionReport().modelWorldSignature;
+  diagnostics.applyCameraPreset("movementBack");
+  await diagnostics.waitForFrames(3);
+  const backProjection = diagnostics.getDialProjectionReport();
+  const backQuarter = diagnostics.getHandScreenDirectionReport().find(({ id }) => id === "minuteHand");
+  check("movement-back-is-positive-y-and-camera-switch-does-not-move-model", diagnostics.getFrontConvention().cameraSide === "back" && JSON.stringify(worldBeforeBack) === JSON.stringify(backProjection.modelWorldSignature), { convention: diagnostics.getFrontConvention(), worldBeforeBack, worldAfterBack: backProjection.modelWorldSignature });
+  check("same-hand-appears-reversed-from-movement-back", frontQuarter.clockAngle * backQuarter.clockAngle < 0 && Math.abs(normalizeAngle(frontQuarter.objectAngle - backQuarter.objectAngle)) < 1e-7, { frontQuarter, backQuarter });
+
+  diagnostics.applyCameraPreset("reset");
+  diagnostics.setWatchTime(12 * 3600);
+  diagnostics.setCrownPosition("set");
+  await diagnostics.waitForFrames(3);
+  const settingScreenBefore = Object.fromEntries(diagnostics.getHandScreenDirectionReport()
+    .filter(({ id }) => ["minuteHand", "hourHand"].includes(id)).map((entry) => [entry.id, entry]));
+  const settingTimeBefore = diagnostics.getWatchTime();
+  diagnostics.setCrownTurnRate(0.5);
+  await diagnostics.waitForFrames(12);
+  diagnostics.setCrownTurnRate(0);
+  const settingScreenAfter = Object.fromEntries(diagnostics.getHandScreenDirectionReport()
+    .filter(({ id }) => ["minuteHand", "hourHand"].includes(id)).map((entry) => [entry.id, entry]));
+  check("position2-positive-input-advances-minute-and-hour-clockwise-on-front", ["minuteHand", "hourHand"].every((id) => normalizeAngle(settingScreenAfter[id].clockAngle - settingScreenBefore[id].clockAngle) > 0)
+    && dayDelta(settingTimeBefore, diagnostics.getWatchTime()) > 0, { settingScreenBefore, settingScreenAfter, settingTimeBefore, settingTimeAfter: diagnostics.getWatchTime() });
+  diagnostics.setCrownPosition("wind");
+  await diagnostics.waitForFrames(3);
+
   diagnostics.applyCameraPreset("dial");
   diagnostics.setStructuralOpacity(0.16);
   await diagnostics.waitForFrames(5);
@@ -181,6 +390,29 @@ export async function runBrowserIntegrationTest(diagnostics) {
   check("diagnostic-layer-is-never-pickable", pickLayers.diagnosticActive === 0, pickLayers);
   check("camera-is-idle-after-preset", diagnostics.getCameraManipulating() === false);
 
+  diagnostics.setFunctionalMode("wind");
+  diagnostics.applyCameraPreset("winding");
+  await diagnostics.waitForFrames(4);
+  const windingSelections = {
+    "巻上げ固定クラッチ": diagnostics.pickProjectedPart("巻上げ固定クラッチ"),
+    "巻上げピニオン歯": diagnostics.pickProjectedPart("巻上げピニオン歯"),
+    "丸穴車・クラウン歯": diagnostics.pickProjectedPart("丸穴車・クラウン歯"),
+    "丸穴車上下回転ハブ": diagnostics.pickProjectedPart("丸穴車上下回転ハブ"),
+  };
+  diagnostics.applyCameraPreset("movementBack");
+  await diagnostics.waitForFrames(3);
+  windingSelections["角穴車"] = diagnostics.pickProjectedPart("角穴車");
+  windingSelections["香箱真上端"] = diagnostics.pickProjectedPart("香箱真上端");
+  windingSelections["主ゼンマイ"] = null;
+  for (const preset of ["side", "structure", "top", "train", "winding", "movementBack"]) {
+    diagnostics.applyCameraPreset(preset);
+    await diagnostics.waitForFrames(3);
+    const selected = diagnostics.pickProjectedPart("主ゼンマイ");
+    if (selected === "主ゼンマイ") { windingSelections["主ゼンマイ"] = selected; break; }
+  }
+  check("wind-mode-keeps-complete-object3d-path-raycast-selectable", Object.entries(windingSelections).every(([name, selected]) => selected === name), windingSelections);
+
+  diagnostics.setFunctionalMode("all");
   diagnostics.setStructuralOpacity(1);
   diagnostics.setCrownTurnRate(0);
   measurements.runRotations = runAfter;
@@ -192,5 +424,9 @@ export async function runBrowserIntegrationTest(diagnostics) {
   measurements.moduleReport = moduleReport;
   measurements.handCoupling = diagnostics.getHandCouplingReport();
   measurements.selection = selection;
+  measurements.windingTransmission = windingTransmission;
+  measurements.frontProjection = frontProjection;
+  measurements.secondsDirections = secondsDirections;
+  measurements.windingSelections = windingSelections;
   return { ok: checks.every(({ ok }) => ok), checks, measurements };
 }

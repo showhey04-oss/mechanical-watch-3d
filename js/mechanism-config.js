@@ -1,6 +1,13 @@
 const TAU = Math.PI * 2;
 const EPSILON = 1e-6;
 
+// The dial stays on negative Y. From that semantic watch front, +Z is twelve
+// o'clock and +X is three o'clock, so positive Y rotation is clockwise.
+export const DIAL_FRONT_NORMAL = Object.freeze([0, -1, 0]);
+export const DIAL_UP_VECTOR = Object.freeze([0, 0, 1]);
+export const DIAL_RIGHT_VECTOR = Object.freeze([1, 0, 0]);
+export const CLOCKWISE_ROTATION_SIGN = 1;
+
 function deepFreeze(value) {
   if (!value || typeof value !== "object" || Object.isFrozen(value)) return value;
   Object.values(value).forEach(deepFreeze);
@@ -303,63 +310,88 @@ const motionWorks = deepFreeze({
   }),
 });
 
+export const WINDING_WORKS_MODULE = 0.082;
+const windingPinionProfile = gearProfileFromModule({ module: WINDING_WORKS_MODULE, toothCount: 10, toothThicknessLike: 0.50 });
+const crownWheelProfile = gearProfileFromModule({ module: WINDING_WORKS_MODULE, toothCount: 40 });
+const ratchetWheelProfile = gearProfileFromModule({ module: WINDING_WORKS_MODULE, toothCount: 60 });
 const ratchetCenter = barrelCenter;
-const crownWheelCenter = placeMeshedCenter(
-  ratchetCenter,
-  2.45,
-  1.65,
-  Math.atan2(1.50, 3.80),
+
+// Preserve the A.3 stem channel. The crown wheel is moved only in X/Z around
+// the fixed barrel arbor; every established Y band remains unchanged.
+const windingStemZ = -4.50;
+const crownWheelZ = windingStemZ + crownWheelProfile.pitchRadius;
+const crownRatchetCenterDistance = crownWheelProfile.pitchRadius + ratchetWheelProfile.pitchRadius;
+const crownRatchetDeltaZ = crownWheelZ - ratchetCenter.z;
+const crownWheelX = ratchetCenter.x + Math.sqrt(
+  crownRatchetCenterDistance ** 2 - crownRatchetDeltaZ ** 2,
 );
+const crownWheelCenter = deepFreeze({ x: crownWheelX, z: crownWheelZ });
+const windingPinionContactY = AXIAL_LAYERS.dial.stemAxis + windingPinionProfile.pitchRadius;
 
 const windingWorks = deepFreeze({
   ratchet: arborDefinition({
     id: "ratchet",
     center: ratchetCenter,
-    wheel: gearProfile({ pitchRadius: 2.45, toothCount: 48 }),
+    wheel: ratchetWheelProfile,
     pinion: null,
     layerYWheel: AXIAL_LAYERS.winding.ratchet,
     layerYPinion: null,
     bodyThickness: 0.26,
     pinionThickness: 0,
-    rotationDirection: 1,
-    gearRatio: 0.72,
+    rotationDirection: -1,
+    gearRatio: 1 / 6,
   }),
   crownWheel: arborDefinition({
     id: "crownWheel",
     center: crownWheelCenter,
-    wheel: gearProfile({ pitchRadius: 1.65, toothCount: 36 }),
+    wheel: crownWheelProfile,
     pinion: null,
     layerYWheel: AXIAL_LAYERS.winding.crownWheel,
     layerYPinion: null,
     bodyThickness: 0.25,
     pinionThickness: 0,
-    rotationDirection: -1,
-    gearRatio: 0.58,
+    rotationDirection: 1,
+    gearRatio: 1 / 4,
   }),
+  windingPinion: {
+    id: "windingPinion",
+    axis: "x",
+    centerX: crownWheelCenter.x,
+    centerY: AXIAL_LAYERS.dial.stemAxis,
+    centerZ: windingStemZ,
+    profile: windingPinionProfile,
+    bodyThickness: 0.24,
+    contactY: windingPinionContactY,
+  },
+  crownContact: {
+    centerX: crownWheelCenter.x,
+    centerY: windingPinionContactY,
+    centerZ: windingStemZ,
+  },
 });
 
 const keyless = deepFreeze({
   axis: {
-    startX: 1.80,
+    startX: crownWheelCenter.x - 0.72,
     endX: 19.72,
     centerY: AXIAL_LAYERS.dial.stemAxis,
-    centerZ: -4.50,
+    centerZ: windingStemZ,
     pullOut: 1.35,
     shaftRadius: 0.16,
   },
   windingClutch: {
-    centerX: 7.16,
-    centerZ: -4.50,
+    centerX: crownWheelCenter.x + 0.90,
+    centerZ: windingStemZ,
     centerY: AXIAL_LAYERS.dial.stemAxis,
     radius: 0.32,
     width: 0.30,
     dogLength: 0.09,
   },
   slidingClutch: {
-    centerX: 6.68,
-    centerXWind: 6.68,
+    centerX: crownWheelCenter.x + 0.42,
+    centerXWind: crownWheelCenter.x + 0.42,
     centerXSet: 4.28,
-    centerZ: -4.50,
+    centerZ: windingStemZ,
     centerY: AXIAL_LAYERS.dial.stemAxis,
     radius: 0.30,
     width: 0.30,
@@ -367,7 +399,7 @@ const keyless = deepFreeze({
   },
   settingInput: {
     centerX: 3.82,
-    centerZ: -4.50,
+    centerZ: windingStemZ,
     centerY: AXIAL_LAYERS.dial.stemAxis,
     radius: 0.46,
     width: 0.28,
@@ -386,10 +418,6 @@ const motionPhases = {
   center: 0,
   cannon: 0,
   fourthArbor: 0,
-  crownInput: 0,
-  stem: 0,
-  slidingClutch: 0,
-  windingClutch: 0,
   settingInput: 0,
 };
 motionPhases.minute = calculateMeshOutputPhase({
@@ -425,16 +453,15 @@ motionPhases.settingTransfer = calculateMeshOutputPhase({
 // Hand phases are absolute dial assembly references.  The rigid hand-fit
 // connections below retain the driver-to-hand assembly offset while keeping
 // all three hands at twelve o'clock when the train input angle is zero.
-motionPhases.minuteHand = Math.PI / 2;
-motionPhases.hourHand = Math.PI / 2;
-motionPhases.secondsHand = Math.PI / 2;
+motionPhases.minuteHand = -Math.PI / 2;
+motionPhases.hourHand = -Math.PI / 2;
+motionPhases.secondsHand = -Math.PI / 2;
 
 export const MOTION_WORKS_NODES = deepFreeze(Object.fromEntries([
   ["center", "y"], ["cannon", "y"], ["minute", "y"], ["hour", "y"],
   ["setting2", "y"], ["setting1", "y"], ["settingTransfer", "y"],
   ["fourthArbor", "y"], ["minuteHand", "y"], ["hourHand", "y"], ["secondsHand", "y"],
-  ["crownInput", "x"], ["stem", "x"], ["slidingClutch", "x"],
-  ["windingClutch", "x"], ["settingInput", "x"],
+  ["settingInput", "x"],
 ].map(([id, axis]) => [id, { id, axis, phaseOffset: motionPhases[id] }])));
 
 const meshBand = (input, inputMember, output, outputMember) => ({
@@ -536,11 +563,7 @@ export const PERMANENT_MOTION_CONNECTIONS = deepFreeze([
 ]);
 
 export const CONDITIONAL_CLUTCH_CONNECTIONS = deepFreeze([
-  connectionMetadata({ id: "crown-stem", input: "crownInput", output: "stem", ratio: 1, meshType: "rigid", permanent: false, activeStates: ["run", "wind", "set"], sourcePriority: ["crown"], allowsBackdrive: false, allowsSlip: false }),
-  connectionMetadata({ id: "stem-sliding", input: "stem", output: "slidingClutch", ratio: 1, meshType: "square", permanent: false, activeStates: ["run", "wind", "set"], sourcePriority: ["crown"], allowsBackdrive: false, allowsSlip: false }),
-  connectionMetadata({ id: "sliding-winding", input: "slidingClutch", output: "windingClutch", ratio: 1, meshType: "face-clutch", permanent: false, activeStates: ["run", "wind"], sourcePriority: ["crown"], allowsBackdrive: false, allowsSlip: false }),
-  connectionMetadata({ id: "sliding-setting-input", input: "slidingClutch", output: "settingInput", ratio: 1, meshType: "face-clutch", permanent: false, activeStates: ["set"], sourcePriority: ["crown"], allowsBackdrive: false, allowsSlip: false }),
-  connectionMetadata({ id: "setting-input-transfer", input: "settingInput", output: "settingTransfer", ratio: -1, meshType: "crown-clutch", permanent: false, activeStates: ["set"], sourcePriority: ["setting"], allowsBackdrive: false, allowsSlip: false }),
+  connectionMetadata({ id: "setting-input-transfer", input: "settingInput", output: "settingTransfer", ratio: 1, meshType: "crown-clutch", permanent: false, activeStates: ["set"], sourcePriority: ["setting"], allowsBackdrive: false, allowsSlip: false }),
 ]);
 
 export const MOTION_WORKS_CONNECTIONS = deepFreeze([
@@ -576,6 +599,7 @@ export function resolveMotionWorksState({
   source = "train",
   trainAngle = 0,
   crownAngle = 0,
+  settingInputAngle = crownAngle,
   crownPosition = source === "setting" ? "set" : "wind",
   mechanismState = null,
   running = true,
@@ -592,11 +616,8 @@ export function resolveMotionWorksState({
   ]));
   const activeConnections = MOTION_WORKS_CONNECTIONS.filter(({ activeStates }) => activeStates.includes(state));
   const seeds = source === "setting"
-    ? [["crownInput", MOTION_WORKS_NODES.crownInput.phaseOffset + crownAngle]]
-    : [
-      ["center", MOTION_WORKS_NODES.center.phaseOffset + trainAngle],
-      ["crownInput", MOTION_WORKS_NODES.crownInput.phaseOffset + crownAngle],
-    ];
+    ? [["settingInput", MOTION_WORKS_NODES.settingInput.phaseOffset + settingInputAngle]]
+    : [["center", MOTION_WORKS_NODES.center.phaseOffset + trainAngle]];
   const visited = new Set();
   const queue = [];
   for (const [id, angle] of seeds) {
@@ -645,6 +666,165 @@ export function resolveMotionWorksGains(source = "train") {
   return Object.fromEntries(Object.keys(MOTION_WORKS_NODES).map((id) => [id, moved[id] - base[id]]));
 }
 
+// At the lower orthogonal contact the pinion presents a tooth centre. Offset the
+// compound crown wheel by half one 40-tooth pitch so the mating point is a gap.
+// The rendered pinion axis is -X after its fixed Z rotation, so a positive X
+// input requires a positive tooth-count ratio at this 90-degree stage.
+const windingCrownPhase = Math.PI / windingWorks.crownWheel.wheel.toothCount;
+const windingRatchetPhase = calculateMeshOutputPhase({
+  inputPhase: windingCrownPhase,
+  inputTeeth: windingWorks.crownWheel.wheel.toothCount,
+  outputTeeth: windingWorks.ratchet.wheel.toothCount,
+  centerAngle: meshCenterAngle(windingWorks.crownWheel, windingWorks.ratchet),
+});
+
+export const WINDING_NODES = deepFreeze({
+  crownInput: { id: "crownInput", axis: "x", phaseOffset: 0 },
+  stem: { id: "stem", axis: "x", phaseOffset: 0 },
+  slidingClutch: { id: "slidingClutch", axis: "x", phaseOffset: 0 },
+  windingClutch: { id: "windingClutch", axis: "x", phaseOffset: 0 },
+  windingPinion: { id: "windingPinion", axis: "x", phaseOffset: 0 },
+  crownWheel: { id: "crownWheel", axis: "y", phaseOffset: windingCrownPhase },
+  ratchetWheel: { id: "ratchetWheel", axis: "y", phaseOffset: windingRatchetPhase },
+  barrelArbor: { id: "barrelArbor", axis: "y", phaseOffset: windingRatchetPhase },
+  barrelDrum: { id: "barrelDrum", axis: "y", phaseOffset: 0, writer: "train", readOnly: true },
+  settingInput: { id: "settingInput", axis: "x", phaseOffset: 0 },
+  mainspring: { id: "mainspring", axis: "relative", phaseOffset: -windingRatchetPhase },
+});
+
+export const WINDING_MESHES = deepFreeze([
+  {
+    id: "winding-pinion-crown-wheel",
+    input: "windingPinion",
+    output: "crownWheel",
+    inputAxis: "x",
+    outputAxis: "y",
+    meshType: "orthogonal-crown-gear",
+    module: WINDING_WORKS_MODULE,
+    inputTeeth: windingWorks.windingPinion.profile.toothCount,
+    outputTeeth: windingWorks.crownWheel.wheel.toothCount,
+    inputPitchRadius: windingWorks.windingPinion.profile.pitchRadius,
+    outputPitchRadius: windingWorks.crownWheel.wheel.pitchRadius,
+    ratio: windingWorks.windingPinion.profile.toothCount / windingWorks.crownWheel.wheel.toothCount,
+    phaseOffset: windingCrownPhase,
+    contactPoint: [windingWorks.crownContact.centerX, windingWorks.crownContact.centerY, windingWorks.crownContact.centerZ],
+    axialMeshBand: { centerY: windingWorks.crownContact.centerY, thickness: windingWorks.windingPinion.bodyThickness },
+  },
+  {
+    id: "crown-wheel-ratchet-wheel",
+    input: "crownWheel",
+    output: "ratchetWheel",
+    inputAxis: "y",
+    outputAxis: "y",
+    meshType: "external-gear",
+    module: WINDING_WORKS_MODULE,
+    inputTeeth: windingWorks.crownWheel.wheel.toothCount,
+    outputTeeth: windingWorks.ratchet.wheel.toothCount,
+    inputPitchRadius: windingWorks.crownWheel.wheel.pitchRadius,
+    outputPitchRadius: windingWorks.ratchet.wheel.pitchRadius,
+    centerDistance: crownRatchetCenterDistance,
+    centerAngle: meshCenterAngle(windingWorks.crownWheel, windingWorks.ratchet),
+    ratio: -windingWorks.crownWheel.wheel.toothCount / windingWorks.ratchet.wheel.toothCount,
+    phaseOffset: windingRatchetPhase,
+    axialMeshBand: { centerY: AXIAL_LAYERS.winding.crownWheel, thickness: Math.min(windingWorks.crownWheel.bodyThickness, windingWorks.ratchet.bodyThickness) },
+  },
+]);
+
+const windingConnectionMetadata = (definition) => connectionMetadata({
+  ...definition,
+  phaseOffset: WINDING_NODES[definition.output].phaseOffset,
+});
+
+export const WINDING_CONNECTIONS = deepFreeze([
+  windingConnectionMetadata({ id: "winding-crown-stem", input: "crownInput", output: "stem", ratio: 1, meshType: "rigid", permanent: true, activeStates: ["wind", "set"], sourcePriority: ["crown"] }),
+  windingConnectionMetadata({ id: "winding-stem-sliding", input: "stem", output: "slidingClutch", ratio: 1, meshType: "square", permanent: true, activeStates: ["wind", "set"], sourcePriority: ["crown"] }),
+  windingConnectionMetadata({ id: "winding-sliding-clutch", input: "slidingClutch", output: "windingClutch", ratio: 1, meshType: "face-clutch", permanent: false, activeStates: ["wind"], sourcePriority: ["crown"] }),
+  windingConnectionMetadata({ id: "winding-clutch-pinion", input: "windingClutch", output: "windingPinion", ratio: 1, meshType: "rigid-short-sleeve", permanent: true, activeStates: ["wind"], sourcePriority: ["crown"] }),
+  windingConnectionMetadata({ id: "winding-pinion-crown-wheel", input: "windingPinion", output: "crownWheel", ratio: WINDING_MESHES[0].ratio, meshType: "orthogonal-crown-gear", permanent: true, activeStates: ["wind"], sourcePriority: ["crown"], oneWay: true, contactPoint: WINDING_MESHES[0].contactPoint }),
+  windingConnectionMetadata({ id: "crown-wheel-ratchet-wheel", input: "crownWheel", output: "ratchetWheel", ratio: WINDING_MESHES[1].ratio, meshType: "external-gear", permanent: true, activeStates: ["wind"], sourcePriority: ["crown"], module: WINDING_WORKS_MODULE, centerDistance: crownRatchetCenterDistance, axialMeshBand: WINDING_MESHES[1].axialMeshBand }),
+  windingConnectionMetadata({ id: "ratchet-wheel-barrel-arbor", input: "ratchetWheel", output: "barrelArbor", ratio: 1, meshType: "square-fit", permanent: true, activeStates: ["wind"], sourcePriority: ["crown"] }),
+  windingConnectionMetadata({ id: "barrel-arbor-mainspring", input: "barrelArbor", output: "mainspring", ratio: -1, meshType: "relative-wind-input", permanent: true, activeStates: ["run", "wind", "set"], sourcePriority: ["crown"] }),
+  windingConnectionMetadata({ id: "barrel-drum-mainspring", input: "barrelDrum", output: "mainspring", ratio: 1, meshType: "relative-wind-input", permanent: true, activeStates: ["run", "wind", "set"], sourcePriority: ["train"] }),
+  windingConnectionMetadata({ id: "sliding-setting-input", input: "slidingClutch", output: "settingInput", ratio: 1, meshType: "face-clutch", permanent: false, activeStates: ["set"], sourcePriority: ["crown"] }),
+]);
+
+export const WINDING_TOPOLOGY = deepFreeze({
+  nodes: WINDING_NODES,
+  connections: WINDING_CONNECTIONS,
+  meshes: WINDING_MESHES,
+  clutchBoundary: "winding-sliding-clutch",
+  oneWayBoundary: "winding-pinion-crown-wheel",
+  energyBoundary: "barrel-arbor-mainspring",
+  energyInputs: ["barrelDrum", "barrelArbor"],
+});
+
+export function resolveWindingState({
+  crownAngle = 0,
+  crownPosition = "wind",
+  previousAngles = {},
+  previousCrownAngle = crownAngle,
+  barrelDrumAngle = 0,
+  forwardSign = 1,
+} = {}) {
+  const angles = Object.fromEntries(Object.entries(WINDING_NODES).map(([id, node]) => [
+    id,
+    Number.isFinite(previousAngles[id]) ? previousAngles[id] : node.phaseOffset,
+  ]));
+  const crownDelta = crownAngle - previousCrownAngle;
+  const forwardDelta = Math.max(0, crownDelta * forwardSign);
+  let windingIncrement = 0;
+  angles.crownInput = WINDING_NODES.crownInput.phaseOffset + crownAngle;
+  angles.stem = WINDING_NODES.stem.phaseOffset + crownAngle;
+  angles.slidingClutch = WINDING_NODES.slidingClutch.phaseOffset + crownAngle;
+  if (crownPosition === "set") {
+    angles.settingInput += crownDelta;
+  } else {
+    angles.windingClutch += crownDelta;
+    angles.windingPinion += crownDelta;
+    if (forwardDelta > 0) {
+      const signedDrive = forwardDelta * forwardSign;
+      const crownDeltaOut = WINDING_MESHES[0].ratio * signedDrive;
+      const ratchetDeltaOut = WINDING_MESHES[1].ratio * crownDeltaOut;
+      angles.crownWheel += crownDeltaOut;
+      angles.ratchetWheel += ratchetDeltaOut;
+      angles.barrelArbor += ratchetDeltaOut;
+      windingIncrement = Math.max(0, -ratchetDeltaOut);
+    }
+  }
+  angles.barrelDrum = barrelDrumAngle;
+  angles.mainspring = angles.barrelDrum - angles.barrelArbor;
+  const freewheeling = crownPosition === "wind" && crownDelta * forwardSign < -EPSILON;
+  const activeConnections = WINDING_CONNECTIONS
+    .filter(({ activeStates, oneWay }) => activeStates.includes(crownPosition === "set" ? "set" : "wind") && !(freewheeling && oneWay))
+    .map(({ id }) => id);
+  const ratchetMode = crownPosition === "set" || Math.abs(crownDelta) < EPSILON
+    ? "held"
+    : forwardDelta > 0 ? "engaged" : "freewheel";
+  const toothPitch = TAU / windingWorks.ratchet.wheel.toothCount;
+  const toothPhase = ((angles.ratchetWheel - WINDING_NODES.ratchetWheel.phaseOffset) / toothPitch % 1 + 1) % 1;
+  return {
+    state: crownPosition === "set" ? "set" : "wind",
+    angles,
+    crownDelta,
+    forwardDelta,
+    activeConnections,
+    reachedNodes: crownPosition === "set"
+      ? ["crownInput", "stem", "slidingClutch", "settingInput"]
+      : freewheeling
+        ? ["crownInput", "stem", "slidingClutch", "windingClutch", "windingPinion"]
+        : ["crownInput", "stem", "slidingClutch", "windingClutch", "windingPinion", "crownWheel", "ratchetWheel", "barrelArbor", "mainspring"],
+    blockedAt: freewheeling ? WINDING_TOPOLOGY.oneWayBoundary : null,
+    ratchetState: { mode: ratchetMode, engaged: ratchetMode === "engaged", freewheel: ratchetMode === "freewheel", forwardSign, toothPhase },
+    barrelEnergy: { barrelArborAngle: angles.barrelArbor, barrelDrumAngle: angles.barrelDrum, relativeWindAngle: angles.mainspring, windingIncrement },
+  };
+}
+
+export function resolveWindingGains() {
+  const phases = Object.fromEntries(Object.entries(WINDING_NODES).map(([id, node]) => [id, node.phaseOffset]));
+  const state = resolveWindingState({ crownAngle: 1, previousCrownAngle: 0, crownPosition: "wind", previousAngles: phases });
+  return Object.fromEntries(Object.keys(WINDING_NODES).map((id) => [id, state.angles[id] - phases[id]]));
+}
+
 // Compatibility exports retain the previous public names while routing every
 // caller through the single A.3 resolver.
 export const SETTING_KINEMATIC_NODES = MOTION_WORKS_NODES;
@@ -664,6 +844,14 @@ export function resolveKinematicAngles(inputAngle, state = "set") {
 
 export const DIAL_INTERFERENCE_RULES = deepFreeze({
   intendedContacts: [
+    ["windingClutch", "windingPinion"],
+    ["windingPinion", "crownWheelLower"],
+    ["crownWheelLower", "crownLowerHub"],
+    ["crownLowerHub", "crownArbor"],
+    ["crownArbor", "crownUpperHub"],
+    ["crownUpperHub", "crownWheelUpper"],
+    ["crownWheelUpper", "ratchetWheel"],
+    ["ratchetWheel", "barrelArbor"],
     ["stem", "slidingClutch"],
     ["stem", "windingClutch"],
     ["stem", "settingInput"],
@@ -682,6 +870,8 @@ export const DIAL_INTERFERENCE_RULES = deepFreeze({
     ["fourthArborExtension", "secondsHandBoss"],
   ],
   forbiddenPairs: [
+    ["windingPinion", "minuteWheel"], ["windingPinion", "setting1"], ["windingPinion", "setting2"],
+    ["crownWheelLower", "minuteWheel"], ["crownWheelLower", "setting1"], ["crownWheelLower", "setting2"],
     ["stem", "minuteWheel"], ["stem", "setting1"], ["stem", "setting2"],
     ["slidingClutch", "minuteWheel"], ["slidingClutch", "setting1"], ["slidingClutch", "setting2"], ["slidingClutch", "settingTransfer"],
     ["windingClutch", "minuteWheel"], ["windingClutch", "setting1"], ["windingClutch", "setting2"], ["windingClutch", "settingTransfer"],
@@ -690,6 +880,7 @@ export const DIAL_INTERFERENCE_RULES = deepFreeze({
     ["setting1", "minuteWheel"], ["setting1", "cannonPinion"],
     ["setting2", "cannonPinion"], ["setting2", "hourWheel"],
     ["minuteWheel", "hourWheel"], ["minutePinion", "cannonTube"],
+    ["crownWheelSeat", "crownWheelUpper"],
   ],
 });
 
@@ -707,9 +898,16 @@ export const CENTER_AXIS = deepFreeze({
 });
 
 export const CAMERA_PRESETS = deepFreeze({
-  reset: { position: [2, 35, 45], target: [0, 2.5, 0], up: [0, 1, 0] },
-  train: { position: [4, 23, 27], target: [0, 1, -2], up: [0, 1, 0] },
-  dial: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], up: [0, 0, -1] },
+  reset: { position: [0, -58, 0], target: [0, -2.10, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "front" },
+  front: { position: [0, -58, 0], target: [0, -2.10, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "front" },
+  dialFront: { position: [0, -58, 0], target: [0, -2.10, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "front" },
+  back: { position: [0, 60, 0], target: [0, 1.50, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "back" },
+  movementBack: { position: [0, 60, 0], target: [0, 1.50, 0], up: DIAL_UP_VECTOR, fitRadius: 18.8, semanticSide: "back" },
+  movementMechanism: { position: [4, 23, 27], target: [0, 1, -2], up: [0, 1, 0], semanticSide: "back" },
+  dialMechanism: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], up: [0, 0, -1], semanticSide: "front" },
+  train: { position: [4, 23, 27], target: [0, 1, -2], up: [0, 1, 0], semanticSide: "back" },
+  dial: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], up: [0, 0, -1], semanticSide: "front" },
+  winding: { position: [-0.2, -8.8, -8.8], target: [-2.8, 0.7, -2.1], up: [0, 0, -1], semanticSide: "front" },
   cannon: { position: [3.0, -7.5, -7.5], target: [1.0, -1.30, -0.10], up: [0, 0, -1] },
   keyless: { position: [8.5, -10.5, -12.5], target: [4.7, -1.05, -3.35], up: [0, 0, -1] },
   motionWorks: { position: [7.0, -8.0, -7.5], target: [3.0, -1.25, -1.75], up: [0, 0, -1] },
@@ -782,7 +980,8 @@ export function isTapGesture({
 
 export const MOTION_STATE_PARTS = deepFreeze({
   run: ["barrel", "center", "third", "fourthArbor", "escape", "cannon", "minute", "hour", "setting2", "setting1", "settingTransfer", "minuteHand", "hourHand", "secondsHand"],
-  wind: ["crown", "stem", "windingClutch", "slidingClutch", "crownWheel", "ratchet", "barrelArbor", "cannon", "minute", "hour", "setting2", "setting1", "settingTransfer", "minuteHand", "hourHand", "fourthArbor", "secondsHand"],
+  wind: ["barrel", "center", "third", "fourthArbor", "escape", "crown", "stem", "windingClutch", "slidingClutch", "windingPinion", "crownWheel", "ratchetWheel", "barrelArbor", "cannon", "minute", "hour", "setting2", "setting1", "settingTransfer", "minuteHand", "hourHand", "secondsHand"],
+  freewheel: ["barrel", "center", "third", "fourthArbor", "escape", "crown", "stem", "windingClutch", "slidingClutch", "windingPinion", "cannon", "minute", "hour", "setting2", "setting1", "settingTransfer", "minuteHand", "hourHand", "secondsHand"],
   set: ["crown", "stem", "slidingClutch", "settingInput", "settingTransfer", "setting1", "setting2", "cannon", "minute", "hour", "minuteHand", "hourHand"],
   hack: [],
   stopped: [],
@@ -792,6 +991,7 @@ export const MOTION_STATE_PARTS = deepFreeze({
 export function resolveMechanismState({ running, powered, crownPosition, crownTurnRate, liveSync }) {
   if (crownPosition === "set") return Math.abs(crownTurnRate) > 0.001 ? "set" : "hack";
   if (crownTurnRate > 0.001) return "wind";
+  if (crownTurnRate < -0.001) return "freewheel";
   if (!powered) return "stopped";
   if (running || liveSync) return "run";
   return "paused";
@@ -815,10 +1015,17 @@ const meshPairs = deepFreeze([
 ]);
 
 export const WATCH_MECHANISM = deepFreeze({
+  frontConvention: {
+    frontNormal: DIAL_FRONT_NORMAL,
+    up: DIAL_UP_VECTOR,
+    right: DIAL_RIGHT_VECTOR,
+    clockwiseRotationSign: CLOCKWISE_ROTATION_SIGN,
+  },
   axialLayers: AXIAL_LAYERS,
   train,
   motionWorks,
   windingWorks,
+  windingTopology: WINDING_TOPOLOGY,
   keyless,
   settingKinematics: {
     nodes: MOTION_WORKS_NODES,
@@ -924,12 +1131,13 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
     });
   }
   checks.push({
-    name: "keyless:continuous-axis-order",
-    ok: config.keyless.axis.startX < config.keyless.settingInput.centerX
+    name: "keyless:continuous-axis-span",
+    ok: config.keyless.axis.startX < config.windingWorks.windingPinion.centerX
+      && config.keyless.axis.startX < config.keyless.slidingClutch.centerXWind
+      && config.keyless.axis.startX < config.keyless.windingClutch.centerX
+      && config.keyless.axis.startX < config.keyless.settingInput.centerX
       && config.keyless.settingInput.centerX < config.keyless.slidingClutch.centerXSet
-      && config.keyless.slidingClutch.centerXSet < config.keyless.slidingClutch.centerXWind
-      && config.keyless.slidingClutch.centerXWind < config.keyless.windingClutch.centerX
-      && config.keyless.windingClutch.centerX < config.keyless.axis.endX
+      && config.keyless.slidingClutch.centerXSet < config.keyless.axis.endX
       && config.keyless.axis.endX <= config.keyless.crownX,
     actual: [
       config.keyless.axis.startX,
@@ -940,7 +1148,7 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
       config.keyless.axis.endX,
       config.keyless.crownX,
     ],
-    expected: "interior, compact setting input, sliding positions, compact winding clutch, crown",
+    expected: "one continuous stem spans both clutch positions, the short winding pinion and crown",
   });
 
   const stemClearances = [
@@ -1117,7 +1325,7 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
   for (const [id, expected] of Object.entries({ cannon: 1, minute: -1 / 3, hour: 1 / 12, setting2: 3 / 8, setting1: -3 / 8, settingTransfer: 2 / 3 })) {
     checks.push({ name: `kinematic:train-${id}-gain`, ok: Math.abs(trainGains[id] - expected) < EPSILON, actual: trainGains[id], expected });
   }
-  for (const [id, expected] of Object.entries({ settingTransfer: -1, setting1: 9 / 16, setting2: -9 / 16, minute: 1 / 2, cannon: -3 / 2, hour: -1 / 8 })) {
+  for (const [id, expected] of Object.entries({ settingTransfer: 1, setting1: -9 / 16, setting2: 9 / 16, minute: -1 / 2, cannon: 3 / 2, hour: 1 / 8 })) {
     checks.push({ name: `kinematic:setting-${id}-gain`, ok: Math.abs(settingGains[id] - expected) < EPSILON, actual: settingGains[id], expected });
   }
   const trainReach = resolveMotionWorksState({ source: "train", crownPosition: "wind" }).reachedNodes;
@@ -1135,6 +1343,96 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
       && ["center", "fourthArbor", "secondsHand", "windingClutch"].every((id) => !settingReach.includes(id)),
     actual: settingReach,
     expected: "setting source stops at center-cannon slip boundary",
+  });
+
+  const windingPinion = config.windingWorks.windingPinion;
+  const windingCrown = config.windingWorks.crownWheel;
+  const windingRatchet = config.windingWorks.ratchet;
+  const orthogonalContact = config.windingWorks.crownContact;
+  checks.push({
+    name: "winding:pinion-crown-orthogonal-contact",
+    ok: windingPinion.axis === "x"
+      && Math.abs(windingPinion.centerX - orthogonalContact.centerX) < EPSILON
+      && Math.abs(windingPinion.centerY + windingPinion.profile.pitchRadius - orthogonalContact.centerY) < EPSILON
+      && Math.abs(windingPinion.centerZ - orthogonalContact.centerZ) < EPSILON
+      && Math.abs(windingCrown.centerX - orthogonalContact.centerX) < EPSILON
+      && Math.abs(windingCrown.centerZ - windingCrown.wheel.pitchRadius - orthogonalContact.centerZ) < EPSILON,
+    actual: { pinion: windingPinion, crown: windingCrown, contact: orthogonalContact },
+    expected: "X/Y axes share one pitch contact point",
+  });
+  checks.push({
+    name: "winding:crown-ratchet-module-center-band",
+    ok: Math.abs(windingCrown.wheel.module - windingRatchet.wheel.module) < EPSILON
+      && Math.abs(distanceBetween(windingCrown, windingRatchet) - windingCrown.wheel.pitchRadius - windingRatchet.wheel.pitchRadius) < EPSILON
+      && Math.abs(windingCrown.layerYWheel - windingRatchet.layerYWheel) < EPSILON,
+    actual: [windingCrown.wheel.module, windingRatchet.wheel.module, distanceBetween(windingCrown, windingRatchet), windingCrown.layerYWheel, windingRatchet.layerYWheel],
+    expected: [WINDING_WORKS_MODULE, WINDING_WORKS_MODULE, windingCrown.wheel.pitchRadius + windingRatchet.wheel.pitchRadius, windingCrown.layerYWheel, windingCrown.layerYWheel],
+  });
+  const windingMesh = WINDING_MESHES[1];
+  const orthogonalMesh = WINDING_MESHES[0];
+  const orthogonalGapPhaseError = normalizeAngle(
+    WINDING_NODES.crownWheel.phaseOffset - Math.PI / orthogonalMesh.outputTeeth,
+  );
+  checks.push({
+    name: "winding:pinion-crown-gap-phase",
+    ok: Math.abs(orthogonalGapPhaseError) < EPSILON,
+    actual: orthogonalGapPhaseError,
+    expected: 0,
+  });
+  const windingPhaseResidual = meshPhaseResidual({
+    inputPhase: WINDING_NODES.crownWheel.phaseOffset,
+    outputPhase: WINDING_NODES.ratchetWheel.phaseOffset,
+    inputTeeth: windingMesh.inputTeeth,
+    outputTeeth: windingMesh.outputTeeth,
+    centerAngle: windingMesh.centerAngle,
+  });
+  checks.push({ name: "winding:crown-ratchet-phase", ok: Math.abs(windingPhaseResidual) < EPSILON, actual: windingPhaseResidual, expected: 0 });
+  for (const connection of WINDING_CONNECTIONS) {
+    const missing = requiredConnectionMetadata.filter((key) => !(key in connection));
+    const nonFinite = ["ratio", "direction", "phaseOffset"].filter((key) => !Number.isFinite(connection[key]));
+    checks.push({ name: `winding:${connection.id}-metadata`, ok: missing.length === 0 && nonFinite.length === 0, actual: { missing, nonFinite }, expected: requiredConnectionMetadata });
+  }
+  const windingGains = resolveWindingGains();
+  for (const [id, expected] of Object.entries({ crownInput: 1, stem: 1, slidingClutch: 1, windingClutch: 1, windingPinion: 1, crownWheel: 1 / 4, ratchetWheel: -1 / 6, barrelArbor: -1 / 6, barrelDrum: 0, mainspring: 1 / 6 })) {
+    checks.push({ name: `winding:forward-${id}-gain`, ok: Math.abs(windingGains[id] - expected) < EPSILON, actual: windingGains[id], expected });
+  }
+  const windingEnergyConnections = WINDING_CONNECTIONS.filter(({ output }) => output === "mainspring");
+  checks.push({
+    name: "winding:two-input-energy-relation",
+    ok: WINDING_TOPOLOGY.energyInputs.join() === "barrelDrum,barrelArbor"
+      && windingEnergyConnections.some(({ input, ratio }) => input === "barrelDrum" && ratio === 1)
+      && windingEnergyConnections.some(({ input, ratio }) => input === "barrelArbor" && ratio === -1),
+    actual: { inputs: WINDING_TOPOLOGY.energyInputs, connections: windingEnergyConnections },
+    expected: "mainspring = +barrelDrum -barrelArbor",
+  });
+  checks.push({
+    name: "winding:public-source-gains",
+    ok: Math.abs(rotationFromCenter(windingCrown, 1) - 1 / 4) < EPSILON
+      && Math.abs(rotationFromCenter(windingRatchet, 1) + 1 / 6) < EPSILON,
+    actual: [rotationFromCenter(windingCrown, 1), rotationFromCenter(windingRatchet, 1)],
+    expected: [1 / 4, -1 / 6],
+  });
+  const windingPhases = Object.fromEntries(Object.entries(WINDING_NODES).map(([id, node]) => [id, node.phaseOffset]));
+  const forwardWinding = resolveWindingState({ crownAngle: 0.8, previousCrownAngle: 0, previousAngles: windingPhases, crownPosition: "wind" });
+  const reverseWinding = resolveWindingState({ crownAngle: 0.2, previousCrownAngle: 0.8, previousAngles: forwardWinding.angles, crownPosition: "wind" });
+  checks.push({
+    name: "winding:reverse-freewheel-holds-downstream",
+    ok: ["crownWheel", "ratchetWheel", "barrelArbor"].every((id) => Math.abs(reverseWinding.angles[id] - forwardWinding.angles[id]) < EPSILON)
+      && reverseWinding.ratchetState.freewheel
+      && reverseWinding.blockedAt === WINDING_TOPOLOGY.oneWayBoundary
+      && !reverseWinding.activeConnections.includes(WINDING_TOPOLOGY.oneWayBoundary)
+      && ["crown-wheel-ratchet-wheel", "ratchet-wheel-barrel-arbor", "barrel-arbor-mainspring", "barrel-drum-mainspring"].every((id) => reverseWinding.activeConnections.includes(id))
+      && !reverseWinding.reachedNodes.includes("crownWheel"),
+    actual: reverseWinding,
+    expected: "upstream reverses while the one-way boundary holds downstream",
+  });
+  const setWinding = resolveWindingState({ crownAngle: 1.1, previousCrownAngle: 0.8, previousAngles: forwardWinding.angles, crownPosition: "set" });
+  checks.push({
+    name: "winding:set-clutch-isolation",
+    ok: Math.abs(setWinding.angles.settingInput - forwardWinding.angles.settingInput) > EPSILON
+      && ["windingClutch", "windingPinion", "crownWheel", "ratchetWheel", "barrelArbor"].every((id) => Math.abs(setWinding.angles[id] - forwardWinding.angles[id]) < EPSILON),
+    actual: setWinding,
+    expected: "position 2 moves only the setting branch",
   });
 
   const centerAxis = config.centerAxis;
@@ -1158,6 +1456,28 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
       && centerAxis.shaftTopY > config.train.center.layerYWheel,
     actual: [centerAxis.shaftBottomY, centerAxis.shaftTopY, centerAxis.plateHoleRadius],
     expected: "shaft spans both faces of the plate through a bearing hole",
+  });
+
+  const [rightX, rightY, rightZ] = config.frontConvention.right;
+  const [upX, upY, upZ] = config.frontConvention.up;
+  const cross = [rightY * upZ - rightZ * upY, rightZ * upX - rightX * upZ, rightX * upY - rightY * upX];
+  checks.push({
+    name: "front:orthonormal-right-up-normal",
+    ok: Math.abs(Math.hypot(...config.frontConvention.right) - 1) < EPSILON
+      && Math.abs(Math.hypot(...config.frontConvention.up) - 1) < EPSILON
+      && Math.abs(Math.hypot(...config.frontConvention.frontNormal) - 1) < EPSILON
+      && cross.every((value, index) => Math.abs(value - config.frontConvention.frontNormal[index]) < EPSILON)
+      && config.frontConvention.clockwiseRotationSign === 1,
+    actual: config.frontConvention,
+    expected: "right × up = negative-Y front; positive Y is clockwise",
+  });
+  checks.push({
+    name: "front:reset-and-back-sides",
+    ok: config.cameraPresets.reset.position[1] < config.cameraPresets.reset.target[1]
+      && config.cameraPresets.dialFront.position[1] < config.cameraPresets.dialFront.target[1]
+      && config.cameraPresets.movementBack.position[1] > config.cameraPresets.movementBack.target[1],
+    actual: [config.cameraPresets.reset, config.cameraPresets.dialFront, config.cameraPresets.movementBack],
+    expected: "reset/front on negative Y and movement back on positive Y",
   });
 
   for (const [name, preset] of Object.entries(config.cameraPresets)) {
