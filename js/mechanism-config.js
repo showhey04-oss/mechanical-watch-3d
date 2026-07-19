@@ -18,6 +18,26 @@ export function placeMeshedCenter(origin, originPitchRadius, targetPitchRadius, 
   return polarCenter(origin, originPitchRadius + targetPitchRadius, angle);
 }
 
+export function normalizeAngle(angle) {
+  const normalized = angle % TAU;
+  return normalized < -Math.PI ? normalized + TAU : normalized > Math.PI ? normalized - TAU : normalized;
+}
+
+export function calculateMeshOutputPhase({ inputPhase, inputTeeth, outputTeeth, centerAngle }) {
+  return normalizeAngle(
+    (Math.PI - inputTeeth * (centerAngle + inputPhase)) / outputTeeth
+      - (centerAngle + Math.PI),
+  );
+}
+
+export function meshPhaseResidual({ inputPhase, outputPhase, inputTeeth, outputTeeth, centerAngle }) {
+  return normalizeAngle(
+    inputTeeth * (centerAngle + inputPhase)
+      + outputTeeth * (centerAngle + Math.PI + outputPhase)
+      - Math.PI,
+  );
+}
+
 export function gearProfile({
   pitchRadius,
   toothCount,
@@ -285,52 +305,162 @@ const windingWorks = deepFreeze({
 
 const keyless = deepFreeze({
   axis: {
-    startX: 3.35,
+    startX: 1.80,
     endX: 19.72,
     centerY: AXIAL_LAYERS.dial.stemAxis,
-    centerZ: -4.0,
+    centerZ: -4.50,
     pullOut: 1.35,
     shaftRadius: 0.16,
   },
-  windingPinion: {
-    ...gearProfile({ pitchRadius: 0.82, toothCount: 20, toothThicknessLike: 0.50 }),
-    centerX: 7.65,
-    centerZ: -4.0,
-    layerYWheel: AXIAL_LAYERS.dial.stemAxis,
-    layerYPinion: AXIAL_LAYERS.dial.stemAxis,
-    bodyThickness: 0.55,
-    pinionThickness: 0.55,
-    rotationDirection: -1,
-    gearRatio: 1,
+  windingClutch: {
+    centerX: 7.16,
+    centerZ: -4.50,
+    centerY: AXIAL_LAYERS.dial.stemAxis,
+    radius: 0.32,
+    width: 0.30,
+    dogLength: 0.09,
   },
-  slidingPinion: {
-    ...gearProfile({ pitchRadius: 0.86, toothCount: 18, toothThicknessLike: 0.50 }),
-    centerX: 6.80,
-    centerXWind: 6.80,
-    centerXSet: 4.00,
-    centerZ: -4.0,
-    layerYWheel: AXIAL_LAYERS.dial.stemAxis,
-    layerYPinion: AXIAL_LAYERS.dial.stemAxis,
-    bodyThickness: 0.62,
-    pinionThickness: 0.62,
-    rotationDirection: 1,
-    gearRatio: 1,
+  slidingClutch: {
+    centerX: 6.68,
+    centerXWind: 6.68,
+    centerXSet: 4.28,
+    centerZ: -4.50,
+    centerY: AXIAL_LAYERS.dial.stemAxis,
+    radius: 0.30,
+    width: 0.30,
+    dogLength: 0.09,
   },
-  settingClutch: {
-    centerX: 4.00,
-    centerZ: -4.0,
-    transferX: settingTransferCenter.x,
-    transferZ: settingTransferCenter.z,
-    type: "face-dog-and-bevel",
-  },
-  windingTransmission: {
-    centerX: 7.65,
-    centerZ: -4.0,
-    lowerY: AXIAL_LAYERS.dial.stemAxis,
-    upperY: AXIAL_LAYERS.winding.crownWheel,
-    type: "face-dog-and-vertical-shaft",
+  settingInput: {
+    centerX: 3.82,
+    centerZ: -4.50,
+    centerY: AXIAL_LAYERS.dial.stemAxis,
+    radius: 0.46,
+    width: 0.28,
+    dogLength: 0.08,
+    type: "compact-face-and-crown-clutch",
   },
   crownX: 19.80,
+});
+
+const meshCenterAngle = (input, output) => Math.atan2(
+  output.centerZ - input.centerZ,
+  output.centerX - input.centerX,
+);
+
+const settingPhases = {
+  crownInput: 0,
+  stem: 0,
+  slidingClutch: 0,
+  settingInput: 0,
+  settingTransfer: 0,
+};
+settingPhases.setting1 = calculateMeshOutputPhase({
+  inputPhase: settingPhases.settingTransfer,
+  inputTeeth: motionWorks.settingTransfer.wheel.toothCount,
+  outputTeeth: motionWorks.setting1.wheel.toothCount,
+  centerAngle: meshCenterAngle(motionWorks.settingTransfer, motionWorks.setting1),
+});
+settingPhases.setting2 = calculateMeshOutputPhase({
+  inputPhase: settingPhases.setting1,
+  inputTeeth: motionWorks.setting1.wheel.toothCount,
+  outputTeeth: motionWorks.setting2.wheel.toothCount,
+  centerAngle: meshCenterAngle(motionWorks.setting1, motionWorks.setting2),
+});
+settingPhases.minute = calculateMeshOutputPhase({
+  inputPhase: settingPhases.setting2,
+  inputTeeth: motionWorks.setting2.wheel.toothCount,
+  outputTeeth: motionWorks.minute.wheel.toothCount,
+  centerAngle: meshCenterAngle(motionWorks.setting2, motionWorks.minute),
+});
+settingPhases.cannon = calculateMeshOutputPhase({
+  inputPhase: settingPhases.minute,
+  inputTeeth: motionWorks.minute.wheel.toothCount,
+  outputTeeth: motionWorks.cannon.pinion.toothCount,
+  centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.cannon),
+});
+settingPhases.hour = calculateMeshOutputPhase({
+  inputPhase: settingPhases.minute,
+  inputTeeth: motionWorks.minute.pinion.toothCount,
+  outputTeeth: motionWorks.hour.wheel.toothCount,
+  centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.hour),
+});
+
+export const SETTING_KINEMATIC_NODES = deepFreeze({
+  crownInput: { id: "crownInput", axis: "x", phaseOffset: settingPhases.crownInput },
+  stem: { id: "stem", axis: "x", phaseOffset: settingPhases.stem },
+  slidingClutch: { id: "slidingClutch", axis: "x", phaseOffset: settingPhases.slidingClutch },
+  settingInput: { id: "settingInput", axis: "x", phaseOffset: settingPhases.settingInput },
+  settingTransfer: { id: "settingTransfer", axis: "y", phaseOffset: settingPhases.settingTransfer },
+  setting1: { id: "setting1", axis: "y", phaseOffset: settingPhases.setting1 },
+  setting2: { id: "setting2", axis: "y", phaseOffset: settingPhases.setting2 },
+  minute: { id: "minute", axis: "y", phaseOffset: settingPhases.minute },
+  cannon: { id: "cannon", axis: "y", phaseOffset: settingPhases.cannon },
+  hour: { id: "hour", axis: "y", phaseOffset: settingPhases.hour },
+});
+
+export const SETTING_KINEMATIC_CONNECTIONS = deepFreeze([
+  { id: "crown-stem", input: "crownInput", output: "stem", ratio: 1, direction: 1, phaseOffset: settingPhases.stem, activeStates: ["set"], kind: "rigid" },
+  { id: "stem-sliding", input: "stem", output: "slidingClutch", ratio: 1, direction: 1, phaseOffset: settingPhases.slidingClutch, activeStates: ["set"], kind: "square" },
+  { id: "sliding-setting-input", input: "slidingClutch", output: "settingInput", ratio: 1, direction: 1, phaseOffset: settingPhases.settingInput, activeStates: ["set"], kind: "face-clutch" },
+  { id: "setting-input-transfer", input: "settingInput", output: "settingTransfer", ratio: 1, direction: 1, phaseOffset: settingPhases.settingTransfer, activeStates: ["set"], kind: "crown-clutch" },
+  { id: "setting-transfer-setting1", input: "settingTransfer", output: "setting1", ratio: -18 / 32, direction: -1, inputTeeth: 18, outputTeeth: 32, phaseOffset: settingPhases.setting1, activeStates: ["set"], kind: "external-gear" },
+  { id: "setting1-setting2", input: "setting1", output: "setting2", ratio: -32 / 32, direction: -1, inputTeeth: 32, outputTeeth: 32, phaseOffset: settingPhases.setting2, activeStates: ["set"], kind: "external-gear" },
+  { id: "setting2-minute", input: "setting2", output: "minute", ratio: -32 / 36, direction: -1, inputTeeth: 32, outputTeeth: 36, phaseOffset: settingPhases.minute, activeStates: ["set"], kind: "external-gear" },
+  { id: "minute-cannon", input: "minute", output: "cannon", ratio: -36 / 12, direction: -1, inputTeeth: 36, outputTeeth: 12, phaseOffset: settingPhases.cannon, activeStates: ["set"], kind: "external-gear" },
+  { id: "cannon-hour", input: "cannon", output: "hour", ratio: 1 / 12, direction: 1, phaseOffset: settingPhases.hour, activeStates: ["set"], kind: "coaxial-display-reduction" },
+]);
+
+export const SETTING_MESH_PHASE_PAIRS = deepFreeze([
+  { id: "setting-transfer-setting1", input: "settingTransfer", output: "setting1", inputTeeth: 18, outputTeeth: 32, centerAngle: meshCenterAngle(motionWorks.settingTransfer, motionWorks.setting1) },
+  { id: "setting1-setting2", input: "setting1", output: "setting2", inputTeeth: 32, outputTeeth: 32, centerAngle: meshCenterAngle(motionWorks.setting1, motionWorks.setting2) },
+  { id: "setting2-minute", input: "setting2", output: "minute", inputTeeth: 32, outputTeeth: 36, centerAngle: meshCenterAngle(motionWorks.setting2, motionWorks.minute) },
+  { id: "minute-cannon", input: "minute", output: "cannon", inputTeeth: 36, outputTeeth: 12, centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.cannon) },
+  { id: "minute-pinion-hour", input: "minute", output: "hour", inputTeeth: 10, outputTeeth: 40, centerAngle: meshCenterAngle(motionWorks.minute, motionWorks.hour) },
+]);
+
+export function resolveKinematicGains(connections = SETTING_KINEMATIC_CONNECTIONS, state = "set") {
+  const gains = { crownInput: 1 };
+  for (const connection of connections) {
+    if (!connection.activeStates.includes(state) || gains[connection.input] === undefined) continue;
+    gains[connection.output] = gains[connection.input] * connection.ratio;
+  }
+  return gains;
+}
+
+export function resolveKinematicAngles(inputAngle, state = "set") {
+  const gains = resolveKinematicGains(SETTING_KINEMATIC_CONNECTIONS, state);
+  return Object.fromEntries(Object.entries(SETTING_KINEMATIC_NODES).map(([id, node]) => [
+    id,
+    node.phaseOffset + (gains[id] ?? 0) * inputAngle,
+  ]));
+}
+
+export const DIAL_INTERFERENCE_RULES = deepFreeze({
+  intendedContacts: [
+    ["stem", "slidingClutch"],
+    ["stem", "windingClutch"],
+    ["stem", "settingInput"],
+    ["slidingClutch", "windingClutch"],
+    ["slidingClutch", "settingInput"],
+    ["settingInput", "settingTransfer"],
+    ["settingTransfer", "setting1"],
+    ["setting1", "setting2"],
+    ["setting2", "minuteWheel"],
+    ["minuteWheel", "cannonPinion"],
+    ["minutePinion", "hourWheel"],
+    ["centerShaft", "cannonTube"],
+    ["cannonTube", "hourPipe"],
+  ],
+  forbiddenPairs: [
+    ["stem", "minuteWheel"], ["stem", "setting1"], ["stem", "setting2"],
+    ["slidingClutch", "minuteWheel"], ["slidingClutch", "setting1"], ["slidingClutch", "setting2"], ["slidingClutch", "settingTransfer"],
+    ["windingClutch", "minuteWheel"], ["windingClutch", "setting1"], ["windingClutch", "setting2"], ["windingClutch", "settingTransfer"],
+    ["settingInput", "minuteWheel"], ["settingInput", "setting1"], ["settingInput", "setting2"],
+    ["settingTransfer", "setting2"], ["settingTransfer", "minuteWheel"],
+    ["setting1", "minuteWheel"], ["setting1", "cannonPinion"],
+    ["setting2", "cannonPinion"], ["setting2", "hourWheel"],
+    ["minuteWheel", "hourWheel"], ["minutePinion", "cannonTube"],
+  ],
 });
 
 export const CENTER_AXIS = deepFreeze({
@@ -350,6 +480,9 @@ export const CAMERA_PRESETS = deepFreeze({
   reset: { position: [2, 35, 45], target: [0, 2.5, 0], up: [0, 1, 0] },
   train: { position: [4, 23, 27], target: [0, 1, -2], up: [0, 1, 0] },
   dial: { position: [8, -25, -31], target: [3.8, -0.9, -2.4], up: [0, 0, -1] },
+  cannon: { position: [3.6, -11.5, -13.8], target: [0.7, -1.05, -0.15], up: [0, 0, -1] },
+  keyless: { position: [8.5, -10.5, -12.5], target: [4.7, -1.05, -3.35], up: [0, 0, -1] },
+  dialSide: { position: [26, -0.2, -8], target: [3.2, -0.6, -2.1], up: [0, 1, 0] },
   side: { position: [48, 5, 0.25], target: [0, 0, 0], up: [0, 1, 0] },
   structure: { position: [46, 8, 18], target: [0, 1.6, 0], up: [0, 1, 0] },
   top: { position: [0.25, 55, 0.45], target: [0, 1.5, 0], up: [0, 0, -1] },
@@ -371,26 +504,50 @@ export function isPickCandidate(candidate, opacityThreshold = PICK_OPACITY_THRES
 export function choosePickCandidateIndex(candidates, { structuralOpacity = 1 } = {}) {
   const valid = candidates
     .map((candidate, index) => ({ candidate, index }))
-    .filter(({ candidate }) => isPickCandidate(candidate));
-  if (structuralOpacity < 0.45) {
-    const internal = valid.find(({ candidate }) => candidate.structural !== true);
-    if (internal) return internal.index;
-  }
+    .filter(({ candidate }) => isPickCandidate(candidate))
+    .map((entry) => ({
+      ...entry,
+      candidate: {
+        ...entry.candidate,
+        pickPriority: entry.candidate.pickPriority
+          ?? (entry.candidate.structural === true ? (structuralOpacity < 0.45 ? 1 : 2) : 3),
+        distance: entry.candidate.distance ?? Number.POSITIVE_INFINITY,
+        materialOpacity: entry.candidate.materialOpacity ?? 1,
+        projectedArea: entry.candidate.projectedArea ?? 0,
+      },
+    }));
+  valid.sort((left, right) => (
+    right.candidate.pickPriority - left.candidate.pickPriority
+    || left.candidate.distance - right.candidate.distance
+    || right.candidate.materialOpacity - left.candidate.materialOpacity
+    || right.candidate.projectedArea - left.candidate.projectedArea
+    || left.index - right.index
+  ));
   return valid.length ? valid[0].index : -1;
 }
 
-export function isTapGesture({ durationMs, distancePx, moved, multi, controlMoved }) {
+export function isTapGesture({
+  durationMs,
+  distancePx,
+  moved,
+  multi,
+  controlMoved,
+  orbitCooldownMs = Number.POSITIVE_INFINITY,
+  debounced = false,
+}) {
   return durationMs <= 450
-    && distancePx <= 6
+    && distancePx <= 3.5
     && moved !== true
     && multi !== true
-    && controlMoved !== true;
+    && controlMoved !== true
+    && orbitCooldownMs >= 125
+    && debounced !== true;
 }
 
 export const MOTION_STATE_PARTS = deepFreeze({
   run: ["barrel", "center", "third", "fourth", "escape", "cannon", "minute", "hour"],
-  wind: ["crown", "stem", "windingPinion", "slidingPinion", "crownWheel", "ratchet", "barrelArbor"],
-  set: ["crown", "stem", "slidingPinion", "settingTransfer", "setting1", "setting2", "cannon", "minute", "hour"],
+  wind: ["crown", "stem", "windingClutch", "slidingClutch", "crownWheel", "ratchet", "barrelArbor"],
+  set: ["crown", "stem", "slidingClutch", "settingInput", "settingTransfer", "setting1", "setting2", "cannon", "minute", "hour"],
   hack: [],
   stopped: [],
   paused: [],
@@ -427,6 +584,12 @@ export const WATCH_MECHANISM = deepFreeze({
   motionWorks,
   windingWorks,
   keyless,
+  settingKinematics: {
+    nodes: SETTING_KINEMATIC_NODES,
+    connections: SETTING_KINEMATIC_CONNECTIONS,
+    phasePairs: SETTING_MESH_PHASE_PAIRS,
+  },
+  dialInterferenceRules: DIAL_INTERFERENCE_RULES,
   centerAxis: CENTER_AXIS,
   cameraPresets: CAMERA_PRESETS,
   escapement: {
@@ -502,40 +665,45 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
     }
   }
 
-  for (const [id, profile] of [
-    ["windingPinion", config.keyless.windingPinion],
-    ["slidingPinion", config.keyless.slidingPinion],
+  for (const [id, clutch] of [
+    ["windingClutch", config.keyless.windingClutch],
+    ["slidingClutch", config.keyless.slidingClutch],
+    ["settingInput", config.keyless.settingInput],
   ]) {
     checks.push({
-      name: `${id}:radii`,
-      ok: profile.addendumRadius > profile.pitchRadius && profile.pitchRadius > profile.dedendumRadius,
-      actual: [profile.dedendumRadius, profile.pitchRadius, profile.addendumRadius],
-      expected: "dedendum < pitch < addendum",
+      name: `${id}:compact-envelope`,
+      ok: clutch.radius > config.keyless.axis.shaftRadius
+        && clutch.radius <= 0.46
+        && clutch.width <= 0.30,
+      actual: [clutch.radius, clutch.width],
+      expected: "small face/crown clutch envelope",
     });
     checks.push({
       name: `${id}:stem-axis`,
-      ok: Math.abs(profile.layerYWheel - config.keyless.axis.centerY) < EPSILON
-        && Math.abs(profile.centerZ - config.keyless.axis.centerZ) < EPSILON,
-      actual: [profile.layerYWheel, profile.centerZ],
+      ok: Math.abs(clutch.centerY - config.keyless.axis.centerY) < EPSILON
+        && Math.abs(clutch.centerZ - config.keyless.axis.centerZ) < EPSILON,
+      actual: [clutch.centerY, clutch.centerZ],
       expected: [config.keyless.axis.centerY, config.keyless.axis.centerZ],
     });
   }
   checks.push({
     name: "keyless:continuous-axis-order",
-    ok: config.keyless.axis.startX < config.keyless.slidingPinion.centerXSet
-      && config.keyless.slidingPinion.centerXSet < config.keyless.slidingPinion.centerXWind
-      && config.keyless.slidingPinion.centerXWind < config.keyless.windingPinion.centerX
-      && config.keyless.windingPinion.centerX < config.keyless.axis.endX
+    ok: config.keyless.axis.startX < config.keyless.settingInput.centerX
+      && config.keyless.settingInput.centerX < config.keyless.slidingClutch.centerXSet
+      && config.keyless.slidingClutch.centerXSet < config.keyless.slidingClutch.centerXWind
+      && config.keyless.slidingClutch.centerXWind < config.keyless.windingClutch.centerX
+      && config.keyless.windingClutch.centerX < config.keyless.axis.endX
       && config.keyless.axis.endX <= config.keyless.crownX,
     actual: [
       config.keyless.axis.startX,
-      config.keyless.slidingPinion.centerXSet,
-      config.keyless.slidingPinion.centerXWind,
-      config.keyless.windingPinion.centerX,
+      config.keyless.settingInput.centerX,
+      config.keyless.slidingClutch.centerXSet,
+      config.keyless.slidingClutch.centerXWind,
+      config.keyless.windingClutch.centerX,
       config.keyless.axis.endX,
       config.keyless.crownX,
     ],
-    expected: "interior, setting clutch, winding clutch, winding transmission, crown",
+    expected: "interior, compact setting input, sliding positions, compact winding clutch, crown",
   });
 
   const stemClearances = [
@@ -564,29 +732,29 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
     config.motionWorks.setting2,
   ];
   const gearFootprint = (definition) => definition.wheel || definition.pinion;
-  const windingPinionClearance = Math.min(...unintendedSettingGears.map((definition) => circularClearance({
-    x: config.keyless.windingPinion.centerX,
-    z: config.keyless.windingPinion.centerZ,
-    radius: config.keyless.windingPinion.addendumRadius,
+  const windingClutchClearance = Math.min(...unintendedSettingGears.map((definition) => circularClearance({
+    x: config.keyless.windingClutch.centerX,
+    z: config.keyless.windingClutch.centerZ,
+    radius: config.keyless.windingClutch.radius,
   }, {
     x: definition.centerX,
     z: definition.centerZ,
     radius: gearFootprint(definition).addendumRadius,
   })));
   checks.push({
-    name: "keyless:winding-pinion-motion-clearance",
-    ok: windingPinionClearance >= 0.20,
-    actual: windingPinionClearance,
+    name: "keyless:winding-clutch-motion-clearance",
+    ok: windingClutchClearance >= 0.20,
+    actual: windingClutchClearance,
     expected: 0.20,
   });
   for (const [positionName, centerX] of [
-    ["wind", config.keyless.slidingPinion.centerXWind],
-    ["set", config.keyless.slidingPinion.centerXSet],
+    ["wind", config.keyless.slidingClutch.centerXWind],
+    ["set", config.keyless.slidingClutch.centerXSet],
   ]) {
     const sliding = {
       x: centerX,
-      z: config.keyless.slidingPinion.centerZ,
-      radius: config.keyless.slidingPinion.addendumRadius,
+      z: config.keyless.slidingClutch.centerZ,
+      radius: config.keyless.slidingClutch.radius,
     };
     const clearance = Math.min(...unintendedSettingGears.map((definition) => circularClearance(sliding, {
       x: definition.centerX,
@@ -601,14 +769,78 @@ export function validateMechanismConfig(config = WATCH_MECHANISM) {
     });
   }
 
+  const faceContactGap = (left, right, leftX, rightX) => (
+    Math.abs(rightX - leftX)
+      - left.width / 2
+      - right.width / 2
+      - left.dogLength
+      - right.dogLength
+  );
   checks.push({
-    name: "keyless:setting-clutch-transfer",
-    ok: config.keyless.settingClutch.type === "face-dog-and-bevel"
-      && Math.abs(config.keyless.settingClutch.transferX - config.motionWorks.settingTransfer.centerX) < EPSILON
-      && Math.abs(config.keyless.settingClutch.transferZ - config.motionWorks.settingTransfer.centerZ) < EPSILON,
-    actual: config.keyless.settingClutch,
-    expected: "face/dog bevel transfer aligned with the setting transfer wheel",
+    name: "keyless:wind-face-contact",
+    ok: Math.abs(faceContactGap(
+      config.keyless.slidingClutch,
+      config.keyless.windingClutch,
+      config.keyless.slidingClutch.centerXWind,
+      config.keyless.windingClutch.centerX,
+    )) < 0.015,
+    actual: faceContactGap(
+      config.keyless.slidingClutch,
+      config.keyless.windingClutch,
+      config.keyless.slidingClutch.centerXWind,
+      config.keyless.windingClutch.centerX,
+    ),
+    expected: 0,
   });
+  checks.push({
+    name: "keyless:set-face-contact",
+    ok: Math.abs(faceContactGap(
+      config.keyless.settingInput,
+      config.keyless.slidingClutch,
+      config.keyless.settingInput.centerX,
+      config.keyless.slidingClutch.centerXSet,
+    )) < 0.015,
+    actual: faceContactGap(
+      config.keyless.settingInput,
+      config.keyless.slidingClutch,
+      config.keyless.settingInput.centerX,
+      config.keyless.slidingClutch.centerXSet,
+    ),
+    expected: 0,
+  });
+
+  const gains = resolveKinematicGains(config.settingKinematics.connections, "set");
+  for (const nodeId of Object.keys(config.settingKinematics.nodes)) {
+    checks.push({
+      name: `kinematic:${nodeId}-connected`,
+      ok: Number.isFinite(gains[nodeId]),
+      actual: gains[nodeId],
+      expected: "finite gain from crown input",
+    });
+  }
+  for (const connection of config.settingKinematics.connections.filter(({ kind }) => kind === "external-gear")) {
+    checks.push({
+      name: `kinematic:${connection.id}-direction`,
+      ok: connection.direction === -1 && connection.ratio < 0,
+      actual: [connection.direction, connection.ratio],
+      expected: "adjacent external gears reverse",
+    });
+  }
+  for (const pair of config.settingKinematics.phasePairs) {
+    const residual = meshPhaseResidual({
+      inputPhase: config.settingKinematics.nodes[pair.input].phaseOffset,
+      outputPhase: config.settingKinematics.nodes[pair.output].phaseOffset,
+      inputTeeth: pair.inputTeeth,
+      outputTeeth: pair.outputTeeth,
+      centerAngle: pair.centerAngle,
+    });
+    checks.push({
+      name: `phase:${pair.id}-tooth-gap`,
+      ok: Math.abs(residual) < EPSILON,
+      actual: residual,
+      expected: 0,
+    });
+  }
 
   const centerAxis = config.centerAxis;
   const coaxialCenters = [config.train.center, config.motionWorks.cannon, config.motionWorks.hour];
