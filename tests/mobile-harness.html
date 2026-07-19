@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Refactor A.5 mobile viewport harness</title>
+<title>Refactor A.6 mobile viewport harness</title>
 <style>
 html,body{margin:0;min-height:100%;background:#11151b;color:#eef2f7;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
 main{display:grid;place-items:start center;gap:10px;padding:14px}
@@ -14,13 +14,14 @@ iframe{display:block;width:390px;height:844px;border:1px solid #536070;border-ra
 <body>
 <main>
 <h1>390 × 844 browser viewport</h1>
-<p>Refactor A.5の1本指回転、2本指ズーム／パン、選択抑止、パネル開閉後の操作継続を同一オリジンiframe内で検証します。</p>
+<p>Refactor A.6の390×844フレームペーシング、1本指回転、2本指ズーム／パン、選択抑止、パネル開閉後の操作継続を同一オリジンiframe内で検証します。</p>
 <iframe id="mobileApp" title="390×844 Mechanical Watch Study Model" src="../?browserTest=1&amp;panel=collapsed&amp;paused=1&amp;a5mobile=1"></iframe>
 </main>
 <script>
 const query=new URLSearchParams(location.search),frame=document.getElementById('mobileApp');
 if(query.get('evidence')==='1')frame.src='../?panel=collapsed&paused=1&a5mobileEvidence=1';
 if(query.get('demo')==='mobile')frame.src='../?panel=collapsed&paused=1&a5Demo=mobile&a5mobileDemo=1';
+if(query.get('a6Profile'))frame.src=`../?panel=collapsed&paused=0&a6Profile=${encodeURIComponent(query.get('a6Profile'))}&profileMs=${encodeURIComponent(query.get('profileMs')||'10000')}&a6mobile=1`;
 </script>
 </body>
 </html>

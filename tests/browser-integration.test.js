@@ -496,6 +496,34 @@ export async function runBrowserIntegrationTest(diagnostics) {
   const selectionAfterRotation = diagnostics.pickProjectedPart("設定車2");
   check("a5-internal-part-selection-still-works-after-camera-rotation", selectionAfterRotation === "設定車2", { selectionAfterRotation, camera: diagnostics.getCameraOrientation() });
 
+  diagnostics.setStructuralOpacity(1);
+  diagnostics.setRunning(false);
+  const smoothingState = diagnostics.getCameraSmoothingState();
+  const adaptiveState = diagnostics.getAdaptivePixelRatioState();
+  check("a6-arcball-input-camera-is-separated-from-render-camera", smoothingState.architecture === "dual-camera"
+    && smoothingState.render.role === "render" && smoothingState.control.role === "control"
+    && smoothingState.raycasterCameraRole === "render" && smoothingState.cameraFillCameraRole === "render"
+    && smoothingState.scaleFactor === 1.03 && smoothingState.zoomTauSeconds > 0, smoothingState);
+  check("a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update", adaptiveState.current >= adaptiveState.min
+    && adaptiveState.current <= adaptiveState.max && adaptiveState.max <= (viewport.width <= 420 ? 1.25 : 1.5)
+    && adaptiveState.shadowAutoUpdate === false, adaptiveState);
+
+  const pointerPerformance = await diagnostics.runPerformanceScenario({ type: "pointer-rotate", durationMs: 1800 });
+  check("a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets", pointerPerformance.pacing.averageFps >= 55
+    && pointerPerformance.pacing.p95 <= 25 && pointerPerformance.pacing.p99 <= 40
+    && pointerPerformance.pacing.over50 <= 1 && pointerPerformance.pacing.over33 / pointerPerformance.pacing.callbackCount < 0.05
+    && pointerPerformance.motion.reversalCount === 0 && pointerPerformance.motion.stopThenJumpCount === 0
+    && pointerPerformance.motion.finite && pointerPerformance.modelInvariant
+    && pointerPerformance.pacing.events.hairSpringGeometry <= pointerPerformance.pacing.callbackCount * 0.7
+    && pointerPerformance.pacing.events.balanceDom <= Math.ceil(pointerPerformance.pacing.durationMs / 90), pointerPerformance);
+
+  const wheelPerformance = await diagnostics.runPerformanceScenario({ type: "wheel-zoom", durationMs: 1800 });
+  check("a6-wheel-path-produces-monotonic-continuous-zoom", wheelPerformance.pacing.p95 <= 25
+    && wheelPerformance.zoom.monotonic && wheelPerformance.zoom.maxStepShare <= 0.08
+    && wheelPerformance.zoom.alternatingSignCount === 0 && wheelPerformance.zoom.finite
+    && wheelPerformance.smoothing.desiredZoomDistance >= 18 && wheelPerformance.smoothing.desiredZoomDistance <= 120
+    && wheelPerformance.modelInvariant, wheelPerformance);
+
   diagnostics.setFunctionalMode("all");
   diagnostics.setStructuralOpacity(1);
   diagnostics.setCrownTurnRate(0);
@@ -522,5 +550,9 @@ export async function runBrowserIntegrationTest(diagnostics) {
   measurements.twoFingerTouch = twoFingerTouch;
   measurements.selectionAfterRotation = selectionAfterRotation;
   measurements.viewport = viewport;
+  measurements.smoothingState = smoothingState;
+  measurements.adaptiveState = adaptiveState;
+  measurements.pointerPerformance = pointerPerformance;
+  measurements.wheelPerformance = wheelPerformance;
   return { ok: checks.every(({ ok }) => ok), checks, measurements };
 }

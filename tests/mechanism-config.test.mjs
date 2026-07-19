@@ -423,7 +423,7 @@ test("camera presets share one stable VIEW_UP convention", () => {
 test("A.5 uses Arcball navigation without rotating the model root", async () => {
   const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
   assert.ok(source.includes('import {ArcballControls} from "three/addons/controls/ArcballControls.js"'));
-  assert.ok(source.includes("new ArcballControls(camera,renderer.domElement,scene)"));
+  assert.ok(source.includes("new ArcballControls(controlCamera,renderer.domElement,scene)"));
   assert.equal(source.includes("OrbitControls"), false);
   assert.equal(source.includes("root.rotation"), false);
   assert.ok(source.includes("camera.up.fromArray(VIEW_UP)"));
@@ -438,4 +438,37 @@ test("A.5 lighting keeps two keys and a subordinate camera-follow fill", async (
   assert.ok(source.includes("frontKey=new THREE.DirectionalLight(0xfff4df,1.96)"));
   assert.ok(source.includes("backKey=new THREE.DirectionalLight(0xe4edff,1.70)"));
   assert.ok(source.includes("cameraFill=new THREE.PointLight(0xd9e8ff,.38"));
+});
+
+test("A.6 separates Arcball input from the smoothed render camera", async () => {
+  const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.ok(source.includes("controlCamera=new THREE.PerspectiveCamera"));
+  assert.ok(source.includes("renderTarget=new THREE.Vector3"));
+  assert.ok(source.includes("camera.position.lerp(controlCamera.position"));
+  assert.ok(source.includes("camera.quaternion.slerp(controlCamera.quaternion"));
+  assert.ok(source.includes("raycaster.setFromCamera(pointer,camera)"));
+  assert.ok(source.includes("camera.add(cameraFill)"));
+  assert.ok(source.includes("controls.scaleFactor=1.03"));
+  assert.equal(source.includes("controls.scaleFactor=1.16"), false);
+});
+
+test("A.6 adapts render quality without per-frame Arcball or Box3 work", async () => {
+  const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.ok(source.includes("innerWidth<=420?1.25:1.5"));
+  assert.ok(source.includes("renderer.shadowMap.autoUpdate=false"));
+  assert.ok(source.includes("updateAdaptiveQuality(now,rawFrameTime)"));
+  assert.ok(source.includes("selectionBoundsDirty"));
+  const animateSource = source.slice(source.indexOf("function animate(now)"));
+  assert.equal(animateSource.includes("controls.update();renderer.render"), false);
+  assert.ok(animateSource.includes("if(selectionBoundsDirty){profileCost('selectionBox'"));
+  assert.equal(animateSource.includes("if(selectedRoot){profileCost('selectionBox'"), false);
+});
+
+test("A.6 exposes frame pacing and camera smoothness diagnostics", async () => {
+  const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  for (const api of ["startPerformanceCapture", "stopPerformanceCapture", "getFramePacingReport", "getCameraMotionSmoothnessReport", "getZoomSmoothnessReport", "getAdaptivePixelRatioState", "getInteractionQualityMode", "getRenderCostBreakdown", "getCameraSmoothingState"]) assert.ok(source.includes(api), api);
+  assert.ok(source.includes("mainSpringGeometry"));
+  assert.ok(source.includes("hairSpringGeometry"));
+  assert.ok(source.includes("balanceDom"));
+  assert.ok(source.includes("selectionBoxRefresh"));
 });
