@@ -4,10 +4,10 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 
 ## 現在の基準版
 
-- バージョン：v3.8.0（Refactor A.4）
+- バージョン：v3.11.0（Refactor A.7）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の重点：実巻上げ伝達と文字板正面座標規約の検証
+- 現在の重点：キーレス3部品の絶対座標配置と長時間安定性の検証
 
 ## 実装済み
 
@@ -29,7 +29,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 構造部品だけを対象とする復元可能な透過表示
 - 巻上げ／時刻合わせを分離する小径の二位置面クラッチ
 - 中心車軸、筒かな、中空時針車の連続同軸構造
-- Pointer EventsとOrbitControlsを連携したドラッグ／選択判定
+- Pointer EventsとArcballControlsを連携した全方向ドラッグ／選択判定
 - 通常運転・時刻合わせを共通解決する常時噛合いグラフと、独立した一方向巻上げグラフ
 - モジュールと歯数からピッチ径を導出する5組の常時噛合い列
 - 位置1でもミニッツホイールから従動する設定車2・設定車1・設定中間車
@@ -42,6 +42,10 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 香箱胴と香箱真を独立させた相対巻上げ・一方向空転モデル
 - 負Y文字板側を時計の表面とする既定カメラ・UI・座標規約
 - 軸・管との1:1拘束を維持した文字板正面時計回りの3針表示
+- 表裏を同等に照らす両面キーライトと低強度カメラ追従フィル
+- Arcball入力カメラと描画カメラを分離したQuaternion・位置・ズーム平滑化
+- 操作中DPR・影更新の動的制御とフレームペーシング診断
+- 位置1基準と遷移率から毎フレーム絶対配置するりゅうず・巻真・二位置移動クラッチ
 
 ## Refactor Aで対応した主要課題
 
@@ -84,6 +88,27 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 5. 主輪列から針までの符号を一元化し、針と軸・管の1:1拘束を保ったまま正面時計回りを実現
 6. 20件の静的試験、60件の実ブラウザ試験、19枚のWebGL証跡を追加
 
+## Refactor A.5で追加対応した主要課題
+
+1. 負Y文字板面と正Yムーブメント面を同程度に照らす両面ライトリグを構築
+2. 自由回転中の黒つぶれを抑える低強度カメラ追従フィルを追加
+3. モデルを回さず、`VIEW_UP=[0,0,1]`を維持して全方向回転できるArcballControlsへ移行
+4. Pointer／touch操作、部品選択、透過、巻上げ、時計回りの針を実ブラウザ回帰
+
+## Refactor A.6で追加対応した主要課題
+
+1. Arcball入力カメラと描画カメラを分離し、Quaternion・位置・ズーム距離をrAFで平滑化
+2. 段階ズームを連続距離目標へ置換し、pointer回転とwheelズームの停止・跳躍を除去
+3. 操作中のpixel ratioと影更新を動的制御し、Geometry・DOM・Box3更新を削減
+4. p50／p95／p99、33ms・50ms超過、long task、描画コストを診断APIへ追加
+
+## Refactor A.7で追加対応した主要課題
+
+1. りゅうず・巻真・二位置移動クラッチの位置1ローカル基準を生成時に固定
+2. `crownTransition`と分解量から3部品のXYZを単一関数で絶対配置し、累積更新を廃止
+3. 位置2の600実rAFフレーム、100往復、30／60／120fps、3,600高速フレームを検証
+4. 位置1・位置2の禁止干渉0件とA.6以前の機構・カメラ・選択回帰を維持
+
 詳細は以下を参照してください。
 
 - `docs/PROJECT_OVERVIEW.md`
@@ -100,6 +125,14 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - `docs/REFACTOR_A4_SUMMARY.md`
 - `docs/REFACTOR_A4_WINDING_TOPOLOGY.md`
 - `docs/REFACTOR_A4_FRONT_CONVENTION.md`
+- `docs/REFACTOR_A5_SUMMARY.md`
+- `docs/REFACTOR_A5_LIGHTING.md`
+- `docs/REFACTOR_A5_CAMERA_CONTROLS.md`
+- `docs/REFACTOR_A6_SUMMARY.md`
+- `docs/REFACTOR_A6_FRAME_PACING.md`
+- `docs/REFACTOR_A6_CAMERA_SMOOTHING.md`
+- `docs/REFACTOR_A7_SUMMARY.md`
+- `docs/REFACTOR_A7_KEYLESS_POSITION.md`
 
 ## ローカル確認
 

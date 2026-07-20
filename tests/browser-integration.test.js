@@ -23,6 +23,53 @@ export async function runBrowserIntegrationTest(diagnostics) {
   };
 
   diagnostics.setLiveSync(false);
+  diagnostics.setRunning(false);
+  diagnostics.setRuntimeScale(1);
+  diagnostics.setCrownTurnRate(0);
+  diagnostics.setCrownPosition("wind");
+  await diagnostics.waitForFrames(4);
+
+  const keylessBase = diagnostics.getKeylessBasePositions();
+  const keylessSetHold = await diagnostics.holdCrownPosition("set", 600);
+  const setGeometry = keylessSetHold.finalGeometry;
+  check("a7-position2-600-frame-hold-has-zero-coordinate-drift", keylessSetHold.observedFrames >= 600
+    && keylessSetHold.tail.sampleCount === 300
+    && Math.max(keylessSetHold.tail.crownSpan, keylessSetHold.tail.stemSpan, keylessSetHold.tail.slidingClutchSpan) <= 1e-6
+    && keylessSetHold.maxDrift <= 1e-6 && keylessSetHold.tail.finite && keylessSetHold.withinConfiguredTravel, keylessSetHold);
+  check("a7-position2-snaps-to-exact-absolute-keyless-coordinates", setGeometry.transition === 1
+    && Math.abs(setGeometry.crownX - (keylessBase.crownWind[0] + keylessBase.pullOut)) <= 1e-6
+    && Math.abs(setGeometry.stemX - (keylessBase.stemWind[0] + keylessBase.pullOut)) <= 1e-6
+    && Math.abs(setGeometry.slidingClutchX - keylessBase.slidingClutchSet[0]) <= 1e-6
+    && setGeometry.finite, { keylessBase, setGeometry });
+  check("a7-position2-hold-keeps-forbidden-interference-zero", keylessSetHold.interference.forbiddenCount === 0, keylessSetHold.interference);
+
+  const keylessWindReturn = await diagnostics.holdCrownPosition("wind", 180);
+  const windGeometry = keylessWindReturn.finalGeometry;
+  check("a7-position1-return-restores-all-bases-within-one-micromodel-unit", windGeometry.transition === 0
+    && Math.abs(windGeometry.crownX - keylessBase.crownWind[0]) <= 1e-6
+    && Math.abs(windGeometry.stemX - keylessBase.stemWind[0]) <= 1e-6
+    && Math.abs(windGeometry.slidingClutchX - keylessBase.slidingClutchWind[0]) <= 1e-6
+    && windGeometry.maxDrift <= 1e-6, { keylessBase, windGeometry });
+  check("a7-position1-return-keeps-forbidden-interference-zero", keylessWindReturn.interference.forbiddenCount === 0, keylessWindReturn.interference);
+
+  const keylessCycle = diagnostics.runCrownPositionCycleTest(100);
+  check("a7-one-hundred-position-cycles-have-zero-cumulative-error", keylessCycle.count === 100
+    && keylessCycle.maxEndpointError <= 1e-6 && keylessCycle.cumulativeError <= 1e-6
+    && keylessCycle.monotonicViolationCount === 0
+    && keylessCycle.scaleInvariant && keylessCycle.quaternionInvariant
+    && keylessCycle.mechanismAnglesInvariant && keylessCycle.topologyInvariant, keylessCycle);
+  check("a7-30-60-120fps-final-keyless-coordinates-are-identical", keylessCycle.frameRates.allFinalPositionsEqual
+    && keylessCycle.frameRates.results.every(({ transition, maxDrift }) => transition === 1 && maxDrift <= 1e-6), keylessCycle.frameRates);
+  check("a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear", keylessCycle.longHold.frames === 3600
+    && keylessCycle.longHold.maxDrift <= 1e-6 && keylessCycle.longHold.positionDelta <= 1e-6
+    && keylessCycle.longHold.finite && keylessCycle.longHold.selectionLightFinite
+    && keylessCycle.longHold.interferenceStable
+    && keylessCycle.longHold.forbiddenInterference.every((count) => count === 0), keylessCycle.longHold);
+  const keylessDriftReport = diagnostics.getKeylessDriftReport();
+  check("a7-diagnostic-api-retains-real-hold-and-cycle-reports", keylessDriftReport.current.maxDrift <= 1e-6
+    && keylessDriftReport.hold?.position === "wind" && keylessDriftReport.hold?.requestedFrames === 180
+    && keylessDriftReport.cycle?.count === 100, keylessDriftReport);
+
   diagnostics.setRunning(true);
   diagnostics.setRuntimeScale(12);
   diagnostics.setCrownTurnRate(0);
@@ -554,5 +601,10 @@ export async function runBrowserIntegrationTest(diagnostics) {
   measurements.adaptiveState = adaptiveState;
   measurements.pointerPerformance = pointerPerformance;
   measurements.wheelPerformance = wheelPerformance;
+  measurements.keylessBase = keylessBase;
+  measurements.keylessSetHold = keylessSetHold;
+  measurements.keylessWindReturn = keylessWindReturn;
+  measurements.keylessCycle = keylessCycle;
+  measurements.keylessDriftReport = keylessDriftReport;
   return { ok: checks.every(({ ok }) => ok), checks, measurements };
 }
