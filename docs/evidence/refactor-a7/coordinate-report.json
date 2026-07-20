@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "capturedAt": "2026-07-20T14:58:13+09:00",
+  "source": "window.watchModelDiagnostics and browser-integration.test.js",
+  "provenance": {
+    "browserMeasurementState": "working tree before final diagnostic-only audit hardening",
+    "postAuditBrowserRerun": false,
+    "postAuditChecks": ["Node 33/33", "inline module syntax", "JSON/SVG validation", "git diff --check"],
+    "note": "Post-run edits made the drift getter read-only, restored principal caller state after cycle diagnostics, and removed a default empty-object allocation. The absolute runtime placement writer and browser thresholds were unchanged.",
+    "finalSourceSha256": {
+      "index.html": "0520380ce17257220ce5aa10a7b4d8cc619d64061900bdb8eef3b63df9b8f38b",
+      "js/keyless-position.js": "6bef58c72daa5f99ed2dda18bf7537f857c628ac1448694f0abbabf076636b06",
+      "tests/browser-integration.test.js": "c04373dc5d97dd891f56a08f7de703261c2426b0cd939783887af2779412faac"
+    }
+  },
+  "desktop": {
+    "suite": { "passed": 86, "total": 86 },
+    "base": {
+      "crownWind": [19.8, -1.05, -4.5],
+      "stemWind": [0, -1.05, -4.5],
+      "slidingClutchWind": [-2.6953173099927072, -1.05, -4.5],
+      "slidingClutchSet": [4.28, -1.05, -4.5],
+      "pullOut": 1.35
+    },
+    "position2RealRafHold": {
+      "requestedFrames": 600,
+      "observedFrames": 600,
+      "durationMs": 9998.89999999106,
+      "transition": 1,
+      "finalX": { "crown": 21.150000000000002, "stem": 1.35, "slidingClutch": 4.28 },
+      "tail300Span": { "crown": 0, "stem": 0, "slidingClutch": 0 },
+      "maxDrift": 0,
+      "finite": true,
+      "forbiddenInterference": 0
+    },
+    "position1RealRafReturn": {
+      "requestedFrames": 180,
+      "observedFrames": 180,
+      "durationMs": 2999,
+      "transition": 0,
+      "finalX": { "crown": 19.8, "stem": 0, "slidingClutch": -2.6953173099927072 },
+      "maxDrift": 0,
+      "forbiddenInterference": 0
+    },
+    "cycleTest": {
+      "cycles": 100,
+      "maxEndpointError": 0,
+      "cumulativeError": 0,
+      "endpointSpans": { "wind": [0, 0, 0], "set": [0, 0, 0] },
+      "monotonicViolationCount": 0,
+      "scaleInvariant": true,
+      "quaternionInvariant": true,
+      "mechanismAnglesInvariant": true,
+      "maxMechanismAngleError": 0,
+      "topologyInvariant": true
+    },
+    "frameRateFinals": {
+      "allEqual": true,
+      "results": [
+        { "fps": 30, "frames": 300, "transition": 1, "finalX": [21.150000000000002, 1.35, 4.28], "maxDrift": 0 },
+        { "fps": 60, "frames": 600, "transition": 1, "finalX": [21.150000000000002, 1.35, 4.28], "maxDrift": 0 },
+        { "fps": 120, "frames": 1200, "transition": 1, "finalX": [21.150000000000002, 1.35, 4.28], "maxDrift": 0 }
+      ]
+    },
+    "acceleratedLongHold": {
+      "frames": 3600,
+      "maxDrift": 0,
+      "positionDelta": 0,
+      "finite": true,
+      "selectionLightFinite": true,
+      "forbiddenInterferenceBeforeAfter": [0, 0],
+      "heapDeltaBytes": 0
+    },
+    "a6Regression": {
+      "pointer": {
+        "averageFps": 59.574799470377094,
+        "p50Ms": 16.69999999999709,
+        "p95Ms": 16.80000000000291,
+        "p99Ms": 17.80000000000291,
+        "over33Ms": 0,
+        "over50Ms": 0,
+        "longTasks": 0,
+        "directionReversals": 0,
+        "stopThenJump": 0
+      },
+      "wheel": {
+        "averageFps": 59.577774899701055,
+        "p50Ms": 16.69999999999709,
+        "p95Ms": 16.80000000000291,
+        "p99Ms": 18.10000000000582,
+        "over33Ms": 0,
+        "over50Ms": 0,
+        "monotonic": true,
+        "maxStepShare": 0.010630257938049923
+      }
+    }
+  },
+  "mobile390x844": {
+    "suite": {
+      "passed": 87,
+      "total": 88,
+      "a7Passed": 9,
+      "a7Total": 9,
+      "onlyFailure": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent"
+    },
+    "a5Luminance": {
+      "allWithinThirtyPercent": true,
+      "maxRelativeDifference": 0.12426016388653248,
+      "failureReason": "Walnut front foreground sample count was 977; the unchanged test requires more than 1000."
+    },
+    "position2RealRafHold": {
+      "observedFrames": 600,
+      "durationMs": 9999.29999999702,
+      "tail300Span": { "crown": 0, "stem": 0, "slidingClutch": 0 },
+      "maxDrift": 0
+    },
+    "cycleTest": {
+      "cycles": 100,
+      "cumulativeError": 0,
+      "endpointSpans": { "wind": [0, 0, 0], "set": [0, 0, 0] },
+      "frameRateFinalsEqual": true,
+      "acceleratedLongHoldDrift": 0,
+      "heapDeltaBytes": 0
+    },
+    "forbiddenInterference": { "wind": 0, "set": 0 },
+    "a6Regression": {
+      "pointer": {
+        "averageFps": 59.621229833926556,
+        "p50Ms": 16.69999999999709,
+        "p95Ms": 16.80000000000291,
+        "p99Ms": 17.19999999999709,
+        "over33Ms": 0,
+        "over50Ms": 0,
+        "longTasks": 0,
+        "directionReversals": 0,
+        "stopThenJump": 0
+      },
+      "wheel": {
+        "p95Ms": 16.80000000000291,
+        "p99Ms": 16.900000000001455,
+        "over33Ms": 0,
+        "over50Ms": 0,
+        "monotonic": true,
+        "maxStepShare": 0.009994351480145817
+      }
+    }
+  },
+  "captureConstraint": "A further mobile-harness inspection and new screenshot/video capture were blocked by the in-app browser security policy. No alternate browser or capture workaround was used."
+}
