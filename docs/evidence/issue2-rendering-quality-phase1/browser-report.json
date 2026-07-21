@@ -1,0 +1,4888 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-21T18:35:31.386Z",
+  "baselineCommit": "b7496af8e9d4a5cf8f462f64700a38661e44c59a",
+  "captureServer": "http://127.0.0.1:8012/",
+  "physicalIPhone": {
+    "executed": false,
+    "status": "user-confirmation-required",
+    "reason": "Chromium emulation cannot establish Safari/WebKit, OLED, Display P3, or device brightness quality"
+  },
+  "renderingQuality": {
+    "desktop": {
+      "baseline": {
+        "status": "passed",
+        "summary": {
+          "ok": true,
+          "total": 9,
+          "passed": 9,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "issue2-candidate-is-explicit-and-query-only",
+            "ok": true
+          },
+          {
+            "name": "issue2-pipeline-keeps-srgb-aces-and-production-exposure",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-cover-real-model",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-preserve-caster-receiver-flags",
+            "ok": true
+          },
+          {
+            "name": "issue2-baseline-retains-a7-shadow-defaults",
+            "ok": true
+          },
+          {
+            "name": "issue2-baseline-reproduces-transparent-discontinuity",
+            "ok": true
+          },
+          {
+            "name": "issue2-baseline-reproduces-depthwrite-discontinuity",
+            "ok": true
+          },
+          {
+            "name": "issue2-candidate-preserves-three-hand-one-to-one-coupling",
+            "ok": true
+          },
+          {
+            "name": "issue2-diagnostics-do-not-transform-model-root",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "candidate",
+          "pipeline",
+          "structural",
+          "transitions",
+          "visualDecisionRequired"
+        ]
+      },
+      "shadow": {
+        "status": "passed",
+        "summary": {
+          "ok": true,
+          "total": 10,
+          "passed": 10,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "issue2-candidate-is-explicit-and-query-only",
+            "ok": true
+          },
+          {
+            "name": "issue2-pipeline-keeps-srgb-aces-and-production-exposure",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-cover-real-model",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-preserve-caster-receiver-flags",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-candidate-uses-soft-map-and-device-budget",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-candidate-tight-fit-contains-all-model-corners",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-candidate-snaps-center-within-half-texel",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-candidate-keeps-tight-four-percent-margin",
+            "ok": true
+          },
+          {
+            "name": "issue2-candidate-preserves-three-hand-one-to-one-coupling",
+            "ok": true
+          },
+          {
+            "name": "issue2-diagnostics-do-not-transform-model-root",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "candidate",
+          "pipeline",
+          "shadow",
+          "structural",
+          "visualDecisionRequired"
+        ]
+      },
+      "transparency": {
+        "status": "passed",
+        "summary": {
+          "ok": true,
+          "total": 10,
+          "passed": 10,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "issue2-candidate-is-explicit-and-query-only",
+            "ok": true
+          },
+          {
+            "name": "issue2-pipeline-keeps-srgb-aces-and-production-exposure",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-cover-real-model",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-preserve-caster-receiver-flags",
+            "ok": true
+          },
+          {
+            "name": "issue2-transparency-candidate-has-one-stable-render-state",
+            "ok": true
+          },
+          {
+            "name": "issue2-transparency-candidate-has-no-threshold-state-change",
+            "ok": true
+          },
+          {
+            "name": "issue2-transparency-candidate-avoids-slider-shader-churn",
+            "ok": true
+          },
+          {
+            "name": "issue2-transparency-candidate-keeps-internal-selection",
+            "ok": true
+          },
+          {
+            "name": "issue2-candidate-preserves-three-hand-one-to-one-coupling",
+            "ok": true
+          },
+          {
+            "name": "issue2-diagnostics-do-not-transform-model-root",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "candidate",
+          "pipeline",
+          "structural",
+          "transitions",
+          "visualDecisionRequired"
+        ]
+      },
+      "lighting": {
+        "status": "passed",
+        "summary": {
+          "ok": true,
+          "total": 11,
+          "passed": 11,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "issue2-candidate-is-explicit-and-query-only",
+            "ok": true
+          },
+          {
+            "name": "issue2-pipeline-keeps-srgb-aces-and-production-exposure",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-cover-real-model",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-preserve-caster-receiver-flags",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-adds-only-shadowless-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-remains-subordinate-to-key",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-keeps-material-samples-finite",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-keeps-all-theme-front-back-balance",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-avoids-broad-frame-clipping",
+            "ok": true
+          },
+          {
+            "name": "issue2-candidate-preserves-three-hand-one-to-one-coupling",
+            "ok": true
+          },
+          {
+            "name": "issue2-diagnostics-do-not-transform-model-root",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "candidate",
+          "frontBack",
+          "lighting",
+          "pipeline",
+          "structural",
+          "visualDecisionRequired"
+        ]
+      }
+    },
+    "mobile390x844": {
+      "baseline": {
+        "status": "passed",
+        "summary": {
+          "ok": true,
+          "total": 9,
+          "passed": 9,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "issue2-candidate-is-explicit-and-query-only",
+            "ok": true
+          },
+          {
+            "name": "issue2-pipeline-keeps-srgb-aces-and-production-exposure",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-cover-real-model",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-preserve-caster-receiver-flags",
+            "ok": true
+          },
+          {
+            "name": "issue2-baseline-retains-a7-shadow-defaults",
+            "ok": true
+          },
+          {
+            "name": "issue2-baseline-reproduces-transparent-discontinuity",
+            "ok": true
+          },
+          {
+            "name": "issue2-baseline-reproduces-depthwrite-discontinuity",
+            "ok": true
+          },
+          {
+            "name": "issue2-candidate-preserves-three-hand-one-to-one-coupling",
+            "ok": true
+          },
+          {
+            "name": "issue2-diagnostics-do-not-transform-model-root",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "candidate",
+          "pipeline",
+          "structural",
+          "transitions",
+          "visualDecisionRequired"
+        ]
+      },
+      "shadow": {
+        "status": "passed",
+        "summary": {
+          "ok": true,
+          "total": 10,
+          "passed": 10,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "issue2-candidate-is-explicit-and-query-only",
+            "ok": true
+          },
+          {
+            "name": "issue2-pipeline-keeps-srgb-aces-and-production-exposure",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-cover-real-model",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-preserve-caster-receiver-flags",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-candidate-uses-soft-map-and-device-budget",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-candidate-tight-fit-contains-all-model-corners",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-candidate-snaps-center-within-half-texel",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-candidate-keeps-tight-four-percent-margin",
+            "ok": true
+          },
+          {
+            "name": "issue2-candidate-preserves-three-hand-one-to-one-coupling",
+            "ok": true
+          },
+          {
+            "name": "issue2-diagnostics-do-not-transform-model-root",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "candidate",
+          "pipeline",
+          "shadow",
+          "structural",
+          "visualDecisionRequired"
+        ]
+      },
+      "transparency": {
+        "status": "passed",
+        "summary": {
+          "ok": true,
+          "total": 10,
+          "passed": 10,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "issue2-candidate-is-explicit-and-query-only",
+            "ok": true
+          },
+          {
+            "name": "issue2-pipeline-keeps-srgb-aces-and-production-exposure",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-cover-real-model",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-preserve-caster-receiver-flags",
+            "ok": true
+          },
+          {
+            "name": "issue2-transparency-candidate-has-one-stable-render-state",
+            "ok": true
+          },
+          {
+            "name": "issue2-transparency-candidate-has-no-threshold-state-change",
+            "ok": true
+          },
+          {
+            "name": "issue2-transparency-candidate-avoids-slider-shader-churn",
+            "ok": true
+          },
+          {
+            "name": "issue2-transparency-candidate-keeps-internal-selection",
+            "ok": true
+          },
+          {
+            "name": "issue2-candidate-preserves-three-hand-one-to-one-coupling",
+            "ok": true
+          },
+          {
+            "name": "issue2-diagnostics-do-not-transform-model-root",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "candidate",
+          "pipeline",
+          "structural",
+          "transitions",
+          "visualDecisionRequired"
+        ]
+      },
+      "lighting": {
+        "status": "passed",
+        "summary": {
+          "ok": true,
+          "total": 11,
+          "passed": 11,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "issue2-candidate-is-explicit-and-query-only",
+            "ok": true
+          },
+          {
+            "name": "issue2-pipeline-keeps-srgb-aces-and-production-exposure",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-cover-real-model",
+            "ok": true
+          },
+          {
+            "name": "issue2-shadow-and-material-reports-preserve-caster-receiver-flags",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-adds-only-shadowless-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-remains-subordinate-to-key",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-keeps-material-samples-finite",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-keeps-all-theme-front-back-balance",
+            "ok": true
+          },
+          {
+            "name": "issue2-lighting-candidate-avoids-broad-frame-clipping",
+            "ok": true
+          },
+          {
+            "name": "issue2-candidate-preserves-three-hand-one-to-one-coupling",
+            "ok": true
+          },
+          {
+            "name": "issue2-diagnostics-do-not-transform-model-root",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "candidate",
+          "frontBack",
+          "lighting",
+          "pipeline",
+          "structural",
+          "visualDecisionRequired"
+        ]
+      }
+    }
+  },
+  "fullRegression": {
+    "baseline": {
+      "desktop1280x720": {
+        "summary": {
+          "ok": true,
+          "total": 86,
+          "passed": 86,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+            "ok": true
+          },
+          {
+            "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+            "ok": true
+          },
+          {
+            "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+            "ok": true
+          },
+          {
+            "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+            "ok": true
+          },
+          {
+            "name": "position1-normal-moves-permanent-motion-works",
+            "ok": true
+          },
+          {
+            "name": "position1-display-backdrive-stops-at-setting-input",
+            "ok": true
+          },
+          {
+            "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+            "ok": true
+          },
+          {
+            "name": "position1-reports-run-with-permanent-meshes-active",
+            "ok": true
+          },
+          {
+            "name": "fourth-wheel-and-escape-pinion-counter-rotate",
+            "ok": true
+          },
+          {
+            "name": "position1-object3d-ratios-follow-single-graph",
+            "ok": true
+          },
+          {
+            "name": "normal-hand-deltas-and-mounts-match-real-drivers",
+            "ok": true
+          },
+          {
+            "name": "normal-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "position1-winding-branch-rotates",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-rotates-complete-object3d-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-winding-ratios-follow-winding-graph",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-increases-relative-wind-and-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "position1-setting-input-remains-disconnected-during-winding",
+            "ok": true
+          },
+          {
+            "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+            "ok": true
+          },
+          {
+            "name": "winding-does-not-inject-motion-across-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "wind-clutch-state-selects-only-winding-branch",
+            "ok": true
+          },
+          {
+            "name": "wind-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+            "ok": true
+          },
+          {
+            "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-freewheels-upstream-and-holds-ratchet-arbor",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-does-not-reduce-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases",
+            "ok": true
+          },
+          {
+            "name": "wind-to-set-has-no-permanent-angle-jump",
+            "ok": true
+          },
+          {
+            "name": "position2-moves-crown-through-display-and-hands",
+            "ok": true
+          },
+          {
+            "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position2-object3d-ratios-follow-reversed-permanent-graph",
+            "ok": true
+          },
+          {
+            "name": "setting-hand-deltas-stay-rigid-to-tubes",
+            "ok": true
+          },
+          {
+            "name": "setting-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "reverse-setting-reverses-complete-path",
+            "ok": true
+          },
+          {
+            "name": "set-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "actual-envelope-report-present",
+            "ok": true
+          },
+          {
+            "name": "actual-tube-pipe-arbor-ends-contact-hand-bosses",
+            "ok": true
+          },
+          {
+            "name": "set-clutch-state-selects-only-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "position2-explicit-time-updates-held-seconds-and-all-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "set-to-wind-after-adjustment-has-no-main-train-or-hand-jump",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-updates-entire-motion-and-hand-state",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-keeps-hand-coupling-exact",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind",
+            "ok": true
+          },
+          {
+            "name": "live-sync-on-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "live-sync-keeps-unified-object3d-coupling",
+            "ok": true
+          },
+          {
+            "name": "live-sync-reaches-current-time-within-bounded-transition",
+            "ok": true
+          },
+          {
+            "name": "live-sync-off-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "browser-module-report-matches-rendered-centres",
+            "ok": true
+          },
+          {
+            "name": "browser-topology-binds-every-node-to-object3d",
+            "ok": true
+          },
+          {
+            "name": "browser-permanent-topology-declares-run-wind-set",
+            "ok": true
+          },
+          {
+            "name": "browser-winding-topology-binds-crown-through-mainspring",
+            "ok": true
+          },
+          {
+            "name": "reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order",
+            "ok": true
+          },
+          {
+            "name": "front-120000-points-all-hands-to-twelve",
+            "ok": true
+          },
+          {
+            "name": "front-121500-points-minute-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-030000-points-hour-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-small-seconds-visits-12-3-6-9",
+            "ok": true
+          },
+          {
+            "name": "front-continuous-time-increase-is-clockwise",
+            "ok": true
+          },
+          {
+            "name": "all-screen-direction-samples-keep-rigid-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "movement-back-is-positive-y-and-camera-switch-does-not-move-model",
+            "ok": true
+          },
+          {
+            "name": "same-hand-appears-reversed-from-movement-back",
+            "ok": true
+          },
+          {
+            "name": "position2-positive-input-advances-minute-and-hour-clockwise-on-front",
+            "ok": true
+          },
+          {
+            "name": "transparent-structure-allows-internal-raycast-selection",
+            "ok": true
+          },
+          {
+            "name": "diagnostic-layer-is-never-pickable",
+            "ok": true
+          },
+          {
+            "name": "camera-is-idle-after-preset",
+            "ok": true
+          },
+          {
+            "name": "wind-mode-keeps-complete-object3d-path-raycast-selectable",
+            "ok": true
+          },
+          {
+            "name": "a5-uses-arcball-with-one-shared-view-up",
+            "ok": true
+          },
+          {
+            "name": "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "ok": true
+          },
+          {
+            "name": "a5-rendered-lighting-avoids-excessive-crush-and-clipping",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-camera-rotation-does-not-transform-model",
+            "ok": true
+          },
+          {
+            "name": "a5-upward-drag-crosses-poles-and-continues-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-downward-drag-crosses-poles-without-direction-reversal",
+            "ok": true
+          },
+          {
+            "name": "a5-every-ui-preset-starts-unrestricted-finite-rotation",
+            "ok": true
+          },
+          {
+            "name": "a5-one-finger-touch-rotates-without-selecting",
+            "ok": true
+          },
+          {
+            "name": "a5-two-finger-touch-zooms-pans-and-does-not-select",
+            "ok": true
+          },
+          {
+            "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+            "ok": true
+          },
+          {
+            "name": "a6-arcball-input-camera-is-separated-from-render-camera",
+            "ok": true
+          },
+          {
+            "name": "a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update",
+            "ok": true
+          },
+          {
+            "name": "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "ok": true
+          },
+          {
+            "name": "a6-wheel-path-produces-monotonic-continuous-zoom",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "adaptiveState",
+          "downwardRotation",
+          "frontProjection",
+          "handCoupling",
+          "horizontalRotation",
+          "keylessBase",
+          "keylessCycle",
+          "keylessDriftReport",
+          "keylessSetHold",
+          "keylessWindReturn",
+          "lightingRig",
+          "luminance",
+          "moduleReport",
+          "pointerPerformance",
+          "presetFreedom",
+          "runRotations",
+          "secondsDirections",
+          "selection",
+          "selectionAfterRotation",
+          "setInterference",
+          "settingForwardRotations",
+          "settingReverseRotations",
+          "smoothingState",
+          "touchRotation",
+          "twoFingerTouch",
+          "upwardRotation",
+          "viewport",
+          "wheelPerformance",
+          "windInterference",
+          "windRotations",
+          "windingSelections",
+          "windingTransmission"
+        ]
+      },
+      "mobile390x844": {
+        "summary": {
+          "ok": true,
+          "total": 88,
+          "passed": 88,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+            "ok": true
+          },
+          {
+            "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+            "ok": true
+          },
+          {
+            "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+            "ok": true
+          },
+          {
+            "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+            "ok": true
+          },
+          {
+            "name": "position1-normal-moves-permanent-motion-works",
+            "ok": true
+          },
+          {
+            "name": "position1-display-backdrive-stops-at-setting-input",
+            "ok": true
+          },
+          {
+            "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+            "ok": true
+          },
+          {
+            "name": "position1-reports-run-with-permanent-meshes-active",
+            "ok": true
+          },
+          {
+            "name": "fourth-wheel-and-escape-pinion-counter-rotate",
+            "ok": true
+          },
+          {
+            "name": "position1-object3d-ratios-follow-single-graph",
+            "ok": true
+          },
+          {
+            "name": "normal-hand-deltas-and-mounts-match-real-drivers",
+            "ok": true
+          },
+          {
+            "name": "normal-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "position1-winding-branch-rotates",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-rotates-complete-object3d-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-winding-ratios-follow-winding-graph",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-increases-relative-wind-and-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "position1-setting-input-remains-disconnected-during-winding",
+            "ok": true
+          },
+          {
+            "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+            "ok": true
+          },
+          {
+            "name": "winding-does-not-inject-motion-across-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "wind-clutch-state-selects-only-winding-branch",
+            "ok": true
+          },
+          {
+            "name": "wind-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+            "ok": true
+          },
+          {
+            "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-freewheels-upstream-and-holds-ratchet-arbor",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-does-not-reduce-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases",
+            "ok": true
+          },
+          {
+            "name": "wind-to-set-has-no-permanent-angle-jump",
+            "ok": true
+          },
+          {
+            "name": "position2-moves-crown-through-display-and-hands",
+            "ok": true
+          },
+          {
+            "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position2-object3d-ratios-follow-reversed-permanent-graph",
+            "ok": true
+          },
+          {
+            "name": "setting-hand-deltas-stay-rigid-to-tubes",
+            "ok": true
+          },
+          {
+            "name": "setting-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "reverse-setting-reverses-complete-path",
+            "ok": true
+          },
+          {
+            "name": "set-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "actual-envelope-report-present",
+            "ok": true
+          },
+          {
+            "name": "actual-tube-pipe-arbor-ends-contact-hand-bosses",
+            "ok": true
+          },
+          {
+            "name": "set-clutch-state-selects-only-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "position2-explicit-time-updates-held-seconds-and-all-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "set-to-wind-after-adjustment-has-no-main-train-or-hand-jump",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-updates-entire-motion-and-hand-state",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-keeps-hand-coupling-exact",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind",
+            "ok": true
+          },
+          {
+            "name": "live-sync-on-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "live-sync-keeps-unified-object3d-coupling",
+            "ok": true
+          },
+          {
+            "name": "live-sync-reaches-current-time-within-bounded-transition",
+            "ok": true
+          },
+          {
+            "name": "live-sync-off-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "browser-module-report-matches-rendered-centres",
+            "ok": true
+          },
+          {
+            "name": "browser-topology-binds-every-node-to-object3d",
+            "ok": true
+          },
+          {
+            "name": "browser-permanent-topology-declares-run-wind-set",
+            "ok": true
+          },
+          {
+            "name": "browser-winding-topology-binds-crown-through-mainspring",
+            "ok": true
+          },
+          {
+            "name": "reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order",
+            "ok": true
+          },
+          {
+            "name": "front-120000-points-all-hands-to-twelve",
+            "ok": true
+          },
+          {
+            "name": "front-121500-points-minute-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-030000-points-hour-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-small-seconds-visits-12-3-6-9",
+            "ok": true
+          },
+          {
+            "name": "front-continuous-time-increase-is-clockwise",
+            "ok": true
+          },
+          {
+            "name": "all-screen-direction-samples-keep-rigid-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "movement-back-is-positive-y-and-camera-switch-does-not-move-model",
+            "ok": true
+          },
+          {
+            "name": "same-hand-appears-reversed-from-movement-back",
+            "ok": true
+          },
+          {
+            "name": "position2-positive-input-advances-minute-and-hour-clockwise-on-front",
+            "ok": true
+          },
+          {
+            "name": "transparent-structure-allows-internal-raycast-selection",
+            "ok": true
+          },
+          {
+            "name": "diagnostic-layer-is-never-pickable",
+            "ok": true
+          },
+          {
+            "name": "camera-is-idle-after-preset",
+            "ok": true
+          },
+          {
+            "name": "wind-mode-keeps-complete-object3d-path-raycast-selectable",
+            "ok": true
+          },
+          {
+            "name": "a5-uses-arcball-with-one-shared-view-up",
+            "ok": true
+          },
+          {
+            "name": "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "ok": true
+          },
+          {
+            "name": "a5-rendered-lighting-avoids-excessive-crush-and-clipping",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-camera-rotation-does-not-transform-model",
+            "ok": true
+          },
+          {
+            "name": "a5-upward-drag-crosses-poles-and-continues-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-downward-drag-crosses-poles-without-direction-reversal",
+            "ok": true
+          },
+          {
+            "name": "a5-every-ui-preset-starts-unrestricted-finite-rotation",
+            "ok": true
+          },
+          {
+            "name": "a5-one-finger-touch-rotates-without-selecting",
+            "ok": true
+          },
+          {
+            "name": "a5-two-finger-touch-zooms-pans-and-does-not-select",
+            "ok": true
+          },
+          {
+            "name": "a5-mobile-test-runs-at-390x844-class-viewport",
+            "ok": true
+          },
+          {
+            "name": "a5-mobile-navigation-continues-after-panel-open-close",
+            "ok": true
+          },
+          {
+            "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+            "ok": true
+          },
+          {
+            "name": "a6-arcball-input-camera-is-separated-from-render-camera",
+            "ok": true
+          },
+          {
+            "name": "a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update",
+            "ok": true
+          },
+          {
+            "name": "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "ok": true
+          },
+          {
+            "name": "a6-wheel-path-produces-monotonic-continuous-zoom",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "adaptiveState",
+          "downwardRotation",
+          "frontProjection",
+          "handCoupling",
+          "horizontalRotation",
+          "keylessBase",
+          "keylessCycle",
+          "keylessDriftReport",
+          "keylessSetHold",
+          "keylessWindReturn",
+          "lightingRig",
+          "luminance",
+          "moduleReport",
+          "pointerPerformance",
+          "presetFreedom",
+          "runRotations",
+          "secondsDirections",
+          "selection",
+          "selectionAfterRotation",
+          "setInterference",
+          "settingForwardRotations",
+          "settingReverseRotations",
+          "smoothingState",
+          "touchRotation",
+          "twoFingerTouch",
+          "upwardRotation",
+          "viewport",
+          "wheelPerformance",
+          "windInterference",
+          "windRotations",
+          "windingSelections",
+          "windingTransmission"
+        ]
+      }
+    },
+    "candidateA": {
+      "desktop1280x720": {
+        "summary": {
+          "ok": true,
+          "total": 86,
+          "passed": 86,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+            "ok": true
+          },
+          {
+            "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+            "ok": true
+          },
+          {
+            "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+            "ok": true
+          },
+          {
+            "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+            "ok": true
+          },
+          {
+            "name": "position1-normal-moves-permanent-motion-works",
+            "ok": true
+          },
+          {
+            "name": "position1-display-backdrive-stops-at-setting-input",
+            "ok": true
+          },
+          {
+            "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+            "ok": true
+          },
+          {
+            "name": "position1-reports-run-with-permanent-meshes-active",
+            "ok": true
+          },
+          {
+            "name": "fourth-wheel-and-escape-pinion-counter-rotate",
+            "ok": true
+          },
+          {
+            "name": "position1-object3d-ratios-follow-single-graph",
+            "ok": true
+          },
+          {
+            "name": "normal-hand-deltas-and-mounts-match-real-drivers",
+            "ok": true
+          },
+          {
+            "name": "normal-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "position1-winding-branch-rotates",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-rotates-complete-object3d-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-winding-ratios-follow-winding-graph",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-increases-relative-wind-and-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "position1-setting-input-remains-disconnected-during-winding",
+            "ok": true
+          },
+          {
+            "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+            "ok": true
+          },
+          {
+            "name": "winding-does-not-inject-motion-across-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "wind-clutch-state-selects-only-winding-branch",
+            "ok": true
+          },
+          {
+            "name": "wind-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+            "ok": true
+          },
+          {
+            "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-freewheels-upstream-and-holds-ratchet-arbor",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-does-not-reduce-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases",
+            "ok": true
+          },
+          {
+            "name": "wind-to-set-has-no-permanent-angle-jump",
+            "ok": true
+          },
+          {
+            "name": "position2-moves-crown-through-display-and-hands",
+            "ok": true
+          },
+          {
+            "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position2-object3d-ratios-follow-reversed-permanent-graph",
+            "ok": true
+          },
+          {
+            "name": "setting-hand-deltas-stay-rigid-to-tubes",
+            "ok": true
+          },
+          {
+            "name": "setting-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "reverse-setting-reverses-complete-path",
+            "ok": true
+          },
+          {
+            "name": "set-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "actual-envelope-report-present",
+            "ok": true
+          },
+          {
+            "name": "actual-tube-pipe-arbor-ends-contact-hand-bosses",
+            "ok": true
+          },
+          {
+            "name": "set-clutch-state-selects-only-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "position2-explicit-time-updates-held-seconds-and-all-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "set-to-wind-after-adjustment-has-no-main-train-or-hand-jump",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-updates-entire-motion-and-hand-state",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-keeps-hand-coupling-exact",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind",
+            "ok": true
+          },
+          {
+            "name": "live-sync-on-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "live-sync-keeps-unified-object3d-coupling",
+            "ok": true
+          },
+          {
+            "name": "live-sync-reaches-current-time-within-bounded-transition",
+            "ok": true
+          },
+          {
+            "name": "live-sync-off-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "browser-module-report-matches-rendered-centres",
+            "ok": true
+          },
+          {
+            "name": "browser-topology-binds-every-node-to-object3d",
+            "ok": true
+          },
+          {
+            "name": "browser-permanent-topology-declares-run-wind-set",
+            "ok": true
+          },
+          {
+            "name": "browser-winding-topology-binds-crown-through-mainspring",
+            "ok": true
+          },
+          {
+            "name": "reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order",
+            "ok": true
+          },
+          {
+            "name": "front-120000-points-all-hands-to-twelve",
+            "ok": true
+          },
+          {
+            "name": "front-121500-points-minute-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-030000-points-hour-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-small-seconds-visits-12-3-6-9",
+            "ok": true
+          },
+          {
+            "name": "front-continuous-time-increase-is-clockwise",
+            "ok": true
+          },
+          {
+            "name": "all-screen-direction-samples-keep-rigid-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "movement-back-is-positive-y-and-camera-switch-does-not-move-model",
+            "ok": true
+          },
+          {
+            "name": "same-hand-appears-reversed-from-movement-back",
+            "ok": true
+          },
+          {
+            "name": "position2-positive-input-advances-minute-and-hour-clockwise-on-front",
+            "ok": true
+          },
+          {
+            "name": "transparent-structure-allows-internal-raycast-selection",
+            "ok": true
+          },
+          {
+            "name": "diagnostic-layer-is-never-pickable",
+            "ok": true
+          },
+          {
+            "name": "camera-is-idle-after-preset",
+            "ok": true
+          },
+          {
+            "name": "wind-mode-keeps-complete-object3d-path-raycast-selectable",
+            "ok": true
+          },
+          {
+            "name": "a5-uses-arcball-with-one-shared-view-up",
+            "ok": true
+          },
+          {
+            "name": "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "ok": true
+          },
+          {
+            "name": "a5-rendered-lighting-avoids-excessive-crush-and-clipping",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-camera-rotation-does-not-transform-model",
+            "ok": true
+          },
+          {
+            "name": "a5-upward-drag-crosses-poles-and-continues-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-downward-drag-crosses-poles-without-direction-reversal",
+            "ok": true
+          },
+          {
+            "name": "a5-every-ui-preset-starts-unrestricted-finite-rotation",
+            "ok": true
+          },
+          {
+            "name": "a5-one-finger-touch-rotates-without-selecting",
+            "ok": true
+          },
+          {
+            "name": "a5-two-finger-touch-zooms-pans-and-does-not-select",
+            "ok": true
+          },
+          {
+            "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+            "ok": true
+          },
+          {
+            "name": "a6-arcball-input-camera-is-separated-from-render-camera",
+            "ok": true
+          },
+          {
+            "name": "a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update",
+            "ok": true
+          },
+          {
+            "name": "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "ok": true
+          },
+          {
+            "name": "a6-wheel-path-produces-monotonic-continuous-zoom",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "adaptiveState",
+          "downwardRotation",
+          "frontProjection",
+          "handCoupling",
+          "horizontalRotation",
+          "keylessBase",
+          "keylessCycle",
+          "keylessDriftReport",
+          "keylessSetHold",
+          "keylessWindReturn",
+          "lightingRig",
+          "luminance",
+          "moduleReport",
+          "pointerPerformance",
+          "presetFreedom",
+          "runRotations",
+          "secondsDirections",
+          "selection",
+          "selectionAfterRotation",
+          "setInterference",
+          "settingForwardRotations",
+          "settingReverseRotations",
+          "smoothingState",
+          "touchRotation",
+          "twoFingerTouch",
+          "upwardRotation",
+          "viewport",
+          "wheelPerformance",
+          "windInterference",
+          "windRotations",
+          "windingSelections",
+          "windingTransmission"
+        ]
+      },
+      "mobile390x844": {
+        "summary": {
+          "ok": true,
+          "total": 88,
+          "passed": 88,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+            "ok": true
+          },
+          {
+            "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+            "ok": true
+          },
+          {
+            "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+            "ok": true
+          },
+          {
+            "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+            "ok": true
+          },
+          {
+            "name": "position1-normal-moves-permanent-motion-works",
+            "ok": true
+          },
+          {
+            "name": "position1-display-backdrive-stops-at-setting-input",
+            "ok": true
+          },
+          {
+            "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+            "ok": true
+          },
+          {
+            "name": "position1-reports-run-with-permanent-meshes-active",
+            "ok": true
+          },
+          {
+            "name": "fourth-wheel-and-escape-pinion-counter-rotate",
+            "ok": true
+          },
+          {
+            "name": "position1-object3d-ratios-follow-single-graph",
+            "ok": true
+          },
+          {
+            "name": "normal-hand-deltas-and-mounts-match-real-drivers",
+            "ok": true
+          },
+          {
+            "name": "normal-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "position1-winding-branch-rotates",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-rotates-complete-object3d-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-winding-ratios-follow-winding-graph",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-increases-relative-wind-and-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "position1-setting-input-remains-disconnected-during-winding",
+            "ok": true
+          },
+          {
+            "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+            "ok": true
+          },
+          {
+            "name": "winding-does-not-inject-motion-across-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "wind-clutch-state-selects-only-winding-branch",
+            "ok": true
+          },
+          {
+            "name": "wind-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+            "ok": true
+          },
+          {
+            "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-freewheels-upstream-and-holds-ratchet-arbor",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-does-not-reduce-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases",
+            "ok": true
+          },
+          {
+            "name": "wind-to-set-has-no-permanent-angle-jump",
+            "ok": true
+          },
+          {
+            "name": "position2-moves-crown-through-display-and-hands",
+            "ok": true
+          },
+          {
+            "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position2-object3d-ratios-follow-reversed-permanent-graph",
+            "ok": true
+          },
+          {
+            "name": "setting-hand-deltas-stay-rigid-to-tubes",
+            "ok": true
+          },
+          {
+            "name": "setting-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "reverse-setting-reverses-complete-path",
+            "ok": true
+          },
+          {
+            "name": "set-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "actual-envelope-report-present",
+            "ok": true
+          },
+          {
+            "name": "actual-tube-pipe-arbor-ends-contact-hand-bosses",
+            "ok": true
+          },
+          {
+            "name": "set-clutch-state-selects-only-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "position2-explicit-time-updates-held-seconds-and-all-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "set-to-wind-after-adjustment-has-no-main-train-or-hand-jump",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-updates-entire-motion-and-hand-state",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-keeps-hand-coupling-exact",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind",
+            "ok": true
+          },
+          {
+            "name": "live-sync-on-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "live-sync-keeps-unified-object3d-coupling",
+            "ok": true
+          },
+          {
+            "name": "live-sync-reaches-current-time-within-bounded-transition",
+            "ok": true
+          },
+          {
+            "name": "live-sync-off-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "browser-module-report-matches-rendered-centres",
+            "ok": true
+          },
+          {
+            "name": "browser-topology-binds-every-node-to-object3d",
+            "ok": true
+          },
+          {
+            "name": "browser-permanent-topology-declares-run-wind-set",
+            "ok": true
+          },
+          {
+            "name": "browser-winding-topology-binds-crown-through-mainspring",
+            "ok": true
+          },
+          {
+            "name": "reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order",
+            "ok": true
+          },
+          {
+            "name": "front-120000-points-all-hands-to-twelve",
+            "ok": true
+          },
+          {
+            "name": "front-121500-points-minute-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-030000-points-hour-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-small-seconds-visits-12-3-6-9",
+            "ok": true
+          },
+          {
+            "name": "front-continuous-time-increase-is-clockwise",
+            "ok": true
+          },
+          {
+            "name": "all-screen-direction-samples-keep-rigid-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "movement-back-is-positive-y-and-camera-switch-does-not-move-model",
+            "ok": true
+          },
+          {
+            "name": "same-hand-appears-reversed-from-movement-back",
+            "ok": true
+          },
+          {
+            "name": "position2-positive-input-advances-minute-and-hour-clockwise-on-front",
+            "ok": true
+          },
+          {
+            "name": "transparent-structure-allows-internal-raycast-selection",
+            "ok": true
+          },
+          {
+            "name": "diagnostic-layer-is-never-pickable",
+            "ok": true
+          },
+          {
+            "name": "camera-is-idle-after-preset",
+            "ok": true
+          },
+          {
+            "name": "wind-mode-keeps-complete-object3d-path-raycast-selectable",
+            "ok": true
+          },
+          {
+            "name": "a5-uses-arcball-with-one-shared-view-up",
+            "ok": true
+          },
+          {
+            "name": "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "ok": true
+          },
+          {
+            "name": "a5-rendered-lighting-avoids-excessive-crush-and-clipping",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-camera-rotation-does-not-transform-model",
+            "ok": true
+          },
+          {
+            "name": "a5-upward-drag-crosses-poles-and-continues-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-downward-drag-crosses-poles-without-direction-reversal",
+            "ok": true
+          },
+          {
+            "name": "a5-every-ui-preset-starts-unrestricted-finite-rotation",
+            "ok": true
+          },
+          {
+            "name": "a5-one-finger-touch-rotates-without-selecting",
+            "ok": true
+          },
+          {
+            "name": "a5-two-finger-touch-zooms-pans-and-does-not-select",
+            "ok": true
+          },
+          {
+            "name": "a5-mobile-test-runs-at-390x844-class-viewport",
+            "ok": true
+          },
+          {
+            "name": "a5-mobile-navigation-continues-after-panel-open-close",
+            "ok": true
+          },
+          {
+            "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+            "ok": true
+          },
+          {
+            "name": "a6-arcball-input-camera-is-separated-from-render-camera",
+            "ok": true
+          },
+          {
+            "name": "a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update",
+            "ok": true
+          },
+          {
+            "name": "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "ok": true
+          },
+          {
+            "name": "a6-wheel-path-produces-monotonic-continuous-zoom",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "adaptiveState",
+          "downwardRotation",
+          "frontProjection",
+          "handCoupling",
+          "horizontalRotation",
+          "keylessBase",
+          "keylessCycle",
+          "keylessDriftReport",
+          "keylessSetHold",
+          "keylessWindReturn",
+          "lightingRig",
+          "luminance",
+          "moduleReport",
+          "pointerPerformance",
+          "presetFreedom",
+          "runRotations",
+          "secondsDirections",
+          "selection",
+          "selectionAfterRotation",
+          "setInterference",
+          "settingForwardRotations",
+          "settingReverseRotations",
+          "smoothingState",
+          "touchRotation",
+          "twoFingerTouch",
+          "upwardRotation",
+          "viewport",
+          "wheelPerformance",
+          "windInterference",
+          "windRotations",
+          "windingSelections",
+          "windingTransmission"
+        ]
+      }
+    },
+    "candidateB": {
+      "desktop1280x720": {
+        "summary": {
+          "ok": true,
+          "total": 86,
+          "passed": 86,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+            "ok": true
+          },
+          {
+            "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+            "ok": true
+          },
+          {
+            "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+            "ok": true
+          },
+          {
+            "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+            "ok": true
+          },
+          {
+            "name": "position1-normal-moves-permanent-motion-works",
+            "ok": true
+          },
+          {
+            "name": "position1-display-backdrive-stops-at-setting-input",
+            "ok": true
+          },
+          {
+            "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+            "ok": true
+          },
+          {
+            "name": "position1-reports-run-with-permanent-meshes-active",
+            "ok": true
+          },
+          {
+            "name": "fourth-wheel-and-escape-pinion-counter-rotate",
+            "ok": true
+          },
+          {
+            "name": "position1-object3d-ratios-follow-single-graph",
+            "ok": true
+          },
+          {
+            "name": "normal-hand-deltas-and-mounts-match-real-drivers",
+            "ok": true
+          },
+          {
+            "name": "normal-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "position1-winding-branch-rotates",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-rotates-complete-object3d-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-winding-ratios-follow-winding-graph",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-increases-relative-wind-and-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "position1-setting-input-remains-disconnected-during-winding",
+            "ok": true
+          },
+          {
+            "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+            "ok": true
+          },
+          {
+            "name": "winding-does-not-inject-motion-across-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "wind-clutch-state-selects-only-winding-branch",
+            "ok": true
+          },
+          {
+            "name": "wind-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+            "ok": true
+          },
+          {
+            "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-freewheels-upstream-and-holds-ratchet-arbor",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-does-not-reduce-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases",
+            "ok": true
+          },
+          {
+            "name": "wind-to-set-has-no-permanent-angle-jump",
+            "ok": true
+          },
+          {
+            "name": "position2-moves-crown-through-display-and-hands",
+            "ok": true
+          },
+          {
+            "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position2-object3d-ratios-follow-reversed-permanent-graph",
+            "ok": true
+          },
+          {
+            "name": "setting-hand-deltas-stay-rigid-to-tubes",
+            "ok": true
+          },
+          {
+            "name": "setting-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "reverse-setting-reverses-complete-path",
+            "ok": true
+          },
+          {
+            "name": "set-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "actual-envelope-report-present",
+            "ok": true
+          },
+          {
+            "name": "actual-tube-pipe-arbor-ends-contact-hand-bosses",
+            "ok": true
+          },
+          {
+            "name": "set-clutch-state-selects-only-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "position2-explicit-time-updates-held-seconds-and-all-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "set-to-wind-after-adjustment-has-no-main-train-or-hand-jump",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-updates-entire-motion-and-hand-state",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-keeps-hand-coupling-exact",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind",
+            "ok": true
+          },
+          {
+            "name": "live-sync-on-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "live-sync-keeps-unified-object3d-coupling",
+            "ok": true
+          },
+          {
+            "name": "live-sync-reaches-current-time-within-bounded-transition",
+            "ok": true
+          },
+          {
+            "name": "live-sync-off-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "browser-module-report-matches-rendered-centres",
+            "ok": true
+          },
+          {
+            "name": "browser-topology-binds-every-node-to-object3d",
+            "ok": true
+          },
+          {
+            "name": "browser-permanent-topology-declares-run-wind-set",
+            "ok": true
+          },
+          {
+            "name": "browser-winding-topology-binds-crown-through-mainspring",
+            "ok": true
+          },
+          {
+            "name": "reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order",
+            "ok": true
+          },
+          {
+            "name": "front-120000-points-all-hands-to-twelve",
+            "ok": true
+          },
+          {
+            "name": "front-121500-points-minute-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-030000-points-hour-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-small-seconds-visits-12-3-6-9",
+            "ok": true
+          },
+          {
+            "name": "front-continuous-time-increase-is-clockwise",
+            "ok": true
+          },
+          {
+            "name": "all-screen-direction-samples-keep-rigid-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "movement-back-is-positive-y-and-camera-switch-does-not-move-model",
+            "ok": true
+          },
+          {
+            "name": "same-hand-appears-reversed-from-movement-back",
+            "ok": true
+          },
+          {
+            "name": "position2-positive-input-advances-minute-and-hour-clockwise-on-front",
+            "ok": true
+          },
+          {
+            "name": "transparent-structure-allows-internal-raycast-selection",
+            "ok": true
+          },
+          {
+            "name": "diagnostic-layer-is-never-pickable",
+            "ok": true
+          },
+          {
+            "name": "camera-is-idle-after-preset",
+            "ok": true
+          },
+          {
+            "name": "wind-mode-keeps-complete-object3d-path-raycast-selectable",
+            "ok": true
+          },
+          {
+            "name": "a5-uses-arcball-with-one-shared-view-up",
+            "ok": true
+          },
+          {
+            "name": "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "ok": true
+          },
+          {
+            "name": "a5-rendered-lighting-avoids-excessive-crush-and-clipping",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-camera-rotation-does-not-transform-model",
+            "ok": true
+          },
+          {
+            "name": "a5-upward-drag-crosses-poles-and-continues-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-downward-drag-crosses-poles-without-direction-reversal",
+            "ok": true
+          },
+          {
+            "name": "a5-every-ui-preset-starts-unrestricted-finite-rotation",
+            "ok": true
+          },
+          {
+            "name": "a5-one-finger-touch-rotates-without-selecting",
+            "ok": true
+          },
+          {
+            "name": "a5-two-finger-touch-zooms-pans-and-does-not-select",
+            "ok": true
+          },
+          {
+            "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+            "ok": true
+          },
+          {
+            "name": "a6-arcball-input-camera-is-separated-from-render-camera",
+            "ok": true
+          },
+          {
+            "name": "a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update",
+            "ok": true
+          },
+          {
+            "name": "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "ok": true
+          },
+          {
+            "name": "a6-wheel-path-produces-monotonic-continuous-zoom",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "adaptiveState",
+          "downwardRotation",
+          "frontProjection",
+          "handCoupling",
+          "horizontalRotation",
+          "keylessBase",
+          "keylessCycle",
+          "keylessDriftReport",
+          "keylessSetHold",
+          "keylessWindReturn",
+          "lightingRig",
+          "luminance",
+          "moduleReport",
+          "pointerPerformance",
+          "presetFreedom",
+          "runRotations",
+          "secondsDirections",
+          "selection",
+          "selectionAfterRotation",
+          "setInterference",
+          "settingForwardRotations",
+          "settingReverseRotations",
+          "smoothingState",
+          "touchRotation",
+          "twoFingerTouch",
+          "upwardRotation",
+          "viewport",
+          "wheelPerformance",
+          "windInterference",
+          "windRotations",
+          "windingSelections",
+          "windingTransmission"
+        ]
+      },
+      "mobile390x844": {
+        "summary": {
+          "ok": true,
+          "total": 88,
+          "passed": 88,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+            "ok": true
+          },
+          {
+            "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+            "ok": true
+          },
+          {
+            "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+            "ok": true
+          },
+          {
+            "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+            "ok": true
+          },
+          {
+            "name": "position1-normal-moves-permanent-motion-works",
+            "ok": true
+          },
+          {
+            "name": "position1-display-backdrive-stops-at-setting-input",
+            "ok": true
+          },
+          {
+            "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+            "ok": true
+          },
+          {
+            "name": "position1-reports-run-with-permanent-meshes-active",
+            "ok": true
+          },
+          {
+            "name": "fourth-wheel-and-escape-pinion-counter-rotate",
+            "ok": true
+          },
+          {
+            "name": "position1-object3d-ratios-follow-single-graph",
+            "ok": true
+          },
+          {
+            "name": "normal-hand-deltas-and-mounts-match-real-drivers",
+            "ok": true
+          },
+          {
+            "name": "normal-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "position1-winding-branch-rotates",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-rotates-complete-object3d-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-winding-ratios-follow-winding-graph",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-increases-relative-wind-and-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "position1-setting-input-remains-disconnected-during-winding",
+            "ok": true
+          },
+          {
+            "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+            "ok": true
+          },
+          {
+            "name": "winding-does-not-inject-motion-across-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "wind-clutch-state-selects-only-winding-branch",
+            "ok": true
+          },
+          {
+            "name": "wind-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+            "ok": true
+          },
+          {
+            "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-freewheels-upstream-and-holds-ratchet-arbor",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-does-not-reduce-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases",
+            "ok": true
+          },
+          {
+            "name": "wind-to-set-has-no-permanent-angle-jump",
+            "ok": true
+          },
+          {
+            "name": "position2-moves-crown-through-display-and-hands",
+            "ok": true
+          },
+          {
+            "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position2-object3d-ratios-follow-reversed-permanent-graph",
+            "ok": true
+          },
+          {
+            "name": "setting-hand-deltas-stay-rigid-to-tubes",
+            "ok": true
+          },
+          {
+            "name": "setting-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "reverse-setting-reverses-complete-path",
+            "ok": true
+          },
+          {
+            "name": "set-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "actual-envelope-report-present",
+            "ok": true
+          },
+          {
+            "name": "actual-tube-pipe-arbor-ends-contact-hand-bosses",
+            "ok": true
+          },
+          {
+            "name": "set-clutch-state-selects-only-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "position2-explicit-time-updates-held-seconds-and-all-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "set-to-wind-after-adjustment-has-no-main-train-or-hand-jump",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-updates-entire-motion-and-hand-state",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-keeps-hand-coupling-exact",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind",
+            "ok": true
+          },
+          {
+            "name": "live-sync-on-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "live-sync-keeps-unified-object3d-coupling",
+            "ok": true
+          },
+          {
+            "name": "live-sync-reaches-current-time-within-bounded-transition",
+            "ok": true
+          },
+          {
+            "name": "live-sync-off-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "browser-module-report-matches-rendered-centres",
+            "ok": true
+          },
+          {
+            "name": "browser-topology-binds-every-node-to-object3d",
+            "ok": true
+          },
+          {
+            "name": "browser-permanent-topology-declares-run-wind-set",
+            "ok": true
+          },
+          {
+            "name": "browser-winding-topology-binds-crown-through-mainspring",
+            "ok": true
+          },
+          {
+            "name": "reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order",
+            "ok": true
+          },
+          {
+            "name": "front-120000-points-all-hands-to-twelve",
+            "ok": true
+          },
+          {
+            "name": "front-121500-points-minute-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-030000-points-hour-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-small-seconds-visits-12-3-6-9",
+            "ok": true
+          },
+          {
+            "name": "front-continuous-time-increase-is-clockwise",
+            "ok": true
+          },
+          {
+            "name": "all-screen-direction-samples-keep-rigid-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "movement-back-is-positive-y-and-camera-switch-does-not-move-model",
+            "ok": true
+          },
+          {
+            "name": "same-hand-appears-reversed-from-movement-back",
+            "ok": true
+          },
+          {
+            "name": "position2-positive-input-advances-minute-and-hour-clockwise-on-front",
+            "ok": true
+          },
+          {
+            "name": "transparent-structure-allows-internal-raycast-selection",
+            "ok": true
+          },
+          {
+            "name": "diagnostic-layer-is-never-pickable",
+            "ok": true
+          },
+          {
+            "name": "camera-is-idle-after-preset",
+            "ok": true
+          },
+          {
+            "name": "wind-mode-keeps-complete-object3d-path-raycast-selectable",
+            "ok": true
+          },
+          {
+            "name": "a5-uses-arcball-with-one-shared-view-up",
+            "ok": true
+          },
+          {
+            "name": "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "ok": true
+          },
+          {
+            "name": "a5-rendered-lighting-avoids-excessive-crush-and-clipping",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-camera-rotation-does-not-transform-model",
+            "ok": true
+          },
+          {
+            "name": "a5-upward-drag-crosses-poles-and-continues-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-downward-drag-crosses-poles-without-direction-reversal",
+            "ok": true
+          },
+          {
+            "name": "a5-every-ui-preset-starts-unrestricted-finite-rotation",
+            "ok": true
+          },
+          {
+            "name": "a5-one-finger-touch-rotates-without-selecting",
+            "ok": true
+          },
+          {
+            "name": "a5-two-finger-touch-zooms-pans-and-does-not-select",
+            "ok": true
+          },
+          {
+            "name": "a5-mobile-test-runs-at-390x844-class-viewport",
+            "ok": true
+          },
+          {
+            "name": "a5-mobile-navigation-continues-after-panel-open-close",
+            "ok": true
+          },
+          {
+            "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+            "ok": true
+          },
+          {
+            "name": "a6-arcball-input-camera-is-separated-from-render-camera",
+            "ok": true
+          },
+          {
+            "name": "a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update",
+            "ok": true
+          },
+          {
+            "name": "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "ok": true
+          },
+          {
+            "name": "a6-wheel-path-produces-monotonic-continuous-zoom",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "adaptiveState",
+          "downwardRotation",
+          "frontProjection",
+          "handCoupling",
+          "horizontalRotation",
+          "keylessBase",
+          "keylessCycle",
+          "keylessDriftReport",
+          "keylessSetHold",
+          "keylessWindReturn",
+          "lightingRig",
+          "luminance",
+          "moduleReport",
+          "pointerPerformance",
+          "presetFreedom",
+          "runRotations",
+          "secondsDirections",
+          "selection",
+          "selectionAfterRotation",
+          "setInterference",
+          "settingForwardRotations",
+          "settingReverseRotations",
+          "smoothingState",
+          "touchRotation",
+          "twoFingerTouch",
+          "upwardRotation",
+          "viewport",
+          "wheelPerformance",
+          "windInterference",
+          "windRotations",
+          "windingSelections",
+          "windingTransmission"
+        ]
+      }
+    },
+    "candidateC": {
+      "desktop1280x720": {
+        "summary": {
+          "ok": true,
+          "total": 86,
+          "passed": 86,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+            "ok": true
+          },
+          {
+            "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+            "ok": true
+          },
+          {
+            "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+            "ok": true
+          },
+          {
+            "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+            "ok": true
+          },
+          {
+            "name": "position1-normal-moves-permanent-motion-works",
+            "ok": true
+          },
+          {
+            "name": "position1-display-backdrive-stops-at-setting-input",
+            "ok": true
+          },
+          {
+            "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+            "ok": true
+          },
+          {
+            "name": "position1-reports-run-with-permanent-meshes-active",
+            "ok": true
+          },
+          {
+            "name": "fourth-wheel-and-escape-pinion-counter-rotate",
+            "ok": true
+          },
+          {
+            "name": "position1-object3d-ratios-follow-single-graph",
+            "ok": true
+          },
+          {
+            "name": "normal-hand-deltas-and-mounts-match-real-drivers",
+            "ok": true
+          },
+          {
+            "name": "normal-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "position1-winding-branch-rotates",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-rotates-complete-object3d-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-winding-ratios-follow-winding-graph",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-increases-relative-wind-and-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "position1-setting-input-remains-disconnected-during-winding",
+            "ok": true
+          },
+          {
+            "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+            "ok": true
+          },
+          {
+            "name": "winding-does-not-inject-motion-across-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "wind-clutch-state-selects-only-winding-branch",
+            "ok": true
+          },
+          {
+            "name": "wind-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+            "ok": true
+          },
+          {
+            "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-freewheels-upstream-and-holds-ratchet-arbor",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-does-not-reduce-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases",
+            "ok": true
+          },
+          {
+            "name": "wind-to-set-has-no-permanent-angle-jump",
+            "ok": true
+          },
+          {
+            "name": "position2-moves-crown-through-display-and-hands",
+            "ok": true
+          },
+          {
+            "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position2-object3d-ratios-follow-reversed-permanent-graph",
+            "ok": true
+          },
+          {
+            "name": "setting-hand-deltas-stay-rigid-to-tubes",
+            "ok": true
+          },
+          {
+            "name": "setting-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "reverse-setting-reverses-complete-path",
+            "ok": true
+          },
+          {
+            "name": "set-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "actual-envelope-report-present",
+            "ok": true
+          },
+          {
+            "name": "actual-tube-pipe-arbor-ends-contact-hand-bosses",
+            "ok": true
+          },
+          {
+            "name": "set-clutch-state-selects-only-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "position2-explicit-time-updates-held-seconds-and-all-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "set-to-wind-after-adjustment-has-no-main-train-or-hand-jump",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-updates-entire-motion-and-hand-state",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-keeps-hand-coupling-exact",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind",
+            "ok": true
+          },
+          {
+            "name": "live-sync-on-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "live-sync-keeps-unified-object3d-coupling",
+            "ok": true
+          },
+          {
+            "name": "live-sync-reaches-current-time-within-bounded-transition",
+            "ok": true
+          },
+          {
+            "name": "live-sync-off-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "browser-module-report-matches-rendered-centres",
+            "ok": true
+          },
+          {
+            "name": "browser-topology-binds-every-node-to-object3d",
+            "ok": true
+          },
+          {
+            "name": "browser-permanent-topology-declares-run-wind-set",
+            "ok": true
+          },
+          {
+            "name": "browser-winding-topology-binds-crown-through-mainspring",
+            "ok": true
+          },
+          {
+            "name": "reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order",
+            "ok": true
+          },
+          {
+            "name": "front-120000-points-all-hands-to-twelve",
+            "ok": true
+          },
+          {
+            "name": "front-121500-points-minute-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-030000-points-hour-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-small-seconds-visits-12-3-6-9",
+            "ok": true
+          },
+          {
+            "name": "front-continuous-time-increase-is-clockwise",
+            "ok": true
+          },
+          {
+            "name": "all-screen-direction-samples-keep-rigid-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "movement-back-is-positive-y-and-camera-switch-does-not-move-model",
+            "ok": true
+          },
+          {
+            "name": "same-hand-appears-reversed-from-movement-back",
+            "ok": true
+          },
+          {
+            "name": "position2-positive-input-advances-minute-and-hour-clockwise-on-front",
+            "ok": true
+          },
+          {
+            "name": "transparent-structure-allows-internal-raycast-selection",
+            "ok": true
+          },
+          {
+            "name": "diagnostic-layer-is-never-pickable",
+            "ok": true
+          },
+          {
+            "name": "camera-is-idle-after-preset",
+            "ok": true
+          },
+          {
+            "name": "wind-mode-keeps-complete-object3d-path-raycast-selectable",
+            "ok": true
+          },
+          {
+            "name": "a5-uses-arcball-with-one-shared-view-up",
+            "ok": true
+          },
+          {
+            "name": "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "ok": true
+          },
+          {
+            "name": "a5-rendered-lighting-avoids-excessive-crush-and-clipping",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-camera-rotation-does-not-transform-model",
+            "ok": true
+          },
+          {
+            "name": "a5-upward-drag-crosses-poles-and-continues-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-downward-drag-crosses-poles-without-direction-reversal",
+            "ok": true
+          },
+          {
+            "name": "a5-every-ui-preset-starts-unrestricted-finite-rotation",
+            "ok": true
+          },
+          {
+            "name": "a5-one-finger-touch-rotates-without-selecting",
+            "ok": true
+          },
+          {
+            "name": "a5-two-finger-touch-zooms-pans-and-does-not-select",
+            "ok": true
+          },
+          {
+            "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+            "ok": true
+          },
+          {
+            "name": "a6-arcball-input-camera-is-separated-from-render-camera",
+            "ok": true
+          },
+          {
+            "name": "a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update",
+            "ok": true
+          },
+          {
+            "name": "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "ok": true
+          },
+          {
+            "name": "a6-wheel-path-produces-monotonic-continuous-zoom",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "adaptiveState",
+          "downwardRotation",
+          "frontProjection",
+          "handCoupling",
+          "horizontalRotation",
+          "keylessBase",
+          "keylessCycle",
+          "keylessDriftReport",
+          "keylessSetHold",
+          "keylessWindReturn",
+          "lightingRig",
+          "luminance",
+          "moduleReport",
+          "pointerPerformance",
+          "presetFreedom",
+          "runRotations",
+          "secondsDirections",
+          "selection",
+          "selectionAfterRotation",
+          "setInterference",
+          "settingForwardRotations",
+          "settingReverseRotations",
+          "smoothingState",
+          "touchRotation",
+          "twoFingerTouch",
+          "upwardRotation",
+          "viewport",
+          "wheelPerformance",
+          "windInterference",
+          "windRotations",
+          "windingSelections",
+          "windingTransmission"
+        ]
+      },
+      "mobile390x844": {
+        "summary": {
+          "ok": true,
+          "total": 88,
+          "passed": 88,
+          "failed": 0,
+          "failures": []
+        },
+        "checks": [
+          {
+            "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+            "ok": true
+          },
+          {
+            "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+            "ok": true
+          },
+          {
+            "name": "a7-position1-return-keeps-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+            "ok": true
+          },
+          {
+            "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+            "ok": true
+          },
+          {
+            "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+            "ok": true
+          },
+          {
+            "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+            "ok": true
+          },
+          {
+            "name": "position1-normal-moves-permanent-motion-works",
+            "ok": true
+          },
+          {
+            "name": "position1-display-backdrive-stops-at-setting-input",
+            "ok": true
+          },
+          {
+            "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+            "ok": true
+          },
+          {
+            "name": "position1-reports-run-with-permanent-meshes-active",
+            "ok": true
+          },
+          {
+            "name": "fourth-wheel-and-escape-pinion-counter-rotate",
+            "ok": true
+          },
+          {
+            "name": "position1-object3d-ratios-follow-single-graph",
+            "ok": true
+          },
+          {
+            "name": "normal-hand-deltas-and-mounts-match-real-drivers",
+            "ok": true
+          },
+          {
+            "name": "normal-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "position1-winding-branch-rotates",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-rotates-complete-object3d-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-winding-ratios-follow-winding-graph",
+            "ok": true
+          },
+          {
+            "name": "position1-forward-increases-relative-wind-and-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "position1-setting-input-remains-disconnected-during-winding",
+            "ok": true
+          },
+          {
+            "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+            "ok": true
+          },
+          {
+            "name": "winding-does-not-inject-motion-across-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "wind-clutch-state-selects-only-winding-branch",
+            "ok": true
+          },
+          {
+            "name": "wind-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+            "ok": true
+          },
+          {
+            "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-freewheels-upstream-and-holds-ratchet-arbor",
+            "ok": true
+          },
+          {
+            "name": "position1-reverse-does-not-reduce-power-reserve",
+            "ok": true
+          },
+          {
+            "name": "ratchet-freewheel-and-click-follow-independent-object3d-tooth-phases",
+            "ok": true
+          },
+          {
+            "name": "wind-to-set-has-no-permanent-angle-jump",
+            "ok": true
+          },
+          {
+            "name": "position2-moves-crown-through-display-and-hands",
+            "ok": true
+          },
+          {
+            "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+            "ok": true
+          },
+          {
+            "name": "position2-object3d-ratios-follow-reversed-permanent-graph",
+            "ok": true
+          },
+          {
+            "name": "setting-hand-deltas-stay-rigid-to-tubes",
+            "ok": true
+          },
+          {
+            "name": "setting-object3d-mesh-phases-remain-engaged",
+            "ok": true
+          },
+          {
+            "name": "reverse-setting-reverses-complete-path",
+            "ok": true
+          },
+          {
+            "name": "set-forbidden-interference-zero",
+            "ok": true
+          },
+          {
+            "name": "actual-envelope-report-present",
+            "ok": true
+          },
+          {
+            "name": "actual-tube-pipe-arbor-ends-contact-hand-bosses",
+            "ok": true
+          },
+          {
+            "name": "set-clutch-state-selects-only-setting-boundary",
+            "ok": true
+          },
+          {
+            "name": "position2-explicit-time-updates-held-seconds-and-all-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "set-to-wind-after-adjustment-has-no-main-train-or-hand-jump",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-updates-entire-motion-and-hand-state",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-keeps-hand-coupling-exact",
+            "ok": true
+          },
+          {
+            "name": "explicit-time-sets-absolute-hands-and-day-wrap-does-not-wind",
+            "ok": true
+          },
+          {
+            "name": "live-sync-on-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "live-sync-keeps-unified-object3d-coupling",
+            "ok": true
+          },
+          {
+            "name": "live-sync-reaches-current-time-within-bounded-transition",
+            "ok": true
+          },
+          {
+            "name": "live-sync-off-does-not-jump-motion-works",
+            "ok": true
+          },
+          {
+            "name": "browser-module-report-matches-rendered-centres",
+            "ok": true
+          },
+          {
+            "name": "browser-topology-binds-every-node-to-object3d",
+            "ok": true
+          },
+          {
+            "name": "browser-permanent-topology-declares-run-wind-set",
+            "ok": true
+          },
+          {
+            "name": "browser-winding-topology-binds-crown-through-mainspring",
+            "ok": true
+          },
+          {
+            "name": "reset-is-negative-y-dial-front-with-cardinal-markers-in-screen-order",
+            "ok": true
+          },
+          {
+            "name": "front-120000-points-all-hands-to-twelve",
+            "ok": true
+          },
+          {
+            "name": "front-121500-points-minute-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-030000-points-hour-hand-to-three",
+            "ok": true
+          },
+          {
+            "name": "front-small-seconds-visits-12-3-6-9",
+            "ok": true
+          },
+          {
+            "name": "front-continuous-time-increase-is-clockwise",
+            "ok": true
+          },
+          {
+            "name": "all-screen-direction-samples-keep-rigid-hand-couplings",
+            "ok": true
+          },
+          {
+            "name": "movement-back-is-positive-y-and-camera-switch-does-not-move-model",
+            "ok": true
+          },
+          {
+            "name": "same-hand-appears-reversed-from-movement-back",
+            "ok": true
+          },
+          {
+            "name": "position2-positive-input-advances-minute-and-hour-clockwise-on-front",
+            "ok": true
+          },
+          {
+            "name": "transparent-structure-allows-internal-raycast-selection",
+            "ok": true
+          },
+          {
+            "name": "diagnostic-layer-is-never-pickable",
+            "ok": true
+          },
+          {
+            "name": "camera-is-idle-after-preset",
+            "ok": true
+          },
+          {
+            "name": "wind-mode-keeps-complete-object3d-path-raycast-selectable",
+            "ok": true
+          },
+          {
+            "name": "a5-uses-arcball-with-one-shared-view-up",
+            "ok": true
+          },
+          {
+            "name": "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "ok": true
+          },
+          {
+            "name": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "ok": true
+          },
+          {
+            "name": "a5-rendered-lighting-avoids-excessive-crush-and-clipping",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-drag-continuously-crosses-front-back-front-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-horizontal-camera-rotation-does-not-transform-model",
+            "ok": true
+          },
+          {
+            "name": "a5-upward-drag-crosses-poles-and-continues-beyond-360",
+            "ok": true
+          },
+          {
+            "name": "a5-downward-drag-crosses-poles-without-direction-reversal",
+            "ok": true
+          },
+          {
+            "name": "a5-every-ui-preset-starts-unrestricted-finite-rotation",
+            "ok": true
+          },
+          {
+            "name": "a5-one-finger-touch-rotates-without-selecting",
+            "ok": true
+          },
+          {
+            "name": "a5-two-finger-touch-zooms-pans-and-does-not-select",
+            "ok": true
+          },
+          {
+            "name": "a5-mobile-test-runs-at-390x844-class-viewport",
+            "ok": true
+          },
+          {
+            "name": "a5-mobile-navigation-continues-after-panel-open-close",
+            "ok": true
+          },
+          {
+            "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+            "ok": true
+          },
+          {
+            "name": "a6-arcball-input-camera-is-separated-from-render-camera",
+            "ok": true
+          },
+          {
+            "name": "a6-adaptive-quality-caps-dpr-and-freezes-shadow-auto-update",
+            "ok": true
+          },
+          {
+            "name": "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "ok": true
+          },
+          {
+            "name": "a6-wheel-path-produces-monotonic-continuous-zoom",
+            "ok": true
+          }
+        ],
+        "measurementKeys": [
+          "adaptiveState",
+          "downwardRotation",
+          "frontProjection",
+          "handCoupling",
+          "horizontalRotation",
+          "keylessBase",
+          "keylessCycle",
+          "keylessDriftReport",
+          "keylessSetHold",
+          "keylessWindReturn",
+          "lightingRig",
+          "luminance",
+          "moduleReport",
+          "pointerPerformance",
+          "presetFreedom",
+          "runRotations",
+          "secondsDirections",
+          "selection",
+          "selectionAfterRotation",
+          "setInterference",
+          "settingForwardRotations",
+          "settingReverseRotations",
+          "smoothingState",
+          "touchRotation",
+          "twoFingerTouch",
+          "upwardRotation",
+          "viewport",
+          "wheelPerformance",
+          "windInterference",
+          "windRotations",
+          "windingSelections",
+          "windingTransmission"
+        ]
+      }
+    }
+  },
+  "uiRegression": {
+    "1280x720": {
+      "status": "passed",
+      "summary": {
+        "ok": true,
+        "total": 20,
+        "passed": 20,
+        "failed": 0,
+        "failures": []
+      },
+      "checks": [
+        {
+          "name": "ui-default-operation-and-aria-contract",
+          "ok": true
+        },
+        {
+          "name": "ui-click-activates-only-target-panel",
+          "ok": true
+        },
+        {
+          "name": "ui-arrow-keys-wrap-and-move-focus",
+          "ok": true
+        },
+        {
+          "name": "ui-home-end-select-boundaries-and-focus",
+          "ok": true
+        },
+        {
+          "name": "ui-hidden-panels-have-no-layout-or-focusable-descendants",
+          "ok": true
+        },
+        {
+          "name": "ui-existing-control-ids-remain-unique",
+          "ok": true
+        },
+        {
+          "name": "ui-operation-panel-owns-general-controls-and-three-view-groups",
+          "ok": true
+        },
+        {
+          "name": "ui-learning-panel-owns-selection-structure-groups-and-legend",
+          "ok": true
+        },
+        {
+          "name": "ui-technical-panel-owns-diagnostics-balance-power-and-notice",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-roundtrip-preserves-play-crown-time-opacity-explode-split-theme-mode",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-roundtrip-preserves-guides-groups-amplitude-efficiency",
+          "ok": true
+        },
+        {
+          "name": "ui-hidden-technical-panel-preserves-history-data-and-canvas-bitmap",
+          "ok": true
+        },
+        {
+          "name": "ui-two-selected-parts-update-top-and-learning-copy-from-one-source",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-switch-does-not-change-model-world-or-camera",
+          "ok": true
+        },
+        {
+          "name": "ui-each-tab-restores-independent-scroll-position",
+          "ok": true
+        },
+        {
+          "name": "ui-panel-close-open-preserves-active-tab-and-scroll",
+          "ok": true
+        },
+        {
+          "name": "ui-layout-has-zero-horizontal-overflow",
+          "ok": true
+        },
+        {
+          "name": "ui-tabs-are-equal-width-sticky-and-at-least-44px",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-attributes-do-not-mutate-during-60-idle-raf-frames",
+          "ok": true
+        },
+        {
+          "name": "ui-3d-rotation-continues-after-tab-and-panel-interactions",
+          "ok": true
+        }
+      ],
+      "measurementKeys": [
+        "configured",
+        "initial",
+        "layout",
+        "restoredScroll",
+        "rotation",
+        "roundTrip",
+        "scrollTargets"
+      ]
+    },
+    "390x844": {
+      "status": "passed",
+      "summary": {
+        "ok": true,
+        "total": 22,
+        "passed": 22,
+        "failed": 0,
+        "failures": []
+      },
+      "checks": [
+        {
+          "name": "ui-default-operation-and-aria-contract",
+          "ok": true
+        },
+        {
+          "name": "ui-click-activates-only-target-panel",
+          "ok": true
+        },
+        {
+          "name": "ui-arrow-keys-wrap-and-move-focus",
+          "ok": true
+        },
+        {
+          "name": "ui-home-end-select-boundaries-and-focus",
+          "ok": true
+        },
+        {
+          "name": "ui-hidden-panels-have-no-layout-or-focusable-descendants",
+          "ok": true
+        },
+        {
+          "name": "ui-existing-control-ids-remain-unique",
+          "ok": true
+        },
+        {
+          "name": "ui-operation-panel-owns-general-controls-and-three-view-groups",
+          "ok": true
+        },
+        {
+          "name": "ui-learning-panel-owns-selection-structure-groups-and-legend",
+          "ok": true
+        },
+        {
+          "name": "ui-technical-panel-owns-diagnostics-balance-power-and-notice",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-roundtrip-preserves-play-crown-time-opacity-explode-split-theme-mode",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-roundtrip-preserves-guides-groups-amplitude-efficiency",
+          "ok": true
+        },
+        {
+          "name": "ui-hidden-technical-panel-preserves-history-data-and-canvas-bitmap",
+          "ok": true
+        },
+        {
+          "name": "ui-two-selected-parts-update-top-and-learning-copy-from-one-source",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-switch-does-not-change-model-world-or-camera",
+          "ok": true
+        },
+        {
+          "name": "ui-each-tab-restores-independent-scroll-position",
+          "ok": true
+        },
+        {
+          "name": "ui-panel-close-open-preserves-active-tab-and-scroll",
+          "ok": true
+        },
+        {
+          "name": "ui-layout-has-zero-horizontal-overflow",
+          "ok": true
+        },
+        {
+          "name": "ui-tabs-are-equal-width-sticky-and-at-least-44px",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-attributes-do-not-mutate-during-60-idle-raf-frames",
+          "ok": true
+        },
+        {
+          "name": "ui-3d-rotation-continues-after-tab-and-panel-interactions",
+          "ok": true
+        },
+        {
+          "name": "ui-mobile-safe-area-and-exact-viewport",
+          "ok": true
+        },
+        {
+          "name": "ui-mobile-two-finger-navigation-continues-after-tab-close",
+          "ok": true
+        }
+      ],
+      "measurementKeys": [
+        "configured",
+        "initial",
+        "layout",
+        "mobileTouch",
+        "restoredScroll",
+        "rotation",
+        "roundTrip",
+        "scrollTargets"
+      ]
+    },
+    "375x667": {
+      "status": "passed",
+      "summary": {
+        "ok": true,
+        "total": 22,
+        "passed": 22,
+        "failed": 0,
+        "failures": []
+      },
+      "checks": [
+        {
+          "name": "ui-default-operation-and-aria-contract",
+          "ok": true
+        },
+        {
+          "name": "ui-click-activates-only-target-panel",
+          "ok": true
+        },
+        {
+          "name": "ui-arrow-keys-wrap-and-move-focus",
+          "ok": true
+        },
+        {
+          "name": "ui-home-end-select-boundaries-and-focus",
+          "ok": true
+        },
+        {
+          "name": "ui-hidden-panels-have-no-layout-or-focusable-descendants",
+          "ok": true
+        },
+        {
+          "name": "ui-existing-control-ids-remain-unique",
+          "ok": true
+        },
+        {
+          "name": "ui-operation-panel-owns-general-controls-and-three-view-groups",
+          "ok": true
+        },
+        {
+          "name": "ui-learning-panel-owns-selection-structure-groups-and-legend",
+          "ok": true
+        },
+        {
+          "name": "ui-technical-panel-owns-diagnostics-balance-power-and-notice",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-roundtrip-preserves-play-crown-time-opacity-explode-split-theme-mode",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-roundtrip-preserves-guides-groups-amplitude-efficiency",
+          "ok": true
+        },
+        {
+          "name": "ui-hidden-technical-panel-preserves-history-data-and-canvas-bitmap",
+          "ok": true
+        },
+        {
+          "name": "ui-two-selected-parts-update-top-and-learning-copy-from-one-source",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-switch-does-not-change-model-world-or-camera",
+          "ok": true
+        },
+        {
+          "name": "ui-each-tab-restores-independent-scroll-position",
+          "ok": true
+        },
+        {
+          "name": "ui-panel-close-open-preserves-active-tab-and-scroll",
+          "ok": true
+        },
+        {
+          "name": "ui-layout-has-zero-horizontal-overflow",
+          "ok": true
+        },
+        {
+          "name": "ui-tabs-are-equal-width-sticky-and-at-least-44px",
+          "ok": true
+        },
+        {
+          "name": "ui-tab-attributes-do-not-mutate-during-60-idle-raf-frames",
+          "ok": true
+        },
+        {
+          "name": "ui-3d-rotation-continues-after-tab-and-panel-interactions",
+          "ok": true
+        },
+        {
+          "name": "ui-mobile-safe-area-and-exact-viewport",
+          "ok": true
+        },
+        {
+          "name": "ui-mobile-two-finger-navigation-continues-after-tab-close",
+          "ok": true
+        }
+      ],
+      "measurementKeys": [
+        "configured",
+        "initial",
+        "layout",
+        "mobileTouch",
+        "restoredScroll",
+        "rotation",
+        "roundTrip",
+        "scrollTargets"
+      ]
+    }
+  },
+  "hudRegression": {
+    "1280x720": {
+      "status": "passed",
+      "summary": {
+        "ok": true,
+        "total": 42,
+        "passed": 42,
+        "failed": 0,
+        "failures": []
+      },
+      "checks": [
+        {
+          "name": "hud-initial-selection-overlay-is-hidden",
+          "ok": true
+        },
+        {
+          "name": "hud-learning-copy-keeps-unselected-guidance",
+          "ok": true
+        },
+        {
+          "name": "hud-title-and-panel-share-v3-13-0",
+          "ok": true
+        },
+        {
+          "name": "hud-canvas-has-no-persistent-version-badge",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-model-info-records-pr3-baseline",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-has-no-visible-menu-text",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-is-native-controlled-button",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-hit-target-is-at-least-44-css-px",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-border-and-shadow-are-removed",
+          "ok": true
+        },
+        {
+          "name": "hud-closed-state-aria-is-synchronized",
+          "ok": true
+        },
+        {
+          "name": "hud-open-state-aria-is-synchronized",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-toggle-preserves-active-tab",
+          "ok": true
+        },
+        {
+          "name": "hud-selection-shows-overlay-and-aria",
+          "ok": true
+        },
+        {
+          "name": "hud-selection-overlay-and-learning-copy-share-source",
+          "ok": true
+        },
+        {
+          "name": "hud-explicit-clear-hides-overlay-without-erasing-learning-guidance",
+          "ok": true
+        },
+        {
+          "name": "hud-reset-clears-selection-and-overlay",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-and-tab-actions-preserve-model-camera-mechanism-and-state",
+          "ok": true
+        },
+        {
+          "name": "hud-layout-has-zero-horizontal-overflow",
+          "ok": true
+        },
+        {
+          "name": "hud-tabbar-remains-sticky",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmmss-change-applies-once-to-display-model-and-hands",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmmss-records-input-change-blur-order",
+          "ok": true
+        },
+        {
+          "name": "hud-time-change-blur-button-sequence-does-not-double-apply",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmm-defaults-seconds-to-zero",
+          "ok": true
+        },
+        {
+          "name": "hud-time-input-blur-fallback-and-late-change-apply-only-once",
+          "ok": true
+        },
+        {
+          "name": "hud-time-touch-button-is-reliable-single-apply-fallback",
+          "ok": true
+        },
+        {
+          "name": "hud-time-touch-button-records-pointer-and-click-events",
+          "ok": true
+        },
+        {
+          "name": "hud-time-manual-change-disables-live-sync-consistently",
+          "ok": true
+        },
+        {
+          "name": "hud-time-controls-remain-available-while-live-sync-is-active",
+          "ok": true
+        },
+        {
+          "name": "hud-time-untouched-focus-blur-does-not-apply-or-disable-live-sync",
+          "ok": true
+        },
+        {
+          "name": "hud-time-position2-render-loop-does-not-overwrite-focused-editor",
+          "ok": true
+        },
+        {
+          "name": "hud-time-position1-position2-round-trip-keeps-applied-time",
+          "ok": true
+        },
+        {
+          "name": "hud-time-invalid-empty-nonfinite-and-range-values-do-not-mutate-clock",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-covers-all-sixteen-existing-checkboxes",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-keeps-native-input-focusable-and-label-layout-compact",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-state-matches-existing-model-bindings",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-on-off-and-disabled-states-are-visually-distinct",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-full-label-touch-click-updates-existing-model-binding",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-native-input-remains-keyboard-focusable",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-all-sixteen-support-touch-and-native-keyboard-activation",
+          "ok": true
+        },
+        {
+          "name": "hud-desktop-panel-keeps-approximately-365px-width",
+          "ok": true
+        },
+        {
+          "name": "hud-desktop-collapse-and-reopen-keep-aria-and-tabs",
+          "ok": true
+        },
+        {
+          "name": "hud-desktop-hamburger-follows-panel-to-left-and-returns",
+          "ok": true
+        }
+      ],
+      "measurementKeys": [
+        "closed",
+        "desktop",
+        "initial",
+        "invariantAfter",
+        "invariantBefore",
+        "opened",
+        "selected",
+        "time",
+        "toggleCards"
+      ]
+    },
+    "390x844": {
+      "status": "passed",
+      "summary": {
+        "ok": true,
+        "total": 54,
+        "passed": 54,
+        "failed": 0,
+        "failures": []
+      },
+      "checks": [
+        {
+          "name": "hud-initial-selection-overlay-is-hidden",
+          "ok": true
+        },
+        {
+          "name": "hud-learning-copy-keeps-unselected-guidance",
+          "ok": true
+        },
+        {
+          "name": "hud-title-and-panel-share-v3-13-0",
+          "ok": true
+        },
+        {
+          "name": "hud-canvas-has-no-persistent-version-badge",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-model-info-records-pr3-baseline",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-has-no-visible-menu-text",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-is-native-controlled-button",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-hit-target-is-at-least-44-css-px",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-border-and-shadow-are-removed",
+          "ok": true
+        },
+        {
+          "name": "hud-closed-state-aria-is-synchronized",
+          "ok": true
+        },
+        {
+          "name": "hud-open-state-aria-is-synchronized",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-toggle-preserves-active-tab",
+          "ok": true
+        },
+        {
+          "name": "hud-selection-shows-overlay-and-aria",
+          "ok": true
+        },
+        {
+          "name": "hud-selection-overlay-and-learning-copy-share-source",
+          "ok": true
+        },
+        {
+          "name": "hud-explicit-clear-hides-overlay-without-erasing-learning-guidance",
+          "ok": true
+        },
+        {
+          "name": "hud-reset-clears-selection-and-overlay",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-and-tab-actions-preserve-model-camera-mechanism-and-state",
+          "ok": true
+        },
+        {
+          "name": "hud-layout-has-zero-horizontal-overflow",
+          "ok": true
+        },
+        {
+          "name": "hud-tabbar-remains-sticky",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmmss-change-applies-once-to-display-model-and-hands",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmmss-records-input-change-blur-order",
+          "ok": true
+        },
+        {
+          "name": "hud-time-change-blur-button-sequence-does-not-double-apply",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmm-defaults-seconds-to-zero",
+          "ok": true
+        },
+        {
+          "name": "hud-time-input-blur-fallback-and-late-change-apply-only-once",
+          "ok": true
+        },
+        {
+          "name": "hud-time-touch-button-is-reliable-single-apply-fallback",
+          "ok": true
+        },
+        {
+          "name": "hud-time-touch-button-records-pointer-and-click-events",
+          "ok": true
+        },
+        {
+          "name": "hud-time-manual-change-disables-live-sync-consistently",
+          "ok": true
+        },
+        {
+          "name": "hud-time-controls-remain-available-while-live-sync-is-active",
+          "ok": true
+        },
+        {
+          "name": "hud-time-untouched-focus-blur-does-not-apply-or-disable-live-sync",
+          "ok": true
+        },
+        {
+          "name": "hud-time-position2-render-loop-does-not-overwrite-focused-editor",
+          "ok": true
+        },
+        {
+          "name": "hud-time-position1-position2-round-trip-keeps-applied-time",
+          "ok": true
+        },
+        {
+          "name": "hud-time-invalid-empty-nonfinite-and-range-values-do-not-mutate-clock",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-covers-all-sixteen-existing-checkboxes",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-keeps-native-input-focusable-and-label-layout-compact",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-state-matches-existing-model-bindings",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-on-off-and-disabled-states-are-visually-distinct",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-full-label-touch-click-updates-existing-model-binding",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-native-input-remains-keyboard-focusable",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-all-sixteen-support-touch-and-native-keyboard-activation",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-is-50-to-60-dvh",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-3d-region-is-at-least-35-dvh",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-panel-is-bottom-fixed-and-inside-viewport",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-body-uses-remaining-height-and-scrolls",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-probe-reaches-canvas",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-pointer-tap-selects-a-part",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-background-tap-clears-selection",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-one-finger-rotation-uses-pointer-events",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-two-finger-zoom-or-pan-uses-pointer-events",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-keeps-position1-winding-visible-and-active",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-keeps-position2-setting-visible-and-active",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-position2-keeps-seconds-hacked",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-time-input-scrolls-into-visible-panel-body",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-time-input-and-grid-stay-within-panel-body",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-toggle-cards-stay-within-viewport",
+          "ok": true
+        }
+      ],
+      "measurementKeys": [
+        "closed",
+        "initial",
+        "invariantAfter",
+        "invariantBefore",
+        "mobile",
+        "opened",
+        "selected",
+        "time",
+        "toggleCards"
+      ]
+    },
+    "393x852": {
+      "status": "passed",
+      "summary": {
+        "ok": true,
+        "total": 54,
+        "passed": 54,
+        "failed": 0,
+        "failures": []
+      },
+      "checks": [
+        {
+          "name": "hud-initial-selection-overlay-is-hidden",
+          "ok": true
+        },
+        {
+          "name": "hud-learning-copy-keeps-unselected-guidance",
+          "ok": true
+        },
+        {
+          "name": "hud-title-and-panel-share-v3-13-0",
+          "ok": true
+        },
+        {
+          "name": "hud-canvas-has-no-persistent-version-badge",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-model-info-records-pr3-baseline",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-has-no-visible-menu-text",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-is-native-controlled-button",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-hit-target-is-at-least-44-css-px",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-border-and-shadow-are-removed",
+          "ok": true
+        },
+        {
+          "name": "hud-closed-state-aria-is-synchronized",
+          "ok": true
+        },
+        {
+          "name": "hud-open-state-aria-is-synchronized",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-toggle-preserves-active-tab",
+          "ok": true
+        },
+        {
+          "name": "hud-selection-shows-overlay-and-aria",
+          "ok": true
+        },
+        {
+          "name": "hud-selection-overlay-and-learning-copy-share-source",
+          "ok": true
+        },
+        {
+          "name": "hud-explicit-clear-hides-overlay-without-erasing-learning-guidance",
+          "ok": true
+        },
+        {
+          "name": "hud-reset-clears-selection-and-overlay",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-and-tab-actions-preserve-model-camera-mechanism-and-state",
+          "ok": true
+        },
+        {
+          "name": "hud-layout-has-zero-horizontal-overflow",
+          "ok": true
+        },
+        {
+          "name": "hud-tabbar-remains-sticky",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmmss-change-applies-once-to-display-model-and-hands",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmmss-records-input-change-blur-order",
+          "ok": true
+        },
+        {
+          "name": "hud-time-change-blur-button-sequence-does-not-double-apply",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmm-defaults-seconds-to-zero",
+          "ok": true
+        },
+        {
+          "name": "hud-time-input-blur-fallback-and-late-change-apply-only-once",
+          "ok": true
+        },
+        {
+          "name": "hud-time-touch-button-is-reliable-single-apply-fallback",
+          "ok": true
+        },
+        {
+          "name": "hud-time-touch-button-records-pointer-and-click-events",
+          "ok": true
+        },
+        {
+          "name": "hud-time-manual-change-disables-live-sync-consistently",
+          "ok": true
+        },
+        {
+          "name": "hud-time-controls-remain-available-while-live-sync-is-active",
+          "ok": true
+        },
+        {
+          "name": "hud-time-untouched-focus-blur-does-not-apply-or-disable-live-sync",
+          "ok": true
+        },
+        {
+          "name": "hud-time-position2-render-loop-does-not-overwrite-focused-editor",
+          "ok": true
+        },
+        {
+          "name": "hud-time-position1-position2-round-trip-keeps-applied-time",
+          "ok": true
+        },
+        {
+          "name": "hud-time-invalid-empty-nonfinite-and-range-values-do-not-mutate-clock",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-covers-all-sixteen-existing-checkboxes",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-keeps-native-input-focusable-and-label-layout-compact",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-state-matches-existing-model-bindings",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-on-off-and-disabled-states-are-visually-distinct",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-full-label-touch-click-updates-existing-model-binding",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-native-input-remains-keyboard-focusable",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-all-sixteen-support-touch-and-native-keyboard-activation",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-is-50-to-60-dvh",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-3d-region-is-at-least-35-dvh",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-panel-is-bottom-fixed-and-inside-viewport",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-body-uses-remaining-height-and-scrolls",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-probe-reaches-canvas",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-pointer-tap-selects-a-part",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-background-tap-clears-selection",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-one-finger-rotation-uses-pointer-events",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-two-finger-zoom-or-pan-uses-pointer-events",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-keeps-position1-winding-visible-and-active",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-keeps-position2-setting-visible-and-active",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-position2-keeps-seconds-hacked",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-time-input-scrolls-into-visible-panel-body",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-time-input-and-grid-stay-within-panel-body",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-toggle-cards-stay-within-viewport",
+          "ok": true
+        }
+      ],
+      "measurementKeys": [
+        "closed",
+        "initial",
+        "invariantAfter",
+        "invariantBefore",
+        "mobile",
+        "opened",
+        "selected",
+        "time",
+        "toggleCards"
+      ]
+    },
+    "375x667": {
+      "status": "passed",
+      "summary": {
+        "ok": true,
+        "total": 54,
+        "passed": 54,
+        "failed": 0,
+        "failures": []
+      },
+      "checks": [
+        {
+          "name": "hud-initial-selection-overlay-is-hidden",
+          "ok": true
+        },
+        {
+          "name": "hud-learning-copy-keeps-unselected-guidance",
+          "ok": true
+        },
+        {
+          "name": "hud-title-and-panel-share-v3-13-0",
+          "ok": true
+        },
+        {
+          "name": "hud-canvas-has-no-persistent-version-badge",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-model-info-records-pr3-baseline",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-has-no-visible-menu-text",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-is-native-controlled-button",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-hit-target-is-at-least-44-css-px",
+          "ok": true
+        },
+        {
+          "name": "hud-hamburger-border-and-shadow-are-removed",
+          "ok": true
+        },
+        {
+          "name": "hud-closed-state-aria-is-synchronized",
+          "ok": true
+        },
+        {
+          "name": "hud-open-state-aria-is-synchronized",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-toggle-preserves-active-tab",
+          "ok": true
+        },
+        {
+          "name": "hud-selection-shows-overlay-and-aria",
+          "ok": true
+        },
+        {
+          "name": "hud-selection-overlay-and-learning-copy-share-source",
+          "ok": true
+        },
+        {
+          "name": "hud-explicit-clear-hides-overlay-without-erasing-learning-guidance",
+          "ok": true
+        },
+        {
+          "name": "hud-reset-clears-selection-and-overlay",
+          "ok": true
+        },
+        {
+          "name": "hud-panel-and-tab-actions-preserve-model-camera-mechanism-and-state",
+          "ok": true
+        },
+        {
+          "name": "hud-layout-has-zero-horizontal-overflow",
+          "ok": true
+        },
+        {
+          "name": "hud-tabbar-remains-sticky",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmmss-change-applies-once-to-display-model-and-hands",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmmss-records-input-change-blur-order",
+          "ok": true
+        },
+        {
+          "name": "hud-time-change-blur-button-sequence-does-not-double-apply",
+          "ok": true
+        },
+        {
+          "name": "hud-time-hhmm-defaults-seconds-to-zero",
+          "ok": true
+        },
+        {
+          "name": "hud-time-input-blur-fallback-and-late-change-apply-only-once",
+          "ok": true
+        },
+        {
+          "name": "hud-time-touch-button-is-reliable-single-apply-fallback",
+          "ok": true
+        },
+        {
+          "name": "hud-time-touch-button-records-pointer-and-click-events",
+          "ok": true
+        },
+        {
+          "name": "hud-time-manual-change-disables-live-sync-consistently",
+          "ok": true
+        },
+        {
+          "name": "hud-time-controls-remain-available-while-live-sync-is-active",
+          "ok": true
+        },
+        {
+          "name": "hud-time-untouched-focus-blur-does-not-apply-or-disable-live-sync",
+          "ok": true
+        },
+        {
+          "name": "hud-time-position2-render-loop-does-not-overwrite-focused-editor",
+          "ok": true
+        },
+        {
+          "name": "hud-time-position1-position2-round-trip-keeps-applied-time",
+          "ok": true
+        },
+        {
+          "name": "hud-time-invalid-empty-nonfinite-and-range-values-do-not-mutate-clock",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-covers-all-sixteen-existing-checkboxes",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-keeps-native-input-focusable-and-label-layout-compact",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-state-matches-existing-model-bindings",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-on-off-and-disabled-states-are-visually-distinct",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-full-label-touch-click-updates-existing-model-binding",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-native-input-remains-keyboard-focusable",
+          "ok": true
+        },
+        {
+          "name": "hud-toggle-card-all-sixteen-support-touch-and-native-keyboard-activation",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-is-50-to-60-dvh",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-3d-region-is-at-least-35-dvh",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-panel-is-bottom-fixed-and-inside-viewport",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-body-uses-remaining-height-and-scrolls",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-probe-reaches-canvas",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-pointer-tap-selects-a-part",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-background-tap-clears-selection",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-one-finger-rotation-uses-pointer-events",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-upper-canvas-two-finger-zoom-or-pan-uses-pointer-events",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-keeps-position1-winding-visible-and-active",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-open-panel-keeps-position2-setting-visible-and-active",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-position2-keeps-seconds-hacked",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-time-input-scrolls-into-visible-panel-body",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-time-input-and-grid-stay-within-panel-body",
+          "ok": true
+        },
+        {
+          "name": "hud-mobile-toggle-cards-stay-within-viewport",
+          "ok": true
+        }
+      ],
+      "measurementKeys": [
+        "closed",
+        "initial",
+        "invariantAfter",
+        "invariantBefore",
+        "mobile",
+        "opened",
+        "selected",
+        "time",
+        "toggleCards"
+      ]
+    }
+  },
+  "performanceReport": "performance/summary.json",
+  "comparisonReport": "comparisons/comparison-report.json",
+  "decisionGate": {
+    "finalIntegratedCandidate": null,
+    "candidateA": "rejected-for-default-visual-darkening",
+    "candidateB": "rejected-for-default-depth-ordering",
+    "candidateC": "promising-awaiting-physical-iphone",
+    "userConfirmationRequired": true,
+    "issue2MustRemainOpen": true
+  }
+}

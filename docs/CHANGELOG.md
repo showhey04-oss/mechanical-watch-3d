@@ -1,5 +1,20 @@
 # Changelog
 
+## Unreleased — Issue #2 レンダリング品質 Phase 1（Draft比較）
+
+- v3.13.0の既定表示を固定し、透過11段階×3視点×2 viewport、通常表示4テーマ×5視点×4 viewportの基準画像を保存
+- shadow camera、構造材質状態、画像差分、ライト／露出、framebuffer輝度、性能を機械可読JSONへ出力する診断ハーネスを追加
+- 基準の`frontKey`が固定±5／512²で約39.30×7.04×37.47のモデルboundsを包含せず、外接8頂点すべてがfrustum外であることを特定
+- 100%→99%で105材質の`transparent`、55%→54%で110材質の`depthWrite`が切り替わり、各遷移で110材質のprogram versionが更新されることを特定
+- Candidate Aとしてライト空間boundsへのtight fit、4% margin、texel snapping、`PCFSoftShadowMap`、desktop 2048／mobile 1024を比較。中央境界は除去したが透過面の全面暗化により現方式を不採用
+- Candidate Bとして構造材質を単一状態へ固定し、評価点間の状態変更とversion増分0を確認。100%表示の深度順破綻により現方式を不採用
+- Candidate Cとして主キー比約1.02%のdistance-invariant fill（強度0.02）を比較。Chromiumでは暗部と表裏差を改善したが、物理iPhone未確認のため未採用
+- 大面積Meshの`alphaHash`、透過率閾値による影ON/OFF、CSS／User-Agent別の明るさ補正、全影無効化を使用していない
+- Candidate A/B/CはURLクエリで独立比較し、最終統合を行わずv3.13.0の既定描画を維持
+- Node 33/33、既定および各Candidateのデスクトップ回帰86/86、390×844回帰88/88、A.7 9/9、PR #3 UI回帰20/20・22/22・22/22を確認
+- 24件の10秒A.6計測で最小59.84fps、最大p95 18.60ms、最大p99 18.70ms、50ms超0を確認（33.3ms超は基準1、各Candidate 0）
+- 物理iPhone Safariでの4テーマ、5視点、代表材質の確認は未実施。Issue #2とPull RequestをOpen／Draftのまま維持し、ユーザー確認を次のゲートとする
+
 ## v3.13.0 — PR #4 モバイルオーバーレイ・HUD整理
 
 - 未選択時の右上部品情報HUDを非表示とし、選択成功・解除・表示無効化・リセットと`hidden`／`aria-hidden`を同期

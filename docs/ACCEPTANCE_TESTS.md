@@ -209,3 +209,69 @@
 - Node 33/33、既存デスクトップ86/86、A.7 9/9、位置2 600フレーム、100往復、30/60/120fps、禁止干渉0/0、A.6性能を回帰する
 - ライト、影、露出、tone mapping、材質、背景、構造透過、適応DPR、ArcballControls、カメラ、Raycaster候補選定、animation loop、内部機構を変更しない
 - Issue #2の照明・透明・影課題を実装せず、IssueをOpenのまま維持する
+
+## M. Issue #2 レンダリング品質 Phase 1
+
+Phase 1の目的は最終画質の合格ではなく、v3.13.0を固定した診断と候補比較である。Candidate専用試験のpassは実装条件と回帰が成立したことを示し、既定描画への採用を意味しない。
+
+### M.1 基準と証跡
+
+- 基準コミットが`b7496af8e9d4a5cf8f462f64700a38661e44c59a`である
+- 通常アクセスで`issue2Candidate=baseline`となり、v3.13.0の既定描画、影、材質、照明を変更しない
+- 透過率100、99、75、56、55、54、53、50、25、16、8%をfront／back／oblique、1280×720／390×844の同一条件で保存する
+- 通常表示100%を4テーマ、front／back／side／winding／motion-works、1280×720／1440×900／390×844／393×852で保存する
+- 撮影manifest、shadow、materials、opacity diff、lighting、performanceの機械可読JSONを保存する
+- 100↔99、56↔55↔54↔53の比較GIFまたは動画、Before／Candidate比較、frustum診断画像を保存する
+
+### M.2 Candidate A：shadow coverage
+
+- モデルのworld boundsをライト空間へ変換し、固定の過大範囲ではなく実boundsへmargin付きでtight fitする
+- light-space centerをshadow texel単位へsnapする
+- `PCFSoftShadowMap`、desktop 2048、mobile 1024を比較し、性能値を基準と併記する
+- カメラ回転だけではfrustumを再計算せず、モデルboundsが変化したときだけ更新する
+- front／back／oblique、desktop／mobileでモデル外接8頂点がfrustum内にある
+- 透過16%の中央四角境界が除去される
+- 大面積の透過構造が不透明な全面影を落として暗化する副作用が残るため、現方式は画質不採用とする
+- Candidate Aを既定shadowへ統合しない
+
+### M.3 Candidate B：透過連続性
+
+- 100→99、56→55、55→54、54→53で`transparent`、`depthWrite`、`castShadow`、`receiveShadow`、`blending`、`renderOrder`、`visible`を切り替えない
+- 上記遷移で構造材質の再生成、UUID変更、program version増分がない
+- `alphaHash`を使用せず、透過率閾値による影ON/OFFを追加しない
+- 100→99と55→54の画像差が隣接評価点に対して不連続に増大しない
+- 100%表示で構造面の前後深度順が破綻する副作用が残るため、単一passの現方式は画質不採用とする
+- Candidate Bを既定透過方式へ統合しない
+
+### M.4 Candidate C：照明均質化
+
+- 強度0.02、主キー比約1.02%のカメラ追従DirectionalLightだけを候補として追加する
+- Candidate lightは距離減衰せず、影を生成しない
+- 既定のexposure、tone mapping、output color space、材質、背景、shadow rig、DPRを変更しない
+- 4テーマ×5視点×4 viewportで暗部率、クリップ率、平均輝度、代表材質を基準と比較する
+- Chromiumで表裏代表輝度差30%以内、広範なハイライトクリップなしを維持する
+- CSS filter、画面全体brightness、User-Agent／端末名別補正を使用しない
+- 物理iPhone Safariで4テーマ、5視点、黄銅／鋼／ルビー／文字板／針、接触影、選択ハイライトを確認するまで未採用とする
+- Candidate Cを既定ライトへ統合しない
+
+### M.5 機能・性能回帰
+
+- Node 33/33を維持する
+- 既定表示およびCandidate A/B/Cのデスクトップ既存回帰86/86を維持する
+- 390×844および393×852で既存モバイル回帰を維持し、既知のwalnutサンプル数ゲートを緩和しない
+- PR #3 UI回帰1280×720、390×844、375×667を維持する
+- PR #4 HUD回帰1280×720、390×844、393×852、375×667を維持する
+- A.7 9/9、位置2 600フレーム、100往復、30／60／120fps、位置1／位置2禁止干渉0/0を維持する
+- A.6 pointer／wheelのp50／p95／p99、33ms／50ms超過数を基準とCandidate別に記録し、閾値を緩和しない
+- 部品選択、解除、透過越し選択、ハイライト、透過、分解、表裏分離を回帰する
+- 通常運転、位置1巻上げ、逆転空転、位置2時刻合わせ、秒停止、3針と軸／管の1:1拘束を回帰する
+- ArcballControls、カメラプリセット、Raycaster候補選定、PR #4 HUD／時刻入力、内部機構を変更しない
+
+### M.6 ユーザー確認ゲート
+
+- Candidate Aは幾何学的なfrustum修正の効果と全面暗化を同じ条件で提示し、現方式を不採用と明記する
+- Candidate Bは状態連続化の効果と100%深度順破綻を提示し、現方式を不採用と明記する
+- Candidate Cは有望な候補として提示するが、物理iPhone未確認のため未採用と明記する
+- A/B/Cを複合した最終案を作らず、既定描画へ統合しない
+- Issue #2をOpen、Pull RequestをDraftのまま維持する
+- ユーザー確認前にReady化、マージ、Issue close、「完成」「合格」の報告を行わない

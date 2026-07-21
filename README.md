@@ -7,7 +7,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - バージョン：v3.13.0（PR #4 モバイルオーバーレイ・HUD整理）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の重点：実機レビューで確認したモバイル時刻入力、ハンバーガー追従、トグルカードの仕上げ
+- 現在の重点：Issue #2のシャドウ境界、透過不連続、物理スマートフォン暗部を分離診断するPhase 1（Draft、既定描画への統合なし）
 
 ## 実装済み
 
@@ -133,6 +133,16 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 8. Live Sync、構造表示、表示グループ、診断、振幅設定の全16チェックボックスをON／OFF／disabledが明確なトグルカードへ変更
 9. ライト、影、露出、tone mapping、材質、構造透過、DPR、カメラ、内部機構を変更せず既存回帰を維持
 
+## Issue #2 レンダリング品質 Phase 1
+
+1. v3.13.0の既定表示を固定し、透過11段階×3視点×2 viewportと、通常表示4テーマ×5視点×4 viewportを同一条件で撮影
+2. 固定±5のshadow cameraが実モデルboundsを包含しないこと、100→99で`transparent`、55→54で`depthWrite`が二値切替することを機械可読レポートで特定
+3. Candidate Aはtight-fit frustumで中央境界を除去したが、透過面の全面暗化により現方式を不採用
+4. Candidate Bは材質状態の連続化を確認したが、100%表示の深度順破綻により現方式を不採用
+5. Candidate Cの強度0.02 distance-invariant fillは有望だが、物理iPhone未確認のため未採用
+6. `alphaHash`や透過率閾値の影ON/OFFは使用せず、Candidate A/B/Cを既定描画へ統合していない
+7. Issue #2をOpen、Pull RequestをDraftのまま維持し、比較証跡に対するユーザー確認を次のゲートとする
+
 詳細は以下を参照してください。
 
 - `docs/PROJECT_OVERVIEW.md`
@@ -159,6 +169,8 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - `docs/REFACTOR_A7_KEYLESS_POSITION.md`
 - `docs/PR3_UI_ARCHITECTURE.md`
 - `docs/PR4_MOBILE_OVERLAY_HUD.md`
+- `docs/ISSUE2_RENDERING_QUALITY_PHASE1.md`
+- `docs/evidence/issue2-rendering-quality-phase1/README.md`
 
 ## ローカル確認
 
