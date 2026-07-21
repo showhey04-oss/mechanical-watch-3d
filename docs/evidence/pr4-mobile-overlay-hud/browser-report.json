@@ -1,0 +1,179 @@
+{
+  "pullRequest": 4,
+  "pullRequestUrl": "https://github.com/showhey04-oss/mechanical-watch-3d/pull/4",
+  "draft": true,
+  "baselineCommit": "368ac3d447627773605cbc8146d98779fae6eae3",
+  "applicationImplementationCommit": "63ce788d07aa729337f83530c4f3d82aad28054f",
+  "testHarnessAndEvidenceIncludedInFinalPullRequestHead": true,
+  "version": "v3.13.0",
+  "environment": {
+    "browser": "Chromium controlled through the Codex in-app browser",
+    "realIPhoneTested": false,
+    "localServer": "http://127.0.0.1:4173"
+  },
+  "node": {
+    "passed": 33,
+    "total": 33
+  },
+  "desktop": {
+    "viewport": "1280x720",
+    "existingRegression": { "passed": 86, "total": 86 },
+    "pr3UiRegression": { "passed": 20, "total": 20 },
+    "pr4HudRegression": { "passed": 20, "total": 20 },
+    "refactorA7": { "passed": 9, "total": 9 },
+    "pointer": {
+      "averageFps": 59.6584,
+      "p50Ms": 16.7,
+      "p95Ms": 18.0,
+      "p99Ms": 18.3,
+      "over33Ms": 0,
+      "over50Ms": 0,
+      "longestFrameMs": 18.5,
+      "directionReversals": 0,
+      "stopJumpCount": 0,
+      "modelWorldInvariant": true
+    },
+    "wheel": {
+      "averageFps": 59.5726,
+      "p50Ms": 16.7,
+      "p95Ms": 17.8,
+      "p99Ms": 18.5,
+      "over33Ms": 0,
+      "over50Ms": 0,
+      "monotonic": true,
+      "maxStepShare": 0.0109354
+    }
+  },
+  "mobile": {
+    "390x844": {
+      "panelHeightPx": 472.6328125,
+      "panelHeightRatio": 0.559991484,
+      "upperCanvasHeightPx": 371.3671875,
+      "upperCanvasHeightRatio": 0.440008516,
+      "horizontalOverflowPx": 0,
+      "existingRegression": { "passed": 88, "total": 88 },
+      "pr3UiRegression": { "passed": 22, "total": 22 },
+      "pr4HudRegression": { "passed": 31, "total": 31 },
+      "pointer": {
+        "averageFps": 59.6091,
+        "p50Ms": 16.7,
+        "p95Ms": 16.9,
+        "p99Ms": 17.9,
+        "over33Ms": 0,
+        "over50Ms": 0
+      },
+      "wheel": {
+        "averageFps": 59.5883,
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 17.7,
+        "over33Ms": 0,
+        "over50Ms": 0,
+        "monotonic": true
+      },
+      "actualCanvasSelection": {
+        "selectedPart": "地板文字板側仕上げ",
+        "point": { "x": 195, "y": 245.102 },
+        "hitElement": "canvas",
+        "backgroundTapCleared": true,
+        "backgroundPoint": { "x": 382, "y": 8 },
+        "hiddenInfoHeightPx": 0
+      }
+    },
+    "393x852": {
+      "panelHeightPx": 477.1171875,
+      "panelHeightRatio": 0.559996699,
+      "upperCanvasHeightPx": 374.8828125,
+      "upperCanvasHeightRatio": 0.440003301,
+      "horizontalOverflowPx": 0,
+      "pr4HudRegression": { "passed": 31, "total": 31 }
+    },
+    "375x667": {
+      "panelHeightPx": 373.515625,
+      "panelHeightRatio": 0.559993441,
+      "upperCanvasHeightPx": 293.484375,
+      "upperCanvasHeightRatio": 0.440006559,
+      "horizontalOverflowPx": 0,
+      "pr3UiRegression": { "passed": 22, "total": 22 },
+      "pr4HudRegression": { "passed": 31, "total": 31 }
+    }
+  },
+  "hud": {
+    "initialInfoHidden": true,
+    "initialInfoAriaHidden": true,
+    "selectionShowsInfo": true,
+    "backgroundTapHidesInfo": true,
+    "hiddenInfoOccupiesNoLayout": true,
+    "learningTabUsesSharedPartInfo": true,
+    "canvasVersionBadgeRemoved": true,
+    "panelVersion": "v3.13.0",
+    "titleVersionMatches": true,
+    "hamburgerHitAreaCssPx": { "width": 44, "height": 44 },
+    "ariaStateTracksPanel": true,
+    "enterKeyToggles": true,
+    "spaceKeyToggles": true,
+    "keyboardTestUsedBrowserInput": true,
+    "onePointerRotation": true,
+    "twoPointerBothContactsHitCanvas": true,
+    "panelRemainsOpenDuringCanvasInput": true,
+    "visualViewport": {
+      "simulatedViewport": "390x520",
+      "focusedControl": "time",
+      "controlTopPx": 376.88,
+      "controlBottomPx": 418.88,
+      "scrollBodyTopPx": 285.80,
+      "scrollBodyBottomPx": 510.0,
+      "fullyVisible": true
+    }
+  },
+  "keyless": {
+    "position2Frames": 600,
+    "maxDrift": 0,
+    "roundTrips": 100,
+    "cumulativeError": 0,
+    "maxEndpointError": 0,
+    "frameRates": [30, 60, 120],
+    "finalCoordinatesMatch": true,
+    "longHoldFrames": 3600,
+    "longHoldDrift": 0,
+    "forbiddenInterference": { "position1": 0, "position2": 0 }
+  },
+  "invariants": {
+    "panelStateSync": true,
+    "tabStateRetained": true,
+    "tabScrollRetained": true,
+    "modelWorldTransformUnchangedByHud": true,
+    "cameraUnchangedByHud": true,
+    "mechanismAnglesUnchangedByHud": true,
+    "crownPositionUnchangedByHud": true,
+    "timeUnchangedByHud": true,
+    "mainspringReserveUnchangedByHud": true
+  },
+  "scope": {
+    "issue2CommentAdded": true,
+    "issue2CommentUrl": "https://github.com/showhey04-oss/mechanical-watch-3d/issues/2#issuecomment-5035033005",
+    "issue2Closed": false,
+    "issue2RenderingImplemented": false,
+    "mechanismChanged": false,
+    "renderingChanged": false,
+    "lightingChanged": false,
+    "shadowsChanged": false,
+    "exposureChanged": false,
+    "toneMappingChanged": false,
+    "materialsChanged": false,
+    "transparencyChanged": false,
+    "adaptiveDprChanged": false,
+    "cameraChanged": false,
+    "raycasterCandidateSelectionChanged": false,
+    "animationLoopChanged": false
+  },
+  "artifacts": {
+    "screenshots": 14,
+    "gifs": 5,
+    "directory": "docs/evidence/pr4-mobile-overlay-hud/"
+  },
+  "limitations": [
+    "No physical iPhone was available; 390x844, 393x852, and 375x667 browser viewports were tested.",
+    "Mobile darkness, shadow, and exposure differences remain tracked in open Issue #2 and were not changed by PR #4."
+  ]
+}

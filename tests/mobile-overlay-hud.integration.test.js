@@ -62,6 +62,7 @@ async function zoomAndPanInUpperCanvas(diagnostics, report) {
   await diagnostics.waitForFrames(36);
   const after = diagnostics.getCameraOrientation();
   const afterTarget = diagnostics.getCameraTarget();
+  const gesturePoints = [p1, p2, q1, q2];
   return {
     before,
     after,
@@ -69,8 +70,21 @@ async function zoomAndPanInUpperCanvas(diagnostics, report) {
     afterTarget,
     distanceChanged: Math.abs(after.distance - before.distance) > 0.01,
     targetChanged: arrayDistance(beforeTarget, afterTarget) > 0.01,
-    hitPoints: [...p1, ...p2, ...q1, ...q2].every(Number.isFinite),
+    finitePoints: gesturePoints.flat().every(Number.isFinite),
+    hitCanvas: gesturePoints.every(([x, pointY]) => document.elementFromPoint(x, pointY) === canvas),
   };
+}
+
+async function tapUpperCanvas(diagnostics, report, { background = false } = {}) {
+  const canvas = document.getElementById("app");
+  const x = background ? innerWidth - 8 : innerWidth * 0.5;
+  const y = background ? report.viewport.visualTop + 8 : report.viewport.visualTop + report.top3D.height * 0.66;
+  const hitCanvas = document.elementFromPoint(x, y) === canvas;
+  const pointerId = background ? 8205 : 8204;
+  dispatchPointer(canvas, "pointerdown", { id: pointerId, x, y });
+  dispatchPointer(canvas, "pointerup", { id: pointerId, x, y, buttons: 0 });
+  await diagnostics.waitForFrames(18);
+  return { x, y, hitCanvas, selection: diagnostics.getSelection(), info: diagnostics.getMobileOverlayHudReport().info };
 }
 
 function invariantSnapshot(diagnostics) {
@@ -174,10 +188,15 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
     diagnostics.clearSelectionInfo();
     diagnostics.applyCameraPreset("reset");
     await diagnostics.waitForFrames(24);
+    const actualSelection = await tapUpperCanvas(diagnostics, diagnostics.getMobileOverlayHudReport());
+    check("hud-mobile-upper-canvas-pointer-tap-selects-a-part", actualSelection.hitCanvas && Boolean(actualSelection.selection) && !actualSelection.info.hidden && actualSelection.info.ariaHidden === "false", actualSelection);
+    const actualClear = await tapUpperCanvas(diagnostics, diagnostics.getMobileOverlayHudReport(), { background: true });
+    check("hud-mobile-upper-canvas-background-tap-clears-selection", actualClear.hitCanvas && actualClear.selection === null && actualClear.info.hidden && actualClear.info.ariaHidden === "true", actualClear);
+    await diagnostics.waitForFrames(10);
     const oneFinger = await rotateInUpperCanvas(diagnostics, diagnostics.getMobileOverlayHudReport());
     check("hud-mobile-upper-canvas-one-finger-rotation-uses-pointer-events", oneFinger.changed && oneFinger.hitStart && oneFinger.hitEnd, oneFinger);
     const twoFinger = await zoomAndPanInUpperCanvas(diagnostics, diagnostics.getMobileOverlayHudReport());
-    check("hud-mobile-upper-canvas-two-finger-zoom-or-pan-uses-pointer-events", (twoFinger.distanceChanged || twoFinger.targetChanged) && twoFinger.hitPoints, twoFinger);
+    check("hud-mobile-upper-canvas-two-finger-zoom-or-pan-uses-pointer-events", (twoFinger.distanceChanged || twoFinger.targetChanged) && twoFinger.finitePoints && twoFinger.hitCanvas, twoFinger);
 
     diagnostics.setCrownPosition("wind");
     await diagnostics.waitForFrames(36);
@@ -211,7 +230,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
 
     diagnostics.setCrownPosition("wind");
     await diagnostics.waitForFrames(36);
-    measurements.mobile = { layout, oneFinger, twoFinger, windingChanged, settingBefore, settingAfter, inputRect: inputRect.toJSON(), bodyRect: bodyRect.toJSON() };
+    measurements.mobile = { layout, actualSelection, actualClear, oneFinger, twoFinger, windingChanged, settingBefore, settingAfter, inputRect: inputRect.toJSON(), bodyRect: bodyRect.toJSON() };
   } else {
     check("hud-desktop-panel-keeps-approximately-365px-width", Math.abs(layout.panel.rect.width - 365) <= 1.5, layout.panel.rect);
     diagnostics.setPanelOpen(false);
