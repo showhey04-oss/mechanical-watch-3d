@@ -82,7 +82,7 @@ Visual Viewport 390×520相当ではinput top／bottomが376.88／418.88px、本
 - 実pointerで上部キャンバスの部品選択・背景解除、2点pointerの両接点がキャンバス内であることを確認
 - 実キーボードのEnter／Spaceと、Visual Viewport縮小時の時刻入力可視性を確認
 - `HH:mm`／`HH:mm:ss`、`input`→`change`→`blur`、touch相当ボタン、Live Sync手動解除、位置1／位置2で表示時刻・`watchTimeSec`・3針角の一致を確認
-- 全16カードのDOM・状態同期・44px・9px gapに加え、各カードでtouch相当pointer、ラベル操作、native keyboard focus／activation、モデル表示同期と元状態への復帰を確認
+- 全16カードのDOM・状態同期・44px・9px gapに加え、各カードでtouch相当pointer、ラベル操作、native keyboard focus／Space activation、モデル表示同期と元状態への復帰を確認
 
 既存モバイル回帰の未達1件はウォールナット前面のサンプル数が3反復で986、998、996となり、既知の条件`sampleCount > 1000`へ届かなかったもの。表裏輝度差は全テーマ12.42%以内で、暗部率・クリップ率を含む画質値と残る87件は合格した。レンダリングや試験条件は変更していない。
 

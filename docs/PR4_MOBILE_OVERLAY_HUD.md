@@ -54,7 +54,7 @@ Live Sync 1件、構造表示3件、表示グループ9件、技術診断2件、
 
 - 各カードは高さ44px以上、`justify-content:flex-start`、インジケータと文章のgap 9px
 - ONは弱い金色、OFFは暗いグレー、disabledは操作不可が明確な別のグレー
-- 全16カードでtouch相当pointerとラベル全体の操作、native inputのキーボードフォーカス／activation、元状態への復帰を確認
+- 全16カードでtouch相当pointerとラベル全体の操作、native inputのキーボードフォーカス／Space activation、元状態への復帰を確認。Spaceは`keydown`の既定動作を抑止して同じinputの`click`へ1回だけ流し、環境差による未反映や二重反転を防ぐ
 - `checked`／disabledからカード表示を同期し、既存change処理を維持したままモデル状態との一致を診断で確認
 - 長文を折り返し、375px幅でも横オーバーフロー0
 

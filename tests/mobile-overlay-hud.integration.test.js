@@ -369,11 +369,8 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
     control.focus({ preventScroll: true });
     control.dispatchEvent(new KeyboardEvent("keydown", { key: " ", code: "Space", bubbles: true, cancelable: true }));
     await Promise.resolve();
-    const focused = diagnostics.getToggleCardReport().find((entry) => originalCard.id ? entry.id === originalCard.id : entry.group === originalCard.group);
-    const keyboardFocused = document.activeElement === control && focused.card.outlineStyle !== "none";
-    control.click();
-    await Promise.resolve();
     const restored = diagnostics.getToggleCardReport().find((entry) => originalCard.id ? entry.id === originalCard.id : entry.group === originalCard.group);
+    const keyboardFocused = document.activeElement === control && restored.card.outlineStyle !== "none";
     control.blur();
     allToggleInteractions.push({
       id: originalCard.id,

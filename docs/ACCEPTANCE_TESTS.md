@@ -199,7 +199,7 @@
 - 時刻入力の`change`で表示時刻・`watchTimeSec`・3針角へ1回だけ反映し、`blur`とボタンclickも同じ適用関数のフォールバックとして動作する
 - 入力中は位置2の描画ループが時刻欄を旧時刻で上書きせず、位置1／位置2を往復しても旧時刻へ戻らない
 - Live Sync ONから手動時刻を適用すると、内部`liveSync`、チェック状態、モード表示が同じOFF状態へ移る
-- 全16個の既存checkboxがvisually-hidden inputを保つ44px以上のトグルカードになり、全カードでON／OFF構造、touch相当pointer、ラベル操作、native inputのフォーカス／activation、モデル表示同期と元状態への復帰が成立する。共通disabled表現は`aria-disabled`、cursor、フォーカス抑止を含めて確認する
+- 全16個の既存checkboxがvisually-hidden inputを保つ44px以上のトグルカードになり、全カードでON／OFF構造、touch相当pointer、ラベル操作、native inputのフォーカス／Space activation、モデル表示同期と元状態への復帰が成立する。共通disabled表現は`aria-disabled`、cursor、フォーカス抑止を含めて確認する
 - パネルを開いた状態で上部キャンバスの1本指回転、2本指ズーム・パン、部品選択、背景タップによる解除が成立する
 - 上部キャンバス操作でパネルが意図せず閉じず、パネル操作直後の誤選択抑止を維持する
 - パネルを開いたまま位置1巻上げ、位置2時刻合わせ、秒停止、位置1復帰後の運転再開を観察できる
