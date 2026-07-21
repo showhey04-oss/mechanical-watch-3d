@@ -153,7 +153,7 @@
 - 位置1巻上げ、位置2時刻合わせ、秒停止、針拘束、選択、透過、両面照明を回帰する
 - A.6 pointer回転とwheelズームの性能閾値を緩和せず維持する
 
-## K. PR #2 UIアーキテクチャ
+## K. PR #3 UIアーキテクチャ
 
 - 操作・学習・技術の3タブが均等幅で表示され、初期状態では操作タブだけが選択・表示される
 - `tablist`、`tab`、`tabpanel`、`aria-selected`、`aria-controls`、`aria-labelledby`が正しく対応する
