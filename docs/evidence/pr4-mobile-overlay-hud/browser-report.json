@@ -10,8 +10,18 @@
   "version": "v3.13.0",
   "environment": {
     "browser": "Chromium controlled through the Codex in-app browser",
-    "realIPhoneTested": false,
+    "realIPhoneTestedByCodexAutomation": false,
     "localServer": "http://127.0.0.1:4174"
+  },
+  "userAcceptance": {
+    "date": "2026-07-22",
+    "physicalIPhoneTested": true,
+    "majorMobileHudFeaturesAccepted": true,
+    "timeInputUpdatesDisplayAndThreeHands": true,
+    "manualTimeInputDisablesLiveSync": true,
+    "minorTimeInputRightEdgeVisualOffset": true,
+    "minorOffsetBlocksAcceptance": false,
+    "minorOffsetDisposition": "Defer to the final polish phase with other non-blocking visual adjustments."
   },
   "node": {
     "passed": 33,
@@ -260,7 +270,8 @@
     "directory": "docs/evidence/pr4-mobile-overlay-hud/"
   },
   "limitations": [
-    "No physical iPhone was available; 390x844, 393x852, and 375x667 browser viewports were tested.",
+    "No physical iPhone was available to Codex automation; the user completed and accepted the physical-iPhone review on 2026-07-22.",
+    "A minor non-blocking right-edge visual offset remains on the physical-iPhone time input and is deferred to final polish.",
     "Mobile darkness, shadow, and exposure differences remain tracked in open Issue #2 and were not changed by PR #4.",
     "The existing 390x844 mobile suite remains 87/88 because the known walnut-front luminance sample-count gate requires more than 1000 samples; measured luminance quality itself passed."
   ]
