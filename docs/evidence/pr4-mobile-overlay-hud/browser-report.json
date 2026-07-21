@@ -1,0 +1,278 @@
+{
+  "pullRequest": 4,
+  "pullRequestUrl": "https://github.com/showhey04-oss/mechanical-watch-3d/pull/4",
+  "draft": true,
+  "baselineCommit": "368ac3d447627773605cbc8146d98779fae6eae3",
+  "initialEvidenceApplicationImplementationCommit": "63ce788d07aa729337f83530c4f3d82aad28054f",
+  "reviewFollowupStartingHead": "cad10ebc39dec611e0232412d8a50a72513f832c",
+  "reviewFollowupIncludedInFinalPullRequestHead": true,
+  "testHarnessAndEvidenceIncludedInFinalPullRequestHead": true,
+  "version": "v3.13.0",
+  "environment": {
+    "browser": "Chromium controlled through the Codex in-app browser",
+    "realIPhoneTestedByCodexAutomation": false,
+    "localServer": "http://127.0.0.1:4174"
+  },
+  "userAcceptance": {
+    "date": "2026-07-22",
+    "physicalIPhoneTested": true,
+    "majorMobileHudFeaturesAccepted": true,
+    "timeInputUpdatesDisplayAndThreeHands": true,
+    "manualTimeInputDisablesLiveSync": true,
+    "minorTimeInputRightEdgeVisualOffset": true,
+    "minorOffsetBlocksAcceptance": false,
+    "minorOffsetDisposition": "Defer to the final polish phase with other non-blocking visual adjustments."
+  },
+  "node": {
+    "passed": 33,
+    "total": 33
+  },
+  "desktop": {
+    "viewport": "1280x720",
+    "existingRegression": { "passed": 86, "total": 86 },
+    "pr3UiRegression": { "passed": 20, "total": 20 },
+    "pr4HudRegression": { "passed": 42, "total": 42 },
+    "refactorA7": { "passed": 9, "total": 9 },
+    "pointer": {
+      "p50Ms": 16.7,
+      "p95Ms": 16.8,
+      "p99Ms": 17.2,
+      "over33Ms": 0,
+      "over50Ms": 0,
+      "directionReversals": 0,
+      "stopJumpCount": 0,
+      "modelWorldInvariant": true
+    },
+    "wheel": {
+      "p50Ms": 16.7,
+      "p95Ms": 16.8,
+      "p99Ms": 17.3,
+      "over33Ms": 0,
+      "over50Ms": 0,
+      "monotonic": true
+    }
+  },
+  "mobile": {
+    "390x844": {
+      "panelHeightPx": 472.6328125,
+      "panelHeightRatio": 0.559991484,
+      "upperCanvasHeightPx": 371.3671875,
+      "upperCanvasHeightRatio": 0.440008516,
+      "horizontalOverflowPx": 0,
+      "timeInputRectPx": { "left": 17, "right": 373, "width": 356 },
+      "scrollBodyRectPx": { "left": 1, "right": 389, "width": 388 },
+      "timeGridHorizontalOverflowPx": 0,
+      "existingRegression": { "passed": 87, "total": 88 },
+      "pr3UiRegression": { "passed": 22, "total": 22 },
+      "pr4HudRegression": { "passed": 54, "total": 54 },
+      "pointer": {
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 17.1,
+        "over33Ms": 0,
+        "over50Ms": 0
+      },
+      "wheel": {
+        "p50Ms": 16.7,
+        "p95Ms": 16.8,
+        "p99Ms": 16.8,
+        "over33Ms": 0,
+        "over50Ms": 0,
+        "monotonic": true
+      },
+      "actualCanvasSelection": {
+        "selectedPart": "地板文字板側仕上げ",
+        "point": { "x": 195, "y": 245.102 },
+        "hitElement": "canvas",
+        "backgroundTapCleared": true,
+        "backgroundPoint": { "x": 382, "y": 8 },
+        "hiddenInfoHeightPx": 0
+      }
+    },
+    "393x852": {
+      "panelHeightPx": 477.1171875,
+      "panelHeightRatio": 0.559996699,
+      "upperCanvasHeightPx": 374.8828125,
+      "upperCanvasHeightRatio": 0.440003301,
+      "horizontalOverflowPx": 0,
+      "timeInputRectPx": { "left": 17, "right": 376, "width": 359 },
+      "scrollBodyRectPx": { "left": 1, "right": 392, "width": 391 },
+      "timeGridHorizontalOverflowPx": 0,
+      "pr4HudRegression": { "passed": 54, "total": 54 }
+    },
+    "375x667": {
+      "panelHeightPx": 373.515625,
+      "panelHeightRatio": 0.559993441,
+      "upperCanvasHeightPx": 293.484375,
+      "upperCanvasHeightRatio": 0.440006559,
+      "horizontalOverflowPx": 0,
+      "timeInputRectPx": { "left": 17, "right": 358, "width": 341 },
+      "scrollBodyRectPx": { "left": 1, "right": 374, "width": 373 },
+      "timeGridHorizontalOverflowPx": 0,
+      "pr3UiRegression": { "passed": 22, "total": 22 },
+      "pr4HudRegression": { "passed": 54, "total": 54 }
+    },
+    "390x520VisualViewportEquivalent": {
+      "timeInputRectPx": { "left": 17, "right": 373, "width": 356, "top": 376.8828, "bottom": 418.8828 },
+      "scrollBodyRectPx": { "left": 1, "right": 389, "width": 388, "top": 285.8047, "bottom": 510 },
+      "horizontalOverflowPx": 0,
+      "inputFullyVisible": true,
+      "pr4HudRegression": { "passed": 54, "total": 54 }
+    }
+  },
+  "hud": {
+    "initialInfoHidden": true,
+    "initialInfoAriaHidden": true,
+    "selectionShowsInfo": true,
+    "backgroundTapHidesInfo": true,
+    "hiddenInfoOccupiesNoLayout": true,
+    "learningTabUsesSharedPartInfo": true,
+    "canvasVersionBadgeRemoved": true,
+    "panelVersion": "v3.13.0",
+    "titleVersionMatches": true,
+    "hamburgerHitAreaCssPx": { "width": 44, "height": 44 },
+    "hamburgerNormalStyle": { "borderWidthPx": 0, "boxShadow": "none", "backgroundTransparent": true },
+    "desktopHamburgerLeftPx": { "expanded": 387, "collapsed": 10, "reexpanded": 387 },
+    "desktopPositionUsesAbsoluteState": true,
+    "ariaStateTracksPanel": true,
+    "enterKeyToggles": true,
+    "spaceKeyToggles": true,
+    "keyboardTestUsedBrowserInput": true,
+    "onePointerRotation": true,
+    "twoPointerBothContactsHitCanvas": true,
+    "panelRemainsOpenDuringCanvasInput": true,
+    "visualViewport": {
+      "simulatedViewport": "390x520",
+      "focusedControl": "time",
+      "controlTopPx": 376.88,
+      "controlBottomPx": 418.88,
+      "scrollBodyTopPx": 285.80,
+      "scrollBodyBottomPx": 510.0,
+      "fullyVisible": true
+    }
+  },
+  "reviewFollowup": {
+    "timeInput": {
+      "diagnosedRootCauses": [
+        "The previous implementation connected applyTimeInput only to the apply button click, not the native time input change event.",
+        "In crown position 2, the existing animation path called setEditorTime repeatedly and could overwrite a focused native time editor before its picker value was committed."
+      ],
+      "visualViewportWasRootCause": false,
+      "visualViewportOnlyScrolledFocusedControl": true,
+      "acceptedFormats": ["HH:mm", "HH:mm:ss"],
+      "strictRangeValidation": true,
+      "emptyOrInvalidLeavesWatchUnchanged": true,
+      "eventsDiagnosed": ["input", "change", "blur", "pointerdown", "pointerup", "click"],
+      "changeIsPrimaryCommit": true,
+      "blurAndButtonAreFallbacks": true,
+      "singleApplyFunction": true,
+      "revisionDedupePreventsDoubleApply": true,
+      "focusedEditorProtectedFromRafWriteback": true,
+      "liveSyncManualOverrideDisablesSync": true,
+      "timeModeCheckboxAndInternalStateStayAligned": true,
+      "scenarios": [
+        { "from": "10:08:30", "to": "13:37:42", "passed": true },
+        { "from": "10:08", "to": "13:37", "secondsResolvedTo": 0, "passed": true },
+        { "fromLiveSync": true, "manualApply": true, "liveSyncAfter": false, "passed": true },
+        { "positionsTested": [1, 2], "roundTrip": [2, 1, 2], "oldValueRestored": false, "passed": true }
+      ],
+      "displayWatchSecondsAndThreeHandAnglesMatch": true,
+      "axisAndHandOneToOneCouplingsRetained": true
+    },
+    "toggleCards": {
+      "total": 16,
+      "idBacked": 7,
+      "displayGroupBacked": 9,
+      "breakdown": {
+        "liveSync": 1,
+        "structuralDisplay": 3,
+        "displayGroups": 9,
+        "technicalDiagnostics": 2,
+        "automaticAmplitude": 1
+      },
+      "nativeInputsRetained": true,
+      "displayNoneUsed": false,
+      "minimumHeightPx": 44,
+      "indicatorTextGapPx": 9,
+      "justifyContent": "flex-start",
+      "onOffDisabledStylesDistinct": true,
+      "allCardsStructureAndStateSyncPassed": true,
+      "allSixteenTouchLabelKeyboardSpaceActivationAndModelSyncPassed": true,
+      "spaceActivationPreventsNativeDoubleToggle": true,
+      "mobileHorizontalOverflowPx": 0
+    },
+    "dynamicResize": {
+      "sequence": ["1280x720", "390x844", "1280x720"],
+      "desktopStart": { "expanded": true, "ariaExpanded": true, "toggleLeftPx": 387 },
+      "mobileAfterCross": { "automaticallyClosed": true, "ariaExpanded": false, "toggleLeftPx": 10 },
+      "mobileAfterManualOpen": { "expanded": true, "ariaExpanded": true, "toggleLeftPx": 10 },
+      "desktopAfterCross": { "expanded": true, "ariaExpanded": true, "toggleLeftPx": 387 },
+      "hitAreaAtLeast44PxThroughout": true,
+      "borderAndShadowRemovedThroughout": true,
+      "passed": true
+    },
+    "knownMobileRegressionGate": {
+      "test": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+      "repeatResults": ["87/88", "87/88", "87/88"],
+      "walnutFrontSampleCounts": [986, 998, 996],
+      "thresholdExpression": "sampleCount > 1000",
+      "minimumPassingSampleCount": 1001,
+      "allThemesWithinThirtyPercent": true,
+      "maximumFrontBackRelativeDifferencePercent": 12.42,
+      "darkAndClippedPixelChecksPassed": true,
+      "renderingOrTestThresholdChanged": false
+    }
+  },
+  "keyless": {
+    "position2Frames": 600,
+    "maxDrift": 0,
+    "roundTrips": 100,
+    "cumulativeError": 0,
+    "maxEndpointError": 0,
+    "frameRates": [30, 60, 120],
+    "finalCoordinatesMatch": true,
+    "longHoldFrames": 3600,
+    "longHoldDrift": 0,
+    "forbiddenInterference": { "position1": 0, "position2": 0 }
+  },
+  "invariants": {
+    "panelStateSync": true,
+    "tabStateRetained": true,
+    "tabScrollRetained": true,
+    "modelWorldTransformUnchangedByHud": true,
+    "cameraUnchangedByHud": true,
+    "mechanismAnglesUnchangedByHud": true,
+    "crownPositionUnchangedByHud": true,
+    "timeUnchangedByHud": true,
+    "mainspringReserveUnchangedByHud": true
+  },
+  "scope": {
+    "issue2CommentAdded": true,
+    "issue2CommentUrl": "https://github.com/showhey04-oss/mechanical-watch-3d/issues/2#issuecomment-5035033005",
+    "issue2Closed": false,
+    "issue2RenderingImplemented": false,
+    "mechanismChanged": false,
+    "renderingChanged": false,
+    "lightingChanged": false,
+    "shadowsChanged": false,
+    "exposureChanged": false,
+    "toneMappingChanged": false,
+    "materialsChanged": false,
+    "transparencyChanged": false,
+    "adaptiveDprChanged": false,
+    "cameraChanged": false,
+    "raycasterCandidateSelectionChanged": false,
+    "animationLoopChanged": false
+  },
+  "artifacts": {
+    "screenshots": 28,
+    "gifs": 10,
+    "directory": "docs/evidence/pr4-mobile-overlay-hud/"
+  },
+  "limitations": [
+    "No physical iPhone was available to Codex automation; the user completed and accepted the physical-iPhone review on 2026-07-22.",
+    "A minor non-blocking right-edge visual offset remains on the physical-iPhone time input and is deferred to final polish.",
+    "Mobile darkness, shadow, and exposure differences remain tracked in open Issue #2 and were not changed by PR #4.",
+    "The existing 390x844 mobile suite remains 87/88 because the known walnut-front luminance sample-count gate requires more than 1000 samples; measured luminance quality itself passed."
+  ]
+}
