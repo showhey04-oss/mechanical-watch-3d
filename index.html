@@ -4,124 +4,163 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
 <meta name="theme-color" content="#0d1015">
-<title>Mechanical Watch Study Model v3.11.0</title>
+<title>Mechanical Watch Study Model v3.12.0</title>
 <style>
 :root{--panel:rgba(16,19,25,.95);--line:rgba(255,255,255,.13);--text:#f5f7fa;--muted:#b5bdc9;--gold:#c9a65c;--blue:#3c6fa6}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0d1015;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP",sans-serif}canvas{display:block;width:100%;height:100%;touch-action:none}
 #top{position:fixed;z-index:20;top:max(10px,env(safe-area-inset-top));left:10px;right:10px;display:flex;justify-content:space-between;pointer-events:none}.pill{pointer-events:auto;color:#fff;background:rgba(13,16,21,.82);border:1px solid var(--line);border-radius:13px;padding:10px 12px;backdrop-filter:blur(8px);font-size:13px}
 #info{position:fixed;z-index:15;top:64px;right:10px;max-width:min(345px,76vw);padding:10px 12px;border:1px solid var(--line);border-radius:13px;background:rgba(13,16,21,.80);backdrop-filter:blur(8px);font-size:12px;line-height:1.5;color:var(--muted);pointer-events:none}#partName{color:#fff;font-weight:700}#partDesc{display:block;margin-top:3px}
-#panel{position:fixed;z-index:30;left:0;right:0;bottom:0;background:var(--panel);border:1px solid var(--line);border-bottom:0;border-radius:18px 18px 0 0;transform:translateY(calc(100% - 56px));transition:transform .24s ease;padding-bottom:max(10px,env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.38)}#panel.open{transform:translateY(0)}#handle{height:56px;display:flex;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.08)}#grab{width:48px;height:5px;border-radius:999px;background:rgba(255,255,255,.3)}#body{max-height:min(80vh,760px);overflow:auto;padding:14px 16px 20px;touch-action:pan-y;-webkit-overflow-scrolling:touch}
+#panel{position:fixed;z-index:30;left:0;right:0;bottom:0;background:var(--panel);border:1px solid var(--line);border-bottom:0;border-radius:18px 18px 0 0;transform:translateY(calc(100% - 56px));transition:transform .24s ease;padding-bottom:max(10px,env(safe-area-inset-bottom));box-shadow:0 -10px 30px rgba(0,0,0,.38)}#panel.open{transform:translateY(0)}#handle{height:56px;display:flex;align-items:center;justify-content:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.08)}#grab{width:48px;height:5px;border-radius:999px;background:rgba(255,255,255,.3)}#body{max-height:min(80vh,760px);overflow-x:hidden;overflow-y:auto;padding:14px 16px 20px;touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;scrollbar-gutter:stable}
 h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 13px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:13px}.metric{padding:9px;border:1px solid var(--line);border-radius:11px;background:rgba(255,255,255,.035)}.metric b{display:block;font-size:14px}.metric span{font-size:10px;color:var(--muted)}
 .buttons{display:flex;flex-wrap:wrap;gap:8px}.action{min-height:42px;padding:9px 12px;border:1px solid var(--line);border-radius:11px;background:#292e37;color:#fff}.action.active{background:#725d32;border-color:#a98a4a}.row{margin:12px 0}.row label,.section>label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}input[type=range]{width:100%;height:34px}.section{border-top:1px solid rgba(255,255,255,.09);padding-top:12px;margin-top:12px}.checks{display:grid;grid-template-columns:1fr 1fr;gap:8px}.checks label{display:flex;align-items:center;justify-content:flex-start;gap:9px;font-size:13px;margin:0;padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.035);cursor:pointer}.checks label:hover{background:rgba(255,255,255,.065)}.checks input{width:19px;height:19px;margin:0;flex:0 0 auto}.checks span{line-height:1.2}select,input[type=time]{width:100%;padding:10px;border-radius:10px;border:1px solid var(--line);background:#292e37;color:#fff}.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:11px;color:var(--muted)}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}.warn{font-size:11px;line-height:1.45;color:#d8c79c;background:rgba(201,166,92,.08);border:1px solid rgba(201,166,92,.25);border-radius:10px;padding:9px;margin-top:10px}.timeGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.full{grid-column:1/-1}.syncLine{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);margin-top:10px}.syncLine input{width:18px;height:18px}.mini{font-size:11px;color:var(--muted);margin-top:6px}#panel.collapsed{transform:translateX(calc(-100% + 46px));overflow:hidden}#panel.collapsed #body{opacity:0;pointer-events:none}#panel.collapsed #handle{border-bottom:0}#panel.collapsed #grab{display:none}#panelToggle{margin-right:8px}.segmented{display:grid;grid-template-columns:1fr 1fr;gap:7px}.segmented button{min-height:44px;padding:8px;border:1px solid var(--line);border-radius:10px;background:#292e37;color:#fff}.segmented button.active{background:#725d32;border-color:#c9a65c;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}.crownControl{padding:11px;border:1px solid rgba(201,166,92,.28);border-radius:12px;background:rgba(201,166,92,.055)}.reserveHead{display:flex;justify-content:space-between;font-size:12px;margin-top:10px}.reserveTrack{height:10px;border-radius:999px;overflow:hidden;background:#222832;border:1px solid var(--line);margin-top:5px}.reserveFill{height:100%;width:50%;background:linear-gradient(90deg,#8f5b35,#c9a65c,#e7d28f);transition:width .15s linear}.crownHint{font-size:11px;line-height:1.45;color:var(--muted);margin-top:6px}.crownDirection{text-align:center;font-size:12px;color:#d8c79c;min-height:18px}.action:disabled,input:disabled{opacity:.48;cursor:not-allowed}.diagnosticControl{padding:11px;border:1px solid rgba(78,216,232,.25);border-radius:12px;background:rgba(78,216,232,.04)}.escStudy{padding:11px;border:1px solid rgba(201,166,92,.30);border-radius:12px;background:rgba(201,166,92,.045)}.escModes{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.escModes button{min-height:42px;border:1px solid var(--line);border-radius:10px;background:#292e37;color:#fff}.escModes button.active{background:#725d32;border-color:#c9a65c}.phaseLegend{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:9px}.phaseLegend span{font-size:10px;color:var(--muted);padding:5px 7px;border:1px solid rgba(255,255,255,.08);border-radius:7px;background:rgba(255,255,255,.025)}.phaseLegend span.active{color:#fff;border-color:#d7b568;background:rgba(201,166,92,.20);box-shadow:0 0 12px rgba(201,166,92,.14)}.phaseStatus{font-size:12px;line-height:1.45;color:#f0dfb4;margin-top:8px;min-height:34px}.escKey{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-top:8px;font-size:10px;color:var(--muted)}.balanceStudy{padding:11px;border:1px solid rgba(105,174,255,.30);border-radius:12px;background:rgba(70,125,190,.055)}.balanceReadout{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px}.balanceReadout div{padding:8px;border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(255,255,255,.03)}.balanceReadout span{display:block;font-size:9px;color:var(--muted)}.balanceReadout b{display:block;font-size:12px;margin-top:2px;color:#eaf2ff}
 .structureStudy{padding:11px;border:1px solid rgba(188,162,112,.32);border-radius:12px;background:rgba(120,92,45,.055)}.structureReadout{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.structureReadout div{padding:8px;border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(255,255,255,.03)}.structureReadout span{display:block;font-size:9px;color:var(--muted)}.structureReadout b{display:block;font-size:12px;margin-top:2px;color:#fff0c9}.powerStudy{padding:11px;border:1px solid rgba(112,205,155,.30);border-radius:12px;background:rgba(62,142,101,.055)}.powerReadout{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.powerReadout div{padding:8px;border:1px solid rgba(255,255,255,.09);border-radius:9px;background:rgba(255,255,255,.03)}.powerReadout span{display:block;font-size:9px;color:var(--muted)}.powerReadout b{display:block;font-size:12px;margin-top:2px;color:#e6fff0}.simButtons{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:9px}.simButtons button{min-height:40px;padding:7px;border:1px solid var(--line);border-radius:9px;background:#292e37;color:#fff}.historyWrap{margin-top:10px;padding:7px;border:1px solid rgba(255,255,255,.09);border-radius:10px;background:rgba(4,8,12,.42)}#historyCanvas{display:block;width:100%;height:150px;border-radius:7px}.historyLegend{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;font-size:10px;color:var(--muted)}.historyLegend i{display:inline-block;width:14px;height:3px;border-radius:3px;margin-right:4px;vertical-align:middle}.stateGood{color:#9cf0ba!important}.stateWarn{color:#f4d482!important}.stateStop{color:#ff9c9c!important}@media(min-width:900px){#panel{top:10px;left:10px;right:auto;bottom:auto;width:365px;border-radius:15px;border:1px solid var(--line);transform:none;padding-bottom:0}#panel.collapsed{transform:translateX(calc(-100% + 46px))}#panel.collapsed #body{display:none}#handle{display:none}#body{max-height:calc(100vh - 20px)}#top{left:387px}.mobileOnly{display:none}}
 
-#renderStatus{position:fixed;z-index:50;inset:0;display:flex;align-items:center;justify-content:center;background:#0d1015;color:#e7edf4;font-size:14px;letter-spacing:.02em;transition:opacity .25s ease}#renderStatus.done{opacity:0;pointer-events:none}#renderStatus.error{padding:24px;text-align:center;color:#ffd1d1;background:#170d10}.themeNote{font-size:11px;color:var(--muted);margin-top:6px}#browserTestResult{display:none}
+.panelTabs{position:sticky;z-index:4;top:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:-14px -16px 14px;padding:10px 16px;background:rgba(16,19,25,.98);border-bottom:1px solid rgba(255,255,255,.10)}.panelTabs button{min-width:0;min-height:44px;padding:8px 6px;border:1px solid var(--line);border-radius:10px;background:#252a32;color:var(--muted);font-weight:700}.panelTabs button[aria-selected="true"]{color:#fff;background:#725d32;border-color:#c9a65c;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}.panelTabs button:focus-visible,.action:focus-visible,.segmented button:focus-visible,.simButtons button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid #f1cf7b;outline-offset:2px}.panelView{min-width:0}.panelView[hidden]{display:none!important}.panelIntro{margin-bottom:12px}.panelSectionTitle{font-size:13px;line-height:1.35;margin:0 0 8px;color:#f3dfad}.viewGroup{margin-top:10px}.viewGroupLabel{display:block;margin-bottom:6px;font-size:11px;color:var(--muted)}.viewGroup .buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.viewGroup .action{width:100%;min-width:0;padding-inline:7px}.viewGroup.primary .buttons{grid-template-columns:1fr}.selectedPartStudy{padding:11px;border:1px solid rgba(201,166,92,.28);border-radius:12px;background:rgba(201,166,92,.055)}.selectedPartStudy b{display:block;margin-top:4px;color:#fff}.selectedPartStudy p{margin:6px 0 0;font-size:12px;line-height:1.55;color:var(--muted)}.technicalNotice{font-size:11px;line-height:1.55;color:#d8c79c;background:rgba(201,166,92,.08);border:1px solid rgba(201,166,92,.25);border-radius:10px;padding:10px;margin:0 0 12px}.tabSectionLabel{display:block;font-size:13px;font-weight:700;color:#f3dfad;margin-bottom:8px}@media(min-width:900px){.panelTabs{top:0}.viewGroup .buttons{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:899px){.panelTabs{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}.panelTabs button{min-height:44px}.viewGroup .buttons{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+#renderStatus{position:fixed;z-index:50;inset:0;display:flex;align-items:center;justify-content:center;background:#0d1015;color:#e7edf4;font-size:14px;letter-spacing:.02em;transition:opacity .25s ease}#renderStatus.done{opacity:0;pointer-events:none}#renderStatus.error{padding:24px;text-align:center;color:#ffd1d1;background:#170d10}.themeNote{font-size:11px;color:var(--muted);margin-top:6px}#browserTestResult,#uiTestResult,#performanceTestResult{display:none}
 </style>
 </head>
 <body>
 <div id="renderStatus">3Dモデルを読み込み中…</div>
-<div id="top"><div><button class="pill" id="panelToggle">メニュー</button></div><div class="pill">v3.11.0｜Refactor A.7 キーレス絶対配置</div></div>
-<div id="info"><b>Refactor A.7：りゅうず位置の絶対座標制御</b><br>選択部品：<span id="partName">なし</span><span id="partDesc">部品をタップ／クリックすると名称と機能を表示します。</span></div>
+<div id="top"><div><button class="pill" id="panelToggle">メニュー</button></div><div class="pill">v3.12.0｜操作パネル情報設計</div></div>
+<div id="info"><b>選択部品情報</b><br>選択部品：<span id="partName">なし</span><span id="partDesc">部品をタップ／クリックすると名称と機能を表示します。</span></div>
 <div id="panel">
- <div id="handle"><div id="grab"></div><span>Mechanical Watch Study Model v3.11.0</span></div>
+ <div id="handle"><div id="grab"></div><span>Mechanical Watch Study Model v3.12.0</span></div>
  <div id="body">
-  <h1>機械式時計 Study Model v3.11.0</h1>
-  <p class="sub">Refactor A.7では内部機構とA.6のカメラ性能を保ったまま、りゅうず・巻真・二位置移動クラッチを固定基準と遷移率から絶対配置します。</p>
-  <div class="metrics"><div class="metric"><b>Refactor A.7</b><span>位置ドリフト0</span></div><div class="metric"><b>2.5 Hz</b><span>18,000振動/時</span></div><div class="metric"><b id="ampMetric">270°</b><span>テンプ振幅</span></div></div>
-  <div class="buttons"><button class="action" id="play">一時停止</button><button class="action" id="reset">表面・文字板</button><button class="action" id="backView">裏面・ムーブメント</button><button class="action" id="dialView">文字板側機構</button><button class="action" id="trainView">ムーブメント側機構</button><button class="action" id="windingView">巻上げ伝達</button><button class="action" id="sideView">側面</button><button class="action" id="structureView">厚さ確認</button><button class="action" id="topView">真上</button><button class="action" id="escView">脱進機</button><button class="action" id="balanceView">調速機</button></div>
-  <div class="section crownControl">
-   <label>りゅうず位置 <span id="crownModeLabel">位置1：巻上げ</span></label>
-   <div class="segmented"><button id="crownWind" class="active">位置1<br>巻上げ</button><button id="crownSet">位置2<br>時刻合わせ</button></div>
-   <div class="row"><label>りゅうずを回す <span id="crownTurnV">中立</span></label><input id="crownTurn" aria-label="りゅうず回転" type="range" min="-100" max="100" value="0"></div>
-   <div class="crownDirection" id="crownDirection">右へ回すと主ゼンマイを巻き上げます</div>
-   <div class="reserveHead"><span>主ゼンマイ残量</span><b id="reserveV">26.0 / 52 h</b></div>
-   <div class="reserveTrack"><div class="reserveFill" id="reserveFill"></div></div>
-   <div class="crownHint">位置1：正転で巻上げ、逆転はコハゼにより空転します。位置2：テンプを停止し、回転方向に応じて時刻を進め／戻します。</div>
-  </div>
-  <div class="section">
-   <label>表示時刻 <span id="timeDisplay">10:08:30</span></label>
-   <div class="timeGrid">
-    <input id="timeInput" class="full" type="time" step="1" value="10:08:30">
-    <button class="action" id="applyTime">入力時刻に設定</button>
-    <button class="action" id="setNow">現在時刻に設定（1回）</button>
+  <nav class="panelTabs" role="tablist" aria-label="操作パネル">
+   <button id="panelTabOperation" role="tab" aria-selected="true" aria-controls="panelViewOperation" tabindex="0">操作</button>
+   <button id="panelTabLearning" role="tab" aria-selected="false" aria-controls="panelViewLearning" tabindex="-1">学習</button>
+   <button id="panelTabTechnical" role="tab" aria-selected="false" aria-controls="panelViewTechnical" tabindex="-1">技術</button>
+  </nav>
+  <section id="panelViewOperation" class="panelView" role="tabpanel" aria-labelledby="panelTabOperation" data-panel-view="operation">
+   <div class="panelIntro">
+    <h1>機械式時計 Study Model v3.12.0</h1>
+    <p class="sub">一般操作、学習情報、技術設定を3つのタブへ整理しました。時計機構と3D表示の動作はRefactor A.7を維持します。</p>
+    <div class="metrics"><div class="metric"><b>3 tabs</b><span>操作・学習・技術</span></div><div class="metric"><b>2.5 Hz</b><span>18,000振動/時</span></div><div class="metric"><b id="ampMetric">270°</b><span>テンプ振幅</span></div></div>
    </div>
-   <label class="syncLine"><input type="checkbox" id="liveSync">現在時刻へ継続同期</label>
-   <div class="mini">動作モード：<b id="timeMode">手動設定</b></div>
-   <div class="mini">「入力時刻に設定」は入力値から開始、「現在時刻に設定（1回）」は押した瞬間だけ端末時刻へ合わせます。「継続同期」は常に端末時刻へ追従します。</div>
-  </div>
-  <div class="section diagnosticControl">
-   <label>輪列・軸受検証</label>
-   <label class="syncLine"><input type="checkbox" id="meshGuide">噛合い基準線・ピッチ円を表示</label>
-   <label class="syncLine"><input type="checkbox" id="pivotGuide">ほぞ・穴石・軸方向すきまを表示</label>
-   <div class="row"><label>エンドシェイク誇張 <span id="endshakeV">0%</span></label><input id="endshake" type="range" min="0" max="100" value="0"></div>
-   <div class="mini">診断表示は教育用です。エンドシェイク量は見やすさのため実寸より大幅に誇張しています。</div>
-  </div>
-  <div class="section structureStudy">
-   <label>ムーブメント構造表示 <span>Refactor A.4</span></label>
-   <label class="syncLine"><input type="checkbox" id="machiningToggle" checked>地板・受の加工座を表示</label>
-   <label class="syncLine"><input type="checkbox" id="supportToggle" checked>受の支持脚・ねじ座を表示</label>
-   <label class="syncLine"><input type="checkbox" id="datumToggle">厚さ基準線を表示</label>
-   <div class="structureReadout">
-    <div><span>地板厚</span><b>0.72 mm相当</b></div>
-    <div><span>基準総厚</span><b>4.50 mm</b></div>
-    <div><span>裏面・ムーブメント</span><b>受・輪列・調速機</b></div>
-    <div><span>表面・文字板</span><b>日の裏・切替機構</b></div>
+   <div class="section crownControl">
+    <label>りゅうず位置 <span id="crownModeLabel">位置1：巻上げ</span></label>
+    <div class="segmented"><button id="crownWind" class="active">位置1<br>巻上げ</button><button id="crownSet">位置2<br>時刻合わせ</button></div>
+    <div class="row"><label>りゅうずを回す <span id="crownTurnV">中立</span></label><input id="crownTurn" aria-label="りゅうず回転" type="range" min="-100" max="100" value="0"></div>
+    <div class="crownDirection" id="crownDirection">右へ回すと主ゼンマイを巻き上げます</div>
+    <div class="reserveHead"><span>主ゼンマイ残量</span><b id="reserveV">26.0 / 52 h</b></div>
+    <div class="reserveTrack"><div class="reserveFill" id="reserveFill"></div></div>
+    <div class="crownHint">位置1：正転で巻上げ、逆転はコハゼにより空転します。位置2：テンプを停止し、回転方向に応じて時刻を進め／戻します。</div>
    </div>
-   <div class="mini">厚さ値はETA 6498-1の公称総厚を基準にした表示です。個々の部品寸法は教育用近似です。</div>
-  </div>
-  <div class="section balanceStudy">
-   <label>調速機パラメータ <span id="balanceStateV">通常運転</span></label>
-   <label class="syncLine"><input type="checkbox" id="autoAmplitude" checked>主ゼンマイ残量から振幅を自動設定</label>
-   <div class="row"><label>テンプ振幅 <span id="amplitudeV">270°</span></label><input id="amplitude" type="range" min="180" max="320" step="1" value="270" disabled></div>
-   <div class="row"><label>緩急調整 <span id="rateAdjustV">0 s/day</span></label><input id="rateAdjust" type="range" min="-30" max="30" step="1" value="0"></div>
-   <div class="row"><label>ビートエラー <span id="beatErrorV">0.0 ms</span></label><input id="beatError" type="range" min="0" max="2" step="0.1" value="0"></div>
-   <label>姿勢差モデル</label>
-   <select id="positionMode"><option value="dialUp">文字板上</option><option value="dialDown">文字板下</option><option value="crownUp">りゅうず上</option><option value="crownDown">りゅうず下</option></select>
-   <div class="balanceReadout">
-    <div><span>推定振幅</span><b id="estimatedAmplitude">270°</b></div>
-    <div><span>推定歩度</span><b id="estimatedRate">0 s/day</b></div>
-    <div><span>周波数</span><b id="estimatedFrequency">2.500 Hz</b></div>
+   <div class="section">
+    <span class="tabSectionLabel">基本操作</span>
+    <div class="viewGroup primary"><span class="viewGroupLabel">再生</span><div class="buttons"><button class="action" id="play">一時停止</button></div></div>
+    <div class="viewGroup"><span class="viewGroupLabel">主要視点</span><div class="buttons"><button class="action" id="reset">表面・文字板</button><button class="action" id="backView">裏面・ムーブメント</button><button class="action" id="sideView">側面</button></div></div>
+    <div class="viewGroup"><span class="viewGroupLabel">機構視点</span><div class="buttons"><button class="action" id="dialView">文字板側機構</button><button class="action" id="trainView">ムーブメント側機構</button><button class="action" id="windingView">巻上げ伝達</button><button class="action" id="escView">脱進機</button><button class="action" id="balanceView">調速機</button></div></div>
+    <div class="viewGroup"><span class="viewGroupLabel">確認視点</span><div class="buttons"><button class="action" id="structureView">厚さ確認</button><button class="action" id="topView">真上</button></div></div>
    </div>
-   <div class="mini">歩度・姿勢差・振幅低下は教育用の簡易モデルです。製造個体の実測値や校正値ではありません。</div>
-  </div>
-  <div class="section powerStudy">
-   <label>動力・歩度連成モデル <span id="coupledStateV">通常運転</span></label>
-   <div class="row"><label>輪列伝達効率 <span id="trainEfficiencyV">84%</span></label><input id="trainEfficiency" type="range" min="70" max="95" step="1" value="84"></div>
-   <label>時間経過倍率</label>
-   <select id="runtimeScale"><option value="1">1×（実時間）</option><option value="60">60×</option><option value="600">600×</option><option value="3600">3,600×（1秒＝1時間）</option><option value="21600">21,600×（高速試験）</option></select>
-   <div class="simButtons"><button id="fullWind">52時間へ満巻き</button><button id="advance24">24時間経過</button><button id="nearStop">停止直前へ</button><button id="clearHistory">履歴クリア</button></div>
-   <div class="powerReadout">
-    <div><span>香箱有効トルク</span><b id="torqueV">88%</b></div>
-    <div><span>調速機入力</span><b id="driveEnergyV">100%</b></div>
-    <div><span>連成振幅</span><b id="coupledAmpV">270°</b></div>
-    <div><span>連成歩度</span><b id="coupledRateV">0.0 s/day</b></div>
+   <div class="section">
+    <label>表示時刻 <span id="timeDisplay">10:08:30</span></label>
+    <div class="timeGrid">
+     <input id="timeInput" class="full" type="time" step="1" value="10:08:30">
+     <button class="action" id="applyTime">入力時刻に設定</button>
+     <button class="action" id="setNow">現在時刻に設定（1回）</button>
+    </div>
+    <label class="syncLine"><input type="checkbox" id="liveSync">現在時刻へ継続同期</label>
+    <div class="mini">動作モード：<b id="timeMode">手動設定</b></div>
+    <div class="mini">「入力時刻に設定」は入力値から開始、「現在時刻に設定（1回）」は押した瞬間だけ端末時刻へ合わせます。「継続同期」は常に端末時刻へ追従します。</div>
    </div>
-   <div class="historyWrap"><canvas id="historyCanvas" width="640" height="300"></canvas></div>
-   <div class="historyLegend"><span><i style="background:#d9b764"></i>残量</span><span><i style="background:#70b8ff"></i>振幅</span><span><i style="background:#ff8585"></i>歩度</span></div>
-   <div class="mini">トルク曲線、伝達損失、振幅応答、低振幅時の歩度悪化を統合した教育用モデルです。数値はETAの製造・検査値ではありません。</div>
-  </div>
-  <div class="row"><label>表裏の層分離 <span id="sideSplitV">0%</span></label><input id="sideSplit" type="range" min="0" max="100" value="0"></div>
-  <div class="row"><label>分解表示 <span id="explodeV">0%</span></label><input id="explode" type="range" min="0" max="100" value="0"></div>
-  <div class="row"><label>構造部品の透過率 <span id="opacityV">100%</span></label><input id="opacity" type="range" min="8" max="100" value="100"></div>
-  <div class="row"><label>動作速度 <span id="speedV">1.0×</span></label><input id="speed" type="range" min="20" max="240" value="100"></div>
-  <div class="row"><label>断面クリップ <span id="clipV">OFF</span></label><input id="clip" type="range" min="0" max="100" value="0"></div>
-  <div class="section"><label>背景テーマ</label><select id="backgroundTheme"><option value="navy">深紺スタジオ</option><option value="obsidian">黒曜石</option><option value="walnut">ウォールナット</option><option value="gallery">ライトギャラリー</option></select><div class="themeNote">安定性を優先し、背景色・霧・露出のみを切り替えます。</div></div>
-  <div class="section"><label>機能表示</label><select id="mode"><option value="all">全機構</option><option value="power">動力：香箱→輪列</option><option value="esc">脱進機・調速機</option><option value="wind">巻上げ伝達系</option><option value="motion">表面・文字板表示</option><option value="dial">文字板側機構・時刻合わせ</option></select></div>
-  <div class="section checks">
-   <label><input type="checkbox" data-group="plate" checked><span>地板</span></label><label><input type="checkbox" data-group="bridge" checked><span>受・上側軸受</span></label><label><input type="checkbox" data-group="train" checked><span>輪列</span></label>
-   <label><input type="checkbox" data-group="esc" checked><span>脱進機</span></label><label><input type="checkbox" data-group="balance" checked><span>テンプ</span></label>
-   <label><input type="checkbox" data-group="wind" checked><span>巻上げ伝達</span></label><label><input type="checkbox" data-group="dial" checked><span>文字板側機構</span></label><label><input type="checkbox" data-group="motion" checked><span>表面・文字板表示</span></label><label><input type="checkbox" data-group="diagnostic"><span>診断ガイド</span></label>
-  </div>
-  <div class="section"><div class="legend"><span><i class="dot" style="background:#c9a65c"></i>黄銅歯車</span><span><i class="dot" style="background:#b7c1ce"></i>鋼部品</span><span><i class="dot" style="background:#a51e48"></i>ルビー</span><span><i class="dot" style="background:#565f6b"></i>地板・受</span><span><i class="dot" style="background:#4ed8e8"></i>噛合いガイド</span><span><i class="dot" style="background:#ff9f43"></i>軸受ガイド</span></div><div class="warn">v3.11.0ではA.6までの機構・照明・カメラ性能を維持し、位置1・位置2のキーレス部品を基準座標から毎フレーム絶対配置します。分解表示中も単一ライターで座標を合成し、累積ドリフトを防ぎます。</div></div>
+   <div class="section">
+    <span class="tabSectionLabel">表示操作</span>
+    <div class="row"><label>表裏の層分離 <span id="sideSplitV">0%</span></label><input id="sideSplit" type="range" min="0" max="100" value="0"></div>
+    <div class="row"><label>分解表示 <span id="explodeV">0%</span></label><input id="explode" type="range" min="0" max="100" value="0"></div>
+    <div class="row"><label>構造部品の透過率 <span id="opacityV">100%</span></label><input id="opacity" type="range" min="8" max="100" value="100"></div>
+    <div class="row"><label>動作速度 <span id="speedV">1.0×</span></label><input id="speed" type="range" min="20" max="240" value="100"></div>
+    <div class="row"><label>断面クリップ <span id="clipV">OFF</span></label><input id="clip" type="range" min="0" max="100" value="0"></div>
+    <div class="section"><label>背景テーマ</label><select id="backgroundTheme"><option value="navy">深紺スタジオ</option><option value="obsidian">黒曜石</option><option value="walnut">ウォールナット</option><option value="gallery">ライトギャラリー</option></select><div class="themeNote">安定性を優先し、背景色・霧・露出のみを切り替えます。</div></div>
+    <div class="section"><label>機能表示</label><select id="mode"><option value="all">全機構</option><option value="power">動力：香箱→輪列</option><option value="esc">脱進機・調速機</option><option value="wind">巻上げ伝達系</option><option value="motion">表面・文字板表示</option><option value="dial">文字板側機構・時刻合わせ</option></select></div>
+   </div>
+  </section>
+  <section id="panelViewLearning" class="panelView" role="tabpanel" aria-labelledby="panelTabLearning" data-panel-view="learning" hidden>
+   <div class="selectedPartStudy">
+    <span class="tabSectionLabel">選択部品情報</span>
+    <b id="learningPartName">なし</b>
+    <p id="learningPartDesc">部品をタップ／クリックすると名称と機能を表示します。</p>
+   </div>
+   <div class="section structureStudy">
+    <label>ムーブメント構造表示 <span>Refactor A.4</span></label>
+    <label class="syncLine"><input type="checkbox" id="machiningToggle" checked>地板・受の加工座を表示</label>
+    <label class="syncLine"><input type="checkbox" id="supportToggle" checked>受の支持脚・ねじ座を表示</label>
+    <label class="syncLine"><input type="checkbox" id="datumToggle">厚さ基準線を表示</label>
+    <div class="structureReadout">
+     <div><span>地板厚</span><b>0.72 mm相当</b></div>
+     <div><span>基準総厚</span><b>4.50 mm</b></div>
+     <div><span>裏面・ムーブメント</span><b>受・輪列・調速機</b></div>
+     <div><span>表面・文字板</span><b>日の裏・切替機構</b></div>
+    </div>
+    <div class="mini">厚さ値はETA 6498-1の公称総厚を基準にした表示です。個々の部品寸法は教育用近似です。</div>
+   </div>
+   <div class="section">
+    <span class="tabSectionLabel">表示グループ</span>
+    <div class="checks">
+     <label><input type="checkbox" data-group="plate" checked><span>地板</span></label><label><input type="checkbox" data-group="bridge" checked><span>受・上側軸受</span></label><label><input type="checkbox" data-group="train" checked><span>輪列</span></label>
+     <label><input type="checkbox" data-group="esc" checked><span>脱進機</span></label><label><input type="checkbox" data-group="balance" checked><span>テンプ</span></label>
+     <label><input type="checkbox" data-group="wind" checked><span>巻上げ伝達</span></label><label><input type="checkbox" data-group="dial" checked><span>文字板側機構</span></label><label><input type="checkbox" data-group="motion" checked><span>表面・文字板表示</span></label><label><input type="checkbox" data-group="diagnostic"><span>診断ガイド</span></label>
+    </div>
+   </div>
+   <div class="section">
+    <span class="tabSectionLabel">材質・機能凡例</span>
+    <div class="legend"><span><i class="dot" style="background:#c9a65c"></i>黄銅歯車</span><span><i class="dot" style="background:#b7c1ce"></i>鋼部品</span><span><i class="dot" style="background:#a51e48"></i>ルビー</span><span><i class="dot" style="background:#565f6b"></i>地板・受</span><span><i class="dot" style="background:#4ed8e8"></i>噛合いガイド</span><span><i class="dot" style="background:#ff9f43"></i>軸受ガイド</span></div>
+    <div class="warn">v3.12.0ではRefactor A.7の内部機構、照明、カメラ、選択、透過表示を維持したまま、操作パネル内の情報配置だけを整理します。</div>
+   </div>
+  </section>
+  <section id="panelViewTechnical" class="panelView" role="tabpanel" aria-labelledby="panelTabTechnical" data-panel-view="technical" hidden>
+   <p class="technicalNotice">技術設定は教育用の簡易モデルです。<br>実機の製造値、検査値、校正値を再現するものではありません。</p>
+   <div class="section diagnosticControl">
+    <label>輪列・軸受検証</label>
+    <label class="syncLine"><input type="checkbox" id="meshGuide">噛合い基準線・ピッチ円を表示</label>
+    <label class="syncLine"><input type="checkbox" id="pivotGuide">ほぞ・穴石・軸方向すきまを表示</label>
+    <div class="row"><label>エンドシェイク誇張 <span id="endshakeV">0%</span></label><input id="endshake" type="range" min="0" max="100" value="0"></div>
+    <div class="mini">診断表示は教育用です。エンドシェイク量は見やすさのため実寸より大幅に誇張しています。</div>
+   </div>
+   <div class="section balanceStudy">
+    <label>調速機パラメータ <span id="balanceStateV">通常運転</span></label>
+    <label class="syncLine"><input type="checkbox" id="autoAmplitude" checked>主ゼンマイ残量から振幅を自動設定</label>
+    <div class="row"><label>テンプ振幅 <span id="amplitudeV">270°</span></label><input id="amplitude" type="range" min="180" max="320" step="1" value="270" disabled></div>
+    <div class="row"><label>緩急調整 <span id="rateAdjustV">0 s/day</span></label><input id="rateAdjust" type="range" min="-30" max="30" step="1" value="0"></div>
+    <div class="row"><label>ビートエラー <span id="beatErrorV">0.0 ms</span></label><input id="beatError" type="range" min="0" max="2" step="0.1" value="0"></div>
+    <label>姿勢差モデル</label>
+    <select id="positionMode"><option value="dialUp">文字板上</option><option value="dialDown">文字板下</option><option value="crownUp">りゅうず上</option><option value="crownDown">りゅうず下</option></select>
+    <div class="balanceReadout">
+     <div><span>推定振幅</span><b id="estimatedAmplitude">270°</b></div>
+     <div><span>推定歩度</span><b id="estimatedRate">0 s/day</b></div>
+     <div><span>周波数</span><b id="estimatedFrequency">2.500 Hz</b></div>
+    </div>
+    <div class="mini">歩度・姿勢差・振幅低下は教育用の簡易モデルです。製造個体の実測値や校正値ではありません。</div>
+   </div>
+   <div class="section powerStudy">
+    <label>動力・歩度連成モデル <span id="coupledStateV">通常運転</span></label>
+    <div class="row"><label>輪列伝達効率 <span id="trainEfficiencyV">84%</span></label><input id="trainEfficiency" type="range" min="70" max="95" step="1" value="84"></div>
+    <label>時間経過倍率</label>
+    <select id="runtimeScale"><option value="1">1×（実時間）</option><option value="60">60×</option><option value="600">600×</option><option value="3600">3,600×（1秒＝1時間）</option><option value="21600">21,600×（高速試験）</option></select>
+    <div class="simButtons"><button id="fullWind">52時間へ満巻き</button><button id="advance24">24時間経過</button><button id="nearStop">停止直前へ</button><button id="clearHistory">履歴クリア</button></div>
+    <div class="powerReadout">
+     <div><span>香箱有効トルク</span><b id="torqueV">88%</b></div>
+     <div><span>調速機入力</span><b id="driveEnergyV">100%</b></div>
+     <div><span>連成振幅</span><b id="coupledAmpV">270°</b></div>
+     <div><span>連成歩度</span><b id="coupledRateV">0.0 s/day</b></div>
+    </div>
+    <div class="historyWrap"><canvas id="historyCanvas" width="640" height="300"></canvas></div>
+    <div class="historyLegend"><span><i style="background:#d9b764"></i>残量</span><span><i style="background:#70b8ff"></i>振幅</span><span><i style="background:#ff8585"></i>歩度</span></div>
+    <div class="mini">トルク曲線、伝達損失、振幅応答、低振幅時の歩度悪化を統合した教育用モデルです。数値はETAの製造・検査値ではありません。</div>
+   </div>
+  </section>
  </div>
 </div>
 <canvas id="app"></canvas>
 <output id="browserTestResult" aria-hidden="true"></output>
+<output id="uiTestResult" aria-hidden="true"></output>
 <output id="performanceTestResult" aria-hidden="true"></output>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script type="module">
 import * as THREE from "three";
 import {ArcballControls} from "three/addons/controls/ArcballControls.js";
+import {createPanelTabs} from "./js/panel-tabs.js";
 import {CAMERA_PRESETS,CLOCKWISE_ROTATION_SIGN,DIAL_FRONT_NORMAL,DIAL_INTERFERENCE_RULES,DIAL_RIGHT_VECTOR,DIAL_UP_VECTOR,MOTION_WORKS_CONNECTIONS,MOTION_WORKS_MESHES,MOTION_WORKS_NODES,MOTION_WORKS_TOPOLOGY,PICK_OPACITY_THRESHOLD,VIEW_UP,WATCH_MECHANISM,WINDING_CONNECTIONS,WINDING_MESHES,WINDING_NODES,WINDING_TOPOLOGY,assertMechanismConfig,choosePickCandidateIndex,isPickCandidate,isTapGesture,meshPhaseResidual,normalizeAngle,resolveMechanismState,resolveMotionWorksGains,resolveMotionWorksState,resolveWindingState,rotationFromCenter} from "./js/mechanism-config.js";
 import {advanceKeylessTransition,resolveKeylessPositionGeometry} from "./js/keyless-position.js";
 
@@ -436,15 +475,17 @@ meshGuides.visible=false;pivotGuides.visible=false;
 
 // Interaction and highlighting
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();raycaster.layers.set(PICK_LAYER);let selectedRoot=null;let selectedMaterials=[],selectionBoundsDirty=false;const selectionLight=new THREE.PointLight(0xffc45e,0,7,2);scene.add(selectionLight);
+const partNameOutputs=[document.getElementById('partName'),document.getElementById('learningPartName')],partDescOutputs=[document.getElementById('partDesc'),document.getElementById('learningPartDesc')];
+function setPartInfo(name,description){partNameOutputs.forEach(output=>{output.textContent=name});partDescOutputs.forEach(output=>{output.textContent=description})}
 function clearSelection(){for(const selected of selectedMaterials){selected.node.material=selected.original;for(const highlight of selected.highlights){highlight.dispose?.()}}selectedMaterials=[];selectedRoot=null;selectionBoundsDirty=false;selectionLight.intensity=0}
-function clearSelectionInfo(){clearSelection();document.getElementById('partName').textContent='なし';document.getElementById('partDesc').textContent='部品をタップ／クリックすると名称と機能を表示します。'}
+function clearSelectionInfo(){clearSelection();setPartInfo('なし','部品をタップ／クリックすると名称と機能を表示します。')}
 function highlightPart(root){clearSelection();selectedRoot=root;root.traverse(node=>{if(!node.isMesh||!node.material)return;const original=node.material;const source=Array.isArray(original)?original:[original];const highlights=source.map(material=>{const highlight=material.clone();if(highlight.color)highlight.color.lerp(new THREE.Color(0xffd071),.42);if(highlight.emissive){highlight.emissive.setHex(0x8a4b10);highlight.emissiveIntensity=.72}if(typeof highlight.roughness==='number')highlight.roughness=Math.max(.10,highlight.roughness*.78);highlight.needsUpdate=true;return highlight});selectedMaterials.push({node,original,highlights});node.material=Array.isArray(original)?highlights:highlights[0]});const box=new THREE.Box3().setFromObject(root);box.getCenter(selectionLight.position);selectionBoundsDirty=false;selectionLight.intensity=1.65}
 function invalidateSelectionBounds(){if(selectedRoot)selectionBoundsDirty=true}
 function visibleHierarchy(object){for(let node=object;node;node=node.parent){if(node.visible===false)return false;if(node===scene)break}return true}
 function inheritedFlag(object,key,defaultValue){for(let node=object;node;node=node.parent){if(node.userData&&key in node.userData)return node.userData[key]}return defaultValue}
 function projectedHitArea(object){if(!object.geometry)return 0;if(!object.geometry.boundingSphere)object.geometry.computeBoundingSphere();const sphere=object.geometry.boundingSphere;if(!sphere)return 0;const center=sphere.center.clone();object.localToWorld(center);const scale=new THREE.Vector3();object.getWorldScale(scale);const radius=sphere.radius*Math.max(scale.x,scale.y,scale.z);const distance=Math.max(.001,camera.position.distanceTo(center));return (radius/distance)**2}
 function hitMetadata(hit){const material=Array.isArray(hit.object.material)?hit.object.material:[hit.object.material];const opacity=Math.max(...material.filter(Boolean).map(item=>item.opacity??1),0);const groupName=inheritedFlag(hit.object,'group',null);return {visibleChain:visibleHierarchy(hit.object),groupVisible:groupName?groups[groupName]?.visible!==false:true,materialOpacity:opacity,pickable:inheritedFlag(hit.object,'pickable',true),pickPriority:inheritedFlag(hit.object,'pickPriority',1),distance:hit.distance,projectedArea:projectedHitArea(hit.object),diagnostic:groupName==='diagnostic'||inheritedFlag(hit.object,'diagnostic',false),structural:inheritedFlag(hit.object,'opacityGroup',null)==='structural'}}
-function pickAt(clientX,clientY){updatePickLayerMembership();const rect=renderer.domElement.getBoundingClientRect();pointer.x=(clientX-rect.left)/rect.width*2-1;pointer.y=-(clientY-rect.top)/rect.height*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(selectable,false);const candidates=hits.map(hitMetadata);const index=choosePickCandidateIndex(candidates,{structuralOpacity:structuralOpacityRatio});if(index>=0&&isPickCandidate(candidates[index],PICK_OPACITY_THRESHOLD)){const picked=hits[index].object;const partRoot=partRoots.get(picked)||picked;highlightPart(partRoot);document.getElementById('partName').textContent=picked.userData.partName;document.getElementById('partDesc').textContent=partsInfo[picked.userData.partName]||''}else clearSelectionInfo()}
+function pickAt(clientX,clientY){updatePickLayerMembership();const rect=renderer.domElement.getBoundingClientRect();pointer.x=(clientX-rect.left)/rect.width*2-1;pointer.y=-(clientY-rect.top)/rect.height*2+1;raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(selectable,false);const candidates=hits.map(hitMetadata);const index=choosePickCandidateIndex(candidates,{structuralOpacity:structuralOpacityRatio});if(index>=0&&isPickCandidate(candidates[index],PICK_OPACITY_THRESHOLD)){const picked=hits[index].object;const partRoot=partRoots.get(picked)||picked;highlightPart(partRoot);setPartInfo(picked.userData.partName,partsInfo[picked.userData.partName]||'')}else clearSelectionInfo()}
 const activePointers=new Set();let pointerGesture=null,cameraGestureActive=false,cameraGestureMoved=false,lastCameraControlEnd=-Infinity,lastPickAt=-Infinity;
 let interactionQualityMode=false,interactionReleaseTimer=0,wheelInteractionTimer=0,shadowRefreshPending=true,lastShadowRefreshAt=-Infinity,lastPixelRatioChangeAt=-Infinity,adaptiveStableSince=performance.now();const adaptiveFrameWindow=[];
 function setAdaptivePixelRatio(value,reason){const next=Math.max(pixelRatioFloor,Math.min(pixelRatioCap,Math.round(value*100)/100));if(Math.abs(next-adaptivePixelRatio)<.001)return false;adaptivePixelRatio=next;renderer.setPixelRatio(adaptivePixelRatio);renderer.setSize(innerWidth,innerHeight,false);lastPixelRatioChangeAt=performance.now();recordPerformanceEvent('pixelRatioChange');document.body.dataset.renderPixelRatio=adaptivePixelRatio.toFixed(2);document.body.dataset.pixelRatioReason=reason;return true}
@@ -468,6 +509,7 @@ renderer.domElement.addEventListener('lostpointercapture',event=>resetPointerGes
 // UI
 const panel=document.getElementById('panel');
 const panelToggle=document.getElementById('panelToggle');
+const panelTabs=createPanelTabs({tablist:document.querySelector('.panelTabs'),scrollContainer:document.getElementById('body')});window.panelTabsDiagnostics=panelTabs;
 function isDesktop(){return innerWidth>=900}
 function togglePanel(){if(isDesktop()){panel.classList.toggle('collapsed')}else{panel.classList.toggle('open')}}
 panelToggle.onclick=togglePanel;
@@ -897,16 +939,18 @@ document.querySelectorAll('[data-group]').forEach(c=>c.onchange=()=>{groups[c.da
 document.getElementById('mode').onchange=e=>{const v=e.target.value;Object.entries(groups).forEach(([k,g])=>{if(k!=='diagnostic')g.visible=true});groups.diagnostic.visible=meshGuides.visible||pivotGuides.visible||datumGroup.visible;if(v==='power'){groups.balance.visible=groups.wind.visible=groups.dial.visible=groups.motion.visible=false}else if(v==='esc'){groups.train.visible=groups.wind.visible=groups.dial.visible=groups.motion.visible=false}else if(v==='wind'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.motion.visible=false}else if(v==='motion'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.wind.visible=false}else if(v==='dial'){groups.train.visible=groups.esc.visible=groups.balance.visible=groups.wind.visible=groups.motion.visible=false}document.querySelectorAll('[data-group]').forEach(c=>c.checked=groups[c.dataset.group].visible);if(selectedRoot&&!visibleHierarchy(selectedRoot))clearSelectionInfo();updatePickLayerMembership();invalidateSelectionBounds();requestShadowRefresh()};
 setEditorTime(watchTimeSec);updateTimeUI();setSyncUI(false);setCrownPosition('wind');amplitudeInput.disabled=true;escMarkers.forEach(m=>m.visible=false);amplitudeState=targetAmplitudeFromDrive();updateBalanceReadout();resetHistory();
 const initialPageParameters=new URLSearchParams(location.search);if(initialPageParameters.has('mode')){const modeControl=document.getElementById('mode');modeControl.value=initialPageParameters.get('mode');modeControl.dispatchEvent(new Event('change'))}if(initialPageParameters.has('opacity')){const opacity=Math.max(.08,Math.min(1,Number(initialPageParameters.get('opacity'))));applyStructuralOpacity(opacity);document.getElementById('opacity').value=String(Math.round(opacity*100));document.getElementById('opacityV').textContent=`${Math.round(opacity*100)}%`}if(initialPageParameters.has('theme')){const theme=initialPageParameters.get('theme');document.getElementById('backgroundTheme').value=theme;applyBackgroundTheme(theme)}if(initialPageParameters.get('crown')==='set')setCrownPosition('set');if(initialPageParameters.has('turn'))setCrownTurnRate(initialPageParameters.get('turn'));if(initialPageParameters.has('time')){const [h=0,m=0,s=0]=initialPageParameters.get('time').split(':').map(Number);if([h,m,s].every(Number.isFinite)){setWatchTime(h*3600+m*60+s);setEditorTime(watchTimeSec)}}if(initialPageParameters.get('paused')==='1'){running=false;playBtn.textContent='再生'}if(initialPageParameters.has('camera'))applyCameraPreset(initialPageParameters.get('camera'));if(initialPageParameters.get('panel')==='collapsed')panel.classList.add('collapsed');else if(initialPageParameters.get('panel')==='open')panel.classList.add('open');if(initialPageParameters.has('select'))waitForFrames(8).then(()=>pickProjectedPart(initialPageParameters.get('select')));
+function getUiRegressionState(){return {running,watchTimeSec,crownPosition,crownTransition,structuralOpacityRatio,explodeAmount,sideSplitAmount,currentBackgroundTheme,functionalMode:document.getElementById('mode').value,groups:Object.fromEntries([...document.querySelectorAll('[data-group]')].map(control=>[control.dataset.group,control.checked])),guides:{mesh:document.getElementById('meshGuide').checked,pivot:document.getElementById('pivotGuide').checked,datum:datumToggle.checked},balance:{autoAmplitude,amplitude:Number(amplitudeInput.value),rateAdjustSecDay,beatErrorMs,positionMode},power:{trainEfficiency,runtimeScale,historyLength:historyData.length},selection:selectedRoot?.userData?.partName||null,selectionOutputs:{topName:document.getElementById('partName').textContent,topDescription:document.getElementById('partDesc').textContent,learningName:document.getElementById('learningPartName').textContent,learningDescription:document.getElementById('learningPartDesc').textContent},panelTabs:panelTabs.getState()}}
 window.watchModelDiagnostics={
  config:WATCH_MECHANISM,validation:mechanismConfigReport,
  getState:()=>currentMechanismState,getMovingParts:()=>WATCH_MECHANISM.motionStates[currentMechanismState]||[],getStructuralOpacity:()=>structuralOpacityRatio,getStructuralTargetCount:()=>structuralOpacityTargets.length,getCrownPosition:()=>crownPosition,getCrownTransition:()=>crownTransition,getKeylessPositionGeometry,getKeylessBasePositions,getKeylessDriftReport,runCrownPositionCycleTest,holdCrownPosition,getSelection:()=>selectedRoot?.userData?.partName||null,getInputAngle:()=>settingInputAngle,
  getPartRotations,getWindingPartRotations,getKinematicAngles:()=>({...currentMotionWorksState.angles}),getConnectedPath:()=>[...motionRuntimeConnections.filter(connection=>currentMotionWorksState.activeConnections.includes(connection.id)),...windingRuntimeConnections.filter(connection=>currentWindingState.activeConnections.includes(connection.id))].map(connection=>({id:connection.id,input:connection.input,output:connection.output,permanent:connection.permanent,inputObject:connection.inputObject?.uuid??null,outputObject:connection.outputObject?.uuid??null})),
- getMotionWorksTopology,getWindingTopology,getWindingTransmissionReport,getRatchetState,getBarrelEnergyState,getFrontConvention,getDialProjectionReport,getHandScreenDirectionReport,getMotionSource,getPermanentMeshAngles,getClutchConnectionState,getHandCouplingReport,getGearModuleReport,getStateTransitionContinuityReport:()=>({...stateTransitionContinuityReport}),getInterferenceReport,getPickLayerReport,getCameraManipulating:()=>cameraGestureActive,getCameraControlType:()=> 'ArcballControls',getCameraOrientation,getCameraQuaternion:()=>camera.quaternion.toArray(),getCameraTarget:()=>renderTarget.toArray(),getCameraSmoothingState,getViewUpConvention,getRotationFreedomReport,getLightingRigReport,getVisibleLightContributionReport,getFrontBackLuminanceReport,getModelWorldSignature,getViewportReport:()=>({width:innerWidth,height:innerHeight,devicePixelRatio,renderPixelRatio:renderer.getPixelRatio(),coarsePointer:matchMedia('(pointer: coarse)').matches,panelOpen:panel.classList.contains('open'),panelCollapsed:panel.classList.contains('collapsed')}),startPerformanceCapture,stopPerformanceCapture,getFramePacingReport,getCameraMotionSmoothnessReport,getZoomSmoothnessReport,getAdaptivePixelRatioState,getInteractionQualityMode:()=>interactionQualityMode,getRenderCostBreakdown,runPerformanceScenario,simulateArcballDrag,simulateTouchGesture,getWatchTime:()=>watchTimeSec,getPowerReserve:()=>powerReserveHours,getLiveSyncState:()=>({enabled:liveSync,offsetSec:liveSyncOffsetSec,transitionMs:LIVE_SYNC_TRANSITION_MS,progress:liveSync?Math.min(1,(performance.now()-liveSyncTransitionStartedAt)/LIVE_SYNC_TRANSITION_MS):0}),
+ getMotionWorksTopology,getWindingTopology,getWindingTransmissionReport,getRatchetState,getBarrelEnergyState,getFrontConvention,getDialProjectionReport,getHandScreenDirectionReport,getMotionSource,getPermanentMeshAngles,getClutchConnectionState,getHandCouplingReport,getGearModuleReport,getStateTransitionContinuityReport:()=>({...stateTransitionContinuityReport}),getInterferenceReport,getPickLayerReport,getCameraManipulating:()=>cameraGestureActive,getCameraControlType:()=> 'ArcballControls',getCameraOrientation,getCameraQuaternion:()=>camera.quaternion.toArray(),getCameraTarget:()=>renderTarget.toArray(),getCameraSmoothingState,getViewUpConvention,getRotationFreedomReport,getLightingRigReport,getVisibleLightContributionReport,getFrontBackLuminanceReport,getModelWorldSignature,getViewportReport:()=>({width:innerWidth,height:innerHeight,devicePixelRatio,renderPixelRatio:renderer.getPixelRatio(),coarsePointer:matchMedia('(pointer: coarse)').matches,panelOpen:panel.classList.contains('open'),panelCollapsed:panel.classList.contains('collapsed')}),getUiRegressionState,startPerformanceCapture,stopPerformanceCapture,getFramePacingReport,getCameraMotionSmoothnessReport,getZoomSmoothnessReport,getAdaptivePixelRatioState,getInteractionQualityMode:()=>interactionQualityMode,getRenderCostBreakdown,runPerformanceScenario,simulateArcballDrag,simulateTouchGesture,getWatchTime:()=>watchTimeSec,getPowerReserve:()=>powerReserveHours,getLiveSyncState:()=>({enabled:liveSync,offsetSec:liveSyncOffsetSec,transitionMs:LIVE_SYNC_TRANSITION_MS,progress:liveSync?Math.min(1,(performance.now()-liveSyncTransitionStartedAt)/LIVE_SYNC_TRANSITION_MS):0}),
  setWatchTime:value=>{const before=transitionSnapshot();setWatchTime(Number(value)||0);return recordStateTransition('explicit-time',before)},setCrownPosition,setCrownTurnRate,setRunning:value=>{running=Boolean(value)},setRuntimeScale:value=>{runtimeScale=Math.max(.1,Number(value)||1);runtimeScaleInput.value=String(runtimeScale)},setPowerReserve:value=>{powerReserveHours=Math.max(0,Math.min(52,Number(value)||0))},setLiveSync:value=>setSyncUI(Boolean(value)),setStructuralOpacity:applyStructuralOpacity,setBackgroundTheme:value=>{const control=document.getElementById('backgroundTheme');control.value=applyBackgroundTheme(value);return control.value},setPanelOpen:value=>{if(isDesktop())panel.classList.toggle('collapsed',!value);else panel.classList.toggle('open',Boolean(value));return {open:panel.classList.contains('open'),collapsed:panel.classList.contains('collapsed')}},setFunctionalMode:value=>{const control=document.getElementById('mode');control.value=value;control.dispatchEvent(new Event('change'));return control.value},pickProjectedPart,waitForFrames,applyCameraPreset
 };
 const a5DemoMode=initialPageParameters.get('a5Demo');if(['horizontal','vertical','mobile'].includes(a5DemoMode)){document.body.dataset.a5DemoStatus='queued';(async()=>{running=false;applyCameraPreset('reset');await waitForFrames(8);document.body.dataset.a5DemoStatus='running';if(a5DemoMode==='mobile'){for(let step=1;step<=12;step++){await simulateArcballDrag({direction:'horizontal',turns:.035,pointerType:'touch'});document.body.dataset.a5DemoStep=String(step);document.body.dataset.a5DemoTurns=(step*.035).toFixed(3);await waitForFrames(5)}document.body.dataset.a5DemoPhase='two-finger';await simulateTouchGesture();await waitForFrames(8)}else{const direction=a5DemoMode==='vertical'?'vertical':'horizontal';for(let step=1;step<=40;step++){await simulateArcballDrag({direction,turns:.03,stepDelayFrames:6});document.body.dataset.a5DemoStep=String(step);document.body.dataset.a5DemoTurns=(step*.03).toFixed(3)}}document.body.dataset.a5DemoStatus='done';updateCameraDataset()})()}
 const a6ProfileMode=initialPageParameters.get('a6Profile');if(a6ProfileMode){document.body.dataset.a6PerformanceStatus='queued';runPerformanceScenario({type:a6ProfileMode,durationMs:Number(initialPageParameters.get('profileMs'))||10000}).catch(error=>{const result={type:a6ProfileMode,error:error.stack||error.message||String(error)};const output=document.getElementById('performanceTestResult');output.value=JSON.stringify(result);output.textContent=JSON.stringify(result);output.dataset.status='failed';document.body.dataset.a6PerformanceStatus='failed'})}
 const browserTestOutput=document.getElementById('browserTestResult');if(new URLSearchParams(location.search).get('browserTest')==='1'){import('./tests/browser-integration.test.js?refactor=a7-1').then(async({runBrowserIntegrationTest})=>{await waitForFrames(3);const result=await runBrowserIntegrationTest(window.watchModelDiagnostics);browserTestOutput.value=JSON.stringify(result);browserTestOutput.textContent=JSON.stringify(result);browserTestOutput.dataset.status=result.ok?'passed':'failed';window.browserIntegrationResult=result}).catch(error=>{const result={ok:false,error:error.stack||error.message||String(error)};browserTestOutput.value=JSON.stringify(result);browserTestOutput.textContent=JSON.stringify(result);browserTestOutput.dataset.status='failed';window.browserIntegrationResult=result})}
+const uiTestOutput=document.getElementById('uiTestResult');if(initialPageParameters.get('uiTest')==='1'){if(initialPageParameters.get('browserTest')==='1'){const result={ok:false,error:'browserTest and uiTest must run on separate pages'};uiTestOutput.value=JSON.stringify(result);uiTestOutput.textContent=JSON.stringify(result);uiTestOutput.dataset.status='failed';window.panelTabsIntegrationResult=result}else{import('./tests/panel-tabs.integration.test.js?version=pr2').then(async({runPanelTabsIntegrationTest})=>{await waitForFrames(3);const result=await runPanelTabsIntegrationTest(window.watchModelDiagnostics,panelTabs);uiTestOutput.value=JSON.stringify(result);uiTestOutput.textContent=JSON.stringify(result);uiTestOutput.dataset.status=result.ok?'passed':'failed';window.panelTabsIntegrationResult=result}).catch(error=>{const result={ok:false,error:error.stack||error.message||String(error)};uiTestOutput.value=JSON.stringify(result);uiTestOutput.textContent=JSON.stringify(result);uiTestOutput.dataset.status='failed';window.panelTabsIntegrationResult=result})}}
 
 // Mechanism animation. Stage 7 retains the Stage 6 coupled model and adds refined structural geometry.
 let simPhase=0,last=performance.now(),lastMainSpringRatio=NaN,lastMainSpringUpdateAt=-Infinity,lastHairSpringAngle=NaN,lastHairSpringUpdateAt=-Infinity,lastUiUpdateAt=-Infinity,lastAppliedExplode=NaN,lastAppliedEndshake=NaN,lastAppliedSideSplit=NaN;updateMainSpring(powerReserveHours/52,performance.now(),true);

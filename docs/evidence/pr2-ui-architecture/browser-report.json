@@ -1,0 +1,77 @@
+{
+  "baselineCommit": "c11724a199e427c1c756fe834d6e75ffa2c35430",
+  "version": "v3.12.0",
+  "desktop": {
+    "viewport": "1440x900",
+    "existingRegression": { "passed": 86, "total": 86 },
+    "refactorA7": { "passed": 9, "total": 9 },
+    "keyless": {
+      "position2Frames": 600,
+      "maxDrift": 0,
+      "roundTrips": 100,
+      "cumulativeError": 0,
+      "frameRates": [30, 60, 120],
+      "finalCoordinatesMatch": true,
+      "forbiddenInterference": { "position1": 0, "position2": 0 }
+    },
+    "pointer": {
+      "averageFps": 59.6189,
+      "p50Ms": 16.7,
+      "p95Ms": 16.8,
+      "p99Ms": 18.0,
+      "over33Ms": 0,
+      "over50Ms": 0
+    },
+    "wheel": {
+      "averageFps": 59.5850,
+      "p50Ms": 16.7,
+      "p95Ms": 17.7,
+      "p99Ms": 18.2,
+      "over33Ms": 0,
+      "over50Ms": 0,
+      "monotonic": true,
+      "maxStepShare": 0.010767
+    }
+  },
+  "uiRegression": {
+    "1280x720": { "passed": 20, "total": 20 },
+    "390x844": { "passed": 22, "total": 22 },
+    "375x667": { "passed": 22, "total": 22 }
+  },
+  "mobile": {
+    "viewport": "390x844",
+    "existingRegression": {
+      "passed": 87,
+      "total": 88,
+      "knownFailure": "Walnut front luminance sample count was 984; the existing guard requires more than 1000 samples.",
+      "allThemesWithinThirtyPercent": true,
+      "maxRelativeLuminanceDifference": 0.1229602
+    },
+    "refactorA7": { "passed": 9, "total": 9 },
+    "pointer": {
+      "averageFps": 57.902,
+      "p50Ms": 16.7,
+      "p95Ms": 17.8,
+      "p99Ms": 33.4,
+      "over33Ms": 3,
+      "over50Ms": 0
+    },
+    "wheel": {
+      "averageFps": 59.6413,
+      "p50Ms": 16.7,
+      "p95Ms": 16.8,
+      "p99Ms": 17.3,
+      "over33Ms": 0,
+      "over50Ms": 0,
+      "monotonic": true
+    }
+  },
+  "scope": {
+    "mechanismChanged": false,
+    "renderingChanged": false,
+    "lightingChanged": false,
+    "shadowsChanged": false,
+    "transparencyChanged": false,
+    "issue2Changed": false
+  }
+}
