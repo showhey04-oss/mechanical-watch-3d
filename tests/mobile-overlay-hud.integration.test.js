@@ -17,6 +17,45 @@ function arrayDistance(left, right) {
   return Math.hypot(...left.map((value, index) => value - right[index]));
 }
 
+function maxAbsolute(values) {
+  return Math.max(...values.map((value) => Math.abs(value)));
+}
+
+function timeReportMatches(report, seconds, expectedDisplay) {
+  return Math.abs(report.watchTimeSec - seconds) <= 1e-7
+    && Math.abs(report.visibleWatchTime - seconds) <= 1e-7
+    && report.timeDisplay === expectedDisplay
+    && maxAbsolute(Object.values(report.handErrors)) <= 1e-7
+    && maxAbsolute(report.handCoupling.map(({ error }) => error)) <= 1e-7;
+}
+
+function editTimeInput(value, { change = true, blur = true } = {}) {
+  const input = document.getElementById("timeInput");
+  input.focus({ preventScroll: true });
+  input.value = value;
+  input.dispatchEvent(new InputEvent("input", { bubbles: true, inputType: "insertReplacementText" }));
+  if (change) input.dispatchEvent(new Event("change", { bubbles: true }));
+  if (blur) input.blur();
+  return input;
+}
+
+function touchApplyButton() {
+  const button = document.getElementById("applyTime");
+  for (const type of ["pointerdown", "pointerup"]) {
+    button.dispatchEvent(new PointerEvent(type, {
+      pointerId: 9104,
+      pointerType: "touch",
+      isPrimary: true,
+      button: 0,
+      buttons: type === "pointerup" ? 0 : 1,
+      bubbles: true,
+      cancelable: true,
+      view: window,
+    }));
+  }
+  button.click();
+}
+
 async function rotateInUpperCanvas(diagnostics, report) {
   const canvas = document.getElementById("app");
   const y = Math.max(72, report.viewport.visualTop + report.top3D.height * 0.56);
@@ -122,6 +161,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   check("hud-hamburger-has-no-visible-menu-text", toggle.textContent.trim() === "" && toggle.querySelectorAll(".panelToggleIcon span").length === 3, toggle.outerHTML);
   check("hud-hamburger-is-native-controlled-button", toggle.tagName === "BUTTON" && toggle.type === "button" && toggle.getAttribute("aria-controls") === panel.id);
   check("hud-hamburger-hit-target-is-at-least-44-css-px", initial.toggle.rect.width >= 44 && initial.toggle.rect.height >= 44, initial.toggle.rect);
+  check("hud-hamburger-border-and-shadow-are-removed", initial.toggle.borderWidth === "0px" && initial.toggle.boxShadow === "none" && initial.toggle.backgroundColor === "rgba(0, 0, 0, 0)", initial.toggle);
 
   diagnostics.setPanelOpen(false);
   await diagnostics.waitForFrames(18);
@@ -177,6 +217,180 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   check("hud-layout-has-zero-horizontal-overflow", layout.horizontalOverflow <= 0 && document.documentElement.scrollWidth <= innerWidth && panelBody.scrollWidth <= panelBody.clientWidth + 1, layout);
   check("hud-tabbar-remains-sticky", layout.tabs.position === "sticky", layout.tabs);
 
+  panelTabs.activate("operation");
+  diagnostics.setPanelOpen(true);
+  diagnostics.setRunning(false);
+  diagnostics.setCrownTurnRate(0);
+  diagnostics.setCrownPosition("wind");
+  diagnostics.setLiveSync(false);
+  diagnostics.setWatchTime(10 * 3600 + 8 * 60 + 30);
+  diagnostics.clearTimeInputDiagnostics();
+  editTimeInput("13:37:42");
+  await diagnostics.waitForFrames(3);
+  const timeWithSeconds = diagnostics.getTimeInputReport();
+  const secondsEventOrder = timeWithSeconds.events.map(({ type }) => type);
+  check("hud-time-hhmmss-change-applies-once-to-display-model-and-hands", timeReportMatches(timeWithSeconds, 13 * 3600 + 37 * 60 + 42, "13:37:42") && timeWithSeconds.successfulApplyCount === 1, timeWithSeconds);
+  check("hud-time-hhmmss-records-input-change-blur-order", secondsEventOrder.indexOf("input") >= 0 && secondsEventOrder.indexOf("change") > secondsEventOrder.indexOf("input") && secondsEventOrder.indexOf("blur") > secondsEventOrder.indexOf("change"), secondsEventOrder);
+  touchApplyButton();
+  const timeWithSecondsDeduped = diagnostics.getTimeInputReport();
+  check("hud-time-change-blur-button-sequence-does-not-double-apply", timeWithSecondsDeduped.successfulApplyCount === 1 && timeWithSecondsDeduped.duplicateSkipCount === 1, timeWithSecondsDeduped);
+
+  diagnostics.setWatchTime(10 * 3600 + 8 * 60);
+  diagnostics.clearTimeInputDiagnostics();
+  editTimeInput("13:37");
+  await diagnostics.waitForFrames(3);
+  const timeWithoutSeconds = diagnostics.getTimeInputReport();
+  check("hud-time-hhmm-defaults-seconds-to-zero", timeReportMatches(timeWithoutSeconds, 13 * 3600 + 37 * 60, "13:37:00") && timeWithoutSeconds.parsed.precision === "minute" && timeWithoutSeconds.successfulApplyCount === 1, timeWithoutSeconds);
+
+  diagnostics.setWatchTime(10 * 3600 + 8 * 60 + 30);
+  diagnostics.clearTimeInputDiagnostics();
+  const blurOnlyInput = editTimeInput("14:26:11", { change: false, blur: false });
+  blurOnlyInput.blur();
+  blurOnlyInput.dispatchEvent(new Event("change", { bubbles: true }));
+  const blurOnlyTime = diagnostics.getTimeInputReport();
+  check("hud-time-input-blur-fallback-and-late-change-apply-only-once", timeReportMatches(blurOnlyTime, 14 * 3600 + 26 * 60 + 11, "14:26:11") && blurOnlyTime.successfulApplyCount === 1 && blurOnlyTime.duplicateSkipCount === 1 && blurOnlyTime.applications[0].source === "blur", blurOnlyTime);
+
+  diagnostics.setWatchTime(10 * 3600 + 8 * 60 + 30);
+  diagnostics.clearTimeInputDiagnostics();
+  editTimeInput("15:24:18", { change: false, blur: false });
+  touchApplyButton();
+  document.getElementById("timeInput").blur();
+  await diagnostics.waitForFrames(3);
+  const touchButtonTime = diagnostics.getTimeInputReport();
+  const touchEventTypes = touchButtonTime.events.map(({ type }) => type);
+  check("hud-time-touch-button-is-reliable-single-apply-fallback", timeReportMatches(touchButtonTime, 15 * 3600 + 24 * 60 + 18, "15:24:18") && touchButtonTime.successfulApplyCount === 1 && touchButtonTime.lastApplication.source === "button", touchButtonTime);
+  check("hud-time-touch-button-records-pointer-and-click-events", ["apply-pointerdown", "apply-pointerup", "apply-click"].every((type) => touchEventTypes.includes(type)) && touchButtonTime.events.filter(({ type }) => type.startsWith("apply-pointer")).every(({ pointerType }) => pointerType === "touch"), touchButtonTime.events);
+
+  diagnostics.setLiveSync(true);
+  diagnostics.clearTimeInputDiagnostics();
+  editTimeInput("17:04:09");
+  await diagnostics.waitForFrames(3);
+  const liveSyncManual = diagnostics.getTimeInputReport();
+  check("hud-time-manual-change-disables-live-sync-consistently", timeReportMatches(liveSyncManual, 17 * 3600 + 4 * 60 + 9, "17:04:09") && !liveSyncManual.liveSync.internal && !liveSyncManual.liveSync.checked && liveSyncManual.timeMode === "入力時刻から動作", liveSyncManual);
+  check("hud-time-controls-remain-available-while-live-sync-is-active", !liveSyncManual.controls.inputDisabled && !liveSyncManual.controls.applyButtonDisabled, liveSyncManual.controls);
+
+  diagnostics.setLiveSync(true);
+  diagnostics.clearTimeInputDiagnostics();
+  const untouched = document.getElementById("timeInput");
+  untouched.focus({ preventScroll: true });
+  untouched.blur();
+  const untouchedReport = diagnostics.getTimeInputReport();
+  check("hud-time-untouched-focus-blur-does-not-apply-or-disable-live-sync", untouchedReport.successfulApplyCount === 0 && untouchedReport.liveSync.internal && untouchedReport.liveSync.checked, untouchedReport);
+  diagnostics.setLiveSync(false);
+
+  diagnostics.setCrownPosition("set");
+  await diagnostics.waitForFrames(36);
+  diagnostics.setWatchTime(10 * 3600 + 8 * 60 + 30);
+  diagnostics.clearTimeInputDiagnostics();
+  editTimeInput("13:37:42", { change: false, blur: false });
+  await diagnostics.waitForFrames(30);
+  const position2Editing = diagnostics.getTimeInputReport();
+  check("hud-time-position2-render-loop-does-not-overwrite-focused-editor", position2Editing.raw === "13:37:42" && position2Editing.successfulApplyCount === 0 && position2Editing.editing, position2Editing);
+  document.getElementById("timeInput").dispatchEvent(new Event("change", { bubbles: true }));
+  document.getElementById("timeInput").blur();
+  diagnostics.setCrownPosition("wind");
+  await diagnostics.waitForFrames(36);
+  diagnostics.setCrownPosition("set");
+  await diagnostics.waitForFrames(36);
+  const positionRoundTripTime = diagnostics.getTimeInputReport();
+  check("hud-time-position1-position2-round-trip-keeps-applied-time", timeReportMatches(positionRoundTripTime, 13 * 3600 + 37 * 60 + 42, "13:37:42") && positionRoundTripTime.successfulApplyCount === 1, positionRoundTripTime);
+
+  diagnostics.setCrownPosition("wind");
+  diagnostics.setWatchTime(10 * 3600 + 8 * 60 + 30);
+  diagnostics.clearTimeInputDiagnostics();
+  editTimeInput("", { change: true, blur: true });
+  const invalidEmpty = diagnostics.getTimeInputReport();
+  const invalidParses = ["", "24:00", "12:60", "12:30:60", "NaN:00"].map((value) => diagnostics.parseTimeInputValue(value));
+  check("hud-time-invalid-empty-nonfinite-and-range-values-do-not-mutate-clock", invalidEmpty.successfulApplyCount === 0 && Math.abs(invalidEmpty.watchTimeSec - (10 * 3600 + 8 * 60 + 30)) <= 1e-7 && invalidParses.every(({ valid }) => !valid), { invalidEmpty, invalidParses });
+
+  diagnostics.setFunctionalMode("all");
+  panelTabs.activate("operation");
+  const toggleCards = diagnostics.getToggleCardReport();
+  check("hud-toggle-card-covers-all-sixteen-existing-checkboxes", toggleCards.length === 16 && toggleCards.filter(({ id }) => id).length === 7 && toggleCards.filter(({ group }) => group).length === 9, toggleCards.map(({ id, group, text }) => ({ id, group, text })));
+  const visibleToggleCards = toggleCards.filter(({ card }) => card.rect.width > 0 && card.rect.height > 0);
+  check("hud-toggle-card-keeps-native-input-focusable-and-label-layout-compact", toggleCards.every((card) => card.input.display !== "none" && card.card.display === "flex" && card.card.justifyContent === "flex-start" && Math.abs(parseFloat(card.card.gap) - 9) <= 0.1) && visibleToggleCards.every((card) => card.layout.minHeightMet && card.text.rightInsideCard), toggleCards);
+  check("hud-toggle-card-state-matches-existing-model-bindings", toggleCards.every(({ modelMatches }) => modelMatches), toggleCards);
+  const liveSyncCardControl = document.getElementById("liveSync");
+  diagnostics.setLiveSync(false);
+  await diagnostics.waitForFrames(12);
+  const offCard = diagnostics.getToggleCardReport().find(({ id }) => id === "liveSync");
+  liveSyncCardControl.click();
+  await diagnostics.waitForFrames(12);
+  const onCard = diagnostics.getToggleCardReport().find(({ id }) => id === "liveSync");
+  liveSyncCardControl.disabled = true;
+  await diagnostics.waitForFrames(12);
+  const disabledCard = diagnostics.getToggleCardReport().find(({ id }) => id === "liveSync");
+  if (new URLSearchParams(location.search).get("hudEvidencePause") === "disabled") {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+  }
+  check("hud-toggle-card-on-off-and-disabled-states-are-visually-distinct", offCard.card.backgroundColor !== onCard.card.backgroundColor && onCard.indicator.backgroundColor !== offCard.indicator.backgroundColor && disabledCard.ariaDisabled === "true" && disabledCard.card.cursor === "not-allowed", { offCard, onCard, disabledCard });
+  liveSyncCardControl.disabled = false;
+  diagnostics.setLiveSync(false);
+  await diagnostics.waitForFrames(12);
+  panelTabs.activate("learning");
+  const plateControl = document.querySelector('[data-group="plate"]');
+  const plateCard = plateControl.closest(".toggleCard");
+  let touchPointerObserved = false;
+  plateCard.addEventListener("pointerup", (event) => { touchPointerObserved = event.pointerType === "touch"; }, { once: true });
+  for (const type of ["pointerdown", "pointerup"]) {
+    plateCard.dispatchEvent(new PointerEvent(type, { pointerId: 9105, pointerType: "touch", isPrimary: true, bubbles: true, cancelable: true, buttons: type === "pointerup" ? 0 : 1 }));
+  }
+  plateCard.click();
+  await Promise.resolve();
+  const plateOff = diagnostics.getToggleCardReport().find(({ group }) => group === "plate");
+  check("hud-toggle-card-full-label-touch-click-updates-existing-model-binding", touchPointerObserved && !plateOff.checked && !plateOff.modelValue && plateOff.modelMatches, plateOff);
+  plateControl.focus({ preventScroll: true });
+  await Promise.resolve();
+  const plateFocused = diagnostics.getToggleCardReport().find(({ group }) => group === "plate");
+  plateControl.click();
+  await Promise.resolve();
+  const plateOn = diagnostics.getToggleCardReport().find(({ group }) => group === "plate");
+  check("hud-toggle-card-native-input-remains-keyboard-focusable", document.activeElement === plateControl && plateFocused.card.outlineStyle !== "none" && plateOn.checked && plateOn.modelValue && plateOn.modelMatches, { focused: plateFocused, restored: plateOn });
+  plateControl.blur();
+
+  const allToggleInteractions = [];
+  for (const originalCard of toggleCards) {
+    const selector = originalCard.id ? `#${originalCard.id}` : `[data-group="${originalCard.group}"]`;
+    const control = document.querySelector(selector);
+    const card = control.closest(".toggleCard");
+    const view = control.closest("[data-panel-view]").dataset.panelView;
+    panelTabs.activate(view);
+    const originalChecked = control.checked;
+    let touchPointerObservedForCard = false;
+    card.addEventListener("pointerup", (event) => { touchPointerObservedForCard = event.pointerType === "touch"; }, { once: true });
+    for (const type of ["pointerdown", "pointerup"]) {
+      card.dispatchEvent(new PointerEvent(type, { pointerId: 9200 + allToggleInteractions.length, pointerType: "touch", isPrimary: true, bubbles: true, cancelable: true, buttons: type === "pointerup" ? 0 : 1 }));
+    }
+    card.click();
+    await Promise.resolve();
+    const afterTouch = diagnostics.getToggleCardReport().find((entry) => originalCard.id ? entry.id === originalCard.id : entry.group === originalCard.group);
+    let keyboardEventObserved = false;
+    control.addEventListener("keydown", (event) => { keyboardEventObserved = event.key === " "; }, { once: true });
+    control.focus({ preventScroll: true });
+    control.dispatchEvent(new KeyboardEvent("keydown", { key: " ", code: "Space", bubbles: true, cancelable: true }));
+    await Promise.resolve();
+    const focused = diagnostics.getToggleCardReport().find((entry) => originalCard.id ? entry.id === originalCard.id : entry.group === originalCard.group);
+    const keyboardFocused = document.activeElement === control && focused.card.outlineStyle !== "none";
+    control.click();
+    await Promise.resolve();
+    const restored = diagnostics.getToggleCardReport().find((entry) => originalCard.id ? entry.id === originalCard.id : entry.group === originalCard.group);
+    control.blur();
+    allToggleInteractions.push({
+      id: originalCard.id,
+      group: originalCard.group,
+      view,
+      touchPointerObserved: touchPointerObservedForCard,
+      touchChanged: afterTouch.checked !== originalChecked,
+      touchModelMatches: afterTouch.modelMatches,
+      keyboardEventObserved,
+      keyboardFocused,
+      keyboardRestored: restored.checked === originalChecked,
+      keyboardModelMatches: restored.modelMatches,
+    });
+  }
+  check("hud-toggle-card-all-sixteen-support-touch-and-native-keyboard-activation", allToggleInteractions.length === 16 && allToggleInteractions.every((entry) => entry.touchPointerObserved && entry.touchChanged && entry.touchModelMatches && entry.keyboardEventObserved && entry.keyboardFocused && entry.keyboardRestored && entry.keyboardModelMatches), allToggleInteractions);
+  panelTabs.activate("operation");
+
   if (layout.mobile) {
     check("hud-mobile-open-panel-is-50-to-60-dvh", layout.panel.heightDvh >= 50 && layout.panel.heightDvh <= 60.01, layout.panel);
     check("hud-mobile-upper-3d-region-is-at-least-35-dvh", layout.top3D.heightDvh >= 35 && layout.top3D.height > 0, layout.top3D);
@@ -227,19 +441,32 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
     const inputRect = timeInput.getBoundingClientRect();
     const bodyRect = panelBody.getBoundingClientRect();
     check("hud-mobile-time-input-scrolls-into-visible-panel-body", inputRect.top >= bodyRect.top - 1 && inputRect.bottom <= bodyRect.bottom + 1, { inputRect: inputRect.toJSON(), bodyRect: bodyRect.toJSON(), visualViewport: window.visualViewport ? { offsetTop: window.visualViewport.offsetTop, height: window.visualViewport.height } : null });
+    const timeLayout = diagnostics.getTimeInputReport().layout;
+    check("hud-mobile-time-input-and-grid-stay-within-panel-body", timeLayout.inputInsideBody && timeLayout.documentOverflow === 0 && timeLayout.gridOverflow === 0 && timeLayout.input.right <= timeLayout.body.right + 1, timeLayout);
+    const mobileToggleCardsByTab = [];
+    for (const view of ["operation", "learning", "technical"]) {
+      panelTabs.activate(view);
+      const cards = diagnostics.getToggleCardReport().filter(({ card }) => card.rect.width > 0 && card.rect.height > 0);
+      mobileToggleCardsByTab.push({ view, cards });
+    }
+    panelTabs.activate("operation");
+    const visibleMobileCards = mobileToggleCardsByTab.flatMap(({ cards }) => cards);
+    check("hud-mobile-toggle-cards-stay-within-viewport", visibleMobileCards.length === 16 && visibleMobileCards.every(({ layout: cardLayout }) => cardLayout.insideViewport && cardLayout.minHeightMet), mobileToggleCardsByTab);
 
     diagnostics.setCrownPosition("wind");
     await diagnostics.waitForFrames(36);
-    measurements.mobile = { layout, actualSelection, actualClear, oneFinger, twoFinger, windingChanged, settingBefore, settingAfter, inputRect: inputRect.toJSON(), bodyRect: bodyRect.toJSON() };
+    measurements.mobile = { layout, actualSelection, actualClear, oneFinger, twoFinger, windingChanged, settingBefore, settingAfter, inputRect: inputRect.toJSON(), bodyRect: bodyRect.toJSON(), timeLayout, toggleCardsByTab: mobileToggleCardsByTab };
   } else {
     check("hud-desktop-panel-keeps-approximately-365px-width", Math.abs(layout.panel.rect.width - 365) <= 1.5, layout.panel.rect);
+    const desktopActiveBeforeCollapse = panelTabs.getState().activeView;
     diagnostics.setPanelOpen(false);
     await diagnostics.waitForFrames(18);
     const desktopClosed = diagnostics.getMobileOverlayHudReport();
     diagnostics.setPanelOpen(true);
     await diagnostics.waitForFrames(18);
     const desktopReopened = diagnostics.getMobileOverlayHudReport();
-    check("hud-desktop-collapse-and-reopen-keep-aria-and-tabs", desktopClosed.panel.collapsed && !desktopClosed.expanded && desktopClosed.toggle.ariaExpanded === "false" && desktopReopened.expanded && !desktopReopened.panel.collapsed && panelTabs.getState().activeView === "learning", { closed: desktopClosed.toggle, reopened: desktopReopened.toggle, active: panelTabs.getState().activeView });
+    check("hud-desktop-collapse-and-reopen-keep-aria-and-tabs", desktopClosed.panel.collapsed && !desktopClosed.expanded && desktopClosed.toggle.ariaExpanded === "false" && desktopReopened.expanded && !desktopReopened.panel.collapsed && panelTabs.getState().activeView === desktopActiveBeforeCollapse, { closed: desktopClosed.toggle, reopened: desktopReopened.toggle, activeBefore: desktopActiveBeforeCollapse, activeAfter: panelTabs.getState().activeView });
+    check("hud-desktop-hamburger-follows-panel-to-left-and-returns", Math.abs(desktopClosed.toggle.rect.left - 10) <= 1.5 && Math.abs(desktopReopened.toggle.rect.left - 387) <= 1.5 && Math.abs(layout.toggle.rect.left - 387) <= 1.5, { expanded: layout.toggle, closed: desktopClosed.toggle, reopened: desktopReopened.toggle });
     measurements.desktop = { layout, closed: desktopClosed, reopened: desktopReopened };
   }
 
@@ -249,5 +476,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   measurements.selected = { name: selected, report: selectedReport, ui: selectedUi.selectionOutputs };
   measurements.invariantBefore = invariantBefore;
   measurements.invariantAfter = invariantAfter;
+  measurements.time = { timeWithSeconds, timeWithSecondsDeduped, timeWithoutSeconds, blurOnlyTime, touchButtonTime, liveSyncManual, untouchedReport, position2Editing, positionRoundTripTime, invalidEmpty };
+  measurements.toggleCards = { initial: toggleCards, off: offCard, on: onCard, disabled: disabledCard, plateOff, plateFocused, plateOn, allToggleInteractions };
   return { ok: checks.every(({ ok }) => ok), checks, measurements };
 }
