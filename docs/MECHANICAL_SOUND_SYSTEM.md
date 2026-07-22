@@ -58,7 +58,9 @@ UIは操作タブの作動音カード、音量slider、状態表示、説明文
 
 ## 診断と証跡
 
-`getAudioDiagnostics()`は対応可否、ON/OFF、context状態、読込済み・失敗資産、gain、最終イベント、種類別件数、drop／suppress件数、活動source、イベントログ、機構不変比較を返す。query指定の証跡モードはcanvas映像とWeb AudioのMediaStreamDestinationをMediaRecorderで合成し、VP9 + Opus WebMを生成する。通常の既定経路では有効にならない。
+`getAudioDiagnostics()`は対応可否、ON/OFF、context状態、必須6bufferの完全性・欠損種別、読込済み・失敗資産、gain、最終イベント、種類別件数、drop／suppress件数、活動source、イベントログ、機構不変比較を返す。部分読込失敗後の再ONでは欠損bufferだけを再試行し、6種すべてが揃うまでONへ遷移しない。query指定の証跡モードはcanvas映像とWeb AudioのMediaStreamDestinationをMediaRecorderで合成し、VP9 + Opus WebMを生成する。通常の既定経路では有効にならない。
+
+OFF操作ではmaster gainを25msで0へrampし、30ms後に活動sourceを停止してcontextをsuspendする。待機中に再ONされた場合はlifecycle sequenceにより古い停止処理を無効化し、新しい再生状態を停止しない。
 
 自動試験は資産形式、resolver境界、engineライフサイクル、実pointerでのON、音量、6イベント、停止／再開、位置2切離し、可視状態、reset、読込失敗、機構不変を検証する。結果と動画は `docs/evidence/mechanical-operation-sounds/` に保存する。
 

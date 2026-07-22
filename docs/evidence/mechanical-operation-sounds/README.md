@@ -4,7 +4,7 @@
 
 | 対象 | 結果 |
 | --- | --- |
-| Node | 46/46 |
+| Node | 50/50 |
 | 既存デスクトップ 1280×720 | 86/86 |
 | UI 1280×720 | 20/20 |
 | HUD 1280×720 | 42/42 |
@@ -44,6 +44,7 @@
 - `recording-report.json`: viewport、時間、codec、byte数、イベント件数
 - `performance-report.json`: 音OFF／ONのA.6フレーム計測
 - `browser-report.json`: Node・既存回帰・音声統合試験の詳細
+- `review-fix-report.json`: PR #6レビュー修正後の完全性・全回帰・性能再試験
 
 4動画はいずれもWebMコンテナ内にVP9映像trackとOpus音声trackを含む。録画は同じ実ブラウザの`canvas.captureStream()`とWeb Audio `MediaStreamDestination`をMediaRecorderへ接続して作成した。
 

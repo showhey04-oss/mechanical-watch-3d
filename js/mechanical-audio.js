@@ -5,7 +5,7 @@ const DEFAULT_BUS_GAINS = Object.freeze({
   crown: 0.38,
 });
 
-const EVENT_TYPES = Object.freeze([
+export const REQUIRED_AUDIO_EVENT_TYPES = Object.freeze([
   "escapementTick",
   "escapementTock",
   "winding",
@@ -14,7 +14,10 @@ const EVENT_TYPES = Object.freeze([
   "crownPush",
 ]);
 
-const emptyCounts = () => Object.fromEntries(EVENT_TYPES.map((type) => [type, 0]));
+const emptyCounts = () => Object.fromEntries(REQUIRED_AUDIO_EVENT_TYPES.map((type) => [type, 0]));
+const defaultWait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+const DISABLE_RAMP_SECONDS = 0.025;
+const DISABLE_STOP_DELAY_MS = 30;
 const stateName = (enabled, loading, supported, failures) => {
   if (!supported || failures.length) return "unavailable";
   if (loading) return "loading";
@@ -28,6 +31,7 @@ export class MechanicalAudioEngine {
     fetchFn = globalThis.fetch?.bind(globalThis),
     masterGain = 0.36,
     onStateChange = () => {},
+    waitFn = defaultWait,
   } = {}) {
     const AudioContextClass = globalThis.AudioContext ?? globalThis.webkitAudioContext;
     this.audioContextFactory = audioContextFactory ?? (AudioContextClass ? () => new AudioContextClass() : null);
@@ -35,6 +39,7 @@ export class MechanicalAudioEngine {
     this.manifestUrl = manifestUrl;
     this.masterGainValue = Math.max(0, Math.min(1, Number(masterGain) || 0));
     this.onStateChange = onStateChange;
+    this.waitFn = waitFn;
     this.supported = Boolean(this.audioContextFactory && this.fetchFn);
     this.enabled = false;
     this.loading = false;
@@ -53,6 +58,7 @@ export class MechanicalAudioEngine {
     this.droppedEvents = 0;
     this.suppressedEvents = 0;
     this.loadPromise = null;
+    this.lifecycleSequence = 0;
   }
 
   emitState() {
@@ -82,25 +88,37 @@ export class MechanicalAudioEngine {
     gain.linearRampToValueAtTime(Math.max(0, value), now + duration);
   }
 
+  getBufferCompleteness() {
+    const loaded = REQUIRED_AUDIO_EVENT_TYPES.filter((type) => this.buffers.has(type));
+    const missing = REQUIRED_AUDIO_EVENT_TYPES.filter((type) => !this.buffers.has(type));
+    return { complete: missing.length === 0, required: [...REQUIRED_AUDIO_EVENT_TYPES], loaded, missing };
+  }
+
   async enableFromUserGesture() {
     if (!this.supported) {
       this.emitState();
       return false;
     }
+    const lifecycleSequence = ++this.lifecycleSequence;
     try {
       this.createGraph();
       await this.context.resume();
-      this.enabled = true;
-      this.loading = this.buffers.size === 0;
+      if (lifecycleSequence !== this.lifecycleSequence) return false;
+      this.enabled = false;
+      this.loading = !this.getBufferCompleteness().complete;
       this.failedAssets = [];
       this.emitState();
-      if (this.buffers.size === 0) await this.loadBuffers();
-      if (this.failedAssets.length) {
+      if (this.loading) await this.loadBuffers();
+      if (lifecycleSequence !== this.lifecycleSequence) return false;
+      const completeness = this.getBufferCompleteness();
+      if (this.failedAssets.length || !completeness.complete) {
         this.enabled = false;
         this.rampMaster(0);
+        if (!this.failedAssets.length) this.failedAssets = completeness.missing.map((type) => `${type}: required buffer missing`);
         this.emitState();
         return false;
       }
+      this.enabled = true;
       this.rampMaster(this.masterGainValue);
       this.emitState();
       return true;
@@ -125,7 +143,13 @@ export class MechanicalAudioEngine {
       const baseUrl = new URL(".", response.url || this.manifestUrl);
       const revision = encodeURIComponent(this.manifest.revision || "1");
       const failures = [];
-      await Promise.all(Object.entries(this.manifest.runtime).map(async ([type, asset]) => {
+      const missingTypes = REQUIRED_AUDIO_EVENT_TYPES.filter((type) => !this.buffers.has(type));
+      await Promise.all(missingTypes.map(async (type) => {
+        const asset = this.manifest?.runtime?.[type];
+        if (!asset?.file) {
+          failures.push(`${type}: missing manifest entry`);
+          return;
+        }
         try {
           const assetUrl = new URL(asset.file, baseUrl);
           assetUrl.searchParams.set("audio", revision);
@@ -137,10 +161,16 @@ export class MechanicalAudioEngine {
           failures.push(`${asset.file}: ${error?.message || String(error)}`);
         }
       }));
+      const stillMissing = REQUIRED_AUDIO_EVENT_TYPES.filter((type) => !this.buffers.has(type));
+      for (const type of stillMissing) {
+        if (!failures.some((failure) => failure.startsWith(`${type}:`) || failure.startsWith(`${this.manifest?.runtime?.[type]?.file}:`))) {
+          failures.push(`${type}: required buffer missing`);
+        }
+      }
       this.failedAssets = failures.sort();
       this.loading = false;
       this.emitState();
-      return this.failedAssets.length === 0;
+      return this.failedAssets.length === 0 && this.getBufferCompleteness().complete;
     })().catch((error) => {
       this.loading = false;
       this.failedAssets = [error?.message || String(error)];
@@ -153,8 +183,12 @@ export class MechanicalAudioEngine {
   }
 
   async disable() {
+    const lifecycleSequence = ++this.lifecycleSequence;
     this.enabled = false;
-    this.rampMaster(0);
+    this.rampMaster(0, DISABLE_RAMP_SECONDS);
+    this.emitState();
+    await this.waitFn(DISABLE_STOP_DELAY_MS);
+    if (lifecycleSequence !== this.lifecycleSequence || this.enabled) return;
     this.stopAll();
     if (this.context?.state === "running") await this.context.suspend().catch(() => {});
     this.emitState();
@@ -245,6 +279,7 @@ export class MechanicalAudioEngine {
       audioContextState: this.context?.state ?? "not-created",
       status: stateName(this.enabled, this.loading, this.supported, this.failedAssets),
       buffersLoaded: [...this.buffers.keys()].sort(),
+      bufferCompleteness: this.getBufferCompleteness(),
       failedAssets: [...this.failedAssets],
       masterGain: this.masterGainValue,
       busGains: { ...DEFAULT_BUS_GAINS },
