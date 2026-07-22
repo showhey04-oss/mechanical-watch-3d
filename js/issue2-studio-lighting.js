@@ -1,19 +1,22 @@
 import * as THREE from "three";
 
-export const ISSUE2_STUDIO_CANDIDATES=Object.freeze(["studio-d1","studio-d2","studio-d2a","studio-d2b","studio-d3"]);
+export const ISSUE2_STUDIO_CANDIDATES=Object.freeze(["studio-d1","studio-d2","studio-d2a","studio-d2b","studio-d2c1","studio-d2c2","studio-d2c3","studio-d3"]);
 
 export const ISSUE2_STUDIO_CONFIGURATIONS=Object.freeze({
- "studio-d1":Object.freeze({rectLights:false,shadowCarrier:false,placementStrategy:"environment-only",zoomStableFog:false}),
- "studio-d2":Object.freeze({rectLights:true,shadowCarrier:false,placementStrategy:"world-fixed-current",zoomStableFog:false}),
- "studio-d2a":Object.freeze({rectLights:true,shadowCarrier:false,placementStrategy:"world-fixed",zoomStableFog:true}),
- "studio-d2b":Object.freeze({rectLights:true,shadowCarrier:false,placementStrategy:"camera-orientation-fixed-radius",zoomStableFog:true}),
- "studio-d3":Object.freeze({rectLights:true,shadowCarrier:true,placementStrategy:"world-fixed-current",zoomStableFog:false}),
+ "studio-d1":Object.freeze({rectLights:false,expectedRectLights:0,shadowCarrier:false,placementStrategy:"environment-only",zoomStableFog:false,studioProfile:"base"}),
+ "studio-d2":Object.freeze({rectLights:true,expectedRectLights:2,shadowCarrier:false,placementStrategy:"world-fixed-current",zoomStableFog:false,studioProfile:"base"}),
+ "studio-d2a":Object.freeze({rectLights:true,expectedRectLights:2,shadowCarrier:false,placementStrategy:"world-fixed",zoomStableFog:true,studioProfile:"base"}),
+ "studio-d2b":Object.freeze({rectLights:true,expectedRectLights:2,shadowCarrier:false,placementStrategy:"camera-orientation-fixed-radius",zoomStableFog:true,studioProfile:"base"}),
+ "studio-d2c1":Object.freeze({rectLights:true,expectedRectLights:2,shadowCarrier:false,placementStrategy:"world-fixed",zoomStableFog:true,studioProfile:"d2c1-midtone-environment"}),
+ "studio-d2c2":Object.freeze({rectLights:true,expectedRectLights:2,shadowCarrier:false,placementStrategy:"world-fixed",zoomStableFog:true,studioProfile:"d2c2-balanced-key-fill"}),
+ "studio-d2c3":Object.freeze({rectLights:true,expectedRectLights:3,shadowCarrier:false,placementStrategy:"world-fixed",zoomStableFog:true,studioProfile:"d2c3-lower-bounce"}),
+ "studio-d3":Object.freeze({rectLights:true,expectedRectLights:2,shadowCarrier:true,placementStrategy:"world-fixed-current",zoomStableFog:false,studioProfile:"base"}),
 });
 
 export const ISSUE2_STUDIO_LAYOUT=Object.freeze({
  environment:{
   background:"#080808",
-  ambientSurface:{kind:"room-and-floor",color:"#181818",roomRadius:70,floorSize:[96,96],floorPosition:[0,0,-24]},
+  ambientSurface:{kind:"room-and-floor",color:"#181818",roomColor:"#181818",floorColor:"#181818",floorRadiance:.7,roomRadius:70,floorSize:[96,96],floorPosition:[0,0,-24]},
   panels:[
    {name:"studioEnvKeyPanel",role:"key-reflection",color:"#ffffff",radiance:4.8,size:[34,22],position:[16,-30,20]},
    {name:"studioEnvFillPanel",role:"fill-reflection",color:"#ffffff",radiance:2.75,size:[32,26],position:[-20,28,10]},
@@ -29,6 +32,30 @@ export const ISSUE2_STUDIO_LAYOUT=Object.freeze({
   {name:"studioRectFill",role:"back-fill",color:"#ffffff",intensity:.35,size:[28,22],position:[-18,27,11]},
  ],
  shadowCarrier:{name:"studioShadowCarrier",role:"contact-shadow",color:"#ffffff",intensity:.15,position:[14,-28,21],mapSize:{desktop:2048,mobile:1024},bias:-.00018,normalBias:.018},
+});
+
+const D2C_MIDTONE_ENVIRONMENT=Object.freeze({
+ background:ISSUE2_STUDIO_LAYOUT.environment.background,
+ ambientSurface:Object.freeze({kind:"room-and-floor",color:"#202020",roomColor:"#202020",floorColor:"#202020",floorRadiance:.7,roomRadius:70,floorSize:[96,96],floorPosition:[0,0,-24]}),
+ panels:ISSUE2_STUDIO_LAYOUT.environment.panels,
+ flags:Object.freeze([
+  Object.freeze({name:"studioEnvFrontFlag",role:"front-edge-negative-fill",color:"#080808",size:[7,30],position:[-23,-25,3]}),
+  Object.freeze({name:"studioEnvBackFlag",role:"back-edge-negative-fill",color:"#080808",size:[8,28],position:[24,22,-4]}),
+ ]),
+});
+
+const D2C_BALANCED_RECT_LIGHTS=Object.freeze([
+ Object.freeze({name:"studioRectKey",role:"front-key",color:"#ffffff",intensity:.85,size:[30,20],position:[15,-28,18]}),
+ Object.freeze({name:"studioRectFill",role:"back-fill",color:"#ffffff",intensity:.455,size:[32.2,25.3],position:[-18,27,11]}),
+]);
+
+const D2C_LOWER_BOUNCE=Object.freeze({name:"studioRectLowerBounce",role:"lower-front-bounce",color:"#ffffff",intensity:.085,size:[38,24],position:[0,-22,-26]});
+
+export const ISSUE2_STUDIO_PROFILES=Object.freeze({
+ base:Object.freeze({environment:ISSUE2_STUDIO_LAYOUT.environment,rectLights:ISSUE2_STUDIO_LAYOUT.rectLights}),
+ "d2c1-midtone-environment":Object.freeze({environment:D2C_MIDTONE_ENVIRONMENT,rectLights:ISSUE2_STUDIO_LAYOUT.rectLights}),
+ "d2c2-balanced-key-fill":Object.freeze({environment:D2C_MIDTONE_ENVIRONMENT,rectLights:D2C_BALANCED_RECT_LIGHTS}),
+ "d2c3-lower-bounce":Object.freeze({environment:D2C_MIDTONE_ENVIRONMENT,rectLights:Object.freeze([...D2C_BALANCED_RECT_LIGHTS,D2C_LOWER_BOUNCE])}),
 });
 
 function makeBasicMaterial(color,radiance=1){
@@ -48,26 +75,27 @@ function addPanel(scene,definition){
  return panel;
 }
 
-function createStudioEnvironmentScene(){
+function createStudioEnvironmentScene(environmentLayout){
  const studioScene=new THREE.Scene();
  studioScene.name="issue2StudioEnvironment";
- studioScene.background=new THREE.Color(ISSUE2_STUDIO_LAYOUT.environment.background);
+ studioScene.background=new THREE.Color(environmentLayout.background);
+ const ambient=environmentLayout.ambientSurface;
  const room=new THREE.Mesh(
-  new THREE.SphereGeometry(ISSUE2_STUDIO_LAYOUT.environment.ambientSurface.roomRadius,32,16),
-  new THREE.MeshBasicMaterial({color:ISSUE2_STUDIO_LAYOUT.environment.ambientSurface.color,side:THREE.BackSide,toneMapped:false}),
+  new THREE.SphereGeometry(ambient.roomRadius,32,16),
+  new THREE.MeshBasicMaterial({color:ambient.roomColor??ambient.color,side:THREE.BackSide,toneMapped:false}),
  );
  room.name="studioAmbientRoom";
  studioScene.add(room);
  const floor=new THREE.Mesh(
-  new THREE.PlaneGeometry(...ISSUE2_STUDIO_LAYOUT.environment.ambientSurface.floorSize),
-  makeBasicMaterial(ISSUE2_STUDIO_LAYOUT.environment.ambientSurface.color,.7),
+  new THREE.PlaneGeometry(...ambient.floorSize),
+  makeBasicMaterial(ambient.floorColor??ambient.color,ambient.floorRadiance??.7),
  );
  floor.name="studioAmbientFloor";
- floor.position.fromArray(ISSUE2_STUDIO_LAYOUT.environment.ambientSurface.floorPosition);
+ floor.position.fromArray(ambient.floorPosition);
  studioScene.add(floor);
  const panels=[
-  ...ISSUE2_STUDIO_LAYOUT.environment.panels.map(definition=>addPanel(studioScene,definition)),
-  ...ISSUE2_STUDIO_LAYOUT.environment.flags.map(definition=>addPanel(studioScene,definition)),
+  ...environmentLayout.panels.map(definition=>addPanel(studioScene,definition)),
+  ...environmentLayout.flags.map(definition=>addPanel(studioScene,definition)),
  ];
  return {scene:studioScene,resources:[room,floor,...panels]};
 }
@@ -171,6 +199,7 @@ function describeLight(light,aim){
 export async function createIssue2StudioRig({candidate,renderer,scene,camera,lightingAim,legacyLights,onStage=()=>{}}){
  if(!ISSUE2_STUDIO_CANDIDATES.includes(candidate))return null;
  const configuration=ISSUE2_STUDIO_CONFIGURATIONS[candidate];
+ const studioProfile=ISSUE2_STUDIO_PROFILES[configuration.studioProfile];
  const stage=(name,details={})=>onStage({name,at:performance.now(),...details});
  const initializationStarted=performance.now();
  const memoryBefore={...renderer.info.memory};
@@ -187,7 +216,7 @@ export async function createIssue2StudioRig({candidate,renderer,scene,camera,lig
  for(const state of legacy){state.light.intensity=0;state.light.castShadow=false}
  stage("legacy-lights-disabled",{count:legacy.length});
 
- const environmentScene=createStudioEnvironmentScene();
+ const environmentScene=createStudioEnvironmentScene(studioProfile.environment);
  const pmremGenerator=new THREE.PMREMGenerator(renderer);
  pmremGenerator.compileCubemapShader();
  const environmentTarget=pmremGenerator.fromScene(environmentScene.scene,.04,.1,100);
@@ -202,7 +231,7 @@ export async function createIssue2StudioRig({candidate,renderer,scene,camera,lig
   const {RectAreaLightUniformsLib}=await import("three/addons/lights/RectAreaLightUniformsLib.js");
   RectAreaLightUniformsLib.init();
   stage("rect-area-uniforms-ready");
-  for(const definition of ISSUE2_STUDIO_LAYOUT.rectLights){rectLights.push(addRectLight(scene,lightingAim.position,definition))}
+  for(const definition of studioProfile.rectLights){rectLights.push(addRectLight(scene,lightingAim.position,definition))}
   stage("rect-lights-built",{count:rectLights.length});
  }
 
@@ -228,9 +257,10 @@ export async function createIssue2StudioRig({candidate,renderer,scene,camera,lig
  const rig={
   candidate,
   configuration,
+  studioProfile:configuration.studioProfile,
   environmentTarget,
   lightingAim,
-  environmentLayout:ISSUE2_STUDIO_LAYOUT.environment,
+  environmentLayout:studioProfile.environment,
   rectLights,
   rectAreaUniformsInitialized:configuration.rectLights,
   shadowCarrier,
@@ -259,6 +289,8 @@ export function describeIssue2StudioRig(rig){
   enabled:true,
   candidate:rig.candidate,
   placementStrategy:rig.configuration.placementStrategy,
+  studioProfile:rig.studioProfile,
+  expectedRectLights:rig.configuration.expectedRectLights,
   cameraDistanceInvariant:true,
   zoomStableFog:rig.configuration.zoomStableFog,
   neutralLightColor:"#ffffff",
@@ -274,6 +306,7 @@ export function describeIssue2StudioRig(rig){
   initialization:rig.initialization,
   rectAreaUniformsInitialized:rig.rectAreaUniformsInitialized,
   rectLights:rig.rectLights.map(light=>describeLight(light,rig.lightingAim.getWorldPosition(new THREE.Vector3()))),
+  directLightBalance:(()=>{const key=rig.rectLights.find(light=>light.name==="studioRectKey"),fill=rig.rectLights.find(light=>light.name==="studioRectFill"),lower=rig.rectLights.find(light=>light.name==="studioRectLowerBounce");return key&&fill?{keyIntensity:key.intensity,fillIntensity:fill.intensity,keyToFillRatio:key.intensity/fill.intensity,keyArea:key.width*key.height,fillArea:fill.width*fill.height,lowerBounceIntensity:lower?.intensity??0,lowerBounceToKeyRatio:lower?lower.intensity/key.intensity:0}:null})(),
   orientationFollowing:rig.orientationFollowing?{
    fixedOffsets:rig.orientationFollowing.fixedOffsets.map(offset=>({...offset})),
    fixedRadii:rig.orientationFollowing.fixedOffsets.map(offset=>offset.radius),

@@ -14,7 +14,18 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
   const candidate = pipeline.candidate;
   const modelBefore = diagnostics.getModelWorldSignature();
 
-  const studioCandidates = ["studio-d1", "studio-d2", "studio-d2a", "studio-d2b", "studio-d3"];
+  const d2cCandidates = ["studio-d2c1", "studio-d2c2", "studio-d2c3"];
+  const studioCandidates = ["studio-d1", "studio-d2", "studio-d2a", "studio-d2b", ...d2cCandidates, "studio-d3"];
+  const expectedRectLightCounts = {
+    "studio-d1": 0,
+    "studio-d2": 2,
+    "studio-d2a": 2,
+    "studio-d2b": 2,
+    "studio-d2c1": 2,
+    "studio-d2c2": 2,
+    "studio-d2c3": 3,
+    "studio-d3": 2,
+  };
   check("issue2-candidate-is-explicit-and-query-only", ["baseline", "shadow", "transparency", "lighting", ...studioCandidates].includes(candidate), pipeline);
   check("issue2-pipeline-keeps-srgb-aces-and-production-exposure", pipeline.outputColorSpace === "srgb"
     && pipeline.toneMapping === 4
@@ -103,6 +114,7 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
 
   if (studioCandidates.includes(candidate)) {
     const studio = diagnostics.getIssue2StudioRigReport();
+    const lightingRig = diagnostics.getLightingRigReport();
     const activeLegacy = studio.legacyLights.filter((light) => light.currentIntensity > 0);
     check("issue2-studio-candidate-is-query-isolated-and-environment-map-independent", studio.enabled
       && studio.candidate === candidate
@@ -122,7 +134,7 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
       check("issue2-d1-uses-only-pmrem-ibl-without-direct-or-shadow-light", studio.rectLights.length === 0
         && studio.shadowCarrier === null
         && studio.rectAreaUniformsInitialized === false, studio);
-    } else {
+    } else if (!d2cCandidates.includes(candidate)) {
       const [key, fill] = studio.rectLights;
       check("issue2-d2-d3-use-two-large-neutral-rect-area-lights", studio.rectAreaUniformsInitialized
         && studio.rectLights.length === 2
@@ -150,8 +162,86 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
       }
     }
 
+    if (d2cCandidates.includes(candidate)) {
+      const [key, fill, lowerBounce] = studio.rectLights;
+      const expectedProfile = {
+        "studio-d2c1": "d2c1-midtone-environment",
+        "studio-d2c2": "d2c2-balanced-key-fill",
+        "studio-d2c3": "d2c3-lower-bounce",
+      }[candidate];
+      check("issue2-d2c-environment-lifts-midtones-without-moving-or-removing-flags", studio.studioProfile === expectedProfile
+        && studio.environment.background === "#080808"
+        && studio.environment.ambientSurface.color === "#202020"
+        && studio.environment.ambientSurface.roomColor === "#202020"
+        && studio.environment.ambientSurface.floorColor === "#202020"
+        && studio.environment.ambientSurface.floorRadiance === .7
+        && studio.environment.ambientSurface.roomRadius === 70
+        && JSON.stringify(studio.environment.ambientSurface.floorSize) === JSON.stringify([96, 96])
+        && JSON.stringify(studio.environment.ambientSurface.floorPosition) === JSON.stringify([0, 0, -24])
+        && JSON.stringify(studio.environment.flags) === JSON.stringify([
+          { name: "studioEnvFrontFlag", role: "front-edge-negative-fill", color: "#080808", size: [7, 30], position: [-23, -25, 3] },
+          { name: "studioEnvBackFlag", role: "back-edge-negative-fill", color: "#080808", size: [8, 28], position: [24, 22, -4] },
+        ]), studio.environment);
+      check("issue2-d2c-lights-are-world-fixed-neutral-shadowless-and-exact", studio.rectAreaUniformsInitialized
+        && studio.expectedRectLights === expectedRectLightCounts[candidate]
+        && studio.rectLights.length === expectedRectLightCounts[candidate]
+        && studio.placementStrategy === "world-fixed"
+        && studio.orientationFollowing === null
+        && studio.shadowCarrier === null
+        && lightingRig.lights.every((light) => light.type !== "AmbientLight")
+        && studio.rectLights.every((light) => light.color === "#ffffff"
+          && !light.castShadow
+          && !light.cameraAttached
+          && light.parent === "Scene"
+          && Number.isFinite(light.distanceToModel))
+        && key.name === "studioRectKey"
+        && fill.name === "studioRectFill", { studio, lightingRig });
+
+      if (candidate === "studio-d2c1") {
+        check("issue2-d2c1-keeps-d2a-direct-lighting-exact", key.intensity === 1
+          && JSON.stringify(key.size) === JSON.stringify([30, 20])
+          && JSON.stringify(key.position) === JSON.stringify([15, -28, 18])
+          && fill.intensity === .35
+          && JSON.stringify(fill.size) === JSON.stringify([28, 22])
+          && JSON.stringify(fill.position) === JSON.stringify([-18, 27, 11])
+          && studio.directLightBalance.keyIntensity === 1
+          && studio.directLightBalance.fillIntensity === .35
+          && studio.directLightBalance.keyArea === 600
+          && studio.directLightBalance.fillArea === 616
+          && studio.directLightBalance.lowerBounceIntensity === 0, studio);
+      } else {
+        check("issue2-d2c2-d2c3-rebalance-key-fill-exact", key.intensity === .85
+          && JSON.stringify(key.size) === JSON.stringify([30, 20])
+          && JSON.stringify(key.position) === JSON.stringify([15, -28, 18])
+          && fill.intensity === .455
+          && JSON.stringify(fill.size) === JSON.stringify([32.2, 25.3])
+          && JSON.stringify(fill.position) === JSON.stringify([-18, 27, 11])
+          && studio.directLightBalance.keyIntensity === .85
+          && studio.directLightBalance.fillIntensity === .455
+          && Math.abs(studio.directLightBalance.keyToFillRatio - .85 / .455) <= 1e-12
+          && studio.directLightBalance.keyArea === 600
+          && Math.abs(studio.directLightBalance.fillArea - 32.2 * 25.3) <= 1e-12, studio);
+        if (candidate === "studio-d2c3") {
+          check("issue2-d2c3-adds-only-one-weak-lower-white-bounce", lowerBounce?.name === "studioRectLowerBounce"
+            && lowerBounce.role === "lower-front-bounce"
+            && lowerBounce.intensity === .085
+            && JSON.stringify(lowerBounce.size) === JSON.stringify([38, 24])
+            && JSON.stringify(lowerBounce.position) === JSON.stringify([0, -22, -26])
+            && !lowerBounce.castShadow
+            && studio.directLightBalance.lowerBounceIntensity === .085
+            && Math.abs(studio.directLightBalance.lowerBounceToKeyRatio - .1) <= 1e-12, studio);
+        } else {
+          check("issue2-d2c2-does-not-add-lower-bounce", lowerBounce === undefined
+            && studio.directLightBalance.lowerBounceIntensity === 0
+            && studio.directLightBalance.lowerBounceToKeyRatio === 0, studio);
+        }
+      }
+    }
+
     const startup = diagnostics.getIssue2StartupReport();
     const initialShadowReadyEvent = startup.events.find(({ name }) => name === "initial-shadow-ready");
+    const rectLightsBuiltEvent = startup.events.find(({ name }) => name === "rect-lights-built");
+    const candidateReadyEvent = startup.events.find(({ name }) => name === "candidate-ready");
     check("issue2-studio-startup-gate-waits-for-required-resources", startup.gateSatisfied
       && startup.milestones.pmremReady
       && startup.milestones.environmentApplied
@@ -162,6 +252,11 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
       && (candidate !== "studio-d3" || (startup.milestones.initialShadowReady
         && initialShadowReadyEvent?.mapSize?.length === 2
         && initialShadowReadyEvent.mapSize.every((value) => value > 0))), startup);
+    check("issue2-studio-startup-gate-verifies-the-exact-rect-light-count", candidateReadyEvent?.rectLightCount === expectedRectLightCounts[candidate]
+      && studio.rectLights.length === expectedRectLightCounts[candidate]
+      && (expectedRectLightCounts[candidate] === 0
+        ? rectLightsBuiltEvent === undefined
+        : rectLightsBuiltEvent?.count === expectedRectLightCounts[candidate]), { startup, studio });
 
     let zoomReports = null;
     if (candidate !== "studio-d1") {
@@ -182,11 +277,46 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
         && report.environment.intensity === report.environmentIntensity), { initial: initial.environmentIntensity, near: near.environmentIntensity, far: far.environmentIntensity });
       check("issue2-object-mask-restores-material-and-visibility-state", materialsAfter.rows.every((row, index) => row.materialUuid === materialsBefore.rows[index]?.materialUuid
         && row.visible === materialsBefore.rows[index]?.visible), { before: materialsBefore, after: materialsAfter });
-      check("issue2-region-report-separates-visible-surface-from-isolated-representative-luminance", Object.values(initial.regions).every((region) => region.method === "isolated-object-material-footprint"
-        && region.sampleCount > 0
-        && region.visibleSurface?.method === "model-silhouette-mask-pass"
-        && region.visibleSurface.sampleCount >= 0), initial.regions);
+      const requiredSilhouetteFields = ["meanLuminance", "medianLuminance", "p10Luminance", "p25Luminance", "p75Luminance", "p90Luminance", "darkRatio", "darkCount", "clippedRatio", "clippedCount", "sampleCount"];
+      const regionNames = ["dial", "hands", "brassTrain", "steelTrain", "ruby", "plate", "outerBezel"];
+      check("issue2-watch-silhouette-reports-required-midtone-percentiles", [initial, near, far].every((report) => report.watchSilhouette?.method === "watch-root-silhouette-mask-pass"
+        && report.watchSilhouette.scope === "watchMechanism"
+        && report.watchSilhouette.meshCount >= 480
+        && report.watchSilhouette.sampleCount > 1000
+        && requiredSilhouetteFields.every((field) => Number.isFinite(report.watchSilhouette[field]))
+        && report.watchSilhouette.thresholds?.dark === .045
+        && report.watchSilhouette.thresholds?.clipped === .965
+        && report.statistics === report.watchSilhouette
+        && report.background?.method === "inverse-watch-mask-background-pass"
+        && Number.isFinite(report.watchToBackground?.medianDifference)
+        && Number.isFinite(report.watchToBackground?.p25ToBackgroundP75)), zoomReports);
+      check("issue2-region-report-separates-seven-visible-surfaces-from-isolated-representative-luminance", [initial, near, far].every((report) => JSON.stringify(Object.keys(report.regions)) === JSON.stringify(regionNames)
+        && Object.values(report.regions).every((region) => region.method === "isolated-object-material-footprint"
+          && region.sampleCount > 0
+          && region.meshCount > 0
+          && region.visibleSurface?.method === "model-silhouette-mask-pass"
+          && region.visibleSurface.sampleCount >= 0
+          && region.visibleSurface.occluded === (region.visibleSurface.sampleCount === 0)
+          && requiredSilhouetteFields.every((field) => Number.isFinite(region.visibleSurface[field]))
+          && region.visibleSurface.thresholds?.dark === .045
+          && region.visibleSurface.thresholds?.clipped === .965)), zoomReports);
       measurements.zoom = zoomReports;
+    }
+
+    if (d2cCandidates.includes(candidate)) {
+      const { initial, near, far } = zoomReports;
+      check("issue2-d2c-keeps-light-distance-size-intensity-and-color-through-zoom", near.rectLights.every((light, index) => Math.abs(light.distanceToModel - initial.rectLights[index].distanceToModel) <= 1e-6
+        && Math.abs(far.rectLights[index].distanceToModel - initial.rectLights[index].distanceToModel) <= 1e-6
+        && light.width === initial.rectLights[index].width && light.height === initial.rectLights[index].height
+        && light.intensity === initial.rectLights[index].intensity && light.color === initial.rectLights[index].color), { initial: initial.rectLights, near: near.rectLights, far: far.rectLights });
+      check("issue2-d2c-keeps-fog-outside-the-camera-range-at-160-260", [initial, near, far].every((report) => report.fog.strategy === "candidate-scoped-model-distance-safe-range"
+        && report.fog.active.near === 160
+        && report.fog.active.far === 260
+        && report.fog.active.near > report.distanceProfile.maxDistance
+        && report.fog.modelCenterFactor === 0), { initial: initial.fog, near: near.fog, far: far.fog });
+      check("issue2-d2c-is-completely-world-fixed", studio.placementStrategy === "world-fixed"
+        && studio.orientationFollowing === null
+        && [initial, near, far].every((report) => report.placementStrategy === "world-fixed"), { studio, zoomReports });
     }
 
     if (candidate === "studio-d2a" || candidate === "studio-d2b") {
@@ -277,6 +407,8 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
             ? "Rejected after physical-iPhone standalone review; camera-fit distance plus legacy fog causes zoom-dependent darkening."
             : candidate === "studio-d3"
               ? "Hold: it shares the legacy fog behavior and must be reassessed after the D2a/D2b comparison."
+              : d2cCandidates.includes(candidate)
+                ? "Hold for fixed-matrix comparison and physical iPhone standalone Safari approval; query-only candidate, do not integrate or adopt as default."
               : ["studio-d2a", "studio-d2b"].includes(candidate)
                 ? "Hold for fixed-matrix visual comparison and physical iPhone standalone Safari approval; do not integrate."
             : "Baseline diagnosis only.";

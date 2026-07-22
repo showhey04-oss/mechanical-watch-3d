@@ -326,6 +326,8 @@ Phase 2Aはスタジオ照明候補の実装・Chromium比較、Phase 2Bはユ�
 
 Phase 2A.1は、物理iPhoneのホーム画面起動で確認されたD2の初期表示・ズームアウト時暗化を診断し、D2a/D2bをquery限定で比較する。自動試験のpassは物理iPhoneでの画質合格または採用を意味しない。
 
+> D2a／D2bの物理iPhone確認は完了した。再起動後に黒潰れは解消方向へ改善しnearは良好だったが、initial／farの中間調不足が残ったため未採用とする。以後のD2c受入条件とユーザー確認ゲートはP節を正とする。
+
 ### O.1 原因診断
 
 - D2/D3のRectAreaLightがcamera配下ではなくscene直下にあり、near／initial／farでlight-to-model距離、寸法、強度、色が変化しないことを確認する
@@ -365,3 +367,41 @@ Phase 2A.1は、物理iPhoneのホーム画面起動で確認されたD2の初�
 - D2a/D2bを同じ物理iPhone Safariとホーム画面起動で比較し、初期表示、ズームアウト、全方向観察、ハイライト追従感、パネル開閉、3D操作を確認する
 - ユーザー確認前にD2a/D2bを採用・既定化せず、PR #5をDraft、Issue #2をOpenのまま維持する
 - Ready化、マージ、Issue close、「完成」「合格」「最終採用」の報告を行わない
+
+## P. Issue #2 レンダリング品質 Phase 2A.2
+
+Phase 2A.2はD2aを基盤に、中間調不足だけをスタジオ構成の範囲内で再調整するquery限定比較である。D2bは比較履歴として保持し、D2c1／D2c2／D2c3の自動試験passは採用または物理iPhoneでの画質合格を意味しない。
+
+### P.1 変更範囲と候補分離
+
+- D2c1はD2aから黒フラッグの影響を弱め、PMREM room／floorの中間調を持ち上げる
+- D2c2はD2c1へkey／fillの再配分を加える
+- D2c3はD2c2でも下方暗部が残る場合に限り、弱い下方白バウンスを加える
+- D2aを基盤、D2bを履歴、D2c1／D2c2／D2c3を独立した`issue2Candidate`クエリとして保持し、通常アクセスへ統合しない
+- exposure、tone mapping、output color space、材質、CSS filter、UA／端末別補正、fog 160/260、カメラ距離、D3 shadow carrier、AmbientLight、背景テーマの明るさを変更しない
+- 黒フラッグを全撤去せず、各候補のPMREMとRectAreaLight／白バウンス構成を機械可読レポートへ記録する
+
+### P.2 固定比較と定量metric
+
+- 1280×720、390×844、393×852、4テーマ、front／back／side／winding／motion-works、near／initial／farを同一時刻・停止・透過100%・非分解・パネル閉で比較する
+- D2a／D2c1／D2c2／D2c3の720 master、60枚の4列比較board、4ライト配置図を保存する
+- watch silhouetteについてmean、median、p10、p25、p75、p90、dark ratio、clipped ratio、sample countを記録し、D2aのinitial／farと同条件で比較する
+- visibleSurfaceは`dial`、`hands`、`brassTrain`、`steelTrain`、`ruby`、`plate`、`outerBezel`の7部位を記録し、mesh countと対象定義を併記する
+- D2a比でinitial／farのmedianとp25が全対象条件で上昇し、dark ratioが低下し、clipped ratioが増加しない候補だけを物理iPhone提示対象とする。p90、nearのclip、金属反射帯、階調平坦化は副作用として別途確認する
+- winding／motion-worksの`initial`は当該プリセットの実クローズアップで、共有`near`よりカメラ距離が短いことを証跡で明示し、ラベルと実距離を混同しない
+
+### P.3 回帰と性能
+
+- Node 33/33、既定desktop 86/86、D2a／D2c候補desktop 87/87、候補mobile 89/89を維持する
+- 既定390×844の既知Issue #2輝度項目87/88を隠さず、閾値を緩和しない
+- PR #3 UI 20/20・22/22・22/22、PR #4 HUD 42/42・54/54・54/54・54/54、A.7 9/9、ドリフト0、位置1／位置2禁止干渉0/0を維持する
+- 描画品質はD2a／D2c1で各viewport 22/22、D2c2／D2c3で各viewport 23/23を維持する
+- D2a／D2c1／D2c2／D2c3のdesktop／mobileでA.6 pointer／wheel／opacityを各10秒計測し、既存fps、p50／p95、33ms／50ms超過率、wheel連続性の閾値を緩和しない
+- 失敗後の再計測は最初の結果、原因、再計測結果をすべて保存し、合格runだけへ置き換えない
+
+### P.4 判定とユーザー確認ゲート
+
+- D2c1／D2c2は比較履歴とし、定量条件を満たしたD2c3だけを物理iPhone確認候補にする
+- 自動定量条件を満たしてもD2c3を採用・既定化せず、Safariタブ起動とホーム画面起動でinitial／farの中間調、nearの白飛び、金属階調、4テーマ、5視点、操作回帰を確認する
+- 通常アクセスのv3.13.0既定描画を維持し、Issue #2をOpen、PR #5をDraftのまま維持する
+- ユーザー確認前にReady化、マージ、Issue close、「完成」「合格」「最終採用」の報告を行わない

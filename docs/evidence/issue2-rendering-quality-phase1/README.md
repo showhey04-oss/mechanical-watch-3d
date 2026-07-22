@@ -1,6 +1,6 @@
 # Issue #2 レンダリング品質 Phase 1 証跡
 
-> 追補（Phase 2A）：Candidate Cは物理iPhone確認で光源色差と硬い・局所的な見え方が受入不可となり、不採用へ更新された。本フォルダはPhase 1時点の証跡を保持し、最新判定とD1/D2/D3は[Phase 2A証跡](../issue2-rendering-quality-phase2a/README.md)を参照する。
+> 追補（Phase 2A／2A.1／2A.2）：Candidate Cは物理iPhone確認で光源色差と硬い・局所的な見え方が受入不可となり、不採用へ更新された。本フォルダはPhase 1時点の証跡を保持する。D1/D2/D3は[Phase 2A証跡](../issue2-rendering-quality-phase2a/README.md)、D2a/D2bのズーム診断は[Phase 2A.1証跡](../issue2-rendering-quality-phase2a1/README.md)、物理iPhone結果を受けた最新のD2c比較は[Phase 2A.2証跡](../issue2-rendering-quality-phase2a2/README.md)を参照する。
 
 ## 判定
 

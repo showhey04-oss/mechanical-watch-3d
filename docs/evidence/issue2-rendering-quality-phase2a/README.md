@@ -1,6 +1,6 @@
 # Issue #2 レンダリング品質 Phase 2A 証跡
 
-> 追補（Phase 2A.1）：このフォルダの判定と数値はPhase 2A時点の履歴である。物理iPhoneで確認されたD2のズーム依存暗化、world固定ライトの診断、D2a/D2b比較は[Phase 2A.1証跡](../issue2-rendering-quality-phase2a1/README.md)を参照する。
+> 追補（Phase 2A.1／2A.2）：このフォルダの判定と数値はPhase 2A時点の履歴である。物理iPhoneで確認されたD2のズーム依存暗化、world固定ライトの診断、D2a/D2b比較は[Phase 2A.1証跡](../issue2-rendering-quality-phase2a1/README.md)、その実機結果を受けた最新のD2c比較は[Phase 2A.2証跡](../issue2-rendering-quality-phase2a2/README.md)を参照する。
 
 ## 判定
 

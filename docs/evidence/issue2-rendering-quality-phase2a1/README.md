@@ -1,5 +1,7 @@
 # Issue #2 レンダリング品質 Phase 2A.1 証跡
 
+> 物理iPhone確認後の更新：端末再起動後、従来の黒潰れは解消方向へ改善し、nearは良好だった。一方でD2a／D2bの差は小さく、initial／farの中間調不足と広い暗部が残ったため、両候補をそのまま採用しない。D2aを次段の基盤、D2bを比較履歴とし、最新のD2c比較証跡は[Phase 2A.2証跡](../issue2-rendering-quality-phase2a2/README.md)を参照する。
+
 ## 判定
 
 このフォルダは、物理iPhoneで確認されたCandidate D2の初期表示・ズームアウト時暗化を診断し、D2現状、D2a、D2bを同一条件で比較するための証跡である。D2a/D2bは`issue2Candidate`クエリでだけ有効な未採用候補であり、通常アクセスのv3.13.0既定レンダリングへ統合していない。
@@ -8,11 +10,11 @@
 | --- | --- | --- |
 | D2現状 | 不採用 | 物理iPhoneの初期表示・ズームアウトで暗化。ライトはworld固定だが、モバイルのカメラ距離約106がlegacy fog 68/125へ深く重なる |
 | D3 | 未採用を維持 | D2と同じlegacy fog条件を持つ。距離・起動診断だけを継続し、D2a/D2bの画像boardへは含めない |
-| D2a | query限定・未採用 | world固定スタジオ＋候補限定fog 160/260。物理iPhoneで最初に確認する保守的候補 |
-| D2b | query限定・未採用 | カメラ方位追従・固定半径スタジオ＋候補限定fog 160/260。D2aとの代替比較候補 |
+| D2a | query限定・未採用／次段基盤 | world固定スタジオ＋候補限定fog 160/260。nearは良好だったがinitial／farの中間調不足が残った |
+| D2b | query限定・未採用／比較履歴 | カメラ方位追従・固定半径スタジオ＋候補限定fog 160/260。物理iPhoneでD2aとの差が小さかった |
 | 既定レンダリング | 変更なし | 通常アクセス、D1/D2/D3、ライト、fog、材質、tone mapping、exposure、DPRは従来どおり |
 
-D2a/D2bの自動測定がpassしても、物理iPhone Safariまたはホーム画面起動での画質合格、採用、完成を意味しない。D2bにはハイライトがカメラへ貼り付いて見える可能性があるため、D2aを物理iPhoneで先に確認し、D2bは同条件の代替として比較する。
+D2a/D2bの自動測定passは、物理iPhone Safariまたはホーム画面起動での画質合格、採用、完成を意味しなかった。物理iPhoneではD2a／D2bの差が小さく、initial／farの中間調不足が残ったため、D2aを次段の基盤、D2bを比較履歴として保持する。
 
 ## 固定条件と規模
 
@@ -98,13 +100,15 @@ python3 scripts/generate_issue2_phase2a1_evidence.py --check
 
 証跡生成だけが使用するPillowは`scripts/requirements-evidence.txt`へ固定し、アプリ本体の依存には含めない。生成時は324 capture、固定クエリ、camera／DPR一致、D2a/D2bのライト不変条件、全viewport・4テーマのfrontに限定した±15%輝度条件、必須JSON件数、36 board、27 SVGを検証する。back／sideは値を保存して比較対象に含めるが、この定量ゲートでは失敗にしない。`--check`はmanifestと実フォルダを閉世界で照合し、未掲載・残存ファイル、hash／MIME／寸法差、JSON／SVG不正を失敗にする。
 
-## 既知制約と物理iPhone確認ゲート
+## 既知制約と物理iPhone確認結果
 
 - 自動ブラウザではiOSの`navigator.standalone`とホーム画面起動を再現できない。直接URLでquery維持と起動完了ゲートを検証しても実機確認の代替にはならない
 - D2a/D2bのcandidate限定fog 160/260は原因切り分けと比較のための設定であり、最終方式として採用していない
 - isolated representative metricは部品単体のズーム安定性を測る診断値であり、遮蔽を含む実画面の画質判定ではない
 - frontの黄銅輪列・鋼輪列のvisibleSurfaceが0でも、文字板による完全遮蔽なら正常である
-- D2bは固定半径でもカメラ方位へ追従するため、回転時にハイライトがカメラへ貼り付いて見えないかを物理iPhoneで確認する必要がある
+- D2bは固定半径でもカメラ方位へ追従するためハイライト貼り付きリスクを実機比較したが、D2aに対する明確な利点は確認できず比較履歴とした
 - 通常アクセスの既定描画、D1/D2/D3、機構、カメラ、UI/HUD、構造透過、DPRは変更していない
 
-D2aとD2bを同じ物理iPhone Safariのタブ起動・ホーム画面起動で開き、query、初期表示、nearからfarまでのズーム、front／back／side、4テーマ、金属反射帯、パネル開閉、3D操作、部品選択を比較する。ユーザー確認前はD2a/D2bを未採用のまま、PR #5をDraft、Issue #2をOpenに維持し、Ready化、マージ、Issue close、完成・合格・最終採用の判定を行わない。
+D2aとD2bの物理iPhone確認では、端末再起動後に黒潰れが解消方向へ改善し、nearの視認性は良好だった。一方、D2a／D2bの差は小さく、initial／farでは中間調不足、広い暗部、OLED上の強い明暗差が残った。そのためD2aを基盤、D2bを比較履歴としてPhase 2A.2へ引き継ぎ、両候補をそのまま採用しない。
+
+Phase 2A.2のD2c1／D2c2／D2c3もquery限定であり、自動定量条件を満たしたD2c3だけを次の物理iPhone確認対象とする。確認前はD2c3を未採用のまま、PR #5をDraft、Issue #2をOpenに維持し、Ready化、マージ、Issue close、完成・合格・最終採用の判定を行わない。

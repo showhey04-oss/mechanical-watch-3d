@@ -1,0 +1,1020 @@
+{
+  "schema": "issue2-phase2a2-candidate-profiles-v1",
+  "entries": [
+    {
+      "candidate": "d2a",
+      "cameraDistanceInvariant": true,
+      "directLightBalance": {
+        "fillArea": 616,
+        "fillIntensity": 0.35,
+        "keyArea": 600,
+        "keyIntensity": 1,
+        "keyToFillRatio": 2.857142857142857,
+        "lowerBounceIntensity": 0,
+        "lowerBounceToKeyRatio": 0
+      },
+      "enabled": true,
+      "environment": {
+        "ambientSurface": {
+          "color": "#181818",
+          "floorColor": "#181818",
+          "floorPosition": [
+            0,
+            0,
+            -24
+          ],
+          "floorRadiance": 0.7,
+          "floorSize": [
+            96,
+            96
+          ],
+          "kind": "room-and-floor",
+          "roomColor": "#181818",
+          "roomRadius": 70
+        },
+        "applied": true,
+        "background": "#080808",
+        "far": 100,
+        "flags": [
+          {
+            "color": "#000000",
+            "name": "studioEnvFrontFlag",
+            "position": [
+              -23,
+              -25,
+              3
+            ],
+            "role": "front-edge-negative-fill",
+            "size": [
+              7,
+              30
+            ]
+          },
+          {
+            "color": "#000000",
+            "name": "studioEnvBackFlag",
+            "position": [
+              24,
+              22,
+              -4
+            ],
+            "role": "back-edge-negative-fill",
+            "size": [
+              8,
+              28
+            ]
+          }
+        ],
+        "near": 0.1,
+        "panels": [
+          {
+            "color": "#ffffff",
+            "name": "studioEnvKeyPanel",
+            "position": [
+              16,
+              -30,
+              20
+            ],
+            "radiance": 4.8,
+            "role": "key-reflection",
+            "size": [
+              34,
+              22
+            ]
+          },
+          {
+            "color": "#ffffff",
+            "name": "studioEnvFillPanel",
+            "position": [
+              -20,
+              28,
+              10
+            ],
+            "radiance": 2.75,
+            "role": "fill-reflection",
+            "size": [
+              32,
+              26
+            ]
+          },
+          {
+            "color": "#ffffff",
+            "name": "studioEnvStripPanel",
+            "position": [
+              -28,
+              -3,
+              -12
+            ],
+            "radiance": 2.1,
+            "role": "rim-reflection",
+            "size": [
+              8,
+              32
+            ]
+          }
+        ],
+        "sigma": 0.04,
+        "source": "PMREMGenerator.fromScene"
+      },
+      "environmentMapBackgroundIndependent": true,
+      "expectedRectLights": 2,
+      "initialization": {
+        "durationMs": 28.700000017881393,
+        "generationCount": 1,
+        "memoryAfter": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "memoryBefore": {
+          "geometries": 0,
+          "textures": 0
+        }
+      },
+      "legacyLights": [
+        {
+          "color": "#e8efff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "baseHemisphere",
+          "originalCastShadow": false,
+          "originalIntensity": 0.95,
+          "parent": "Scene",
+          "type": "HemisphereLight"
+        },
+        {
+          "color": "#fff4df",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "frontKey",
+          "originalCastShadow": true,
+          "originalIntensity": 1.96,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#e4edff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "backKey",
+          "originalCastShadow": false,
+          "originalIntensity": 1.7,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#9ebcff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "sideRim",
+          "originalCastShadow": false,
+          "originalIntensity": 0.58,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#d9e8ff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "cameraFill",
+          "originalCastShadow": false,
+          "originalIntensity": 0.38,
+          "parent": "PerspectiveCamera",
+          "type": "PointLight"
+        }
+      ],
+      "neutralLightColor": "#ffffff",
+      "orientationFollowing": null,
+      "placementStrategy": "world-fixed",
+      "pointLightActive": false,
+      "rectAreaUniformsInitialized": true,
+      "rectLights": [
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 36.89512162874653,
+          "intensity": 1,
+          "name": "studioRectKey",
+          "parent": "Scene",
+          "position": [
+            15,
+            -28,
+            18
+          ],
+          "quaternion": [
+            0.40164919256118975,
+            0.3078038948103514,
+            -0.14541706413241262,
+            0.8501697277094923
+          ],
+          "role": "front-key",
+          "size": [
+            30,
+            20
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        },
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 33.8710791088799,
+          "intensity": 0.35,
+          "name": "studioRectFill",
+          "parent": "Scene",
+          "position": [
+            -18,
+            27,
+            11
+          ],
+          "quaternion": [
+            -0.3787762453180504,
+            -0.44062244326044064,
+            -0.21243083055011633,
+            0.7856548610616163
+          ],
+          "role": "back-fill",
+          "size": [
+            28,
+            22
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        }
+      ],
+      "shadowCarrier": null,
+      "studioProfile": "base",
+      "zoomStableFog": true,
+      "queryCandidate": "studio-d2a"
+    },
+    {
+      "candidate": "d2c1",
+      "cameraDistanceInvariant": true,
+      "directLightBalance": {
+        "fillArea": 616,
+        "fillIntensity": 0.35,
+        "keyArea": 600,
+        "keyIntensity": 1,
+        "keyToFillRatio": 2.857142857142857,
+        "lowerBounceIntensity": 0,
+        "lowerBounceToKeyRatio": 0
+      },
+      "enabled": true,
+      "environment": {
+        "ambientSurface": {
+          "color": "#202020",
+          "floorColor": "#202020",
+          "floorPosition": [
+            0,
+            0,
+            -24
+          ],
+          "floorRadiance": 0.7,
+          "floorSize": [
+            96,
+            96
+          ],
+          "kind": "room-and-floor",
+          "roomColor": "#202020",
+          "roomRadius": 70
+        },
+        "applied": true,
+        "background": "#080808",
+        "far": 100,
+        "flags": [
+          {
+            "color": "#080808",
+            "name": "studioEnvFrontFlag",
+            "position": [
+              -23,
+              -25,
+              3
+            ],
+            "role": "front-edge-negative-fill",
+            "size": [
+              7,
+              30
+            ]
+          },
+          {
+            "color": "#080808",
+            "name": "studioEnvBackFlag",
+            "position": [
+              24,
+              22,
+              -4
+            ],
+            "role": "back-edge-negative-fill",
+            "size": [
+              8,
+              28
+            ]
+          }
+        ],
+        "near": 0.1,
+        "panels": [
+          {
+            "color": "#ffffff",
+            "name": "studioEnvKeyPanel",
+            "position": [
+              16,
+              -30,
+              20
+            ],
+            "radiance": 4.8,
+            "role": "key-reflection",
+            "size": [
+              34,
+              22
+            ]
+          },
+          {
+            "color": "#ffffff",
+            "name": "studioEnvFillPanel",
+            "position": [
+              -20,
+              28,
+              10
+            ],
+            "radiance": 2.75,
+            "role": "fill-reflection",
+            "size": [
+              32,
+              26
+            ]
+          },
+          {
+            "color": "#ffffff",
+            "name": "studioEnvStripPanel",
+            "position": [
+              -28,
+              -3,
+              -12
+            ],
+            "radiance": 2.1,
+            "role": "rim-reflection",
+            "size": [
+              8,
+              32
+            ]
+          }
+        ],
+        "sigma": 0.04,
+        "source": "PMREMGenerator.fromScene"
+      },
+      "environmentMapBackgroundIndependent": true,
+      "expectedRectLights": 2,
+      "initialization": {
+        "durationMs": 28.100000023841858,
+        "generationCount": 1,
+        "memoryAfter": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "memoryBefore": {
+          "geometries": 0,
+          "textures": 0
+        }
+      },
+      "legacyLights": [
+        {
+          "color": "#e8efff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "baseHemisphere",
+          "originalCastShadow": false,
+          "originalIntensity": 0.95,
+          "parent": "Scene",
+          "type": "HemisphereLight"
+        },
+        {
+          "color": "#fff4df",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "frontKey",
+          "originalCastShadow": true,
+          "originalIntensity": 1.96,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#e4edff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "backKey",
+          "originalCastShadow": false,
+          "originalIntensity": 1.7,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#9ebcff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "sideRim",
+          "originalCastShadow": false,
+          "originalIntensity": 0.58,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#d9e8ff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "cameraFill",
+          "originalCastShadow": false,
+          "originalIntensity": 0.38,
+          "parent": "PerspectiveCamera",
+          "type": "PointLight"
+        }
+      ],
+      "neutralLightColor": "#ffffff",
+      "orientationFollowing": null,
+      "placementStrategy": "world-fixed",
+      "pointLightActive": false,
+      "rectAreaUniformsInitialized": true,
+      "rectLights": [
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 36.89512162874653,
+          "intensity": 1,
+          "name": "studioRectKey",
+          "parent": "Scene",
+          "position": [
+            15,
+            -28,
+            18
+          ],
+          "quaternion": [
+            0.40164919256118975,
+            0.3078038948103514,
+            -0.14541706413241262,
+            0.8501697277094923
+          ],
+          "role": "front-key",
+          "size": [
+            30,
+            20
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        },
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 33.8710791088799,
+          "intensity": 0.35,
+          "name": "studioRectFill",
+          "parent": "Scene",
+          "position": [
+            -18,
+            27,
+            11
+          ],
+          "quaternion": [
+            -0.3787762453180504,
+            -0.44062244326044064,
+            -0.21243083055011633,
+            0.7856548610616163
+          ],
+          "role": "back-fill",
+          "size": [
+            28,
+            22
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        }
+      ],
+      "shadowCarrier": null,
+      "studioProfile": "d2c1-midtone-environment",
+      "zoomStableFog": true,
+      "queryCandidate": "studio-d2c1"
+    },
+    {
+      "candidate": "d2c2",
+      "cameraDistanceInvariant": true,
+      "directLightBalance": {
+        "fillArea": 814.6600000000001,
+        "fillIntensity": 0.455,
+        "keyArea": 600,
+        "keyIntensity": 0.85,
+        "keyToFillRatio": 1.868131868131868,
+        "lowerBounceIntensity": 0,
+        "lowerBounceToKeyRatio": 0
+      },
+      "enabled": true,
+      "environment": {
+        "ambientSurface": {
+          "color": "#202020",
+          "floorColor": "#202020",
+          "floorPosition": [
+            0,
+            0,
+            -24
+          ],
+          "floorRadiance": 0.7,
+          "floorSize": [
+            96,
+            96
+          ],
+          "kind": "room-and-floor",
+          "roomColor": "#202020",
+          "roomRadius": 70
+        },
+        "applied": true,
+        "background": "#080808",
+        "far": 100,
+        "flags": [
+          {
+            "color": "#080808",
+            "name": "studioEnvFrontFlag",
+            "position": [
+              -23,
+              -25,
+              3
+            ],
+            "role": "front-edge-negative-fill",
+            "size": [
+              7,
+              30
+            ]
+          },
+          {
+            "color": "#080808",
+            "name": "studioEnvBackFlag",
+            "position": [
+              24,
+              22,
+              -4
+            ],
+            "role": "back-edge-negative-fill",
+            "size": [
+              8,
+              28
+            ]
+          }
+        ],
+        "near": 0.1,
+        "panels": [
+          {
+            "color": "#ffffff",
+            "name": "studioEnvKeyPanel",
+            "position": [
+              16,
+              -30,
+              20
+            ],
+            "radiance": 4.8,
+            "role": "key-reflection",
+            "size": [
+              34,
+              22
+            ]
+          },
+          {
+            "color": "#ffffff",
+            "name": "studioEnvFillPanel",
+            "position": [
+              -20,
+              28,
+              10
+            ],
+            "radiance": 2.75,
+            "role": "fill-reflection",
+            "size": [
+              32,
+              26
+            ]
+          },
+          {
+            "color": "#ffffff",
+            "name": "studioEnvStripPanel",
+            "position": [
+              -28,
+              -3,
+              -12
+            ],
+            "radiance": 2.1,
+            "role": "rim-reflection",
+            "size": [
+              8,
+              32
+            ]
+          }
+        ],
+        "sigma": 0.04,
+        "source": "PMREMGenerator.fromScene"
+      },
+      "environmentMapBackgroundIndependent": true,
+      "expectedRectLights": 2,
+      "initialization": {
+        "durationMs": 26.200000017881393,
+        "generationCount": 1,
+        "memoryAfter": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "memoryBefore": {
+          "geometries": 0,
+          "textures": 0
+        }
+      },
+      "legacyLights": [
+        {
+          "color": "#e8efff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "baseHemisphere",
+          "originalCastShadow": false,
+          "originalIntensity": 0.95,
+          "parent": "Scene",
+          "type": "HemisphereLight"
+        },
+        {
+          "color": "#fff4df",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "frontKey",
+          "originalCastShadow": true,
+          "originalIntensity": 1.96,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#e4edff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "backKey",
+          "originalCastShadow": false,
+          "originalIntensity": 1.7,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#9ebcff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "sideRim",
+          "originalCastShadow": false,
+          "originalIntensity": 0.58,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#d9e8ff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "cameraFill",
+          "originalCastShadow": false,
+          "originalIntensity": 0.38,
+          "parent": "PerspectiveCamera",
+          "type": "PointLight"
+        }
+      ],
+      "neutralLightColor": "#ffffff",
+      "orientationFollowing": null,
+      "placementStrategy": "world-fixed",
+      "pointLightActive": false,
+      "rectAreaUniformsInitialized": true,
+      "rectLights": [
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 36.89512162874653,
+          "intensity": 0.85,
+          "name": "studioRectKey",
+          "parent": "Scene",
+          "position": [
+            15,
+            -28,
+            18
+          ],
+          "quaternion": [
+            0.40164919256118975,
+            0.3078038948103514,
+            -0.14541706413241262,
+            0.8501697277094923
+          ],
+          "role": "front-key",
+          "size": [
+            30,
+            20
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        },
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 33.8710791088799,
+          "intensity": 0.455,
+          "name": "studioRectFill",
+          "parent": "Scene",
+          "position": [
+            -18,
+            27,
+            11
+          ],
+          "quaternion": [
+            -0.3787762453180504,
+            -0.44062244326044064,
+            -0.21243083055011633,
+            0.7856548610616163
+          ],
+          "role": "back-fill",
+          "size": [
+            32.2,
+            25.3
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        }
+      ],
+      "shadowCarrier": null,
+      "studioProfile": "d2c2-balanced-key-fill",
+      "zoomStableFog": true,
+      "queryCandidate": "studio-d2c2"
+    },
+    {
+      "candidate": "d2c3",
+      "cameraDistanceInvariant": true,
+      "directLightBalance": {
+        "fillArea": 814.6600000000001,
+        "fillIntensity": 0.455,
+        "keyArea": 600,
+        "keyIntensity": 0.85,
+        "keyToFillRatio": 1.868131868131868,
+        "lowerBounceIntensity": 0.085,
+        "lowerBounceToKeyRatio": 0.1
+      },
+      "enabled": true,
+      "environment": {
+        "ambientSurface": {
+          "color": "#202020",
+          "floorColor": "#202020",
+          "floorPosition": [
+            0,
+            0,
+            -24
+          ],
+          "floorRadiance": 0.7,
+          "floorSize": [
+            96,
+            96
+          ],
+          "kind": "room-and-floor",
+          "roomColor": "#202020",
+          "roomRadius": 70
+        },
+        "applied": true,
+        "background": "#080808",
+        "far": 100,
+        "flags": [
+          {
+            "color": "#080808",
+            "name": "studioEnvFrontFlag",
+            "position": [
+              -23,
+              -25,
+              3
+            ],
+            "role": "front-edge-negative-fill",
+            "size": [
+              7,
+              30
+            ]
+          },
+          {
+            "color": "#080808",
+            "name": "studioEnvBackFlag",
+            "position": [
+              24,
+              22,
+              -4
+            ],
+            "role": "back-edge-negative-fill",
+            "size": [
+              8,
+              28
+            ]
+          }
+        ],
+        "near": 0.1,
+        "panels": [
+          {
+            "color": "#ffffff",
+            "name": "studioEnvKeyPanel",
+            "position": [
+              16,
+              -30,
+              20
+            ],
+            "radiance": 4.8,
+            "role": "key-reflection",
+            "size": [
+              34,
+              22
+            ]
+          },
+          {
+            "color": "#ffffff",
+            "name": "studioEnvFillPanel",
+            "position": [
+              -20,
+              28,
+              10
+            ],
+            "radiance": 2.75,
+            "role": "fill-reflection",
+            "size": [
+              32,
+              26
+            ]
+          },
+          {
+            "color": "#ffffff",
+            "name": "studioEnvStripPanel",
+            "position": [
+              -28,
+              -3,
+              -12
+            ],
+            "radiance": 2.1,
+            "role": "rim-reflection",
+            "size": [
+              8,
+              32
+            ]
+          }
+        ],
+        "sigma": 0.04,
+        "source": "PMREMGenerator.fromScene"
+      },
+      "environmentMapBackgroundIndependent": true,
+      "expectedRectLights": 3,
+      "initialization": {
+        "durationMs": 30.599999994039536,
+        "generationCount": 1,
+        "memoryAfter": {
+          "geometries": 0,
+          "textures": 1
+        },
+        "memoryBefore": {
+          "geometries": 0,
+          "textures": 0
+        }
+      },
+      "legacyLights": [
+        {
+          "color": "#e8efff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "baseHemisphere",
+          "originalCastShadow": false,
+          "originalIntensity": 0.95,
+          "parent": "Scene",
+          "type": "HemisphereLight"
+        },
+        {
+          "color": "#fff4df",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "frontKey",
+          "originalCastShadow": true,
+          "originalIntensity": 1.96,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#e4edff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "backKey",
+          "originalCastShadow": false,
+          "originalIntensity": 1.7,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#9ebcff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "sideRim",
+          "originalCastShadow": false,
+          "originalIntensity": 0.58,
+          "parent": "Scene",
+          "type": "DirectionalLight"
+        },
+        {
+          "color": "#d9e8ff",
+          "currentCastShadow": false,
+          "currentIntensity": 0,
+          "name": "cameraFill",
+          "originalCastShadow": false,
+          "originalIntensity": 0.38,
+          "parent": "PerspectiveCamera",
+          "type": "PointLight"
+        }
+      ],
+      "neutralLightColor": "#ffffff",
+      "orientationFollowing": null,
+      "placementStrategy": "world-fixed",
+      "pointLightActive": false,
+      "rectAreaUniformsInitialized": true,
+      "rectLights": [
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 36.89512162874653,
+          "intensity": 0.85,
+          "name": "studioRectKey",
+          "parent": "Scene",
+          "position": [
+            15,
+            -28,
+            18
+          ],
+          "quaternion": [
+            0.40164919256118975,
+            0.3078038948103514,
+            -0.14541706413241262,
+            0.8501697277094923
+          ],
+          "role": "front-key",
+          "size": [
+            30,
+            20
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        },
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 33.8710791088799,
+          "intensity": 0.455,
+          "name": "studioRectFill",
+          "parent": "Scene",
+          "position": [
+            -18,
+            27,
+            11
+          ],
+          "quaternion": [
+            -0.3787762453180504,
+            -0.44062244326044064,
+            -0.21243083055011633,
+            0.7856548610616163
+          ],
+          "role": "back-fill",
+          "size": [
+            32.2,
+            25.3
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        },
+        {
+          "cameraAttached": false,
+          "castShadow": false,
+          "color": "#ffffff",
+          "distanceToModel": 34.38386249390839,
+          "intensity": 0.085,
+          "name": "studioRectLowerBounce",
+          "parent": "Scene",
+          "position": [
+            0,
+            -22,
+            -26
+          ],
+          "quaternion": [
+            0,
+            0.9370615461277816,
+            -0.3491642289362006,
+            0
+          ],
+          "role": "lower-front-bounce",
+          "size": [
+            38,
+            24
+          ],
+          "target": null,
+          "type": "RectAreaLight"
+        }
+      ],
+      "shadowCarrier": null,
+      "studioProfile": "d2c3-lower-bounce",
+      "zoomStableFog": true,
+      "queryCandidate": "studio-d2c3"
+    }
+  ]
+}

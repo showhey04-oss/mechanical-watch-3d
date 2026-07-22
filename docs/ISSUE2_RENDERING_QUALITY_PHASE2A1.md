@@ -1,5 +1,7 @@
 # Issue #2 レンダリング品質改善 Phase 2A.1
 
+> 物理iPhone確認結果（Phase 2A.2への引継ぎ）：端末再起動後、従来の黒潰れは解消方向へ改善し、nearでは部品の視認性が良好だった。一方、D2aとD2bの見た目の差は小さく、initial／farでは中間調が低く広い暗部とOLED上の強い明暗差が残った。このためD2a／D2bはいずれも未採用とし、D2aを次段の基盤、D2bを比較履歴とする。最新のD2c1／D2c2／D2c3比較とユーザー確認ゲートは[Phase 2A.2](ISSUE2_RENDERING_QUALITY_PHASE2A2.md)を参照する。
+
 ## 結論
 
 物理iPhoneのホーム画面起動で確認されたCandidate D2の初期表示・ズームアウト時暗化は、RectAreaLightがカメラ距離へ追従したためではない。D2/D3のkey／fillは実装時からcamera配下ではなくscene直下にあり、カメラをnear／initial／farへ移動してもlight-to-model距離、寸法、強度、色は変化しなかった。
@@ -8,12 +10,12 @@
 
 - Candidate D2：物理iPhone結果により現方式を不採用
 - Candidate D3：D2と同じlegacy fog条件を持つため未採用を維持
-- Candidate D2a：world固定スタジオ＋候補限定fog 160/260。物理iPhoneで最初に確認する保守的候補
-- Candidate D2b：方位追従・固定半径スタジオ＋候補限定fog 160/260。カメラへ貼り付くハイライトがないか比較する代替候補
+- Candidate D2a：world固定スタジオ＋候補限定fog 160/260。物理iPhone確認後も未採用だが、次段の中間調再調整の基盤とする
+- Candidate D2b：方位追従・固定半径スタジオ＋候補限定fog 160/260。D2aとの差が小さかったため比較履歴として保持する
 - 最終統合：なし
 - Issue #2：Openを維持
 
-D2a/D2bはquery限定でズーム安定性を比較し、画質の採用・合格は物理iPhone Safariとホーム画面起動でのユーザー確認後に判断する。通常アクセスのv3.13.0既定描画は変更していない。
+D2a/D2bはquery限定でズーム安定性を比較し、物理iPhone結果に基づいてそのままの採用を見送った。通常アクセスのv3.13.0既定描画は変更していない。
 
 ## 診断
 
@@ -100,7 +102,7 @@ frontの±15%条件は自動測定上のズーム安定性だけを示す。isol
 
 `renderStatus`は、対象Candidateに必要なPMREM、environment、uniforms、ライト、D3 shadow、および1フレーム以上の正常描画が揃うまで完了扱いにしない。自動ブラウザの直接URL起動ではqueryと解決Candidateが維持された。
 
-自動ブラウザではiOSの`navigator.standalone`を再現できないため、ホーム画面からの実起動でquery、D2a/D2b、PMREM、初期表示、ズーム、パネル開閉、3D操作が維持されるかは物理iPhoneのユーザー確認項目として残す。
+自動ブラウザではiOSの`navigator.standalone`を再現できないため、ホーム画面からの実起動でquery、D2a/D2b、PMREM、初期表示、ズーム、パネル開閉、3D操作が維持されるかを物理iPhoneのユーザー確認項目として残した。後続の実機確認結果は冒頭の追補と末尾の「物理iPhone確認結果と次のゲート」を正とする。
 
 12条件すべてで21 sample、query維持、PMREM／environment／Candidateライト／初回描画の起動ゲートを確認し、D3では実shadow map寸法の生成後にshadow-readyとなった。自動環境のstandalone値は`navigator.standalone = null`、display modeは`false`であり、物理iPhone合格を代替しない。
 
@@ -129,15 +131,8 @@ Phase 2Aの45 browser runと36 performance runは履歴補助証跡として保�
 
 画像324枚、比較board 36枚、ライト配置図27枚、距離・isolated representative／visibleSurface輝度・起動タイムライン、性能、全回帰の機械可読レポートは[Phase 2A.1 evidence README](evidence/issue2-rendering-quality-phase2a1/README.md)を索引とする。`evidence-manifest.json`で相対パス、byte数、SHA-256、MIME、画像寸法、未掲載・残存ファイルの閉世界整合を検証する。
 
-## ユーザー確認ゲート
+## 物理iPhone確認結果と次のゲート
 
-D2a/D2bを同じ物理iPhone Safariで開き、Safariタブとホーム画面起動の両方で次を確認する。
+D2a/D2bを物理iPhoneで確認した結果、端末再起動後は従来の黒潰れが解消方向へ改善し、nearでは文字板・針・内部部品を良好に識別できた。D2aとD2bの知覚上の差は小さく、initial／farでは中間調が不足し、広い暗部と明部のコントラストがOLED上で強く見えた。したがって、D2a／D2bをそのまま採用せず、D2aを基盤、D2bを比較履歴としてPhase 2A.2へ引き継ぐ。
 
-1. queryとCandidateが維持される
-2. 初期表示で文字板、針、黄銅輪列、鋼輪列を識別できる
-3. nearからfarまでズームしても黒画面へ近づかない
-4. front／back／sideの回転で極端な暗部やカメラへ貼り付くハイライトがない
-5. 4テーマで色差、黒潰れ、白飛び、金属反射帯が妥当である
-6. パネル開閉、3D操作、部品選択が正常である
-
-ユーザー確認前にD2a/D2bを採用・既定化せず、PR #5をDraft、Issue #2をOpenのまま維持する。Ready化、マージ、Issue close、「完成」「合格」「最終採用」の報告は行わない。
+次のユーザー確認対象は、自動定量条件を満たしたD2c3だけとする。D2c3も物理iPhone確認前には未採用であり、通常アクセスへ統合しない。PR #5をDraft、Issue #2をOpenのまま維持し、Ready化、マージ、Issue close、「完成」「合格」「最終採用」の報告は行わない。
