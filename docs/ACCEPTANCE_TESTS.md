@@ -280,6 +280,8 @@ Phase 1の目的は最終画質の合格ではなく、v3.13.0を固定した診
 
 Phase 2Aはスタジオ照明候補の実装・Chromium比較、Phase 2Bはユーザーによる物理iPhone Safari確認である。専用試験のpassは採用または画質完成を意味しない。
 
+> Phase 2A時点のD2/D3判定は履歴として残す。物理iPhoneで確認されたズーム依存暗化の原因、D2a/D2bの受入条件、最新のユーザー確認ゲートはO節を正とする。
+
 ### N.1 既定表示と変更禁止範囲
 
 - 通常アクセスはv3.13.0 Baselineを維持し、D1/D2/D3は`issue2Candidate`クエリでだけ有効にする
@@ -319,3 +321,47 @@ Phase 2Aはスタジオ照明候補の実装・Chromium比較、Phase 2Bはユ�
 - D2/D3を物理iPhone Safariで4テーマ、5視点、色差、黒潰れ、白飛び、反射帯、接触影、金属感、黄銅／鋼／ルビー、選択ハイライトについて比較できるURLを提示する
 - ユーザー確認前にD2/D3を既定化せず、PR #5をDraft、Issue #2をOpenのまま維持する
 - ユーザー確認前にReady化、マージ、Issue close、「完成」「最終採用」の報告を行わない
+
+## O. Issue #2 レンダリング品質 Phase 2A.1
+
+Phase 2A.1は、物理iPhoneのホーム画面起動で確認されたD2の初期表示・ズームアウト時暗化を診断し、D2a/D2bをquery限定で比較する。自動試験のpassは物理iPhoneでの画質合格または採用を意味しない。
+
+### O.1 原因診断
+
+- D2/D3のRectAreaLightがcamera配下ではなくscene直下にあり、near／initial／farでlight-to-model距離、寸法、強度、色が変化しないことを確認する
+- PMREM環境を1回生成し、カメラ距離で再生成または強度変更しないことを確認する
+- 390×844／393×852相当の初期camera-to-model distanceが約106となり、legacy fog near/far 68/125へ深く重なることを記録する
+- framebuffer全体に加え、文字板、針、黄銅輪列、鋼輪列について、対象以外のObject3Dを隠して対象の実材質だけを描画するisolated representative metricと、通常合成画面で実際に見えている面だけのvisibleSurface metricをnear／initial／farで記録する
+- D2の物理iPhone結果を現方式不採用とし、同じlegacy fog条件を持つD3も未採用のまま個別に診断する
+
+### O.2 D2a／D2b
+
+- D2aはPMREM、RectAreaLight位置・向きをworld固定とし、カメラ回転・ズームでライトを動かさない
+- D2bはPMREMを固定し、RectAreaLightをカメラ方位へ追従させるが、モデル中心からの半径、寸法、強度、色を固定し、カメラズームへ追従させない
+- D2a/D2bだけfog near/far 160/260を適用し、通常アクセス、D1/D2/D3、背景テーマ、tone mapping、exposure、材質、DPRを変更しない
+- 全viewport・4テーマのfront near／initial／farで、文字板、針、黄銅輪列、鋼輪列のisolated representative平均輝度をinitial比±15%以内に維持する
+- back／sideのisolated representative／visibleSurface値は診断として記録するが、金属反射面と投影面積が距離で変化するため±15%定量ゲートの対象外とし、同一条件画像による主観比較を行う
+- frontで黄銅輪列・鋼輪列のvisibleSurfaceが0でも、文字板による完全遮蔽なら正常とし、isolated representative metricと画像比較を併用して判定する
+- front／back／sideでライトのparent、位置、quaternion、light-to-model距離を記録し、D2bは方位変化と固定半径の両方を確認する
+- D2a/D2bは`issue2Candidate`クエリでだけ有効にし、物理iPhone確認前に既定化しない
+
+### O.3 起動完了ゲート
+
+- `navigator.standalone`、`(display-mode: standalone)`、URL、search、解決Candidate、theme、camera、viewport、DPR、drawing bufferを起動後5秒間250ms間隔で記録する
+- PMREM生成、`scene.environment`適用、RectAreaLightUniformsLib初期化、Candidateライト構築、D3初回shadow更新、初回正常描画の順序を記録する
+- 必須初期化と初回正常描画が完了するまで`renderStatus`を完了扱いにしない
+- 自動ブラウザの直接URL起動でqueryとCandidateが維持されても、物理iPhoneのホーム画面起動確認を代替しない
+
+### O.4 証跡と回帰
+
+- D2現状／D2a／D2bについて1280×720、390×844、393×852、4テーマ、front／back／side、near／initial／farの同一条件画像を保存する
+- 各距離のライト配置図、camera/light/model距離、起動タイムライン、isolated representative／visibleSurface比較をJSONへ保存する
+- Node 33/33、desktop、mobile、PR #3 UI、PR #4 HUD、A.7 9/9、禁止干渉0/0、ドリフト0を維持する
+- A.6 pointer／wheel／opacity idleをdesktop／mobileで計測し、p50／p95／p99、33ms／50ms超過数を記録して既存閾値を緩和しない
+- manifestで相対パス、byte数、SHA-256、MIME、画像寸法を記録し、閉世界整合を検証する
+
+### O.5 ユーザー確認ゲート
+
+- D2a/D2bを同じ物理iPhone Safariとホーム画面起動で比較し、初期表示、ズームアウト、全方向観察、ハイライト追従感、パネル開閉、3D操作を確認する
+- ユーザー確認前にD2a/D2bを採用・既定化せず、PR #5をDraft、Issue #2をOpenのまま維持する
+- Ready化、マージ、Issue close、「完成」「合格」「最終採用」の報告を行わない

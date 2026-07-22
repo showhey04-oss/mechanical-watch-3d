@@ -1,5 +1,7 @@
 # Issue #2 レンダリング品質 Phase 2A 証跡
 
+> 追補（Phase 2A.1）：このフォルダの判定と数値はPhase 2A時点の履歴である。物理iPhoneで確認されたD2のズーム依存暗化、world固定ライトの診断、D2a/D2b比較は[Phase 2A.1証跡](../issue2-rendering-quality-phase2a1/README.md)を参照する。
+
 ## 判定
 
 このフォルダは、v3.13.0既定表示、Phase 1 Candidate C、スタジオ照明Candidate D1/D2/D3を固定条件で比較する証跡である。D候補は`issue2Candidate`クエリでだけ有効になり、既定描画へ統合していない。

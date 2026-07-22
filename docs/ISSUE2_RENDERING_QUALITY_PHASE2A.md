@@ -1,5 +1,7 @@
 # Issue #2 レンダリング品質改善 Phase 2A
 
+> 追補（Phase 2A.1）：物理iPhoneでD2の初期表示・ズームアウト時暗化が確認され、現方式は不採用となった。D2/D3のRectAreaLightは元からworld固定であり、暗化原因はモバイル初期カメラ距離約106とfog 68/125の重なりだった。本資料のD2/D3判定と数値はPhase 2A時点の履歴として残し、最新の診断、D2a/D2b比較、ユーザー確認ゲートは[Phase 2A.1](ISSUE2_RENDERING_QUALITY_PHASE2A1.md)を参照する。
+
 ## 結論
 
 Phase 2Aでは、時計物撮りの白い反射帯・黒い反射帯・弱い接触影をThree.jsへ翻訳し、Baseline、Candidate C、Candidate D1/D2/D3を同一条件で比較した。通常アクセスの既定描画は変更していない。

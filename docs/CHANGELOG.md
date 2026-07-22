@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased — Issue #2 レンダリング品質 Phase 2A.1（Draft比較）
+
+- 物理iPhoneのホーム画面起動でCandidate D2の初期表示とズームアウト時の黒潰れを確認し、現方式を不採用へ更新
+- D2/D3のRectAreaLightは元からcamera配下ではなくscene直下のworld固定であり、カメラ距離に伴うlight-to-model距離変化がないことを確認
+- 390×844／393×852相当の初期camera-to-model distanceが約106となり、legacy fog 68/125へ重なることをズーム依存暗化の原因として特定
+- D2aをworld固定ライト、D2bをカメラ方位追従・固定半径ライトとして追加し、両候補だけfog 160/260を適用。通常アクセスとD1/D2/D3は変更なし
+- 対象以外のObject3Dを隠して実材質だけを描画するisolated representative metricを追加し、全viewport・4テーマのfront near／initial／farで文字板、針、黄銅輪列、鋼輪列の輝度変動をinitial比±15%以内とする受入条件を設定。back／sideは診断・主観比較とし、通常合成画面の実可視面はvisibleSurface metricとして分離記録
+- PMREM、environment、RectAreaLight uniforms、Candidateライト、D3初回shadow、初回正常描画を明示する起動完了ゲートと5秒タイムライン診断を追加
+- D2現状／D2a／D2bの3 viewport×4テーマ×3視点×3距離比較、ライト配置図、距離・輝度・起動JSONを`docs/evidence/issue2-rendering-quality-phase2a1/`へ追加
+- D2a/D2bはquery限定・未採用とし、物理iPhone Safari／ホーム画面起動の再確認前に既定化しない。Issue #2とPR #5をOpen／Draftのまま維持
+
 ## Unreleased — Issue #2 レンダリング品質 Phase 2A（Draft比較）
 
 - 物理iPhoneでCandidate Cを確認し、明るさは概ね問題ない一方、光源色差と硬い・局所的な見え方が受入不可のため不採用へ更新

@@ -1,6 +1,6 @@
 # Issue #2 レンダリング品質改善 Phase 1
 
-> 追補（Phase 2A）：Candidate Cは物理iPhoneで明るさは概ね問題なかったが、光源色差と硬い・局所的な見え方が受入不可のため不採用となった。本資料の「有望／未確認」はPhase 1時点の履歴であり、最新判定とD1/D2/D3比較は[Phase 2A](ISSUE2_RENDERING_QUALITY_PHASE2A.md)を参照する。
+> 追補（Phase 2A／2A.1）：Candidate Cは物理iPhoneで光源色差と硬い・局所的な見え方が受入不可となり、D2も初期表示・ズームアウト時暗化により現方式不採用となった。本資料の「有望／未確認」はPhase 1時点の履歴である。D1/D2/D3の当時の比較は[Phase 2A](ISSUE2_RENDERING_QUALITY_PHASE2A.md)、最新のズーム診断とD2a/D2b比較は[Phase 2A.1](ISSUE2_RENDERING_QUALITY_PHASE2A1.md)を参照する。
 
 ## 位置づけ
 

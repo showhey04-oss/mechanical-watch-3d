@@ -68,17 +68,20 @@
 
 ## 現在の改修フェーズ
 
-### Issue #2 レンダリング品質 Phase 2A／2B — Draft候補比較
+### Issue #2 レンダリング品質 Phase 2A／2A.1／2B — Draft候補比較
 
 - v3.13.0を画質・機能基準として、中央シャドウ境界、透過不連続、物理スマートフォン暗部を分離診断
 - Candidate Aのtight-fit shadow frustumは中央境界へ有効だが、透過面の全面暗化により現方式を不採用
 - Candidate Bは材質状態を連続化できるが、100%表示の深度順破綻により現方式を不採用
 - Candidate Cは物理iPhoneで光源色差と硬い・局所的な見え方が受入不可のため不採用
 - Phase 2AでPMREMスタジオ単独D1、大型RectAreaLight併用D2、弱い接触影併用D3を比較
-- D1は不採用、D2は未採用、D3をPhase 2B推奨候補とするが既定化しない
+- Phase 2A時点ではD1を不採用、D2を未採用、D3をPhase 2B推奨候補として記録
+- Phase 2A.1でD2/D3のRectAreaLightがworld固定でカメラ距離非連動であることを確認し、暗化原因をモバイル初期距離約106とfog 68/125の重なりへ特定
+- 物理iPhoneで暗化したD2の現方式を不採用とし、同じlegacy fog条件のD3も未採用を維持
+- world固定＋fog 160/260のD2a、方位追従・固定半径＋同fogのD2bをquery限定で比較し、全viewport・4テーマのfrontで主要部isolated representative metricのnear／initial／far変動±15%以内を受入条件化。back／sideは診断・主観比較とし、合成画面の実可視面はvisibleSurface metricとして分離記録
 - `alphaHash`、透過率閾値による影ON/OFF、端末別の明るさ補正を使用しない
 - Candidateを既定描画へ統合せず、Issue #2をOpen、Pull RequestをDraftのまま維持
-- D2/D3の4テーマ×5視点を物理iPhone Safariで比較するユーザー判断を次のPhase 2Bゲートとする
+- D2a/D2bを物理iPhone Safariとホーム画面起動で比較するユーザー判断を次のPhase 2Bゲートとする
 
 ## 今後
 

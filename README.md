@@ -7,7 +7,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - バージョン：v3.13.0（PR #4 モバイルオーバーレイ・HUD整理）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の重点：Issue #2 Phase 2Aのスタジオ照明D1/D2/D3比較と、Phase 2Bの物理iPhone確認ゲート（Draft、既定描画への統合なし）
+- 現在の重点：Issue #2 Phase 2A.1のズーム依存暗化診断とD2a/D2b比較、物理iPhone確認ゲート（Draft、既定描画への統合なし）
 
 ## 実装済み
 
@@ -133,7 +133,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 8. Live Sync、構造表示、表示グループ、診断、振幅設定の全16チェックボックスをON／OFF／disabledが明確なトグルカードへ変更
 9. ライト、影、露出、tone mapping、材質、構造透過、DPR、カメラ、内部機構を変更せず既存回帰を維持
 
-## Issue #2 レンダリング品質 Phase 1／2A
+## Issue #2 レンダリング品質 Phase 1／2A／2A.1
 
 1. v3.13.0の既定表示を固定し、透過11段階×3視点×2 viewportと、通常表示4テーマ×5視点×4 viewportを同一条件で撮影
 2. 固定±5のshadow cameraが実モデルboundsを包含しないこと、100→99で`transparent`、55→54で`depthWrite`が二値切替することを機械可読レポートで特定
@@ -142,8 +142,10 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 5. Candidate Cは物理iPhoneで明るさは概ね問題なかったが、光源色差と硬い・局所的な見え方により不採用
 6. Candidate D1はPMREMスタジオ単独、D2は大型RectAreaLight併用、D3は弱い接触影carrier併用として比較用クエリへ隔離
 7. 5対象×4テーマ×5視点×4 viewportの400枚、80比較board、32材質／接触部cropと機械可読JSONを保存
-8. D1は不採用、D2は未採用、D3はPhase 2B推奨だが未採用。通常アクセスではv3.13.0既定描画を維持
-9. Issue #2をOpen、Pull RequestをDraftのまま維持し、物理iPhoneでのD2/D3比較を次のユーザー確認ゲートとする
+8. 物理iPhoneでD2の初期表示とズームアウト時の黒潰れを確認し、D2/D3のRectAreaLightは元からscene直下のworld固定で、暗化原因が約106のモバイル初期カメラ距離とfog 68/125の重なりであることを特定
+9. D2aはworld固定ライト、D2bはカメラ方位追従・固定半径ライトとし、両候補だけfog 160/260で全viewport・4テーマのfront near／initial／farにおける主要部isolated representative輝度±15%以内を受入条件化。back／sideは診断・主観比較とし、合成画面の実可視面はvisibleSurfaceとして分離記録
+10. D2a/D2bは比較用クエリに隔離して未採用とし、通常アクセスではv3.13.0既定描画を維持
+11. Issue #2をOpen、Pull RequestをDraftのまま維持し、物理iPhoneでのD2a/D2b再確認を次のユーザー確認ゲートとする
 
 詳細は以下を参照してください。
 
@@ -152,6 +154,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - `docs/ACCEPTANCE_TESTS.md`
 - `docs/ISSUE2_RENDERING_QUALITY_PHASE1.md`
 - `docs/ISSUE2_RENDERING_QUALITY_PHASE2A.md`
+- `docs/ISSUE2_RENDERING_QUALITY_PHASE2A1.md`
 - `docs/CODEX_HANDOFF.md`
 - `docs/CODEX_REQUEST.md`
 - `docs/REFACTOR_A_SUMMARY.md`
@@ -175,6 +178,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - `docs/PR4_MOBILE_OVERLAY_HUD.md`
 - `docs/ISSUE2_RENDERING_QUALITY_PHASE1.md`
 - `docs/evidence/issue2-rendering-quality-phase1/README.md`
+- `docs/evidence/issue2-rendering-quality-phase2a1/README.md`
 
 ## ローカル確認
 

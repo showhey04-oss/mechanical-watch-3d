@@ -1,6 +1,14 @@
 import * as THREE from "three";
 
-export const ISSUE2_STUDIO_CANDIDATES=Object.freeze(["studio-d1","studio-d2","studio-d3"]);
+export const ISSUE2_STUDIO_CANDIDATES=Object.freeze(["studio-d1","studio-d2","studio-d2a","studio-d2b","studio-d3"]);
+
+export const ISSUE2_STUDIO_CONFIGURATIONS=Object.freeze({
+ "studio-d1":Object.freeze({rectLights:false,shadowCarrier:false,placementStrategy:"environment-only",zoomStableFog:false}),
+ "studio-d2":Object.freeze({rectLights:true,shadowCarrier:false,placementStrategy:"world-fixed-current",zoomStableFog:false}),
+ "studio-d2a":Object.freeze({rectLights:true,shadowCarrier:false,placementStrategy:"world-fixed",zoomStableFog:true}),
+ "studio-d2b":Object.freeze({rectLights:true,shadowCarrier:false,placementStrategy:"camera-orientation-fixed-radius",zoomStableFog:true}),
+ "studio-d3":Object.freeze({rectLights:true,shadowCarrier:true,placementStrategy:"world-fixed-current",zoomStableFog:false}),
+});
 
 export const ISSUE2_STUDIO_LAYOUT=Object.freeze({
  environment:{
@@ -82,22 +90,88 @@ function addRectLight(scene,aim,definition){
  return light;
 }
 
-function describeLight(light){
+function cameraBasis(camera,aim){
+ camera.updateMatrixWorld(true);
+ const quaternion=camera.getWorldQuaternion(new THREE.Quaternion());
+ const cameraPosition=camera.getWorldPosition(new THREE.Vector3());
+ const view=cameraPosition.sub(aim);
+ if(view.lengthSq()<=1e-12)view.set(0,0,1).applyQuaternion(quaternion);
+ view.normalize();
+ const quaternionRight=new THREE.Vector3(1,0,0).applyQuaternion(quaternion);
+ const quaternionUp=new THREE.Vector3(0,1,0).applyQuaternion(quaternion);
+ const right=quaternionRight.addScaledVector(view,-quaternionRight.dot(view));
+ if(right.lengthSq()<=1e-12)right.copy(quaternionUp).cross(view);
+ right.normalize();
+ const up=quaternionUp
+  .addScaledVector(view,-quaternionUp.dot(view))
+  .addScaledVector(right,-quaternionUp.dot(right));
+ if(up.lengthSq()<=1e-12)up.copy(view).cross(right);
+ up.normalize();
+ return {quaternion,view,right,up};
+}
+
+function configureOrientationFollowingLights(lights,camera,aim){
+ const basis=cameraBasis(camera,aim);
+ const fixedOffsets=lights.map(light=>{
+  const offset=light.getWorldPosition(new THREE.Vector3()).sub(aim);
+  return {
+   name:light.name,
+   depth:offset.dot(basis.view),
+   side:offset.dot(basis.right),
+   height:offset.dot(basis.up),
+   radius:offset.length(),
+  };
+ });
+ return {fixedOffsets,lastQuaternion:basis.quaternion.clone(),lastView:basis.view.clone(),lastRight:basis.right.clone(),lastUp:basis.up.clone(),updateCount:0};
+}
+
+function updateOrientationFollowingLights(lights,state,camera,aim){
+ const basis=cameraBasis(camera,aim);
+ // D2b follows camera orientation, not camera zoom or pan.  The camera can
+ // target a point slightly offset from the model centre, so recomputing from
+ // cameraPosition - modelCentre on a pure zoom would otherwise introduce a
+ // small light orbit even though the camera quaternion did not change.
+ if(state.lastQuaternion.angleTo(basis.quaternion)<=1e-7)return false;
+ lights.forEach((light,index)=>{
+  const fixed=state.fixedOffsets[index];
+  light.position.copy(aim)
+   .addScaledVector(basis.view,fixed.depth)
+   .addScaledVector(basis.right,fixed.side)
+   .addScaledVector(basis.up,fixed.height);
+  light.lookAt(aim);
+  light.updateMatrixWorld(true);
+ });
+ state.lastQuaternion.copy(basis.quaternion);
+ state.lastView.copy(basis.view);
+ state.lastRight.copy(basis.right);
+ state.lastUp.copy(basis.up);
+ state.updateCount++;
+ return true;
+}
+
+function describeLight(light,aim){
+ const worldPosition=light.getWorldPosition(new THREE.Vector3());
  return {
   name:light.name,
   role:light.userData.issue2StudioRole??null,
   type:light.type,
   color:`#${light.color.getHexString()}`,
   intensity:light.intensity,
-  position:light.getWorldPosition(new THREE.Vector3()).toArray(),
+  position:worldPosition.toArray(),
+  quaternion:light.getWorldQuaternion(new THREE.Quaternion()).toArray(),
   target:light.target?.getWorldPosition(new THREE.Vector3()).toArray()??null,
   size:light.isRectAreaLight?[light.width,light.height]:null,
   castShadow:light.castShadow,
+  parent:light.parent?.name||light.parent?.type||null,
+  cameraAttached:Boolean(light.parent?.isCamera),
+  distanceToModel:aim?worldPosition.distanceTo(aim):null,
  };
 }
 
-export async function createIssue2StudioRig({candidate,renderer,scene,lightingAim,legacyLights}){
+export async function createIssue2StudioRig({candidate,renderer,scene,camera,lightingAim,legacyLights,onStage=()=>{}}){
  if(!ISSUE2_STUDIO_CANDIDATES.includes(candidate))return null;
+ const configuration=ISSUE2_STUDIO_CONFIGURATIONS[candidate];
+ const stage=(name,details={})=>onStage({name,at:performance.now(),...details});
  const initializationStarted=performance.now();
  const memoryBefore={...renderer.info.memory};
  const previousEnvironment=scene.environment;
@@ -111,24 +185,33 @@ export async function createIssue2StudioRig({candidate,renderer,scene,lightingAi
   parent:light.parent?.name||light.parent?.type||null,
  }));
  for(const state of legacy){state.light.intensity=0;state.light.castShadow=false}
+ stage("legacy-lights-disabled",{count:legacy.length});
 
  const environmentScene=createStudioEnvironmentScene();
  const pmremGenerator=new THREE.PMREMGenerator(renderer);
  pmremGenerator.compileCubemapShader();
  const environmentTarget=pmremGenerator.fromScene(environmentScene.scene,.04,.1,100);
+ stage("pmrem-ready",{textureCountDelta:renderer.info.memory.textures-memoryBefore.textures});
  scene.environment=environmentTarget.texture;
+ stage("environment-applied",{applied:scene.environment===environmentTarget.texture});
  pmremGenerator.dispose();
  disposeStudioEnvironment(environmentScene);
 
  const rectLights=[];
- if(candidate!=="studio-d1"){
+ if(configuration.rectLights){
   const {RectAreaLightUniformsLib}=await import("three/addons/lights/RectAreaLightUniformsLib.js");
   RectAreaLightUniformsLib.init();
+  stage("rect-area-uniforms-ready");
   for(const definition of ISSUE2_STUDIO_LAYOUT.rectLights){rectLights.push(addRectLight(scene,lightingAim.position,definition))}
+  stage("rect-lights-built",{count:rectLights.length});
  }
 
+ const orientationFollowing=configuration.placementStrategy==="camera-orientation-fixed-radius"
+  ?configureOrientationFollowingLights(rectLights,camera,lightingAim.getWorldPosition(new THREE.Vector3()))
+  :null;
+
  let shadowCarrier=null;
- if(candidate==="studio-d3"){
+ if(configuration.shadowCarrier){
   const definition=ISSUE2_STUDIO_LAYOUT.shadowCarrier;
   shadowCarrier=new THREE.DirectionalLight(definition.color,definition.intensity);
   shadowCarrier.name=definition.name;
@@ -139,19 +222,28 @@ export async function createIssue2StudioRig({candidate,renderer,scene,lightingAi
   shadowCarrier.shadow.bias=definition.bias;
   shadowCarrier.shadow.normalBias=definition.normalBias;
   scene.add(shadowCarrier);
+  stage("shadow-carrier-built",{count:1});
  }
 
  const rig={
   candidate,
+  configuration,
   environmentTarget,
+  lightingAim,
   environmentLayout:ISSUE2_STUDIO_LAYOUT.environment,
   rectLights,
-  rectAreaUniformsInitialized:candidate!=="studio-d1",
+  rectAreaUniformsInitialized:configuration.rectLights,
   shadowCarrier,
+  orientationFollowing,
   shadowIntensitySupported:Boolean(shadowCarrier&&"intensity" in shadowCarrier.shadow),
   legacy,
  };
  rig.initialization={durationMs:performance.now()-initializationStarted,memoryBefore,memoryAfter:{...renderer.info.memory},generationCount:1};
+ rig.updateCameraOrientation=(activeCamera=camera)=>{
+  if(!orientationFollowing)return false;
+  return updateOrientationFollowingLights(rectLights,orientationFollowing,activeCamera,lightingAim.getWorldPosition(new THREE.Vector3()));
+ };
+ stage("candidate-ready",{candidate,rectLightCount:rectLights.length,shadowCarrier:Boolean(shadowCarrier)});
  rig.dispose=()=>{
   if(scene.environment===environmentTarget.texture)scene.environment=previousEnvironment;
   for(const light of [...rectLights,...(shadowCarrier?[shadowCarrier]:[])])light.removeFromParent();
@@ -166,8 +258,11 @@ export function describeIssue2StudioRig(rig){
  return {
   enabled:true,
   candidate:rig.candidate,
+  placementStrategy:rig.configuration.placementStrategy,
+  cameraDistanceInvariant:true,
+  zoomStableFog:rig.configuration.zoomStableFog,
   neutralLightColor:"#ffffff",
-  backgroundIndependent:true,
+  environmentMapBackgroundIndependent:true,
   environment:{
    applied:Boolean(rig.environmentTarget?.texture),
    source:"PMREMGenerator.fromScene",
@@ -178,9 +273,18 @@ export function describeIssue2StudioRig(rig){
   },
   initialization:rig.initialization,
   rectAreaUniformsInitialized:rig.rectAreaUniformsInitialized,
-  rectLights:rig.rectLights.map(describeLight),
+  rectLights:rig.rectLights.map(light=>describeLight(light,rig.lightingAim.getWorldPosition(new THREE.Vector3()))),
+  orientationFollowing:rig.orientationFollowing?{
+   fixedOffsets:rig.orientationFollowing.fixedOffsets.map(offset=>({...offset})),
+   fixedRadii:rig.orientationFollowing.fixedOffsets.map(offset=>offset.radius),
+   updateCount:rig.orientationFollowing.updateCount,
+   lastCameraQuaternion:rig.orientationFollowing.lastQuaternion.toArray(),
+   lastViewDirection:rig.orientationFollowing.lastView.toArray(),
+   lastRightDirection:rig.orientationFollowing.lastRight.toArray(),
+   lastUpDirection:rig.orientationFollowing.lastUp.toArray(),
+  }:null,
   shadowCarrier:rig.shadowCarrier?{
-   ...describeLight(rig.shadowCarrier),
+   ...describeLight(rig.shadowCarrier,rig.lightingAim.getWorldPosition(new THREE.Vector3())),
    mapSize:rig.shadowCarrier.shadow.mapSize.toArray(),
    bias:rig.shadowCarrier.shadow.bias,
    normalBias:rig.shadowCarrier.shadow.normalBias,

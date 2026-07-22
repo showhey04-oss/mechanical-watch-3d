@@ -530,10 +530,22 @@ export async function runBrowserIntegrationTest(diagnostics) {
       studioShadowDrive = { settledWindTransition, settledSetTransition, beforeIdle, afterIdle, afterTimeJump, beforeKeylessTransition, afterKeylessTransition, beforeRunningWithoutMotion, afterRunningWithoutMotion, beforeLiveSync, afterLiveSync };
     }
     const studioShadowUpdates = diagnostics.getIssue2StudioShadowUpdateReport();
+    const studioStartup = diagnostics.getIssue2StartupReport();
+    const initialShadowReadyEvent = studioStartup.events.find(({ name }) => name === "initial-shadow-ready");
     check("issue2-studio-rig-replaces-legacy-main-lights-only-in-explicit-candidate", studio.environment.applied
-      && studio.backgroundIndependent
+      && studio.environmentMapBackgroundIndependent
       && studio.legacyLights.every((light) => light.currentIntensity === 0)
       && lightingByName.cameraFill?.intensity === 0, lightingRig);
+    check("issue2-studio-startup-completes-only-after-required-resources", studioStartup.gateSatisfied
+      && studioStartup.milestones.pmremReady
+      && studioStartup.milestones.environmentApplied
+      && studioStartup.milestones.candidateReady
+      && studioStartup.milestones.firstFrameRendered
+      && studioStartup.milestones.renderComplete
+      && (studio.candidate === "studio-d1" || studioStartup.milestones.rectAreaUniformsReady)
+      && (studio.candidate !== "studio-d3" || (studioStartup.milestones.initialShadowReady
+        && initialShadowReadyEvent?.mapSize?.length === 2
+        && initialShadowReadyEvent.mapSize.every((value) => value > 0))), studioStartup);
     check("issue2-studio-rig-uses-neutral-soft-sources-and-preserves-selection-feedback", [...studio.rectLights, ...(studio.shadowCarrier ? [studio.shadowCarrier] : [])].every((light) => light.color === "#ffffff")
       && lightingRig.auxiliaryLights.some((light) => light.name === "" || light.category === "selection-feedback")
       && studioContributions.environmentMapApplied
