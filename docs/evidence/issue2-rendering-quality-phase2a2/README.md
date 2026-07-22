@@ -10,8 +10,8 @@
 | D2b | Phase 2A.1比較履歴 | 実機上でD2aとの差が小さく、カメラ方位追従を新候補へ継承しない |
 | D2c1 | query限定・提示対象外 | room／floorと黒フラッグを持ち上げたが、initial／farのclipped ratio非悪化を118/120条件でしか満たさない |
 | D2c2 | query限定・提示対象外 | key／fill比を縮めたが、median全条件上昇とdark ratio全条件低下を満たさない |
-| D2c3 | query限定・物理iPhone候補・未採用 | 下側白レフを加え、4項目の自動相対ゲートを全120条件で満たした唯一の候補 |
-| 既定レンダリング | 変更なし | D2c3も自動証跡だけでは採用せず、物理iPhone Safari／OLED／P3確認を待つ |
+| D2c3 | query限定・暫定推奨・未採用 | 下側白レフを加え、4項目の自動相対ゲートを全120条件で満たした唯一の候補 |
+| 既定レンダリング | 変更なし | D2c3も自動証跡だけでは採用せず、最終微調整工程の物理iPhone Safari／OLED／P3確認を待つ |
 
 D2aの「再起動後に解消方向」を恒久解決または合格とは扱わない。D2c3の自動ゲート通過も画質採用、完成、Issue #2解決を意味しない。
 
@@ -160,7 +160,7 @@ python3 scripts/generate_issue2_phase2a2_evidence.py --check
 
 生成時は候補／viewport／theme／view／distanceの720条件、固定query、camera／Quaternion／target／DPR一致、world固定ライト、D2c1／2／3の設定値、距離順、watch silhouette、visibleSurface、相対ゲート、全回帰、24性能run、60 board、4 SVGを検証する。`--check`はmanifestと実フォルダを閉世界で照合し、未掲載・残存ファイル、hash／MIME／寸法差、JSON／SVG不正を失敗にする。
 
-## 既知制約と物理iPhone確認ゲート
+## 既知制約と最終微調整ゲート
 
 - 自動ブラウザはiPhone Safari、OLED、Display P3、ホーム画面起動を再現せず、実機の知覚評価を代替しない
 - D2aの再起動後改善は恒久解決を示さない
@@ -168,7 +168,7 @@ python3 scripts/generate_issue2_phase2a2_evidence.py --check
 - watch silhouetteの面積輝度maskはMesh表面を対象とし、Line primitiveだけで描く主ゼンマイ／ヒゲゼンマイは含めない。線材は近接boardの目視対象とする
 - `outerBezel`は独立case／bezelがないモデルでの簡易外周代理領域である
 - winding／motion-worksの最接近は`initial`で、共通`near`より近い
-- D2c1／D2c2は比較履歴、D2c3は物理iPhone候補にとどまり、いずれも既定未採用
+- D2c1／D2c2は比較履歴、D2c3は最終微調整再開時の物理iPhone候補にとどまり、いずれも既定未採用
 - 通常アクセス、D1／D2／D3、fog、shadow、tone mapping、exposure、output color space、材質、構造透過、背景テーマ、DPR、camera、機構、UI／HUDは変更していない
 
-D2c3を同じ物理iPhone Safariのタブ起動とホーム画面起動で開き、query維持、initial／farの中間調、navy／obsidianでの背景分離、gallery近接の白飛び、front／back／sideの金属階調、winding／motion-worksの`initial`近接、パネル開閉、3D操作、部品選択を確認する。確認前はD2c3を採用せず、PR #5をDraft、Issue #2をOpenに維持し、Ready化、マージ、Issue close、完成・合格・最終採用の判定を行わない。
+[最終微調整申し送り](../../ISSUE2_FINAL_POLISH_HANDOFF.md)の4依存工程が完了した後、D2c3を同じ物理iPhone Safariのタブ起動とホーム画面起動で開き、query維持、initial／farの中間調、navy／obsidianでの背景分離、gallery近接の白飛び、front／back／sideの金属階調、winding／motion-worksの`initial`近接、パネル開閉、3D操作、部品選択を確認する。それまではD2c3を採用せず、PR #5をDraft、Issue #2をOpenに維持し、Ready化、マージ、Issue close、完成・合格・最終採用の判定を行わない。

@@ -7,7 +7,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - バージョン：v3.13.0（PR #4 モバイルオーバーレイ・HUD整理）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の重点：Issue #2 Phase 2A.2のD2c1／D2c2／D2c3中間調再調整と物理iPhone確認ゲート（PR #5 Draft、既定描画への統合なし）
+- 現在の重点：Issue #2 Phase 2A.2比較完了。D2c3を未採用の暫定推奨候補として保持し、追加照明反復と実機採用判定は[申し送り](docs/ISSUE2_FINAL_POLISH_HANDOFF.md)の4依存工程完了後まで保留（PR #5 Draft、既定描画への統合なし）
 
 ## 実装済み
 
@@ -146,7 +146,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 9. D2aはworld固定ライト、D2bはカメラ方位追従・固定半径ライトとし、両候補だけfog 160/260で全viewport・4テーマのfront near／initial／farにおける主要部isolated representative輝度±15%以内を受入条件化。back／sideは診断・主観比較とし、合成画面の実可視面はvisibleSurfaceとして分離記録
 10. 物理iPhone再確認では、再起動後に従来の黒潰れが解消方向へ改善しnearの視認性は良好だった一方、D2a／D2bの差は小さく、initial／farの中間調が低く広い暗部とOLED上の強い明暗差が残ったため、そのままの採用を見送った
 11. D2aをworld固定の基盤、D2bを比較履歴として保持し、D2aから黒フラッグ、PMREM中間調、key／fill、必要最小限の下方白バウンスを段階的に調整するD2c1／D2c2／D2c3をquery限定で比較
-12. 定量ゲートを満たしたD2c3だけを次の物理iPhone確認候補とするが、未採用・既定化なしを維持。通常アクセスはv3.13.0既定描画のまま、Issue #2をOpen、PR #5をDraftとする
+12. 定量ゲートを満たしたD2c3を最終微調整再開時の暫定推奨候補として保持するが、未採用・既定化なしを維持。追加照明反復は申し送りの4依存工程完了後まで停止し、通常アクセスはv3.13.0既定描画、Issue #2はOpen、PR #5はDraftのままとする
 
 詳細は以下を参照してください。
 
@@ -157,6 +157,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - `docs/ISSUE2_RENDERING_QUALITY_PHASE2A.md`
 - `docs/ISSUE2_RENDERING_QUALITY_PHASE2A1.md`
 - `docs/ISSUE2_RENDERING_QUALITY_PHASE2A2.md`
+- `docs/ISSUE2_FINAL_POLISH_HANDOFF.md`
 - `docs/CODEX_HANDOFF.md`
 - `docs/CODEX_REQUEST.md`
 - `docs/REFACTOR_A_SUMMARY.md`

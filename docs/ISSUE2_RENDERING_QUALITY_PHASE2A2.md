@@ -8,11 +8,11 @@ Phase 2A.2では、物理iPhoneで確認されたD2aの引き表示における�
 - D2b：実機上のD2aとの差が小さく、カメラ方位追従によるハイライト貼り付きのリスクに見合う明確な利点が未確認のため、Phase 2A.1の比較履歴として保持する
 - D2c1：PMREM room／floorと黒フラッグの最低反射レベルだけを持ち上げたquery限定候補。clipped ratioの全条件非悪化を満たさず、物理iPhone提示対象外
 - D2c2：D2c1にkey／fill比の再調整を加えたquery限定候補。medianとdark ratioの全条件改善を満たさず、物理iPhone提示対象外
-- D2c3：D2c2に弱い下側白レフを加えたquery限定候補。initial／farの全120条件で相対ゲートを満たした唯一の候補として、物理iPhone確認へ提示可能
-- 最終統合・既定採用：なし。D2c3も未採用で、物理iPhone Safari／OLED／P3での確認が必要
+- D2c3：D2c2に弱い下側白レフを加えたquery限定候補。initial／farの全120条件で相対ゲートを満たした唯一の候補として、最終微調整再開時の暫定推奨候補とする
+- 最終統合・既定採用：なし。D2c3も未採用で、申し送りの4依存工程完了後に物理iPhone Safari／OLED／P3での確認が必要
 - PR #5：Draftを維持。Issue #2：Openを維持
 
-物理iPhoneで「再起動後に解消方向」と確認された起動時黒潰れを、恒久解決または合格とは扱わない。D2a／D2bは現状のまま最終採用せず、D2c3も自動測定と比較画像だけで採用しない。
+物理iPhoneで「再起動後に解消方向」と確認された起動時黒潰れを、恒久解決または合格とは扱わない。D2a／D2bは現状のまま最終採用せず、D2c3も自動測定と比較画像だけで採用しない。Phase 2A.2の比較完了をもって追加のライティング反復を停止し、[最終微調整申し送り](ISSUE2_FINAL_POLISH_HANDOFF.md)に記載した作動音、寸法・比率調整、最終外装、完成時計の初回PC／iPhone確認が完了するまで採用・既定統合・Phase 2B最終判定を延期する。
 
 ## 物理iPhone評価からの判断
 
@@ -25,6 +25,8 @@ Phase 2A.1後の同一実機確認では、D2a／D2bに次の傾向があった�
 - 明るい反射帯と広い暗部の差が大きく、OLEDでは暗部がより沈んで見えた
 
 D2a／D2bにD3のDirectionalLight shadow carrierはない。したがってPhase 2A.2ではshadow map、shadow camera、bias、normalBiasではなく、PMREMのroom／floor、保持した黒フラッグ、RectAreaLightのkey／fill比を独立に比較した。D2aを完全world固定の基礎とし、D2bは新候補へ継承していない。
+
+旧D2の暗化は約106のモバイル初期カメラ距離がlegacy fog 68/125へ重なることが主因であり、D2a／D2b限定のfog 160/260では再起動後の初期黒潰れが解消方向へ改善した。一方、initial／farの中間調不足と強い明暗差は残ったため、fog修正だけを最終画質の合格とは扱わない。
 
 ## Candidate D2c
 
@@ -112,7 +114,7 @@ nearの最大clipped ratioはD2c1 0.033883、D2c2 0.017377、D2c3 0.017727、最
 - gallery近接で針、歯車、地板に広範な白飛びや白い平板化がないこと
 - back／sideで黒フラッグ由来の輪郭線と金属反射帯を維持すること
 
-D2c1／D2c2は比較履歴として保持するが、自動相対ゲートを満たさないため物理iPhoneへ提示しない。D2c3だけを次の実機レビュー候補とする。ただし画像boardと定量値はOLED／P3表示、ホーム画面起動、知覚的な金属階調を代替しないため、採用・既定化・完成判定は保留する。
+D2c1／D2c2は比較履歴として保持するが、自動相対ゲートを満たさないため物理iPhoneへ提示しない。D2c3だけを最終微調整再開時の実機レビュー候補として保持する。ただし画像boardと定量値はOLED／P3表示、ホーム画面起動、知覚的な金属階調を代替しないため、採用・既定化・完成判定は保留する。
 
 必須boardのChromium目視では、D2c3はnavy／obsidianのinitial／farでD2aより下側と外周の中間調がわずかに開き、時計外形とnegative fillの暗い輪郭を維持した。galleryおよびwinding／motion-worksの実最接近で広範な白飛びや白い平板化は見られず、黄銅、鋼、ルビー、歯先、穴、軸の識別も維持した。D2c1の変化は小さく、D2c2はkey／fill再配分だけでは全条件の暗部改善が揃わなかった。これはChromium画像上の選別であり、物理iPhoneの採用判定ではない。
 
@@ -135,7 +137,7 @@ D2a・1280×720 pointerの最初の計測は、連続capture直後の一時的ou
 
 720 master capture、60比較board、4ライト配置図、watch silhouette、visibleSurface、候補設定、性能、全回帰は[Phase 2A.2 evidence README](evidence/issue2-rendering-quality-phase2a2/README.md)を索引とする。`evidence-manifest.json`は相対パス、byte数、SHA-256、MIME、JPEG寸法を記録し、未掲載・残存ファイルを含む閉世界整合を検証する。
 
-## 既知制約と物理iPhone確認ゲート
+## 既知制約と最終微調整ゲート
 
 - 自動ブラウザはiPhone Safari、OLED、Display P3、`navigator.standalone`、ホーム画面起動を再現しない
 - D2aの再起動後の改善は方向性の観察であり、起動経路を含む恒久解決を意味しない
@@ -146,4 +148,4 @@ D2a・1280×720 pointerの最初の計測は、連続capture直後の一時的ou
 - baseline 390×844の87/88は既知のIssue #2輝度項目であり、失敗を隠さず許容済み既知結果として記録する
 - D2c1／D2c2／D2c3はquery限定で、通常アクセスの既定描画へ統合していない
 
-D2c3を同じ物理iPhone Safariのタブ起動とホーム画面起動で開き、initial／farの中間調、navy／obsidianでの背景分離、gallery近接の白飛び、front／back／sideの金属反射帯、winding／motion-works近接、パネル開閉、3D操作、部品選択を確認する。ユーザー確認前はD2c3を未採用のまま、PR #5をDraft、Issue #2をOpenに維持し、Ready化、マージ、Issue close、完成・合格・最終採用の判定を行わない。
+作動音、寸法・比率調整、最終外装、完成時計の初回PC／iPhone確認が完了した後、D2c3を同じ物理iPhone Safariのタブ起動とホーム画面起動で開き、initial／farの中間調、navy／obsidianでの背景分離、gallery近接の白飛び、front／back／sideの金属反射帯、winding／motion-works近接、パネル開閉、3D操作、部品選択を確認する。それまではD2c3を未採用のまま、PR #5をDraft、Issue #2をOpenに維持し、Ready化、マージ、Issue close、完成・合格・最終採用の判定を行わない。

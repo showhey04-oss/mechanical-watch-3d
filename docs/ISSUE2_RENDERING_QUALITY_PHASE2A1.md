@@ -135,4 +135,4 @@ Phase 2Aの45 browser runと36 performance runは履歴補助証跡として保�
 
 D2a/D2bを物理iPhoneで確認した結果、端末再起動後は従来の黒潰れが解消方向へ改善し、nearでは文字板・針・内部部品を良好に識別できた。D2aとD2bの知覚上の差は小さく、initial／farでは中間調が不足し、広い暗部と明部のコントラストがOLED上で強く見えた。したがって、D2a／D2bをそのまま採用せず、D2aを基盤、D2bを比較履歴としてPhase 2A.2へ引き継ぐ。
 
-次のユーザー確認対象は、自動定量条件を満たしたD2c3だけとする。D2c3も物理iPhone確認前には未採用であり、通常アクセスへ統合しない。PR #5をDraft、Issue #2をOpenのまま維持し、Ready化、マージ、Issue close、「完成」「合格」「最終採用」の報告は行わない。
+後続のPhase 2A.2でD2c3だけが自動定量条件を満たしたが、実施時期は[最終微調整申し送り](ISSUE2_FINAL_POLISH_HANDOFF.md)を正とし、4依存工程完了後まで物理iPhone確認を延期する。D2c3は未採用のまま通常アクセスへ統合せず、PR #5をDraft、Issue #2をOpenに維持し、Ready化、マージ、Issue close、「完成」「合格」「最終採用」の報告は行わない。

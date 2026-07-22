@@ -1,6 +1,6 @@
 # Issue #2 レンダリング品質 Phase 2A.1 証跡
 
-> 物理iPhone確認後の更新：端末再起動後、従来の黒潰れは解消方向へ改善し、nearは良好だった。一方でD2a／D2bの差は小さく、initial／farの中間調不足と広い暗部が残ったため、両候補をそのまま採用しない。D2aを次段の基盤、D2bを比較履歴とし、最新のD2c比較証跡は[Phase 2A.2証跡](../issue2-rendering-quality-phase2a2/README.md)を参照する。
+> 物理iPhone確認後の更新：端末再起動後、従来の黒潰れは解消方向へ改善し、nearは良好だった。一方でD2a／D2bの差は小さく、initial／farの中間調不足と広い暗部が残ったため、両候補をそのまま採用しない。D2aを次段の基盤、D2bを比較履歴とし、最新のD2c比較証跡は[Phase 2A.2証跡](../issue2-rendering-quality-phase2a2/README.md)、実機確認の実施時期は[最終微調整申し送り](../../ISSUE2_FINAL_POLISH_HANDOFF.md)を参照する。
 
 ## 判定
 
@@ -111,4 +111,4 @@ python3 scripts/generate_issue2_phase2a1_evidence.py --check
 
 D2aとD2bの物理iPhone確認では、端末再起動後に黒潰れが解消方向へ改善し、nearの視認性は良好だった。一方、D2a／D2bの差は小さく、initial／farでは中間調不足、広い暗部、OLED上の強い明暗差が残った。そのためD2aを基盤、D2bを比較履歴としてPhase 2A.2へ引き継ぎ、両候補をそのまま採用しない。
 
-Phase 2A.2のD2c1／D2c2／D2c3もquery限定であり、自動定量条件を満たしたD2c3だけを次の物理iPhone確認対象とする。確認前はD2c3を未採用のまま、PR #5をDraft、Issue #2をOpenに維持し、Ready化、マージ、Issue close、完成・合格・最終採用の判定を行わない。
+Phase 2A.2のD2c1／D2c2／D2c3もquery限定であり、自動定量条件を満たしたD2c3だけを最終微調整再開時の物理iPhone確認対象として保持する。4依存工程完了まで確認を延期し、D2c3を未採用のまま、PR #5をDraft、Issue #2をOpenに維持して、Ready化、マージ、Issue close、完成・合格・最終採用の判定を行わない。

@@ -6,10 +6,11 @@
 - D2aをworld固定の基盤、D2bを比較履歴とし、D2aから黒フラッグ影響とPMREM room／floor中間調、key／fill、必要最小限の下方白バウンスを段階的に調整するD2c1／D2c2／D2c3をquery限定で追加
 - 3 viewport×4テーマ×5視点×3距離×4候補の720 master、60枚の4列比較board、4ライト配置図を保存し、watch silhouetteのmean／median／p10／p25／p75／p90／dark／clippedと7部位visibleSurfaceを機械可読化
 - D2c1／D2c2は比較履歴として保持し、D2a比の定量ゲートを満たしたD2c3だけを物理iPhone提示候補とする。ただしD2c3も未採用であり、通常アクセスのv3.13.0既定描画は変更しない
+- D2c3を最終微調整再開時の暫定推奨候補として保持し、Phase 2A.2完了をもって追加照明反復を停止。作動音、寸法・比率調整、最終外装、完成時計の初回PC／iPhone確認後まで採用判定を保留する
 - Node 33/33、既定desktop 86/86、D2a／D2c1／D2c2／D2c3 desktop 87/87、各候補390×844 89/89を確認。既定390×844は既知のIssue #2輝度項目だけが未合格の87/88で、閾値を緩和していない
 - UI 20/20・22/22・22/22、HUD 42/42・54/54・54/54・54/54、A.7 9/9、ドリフト0、禁止干渉0/0を維持。描画品質はD2a／D2c1が各viewport 22/22、D2c2／D2c3が各viewport 23/23
 - 24件の10秒A.6計測は全既存ゲートを通過。最小54.9347fps、最大p95 17.7ms、最大p99 50.0ms、33ms超46、50ms超6、wheel step share最大0.003637を記録し、最初のD2a desktop pointer transient失敗は再実行前後を隠さず保存
-- Issue #2をOpen、PR #5をDraftのまま維持し、D2c3の物理iPhone Safari／ホーム画面起動確認前にReady化、マージ、既定化を行わない
+- Issue #2をOpen、PR #5をDraftのまま維持し、最終微調整工程でのD2c3物理iPhone Safari／ホーム画面起動確認前にReady化、マージ、既定化を行わない
 
 ## Unreleased — Issue #2 レンダリング品質 Phase 2A.1（Draft比較）
 

@@ -39,5 +39,6 @@ Refactor AとUI／HUD整理を反映した現在の公開基準はv3.13.0であ�
 - D2/D3のRectAreaLightは元からscene直下のworld固定であり、暗化は約106のモバイル初期カメラ距離がfog 68/125へ重なることを原因とする
 - D2a／D2bの物理iPhone再確認では、再起動後に黒潰れは解消方向へ改善しnearは良好だったが、両候補の差が小さくinitial／farの中間調不足が残ったため、そのまま採用しない
 - D2aをworld固定の基盤、D2bを比較履歴とし、黒フラッグとPMREM中間調、key／fill、必要最小限の下方白バウンスを段階比較するD2c1／D2c2／D2c3をquery限定で追加する
-- D2c3だけが定量的な物理iPhone提示条件を満たしたが未採用とし、実機確認前に既定化しない
+- D2c3だけが定量的な物理iPhone提示条件を満たしたため最終微調整再開時の暫定推奨候補とするが、未採用・既定化なしを維持する
+- Phase 2A.2で追加照明反復を停止し、作動音、寸法・比率調整、最終外装、完成時計の初回PC／iPhone確認後までPhase 2B採用判定を保留する。詳細は[最終微調整申し送り](ISSUE2_FINAL_POLISH_HANDOFF.md)を正とする
 - Candidate A/B/C/D1/D2/D2a/D2b/D2c1/D2c2/D2c3/D3を既定描画へ統合せずIssue #2をOpen、PR #5をDraftのまま維持する

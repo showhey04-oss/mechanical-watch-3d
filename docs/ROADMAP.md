@@ -68,7 +68,7 @@
 
 ## 現在の改修フェーズ
 
-### Issue #2 レンダリング品質 Phase 2A／2A.1／2A.2／2B — Draft候補比較
+### Issue #2 レンダリング品質 Phase 2A.2完了／Phase 2B保留 — Draft候補比較
 
 - v3.13.0を画質・機能基準として、中央シャドウ境界、透過不連続、物理スマートフォン暗部を分離診断
 - Candidate Aのtight-fit shadow frustumは中央境界へ有効だが、透過面の全面暗化により現方式を不採用
@@ -80,12 +80,17 @@
 - 物理iPhoneで暗化したD2の現方式を不採用とし、同じlegacy fog条件のD3も未採用を維持
 - world固定＋fog 160/260のD2a、方位追従・固定半径＋同fogのD2bをquery限定で比較し、全viewport・4テーマのfrontで主要部isolated representative metricのnear／initial／far変動±15%以内を受入条件化。back／sideは診断・主観比較とし、合成画面の実可視面はvisibleSurface metricとして分離記録
 - 物理iPhone再確認では、再起動後に黒潰れは解消方向へ改善しnearは良好だったが、D2a／D2bの差は小さく、initial／farの中間調不足と広い暗部が残ったため、そのまま採用しない。D2aを基盤、D2bを比較履歴とする
-- Phase 2A.2でD2c1／D2c2／D2c3をquery限定比較し、watch silhouette分位点・暗部・クリップ率と7部位visibleSurfaceを3 viewport、4テーマ、5視点、3距離で記録する
-- D2c3だけがD2a比の定量的な物理iPhone提示条件を満たしたが未採用であり、実機確認を次のPhase 2Bゲートとする
+- Phase 2A.2でD2c1／D2c2／D2c3をquery限定比較し、watch silhouette分位点・暗部・クリップ率と7部位visibleSurfaceを3 viewport、4テーマ、5視点、3距離で記録した
+- D2c3だけがD2a比の定量的な物理iPhone提示条件を満たしたため暫定推奨候補として保持するが、未採用・既定未統合とする
+- 追加のライティング反復とPhase 2B実機採用判定は、作動音、寸法・比率調整、最終外装、完成時計の初回PC／iPhone確認が完了するまで保留する。再開条件と残項目は[最終微調整申し送り](ISSUE2_FINAL_POLISH_HANDOFF.md)を正とする
 - `alphaHash`、透過率閾値による影ON/OFF、端末別の明るさ補正を使用しない
 - Candidateを既定描画へ統合せず、Issue #2をOpen、PR #5をDraftのまま維持
 
 ## 今後
+
+### Issue #2再開前の依存工程
+
+[最終微調整申し送り](ISSUE2_FINAL_POLISH_HANDOFF.md)に記載した4依存工程の完了後、動画制作・最終統合レビュー前にIssue #2の照明、透明・影、端末差、時刻入力欄右端の軽微事項を一括して最終調整する。
 
 ### Stage 8 / v4.0
 - ケース
@@ -97,7 +102,7 @@
 
 ### Stage 9 / v4.1
 - 表面仕上げ
-- 高級感のある照明
+- 高級感のある照明とIssue #2最終微調整
 - 背景・撮影モード
 
 ### Stage 10 / v4.2
