@@ -14,7 +14,8 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
   const candidate = pipeline.candidate;
   const modelBefore = diagnostics.getModelWorldSignature();
 
-  check("issue2-candidate-is-explicit-and-query-only", ["baseline", "shadow", "transparency", "lighting"].includes(candidate), pipeline);
+  const studioCandidates = ["studio-d1", "studio-d2", "studio-d3"];
+  check("issue2-candidate-is-explicit-and-query-only", ["baseline", "shadow", "transparency", "lighting", ...studioCandidates].includes(candidate), pipeline);
   check("issue2-pipeline-keeps-srgb-aces-and-production-exposure", pipeline.outputColorSpace === "srgb"
     && pipeline.toneMapping === 4
     && pipeline.toneMappingExposure >= 0.82
@@ -100,6 +101,64 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
     measurements.frontBack = frontBack;
   }
 
+  if (studioCandidates.includes(candidate)) {
+    const studio = diagnostics.getIssue2StudioRigReport();
+    const activeLegacy = studio.legacyLights.filter((light) => light.currentIntensity > 0);
+    check("issue2-studio-candidate-is-query-isolated-and-background-independent", studio.enabled
+      && studio.candidate === candidate
+      && studio.backgroundIndependent
+      && studio.environment.applied
+      && studio.environment.source === "PMREMGenerator.fromScene"
+      && studio.environment.panels.length === 3
+      && studio.environment.flags.length === 2
+      && studio.initialization.generationCount === 1, studio);
+    check("issue2-studio-candidate-removes-legacy-point-and-colored-lights-from-main-rig", activeLegacy.length === 0
+      && studio.pointLightActive === false
+      && studio.legacyLights.find((light) => light.name === "cameraFill")?.currentIntensity === 0, studio.legacyLights);
+    check("issue2-studio-candidate-keeps-neutral-white-active-lights", [...studio.rectLights, ...(studio.shadowCarrier ? [studio.shadowCarrier] : [])]
+      .every((light) => light.color === "#ffffff"), studio);
+
+    if (candidate === "studio-d1") {
+      check("issue2-d1-uses-only-pmrem-ibl-without-direct-or-shadow-light", studio.rectLights.length === 0
+        && studio.shadowCarrier === null
+        && studio.rectAreaUniformsInitialized === false, studio);
+    } else {
+      const [key, fill] = studio.rectLights;
+      check("issue2-d2-d3-use-two-large-neutral-rect-area-lights", studio.rectAreaUniformsInitialized
+        && studio.rectLights.length === 2
+        && key.name === "studioRectKey" && key.intensity === 1 && key.size[0] >= 28 && key.size[1] >= 18
+        && fill.name === "studioRectFill" && fill.intensity >= .25 && fill.intensity <= .35
+        && !key.castShadow && !fill.castShadow, studio.rectLights);
+      if (candidate === "studio-d2") {
+        check("issue2-d2-has-no-shadow-casting-main-light", studio.shadowCarrier === null, studio);
+      } else {
+        const carrier = studio.shadowCarrier;
+        const shadowUpdatePolicy = diagnostics.getIssue2StudioShadowUpdateReport();
+        check("issue2-d3-uses-one-weak-neutral-shadow-carrier", carrier?.type === "DirectionalLight"
+          && carrier.color === "#ffffff" && carrier.intensity >= .10 && carrier.intensity <= .20
+          && carrier.castShadow && carrier.shadowIntensitySupported === false
+          && carrier.effectiveShadowStrengthControl === "carrier-light-intensity", carrier);
+        check("issue2-d3-shadow-carrier-uses-pcfsoft-fitted-and-texel-snapped", shadow.studioShadowCarrier?.mapType === "PCFSoftShadowMap"
+          && shadow.studioShadowCarrier?.mapSize[0] === (innerWidth <= 420 ? 1024 : 2048)
+          && shadow.fit?.light === "studioShadowCarrier"
+          && shadow.fit?.allModelCornersInside === true
+          && shadow.fit?.snapDelta.every((value, index) => Math.abs(value) <= shadow.fit.texelSize[index] / 2 + 1e-9)
+          && shadowUpdatePolicy.strategy === "transform-driven-throttled"
+          && shadowUpdatePolicy.autoUpdate === false
+          && shadowUpdatePolicy.intervalMs === 200, { shadow, shadowUpdatePolicy });
+      }
+    }
+
+    const phase2Framebuffer = diagnostics.getPhase2FramebufferReport();
+    check("issue2-studio-candidate-mask-report-covers-model-without-crush-or-clipping", phase2Framebuffer.statistics.method === "model-silhouette-mask-pass"
+      && phase2Framebuffer.statistics.sampleCount > 1000
+      && phase2Framebuffer.statistics.darkRatio < .35
+      && phase2Framebuffer.statistics.clippedRatio < .18
+      && Number.isFinite(phase2Framebuffer.statistics.p99Luminance), phase2Framebuffer);
+    measurements.studio = studio;
+    measurements.phase2Framebuffer = phase2Framebuffer;
+  }
+
   const handCoupling = diagnostics.getHandCouplingReport();
   check("issue2-candidate-preserves-three-hand-one-to-one-coupling", handCoupling.length === 3
     && maxAbsolute(handCoupling.map(({ error }) => error)) < 1e-7
@@ -124,6 +183,10 @@ export async function runRenderingQualityIntegrationTest(diagnostics) {
       ? "Confirm opaque-mode depth ordering before integration."
       : candidate === "lighting"
         ? "Confirm metal contrast and physical iPhone brightness before integration."
-        : "Baseline diagnosis only.";
+        : candidate === "studio-d1"
+          ? "Rejected after fixed-matrix comparison; PMREM-only base illumination is insufficient. Do not integrate."
+          : ["studio-d2", "studio-d3"].includes(candidate)
+            ? "Hold for fixed-matrix visual comparison and physical iPhone Safari approval; do not integrate."
+            : "Baseline diagnosis only.";
   return { ok: checks.every(({ ok }) => ok), checks, measurements };
 }

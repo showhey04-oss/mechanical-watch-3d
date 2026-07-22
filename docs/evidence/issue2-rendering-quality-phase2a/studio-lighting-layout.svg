@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Issue #2 Phase 2A studio lighting layout</title>
+  <desc id="desc">PMREM white reflection panels and black flags surround the watch. Candidate D2 adds two neutral RectAreaLights. Candidate D3 adds a weak shadow-only directional carrier.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#151922"/><stop offset="1" stop-color="#080a0e"/></linearGradient>
+    <radialGradient id="watch" cx="42%" cy="35%"><stop stop-color="#d7c186"/><stop offset=".45" stop-color="#7d8795"/><stop offset="1" stop-color="#242a33"/></radialGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L9,3 L0,6 Z" fill="#e8d18d"/></marker>
+    <style>
+      .label{font:600 18px system-ui,sans-serif;fill:#f4f6f8}.small{font:14px system-ui,sans-serif;fill:#b8c0cb}.panel{fill:#f4f4ee;stroke:#fff;stroke-width:2}.flag{fill:#020203;stroke:#58606b;stroke-width:2}.rect{fill:#dbe9ff;fill-opacity:.34;stroke:#a8c8ff;stroke-width:3}.arrow{stroke:#e8d18d;stroke-width:3;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <text x="50" y="55" class="label" font-size="26">Issue #2 Phase 2A — neutral studio lighting (not to scale)</text>
+  <text x="50" y="82" class="small">D1 = PMREM only · D2 = D1 + RectArea key/fill · D3 = D2 + weak contact-shadow carrier</text>
+
+  <ellipse cx="600" cy="372" rx="162" ry="162" fill="url(#watch)" stroke="#d8dee8" stroke-width="5"/>
+  <circle cx="600" cy="372" r="104" fill="none" stroke="#e7d18c" stroke-width="4" stroke-dasharray="10 8"/>
+  <text x="548" y="365" class="label">WATCH</text>
+  <text x="520" y="392" class="small">lighting aim (0, 0.5, 0)</text>
+
+  <g transform="translate(720 118) rotate(14)"><rect width="300" height="126" rx="8" class="panel"/><text x="20" y="54" fill="#111" font-family="system-ui" font-size="18" font-weight="700">PMREM KEY PANEL</text><text x="20" y="82" fill="#333" font-family="system-ui" font-size="14">34×22 · (16, −30, 20) · 4.8</text></g>
+  <g transform="translate(118 430) rotate(-12)"><rect width="306" height="136" rx="8" class="panel"/><text x="20" y="57" fill="#111" font-family="system-ui" font-size="18" font-weight="700">PMREM FILL PANEL</text><text x="20" y="85" fill="#333" font-family="system-ui" font-size="14">32×26 · (−20, 28, 10) · 2.75</text></g>
+  <g transform="translate(182 105)"><rect width="86" height="250" rx="7" class="panel"/><text x="43" y="35" text-anchor="middle" fill="#111" font-family="system-ui" font-size="15" font-weight="700">STRIP</text><text x="43" y="60" text-anchor="middle" fill="#333" font-family="system-ui" font-size="12">8×32</text><text x="43" y="82" text-anchor="middle" fill="#333" font-family="system-ui" font-size="12">2.1</text></g>
+  <rect x="315" y="118" width="56" height="238" rx="6" class="flag"/><text x="343" y="385" text-anchor="middle" class="small">black flag 7×30</text>
+  <rect x="832" y="405" width="62" height="220" rx="6" class="flag"/><text x="863" y="650" text-anchor="middle" class="small">black flag 8×28</text>
+
+  <rect x="735" y="285" width="248" height="100" rx="10" class="rect"/><text x="756" y="325" class="label">D2 RectArea KEY</text><text x="756" y="352" class="small">30×20 · (15, −28, 18) · 1.0</text>
+  <rect x="220" y="505" width="248" height="100" rx="10" class="rect"/><text x="241" y="545" class="label">D2 RectArea FILL</text><text x="241" y="572" class="small">28×22 · (−18, 27, 11) · 0.35</text>
+
+  <line x1="985" y1="172" x2="720" y2="318" class="arrow"/><text x="947" y="145" class="label">D3 SHADOW CARRIER</text><text x="947" y="168" class="small">#fff · 0.15 · (14, −28, 21)</text><text x="947" y="190" class="small">PCFSoft · 2048/1024 · bounds-fit</text>
+
+  <text x="52" y="666" class="small">All primary lights use neutral #ffffff. Existing keys and camera PointLight are zeroed only inside D candidates. Background themes and selection feedback remain independent.</text>
+</svg>

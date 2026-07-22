@@ -1,0 +1,3623 @@
+{
+  "schema": "issue2-phase2a-all-lights-v1",
+  "entries": [
+    {
+      "candidate": "baseline",
+      "queryCandidate": "baseline",
+      "viewport": "1280x720",
+      "report": {
+        "candidate": "baseline",
+        "theme": "navy",
+        "view": "reset",
+        "pipeline": {
+          "threeRevision": "160",
+          "candidate": "baseline",
+          "requestedCandidate": "baseline",
+          "outputColorSpace": "srgb",
+          "toneMapping": 4,
+          "toneMappingExposure": 1.08,
+          "shadowMap": {
+            "enabled": true,
+            "autoUpdate": false,
+            "type": "PCFShadowMap"
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "css": [
+              1280,
+              720
+            ],
+            "drawingBuffer": [
+              1280,
+              720
+            ]
+          },
+          "webgl": {
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "renderer": "WebKit WebGL"
+          }
+        },
+        "rig": {
+          "candidate": "baseline",
+          "theme": "navy",
+          "exposure": 1.08,
+          "aim": [
+            0,
+            0.5,
+            0
+          ],
+          "lights": [
+            {
+              "name": "baseHemisphere",
+              "type": "HemisphereLight",
+              "intensity": 0.95,
+              "color": "#e8efff",
+              "position": [
+                0,
+                1,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "frontKey",
+              "type": "DirectionalLight",
+              "intensity": 1.96,
+              "color": "#fff4df",
+              "position": [
+                18,
+                -34,
+                24
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": true,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "backKey",
+              "type": "DirectionalLight",
+              "intensity": 1.7,
+              "color": "#e4edff",
+              "position": [
+                -16,
+                35,
+                21
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "sideRim",
+              "type": "DirectionalLight",
+              "intensity": 0.58,
+              "color": "#9ebcff",
+              "position": [
+                -30,
+                -2,
+                -19
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "cameraFill",
+              "type": "PointLight",
+              "intensity": 0.38,
+              "color": "#d9e8ff",
+              "position": [
+                0,
+                -48.473885644555445,
+                0.41858021918423455
+              ],
+              "target": null,
+              "cameraAttached": true,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-camera-fill"
+            }
+          ],
+          "auxiliaryLights": [
+            {
+              "name": "",
+              "type": "PointLight",
+              "intensity": 0,
+              "color": "#ffc45e",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "selection-feedback"
+            }
+          ],
+          "studio": {
+            "enabled": false,
+            "candidate": null
+          },
+          "frontKeyToBackKeyRatio": 1.1529411764705881,
+          "cameraFillToKeyRatio": 0.19387755102040816,
+          "issue2ViewFillToKeyRatio": 0
+        },
+        "studio": {
+          "enabled": false,
+          "candidate": null
+        },
+        "contributions": {
+          "front": {
+            "side": "front",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0.95,
+                "incidence": 0.55,
+                "estimated": 0.5225
+              },
+              {
+                "name": "frontKey",
+                "intensity": 1.96,
+                "incidence": 0.7546055221635046,
+                "estimated": 1.479026823440469
+              },
+              {
+                "name": "backKey",
+                "intensity": 1.7,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0.58,
+                "incidence": 0.07022776686260629,
+                "estimated": 0.04073210478031165
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0.38,
+                "incidence": 0.9999634763235147,
+                "estimated": 0.3799861210029356
+              }
+            ],
+            "total": 2.422245049223716
+          },
+          "back": {
+            "side": "back",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0.95,
+                "incidence": 0.55,
+                "estimated": 0.5225
+              },
+              {
+                "name": "frontKey",
+                "intensity": 1.96,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "backKey",
+                "intensity": 1.7,
+                "incidence": 0.7941533606342354,
+                "estimated": 1.3500607130782
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0.58,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0.38,
+                "incidence": 0.12,
+                "estimated": 0.0456
+              }
+            ],
+            "total": 1.9181607130782001
+          },
+          "cameraFillFollowsCamera": true,
+          "issue2ViewFillFollowsCamera": false
+        },
+        "cameraFillDistance": 48.97567441624348,
+        "cameraFillDecay": 2,
+        "cameraFillDistanceAttenuation": 0.0004169069641061308,
+        "cameraFillDistanceAdjustedIntensity": 0.0001584246463603297,
+        "issue2ViewFill": {
+          "enabled": false,
+          "type": null,
+          "intensity": 0,
+          "keyRatio": 0,
+          "distanceInvariant": false,
+          "cameraAttached": false,
+          "castShadow": false
+        },
+        "framebuffer": {
+          "averageLuminance": 0.135659336365191,
+          "rawAverageLuminance": 0.12195487848890456,
+          "darkRatio": 0.029560823821187056,
+          "clippedRatio": 0,
+          "sampleCount": 64917,
+          "buffer": [
+            1280,
+            720
+          ]
+        },
+        "phase2Framebuffer": {
+          "candidate": "baseline",
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "quaternion": [
+              0.704078583547734,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235146,
+              -0.008546696378833095
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.97567441624348,
+            "preset": "reset",
+            "finite": true
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "coarsePointer": false,
+            "panelOpen": false,
+            "panelCollapsed": true
+          },
+          "statistics": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 100629,
+            "averageLuminance": 0.12757822363986682,
+            "p50Luminance": 0.10001019607843137,
+            "p90Luminance": 0.2173741176470588,
+            "p95Luminance": 0.27619764705882355,
+            "p99Luminance": 0.39664941176470586,
+            "maxLuminance": 1,
+            "darkRatio": 0.02092836061175208,
+            "clippedRatio": 0.000009937493167973447,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.12436885714348092,
+              0.12876988058836916,
+              0.1252241830260326
+            ],
+            "buffer": [
+              1280,
+              720
+            ]
+          }
+        },
+        "materials": {
+          "brass": {
+            "world": [
+              -0.0002156231274588194,
+              0,
+              0.000058901927501020523
+            ],
+            "ndc": [
+              -0.0000065180310431758535,
+              -0.00022648492435157336,
+              0.996539734095855
+            ],
+            "pixel": [
+              640,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.2036265698378119,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "steel": {
+            "world": [
+              7.942341345003646,
+              -1.05,
+              -4.5
+            ],
+            "ndc": [
+              0.24520400895385946,
+              -0.24770217174508144,
+              0.9964517810258285
+            ],
+            "pixel": [
+              797,
+              271
+            ],
+            "inside": true,
+            "averageLuminance": 0.2998125393367219,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "ruby": {
+            "world": [
+              7.313573751952849,
+              1.42,
+              1.3809835864548963
+            ],
+            "ndc": [
+              0.21483987353614628,
+              0.07252724936280461,
+              0.9966562374764587
+            ],
+            "pixel": [
+              777,
+              386
+            ],
+            "inside": true,
+            "averageLuminance": 0.08895865407891557,
+            "darkRatio": 0.2839506172839506,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "dial": {
+            "world": [
+              16.1,
+              -2.08,
+              0
+            ],
+            "ndc": [
+              0.5085019287312003,
+              -0.0012381184165337572,
+              0.9963547136347357
+            ],
+            "pixel": [
+              965,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.12737552166545626,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "hands": {
+            "world": [
+              0,
+              -2.41,
+              0
+            ],
+            "ndc": [
+              0,
+              -0.0014064859721849249,
+              0.99632382376675
+            ],
+            "pixel": [
+              640,
+              359
+            ],
+            "inside": true,
+            "averageLuminance": 0.20192113289760372,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          }
+        }
+      }
+    },
+    {
+      "candidate": "c",
+      "queryCandidate": "lighting",
+      "viewport": "1280x720",
+      "report": {
+        "candidate": "lighting",
+        "theme": "navy",
+        "view": "reset",
+        "pipeline": {
+          "threeRevision": "160",
+          "candidate": "lighting",
+          "requestedCandidate": "lighting",
+          "outputColorSpace": "srgb",
+          "toneMapping": 4,
+          "toneMappingExposure": 1.08,
+          "shadowMap": {
+            "enabled": true,
+            "autoUpdate": false,
+            "type": "PCFShadowMap"
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "css": [
+              1280,
+              720
+            ],
+            "drawingBuffer": [
+              1280,
+              720
+            ]
+          },
+          "webgl": {
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "renderer": "WebKit WebGL"
+          }
+        },
+        "rig": {
+          "candidate": "lighting",
+          "theme": "navy",
+          "exposure": 1.08,
+          "aim": [
+            0,
+            0.5,
+            0
+          ],
+          "lights": [
+            {
+              "name": "baseHemisphere",
+              "type": "HemisphereLight",
+              "intensity": 0.95,
+              "color": "#e8efff",
+              "position": [
+                0,
+                1,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "frontKey",
+              "type": "DirectionalLight",
+              "intensity": 1.96,
+              "color": "#fff4df",
+              "position": [
+                18,
+                -34,
+                24
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": true,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "backKey",
+              "type": "DirectionalLight",
+              "intensity": 1.7,
+              "color": "#e4edff",
+              "position": [
+                -16,
+                35,
+                21
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "sideRim",
+              "type": "DirectionalLight",
+              "intensity": 0.58,
+              "color": "#9ebcff",
+              "position": [
+                -30,
+                -2,
+                -19
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "cameraFill",
+              "type": "PointLight",
+              "intensity": 0.38,
+              "color": "#d9e8ff",
+              "position": [
+                0,
+                -48.473885644555445,
+                0.41858021918423455
+              ],
+              "target": null,
+              "cameraAttached": true,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-camera-fill"
+            },
+            {
+              "name": "issue2ViewFill",
+              "type": "DirectionalLight",
+              "intensity": 0.02,
+              "color": "#e6efff",
+              "position": [
+                0,
+                -48.473885644555445,
+                0.41858021918423455
+              ],
+              "target": [
+                0,
+                -47.47392216823193,
+                0.41003352280540145
+              ],
+              "cameraAttached": true,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            }
+          ],
+          "auxiliaryLights": [
+            {
+              "name": "",
+              "type": "PointLight",
+              "intensity": 0,
+              "color": "#ffc45e",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "selection-feedback"
+            }
+          ],
+          "studio": {
+            "enabled": false,
+            "candidate": null
+          },
+          "frontKeyToBackKeyRatio": 1.1529411764705881,
+          "cameraFillToKeyRatio": 0.19387755102040816,
+          "issue2ViewFillToKeyRatio": 0.010204081632653062
+        },
+        "studio": {
+          "enabled": false,
+          "candidate": null
+        },
+        "contributions": {
+          "front": {
+            "side": "front",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0.95,
+                "incidence": 0.55,
+                "estimated": 0.5225
+              },
+              {
+                "name": "frontKey",
+                "intensity": 1.96,
+                "incidence": 0.7546055221635046,
+                "estimated": 1.479026823440469
+              },
+              {
+                "name": "backKey",
+                "intensity": 1.7,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0.58,
+                "incidence": 0.07022776686260629,
+                "estimated": 0.04073210478031165
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0.38,
+                "incidence": 0.9999634763235147,
+                "estimated": 0.3799861210029356
+              },
+              {
+                "name": "issue2ViewFill",
+                "intensity": 0.02,
+                "incidence": 0.9999634763235147,
+                "estimated": 0.019999269526470295
+              }
+            ],
+            "total": 2.4422443187501863
+          },
+          "back": {
+            "side": "back",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0.95,
+                "incidence": 0.55,
+                "estimated": 0.5225
+              },
+              {
+                "name": "frontKey",
+                "intensity": 1.96,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "backKey",
+                "intensity": 1.7,
+                "incidence": 0.7941533606342354,
+                "estimated": 1.3500607130782
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0.58,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0.38,
+                "incidence": 0.12,
+                "estimated": 0.0456
+              },
+              {
+                "name": "issue2ViewFill",
+                "intensity": 0.02,
+                "incidence": 0.12,
+                "estimated": 0.0024
+              }
+            ],
+            "total": 1.9205607130782
+          },
+          "cameraFillFollowsCamera": true,
+          "issue2ViewFillFollowsCamera": true
+        },
+        "cameraFillDistance": 48.97567441624348,
+        "cameraFillDecay": 2,
+        "cameraFillDistanceAttenuation": 0.0004169069641061308,
+        "cameraFillDistanceAdjustedIntensity": 0.0001584246463603297,
+        "issue2ViewFill": {
+          "enabled": true,
+          "type": "DirectionalLight",
+          "intensity": 0.02,
+          "keyRatio": 0.010204081632653062,
+          "distanceInvariant": true,
+          "cameraAttached": true,
+          "castShadow": false
+        },
+        "framebuffer": {
+          "averageLuminance": 0.165169263771326,
+          "rawAverageLuminance": 0.16339322434900222,
+          "darkRatio": 0.004801551634419793,
+          "clippedRatio": 0,
+          "sampleCount": 84556,
+          "buffer": [
+            1280,
+            720
+          ]
+        },
+        "phase2Framebuffer": {
+          "candidate": "lighting",
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "quaternion": [
+              0.704078583547734,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235146,
+              -0.008546696378833095
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.97567441624348,
+            "preset": "reset",
+            "finite": true
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "coarsePointer": false,
+            "panelOpen": false,
+            "panelCollapsed": true
+          },
+          "statistics": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 100629,
+            "averageLuminance": 0.16381118608656048,
+            "p50Luminance": 0.13194901960784314,
+            "p90Luminance": 0.2818854901960784,
+            "p95Luminance": 0.33420313725490197,
+            "p99Luminance": 0.46251372549019604,
+            "maxLuminance": 1,
+            "darkRatio": 0.0060320583529598825,
+            "clippedRatio": 0.000009937493167973447,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.15620831245978972,
+              0.16548618990477498,
+              0.1696063135427785
+            ],
+            "buffer": [
+              1280,
+              720
+            ]
+          }
+        },
+        "materials": {
+          "brass": {
+            "world": [
+              -0.0002156231274588194,
+              0,
+              0.000058901927501020523
+            ],
+            "ndc": [
+              -0.0000065180310431758535,
+              -0.00022648492435157336,
+              0.996539734095855
+            ],
+            "pixel": [
+              640,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.8636844057129025,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "steel": {
+            "world": [
+              7.942341345003646,
+              -1.05,
+              -4.5
+            ],
+            "ndc": [
+              0.24520400895385946,
+              -0.24770217174508144,
+              0.9964517810258285
+            ],
+            "pixel": [
+              797,
+              271
+            ],
+            "inside": true,
+            "averageLuminance": 0.30857128056160715,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "ruby": {
+            "world": [
+              7.313573751952849,
+              1.42,
+              1.3809835864548963
+            ],
+            "ndc": [
+              0.21483987353614628,
+              0.07252724936280461,
+              0.9966562374764587
+            ],
+            "pixel": [
+              777,
+              386
+            ],
+            "inside": true,
+            "averageLuminance": 0.15784685548293395,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "dial": {
+            "world": [
+              16.1,
+              -2.08,
+              0
+            ],
+            "ndc": [
+              0.5085019287312003,
+              -0.0012381184165337572,
+              0.9963547136347357
+            ],
+            "pixel": [
+              965,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.1302546695715323,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "hands": {
+            "world": [
+              0,
+              -2.41,
+              0
+            ],
+            "ndc": [
+              0,
+              -0.0014064859721849249,
+              0.99632382376675
+            ],
+            "pixel": [
+              640,
+              359
+            ],
+            "inside": true,
+            "averageLuminance": 0.8630893923989351,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          }
+        }
+      }
+    },
+    {
+      "candidate": "d1",
+      "queryCandidate": "studio-d1",
+      "viewport": "1280x720",
+      "report": {
+        "candidate": "studio-d1",
+        "theme": "navy",
+        "view": "reset",
+        "pipeline": {
+          "threeRevision": "160",
+          "candidate": "studio-d1",
+          "requestedCandidate": "studio-d1",
+          "outputColorSpace": "srgb",
+          "toneMapping": 4,
+          "toneMappingExposure": 1.08,
+          "shadowMap": {
+            "enabled": true,
+            "autoUpdate": false,
+            "type": "PCFShadowMap"
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "css": [
+              1280,
+              720
+            ],
+            "drawingBuffer": [
+              1280,
+              720
+            ]
+          },
+          "webgl": {
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "renderer": "WebKit WebGL"
+          }
+        },
+        "rig": {
+          "candidate": "studio-d1",
+          "theme": "navy",
+          "exposure": 1.08,
+          "aim": [
+            0,
+            0.5,
+            0
+          ],
+          "lights": [
+            {
+              "name": "baseHemisphere",
+              "type": "HemisphereLight",
+              "intensity": 0,
+              "color": "#e8efff",
+              "position": [
+                0,
+                1,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "frontKey",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#fff4df",
+              "position": [
+                18,
+                -34,
+                24
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "backKey",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#e4edff",
+              "position": [
+                -16,
+                35,
+                21
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "sideRim",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#9ebcff",
+              "position": [
+                -30,
+                -2,
+                -19
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "cameraFill",
+              "type": "PointLight",
+              "intensity": 0,
+              "color": "#d9e8ff",
+              "position": [
+                0,
+                -48.473885644555445,
+                0.41858021918423455
+              ],
+              "target": null,
+              "cameraAttached": true,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-camera-fill"
+            }
+          ],
+          "auxiliaryLights": [
+            {
+              "name": "",
+              "type": "PointLight",
+              "intensity": 0,
+              "color": "#ffc45e",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "selection-feedback"
+            }
+          ],
+          "studio": {
+            "enabled": true,
+            "candidate": "studio-d1",
+            "neutralLightColor": "#ffffff",
+            "backgroundIndependent": true,
+            "environment": {
+              "applied": true,
+              "source": "PMREMGenerator.fromScene",
+              "sigma": 0.04,
+              "near": 0.1,
+              "far": 100,
+              "background": "#080808",
+              "ambientSurface": {
+                "kind": "room-and-floor",
+                "color": "#181818",
+                "roomRadius": 70,
+                "floorSize": [
+                  96,
+                  96
+                ],
+                "floorPosition": [
+                  0,
+                  0,
+                  -24
+                ]
+              },
+              "panels": [
+                {
+                  "name": "studioEnvKeyPanel",
+                  "role": "key-reflection",
+                  "color": "#ffffff",
+                  "radiance": 4.8,
+                  "size": [
+                    34,
+                    22
+                  ],
+                  "position": [
+                    16,
+                    -30,
+                    20
+                  ]
+                },
+                {
+                  "name": "studioEnvFillPanel",
+                  "role": "fill-reflection",
+                  "color": "#ffffff",
+                  "radiance": 2.75,
+                  "size": [
+                    32,
+                    26
+                  ],
+                  "position": [
+                    -20,
+                    28,
+                    10
+                  ]
+                },
+                {
+                  "name": "studioEnvStripPanel",
+                  "role": "rim-reflection",
+                  "color": "#ffffff",
+                  "radiance": 2.1,
+                  "size": [
+                    8,
+                    32
+                  ],
+                  "position": [
+                    -28,
+                    -3,
+                    -12
+                  ]
+                }
+              ],
+              "flags": [
+                {
+                  "name": "studioEnvFrontFlag",
+                  "role": "front-edge-negative-fill",
+                  "color": "#000000",
+                  "size": [
+                    7,
+                    30
+                  ],
+                  "position": [
+                    -23,
+                    -25,
+                    3
+                  ]
+                },
+                {
+                  "name": "studioEnvBackFlag",
+                  "role": "back-edge-negative-fill",
+                  "color": "#000000",
+                  "size": [
+                    8,
+                    28
+                  ],
+                  "position": [
+                    24,
+                    22,
+                    -4
+                  ]
+                }
+              ]
+            },
+            "initialization": {
+              "durationMs": 14.199999988079071,
+              "memoryBefore": {
+                "geometries": 0,
+                "textures": 0
+              },
+              "memoryAfter": {
+                "geometries": 0,
+                "textures": 1
+              },
+              "generationCount": 1
+            },
+            "rectAreaUniformsInitialized": false,
+            "rectLights": [],
+            "shadowCarrier": null,
+            "pointLightActive": false,
+            "legacyLights": [
+              {
+                "name": "baseHemisphere",
+                "type": "HemisphereLight",
+                "color": "#e8efff",
+                "originalIntensity": 0.95,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "frontKey",
+                "type": "DirectionalLight",
+                "color": "#fff4df",
+                "originalIntensity": 1.96,
+                "currentIntensity": 0,
+                "originalCastShadow": true,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "backKey",
+                "type": "DirectionalLight",
+                "color": "#e4edff",
+                "originalIntensity": 1.7,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "sideRim",
+                "type": "DirectionalLight",
+                "color": "#9ebcff",
+                "originalIntensity": 0.58,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "cameraFill",
+                "type": "PointLight",
+                "color": "#d9e8ff",
+                "originalIntensity": 0.38,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "PerspectiveCamera"
+              }
+            ]
+          },
+          "frontKeyToBackKeyRatio": 0,
+          "cameraFillToKeyRatio": 0,
+          "issue2ViewFillToKeyRatio": 0
+        },
+        "studio": {
+          "enabled": true,
+          "candidate": "studio-d1",
+          "neutralLightColor": "#ffffff",
+          "backgroundIndependent": true,
+          "environment": {
+            "applied": true,
+            "source": "PMREMGenerator.fromScene",
+            "sigma": 0.04,
+            "near": 0.1,
+            "far": 100,
+            "background": "#080808",
+            "ambientSurface": {
+              "kind": "room-and-floor",
+              "color": "#181818",
+              "roomRadius": 70,
+              "floorSize": [
+                96,
+                96
+              ],
+              "floorPosition": [
+                0,
+                0,
+                -24
+              ]
+            },
+            "panels": [
+              {
+                "name": "studioEnvKeyPanel",
+                "role": "key-reflection",
+                "color": "#ffffff",
+                "radiance": 4.8,
+                "size": [
+                  34,
+                  22
+                ],
+                "position": [
+                  16,
+                  -30,
+                  20
+                ]
+              },
+              {
+                "name": "studioEnvFillPanel",
+                "role": "fill-reflection",
+                "color": "#ffffff",
+                "radiance": 2.75,
+                "size": [
+                  32,
+                  26
+                ],
+                "position": [
+                  -20,
+                  28,
+                  10
+                ]
+              },
+              {
+                "name": "studioEnvStripPanel",
+                "role": "rim-reflection",
+                "color": "#ffffff",
+                "radiance": 2.1,
+                "size": [
+                  8,
+                  32
+                ],
+                "position": [
+                  -28,
+                  -3,
+                  -12
+                ]
+              }
+            ],
+            "flags": [
+              {
+                "name": "studioEnvFrontFlag",
+                "role": "front-edge-negative-fill",
+                "color": "#000000",
+                "size": [
+                  7,
+                  30
+                ],
+                "position": [
+                  -23,
+                  -25,
+                  3
+                ]
+              },
+              {
+                "name": "studioEnvBackFlag",
+                "role": "back-edge-negative-fill",
+                "color": "#000000",
+                "size": [
+                  8,
+                  28
+                ],
+                "position": [
+                  24,
+                  22,
+                  -4
+                ]
+              }
+            ]
+          },
+          "initialization": {
+            "durationMs": 14.199999988079071,
+            "memoryBefore": {
+              "geometries": 0,
+              "textures": 0
+            },
+            "memoryAfter": {
+              "geometries": 0,
+              "textures": 1
+            },
+            "generationCount": 1
+          },
+          "rectAreaUniformsInitialized": false,
+          "rectLights": [],
+          "shadowCarrier": null,
+          "pointLightActive": false,
+          "legacyLights": [
+            {
+              "name": "baseHemisphere",
+              "type": "HemisphereLight",
+              "color": "#e8efff",
+              "originalIntensity": 0.95,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "frontKey",
+              "type": "DirectionalLight",
+              "color": "#fff4df",
+              "originalIntensity": 1.96,
+              "currentIntensity": 0,
+              "originalCastShadow": true,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "backKey",
+              "type": "DirectionalLight",
+              "color": "#e4edff",
+              "originalIntensity": 1.7,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "sideRim",
+              "type": "DirectionalLight",
+              "color": "#9ebcff",
+              "originalIntensity": 0.58,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "cameraFill",
+              "type": "PointLight",
+              "color": "#d9e8ff",
+              "originalIntensity": 0.38,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "PerspectiveCamera"
+            }
+          ]
+        },
+        "contributions": {
+          "front": {
+            "side": "front",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0,
+                "incidence": 0.55,
+                "estimated": 0
+              },
+              {
+                "name": "frontKey",
+                "intensity": 0,
+                "incidence": 0.7546055221635046,
+                "estimated": 0
+              },
+              {
+                "name": "backKey",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0,
+                "incidence": 0.07022776686260629,
+                "estimated": 0
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0,
+                "incidence": 0.9999634763235147,
+                "estimated": 0
+              }
+            ],
+            "total": 0
+          },
+          "back": {
+            "side": "back",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0,
+                "incidence": 0.55,
+                "estimated": 0
+              },
+              {
+                "name": "frontKey",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "backKey",
+                "intensity": 0,
+                "incidence": 0.7941533606342354,
+                "estimated": 0
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0,
+                "incidence": 0.12,
+                "estimated": 0
+              }
+            ],
+            "total": 0
+          },
+          "cameraFillFollowsCamera": true,
+          "issue2ViewFillFollowsCamera": false
+        },
+        "cameraFillDistance": 48.97567441624348,
+        "cameraFillDecay": 2,
+        "cameraFillDistanceAttenuation": 0.0004169069641061308,
+        "cameraFillDistanceAdjustedIntensity": 0,
+        "issue2ViewFill": {
+          "enabled": false,
+          "type": null,
+          "intensity": 0,
+          "keyRatio": 0,
+          "distanceInvariant": false,
+          "cameraAttached": false,
+          "castShadow": false
+        },
+        "framebuffer": {
+          "averageLuminance": 0.13385563885381,
+          "rawAverageLuminance": 0.13188310590461094,
+          "darkRatio": 0.008792441125241583,
+          "clippedRatio": 0,
+          "sampleCount": 83822,
+          "buffer": [
+            1280,
+            720
+          ]
+        },
+        "phase2Framebuffer": {
+          "candidate": "studio-d1",
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "quaternion": [
+              0.704078583547734,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235146,
+              -0.008546696378833095
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.97567441624348,
+            "preset": "reset",
+            "finite": true
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "coarsePointer": false,
+            "panelOpen": false,
+            "panelCollapsed": true
+          },
+          "statistics": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 100629,
+            "averageLuminance": 0.14157249621453774,
+            "p50Luminance": 0.09219843137254902,
+            "p90Luminance": 0.2779482352941176,
+            "p95Luminance": 0.36912235294117646,
+            "p99Luminance": 0.5211011764705882,
+            "maxLuminance": 0.952673725490196,
+            "darkRatio": 0.009202118673543412,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.12702290825999502,
+              0.1436660659354913,
+              0.16367666982526882
+            ],
+            "buffer": [
+              1280,
+              720
+            ]
+          }
+        },
+        "materials": {
+          "brass": {
+            "world": [
+              -0.0002156231274588194,
+              0,
+              0.000058901927501020523
+            ],
+            "ndc": [
+              -0.0000065180310431758535,
+              -0.00022648492435157336,
+              0.996539734095855
+            ],
+            "pixel": [
+              640,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.17411647542967812,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "steel": {
+            "world": [
+              7.942341345003646,
+              -1.05,
+              -4.5
+            ],
+            "ndc": [
+              0.24520400895385946,
+              -0.24770217174508144,
+              0.9964517810258285
+            ],
+            "pixel": [
+              797,
+              271
+            ],
+            "inside": true,
+            "averageLuminance": 0.29781193899782105,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "ruby": {
+            "world": [
+              7.313573751952849,
+              1.42,
+              1.3809835864548963
+            ],
+            "ndc": [
+              0.21483987353614628,
+              0.07252724936280461,
+              0.9966562374764587
+            ],
+            "pixel": [
+              777,
+              386
+            ],
+            "inside": true,
+            "averageLuminance": 0.1229047591382232,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "dial": {
+            "world": [
+              16.1,
+              -2.08,
+              0
+            ],
+            "ndc": [
+              0.5085019287312003,
+              -0.0012381184165337572,
+              0.9963547136347357
+            ],
+            "pixel": [
+              965,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.17777155168240125,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "hands": {
+            "world": [
+              0,
+              -2.41,
+              0
+            ],
+            "ndc": [
+              0,
+              -0.0014064859721849249,
+              0.99632382376675
+            ],
+            "pixel": [
+              640,
+              359
+            ],
+            "inside": true,
+            "averageLuminance": 0.1741127862503027,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          }
+        }
+      }
+    },
+    {
+      "candidate": "d2",
+      "queryCandidate": "studio-d2",
+      "viewport": "1280x720",
+      "report": {
+        "candidate": "studio-d2",
+        "theme": "navy",
+        "view": "reset",
+        "pipeline": {
+          "threeRevision": "160",
+          "candidate": "studio-d2",
+          "requestedCandidate": "studio-d2",
+          "outputColorSpace": "srgb",
+          "toneMapping": 4,
+          "toneMappingExposure": 1.08,
+          "shadowMap": {
+            "enabled": true,
+            "autoUpdate": false,
+            "type": "PCFShadowMap"
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "css": [
+              1280,
+              720
+            ],
+            "drawingBuffer": [
+              1280,
+              720
+            ]
+          },
+          "webgl": {
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "renderer": "WebKit WebGL"
+          }
+        },
+        "rig": {
+          "candidate": "studio-d2",
+          "theme": "navy",
+          "exposure": 1.08,
+          "aim": [
+            0,
+            0.5,
+            0
+          ],
+          "lights": [
+            {
+              "name": "baseHemisphere",
+              "type": "HemisphereLight",
+              "intensity": 0,
+              "color": "#e8efff",
+              "position": [
+                0,
+                1,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "frontKey",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#fff4df",
+              "position": [
+                18,
+                -34,
+                24
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "backKey",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#e4edff",
+              "position": [
+                -16,
+                35,
+                21
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "sideRim",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#9ebcff",
+              "position": [
+                -30,
+                -2,
+                -19
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "cameraFill",
+              "type": "PointLight",
+              "intensity": 0,
+              "color": "#d9e8ff",
+              "position": [
+                0,
+                -48.473885644555445,
+                0.41858021918423455
+              ],
+              "target": null,
+              "cameraAttached": true,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-camera-fill"
+            },
+            {
+              "name": "studioRectKey",
+              "type": "RectAreaLight",
+              "intensity": 1,
+              "color": "#ffffff",
+              "position": [
+                15,
+                -28,
+                18
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": 30,
+              "height": 20,
+              "category": "issue2-studio"
+            },
+            {
+              "name": "studioRectFill",
+              "type": "RectAreaLight",
+              "intensity": 0.35,
+              "color": "#ffffff",
+              "position": [
+                -18,
+                27,
+                11
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": 28,
+              "height": 22,
+              "category": "issue2-studio"
+            }
+          ],
+          "auxiliaryLights": [
+            {
+              "name": "",
+              "type": "PointLight",
+              "intensity": 0,
+              "color": "#ffc45e",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "selection-feedback"
+            }
+          ],
+          "studio": {
+            "enabled": true,
+            "candidate": "studio-d2",
+            "neutralLightColor": "#ffffff",
+            "backgroundIndependent": true,
+            "environment": {
+              "applied": true,
+              "source": "PMREMGenerator.fromScene",
+              "sigma": 0.04,
+              "near": 0.1,
+              "far": 100,
+              "background": "#080808",
+              "ambientSurface": {
+                "kind": "room-and-floor",
+                "color": "#181818",
+                "roomRadius": 70,
+                "floorSize": [
+                  96,
+                  96
+                ],
+                "floorPosition": [
+                  0,
+                  0,
+                  -24
+                ]
+              },
+              "panels": [
+                {
+                  "name": "studioEnvKeyPanel",
+                  "role": "key-reflection",
+                  "color": "#ffffff",
+                  "radiance": 4.8,
+                  "size": [
+                    34,
+                    22
+                  ],
+                  "position": [
+                    16,
+                    -30,
+                    20
+                  ]
+                },
+                {
+                  "name": "studioEnvFillPanel",
+                  "role": "fill-reflection",
+                  "color": "#ffffff",
+                  "radiance": 2.75,
+                  "size": [
+                    32,
+                    26
+                  ],
+                  "position": [
+                    -20,
+                    28,
+                    10
+                  ]
+                },
+                {
+                  "name": "studioEnvStripPanel",
+                  "role": "rim-reflection",
+                  "color": "#ffffff",
+                  "radiance": 2.1,
+                  "size": [
+                    8,
+                    32
+                  ],
+                  "position": [
+                    -28,
+                    -3,
+                    -12
+                  ]
+                }
+              ],
+              "flags": [
+                {
+                  "name": "studioEnvFrontFlag",
+                  "role": "front-edge-negative-fill",
+                  "color": "#000000",
+                  "size": [
+                    7,
+                    30
+                  ],
+                  "position": [
+                    -23,
+                    -25,
+                    3
+                  ]
+                },
+                {
+                  "name": "studioEnvBackFlag",
+                  "role": "back-edge-negative-fill",
+                  "color": "#000000",
+                  "size": [
+                    8,
+                    28
+                  ],
+                  "position": [
+                    24,
+                    22,
+                    -4
+                  ]
+                }
+              ]
+            },
+            "initialization": {
+              "durationMs": 21.900000005960464,
+              "memoryBefore": {
+                "geometries": 0,
+                "textures": 0
+              },
+              "memoryAfter": {
+                "geometries": 0,
+                "textures": 1
+              },
+              "generationCount": 1
+            },
+            "rectAreaUniformsInitialized": true,
+            "rectLights": [
+              {
+                "name": "studioRectKey",
+                "role": "front-key",
+                "type": "RectAreaLight",
+                "color": "#ffffff",
+                "intensity": 1,
+                "position": [
+                  15,
+                  -28,
+                  18
+                ],
+                "target": null,
+                "size": [
+                  30,
+                  20
+                ],
+                "castShadow": false
+              },
+              {
+                "name": "studioRectFill",
+                "role": "back-fill",
+                "type": "RectAreaLight",
+                "color": "#ffffff",
+                "intensity": 0.35,
+                "position": [
+                  -18,
+                  27,
+                  11
+                ],
+                "target": null,
+                "size": [
+                  28,
+                  22
+                ],
+                "castShadow": false
+              }
+            ],
+            "shadowCarrier": null,
+            "pointLightActive": false,
+            "legacyLights": [
+              {
+                "name": "baseHemisphere",
+                "type": "HemisphereLight",
+                "color": "#e8efff",
+                "originalIntensity": 0.95,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "frontKey",
+                "type": "DirectionalLight",
+                "color": "#fff4df",
+                "originalIntensity": 1.96,
+                "currentIntensity": 0,
+                "originalCastShadow": true,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "backKey",
+                "type": "DirectionalLight",
+                "color": "#e4edff",
+                "originalIntensity": 1.7,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "sideRim",
+                "type": "DirectionalLight",
+                "color": "#9ebcff",
+                "originalIntensity": 0.58,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "cameraFill",
+                "type": "PointLight",
+                "color": "#d9e8ff",
+                "originalIntensity": 0.38,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "PerspectiveCamera"
+              }
+            ]
+          },
+          "frontKeyToBackKeyRatio": 0,
+          "cameraFillToKeyRatio": 0,
+          "issue2ViewFillToKeyRatio": 0
+        },
+        "studio": {
+          "enabled": true,
+          "candidate": "studio-d2",
+          "neutralLightColor": "#ffffff",
+          "backgroundIndependent": true,
+          "environment": {
+            "applied": true,
+            "source": "PMREMGenerator.fromScene",
+            "sigma": 0.04,
+            "near": 0.1,
+            "far": 100,
+            "background": "#080808",
+            "ambientSurface": {
+              "kind": "room-and-floor",
+              "color": "#181818",
+              "roomRadius": 70,
+              "floorSize": [
+                96,
+                96
+              ],
+              "floorPosition": [
+                0,
+                0,
+                -24
+              ]
+            },
+            "panels": [
+              {
+                "name": "studioEnvKeyPanel",
+                "role": "key-reflection",
+                "color": "#ffffff",
+                "radiance": 4.8,
+                "size": [
+                  34,
+                  22
+                ],
+                "position": [
+                  16,
+                  -30,
+                  20
+                ]
+              },
+              {
+                "name": "studioEnvFillPanel",
+                "role": "fill-reflection",
+                "color": "#ffffff",
+                "radiance": 2.75,
+                "size": [
+                  32,
+                  26
+                ],
+                "position": [
+                  -20,
+                  28,
+                  10
+                ]
+              },
+              {
+                "name": "studioEnvStripPanel",
+                "role": "rim-reflection",
+                "color": "#ffffff",
+                "radiance": 2.1,
+                "size": [
+                  8,
+                  32
+                ],
+                "position": [
+                  -28,
+                  -3,
+                  -12
+                ]
+              }
+            ],
+            "flags": [
+              {
+                "name": "studioEnvFrontFlag",
+                "role": "front-edge-negative-fill",
+                "color": "#000000",
+                "size": [
+                  7,
+                  30
+                ],
+                "position": [
+                  -23,
+                  -25,
+                  3
+                ]
+              },
+              {
+                "name": "studioEnvBackFlag",
+                "role": "back-edge-negative-fill",
+                "color": "#000000",
+                "size": [
+                  8,
+                  28
+                ],
+                "position": [
+                  24,
+                  22,
+                  -4
+                ]
+              }
+            ]
+          },
+          "initialization": {
+            "durationMs": 21.900000005960464,
+            "memoryBefore": {
+              "geometries": 0,
+              "textures": 0
+            },
+            "memoryAfter": {
+              "geometries": 0,
+              "textures": 1
+            },
+            "generationCount": 1
+          },
+          "rectAreaUniformsInitialized": true,
+          "rectLights": [
+            {
+              "name": "studioRectKey",
+              "role": "front-key",
+              "type": "RectAreaLight",
+              "color": "#ffffff",
+              "intensity": 1,
+              "position": [
+                15,
+                -28,
+                18
+              ],
+              "target": null,
+              "size": [
+                30,
+                20
+              ],
+              "castShadow": false
+            },
+            {
+              "name": "studioRectFill",
+              "role": "back-fill",
+              "type": "RectAreaLight",
+              "color": "#ffffff",
+              "intensity": 0.35,
+              "position": [
+                -18,
+                27,
+                11
+              ],
+              "target": null,
+              "size": [
+                28,
+                22
+              ],
+              "castShadow": false
+            }
+          ],
+          "shadowCarrier": null,
+          "pointLightActive": false,
+          "legacyLights": [
+            {
+              "name": "baseHemisphere",
+              "type": "HemisphereLight",
+              "color": "#e8efff",
+              "originalIntensity": 0.95,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "frontKey",
+              "type": "DirectionalLight",
+              "color": "#fff4df",
+              "originalIntensity": 1.96,
+              "currentIntensity": 0,
+              "originalCastShadow": true,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "backKey",
+              "type": "DirectionalLight",
+              "color": "#e4edff",
+              "originalIntensity": 1.7,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "sideRim",
+              "type": "DirectionalLight",
+              "color": "#9ebcff",
+              "originalIntensity": 0.58,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "cameraFill",
+              "type": "PointLight",
+              "color": "#d9e8ff",
+              "originalIntensity": 0.38,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "PerspectiveCamera"
+            }
+          ]
+        },
+        "contributions": {
+          "front": {
+            "side": "front",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0,
+                "incidence": 0.55,
+                "estimated": 0
+              },
+              {
+                "name": "frontKey",
+                "intensity": 0,
+                "incidence": 0.7546055221635046,
+                "estimated": 0
+              },
+              {
+                "name": "backKey",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0,
+                "incidence": 0.07022776686260629,
+                "estimated": 0
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0,
+                "incidence": 0.9999634763235147,
+                "estimated": 0
+              }
+            ],
+            "total": 0
+          },
+          "back": {
+            "side": "back",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0,
+                "incidence": 0.55,
+                "estimated": 0
+              },
+              {
+                "name": "frontKey",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "backKey",
+                "intensity": 0,
+                "incidence": 0.7941533606342354,
+                "estimated": 0
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0,
+                "incidence": 0.12,
+                "estimated": 0
+              }
+            ],
+            "total": 0
+          },
+          "cameraFillFollowsCamera": true,
+          "issue2ViewFillFollowsCamera": false
+        },
+        "cameraFillDistance": 48.97567441624348,
+        "cameraFillDecay": 2,
+        "cameraFillDistanceAttenuation": 0.0004169069641061308,
+        "cameraFillDistanceAdjustedIntensity": 0,
+        "issue2ViewFill": {
+          "enabled": false,
+          "type": null,
+          "intensity": 0,
+          "keyRatio": 0,
+          "distanceInvariant": false,
+          "cameraAttached": false,
+          "castShadow": false
+        },
+        "framebuffer": {
+          "averageLuminance": 0.22073161052166682,
+          "rawAverageLuminance": 0.2180062306794557,
+          "darkRatio": 0.005293943870014771,
+          "clippedRatio": 0,
+          "sampleCount": 84625,
+          "buffer": [
+            1280,
+            720
+          ]
+        },
+        "phase2Framebuffer": {
+          "candidate": "studio-d2",
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "quaternion": [
+              0.704078583547734,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235146,
+              -0.008546696378833095
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.97567441624348,
+            "preset": "reset",
+            "finite": true
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "coarsePointer": false,
+            "panelOpen": false,
+            "panelCollapsed": true
+          },
+          "statistics": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 100629,
+            "averageLuminance": 0.2239698590922397,
+            "p50Luminance": 0.11601098039215686,
+            "p90Luminance": 0.6227788235294117,
+            "p95Luminance": 0.6930839215686274,
+            "p99Luminance": 0.7485364705882352,
+            "maxLuminance": 0.9593999999999999,
+            "darkRatio": 0.00579355851692852,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.20704217530556218,
+              0.22649312296244495,
+              0.24882009805382896
+            ],
+            "buffer": [
+              1280,
+              720
+            ]
+          }
+        },
+        "materials": {
+          "brass": {
+            "world": [
+              -0.0002156231274588194,
+              0,
+              0.000058901927501020523
+            ],
+            "ndc": [
+              -0.0000065180310431758535,
+              -0.00022648492435157336,
+              0.996539734095855
+            ],
+            "pixel": [
+              640,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.21385673202614397,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "steel": {
+            "world": [
+              7.942341345003646,
+              -1.05,
+              -4.5
+            ],
+            "ndc": [
+              0.24520400895385946,
+              -0.24770217174508144,
+              0.9964517810258285
+            ],
+            "pixel": [
+              797,
+              271
+            ],
+            "inside": true,
+            "averageLuminance": 0.3314417622851611,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "ruby": {
+            "world": [
+              7.313573751952849,
+              1.42,
+              1.3809835864548963
+            ],
+            "ndc": [
+              0.21483987353614628,
+              0.07252724936280461,
+              0.9966562374764587
+            ],
+            "pixel": [
+              777,
+              386
+            ],
+            "inside": true,
+            "averageLuminance": 0.21845614137012806,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "dial": {
+            "world": [
+              16.1,
+              -2.08,
+              0
+            ],
+            "ndc": [
+              0.5085019287312003,
+              -0.0012381184165337572,
+              0.9963547136347357
+            ],
+            "pixel": [
+              965,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.2151566690873879,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "hands": {
+            "world": [
+              0,
+              -2.41,
+              0
+            ],
+            "ndc": [
+              0,
+              -0.0014064859721849249,
+              0.99632382376675
+            ],
+            "pixel": [
+              640,
+              359
+            ],
+            "inside": true,
+            "averageLuminance": 0.21361745824255646,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          }
+        }
+      }
+    },
+    {
+      "candidate": "d3",
+      "queryCandidate": "studio-d3",
+      "viewport": "1280x720",
+      "report": {
+        "candidate": "studio-d3",
+        "theme": "navy",
+        "view": "reset",
+        "pipeline": {
+          "threeRevision": "160",
+          "candidate": "studio-d3",
+          "requestedCandidate": "studio-d3",
+          "outputColorSpace": "srgb",
+          "toneMapping": 4,
+          "toneMappingExposure": 1.08,
+          "shadowMap": {
+            "enabled": true,
+            "autoUpdate": false,
+            "type": "PCFSoftShadowMap"
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "css": [
+              1280,
+              720
+            ],
+            "drawingBuffer": [
+              1280,
+              720
+            ]
+          },
+          "webgl": {
+            "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+            "renderer": "WebKit WebGL"
+          }
+        },
+        "rig": {
+          "candidate": "studio-d3",
+          "theme": "navy",
+          "exposure": 1.08,
+          "aim": [
+            0,
+            0.5,
+            0
+          ],
+          "lights": [
+            {
+              "name": "baseHemisphere",
+              "type": "HemisphereLight",
+              "intensity": 0,
+              "color": "#e8efff",
+              "position": [
+                0,
+                1,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "frontKey",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#fff4df",
+              "position": [
+                18,
+                -34,
+                24
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "backKey",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#e4edff",
+              "position": [
+                -16,
+                35,
+                21
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "sideRim",
+              "type": "DirectionalLight",
+              "intensity": 0,
+              "color": "#9ebcff",
+              "position": [
+                -30,
+                -2,
+                -19
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-main"
+            },
+            {
+              "name": "cameraFill",
+              "type": "PointLight",
+              "intensity": 0,
+              "color": "#d9e8ff",
+              "position": [
+                0,
+                -48.473885644555445,
+                0.41858021918423455
+              ],
+              "target": null,
+              "cameraAttached": true,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "legacy-camera-fill"
+            },
+            {
+              "name": "studioRectKey",
+              "type": "RectAreaLight",
+              "intensity": 1,
+              "color": "#ffffff",
+              "position": [
+                15,
+                -28,
+                18
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": 30,
+              "height": 20,
+              "category": "issue2-studio"
+            },
+            {
+              "name": "studioRectFill",
+              "type": "RectAreaLight",
+              "intensity": 0.35,
+              "color": "#ffffff",
+              "position": [
+                -18,
+                27,
+                11
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": 28,
+              "height": 22,
+              "category": "issue2-studio"
+            },
+            {
+              "name": "studioShadowCarrier",
+              "type": "DirectionalLight",
+              "intensity": 0.15,
+              "color": "#ffffff",
+              "position": [
+                14,
+                -28,
+                21
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "cameraAttached": false,
+              "castShadow": true,
+              "width": null,
+              "height": null,
+              "category": "issue2-studio"
+            }
+          ],
+          "auxiliaryLights": [
+            {
+              "name": "",
+              "type": "PointLight",
+              "intensity": 0,
+              "color": "#ffc45e",
+              "position": [
+                0,
+                0,
+                0
+              ],
+              "target": null,
+              "cameraAttached": false,
+              "castShadow": false,
+              "width": null,
+              "height": null,
+              "category": "selection-feedback"
+            }
+          ],
+          "studio": {
+            "enabled": true,
+            "candidate": "studio-d3",
+            "neutralLightColor": "#ffffff",
+            "backgroundIndependent": true,
+            "environment": {
+              "applied": true,
+              "source": "PMREMGenerator.fromScene",
+              "sigma": 0.04,
+              "near": 0.1,
+              "far": 100,
+              "background": "#080808",
+              "ambientSurface": {
+                "kind": "room-and-floor",
+                "color": "#181818",
+                "roomRadius": 70,
+                "floorSize": [
+                  96,
+                  96
+                ],
+                "floorPosition": [
+                  0,
+                  0,
+                  -24
+                ]
+              },
+              "panels": [
+                {
+                  "name": "studioEnvKeyPanel",
+                  "role": "key-reflection",
+                  "color": "#ffffff",
+                  "radiance": 4.8,
+                  "size": [
+                    34,
+                    22
+                  ],
+                  "position": [
+                    16,
+                    -30,
+                    20
+                  ]
+                },
+                {
+                  "name": "studioEnvFillPanel",
+                  "role": "fill-reflection",
+                  "color": "#ffffff",
+                  "radiance": 2.75,
+                  "size": [
+                    32,
+                    26
+                  ],
+                  "position": [
+                    -20,
+                    28,
+                    10
+                  ]
+                },
+                {
+                  "name": "studioEnvStripPanel",
+                  "role": "rim-reflection",
+                  "color": "#ffffff",
+                  "radiance": 2.1,
+                  "size": [
+                    8,
+                    32
+                  ],
+                  "position": [
+                    -28,
+                    -3,
+                    -12
+                  ]
+                }
+              ],
+              "flags": [
+                {
+                  "name": "studioEnvFrontFlag",
+                  "role": "front-edge-negative-fill",
+                  "color": "#000000",
+                  "size": [
+                    7,
+                    30
+                  ],
+                  "position": [
+                    -23,
+                    -25,
+                    3
+                  ]
+                },
+                {
+                  "name": "studioEnvBackFlag",
+                  "role": "back-edge-negative-fill",
+                  "color": "#000000",
+                  "size": [
+                    8,
+                    28
+                  ],
+                  "position": [
+                    24,
+                    22,
+                    -4
+                  ]
+                }
+              ]
+            },
+            "initialization": {
+              "durationMs": 18.899999976158142,
+              "memoryBefore": {
+                "geometries": 0,
+                "textures": 0
+              },
+              "memoryAfter": {
+                "geometries": 0,
+                "textures": 1
+              },
+              "generationCount": 1
+            },
+            "rectAreaUniformsInitialized": true,
+            "rectLights": [
+              {
+                "name": "studioRectKey",
+                "role": "front-key",
+                "type": "RectAreaLight",
+                "color": "#ffffff",
+                "intensity": 1,
+                "position": [
+                  15,
+                  -28,
+                  18
+                ],
+                "target": null,
+                "size": [
+                  30,
+                  20
+                ],
+                "castShadow": false
+              },
+              {
+                "name": "studioRectFill",
+                "role": "back-fill",
+                "type": "RectAreaLight",
+                "color": "#ffffff",
+                "intensity": 0.35,
+                "position": [
+                  -18,
+                  27,
+                  11
+                ],
+                "target": null,
+                "size": [
+                  28,
+                  22
+                ],
+                "castShadow": false
+              }
+            ],
+            "shadowCarrier": {
+              "name": "studioShadowCarrier",
+              "role": "contact-shadow",
+              "type": "DirectionalLight",
+              "color": "#ffffff",
+              "intensity": 0.15,
+              "position": [
+                14,
+                -28,
+                21
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "size": null,
+              "castShadow": true,
+              "mapSize": [
+                2048,
+                2048
+              ],
+              "bias": -0.00018,
+              "normalBias": 0.018,
+              "filter": "PCFSoftShadowMap fixed kernel (Three.js r160; radius is not used as a tuning control)",
+              "shadowIntensitySupported": false,
+              "effectiveShadowStrengthControl": "carrier-light-intensity"
+            },
+            "pointLightActive": false,
+            "legacyLights": [
+              {
+                "name": "baseHemisphere",
+                "type": "HemisphereLight",
+                "color": "#e8efff",
+                "originalIntensity": 0.95,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "frontKey",
+                "type": "DirectionalLight",
+                "color": "#fff4df",
+                "originalIntensity": 1.96,
+                "currentIntensity": 0,
+                "originalCastShadow": true,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "backKey",
+                "type": "DirectionalLight",
+                "color": "#e4edff",
+                "originalIntensity": 1.7,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "sideRim",
+                "type": "DirectionalLight",
+                "color": "#9ebcff",
+                "originalIntensity": 0.58,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "Scene"
+              },
+              {
+                "name": "cameraFill",
+                "type": "PointLight",
+                "color": "#d9e8ff",
+                "originalIntensity": 0.38,
+                "currentIntensity": 0,
+                "originalCastShadow": false,
+                "currentCastShadow": false,
+                "parent": "PerspectiveCamera"
+              }
+            ]
+          },
+          "frontKeyToBackKeyRatio": 0,
+          "cameraFillToKeyRatio": 0,
+          "issue2ViewFillToKeyRatio": 0
+        },
+        "studio": {
+          "enabled": true,
+          "candidate": "studio-d3",
+          "neutralLightColor": "#ffffff",
+          "backgroundIndependent": true,
+          "environment": {
+            "applied": true,
+            "source": "PMREMGenerator.fromScene",
+            "sigma": 0.04,
+            "near": 0.1,
+            "far": 100,
+            "background": "#080808",
+            "ambientSurface": {
+              "kind": "room-and-floor",
+              "color": "#181818",
+              "roomRadius": 70,
+              "floorSize": [
+                96,
+                96
+              ],
+              "floorPosition": [
+                0,
+                0,
+                -24
+              ]
+            },
+            "panels": [
+              {
+                "name": "studioEnvKeyPanel",
+                "role": "key-reflection",
+                "color": "#ffffff",
+                "radiance": 4.8,
+                "size": [
+                  34,
+                  22
+                ],
+                "position": [
+                  16,
+                  -30,
+                  20
+                ]
+              },
+              {
+                "name": "studioEnvFillPanel",
+                "role": "fill-reflection",
+                "color": "#ffffff",
+                "radiance": 2.75,
+                "size": [
+                  32,
+                  26
+                ],
+                "position": [
+                  -20,
+                  28,
+                  10
+                ]
+              },
+              {
+                "name": "studioEnvStripPanel",
+                "role": "rim-reflection",
+                "color": "#ffffff",
+                "radiance": 2.1,
+                "size": [
+                  8,
+                  32
+                ],
+                "position": [
+                  -28,
+                  -3,
+                  -12
+                ]
+              }
+            ],
+            "flags": [
+              {
+                "name": "studioEnvFrontFlag",
+                "role": "front-edge-negative-fill",
+                "color": "#000000",
+                "size": [
+                  7,
+                  30
+                ],
+                "position": [
+                  -23,
+                  -25,
+                  3
+                ]
+              },
+              {
+                "name": "studioEnvBackFlag",
+                "role": "back-edge-negative-fill",
+                "color": "#000000",
+                "size": [
+                  8,
+                  28
+                ],
+                "position": [
+                  24,
+                  22,
+                  -4
+                ]
+              }
+            ]
+          },
+          "initialization": {
+            "durationMs": 18.899999976158142,
+            "memoryBefore": {
+              "geometries": 0,
+              "textures": 0
+            },
+            "memoryAfter": {
+              "geometries": 0,
+              "textures": 1
+            },
+            "generationCount": 1
+          },
+          "rectAreaUniformsInitialized": true,
+          "rectLights": [
+            {
+              "name": "studioRectKey",
+              "role": "front-key",
+              "type": "RectAreaLight",
+              "color": "#ffffff",
+              "intensity": 1,
+              "position": [
+                15,
+                -28,
+                18
+              ],
+              "target": null,
+              "size": [
+                30,
+                20
+              ],
+              "castShadow": false
+            },
+            {
+              "name": "studioRectFill",
+              "role": "back-fill",
+              "type": "RectAreaLight",
+              "color": "#ffffff",
+              "intensity": 0.35,
+              "position": [
+                -18,
+                27,
+                11
+              ],
+              "target": null,
+              "size": [
+                28,
+                22
+              ],
+              "castShadow": false
+            }
+          ],
+          "shadowCarrier": {
+            "name": "studioShadowCarrier",
+            "role": "contact-shadow",
+            "type": "DirectionalLight",
+            "color": "#ffffff",
+            "intensity": 0.15,
+            "position": [
+              14,
+              -28,
+              21
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "size": null,
+            "castShadow": true,
+            "mapSize": [
+              2048,
+              2048
+            ],
+            "bias": -0.00018,
+            "normalBias": 0.018,
+            "filter": "PCFSoftShadowMap fixed kernel (Three.js r160; radius is not used as a tuning control)",
+            "shadowIntensitySupported": false,
+            "effectiveShadowStrengthControl": "carrier-light-intensity"
+          },
+          "pointLightActive": false,
+          "legacyLights": [
+            {
+              "name": "baseHemisphere",
+              "type": "HemisphereLight",
+              "color": "#e8efff",
+              "originalIntensity": 0.95,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "frontKey",
+              "type": "DirectionalLight",
+              "color": "#fff4df",
+              "originalIntensity": 1.96,
+              "currentIntensity": 0,
+              "originalCastShadow": true,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "backKey",
+              "type": "DirectionalLight",
+              "color": "#e4edff",
+              "originalIntensity": 1.7,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "sideRim",
+              "type": "DirectionalLight",
+              "color": "#9ebcff",
+              "originalIntensity": 0.58,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "Scene"
+            },
+            {
+              "name": "cameraFill",
+              "type": "PointLight",
+              "color": "#d9e8ff",
+              "originalIntensity": 0.38,
+              "currentIntensity": 0,
+              "originalCastShadow": false,
+              "currentCastShadow": false,
+              "parent": "PerspectiveCamera"
+            }
+          ]
+        },
+        "contributions": {
+          "front": {
+            "side": "front",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0,
+                "incidence": 0.55,
+                "estimated": 0
+              },
+              {
+                "name": "frontKey",
+                "intensity": 0,
+                "incidence": 0.7546055221635046,
+                "estimated": 0
+              },
+              {
+                "name": "backKey",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0,
+                "incidence": 0.07022776686260629,
+                "estimated": 0
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0,
+                "incidence": 0.9999634763235147,
+                "estimated": 0
+              }
+            ],
+            "total": 0
+          },
+          "back": {
+            "side": "back",
+            "terms": [
+              {
+                "name": "baseHemisphere",
+                "intensity": 0,
+                "incidence": 0.55,
+                "estimated": 0
+              },
+              {
+                "name": "frontKey",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "backKey",
+                "intensity": 0,
+                "incidence": 0.7941533606342354,
+                "estimated": 0
+              },
+              {
+                "name": "sideRim",
+                "intensity": 0,
+                "incidence": 0,
+                "estimated": 0
+              },
+              {
+                "name": "cameraFill",
+                "intensity": 0,
+                "incidence": 0.12,
+                "estimated": 0
+              }
+            ],
+            "total": 0
+          },
+          "cameraFillFollowsCamera": true,
+          "issue2ViewFillFollowsCamera": false
+        },
+        "cameraFillDistance": 48.97567441624348,
+        "cameraFillDecay": 2,
+        "cameraFillDistanceAttenuation": 0.0004169069641061308,
+        "cameraFillDistanceAdjustedIntensity": 0,
+        "issue2ViewFill": {
+          "enabled": false,
+          "type": null,
+          "intensity": 0,
+          "keyRatio": 0,
+          "distanceInvariant": false,
+          "cameraAttached": false,
+          "castShadow": false
+        },
+        "framebuffer": {
+          "averageLuminance": 0.22718245204621335,
+          "rawAverageLuminance": 0.2247097949825875,
+          "darkRatio": 0.004834107576579338,
+          "clippedRatio": 0,
+          "sampleCount": 84814,
+          "buffer": [
+            1280,
+            720
+          ]
+        },
+        "phase2Framebuffer": {
+          "candidate": "studio-d3",
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "quaternion": [
+              0.704078583547734,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235146,
+              -0.008546696378833095
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.97567441624348,
+            "preset": "reset",
+            "finite": true
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "devicePixelRatio": 1,
+            "renderPixelRatio": 1,
+            "coarsePointer": false,
+            "panelOpen": false,
+            "panelCollapsed": true
+          },
+          "statistics": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 100629,
+            "averageLuminance": 0.23069503842793357,
+            "p50Luminance": 0.12385411764705882,
+            "p90Luminance": 0.6295050980392156,
+            "p95Luminance": 0.6970054901960784,
+            "p99Luminance": 0.7524580392156862,
+            "maxLuminance": 0.9759199999999999,
+            "darkRatio": 0.0050283715429945645,
+            "clippedRatio": 0.000009937493167973447,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.21344347972819827,
+              0.2332699477151469,
+              0.25598736886164025
+            ],
+            "buffer": [
+              1280,
+              720
+            ]
+          }
+        },
+        "materials": {
+          "brass": {
+            "world": [
+              -0.0002156231274588194,
+              0,
+              0.000058901927501020523
+            ],
+            "ndc": [
+              -0.0000065180310431758535,
+              -0.00022648492435157336,
+              0.996539734095855
+            ],
+            "pixel": [
+              640,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.22542123456790136,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "steel": {
+            "world": [
+              7.942341345003646,
+              -1.05,
+              -4.5
+            ],
+            "ndc": [
+              0.24520400895385946,
+              -0.24770217174508144,
+              0.9964517810258285
+            ],
+            "pixel": [
+              797,
+              271
+            ],
+            "inside": true,
+            "averageLuminance": 0.34157721617041875,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "ruby": {
+            "world": [
+              7.313573751952849,
+              1.42,
+              1.3809835864548963
+            ],
+            "ndc": [
+              0.21483987353614628,
+              0.07252724936280461,
+              0.9966562374764587
+            ],
+            "pixel": [
+              777,
+              386
+            ],
+            "inside": true,
+            "averageLuminance": 0.22376236262406177,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "dial": {
+            "world": [
+              16.1,
+              -2.08,
+              0
+            ],
+            "ndc": [
+              0.5085019287312003,
+              -0.0012381184165337572,
+              0.9963547136347357
+            ],
+            "pixel": [
+              965,
+              360
+            ],
+            "inside": true,
+            "averageLuminance": 0.22184696199467435,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          },
+          "hands": {
+            "world": [
+              0,
+              -2.41,
+              0
+            ],
+            "ndc": [
+              0,
+              -0.0014064859721849249,
+              0.99632382376675
+            ],
+            "pixel": [
+              640,
+              359
+            ],
+            "inside": true,
+            "averageLuminance": 0.22521658678286144,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "sampleCount": 81
+          }
+        }
+      }
+    }
+  ]
+}

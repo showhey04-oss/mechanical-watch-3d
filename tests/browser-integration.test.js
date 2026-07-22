@@ -471,16 +471,84 @@ export async function runBrowserIntegrationTest(diagnostics) {
 
   const lightingRig = diagnostics.getLightingRigReport();
   const lightingByName = Object.fromEntries(lightingRig.lights.map((light) => [light.name, light]));
-  check("a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill", lightingByName.frontKey?.intensity >= 1.5
-    && lightingByName.backKey?.intensity >= 1.4
-    && lightingByName.cameraFill?.cameraAttached === true
-    && lightingRig.frontKeyToBackKeyRatio > 0.85 && lightingRig.frontKeyToBackKeyRatio < 1.2
-    && lightingRig.cameraFillToKeyRatio > 0.1 && lightingRig.cameraFillToKeyRatio < 0.35, lightingRig);
-  const lightContributions = diagnostics.getVisibleLightContributionReport();
-  check("a5-both-faces-retain-key-light-and-camera-follow-fill", lightContributions.cameraFillFollowsCamera
-    && lightContributions.front.total > 1.2 && lightContributions.back.total > 1.2
-    && lightContributions.front.terms.some(({ name, estimated }) => name === "frontKey" && estimated > 1)
-    && lightContributions.back.terms.some(({ name, estimated }) => name === "backKey" && estimated > 1), lightContributions);
+  const studioLighting = lightingRig.studio?.enabled === true;
+  let lightContributions = null;
+  if (!studioLighting) {
+    check("a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill", lightingByName.frontKey?.intensity >= 1.5
+      && lightingByName.backKey?.intensity >= 1.4
+      && lightingByName.cameraFill?.cameraAttached === true
+      && lightingRig.frontKeyToBackKeyRatio > 0.85 && lightingRig.frontKeyToBackKeyRatio < 1.2
+      && lightingRig.cameraFillToKeyRatio > 0.1 && lightingRig.cameraFillToKeyRatio < 0.35, lightingRig);
+    lightContributions = diagnostics.getVisibleLightContributionReport();
+    check("a5-both-faces-retain-key-light-and-camera-follow-fill", lightContributions.cameraFillFollowsCamera
+      && lightContributions.front.total > 1.2 && lightContributions.back.total > 1.2
+      && lightContributions.front.terms.some(({ name, estimated }) => name === "frontKey" && estimated > 1)
+      && lightContributions.back.terms.some(({ name, estimated }) => name === "backKey" && estimated > 1), lightContributions);
+  } else {
+    const studio = lightingRig.studio;
+    const studioContributions = diagnostics.getVisibleLightContributionReport();
+    let studioShadowDrive = null;
+    if (studio.candidate === "studio-d3") {
+      const waitForShadowWindow = async () => {
+        await new Promise((resolve) => setTimeout(resolve, 260));
+        await diagnostics.waitForFrames(2);
+      };
+      const settleCrownTransition = async (target) => {
+        const deadline = performance.now() + 5000;
+        while (diagnostics.getCrownTransition() !== target && performance.now() < deadline) await diagnostics.waitForFrames(1);
+        await waitForShadowWindow();
+        return diagnostics.getCrownTransition();
+      };
+      const settledWindTransition = await settleCrownTransition(0);
+      const beforeIdle = diagnostics.getIssue2StudioShadowUpdateReport();
+      await waitForShadowWindow();
+      const afterIdle = diagnostics.getIssue2StudioShadowUpdateReport();
+      const originalTime = diagnostics.getWatchTime();
+      diagnostics.setWatchTime(originalTime + 43200);
+      await waitForShadowWindow();
+      const afterTimeJump = diagnostics.getIssue2StudioShadowUpdateReport();
+      diagnostics.setWatchTime(originalTime);
+      await waitForShadowWindow();
+      const beforeKeylessTransition = diagnostics.getIssue2StudioShadowUpdateReport();
+      diagnostics.setCrownPosition("set");
+      const settledSetTransition = await settleCrownTransition(1);
+      const afterKeylessTransition = diagnostics.getIssue2StudioShadowUpdateReport();
+      const beforeRunningWithoutMotion = afterKeylessTransition;
+      diagnostics.setRunning(true);
+      await waitForShadowWindow();
+      const afterRunningWithoutMotion = diagnostics.getIssue2StudioShadowUpdateReport();
+      diagnostics.setRunning(false);
+      diagnostics.setCrownPosition("wind");
+      await settleCrownTransition(0);
+      const beforeLiveSync = diagnostics.getIssue2StudioShadowUpdateReport();
+      diagnostics.setLiveSync(true);
+      await waitForShadowWindow();
+      const afterLiveSync = diagnostics.getIssue2StudioShadowUpdateReport();
+      diagnostics.setLiveSync(false);
+      diagnostics.setWatchTime(originalTime);
+      await waitForShadowWindow();
+      studioShadowDrive = { settledWindTransition, settledSetTransition, beforeIdle, afterIdle, afterTimeJump, beforeKeylessTransition, afterKeylessTransition, beforeRunningWithoutMotion, afterRunningWithoutMotion, beforeLiveSync, afterLiveSync };
+    }
+    const studioShadowUpdates = diagnostics.getIssue2StudioShadowUpdateReport();
+    check("issue2-studio-rig-replaces-legacy-main-lights-only-in-explicit-candidate", studio.environment.applied
+      && studio.backgroundIndependent
+      && studio.legacyLights.every((light) => light.currentIntensity === 0)
+      && lightingByName.cameraFill?.intensity === 0, lightingRig);
+    check("issue2-studio-rig-uses-neutral-soft-sources-and-preserves-selection-feedback", [...studio.rectLights, ...(studio.shadowCarrier ? [studio.shadowCarrier] : [])].every((light) => light.color === "#ffffff")
+      && lightingRig.auxiliaryLights.some((light) => light.name === "" || light.category === "selection-feedback")
+      && studioContributions.environmentMapApplied
+      && studioContributions.front.totalIncludesEnvironment === false
+      && studioContributions.back.totalIncludesEnvironment === false
+      && (studio.rectLights.length === 0 || (studioContributions.front.total > 0 && studioContributions.back.total > 0))
+      && (studio.candidate !== "studio-d3" || (studioShadowUpdates.strategy === "transform-driven-throttled"
+        && studioShadowUpdates.autoUpdate === false && studioShadowUpdates.transformDrivenRefreshCount > 0
+        && studioShadowDrive.settledWindTransition === 0 && studioShadowDrive.settledSetTransition === 1
+        && studioShadowDrive.afterIdle.transformDrivenRefreshCount === studioShadowDrive.beforeIdle.transformDrivenRefreshCount
+        && studioShadowDrive.afterTimeJump.transformDrivenRefreshCount > studioShadowDrive.afterIdle.transformDrivenRefreshCount
+        && studioShadowDrive.afterKeylessTransition.transformDrivenRefreshCount > studioShadowDrive.beforeKeylessTransition.transformDrivenRefreshCount
+        && studioShadowDrive.afterRunningWithoutMotion.transformDrivenRefreshCount === studioShadowDrive.beforeRunningWithoutMotion.transformDrivenRefreshCount
+        && studioShadowDrive.afterLiveSync.transformDrivenRefreshCount > studioShadowDrive.beforeLiveSync.transformDrivenRefreshCount)), { lightingRig, studioContributions, studioShadowUpdates, studioShadowDrive });
+  }
   const luminanceReport = diagnostics.getFrontBackLuminanceReport({ themes: "all" });
   check("a5-all-background-themes-keep-front-back-luminance-within-thirty-percent", luminanceReport.allWithinThirtyPercent
     && Object.keys(luminanceReport.themes).length === 4

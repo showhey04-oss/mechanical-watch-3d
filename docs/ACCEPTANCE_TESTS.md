@@ -210,9 +210,9 @@
 - ライト、影、露出、tone mapping、材質、背景、構造透過、適応DPR、ArcballControls、カメラ、Raycaster候補選定、animation loop、内部機構を変更しない
 - Issue #2の照明・透明・影課題を実装せず、IssueをOpenのまま維持する
 
-## M. Issue #2 レンダリング品質 Phase 1
+## M. Issue #2 レンダリング品質 Phase 1（履歴）
 
-Phase 1の目的は最終画質の合格ではなく、v3.13.0を固定した診断と候補比較である。Candidate専用試験のpassは実装条件と回帰が成立したことを示し、既定描画への採用を意味しない。
+Phase 1の目的は最終画質の合格ではなく、v3.13.0を固定した診断と候補比較である。Candidate専用試験のpassは実装条件と回帰が成立したことを示し、既定描画への採用を意味しない。Candidate Cの物理iPhone確認後の最新判定はN節を正とする。
 
 ### M.1 基準と証跡
 
@@ -271,7 +271,51 @@ Phase 1の目的は最終画質の合格ではなく、v3.13.0を固定した診
 
 - Candidate Aは幾何学的なfrustum修正の効果と全面暗化を同じ条件で提示し、現方式を不採用と明記する
 - Candidate Bは状態連続化の効果と100%深度順破綻を提示し、現方式を不採用と明記する
-- Candidate Cは有望な候補として提示するが、物理iPhone未確認のため未採用と明記する
+- Phase 1時点ではCandidate Cを有望・物理iPhone未確認として提示し、Phase 2Aでは実機結果により不採用へ更新した履歴を明記する
 - A/B/Cを複合した最終案を作らず、既定描画へ統合しない
 - Issue #2をOpen、Pull RequestをDraftのまま維持する
 - ユーザー確認前にReady化、マージ、Issue close、「完成」「合格」の報告を行わない
+
+## N. Issue #2 レンダリング品質 Phase 2A／2B
+
+Phase 2Aはスタジオ照明候補の実装・Chromium比較、Phase 2Bはユーザーによる物理iPhone Safari確認である。専用試験のpassは採用または画質完成を意味しない。
+
+### N.1 既定表示と変更禁止範囲
+
+- 通常アクセスはv3.13.0 Baselineを維持し、D1/D2/D3は`issue2Candidate`クエリでだけ有効にする
+- tone mapping、exposure、output color space、材質、構造透過、DPR、背景テーマを変更しない
+- 内部機構、A.7絶対配置、3針拘束、ArcballControls、カメラプリセット、Raycaster、PR #4 HUD／時刻入力を変更しない
+- 既存主ライトはD候補のページ内だけ無効化し、選択用PointLightは選択フィードバックとして維持する
+
+### N.2 スタジオ候補
+
+- D1は大型白反射面2、白ストリップ1、黒フラッグ2、暗い周辺面からPMREMを1回生成し、背景とは独立して`scene.environment`へ適用する
+- D2はD1へ同色`#ffffff`の大型RectAreaLight key 1.0とfill 0.35を加え、影を生成しない
+- D3はD2へ強度0.15のDirectionalLightを接触影carrierとして加える
+- D3 shadow cameraは実モデルboundsをlight spaceへtight fitし、texel snap、`PCFSoftShadowMap`、desktop 2048／mobile 1024を使用する
+- D3は`shadowMap.autoUpdate=false`を維持する。運動由来の継続更新は、影を落とすObject3Dの位置または回転に実差分が生じた場合だけ最大1回／200msとする。停止中の時刻ジャンプとりゅうず遷移は更新し、`running=true`だけでは更新しない。描画状態変更時の明示更新は維持する
+- Three.js r160で未対応の`shadow.intensity`を適用済みとせず、PCFSoft時の`shadow.radius`を影エッジ調整値として扱わない
+- 主照明色はすべてニュートラル白とし、材質色をライト色で演出しない
+
+### N.3 比較証跡
+
+- Baseline／C／D1／D2／D3、4テーマ、5視点、4 viewportの固定条件400枚を保存する
+- 時刻10:10:30、停止、透過100%、非分解、表裏分離なし、同一カメラ・DPR条件を維持する
+- 80枚の5候補比較、32枚のハイライト・黄銅・鋼・ルビー・文字板・針・接触部crop、スタジオ構成図を保存する
+- PointLight20条件、全ライト5対象、framebuffer400条件、固定性能30条件＋D3運転中6条件、全回帰をJSONへ保存する
+- manifestで相対パス、byte数、SHA-256、MIME、画像寸法を記録し、未掲載／残存ファイルを含む閉世界整合を検証する
+
+### N.4 回帰と判定
+
+- Node 33/33、desktop 86/86、mobile既存回帰、PR #3 UI、PR #4 HUD、A.7 9/9、禁止干渉0/0、ドリフト0を維持する
+- D3の停止idle、停止中時刻ジャンプ、りゅうず遷移、無変位`running=true`、Live Syncをdesktop／390×844で実測し、transform-driven更新の停止・発火境界を確認する
+- A.6 pointer／wheelをD1/D2/D3のdesktop／mobileで各10秒計測し、p50／p95／p99、33ms／50ms超を記録する
+- 既知のBaseline mobile walnut輝度ガード、不採用候補の未達を隠すため閾値を緩和しない
+- Candidate Cは物理iPhone結果により不採用、D1は回帰と基礎照度の副作用により不採用とする
+- D2は未採用、D3はPhase 2B推奨だが未採用とする
+
+### N.5 Phase 2Bユーザー確認ゲート
+
+- D2/D3を物理iPhone Safariで4テーマ、5視点、色差、黒潰れ、白飛び、反射帯、接触影、金属感、黄銅／鋼／ルビー、選択ハイライトについて比較できるURLを提示する
+- ユーザー確認前にD2/D3を既定化せず、PR #5をDraft、Issue #2をOpenのまま維持する
+- ユーザー確認前にReady化、マージ、Issue close、「完成」「最終採用」の報告を行わない

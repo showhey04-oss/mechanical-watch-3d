@@ -438,6 +438,19 @@ test("A.5 lighting keeps two keys and a subordinate camera-follow fill", async (
   assert.ok(source.includes("frontKey=new THREE.DirectionalLight(0xfff4df,1.96)"));
   assert.ok(source.includes("backKey=new THREE.DirectionalLight(0xe4edff,1.70)"));
   assert.ok(source.includes("cameraFill=new THREE.PointLight(0xd9e8ff,.38"));
+  assert.ok(source.includes("'studio-d1','studio-d2','studio-d3'"));
+  assert.ok(source.includes("await import('./js/issue2-studio-lighting.js?version=phase2a-5')"));
+  assert.ok(source.includes("strategy:issue2Candidate==='studio-d3'?'transform-driven-throttled':'disabled'"));
+  assert.ok(source.includes("setRotationIfChanged(binding.object,binding.axis,angle)"));
+  assert.ok(source.includes("requestIssue2StudioTransformShadowRefresh('transform-change')"));
+  assert.equal(source.includes("requestIssue2StudioMotionShadowRefresh"), false);
+  assert.equal(source.includes("continuous-motion"), false);
+  assert.equal(source.includes("issue2Candidate==='studio-d3'&&(running||Math.abs(crownTurnRate)>.001)"), false);
+  const studioSource = await readFile(new URL("../js/issue2-studio-lighting.js", import.meta.url), "utf8");
+  assert.ok(studioSource.includes('await import("three/addons/lights/RectAreaLightUniformsLib.js")'));
+  assert.ok(studioSource.includes("PMREMGenerator(renderer)"));
+  assert.ok(studioSource.includes("pmremGenerator.fromScene(environmentScene.scene,.04,.1,100)"));
+  assert.equal(studioSource.includes("PointLight("), false);
 });
 
 test("A.6 separates Arcball input from the smoothed render camera", async () => {

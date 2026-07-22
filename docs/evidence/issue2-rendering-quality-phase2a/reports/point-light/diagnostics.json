@@ -1,0 +1,4045 @@
+{
+  "schema": "issue2-phase2a-point-light-v1",
+  "entries": [
+    {
+      "viewport": "1280x720",
+      "view": "front",
+      "cameraPreset": "reset",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "quaternion": [
+              0.704078583547734,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235146,
+              -0.008546696378833095
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.97567441624348,
+            "preset": "reset",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 157169,
+            "meanPositiveLuminanceDelta": 0.00009132354219929686,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0.0028047058823529453,
+            "maxPositiveLuminanceDelta": 0.03447607843137254,
+            "meanAbsoluteLuminanceDelta": 0.00009132354219929686,
+            "p99AbsoluteLuminanceDelta": 0.0028047058823529453,
+            "maxAbsoluteLuminanceDelta": 0.03447607843137254,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.000012725155724093174,
+            "withoutPointClippedRatio": 0.000012725155724093174
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 157169,
+            "averageLuminance": 0.12759019787735323,
+            "p50Luminance": 0.09722117647058823,
+            "p90Luminance": 0.2173741176470588,
+            "p95Luminance": 0.2790023529411765,
+            "p99Luminance": 0.39664941176470586,
+            "maxLuminance": 1,
+            "darkRatio": 0.022523525631644916,
+            "clippedRatio": 0.000012725155724093174,
+            "clippedCount": 2,
+            "meanRgb": [
+              0.12436609075367588,
+              0.12877964883322257,
+              0.12530141465068548
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 157169,
+            "averageLuminance": 0.12749887433515325,
+            "p50Luminance": 0.09720549019607842,
+            "p90Luminance": 0.2173741176470588,
+            "p95Luminance": 0.2790023529411765,
+            "p99Luminance": 0.39664941176470586,
+            "maxLuminance": 1,
+            "darkRatio": 0.022548975943093102,
+            "clippedRatio": 0.000012725155724093174,
+            "clippedCount": 2,
+            "meanRgb": [
+              0.12428739439847207,
+              0.12868752868629463,
+              0.12518080013544916
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 157169,
+            "averageLuminance": 0.0002106083934378634,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0.004204705882352941,
+            "maxLuminance": 0.046523921568627453,
+            "darkRatio": 0.9990583384764171,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.00017999857528158401,
+              0.00020769450244578734,
+              0.0003296064845397506
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1280x720",
+      "view": "back",
+      "cameraPreset": "movementBack",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "movementBack",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "quaternion": [
+              0,
+              0.7041295815926412,
+              0.7100714980381709,
+              0
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              -0.9999646936289545,
+              -0.008403064652344194
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.975674416243464,
+            "preset": "movementBack",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 150689,
+            "meanPositiveLuminanceDelta": 0.00008870289528920447,
+            "p95PositiveLuminanceDelta": 0.0002831372549019495,
+            "p99PositiveLuminanceDelta": 0.003087843137254881,
+            "maxPositiveLuminanceDelta": 0.014852549019607864,
+            "meanAbsoluteLuminanceDelta": 0.00008870289528920447,
+            "p99AbsoluteLuminanceDelta": 0.003087843137254881,
+            "maxAbsoluteLuminanceDelta": 0.014852549019607864,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.000006636184459383233,
+            "withoutPointClippedRatio": 0.000006636184459383233
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 150689,
+            "averageLuminance": 0.16166683003642573,
+            "p50Luminance": 0.13116235294117645,
+            "p90Luminance": 0.2662305882352941,
+            "p95Luminance": 0.33571764705882345,
+            "p99Luminance": 0.44945882352941174,
+            "maxLuminance": 0.9960784313725489,
+            "darkRatio": 0.0010087000378262514,
+            "clippedRatio": 0.000006636184459383233,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.135956083553044,
+              0.16443359059619772,
+              0.20996762713087297
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 150689,
+            "averageLuminance": 0.16157812714113645,
+            "p50Luminance": 0.13061176470588234,
+            "p90Luminance": 0.2662305882352941,
+            "p95Luminance": 0.33571764705882345,
+            "p99Luminance": 0.44945882352941174,
+            "maxLuminance": 0.9960784313725489,
+            "darkRatio": 0.0010087000378262514,
+            "clippedRatio": 0.000006636184459383233,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.1358813418990543,
+              0.164343468608814,
+              0.20985187125449983
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 150689,
+            "averageLuminance": 0.0005794438174768227,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0.004204705882352941,
+            "maxLuminance": 0.7177976470588235,
+            "darkRatio": 0.997922874264213,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.0005258200274581674,
+              0.0005804709583001351,
+              0.00072716967123177
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1280x720",
+      "view": "side",
+      "cameraPreset": "side",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "side",
+          "camera": {
+            "role": "render",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "quaternion": [
+              0.4721626798222696,
+              0.5239010273228593,
+              0.5266220235612831,
+              0.4746149614722705
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.9946050635924875,
+              -0.1036046941242175,
+              -0.005180234706211207
+            ],
+            "target": [
+              0,
+              0,
+              0
+            ],
+            "distance": 48.26036158173704,
+            "preset": "side",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 34991,
+            "meanPositiveLuminanceDelta": 0.00002041484056684606,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0.0002831372549019634,
+            "maxPositiveLuminanceDelta": 0.008126274509803924,
+            "meanAbsoluteLuminanceDelta": 0.00002041484056684606,
+            "p99AbsoluteLuminanceDelta": 0.0002831372549019634,
+            "maxAbsoluteLuminanceDelta": 0.008126274509803924,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.00005715755479980567,
+            "withoutPointClippedRatio": 0.00005715755479980567
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 34991,
+            "averageLuminance": 0.11862983214171806,
+            "p50Luminance": 0.11238823529411765,
+            "p90Luminance": 0.16697568627450982,
+            "p95Luminance": 0.2748447058823529,
+            "p99Luminance": 0.6256619607843137,
+            "maxLuminance": 0.9874172549019608,
+            "darkRatio": 0.14803806693149668,
+            "clippedRatio": 0.00005715755479980567,
+            "clippedCount": 2,
+            "meanRgb": [
+              0.10429270047588364,
+              0.12028549638249551,
+              0.14444621894363976
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 34991,
+            "averageLuminance": 0.11860941730115114,
+            "p50Luminance": 0.11238823529411765,
+            "p90Luminance": 0.16697568627450982,
+            "p95Luminance": 0.2748447058823529,
+            "p99Luminance": 0.6256619607843137,
+            "maxLuminance": 0.9874172549019608,
+            "darkRatio": 0.1481809608184962,
+            "clippedRatio": 0.00005715755479980567,
+            "clippedCount": 2,
+            "meanRgb": [
+              0.10427151855851668,
+              0.12026812496878186,
+              0.1443979152061521
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 34991,
+            "averageLuminance": 0.005213208393642983,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0.004204705882352941,
+            "p99Luminance": 0.046523921568627453,
+            "maxLuminance": 0.7177976470588235,
+            "darkRatio": 0.9823954731216599,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.004759319062997072,
+              0.005263762502514709,
+              0.006048950402372309
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1280x720",
+      "view": "winding",
+      "cameraPreset": "winding",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "winding",
+          "camera": {
+            "role": "render",
+            "position": [
+              -2.232963607431971,
+              -11.187211040056019,
+              -1.5735273447649585
+            ],
+            "quaternion": [
+              0.6911077591107235,
+              0.0164739421606488,
+              0.01721870323377282,
+              0.7223587687469358
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.04760015196451961,
+              0.9978881800430432,
+              -0.04419734905328343
+            ],
+            "target": [
+              -2.8,
+              0.7,
+              -2.1
+            ],
+            "distance": 11.912367104737683,
+            "preset": "winding",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 360000,
+            "meanPositiveLuminanceDelta": 0.0006425479368192096,
+            "p95PositiveLuminanceDelta": 0.0028047058823529453,
+            "p99PositiveLuminanceDelta": 0.012865882352941171,
+            "maxPositiveLuminanceDelta": 0.12443607843137258,
+            "meanAbsoluteLuminanceDelta": 0.0006425479368192096,
+            "p99AbsoluteLuminanceDelta": 0.012865882352941171,
+            "maxAbsoluteLuminanceDelta": 0.12443607843137258,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.00095,
+            "withoutPointClippedRatio": 0.00095
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 360000,
+            "averageLuminance": 0.12092596505885049,
+            "p50Luminance": 0.08123607843137254,
+            "p90Luminance": 0.2845466666666666,
+            "p95Luminance": 0.41079215686274506,
+            "p99Luminance": 0.6241003921568626,
+            "maxLuminance": 1,
+            "darkRatio": 0.13986666666666667,
+            "clippedRatio": 0.00095,
+            "clippedCount": 342,
+            "meanRgb": [
+              0.13121543573005734,
+              0.12035607843159024,
+              0.09627279956445436
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 360000,
+            "averageLuminance": 0.12028341712203694,
+            "p50Luminance": 0.08123607843137254,
+            "p90Luminance": 0.28352862745098034,
+            "p95Luminance": 0.41079215686274506,
+            "p99Luminance": 0.6241003921568626,
+            "maxLuminance": 1,
+            "darkRatio": 0.14043611111111112,
+            "clippedRatio": 0.00095,
+            "clippedCount": 342,
+            "meanRgb": [
+              0.1306338888890991,
+              0.11969934640544629,
+              0.09559113289779078
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 360000,
+            "averageLuminance": 0.00026752169281046145,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0.007575686274509804,
+            "maxLuminance": 0.18414509803921572,
+            "darkRatio": 0.9989777777777777,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.00028557734204794435,
+              0.00026501089324619835,
+              0.00023922657952070474
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1280x720",
+      "view": "motion-works",
+      "cameraPreset": "dial",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "dial",
+          "camera": {
+            "role": "render",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "quaternion": [
+              0.9345748897882793,
+              0.08082687071486905,
+              0.029852499431480283,
+              0.3451747682339499
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.11159758546432139,
+              0.6403575737357491,
+              0.759926415304665
+            ],
+            "target": [
+              3.8,
+              -0.9,
+              -2.4
+            ],
+            "distance": 37.63522286369512,
+            "preset": "dial",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 166972,
+            "meanPositiveLuminanceDelta": 0.000012080607151228493,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0,
+            "maxPositiveLuminanceDelta": 0.0072925490196078455,
+            "meanAbsoluteLuminanceDelta": 0.000012080607151228493,
+            "p99AbsoluteLuminanceDelta": 0,
+            "maxAbsoluteLuminanceDelta": 0.0072925490196078455,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.00002994514050259924,
+            "withoutPointClippedRatio": 0.00002994514050259924
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 166972,
+            "averageLuminance": 0.14700676166430832,
+            "p50Luminance": 0.10084392156862744,
+            "p90Luminance": 0.29889333333333334,
+            "p95Luminance": 0.4269364705882353,
+            "p99Luminance": 0.6201788235294118,
+            "maxLuminance": 0.988235294117647,
+            "darkRatio": 0.061866660278370025,
+            "clippedRatio": 0.00002994514050259924,
+            "clippedCount": 5,
+            "meanRgb": [
+              0.1433631234638575,
+              0.14825871943789426,
+              0.14533414784129095
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 166972,
+            "averageLuminance": 0.14699468105715707,
+            "p50Luminance": 0.10084392156862744,
+            "p90Luminance": 0.29889333333333334,
+            "p95Luminance": 0.4269364705882353,
+            "p99Luminance": 0.6201788235294118,
+            "maxLuminance": 0.988235294117647,
+            "darkRatio": 0.061902594446973144,
+            "clippedRatio": 0.00002994514050259924,
+            "clippedCount": 5,
+            "meanRgb": [
+              0.14335520855221068,
+              0.14824596633099849,
+              0.14531646259360617
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 166972,
+            "averageLuminance": 0.00019909373557055364,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0.004204705882352941,
+            "maxLuminance": 0.046523921568627453,
+            "darkRatio": 0.9988740627171022,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.00017173244498431756,
+              0.0001972856315465355,
+              0.00029757249424936454
+            ],
+            "buffer": [
+              1600,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "view": "front",
+      "cameraPreset": "reset",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "quaternion": [
+              0.704078583547734,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235146,
+              -0.008546696378833095
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.97567441624348,
+            "preset": "reset",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 157169,
+            "meanPositiveLuminanceDelta": 0.00009133244980830372,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0.0028047058823529453,
+            "maxPositiveLuminanceDelta": 0.03447607843137254,
+            "meanAbsoluteLuminanceDelta": 0.00009133244980830372,
+            "p99AbsoluteLuminanceDelta": 0.0028047058823529453,
+            "maxAbsoluteLuminanceDelta": 0.03447607843137254,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.000012725155724093174,
+            "withoutPointClippedRatio": 0.000012725155724093174
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 157169,
+            "averageLuminance": 0.1275934644597594,
+            "p50Luminance": 0.09722117647058823,
+            "p90Luminance": 0.2173741176470588,
+            "p95Luminance": 0.2790023529411765,
+            "p99Luminance": 0.39664941176470586,
+            "maxLuminance": 1,
+            "darkRatio": 0.022523525631644916,
+            "clippedRatio": 0.000012725155724093174,
+            "clippedCount": 2,
+            "meanRgb": [
+              0.12436978354396443,
+              0.12878296735422515,
+              0.12530291172782948
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 157169,
+            "averageLuminance": 0.12750213200995042,
+            "p50Luminance": 0.09720549019607842,
+            "p90Luminance": 0.2173741176470588,
+            "p95Luminance": 0.2790023529411765,
+            "p99Luminance": 0.39664941176470586,
+            "maxLuminance": 1,
+            "darkRatio": 0.022548975943093102,
+            "clippedRatio": 0.000012725155724093174,
+            "clippedCount": 2,
+            "meanRgb": [
+              0.12429106223747488,
+              0.12869084720729718,
+              0.12518224731002167
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 157169,
+            "averageLuminance": 0.0002106083934378634,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0.004204705882352941,
+            "maxLuminance": 0.046523921568627453,
+            "darkRatio": 0.9990583384764171,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.00017999857528158401,
+              0.00020769450244578734,
+              0.0003296064845397506
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "view": "back",
+      "cameraPreset": "movementBack",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "movementBack",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "quaternion": [
+              0,
+              0.7041295815926412,
+              0.7100714980381709,
+              0
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              -0.9999646936289545,
+              -0.008403064652344194
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 48.975674416243464,
+            "preset": "movementBack",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 150689,
+            "meanPositiveLuminanceDelta": 0.00008866768447519057,
+            "p95PositiveLuminanceDelta": 0.0002831372549019495,
+            "p99PositiveLuminanceDelta": 0.003087843137254881,
+            "maxPositiveLuminanceDelta": 0.014852549019607864,
+            "meanAbsoluteLuminanceDelta": 0.00008866768447519057,
+            "p99AbsoluteLuminanceDelta": 0.003087843137254881,
+            "maxAbsoluteLuminanceDelta": 0.014852549019607864,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.000006636184459383233,
+            "withoutPointClippedRatio": 0.000006636184459383233
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 150689,
+            "averageLuminance": 0.16166664257332322,
+            "p50Luminance": 0.13116235294117645,
+            "p90Luminance": 0.2662305882352941,
+            "p95Luminance": 0.33571764705882345,
+            "p99Luminance": 0.44945882352941174,
+            "maxLuminance": 0.9960784313725489,
+            "darkRatio": 0.0010087000378262514,
+            "clippedRatio": 0.000006636184459383233,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.13595577126201064,
+              0.164433434450681,
+              0.2099674970096091
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 150689,
+            "averageLuminance": 0.16157797488884795,
+            "p50Luminance": 0.13061176470588234,
+            "p90Luminance": 0.2662305882352941,
+            "p95Luminance": 0.33571764705882345,
+            "p99Luminance": 0.44945882352941174,
+            "maxLuminance": 0.9960784313725489,
+            "darkRatio": 0.0010087000378262514,
+            "clippedRatio": 0.000006636184459383233,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.13588110768077927,
+              0.16434333848755006,
+              0.20985174113323593
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 150689,
+            "averageLuminance": 0.0005794438174768227,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0.004204705882352941,
+            "maxLuminance": 0.7177976470588235,
+            "darkRatio": 0.997922874264213,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.0005258200274581674,
+              0.0005804709583001351,
+              0.00072716967123177
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "view": "side",
+      "cameraPreset": "side",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "side",
+          "camera": {
+            "role": "render",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "quaternion": [
+              0.4721626798222696,
+              0.5239010273228593,
+              0.5266220235612831,
+              0.4746149614722705
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.9946050635924875,
+              -0.1036046941242175,
+              -0.005180234706211207
+            ],
+            "target": [
+              0,
+              0,
+              0
+            ],
+            "distance": 48.26036158173704,
+            "preset": "side",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 34991,
+            "meanPositiveLuminanceDelta": 0.00002031085864656516,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0.0002831372549019634,
+            "maxPositiveLuminanceDelta": 0.008126274509803924,
+            "meanAbsoluteLuminanceDelta": 0.00002031085864656516,
+            "p99AbsoluteLuminanceDelta": 0.0002831372549019634,
+            "maxAbsoluteLuminanceDelta": 0.008126274509803924,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.00005715755479980567,
+            "withoutPointClippedRatio": 0.00005715755479980567
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 34991,
+            "averageLuminance": 0.11863056270492728,
+            "p50Luminance": 0.11238823529411765,
+            "p90Luminance": 0.16697568627450982,
+            "p95Luminance": 0.2748447058823529,
+            "p99Luminance": 0.6256619607843137,
+            "maxLuminance": 0.9874172549019608,
+            "darkRatio": 0.14803806693149668,
+            "clippedRatio": 0.00005715755479980567,
+            "clippedCount": 2,
+            "meanRgb": [
+              0.1042928125495205,
+              0.12028628089795355,
+              0.14444823626910328
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 34991,
+            "averageLuminance": 0.11861025184628064,
+            "p50Luminance": 0.11238823529411765,
+            "p90Luminance": 0.16697568627450982,
+            "p95Luminance": 0.2748447058823529,
+            "p99Luminance": 0.6256619607843137,
+            "maxLuminance": 0.9874172549019608,
+            "darkRatio": 0.1481809608184962,
+            "clippedRatio": 0.00005715755479980567,
+            "clippedCount": 2,
+            "meanRgb": [
+              0.10427174270579041,
+              0.12026902155787676,
+              0.14439993253161565
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 34991,
+            "averageLuminance": 0.005213208393642983,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0.004204705882352941,
+            "p99Luminance": 0.046523921568627453,
+            "maxLuminance": 0.7177976470588235,
+            "darkRatio": 0.9823954731216599,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.004759319062997072,
+              0.005263762502514709,
+              0.006048950402372309
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "view": "winding",
+      "cameraPreset": "winding",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "winding",
+          "camera": {
+            "role": "render",
+            "position": [
+              -2.2329595420430084,
+              -11.187200043115437,
+              -1.5735430560318788
+            ],
+            "quaternion": [
+              0.6911080179034773,
+              0.01647406015352264,
+              0.017218756413706442,
+              0.7223585171915333
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.04760039656092435,
+              0.9978882004060143,
+              -0.04419662586316996
+            ],
+            "target": [
+              -2.8,
+              0.7,
+              -2.1
+            ],
+            "distance": 11.912355630178943,
+            "preset": "winding",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 324000,
+            "meanPositiveLuminanceDelta": 0.0007033489808763363,
+            "p95PositiveLuminanceDelta": 0.003087843137254895,
+            "p99PositiveLuminanceDelta": 0.015135686274509813,
+            "maxPositiveLuminanceDelta": 0.12443607843137258,
+            "meanAbsoluteLuminanceDelta": 0.0007033489808763363,
+            "p99AbsoluteLuminanceDelta": 0.015135686274509813,
+            "maxAbsoluteLuminanceDelta": 0.12443607843137258,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.0005895061728395062,
+            "withoutPointClippedRatio": 0.0005895061728395062
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 324000,
+            "averageLuminance": 0.12141600225125933,
+            "p50Luminance": 0.08123607843137254,
+            "p90Luminance": 0.28846823529411764,
+            "p95Luminance": 0.4122956862745098,
+            "p99Luminance": 0.6241003921568626,
+            "maxLuminance": 1,
+            "darkRatio": 0.14465432098765432,
+            "clippedRatio": 0.0005895061728395062,
+            "clippedCount": 191,
+            "meanRgb": [
+              0.13286741709048797,
+              0.12070226337464193,
+              0.0947663519730389
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 324000,
+            "averageLuminance": 0.12071265327039227,
+            "p50Luminance": 0.08123607843137254,
+            "p90Luminance": 0.2871286274509804,
+            "p95Luminance": 0.41200078431372544,
+            "p99Luminance": 0.6241003921568626,
+            "maxLuminance": 1,
+            "darkRatio": 0.1452746913580247,
+            "clippedRatio": 0.0005895061728395062,
+            "clippedCount": 191,
+            "meanRgb": [
+              0.13222818930060326,
+              0.1199842895184295,
+              0.09401906318098267
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 324000,
+            "averageLuminance": 0.00029723941660615304,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0.008110588235294118,
+            "maxLuminance": 0.18414509803921572,
+            "darkRatio": 0.9988611111111111,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.0003173081578310492,
+              0.00029444444444445665,
+              0.00026583151779231056
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "1440x900",
+      "view": "motion-works",
+      "cameraPreset": "dial",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -48.473885644555445,
+              0.41858021918423455
+            ],
+            "targetDistance": 48.97567441624348,
+            "inversePowerAttenuationWithoutCutoff": 0.0004169069641061308,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              49.47394526291032,
+              0.41154575851185143
+            ],
+            "targetDistance": 48.975674416243464,
+            "inversePowerAttenuationWithoutCutoff": 0.00041690696410613107,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "dial",
+          "camera": {
+            "role": "render",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "quaternion": [
+              0.9345748897882793,
+              0.08082687071486905,
+              0.029852499431480283,
+              0.3451747682339499
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.11159758546432139,
+              0.6403575737357491,
+              0.759926415304665
+            ],
+            "target": [
+              3.8,
+              -0.9,
+              -2.4
+            ],
+            "distance": 37.63522286369512,
+            "preset": "dial",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 166972,
+            "meanPositiveLuminanceDelta": 0.000012117499564327696,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0,
+            "maxPositiveLuminanceDelta": 0.0072925490196078455,
+            "meanAbsoluteLuminanceDelta": 0.000012117499564327696,
+            "p99AbsoluteLuminanceDelta": 0,
+            "maxAbsoluteLuminanceDelta": 0.0072925490196078455,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.00002994514050259924,
+            "withoutPointClippedRatio": 0.00002994514050259924
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 166972,
+            "averageLuminance": 0.14700823242399422,
+            "p50Luminance": 0.10084392156862744,
+            "p90Luminance": 0.29889333333333334,
+            "p95Luminance": 0.4269364705882353,
+            "p99Luminance": 0.6201788235294118,
+            "maxLuminance": 0.988235294117647,
+            "darkRatio": 0.061884627362671585,
+            "clippedRatio": 0.00002994514050259924,
+            "clippedCount": 5,
+            "meanRgb": [
+              0.14336474402440239,
+              0.14826017559374619,
+              0.14533532216052633
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 166972,
+            "averageLuminance": 0.14699611492442988,
+            "p50Luminance": 0.10084392156862744,
+            "p90Luminance": 0.29889333333333334,
+            "p95Luminance": 0.4269364705882353,
+            "p99Luminance": 0.6201788235294118,
+            "maxLuminance": 0.988235294117647,
+            "darkRatio": 0.061920561531274704,
+            "clippedRatio": 0.00002994514050259924,
+            "clippedCount": 5,
+            "meanRgb": [
+              0.14335680562637088,
+              0.14824737551408096,
+              0.14531766039922622
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 166972,
+            "averageLuminance": 0.00019909373557055364,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0.004204705882352941,
+            "maxLuminance": 0.046523921568627453,
+            "darkRatio": 0.9988740627171022,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.00017173244498431756,
+              0.0001972856315465355,
+              0.00029757249424936454
+            ],
+            "buffer": [
+              1440,
+              900
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "view": "front",
+      "cameraPreset": "reset",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.4845114974482,
+              0.9058505256192153
+            ],
+            "targetDistance": 105.98838258284488,
+            "inversePowerAttenuationWithoutCutoff": 0.0000890191556239506,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.48464051768285,
+              0.8906272312410324
+            ],
+            "targetDistance": 105.98838258284485,
+            "inversePowerAttenuationWithoutCutoff": 0.00008901915562395065,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -105.4845114974482,
+              0.9058505256192153
+            ],
+            "quaternion": [
+              0.7040785835477338,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235147,
+              -0.008546696378833764
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 105.98838258284488,
+            "preset": "reset",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 28877,
+            "meanPositiveLuminanceDelta": 0.000004067148901323869,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0,
+            "maxPositiveLuminanceDelta": 0.0028047058823529453,
+            "meanAbsoluteLuminanceDelta": 0.000004067148901323869,
+            "p99AbsoluteLuminanceDelta": 0,
+            "maxAbsoluteLuminanceDelta": 0.0028047058823529453,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0,
+            "withoutPointClippedRatio": 0
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28877,
+            "averageLuminance": 0.07658436883412797,
+            "p50Luminance": 0.07369176470588235,
+            "p90Luminance": 0.08545647058823529,
+            "p95Luminance": 0.09575372549019608,
+            "p99Luminance": 0.13560313725490195,
+            "maxLuminance": 0.2360180392156863,
+            "darkRatio": 0.004848149045953527,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.06807819779223935,
+              0.07768513784289738,
+              0.0907276093939573
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28877,
+            "averageLuminance": 0.07658030168522674,
+            "p50Luminance": 0.07369176470588235,
+            "p90Luminance": 0.08545647058823529,
+            "p95Luminance": 0.09575372549019608,
+            "p99Luminance": 0.13560313725490195,
+            "maxLuminance": 0.2360180392156863,
+            "darkRatio": 0.004848149045953527,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.0680750743348708,
+              0.07768092796557458,
+              0.09072217729418593
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28877,
+            "averageLuminance": 0.04400772602119018,
+            "p50Luminance": 0.042602352941176466,
+            "p90Luminance": 0.04540705882352941,
+            "p95Luminance": 0.04540705882352941,
+            "p99Luminance": 0.046523921568627453,
+            "maxLuminance": 0.05773803921568628,
+            "darkRatio": 0.5235654673269384,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.03543671026604696,
+              0.04506171204844431,
+              0.05880533187749463
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "view": "back",
+      "cameraPreset": "movementBack",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.4845114974482,
+              0.9058505256192153
+            ],
+            "targetDistance": 105.98838258284488,
+            "inversePowerAttenuationWithoutCutoff": 0.0000890191556239506,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.48464051768285,
+              0.8906272312410324
+            ],
+            "targetDistance": 105.98838258284485,
+            "inversePowerAttenuationWithoutCutoff": 0.00008901915562395065,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "movementBack",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              106.48464051768285,
+              0.8906272312410324
+            ],
+            "quaternion": [
+              0,
+              0.704129581592641,
+              0.7100714980381709,
+              0
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              -0.9999646936289545,
+              -0.008403064652344529
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 105.98838258284485,
+            "preset": "movementBack",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 28346,
+            "meanPositiveLuminanceDelta": 0.000006584737895722738,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0,
+            "maxPositiveLuminanceDelta": 0.002804705882352959,
+            "meanAbsoluteLuminanceDelta": 0.000006584737895722738,
+            "p99AbsoluteLuminanceDelta": 0,
+            "maxAbsoluteLuminanceDelta": 0.002804705882352959,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0,
+            "withoutPointClippedRatio": 0
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28346,
+            "averageLuminance": 0.08451534746401856,
+            "p50Luminance": 0.08463843137254902,
+            "p90Luminance": 0.09304784313725491,
+            "p95Luminance": 0.09668627450980391,
+            "p99Luminance": 0.12750823529411764,
+            "maxLuminance": 0.25945725490196075,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.07002848553516736,
+              0.08604914342788454,
+              0.11197983462058636
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28346,
+            "averageLuminance": 0.08450876272612276,
+            "p50Luminance": 0.08463843137254902,
+            "p90Luminance": 0.09304784313725491,
+            "p95Luminance": 0.09668627450980391,
+            "p99Luminance": 0.12750823529411764,
+            "maxLuminance": 0.25945725490196075,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.07002309002340308,
+              0.08604236445156531,
+              0.11197167217971216
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28346,
+            "averageLuminance": 0.045404892622426,
+            "p50Luminance": 0.046523921568627453,
+            "p90Luminance": 0.046523921568627453,
+            "p95Luminance": 0.046523921568627453,
+            "p99Luminance": 0.050445490196078434,
+            "maxLuminance": 0.25945725490196075,
+            "darkRatio": 0.22518168348267834,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.038336217856917126,
+              0.04589491479931465,
+              0.06136523049209414
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "view": "side",
+      "cameraPreset": "side",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.4845114974482,
+              0.9058505256192153
+            ],
+            "targetDistance": 105.98838258284488,
+            "inversePowerAttenuationWithoutCutoff": 0.0000890191556239506,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.48464051768285,
+              0.8906272312410324
+            ],
+            "targetDistance": 105.98838258284485,
+            "inversePowerAttenuationWithoutCutoff": 0.00008901915562395065,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "side",
+          "camera": {
+            "role": "render",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "quaternion": [
+              0.4721626798222696,
+              0.5239010273228593,
+              0.5266220235612831,
+              0.4746149614722705
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.9946050635924875,
+              -0.1036046941242175,
+              -0.005180234706211207
+            ],
+            "target": [
+              0,
+              0,
+              0
+            ],
+            "distance": 48.26036158173704,
+            "preset": "side",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 30791,
+            "meanPositiveLuminanceDelta": 0.000019331877598559838,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0.0002831372549019634,
+            "maxPositiveLuminanceDelta": 0.008126274509803924,
+            "meanAbsoluteLuminanceDelta": 0.000019331877598559838,
+            "p99AbsoluteLuminanceDelta": 0.0002831372549019634,
+            "maxAbsoluteLuminanceDelta": 0.008126274509803924,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.0000324770225065766,
+            "withoutPointClippedRatio": 0.0000324770225065766
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 30791,
+            "averageLuminance": 0.11825225359333186,
+            "p50Luminance": 0.11238823529411765,
+            "p90Luminance": 0.16978039215686275,
+            "p95Luminance": 0.26788235294117646,
+            "p99Luminance": 0.6180549019607842,
+            "maxLuminance": 0.996361568627451,
+            "darkRatio": 0.15017375207041017,
+            "clippedRatio": 0.0000324770225065766,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.1040166435187939,
+              0.1199143370770623,
+              0.14370611223926735
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 30791,
+            "averageLuminance": 0.11823292171573332,
+            "p50Luminance": 0.11238823529411765,
+            "p90Luminance": 0.16978039215686275,
+            "p95Luminance": 0.26788235294117646,
+            "p99Luminance": 0.6180549019607842,
+            "maxLuminance": 0.996361568627451,
+            "darkRatio": 0.15023870611542334,
+            "clippedRatio": 0.0000324770225065766,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.10399575633569166,
+              0.11989867168973561,
+              0.1436550405293649
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 30791,
+            "averageLuminance": 0.005104920650992392,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0.004204705882352941,
+            "p99Luminance": 0.046523921568627453,
+            "maxLuminance": 0.7177976470588235,
+            "darkRatio": 0.9839238738592446,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.004652492675157755,
+              0.005155186039210652,
+              0.005939219570781057
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "view": "winding",
+      "cameraPreset": "winding",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.4845114974482,
+              0.9058505256192153
+            ],
+            "targetDistance": 105.98838258284488,
+            "inversePowerAttenuationWithoutCutoff": 0.0000890191556239506,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.48464051768285,
+              0.8906272312410324
+            ],
+            "targetDistance": 105.98838258284485,
+            "inversePowerAttenuationWithoutCutoff": 0.00008901915562395065,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "winding",
+          "camera": {
+            "role": "render",
+            "position": [
+              -2.2329676236158034,
+              -11.187203845690671,
+              -1.5735154805808975
+            ],
+            "quaternion": [
+              0.6911075554561162,
+              0.016473849307259113,
+              0.017218661384319888,
+              0.7223589667060313
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.047599959481613,
+              0.9978881640181865,
+              -0.044197918160945864
+            ],
+            "target": [
+              -2.8,
+              0.7,
+              -2.1
+            ],
+            "distance": 11.912360258742133,
+            "preset": "winding",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 82290,
+            "meanPositiveLuminanceDelta": 0.001990375005659144,
+            "p95PositiveLuminanceDelta": 0.011198431372549,
+            "p99PositiveLuminanceDelta": 0.03135686274509805,
+            "maxPositiveLuminanceDelta": 0.11968078431372545,
+            "meanAbsoluteLuminanceDelta": 0.001990375005659144,
+            "p99AbsoluteLuminanceDelta": 0.03135686274509805,
+            "maxAbsoluteLuminanceDelta": 0.11968078431372545,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.00006076072426783327,
+            "withoutPointClippedRatio": 0.00006076072426783327
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 82290,
+            "averageLuminance": 0.10950784237478664,
+            "p50Luminance": 0.09720549019607842,
+            "p90Luminance": 0.18380156862745098,
+            "p95Luminance": 0.23696862745098038,
+            "p99Luminance": 0.41079215686274506,
+            "maxLuminance": 0.9800462745098039,
+            "darkRatio": 0.21081540891967432,
+            "clippedRatio": 0.00006076072426783327,
+            "clippedCount": 5,
+            "meanRgb": [
+              0.12535647482953918,
+              0.10826260070191214,
+              0.07517512193838771
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 82290,
+            "averageLuminance": 0.1075174673691246,
+            "p50Luminance": 0.09692235294117646,
+            "p90Luminance": 0.17624156862745097,
+            "p95Luminance": 0.23333019607843136,
+            "p99Luminance": 0.41079215686274506,
+            "maxLuminance": 0.9800462745098039,
+            "darkRatio": 0.21265038279256288,
+            "clippedRatio": 0.00006076072426783327,
+            "clippedCount": 5,
+            "meanRgb": [
+              0.12347942117662575,
+              0.10624453451322752,
+              0.07312536486214787
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 82290,
+            "averageLuminance": 0.0009968381929998918,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0.004204705882352941,
+            "p99Luminance": 0.029370196078431367,
+            "maxLuminance": 0.17713568627450982,
+            "darkRatio": 0.996269291529955,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.001064241956352403,
+              0.0009873260277498193,
+              0.0008925869533620012
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "view": "motion-works",
+      "cameraPreset": "dial",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.4845114974482,
+              0.9058505256192153
+            ],
+            "targetDistance": 105.98838258284488,
+            "inversePowerAttenuationWithoutCutoff": 0.0000890191556239506,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.48464051768285,
+              0.8906272312410324
+            ],
+            "targetDistance": 105.98838258284485,
+            "inversePowerAttenuationWithoutCutoff": 0.00008901915562395065,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "dial",
+          "camera": {
+            "role": "render",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "quaternion": [
+              0.9345748897882793,
+              0.08082687071486905,
+              0.029852499431480283,
+              0.3451747682339499
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.11159758546432139,
+              0.6403575737357491,
+              0.759926415304665
+            ],
+            "target": [
+              3.8,
+              -0.9,
+              -2.4
+            ],
+            "distance": 37.63522286369512,
+            "preset": "dial",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 66366,
+            "meanPositiveLuminanceDelta": 0.00001894999388418232,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0.00028313725490195993,
+            "maxPositiveLuminanceDelta": 0.0072925490196078455,
+            "meanAbsoluteLuminanceDelta": 0.00001894999388418232,
+            "p99AbsoluteLuminanceDelta": 0.00028313725490195993,
+            "maxAbsoluteLuminanceDelta": 0.0072925490196078455,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0,
+            "withoutPointClippedRatio": 0
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 66366,
+            "averageLuminance": 0.1230944323013935,
+            "p50Luminance": 0.11569647058823529,
+            "p90Luminance": 0.18711843137254902,
+            "p95Luminance": 0.2173741176470588,
+            "p99Luminance": 0.28041803921568625,
+            "maxLuminance": 0.8216258823529412,
+            "darkRatio": 0.08103546996956273,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.12111186155435306,
+              0.1239953957051389,
+              0.1200075280691592
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 66366,
+            "averageLuminance": 0.12307548230750934,
+            "p50Luminance": 0.11569647058823529,
+            "p90Luminance": 0.18711843137254902,
+            "p95Luminance": 0.2173741176470588,
+            "p99Luminance": 0.28041803921568625,
+            "maxLuminance": 0.8216258823529412,
+            "darkRatio": 0.08114094566494892,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.12110092989964918,
+              0.12397471419623945,
+              0.11998211935822585
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 66366,
+            "averageLuminance": 0.00013764556975488852,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0,
+            "maxLuminance": 0.046523921568627453,
+            "darkRatio": 0.9988548353072356,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.00011652553014093525,
+              0.00013821156947243794,
+              0.00019422891357670087
+            ],
+            "buffer": [
+              390,
+              844
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "393x852",
+      "view": "front",
+      "cameraPreset": "reset",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.67239330575379,
+              0.9074563530406308
+            ],
+            "targetDistance": 106.17627125353549,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814557,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.67252255470635,
+              0.8922060718882887
+            ],
+            "targetDistance": 106.17627125353548,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814559,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "reset",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              -105.67239330575379,
+              0.9074563530406308
+            ],
+            "quaternion": [
+              0.7040785835477338,
+              0,
+              0,
+              0.7101220656967482
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              0.9999634763235147,
+              -0.008546696378833764
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 106.17627125353549,
+            "preset": "reset",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 29329,
+            "meanPositiveLuminanceDelta": 0.0000047665597658477596,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0,
+            "maxPositiveLuminanceDelta": 0.0028047058823529453,
+            "meanAbsoluteLuminanceDelta": 0.0000047665597658477596,
+            "p99AbsoluteLuminanceDelta": 0,
+            "maxAbsoluteLuminanceDelta": 0.0028047058823529453,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0,
+            "withoutPointClippedRatio": 0
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 29329,
+            "averageLuminance": 0.07639103846222052,
+            "p50Luminance": 0.07285803921568627,
+            "p90Luminance": 0.08462274509803921,
+            "p95Luminance": 0.09465254901960785,
+            "p99Luminance": 0.13560313725490195,
+            "maxLuminance": 0.24231921568627451,
+            "darkRatio": 0.0019775648675372497,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.06785641461737917,
+              0.07749339976022909,
+              0.09060228817220521
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 29329,
+            "averageLuminance": 0.07638627190245471,
+            "p50Luminance": 0.07285803921568627,
+            "p90Luminance": 0.08462274509803921,
+            "p95Luminance": 0.09438509803921569,
+            "p99Luminance": 0.13560313725490195,
+            "maxLuminance": 0.24231921568627451,
+            "darkRatio": 0.0019775648675372497,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.06785146736247052,
+              0.07748885363409683,
+              0.09059587011178319
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 29329,
+            "averageLuminance": 0.045252350353896645,
+            "p50Luminance": 0.04540705882352941,
+            "p90Luminance": 0.04540705882352941,
+            "p95Luminance": 0.04540705882352941,
+            "p99Luminance": 0.046523921568627453,
+            "maxLuminance": 0.05773803921568628,
+            "darkRatio": 0.07923897848545808,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.03543491384755623,
+              0.04680223482209997,
+              0.05880788538944973
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "393x852",
+      "view": "back",
+      "cameraPreset": "movementBack",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.67239330575379,
+              0.9074563530406308
+            ],
+            "targetDistance": 106.17627125353549,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814557,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.67252255470635,
+              0.8922060718882887
+            ],
+            "targetDistance": 106.17627125353548,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814559,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "movementBack",
+          "camera": {
+            "role": "render",
+            "position": [
+              0,
+              106.67252255470635,
+              0.8922060718882887
+            ],
+            "quaternion": [
+              0,
+              0.704129581592641,
+              0.7100714980381709,
+              0
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              0,
+              -0.9999646936289545,
+              -0.008403064652344529
+            ],
+            "target": [
+              0,
+              0.5,
+              0
+            ],
+            "distance": 106.17627125353548,
+            "preset": "movementBack",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 28780,
+            "meanPositiveLuminanceDelta": 0.0000053233318344711,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0,
+            "maxPositiveLuminanceDelta": 0.002804705882352959,
+            "meanAbsoluteLuminanceDelta": 0.0000053233318344711,
+            "p99AbsoluteLuminanceDelta": 0,
+            "maxAbsoluteLuminanceDelta": 0.002804705882352959,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0,
+            "withoutPointClippedRatio": 0
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28780,
+            "averageLuminance": 0.0842367110874737,
+            "p50Luminance": 0.08380470588235293,
+            "p90Luminance": 0.09276470588235294,
+            "p95Luminance": 0.09585254901960784,
+            "p99Luminance": 0.1277913725490196,
+            "maxLuminance": 0.2555356862745098,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.0698209540939186,
+              0.08576026379971545,
+              0.11159329054756817
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28780,
+            "averageLuminance": 0.08423138775563921,
+            "p50Luminance": 0.08380470588235293,
+            "p90Luminance": 0.09276470588235294,
+            "p95Luminance": 0.09585254901960784,
+            "p99Luminance": 0.1277913725490196,
+            "maxLuminance": 0.2555356862745098,
+            "darkRatio": 0,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.06981454986440193,
+              0.08575549469262857,
+              0.11158565997622913
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 28780,
+            "averageLuminance": 0.04580276134028326,
+            "p50Luminance": 0.046523921568627453,
+            "p90Luminance": 0.046523921568627453,
+            "p95Luminance": 0.046523921568627453,
+            "p99Luminance": 0.046523921568627453,
+            "maxLuminance": 0.2555356862745098,
+            "darkRatio": 0.22487838776928423,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.03861491504174981,
+              0.04637002820584042,
+              0.06134883974435753
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "393x852",
+      "view": "side",
+      "cameraPreset": "side",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.67239330575379,
+              0.9074563530406308
+            ],
+            "targetDistance": 106.17627125353549,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814557,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.67252255470635,
+              0.8922060718882887
+            ],
+            "targetDistance": 106.17627125353548,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814559,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "side",
+          "camera": {
+            "role": "render",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "quaternion": [
+              0.4721626798222696,
+              0.5239010273228593,
+              0.5266220235612831,
+              0.4746149614722705
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.9946050635924875,
+              -0.1036046941242175,
+              -0.005180234706211207
+            ],
+            "target": [
+              0,
+              0,
+              0
+            ],
+            "distance": 48.26036158173704,
+            "preset": "side",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 31408,
+            "meanPositiveLuminanceDelta": 0.00002007813670552278,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0.0002831372549019634,
+            "maxPositiveLuminanceDelta": 0.004204705882352944,
+            "meanAbsoluteLuminanceDelta": 0.00002007813670552278,
+            "p99AbsoluteLuminanceDelta": 0.0002831372549019634,
+            "maxAbsoluteLuminanceDelta": 0.004204705882352944,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.00003183902190524707,
+            "withoutPointClippedRatio": 0.00003183902190524707
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 31408,
+            "averageLuminance": 0.11851249845175311,
+            "p50Luminance": 0.11517725490196078,
+            "p90Luminance": 0.1670227450980392,
+            "p95Luminance": 0.272075294117647,
+            "p99Luminance": 0.6162141176470588,
+            "maxLuminance": 0.9946941176470588,
+            "darkRatio": 0.1456953642384106,
+            "clippedRatio": 0.00003183902190524707,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.10426006113088701,
+              0.12015934494017318,
+              0.1441668414690906
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 31408,
+            "averageLuminance": 0.11849242031504757,
+            "p50Luminance": 0.11516156862745099,
+            "p90Luminance": 0.1670227450980392,
+            "p95Luminance": 0.272075294117647,
+            "p99Luminance": 0.6162141176470588,
+            "maxLuminance": 0.9946941176470588,
+            "darkRatio": 0.14579088130412635,
+            "clippedRatio": 0.00003183902190524707,
+            "clippedCount": 1,
+            "meanRgb": [
+              0.1042394594108307,
+              0.12014261384630924,
+              0.14411514988058569
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 31408,
+            "averageLuminance": 0.005207778060791335,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0.004204705882352941,
+            "p99Luminance": 0.046523921568627453,
+            "maxLuminance": 0.7177976470588235,
+            "darkRatio": 0.9812786551197147,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.004750881503900523,
+              0.005258807547471432,
+              0.00604766613726483
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "393x852",
+      "view": "winding",
+      "cameraPreset": "winding",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.67239330575379,
+              0.9074563530406308
+            ],
+            "targetDistance": 106.17627125353549,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814557,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.67252255470635,
+              0.8922060718882887
+            ],
+            "targetDistance": 106.17627125353548,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814559,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "winding",
+          "camera": {
+            "role": "render",
+            "position": [
+              -2.2329638959038527,
+              -11.187221941446772,
+              -1.573524180331902
+            ],
+            "quaternion": [
+              0.6911077139899535,
+              0.016473921588480208,
+              0.017218693961801194,
+              0.7223588126058456
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.04760010931889881,
+              0.9978881764926808,
+              -0.04419747514215444
+            ],
+            "target": [
+              -2.8,
+              0.7,
+              -2.1
+            ],
+            "distance": 11.912378109229797,
+            "preset": "winding",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 83922,
+            "meanPositiveLuminanceDelta": 0.0019879983420646517,
+            "p95PositiveLuminanceDelta": 0.011198431372549,
+            "p99PositiveLuminanceDelta": 0.03135686274509805,
+            "maxPositiveLuminanceDelta": 0.09641882352941178,
+            "meanAbsoluteLuminanceDelta": 0.0019879983420646517,
+            "p99AbsoluteLuminanceDelta": 0.03135686274509805,
+            "maxAbsoluteLuminanceDelta": 0.09641882352941178,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0.00005957913300445652,
+            "withoutPointClippedRatio": 0.00005957913300445652
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 83922,
+            "averageLuminance": 0.10951604585212328,
+            "p50Luminance": 0.09720549019607842,
+            "p90Luminance": 0.18380156862745098,
+            "p95Luminance": 0.23696862745098038,
+            "p99Luminance": 0.41079215686274506,
+            "maxLuminance": 0.9800462745098039,
+            "darkRatio": 0.21113653154119302,
+            "clippedRatio": 0.00005957913300445652,
+            "clippedCount": 5,
+            "meanRgb": [
+              0.12535276687827307,
+              0.10827168645389872,
+              0.07520966013721457
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 83922,
+            "averageLuminance": 0.10752804751005253,
+            "p50Luminance": 0.09692235294117646,
+            "p90Luminance": 0.17624156862745097,
+            "p95Luminance": 0.23333019607843136,
+            "p99Luminance": 0.41079215686274506,
+            "maxLuminance": 0.9800462745098039,
+            "darkRatio": 0.21304306379733562,
+            "clippedRatio": 0.00005957913300445652,
+            "clippedCount": 5,
+            "meanRgb": [
+              0.12347735595748514,
+              0.10625683699751491,
+              0.07315611929093098
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 83922,
+            "averageLuminance": 0.0009967350635113619,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0.004204705882352941,
+            "p99Luminance": 0.029370196078431367,
+            "maxLuminance": 0.1460305882352941,
+            "darkRatio": 0.996163103834513,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.0010641066798255262,
+              0.0009871911873350556,
+              0.0008928926066268169
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          }
+        }
+      }
+    },
+    {
+      "viewport": "393x852",
+      "view": "motion-works",
+      "cameraPreset": "dial",
+      "report": {
+        "candidate": "baseline",
+        "hypothesis": "Existing camera-follow PointLight contribution; screen-space isolation does not imply physical additivity after ACES.",
+        "configuration": {
+          "name": "cameraFill",
+          "type": "PointLight",
+          "color": "#d9e8ff",
+          "configuredIntensity": 0.38,
+          "activeIntensity": 0.38,
+          "distance": 125,
+          "decay": 2,
+          "cameraRelativePosition": [
+            0,
+            0,
+            0
+          ],
+          "cameraAttached": true,
+          "castShadow": false,
+          "selectionFeedbackExcludedFromPointOnly": true
+        },
+        "viewDistances": {
+          "front": {
+            "preset": "reset",
+            "position": [
+              0,
+              -105.67239330575379,
+              0.9074563530406308
+            ],
+            "targetDistance": 106.17627125353549,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814557,
+            "cutoffDistance": 125
+          },
+          "back": {
+            "preset": "movementBack",
+            "position": [
+              0,
+              106.67252255470635,
+              0.8922060718882887
+            ],
+            "targetDistance": 106.17627125353548,
+            "inversePowerAttenuationWithoutCutoff": 0.00008870437922814559,
+            "cutoffDistance": 125
+          },
+          "side": {
+            "preset": "side",
+            "position": [
+              48,
+              5,
+              0.25
+            ],
+            "targetDistance": 48.21112423497299,
+            "inversePowerAttenuationWithoutCutoff": 0.00043023474683374116,
+            "cutoffDistance": 125
+          },
+          "winding": {
+            "preset": "winding",
+            "position": [
+              -0.2,
+              -8.8,
+              -8.8
+            ],
+            "targetDistance": 12.805077118080938,
+            "inversePowerAttenuationWithoutCutoff": 0.006098676587180581,
+            "cutoffDistance": 125
+          },
+          "motion-works": {
+            "preset": "dial",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "targetDistance": 40.929817981515626,
+            "inversePowerAttenuationWithoutCutoff": 0.0005969258319653784,
+            "cutoffDistance": 125
+          }
+        },
+        "current": {
+          "theme": "navy",
+          "view": "dial",
+          "camera": {
+            "role": "render",
+            "position": [
+              8,
+              -25,
+              -31
+            ],
+            "quaternion": [
+              0.9345748897882793,
+              0.08082687071486905,
+              0.029852499431480283,
+              0.3451747682339499
+            ],
+            "cameraUp": [
+              0,
+              0,
+              1
+            ],
+            "direction": [
+              -0.11159758546432139,
+              0.6403575737357491,
+              0.759926415304665
+            ],
+            "target": [
+              3.8,
+              -0.9,
+              -2.4
+            ],
+            "distance": 37.63522286369512,
+            "preset": "dial",
+            "finite": true
+          },
+          "delta": {
+            "method": "post-tone-map-screen-space-difference",
+            "sampleCount": 67661,
+            "meanPositiveLuminanceDelta": 0.000019693031378171023,
+            "p95PositiveLuminanceDelta": 0,
+            "p99PositiveLuminanceDelta": 0.00028313725490195993,
+            "maxPositiveLuminanceDelta": 0.0072925490196078455,
+            "meanAbsoluteLuminanceDelta": 0.000019693031378171023,
+            "p99AbsoluteLuminanceDelta": 0.00028313725490195993,
+            "maxAbsoluteLuminanceDelta": 0.0072925490196078455,
+            "newClippedPixelCount": 0,
+            "withPointClippedRatio": 0,
+            "withoutPointClippedRatio": 0
+          },
+          "withPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 67661,
+            "averageLuminance": 0.12324025976090602,
+            "p50Luminance": 0.11569647058823529,
+            "p90Luminance": 0.1881129411764706,
+            "p95Luminance": 0.2173741176470588,
+            "p99Luminance": 0.2795843137254902,
+            "maxLuminance": 0.7345333333333333,
+            "darkRatio": 0.08142061157830952,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.12123918809767649,
+              0.12414757422448722,
+              0.1201449208582587
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "withoutPoint": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 67661,
+            "averageLuminance": 0.12322056672952797,
+            "p50Luminance": 0.11569647058823529,
+            "p90Luminance": 0.18793647058823532,
+            "p95Luminance": 0.2173741176470588,
+            "p99Luminance": 0.2795843137254902,
+            "maxLuminance": 0.7345333333333333,
+            "darkRatio": 0.0815092889552327,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.12122823383346822,
+              0.12412572365514078,
+              0.12012086784425667
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          },
+          "pointOnly": {
+            "method": "model-silhouette-mask-pass",
+            "sampleStride": 2,
+            "sampleCount": 67661,
+            "averageLuminance": 0.00011868730820981491,
+            "p50Luminance": 0,
+            "p90Luminance": 0,
+            "p95Luminance": 0,
+            "p99Luminance": 0,
+            "maxLuminance": 0.046523921568627453,
+            "darkRatio": 0.9991132262307681,
+            "clippedRatio": 0,
+            "clippedCount": 0,
+            "meanRgb": [
+              0.00010050102717961571,
+              0.00011898997047275153,
+              0.00016924048406255932
+            ],
+            "buffer": [
+              393,
+              852
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

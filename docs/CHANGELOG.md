@@ -1,6 +1,20 @@
 # Changelog
 
-## Unreleased — Issue #2 レンダリング品質 Phase 1（Draft比較）
+## Unreleased — Issue #2 レンダリング品質 Phase 2A（Draft比較）
+
+- 物理iPhoneでCandidate Cを確認し、明るさは概ね問題ない一方、光源色差と硬い・局所的な見え方が受入不可のため不採用へ更新
+- PMREMスタジオの大型白反射面2、白ストリップ1、黒フラッグ2、暗い周辺面をCandidate D1/D2/D3共通で1回生成
+- D1をIBL単独、D2をニュートラル白の30×20 key（1.0）＋28×22 fill（0.35）、D3をD2＋弱いDirectionalLight（0.15）として比較用クエリに隔離
+- D3は実モデルboundsのlight-space tight fit、texel snap、`PCFSoftShadowMap`、desktop 2048／mobile 1024を使用。Three.js r160で無効な`shadow.intensity`／PCFSoft時の`radius`を調整値として使用せず、運動由来の接触影継続更新をObject3D実変位時の最大1回／200msへ限定し、`running=true`だけの無変位更新を除外。描画状態変更時の明示更新は維持
+- 5対象×4テーマ×5視点×4 viewportの400枚、80比較board、32材質・接触部crop、スタジオ構成図、全ライト／PointLight／framebuffer／性能／回帰JSONを追加
+- PointLightの20条件画面差分では巻上げ近接視点の局所差最大0.1244を確認したが新規クリップは0。局所性への寄与は記録しつつ原因を一灯へ断定せずスタジオ照明比較を継続
+- D1は不採用。D2は実機確認待ち。D3はPhase 2B推奨だが未採用。既定描画、tone mapping、exposure、材質、DPR、カメラ、機構を変更していない
+- Node 33/33、Baseline desktop 86/86、D2/D3 desktop 86/86・mobile 88/88、UI 20/20・22/22・22/22、HUD 42/42・54/54・54/54・54/54、描画品質24条件を確認
+- Baseline 390×844は既知のwalnut表裏輝度ガード1件により87/88。閾値を緩和せず実測値を記録
+- D1/D2/D3の停止時10秒A.6計測18条件は最大p95 17.60ms、最大p99 17.70ms、33ms／50ms超0。D3 transform-driven更新を含む運転中の補足6条件は最大p95 17.70ms、最大p99 18.30ms、33ms／50ms超0
+- Issue #2とPR #5をOpen／Draftのまま維持し、D2/D3の物理iPhone Safari比較をPhase 2Bゲートとする
+
+### Phase 1 履歴
 
 - v3.13.0の既定表示を固定し、透過11段階×3視点×2 viewport、通常表示4テーマ×5視点×4 viewportの基準画像を保存
 - shadow camera、構造材質状態、画像差分、ライト／露出、framebuffer輝度、性能を機械可読JSONへ出力する診断ハーネスを追加
