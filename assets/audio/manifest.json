@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "revision": "mechanical-watch-selected-audio-v1",
+  "appVersion": "v3.14.0",
+  "format": {
+    "container": "WAV",
+    "sampleRate": 48000,
+    "sampleWidthBits": 16,
+    "channels": 1,
+    "encoding": "PCM"
+  },
+  "runtime": {
+    "escapementTick": {
+      "file": "escapement_tick_A3.wav",
+      "bus": "escapement",
+      "selection": "A3"
+    },
+    "escapementTock": {
+      "file": "escapement_tock_A3.wav",
+      "bus": "escapement",
+      "selection": "A3"
+    },
+    "winding": {
+      "file": "winding_click_W3.wav",
+      "bus": "winding",
+      "selection": "W3"
+    },
+    "reverse": {
+      "file": "reverse_click_R2.wav",
+      "bus": "reverse",
+      "selection": "R2"
+    },
+    "crownPull": {
+      "file": "crown_pull_S3.wav",
+      "bus": "crown",
+      "selection": "S3"
+    },
+    "crownPush": {
+      "file": "crown_push_S3.wav",
+      "bus": "crown",
+      "selection": "S3"
+    }
+  },
+  "references": [
+    "references/escapement_reference_A3.wav",
+    "references/winding_reference_W3.wav",
+    "references/reverse_reference_R2.wav",
+    "references/crown_shift_reference_S3.wav"
+  ],
+  "provenance": "Synthetic direction-study assets; not recordings of an ETA 6498-1 movement."
+}

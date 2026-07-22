@@ -155,8 +155,8 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   const initial = diagnostics.getMobileOverlayHudReport();
   check("hud-initial-selection-overlay-is-hidden", info.hidden && info.getAttribute("aria-hidden") === "true" && initial.info.rect.width === 0 && initial.info.rect.height === 0, initial.info);
   check("hud-learning-copy-keeps-unselected-guidance", document.getElementById("learningPartName").textContent === "なし" && document.getElementById("learningPartDesc").textContent.length > 0);
-  check("hud-title-and-panel-share-v3-13-0", document.title === "Mechanical Watch Study Model v3.13.0" && initial.appVersion === "v3.13.0" && initial.modelInfo.includes("v3.13.0"), { title: document.title, modelInfo: initial.modelInfo });
-  check("hud-canvas-has-no-persistent-version-badge", initial.topHudText === "" && !document.getElementById("top").innerText.includes("v3.13.0"), initial.topHudText);
+  check("hud-title-and-panel-share-v3-14-0", document.title === "Mechanical Watch Study Model v3.14.0" && initial.appVersion === "v3.14.0" && initial.modelInfo.includes("v3.14.0"), { title: document.title, modelInfo: initial.modelInfo });
+  check("hud-canvas-has-no-persistent-version-badge", initial.topHudText === "" && !document.getElementById("top").innerText.includes("v3.14.0"), initial.topHudText);
   check("hud-panel-model-info-records-pr3-baseline", initial.modelInfo.includes("Mechanical Watch Study Model") && initial.modelInfo.includes("基準：PR #3 UIアーキテクチャ整理"), initial.modelInfo);
   check("hud-hamburger-has-no-visible-menu-text", toggle.textContent.trim() === "" && toggle.querySelectorAll(".panelToggleIcon span").length === 3, toggle.outerHTML);
   check("hud-hamburger-is-native-controlled-button", toggle.tagName === "BUTTON" && toggle.type === "button" && toggle.getAttribute("aria-controls") === panel.id);
@@ -306,7 +306,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   diagnostics.setFunctionalMode("all");
   panelTabs.activate("operation");
   const toggleCards = diagnostics.getToggleCardReport();
-  check("hud-toggle-card-covers-all-sixteen-existing-checkboxes", toggleCards.length === 16 && toggleCards.filter(({ id }) => id).length === 7 && toggleCards.filter(({ group }) => group).length === 9, toggleCards.map(({ id, group, text }) => ({ id, group, text })));
+  check("hud-toggle-card-covers-sixteen-existing-plus-sound-checkbox", toggleCards.length === 17 && toggleCards.filter(({ id }) => id).length === 8 && toggleCards.filter(({ group }) => group).length === 9, toggleCards.map(({ id, group, text }) => ({ id, group, text })));
   const visibleToggleCards = toggleCards.filter(({ card }) => card.rect.width > 0 && card.rect.height > 0);
   check("hud-toggle-card-keeps-native-input-focusable-and-label-layout-compact", toggleCards.every((card) => card.input.display !== "none" && card.card.display === "flex" && card.card.justifyContent === "flex-start" && Math.abs(parseFloat(card.card.gap) - 9) <= 0.1) && visibleToggleCards.every((card) => card.layout.minHeightMet && card.text.rightInsideCard), toggleCards);
   check("hud-toggle-card-state-matches-existing-model-bindings", toggleCards.every(({ modelMatches }) => modelMatches), toggleCards);
@@ -385,7 +385,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
       keyboardModelMatches: restored.modelMatches,
     });
   }
-  check("hud-toggle-card-all-sixteen-support-touch-and-native-keyboard-activation", allToggleInteractions.length === 16 && allToggleInteractions.every((entry) => entry.touchPointerObserved && entry.touchChanged && entry.touchModelMatches && entry.keyboardEventObserved && entry.keyboardFocused && entry.keyboardRestored && entry.keyboardModelMatches), allToggleInteractions);
+  check("hud-toggle-card-all-seventeen-support-touch-and-native-keyboard-activation", allToggleInteractions.length === 17 && allToggleInteractions.every((entry) => entry.touchPointerObserved && entry.touchChanged && entry.touchModelMatches && entry.keyboardEventObserved && entry.keyboardFocused && entry.keyboardRestored && entry.keyboardModelMatches), allToggleInteractions);
   panelTabs.activate("operation");
 
   if (layout.mobile) {
@@ -448,7 +448,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
     }
     panelTabs.activate("operation");
     const visibleMobileCards = mobileToggleCardsByTab.flatMap(({ cards }) => cards);
-    check("hud-mobile-toggle-cards-stay-within-viewport", visibleMobileCards.length === 16 && visibleMobileCards.every(({ layout: cardLayout }) => cardLayout.insideViewport && cardLayout.minHeightMet), mobileToggleCardsByTab);
+    check("hud-mobile-toggle-cards-stay-within-viewport", visibleMobileCards.length === 17 && visibleMobileCards.every(({ layout: cardLayout }) => cardLayout.insideViewport && cardLayout.minHeightMet), mobileToggleCardsByTab);
 
     diagnostics.setCrownPosition("wind");
     await diagnostics.waitForFrames(36);
