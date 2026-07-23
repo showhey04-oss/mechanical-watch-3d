@@ -1,0 +1,3080 @@
+{
+  "schemaVersion": 1,
+  "generatedOn": "2026-07-23",
+  "baselineCommit": "e9a223e1ec2b5d966354c73b7719ae81a14f50fa",
+  "mode": "query-only-geometry-candidate",
+  "adopted": false,
+  "humanConfirmationRequired": true,
+  "candidate": {
+    "adopted": false,
+    "decision": "RETAIN_FOR_REVIEW",
+    "fallbackReason": null,
+    "fallbackToBaseline": false,
+    "hourHandLength": 9.2,
+    "id": "h1",
+    "label": "conservative",
+    "minuteHandLength": 13.3,
+    "queryLimited": true,
+    "rationale": "Conservative reach improvement with substantial clearance to the dial ring.",
+    "requested": "h1",
+    "validQuery": true
+  },
+  "fixedDimensions": {
+    "dialRingDiameter": 32.2,
+    "dialRingRadius": 16.1,
+    "hourHandWidth": 0.58,
+    "indexCircleDiameter": 29.6,
+    "indexCircleRadius": 14.8,
+    "minuteHandWidth": 0.42,
+    "smallSecondHandLength": 3.8
+  },
+  "ratios": {
+    "hourDialRingClearance": 6.9,
+    "hourTipInsideDialRing": true,
+    "hourToIndexRadius": 0.621622,
+    "hourToMinuteLength": 0.691729,
+    "minuteDialRingClearance": 2.8,
+    "minuteTipInsideDialRing": true,
+    "minuteTipToDialRingRadius": 0.826087,
+    "minuteToIndexRadius": 0.898649,
+    "smallSecondHandLength": 3.8
+  },
+  "measurements": [
+    {
+      "viewport": "1280x720",
+      "time": "10:10:30",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": false,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 720,
+          "renderPixelRatio": 1,
+          "width": 1280
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              -0.383826,
+              0.480893,
+              0.996331
+            ],
+            "screen": [
+              394.351231,
+              186.878389
+            ],
+            "world": [
+              -12.086295,
+              -2.26,
+              8.541749
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 6.595479,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.00133,
+              0.996338
+            ],
+            "screen": [
+              640,
+              360.478677
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              -0.238452,
+              0.298251,
+              0.996334
+            ],
+            "screen": [
+              487.390773,
+              252.629548
+            ],
+            "world": [
+              -7.513102,
+              -2.26,
+              5.309736
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 113.92792,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0.420002,
+              0.379025,
+              0.996318
+            ],
+            "screen": [
+              908.801056,
+              223.55099
+            ],
+            "world": [
+              13.186897,
+              -2.41,
+              6.719059
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 4.792043,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.001406,
+              0.996324
+            ],
+            "screen": [
+              640,
+              360.506335
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0.377386,
+              0.340425,
+              0.996319
+            ],
+            "screen": [
+              881.527152,
+              237.447167
+            ],
+            "world": [
+              11.850387,
+              -2.41,
+              6.038074
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 30.609959,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 63.931411,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 62.360614,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 5.384341,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 3.756821,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 3835.88463,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 3834.313834,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "1280x720",
+      "time": "03:00:00",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": false,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 720,
+          "renderPixelRatio": 1,
+          "width": 1280
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0.469263,
+              -0.00133,
+              0.996338
+            ],
+            "screen": [
+              940.328502,
+              360.478677
+            ],
+            "world": [
+              14.8,
+              -2.26,
+              0
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 6.590729,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.00133,
+              0.996338
+            ],
+            "screen": [
+              640,
+              360.478677
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0.291704,
+              -0.00133,
+              0.996338
+            ],
+            "screen": [
+              826.69069,
+              360.478677
+            ],
+            "world": [
+              9.2,
+              -2.26,
+              0
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 113.637812,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0,
+              0.837826,
+              0.996312
+            ],
+            "screen": [
+              640,
+              58.382735
+            ],
+            "world": [
+              0,
+              -2.41,
+              14.8
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 4.796851,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.001406,
+              0.996324
+            ],
+            "screen": [
+              640,
+              360.506335
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0,
+              0.752558,
+              0.996313
+            ],
+            "screen": [
+              640,
+              89.079116
+            ],
+            "world": [
+              0,
+              -2.41,
+              13.3
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 30.696381,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 18.849556,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 17.27876,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 1.62752,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 0,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 1130.973355,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 1129.402559,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "1280x720",
+      "time": "06:30:00",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": false,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 720,
+          "renderPixelRatio": 1,
+          "width": 1280
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              -0.121134,
+              -0.804992,
+              0.996349
+            ],
+            "screen": [
+              562.474219,
+              649.796999
+            ],
+            "world": [
+              -3.830522,
+              -2.26,
+              -14.295702
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 6.583186,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.00133,
+              0.996338
+            ],
+            "screen": [
+              640,
+              360.478677
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              -0.075375,
+              -0.501402,
+              0.996345
+            ],
+            "screen": [
+              591.76017,
+              540.504811
+            ],
+            "world": [
+              -2.381135,
+              -2.26,
+              -8.886518
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 113.147909,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.836042,
+              0.996336
+            ],
+            "screen": [
+              640,
+              660.975288
+            ],
+            "world": [
+              0,
+              -2.41,
+              -14.8
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 4.779837,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.001406,
+              0.996324
+            ],
+            "screen": [
+              640,
+              360.506335
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.751659,
+              0.996335
+            ],
+            "screen": [
+              640,
+              630.597314
+            ],
+            "world": [
+              0,
+              -2.41,
+              -13.3
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 30.377974,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 40.840704,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 39.269908,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 3.460115,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 1.832596,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 2450.44227,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 2448.871473,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "time": "10:10:30",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 844,
+          "renderPixelRatio": 1,
+          "width": 390
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              -0.660543,
+              0.21511,
+              0.998727
+            ],
+            "screen": [
+              66.194053,
+              331.223673
+            ],
+            "world": [
+              -12.086295,
+              -2.26,
+              8.541749
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.460014,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000595,
+              0.998729
+            ],
+            "screen": [
+              195,
+              422.251213
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              -0.410498,
+              0.133456,
+              0.998728
+            ],
+            "screen": [
+              114.952873,
+              365.681674
+            ],
+            "world": [
+              -7.513102,
+              -2.26,
+              5.309736
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 59.705749,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0.721634,
+              0.169269,
+              0.998725
+            ],
+            "screen": [
+              335.71863,
+              350.568295
+            ],
+            "world": [
+              13.186897,
+              -2.41,
+              6.719059
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.509272,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000629,
+              0.998726
+            ],
+            "screen": [
+              195,
+              422.265252
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0.648459,
+              0.152041,
+              0.998725
+            ],
+            "screen": [
+              321.449463,
+              357.838518
+            ],
+            "world": [
+              11.850387,
+              -2.41,
+              6.038074
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 16.014533,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 63.931411,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 62.360614,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 5.384341,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 3.756821,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 3835.88463,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 3834.313834,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "time": "03:00:00",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 844,
+          "renderPixelRatio": 1,
+          "width": 390
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0.808281,
+              -0.000595,
+              0.998729
+            ],
+            "screen": [
+              352.614873,
+              422.251213
+            ],
+            "world": [
+              14.8,
+              -2.26,
+              0
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.458875,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000595,
+              0.998729
+            ],
+            "screen": [
+              195,
+              422.251213
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0.502445,
+              -0.000595,
+              0.998729
+            ],
+            "screen": [
+              292.976813,
+              422.251213
+            ],
+            "world": [
+              9.2,
+              -2.26,
+              0
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 59.63806,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0,
+              0.373855,
+              0.998724
+            ],
+            "screen": [
+              195,
+              264.23319
+            ],
+            "world": [
+              0,
+              -2.41,
+              14.8
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.510437,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000629,
+              0.998726
+            ],
+            "screen": [
+              195,
+              422.265252
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0,
+              0.335859,
+              0.998724
+            ],
+            "screen": [
+              195,
+              280.267635
+            ],
+            "world": [
+              0,
+              -2.41,
+              13.3
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 16.034445,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 18.849556,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 17.27876,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 1.62752,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 0,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 1130.973355,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 1129.402559,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "390x844",
+      "time": "06:30:00",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 844,
+          "renderPixelRatio": 1,
+          "width": 390
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              -0.208951,
+              -0.360923,
+              0.998731
+            ],
+            "screen": [
+              154.254495,
+              574.309656
+            ],
+            "world": [
+              -3.830522,
+              -2.26,
+              -14.295702
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.457167,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000595,
+              0.998729
+            ],
+            "screen": [
+              195,
+              422.251213
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              -0.129947,
+              -0.224683,
+              0.99873
+            ],
+            "screen": [
+              169.660379,
+              516.81633
+            ],
+            "world": [
+              -2.381135,
+              -2.26,
+              -8.886518
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 59.521624,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.374194,
+              0.998728
+            ],
+            "screen": [
+              195,
+              579.909936
+            ],
+            "world": [
+              0,
+              -2.41,
+              -14.8
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.506453,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000629,
+              0.998726
+            ],
+            "screen": [
+              195,
+              422.265252
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.336374,
+              0.998728
+            ],
+            "screen": [
+              195,
+              563.950034
+            ],
+            "world": [
+              0,
+              -2.41,
+              -13.3
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 15.959902,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 40.840704,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 39.269908,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 3.460115,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 1.832596,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 2450.44227,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 2448.871473,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "393x852",
+      "time": "10:10:30",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 852,
+          "renderPixelRatio": 1,
+          "width": 393
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              -0.660511,
+              0.214719,
+              0.998731
+            ],
+            "screen": [
+              66.709546,
+              334.529838
+            ],
+            "world": [
+              -12.086295,
+              -2.26,
+              8.541749
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.486463,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000594,
+              0.998732
+            ],
+            "screen": [
+              196.5,
+              426.253134
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              -0.410478,
+              0.133213,
+              0.998731
+            ],
+            "screen": [
+              115.841007,
+              369.251187
+            ],
+            "world": [
+              -7.513102,
+              -2.26,
+              5.309736
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 60.162052,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0.721597,
+              0.168961,
+              0.998728
+            ],
+            "screen": [
+              338.293854,
+              354.022489
+            ],
+            "world": [
+              13.186897,
+              -2.41,
+              6.719059
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.528446,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000627,
+              0.99873
+            ],
+            "screen": [
+              196.5,
+              426.267279
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0.648426,
+              0.151765,
+              0.998729
+            ],
+            "screen": [
+              323.91567,
+              361.348257
+            ],
+            "world": [
+              11.850387,
+              -2.41,
+              6.038074
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 16.136885,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 63.931411,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 62.360614,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 5.384341,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 3.756821,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 3835.88463,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 3834.313834,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "393x852",
+      "time": "03:00:00",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 852,
+          "renderPixelRatio": 1,
+          "width": 393
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0.808243,
+              -0.000594,
+              0.998732
+            ],
+            "screen": [
+              355.319781,
+              426.253134
+            ],
+            "world": [
+              14.8,
+              -2.26,
+              0
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.485317,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000594,
+              0.998732
+            ],
+            "screen": [
+              196.5,
+              426.253134
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0.502421,
+              -0.000594,
+              0.998732
+            ],
+            "screen": [
+              295.22581,
+              426.253134
+            ],
+            "world": [
+              9.2,
+              -2.26,
+              0
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 60.093971,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0,
+              0.373174,
+              0.998727
+            ],
+            "screen": [
+              196.5,
+              267.027896
+            ],
+            "world": [
+              0,
+              -2.41,
+              14.8
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.529618,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000627,
+              0.99873
+            ],
+            "screen": [
+              196.5,
+              426.267279
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0,
+              0.335247,
+              0.998727
+            ],
+            "screen": [
+              196.5,
+              283.184808
+            ],
+            "world": [
+              0,
+              -2.41,
+              13.3
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 16.156911,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 18.849556,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 17.27876,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 1.62752,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 0,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 1130.973355,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 1129.402559,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "393x852",
+      "time": "06:30:00",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 852,
+          "renderPixelRatio": 1,
+          "width": 393
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              -0.208942,
+              -0.360268,
+              0.998735
+            ],
+            "screen": [
+              155.442923,
+              579.474337
+            ],
+            "world": [
+              -3.830522,
+              -2.26,
+              -14.295702
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.483599,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000594,
+              0.998732
+            ],
+            "screen": [
+              196.5,
+              426.253134
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              -0.129941,
+              -0.224275,
+              0.998734
+            ],
+            "screen": [
+              170.966632,
+              521.541293
+            ],
+            "world": [
+              -2.381135,
+              -2.26,
+              -8.886518
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 59.976855,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.373514,
+              0.998732
+            ],
+            "screen": [
+              196.5,
+              585.117034
+            ],
+            "world": [
+              0,
+              -2.41,
+              -14.8
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.525611,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000627,
+              0.99873
+            ],
+            "screen": [
+              196.5,
+              426.267279
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.335763,
+              0.998732
+            ],
+            "screen": [
+              196.5,
+              569.035099
+            ],
+            "world": [
+              0,
+              -2.41,
+              -13.3
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 16.081935,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 40.840704,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 39.269908,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 3.460115,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 1.832596,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 2450.44227,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 2448.871473,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "375x667",
+      "time": "10:10:30",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 667,
+          "renderPixelRatio": 1,
+          "width": 375
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              -0.664498,
+              0.263291,
+              0.998293
+            ],
+            "screen": [
+              62.906661,
+              245.692519
+            ],
+            "world": [
+              -12.086295,
+              -2.26,
+              8.541749
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.34656,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000729,
+              0.998295
+            ],
+            "screen": [
+              187.5,
+              333.742959
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              -0.412931,
+              0.163338,
+              0.998294
+            ],
+            "screen": [
+              110.075463,
+              279.026835
+            ],
+            "world": [
+              -7.513102,
+              -2.26,
+              5.309736
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 57.758744,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0.726166,
+              0.207244,
+              0.998289
+            ],
+            "screen": [
+              323.656208,
+              264.384276
+            ],
+            "world": [
+              13.186897,
+              -2.41,
+              6.719059
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.427807,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000769,
+              0.998291
+            ],
+            "screen": [
+              187.5,
+              333.75662
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0.652523,
+              0.186148,
+              0.998289
+            ],
+            "screen": [
+              309.848129,
+              271.419568
+            ],
+            "world": [
+              11.850387,
+              -2.41,
+              6.038074
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 15.497044,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 63.931411,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 62.360614,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 5.384341,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 3.756821,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 3835.88463,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 3834.313834,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "375x667",
+      "time": "03:00:00",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 667,
+          "renderPixelRatio": 1,
+          "width": 375
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0.812992,
+              -0.000729,
+              0.998295
+            ],
+            "screen": [
+              339.935921,
+              333.742959
+            ],
+            "world": [
+              14.8,
+              -2.26,
+              0
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.345221,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000729,
+              0.998295
+            ],
+            "screen": [
+              187.5,
+              333.742959
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0.505373,
+              -0.000729,
+              0.998295
+            ],
+            "screen": [
+              282.257464,
+              333.742959
+            ],
+            "world": [
+              9.2,
+              -2.26,
+              0
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 57.678456,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0,
+              0.457795,
+              0.998287
+            ],
+            "screen": [
+              187.5,
+              180.825377
+            ],
+            "world": [
+              0,
+              -2.41,
+              14.8
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.429172,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000769,
+              0.998291
+            ],
+            "screen": [
+              187.5,
+              333.75662
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0,
+              0.411256,
+              0.998288
+            ],
+            "screen": [
+              187.5,
+              196.346117
+            ],
+            "world": [
+              0,
+              -2.41,
+              13.3
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 15.520741,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 18.849556,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 17.27876,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 1.62752,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 0,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 1130.973355,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 1129.402559,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    },
+    {
+      "viewport": "375x667",
+      "time": "06:30:00",
+      "status": "passed",
+      "screenSpace": {
+        "mobile": true,
+        "preset": "reset",
+        "viewport": {
+          "devicePixelRatio": 1,
+          "height": 667,
+          "renderPixelRatio": 1,
+          "width": 375
+        },
+        "visibility": {
+          "hour": true,
+          "minute": true
+        }
+      },
+      "hands": {
+        "hour": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              -0.210113,
+              -0.441577,
+              0.998298
+            ],
+            "screen": [
+              148.103745,
+              480.766062
+            ],
+            "world": [
+              -3.830522,
+              -2.26,
+              -14.295702
+            ]
+          },
+          "length": 9.2,
+          "lineWidthPx": 3.343174,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000729,
+              0.998295
+            ],
+            "screen": [
+              187.5,
+              333.742959
+            ],
+            "world": [
+              0,
+              -2.26,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              -0.130683,
+              -0.27492,
+              0.998297
+            ],
+            "screen": [
+              162.997026,
+              425.185744
+            ],
+            "world": [
+              -2.381135,
+              -2.26,
+              -8.886518
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 9.2,
+          "tipToIndexPx": 57.54113,
+          "width": 0.58
+        },
+        "minute": {
+          "discernible": true,
+          "indexTip": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.457958,
+              0.998294
+            ],
+            "screen": [
+              187.5,
+              486.229072
+            ],
+            "world": [
+              0,
+              -2.41,
+              -14.8
+            ]
+          },
+          "length": 13.3,
+          "lineWidthPx": 2.424454,
+          "pivot": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.000769,
+              0.998291
+            ],
+            "screen": [
+              187.5,
+              333.75662
+            ],
+            "world": [
+              0,
+              -2.41,
+              0
+            ]
+          },
+          "tip": {
+            "inside": true,
+            "ndc": [
+              0,
+              -0.411684,
+              0.998294
+            ],
+            "screen": [
+              187.5,
+              470.796617
+            ],
+            "world": [
+              0,
+              -2.41,
+              -13.3
+            ]
+          },
+          "tipInsideDialRing": true,
+          "tipInsideViewport": true,
+          "tipRadius": 13.3,
+          "tipToIndexPx": 15.432455,
+          "width": 0.42
+        }
+      },
+      "coupling": [
+        {
+          "actualOffset": -1.570796,
+          "driver": "cannon",
+          "driverAngle": 40.840704,
+          "driverMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "minuteHand",
+          "handAngle": 39.269908,
+          "handMount": [
+            0,
+            -2.41,
+            0
+          ],
+          "id": "minute",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.62752,
+          "driver": "hour",
+          "driverAngle": 3.460115,
+          "driverMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "error": 0,
+          "fixedOffset": -1.62752,
+          "hand": "hourHand",
+          "handAngle": 1.832596,
+          "handMount": [
+            0,
+            -2.26,
+            0
+          ],
+          "id": "hour",
+          "mountDistance": 0
+        },
+        {
+          "actualOffset": -1.570796,
+          "driver": "fourthArbor",
+          "driverAngle": 2450.44227,
+          "driverMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "error": 0,
+          "fixedOffset": -1.570796,
+          "hand": "secondsHand",
+          "handAngle": 2448.871473,
+          "handMount": [
+            -0.000508,
+            -2.39,
+            -5.601266
+          ],
+          "id": "seconds",
+          "mountDistance": 0
+        }
+      ],
+      "invariants": {
+        "transformsUnchanged": true,
+        "pivotsUnchanged": true,
+        "scalesUnchanged": true,
+        "cameraUnchanged": true,
+        "stateUnchanged": true
+      },
+      "geometry": {
+        "hour": {
+          "boundingBox": [
+            -0.474774,
+            -0.1,
+            -0.315224,
+            9.235355,
+            0.02,
+            0.315224
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "minute": {
+          "boundingBox": [
+            -0.474885,
+            -0.1,
+            -0.235115,
+            13.335356,
+            0.02,
+            0.235115
+          ],
+          "finite": true,
+          "vertexCount": 228
+        },
+        "smallSecond": {
+          "boundingBox": [
+            -0.474879,
+            -0.1,
+            -0.095121,
+            3.835355,
+            0.02,
+            0.095121
+          ],
+          "finite": true,
+          "vertexCount": 228
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "schemaVersion": 1,
+  "generatedOn": "2026-07-23",
+  "baselineCommit": "e9a223e1ec2b5d966354c73b7719ae81a14f50fa",
+  "node": {
+    "passed": 61,
+    "total": 61
+  },
+  "candidateIntegration": {
+    "desktop": {
+      "h0": {
+        "passed": true,
+        "checks": 12,
+        "total": 12,
+        "failed": []
+      },
+      "h1": {
+        "passed": true,
+        "checks": 12,
+        "total": 12,
+        "failed": []
+      },
+      "h2": {
+        "passed": true,
+        "checks": 12,
+        "total": 12,
+        "failed": []
+      },
+      "h3": {
+        "passed": true,
+        "checks": 12,
+        "total": 12,
+        "failed": []
+      }
+    },
+    "fixedConditionMatrix": {
+      "cases": 48,
+      "passed": 48,
+      "finite": true,
+      "inside": true,
+      "coupled": true,
+      "invariant": true,
+      "minMinuteWidthPx": 2.424259,
+      "minHourWidthPx": 3.342845,
+      "allDiscernible": true
+    },
+    "fallbacks": {
+      "absent": {
+        "candidate": {
+          "adopted": false,
+          "decision": "REJECT",
+          "fallbackReason": "query-absent",
+          "fallbackToBaseline": true,
+          "hourHandLength": 7.2,
+          "id": "h0",
+          "label": "baseline",
+          "minuteHandLength": 10.3,
+          "queryLimited": false,
+          "rationale": "The current hands remain visibly short of the 14.8 index-circle radius.",
+          "requested": null,
+          "validQuery": false
+        },
+        "geometryLengths": {
+          "hour": 7.2,
+          "minute": 10.3,
+          "smallSecond": 3.8
+        },
+        "query": {
+          "fallbackReason": "query-absent",
+          "fallbackToBaseline": true,
+          "parameter": "dialHandCandidate",
+          "requested": null,
+          "valid": false
+        }
+      },
+      "invalid": {
+        "candidate": {
+          "adopted": false,
+          "decision": "REJECT",
+          "fallbackReason": "invalid-query",
+          "fallbackToBaseline": true,
+          "hourHandLength": 7.2,
+          "id": "h0",
+          "label": "baseline",
+          "minuteHandLength": 10.3,
+          "queryLimited": false,
+          "rationale": "The current hands remain visibly short of the 14.8 index-circle radius.",
+          "requested": "invalid",
+          "validQuery": false
+        },
+        "geometryLengths": {
+          "hour": 7.2,
+          "minute": 10.3,
+          "smallSecond": 3.8
+        },
+        "query": {
+          "fallbackReason": "invalid-query",
+          "fallbackToBaseline": true,
+          "parameter": "dialHandCandidate",
+          "requested": "invalid",
+          "valid": false
+        }
+      }
+    }
+  },
+  "browser": {
+    "desktop": {
+      "passed": true,
+      "checks": 86,
+      "total": 86
+    },
+    "mobile390": {
+      "passed": true,
+      "checks": 88,
+      "total": 88,
+      "devicePixelRatio": 2,
+      "walnutSampleGuard": {
+        "threshold": ">1000",
+        "front": 1740,
+        "back": 6727,
+        "thresholdChanged": false
+      }
+    },
+    "directViewportDiagnostic": {
+      "devicePixelRatio": 1,
+      "accepted": false,
+      "reason": "non-canonical DPR produced a known walnut sample-count guard miss while all luminance differences remained within 30%",
+      "attempts": [
+        {
+          "front": 997,
+          "back": 4346
+        },
+        {
+          "front": 978,
+          "back": 4346
+        }
+      ]
+    }
+  },
+  "ui": {
+    "desktop": {
+      "passed": true,
+      "checks": 20,
+      "total": 20
+    },
+    "mobile390": {
+      "passed": true,
+      "checks": 22,
+      "total": 22
+    },
+    "mobile375": {
+      "passed": true,
+      "checks": 22,
+      "total": 22
+    }
+  },
+  "hud": {
+    "mobile390": {
+      "passed": true,
+      "checks": 57,
+      "total": 57
+    },
+    "mobile393": {
+      "passed": true,
+      "checks": 57,
+      "total": 57
+    },
+    "mobile375": {
+      "passed": true,
+      "checks": 57,
+      "total": 57
+    }
+  },
+  "audio": {
+    "desktop": {
+      "passed": true,
+      "checks": 23,
+      "total": 23
+    },
+    "mobile390": {
+      "passed": true,
+      "checks": 23,
+      "total": 23
+    }
+  },
+  "phase1DimensionAudit": {
+    "passed": true,
+    "checks": 11,
+    "total": 11,
+    "schemaVersion": 2,
+    "viewport": {
+      "devicePixelRatio": 2,
+      "height": 720,
+      "renderPixelRatio": 1.25,
+      "width": 1280
+    }
+  },
+  "a7": {
+    "passed": true,
+    "checks": 9,
+    "total": 9
+  },
+  "interference": {
+    "position1": 0,
+    "position2": 0
+  },
+  "threeHandCoupling": {
+    "passed": true,
+    "maxErrorOrMountDistance": 1.652011860642233e-13
+  },
+  "pixelExact": true,
+  "performance": {
+    "default": {
+      "p50": 16.699999999999818,
+      "p95": 16.799999999999955,
+      "p99": 17.600000000000364,
+      "over33": 0,
+      "over50": 0,
+      "longtasks": 0
+    },
+    "h2": {
+      "p50": 16.699999999999818,
+      "p95": 17.09999999999991,
+      "p99": 18,
+      "over33": 0,
+      "over50": 0,
+      "longtasks": 0
+    }
+  },
+  "protectedScope": {
+    "pr5": "open-draft",
+    "issue2": "open",
+    "d2c3": "not-adopted",
+    "phase2bStarted": false,
+    "defaultCandidateAdopted": false
+  },
+  "consoleErrors": {
+    "freshH2CandidatePage": 0
+  }
+}
