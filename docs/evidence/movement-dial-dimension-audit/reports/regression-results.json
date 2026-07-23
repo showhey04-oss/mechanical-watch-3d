@@ -1,0 +1,497 @@
+{
+  "schemaVersion": 2,
+  "executedOn": "2026-07-23",
+  "node": {
+    "command": "node --test tests/*.test.mjs",
+    "passed": 57,
+    "failed": 0
+  },
+  "comprehensive": [
+    {
+      "viewport": "desktop",
+      "checkCount": 86,
+      "passed": 86,
+      "failedChecks": [],
+      "a7Count": 9,
+      "a7Passed": 9,
+      "windInterference": 0,
+      "setInterference": 0,
+      "handCoupling": [
+        {
+          "id": "minute",
+          "error": 5.329070518200751e-15,
+          "mountDistance": 0
+        },
+        {
+          "id": "hour",
+          "error": 0,
+          "mountDistance": 0
+        },
+        {
+          "id": "seconds",
+          "error": -1.652011860642233e-13,
+          "mountDistance": 0
+        }
+      ],
+      "ok": true,
+      "status": "passed"
+    },
+    {
+      "viewport": "390x844",
+      "checkCount": 88,
+      "passed": 88,
+      "failedChecks": [],
+      "a7Count": 9,
+      "a7Passed": 9,
+      "windInterference": 0,
+      "setInterference": 0,
+      "handCoupling": [
+        {
+          "id": "minute",
+          "error": 5.329070518200751e-15,
+          "mountDistance": 0
+        },
+        {
+          "id": "hour",
+          "error": 0,
+          "mountDistance": 0
+        },
+        {
+          "id": "seconds",
+          "error": -1.652011860642233e-13,
+          "mountDistance": 0
+        }
+      ],
+      "ok": true,
+      "status": "passed"
+    }
+  ],
+  "pr3Ui": [
+    {
+      "viewport": "desktop",
+      "count": 20,
+      "passed": 20,
+      "failed": [],
+      "ok": true,
+      "status": "passed"
+    },
+    {
+      "viewport": "390x844",
+      "count": 22,
+      "passed": 22,
+      "failed": [],
+      "ok": true,
+      "status": "passed"
+    },
+    {
+      "viewport": "375x667",
+      "count": 22,
+      "passed": 22,
+      "failed": [],
+      "ok": true,
+      "status": "passed"
+    }
+  ],
+  "pr4Hud": [
+    {
+      "viewport": "390x844",
+      "count": 57,
+      "passed": 57,
+      "failed": [],
+      "ok": true,
+      "status": "passed"
+    },
+    {
+      "viewport": "393x852",
+      "count": 57,
+      "passed": 57,
+      "failed": [],
+      "ok": true,
+      "status": "passed"
+    },
+    {
+      "viewport": "375x667",
+      "count": 57,
+      "passed": 57,
+      "failed": [],
+      "ok": true,
+      "status": "passed"
+    }
+  ],
+  "audio": [
+    {
+      "viewport": "desktop",
+      "count": 23,
+      "passed": 23,
+      "failed": [],
+      "ok": true,
+      "status": "passed"
+    },
+    {
+      "viewport": "390x844",
+      "count": 23,
+      "passed": 23,
+      "failed": [],
+      "ok": true,
+      "status": "passed"
+    }
+  ],
+  "performance": {
+    "frontIdle10s": {
+      "type": "front-idle",
+      "pacing": {
+        "captured": true,
+        "label": "front-idle",
+        "durationMs": 10064.299999982119,
+        "averageFps": 59.914748169378036,
+        "meanFrameTime": 16.666334991708126,
+        "p50": 16.699999999999818,
+        "p90": 16.700000000000728,
+        "p95": 16.800000000000182,
+        "p99": 18.5,
+        "over33": 0,
+        "over50": 0,
+        "longest": 18.700000000000728,
+        "callbackCount": 603,
+        "events": {
+          "controlsChange": 0,
+          "pointerMove": 0,
+          "pointerDown": 0,
+          "pointerUp": 0,
+          "wheel": 0,
+          "mainSpringGeometry": 50,
+          "hairSpringGeometry": 604,
+          "balanceDom": 96,
+          "timeDom": 96,
+          "selectionBoxRefresh": 0,
+          "shadowRefresh": 0,
+          "pixelRatioChange": 4
+        },
+        "longtaskCount": 0,
+        "longtasks": [],
+        "viewport": {
+          "width": 1280,
+          "height": 720,
+          "devicePixelRatio": 2
+        },
+        "renderPixelRatio": 1.45,
+        "costs": {
+          "mechanismState": {
+            "calls": 604,
+            "totalMs": 47.50000035762787,
+            "maxMs": 0.20000001788139343,
+            "averageMs": 0.07864238469805938
+          },
+          "updateHairSpring": {
+            "calls": 604,
+            "totalMs": 8.199999928474426,
+            "maxMs": 0.19999998807907104,
+            "averageMs": 0.013576158821977527
+          },
+          "updateMainSpring": {
+            "calls": 604,
+            "totalMs": 1.5,
+            "maxMs": 0.10000002384185791,
+            "averageMs": 0.0024834437086092716
+          },
+          "updateBalanceReadout": {
+            "calls": 96,
+            "totalMs": 1.0999999642372131,
+            "maxMs": 0.10000002384185791,
+            "averageMs": 0.011458332960804304
+          },
+          "updateTimeUI": {
+            "calls": 96,
+            "totalMs": 0.3999999761581421,
+            "maxMs": 0.09999999403953552,
+            "averageMs": 0.00416666641831398
+          },
+          "selectionBox": {
+            "calls": 0,
+            "totalMs": 0,
+            "maxMs": 0,
+            "averageMs": 0
+          },
+          "controlsUpdate": {
+            "calls": 604,
+            "totalMs": 9.700000047683716,
+            "maxMs": 0.19999998807907104,
+            "averageMs": 0.016059602727953173
+          },
+          "rendererRender": {
+            "calls": 604,
+            "totalMs": 3091.8999998271465,
+            "maxMs": 8.099999994039536,
+            "averageMs": 5.119039734813157
+          },
+          "shadowUpdate": {
+            "calls": 0,
+            "totalMs": 0,
+            "maxMs": 0,
+            "averageMs": 0
+          }
+        },
+        "motionAxis": [
+          0,
+          0,
+          1
+        ]
+      },
+      "motion": {
+        "captured": true,
+        "sampleCount": 604,
+        "p50AngularStep": 0,
+        "p95AngularStep": 0,
+        "p99AngularStep": 0,
+        "maxAngularStep": 0,
+        "p95AngularVelocity": 0,
+        "p95JerkProxy": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "finite": true
+      },
+      "zoom": {
+        "captured": true,
+        "sampleCount": 604,
+        "startDistance": 48.97567441624348,
+        "endDistance": 48.97567441624348,
+        "totalChange": 0,
+        "maxFrameDistanceStep": 0,
+        "maxStepShare": 0,
+        "p50FrameDistanceStep": 0,
+        "p95FrameDistanceStep": 0,
+        "monotonic": true,
+        "alternatingSignCount": 0,
+        "finite": true
+      },
+      "costs": {
+        "mechanismState": {
+          "calls": 604,
+          "totalMs": 47.50000035762787,
+          "maxMs": 0.20000001788139343,
+          "averageMs": 0.07864238469805938
+        },
+        "updateHairSpring": {
+          "calls": 604,
+          "totalMs": 8.199999928474426,
+          "maxMs": 0.19999998807907104,
+          "averageMs": 0.013576158821977527
+        },
+        "updateMainSpring": {
+          "calls": 604,
+          "totalMs": 1.5,
+          "maxMs": 0.10000002384185791,
+          "averageMs": 0.0024834437086092716
+        },
+        "updateBalanceReadout": {
+          "calls": 96,
+          "totalMs": 1.0999999642372131,
+          "maxMs": 0.10000002384185791,
+          "averageMs": 0.011458332960804304
+        },
+        "updateTimeUI": {
+          "calls": 96,
+          "totalMs": 0.3999999761581421,
+          "maxMs": 0.09999999403953552,
+          "averageMs": 0.00416666641831398
+        },
+        "selectionBox": {
+          "calls": 0,
+          "totalMs": 0,
+          "maxMs": 0,
+          "averageMs": 0
+        },
+        "controlsUpdate": {
+          "calls": 604,
+          "totalMs": 9.700000047683716,
+          "maxMs": 0.19999998807907104,
+          "averageMs": 0.016059602727953173
+        },
+        "rendererRender": {
+          "calls": 604,
+          "totalMs": 3091.8999998271465,
+          "maxMs": 8.099999994039536,
+          "averageMs": 5.119039734813157
+        },
+        "shadowUpdate": {
+          "calls": 0,
+          "totalMs": 0,
+          "maxMs": 0,
+          "averageMs": 0
+        }
+      },
+      "adaptive": {
+        "current": 1.45,
+        "min": 1,
+        "max": 1.5,
+        "devicePixelRatio": 2,
+        "interactionQualityMode": false,
+        "lastChangeAt": 8908.100000023842,
+        "recentP95": 17.200000000000728,
+        "shadowAutoUpdate": false,
+        "shadowRefreshPending": false
+      },
+      "smoothing": {
+        "architecture": "dual-camera",
+        "render": {
+          "role": "render",
+          "position": [
+            0,
+            -48.473885644555445,
+            0.41858021918423455
+          ],
+          "quaternion": [
+            0.704078583547734,
+            0,
+            0,
+            0.7101220656967482
+          ],
+          "cameraUp": [
+            0,
+            0,
+            1
+          ],
+          "direction": [
+            0,
+            0.9999634763235146,
+            -0.008546696378833095
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "distance": 48.97567441624348,
+          "preset": "reset",
+          "finite": true
+        },
+        "control": {
+          "role": "control",
+          "position": [
+            0,
+            -48.473885644555445,
+            0.41858021918423455
+          ],
+          "quaternion": [
+            0.704078583547734,
+            0,
+            0,
+            0.7101220656967482
+          ],
+          "cameraUp": [
+            0,
+            0,
+            1
+          ],
+          "direction": [
+            0,
+            0.9999634763235146,
+            -0.008546696378833095
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "distance": 48.97567441624348,
+          "preset": "reset",
+          "finite": true
+        },
+        "desiredZoomDistance": 48.97567441624348,
+        "rotationTauSeconds": 0.085,
+        "positionTauSeconds": 0.09,
+        "zoomTauSeconds": 0.065,
+        "scaleFactor": 1.03,
+        "raycasterCameraRole": "render",
+        "cameraFillCameraRole": "render"
+      },
+      "modelInvariant": true,
+      "camera": {
+        "role": "render",
+        "position": [
+          0,
+          -48.473885644555445,
+          0.41858021918423455
+        ],
+        "quaternion": [
+          0.704078583547734,
+          0,
+          0,
+          0.7101220656967482
+        ],
+        "cameraUp": [
+          0,
+          0,
+          1
+        ],
+        "direction": [
+          0,
+          0.9999634763235146,
+          -0.008546696378833095
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "distance": 48.97567441624348,
+        "preset": "reset",
+        "finite": true,
+        "control": {
+          "role": "control",
+          "position": [
+            0,
+            -48.473885644555445,
+            0.41858021918423455
+          ],
+          "quaternion": [
+            0.704078583547734,
+            0,
+            0,
+            0.7101220656967482
+          ],
+          "cameraUp": [
+            0,
+            0,
+            1
+          ],
+          "direction": [
+            0,
+            0.9999634763235146,
+            -0.008546696378833095
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "distance": 48.97567441624348,
+          "preset": "reset",
+          "finite": true
+        }
+      }
+    }
+  },
+  "baselineImage": {
+    "pixelExact": true,
+    "branchSha256": "ea4adcb895a1409a1de7eca487fcd235813d9d476d76defc9c65711970c29d16",
+    "baselineSha256": "ea4adcb895a1409a1de7eca487fcd235813d9d476d76defc9c65711970c29d16",
+    "canvas": [
+      1920,
+      1080
+    ]
+  },
+  "dimensionAudit": {
+    "integrationChecks": 11,
+    "integrationPassed": 11,
+    "integrationOk": true,
+    "screenSpaceCases": 20,
+    "allTransformInvariant": true,
+    "allForbiddenZero": true,
+    "invalidReviewMetadata": 0
+  },
+  "knownResults": [
+    "Walnut luminance sampling guard threshold remains unchanged; the current isolated 390x844 run passed 88/88.",
+    "Issue #2, Draft PR #5, and D2c3 remain outside this audit."
+  ]
+}
