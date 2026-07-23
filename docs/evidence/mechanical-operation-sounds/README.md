@@ -57,6 +57,13 @@ pullは`crownTransition=0.999975`の上向き交差、pushは`0.000025`の下向
 
 4動画はいずれもWebMコンテナ内にVP9映像trackとOpus音声trackを含む。録画は同じ実ブラウザの`canvas.captureStream()`とWeb Audio `MediaStreamDestination`をMediaRecorderへ接続して作成した。
 
-## 人手確認待ち
+## 物理iPhone人手確認
 
-実機iPhoneはこの環境から操作できないため未実施。Safari実機で右上ボタンのtap領域、音量、5bpsの知覚、正転／逆転の識別、pull/pushの前倒し時刻と一回性、尾引き、二重発音、タブ／ホーム復帰をユーザーが確認するまで、PRはDraftのまま完成判定しない。main v3.13.0の既定照明が暗く見える件は既知事項としてIssue #2の最終微調整へ申し送る。
+物理iPhone Safariで次を人手確認し、すべて合格した。
+
+- pull／push音の前倒し時刻と1操作1回の発音
+- 右上スピーカーボタンのtap操作
+- ON／OFF、タブ移動、ホーム復帰時に二重音と音残りがないこと
+- 5bpsのtick／tock、正転巻上げ、逆転空転の音量と識別性
+
+main v3.13.0の既定照明が暗く見える件は既知事項としてIssue #2の最終微調整へ申し送る。
