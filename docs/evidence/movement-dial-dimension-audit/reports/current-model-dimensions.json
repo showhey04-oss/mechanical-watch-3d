@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "sourceCommit": "7cd1941c3239f7186a6d83695eab8ba347e2afd9",
   "mode": "read-only-query-diagnostic",
   "coordinateConvention": {
@@ -27,7 +27,6 @@
     ],
     "movementReferenceDiameter": 36.6,
     "plateDiameter": 36.6,
-    "dialDiameter": 32.2,
     "indexCircleDiameter": 29.6,
     "minuteHandLength": 10.3,
     "hourHandLength": 7.2,
@@ -123,7 +122,9 @@
         ],
         "outerDiameter": 1.629063
       }
-    }
+    },
+    "dialRingDiameter": 32.2,
+    "dialBlankDiameter": null
   },
   "renderedGeometry": {
     "movement": {
@@ -3537,5 +3538,17 @@
     "defaultDomNodesAdded": 0,
     "defaultObject3DAdded": 0,
     "animationLoopCalls": 0
+  },
+  "dimensionSemantics": {
+    "dialRingDiameter": {
+      "valueModelUnit": 32.2,
+      "classification": "currentModelDefinition",
+      "meaning": "Torus centerline diameter used as a display-aperture candidate; not a physical dial blank diameter."
+    },
+    "dialBlankDiameter": {
+      "valueModelUnit": null,
+      "classification": "unverified",
+      "meaning": "Physical dial blank diameter is not defined or verified in Phase 1."
+    }
   }
 }

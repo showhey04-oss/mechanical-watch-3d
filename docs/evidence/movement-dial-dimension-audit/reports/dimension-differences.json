@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "decisions": [
     "KEEP",
     "REVIEW",
@@ -21,27 +21,40 @@
     },
     {
       "id": "movement-height",
-      "target": "rendered movement body thickness",
+      "target": "current app movement Y envelope (datum basis not aligned to ETA height)",
       "currentModelUnit": 6.645,
       "convertedMm": 6.645,
       "officialCandidate": 4.5,
       "evidence": "currentRenderedGeometry",
-      "decision": "ADJUST_PHASE2",
-      "recommendation": "Review the stacked Y envelope against the 4.5 mm calibre height before changing geometry.",
+      "decision": "REVIEW",
+      "recommendation": "Measure three separate Phase 2 envelopes and align datum surfaces before deciding whether any thickness adjustment is warranted.",
       "differenceMm": 2.145,
-      "normalizedRatio": 0.181557
+      "normalizedRatio": 0.181557,
+      "comparisonQualification": "descriptiveOnly"
     },
     {
-      "id": "dial-diameter",
-      "target": "dial outer ring diameter",
+      "id": "dial-ring-diameter",
+      "target": "dialRingDiameter / display-aperture candidate",
       "currentModelUnit": 32.2,
       "convertedMm": 32.2,
       "officialCandidate": null,
       "evidence": "currentModelDefinition",
       "decision": "REVIEW",
-      "recommendation": "Confirm the intended dial opening and case before resizing.",
+      "recommendation": "Do not treat 32.20 model unit as the physical dial blank diameter; verify case opening and dial blank separately.",
       "differenceMm": null,
       "normalizedRatio": 0.879781
+    },
+    {
+      "id": "dial-blank-diameter",
+      "target": "physical dialBlankDiameter",
+      "currentModelUnit": null,
+      "convertedMm": null,
+      "officialCandidate": null,
+      "evidence": "unverified",
+      "decision": "UNVERIFIED",
+      "recommendation": "Obtain an authoritative drawing or measured reference before defining the dial blank diameter.",
+      "differenceMm": null,
+      "normalizedRatio": null
     },
     {
       "id": "index-circle",
@@ -115,5 +128,15 @@
       "differenceMm": null,
       "normalizedRatio": null
     }
-  ]
+  ],
+  "measurementBasis": {
+    "alignmentStatus": "NOT_ALIGNED",
+    "decision": "REVIEW",
+    "note": "ETA 4.50 mm and the app 6.645 model-unit Y envelope do not share verified datum surfaces. The difference is descriptive and is not a Phase 2 adjustment amount.",
+    "phase2EnvelopePlan": [
+      "baseMovementEnvelope",
+      "handMountAndProtrudingArborEnvelope",
+      "applicationEnvelopeIncludingDialAndHands"
+    ]
+  }
 }

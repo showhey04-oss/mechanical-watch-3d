@@ -4,6 +4,8 @@
 
 Refactor Phase 1の読み取り専用寸法監査証跡。基準はmain `7cd1941c3239f7186a6d83695eab8ba347e2afd9`、アプリ実装基準は `90e14647190156d040fbd4aee1e74bf38c3442b3`。寸法・座標・形状・機構・通常表示は変更していない。
 
+ETA公式高さ4.50 mmと現行アプリY包絡6.645 model unitは基準面が未対応のため、movement-heightは `REVIEW`。数値差は調整量ではない。32.20 model unitは `dialRingDiameter` / 表示開口候補であり、物理 `dialBlankDiameter` は `UNVERIFIED` とする。
+
 ## Fixed capture state
 
 - time: `10:10:30`
@@ -22,9 +24,9 @@ Refactor Phase 1の読み取り専用寸法監査証跡。基準はmain `7cd1941
 
 - [`current-model-dimensions.json`](reports/current-model-dimensions.json): 定義値、Object3D実Geometry、world座標、層範囲、機構不変条件
 - [`reference-anchors.json`](reports/reference-anchors.json): ETA公式アンカーと分類語彙
-- [`normalized-ratios.json`](reports/normalized-ratios.json): 径基準の換算と無次元比
-- [`dimension-differences.json`](reports/dimension-differences.json): KEEP / REVIEW / ADJUST_PHASE2 / UNVERIFIED
-- [`screen-space-ratios.json`](reports/screen-space-ratios.json): 4 viewport × 5 viewの20条件
+- [`normalized-ratios.json`](reports/normalized-ratios.json): 基準面不一致の注記、対直径比・対半径比、Phase 2の3包絡計測方針
+- [`dimension-differences.json`](reports/dimension-differences.json): KEEP / REVIEW / ADJUST_PHASE2 / UNVERIFIED。movement-heightはREVIEW、dialBlankDiameterはUNVERIFIED
+- [`screen-space-ratios.json`](reports/screen-space-ratios.json): 4 viewport × 5 viewの20条件とcamera composition判定
 - [`regression-results.json`](reports/regression-results.json): Node、desktop、mobile、PR #3、PR #4、音声、A.7、性能
 - [`baseline-image-comparison.json`](reports/baseline-image-comparison.json): mainと監査ブランチの通常表示pixel exact比較
 - [`evidence-manifest.json`](evidence-manifest.json): 閉世界ファイル一覧、サイズ、SHA-256
@@ -74,6 +76,13 @@ Refactor Phase 1の読み取り専用寸法監査証跡。基準はmain `7cd1941
 | normal baseline image | pixel exact |
 
 393×852でPR #3 UIを補助実行した場合、既存試験ハーネスの厳密viewport許可値が `[375,390] × [667,844]` のため、そのガードだけが非適用となる。試験閾値は変更していない。393×852のHUD 57/57と寸法監査は合格している。
+
+## Interpretation and Phase 2 handoff
+
+- screen-space占有率が100%を超える条件は `REVIEW — camera composition`。モデル寸法縮小の根拠にはしない
+- 針長、中心半径、りゅうず位置、輪列中心は対ムーブメント直径比と対ムーブメント半径比を併記
+- Phase 2では `baseMovementEnvelope`、`handMountAndProtrudingArborEnvelope`、`applicationEnvelopeIncludingDialAndHands` を別々に計測する
+- Phase 2の寸法変更は本証跡の対象外
 
 ## Performance
 
