@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><title>Mobile 390 browser regression harness</title></head>
+<body>
+<output id="mobileBrowserHarnessResult">running</output>
+<iframe id="target" width="390" height="844" style="position:fixed;left:-2000px;top:0;border:0" src="../index.html?browserTest=1&amp;theme=navy&amp;camera=reset&amp;time=10%3A10%3A30&amp;paused=1&amp;opacity=1&amp;panel=collapsed&amp;cache=browser-mobile390-fixed-viewport"></iframe>
+<script type="module">
+const frame=document.getElementById("target");
+const result=await new Promise((resolve,reject)=>{
+  const started=performance.now();
+  const check=()=>{
+    const output=frame.contentDocument?.querySelector("#browserTestResult");
+    if(output?.dataset.status)return resolve(JSON.parse(output.textContent));
+    if(performance.now()-started>65000)return reject(new Error("mobile browser regression timeout"));
+    requestAnimationFrame(check);
+  };
+  check();
+});
+const output=document.getElementById("mobileBrowserHarnessResult");output.value=JSON.stringify(result);output.textContent=JSON.stringify(result);output.dataset.status=result.ok?"passed":"failed";
+window.mobileBrowserHarnessResult=result;
+</script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><title>Phase 2B fixed-condition matrix</title></head>
+<body>
+<output id="matrixStatus">running</output>
+<script type="module">
+const candidates=["s100","s92","s86","s80"];
+const viewports=[[1280,720],[390,844],[393,852],[375,667]];
+const times=["10:10:30","03:00:00","06:30:00"];
+const results=[];
+const frames=candidates.map(()=>{
+  const frame=document.createElement("iframe");
+  frame.style.cssText="position:fixed;left:-2000px;top:0;border:0";
+  document.body.append(frame);
+  return frame;
+});
+const wait=(frame)=>new Promise((resolve,reject)=>{
+  const started=performance.now();
+  const check=()=>{
+    try{
+      const output=frame.contentDocument?.querySelector("#dialDisplayScaleResult");
+      if(output?.dataset.status)return resolve(frame.contentWindow.watchModelDiagnostics);
+    }catch{}
+    if(performance.now()-started>15000)return reject(new Error(`timeout: ${frame.src}`));
+    requestAnimationFrame(check);
+  };
+  check();
+});
+frames.forEach((frame,index)=>{
+  frame.width="1280";frame.height="720";
+  frame.src=`../index.html?dialDisplayScale=${candidates[index]}&dialDisplayScaleAudit=1&theme=navy&camera=reset&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&cache=phase2b-matrix-${candidates[index]}`;
+});
+const diagnostics=await Promise.all(frames.map(wait));
+const parseTime=time=>{const [hours,minutes,seconds]=time.split(":").map(Number);return hours*3600+minutes*60+seconds};
+for(const [width,height] of viewports){
+  for(const frame of frames){frame.width=String(width);frame.height=String(height)}
+  await Promise.all(diagnostics.map(diagnostic=>diagnostic.waitForFrames(2)));
+  diagnostics.forEach(diagnostic=>diagnostic.applyCameraPreset("reset"));
+  for(const time of times){
+    await Promise.all(diagnostics.map(async diagnostic=>{
+      diagnostic.setWatchTime(parseTime(time));
+      await diagnostic.waitForFrames(10);
+    }));
+    const batch=diagnostics.map(diagnostic=>diagnostic.getDialDisplayScaleDiagnostics());
+    batch.forEach((report,index)=>{
+      const candidate=candidates[index];
+      results.push({
+        candidate,viewport:{width,height},time,ok:report.checks.finiteGeometry
+          && report.checks.dialRingProtrusionCount===0
+          && report.checks.markerInterferenceCount===0
+          && report.checks.smallSecondAxisCoincident
+          && report.invariants.protectedTransformsUnchanged
+          && report.invariants.cameraUnchanged
+          && report.invariants.mechanismStateUnchanged,
+        checkCount:15,
+        metrics:report.metrics,hands:report.hands,screenPoints:report.screenPoints,
+        geometry:report.geometry,checks:report.checks,invariants:report.invariants,
+      });
+    });
+  }
+}
+const summary={
+  ok:results.length===48&&results.every(item=>item.ok),
+  expectedCount:48,actualCount:results.length,
+  allFiniteGeometry:results.every(item=>item.checks.finiteGeometry),
+  dialRingProtrusionCount:results.reduce((sum,item)=>sum+item.checks.dialRingProtrusionCount,0),
+  markerInterferenceCount:results.reduce((sum,item)=>sum+item.checks.markerInterferenceCount,0),
+  maxSmallSecondAxisDistance:Math.max(...results.map(item=>item.checks.smallSecondAxisDistance)),
+  maxCouplingError:Math.max(...results.flatMap(item=>item.checks.threeHandCoupling.flatMap(({error,mountDistance})=>[Math.abs(error),mountDistance]))),
+  allTransformsCameraMechanismInvariant:results.every(item=>item.invariants.protectedTransformsUnchanged&&item.invariants.cameraUnchanged&&item.invariants.mechanismStateUnchanged&&item.invariants.pivotsUnchanged&&item.invariants.scalesUnchanged),
+  minLineWidthPx:Object.fromEntries(["minute","hour","smallSecond"].map(id=>[id,Math.min(...results.map(item=>item.hands[id].lineWidthPx))])),
+  allTipsDiscernible:results.every(item=>Object.values(item.hands).every(hand=>hand.discernible)),
+};
+const output=document.getElementById("matrixStatus");output.value=JSON.stringify({summary,results});output.textContent=JSON.stringify({summary,results});output.dataset.status=summary.ok?"passed":"failed";
+window.dialDisplayScaleMatrixResult={summary,results};
+</script>
+</body>
+</html>

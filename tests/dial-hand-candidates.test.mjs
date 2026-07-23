@@ -55,9 +55,12 @@ test("Phase 2A ratios retain all fixed dial and small-seconds dimensions", () =>
 test("Phase 2A applies candidate values only to hand Geometry generation", async () => {
   const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
   assert.match(source, /resolveDialHandCandidate\(initialPageParameters\.get\('dialHandCandidate'\)\)/);
-  assert.match(source, /makeHand\(dialHandCandidate\.minuteHandLength,\.42,MAT\.hand\)/);
-  assert.match(source, /makeHand\(dialHandCandidate\.hourHandLength,\.58,MAT\.brass\)/);
-  assert.match(source, /const secHand=makeHand\(3\.8,\.14,MAT\.red\)/);
+  assert.match(source, /minuteHandLength:dialHandCandidate\.minuteHandLength/);
+  assert.match(source, /hourHandLength:dialHandCandidate\.hourHandLength/);
+  assert.match(source, /smallSecondHandLength:3\.8/);
+  assert.match(source, /makeHand\(dialDisplayGeometry\.minuteHandLength,\.42,MAT\.hand\)/);
+  assert.match(source, /makeHand\(dialDisplayGeometry\.hourHandLength,\.58,MAT\.brass\)/);
+  assert.match(source, /const secHand=makeHand\(dialDisplayGeometry\.smallSecondHandLength,\.14,MAT\.red\)/);
   assert.match(source, /minuteHandLength:10\.3,hourHandLength:7\.2,smallSecondHandLength:3\.8/);
   assert.doesNotMatch(source, /(?:minuteAxis|hourAxis)\.scale\.(?:set|copy)/);
   assert.doesNotMatch(source, /dialHandCandidate\.(?:minuteHandLength|hourHandLength)\s*=/);
