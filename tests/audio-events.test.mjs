@@ -2,10 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  CROWN_PULL_DETENT_THRESHOLD,
+  CROWN_PUSH_DETENT_THRESHOLD,
   MAX_ESCAPEMENT_AUDIO_RATE,
   createAudioEventState,
+  resolveCrownDetentEvent,
   resolveMechanicalAudioEvents,
 } from "../js/audio-events.js";
+import { advanceKeylessTransition } from "../js/keyless-position.js";
 
 const base = {
   audioEnabled: true,
@@ -69,10 +73,48 @@ test("hidden or disabled audio advances cursors without a catch-up burst", () =>
   assert.equal(disabled.droppedEvents, 0);
 });
 
-test("confirmed user crown endpoints map to one pull or push event", () => {
+test("confirmed user crown detents map to one pull or push event", () => {
   const state = createAudioEventState({ ...base, escapementBeatIndex: 10 });
-  const pull = resolveMechanicalAudioEvents(state, { ...base, activeOscillation: false, escapementBeatIndex: 10, crownPosition: "set", crownEndpointEvent: "crownPull" });
+  const pull = resolveMechanicalAudioEvents(state, { ...base, activeOscillation: false, escapementBeatIndex: 10, crownPosition: "set", crownDetentEvent: "crownPull" });
   assert.deepEqual(pull.events, ["crownPull"]);
   const next = resolveMechanicalAudioEvents(pull.state, { ...base, activeOscillation: false, escapementBeatIndex: 10, crownPosition: "set" });
   assert.deepEqual(next.events, []);
+});
+
+test("crown detent crossings are direction-specific and do not fire on the same side", () => {
+  assert.equal(resolveCrownDetentEvent({ direction: "pull", previousTransition: CROWN_PULL_DETENT_THRESHOLD - 1e-7, currentTransition: CROWN_PULL_DETENT_THRESHOLD }), "crownPull");
+  assert.equal(resolveCrownDetentEvent({ direction: "push", previousTransition: CROWN_PUSH_DETENT_THRESHOLD + 1e-7, currentTransition: CROWN_PUSH_DETENT_THRESHOLD }), "crownPush");
+  assert.equal(resolveCrownDetentEvent({ direction: "pull", previousTransition: CROWN_PULL_DETENT_THRESHOLD, currentTransition: 1 }), null);
+  assert.equal(resolveCrownDetentEvent({ direction: "push", previousTransition: CROWN_PUSH_DETENT_THRESHOLD, currentTransition: 0 }), null);
+  assert.equal(resolveCrownDetentEvent({ direction: "push", previousTransition: 0, currentTransition: 1 }), null);
+  assert.equal(resolveCrownDetentEvent({ direction: "pull", previousTransition: 1, currentTransition: 0 }), null);
+});
+
+test("crown detent events lead transition endpoints by 70 to 100 ms at 30, 60, and 120 fps", () => {
+  const simulate = (direction, fps) => {
+    const target = direction === "pull" ? 1 : 0;
+    let transition = direction === "pull" ? 0 : 1;
+    let eventFrame = null;
+    let eventCount = 0;
+    let endpointFrame = null;
+    for (let frame = 1; frame <= 600; frame += 1) {
+      const previous = transition;
+      transition = advanceKeylessTransition(transition, target, 1 / fps);
+      if (resolveCrownDetentEvent({ direction, previousTransition: previous, currentTransition: transition })) {
+        eventFrame = frame;
+        eventCount += 1;
+      }
+      if (transition === target) {
+        endpointFrame = frame;
+        break;
+      }
+    }
+    return { direction, fps, eventFrame, endpointFrame, eventCount, leadMs: (endpointFrame - eventFrame) * 1000 / fps };
+  };
+  const reports = [30, 60, 120].flatMap((fps) => [simulate("pull", fps), simulate("push", fps)]);
+  for (const report of reports) {
+    assert.equal(report.eventCount, 1, JSON.stringify(report));
+    assert.ok(report.eventFrame < report.endpointFrame, JSON.stringify(report));
+    assert.ok(report.leadMs >= 70 - 1e-9 && report.leadMs <= 100 + 1e-9, JSON.stringify(report));
+  }
 });

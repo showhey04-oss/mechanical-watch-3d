@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-07-23",
+  "scope": "PR #6 crown detent timing and top-right speaker review fix",
+  "detent": {
+    "pullThreshold": 0.999975,
+    "pushThreshold": 0.000025,
+    "timerUsed": false,
+    "endpointLeadMs": {
+      "30fps": 100,
+      "60fps": 83.33333333333333,
+      "120fps": 100
+    },
+    "oneEventPerOperation": true,
+    "silentPaths": ["same-position", "initialization", "reset", "diagnostic-100-cycle", "state-restore"]
+  },
+  "node": { "passed": 52, "total": 52, "a7Passed": 9, "a7Total": 9 },
+  "desktop1280x720": {
+    "existing": { "passed": 86, "total": 86 },
+    "ui": { "passed": 20, "total": 20 },
+    "hud": { "passed": 45, "total": 45 },
+    "audio": { "passed": 23, "total": 23 }
+  },
+  "mobile390x844": {
+    "existing": {
+      "passed": 87,
+      "total": 88,
+      "knownBaselineConstraint": {
+        "check": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "walnutFrontSampleCount": 995,
+        "required": "> 1000",
+        "walnutRelativeDifference": 0.07882151168905101,
+        "allThemeDifferencesWithinThirtyPercent": true,
+        "maxRelativeDifference": 0.12420074268265821
+      }
+    },
+    "ui": { "passed": 22, "total": 22 },
+    "hud": { "passed": 57, "total": 57 },
+    "audio": { "passed": 23, "total": 23 },
+    "panelHeightPx": 472.6328125,
+    "top3DHeightPx": 371.3671875
+  },
+  "mobile393x852": {
+    "uiExactViewportRunner": { "passed": 21, "total": 22, "notApplicable": 1 },
+    "hud": { "passed": 57, "total": 57 },
+    "audio": { "passed": 23, "total": 23 },
+    "panelHeightPx": 477.1171875,
+    "top3DHeightPx": 374.8828125
+  },
+  "mobile375x667": {
+    "ui": { "passed": 22, "total": 22 },
+    "hud": { "passed": 57, "total": 57 },
+    "audio": { "passed": 23, "total": 23 },
+    "panelHeightPx": 373.515625,
+    "top3DHeightPx": 293.484375
+  },
+  "speaker": {
+    "hitTargetPx": [44, 44],
+    "nativeButton": true,
+    "enterVerified": true,
+    "spaceVerified": true,
+    "ariaLabelAndPressedVerified": true,
+    "focusVisibleVerified": true,
+    "partInfoHudOverlapCount": 0
+  },
+  "fixedGains": {
+    "master": 0.36,
+    "escapement": 0.24,
+    "winding": 0.32,
+    "reverse": 0.24,
+    "crown": 0.38
+  },
+  "performance": {
+    "desktopPointer": { "averageFps": 59.917009359773196, "p50Ms": 16.7, "p95Ms": 17.6, "p99Ms": 17.7, "over33Ms": 0, "over50Ms": 0 },
+    "desktopWheel": { "averageFps": 59.90369549425669, "p50Ms": 16.7, "p95Ms": 17.6, "p99Ms": 18.2, "over33Ms": 0, "over50Ms": 0 },
+    "desktopAudioOn": { "averageFps": 59.90879556488985, "p50Ms": 16.7, "p95Ms": 18.7, "p99Ms": 18.7, "over33Ms": 0, "over50Ms": 0 },
+    "mobile390AudioOn": { "averageFps": 59.90998599123278, "p50Ms": 16.7, "p95Ms": 18.5, "p99Ms": 18.7, "over33Ms": 0, "over50Ms": 0 },
+    "droppedEvents": 0,
+    "suppressedEvents": 0,
+    "modelInvariant": true
+  },
+  "renderingScope": {
+    "mainV313LightingUnchanged": true,
+    "pr5D2c3Imported": false,
+    "knownDarkDefaultLightingHandoff": "Issue #2 final polish"
+  },
+  "physicalIPhoneStatus": "pending user review on immutable commit URL"
+}

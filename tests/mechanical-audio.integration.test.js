@@ -10,15 +10,14 @@ const waitUntil = async (predicate, diagnostics, maxFrames = 600) => {
 export async function runMechanicalAudioIntegrationTest(diagnostics, initialState) {
   const checks = [];
   const check = (name, ok, detail = null) => checks.push({ name, ok: Boolean(ok), detail });
-  const soundToggle = document.getElementById("soundEnabled");
-  const volume = document.getElementById("soundVolume");
+  const soundToggle = document.getElementById("audioToggle");
   const play = document.getElementById("play");
   const crownWind = document.getElementById("crownWind");
   const crownSet = document.getElementById("crownSet");
   const initial = initialState.audio;
   const ui = initialState.ui;
   check("audio-default-is-off-without-autoplay-context", !initial.audioEnabled && initial.audioContextState === "not-created" && ui.status.state === "off", { initial, ui });
-  check("audio-toggle-and-volume-have-accessible-descriptions", ui.toggle.ariaDescribedBy === "soundDescription" && ui.volume.ariaDescribedBy === "soundDescription" && ui.toggle.rect.height >= 44 && ui.description.includes("合成音"), ui);
+  check("audio-speaker-is-native-labeled-44px-button", ui.toggle.tagName === "BUTTON" && !ui.toggle.pressed && ui.toggle.ariaLabel === "作動音をオンにする" && ui.toggle.rect.width >= 44 && ui.toggle.rect.height >= 44 && ui.toggle.visibleText === "", ui);
 
   const settled = await waitUntil(() => {
     const report = diagnostics.getAudioDiagnostics();
@@ -31,10 +30,10 @@ export async function runMechanicalAudioIntegrationTest(diagnostics, initialStat
   }
 
   check("audio-pointer-enable-loads-all-six-atomic-buffers", settled.audioEnabled && settled.audioContextState === "running" && settled.buffersLoaded.length === 6 && settled.failedAssets.length === 0, settled);
-  volume.value = "22";
-  volume.dispatchEvent(new Event("input", { bubbles: true }));
-  const volumeReport = diagnostics.getAudioDiagnostics();
-  check("audio-master-volume-input-updates-ramped-gain-target", Math.abs(volumeReport.masterGain - 0.22) < 1e-9 && document.getElementById("soundVolumeV").textContent === "22%", volumeReport);
+  const fixedGainReport = diagnostics.getAudioDiagnostics();
+  check("audio-master-and-bus-gains-remain-fixed", Math.abs(fixedGainReport.masterGain - 0.36) < 1e-9 && JSON.stringify(fixedGainReport.busGains) === JSON.stringify({ escapement: 0.24, winding: 0.32, reverse: 0.24, crown: 0.38 }), fixedGainReport);
+  const enabledUi = diagnostics.getSoundUiReport();
+  check("audio-speaker-on-state-updates-aria-and-status", enabledUi.toggle.pressed && enabledUi.toggle.ariaLabel === "作動音をオフにする" && enabledUi.status.state === "on", enabledUi);
 
   diagnostics.clearAudioEventLog();
   diagnostics.setRunning(true);
@@ -72,9 +71,18 @@ export async function runMechanicalAudioIntegrationTest(diagnostics, initialStat
 
   diagnostics.clearAudioEventLog();
   crownSet.click();
+  const pullDetent = await waitUntil(() => {
+    const audio = diagnostics.getAudioDiagnostics();
+    return audio.eventCounts.crownPull === 1 ? { audio, transition: diagnostics.getCrownTransition(), detent: diagnostics.getCrownDetentAudioReport() } : null;
+  }, diagnostics, 180);
+  check("audio-user-pull-fires-once-at-directional-detent-before-endpoint", pullDetent.audio.eventCounts.crownPush === 0 && pullDetent.transition >= pullDetent.detent.threshold && pullDetent.transition < 1 && pullDetent.detent.direction === "pull" && pullDetent.detent.event === "crownPull", pullDetent);
   await waitUntil(() => diagnostics.getCrownTransition() === 1, diagnostics, 180);
   const pulled = diagnostics.getAudioDiagnostics();
-  check("audio-user-pull-fires-once-at-position-two-endpoint", pulled.eventCounts.crownPull === 1 && pulled.eventCounts.crownPush === 0 && diagnostics.getCrownTransition() === 1, { counts: pulled.eventCounts, transition: diagnostics.getCrownTransition() });
+  check("audio-user-pull-does-not-repeat-at-position-two-endpoint", pulled.eventCounts.crownPull === 1 && pulled.eventCounts.crownPush === 0 && diagnostics.getCrownTransition() === 1, { counts: pulled.eventCounts, transition: diagnostics.getCrownTransition() });
+  crownSet.click();
+  await diagnostics.waitForFrames(12);
+  const samePosition = diagnostics.getAudioDiagnostics();
+  check("audio-same-position-reselection-is-silent", samePosition.eventCounts.crownPull === 1 && samePosition.eventCounts.crownPush === 0, samePosition.eventCounts);
   diagnostics.setCrownTurnRate(0.85);
   await diagnostics.waitForFrames(50);
   diagnostics.setCrownTurnRate(-0.85);
@@ -83,14 +91,28 @@ export async function runMechanicalAudioIntegrationTest(diagnostics, initialStat
   const setting = diagnostics.getAudioDiagnostics();
   check("audio-position-two-suppresses-winding-and-reverse", setting.eventCounts.winding === 0 && setting.eventCounts.reverse === 0, setting.eventCounts);
   crownWind.click();
+  const pushDetent = await waitUntil(() => {
+    const audio = diagnostics.getAudioDiagnostics();
+    return audio.eventCounts.crownPush === 1 ? { audio, transition: diagnostics.getCrownTransition(), detent: diagnostics.getCrownDetentAudioReport() } : null;
+  }, diagnostics, 180);
+  check("audio-user-push-fires-once-at-directional-detent-before-endpoint", pushDetent.audio.eventCounts.crownPull === 1 && pushDetent.transition <= pushDetent.detent.threshold && pushDetent.transition > 0 && pushDetent.detent.direction === "push" && pushDetent.detent.event === "crownPush", pushDetent);
   await waitUntil(() => diagnostics.getCrownTransition() === 0, diagnostics, 180);
   const pushed = diagnostics.getAudioDiagnostics();
-  check("audio-user-push-fires-once-at-position-one-endpoint", pushed.eventCounts.crownPull === 1 && pushed.eventCounts.crownPush === 1 && diagnostics.getCrownTransition() === 0, { counts: pushed.eventCounts, transition: diagnostics.getCrownTransition() });
+  check("audio-user-push-does-not-repeat-at-position-one-endpoint", pushed.eventCounts.crownPull === 1 && pushed.eventCounts.crownPush === 1 && diagnostics.getCrownTransition() === 0, { counts: pushed.eventCounts, transition: diagnostics.getCrownTransition() });
 
   const beforeCycle = diagnostics.getAudioDiagnostics().eventCounts;
   const cycle = diagnostics.runCrownPositionCycleTest(100);
   const afterCycle = diagnostics.getAudioDiagnostics().eventCounts;
   check("audio-diagnostic-one-hundred-cycle-restore-is-silent", afterCycle.crownPull === beforeCycle.crownPull && afterCycle.crownPush === beforeCycle.crownPush && cycle.maxEndpointError === 0, { beforeCycle, afterCycle, cycle });
+
+  crownSet.click();
+  await diagnostics.waitForFrames(2);
+  document.getElementById("reset").click();
+  await waitUntil(() => diagnostics.getCrownTransition() === 1, diagnostics, 180);
+  const afterResetTransition = diagnostics.getAudioDiagnostics().eventCounts;
+  check("audio-reset-during-crown-transition-cancels-pending-detent", afterResetTransition.crownPull === afterCycle.crownPull && afterResetTransition.crownPush === afterCycle.crownPush, { before: afterCycle, after: afterResetTransition });
+  diagnostics.setCrownPosition("wind");
+  await waitUntil(() => diagnostics.getCrownTransition() === 0, diagnostics, 180);
 
   const beforeHidden = diagnostics.getAudioDiagnostics();
   await diagnostics.setAudioVisibilityForTest(false);
@@ -108,9 +130,17 @@ export async function runMechanicalAudioIntegrationTest(diagnostics, initialStat
   check("audio-events-do-not-mutate-mechanism-state", reset.mechanismIntegrity.checked && reset.mechanismIntegrity.unchanged, reset.mechanismIntegrity);
   check("audio-event-log-records-mechanism-context", reset.eventLog.length > 0 && reset.eventLog.every((event) => "crownPosition" in event && "ratchetMode" in event), reset.eventLog.slice(-12));
 
+  soundToggle.click();
+  const disabled = await waitUntil(() => {
+    const report = diagnostics.getAudioDiagnostics();
+    return report.status === "off" && report.audioContextState === "suspended" ? report : null;
+  }, diagnostics, 120);
+  const disabledUi = diagnostics.getSoundUiReport();
+  check("audio-speaker-one-click-disables-and-restores-off-aria", !disabled.audioEnabled && !disabledUi.toggle.pressed && disabledUi.toggle.ariaLabel === "作動音をオンにする" && disabledUi.status.state === "off", { disabled, disabledUi });
+
   return {
     ok: checks.every(({ ok }) => ok),
     checks,
-    measurements: { initial, settled, escapement, forward, reverse, pulled, setting, pushed, cycle, hidden, visible, reset },
+    measurements: { initial, settled, fixedGainReport, escapement, forward, reverse, pullDetent, pulled, samePosition, setting, pushDetent, pushed, cycle, afterResetTransition, hidden, visible, reset, disabled },
   };
 }

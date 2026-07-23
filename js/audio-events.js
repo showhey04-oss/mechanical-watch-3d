@@ -1,5 +1,8 @@
 export const MAX_ESCAPEMENT_AUDIO_RATE = 8;
 export const MAX_PHASE_EVENTS_PER_FRAME = 1;
+export const CROWN_DETENT_EPSILON = 0.000025;
+export const CROWN_PULL_DETENT_THRESHOLD = 1 - CROWN_DETENT_EPSILON;
+export const CROWN_PUSH_DETENT_THRESHOLD = CROWN_DETENT_EPSILON;
 
 const finiteIndex = (value) => Number.isFinite(value) ? Math.trunc(value) : null;
 
@@ -14,6 +17,15 @@ export function createAudioEventState(snapshot = {}) {
 function phaseCrossings(previous, current) {
   if (previous === null || current === null) return 0;
   return Math.abs(current - previous);
+}
+
+export function resolveCrownDetentEvent({ direction, previousTransition, currentTransition } = {}) {
+  const previous = Number(previousTransition);
+  const current = Number(currentTransition);
+  if (!Number.isFinite(previous) || !Number.isFinite(current)) return null;
+  if (direction === "pull" && previous < CROWN_PULL_DETENT_THRESHOLD && current >= CROWN_PULL_DETENT_THRESHOLD) return "crownPull";
+  if (direction === "push" && previous > CROWN_PUSH_DETENT_THRESHOLD && current <= CROWN_PUSH_DETENT_THRESHOLD) return "crownPush";
+  return null;
 }
 
 export function resolveMechanicalAudioEvents(previousState, snapshot = {}) {
@@ -60,8 +72,8 @@ export function resolveMechanicalAudioEvents(previousState, snapshot = {}) {
     if (snapshot.audioEnabled === true) droppedEvents += Math.max(0, reverseCrossings - MAX_PHASE_EVENTS_PER_FRAME);
   }
 
-  if (snapshot.crownEndpointEvent) {
-    if (available) events.push(snapshot.crownEndpointEvent);
+  if (snapshot.crownDetentEvent) {
+    if (available) events.push(snapshot.crownDetentEvent);
     else if (snapshot.audioEnabled === true) suppressedEvents += 1;
   }
 

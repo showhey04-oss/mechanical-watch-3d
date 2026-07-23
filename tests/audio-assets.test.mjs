@@ -44,14 +44,21 @@ test("all packaged WAV assets are 48 kHz 16-bit PCM mono", async () => {
 
 test("sound UI is accessible and integration does not introduce an independent timer or mechanism writer", async () => {
   const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
-  assert.match(source, /id="soundEnabled" aria-describedby="soundDescription"/);
-  assert.match(source, /<label for="soundVolume">/);
-  assert.match(source, /id="soundVolume"[^>]+aria-describedby="soundDescription"/);
+  assert.match(source, /id="audioToggle" type="button" aria-label="作動音をオンにする" aria-pressed="false"/);
+  assert.match(source, /#audioToggle\{[^}]*width:44px;height:44px/);
+  assert.match(source, /#audioToggle:focus-visible\{/);
+  assert.match(source, /audioToggle\.addEventListener\('keydown'.*event\.key==='Enter'.*event\.key===' '.*event\.preventDefault\(\);audioToggle\.click\(\)/);
   assert.match(source, /id="soundStatus"[^>]+role="status"[^>]+aria-live="polite"/);
+  assert.equal(source.includes('id="soundEnabled"'), false);
+  assert.equal(source.includes('id="soundVolume"'), false);
+  assert.equal(source.includes('class="section soundControl"'), false);
+  assert.match(source, /new MechanicalAudioEngine\(\{masterGain:\.36/);
   assert.equal(source.includes("setInterval("), false);
   assert.equal(source.includes("setTimeout(processMechanicalAudio"), false);
   assert.equal((source.match(/function applyWindingState/g) || []).length, 1);
   assert.equal((source.match(/function applyMotionWorksState/g) || []).length, 1);
   const processor = source.slice(source.indexOf("function processMechanicalAudio"), source.indexOf("function requestCrownPositionFromUser"));
+  assert.equal(processor.includes("setTimeout("), false);
+  assert.match(processor, /resolveCrownDetentEvent/);
   assert.equal(/(?:watchTimeSec|trainTimeSec|crownRotation|powerReserveHours)\s*=/.test(processor), false);
 });

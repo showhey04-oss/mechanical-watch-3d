@@ -31,15 +31,15 @@ v3.14.0 Phase 1は、既存の機構状態を音へ変換し、視覚と聴覚�
 
 ### りゅうずpull／push
 
-位置ボタンのユーザー操作からだけ発音意図を作り、位置遷移の端点到達時に各1回発音する。同位置再選択、初期化、reset、診断、状態復元、テストの直接状態変更は発音しない。
+位置ボタンのユーザー操作からだけ発音意図を作る。pullは`crownTransition`が`0.999975`を上向きに、pushは`0.000025`を下向きに交差したフレームで各1回発音する。timerは使わず、既存の遷移更新を30／60／120fps相当で進めた場合に端点到達より70〜100ms先行する。同位置再選択、初期化、reset、診断、状態復元、テストの直接状態変更は発音しない。
 
 ## Web AudioとUI
 
-初期状態はOFFで、`AudioContext`も音源も生成しない。ユーザーが作動音カードをpointerまたはkeyboardでONにした後、contextを生成・resumeし、6原子音をfetch／decodeする。ブラウザがWeb Audio非対応、または音源読込に失敗した場合は「利用不可」を表示し、失敗資産を診断へ残してアプリ本体を継続する。
+初期状態はOFFで、`AudioContext`も音源も生成しない。ユーザーが右上のスピーカーボタンをpointerまたはkeyboardでONにした後、contextを生成・resumeし、6原子音をfetch／decodeする。ブラウザがWeb Audio非対応、または音源読込に失敗した場合は「利用不可」を通知し、失敗資産を診断へ残してアプリ本体を継続する。
 
-マスターgainの初期値は0.36、bus gainは脱進機0.24、巻上げ0.32、逆転0.24、りゅうず0.38である。音量変更とON/OFFは短いrampを使い、OFF・非表示では活動中sourceを停止する。`visibilitychange`で非表示中はcontextをsuspendし、復帰時にcursorを再基準化してからresumeする。
+マスターgainは0.36、bus gainは脱進機0.24、巻上げ0.32、逆転0.24、りゅうず0.38の固定値である。ON/OFFは短いrampを使い、OFF・非表示では活動中sourceを停止する。`visibilitychange`で非表示中はcontextをsuspendし、復帰時にcursorを再基準化してからresumeする。
 
-UIは操作タブの作動音カード、音量slider、状態表示、説明文からなる。カードは44px以上で、状態と音量は説明文へ`aria-describedby`で関連付ける。
+UIは右上に固定した小型スピーカーアイコンだけを表示し、操作タブ内に作動音セクションや音量sliderを置かない。ボタンの操作領域は44×44px、`aria-label`と`aria-pressed`を状態に同期し、Enter／Spaceと`focus-visible`へ対応する。選択部品HUDは下方へ分離し、矩形重なりを自動試験する。
 
 ## 音源
 
@@ -62,10 +62,11 @@ UIは操作タブの作動音カード、音量slider、状態表示、説明文
 
 OFF操作ではmaster gainを25msで0へrampし、30ms後に活動sourceを停止してcontextをsuspendする。待機中に再ONされた場合はlifecycle sequenceにより古い停止処理を無効化し、新しい再生状態を停止しない。
 
-自動試験は資産形式、resolver境界、engineライフサイクル、実pointerでのON、音量、6イベント、停止／再開、位置2切離し、可視状態、reset、読込失敗、機構不変を検証する。結果と動画は `docs/evidence/mechanical-operation-sounds/` に保存する。
+自動試験は資産形式、方向別節度閾値、30／60／120fpsでの70〜100ms先行、engineライフサイクル、実pointerでのON、固定gain、6イベント、停止／再開、位置2切離し、可視状態、reset、読込失敗、機構不変、スピーカーと部品HUDの非重複を検証する。結果と動画は `docs/evidence/mechanical-operation-sounds/` に保存する。
 
 ## 既知の制約と人手確認
 
 - 音色・実機音量・スピーカー特性は自動試験だけでは完成判定できない。
 - 実機iPhone Safariで、5bpsのtick/tock知覚、W3/R2の識別、pull/pushの一回性、操作遅延、尾引き、二重発音、タブ／ホーム復帰を確認する必要がある。
 - 合成音はETA 6498-1の音響忠実再現ではない。将来実録音へ置換する場合も、機構イベントresolverとは独立して音源とgainを評価する。
+- main v3.13.0の既定照明が実機で暗く見える件は既知事項であり、このPRへPR #5のD2c3や照明変更を取り込まず、Issue #2の最終微調整へ申し送る。
