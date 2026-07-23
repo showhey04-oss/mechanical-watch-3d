@@ -147,6 +147,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   const measurements = {};
   const check = (name, ok, detail = null) => checks.push({ name, ok: Boolean(ok), detail });
   const toggle = document.getElementById("panelToggle");
+  const audioToggle = document.getElementById("audioToggle");
   const info = document.getElementById("info");
   const panel = document.getElementById("panel");
   const panelBody = document.getElementById("body");
@@ -155,13 +156,18 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   const initial = diagnostics.getMobileOverlayHudReport();
   check("hud-initial-selection-overlay-is-hidden", info.hidden && info.getAttribute("aria-hidden") === "true" && initial.info.rect.width === 0 && initial.info.rect.height === 0, initial.info);
   check("hud-learning-copy-keeps-unselected-guidance", document.getElementById("learningPartName").textContent === "なし" && document.getElementById("learningPartDesc").textContent.length > 0);
-  check("hud-title-and-panel-share-v3-13-0", document.title === "Mechanical Watch Study Model v3.13.0" && initial.appVersion === "v3.13.0" && initial.modelInfo.includes("v3.13.0"), { title: document.title, modelInfo: initial.modelInfo });
-  check("hud-canvas-has-no-persistent-version-badge", initial.topHudText === "" && !document.getElementById("top").innerText.includes("v3.13.0"), initial.topHudText);
+  check("hud-title-and-panel-share-v3-14-0", document.title === "Mechanical Watch Study Model v3.14.0" && initial.appVersion === "v3.14.0" && initial.modelInfo.includes("v3.14.0"), { title: document.title, modelInfo: initial.modelInfo });
+  check("hud-canvas-has-no-persistent-version-badge", initial.topHudText === "" && !document.getElementById("top").innerText.includes("v3.14.0"), initial.topHudText);
   check("hud-panel-model-info-records-pr3-baseline", initial.modelInfo.includes("Mechanical Watch Study Model") && initial.modelInfo.includes("基準：PR #3 UIアーキテクチャ整理"), initial.modelInfo);
   check("hud-hamburger-has-no-visible-menu-text", toggle.textContent.trim() === "" && toggle.querySelectorAll(".panelToggleIcon span").length === 3, toggle.outerHTML);
   check("hud-hamburger-is-native-controlled-button", toggle.tagName === "BUTTON" && toggle.type === "button" && toggle.getAttribute("aria-controls") === panel.id);
   check("hud-hamburger-hit-target-is-at-least-44-css-px", initial.toggle.rect.width >= 44 && initial.toggle.rect.height >= 44, initial.toggle.rect);
   check("hud-hamburger-border-and-shadow-are-removed", initial.toggle.borderWidth === "0px" && initial.toggle.boxShadow === "none" && initial.toggle.backgroundColor === "rgba(0, 0, 0, 0)", initial.toggle);
+  check("hud-speaker-is-native-top-right-44px-button", initial.speaker.tagName === "BUTTON" && initial.speaker.visibleText === "" && initial.speaker.rect.width >= 44 && initial.speaker.rect.height >= 44 && initial.speaker.rect.right <= innerWidth + 1 && initial.speaker.rect.top >= 0 && initial.speaker.ariaPressed === "false" && initial.speaker.ariaLabel === "作動音をオンにする", initial.speaker);
+  audioToggle.focus({ preventScroll: true });
+  const audioFocusStyle = getComputedStyle(audioToggle);
+  check("hud-speaker-focus-visible-is-present", document.activeElement === audioToggle && audioFocusStyle.outlineStyle !== "none" && parseFloat(audioFocusStyle.outlineWidth) >= 3, { outlineStyle: audioFocusStyle.outlineStyle, outlineWidth: audioFocusStyle.outlineWidth });
+  audioToggle.blur();
 
   diagnostics.setPanelOpen(false);
   await diagnostics.waitForFrames(18);
@@ -189,6 +195,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   const selectedReport = diagnostics.getMobileOverlayHudReport();
   const selectedUi = diagnostics.getUiRegressionState();
   check("hud-selection-shows-overlay-and-aria", selected === "設定車2" && !selectedReport.info.hidden && selectedReport.info.ariaHidden === "false" && selectedReport.info.rect.width > 0, { selected, info: selectedReport.info });
+  check("hud-speaker-does-not-overlap-selected-part-information", selectedReport.speaker.infoOverlap === false, { speaker: selectedReport.speaker, info: selectedReport.info });
   check("hud-selection-overlay-and-learning-copy-share-source", selectedUi.selectionOutputs.topName === selectedUi.selectionOutputs.learningName && selectedUi.selectionOutputs.topDescription === selectedUi.selectionOutputs.learningDescription && selectedUi.selectionOutputs.topName === "設定車2", selectedUi.selectionOutputs);
   diagnostics.clearSelectionInfo();
   const clearedReport = diagnostics.getMobileOverlayHudReport();
@@ -306,7 +313,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   diagnostics.setFunctionalMode("all");
   panelTabs.activate("operation");
   const toggleCards = diagnostics.getToggleCardReport();
-  check("hud-toggle-card-covers-all-sixteen-existing-checkboxes", toggleCards.length === 16 && toggleCards.filter(({ id }) => id).length === 7 && toggleCards.filter(({ group }) => group).length === 9, toggleCards.map(({ id, group, text }) => ({ id, group, text })));
+  check("hud-toggle-card-covers-sixteen-existing-checkboxes", toggleCards.length === 16 && toggleCards.filter(({ id }) => id).length === 7 && toggleCards.filter(({ group }) => group).length === 9, toggleCards.map(({ id, group, text }) => ({ id, group, text })));
   const visibleToggleCards = toggleCards.filter(({ card }) => card.rect.width > 0 && card.rect.height > 0);
   check("hud-toggle-card-keeps-native-input-focusable-and-label-layout-compact", toggleCards.every((card) => card.input.display !== "none" && card.card.display === "flex" && card.card.justifyContent === "flex-start" && Math.abs(parseFloat(card.card.gap) - 9) <= 0.1) && visibleToggleCards.every((card) => card.layout.minHeightMet && card.text.rightInsideCard), toggleCards);
   check("hud-toggle-card-state-matches-existing-model-bindings", toggleCards.every(({ modelMatches }) => modelMatches), toggleCards);
