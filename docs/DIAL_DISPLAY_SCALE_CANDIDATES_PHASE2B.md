@@ -4,7 +4,7 @@
 
 Phase 2AのH2到達比率を基準に、文字板表示系だけを同率縮小するS100、S92、S86、S80をquery限定で比較した。通常アクセス、`dialDisplayScale`なし、無効値はmain `e9a223e1ec2b5d966354c73b7719ae81a14f50fa` と同じ表示へ戻り、1280×720の通常アクセスはmainとpixel exactである。
 
-Phase 2Bでは候補を既定採用しない。自動計測と同一条件画像から、S80を `REJECT`、S100とS86を `RETAIN_FOR_REVIEW`、S92を `PROVISIONAL_RECOMMENDATION` と整理する。これは人間の視覚確認前の暫定分類であり、`ADOPTED` ではない。
+Phase 2Bでは候補を既定採用しない。自動計測と同一条件画像から、S80を `REJECT`、S100とS86を `RETAIN_FOR_REVIEW`、S92を `PROVISIONAL_RECOMMENDATION` と整理した。その後の人間確認対象整理では、S100は縮小目的を満たさず、S80は縮小しすぎるため最終比較から外し、S92とS86だけをfinalistとして残す。S92、S86とも `ADOPTED` ではない。
 
 ## 2. 実装境界とquery競合
 
@@ -34,6 +34,17 @@ Phase 2Bでは候補を既定採用しない。自動計測と同一条件画像
 4候補とも時針・分針はdial ring内、小秒針は小秒円内で、マーカー干渉は0件だった。小秒中心と四番車軸の距離は全条件で0、3針の角度誤差と取付中心距離も0だった。
 
 S92は表示系とムーブメント外周の区別を増やしつつ、小秒円の主中心側余白とdial ring側余白を残す。S86は外周露出をさらに増やすため保持候補とする。S80はplate露出面積が50%を超え、表示系がムーブメントに対して小さく見えるリスクから自動分類を `REJECT` とした。
+
+### Finalist整理
+
+| 候補 | 最終比較 | 理由 |
+|---|---|---|
+| S100 | 対象外 | scale 1.00で縮小目的を満たさない |
+| S92 | finalist | 表示系を縮小しつつ、外周露出と小秒側余白のバランスを比較できる |
+| S86 | finalist | S92より外周露出を増やした場合の主従関係を比較できる |
+| S80 | 対象外 | 表示系を縮小しすぎる |
+
+この整理は候補値、query resolver、Geometry、自動判定語彙を変更しない。S100／S80の既存JSONと4候補証跡は監査履歴として保持し、人間の最終比較だけをS92／S86へ限定する。
 
 ## 4. 固定比較
 
@@ -84,10 +95,12 @@ DPR1の補助試行は既知のウォールナット採取数が995で閾値 `>1
 
 比較画像、注記図、候補別12条件JSON、回帰、性能、pixel比較、closed-world manifestは [`docs/evidence/dial-display-scale-candidates-phase2b/README.md`](evidence/dial-display-scale-candidates-phase2b/README.md) にまとめた。
 
-S92は自動採用しない。desktopと物理iPhoneで次を確認後、S100、S92、S86、S80、別候補、またはmain維持を人間が判断する。
+S92／S86のfinalist比較ボードと固定commit確認URLは [`docs/evidence/dial-display-scale-finalists-phase2b/README.md`](evidence/dial-display-scale-finalists-phase2b/README.md) に分離した。
+
+S92／S86は自動採用しない。desktopと物理iPhoneで次を確認後、S92、S86、別候補、またはmain維持を人間が判断する。
 
 - 外周露出量と文字板表示系の視覚バランス
-- 10:10、03:00、06:30での時分針とindexの関係
+- 小秒針の識別性
+- 文字板表示系と内部機構の主従関係
+- 10:10、03:00、06:30での針長
 - 小秒円と主中心の間隔
-- モバイルでの小秒針先端識別性
-- S80の縮小感とS86／S92の好み
