@@ -1,0 +1,3541 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "7cd1941c3239f7186a6d83695eab8ba347e2afd9",
+  "mode": "read-only-query-diagnostic",
+  "coordinateConvention": {
+    "axes": {
+      "x": "crown-side horizontal",
+      "y": "movement thickness; dial side is negative Y",
+      "z": "dial vertical"
+    },
+    "dialFrontNormal": [
+      0,
+      -1,
+      0
+    ],
+    "viewUp": [
+      0,
+      0,
+      1
+    ]
+  },
+  "definitions": {
+    "movementReferenceCenter": [
+      0,
+      0,
+      0
+    ],
+    "movementReferenceDiameter": 36.6,
+    "plateDiameter": 36.6,
+    "dialDiameter": 32.2,
+    "indexCircleDiameter": 29.6,
+    "minuteHandLength": 10.3,
+    "hourHandLength": 7.2,
+    "smallSecondHandLength": 3.8,
+    "smallSecondRingDiameter": 9,
+    "smallSecondCenterRadius": 5.601266,
+    "crownAxis": {
+      "centerY": -1.05,
+      "centerZ": -4.5,
+      "direction": "+X / 3-o-clock"
+    },
+    "crownDiameter": 2.3,
+    "crownCenterRadius": 20.304926,
+    "barrelOuterDiameter": 7.660156,
+    "balanceOuterDiameter": 6.5,
+    "trainCenters": {
+      "barrel": [
+        -4.1,
+        1.12
+      ],
+      "center": [
+        -0.000216,
+        0.000059
+      ],
+      "third": [
+        0.919874,
+        -3.148248
+      ],
+      "fourth": [
+        -0.000508,
+        -5.601266
+      ],
+      "escape": [
+        1.996664,
+        -4.952185
+      ],
+      "pallet": [
+        3.55,
+        -2.7
+      ],
+      "balance": [
+        7.7,
+        1.8
+      ]
+    },
+    "trainOuterDiameters": {
+      "barrel": 7.660156,
+      "center": 5.85,
+      "third": 4.65,
+      "fourth": 3.75,
+      "escape": 3.523667
+    },
+    "motionWorks": {
+      "cannon": {
+        "center": [
+          0,
+          0
+        ],
+        "outerDiameter": 1.141563
+      },
+      "minute": {
+        "center": [
+          1.95,
+          0
+        ],
+        "outerDiameter": 3.091563
+      },
+      "hour": {
+        "center": [
+          0,
+          0
+        ],
+        "outerDiameter": 3.2799
+      },
+      "setting1": {
+        "center": [
+          6.289618,
+          -2.706703
+        ],
+        "outerDiameter": 2.766563
+      },
+      "setting2": {
+        "center": [
+          4.61837,
+          -0.714988
+        ],
+        "outerDiameter": 2.766563
+      },
+      "settingTransfer": {
+        "center": [
+          4.347124,
+          -3.300583
+        ],
+        "outerDiameter": 1.629063
+      }
+    }
+  },
+  "renderedGeometry": {
+    "movement": {
+      "min": [
+        -18.299999,
+        -2.41,
+        -18.299999
+      ],
+      "max": [
+        18.35,
+        4.235,
+        18.299999
+      ],
+      "size": [
+        36.649999,
+        6.645,
+        36.599998
+      ],
+      "center": [
+        0.025,
+        0.9125,
+        0
+      ]
+    },
+    "display": {
+      "min": [
+        -16.280001,
+        -2.51,
+        -16.280001
+      ],
+      "max": [
+        16.280001,
+        -1.90881,
+        16.280001
+      ],
+      "size": [
+        32.560001,
+        0.60119,
+        32.560001
+      ],
+      "center": [
+        0,
+        -2.209405,
+        0
+      ]
+    },
+    "whole": {
+      "min": [
+        -18.299999,
+        -2.51,
+        -18.299999
+      ],
+      "max": [
+        20.375,
+        4.235,
+        18.299999
+      ],
+      "size": [
+        38.674999,
+        6.745,
+        36.599998
+      ],
+      "center": [
+        1.0375,
+        0.8625,
+        0
+      ]
+    },
+    "plate": {
+      "min": [
+        -18.299999,
+        -0.5645,
+        -18.299999
+      ],
+      "max": [
+        18.35,
+        0.652,
+        18.299999
+      ],
+      "size": [
+        36.649999,
+        1.2165,
+        36.599998
+      ],
+      "center": [
+        0.025,
+        0.04375,
+        0
+      ]
+    },
+    "bridge": {
+      "min": [
+        -9.11,
+        2.96,
+        -8.940887
+      ],
+      "max": [
+        11.641607,
+        4.23,
+        9.564935
+      ],
+      "size": [
+        20.751607,
+        1.27,
+        18.505822
+      ],
+      "center": [
+        1.265804,
+        3.595,
+        0.312024
+      ]
+    },
+    "train": {
+      "min": [
+        -6.761271,
+        -2.39,
+        -7.498014
+      ],
+      "max": [
+        3.757088,
+        3.036,
+        3.680575
+      ],
+      "size": [
+        10.518359,
+        5.426,
+        11.17859
+      ],
+      "center": [
+        -1.502092,
+        0.323,
+        -1.90872
+      ]
+    },
+    "escapement": {
+      "min": [
+        0.260061,
+        0.984,
+        -6.695601
+      ],
+      "max": [
+        7.207519,
+        3.036,
+        1.161036
+      ],
+      "size": [
+        6.947459,
+        2.052,
+        7.856637
+      ],
+      "center": [
+        3.73379,
+        2.01,
+        -2.767282
+      ]
+    },
+    "balance": {
+      "min": [
+        4.27,
+        1.02,
+        -1.63
+      ],
+      "max": [
+        11.13,
+        2.44,
+        5.23
+      ],
+      "size": [
+        6.86,
+        1.42,
+        6.86
+      ],
+      "center": [
+        7.7,
+        1.73,
+        1.8
+      ]
+    },
+    "winding": {
+      "min": [
+        -3.835317,
+        -2.245,
+        -5.695
+      ],
+      "max": [
+        20.375,
+        0.145,
+        -3.305
+      ],
+      "size": [
+        24.210317,
+        2.39,
+        2.39
+      ],
+      "center": [
+        8.269841,
+        -1.05,
+        -4.5
+      ]
+    },
+    "motionWorks": {
+      "min": [
+        -1.662436,
+        -2.41,
+        -4.138285
+      ],
+      "max": [
+        7.694091,
+        -0.126,
+        1.662436
+      ],
+      "size": [
+        9.356527,
+        2.284,
+        5.800721
+      ],
+      "center": [
+        3.015827,
+        -1.268,
+        -1.237924
+      ]
+    },
+    "layers": {
+      "plate": {
+        "min": [
+          -18.299999,
+          -0.5645,
+          -18.299999
+        ],
+        "max": [
+          18.35,
+          3.16,
+          18.299999
+        ],
+        "size": [
+          36.649999,
+          3.7245,
+          36.599998
+        ],
+        "center": [
+          0.025,
+          1.29775,
+          0
+        ]
+      },
+      "train": {
+        "min": [
+          -7.952177,
+          -2.39,
+          -7.498014
+        ],
+        "max": [
+          3.266674,
+          2.714,
+          4.972177
+        ],
+        "size": [
+          11.218851,
+          5.104,
+          12.470191
+        ],
+        "center": [
+          -2.342751,
+          0.162,
+          -1.262919
+        ]
+      },
+      "escapement": {
+        "min": [
+          0.260061,
+          0.984,
+          -6.695601
+        ],
+        "max": [
+          7.207519,
+          3.036,
+          1.161036
+        ],
+        "size": [
+          6.947459,
+          2.052,
+          7.856637
+        ],
+        "center": [
+          3.73379,
+          2.01,
+          -2.767282
+        ]
+      },
+      "balance": {
+        "min": [
+          4.27,
+          0.88,
+          -1.63
+        ],
+        "max": [
+          11.639549,
+          3.77,
+          5.23
+        ],
+        "size": [
+          7.369549,
+          2.89,
+          6.86
+        ],
+        "center": [
+          7.954774,
+          2.325,
+          1.8
+        ]
+      },
+      "winding": {
+        "min": [
+          -7.852693,
+          -2.245,
+          -5.695
+        ],
+        "max": [
+          20.375,
+          3.25,
+          4.418716
+        ],
+        "size": [
+          28.227693,
+          5.495,
+          10.113716
+        ],
+        "center": [
+          6.261153,
+          0.5025,
+          -0.638142
+        ]
+      },
+      "dialWorks": {
+        "min": [
+          -13.8,
+          -2.41,
+          -5.96725
+        ],
+        "max": [
+          8.18,
+          -0.126,
+          4.2
+        ],
+        "size": [
+          21.98,
+          2.284,
+          10.16725
+        ],
+        "center": [
+          -2.81,
+          -1.268,
+          -0.883625
+        ]
+      },
+      "bridges": {
+        "min": [
+          -9.11,
+          2.96,
+          -8.940887
+        ],
+        "max": [
+          11.641607,
+          4.235,
+          9.564935
+        ],
+        "size": [
+          20.751607,
+          1.275,
+          18.505822
+        ],
+        "center": [
+          1.265804,
+          3.5975,
+          0.312024
+        ]
+      },
+      "display": {
+        "min": [
+          -16.280001,
+          -2.51,
+          -16.280001
+        ],
+        "max": [
+          16.280001,
+          -1.90881,
+          16.280001
+        ],
+        "size": [
+          32.560001,
+          0.60119,
+          32.560001
+        ],
+        "center": [
+          0,
+          -2.209405,
+          0
+        ]
+      }
+    },
+    "displayAdditionalThicknessNegativeY": 0.1
+  },
+  "worldCoordinates": {
+    "mainPlate": [
+      0,
+      0,
+      0
+    ],
+    "barrel": [
+      -4.1,
+      0,
+      1.12
+    ],
+    "center": [
+      -0.000216,
+      0,
+      0.000059
+    ],
+    "third": [
+      0.919874,
+      0,
+      -3.148248
+    ],
+    "fourth": [
+      -0.000508,
+      0,
+      -5.601266
+    ],
+    "escape": [
+      1.996664,
+      0,
+      -4.952185
+    ],
+    "pallet": [
+      3.55,
+      1.72,
+      -2.7
+    ],
+    "balance": [
+      7.7,
+      1.73,
+      1.8
+    ],
+    "crown": [
+      19.8,
+      -1.05,
+      -4.5
+    ],
+    "stem": [
+      0,
+      -1.05,
+      -4.5
+    ],
+    "slidingClutch": [
+      -2.695317,
+      -1.05,
+      -4.5
+    ],
+    "driverCannon": [
+      0,
+      -1.05,
+      0
+    ],
+    "hourWheelDial": [
+      0,
+      -1.47,
+      0
+    ],
+    "minuteWheelDial": [
+      1.95,
+      0,
+      0
+    ],
+    "minuteHand": [
+      0,
+      -2.41,
+      0
+    ],
+    "hourHand": [
+      0,
+      -2.26,
+      0
+    ],
+    "secondsHand": [
+      -0.000508,
+      -2.39,
+      -5.601266
+    ]
+  },
+  "mechanismChecks": {
+    "configuration": {
+      "ok": true,
+      "checks": [
+        {
+          "name": "barrel-center:center-distance",
+          "ok": true,
+          "actual": 4.25,
+          "expected": 4.25
+        },
+        {
+          "name": "barrel-center:axial-layer",
+          "ok": true,
+          "actual": 0.86,
+          "expected": 0.86
+        },
+        {
+          "name": "center-third:center-distance",
+          "ok": true,
+          "actual": 3.28,
+          "expected": 3.28
+        },
+        {
+          "name": "center-third:axial-layer",
+          "ok": true,
+          "actual": 1.84,
+          "expected": 1.84
+        },
+        {
+          "name": "third-fourth:center-distance",
+          "ok": true,
+          "actual": 2.62,
+          "expected": 2.62
+        },
+        {
+          "name": "third-fourth:axial-layer",
+          "ok": true,
+          "actual": 1.32,
+          "expected": 1.32
+        },
+        {
+          "name": "fourth-escape:center-distance",
+          "ok": true,
+          "actual": 2.1,
+          "expected": 2.1
+        },
+        {
+          "name": "fourth-escape:axial-layer",
+          "ok": true,
+          "actual": 1.84,
+          "expected": 1.84
+        },
+        {
+          "name": "cannon-minute:center-distance",
+          "ok": true,
+          "actual": 1.95,
+          "expected": 1.95
+        },
+        {
+          "name": "cannon-minute:axial-layer",
+          "ok": true,
+          "actual": -1.05,
+          "expected": -1.05
+        },
+        {
+          "name": "minute-hour:center-distance",
+          "ok": true,
+          "actual": 1.95,
+          "expected": 1.95
+        },
+        {
+          "name": "minute-hour:axial-layer",
+          "ok": true,
+          "actual": -1.47,
+          "expected": -1.47
+        },
+        {
+          "name": "minute-setting2:center-distance",
+          "ok": true,
+          "actual": 2.7625,
+          "expected": 2.7625
+        },
+        {
+          "name": "minute-setting2:axial-layer",
+          "ok": true,
+          "actual": -1.05,
+          "expected": -1.05
+        },
+        {
+          "name": "setting2-setting1:center-distance",
+          "ok": true,
+          "actual": 2.6,
+          "expected": 2.6
+        },
+        {
+          "name": "setting2-setting1:axial-layer",
+          "ok": true,
+          "actual": -1.05,
+          "expected": -1.05
+        },
+        {
+          "name": "setting1-transfer:center-distance",
+          "ok": true,
+          "actual": 2.03125,
+          "expected": 2.03125
+        },
+        {
+          "name": "setting1-transfer:axial-layer",
+          "ok": true,
+          "actual": -1.05,
+          "expected": -1.05
+        },
+        {
+          "name": "ratchet-crownWheel:center-distance",
+          "ok": true,
+          "actual": 4.1,
+          "expected": 4.1
+        },
+        {
+          "name": "ratchet-crownWheel:axial-layer",
+          "ok": true,
+          "actual": 3.08,
+          "expected": 3.08
+        },
+        {
+          "name": "barrel:wheel-radii",
+          "ok": true,
+          "actual": [
+            3.654297,
+            3.75,
+            3.830078
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "center:wheel-radii",
+          "ok": true,
+          "actual": [
+            2.76,
+            2.85,
+            2.925
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "center:pinion-radii",
+          "ok": true,
+          "actual": [
+            0.397917,
+            0.5,
+            0.585417
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "third:wheel-radii",
+          "ok": true,
+          "actual": [
+            2.16,
+            2.25,
+            2.325
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "third:pinion-radii",
+          "ok": true,
+          "actual": [
+            0.32465,
+            0.43,
+            0.51815
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "fourth:wheel-radii",
+          "ok": true,
+          "actual": [
+            1.71,
+            1.8,
+            1.875
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "fourth:pinion-radii",
+          "ok": true,
+          "actual": [
+            0.27935,
+            0.37,
+            0.44585
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "escape:wheel-radii",
+          "ok": true,
+          "actual": [
+            1.296833,
+            1.55,
+            1.761833
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "escape:pinion-radii",
+          "ok": true,
+          "actual": [
+            0.1775,
+            0.3,
+            0.4025
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "cannon:pinion-radii",
+          "ok": true,
+          "actual": [
+            0.387969,
+            0.4875,
+            0.570781
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "minute:wheel-radii",
+          "ok": true,
+          "actual": [
+            1.362969,
+            1.4625,
+            1.545781
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "minute:pinion-radii",
+          "ok": true,
+          "actual": [
+            0.29445,
+            0.39,
+            0.46995
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "hour:wheel-radii",
+          "ok": true,
+          "actual": [
+            1.46445,
+            1.56,
+            1.63995
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "setting1:wheel-radii",
+          "ok": true,
+          "actual": [
+            1.200469,
+            1.3,
+            1.383281
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "setting2:wheel-radii",
+          "ok": true,
+          "actual": [
+            1.200469,
+            1.3,
+            1.383281
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "settingTransfer:wheel-radii",
+          "ok": true,
+          "actual": [
+            0.631719,
+            0.73125,
+            0.814531
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "ratchet:wheel-radii",
+          "ok": true,
+          "actual": [
+            2.35955,
+            2.46,
+            2.54405
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "crownWheel:wheel-radii",
+          "ok": true,
+          "actual": [
+            1.53955,
+            1.64,
+            1.72405
+          ],
+          "expected": "dedendum < pitch < addendum"
+        },
+        {
+          "name": "windingClutch:compact-envelope",
+          "ok": true,
+          "actual": [
+            0.32,
+            0.3
+          ],
+          "expected": "small face/crown clutch envelope"
+        },
+        {
+          "name": "windingClutch:stem-axis",
+          "ok": true,
+          "actual": [
+            -1.05,
+            -4.5
+          ],
+          "expected": [
+            -1.05,
+            -4.5
+          ]
+        },
+        {
+          "name": "slidingClutch:compact-envelope",
+          "ok": true,
+          "actual": [
+            0.3,
+            0.3
+          ],
+          "expected": "small face/crown clutch envelope"
+        },
+        {
+          "name": "slidingClutch:stem-axis",
+          "ok": true,
+          "actual": [
+            -1.05,
+            -4.5
+          ],
+          "expected": [
+            -1.05,
+            -4.5
+          ]
+        },
+        {
+          "name": "settingInput:compact-envelope",
+          "ok": true,
+          "actual": [
+            0.46,
+            0.28
+          ],
+          "expected": "small face/crown clutch envelope"
+        },
+        {
+          "name": "settingInput:stem-axis",
+          "ok": true,
+          "actual": [
+            -1.05,
+            -4.5
+          ],
+          "expected": [
+            -1.05,
+            -4.5
+          ]
+        },
+        {
+          "name": "keyless:continuous-axis-span",
+          "ok": true,
+          "actual": [
+            -3.835317,
+            3.82,
+            4.28,
+            -2.695317,
+            -2.215317,
+            19.72,
+            19.8
+          ],
+          "expected": "one continuous stem spans both clutch positions, the short winding pinion and crown"
+        },
+        {
+          "name": "keyless:stem-motion-clearance",
+          "ok": true,
+          "actual": 0.250016,
+          "expected": 0.2
+        },
+        {
+          "name": "keyless:winding-clutch-motion-clearance",
+          "ok": true,
+          "actual": 4.124957,
+          "expected": 0.2
+        },
+        {
+          "name": "keyless:sliding-wind-unintended-clearance",
+          "ok": true,
+          "actual": 4.374668,
+          "expected": 0.05
+        },
+        {
+          "name": "keyless:sliding-set-unintended-clearance",
+          "ok": true,
+          "actual": 1.010132,
+          "expected": 0.05
+        },
+        {
+          "name": "keyless:wind-face-contact",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "keyless:set-face-contact",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "kinematic:center-cannon-friction-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:center-fourth-train-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:cannon-minute-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:minute-pinion-hour-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:minute-setting2-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:setting2-setting1-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:setting1-transfer-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:cannon-minute-hand-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:hour-pipe-hour-hand-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:fourth-arbor-seconds-hand-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:setting-input-transfer-metadata",
+          "ok": true,
+          "actual": [],
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "kinematic:cannon-minute-direction",
+          "ok": true,
+          "actual": [
+            -1,
+            -0.333333
+          ],
+          "expected": "adjacent external gears reverse"
+        },
+        {
+          "name": "kinematic:minute-pinion-hour-direction",
+          "ok": true,
+          "actual": [
+            -1,
+            -0.25
+          ],
+          "expected": "adjacent external gears reverse"
+        },
+        {
+          "name": "kinematic:minute-setting2-direction",
+          "ok": true,
+          "actual": [
+            -1,
+            -1.125
+          ],
+          "expected": "adjacent external gears reverse"
+        },
+        {
+          "name": "kinematic:setting2-setting1-direction",
+          "ok": true,
+          "actual": [
+            -1,
+            -1
+          ],
+          "expected": "adjacent external gears reverse"
+        },
+        {
+          "name": "kinematic:setting1-transfer-direction",
+          "ok": true,
+          "actual": [
+            -1,
+            -1.777778
+          ],
+          "expected": "adjacent external gears reverse"
+        },
+        {
+          "name": "module:cannon-minute-derived-pitch",
+          "ok": true,
+          "actual": [
+            0.08125,
+            0.08125,
+            0.4875,
+            1.4625
+          ],
+          "expected": [
+            0.08125,
+            0.08125,
+            0.4875,
+            1.4625
+          ]
+        },
+        {
+          "name": "phase:cannon-minute-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "phase:cannon-minute-dynamic-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "module:minute-pinion-hour-derived-pitch",
+          "ok": true,
+          "actual": [
+            0.078,
+            0.078,
+            0.39,
+            1.56
+          ],
+          "expected": [
+            0.078,
+            0.078,
+            0.39,
+            1.56
+          ]
+        },
+        {
+          "name": "phase:minute-pinion-hour-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "phase:minute-pinion-hour-dynamic-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "module:minute-setting2-derived-pitch",
+          "ok": true,
+          "actual": [
+            0.08125,
+            0.08125,
+            1.4625,
+            1.3
+          ],
+          "expected": [
+            0.08125,
+            0.08125,
+            1.4625,
+            1.3
+          ]
+        },
+        {
+          "name": "phase:minute-setting2-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "phase:minute-setting2-dynamic-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "module:setting2-setting1-derived-pitch",
+          "ok": true,
+          "actual": [
+            0.08125,
+            0.08125,
+            1.3,
+            1.3
+          ],
+          "expected": [
+            0.08125,
+            0.08125,
+            1.3,
+            1.3
+          ]
+        },
+        {
+          "name": "phase:setting2-setting1-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "phase:setting2-setting1-dynamic-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "module:setting1-transfer-derived-pitch",
+          "ok": true,
+          "actual": [
+            0.08125,
+            0.08125,
+            1.3,
+            0.73125
+          ],
+          "expected": [
+            0.08125,
+            0.08125,
+            1.3,
+            0.73125
+          ]
+        },
+        {
+          "name": "phase:setting1-transfer-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "phase:setting1-transfer-dynamic-tooth-gap",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "kinematic:train-cannon-gain",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "kinematic:train-minute-gain",
+          "ok": true,
+          "actual": -0.333333,
+          "expected": -0.333333
+        },
+        {
+          "name": "kinematic:train-hour-gain",
+          "ok": true,
+          "actual": 0.083333,
+          "expected": 0.083333
+        },
+        {
+          "name": "kinematic:train-setting2-gain",
+          "ok": true,
+          "actual": 0.375,
+          "expected": 0.375
+        },
+        {
+          "name": "kinematic:train-setting1-gain",
+          "ok": true,
+          "actual": -0.375,
+          "expected": -0.375
+        },
+        {
+          "name": "kinematic:train-settingTransfer-gain",
+          "ok": true,
+          "actual": 0.666667,
+          "expected": 0.666667
+        },
+        {
+          "name": "kinematic:setting-settingTransfer-gain",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "kinematic:setting-setting1-gain",
+          "ok": true,
+          "actual": -0.5625,
+          "expected": -0.5625
+        },
+        {
+          "name": "kinematic:setting-setting2-gain",
+          "ok": true,
+          "actual": 0.5625,
+          "expected": 0.5625
+        },
+        {
+          "name": "kinematic:setting-minute-gain",
+          "ok": true,
+          "actual": -0.5,
+          "expected": -0.5
+        },
+        {
+          "name": "kinematic:setting-cannon-gain",
+          "ok": true,
+          "actual": 1.5,
+          "expected": 1.5
+        },
+        {
+          "name": "kinematic:setting-hour-gain",
+          "ok": true,
+          "actual": 0.125,
+          "expected": 0.125
+        },
+        {
+          "name": "kinematic:wind-permanent-backdrive",
+          "ok": true,
+          "actual": [
+            "center",
+            "cannon",
+            "fourthArbor",
+            "minute",
+            "minuteHand",
+            "secondsHand",
+            "hour",
+            "setting2",
+            "hourHand",
+            "setting1",
+            "settingTransfer"
+          ],
+          "expected": "train reaches permanent setting train but not setting input"
+        },
+        {
+          "name": "kinematic:set-friction-isolation",
+          "ok": true,
+          "actual": [
+            "settingInput",
+            "settingTransfer",
+            "setting1",
+            "setting2",
+            "minute",
+            "cannon",
+            "hour",
+            "minuteHand",
+            "hourHand"
+          ],
+          "expected": "setting source stops at center-cannon slip boundary"
+        },
+        {
+          "name": "winding:pinion-crown-orthogonal-contact",
+          "ok": true,
+          "actual": {
+            "pinion": {
+              "id": "windingPinion",
+              "axis": "x",
+              "centerX": -3.115317,
+              "centerY": -1.05,
+              "centerZ": -4.5,
+              "profile": {
+                "module": 0.082,
+                "pitchRadius": 0.41,
+                "pitchDiameter": 0.82,
+                "addendumRadius": 0.49405,
+                "dedendumRadius": 0.30955,
+                "toothCount": 10,
+                "toothThicknessLike": 0.5,
+                "boreRadius": 0.0656
+              },
+              "bodyThickness": 0.24,
+              "contactY": -0.64
+            },
+            "crown": {
+              "id": "crownWheel",
+              "centerX": -3.115317,
+              "centerZ": -2.86,
+              "wheel": {
+                "module": 0.082,
+                "pitchRadius": 1.64,
+                "pitchDiameter": 3.28,
+                "addendumRadius": 1.72405,
+                "dedendumRadius": 1.53955,
+                "toothCount": 40,
+                "toothThicknessLike": 0.46,
+                "boreRadius": 0.2624
+              },
+              "pinion": null,
+              "layerYWheel": 3.08,
+              "layerYPinion": null,
+              "bodyThickness": 0.25,
+              "pinionThickness": 0,
+              "rotationDirection": 1,
+              "gearRatio": 0.25
+            },
+            "contact": {
+              "centerX": -3.115317,
+              "centerY": -0.64,
+              "centerZ": -4.5
+            }
+          },
+          "expected": "X/Y axes share one pitch contact point"
+        },
+        {
+          "name": "winding:crown-ratchet-module-center-band",
+          "ok": true,
+          "actual": [
+            0.082,
+            0.082,
+            4.1,
+            3.08,
+            3.08
+          ],
+          "expected": [
+            0.082,
+            0.082,
+            4.1,
+            3.08,
+            3.08
+          ]
+        },
+        {
+          "name": "winding:pinion-crown-gap-phase",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "winding:crown-ratchet-phase",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "winding:winding-crown-stem-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:winding-stem-sliding-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:winding-sliding-clutch-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:winding-clutch-pinion-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:winding-pinion-crown-wheel-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:crown-wheel-ratchet-wheel-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:ratchet-wheel-barrel-arbor-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:barrel-arbor-mainspring-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:barrel-drum-mainspring-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:sliding-setting-input-metadata",
+          "ok": true,
+          "actual": {
+            "missing": [],
+            "nonFinite": []
+          },
+          "expected": [
+            "meshType",
+            "permanent",
+            "activeStates",
+            "input",
+            "output",
+            "ratio",
+            "phaseOffset",
+            "sourcePriority",
+            "allowsBackdrive",
+            "allowsSlip"
+          ]
+        },
+        {
+          "name": "winding:forward-crownInput-gain",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "winding:forward-stem-gain",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "winding:forward-slidingClutch-gain",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "winding:forward-windingClutch-gain",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "winding:forward-windingPinion-gain",
+          "ok": true,
+          "actual": 1,
+          "expected": 1
+        },
+        {
+          "name": "winding:forward-crownWheel-gain",
+          "ok": true,
+          "actual": 0.25,
+          "expected": 0.25
+        },
+        {
+          "name": "winding:forward-ratchetWheel-gain",
+          "ok": true,
+          "actual": -0.166667,
+          "expected": -0.166667
+        },
+        {
+          "name": "winding:forward-barrelArbor-gain",
+          "ok": true,
+          "actual": -0.166667,
+          "expected": -0.166667
+        },
+        {
+          "name": "winding:forward-barrelDrum-gain",
+          "ok": true,
+          "actual": 0,
+          "expected": 0
+        },
+        {
+          "name": "winding:forward-mainspring-gain",
+          "ok": true,
+          "actual": 0.166667,
+          "expected": 0.166667
+        },
+        {
+          "name": "winding:two-input-energy-relation",
+          "ok": true,
+          "actual": {
+            "inputs": [
+              "barrelDrum",
+              "barrelArbor"
+            ],
+            "connections": [
+              {
+                "id": "barrel-arbor-mainspring",
+                "input": "barrelArbor",
+                "output": "mainspring",
+                "ratio": -1,
+                "direction": -1,
+                "meshType": "relative-wind-input",
+                "kind": "relative-wind-input",
+                "permanent": true,
+                "activeStates": [
+                  "run",
+                  "wind",
+                  "set"
+                ],
+                "phaseOffset": -0.11937,
+                "sourcePriority": [
+                  "crown"
+                ],
+                "allowsBackdrive": false,
+                "allowsSlip": false
+              },
+              {
+                "id": "barrel-drum-mainspring",
+                "input": "barrelDrum",
+                "output": "mainspring",
+                "ratio": 1,
+                "direction": 1,
+                "meshType": "relative-wind-input",
+                "kind": "relative-wind-input",
+                "permanent": true,
+                "activeStates": [
+                  "run",
+                  "wind",
+                  "set"
+                ],
+                "phaseOffset": -0.11937,
+                "sourcePriority": [
+                  "train"
+                ],
+                "allowsBackdrive": false,
+                "allowsSlip": false
+              }
+            ]
+          },
+          "expected": "mainspring = +barrelDrum -barrelArbor"
+        },
+        {
+          "name": "winding:public-source-gains",
+          "ok": true,
+          "actual": [
+            0.25,
+            -0.166667
+          ],
+          "expected": [
+            0.25,
+            -0.166667
+          ]
+        },
+        {
+          "name": "winding:reverse-freewheel-holds-downstream",
+          "ok": true,
+          "actual": {
+            "state": "wind",
+            "angles": {
+              "crownInput": 0.2,
+              "stem": 0.2,
+              "slidingClutch": 0.2,
+              "windingClutch": 0.2,
+              "windingPinion": 0.2,
+              "crownWheel": 0.27854,
+              "ratchetWheel": -0.013964,
+              "barrelArbor": -0.013964,
+              "barrelDrum": 0,
+              "settingInput": 0,
+              "mainspring": 0.013964
+            },
+            "crownDelta": -0.6,
+            "forwardDelta": 0,
+            "activeConnections": [
+              "winding-crown-stem",
+              "winding-stem-sliding",
+              "winding-sliding-clutch",
+              "winding-clutch-pinion",
+              "crown-wheel-ratchet-wheel",
+              "ratchet-wheel-barrel-arbor",
+              "barrel-arbor-mainspring",
+              "barrel-drum-mainspring"
+            ],
+            "reachedNodes": [
+              "crownInput",
+              "stem",
+              "slidingClutch",
+              "windingClutch",
+              "windingPinion"
+            ],
+            "blockedAt": "winding-pinion-crown-wheel",
+            "ratchetState": {
+              "mode": "freewheel",
+              "engaged": false,
+              "freewheel": true,
+              "forwardSign": 1,
+              "toothPhase": 0.72676
+            },
+            "barrelEnergy": {
+              "barrelArborAngle": -0.013964,
+              "barrelDrumAngle": 0,
+              "relativeWindAngle": 0.013964,
+              "windingIncrement": 0
+            }
+          },
+          "expected": "upstream reverses while the one-way boundary holds downstream"
+        },
+        {
+          "name": "winding:set-clutch-isolation",
+          "ok": true,
+          "actual": {
+            "state": "set",
+            "angles": {
+              "crownInput": 1.1,
+              "stem": 1.1,
+              "slidingClutch": 1.1,
+              "windingClutch": 0.8,
+              "windingPinion": 0.8,
+              "crownWheel": 0.27854,
+              "ratchetWheel": -0.013964,
+              "barrelArbor": -0.013964,
+              "barrelDrum": 0,
+              "settingInput": 0.3,
+              "mainspring": 0.013964
+            },
+            "crownDelta": 0.3,
+            "forwardDelta": 0.3,
+            "activeConnections": [
+              "winding-crown-stem",
+              "winding-stem-sliding",
+              "barrel-arbor-mainspring",
+              "barrel-drum-mainspring",
+              "sliding-setting-input"
+            ],
+            "reachedNodes": [
+              "crownInput",
+              "stem",
+              "slidingClutch",
+              "settingInput"
+            ],
+            "blockedAt": null,
+            "ratchetState": {
+              "mode": "held",
+              "engaged": false,
+              "freewheel": false,
+              "forwardSign": 1,
+              "toothPhase": 0.72676
+            },
+            "barrelEnergy": {
+              "barrelArborAngle": -0.013964,
+              "barrelDrumAngle": 0,
+              "relativeWindAngle": 0.013964,
+              "windingIncrement": 0
+            }
+          },
+          "expected": "position 2 moves only the setting branch"
+        },
+        {
+          "name": "center-axis:coaxial",
+          "ok": true,
+          "actual": {
+            "centerX": 0,
+            "centerZ": 0,
+            "shaftRadius": 0.14,
+            "plateHoleRadius": 0.31,
+            "shaftBottomY": -1.72,
+            "shaftTopY": 2.58,
+            "cannonInnerRadius": 0.18,
+            "cannonOuterRadius": 0.42,
+            "hourInnerRadius": 0.54,
+            "hourOuterRadius": 0.66
+          },
+          "expected": "center shaft inside cannon tube inside hollow hour wheel"
+        },
+        {
+          "name": "center-axis:continuous-through-plate",
+          "ok": true,
+          "actual": [
+            -1.72,
+            2.58,
+            0.31
+          ],
+          "expected": "shaft spans both faces of the plate through a bearing hole"
+        },
+        {
+          "name": "front:orthonormal-right-up-normal",
+          "ok": true,
+          "actual": {
+            "frontNormal": [
+              0,
+              -1,
+              0
+            ],
+            "up": [
+              0,
+              0,
+              1
+            ],
+            "right": [
+              1,
+              0,
+              0
+            ],
+            "clockwiseRotationSign": 1
+          },
+          "expected": "right × up = negative-Y front; positive Y is clockwise"
+        },
+        {
+          "name": "front:reset-and-back-sides",
+          "ok": true,
+          "actual": [
+            {
+              "position": [
+                0,
+                -58,
+                0.5
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "fitRadius": 18.8,
+              "semanticSide": "front"
+            },
+            {
+              "position": [
+                0,
+                -58,
+                0.5
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "fitRadius": 18.8,
+              "semanticSide": "front"
+            },
+            {
+              "position": [
+                0,
+                60,
+                0.5
+              ],
+              "target": [
+                0,
+                0.5,
+                0
+              ],
+              "fitRadius": 18.8,
+              "semanticSide": "back"
+            }
+          ],
+          "expected": "reset/front on negative Y and movement back on positive Y"
+        },
+        {
+          "name": "camera:shared-view-up",
+          "ok": true,
+          "actual": {
+            "viewUp": [
+              0,
+              0,
+              1
+            ],
+            "perPresetUpFields": 0
+          },
+          "expected": "one normalized [0,0,1] view-up convention and no preset-specific up fields"
+        },
+        {
+          "name": "camera:reset-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 58.502137,
+            "viewUpDot": 0.008547
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:front-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 58.502137,
+            "viewUpDot": 0.008547
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:dialFront-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 58.502137,
+            "viewUpDot": 0.008547
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:back-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 59.502101,
+            "viewUpDot": 0.008403
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:movementBack-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 59.502101,
+            "viewUpDot": 0.008403
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:movementMechanism-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 36.619667,
+            "viewUpDot": 0.791924
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:dialMechanism-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 37.635223,
+            "viewUpDot": 0.759926
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:train-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 36.619667,
+            "viewUpDot": 0.791924
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:dial-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 37.635223,
+            "viewUpDot": 0.759926
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:winding-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 11.912179,
+            "viewUpDot": 0.56245
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:cannon-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 9.859006,
+            "viewUpDot": 0.750583
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:keyless-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 13.691786,
+            "viewUpDot": 0.668284
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:motionWorks-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 9.727538,
+            "viewUpDot": 0.591105
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:minuteHourSide-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 6.423589,
+            "viewUpDot": 0.085622
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:handMount-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 5.395137,
+            "viewUpDot": 0.732141
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:cannonMount-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 4.013278,
+            "viewUpDot": 0.622932
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:hourMount-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 4.471297,
+            "viewUpDot": 0.111824
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:secondsMount-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 4.628175,
+            "viewUpDot": 0.561777
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:dialSide-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 23.554405,
+            "viewUpDot": 0.250484
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:side-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 48.260362,
+            "viewUpDot": 0.00518
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:leftSide-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 48.260362,
+            "viewUpDot": 0.00518
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:structure-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 49.809236,
+            "viewUpDot": 0.361379
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:top-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 53.502477,
+            "viewUpDot": 0.008411
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:escapement-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 21.060864,
+            "viewUpDot": 0.778695
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "camera:balance-shared-up-compatible",
+          "ok": true,
+          "actual": {
+            "viewLength": 13.94776,
+            "viewUpDot": 0.7313
+          },
+          "expected": "finite preset view vector under the shared VIEW_UP convention"
+        },
+        {
+          "name": "pallet-support-1:contact-clearance",
+          "ok": true,
+          "actual": 3.708436,
+          "expected": 0.72
+        },
+        {
+          "name": "pallet-support-2:contact-clearance",
+          "ok": true,
+          "actual": 1.820027,
+          "expected": 0.72
+        }
+      ],
+      "failures": []
+    },
+    "handCoupling": [
+      {
+        "id": "minute",
+        "driver": "cannon",
+        "hand": "minuteHand",
+        "driverObject": "b4b2bbe4-a82e-48cb-a9bc-337e1ac3495e",
+        "handObject": "507c966c-09d6-4346-b7ee-1742b66791f0",
+        "driverGeometry": "baf30a73-2f78-4a20-8455-a58f7564df38",
+        "handGeometry": "7806d5af-86aa-412d-be25-9ea8a39efe3a",
+        "driverAngle": 63.931411,
+        "handAngle": 62.360614,
+        "fixedOffset": -1.570796,
+        "actualOffset": -1.570796,
+        "error": 0,
+        "mountDistance": 0,
+        "driverMount": [
+          0,
+          -2.41,
+          0
+        ],
+        "handMount": [
+          0,
+          -2.41,
+          0
+        ]
+      },
+      {
+        "id": "hour",
+        "driver": "hour",
+        "hand": "hourHand",
+        "driverObject": "6473f408-fc9d-49fb-a446-7da75e0470ad",
+        "handObject": "4f2801fb-ae49-47e9-96cc-fad71f8c7d46",
+        "driverGeometry": "684722e8-9f99-44af-b477-9a720563c713",
+        "handGeometry": "1d92f54d-6b79-4404-a496-14a8a503b42d",
+        "driverAngle": 5.384341,
+        "handAngle": 3.756821,
+        "fixedOffset": -1.62752,
+        "actualOffset": -1.62752,
+        "error": 0,
+        "mountDistance": 0,
+        "driverMount": [
+          0,
+          -2.26,
+          0
+        ],
+        "handMount": [
+          0,
+          -2.26,
+          0
+        ]
+      },
+      {
+        "id": "seconds",
+        "driver": "fourthArbor",
+        "hand": "secondsHand",
+        "driverObject": "1fed16c0-7477-4990-99d1-30219bd513d6",
+        "handObject": "3223f020-8353-4088-add7-180109ff85b6",
+        "driverGeometry": "c5e64aa7-fc43-458f-be9f-8a85601614fc",
+        "handGeometry": "1daa50ae-e5cc-4bb0-80bb-3bd3444dca89",
+        "driverAngle": 3835.88463,
+        "handAngle": 3834.313834,
+        "fixedOffset": -1.570796,
+        "actualOffset": -1.570796,
+        "error": 0,
+        "mountDistance": 0,
+        "driverMount": [
+          -0.000508,
+          -2.39,
+          -5.601266
+        ],
+        "handMount": [
+          -0.000508,
+          -2.39,
+          -5.601266
+        ]
+      }
+    ],
+    "handCouplingMaxError": 0,
+    "smallSecondFourthAxisDistance": 0,
+    "dialMotionWorksCenterDistance": 0,
+    "crownThreeOClock": true,
+    "interference": {
+      "state": "wind",
+      "forbiddenCount": 0
+    },
+    "frontConvention": {
+      "frontNormal": [
+        0,
+        -1,
+        0
+      ],
+      "up": [
+        0,
+        0,
+        1
+      ],
+      "right": [
+        1,
+        0,
+        0
+      ],
+      "clockwiseRotationSign": 1,
+      "currentPreset": "reset",
+      "cameraSide": "front",
+      "cameraNormalDot": 0.999963
+    }
+  },
+  "transformInvariant": {
+    "unchanged": true,
+    "before": {
+      "root": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          0,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "mainPlate": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          0,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "dialRing": {
+        "position": [
+          0,
+          -2.08,
+          0
+        ],
+        "quaternion": [
+          0.707107,
+          0,
+          0,
+          0.707107
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -2.08,
+          0
+        ],
+        "worldQuaternion": [
+          0.707107,
+          0,
+          0,
+          0.707107
+        ]
+      },
+      "barrel": {
+        "position": [
+          -4.1,
+          0,
+          1.12
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -4.1,
+          0,
+          1.12
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "center": {
+        "position": [
+          -0.000216,
+          0,
+          0.000059
+        ],
+        "quaternion": [
+          0,
+          0.522499,
+          0,
+          0.85264
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -0.000216,
+          0,
+          0.000059
+        ],
+        "worldQuaternion": [
+          0,
+          0.522499,
+          0,
+          0.85264
+        ]
+      },
+      "third": {
+        "position": [
+          0.919874,
+          0,
+          -3.148248
+        ],
+        "quaternion": [
+          0,
+          0.951057,
+          0,
+          -0.309017
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0.919874,
+          0,
+          -3.148248
+        ],
+        "worldQuaternion": [
+          0,
+          0.951057,
+          0,
+          -0.309017
+        ]
+      },
+      "fourth": {
+        "position": [
+          -0.000508,
+          0,
+          -5.601266
+        ],
+        "quaternion": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -0.000508,
+          0,
+          -5.601266
+        ],
+        "worldQuaternion": [
+          0,
+          1,
+          0,
+          0
+        ]
+      },
+      "escape": {
+        "position": [
+          1.996664,
+          0,
+          -4.952185
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          -1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          1.996664,
+          0,
+          -4.952185
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "pallet": {
+        "position": [
+          3.55,
+          1.72,
+          -2.7
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          3.55,
+          1.72,
+          -2.7
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "balance": {
+        "position": [
+          7.7,
+          1.73,
+          1.8
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          7.7,
+          1.73,
+          1.8
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "crown": {
+        "position": [
+          19.8,
+          -1.05,
+          -4.5
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          19.8,
+          -1.05,
+          -4.5
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "stem": {
+        "position": [
+          0,
+          -1.05,
+          -4.5
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -1.05,
+          -4.5
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "slidingClutch": {
+        "position": [
+          -2.695317,
+          -1.05,
+          -4.5
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -2.695317,
+          -1.05,
+          -4.5
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "driverCannon": {
+        "position": [
+          0,
+          -1.05,
+          0
+        ],
+        "quaternion": [
+          0,
+          0.522499,
+          0,
+          0.85264
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -1.05,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          0.522499,
+          0,
+          0.85264
+        ]
+      },
+      "hourWheelDial": {
+        "position": [
+          0,
+          -1.47,
+          0
+        ],
+        "quaternion": [
+          0,
+          0.434445,
+          0,
+          -0.900698
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -1.47,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          -0.434445,
+          0,
+          0.900698
+        ]
+      },
+      "minuteAxis": {
+        "position": [
+          0,
+          -2.41,
+          0
+        ],
+        "quaternion": [
+          0,
+          -0.233445,
+          0,
+          0.97237
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -2.41,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          -0.233445,
+          0,
+          0.97237
+        ]
+      },
+      "hourAxis": {
+        "position": [
+          0,
+          -2.26,
+          0
+        ],
+        "quaternion": [
+          0,
+          0.953059,
+          0,
+          -0.302786
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -2.26,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          0.953059,
+          0,
+          -0.302786
+        ]
+      },
+      "secAxis": {
+        "position": [
+          -0.000508,
+          -2.39,
+          -5.601266
+        ],
+        "quaternion": [
+          0,
+          0.707107,
+          0,
+          0.707107
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -0.000508,
+          -2.39,
+          -5.601266
+        ],
+        "worldQuaternion": [
+          0,
+          0.707107,
+          0,
+          0.707107
+        ]
+      }
+    },
+    "after": {
+      "root": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          0,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "mainPlate": {
+        "position": [
+          0,
+          0,
+          0
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          0,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "dialRing": {
+        "position": [
+          0,
+          -2.08,
+          0
+        ],
+        "quaternion": [
+          0.707107,
+          0,
+          0,
+          0.707107
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -2.08,
+          0
+        ],
+        "worldQuaternion": [
+          0.707107,
+          0,
+          0,
+          0.707107
+        ]
+      },
+      "barrel": {
+        "position": [
+          -4.1,
+          0,
+          1.12
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -4.1,
+          0,
+          1.12
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "center": {
+        "position": [
+          -0.000216,
+          0,
+          0.000059
+        ],
+        "quaternion": [
+          0,
+          0.522499,
+          0,
+          0.85264
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -0.000216,
+          0,
+          0.000059
+        ],
+        "worldQuaternion": [
+          0,
+          0.522499,
+          0,
+          0.85264
+        ]
+      },
+      "third": {
+        "position": [
+          0.919874,
+          0,
+          -3.148248
+        ],
+        "quaternion": [
+          0,
+          0.951057,
+          0,
+          -0.309017
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0.919874,
+          0,
+          -3.148248
+        ],
+        "worldQuaternion": [
+          0,
+          0.951057,
+          0,
+          -0.309017
+        ]
+      },
+      "fourth": {
+        "position": [
+          -0.000508,
+          0,
+          -5.601266
+        ],
+        "quaternion": [
+          0,
+          1,
+          0,
+          0
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -0.000508,
+          0,
+          -5.601266
+        ],
+        "worldQuaternion": [
+          0,
+          1,
+          0,
+          0
+        ]
+      },
+      "escape": {
+        "position": [
+          1.996664,
+          0,
+          -4.952185
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          -1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          1.996664,
+          0,
+          -4.952185
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "pallet": {
+        "position": [
+          3.55,
+          1.72,
+          -2.7
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          3.55,
+          1.72,
+          -2.7
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "balance": {
+        "position": [
+          7.7,
+          1.73,
+          1.8
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          7.7,
+          1.73,
+          1.8
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "crown": {
+        "position": [
+          19.8,
+          -1.05,
+          -4.5
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          19.8,
+          -1.05,
+          -4.5
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "stem": {
+        "position": [
+          0,
+          -1.05,
+          -4.5
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -1.05,
+          -4.5
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "slidingClutch": {
+        "position": [
+          -2.695317,
+          -1.05,
+          -4.5
+        ],
+        "quaternion": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -2.695317,
+          -1.05,
+          -4.5
+        ],
+        "worldQuaternion": [
+          0,
+          0,
+          0,
+          1
+        ]
+      },
+      "driverCannon": {
+        "position": [
+          0,
+          -1.05,
+          0
+        ],
+        "quaternion": [
+          0,
+          0.522499,
+          0,
+          0.85264
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -1.05,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          0.522499,
+          0,
+          0.85264
+        ]
+      },
+      "hourWheelDial": {
+        "position": [
+          0,
+          -1.47,
+          0
+        ],
+        "quaternion": [
+          0,
+          0.434445,
+          0,
+          -0.900698
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -1.47,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          -0.434445,
+          0,
+          0.900698
+        ]
+      },
+      "minuteAxis": {
+        "position": [
+          0,
+          -2.41,
+          0
+        ],
+        "quaternion": [
+          0,
+          -0.233445,
+          0,
+          0.97237
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -2.41,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          -0.233445,
+          0,
+          0.97237
+        ]
+      },
+      "hourAxis": {
+        "position": [
+          0,
+          -2.26,
+          0
+        ],
+        "quaternion": [
+          0,
+          0.953059,
+          0,
+          -0.302786
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          0,
+          -2.26,
+          0
+        ],
+        "worldQuaternion": [
+          0,
+          0.953059,
+          0,
+          -0.302786
+        ]
+      },
+      "secAxis": {
+        "position": [
+          -0.000508,
+          -2.39,
+          -5.601266
+        ],
+        "quaternion": [
+          0,
+          0.707107,
+          0,
+          0.707107
+        ],
+        "scale": [
+          1,
+          1,
+          1
+        ],
+        "worldPosition": [
+          -0.000508,
+          -2.39,
+          -5.601266
+        ],
+        "worldQuaternion": [
+          0,
+          0.707107,
+          0,
+          0.707107
+        ]
+      }
+    }
+  },
+  "runtimeFootprint": {
+    "queryOnly": true,
+    "defaultDomNodesAdded": 0,
+    "defaultObject3DAdded": 0,
+    "animationLoopCalls": 0
+  }
+}

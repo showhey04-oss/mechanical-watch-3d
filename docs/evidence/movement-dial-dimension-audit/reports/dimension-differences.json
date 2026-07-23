@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "decisions": [
+    "KEEP",
+    "REVIEW",
+    "ADJUST_PHASE2",
+    "UNVERIFIED"
+  ],
+  "facts": [
+    {
+      "id": "movement-diameter",
+      "target": "movement reference diameter",
+      "currentModelUnit": 36.6,
+      "convertedMm": 36.6,
+      "officialCandidate": 36.6,
+      "evidence": "officialAnchor",
+      "decision": "KEEP",
+      "recommendation": "Keep the 36.6 mm diameter anchor.",
+      "differenceMm": 0,
+      "normalizedRatio": 1
+    },
+    {
+      "id": "movement-height",
+      "target": "rendered movement body thickness",
+      "currentModelUnit": 6.645,
+      "convertedMm": 6.645,
+      "officialCandidate": 4.5,
+      "evidence": "currentRenderedGeometry",
+      "decision": "ADJUST_PHASE2",
+      "recommendation": "Review the stacked Y envelope against the 4.5 mm calibre height before changing geometry.",
+      "differenceMm": 2.145,
+      "normalizedRatio": 0.181557
+    },
+    {
+      "id": "dial-diameter",
+      "target": "dial outer ring diameter",
+      "currentModelUnit": 32.2,
+      "convertedMm": 32.2,
+      "officialCandidate": null,
+      "evidence": "currentModelDefinition",
+      "decision": "REVIEW",
+      "recommendation": "Confirm the intended dial opening and case before resizing.",
+      "differenceMm": null,
+      "normalizedRatio": 0.879781
+    },
+    {
+      "id": "index-circle",
+      "target": "hour index circle diameter",
+      "currentModelUnit": 29.6,
+      "convertedMm": 29.6,
+      "officialCandidate": null,
+      "evidence": "currentModelDefinition",
+      "decision": "REVIEW",
+      "recommendation": "Review together with dial and hand reach.",
+      "differenceMm": null,
+      "normalizedRatio": 0.808743
+    },
+    {
+      "id": "minute-hand",
+      "target": "minute hand length",
+      "currentModelUnit": 10.3,
+      "convertedMm": 10.3,
+      "officialCandidate": null,
+      "evidence": "currentModelDefinition",
+      "decision": "REVIEW",
+      "recommendation": "Compare the tip radius with the index circle in Phase 2.",
+      "differenceMm": null,
+      "normalizedRatio": 0.281421
+    },
+    {
+      "id": "hour-hand",
+      "target": "hour hand length",
+      "currentModelUnit": 7.2,
+      "convertedMm": 7.2,
+      "officialCandidate": null,
+      "evidence": "currentModelDefinition",
+      "decision": "REVIEW",
+      "recommendation": "Preserve coupling and revise only after dial hierarchy is fixed.",
+      "differenceMm": null,
+      "normalizedRatio": 0.196721
+    },
+    {
+      "id": "small-second-layout",
+      "target": "small seconds center radius",
+      "currentModelUnit": 5.601266,
+      "convertedMm": 5.601266,
+      "officialCandidate": null,
+      "evidence": "currentModelDefinition",
+      "decision": "REVIEW",
+      "recommendation": "Confirm ETA 6498-1 dial drawing or measured reference.",
+      "differenceMm": null,
+      "normalizedRatio": 0.15304
+    },
+    {
+      "id": "crown-layout",
+      "target": "crown center radius",
+      "currentModelUnit": 20.304926,
+      "convertedMm": 20.304926,
+      "officialCandidate": null,
+      "evidence": "educationalApproximation",
+      "decision": "UNVERIFIED",
+      "recommendation": "Verify against case and stem-height references.",
+      "differenceMm": null,
+      "normalizedRatio": 0.554779
+    },
+    {
+      "id": "hand-coupling",
+      "target": "arbor/tube to hand 1:1 constraints",
+      "currentModelUnit": null,
+      "convertedMm": null,
+      "officialCandidate": null,
+      "evidence": "currentRenderedGeometry",
+      "decision": "KEEP",
+      "recommendation": "Keep all three direct constraints during any Phase 2 dimension changes.",
+      "differenceMm": null,
+      "normalizedRatio": null
+    }
+  ]
+}
