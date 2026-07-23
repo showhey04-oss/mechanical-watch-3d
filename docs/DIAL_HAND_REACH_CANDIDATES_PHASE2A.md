@@ -106,4 +106,4 @@ H2は自動採用しない。次の確認後に、H0維持、H1、H2、H3、ま�
 - H3の分針先端余白と、H2／H3の時針長の好み
 - 既定化する場合のPhase 2A専用PRと全証跡再確認
 
-Phase 2Bの文字板表示系縮小候補は同じDraft PR内の [`DIAL_DISPLAY_SCALE_CANDIDATES_PHASE2B.md`](DIAL_DISPLAY_SCALE_CANDIDATES_PHASE2B.md) でquery限定比較を開始した。Phase 2AのH2絶対値は既定採用しておらず、Phase 2Cおよび既定化実装は開始していない。
+Phase 2Bの文字板表示系縮小候補は同じDraft PR内の [`DIAL_DISPLAY_SCALE_CANDIDATES_PHASE2B.md`](DIAL_DISPLAY_SCALE_CANDIDATES_PHASE2B.md) でquery限定比較を行った。人間確認では、H2の到達比率を維持したS86が `SELECTED_FOR_IMPLEMENTATION` と選定された。H2の絶対値 `14.0／10.0` はmainへ既定採用していない。S86の実装はmain起点の専用Draft PRで行い、内部機構、小秒中心、四番車軸、Y方向配置は変更しない。Phase 2Cは開始していない。
