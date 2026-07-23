@@ -21,7 +21,12 @@ export async function runDimensionAuditIntegrationTest(diagnostics) {
   ]);
 
   check("dimension-runtime-schema-v2-and-dial-definitions", runtime.schemaVersion === 2
-    && runtime.definitions.dialRingDiameter === 32.2
+    && runtime.definitions.dialRingDiameter === 27.692
+    && runtime.definitions.indexCircleDiameter === 25.456
+    && runtime.definitions.minuteHandLength === 12.04
+    && runtime.definitions.hourHandLength === 8.6
+    && runtime.definitions.smallSecondRingDiameter === 7.74
+    && runtime.definitions.smallSecondHandLength === 3.268
     && runtime.definitions.dialBlankDiameter === null
     && !Object.hasOwn(runtime.definitions, ["dial", "Diameter"].join("")), runtime.definitions);
 
@@ -38,8 +43,8 @@ export async function runDimensionAuditIntegrationTest(diagnostics) {
       "applicationEnvelopeIncludingDialAndHands",
     ]), runtime.measurementBasis);
 
-  check("dimension-runtime-dual-reference-ratios", runtime.dualReferenceRatios.handLengths.minute.toMovementDiameter === 0.281421
-    && runtime.dualReferenceRatios.handLengths.minute.toMovementRadius === 0.562842
+  check("dimension-runtime-dual-reference-ratios", runtime.dualReferenceRatios.handLengths.minute.toMovementDiameter === 0.328962
+    && runtime.dualReferenceRatios.handLengths.minute.toMovementRadius === 0.657923
     && runtime.dualReferenceRatios.centerRadii.smallSecond.toMovementDiameter === 0.15304
     && runtime.dualReferenceRatios.centerRadii.smallSecond.toMovementRadius === 0.30608
     && runtime.dualReferenceRatios.crownPosition.toMovementDiameter.radial === 0.554779
@@ -97,7 +102,8 @@ export async function runDimensionAuditIntegrationTest(diagnostics) {
     && regression.dimensionAudit.screenSpaceCases === 20
     && regression.dimensionAudit.invalidReviewMetadata === 0
     && baseline.schemaVersion === runtime.schemaVersion
-    && baseline.pixelExact === true);
+    && baseline.pixelExact === false
+    && baseline.comparisonPurpose?.includes("S86 intentionally changes dial-display Geometry"));
 
   return {
     ok: checks.every(({ ok }) => ok),

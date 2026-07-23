@@ -2,8 +2,8 @@
   "schemaVersion": 2,
   "executedOn": "2026-07-23",
   "node": {
-    "command": "node --test tests/*.test.mjs",
-    "passed": 57,
+    "command": "/Users/tsuchidashohei/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test tests/*.test.mjs",
+    "passed": 58,
     "failed": 0
   },
   "comprehensive": [
@@ -473,13 +473,8 @@
     }
   },
   "baselineImage": {
-    "pixelExact": true,
-    "branchSha256": "ea4adcb895a1409a1de7eca487fcd235813d9d476d76defc9c65711970c29d16",
-    "baselineSha256": "ea4adcb895a1409a1de7eca487fcd235813d9d476d76defc9c65711970c29d16",
-    "canvas": [
-      1920,
-      1080
-    ]
+    "pixelExact": false,
+    "reason": "S86 intentionally changes dial-display Geometry only."
   },
   "dimensionAudit": {
     "integrationChecks": 11,
@@ -488,7 +483,8 @@
     "screenSpaceCases": 20,
     "allTransformInvariant": true,
     "allForbiddenZero": true,
-    "invalidReviewMetadata": 0
+    "invalidReviewMetadata": 0,
+    "defaultS86": true
   },
   "knownResults": [
     "Walnut luminance sampling guard threshold remains unchanged; the current isolated 390x844 run passed 88/88.",

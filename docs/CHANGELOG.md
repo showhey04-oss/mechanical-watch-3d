@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — v3.15.0 Draft candidate: S86 dial display proportions
+
+- 人間確認で選定されたS86の文字板表示寸法を通常Geometryへ反映（dial ring 27.692、index円 25.456、分針 12.040、時針 8.600、小秒表示円 7.740、小秒針 3.268）。
+- インデックスと補助マーカーの径方向位置・長さをS86比較Geometryと一致させた。
+- ムーブメント、輪列、四番車軸・小秒中心、Y方向配置、針pivot／position／rotation／scale、照明・影・材質・透過、カメラ、UI、作動音を変更していない。
+- main公開基準はマージまでv3.14.0のまま。S86は実装済み候補であり未マージ。
+
 ## v3.14.0 — PR #6 機構同期作動音 Phase 1
 
 - `audio-events.js`へ、既存ビート番号・巻上げ歯位相・逆転歯位相から離散音イベントを解決する純粋resolverを追加
