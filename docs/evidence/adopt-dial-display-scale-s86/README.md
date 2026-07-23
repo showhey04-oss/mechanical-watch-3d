@@ -10,10 +10,13 @@ main `e9a223e1ec2b5d966354c73b7719ae81a14f50fa` とS86 Draft候補を同一状�
 
 ## 保存内容
 
-- `images/`: desktop／mobile before-after、3時刻、背面、巻上げ、文字板側機構、小秒中心固定、ムーブメント外周と表示リングの比較図
+- `images/`: 4 viewport（1280×720、390×844、393×852、375×667）×3時刻のfront before／after、背面、巻上げ、文字板側機構、小秒中心固定、ムーブメント外周と表示リングの比較図
 - `adopted-dimensions.json`: S86確定値とH2到達比率
 - `before-after-dimensions.json`: mainとS86の表示寸法差、および内部機構・軸中心・Y配置の不変性
-- `regression-results.json`: 回帰、拘束、干渉、transform比較
+- `reports/current-s86-dimensions.json`: S86実行時診断の保存結果。Phase 1履歴証跡は参照・更新しない
+- `reports/s86-dimension-differences.json`: mainからの表示寸法差と不変条件
+- `reports/runtime-saved-integration.json`: 実行時診断とS86専用保存JSONの統合結果
+- `regression-results.json`: 回帰、拘束、干渉、transform比較。全WebGL回帰が完了するまで`complete`にはしない
 - `performance.json`: 10秒性能計測
 - `evidence-manifest.json`: 閉世界SHA-256 manifest
 

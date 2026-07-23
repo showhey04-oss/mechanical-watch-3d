@@ -79,8 +79,7 @@ test("dimension diagnostics remain explicit, query-only, and out of the animatio
   const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
   assert.match(source, /function getDimensionDiagnostics\(/);
   assert.match(source, /schemaVersion:DIMENSION_AUDIT_SCHEMA_VERSION/);
-  assert.match(source, /Object\.assign\(definitions,DIAL_DISPLAY_DIMENSIONS\)/);
-  assert.match(source, /DIAL_DISPLAY_DIMENSIONS\.dialRingDiameter\/2/);
+  assert.match(source, /dialRingDiameter:32\.2,dialBlankDiameter:null/);
   assert.doesNotMatch(source, new RegExp(`\\b${["dial", "Diameter"].join("")}\\b|${["dial", "diameter"].join("-")}`));
   assert.match(source, /id:'movement-height'.+decision:'REVIEW'.+comparisonQualification:'descriptiveOnly'/);
   assert.match(source, /id:'dial-ring-diameter'.+decision:'REVIEW'/);

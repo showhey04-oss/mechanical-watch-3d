@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "sourceCommit": "feature/adopt-dial-display-scale-s86 (Draft v3.15.0)",
+  "sourceCommit": "7cd1941c3239f7186a6d83695eab8ba347e2afd9",
   "mode": "read-only-query-diagnostic",
   "coordinateConvention": {
     "axes": {
@@ -27,13 +27,13 @@
     ],
     "movementReferenceDiameter": 36.6,
     "plateDiameter": 36.6,
-    "dialRingDiameter": 27.692,
+    "dialRingDiameter": 32.2,
     "dialBlankDiameter": null,
-    "indexCircleDiameter": 25.456,
-    "minuteHandLength": 12.04,
-    "hourHandLength": 8.6,
-    "smallSecondHandLength": 3.268,
-    "smallSecondRingDiameter": 7.74,
+    "indexCircleDiameter": 29.6,
+    "minuteHandLength": 10.3,
+    "hourHandLength": 7.2,
+    "smallSecondHandLength": 3.8,
+    "smallSecondRingDiameter": 9,
     "smallSecondCenterRadius": 5.601266,
     "crownAxis": {
       "centerY": -1.05,
@@ -124,8 +124,7 @@
         ],
         "outerDiameter": 1.629063
       }
-    },
-    "markerScale": 0.86
+    }
   },
   "renderedGeometry": {
     "movement": {
@@ -152,19 +151,19 @@
     },
     "display": {
       "min": [
-        -14.026,
+        -16.280001,
         -2.51,
-        -14.026
+        -16.280001
       ],
       "max": [
-        14.026,
+        16.280001,
         -1.90881,
-        14.026
+        16.280001
       ],
       "size": [
-        28.052,
+        32.560001,
         0.60119,
-        28.052
+        32.560001
       ],
       "center": [
         0,
@@ -505,19 +504,19 @@
       },
       "display": {
         "min": [
-          -14.026,
+          -16.280001,
           -2.51,
-          -14.026
+          -16.280001
         ],
         "max": [
-          14.026,
+          16.280001,
           -1.90881,
-          14.026
+          16.280001
         ],
         "size": [
-          28.052,
+          32.560001,
           0.60119,
-          28.052
+          32.560001
         ],
         "center": [
           0,
@@ -3529,9 +3528,17 @@
     "animationLoopCalls": 0
   },
   "dimensionSemantics": {
-    "displayDimensions": "S86 selected-for-implementation candidate; main remains v3.14.0 until merge.",
-    "internalMechanism": "unchanged from main",
-    "smallSecondCenterAndFourthArbor": "unchanged from main",
-    "yAxisLayout": "unchanged from main"
+    "dialRingDiameter": {
+      "valueModelUnit": 32.2,
+      "meaning": "Torus centerline diameter used as a display-aperture candidate; not verified as the physical dial blank diameter.",
+      "classification": "currentModelDefinition",
+      "decision": "REVIEW"
+    },
+    "dialBlankDiameter": {
+      "valueModelUnit": null,
+      "meaning": "Physical dial blank diameter is not defined by the current model and lacks an authoritative Phase 1 source.",
+      "classification": "unverified",
+      "decision": "UNVERIFIED"
+    }
   }
 }

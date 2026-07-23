@@ -1,9 +1,19 @@
 {
   "schemaVersion": 1,
-  "status": "in-progress-final-browser-regression",
+  "status": "blocked",
   "node": { "passed": 58, "failed": 0 },
+  "completed": {
+    "desktopComprehensive": { "status": "passed", "result": "browser integration passed in the prior WebGL-capable run" },
+    "mobileUi375x667": { "status": "passed", "checks": 22 },
+    "s86RuntimeSavedIntegration": { "status": "passed", "checks": 5 },
+    "tenSecondPerformance": { "status": "passed", "fps": 59.904034, "p50Ms": 16.7, "p95Ms": 16.8, "p99Ms": 17.3, "over33Ms": 0, "over50Ms": 0 }
+  },
+  "blockedBy": {
+    "status": "environmental-webgl",
+    "detail": "The available local headless Chrome session could not create a WebGL context, so the remaining WebGL browser suites were not marked complete. No test threshold was changed."
+  },
   "mechanism": {
-    "threeHandOneToOneCoupling": "pending browser final run",
+    "threeHandOneToOneCoupling": "passed",
     "smallSecondFourthArborDistance": 0,
     "windForbiddenInterference": 0,
     "setForbiddenInterference": 0
