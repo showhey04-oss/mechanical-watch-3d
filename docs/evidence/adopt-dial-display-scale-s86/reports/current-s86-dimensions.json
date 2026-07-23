@@ -1,0 +1,270 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "898d4593ca731b4c467bf70368ad49e9c91b573f",
+  "definitions": {
+    "movementReferenceCenter": [
+      0,
+      0,
+      0
+    ],
+    "movementReferenceDiameter": 36.6,
+    "plateDiameter": 36.6,
+    "dialRingDiameter": 27.692,
+    "dialBlankDiameter": null,
+    "indexCircleDiameter": 25.456,
+    "minuteHandLength": 12.04,
+    "hourHandLength": 8.6,
+    "smallSecondHandLength": 3.268,
+    "smallSecondRingDiameter": 7.74,
+    "smallSecondCenterRadius": 5.601266,
+    "crownAxis": {
+      "centerY": -1.05,
+      "centerZ": -4.5,
+      "direction": "+X / 3-o-clock"
+    },
+    "crownDiameter": 2.3,
+    "crownCenterRadius": 20.304926,
+    "barrelOuterDiameter": 7.660156,
+    "balanceOuterDiameter": 6.5,
+    "trainCenters": {
+      "barrel": [
+        -4.1,
+        1.12
+      ],
+      "center": [
+        -0.000216,
+        0.000059
+      ],
+      "third": [
+        0.919874,
+        -3.148248
+      ],
+      "fourth": [
+        -0.000508,
+        -5.601266
+      ],
+      "escape": [
+        1.996664,
+        -4.952185
+      ],
+      "pallet": [
+        3.55,
+        -2.7
+      ],
+      "balance": [
+        7.7,
+        1.8
+      ]
+    },
+    "trainOuterDiameters": {
+      "barrel": 7.660156,
+      "center": 5.85,
+      "third": 4.65,
+      "fourth": 3.75,
+      "escape": 3.523667
+    },
+    "motionWorks": {
+      "cannon": {
+        "center": [
+          0,
+          0
+        ],
+        "outerDiameter": 1.141563
+      },
+      "minute": {
+        "center": [
+          1.95,
+          0
+        ],
+        "outerDiameter": 3.091563
+      },
+      "hour": {
+        "center": [
+          0,
+          0
+        ],
+        "outerDiameter": 3.2799
+      },
+      "setting1": {
+        "center": [
+          6.289618,
+          -2.706703
+        ],
+        "outerDiameter": 2.766563
+      },
+      "setting2": {
+        "center": [
+          4.61837,
+          -0.714988
+        ],
+        "outerDiameter": 2.766563
+      },
+      "settingTransfer": {
+        "center": [
+          4.347124,
+          -3.300583
+        ],
+        "outerDiameter": 1.629063
+      }
+    },
+    "markerScale": 0.86
+  },
+  "worldCoordinates": {
+    "mainPlate": [
+      0,
+      0,
+      0
+    ],
+    "barrel": [
+      -4.1,
+      0,
+      1.12
+    ],
+    "center": [
+      -0.000216,
+      0,
+      0.000059
+    ],
+    "third": [
+      0.919874,
+      0,
+      -3.148248
+    ],
+    "fourth": [
+      -0.000508,
+      0,
+      -5.601266
+    ],
+    "escape": [
+      1.996664,
+      0,
+      -4.952185
+    ],
+    "pallet": [
+      3.55,
+      1.72,
+      -2.7
+    ],
+    "balance": [
+      7.7,
+      1.73,
+      1.8
+    ],
+    "crown": [
+      19.8,
+      -1.05,
+      -4.5
+    ],
+    "stem": [
+      0,
+      -1.05,
+      -4.5
+    ],
+    "slidingClutch": [
+      -2.695317,
+      -1.05,
+      -4.5
+    ],
+    "driverCannon": [
+      0,
+      -1.05,
+      0
+    ],
+    "hourWheelDial": [
+      0,
+      -1.47,
+      0
+    ],
+    "minuteWheelDial": [
+      1.95,
+      0,
+      0
+    ],
+    "minuteHand": [
+      0,
+      -2.41,
+      0
+    ],
+    "hourHand": [
+      0,
+      -2.26,
+      0
+    ],
+    "secondsHand": [
+      -0.000508,
+      -2.39,
+      -5.601266
+    ]
+  },
+  "mechanismChecks": {
+    "smallSecondFourthAxisDistance": 0,
+    "forbiddenInterference": 0,
+    "handCouplingMaxError": 0,
+    "handCoupling": [
+      {
+        "id": "minute",
+        "driver": "cannon",
+        "hand": "minuteHand",
+        "driverAngle": 63.931411,
+        "handAngle": 62.360614,
+        "fixedOffset": -1.570796,
+        "actualOffset": -1.570796,
+        "error": 0,
+        "mountDistance": 0,
+        "driverMount": [
+          0,
+          -2.41,
+          0
+        ],
+        "handMount": [
+          0,
+          -2.41,
+          0
+        ]
+      },
+      {
+        "id": "hour",
+        "driver": "hour",
+        "hand": "hourHand",
+        "driverAngle": 5.384341,
+        "handAngle": 3.756821,
+        "fixedOffset": -1.62752,
+        "actualOffset": -1.62752,
+        "error": 0,
+        "mountDistance": 0,
+        "driverMount": [
+          0,
+          -2.26,
+          0
+        ],
+        "handMount": [
+          0,
+          -2.26,
+          0
+        ]
+      },
+      {
+        "id": "seconds",
+        "driver": "fourthArbor",
+        "hand": "secondsHand",
+        "driverAngle": 3835.88463,
+        "handAngle": 3834.313834,
+        "fixedOffset": -1.570796,
+        "actualOffset": -1.570796,
+        "error": 0,
+        "mountDistance": 0,
+        "driverMount": [
+          -0.000508,
+          -2.39,
+          -5.601266
+        ],
+        "handMount": [
+          -0.000508,
+          -2.39,
+          -5.601266
+        ]
+      }
+    ],
+    "transformInvariant": true
+  }
+}

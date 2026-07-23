@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "status": "accepted-with-test-environment-limitation",
+  "absoluteFullSuiteCompleted": false,
+  "prSpecificRegressionDetected": false,
+  "productDefectDetected": false,
+  "testThresholdsChanged": false,
+  "physicalIPhoneAccepted": true,
+  "mergeRecommendation": "acceptable-after-human-approval",
+  "node": { "passed": 58, "failed": 0 },
+  "completed": {
+    "node": { "status": "passed", "checks": "58/58" },
+    "s86RuntimeSavedIntegration": { "status": "passed", "checks": "5/5" },
+    "phase1EvidenceMatchesMain": { "status": "passed", "result": "byte-identical" },
+    "evidenceManifest": { "status": "passed", "checks": "44/44", "missing": 0, "unexpected": 0, "shaMismatch": 0 },
+    "gitDiffCheck": { "status": "passed" },
+    "physicalIphoneAcceptance": { "status": "passed" },
+    "desktopMainPrAb": { "status": "passed", "mainRuns": 3, "prRuns": 3, "totalRuns": 6 },
+    "mobile390MainPrAb": { "status": "passed", "mainRuns": 3, "prRuns": 3, "totalRuns": 6 },
+    "consoleErrorWarning": { "status": "passed", "errors": 0, "warnings": 0 },
+    "completedAbPrSpecificFailures": { "status": "passed", "count": 0 },
+    "tenSecondPerformance": { "status": "passed", "fps": 59.904034, "p50Ms": 16.7, "p95Ms": 16.8, "p99Ms": 17.3, "over33Ms": 0, "over50Ms": 0 }
+  },
+  "notCompleted": [
+    "393x852 full specified A/B repetitions",
+    "375x667 full specified A/B repetitions",
+    "PR #3 UI full specified repetitions",
+    "PR #4 HUD full specified repetitions",
+    "audio full specified repetitions",
+    "A.6 performance full specified repetitions and median comparison"
+  ],
+  "physicalIphoneAcceptance": {
+    "status": "passed",
+    "scope": "current-phase dial-display dimensions",
+    "checks": {
+      "s86DialDisplayDimensions": "passed",
+      "smallSecondHandLegibility": "passed",
+      "hourAndMinuteHandReach": "passed",
+      "displayMechanismHierarchy": "passed",
+      "rotationZoomSelectionAndOperationSound": "passed"
+    },
+    "finalExteriorIntegration": {
+      "status": "reconfirm-during-exterior-integration",
+      "classification": "integration-confirmation-not-defect",
+      "scope": ["case aperture", "bezel", "crystal", "physical dial", "indices", "hands", "overall proportions"]
+    }
+  },
+  "blockReason": [
+    "in-app Browser safety policy",
+    "raw.githack fixed-commit URL rejection",
+    "temporary runner rejection",
+    "local server unreachable"
+  ],
+  "testEnvironmentLimitation": {
+    "status": "ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION",
+    "detail": "The full browser matrix was not rerun because the in-app Browser safety policy rejected the raw.githack fixed-commit URL and a temporary runner, while the local server was unreachable. No test threshold was relaxed and no product-code workaround was made."
+  },
+  "mechanism": {
+    "threeHandOneToOneCoupling": "passed",
+    "smallSecondFourthArborDistance": 0,
+    "windForbiddenInterference": 0,
+    "setForbiddenInterference": 0
+  },
+  "display": {
+    "dialRingProtrusionCount": 0,
+    "markerInterferenceCount": 0,
+    "queryCandidateProductionCode": false
+  }
+}

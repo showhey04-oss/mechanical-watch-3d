@@ -156,8 +156,8 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   const initial = diagnostics.getMobileOverlayHudReport();
   check("hud-initial-selection-overlay-is-hidden", info.hidden && info.getAttribute("aria-hidden") === "true" && initial.info.rect.width === 0 && initial.info.rect.height === 0, initial.info);
   check("hud-learning-copy-keeps-unselected-guidance", document.getElementById("learningPartName").textContent === "なし" && document.getElementById("learningPartDesc").textContent.length > 0);
-  check("hud-title-and-panel-share-v3-14-0", document.title === "Mechanical Watch Study Model v3.14.0" && initial.appVersion === "v3.14.0" && initial.modelInfo.includes("v3.14.0"), { title: document.title, modelInfo: initial.modelInfo });
-  check("hud-canvas-has-no-persistent-version-badge", initial.topHudText === "" && !document.getElementById("top").innerText.includes("v3.14.0"), initial.topHudText);
+  check("hud-title-and-panel-share-v3-15-0", document.title === "Mechanical Watch Study Model v3.15.0" && initial.appVersion === "v3.15.0" && initial.modelInfo.includes("v3.15.0"), { title: document.title, modelInfo: initial.modelInfo });
+  check("hud-canvas-has-no-persistent-version-badge", initial.topHudText === "" && !document.getElementById("top").innerText.includes("v3.15.0"), initial.topHudText);
   check("hud-panel-model-info-records-pr3-baseline", initial.modelInfo.includes("Mechanical Watch Study Model") && initial.modelInfo.includes("基準：PR #3 UIアーキテクチャ整理"), initial.modelInfo);
   check("hud-hamburger-has-no-visible-menu-text", toggle.textContent.trim() === "" && toggle.querySelectorAll(".panelToggleIcon span").length === 3, toggle.outerHTML);
   check("hud-hamburger-is-native-controlled-button", toggle.tagName === "BUTTON" && toggle.type === "button" && toggle.getAttribute("aria-controls") === panel.id);
