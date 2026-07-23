@@ -13,6 +13,7 @@
     "diameterThicknessRatioDifference": 0.058607,
     "normalizedRatios": {
       "plateDiameter": 1,
+      "dialRingDiameter": 0.879781,
       "indexCircleDiameter": 0.808743,
       "minuteHandLength": 0.281421,
       "hourHandLength": 0.196721,
@@ -30,12 +31,12 @@
       "trainCenterRadius_center": 0.000006,
       "trainCenterRadius_third": 0.089614,
       "trainCenterRadius_fourth": 0.15304,
-      "trainCenterRadius_escape": 0.145889,
-      "dialRingDiameter": 0.879781
+      "trainCenterRadius_escape": 0.145889
     }
   },
   "ratios": {
     "plateDiameter": 1,
+    "dialRingDiameter": 0.879781,
     "indexCircleDiameter": 0.808743,
     "minuteHandLength": 0.281421,
     "hourHandLength": 0.196721,
@@ -53,15 +54,12 @@
     "trainCenterRadius_center": 0.000006,
     "trainCenterRadius_third": 0.089614,
     "trainCenterRadius_fourth": 0.15304,
-    "trainCenterRadius_escape": 0.145889,
-    "dialRingDiameter": 0.879781
+    "trainCenterRadius_escape": 0.145889
   },
   "measurementBasis": {
     "alignmentStatus": "NOT_ALIGNED",
     "decision": "REVIEW",
-    "officialHeightBasis": "ETA official calibre height 4.50 mm; its manufacturing datum surfaces are not mapped to the app Box3 in Phase 1.",
-    "currentEnvelopeBasis": "App movement Y envelope from -2.410000 to 4.235000 model unit, including dial-side motion works and bridge tops but excluding hands and the external crown/stem envelope.",
-    "comparisonQualification": "The numeric 6.645 versus 4.50 comparison is descriptive only. The datum mismatch prevents treating 2.145 mm or 47.6667% as an actionable thickness reduction.",
+    "comparisonQualification": "ETA 4.50 mm and the app 6.645 model-unit Y envelope do not share verified datum surfaces. The 2.145 mm difference is descriptive only and is not a Phase 2 adjustment amount.",
     "phase2EnvelopePlan": [
       "baseMovementEnvelope",
       "handMountAndProtrudingArborEnvelope",
@@ -112,8 +110,7 @@
         "x": 1.081967,
         "z": -0.245902,
         "radial": 1.109559
-      },
-      "axisYModel": -1.05
+      }
     },
     "trainCenters": {
       "barrel": {
@@ -239,10 +236,9 @@
   },
   "unverified": {
     "dialBlankDiameter": {
-      "modelUnit": null,
-      "toMovementDiameter": null,
-      "toMovementRadius": null,
-      "classification": "unverified"
+      "valueModelUnit": null,
+      "evidence": "unverified",
+      "decision": "UNVERIFIED"
     }
   }
 }

@@ -27,6 +27,8 @@
     ],
     "movementReferenceDiameter": 36.6,
     "plateDiameter": 36.6,
+    "dialRingDiameter": 32.2,
+    "dialBlankDiameter": null,
     "indexCircleDiameter": 29.6,
     "minuteHandLength": 10.3,
     "hourHandLength": 7.2,
@@ -122,9 +124,7 @@
         ],
         "outerDiameter": 1.629063
       }
-    },
-    "dialRingDiameter": 32.2,
-    "dialBlankDiameter": null
+    }
   },
   "renderedGeometry": {
     "movement": {
@@ -2380,10 +2380,6 @@
         "id": "minute",
         "driver": "cannon",
         "hand": "minuteHand",
-        "driverObject": "b4b2bbe4-a82e-48cb-a9bc-337e1ac3495e",
-        "handObject": "507c966c-09d6-4346-b7ee-1742b66791f0",
-        "driverGeometry": "baf30a73-2f78-4a20-8455-a58f7564df38",
-        "handGeometry": "7806d5af-86aa-412d-be25-9ea8a39efe3a",
         "driverAngle": 63.931411,
         "handAngle": 62.360614,
         "fixedOffset": -1.570796,
@@ -2405,10 +2401,6 @@
         "id": "hour",
         "driver": "hour",
         "hand": "hourHand",
-        "driverObject": "6473f408-fc9d-49fb-a446-7da75e0470ad",
-        "handObject": "4f2801fb-ae49-47e9-96cc-fad71f8c7d46",
-        "driverGeometry": "684722e8-9f99-44af-b477-9a720563c713",
-        "handGeometry": "1d92f54d-6b79-4404-a496-14a8a503b42d",
         "driverAngle": 5.384341,
         "handAngle": 3.756821,
         "fixedOffset": -1.62752,
@@ -2430,10 +2422,6 @@
         "id": "seconds",
         "driver": "fourthArbor",
         "hand": "secondsHand",
-        "driverObject": "1fed16c0-7477-4990-99d1-30219bd513d6",
-        "handObject": "3223f020-8353-4088-add7-180109ff85b6",
-        "driverGeometry": "c5e64aa7-fc43-458f-be9f-8a85601614fc",
-        "handGeometry": "1daa50ae-e5cc-4bb0-80bb-3bd3444dca89",
         "driverAngle": 3835.88463,
         "handAngle": 3834.313834,
         "fixedOffset": -1.570796,
@@ -3542,13 +3530,15 @@
   "dimensionSemantics": {
     "dialRingDiameter": {
       "valueModelUnit": 32.2,
+      "meaning": "Torus centerline diameter used as a display-aperture candidate; not verified as the physical dial blank diameter.",
       "classification": "currentModelDefinition",
-      "meaning": "Torus centerline diameter used as a display-aperture candidate; not a physical dial blank diameter."
+      "decision": "REVIEW"
     },
     "dialBlankDiameter": {
       "valueModelUnit": null,
+      "meaning": "Physical dial blank diameter is not defined by the current model and lacks an authoritative Phase 1 source.",
       "classification": "unverified",
-      "meaning": "Physical dial blank diameter is not defined or verified in Phase 1."
+      "decision": "UNVERIFIED"
     }
   }
 }

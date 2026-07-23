@@ -20,6 +20,8 @@ ETA公式高さ4.50 mmと現行アプリY包絡6.645 model unitは基準面が�
 
 監査注釈は `?dimensionAudit=1&dimensionOverlay=<mode>` の証跡専用canvasで、通常アクセスには存在しない。
 
+実行時 `getDimensionDiagnostics()` と7種の保存JSONは `schemaVersion: 2` で統一した。`tests/dimension-audit-harness.html?width=<w>&height=<h>&view=<preset>` で同一条件を再生成でき、`?dimensionAuditTest=1` は実行時診断と保存JSONの主要フィールドを比較する。
+
 ## Reports
 
 - [`current-model-dimensions.json`](reports/current-model-dimensions.json): 定義値、Object3D実Geometry、world座標、層範囲、機構不変条件
@@ -63,9 +65,9 @@ ETA公式高さ4.50 mmと現行アプリY包絡6.645 model unitは基準面が�
 
 | Suite | Result |
 |---|---|
-| Node | 56/56 |
+| Node | 57/57 |
 | desktop comprehensive | 86/86 |
-| 390×844 comprehensive | 87/88; existing walnut sampling guard only |
+| 390×844 comprehensive | 88/88; walnut sampling guard threshold unchanged |
 | PR #3 UI | 1280: 20/20、390: 22/22、375: 22/22 |
 | PR #4 HUD | 390 / 393 / 375: each 57/57 |
 | v3.14 audio | desktop / 390: each 23/23 |
@@ -73,6 +75,7 @@ ETA公式高さ4.50 mmと現行アプリY包絡6.645 model unitは基準面が�
 | interference | wind 0 / set 0 |
 | hand coupling | 3/3; mount distance 0 |
 | audit transform invariant | all 20 screen-space cases |
+| runtime / saved JSON integration | 11/11 |
 | normal baseline image | pixel exact |
 
 393×852でPR #3 UIを補助実行した場合、既存試験ハーネスの厳密viewport許可値が `[375,390] × [667,844]` のため、そのガードだけが非適用となる。試験閾値は変更していない。393×852のHUD 57/57と寸法監査は合格している。
@@ -86,7 +89,7 @@ ETA公式高さ4.50 mmと現行アプリY包絡6.645 model unitは基準面が�
 
 ## Performance
 
-- front idle 10 s: 600 frames、59.61 fps、p50 16.70 ms、p95 16.80 ms、p99 17.40 ms
+- front idle 10 s: 603 frames、59.91 fps、p50 16.70 ms、p95 16.80 ms、p99 18.50 ms
 - over 33 ms / 50 ms: 0 / 0
 - pointer / wheel: p95 17.60 ms、over 33 ms / 50 ms: 0 / 0
 - per-frame audit Box3 / DOM / Object3D work: none

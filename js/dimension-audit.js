@@ -42,6 +42,14 @@ export const DIMENSION_AUDIT_DECISIONS = freeze([
   "UNVERIFIED",
 ]);
 
+export const DIMENSION_AUDIT_SCHEMA_VERSION = 2;
+
+export const DIMENSION_AUDIT_PHASE2_ENVELOPE_PLAN = freeze([
+  "baseMovementEnvelope",
+  "handMountAndProtrudingArborEnvelope",
+  "applicationEnvelopeIncludingDialAndHands",
+]);
+
 export function roundDimension(value, digits = 6) {
   if (!Number.isFinite(value)) return null;
   const scale = 10 ** digits;
@@ -81,3 +89,47 @@ export function deriveDimensionAudit({ movementReferenceDiameterModel, movementB
   });
 }
 
+export function deriveDimensionReferenceRatios({
+  movementReferenceDiameterModel,
+  handLengths = {},
+  centerRadii = {},
+  crownPosition = null,
+  trainCenters = {},
+}) {
+  if (!(movementReferenceDiameterModel > 0)) throw new TypeError("movementReferenceDiameterModel must be positive");
+  const movementRadiusModel = movementReferenceDiameterModel / 2;
+  const scalarRatio = (value) => ({
+    modelUnit: value,
+    toMovementDiameter: value / movementReferenceDiameterModel,
+    toMovementRadius: value / movementRadiusModel,
+  });
+  const pointRatio = ([x, z]) => {
+    const radialDistanceModel = Math.hypot(x, z);
+    return {
+      modelXZ: [x, z],
+      radialDistanceModel,
+      toMovementDiameter: {
+        x: x / movementReferenceDiameterModel,
+        z: z / movementReferenceDiameterModel,
+        radial: radialDistanceModel / movementReferenceDiameterModel,
+      },
+      toMovementRadius: {
+        x: x / movementRadiusModel,
+        z: z / movementRadiusModel,
+        radial: radialDistanceModel / movementRadiusModel,
+      },
+    };
+  };
+  return roundDimensionTree({
+    ratioBases: {
+      movementDiameterModel: movementReferenceDiameterModel,
+      movementRadiusModel,
+    },
+    dualReferenceRatios: {
+      handLengths: Object.fromEntries(Object.entries(handLengths).map(([id, value]) => [id, scalarRatio(value)])),
+      centerRadii: Object.fromEntries(Object.entries(centerRadii).map(([id, value]) => [id, scalarRatio(value)])),
+      crownPosition: crownPosition ? pointRatio(crownPosition) : null,
+      trainCenters: Object.fromEntries(Object.entries(trainCenters).map(([id, point]) => [id, pointRatio(point)])),
+    },
+  });
+}
