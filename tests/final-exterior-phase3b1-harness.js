@@ -1,7 +1,9 @@
 const params = new URLSearchParams(location.search);
 const frame = document.getElementById("exteriorApp");
 const statusOutput = document.getElementById("phase3b1Status");
+const summaryOutput = document.getElementById("phase3b1Summary");
 const resultOutput = document.getElementById("phase3b1Result");
+const audioTrigger = document.getElementById("phase3b1AudioTrigger");
 const width = Math.max(320, Number(params.get("width")) || 1280);
 const height = Math.max(480, Number(params.get("height")) || 720);
 const defaultQuery = [
@@ -14,6 +16,12 @@ const defaultQuery = [
   "panel=collapsed",
 ].join("&");
 const appQuery = params.get("appQuery") || defaultQuery;
+const integrationResultId = params.get("integrationResultId");
+const triggerAudio = params.get("triggerAudio") === "1";
+audioTrigger.hidden = !triggerAudio;
+audioTrigger.addEventListener("click", () => {
+  frame.contentDocument.getElementById("audioToggle")?.click();
+});
 const expectedExteriorEnabled =
   new URLSearchParams(appQuery).get("exterior") === "balanced";
 frame.style.width = `${width}px`;
@@ -35,11 +43,78 @@ async function waitForDiagnostics(timeoutMs = 30000) {
   throw new Error("watchModelDiagnostics did not become available");
 }
 
+async function waitForIntegrationResult(timeoutMs = 240000) {
+  if (!integrationResultId) return null;
+  const started = performance.now();
+  while (performance.now() - started < timeoutMs) {
+    const output = frame.contentDocument.getElementById(integrationResultId);
+    const status = output?.dataset.status;
+    if (status === "passed" || status === "failed") {
+      return {
+        id: integrationResultId,
+        status,
+        result: JSON.parse(output.textContent),
+      };
+    }
+    await wait(100);
+  }
+  throw new Error(`integration output timed out: ${integrationResultId}`);
+}
+
 function writeResult(result, status) {
   const json = JSON.stringify(result);
+  const integrationChecks = result.integration?.result?.results
+    || result.integration?.result?.checks
+    || [];
+  const integrationFailures = Array.isArray(integrationChecks)
+    ? integrationChecks
+      .filter(item => item?.ok === false || item?.pass === false)
+      .map(item => item.id || item.name || item.label || "unnamed")
+    : Object.entries(integrationChecks)
+      .filter(([, value]) => value === false)
+      .map(([id]) => id);
+  const pointerPerformance = result.integration?.result?.measurements?.pointerPerformance;
+  const wheelPerformance = result.integration?.result?.measurements?.wheelPerformance;
+  const standalonePerformance = result.integration?.result?.pacing
+    ? result.integration.result
+    : null;
+  const summary = {
+    ok: result.ok,
+    status,
+    appVersion: result.appVersion || null,
+    viewport: result.viewport || null,
+    exteriorState: result.state || null,
+    checks: result.checks || null,
+    integration: result.integration ? {
+      id: result.integration.id,
+      status: result.integration.status,
+      ok: result.integration.result?.ok === true,
+      total: Array.isArray(integrationChecks)
+        ? integrationChecks.length
+        : Object.keys(integrationChecks).length,
+      failures: integrationFailures,
+      performance: {
+        pointer: pointerPerformance ? {
+          pacing: pointerPerformance.pacing,
+          motion: pointerPerformance.motion,
+          modelInvariant: pointerPerformance.modelInvariant,
+        } : null,
+        wheel: wheelPerformance ? {
+          pacing: wheelPerformance.pacing,
+          zoom: wheelPerformance.zoom,
+          modelInvariant: wheelPerformance.modelInvariant,
+        } : null,
+        standalone: standalonePerformance,
+      },
+    } : null,
+    error: result.error || null,
+  };
   resultOutput.value = json;
   resultOutput.textContent = json;
   resultOutput.dataset.status = status;
+  summaryOutput.value = JSON.stringify(summary);
+  summaryOutput.textContent = JSON.stringify(summary);
+  summaryOutput.dataset.status = status;
   statusOutput.value = status;
   statusOutput.textContent = status;
   document.body.dataset.auditReady = "true";
@@ -69,6 +144,7 @@ frame.addEventListener("load", async () => {
       drift: diagnostics.getKeylessDriftReport(),
     };
     const modelAfter = diagnostics.getModelWorldSignature();
+    const integration = await waitForIntegrationResult();
     const checks = {
       enabled: state.enabled === expectedExteriorEnabled,
       candidate: state.id === "E-BALANCED",
@@ -150,6 +226,7 @@ frame.addEventListener("load", async () => {
         && yEnvelopes.handMountAndProtrudingArbor.ySize === 3.190
         && yEnvelopes.applicationIncludingDialAndHandsWithoutExternalCrown.ySize === 6.745,
       transformInvariant: JSON.stringify(modelBefore) === JSON.stringify(modelAfter),
+      integration: integration ? integration.status === "passed" : true,
     };
     const result = {
       ok: Object.values(checks).every(Boolean),
@@ -173,6 +250,7 @@ frame.addEventListener("load", async () => {
       keyless,
       modelBefore,
       modelAfter,
+      integration,
     };
     writeResult(result, result.ok ? "passed" : "failed");
   } catch (error) {

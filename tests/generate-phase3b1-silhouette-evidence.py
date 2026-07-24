@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from pathlib import Path
 
 from PIL import Image, ImageDraw
@@ -77,12 +78,16 @@ def close_up(source: Image.Image, title: str, subtitle: str) -> Image.Image:
     return overlay.convert("RGB")
 
 
-def local_relief_overlay(source: Image.Image) -> Image.Image:
+def local_relief_overlay(source: Image.Image, relief: dict) -> Image.Image:
     image = source.convert("RGBA")
     draw = ImageDraw.Draw(image, "RGBA")
     panel(draw, "CASE-BODY LOCAL RELIEF", [
         "actual WebGL side capture + diagnostic overlay",
-        "required 0.298836 / adopted 0.309461 / limit 0.330",
+        (
+            f"required {relief['calculation']['requiredMinimumDepth']:.6f} / "
+            f"adopted {relief['calculation']['adoptedMaximumDepth']:.6f} / "
+            f"limit {relief['calculation']['maximumAllowedDepth']:.3f}"
+        ),
         "inner radius 18.900 unchanged; CSG not used",
     ])
     # The side preset places the crown relief in this visible region.
@@ -102,12 +107,15 @@ def local_relief_overlay(source: Image.Image) -> Image.Image:
     return image.convert("RGB")
 
 
-def gap_overlay(source: Image.Image) -> Image.Image:
+def gap_overlay(source: Image.Image, relief: dict) -> Image.Image:
     image = source.convert("RGBA")
     draw = ImageDraw.Draw(image, "RGBA")
     panel(draw, "MINIMUM CROWN / CASE GAP", [
-        "actual geometry: 0.030084 >= 0.030",
-        "XYZ: [19.194916, -0.127315, -3.983456]",
+        (
+            "actual geometry: "
+            f"{relief['position1']['actualMinimumGap']:.6f} >= 0.030"
+        ),
+        f"XYZ: {relief['position1']['actualMinimumGapPoint']}",
         "position 1 forbidden interference: 0",
     ])
     point = (548, 514)
@@ -119,12 +127,15 @@ def gap_overlay(source: Image.Image) -> Image.Image:
     return image.convert("RGB")
 
 
-def wall_overlay(source: Image.Image) -> Image.Image:
+def wall_overlay(source: Image.Image, relief: dict) -> Image.Image:
     image = source.convert("RGBA")
     draw = ImageDraw.Draw(image, "RGBA")
     panel(draw, "MINIMUM CASE-BODY WALL", [
-        "actual geometry: 0.590539 >= 0.550",
-        "XYZ: [19.184206, -1.050000, -3.442000]",
+        (
+            "actual geometry: "
+            f"{relief['wall']['actualMinimum']:.6f} >= 0.550"
+        ),
+        f"XYZ: {relief['wall']['actualMinimumPoint']}",
         "inner radius remains exactly 18.900",
     ])
     point = (530, 563)
@@ -136,6 +147,90 @@ def wall_overlay(source: Image.Image) -> Image.Image:
     return image.convert("RGB")
 
 
+def annotate_capture(
+    source: Image.Image,
+    title: str,
+    lines: list[str],
+    box: tuple[int, int, int, int] | None = None,
+) -> Image.Image:
+    image = source.convert("RGBA")
+    draw = ImageDraw.Draw(image, "RGBA")
+    panel(draw, title, lines)
+    if box:
+        draw.rounded_rectangle(box, radius=18, outline=CYAN + (235,), width=4)
+    return image.convert("RGB")
+
+
+def section_diagram() -> Image.Image:
+    image = Image.new("RGB", DESKTOP_SIZE, (13, 16, 21))
+    draw = ImageDraw.Draw(image)
+    draw.text((38, 28), "BEZEL SECTION / DISPLAY APERTURE", fill=INK)
+    draw.text((38, 58), "old aperture 29.000 vs second candidate 29.800", fill=GOLD)
+    center = 640
+    scale = 24
+    old_inner = 29.0 / 2 * scale
+    old_outer = 39.2 / 2 * scale
+    old_back, old_front = 240, 160
+    for sign in (-1, 1):
+        inner_x = center + sign * old_inner
+        outer_x = center + sign * old_outer
+        draw.polygon(
+            [
+                (inner_x, old_front),
+                (outer_x, old_front),
+                (outer_x, old_back),
+                (inner_x, old_back),
+            ],
+            fill=(98, 46, 52),
+            outline=RED,
+        )
+    draw.line((center - old_inner, old_front, center + old_inner, old_front), fill=(87, 98, 112), width=2)
+    draw.text((50, 278), "old: parallel annular ExtrudeGeometry / aperture 29.000", fill=INK)
+
+    new_back_y = 525
+    inner_front_y = 425
+    outer_front_y = 485
+    new_inner_back = 29.8 / 2 * scale
+    new_inner_front = 30.6 / 2 * scale
+    new_outer_back = 38.8 / 2 * scale
+    new_outer_front = 37.6 / 2 * scale
+    for sign in (-1, 1):
+        points = [
+            (center + sign * new_inner_back, new_back_y),
+            (center + sign * new_inner_front, inner_front_y),
+            (center + sign * new_outer_front, outer_front_y),
+            (center + sign * new_outer_back, new_back_y),
+        ]
+        draw.polygon(points, fill=(42, 91, 72), outline=GREEN)
+    draw.line((center - new_inner_front, inner_front_y, center + new_inner_front, inner_front_y), fill=(87, 98, 112), width=2)
+    draw.text((50, 565), "new: single closed tapered profile / aperture 29.800", fill=INK)
+    draw.text((50, 650), "back OD 38.800 / front OD 37.600; outer edge becomes axially thinner", fill=INK)
+    return image
+
+
+def thickness_diagram() -> Image.Image:
+    image = Image.new("RGB", DESKTOP_SIZE, (13, 16, 21))
+    draw = ImageDraw.Draw(image)
+    draw.text((38, 28), "TOTAL EXTERIOR THICKNESS", fill=INK)
+    rows = (
+        (200, 9.845, 0.950, 7.945, RED, "previous candidate"),
+        (470, 8.695, 0.600, 7.495, GREEN, "second candidate"),
+    )
+    x0 = 170
+    unit = 92
+    for y, total, projection, body, color, label in rows:
+        width = total * unit
+        front = projection * unit
+        body_width = body * unit
+        draw.rectangle((x0, y, x0 + width, y + 62), outline=color, width=4)
+        draw.rectangle((x0, y, x0 + front, y + 62), fill=(48, 58, 72))
+        draw.rectangle((x0 + front, y, x0 + front + body_width, y + 62), fill=(77, 88, 103))
+        draw.rectangle((x0 + front + body_width, y, x0 + width, y + 62), fill=(48, 58, 72))
+        draw.text((x0, y - 38), f"{label}: {projection:.3f} + {body:.3f} + {projection:.3f} = {total:.3f}", fill=INK)
+    draw.text((170, 650), "Movement Y positions and Phase 2C envelopes remain unchanged.", fill=GOLD)
+    return image
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--evidence-dir", type=Path, required=True)
@@ -143,6 +238,9 @@ def main() -> None:
     parser.add_argument("--seed-main-side-board", type=Path)
     args = parser.parse_args()
     evidence = args.evidence_dir
+    relief = json.loads(
+        (evidence / "reports/case-body-relief-report.json").read_text(),
+    )
 
     main_front_path = evidence / "main-baseline-front.png"
     main_side_path = evidence / "main-baseline-side.png"
@@ -161,6 +259,23 @@ def main() -> None:
         evidence / "before-profile-desktop-oblique-front.png",
         DESKTOP_SIZE,
     )
+    before_second_front = load_rgb(
+        evidence / "before-second-desktop-front.png",
+        DESKTOP_SIZE,
+    )
+    before_second_oblique = load_rgb(
+        evidence / "before-second-desktop-oblique-front.png",
+        DESKTOP_SIZE,
+    )
+    before_second_side = load_rgb(
+        evidence / "before-second-desktop-side.png",
+        DESKTOP_SIZE,
+    )
+    before_second_back = load_rgb(
+        evidence / "before-second-desktop-back.png",
+        DESKTOP_SIZE,
+    )
+    current_back = load_rgb(evidence / "desktop-back.png", DESKTOP_SIZE)
 
     save_png(board(
         main_front,
@@ -187,21 +302,59 @@ def main() -> None:
         "after: tapered E-BALANCED silhouette",
     ), evidence / "case-body-profile-before-after-oblique-front.png")
 
-    crown1 = load_rgb(evidence / "crown-position-1.png", DESKTOP_SIZE)
-    crown2 = load_rgb(evidence / "crown-position-2.png", DESKTOP_SIZE)
-    save_png(close_up(
+    for name, before, after, view in (
+        ("front", before_second_front, current_front, "front"),
+        ("oblique-front", before_second_oblique, current_oblique, "oblique front"),
+        ("side", before_second_side, current_side, "side"),
+        ("back", before_second_back, current_back, "back"),
+    ):
+        save_png(board(
+            before,
+            after,
+            f"Head 43c8165: previous Phase 3B.1 {view}",
+            f"second candidate: refined proportions {view}",
+        ), evidence / f"second-candidate-before-after-{name}.png")
+
+    crown1 = load_rgb(evidence / "crown-position1-closeup.png", DESKTOP_SIZE)
+    crown2 = load_rgb(evidence / "crown-position2-closeup.png", DESKTOP_SIZE)
+    save_png(crown1, evidence / "crown-position-1.png")
+    save_png(crown2, evidence / "crown-position-2.png")
+    save_png(annotate_capture(
         crown1,
         "POSITION 1 CROWN CLOSE-UP",
-        "case-body gap 0.030084 / tube seat assumption retained",
+        [
+            (
+                "case-body gap "
+                f"{relief['position1']['actualMinimumGap']:.6f} / "
+                "tube seat assumption retained"
+            ),
+            "human finger access and pull/push acceptance retained",
+        ],
+        (760, 160, 1240, 620),
     ), evidence / "crown-position-1-close-up.png")
-    save_png(close_up(
+    save_png(annotate_capture(
         crown2,
         "POSITION 2 CROWN CLOSE-UP",
-        "crown travel 1.350 / forbidden interference 0",
+        [
+            "crown travel 1.350 / forbidden interference 0",
+            "crown, stem, and tube positions unchanged",
+        ],
+        (760, 160, 1240, 620),
     ), evidence / "crown-position-2-close-up.png")
-    save_png(local_relief_overlay(current_side), evidence / "case-body-wireframe-relief.png")
-    save_png(gap_overlay(current_side), evidence / "crown-minimum-gap-annotated.png")
-    save_png(wall_overlay(current_side), evidence / "case-minimum-wall-annotated.png")
+    save_png(local_relief_overlay(current_side, relief), evidence / "case-body-wireframe-relief.png")
+    save_png(gap_overlay(current_side, relief), evidence / "crown-minimum-gap-annotated.png")
+    save_png(wall_overlay(current_side, relief), evidence / "case-minimum-wall-annotated.png")
+
+    save_png(section_diagram(), evidence / "bezel-section-29.0-vs-29.8.png")
+    save_png(thickness_diagram(), evidence / "total-thickness-9.845-vs-8.695.png")
+    holder_absent = load_rgb(evidence / "movement-holder-absent.png", DESKTOP_SIZE)
+    holder_present = load_rgb(evidence / "movement-holder-present.png", DESKTOP_SIZE)
+    save_png(board(
+        holder_absent,
+        holder_present,
+        "Head 43c8165: no movement holder ring",
+        "second candidate: holder ring OD 37.650 / ID 36.750",
+    ), evidence / "movement-holder-before-after.png")
 
 
 if __name__ == "__main__":

@@ -11,7 +11,8 @@ const evidence = path.join(
   "docs/evidence/final-exterior-balanced-phase3b1",
 );
 const reports = path.join(evidence, "reports");
-const implementationCommit = "b27d827ff1f60c8051187a7724e93b9c50af8912";
+const implementationCommit = "4368f2e5d283e3030dc5597a5caf58b7d3d6802d";
+const captureCommit = "b4b05b364188574cb3caa2540f021f84cbb4516c";
 
 const pngDimensions = buffer => {
   assert.deepEqual([...buffer.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
@@ -50,6 +51,19 @@ test("Phase 3B.1 evidence images are decoded PNGs with fixed viewports", async (
     ["main-baseline-side.png", [1280, 720]],
     ["before-profile-desktop-side.png", [1280, 720]],
     ["before-profile-desktop-oblique-front.png", [1280, 720]],
+    ["before-second-desktop-front.png", [1280, 720]],
+    ["before-second-desktop-oblique-front.png", [1280, 720]],
+    ["before-second-desktop-side.png", [1280, 720]],
+    ["before-second-desktop-back.png", [1280, 720]],
+    ["before-second-mobile-390-front.png", [390, 844]],
+    ["before-second-mobile-390-side.png", [390, 844]],
+    ["crown-position1-closeup.png", [1280, 720]],
+    ["crown-position2-closeup.png", [1280, 720]],
+    ["opacity-100.png", [1280, 720]],
+    ["opacity-50.png", [1280, 720]],
+    ["opacity-16.png", [1280, 720]],
+    ["movement-holder-absent.png", [1280, 720]],
+    ["movement-holder-present.png", [1280, 720]],
     ["baseline-vs-balanced-front.png", [2560, 772]],
     ["baseline-vs-balanced-side.png", [2560, 772]],
     ["case-body-profile-before-after-side.png", [2560, 772]],
@@ -57,6 +71,13 @@ test("Phase 3B.1 evidence images are decoded PNGs with fixed viewports", async (
     ["case-body-wireframe-relief.png", [1280, 720]],
     ["crown-minimum-gap-annotated.png", [1280, 720]],
     ["case-minimum-wall-annotated.png", [1280, 720]],
+    ["second-candidate-before-after-front.png", [2560, 772]],
+    ["second-candidate-before-after-oblique-front.png", [2560, 772]],
+    ["second-candidate-before-after-side.png", [2560, 772]],
+    ["second-candidate-before-after-back.png", [2560, 772]],
+    ["bezel-section-29.0-vs-29.8.png", [1280, 720]],
+    ["total-thickness-9.845-vs-8.695.png", [1280, 720]],
+    ["movement-holder-before-after.png", [2560, 772]],
   ]);
   const hashes = new Set();
   for (const [name, dimensions] of expected) {
@@ -65,7 +86,7 @@ test("Phase 3B.1 evidence images are decoded PNGs with fixed viewports", async (
     assert.deepEqual(pngDimensions(bytes), dimensions, name);
     hashes.add(createHash("sha256").update(bytes).digest("hex"));
   }
-  assert.ok(hashes.size >= 22);
+  assert.ok(hashes.size >= 36);
 });
 
 test("Phase 3B.1 saved reports reproduce runtime config and protected decisions", async () => {
@@ -82,6 +103,8 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
     regression,
     decision,
     caseBody,
+    proportions,
+    holder,
   ] = await Promise.all([
     readJson("runtime-dimensions.json"),
     readJson("exterior-interference.json"),
@@ -93,6 +116,8 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
     readJson("regression-results.json"),
     readJson("decision-summary.json"),
     readJson("case-body-relief-report.json"),
+    readJson("exterior-proportions.json"),
+    readJson("movement-holder-report.json"),
   ]);
   for (const report of [
     dimensions,
@@ -105,42 +130,70 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
     regression,
     decision,
     caseBody,
+    proportions,
+    holder,
   ]) {
     assert.equal(report.metadata.sourceImplementationCommit, implementationCommit);
+    assert.equal(report.metadata.sourceCaptureCommit, captureCommit);
     assert.equal(report.metadata.appVersion, "v3.15.0");
     assert.equal(report.metadata.candidateStatus, "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT");
   }
   assert.equal(dimensions.runtimeToConfigPassed, true);
   assert.equal(dimensions.viewportInvariant, true);
-  assert.equal(interference.forbidden.length, 11);
+  assert.equal(interference.forbidden.length, 14);
   assert.equal(interference.forbiddenCount, 0);
   assert.equal(interference.position1.maxDrift, 0);
   assert.equal(interference.position2.maxDrift, 0);
   assert.equal(crown.axisError, 0);
   assert.ok(crown.stemBoreClearance > 0);
-  assert.equal(crown.fingerAccess, "UNVERIFIED");
+  assert.equal(crown.fingerAccess, "HUMAN_ACCEPTED_PHASE3B1");
+  assert.equal(crown.pullPushOperability, "HUMAN_ACCEPTED_PHASE3B1");
   assert.equal(selection.selectionPassed, true);
   assert.equal(materials.runtime.alphaHashUsed, false);
   assert.equal(materials.runtime.d2c3Used, false);
   assert.equal(normal.diffCount, 0);
   assert.equal(normal.screenshot.byteIdentical, true);
   assert.equal(performance.thresholdsChanged, false);
-  assert.equal(performance.thresholdsMaintained, true);
+  assert.equal(performance.absoluteThresholdsPassed, false);
+  assert.equal(performance.differentialPassed, true);
+  assert.equal(performance.thresholdsMaintained, false);
   assert.equal(regression.testThresholdsChanged, false);
+  assert.equal(regression.status, "FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS");
+  assert.deepEqual(regression.desktop.failed, [
+    "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+    "a6-wheel-path-produces-monotonic-continuous-zoom",
+  ]);
+  assert.equal(regression.mobile390.passed, 86);
+  assert.equal(regression.ui.mobile390.passed, 22);
+  assert.equal(regression.hud.passed, 57);
+  assert.equal(regression.audio.passed, 22);
+  assert.equal(regression.s86RuntimeToSaved.passed, 5);
+  assert.equal(regression.a7.passed, 9);
   assert.equal(decision.defaultAdoption, "NOT_APPROVED_FOR_DEFAULT_ADOPTION");
   assert.equal(decision.humanReviewRequired, true);
+  assert.equal(decision.previouslyAcceptedByHuman.crownPullPush, true);
+  assert.equal(decision.secondCandidateHumanReview.structuralOpacity50, "PENDING");
   assert.equal(caseBody.calculation.requiredMinimumDepth, 0.298836197);
-  assert.equal(caseBody.calculation.adoptedMaximumDepth, 0.309460794);
+  assert.equal(caseBody.calculation.adoptedMaximumDepth, 0.310871569);
   assert.equal(caseBody.calculation.maximumAllowedDepth, 0.33);
-  assert.equal(caseBody.position1.actualMinimumGap, 0.030084333);
-  assert.equal(caseBody.position2.actualMinimumGap, 1.380084333);
-  assert.equal(caseBody.wall.actualMinimum, 0.590539206);
+  assert.equal(caseBody.position1.actualMinimumGap, 0.030088134);
+  assert.equal(caseBody.position2.actualMinimumGap, 1.380088134);
+  assert.equal(caseBody.wall.actualMinimum, 0.589128431);
   assert.equal(caseBody.wall.innerRadius, 18.9);
   assert.equal(caseBody.mesh.singleClosedMesh, true);
   assert.equal(caseBody.mesh.csgUsed, false);
   assert.equal(caseBody.mesh.innerProfileChanged, false);
   assert.equal(caseBody.mesh.degenerateTriangleCount, 0);
   assert.equal(caseBody.mesh.nonManifoldEdgeCount, 0);
+  assert.equal(proportions.previousCandidate.totalCaseThickness, 9.845);
+  assert.equal(proportions.currentCandidate.totalCaseThickness, 8.695);
+  assert.equal(proportions.currentCandidate.dialApertureDiameter, 29.8);
+  assert.equal(holder.runtime.outerDiameter, 37.65);
+  assert.equal(holder.runtime.innerDiameter, 36.75);
+  assert.equal(holder.runtime.forbiddenInterferenceCount, 0);
+  assert.equal(holder.runtime.profileGeometry.topology.closed, true);
+  assert.equal(holder.selection.pickPriority, -1);
+  assert.equal(holder.structuralOpacityIntegrated, true);
 });
 
 test("Phase 3B.1 comparison generator only reads browser captures", async () => {
@@ -162,8 +215,11 @@ test("Phase 3B.1 silhouette evidence generator overlays real captures instead of
   assert.match(source, /desktop-side\.png/);
   assert.match(source, /desktop-oblique-front\.png/);
   assert.match(source, /before-profile-desktop-side\.png/);
+  assert.match(source, /before-second-desktop-front\.png/);
+  assert.match(source, /movement-holder-before-after\.png/);
+  assert.match(source, /bezel-section-29\.0-vs-29\.8\.png/);
   assert.match(source, /load_rgb/);
-  assert.match(source, /local_relief_overlay\(current_side\)/);
+  assert.match(source, /local_relief_overlay\(current_side,\s*relief\)/);
   assert.doesNotMatch(source, /save_png\([^\\n]*desktop-side\.png/);
   assert.doesNotMatch(source, /save_png\([^\\n]*mobile-390-side\.png/);
 });
@@ -175,6 +231,7 @@ test("Phase 3B.1 evidence manifest is a closed-world byte and SHA inventory", as
   assert.equal(manifest.closedWorld, true);
   assert.equal(manifest.selfIncluded, false);
   assert.equal(manifest.sourceImplementationCommit, implementationCommit);
+  assert.equal(manifest.sourceCaptureCommit, captureCommit);
   const actual = (await listFiles(evidence))
     .filter(name => name !== "evidence-manifest.json")
     .sort();

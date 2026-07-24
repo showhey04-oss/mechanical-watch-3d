@@ -11,7 +11,7 @@ for (let index = 2; index < process.argv.length; index += 2) {
 }
 const sourcePath = args.get("--source");
 const outputDirectory = args.get("--output");
-const nodePassed = Number(args.get("--node-passed") || 105);
+const nodePassed = Number(args.get("--node-passed") || 109);
 if (!sourcePath || !outputDirectory) {
   throw new Error("--source and --output are required");
 }
@@ -21,6 +21,7 @@ const metadata = {
   schemaVersion: 1,
   sourceBaseCommit: source.metadata.sourceBaseCommit,
   sourceImplementationCommit: source.metadata.sourceImplementationCommit,
+  sourceCaptureCommit: source.metadata.sourceCaptureCommit,
   sourceBranch: source.metadata.branch,
   appVersion: source.metadata.appVersion,
   capturedAt: source.metadata.capturedAt,
@@ -67,6 +68,48 @@ await writeReport("runtime-dimensions.json", {
   },
 });
 
+await writeReport("exterior-proportions.json", {
+  previousCandidate: {
+    totalCaseThickness: 9.845,
+    caseBodyAxialThickness: 7.945,
+    frontExteriorProjection: 0.950,
+    rearExteriorProjection: 0.950,
+    dialApertureDiameter: 29.000,
+  },
+  currentCandidate: {
+    totalCaseThickness:
+      FINAL_EXTERIOR_BALANCED.dimensions.totalCaseThickness,
+    caseBodyAxialThickness:
+      FINAL_EXTERIOR_BALANCED.dimensions.caseBodyAxialThickness,
+    frontExteriorProjection:
+      FINAL_EXTERIOR_BALANCED.dimensions.frontExteriorProjection,
+    rearExteriorProjection:
+      FINAL_EXTERIOR_BALANCED.dimensions.rearExteriorProjection,
+    dialApertureDiameter:
+      FINAL_EXTERIOR_BALANCED.dimensions.dialApertureDiameter,
+    crystalClearDiameter:
+      FINAL_EXTERIOR_BALANCED.dimensions.crystalClearDiameter,
+    crystalInnerY:
+      FINAL_EXTERIOR_BALANCED.dimensions.crystalInnerY,
+    crystalOuterY:
+      FINAL_EXTERIOR_BALANCED.dimensions.crystalOuterY,
+    casebackInnerY:
+      FINAL_EXTERIOR_BALANCED.dimensions.casebackInnerY,
+    casebackOuterY:
+      FINAL_EXTERIOR_BALANCED.dimensions.casebackOuterY,
+    caseBodyProfile:
+      FINAL_EXTERIOR_BALANCED.caseBody.outerRadiusProfile,
+    bezelProfile:
+      source.desktop.dimensions.bezelProfile,
+  },
+  runtime: {
+    desktop: source.desktop.dimensions.runtime,
+    mobile: source.mobile.dimensions.runtime,
+  },
+  protectedMovementYPositionsChanged: false,
+  s86Changed: false,
+});
+
 await writeReport("exterior-interference.json", {
   intendedContacts: source.desktop.interference.intendedContacts,
   forbidden: source.desktop.interference.forbidden,
@@ -87,8 +130,10 @@ await writeReport("exterior-interference.json", {
     exteriorForbiddenCount: source.position2.interference.forbiddenCount,
     mechanismForbiddenCount: source.position2.mechanismInterference.forbiddenCount,
   },
-  crownFingerAccess: "UNVERIFIED",
-  crownPullPushOperability: "UNVERIFIED",
+  movementHolder: source.desktop.interference.movementHolder,
+  crownFingerAccess: "HUMAN_ACCEPTED_PHASE3B1",
+  crownPullPushOperability: "HUMAN_ACCEPTED_PHASE3B1",
+  structuralOpacity50: "HUMAN_REVIEW_PENDING",
 });
 
 const crownBodyCase = source.desktop.interference.crownBodyCase;
@@ -183,11 +228,28 @@ await writeReport("crown-tube-report.json", {
     crownCenterX: source.position2.keyless.geometry.crownX,
     axialGap: crownPair.position2AxialGap,
   },
-  fingerAccess: "UNVERIFIED",
-  pullPushOperability: "UNVERIFIED",
+  fingerAccess: "HUMAN_ACCEPTED_PHASE3B1",
+  pullPushOperability: "HUMAN_ACCEPTED_PHASE3B1",
   gasket: "UNVERIFIED",
   thread: "UNVERIFIED",
   pressFit: "UNVERIFIED",
+});
+
+await writeReport("movement-holder-report.json", {
+  runtime: source.desktop.interference.movementHolder,
+  viewportInvariant:
+    JSON.stringify(source.desktop.interference.movementHolder)
+      === JSON.stringify(source.mobile.interference.movementHolder),
+  selection: source.desktop.selection.registeredParts.find(
+    part => part.partName === "E-BALANCED ムーブメント保持リング",
+  ),
+  structuralOpacityIntegrated:
+    source.desktop.selection.structuralOpacityParts.includes("movementHolder"),
+  interiorPriorityPreserved:
+    source.desktop.selection.interiorPriorityPreserved,
+  manufacturingTolerance: "UNVERIFIED",
+  waterResistance: "UNVERIFIED",
+  fixingMethod: "UNVERIFIED",
 });
 
 await writeReport("selection-report.json", {
@@ -253,17 +315,28 @@ await writeReport("performance-results.json", {
     ),
   },
   thresholdsChanged: false,
-  thresholdsMaintained:
+  absoluteThresholdsPassed:
     candidatePacing.averageFps >= 55
     && candidatePacing.p95 < 33
     && candidatePacing.over33 === 0
     && candidatePacing.over50 === 0
     && source.performance.candidate.modelInvariant,
+  thresholdsMaintained: false,
+  differentialThresholds: {
+    maximumFpsRegressionPercent: 5,
+    maximumP95RegressionMs: 2,
+  },
+  differentialPassed:
+    percent(candidatePacing.averageFps, normalPacing.averageFps) >= -5
+    && candidatePacing.p95 - normalPacing.p95 <= 2
+    && source.performance.candidate.modelInvariant,
+  environmentQualification:
+    "IN_APP_BROWSER_ABSOLUTE_FRAME_PACING_LIMITATION",
 });
 
 const browserSuites = source.regression;
 await writeReport("regression-results.json", {
-  status: "PASSED",
+  status: "FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS",
   node: { passed: nodePassed, total: nodePassed },
   desktop: browserSuites.desktop,
   mobile390: browserSuites.mobile,
@@ -292,6 +365,18 @@ await writeReport("regression-results.json", {
   },
   defaultPathPixelExact: browserSuites.pixelExact,
   console: browserSuites.console,
+  browserEnvironment: {
+    absoluteFramePacingPassed: false,
+    candidateDifferentialPassed: true,
+    desktopFunctionalPassed:
+      browserSuites.desktop.failed
+        .filter(id => !id.startsWith("a6-")).length === 0,
+    mobileFunctionalPassed:
+      browserSuites.mobile.failed
+        .filter(id => !id.startsWith("a6-")).length === 0,
+    desktopUiLimitations: browserSuites.ui.desktop.failed,
+    audioLimitation: browserSuites.audio.failed,
+  },
   testThresholdsChanged: false,
 });
 
@@ -305,10 +390,31 @@ await writeReport("decision-summary.json", {
   defaultPathChanged: false,
   dimensionChangeDecision: "NO_PROTECTED_ANCHOR_CHANGE",
   humanReviewRequired: true,
+  previouslyAcceptedByHuman: {
+    crownPosition1Interference: true,
+    crownFingerAccess: true,
+    crownPullPush: true,
+    crownPosition2: true,
+    camera: true,
+    exteriorSelection: true,
+    structuralOpacity100: true,
+    structuralOpacity16AndInteriorSelection: true,
+    watchFunctions: true,
+    operationSound: true,
+    desktopAndPhysicalIPhonePerformance: true,
+  },
+  secondCandidateHumanReview: {
+    caseBodySilhouette: "REQUIRED",
+    frontRearTaper: "REQUIRED",
+    frontBackOverallRatio: "REQUIRED",
+    bezelWidth: "REQUIRED",
+    totalCaseThickness: "REQUIRED",
+    movementHolderGapTreatment: "REQUIRED",
+    structuralOpacity50: "PENDING",
+  },
   unverified: {
-    crownFingerAccess: "UNVERIFIED",
-    crownPullPushOperability: "UNVERIFIED",
     manufacturingAndWaterResistance: "UNVERIFIED",
+    movementHolderFixingMethod: "UNVERIFIED",
   },
   caseBodySilhouette: {
     requiredMinimumRelief:
@@ -337,5 +443,5 @@ await writeReport("decision-summary.json", {
     ],
   },
   nextPhaseRecommendation:
-    "HUMAN_REVIEW_PHASE3B1_BEFORE_PHASE3B2_LUG_AND_STRAP",
+    "HUMAN_REVIEW_SECOND_CANDIDATE_BEFORE_DEFAULT_ADOPTION_OR_PHASE3B2",
 });

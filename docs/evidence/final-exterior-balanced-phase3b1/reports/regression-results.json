@@ -2,54 +2,82 @@
   "metadata": {
     "schemaVersion": 1,
     "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
-    "sourceImplementationCommit": "b27d827ff1f60c8051187a7724e93b9c50af8912",
+    "sourceImplementationCommit": "4368f2e5d283e3030dc5597a5caf58b7d3d6802d",
+    "sourceCaptureCommit": "b4b05b364188574cb3caa2540f021f84cbb4516c",
     "sourceBranch": "feature/final-exterior-balanced-phase3b1",
     "appVersion": "v3.15.0",
-    "capturedAt": "2026-07-24T15:10:13.683Z",
-    "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser WebGL screenshots",
+    "capturedAt": "2026-07-24T17:35:02.070Z",
+    "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser Three.js WebGLRenderTarget PNG",
     "candidateId": "E-BALANCED",
     "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
   },
-  "status": "PASSED",
+  "status": "FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS",
   "node": {
-    "passed": 106,
-    "total": 106
+    "passed": 109,
+    "total": 109
   },
   "desktop": {
-    "ok": true,
+    "ok": false,
     "total": 86,
-    "passed": 86,
-    "failed": []
+    "passed": 84,
+    "failed": [
+      "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+      "a6-wheel-path-produces-monotonic-continuous-zoom"
+    ],
+    "status": "failed"
   },
   "mobile390": {
-    "ok": true,
+    "ok": false,
     "total": 88,
-    "passed": 88,
-    "failed": []
+    "passed": 86,
+    "failed": [
+      "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+      "a6-wheel-path-produces-monotonic-continuous-zoom"
+    ],
+    "status": "failed"
   },
   "ui": {
-    "ok": true,
-    "total": 22,
-    "passed": 22,
-    "failed": []
+    "desktop": {
+      "ok": false,
+      "total": 20,
+      "passed": 17,
+      "failed": [
+        "ui-arrow-keys-wrap-and-move-focus",
+        "ui-home-end-select-boundaries-and-focus",
+        "ui-layout-has-zero-horizontal-overflow"
+      ],
+      "status": "failed"
+    },
+    "mobile390": {
+      "ok": true,
+      "total": 22,
+      "passed": 22,
+      "failed": [],
+      "status": "passed"
+    }
   },
   "hud": {
     "ok": true,
     "total": 57,
     "passed": 57,
-    "failed": []
+    "failed": [],
+    "status": "passed"
   },
   "audio": {
-    "ok": true,
+    "ok": false,
     "total": 23,
-    "passed": 23,
-    "failed": []
+    "passed": 22,
+    "failed": [
+      "audio-resume-does-not-replay-a-backlog"
+    ],
+    "status": "failed"
   },
   "s86RuntimeToSaved": {
     "ok": true,
     "total": 5,
     "passed": 5,
-    "failed": []
+    "failed": [],
+    "status": "passed"
   },
   "a7": {
     "ok": true,
@@ -72,9 +100,93 @@
   "phase2c": {
     "passed": true,
     "desktop": {
-      "applicationIncludingDialAndHandsWithExternalCrown": {
+      "baseMovement": {
+        "id": "baseMovementEnvelope",
+        "yMin": -2.41,
+        "yMax": 4.235,
+        "ySize": 6.645,
+        "yMinObject": "dialWorks",
+        "yMaxObject": "bridges",
+        "thicknessToMovementDiameter": 0.181557,
+        "officialHeightMm": 4.5,
+        "officialDifferenceMm": 2.145,
+        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
         "decision": "UNVERIFIED",
+        "includedObjects": [
+          "plate",
+          "bridges",
+          "train",
+          "escapement",
+          "balance",
+          "dialWorks"
+        ]
+      },
+      "handMountAndProtrudingArbor": {
+        "id": "handMountAndProtrudingArborEnvelope",
+        "yMin": -2.47,
+        "yMax": 0.72,
+        "ySize": 3.19,
+        "yMinObject": "minuteBoss",
+        "yMaxObject": "fourthArbor",
+        "thicknessToMovementDiameter": 0.087158,
+        "officialHeightMm": 4.5,
+        "officialDifferenceMm": -1.31,
+        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
+        "decision": "UNVERIFIED",
+        "includedObjects": [
+          "cannonTube",
+          "hourTube",
+          "fourthArbor",
+          "minuteBoss",
+          "hourBoss",
+          "smallSecondBoss"
+        ]
+      },
+      "applicationIncludingDialAndHandsWithoutExternalCrown": {
+        "id": "applicationEnvelopeIncludingDialAndHands",
+        "yMin": -2.51,
+        "yMax": 4.235,
+        "ySize": 6.745,
+        "yMinObject": "minuteHand",
+        "yMaxObject": "bridges",
+        "thicknessToMovementDiameter": 0.18429,
+        "officialHeightMm": 4.5,
+        "officialDifferenceMm": 2.245,
+        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
+        "decision": "UNVERIFIED",
+        "includedObjects": [
+          "plate",
+          "bridges",
+          "train",
+          "escapement",
+          "balance",
+          "dialWorks",
+          "cannonTube",
+          "hourTube",
+          "fourthArbor",
+          "minuteBoss",
+          "hourBoss",
+          "smallSecondBoss",
+          "dialRing",
+          "twelveMarker",
+          "smallSecondRing",
+          "minuteHand",
+          "hourHand",
+          "smallSecondHand"
+        ]
+      },
+      "applicationIncludingDialAndHandsWithExternalCrown": {
         "id": "applicationEnvelopeIncludingDialAndHandsWithExternalCrown",
+        "yMin": -2.51,
+        "yMax": 4.235,
+        "ySize": 6.745,
+        "yMinObject": "minuteHand",
+        "yMaxObject": "bridges",
+        "thicknessToMovementDiameter": 0.18429,
+        "officialHeightMm": 4.5,
+        "officialDifferenceMm": 2.245,
+        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
+        "decision": "UNVERIFIED",
         "includedObjects": [
           "plate",
           "bridges",
@@ -96,97 +208,97 @@
           "smallSecondHand",
           "crown",
           "stem"
-        ],
-        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
-        "officialDifferenceMm": 2.245,
-        "officialHeightMm": 4.5,
-        "thicknessToMovementDiameter": 0.18429,
-        "yMax": 4.235,
-        "yMaxObject": "bridges",
-        "yMin": -2.51,
-        "yMinObject": "minuteHand",
-        "ySize": 6.745
-      },
-      "applicationIncludingDialAndHandsWithoutExternalCrown": {
-        "decision": "UNVERIFIED",
-        "id": "applicationEnvelopeIncludingDialAndHands",
-        "includedObjects": [
-          "plate",
-          "bridges",
-          "train",
-          "escapement",
-          "balance",
-          "dialWorks",
-          "cannonTube",
-          "hourTube",
-          "fourthArbor",
-          "minuteBoss",
-          "hourBoss",
-          "smallSecondBoss",
-          "dialRing",
-          "twelveMarker",
-          "smallSecondRing",
-          "minuteHand",
-          "hourHand",
-          "smallSecondHand"
-        ],
-        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
-        "officialDifferenceMm": 2.245,
-        "officialHeightMm": 4.5,
-        "thicknessToMovementDiameter": 0.18429,
-        "yMax": 4.235,
-        "yMaxObject": "bridges",
-        "yMin": -2.51,
-        "yMinObject": "minuteHand",
-        "ySize": 6.745
-      },
-      "baseMovement": {
-        "decision": "UNVERIFIED",
-        "id": "baseMovementEnvelope",
-        "includedObjects": [
-          "plate",
-          "bridges",
-          "train",
-          "escapement",
-          "balance",
-          "dialWorks"
-        ],
-        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
-        "officialDifferenceMm": 2.145,
-        "officialHeightMm": 4.5,
-        "thicknessToMovementDiameter": 0.181557,
-        "yMax": 4.235,
-        "yMaxObject": "bridges",
-        "yMin": -2.41,
-        "yMinObject": "dialWorks",
-        "ySize": 6.645
-      },
-      "handMountAndProtrudingArbor": {
-        "decision": "UNVERIFIED",
-        "id": "handMountAndProtrudingArborEnvelope",
-        "includedObjects": [
-          "cannonTube",
-          "hourTube",
-          "fourthArbor",
-          "minuteBoss",
-          "hourBoss",
-          "smallSecondBoss"
-        ],
-        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
-        "officialDifferenceMm": -1.31,
-        "officialHeightMm": 4.5,
-        "thicknessToMovementDiameter": 0.087158,
-        "yMax": 0.72,
-        "yMaxObject": "fourthArbor",
-        "yMin": -2.47,
-        "yMinObject": "minuteBoss",
-        "ySize": 3.19
+        ]
       }
     },
     "mobile": {
-      "applicationIncludingDialAndHandsWithExternalCrown": {
+      "baseMovement": {
+        "id": "baseMovementEnvelope",
+        "yMin": -2.41,
+        "yMax": 4.235,
+        "ySize": 6.645,
+        "yMinObject": "dialWorks",
+        "yMaxObject": "bridges",
+        "thicknessToMovementDiameter": 0.181557,
+        "officialHeightMm": 4.5,
+        "officialDifferenceMm": 2.145,
+        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
         "decision": "UNVERIFIED",
+        "includedObjects": [
+          "plate",
+          "bridges",
+          "train",
+          "escapement",
+          "balance",
+          "dialWorks"
+        ]
+      },
+      "handMountAndProtrudingArbor": {
+        "id": "handMountAndProtrudingArborEnvelope",
+        "yMin": -2.47,
+        "yMax": 0.72,
+        "ySize": 3.19,
+        "yMinObject": "minuteBoss",
+        "yMaxObject": "fourthArbor",
+        "thicknessToMovementDiameter": 0.087158,
+        "officialHeightMm": 4.5,
+        "officialDifferenceMm": -1.31,
+        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
+        "decision": "UNVERIFIED",
+        "includedObjects": [
+          "cannonTube",
+          "hourTube",
+          "fourthArbor",
+          "minuteBoss",
+          "hourBoss",
+          "smallSecondBoss"
+        ]
+      },
+      "applicationIncludingDialAndHandsWithoutExternalCrown": {
+        "id": "applicationEnvelopeIncludingDialAndHands",
+        "yMin": -2.51,
+        "yMax": 4.235,
+        "ySize": 6.745,
+        "yMinObject": "minuteHand",
+        "yMaxObject": "bridges",
+        "thicknessToMovementDiameter": 0.18429,
+        "officialHeightMm": 4.5,
+        "officialDifferenceMm": 2.245,
+        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
+        "decision": "UNVERIFIED",
+        "includedObjects": [
+          "plate",
+          "bridges",
+          "train",
+          "escapement",
+          "balance",
+          "dialWorks",
+          "cannonTube",
+          "hourTube",
+          "fourthArbor",
+          "minuteBoss",
+          "hourBoss",
+          "smallSecondBoss",
+          "dialRing",
+          "twelveMarker",
+          "smallSecondRing",
+          "minuteHand",
+          "hourHand",
+          "smallSecondHand"
+        ]
+      },
+      "applicationIncludingDialAndHandsWithExternalCrown": {
         "id": "applicationEnvelopeIncludingDialAndHandsWithExternalCrown",
+        "yMin": -2.51,
+        "yMax": 4.235,
+        "ySize": 6.745,
+        "yMinObject": "minuteHand",
+        "yMaxObject": "bridges",
+        "thicknessToMovementDiameter": 0.18429,
+        "officialHeightMm": 4.5,
+        "officialDifferenceMm": 2.245,
+        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
+        "decision": "UNVERIFIED",
         "includedObjects": [
           "plate",
           "bridges",
@@ -208,106 +320,36 @@
           "smallSecondHand",
           "crown",
           "stem"
-        ],
-        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
-        "officialDifferenceMm": 2.245,
-        "officialHeightMm": 4.5,
-        "thicknessToMovementDiameter": 0.18429,
-        "yMax": 4.235,
-        "yMaxObject": "bridges",
-        "yMin": -2.51,
-        "yMinObject": "minuteHand",
-        "ySize": 6.745
-      },
-      "applicationIncludingDialAndHandsWithoutExternalCrown": {
-        "decision": "UNVERIFIED",
-        "id": "applicationEnvelopeIncludingDialAndHands",
-        "includedObjects": [
-          "plate",
-          "bridges",
-          "train",
-          "escapement",
-          "balance",
-          "dialWorks",
-          "cannonTube",
-          "hourTube",
-          "fourthArbor",
-          "minuteBoss",
-          "hourBoss",
-          "smallSecondBoss",
-          "dialRing",
-          "twelveMarker",
-          "smallSecondRing",
-          "minuteHand",
-          "hourHand",
-          "smallSecondHand"
-        ],
-        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
-        "officialDifferenceMm": 2.245,
-        "officialHeightMm": 4.5,
-        "thicknessToMovementDiameter": 0.18429,
-        "yMax": 4.235,
-        "yMaxObject": "bridges",
-        "yMin": -2.51,
-        "yMinObject": "minuteHand",
-        "ySize": 6.745
-      },
-      "baseMovement": {
-        "decision": "UNVERIFIED",
-        "id": "baseMovementEnvelope",
-        "includedObjects": [
-          "plate",
-          "bridges",
-          "train",
-          "escapement",
-          "balance",
-          "dialWorks"
-        ],
-        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
-        "officialDifferenceMm": 2.145,
-        "officialHeightMm": 4.5,
-        "thicknessToMovementDiameter": 0.181557,
-        "yMax": 4.235,
-        "yMaxObject": "bridges",
-        "yMin": -2.41,
-        "yMinObject": "dialWorks",
-        "ySize": 6.645
-      },
-      "handMountAndProtrudingArbor": {
-        "decision": "UNVERIFIED",
-        "id": "handMountAndProtrudingArborEnvelope",
-        "includedObjects": [
-          "cannonTube",
-          "hourTube",
-          "fourthArbor",
-          "minuteBoss",
-          "hourBoss",
-          "smallSecondBoss"
-        ],
-        "officialDatumConfidence": "REFERENCE_DATUM_UNRESOLVED",
-        "officialDifferenceMm": -1.31,
-        "officialHeightMm": 4.5,
-        "thicknessToMovementDiameter": 0.087158,
-        "yMax": 0.72,
-        "yMaxObject": "fourthArbor",
-        "yMin": -2.47,
-        "yMinObject": "minuteBoss",
-        "ySize": 3.19
+        ]
       }
     }
   },
   "defaultPathPixelExact": {
-    "mainSha": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
-    "baselinePngSha256": "793e938865044b542eb52931c009a443a39953d8572755c0475807baded79c1d",
-    "branchNormalPngSha256": "793e938865044b542eb52931c009a443a39953d8572755c0475807baded79c1d",
-    "byteIdentical": true
+    "mainSha": "a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c",
+    "branchSha": "a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c",
+    "bytes": 237334,
+    "byteIdentical": true,
+    "width": 1280,
+    "height": 720
   },
   "console": {
-    "applicationErrors": 0,
-    "applicationWarnings": 0,
-    "controllerErrors": 0,
-    "controllerWarnings": 0,
-    "qualification": "fresh in-app Browser evidence tab; no console error or warning"
+    "errors": 0,
+    "warnings": 0,
+    "logs": []
+  },
+  "browserEnvironment": {
+    "absoluteFramePacingPassed": false,
+    "candidateDifferentialPassed": true,
+    "desktopFunctionalPassed": true,
+    "mobileFunctionalPassed": true,
+    "desktopUiLimitations": [
+      "ui-arrow-keys-wrap-and-move-focus",
+      "ui-home-end-select-boundaries-and-focus",
+      "ui-layout-has-zero-horizontal-overflow"
+    ],
+    "audioLimitation": [
+      "audio-resume-does-not-replay-a-backlog"
+    ]
   },
   "testThresholdsChanged": false
 }

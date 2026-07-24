@@ -2,176 +2,177 @@
   "metadata": {
     "schemaVersion": 1,
     "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
-    "sourceImplementationCommit": "b27d827ff1f60c8051187a7724e93b9c50af8912",
+    "sourceImplementationCommit": "4368f2e5d283e3030dc5597a5caf58b7d3d6802d",
+    "sourceCaptureCommit": "b4b05b364188574cb3caa2540f021f84cbb4516c",
     "sourceBranch": "feature/final-exterior-balanced-phase3b1",
     "appVersion": "v3.15.0",
-    "capturedAt": "2026-07-24T15:10:13.683Z",
-    "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser WebGL screenshots",
+    "capturedAt": "2026-07-24T17:35:02.070Z",
+    "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser Three.js WebGLRenderTarget PNG",
     "candidateId": "E-BALANCED",
     "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
   },
   "runtime": {
-    "alphaHashUsed": false,
-    "d2c3Used": false,
+    "structuralOpacityIntegrated": true,
     "fixedTransparencyIndependent": true,
     "materials": {
-      "backGlass": {
-        "depthWrite": false,
-        "metalness": 0,
-        "opacity": 0.16,
-        "roughness": 0.12,
-        "transmission": null,
-        "transparent": true,
-        "type": "MeshStandardMaterial"
-      },
-      "bezel": {
-        "depthWrite": true,
-        "metalness": 0.88,
-        "opacity": 1,
-        "roughness": 0.18,
-        "transmission": null,
-        "transparent": false,
-        "type": "MeshStandardMaterial"
-      },
-      "dial": {
-        "depthWrite": true,
-        "metalness": 0.35,
-        "opacity": 0.96,
-        "roughness": 0.42,
-        "transmission": null,
-        "transparent": true,
-        "type": "MeshStandardMaterial"
-      },
-      "glass": {
-        "depthWrite": false,
-        "metalness": 0,
-        "opacity": 0.16,
-        "roughness": 0.12,
-        "transmission": null,
-        "transparent": true,
-        "type": "MeshStandardMaterial"
-      },
       "metal": {
+        "type": "MeshStandardMaterial",
+        "opacity": 1,
+        "transparent": false,
         "depthWrite": true,
         "metalness": 0.9,
-        "opacity": 1,
         "roughness": 0.22,
-        "transmission": null,
+        "transmission": null
+      },
+      "bezel": {
+        "type": "MeshStandardMaterial",
+        "opacity": 1,
         "transparent": false,
-        "type": "MeshStandardMaterial"
+        "depthWrite": true,
+        "metalness": 0.88,
+        "roughness": 0.18,
+        "transmission": null
+      },
+      "dial": {
+        "type": "MeshStandardMaterial",
+        "opacity": 0.96,
+        "transparent": true,
+        "depthWrite": true,
+        "metalness": 0.35,
+        "roughness": 0.42,
+        "transmission": null
+      },
+      "glass": {
+        "type": "MeshStandardMaterial",
+        "opacity": 0.16,
+        "transparent": true,
+        "depthWrite": false,
+        "metalness": 0,
+        "roughness": 0.12,
+        "transmission": null
+      },
+      "backGlass": {
+        "type": "MeshStandardMaterial",
+        "opacity": 0.16,
+        "transparent": true,
+        "depthWrite": false,
+        "metalness": 0,
+        "roughness": 0.12,
+        "transmission": null
       }
     },
-    "structuralOpacityIntegrated": true
+    "alphaHashUsed": false,
+    "d2c3Used": false
   },
   "lighting": {
-    "allWithinThirtyPercent": true,
-    "maxRelativeDifference": 0.11298483696825028,
     "themes": {
-      "gallery": {
-        "back": {
-          "averageLuminance": 0.2665229669671847,
-          "buffer": [
-            1280,
-            720
-          ],
-          "clippedRatio": 0,
-          "darkRatio": 0.007381529926532886,
-          "rawAverageLuminance": 0.2665229669671847,
-          "sampleCount": 86161
-        },
-        "front": {
-          "averageLuminance": 0.23640991299610298,
-          "buffer": [
-            1280,
-            720
-          ],
-          "clippedRatio": 0,
-          "darkRatio": 0.07078855126627823,
-          "rawAverageLuminance": 0.23642357894962945,
-          "sampleCount": 86158
-        },
-        "relativeDifference": 0.11298483696825028,
-        "withinThirtyPercent": true
-      },
       "navy": {
-        "back": {
-          "averageLuminance": 0.3111214027502786,
-          "buffer": [
-            1280,
-            720
-          ],
-          "clippedRatio": 0,
-          "darkRatio": 0.004430401884086696,
-          "rawAverageLuminance": 0.3099634350922161,
-          "sampleCount": 85771
-        },
         "front": {
-          "averageLuminance": 0.28972560485801224,
-          "buffer": [
-            1280,
-            720
-          ],
+          "averageLuminance": 0.2987536467897187,
+          "rawAverageLuminance": 0.2915831603442943,
+          "darkRatio": 0.00714152774454282,
           "clippedRatio": 0,
-          "darkRatio": 0.023889096678450347,
-          "rawAverageLuminance": 0.280909052414593,
-          "sampleCount": 82883
+          "sampleCount": 188055,
+          "buffer": [
+            1920,
+            1080
+          ]
         },
-        "relativeDifference": 0.06876993258300423,
+        "back": {
+          "averageLuminance": 0.3078116693453836,
+          "rawAverageLuminance": 0.3078116693453836,
+          "darkRatio": 0,
+          "clippedRatio": 0,
+          "sampleCount": 193824,
+          "buffer": [
+            1920,
+            1080
+          ]
+        },
+        "relativeDifference": 0.02942715776477351,
         "withinThirtyPercent": true
       },
       "obsidian": {
-        "back": {
-          "averageLuminance": 0.3169361689164558,
-          "buffer": [
-            1280,
-            720
-          ],
-          "clippedRatio": 0,
-          "darkRatio": 0.0018057270672662458,
-          "rawAverageLuminance": 0.31584107810025297,
-          "sampleCount": 85838
-        },
         "front": {
-          "averageLuminance": 0.28920190950195573,
-          "buffer": [
-            1280,
-            720
-          ],
-          "clippedRatio": 0,
+          "averageLuminance": 0.29810839369509656,
+          "rawAverageLuminance": 0.2978703948112942,
           "darkRatio": 0,
-          "rawAverageLuminance": 0.2869942898872492,
-          "sampleCount": 85379
+          "clippedRatio": 0,
+          "sampleCount": 193641,
+          "buffer": [
+            1920,
+            1080
+          ]
         },
-        "relativeDifference": 0.08750739781236776,
+        "back": {
+          "averageLuminance": 0.3136991792026818,
+          "rawAverageLuminance": 0.3136991792026818,
+          "darkRatio": 0,
+          "clippedRatio": 0,
+          "sampleCount": 193824,
+          "buffer": [
+            1920,
+            1080
+          ]
+        },
+        "relativeDifference": 0.0496997969430835,
         "withinThirtyPercent": true
       },
       "walnut": {
-        "back": {
-          "averageLuminance": 0.305538001975785,
-          "buffer": [
-            1280,
-            720
-          ],
-          "clippedRatio": 0,
-          "darkRatio": 0.0061396687596476365,
-          "rawAverageLuminance": 0.305538001975785,
-          "sampleCount": 86161
-        },
         "front": {
-          "averageLuminance": 0.27621399612343656,
-          "buffer": [
-            1280,
-            720
-          ],
+          "averageLuminance": 0.2866974745471719,
+          "rawAverageLuminance": 0.2866974745471719,
+          "darkRatio": 0.02958869902592042,
           "clippedRatio": 0,
-          "darkRatio": 0.041387634776755146,
-          "rawAverageLuminance": 0.27621399612343656,
-          "sampleCount": 86161
+          "sampleCount": 193824,
+          "buffer": [
+            1920,
+            1080
+          ]
         },
-        "relativeDifference": 0.09597498727726998,
+        "back": {
+          "averageLuminance": 0.3033777351596324,
+          "rawAverageLuminance": 0.3033777351596324,
+          "darkRatio": 0,
+          "clippedRatio": 0,
+          "sampleCount": 193824,
+          "buffer": [
+            1920,
+            1080
+          ]
+        },
+        "relativeDifference": 0.05498182193127519,
+        "withinThirtyPercent": true
+      },
+      "gallery": {
+        "front": {
+          "averageLuminance": 0.24556832833317518,
+          "rawAverageLuminance": 0.24569415065852424,
+          "darkRatio": 0.052946398158565666,
+          "clippedRatio": 0,
+          "sampleCount": 193762,
+          "buffer": [
+            1920,
+            1080
+          ]
+        },
+        "back": {
+          "averageLuminance": 0.2644214759821548,
+          "rawAverageLuminance": 0.2644214759821548,
+          "darkRatio": 0,
+          "clippedRatio": 0,
+          "sampleCount": 193824,
+          "buffer": [
+            1920,
+            1080
+          ]
+        },
+        "relativeDifference": 0.07129960824457386,
         "withinThirtyPercent": true
       }
-    }
+    },
+    "allWithinThirtyPercent": true,
+    "maxRelativeDifference": 0.07129960824457386
   },
   "themesWithinThirtyPercent": true,
   "protectedRendering": {
