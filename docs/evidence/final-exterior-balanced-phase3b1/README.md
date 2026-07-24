@@ -3,14 +3,14 @@
 ## 由来
 
 - sourceBaseCommit：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
-- sourceImplementationCommit：`4368f2e5d283e3030dc5597a5caf58b7d3d6802d`
-- sourceCaptureCommit：`b4b05b364188574cb3caa2540f021f84cbb4516c`
+- sourceImplementationCommit：`d3b2e809f788c198df1b78d0f5c5a2bc8065d611`
+- sourceCaptureCommit：`d3b2e809f788c198df1b78d0f5c5a2bc8065d611`
 - sourceBranch：`feature/final-exterior-balanced-phase3b1`
 - APP_VERSION：v3.15.0
 - captureMode：same-origin unsandboxed iframe harness + actual in-app Browser Three.js WebGLRenderTarget PNG
 - candidate：E-BALANCED / `IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`
 
-画像は`tests/final-exterior-phase3b1-harness.html`から同一origin・sandboxなしのiframeへ実アプリを読み込み、実際のThree.js WebGL表示をPNGとして取得した。第2候補A/BはHead 43c8165と新候補をともに1280×720のライブ画面、同一時刻・テーマ・camera presetで取得し、UIを含む同じフレーミング方式へ統一した。固定main／query候補のpixel-exact確認と測定用raw画像は同じWebGLRenderTarget方式を使用する。
+画像は`tests/final-exterior-phase3b1-harness.html`から同一origin・sandboxなしのiframeへ実アプリを読み込み、実際のThree.js WebGL表示をPNGとして取得した。第3候補A/BはHead 24ee892と新候補をともに1280×720のライブ画面、同一時刻・テーマ・camera presetで取得し、UIを含む同じフレーミング方式へ統一した。固定main／通常pathのpixel-exact確認は同じWebGLRenderTarget方式を使用する。
 
 ## 画像
 
@@ -39,6 +39,9 @@
 | `live-second-desktop-oblique-front.png` | 第2候補の同一フレーミング斜め正面実画面 | 1280×720 |
 | `live-second-desktop-side.png` | 第2候補の同一フレーミング側面実画面 | 1280×720 |
 | `live-second-desktop-back.png` | 第2候補の同一フレーミング裏面実画面 | 1280×720 |
+| `live-third-desktop-front.png` / `live-third-desktop-oblique-front.png` | 第3候補の正面／斜め正面実画面 | 1280×720 |
+| `live-third-desktop-side.png` / `live-third-desktop-back.png` | 第3候補の側面／裏面実画面 | 1280×720 |
+| `live-third-mobile-390-front.png` / `live-third-mobile-390-side.png` | 第3候補の390×844実画面 | 390×844 |
 | `baseline-vs-balanced-front.png` | 固定mainと候補の正面A/B | 2560×772 |
 | `baseline-vs-balanced-side.png` | 固定mainと候補の側面A/B | 2560×772 |
 | `case-body-profile-before-after-side.png` | 旧外形／新外形の側面A/B | 2560×772 |
@@ -50,6 +53,15 @@
 | `second-candidate-before-after-oblique-front.png` | Head 43c8165と第2候補の斜め正面A/B | 2560×772 |
 | `second-candidate-before-after-side.png` | Head 43c8165と第2候補の側面A/B | 2560×772 |
 | `second-candidate-before-after-back.png` | Head 43c8165と第2候補の裏面A/B | 2560×772 |
+| `third-candidate-before-after-front.png` | Head 24ee892と第3候補の正面A/B | 2560×772 |
+| `third-candidate-before-after-oblique-front.png` | Head 24ee892と第3候補の斜め正面A/B | 2560×772 |
+| `third-candidate-before-after-side.png` | Head 24ee892と第3候補の側面A/B | 2560×772 |
+| `third-candidate-before-after-back.png` | Head 24ee892と第3候補の裏面A/B | 2560×772 |
+| `third-candidate-bezel-taper-comparison.png` | 第2／第3候補ベゼル断面 | 1280×720 |
+| `third-candidate-caseback-taper-comparison.png` | 第2／第3候補裏蓋断面 | 1280×720 |
+| `third-candidate-case-profile-comparison.png` | 第2／第3候補ケース胴プロファイル | 1280×720 |
+| `third-opacity-50.png` | 第3候補の透過50%実画面 | 1280×720 |
+| `third-crown-position1.png` / `third-crown-position2.png` | 第3候補のりゅうず位置1／2 | 1280×720 |
 | `bezel-section-29.0-vs-29.8.png` | 旧29.000開口と新29.800テーパーベゼル断面 | 1280×720 |
 | `total-thickness-9.845-vs-8.695.png` | 旧／新外装総厚と前後突出の比較 | 1280×720 |
 | `movement-holder-before-after.png` | 保持リングなし／あり比較 | 2560×772 |
@@ -79,17 +91,18 @@ desktop／mobile、位置1／位置2、透過、選択、修正前固定Headの�
 - runtime実装：`FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS`
 - 通常path差分：0
 - forbidden interference：位置1 0／位置2 0
-- 外装総厚：旧9.845／第2候補8.695
-- ベゼル表示開口：旧29.000／第2候補29.800
+- 外装総厚：第2候補から8.695を維持
+- ベゼル：表示開口29.800を維持、正面外径37.600→37.000
+- 裏蓋リング：前面外径39.000を維持、後面外径38.400→37.800
 - 保持リング：外径37.650、内径36.750、Y=4.035～4.485、禁止干渉0
-- ケース胴局所逃げ：必要0.298836、採用0.310872、上限差0.019128
-- 実Geometry：位置1gap 0.030088、位置2gap 1.380088、最小壁厚0.589128
+- ケース胴局所逃げ：必要0.298836、採用0.319108、上限差0.010892
+- 実Geometry：位置1gap 0.030026、位置2gap 1.380026、最小壁厚0.550000
 - 旧0.150：物理食い込み0.121192、目標gap込み不足0.151192
 - ケース胴：単一閉合Mesh、CSGなし、内周半径18.900不変
 - 既定採用：`NOT_APPROVED_FOR_DEFAULT_ADOPTION`
 - 指掛かり／pull・push操作性：第1候補の物理iPhone人間確認で合格
 - 透過50%：`HUMAN_REVIEW_PENDING`
-- in-app Browser絶対性能：通常path／候補とも未達。候補差分はfps -2.81%、p95 -0.30msで差分基準内、閾値変更なし
+- in-app Browser 10秒idle：通常59.22fps／候補59.11fps、候補差分fps -0.19%、p95 +0.00msで差分基準内。初期化long taskによる絶対閾値未達を環境制約として分離し、閾値変更なし
 - 動画：実行環境にリポジトリ保存可能なWebM経路がなく未取得。A.6診断、位置サイクル診断、PNGを代替証跡とする
 
-次はPCと物理iPhoneで第2候補のケース胴シルエット、前後比率、ベゼル、保持リング、透過50%を人間確認する。合格前にPhase 3B.2または既定採用へ進めない。
+次はPCと物理iPhoneで第3候補のケース胴・ベゼル・裏蓋リングのテーパーと透過50%を人間確認する。合格前にPhase 3B.2または既定採用へ進めない。

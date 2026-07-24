@@ -4,13 +4,12 @@
 
 Phase 3Aで`APPROVED_FOR_PHASE_3B_IMPLEMENTATION`とされたE-BALANCEDを、`?exterior=balanced`の明示query時だけ生成するThree.js Geometryとして実装した。状態は`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`であり、通常表示への既定採用は行っていない。
 
-第1候補の人間確認では、りゅうず位置1の食い込み、指掛かり、pull／push、位置2、カメラ、外装選択、透過100%／16%、時計機能、作動音、PC／物理iPhone性能が合格した。第2候補ではケース胴シルエット、前後テーパー、正面／裏面比率、ベゼル、外装総厚、ムーブメント保持リングを改めて確認する。透過50%は判断保留である。人間確認前に`ADOPTED`または最終外装完成とはしない。
+第2候補までの人間確認では、外装総厚8.695の方向性、りゅうず位置1／2、指掛かり、pull／push、保持リング追加方針、透過16%、回転・ズーム、時計機能、作動音、物理iPhone操作性が合格した。第3候補ではケース胴、ベゼル、裏蓋リングのテーパーだけを増強し、この3点と透過50%を改めて確認する。人間確認前に`ADOPTED`または最終外装完成とはしない。
 
 ## 基準
 
 - 開始main：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
-- 第2候補実装生成元：`4368f2e5d283e3030dc5597a5caf58b7d3d6802d`
-- 状態不変PNG取得修正：`b4b05b364188574cb3caa2540f021f84cbb4516c`
+- 第3候補実装生成元：`d3b2e809f788c198df1b78d0f5c5a2bc8065d611`
 - ブランチ：`feature/final-exterior-balanced-phase3b1`
 - アプリ版：v3.15.0
 - 候補URL：`index.html?exterior=balanced`
@@ -38,7 +37,7 @@ Phase 3Aで`APPROVED_FOR_PHASE_3B_IMPLEMENTATION`とされたE-BALANCEDを、`?e
 | ケース外径 | 39.600 |
 | ムーブメント収容径 | 37.800 |
 | 半径方向収容余裕 | 0.600 |
-| ベゼル背面／正面外径 | 38.800 / 37.600 |
+| ベゼル背面／正面外径 | 38.800 / 37.000 |
 | 表示開口径 | 29.800 |
 | 風防有効径 | 30.600 |
 | 風防内面／外面Y | -2.860 / -3.460 |
@@ -66,21 +65,21 @@ desktop 1280×720とmobile 390×844のruntime-to-configはともに合格した�
 
 | Y | 外半径 |
 |---:|---:|
-| -2.860 | 19.500 |
-| -2.450 | 19.680 |
-| -1.550 | 19.800 |
-| 2.350 | 19.800 |
-| 3.450 | 19.680 |
-| 4.635 | 19.500 |
+| -2.860 | 19.450 |
+| -2.300 | 19.620 |
+| -1.350 | 19.800 |
+| 2.100 | 19.800 |
+| 3.250 | 19.620 |
+| 4.635 | 19.450 |
 
-りゅうずの実Meshからコア、外周歯、位置1包絡を取得し、gap 0.030を満たす必要最小逃げを算出した。旧上限0.150では物理食い込み0.121192、gap込み不足0.151192が残る。必要最小値は0.298836、滑らかな円周・Y方向減衰と生成後再計測を含む実採用最大値は0.310872、上限0.330との差は0.019128である。
+りゅうずの実Meshからコア、外周歯、位置1包絡を取得し、gap 0.030を満たす必要最小逃げを算出した。旧上限0.150では物理食い込み0.121192、gap込み不足0.151192が残る。必要最小値は0.298836、滑らかな円周・Y方向減衰と生成後再計測を含む実採用最大値は0.319108、上限0.330との差は0.010892である。
 
-生成後の実Geometryでは、位置1最小gap 0.030088、位置2最小gap 1.380088、最小壁厚0.589128を確認した。ケース胴は99,084頂点／594,504 index／198,168三角形の単一閉合indexed Meshで、非有限値0、退化三角形0、非多様体edge 0である。CSG、重複Mesh、同一面重ね、内周開口変更は使用していない。
+生成後の実Geometryでは、位置1最小gap 0.030026、位置2最小gap 1.380026、最小壁厚0.550000を確認した。ケース胴は97,428頂点／584,568 index／194,856三角形の単一閉合indexed Meshで、非有限値0、退化三角形0、非多様体edge 0である。CSG、重複Mesh、同一面重ね、内周開口変更は使用していない。
 
 ## Phase 3B.1実装仮定
 
 - ケース胴前後面：-2.860～4.635
-- ベゼル：背面Y=-2.860、内周正面Y=-3.180、外周正面Y=-2.960
+- ベゼル：背面Y=-2.860、内周正面Y=-3.240、外周正面Y=-2.880
 - rehaut：-2.860～-2.720
 - 物理文字板blank：外径35.000、Y=-2.020～-1.820
 - 文字板中央穴／小秒穴：runtime Object3D半径に0.120／0.100を加えて導出
@@ -123,7 +122,7 @@ light、shadow、tone mapping、exposure、fog、DPR、既存透過方式は変�
 
 queryなしでは外装のObject3D／Mesh／Geometry／Material／選択対象／構造透過対象の追加数はすべて0である。固定mainと同一browser、1280×720、同一camera／時刻／テーマ／透過率で取得した通常表示PNGは、保存byteとSHA-256が完全一致した。
 
-- 固定main PNG SHA-256：`a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`
+- 固定main PNG SHA-256：`f3bdd25d543c11a4ae1dc08a3020a60358a85d5d20a90ccff9b8242bc35bd003`
 - ブランチ通常path PNG SHA-256：同上
 - `cmp`：一致
 
@@ -131,7 +130,7 @@ queryなしでは外装のObject3D／Mesh／Geometry／Material／選択対象�
 
 - Node：最終結果は証跡`regression-results.json`に記録
 - desktop総合：機能84/84、A.6絶対性能2項目はin-app Browser環境で未達
-- 390×844総合：機能86/86、A.6絶対性能2項目は同環境で未達
+- 390×844総合：88/88
 - PR #3 UI：390×844は22/22、desktopは17/20（focus／overflow 3項目が同環境で未達）
 - PR #4 HUD：57/57
 - v3.14作動音：22/23（resume backlog 1項目が同環境で未達。音響コードは変更なし）
@@ -142,7 +141,7 @@ queryなしでは外装のObject3D／Mesh／Geometry／Material／選択対象�
 - 3針拘束最大誤差：0
 - Phase 2C包絡：desktop／mobile一致
 
-同一in-app Browserの10秒idleは、通常path 19.58fps、候補19.03fpsで双方とも絶対閾値を満たさなかった。候補差分はfps -2.81%、p95 -0.30ms、renderer平均 -0.66%で差分基準（fps悪化5%以内、p95悪化2ms以内）を満たし、transform invariantはtrueだった。pointer／wheelでも回転反転0、停止後跳躍0、zoom単調、model invariant trueだが、絶対フレーム間隔は環境制約で未達である。製品閾値は変更していない。
+同一in-app Browserの10秒idleは、通常path 59.22fps、候補59.11fpsで、候補差分はfps -0.19%、p95 +0.00ms、renderer平均+4.30%となり差分基準（fps悪化5%以内、p95悪化2ms以内）を満たし、transform invariantはtrueだった。初期化由来のlong task各1件により双方で33ms／50ms超が1件あり、絶対閾値は環境制約として未達である。モバイルpointer／wheelは88/88、デスクトップpointer／wheelは回転反転0、停止後跳躍0、zoom単調、model invariant trueだが絶対フレーム間隔2項目のみ未達だった。製品閾値は変更していない。
 
 候補通常画面を新規in-app Browserタブで12秒保持し、console error／warning 0件を確認した。全ブラウザ項目を`PASSED`とはせず、証跡状態は`FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS`とする。
 
@@ -155,7 +154,7 @@ queryなしでは外装のObject3D／Mesh／Geometry／Material／選択対象�
 - Phase 3B.1 runtime：`FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS`
 - 候補状態：`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`
 - 通常既定：`NOT_APPROVED_FOR_DEFAULT_ADOPTION`
-- 次工程：PC／物理iPhoneで第2候補のケース比率、ベゼル、保持リング、透過50%を人間確認
+- 次工程：PC／物理iPhoneで第3候補のケース胴・ベゼル・裏蓋リングのテーパーと透過50%を人間確認
 - Phase 3B.2：Phase 3B.1承認後にラグ／ストラップを別作業で開始
 
 PR #5、Issue #2、D2c3は保留のまま変更していない。

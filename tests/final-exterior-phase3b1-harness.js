@@ -183,7 +183,7 @@ frame.addEventListener("load", async () => {
         : true,
       bezelProfile: expectedExteriorEnabled
         ? dimensions.bezelGeometry.bounds.size[0] === 38.8
-          && dimensions.bezelGeometry.bounds.size[1] === 0.32
+          && dimensions.bezelGeometry.bounds.size[1] === 0.38
           && dimensions.bezelGeometry.topology.closed
           && dimensions.bezelGeometry.degenerateTriangleCount === 0
         : true,

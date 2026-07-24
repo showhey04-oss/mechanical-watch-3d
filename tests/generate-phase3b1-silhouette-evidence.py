@@ -231,6 +231,86 @@ def thickness_diagram() -> Image.Image:
     return image
 
 
+def third_bezel_taper_diagram() -> Image.Image:
+    image = Image.new("RGB", DESKTOP_SIZE, (13, 16, 21))
+    draw = ImageDraw.Draw(image)
+    draw.text((38, 28), "BEZEL TAPER / SECOND vs THIRD CANDIDATE", fill=INK)
+    draw.text((38, 58), "aperture 29.800 and back OD 38.800 remain fixed", fill=GOLD)
+    center = 640
+    scale = 24
+    rows = (
+        (240, 37.6, -3.18, -2.96, RED, "Head 24ee892: front OD 37.600 / inner -3.180 / outer -2.960"),
+        (525, 37.0, -3.24, -2.88, GREEN, "third candidate: front OD 37.000 / inner -3.240 / outer -2.880"),
+    )
+    inner_back = 29.8 / 2 * scale
+    inner_front = 30.6 / 2 * scale
+    outer_back = 38.8 / 2 * scale
+    for back_y, front_od, inner_y, outer_y, color, label in rows:
+        inner_front_y = back_y - (abs(inner_y + 2.86) * 280)
+        outer_front_y = back_y - (abs(outer_y + 2.86) * 280)
+        outer_front = front_od / 2 * scale
+        for sign in (-1, 1):
+            draw.polygon([
+                (center + sign * inner_back, back_y),
+                (center + sign * inner_front, inner_front_y),
+                (center + sign * outer_front, outer_front_y),
+                (center + sign * outer_back, back_y),
+            ], fill=(42, 91, 72) if color == GREEN else (98, 46, 52), outline=color)
+        draw.text((50, back_y + 38), label, fill=INK)
+    draw.text((50, 675), "single closed Mesh; the outer edge is visibly thinner without a blade edge", fill=GOLD)
+    return image
+
+
+def third_caseback_taper_diagram() -> Image.Image:
+    image = Image.new("RGB", DESKTOP_SIZE, (13, 16, 21))
+    draw = ImageDraw.Draw(image)
+    draw.text((38, 28), "CASEBACK RING TAPER / SECOND vs THIRD CANDIDATE", fill=INK)
+    draw.text((38, 58), "front OD 39.000 and axial thickness 0.600 remain fixed", fill=GOLD)
+    center = 640
+    scale = 23
+    for y, rear_od, color, label in (
+        (245, 38.4, RED, "Head 24ee892 rear OD 38.400"),
+        (520, 37.8, GREEN, "third candidate rear OD 37.800"),
+    ):
+        inner = 28.548 / 2 * scale
+        front = 39.0 / 2 * scale
+        rear = rear_od / 2 * scale
+        for sign in (-1, 1):
+            draw.polygon([
+                (center + sign * inner, y - 85),
+                (center + sign * inner, y),
+                (center + sign * front, y),
+                (center + sign * rear, y - 85),
+            ], fill=(42, 91, 72) if color == GREEN else (98, 46, 52), outline=color)
+        draw.text((50, y + 36), label, fill=INK)
+    draw.text((50, 675), "window diameter unchanged; stronger rear taper separates it visually from the holder ring", fill=GOLD)
+    return image
+
+
+def third_case_profile_diagram() -> Image.Image:
+    image = Image.new("RGB", DESKTOP_SIZE, (13, 16, 21))
+    draw = ImageDraw.Draw(image)
+    draw.text((38, 28), "CASE-BODY AXIAL OUTER-RADIUS PROFILE", fill=INK)
+    draw.text((38, 58), "inner radius 18.900 and maximum outer radius 19.800 remain fixed", fill=GOLD)
+    old = [(-2.86, 19.5), (-2.45, 19.68), (-1.55, 19.8), (2.35, 19.8), (3.45, 19.68), (4.635, 19.5)]
+    new = [(-2.86, 19.45), (-2.3, 19.62), (-1.35, 19.8), (2.1, 19.8), (3.25, 19.62), (4.635, 19.45)]
+    y0, y1 = -2.86, 4.635
+    def points(profile):
+        return [
+            (130 + int((y - y0) / (y1 - y0) * 1010), 620 - int((radius - 18.9) / 0.9 * 480))
+            for y, radius in profile
+        ]
+    draw.line(points(old), fill=RED, width=5, joint="curve")
+    draw.line(points(new), fill=GREEN, width=5, joint="curve")
+    for x, y in points(new):
+        draw.ellipse((x - 5, y - 5, x + 5, y + 5), fill=GREEN)
+    draw.text((130, 650), "front Y -2.860", fill=INK)
+    draw.text((1030, 650), "back Y 4.635", fill=INK)
+    draw.text((800, 100), "second candidate", fill=RED)
+    draw.text((800, 128), "third candidate stronger taper", fill=GREEN)
+    return image
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--evidence-dir", type=Path, required=True)
@@ -291,6 +371,22 @@ def main() -> None:
         evidence / "live-second-desktop-back.png",
         DESKTOP_SIZE,
     )
+    live_third_front = load_rgb(
+        evidence / "live-third-desktop-front.png",
+        DESKTOP_SIZE,
+    )
+    live_third_oblique = load_rgb(
+        evidence / "live-third-desktop-oblique-front.png",
+        DESKTOP_SIZE,
+    )
+    live_third_side = load_rgb(
+        evidence / "live-third-desktop-side.png",
+        DESKTOP_SIZE,
+    )
+    live_third_back = load_rgb(
+        evidence / "live-third-desktop-back.png",
+        DESKTOP_SIZE,
+    )
     current_back = load_rgb(evidence / "desktop-back.png", DESKTOP_SIZE)
 
     save_png(board(
@@ -336,6 +432,19 @@ def main() -> None:
             f"second candidate: refined proportions {view}",
         ), evidence / f"second-candidate-before-after-{name}.png")
 
+    for name, before, after, view in (
+        ("front", live_second_front, live_third_front, "front"),
+        ("oblique-front", live_second_oblique, live_third_oblique, "oblique front"),
+        ("side", live_second_side, live_third_side, "side"),
+        ("back", live_second_back, live_third_back, "back"),
+    ):
+        save_png(board(
+            before,
+            after,
+            f"Head 24ee892: second candidate {view}",
+            f"third candidate: stronger taper {view}",
+        ), evidence / f"third-candidate-before-after-{name}.png")
+
     crown1 = load_rgb(evidence / "crown-position1-closeup.png", DESKTOP_SIZE)
     crown2 = load_rgb(evidence / "crown-position2-closeup.png", DESKTOP_SIZE)
     save_png(crown1, evidence / "crown-position-1.png")
@@ -367,6 +476,9 @@ def main() -> None:
     save_png(wall_overlay(current_side, relief), evidence / "case-minimum-wall-annotated.png")
 
     save_png(section_diagram(), evidence / "bezel-section-29.0-vs-29.8.png")
+    save_png(third_bezel_taper_diagram(), evidence / "third-candidate-bezel-taper-comparison.png")
+    save_png(third_caseback_taper_diagram(), evidence / "third-candidate-caseback-taper-comparison.png")
+    save_png(third_case_profile_diagram(), evidence / "third-candidate-case-profile-comparison.png")
     save_png(thickness_diagram(), evidence / "total-thickness-9.845-vs-8.695.png")
     holder_absent = load_rgb(evidence / "movement-holder-absent.png", DESKTOP_SIZE)
     holder_present = load_rgb(evidence / "movement-holder-present.png", DESKTOP_SIZE)

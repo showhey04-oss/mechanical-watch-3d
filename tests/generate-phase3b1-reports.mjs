@@ -69,12 +69,31 @@ await writeReport("runtime-dimensions.json", {
 });
 
 await writeReport("exterior-proportions.json", {
-  previousCandidate: {
+  originalCandidate: {
     totalCaseThickness: 9.845,
     caseBodyAxialThickness: 7.945,
     frontExteriorProjection: 0.950,
     rearExteriorProjection: 0.950,
     dialApertureDiameter: 29.000,
+  },
+  previousCandidate: {
+    totalCaseThickness: 8.695,
+    caseBodyAxialThickness: 7.495,
+    frontExteriorProjection: 0.600,
+    rearExteriorProjection: 0.600,
+    dialApertureDiameter: 29.800,
+    bezelFrontOuterDiameter: 37.600,
+    bezelInnerFrontY: -3.180,
+    bezelOuterFrontY: -2.960,
+    casebackRearOuterDiameter: 38.400,
+    caseBodyProfile: [
+      { y: -2.860, outerRadius: 19.500 },
+      { y: -2.450, outerRadius: 19.680 },
+      { y: -1.550, outerRadius: 19.800 },
+      { y: 2.350, outerRadius: 19.800 },
+      { y: 3.450, outerRadius: 19.680 },
+      { y: 4.635, outerRadius: 19.500 },
+    ],
   },
   currentCandidate: {
     totalCaseThickness:
@@ -101,6 +120,8 @@ await writeReport("exterior-proportions.json", {
       FINAL_EXTERIOR_BALANCED.caseBody.outerRadiusProfile,
     bezelProfile:
       source.desktop.dimensions.bezelProfile,
+    casebackProfile:
+      source.desktop.dimensions.casebackGeometry.profile,
   },
   runtime: {
     desktop: source.desktop.dimensions.runtime,
@@ -403,13 +424,19 @@ await writeReport("decision-summary.json", {
     operationSound: true,
     desktopAndPhysicalIPhonePerformance: true,
   },
-  secondCandidateHumanReview: {
-    caseBodySilhouette: "REQUIRED",
-    frontRearTaper: "REQUIRED",
-    frontBackOverallRatio: "REQUIRED",
-    bezelWidth: "REQUIRED",
-    totalCaseThickness: "REQUIRED",
-    movementHolderGapTreatment: "REQUIRED",
+  acceptedSecondCandidate: {
+    totalCaseThicknessDirection: "HUMAN_ACCEPTED_PHASE3B1",
+    crownPosition1And2: "HUMAN_ACCEPTED_PHASE3B1",
+    fingerAccessAndPullPush: "HUMAN_ACCEPTED_PHASE3B1",
+    movementHolderDirection: "HUMAN_ACCEPTED_PHASE3B1",
+    structuralOpacity16: "HUMAN_ACCEPTED_PHASE3B1",
+    rotationZoomWatchFunctionsSound: "HUMAN_ACCEPTED_PHASE3B1",
+    physicalIPhoneOperability: "HUMAN_ACCEPTED_PHASE3B1",
+  },
+  thirdCandidateHumanReview: {
+    caseBodyTaper: "REQUIRED",
+    bezelTaper: "REQUIRED",
+    casebackRingTaper: "REQUIRED",
     structuralOpacity50: "PENDING",
   },
   unverified: {
@@ -443,5 +470,5 @@ await writeReport("decision-summary.json", {
     ],
   },
   nextPhaseRecommendation:
-    "HUMAN_REVIEW_SECOND_CANDIDATE_BEFORE_DEFAULT_ADOPTION_OR_PHASE3B2",
+    "HUMAN_REVIEW_THIRD_CANDIDATE_TAPER_BEFORE_DEFAULT_ADOPTION_OR_PHASE3B2",
 });

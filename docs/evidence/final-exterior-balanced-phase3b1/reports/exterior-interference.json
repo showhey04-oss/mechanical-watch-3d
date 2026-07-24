@@ -2,12 +2,12 @@
   "metadata": {
     "schemaVersion": 1,
     "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
-    "sourceImplementationCommit": "4368f2e5d283e3030dc5597a5caf58b7d3d6802d",
-    "sourceCaptureCommit": "b4b05b364188574cb3caa2540f021f84cbb4516c",
+    "sourceImplementationCommit": "d3b2e809f788c198df1b78d0f5c5a2bc8065d611",
+    "sourceCaptureCommit": "d3b2e809f788c198df1b78d0f5c5a2bc8065d611",
     "sourceBranch": "feature/final-exterior-balanced-phase3b1",
     "appVersion": "v3.15.0",
-    "capturedAt": "2026-07-24T17:35:02.070Z",
-    "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser Three.js WebGLRenderTarget PNG",
+    "capturedAt": "2026-07-24T23:08:41.876Z",
+    "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser runtime screenshots and Three.js WebGLRenderTarget PNG",
     "candidateId": "E-BALANCED",
     "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
   },
@@ -97,54 +97,54 @@
     {
       "a": "case body",
       "b": "crown core / outer teeth",
-      "clearance": 0.030088,
-      "position1MinimumGap": 0.030088134,
-      "position1MinimumGapPoint": [
-        19.194911878,
-        -0.338636364,
-        -3.718188247
-      ],
-      "position2MinimumGap": 1.380088134,
-      "position2MinimumGapPoint": [
-        19.194911878,
-        -0.338636364,
-        -3.718188247
-      ],
-      "qualification": "forbidden crown-body to case-body interference",
       "classification": "FORBIDDEN_INTERFERENCE",
-      "forbiddenInterference": false
+      "clearance": 0.030026,
+      "forbiddenInterference": false,
+      "position1MinimumGap": 0.030026034,
+      "position1MinimumGapPoint": [
+        19.194973978,
+        -0.190086207,
+        -3.892564444
+      ],
+      "position2MinimumGap": 1.380026034,
+      "position2MinimumGapPoint": [
+        19.194973978,
+        -0.190086207,
+        -3.892564444
+      ],
+      "qualification": "forbidden crown-body to case-body interference"
     },
     {
       "a": "crown tube",
       "b": "crown moving body",
+      "classification": "PHASE3B1_IMPLEMENTATION_ASSUMPTION",
       "clearance": 0,
-      "rawPosition1AxialGap": -0.056857,
+      "forbiddenInterference": false,
       "position2AxialGap": 1.293143,
       "qualification": "position 1 local seating candidate; operability remains UNVERIFIED",
-      "classification": "PHASE3B1_IMPLEMENTATION_ASSUMPTION",
-      "forbiddenInterference": false
+      "rawPosition1AxialGap": -0.056857
     }
   ],
   "forbiddenCount": 0,
   "clearances": {
-    "movementToCaseRadial": 0.6,
-    "minuteHandToCrystal": 0.35,
-    "hourHandToCrystal": 0.5,
-    "smallSecondHandToCrystal": 0.47,
-    "dialBlankToHands": 0.18,
     "bridgeToCaseback": 0.4,
-    "stemToTubeRadial": 0.1,
     "centerInterfaceToDialHole": 0.12,
-    "smallSecondInterfaceToDialHole": 0.1,
-    "dialRingToAperture": 1.054,
-    "minuteTipToAperture": 2.86,
+    "crownBodyToCasePosition1": 0.030026,
+    "crownBodyToCasePosition2": 1.380026,
     "crownPosition1AxialGap": -0.056857,
     "crownPosition2AxialGap": 1.293143,
-    "crownBodyToCasePosition1": 0.030088,
-    "crownBodyToCasePosition2": 1.380088,
+    "dialBlankToHands": 0.18,
+    "dialRingToAperture": 1.054,
+    "hourHandToCrystal": 0.5,
+    "minuteHandToCrystal": 0.35,
+    "minuteTipToAperture": 2.86,
     "movementHolderToCase": 0.075,
+    "movementHolderToCaseback": 0.15,
     "movementHolderToMovement": 0.075,
-    "movementHolderToCaseback": 0.15
+    "movementToCaseRadial": 0.6,
+    "smallSecondHandToCrystal": 0.47,
+    "smallSecondInterfaceToDialHole": 0.1,
+    "stemToTubeRadial": 0.1
   },
   "tubeAxisError": 0,
   "position1": {
@@ -162,16 +162,41 @@
     "mechanismForbiddenCount": 0
   },
   "movementHolder": {
-    "outerDiameter": 37.65,
-    "innerDiameter": 36.75,
-    "yMin": 4.035,
-    "yMax": 4.485,
     "axialThickness": 0.45,
     "caseRadialClearance": 0.075,
-    "movementRadialClearance": 0.075,
     "casebackAxialClearance": 0.15,
+    "fixingMethod": "UNVERIFIED",
     "forbiddenInterferenceCount": 0,
+    "innerDiameter": 36.75,
+    "manufacturingTolerance": "UNVERIFIED",
+    "movementRadialClearance": 0.075,
+    "outerDiameter": 37.65,
     "profileGeometry": {
+      "bounds": {
+        "max": [
+          18.825,
+          4.485,
+          18.825
+        ],
+        "min": [
+          -18.825,
+          4.035,
+          -18.825
+        ],
+        "size": [
+          37.65,
+          0.45,
+          37.65
+        ]
+      },
+      "circumferentialSegments": 128,
+      "degenerateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 3072,
       "profile": [
         {
           "radius": 18.375,
@@ -190,43 +215,18 @@
           "y": 4.485
         }
       ],
-      "circumferentialSegments": 128,
-      "vertexCount": 512,
-      "indexCount": 3072,
-      "triangleCount": 1024,
-      "finite": {
-        "positions": true,
-        "normals": true,
-        "indices": true
-      },
-      "degenerateTriangleCount": 0,
       "topology": {
+        "closed": true,
         "edgeCount": 1536,
         "nonManifoldEdgeCount": 0,
-        "nonManifoldEdges": [],
-        "closed": true
+        "nonManifoldEdges": []
       },
-      "bounds": {
-        "min": [
-          -18.825,
-          4.035,
-          -18.825
-        ],
-        "max": [
-          18.825,
-          4.485,
-          18.825
-        ],
-        "size": [
-          37.65,
-          0.45,
-          37.65
-        ]
-      }
+      "triangleCount": 1024,
+      "vertexCount": 512
     },
-    "manufacturingTolerance": "UNVERIFIED",
     "waterResistance": "UNVERIFIED",
-    "fixingMethod": "UNVERIFIED"
+    "yMax": 4.485,
+    "yMin": 4.035
   },
   "crownFingerAccess": "HUMAN_ACCEPTED_PHASE3B1",
   "crownPullPushOperability": "HUMAN_ACCEPTED_PHASE3B1",
