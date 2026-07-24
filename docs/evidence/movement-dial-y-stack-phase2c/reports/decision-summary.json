@@ -1,8 +1,9 @@
 {
   "sourceBaseCommit": "81752950b2b8f9501399576f64faad238b1e4f13",
   "sourceAuditCommit": "da473d7d569f1b43b9d6adc04087a0a8011e9951",
+  "captureImplementationCommit": "c8d59606810026a69ddef1a9a7c4e68bd379cf51",
   "sourceBranch": "audit/y-layer-stack-phase2c",
-  "captureMode": "same-origin unsandboxed iframe harness",
+  "captureMode": "same-origin unsandboxed iframe harness - actual Three.js scene rendered to offscreen WebGLRenderTarget",
   "desktopViewport": {
     "width": 1280,
     "height": 720
@@ -11,12 +12,111 @@
     "width": 390,
     "height": 844
   },
-  "captureTimestamp": "2026-07-24T03:56:45.171Z",
+  "captureTimestamp": "2026-07-24T05:20:02.844Z",
   "APP_VERSION": "v3.15.0",
   "status": "PASSED",
   "dimensionChangeDecision": "NO_DIMENSION_CHANGE",
   "officialDatumDecision": "REFERENCE_DATUM_UNRESOLVED",
   "nextPhaseRecommendation": "FINAL_EXTERIOR_INTEGRATION",
   "handFittingEnvelopeDefinition": "physical fitting meshes only: cannonTube, hourPipe, fourthDialArbor, and three hand bosses",
-  "handFittingEnvelopeProxy": false
+  "handFittingEnvelopeProxy": false,
+  "captureEvidence": {
+    "desktop": {
+      "source": "actual Three.js scene rendered to offscreen WebGLRenderTarget",
+      "cameraPreset": "side",
+      "renderTargetWidth": 1280,
+      "renderTargetHeight": 720,
+      "pngByteLength": 95729,
+      "chunkCount": 4,
+      "browserSha256": "d8b21fb18c2c7208ed0377af945d5a34e293192b837f41a4e30097d780f9f56c",
+      "savedSha256": "d8b21fb18c2c7208ed0377af945d5a34e293192b837f41a4e30097d780f9f56c",
+      "browserAndSavedShaMatch": true,
+      "stateInvariant": {
+        "camera": true,
+        "controlCamera": true,
+        "renderer": true,
+        "controlsTarget": true,
+        "renderTarget": true,
+        "desiredZoomDistance": true,
+        "transformSignature": true,
+        "modelWorldSignature": true,
+        "mechanismState": true,
+        "all": true
+      },
+      "liveCanvasMetadata": {
+        "frameInnerWidth": 1280,
+        "frameInnerHeight": 720,
+        "canvasClientWidth": 0,
+        "canvasClientHeight": 0,
+        "canvasDrawingBufferWidth": 640,
+        "canvasDrawingBufferHeight": 300,
+        "liveAspect": 2.1333333333333333
+      },
+      "environmentLimitation": {
+        "classification": "TEST_ENVIRONMENT_NESTED_VIEWPORT_LIMITATION",
+        "productDefect": false,
+        "liveCanvasResamplingAdopted": false,
+        "requestedIframeViewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "observedLiveDrawingBuffer": {
+          "width": 640,
+          "height": 300
+        },
+        "liveAspect": 2.1333333333333333,
+        "evidenceAspect": 1.7777777777777777
+      }
+    },
+    "mobile390": {
+      "source": "actual Three.js scene rendered to offscreen WebGLRenderTarget",
+      "cameraPreset": "side",
+      "renderTargetWidth": 390,
+      "renderTargetHeight": 844,
+      "pngByteLength": 97997,
+      "chunkCount": 5,
+      "browserSha256": "3e5b6c22d66a4ac2a32c949b5ae9800e1278ee292580151eb52eccafc29db5ef",
+      "savedSha256": "3e5b6c22d66a4ac2a32c949b5ae9800e1278ee292580151eb52eccafc29db5ef",
+      "browserAndSavedShaMatch": true,
+      "stateInvariant": {
+        "camera": true,
+        "controlCamera": true,
+        "renderer": true,
+        "controlsTarget": true,
+        "renderTarget": true,
+        "desiredZoomDistance": true,
+        "transformSignature": true,
+        "modelWorldSignature": true,
+        "mechanismState": true,
+        "all": true
+      },
+      "liveCanvasMetadata": {
+        "frameInnerWidth": 390,
+        "frameInnerHeight": 844,
+        "canvasClientWidth": 0,
+        "canvasClientHeight": 0,
+        "canvasDrawingBufferWidth": 640,
+        "canvasDrawingBufferHeight": 300,
+        "liveAspect": 2.1333333333333333
+      },
+      "environmentLimitation": {
+        "classification": "TEST_ENVIRONMENT_NESTED_VIEWPORT_LIMITATION",
+        "productDefect": false,
+        "liveCanvasResamplingAdopted": false,
+        "requestedIframeViewport": {
+          "width": 390,
+          "height": 844
+        },
+        "observedLiveDrawingBuffer": {
+          "width": 640,
+          "height": 300
+        },
+        "liveAspect": 2.1333333333333333,
+        "evidenceAspect": 0.46208530805687204
+      }
+    }
+  },
+  "environmentClassification": "TEST_ENVIRONMENT_NESTED_VIEWPORT_LIMITATION",
+  "productDefectDetected": false,
+  "liveCanvasResamplingAdopted": false
 }
