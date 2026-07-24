@@ -1,0 +1,120 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+    "sourceImplementationCommit": "5e3081447c23fd94d3ed6c6bc91a7ca4cdc98995",
+    "sourceBranch": "feature/final-exterior-balanced-phase3b1",
+    "appVersion": "v3.15.0",
+    "capturedAt": "2026-07-24T08:13:02.191Z",
+    "captureMode": "same-origin unsandboxed iframe harness",
+    "candidateId": "E-BALANCED",
+    "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
+  },
+  "intendedContacts": [
+    "case body ↔ bezel",
+    "bezel ↔ crystal retention candidate",
+    "case body ↔ caseback ring",
+    "case body ↔ crown tube",
+    "dial blank ↔ dial support candidate",
+    "crown tube ↔ crown position-1 local seating candidate"
+  ],
+  "forbidden": [
+    {
+      "a": "crystal",
+      "b": "minute hand",
+      "clearance": 0.55,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "crystal",
+      "b": "hour hand",
+      "clearance": 0.7,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "crystal",
+      "b": "small-second hand",
+      "clearance": 0.67,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "dial blank",
+      "b": "three hands",
+      "clearance": 0.18,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "dial blank",
+      "b": "cannon/hour/fourth interfaces",
+      "clearance": 0.1,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "caseback ring",
+      "b": "bridges",
+      "clearance": 0.65,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "caseback window",
+      "b": "bridges",
+      "clearance": 0.65,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "case",
+      "b": "movement outer",
+      "clearance": 0.6,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "crown tube",
+      "b": "stem",
+      "clearance": 0.1,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "crown tube",
+      "b": "crown moving body",
+      "clearance": 0,
+      "rawPosition1AxialGap": -0.056857,
+      "position2AxialGap": 1.293143,
+      "qualification": "position 1 local seating candidate; operability remains UNVERIFIED",
+      "classification": "PHASE3B1_IMPLEMENTATION_ASSUMPTION",
+      "forbiddenInterference": false
+    }
+  ],
+  "forbiddenCount": 0,
+  "clearances": {
+    "movementToCaseRadial": 0.6,
+    "minuteHandToCrystal": 0.55,
+    "hourHandToCrystal": 0.7,
+    "smallSecondHandToCrystal": 0.67,
+    "dialBlankToHands": 0.18,
+    "bridgeToCaseback": 0.65,
+    "stemToTubeRadial": 0.1,
+    "centerInterfaceToDialHole": 0.12,
+    "smallSecondInterfaceToDialHole": 0.1,
+    "dialRingToAperture": 0.654,
+    "minuteTipToAperture": 2.46,
+    "crownPosition1AxialGap": -0.056857,
+    "crownPosition2AxialGap": 1.293143
+  },
+  "tubeAxisError": 0,
+  "position1": {
+    "crownPosition": "wind",
+    "transition": 0,
+    "maxDrift": 0,
+    "exteriorForbiddenCount": 0,
+    "mechanismForbiddenCount": 0
+  },
+  "position2": {
+    "crownPosition": "set",
+    "transition": 1,
+    "maxDrift": 0,
+    "exteriorForbiddenCount": 0,
+    "mechanismForbiddenCount": 0
+  },
+  "crownFingerAccess": "UNVERIFIED",
+  "crownPullPushOperability": "UNVERIFIED"
+}
