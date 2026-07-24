@@ -10,7 +10,7 @@ const dimensions = {
   movementCavityDiameter: 37.800,
   radialMovementClearance: 0.600,
   bezelBackOuterDiameter: 38.800,
-  bezelFrontOuterDiameter: 37.600,
+  bezelFrontOuterDiameter: 37.000,
   dialApertureDiameter: 29.800,
   crystalClearDiameter: 30.600,
   crystalInnerY: -2.860,
@@ -40,12 +40,12 @@ const dimensions = {
 const caseBody = {
   innerRadius: dimensions.movementCavityDiameter / 2,
   outerRadiusProfile: [
-    { y: -2.860, outerRadius: 19.500 },
-    { y: -2.450, outerRadius: 19.680 },
-    { y: -1.550, outerRadius: 19.800 },
-    { y: 2.350, outerRadius: 19.800 },
-    { y: 3.450, outerRadius: 19.680 },
-    { y: 4.635, outerRadius: 19.500 },
+    { y: -2.860, outerRadius: 19.450 },
+    { y: -2.300, outerRadius: 19.620 },
+    { y: -1.350, outerRadius: 19.800 },
+    { y: 2.100, outerRadius: 19.800 },
+    { y: 3.250, outerRadius: 19.620 },
+    { y: 4.635, outerRadius: 19.450 },
   ],
   circumferentialSegments: 192,
   axialMaxStep: 0.060,
@@ -64,8 +64,8 @@ const assumptions = {
   caseBodyFrontY: dimensions.crystalInnerY,
   caseBodyBackY: dimensions.casebackInnerY,
   bezelBackY: dimensions.crystalInnerY,
-  bezelInnerFrontY: -3.180,
-  bezelOuterFrontY: -2.960,
+  bezelInnerFrontY: -3.240,
+  bezelOuterFrontY: -2.880,
   rehautBackY: -2.720,
   rehautFrontY: dimensions.crystalInnerY,
   dialBlankDiameter: 35.000,
@@ -75,7 +75,7 @@ const assumptions = {
   dialSmallSecondHoleClearance: 0.100,
   casebackWindowDiameter: 28.548,
   casebackWindowThickness: 0.380,
-  casebackRearOuterDiameter: 38.400,
+  casebackRearOuterDiameter: 37.800,
   movementHolderOuterDiameter: 37.650,
   movementHolderInnerDiameter: 36.750,
   movementHolderCaseRadialClearance: 0.075,
@@ -219,8 +219,8 @@ export function assertFinalExteriorConfig(
       && Math.max(
         ...config.caseBody.outerRadiusProfile.map(point => point.outerRadius),
       ) * 2 === d.caseOuterDiameter
-      && config.caseBody.outerRadiusProfile[0].outerRadius * 2 === 39
-      && config.caseBody.outerRadiusProfile.at(-1).outerRadius * 2 === 39,
+      && config.caseBody.outerRadiusProfile[0].outerRadius * 2 === 38.9
+      && config.caseBody.outerRadiusProfile.at(-1).outerRadius * 2 === 38.9,
     caseBodyWall:
       Math.min(
         ...config.caseBody.outerRadiusProfile.map(point =>

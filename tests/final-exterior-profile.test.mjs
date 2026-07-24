@@ -40,16 +40,16 @@ const geometry = createCaseBodyProfileGeometryData({
 test("case-body profile preserves the approved maximum, end diameters, cavity, and Y range", () => {
   const profile = config.caseBody.outerRadiusProfile;
   assert.deepEqual(profile, [
-    { y: -2.860, outerRadius: 19.500 },
-    { y: -2.450, outerRadius: 19.680 },
-    { y: -1.550, outerRadius: 19.800 },
-    { y: 2.350, outerRadius: 19.800 },
-    { y: 3.450, outerRadius: 19.680 },
-    { y: 4.635, outerRadius: 19.500 },
+    { y: -2.860, outerRadius: 19.450 },
+    { y: -2.300, outerRadius: 19.620 },
+    { y: -1.350, outerRadius: 19.800 },
+    { y: 2.100, outerRadius: 19.800 },
+    { y: 3.250, outerRadius: 19.620 },
+    { y: 4.635, outerRadius: 19.450 },
   ]);
   assert.equal(Math.max(...profile.map(point => point.outerRadius)) * 2, 39.6);
-  assert.equal(profile[0].outerRadius * 2, 39);
-  assert.equal(profile.at(-1).outerRadius * 2, 39);
+  assert.equal(profile[0].outerRadius * 2, 38.9);
+  assert.equal(profile.at(-1).outerRadius * 2, 38.9);
   assert.equal(config.caseBody.innerRadius * 2, 37.8);
   assert.equal(geometry.audit.bounds.min[1], -2.86);
   assert.equal(geometry.audit.bounds.max[1], 4.635);
@@ -58,12 +58,12 @@ test("case-body profile preserves the approved maximum, end diameters, cavity, a
 
 test("profile interpolation is linear and the central case band stays at maximum diameter", () => {
   const profile = config.caseBody.outerRadiusProfile;
-  assert.equal(interpolateCaseBodyRadius(profile, -2.86), 19.5);
-  assert.equal(interpolateCaseBodyRadius(profile, -2.655), 19.59);
-  assert.equal(interpolateCaseBodyRadius(profile, -1.55), 19.8);
+  assert.equal(interpolateCaseBodyRadius(profile, -2.86), 19.45);
+  assert.equal(interpolateCaseBodyRadius(profile, -2.58), 19.535);
+  assert.equal(interpolateCaseBodyRadius(profile, -1.35), 19.8);
   assert.equal(interpolateCaseBodyRadius(profile, -1.05), 19.8);
-  assert.equal(interpolateCaseBodyRadius(profile, 2.35), 19.8);
-  assert.equal(interpolateCaseBodyRadius(profile, 4.635), 19.5);
+  assert.equal(interpolateCaseBodyRadius(profile, 2.1), 19.8);
+  assert.equal(interpolateCaseBodyRadius(profile, 4.635), 19.45);
 });
 
 test("case-body thickness terminology and exterior identity remain exact", () => {
@@ -134,7 +134,7 @@ test("bezel profile is a closed indexed taper that thins toward the outer edge",
     circumferentialSegments: 128,
   });
   assert.equal(bezel.audit.bounds.size[0], 38.8);
-  assert.equal(bezel.audit.bounds.min[1], -3.18);
+  assert.equal(bezel.audit.bounds.min[1], -3.24);
   assert.equal(bezel.audit.bounds.max[1], -2.86);
   assert.ok(
     a.bezelBackY - a.bezelInnerFrontY
@@ -169,6 +169,7 @@ test("caseback and holder rings are closed profiles with exact clearances", () =
     assert.equal(value.audit.degenerateTriangleCount, 0);
   }
   assert.equal(caseback.audit.bounds.size[1], 0.6);
+  assert.equal(caseback.audit.profile.at(-1).radius * 2, 37.8);
   assert.equal(holder.audit.bounds.size[0], 37.65);
   assert.equal(holder.audit.bounds.size[1], 0.45);
   assert.ok(Math.abs(

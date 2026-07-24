@@ -97,7 +97,7 @@ function buildCircumferentialSamples(baseSegments, axialSamples, relief) {
       }
     }
   }
-  return uniqueSorted(values);
+  return uniqueSorted(values, 1e-6);
 }
 
 function falloff(distance, radius, transitionWidth) {
@@ -672,7 +672,9 @@ export function createCaseBodyProfileGeometryData({
     throw new Error("case-body profile geometry contains non-finite data");
   }
   if (degenerateTriangleCount !== 0) {
-    throw new Error("case-body profile geometry contains degenerate triangles");
+    throw new Error(
+      `case-body profile geometry contains ${degenerateTriangleCount} degenerate triangles`,
+    );
   }
   if (!topology.closed) {
     throw new Error("case-body profile geometry is not a closed manifold");

@@ -35,13 +35,13 @@ test("resolver accepts only exterior=balanced and invalid values return the norm
   );
 });
 
-test("E-BALANCED second-candidate exterior proportions are exact", () => {
+test("E-BALANCED third-candidate taper proportions are exact", () => {
   assert.deepEqual(FINAL_EXTERIOR_BALANCED.dimensions, {
     caseOuterDiameter: 39.600,
     movementCavityDiameter: 37.800,
     radialMovementClearance: 0.600,
     bezelBackOuterDiameter: 38.800,
-    bezelFrontOuterDiameter: 37.600,
+    bezelFrontOuterDiameter: 37.000,
     dialApertureDiameter: 29.800,
     crystalClearDiameter: 30.600,
     crystalInnerY: -2.860,
