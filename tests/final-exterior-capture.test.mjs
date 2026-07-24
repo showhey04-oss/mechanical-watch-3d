@@ -15,6 +15,10 @@ const mobileFront = await readFile(
   new URL("./final-exterior-capture-mobile-front.html", import.meta.url),
   "utf8",
 );
+const phase3b1Capture = await readFile(
+  new URL("./final-exterior-phase3b1-capture.html", import.meta.url),
+  "utf8",
+);
 
 test("Phase 3A baseline capture reuses the explicit offscreen WebGL audit API", () => {
   assert.match(capture, /captureAuditViewportPng\(\{ width, height, cameraPreset \}\)/);
@@ -46,3 +50,11 @@ test("Phase 3A capture metadata stays separate from individually published PNG c
   assert.doesNotMatch(capture, /pngBase64/);
 });
 
+test("Phase 3B.1 uses the same state-safe capture path with an explicit query-only candidate", () => {
+  assert.match(capture, /appQuery = "dimensionAudit=1/);
+  assert.match(capture, /const query = new URLSearchParams\(appQuery\)/);
+  assert.match(phase3b1Capture, /exterior=balanced/);
+  assert.match(phase3b1Capture, /width,\s*height,\s*cameraPreset/s);
+  assert.match(phase3b1Capture, /readyKey: "phase3b1CaptureReady"/);
+  assert.doesNotMatch(phase3b1Capture, /\bsandbox=/);
+});

@@ -3,6 +3,7 @@ import test from "node:test";
 
 import { FINAL_EXTERIOR_BALANCED } from "../js/final-exterior-config.js";
 import {
+  createAxialProfileAnnulusGeometryData,
   createCaseBodyProfileGeometryData,
   interpolateCaseBodyRadius,
 } from "../js/final-exterior-profile.js";
@@ -39,38 +40,38 @@ const geometry = createCaseBodyProfileGeometryData({
 test("case-body profile preserves the approved maximum, end diameters, cavity, and Y range", () => {
   const profile = config.caseBody.outerRadiusProfile;
   assert.deepEqual(profile, [
-    { y: -3.060, outerRadius: 19.500 },
-    { y: -2.550, outerRadius: 19.680 },
-    { y: -1.700, outerRadius: 19.800 },
-    { y: 2.600, outerRadius: 19.800 },
-    { y: 3.650, outerRadius: 19.680 },
-    { y: 4.885, outerRadius: 19.500 },
+    { y: -2.860, outerRadius: 19.500 },
+    { y: -2.450, outerRadius: 19.680 },
+    { y: -1.550, outerRadius: 19.800 },
+    { y: 2.350, outerRadius: 19.800 },
+    { y: 3.450, outerRadius: 19.680 },
+    { y: 4.635, outerRadius: 19.500 },
   ]);
   assert.equal(Math.max(...profile.map(point => point.outerRadius)) * 2, 39.6);
   assert.equal(profile[0].outerRadius * 2, 39);
   assert.equal(profile.at(-1).outerRadius * 2, 39);
   assert.equal(config.caseBody.innerRadius * 2, 37.8);
-  assert.equal(geometry.audit.bounds.min[1], -3.06);
-  assert.equal(geometry.audit.bounds.max[1], 4.885);
-  assert.equal(geometry.audit.bounds.size[1], 7.945);
+  assert.equal(geometry.audit.bounds.min[1], -2.86);
+  assert.equal(geometry.audit.bounds.max[1], 4.635);
+  assert.equal(geometry.audit.bounds.size[1], 7.495);
 });
 
 test("profile interpolation is linear and the central case band stays at maximum diameter", () => {
   const profile = config.caseBody.outerRadiusProfile;
-  assert.equal(interpolateCaseBodyRadius(profile, -3.06), 19.5);
-  assert.equal(interpolateCaseBodyRadius(profile, -2.805), 19.59);
-  assert.equal(interpolateCaseBodyRadius(profile, -1.7), 19.8);
+  assert.equal(interpolateCaseBodyRadius(profile, -2.86), 19.5);
+  assert.equal(interpolateCaseBodyRadius(profile, -2.655), 19.59);
+  assert.equal(interpolateCaseBodyRadius(profile, -1.55), 19.8);
   assert.equal(interpolateCaseBodyRadius(profile, -1.05), 19.8);
-  assert.equal(interpolateCaseBodyRadius(profile, 2.6), 19.8);
-  assert.equal(interpolateCaseBodyRadius(profile, 4.885), 19.5);
+  assert.equal(interpolateCaseBodyRadius(profile, 2.35), 19.8);
+  assert.equal(interpolateCaseBodyRadius(profile, 4.635), 19.5);
 });
 
 test("case-body thickness terminology and exterior identity remain exact", () => {
   const dimensions = config.dimensions;
-  assert.equal(dimensions.caseBodyAxialThickness, 7.945);
-  assert.equal(dimensions.frontExteriorProjection, 0.95);
-  assert.equal(dimensions.rearExteriorProjection, 0.95);
-  assert.equal(dimensions.totalCaseThickness, 9.845);
+  assert.equal(dimensions.caseBodyAxialThickness, 7.495);
+  assert.equal(dimensions.frontExteriorProjection, 0.6);
+  assert.equal(dimensions.rearExteriorProjection, 0.6);
+  assert.equal(dimensions.totalCaseThickness, 8.695);
   assert.ok(Math.abs(
     dimensions.frontExteriorProjection
       + dimensions.caseBodyAxialThickness
@@ -119,4 +120,66 @@ test("legacy 0.150 relief remains insufficient while inner geometry stays unchan
   assert.ok(Math.abs(relief.legacyRemainingOverlap - 0.12119177) <= 1e-8);
   assert.ok(Math.abs(relief.legacyTargetGapShortfall - 0.15119177) <= 1e-8);
   assert.equal(geometry.audit.innerRadius, 18.9);
+});
+
+test("bezel profile is a closed indexed taper that thins toward the outer edge", () => {
+  const { dimensions: d, assumptions: a } = config;
+  const bezel = createAxialProfileAnnulusGeometryData({
+    profile: [
+      { radius: d.dialApertureDiameter / 2, y: a.bezelBackY },
+      { radius: d.crystalClearDiameter / 2, y: a.bezelInnerFrontY },
+      { radius: d.bezelFrontOuterDiameter / 2, y: a.bezelOuterFrontY },
+      { radius: d.bezelBackOuterDiameter / 2, y: a.bezelBackY },
+    ],
+    circumferentialSegments: 128,
+  });
+  assert.equal(bezel.audit.bounds.size[0], 38.8);
+  assert.equal(bezel.audit.bounds.min[1], -3.18);
+  assert.equal(bezel.audit.bounds.max[1], -2.86);
+  assert.ok(
+    a.bezelBackY - a.bezelInnerFrontY
+      > a.bezelBackY - a.bezelOuterFrontY,
+  );
+  assert.equal(bezel.audit.topology.closed, true);
+  assert.equal(bezel.audit.topology.nonManifoldEdgeCount, 0);
+  assert.equal(bezel.audit.degenerateTriangleCount, 0);
+});
+
+test("caseback and holder rings are closed profiles with exact clearances", () => {
+  const { dimensions: d, assumptions: a, protectedAnchors } = config;
+  const caseback = createAxialProfileAnnulusGeometryData({
+    profile: [
+      { radius: a.casebackWindowDiameter / 2, y: d.casebackOuterY },
+      { radius: a.casebackWindowDiameter / 2, y: d.casebackInnerY },
+      { radius: d.caseOuterDiameter / 2 - 0.3, y: d.casebackInnerY },
+      { radius: a.casebackRearOuterDiameter / 2, y: d.casebackOuterY },
+    ],
+  });
+  const holder = createAxialProfileAnnulusGeometryData({
+    profile: [
+      { radius: a.movementHolderInnerDiameter / 2, y: a.movementHolderBackY },
+      { radius: a.movementHolderInnerDiameter / 2, y: a.movementHolderFrontY },
+      { radius: a.movementHolderOuterDiameter / 2, y: a.movementHolderFrontY },
+      { radius: a.movementHolderOuterDiameter / 2, y: a.movementHolderBackY },
+    ],
+  });
+  for (const value of [caseback, holder]) {
+    assert.equal(value.audit.topology.closed, true);
+    assert.equal(value.audit.topology.nonManifoldEdgeCount, 0);
+    assert.equal(value.audit.degenerateTriangleCount, 0);
+  }
+  assert.equal(caseback.audit.bounds.size[1], 0.6);
+  assert.equal(holder.audit.bounds.size[0], 37.65);
+  assert.equal(holder.audit.bounds.size[1], 0.45);
+  assert.ok(Math.abs(
+    (d.movementCavityDiameter - a.movementHolderOuterDiameter) / 2
+      - 0.075,
+  ) <= 1e-12);
+  assert.ok(Math.abs(
+    (
+      a.movementHolderInnerDiameter
+        - protectedAnchors.movementReferenceDiameter
+    ) / 2
+      - 0.075,
+  ) <= 1e-12);
 });

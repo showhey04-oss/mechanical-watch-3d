@@ -277,6 +277,109 @@ function closedEdgeReport(indices) {
   };
 }
 
+export function createAxialProfileAnnulusGeometryData({
+  profile,
+  circumferentialSegments = 128,
+}) {
+  if (!Array.isArray(profile) || profile.length < 4) {
+    throw new Error("axial annulus profile requires at least four points");
+  }
+  if (
+    !Number.isInteger(circumferentialSegments)
+    || circumferentialSegments < 32
+  ) {
+    throw new Error(
+      "axial annulus circumferential segments must be an integer >= 32",
+    );
+  }
+  profile.forEach((point, index) => {
+    assertFiniteNumber(point.radius, `profile[${index}].radius`);
+    assertFiniteNumber(point.y, `profile[${index}].y`);
+    if (point.radius <= 0) {
+      throw new Error(`profile[${index}].radius must be positive`);
+    }
+    const next = profile[(index + 1) % profile.length];
+    if (
+      next
+      && Math.hypot(point.radius - next.radius, point.y - next.y) <= 1e-9
+    ) {
+      throw new Error("axial annulus profile contains a duplicate edge");
+    }
+  });
+
+  const profileCount = profile.length;
+  const vertexCount = profileCount * circumferentialSegments;
+  const positions = new Float64Array(vertexCount * 3);
+  const vertex = (profileIndex, segment) =>
+    profileIndex * circumferentialSegments
+      + (segment + circumferentialSegments) % circumferentialSegments;
+  for (let profileIndex = 0; profileIndex < profileCount; profileIndex++) {
+    const point = profile[profileIndex];
+    for (let segment = 0; segment < circumferentialSegments; segment++) {
+      const theta = segment / circumferentialSegments * TAU;
+      const offset = vertex(profileIndex, segment) * 3;
+      positions[offset] = point.radius * Math.cos(theta);
+      positions[offset + 1] = point.y;
+      positions[offset + 2] = point.radius * Math.sin(theta);
+    }
+  }
+
+  const indices = [];
+  for (let profileIndex = 0; profileIndex < profileCount; profileIndex++) {
+    const nextProfile = (profileIndex + 1) % profileCount;
+    for (let segment = 0; segment < circumferentialSegments; segment++) {
+      const nextSegment = segment + 1;
+      const a = vertex(profileIndex, segment);
+      const b = vertex(nextProfile, segment);
+      const c = vertex(nextProfile, nextSegment);
+      const d = vertex(profileIndex, nextSegment);
+      indices.push(a, b, c, a, c, d);
+    }
+  }
+
+  const indexArray =
+    vertexCount > 65_535
+      ? Uint32Array.from(indices)
+      : Uint16Array.from(indices);
+  const { normals, degenerateTriangleCount } =
+    accumulateVertexNormals(positions, indexArray);
+  const topology = closedEdgeReport(indexArray);
+  const finite = {
+    positions: [...positions].every(Number.isFinite),
+    normals: [...normals].every(Number.isFinite),
+    indices: [...indexArray].every(Number.isFinite),
+  };
+  const audit = {
+    profile: profile.map(point => ({
+      radius: round(point.radius),
+      y: round(point.y),
+    })),
+    circumferentialSegments,
+    vertexCount,
+    indexCount: indexArray.length,
+    triangleCount: indexArray.length / 3,
+    finite,
+    degenerateTriangleCount,
+    topology,
+    bounds: geometryBounds(positions),
+  };
+  if (!Object.values(finite).every(Boolean)) {
+    throw new Error("axial annulus geometry contains non-finite data");
+  }
+  if (degenerateTriangleCount !== 0) {
+    throw new Error("axial annulus geometry contains degenerate triangles");
+  }
+  if (!topology.closed) {
+    throw new Error("axial annulus geometry is not a closed manifold");
+  }
+  return {
+    positions: Float32Array.from(positions),
+    normals: Float32Array.from(normals),
+    indices: indexArray,
+    audit,
+  };
+}
+
 function crownEnvelopeGapAtPoint(point, envelope, positionOffsetX = 0) {
   const [x, y, z] = point;
   const dy = y - envelope.centerY;

@@ -4,7 +4,10 @@ import {
   FINAL_EXTERIOR_BALANCED,
   assertFinalExteriorConfig,
 } from "./final-exterior-config.js";
-import { createCaseBodyProfileGeometryData } from "./final-exterior-profile.js";
+import {
+  createAxialProfileAnnulusGeometryData,
+  createCaseBodyProfileGeometryData,
+} from "./final-exterior-profile.js";
 
 const round = (value, digits = 6) => Number(Number(value).toFixed(digits));
 const roundArray = values => values.map(value => round(value));
@@ -32,6 +35,28 @@ function createAnnularMesh({
   geometry.center();
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.y = (yMin + yMax) / 2;
+  return mesh;
+}
+
+function createProfiledAnnularMesh({
+  profile,
+  material,
+  segments = 128,
+  auditKey,
+}) {
+  const data = createAxialProfileAnnulusGeometryData({
+    profile,
+    circumferentialSegments: segments,
+  });
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.BufferAttribute(data.positions, 3));
+  geometry.setAttribute("normal", new THREE.BufferAttribute(data.normals, 3));
+  geometry.setIndex(new THREE.BufferAttribute(data.indices, 1));
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+  geometry.userData[auditKey] = data.audit;
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.userData[auditKey] = data.audit;
   return mesh;
 }
 
@@ -221,12 +246,13 @@ export function createBalancedExterior({
 
   const descriptions = {
     caseBody: "E-BALANCED候補のプロファイル中空ケース胴。中央バンド、前後テーパー、実りゅうず包絡から導いた局所逃げを1つの閉じたMeshで構成する。",
-    bezel: "直径29.0の表示開口と風防保持候補を構成するE-BALANCEDベゼル。",
-    crystal: "針最前面から0.55離した固定透明風防候補。光学特性・防水性・保持方式は未検証。",
-    rehaut: "S86表示リングを隠さず、直径29.0の表示開口へつなぐ内周リング候補。",
+    bezel: "直径29.8の表示開口から外縁へ向かって軸方向に薄くなる、単一閉合プロファイルのE-BALANCEDベゼル候補。",
+    crystal: "針最前面から0.35離した厚さ0.60の固定透明風防候補。光学特性・防水性・保持方式は未検証。",
+    rehaut: "S86表示リングを隠さず、直径29.8の表示開口へつなぐ内周リング候補。",
     dialBlank: "中心管と小秒軸の実位置から導いた貫通孔を持つ物理文字板候補。",
-    casebackRing: "ブリッジ上端から0.65離したE-BALANCED裏蓋リング候補。",
+    casebackRing: "ブリッジ上端から0.40離し、軸方向厚さを0.60へ抑えたテーパー付きE-BALANCED裏蓋リング候補。",
     casebackWindow: "ムーブメント裏面を観察する固定透明窓候補。防水・保持・製造公差は未検証。",
+    movementHolder: "ケース内周とムーブメント外周の各0.075クリアランスから導いた保持リング候補。固定方式・製造公差・防水性は未検証。",
     crownTube: "A.7巻真軸へ同軸配置した中空ケースチューブ候補。内径0.52、外径1.00。",
     crownConnection: "ケース胴と中空チューブをつなぐ局所教育用カラー候補。ねじ・ガスケット・圧入は未検証。",
   };
@@ -257,12 +283,27 @@ export function createBalancedExterior({
   });
   const bezel = addPart({
     group: groups.exteriorFront,
-    mesh: createAnnularMesh({
-      outerRadius: d.bezelOuterDiameter / 2,
-      innerRadius: d.dialApertureDiameter / 2,
-      yMin: a.bezelFrontY,
-      yMax: a.bezelBackY,
+    mesh: createProfiledAnnularMesh({
+      profile: [
+        {
+          radius: d.dialApertureDiameter / 2,
+          y: a.bezelBackY,
+        },
+        {
+          radius: d.crystalClearDiameter / 2,
+          y: a.bezelInnerFrontY,
+        },
+        {
+          radius: d.bezelFrontOuterDiameter / 2,
+          y: a.bezelOuterFrontY,
+        },
+        {
+          radius: d.bezelBackOuterDiameter / 2,
+          y: a.bezelBackY,
+        },
+      ],
       material: exteriorMaterials.bezel,
+      auditKey: "bezelProfileAudit",
     }),
     name: "E-BALANCED ベゼル",
     description: descriptions.bezel,
@@ -327,12 +368,27 @@ export function createBalancedExterior({
   const casebackWindowRadius = a.casebackWindowDiameter / 2;
   const casebackRing = addPart({
     group: groups.exteriorBack,
-    mesh: createAnnularMesh({
-      outerRadius: d.caseOuterDiameter / 2,
-      innerRadius: casebackWindowRadius,
-      yMin: d.casebackInnerY,
-      yMax: d.casebackOuterY,
+    mesh: createProfiledAnnularMesh({
+      profile: [
+        {
+          radius: casebackWindowRadius,
+          y: d.casebackOuterY,
+        },
+        {
+          radius: casebackWindowRadius,
+          y: d.casebackInnerY,
+        },
+        {
+          radius: d.caseOuterDiameter / 2 - 0.3,
+          y: d.casebackInnerY,
+        },
+        {
+          radius: a.casebackRearOuterDiameter / 2,
+          y: d.casebackOuterY,
+        },
+      ],
       material: exteriorMaterials.metal,
+      auditKey: "casebackProfileAudit",
     }),
     name: "E-BALANCED 裏蓋リング",
     description: descriptions.casebackRing,
@@ -353,9 +409,39 @@ export function createBalancedExterior({
     structural: false,
     pickPriority: 0,
   });
-  casebackWindow.position.y = d.casebackInnerY + a.casebackWindowThickness / 2;
+  casebackWindow.position.y =
+    d.casebackOuterY - a.casebackWindowThickness / 2;
   casebackWindow.castShadow = false;
   casebackWindow.receiveShadow = false;
+
+  const movementHolder = addPart({
+    group: groups.exteriorBack,
+    mesh: createProfiledAnnularMesh({
+      profile: [
+        {
+          radius: a.movementHolderInnerDiameter / 2,
+          y: a.movementHolderBackY,
+        },
+        {
+          radius: a.movementHolderInnerDiameter / 2,
+          y: a.movementHolderFrontY,
+        },
+        {
+          radius: a.movementHolderOuterDiameter / 2,
+          y: a.movementHolderFrontY,
+        },
+        {
+          radius: a.movementHolderOuterDiameter / 2,
+          y: a.movementHolderBackY,
+        },
+      ],
+      material: exteriorMaterials.metal,
+      auditKey: "movementHolderProfileAudit",
+    }),
+    name: "E-BALANCED ムーブメント保持リング",
+    description: descriptions.movementHolder,
+    pickPriority: -1,
+  });
 
   const crownTube = addPart({
     group: groups.exteriorCrownInterface,
@@ -394,6 +480,7 @@ export function createBalancedExterior({
     dialBlank,
     casebackRing,
     casebackWindow,
+    movementHolder,
     crownTube,
     crownConnection,
   };
@@ -401,6 +488,8 @@ export function createBalancedExterior({
     "case body ↔ bezel",
     "bezel ↔ crystal retention candidate",
     "case body ↔ caseback ring",
+    "case inner wall ↔ movement holder ring",
+    "movement outer reference ↔ movement holder ring",
     "case body ↔ crown tube",
     "dial blank ↔ dial support candidate",
     "crown tube ↔ crown position-1 local seating candidate",
@@ -447,6 +536,7 @@ export function createBalancedExterior({
       dialBlank: boundsRecord(dialBlank),
       casebackRing: boundsRecord(casebackRing),
       casebackWindow: boundsRecord(casebackWindow),
+      movementHolder: boundsRecord(movementHolder),
       crownTube: boundsRecord(crownTube),
       crownConnection: boundsRecord(crownConnection),
       dialCenterHoleRadius: round(centerHoleRadius),
@@ -456,8 +546,13 @@ export function createBalancedExterior({
     configDiff: {
       caseOuterDiameter:
         round(boundsRecord(caseBody).size[0] - d.caseOuterDiameter),
-      bezelOuterDiameter:
-        round(boundsRecord(bezel).size[0] - d.bezelOuterDiameter),
+      bezelBackOuterDiameter:
+        round(boundsRecord(bezel).size[0] - d.bezelBackOuterDiameter),
+      bezelFrontOuterDiameter:
+        round(
+          bezel.userData.bezelProfileAudit.profile[2].radius * 2
+            - d.bezelFrontOuterDiameter,
+        ),
       crystalClearDiameter:
         round(boundsRecord(crystal).size[0] - d.crystalClearDiameter),
       crownTubeOuterDiameter:
@@ -466,8 +561,29 @@ export function createBalancedExterior({
         round(boundsRecord(crownTube).size[0] - d.crownTubeAxialLength),
       caseBodyAxialThickness:
         round(boundsRecord(caseBody).size[1] - d.caseBodyAxialThickness),
+      casebackRingAxialThickness:
+        round(boundsRecord(casebackRing).size[1] - d.casebackRingAxialThickness),
+      movementHolderOuterDiameter:
+        round(
+          boundsRecord(movementHolder).size[0]
+            - a.movementHolderOuterDiameter,
+        ),
+      movementHolderInnerDiameter:
+        round(
+          movementHolder.userData.movementHolderProfileAudit.profile[0].radius * 2
+            - a.movementHolderInnerDiameter,
+        ),
+      movementHolderAxialThickness:
+        round(
+          boundsRecord(movementHolder).size[1]
+            - a.movementHolderAxialThickness,
+        ),
     },
     caseBodyGeometry: caseBodyAudit,
+    bezelGeometry: bezel.userData.bezelProfileAudit,
+    casebackGeometry: casebackRing.userData.casebackProfileAudit,
+    movementHolderGeometry:
+      movementHolder.userData.movementHolderProfileAudit,
   });
 
   const getInterferenceReport = () => {
@@ -508,6 +624,18 @@ export function createBalancedExterior({
         caseBodyAudit.relief.position1.minimumGap,
       crownBodyToCasePosition2:
         caseBodyAudit.relief.position2.minimumGap,
+      movementHolderToCase:
+        (
+          d.movementCavityDiameter
+            - a.movementHolderOuterDiameter
+        ) / 2,
+      movementHolderToMovement:
+        (
+          a.movementHolderInnerDiameter
+            - config.protectedAnchors.movementReferenceDiameter
+        ) / 2,
+      movementHolderToCaseback:
+        d.casebackInnerY - a.movementHolderBackY,
     };
     const forbidden = [
       ["crystal", "minute hand", clearances.minuteHandToCrystal],
@@ -525,6 +653,9 @@ export function createBalancedExterior({
       ["caseback ring", "bridges", clearances.bridgeToCaseback],
       ["caseback window", "bridges", clearances.bridgeToCaseback],
       ["case", "movement outer", clearances.movementToCaseRadial],
+      ["case inner wall", "movement holder ring", clearances.movementHolderToCase],
+      ["movement holder ring", "movement outer", clearances.movementHolderToMovement],
+      ["movement holder ring", "caseback inner face", clearances.movementHolderToCaseback],
       ["crown tube", "stem", clearances.stemToTubeRadial],
     ].map(([aName, bName, clearance]) => ({
       a: aName,
@@ -566,8 +697,9 @@ export function createBalancedExterior({
       clearances: Object.fromEntries(
         Object.entries(clearances).map(([key, value]) => [key, round(value)]),
       ),
-      crownFingerAccess: "UNVERIFIED",
-      crownPullPushOperability: "UNVERIFIED",
+      crownFingerAccess: config.classifications.crownFingerAccess,
+      crownPullPushOperability:
+        config.classifications.crownPullPushOperability,
       crownBodyCase: {
         position1: caseBodyAudit.relief.position1,
         position2: caseBodyAudit.relief.position2,
@@ -581,6 +713,27 @@ export function createBalancedExterior({
         closedMesh: caseBodyAudit.topology.closed,
         degenerateTriangleCount: caseBodyAudit.degenerateTriangleCount,
         finite: caseBodyAudit.finite,
+      },
+      movementHolder: {
+        outerDiameter: a.movementHolderOuterDiameter,
+        innerDiameter: a.movementHolderInnerDiameter,
+        yMin: a.movementHolderFrontY,
+        yMax: a.movementHolderBackY,
+        axialThickness: a.movementHolderAxialThickness,
+        caseRadialClearance: round(clearances.movementHolderToCase),
+        movementRadialClearance:
+          round(clearances.movementHolderToMovement),
+        casebackAxialClearance: round(clearances.movementHolderToCaseback),
+        forbiddenInterferenceCount: [
+          clearances.movementHolderToCase,
+          clearances.movementHolderToMovement,
+          clearances.movementHolderToCaseback,
+        ].filter(value => value < -1e-6).length,
+        profileGeometry:
+          movementHolder.userData.movementHolderProfileAudit,
+        manufacturingTolerance: "UNVERIFIED",
+        waterResistance: "UNVERIFIED",
+        fixingMethod: "UNVERIFIED",
       },
     };
   };
@@ -604,6 +757,7 @@ export function createBalancedExterior({
       "rehaut",
       "dialBlank",
       "casebackRing",
+      "movementHolder",
       "crownTube",
       "crownConnection",
     ],
@@ -611,7 +765,8 @@ export function createBalancedExterior({
     interiorPriorityPreserved:
       dialBlank.userData.pickPriority === 0
       && crystal.userData.pickPriority === 0
-      && casebackWindow.userData.pickPriority === 0,
+      && casebackWindow.userData.pickPriority === 0
+      && movementHolder.userData.pickPriority < 0,
   });
 
   const getMaterialReport = () => ({
@@ -621,6 +776,7 @@ export function createBalancedExterior({
       rehaut,
       dialBlank,
       casebackRing,
+      movementHolder,
       crownTube,
       crownConnection,
     ].every(object => {

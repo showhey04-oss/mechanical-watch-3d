@@ -35,24 +35,26 @@ test("resolver accepts only exterior=balanced and invalid values return the norm
   );
 });
 
-test("approved E-BALANCED dimensions match the Phase 3A decision exactly", () => {
+test("E-BALANCED second-candidate exterior proportions are exact", () => {
   assert.deepEqual(FINAL_EXTERIOR_BALANCED.dimensions, {
     caseOuterDiameter: 39.600,
     movementCavityDiameter: 37.800,
     radialMovementClearance: 0.600,
-    bezelOuterDiameter: 39.200,
-    dialApertureDiameter: 29.000,
-    crystalClearDiameter: 29.800,
-    crystalInnerY: -3.060,
-    crystalOuterY: -4.010,
-    frontHandClearance: 0.550,
-    casebackInnerY: 4.885,
-    casebackOuterY: 5.835,
-    rearBridgeClearance: 0.650,
-    totalCaseThickness: 9.845,
-    caseBodyAxialThickness: 7.945,
-    frontExteriorProjection: 0.950,
-    rearExteriorProjection: 0.950,
+    bezelBackOuterDiameter: 38.800,
+    bezelFrontOuterDiameter: 37.600,
+    dialApertureDiameter: 29.800,
+    crystalClearDiameter: 30.600,
+    crystalInnerY: -2.860,
+    crystalOuterY: -3.460,
+    frontHandClearance: 0.350,
+    casebackInnerY: 4.635,
+    casebackOuterY: 5.235,
+    rearBridgeClearance: 0.400,
+    casebackRingAxialThickness: 0.600,
+    totalCaseThickness: 8.695,
+    caseBodyAxialThickness: 7.495,
+    frontExteriorProjection: 0.600,
+    rearExteriorProjection: 0.600,
     crownTubeAxisY: -1.050,
     crownTubeAxisZ: -4.500,
     crownTubeOuterDiameter: 1.000,
@@ -99,6 +101,10 @@ test("configuration assertions preserve radial, Y, aperture, tube, and thickness
     exteriorThicknessIdentity: true,
     caseBodyProfile: true,
     caseBodyWall: true,
+    bezelProfile: true,
+    casebackRingThickness: true,
+    movementHolderRadialClearance: true,
+    movementHolderAxialDerivation: true,
     crownRelief: true,
     crownTravel: true,
     crownTubeLength: true,
@@ -119,11 +125,29 @@ test("dial blank and observation window assumptions are bounded and educational"
   assert.ok((d.caseOuterDiameter - a.casebackWindowDiameter) / 2 > 0);
 });
 
-test("deferred exterior interfaces remain UNVERIFIED and Phase 3B.2 scope is absent", () => {
-  assert.ok(
-    Object.values(FINAL_EXTERIOR_BALANCED.classifications)
-      .every(value => value === "UNVERIFIED"),
+test("human-accepted crown behavior and deferred interfaces remain distinct", () => {
+  assert.equal(
+    FINAL_EXTERIOR_BALANCED.classifications.crownFingerAccess,
+    "HUMAN_ACCEPTED_PHASE3B1",
   );
+  assert.equal(
+    FINAL_EXTERIOR_BALANCED.classifications.crownPullPushOperability,
+    "HUMAN_ACCEPTED_PHASE3B1",
+  );
+  assert.equal(
+    FINAL_EXTERIOR_BALANCED.classifications.structuralOpacity50,
+    "HUMAN_REVIEW_PENDING",
+  );
+  for (const name of [
+    "gasket",
+    "thread",
+    "pressFit",
+    "waterResistance",
+    "manufacturingTolerance",
+    "movementHolderFixingMethod",
+  ]) {
+    assert.equal(FINAL_EXTERIOR_BALANCED.classifications[name], "UNVERIFIED");
+  }
   assert.deepEqual(
     FINAL_EXTERIOR_BALANCED.scope.deferredToPhase3B2.slice(0, 4),
     ["lugs", "spring bars", "strap", "buckle"],
@@ -161,6 +185,8 @@ test("runtime implements hollow rings, derived dial holes, selection, and diagno
   const source = await readFile(runtimeSourceUrl, "utf8");
   assert.match(source, /createProfiledCaseBodyMesh/);
   assert.match(source, /createCaseBodyProfileGeometryData/);
+  assert.match(source, /createProfiledAnnularMesh/);
+  assert.match(source, /createAxialProfileAnnulusGeometryData/);
   assert.match(source, /createAnnularMesh/);
   assert.match(source, /createPerforatedDial/);
   assert.match(source, /createAxialAnnulus/);
@@ -171,6 +197,9 @@ test("runtime implements hollow rings, derived dial holes, selection, and diagno
   assert.match(source, /forbiddenCount/);
   assert.match(source, /tubeAxisError/);
   assert.match(source, /crownBodyToCasePosition1/);
+  assert.match(source, /movementHolderToCase/);
+  assert.match(source, /movementHolderToMovement/);
+  assert.match(source, /pickPriority: -1/);
   assert.match(source, /alphaHashUsed: false/);
   assert.match(source, /d2c3Used: false/);
 });

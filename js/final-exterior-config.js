@@ -9,19 +9,21 @@ const dimensions = {
   caseOuterDiameter: 39.600,
   movementCavityDiameter: 37.800,
   radialMovementClearance: 0.600,
-  bezelOuterDiameter: 39.200,
-  dialApertureDiameter: 29.000,
-  crystalClearDiameter: 29.800,
-  crystalInnerY: -3.060,
-  crystalOuterY: -4.010,
-  frontHandClearance: 0.550,
-  casebackInnerY: 4.885,
-  casebackOuterY: 5.835,
-  rearBridgeClearance: 0.650,
-  totalCaseThickness: 9.845,
-  caseBodyAxialThickness: 7.945,
-  frontExteriorProjection: 0.950,
-  rearExteriorProjection: 0.950,
+  bezelBackOuterDiameter: 38.800,
+  bezelFrontOuterDiameter: 37.600,
+  dialApertureDiameter: 29.800,
+  crystalClearDiameter: 30.600,
+  crystalInnerY: -2.860,
+  crystalOuterY: -3.460,
+  frontHandClearance: 0.350,
+  casebackInnerY: 4.635,
+  casebackOuterY: 5.235,
+  rearBridgeClearance: 0.400,
+  casebackRingAxialThickness: 0.600,
+  totalCaseThickness: 8.695,
+  caseBodyAxialThickness: 7.495,
+  frontExteriorProjection: 0.600,
+  rearExteriorProjection: 0.600,
   crownTubeAxisY: -1.050,
   crownTubeAxisZ: -4.500,
   crownTubeOuterDiameter: 1.000,
@@ -38,12 +40,12 @@ const dimensions = {
 const caseBody = {
   innerRadius: dimensions.movementCavityDiameter / 2,
   outerRadiusProfile: [
-    { y: -3.060, outerRadius: 19.500 },
-    { y: -2.550, outerRadius: 19.680 },
-    { y: -1.700, outerRadius: 19.800 },
-    { y: 2.600, outerRadius: 19.800 },
-    { y: 3.650, outerRadius: 19.680 },
-    { y: 4.885, outerRadius: 19.500 },
+    { y: -2.860, outerRadius: 19.500 },
+    { y: -2.450, outerRadius: 19.680 },
+    { y: -1.550, outerRadius: 19.800 },
+    { y: 2.350, outerRadius: 19.800 },
+    { y: 3.450, outerRadius: 19.680 },
+    { y: 4.635, outerRadius: 19.500 },
   ],
   circumferentialSegments: 192,
   axialMaxStep: 0.060,
@@ -62,7 +64,8 @@ const assumptions = {
   caseBodyFrontY: dimensions.crystalInnerY,
   caseBodyBackY: dimensions.casebackInnerY,
   bezelBackY: dimensions.crystalInnerY,
-  bezelFrontY: -3.520,
+  bezelInnerFrontY: -3.180,
+  bezelOuterFrontY: -2.960,
   rehautBackY: -2.720,
   rehautFrontY: dimensions.crystalInnerY,
   dialBlankDiameter: 35.000,
@@ -72,6 +75,16 @@ const assumptions = {
   dialSmallSecondHoleClearance: 0.100,
   casebackWindowDiameter: 28.548,
   casebackWindowThickness: 0.380,
+  casebackRearOuterDiameter: 38.400,
+  movementHolderOuterDiameter: 37.650,
+  movementHolderInnerDiameter: 36.750,
+  movementHolderCaseRadialClearance: 0.075,
+  movementHolderMovementRadialClearance: 0.075,
+  movementHolderCasebackClearance: 0.150,
+  movementHolderEnvelopeOverlap: 0.200,
+  movementHolderFrontY: 4.035,
+  movementHolderBackY: 4.485,
+  movementHolderAxialThickness: 0.450,
   crownConnectionOuterDiameter: 1.120,
   crownConnectionInnerDiameter: dimensions.crownTubeInnerDiameter,
   crownConnectionAxialLength: 0.180,
@@ -110,13 +123,15 @@ export const FINAL_EXTERIOR_BALANCED = deepFreeze({
     crownTubePosition1LocalSeat: "PHASE3B1_IMPLEMENTATION_ASSUMPTION",
   },
   classifications: {
-    crownFingerAccess: "UNVERIFIED",
-    crownPullPushOperability: "UNVERIFIED",
+    crownFingerAccess: "HUMAN_ACCEPTED_PHASE3B1",
+    crownPullPushOperability: "HUMAN_ACCEPTED_PHASE3B1",
+    structuralOpacity50: "HUMAN_REVIEW_PENDING",
     gasket: "UNVERIFIED",
     thread: "UNVERIFIED",
     pressFit: "UNVERIFIED",
     waterResistance: "UNVERIFIED",
     manufacturingTolerance: "UNVERIFIED",
+    movementHolderFixingMethod: "UNVERIFIED",
   },
   scope: {
     included: [
@@ -127,6 +142,7 @@ export const FINAL_EXTERIOR_BALANCED = deepFreeze({
       "physical dial blank",
       "caseback ring",
       "transparent caseback window",
+      "movement holder ring",
       "hollow crown tube",
       "local crown connection candidate",
     ],
@@ -210,6 +226,49 @@ export function assertFinalExteriorConfig(
         ...config.caseBody.outerRadiusProfile.map(point =>
           point.outerRadius - config.caseBody.innerRadius),
       ) >= config.caseBody.crownRelief.minimumWall,
+    bezelProfile:
+      d.bezelBackOuterDiameter > d.bezelFrontOuterDiameter
+      && d.bezelBackOuterDiameter < d.caseOuterDiameter
+      && a.bezelInnerFrontY < a.bezelOuterFrontY
+      && a.bezelOuterFrontY < a.bezelBackY,
+    casebackRingThickness:
+      Math.abs(
+        d.casebackOuterY
+          - d.casebackInnerY
+          - d.casebackRingAxialThickness,
+      ) <= tolerance,
+    movementHolderRadialClearance:
+      Math.abs(
+        (d.movementCavityDiameter - a.movementHolderOuterDiameter) / 2
+          - a.movementHolderCaseRadialClearance,
+      ) <= tolerance
+      && Math.abs(
+        (
+          a.movementHolderInnerDiameter
+            - config.protectedAnchors.movementReferenceDiameter
+        ) / 2
+          - a.movementHolderMovementRadialClearance,
+      ) <= tolerance,
+    movementHolderAxialDerivation:
+      Math.abs(
+        a.movementHolderFrontY
+          - (
+            config.protectedAnchors.bridgeYMax
+              - a.movementHolderEnvelopeOverlap
+          ),
+      ) <= tolerance
+      && Math.abs(
+        a.movementHolderBackY
+          - (
+            d.casebackInnerY
+              - a.movementHolderCasebackClearance
+          ),
+      ) <= tolerance
+      && Math.abs(
+        a.movementHolderBackY
+          - a.movementHolderFrontY
+          - a.movementHolderAxialThickness,
+      ) <= tolerance,
     crownRelief:
       config.caseBody.crownRelief.targetGap >= 0.03
       && config.caseBody.crownRelief.maximumDepth === 0.33

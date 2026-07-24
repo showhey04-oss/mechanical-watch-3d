@@ -86,10 +86,10 @@ frame.addEventListener("load", async () => {
         : dimensions.runtime === null && dimensions.configDiff === null,
       exteriorInterference:
         interference.forbiddenCount === 0
-        && interference.forbidden.length === (expectedExteriorEnabled ? 11 : 0),
+        && interference.forbidden.length === (expectedExteriorEnabled ? 14 : 0),
       caseBodyProfile: expectedExteriorEnabled
         ? dimensions.caseBodyGeometry.bounds.size[0] === 39.6
-          && dimensions.caseBodyGeometry.bounds.size[1] === 7.945
+          && dimensions.caseBodyGeometry.bounds.size[1] === 7.495
           && dimensions.caseBodyGeometry.innerRadius === 18.9
         : true,
       caseBodyGeometry: expectedExteriorEnabled
@@ -105,13 +105,33 @@ frame.addEventListener("load", async () => {
           && interference.crownBodyCase.adoptedMaximumDepth <= 0.33
           && interference.crownBodyCase.minimumWall >= 0.55
         : true,
+      bezelProfile: expectedExteriorEnabled
+        ? dimensions.bezelGeometry.bounds.size[0] === 38.8
+          && dimensions.bezelGeometry.bounds.size[1] === 0.32
+          && dimensions.bezelGeometry.topology.closed
+          && dimensions.bezelGeometry.degenerateTriangleCount === 0
+        : true,
+      casebackProfile: expectedExteriorEnabled
+        ? dimensions.casebackGeometry.bounds.size[1] === 0.6
+          && dimensions.casebackGeometry.topology.closed
+          && dimensions.casebackGeometry.degenerateTriangleCount === 0
+        : true,
+      movementHolder: expectedExteriorEnabled
+        ? interference.movementHolder.outerDiameter === 37.65
+          && interference.movementHolder.innerDiameter === 36.75
+          && interference.movementHolder.axialThickness === 0.45
+          && interference.movementHolder.caseRadialClearance === 0.075
+          && interference.movementHolder.movementRadialClearance === 0.075
+          && interference.movementHolder.forbiddenInterferenceCount === 0
+          && interference.movementHolder.profileGeometry.topology.closed
+        : true,
       tubeAxis: expectedExteriorEnabled
         ? interference.tubeAxisError === 0
         : interference.tubeAxisError === null,
       tubeBore: expectedExteriorEnabled
         ? interference.crownTubeBoreClearance > 0
         : interference.crownTubeBoreClearance === null,
-      selection: selection.registeredParts.length >= (expectedExteriorEnabled ? 8 : 0),
+      selection: selection.registeredParts.length >= (expectedExteriorEnabled ? 10 : 0),
       selectionPriority: selection.interiorPriorityPreserved === true,
       structuralOpacity: materials.structuralOpacityIntegrated === expectedExteriorEnabled,
       fixedTransparency: materials.fixedTransparencyIndependent === expectedExteriorEnabled,

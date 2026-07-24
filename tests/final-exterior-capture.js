@@ -47,6 +47,7 @@ export async function runFinalExteriorCapture({
   height,
   cameraPreset,
   readyKey,
+  appQuery = "dimensionAudit=1&theme=navy&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed",
 }) {
   const frame = document.getElementById("auditApp");
   const output = document.getElementById("captureResult");
@@ -67,11 +68,10 @@ export async function runFinalExteriorCapture({
     document.body.dataset.captureStage = "waiting-for-iframe";
     document.body.dataset.captureError = "";
     document.body.dataset[readyKey] = "false";
-    frame.src = `../index.html?dimensionAudit=1&theme=navy&camera=${encodeURIComponent(
-      cameraPreset,
-    )}&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&capture=${encodeURIComponent(
-      captureId,
-    )}`;
+    const query = new URLSearchParams(appQuery);
+    query.set("camera", cameraPreset);
+    query.set("capture", captureId);
+    frame.src = `../index.html?${query}`;
     const diagnostics = await waitForDiagnostics(frame);
     await diagnostics.waitForFrames(8);
     const before = {
