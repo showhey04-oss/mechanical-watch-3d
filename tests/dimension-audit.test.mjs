@@ -91,3 +91,18 @@ test("dimension diagnostics remain explicit, query-only, and out of the animatio
   const animation = source.slice(source.indexOf("function animate(now)"), source.indexOf("window.addEventListener('resize'"));
   assert.doesNotMatch(animation, /getDimensionDiagnostics|dimensionAuditOverlay|dimensionAuditResult/);
 });
+
+test("Phase 2C Y-layer audit stays diagnostic-only and preserves protected classification", async () => {
+  const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  assert.match(source, /function getYDatumMap\(\)/);
+  assert.match(source, /function getYEnvelopeBreakdown\(\)/);
+  assert.match(source, /function getYLayerStack\(\)/);
+  assert.match(source, /function getOfficialHeightDatumAssessment\(\)/);
+  assert.match(source, /baseMovementEnvelope/);
+  assert.match(source, /handMountAndProtrudingArborEnvelope/);
+  assert.match(source, /applicationEnvelopeIncludingDialAndHands/);
+  assert.match(source, /REFERENCE_DATUM_UNRESOLVED/);
+  assert.match(source, /'LOCAL_REVIEW','DEFER_TO_EXTERIOR','PROTECTED'/);
+  const animation = source.slice(source.indexOf("function animate(now)"), source.indexOf("window.addEventListener('resize'"));
+  assert.doesNotMatch(animation, /getYDatumMap|getYEnvelopeBreakdown|getYLayerStack|getOfficialHeightDatumAssessment/);
+});
