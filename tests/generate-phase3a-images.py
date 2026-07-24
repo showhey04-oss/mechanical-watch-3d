@@ -209,23 +209,67 @@ def generate_side_clearance(clearance: dict) -> None:
 def generate_crown_interface(interface: dict, matrix: dict) -> None:
     image, draw = front_overlay_base(
         "Phase 3A — crown and stem interface",
-        "Fixed A.7 axis and position-1/position-2 travel; exterior must adapt",
+        "Local circular intersections and tube candidates; finger access / pull-push operability UNVERIFIED",
     )
     crown = interface["crownStem"]
     center_y = FRONT_CENTER[1] - crown["axis"]["centerZ"] * FRONT_SCALE
     x_wind = FRONT_CENTER[0] + crown["crownPosition1"]["centerX"] * FRONT_SCALE
     x_set = FRONT_CENTER[0] + crown["crownPosition2"]["centerX"] * FRONT_SCALE
+    wind_outer_x = FRONT_CENTER[0] + crown["crownPosition1"]["outerX"] * FRONT_SCALE
+    set_outer_x = FRONT_CENTER[0] + crown["crownPosition2"]["outerX"] * FRONT_SCALE
     draw.line((FRONT_CENTER[0], center_y, 1260, center_y), fill="#60d9ff", width=3)
-    draw.ellipse((x_wind - 12, center_y - 12, x_wind + 12, center_y + 12), outline="#55e0a3", width=4)
-    draw.ellipse((x_set - 12, center_y - 12, x_set + 12, center_y + 12), outline="#ff8b8b", width=4)
+    draw.ellipse((x_wind - 10, center_y - 10, x_wind + 10, center_y + 10), outline="#55e0a3", width=4)
+    draw.ellipse((x_set - 10, center_y - 10, x_set + 10, center_y + 10), outline="#ff8b8b", width=4)
     draw.line((x_wind, center_y - 34, x_set, center_y - 34), fill="#f5cf72", width=3)
-    draw.text((870, 84), f"axis Y {crown['axis']['centerY']:.3f}", fill="#60d9ff", font=FONT)
-    draw.text((870, 108), f"position 1 X {crown['crownPosition1']['centerX']:.3f}", fill="#55e0a3", font=FONT)
-    draw.text((870, 132), f"position 2 X {crown['crownPosition2']['centerX']:.3f}", fill="#ff8b8b", font=FONT)
-    draw.text((870, 156), f"pull travel {crown['pullTravel']['value']:.3f}", fill="#f5cf72", font=FONT)
+    draw.line((wind_outer_x, center_y - 18, wind_outer_x, center_y + 18), fill="#55e0a3", width=3)
+    draw.line((set_outer_x, center_y - 18, set_outer_x, center_y + 18), fill="#ff8b8b", width=3)
+    draw.text((846, 74), f"stem axis Y {crown['axis']['centerY']:.3f} / Z {crown['axis']['centerZ']:.3f}", fill="#60d9ff", font=FONT)
+    draw.text((846, 94), f"P1 center/end X {crown['crownPosition1']['centerX']:.3f} / {crown['crownPosition1']['outerX']:.3f}", fill="#55e0a3", font=FONT)
+    draw.text((846, 114), f"P2 center/end X {crown['crownPosition2']['centerX']:.3f} / {crown['crownPosition2']['outerX']:.3f}", fill="#ff8b8b", font=FONT)
+    draw.text((846, 134), f"pull travel {crown['pullTravel']['value']:.3f}", fill="#f5cf72", font=FONT)
     colors = {"E-COMPACT": "#f7c873", "E-BALANCED": "#60d9ff", "E-EDUCATIONAL": "#bc8cff"}
-    for candidate_id, candidate in matrix["candidates"].items():
-        draw_circle(draw, candidate["values"]["caseOuterDiameter"]["value"], colors[candidate_id], None, 2)
+    for index, (candidate_id, candidate) in enumerate(matrix["candidates"].items()):
+        color = colors[candidate_id]
+        values = candidate["values"]
+        draw_circle(draw, values["caseOuterDiameter"]["value"], color, None, 2)
+        draw_circle(draw, values["movementCavityDiameter"]["value"], color, None, 1)
+        outer_x = FRONT_CENTER[0] + values["caseOuterIntersectionXAtStemZ"]["value"] * FRONT_SCALE
+        cavity_x = FRONT_CENTER[0] + values["movementCavityIntersectionXAtStemZ"]["value"] * FRONT_SCALE
+        tube_outer_half = values["crownTubeOuterDiameter"]["value"] * FRONT_SCALE / 2
+        tube_inner_half = values["crownTubeInnerDiameter"]["value"] * FRONT_SCALE / 2
+        draw.ellipse((outer_x - 5, center_y - 5, outer_x + 5, center_y + 5), fill=color)
+        draw.ellipse((cavity_x - 4, center_y - 4, cavity_x + 4, center_y + 4), outline=color, width=2)
+        draw.rectangle(
+            (cavity_x, center_y - tube_outer_half, outer_x, center_y + tube_outer_half),
+            fill=(*ImageColor.getrgb(color), 50),
+            outline=color,
+            width=2,
+        )
+        draw.rectangle(
+            (cavity_x, center_y - tube_inner_half, outer_x, center_y + tube_inner_half),
+            outline="#f5f8fc",
+            width=1,
+        )
+        legend_y = 164 + index * 64
+        draw.rectangle((842, legend_y, 1265, legend_y + 56), fill=(7, 12, 20, 202), outline=color, width=2)
+        draw.text((850, legend_y + 6), candidate_id, fill=color, font=FONT)
+        draw.text(
+            (850, legend_y + 22),
+            f"case/cavity X {values['caseOuterIntersectionXAtStemZ']['value']:.3f} / {values['movementCavityIntersectionXAtStemZ']['value']:.3f}; wall {values['localCaseWallAxialLength']['value']:.3f}",
+            fill="#eef3f8",
+            font=FONT,
+        )
+        draw.text(
+            (850, legend_y + 38),
+            f"tube OD/ID {values['crownTubeOuterDiameter']['value']:.2f}/{values['crownTubeInnerDiameter']['value']:.2f}; local P1 center/end {values['crownCenterProjectionWindLocal']['value']:.3f}/{values['crownOuterProjectionWindLocal']['value']:.3f}",
+            fill="#eef3f8",
+            font=FONT,
+        )
+        draw.line((outer_x, center_y + 28 + index * 10, x_wind, center_y + 28 + index * 10), fill=color, width=2)
+        draw.line((outer_x, center_y + 60 + index * 10, set_outer_x, center_y + 60 + index * 10), fill=color, width=2)
+    draw.text((846, 366), "geometric projection: PASS", fill="#55e0a3", font=FONT)
+    draw.text((846, 386), "finger access: UNVERIFIED", fill="#ffcf72", font=FONT)
+    draw.text((846, 406), "pull/push operability: UNVERIFIED", fill="#ffcf72", font=FONT)
     image.save(IMAGES / "crown-stem-interface.png", format="PNG")
 
 
@@ -262,7 +306,7 @@ def generate_front_comparison(matrix: dict) -> None:
         draw.text((20, 90 + index * 54), candidate_id, fill=color, font=FONT)
         draw.text(
             (20, 108 + index * 54),
-            f"case {case_diameter:.1f} / aperture {aperture:.1f} / L2L {lug_to_lug:.1f}",
+            f"case {case_diameter:.1f} / aperture {aperture:.1f} / local P1 {candidate['values']['crownCenterProjectionWindLocal']['value']:.3f} / tube {candidate['values']['crownTubeOuterDiameter']['value']:.2f}",
             fill="#eef3f8",
             font=FONT,
         )

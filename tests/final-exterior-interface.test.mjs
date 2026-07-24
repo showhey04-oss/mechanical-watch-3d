@@ -46,9 +46,32 @@ test("Phase 3A runtime crown and stem anchors remain tied to A.7 configuration",
 test("all Phase 3A candidate values are finite, classified, traceable, and non-default", () => {
   const result = assertExteriorCandidates();
   assert.equal(result.candidateCount, 3);
+  assert.equal(result.allGeometricAuditChecksPassed, true);
   for (const candidate of Object.values(EXTERIOR_CANDIDATES)) {
     assert.equal(candidate.status, "CANDIDATE_NOT_ADOPTED");
-    for (const record of Object.values(candidate.values)) {
+    const formalRecords = {
+      ...candidate.values,
+      ...candidate.assumptions,
+    };
+    for (const name of [
+      "caseWall",
+      "bezelInset",
+      "dialApertureMargin",
+      "crystalClearMargin",
+      "crystalThickness",
+      "casebackThickness",
+      "lugExtension",
+      "crownTubeOuterDiameter",
+      "crownTubeRadialClearance",
+      "crownTubeInnerDiameter",
+      "crownTubeAnnularWall",
+      "crownTubeAxialLengthCandidate",
+    ]) {
+      assert.ok(formalRecords[name], `missing formal record ${candidate.id}.${name}`);
+    }
+    for (const record of Object.values({
+      ...formalRecords,
+    })) {
       assert.equal(Number.isFinite(record.value), true);
       assert.ok(record.formula);
       assert.ok(record.sourceInputs);
@@ -75,9 +98,123 @@ test("all exterior candidates satisfy the required radial and Y containment rule
     assert.ok(value("casebackInnerY") > 4.235);
     assert.ok(value("frontHandClearance") > 0);
     assert.ok(value("rearBridgeClearance") > 0);
-    assert.ok(candidate.derived.crownOuterProjectionWind > 0);
-    assert.ok(candidate.derived.crownOuterProjectionSet > 0);
-    assert.equal(candidate.allConstraintsPassed, true);
+    assert.ok(value("crownCenterProjectionWindLocal") > 0);
+    assert.ok(value("crownOuterProjectionWindLocal") > 0);
+    assert.equal(candidate.geometricCrownProjectionPassed, true);
+    assert.equal(candidate.crownTubeGeometryCandidatePassed, true);
+    assert.equal(candidate.allGeometricAuditChecksPassed, true);
+  }
+});
+
+test("circular case intersections and local crown projections are formula-derived", () => {
+  const expected = {
+    "E-COMPACT": {
+      outer: 18.973666,
+      cavity: 18.098964,
+      wall: 0.874702,
+      centerWind: 0.826334,
+      outerWind: 1.401334,
+      outerSet: 2.751334,
+    },
+    "E-BALANCED": {
+      outer: 19.281857,
+      cavity: 18.356470,
+      wall: 0.925387,
+      centerWind: 0.518143,
+      outerWind: 1.093143,
+      outerSet: 2.443143,
+    },
+    "E-EDUCATIONAL": {
+      outer: 19.589793,
+      cavity: 18.665208,
+      wall: 0.924585,
+      centerWind: 0.210207,
+      outerWind: 0.785207,
+      outerSet: 2.135207,
+    },
+  };
+  for (const [id, candidate] of Object.entries(EXTERIOR_CANDIDATES)) {
+    const value = name => candidate.values[name].value;
+    const caseRadius = value("caseOuterDiameter") / 2;
+    const cavityRadius = value("movementCavityDiameter") / 2;
+    const z = RUNTIME_INTERFACE_ANCHORS.crownStemAxisZ;
+    assert.ok(Math.abs(z) < caseRadius);
+    assert.ok(Math.abs(z) < cavityRadius);
+    assert.equal(
+      value("caseOuterIntersectionXAtStemZ"),
+      Number(Math.sqrt(caseRadius ** 2 - z ** 2).toFixed(6)),
+    );
+    assert.equal(
+      value("movementCavityIntersectionXAtStemZ"),
+      Number(Math.sqrt(cavityRadius ** 2 - z ** 2).toFixed(6)),
+    );
+    assert.equal(
+      value("localCaseWallAxialLength"),
+      Number(
+        (
+          Math.sqrt(caseRadius ** 2 - z ** 2) -
+          Math.sqrt(cavityRadius ** 2 - z ** 2)
+        ).toFixed(6),
+      ),
+    );
+    assert.deepEqual(
+      {
+        outer: value("caseOuterIntersectionXAtStemZ"),
+        cavity: value("movementCavityIntersectionXAtStemZ"),
+        wall: value("localCaseWallAxialLength"),
+        centerWind: value("crownCenterProjectionWindLocal"),
+        outerWind: value("crownOuterProjectionWindLocal"),
+        outerSet: value("crownOuterProjectionSetLocal"),
+      },
+      expected[id],
+    );
+  }
+});
+
+test("formal crown-tube records remain geometric candidates, not operability approval", () => {
+  const expected = {
+    "E-COMPACT": { outer: 0.90, clearance: 0.08, inner: 0.48, wall: 0.21 },
+    "E-BALANCED": { outer: 1.00, clearance: 0.10, inner: 0.52, wall: 0.24 },
+    "E-EDUCATIONAL": { outer: 1.10, clearance: 0.12, inner: 0.56, wall: 0.27 },
+  };
+  for (const [id, candidate] of Object.entries(EXTERIOR_CANDIDATES)) {
+    const value = name => candidate.values[name].value;
+    assert.deepEqual(
+      {
+        outer: value("crownTubeOuterDiameter"),
+        clearance: candidate.assumptions.crownTubeRadialClearance.value,
+        inner: value("crownTubeInnerDiameter"),
+        wall: value("crownTubeAnnularWall"),
+      },
+      expected[id],
+    );
+    assert.equal(
+      value("crownTubeInnerDiameter"),
+      2 *
+        (RUNTIME_INTERFACE_ANCHORS.stemRadius +
+          candidate.assumptions.crownTubeRadialClearance.value),
+    );
+    assert.equal(
+      value("crownTubeAnnularWall"),
+      Number(
+        (
+          (value("crownTubeOuterDiameter") -
+            value("crownTubeInnerDiameter")) /
+          2
+        ).toFixed(6),
+      ),
+    );
+    assert.equal(
+      value("crownTubeAxialLengthCandidate"),
+      value("localCaseWallAxialLength"),
+    );
+    assert.equal(candidate.crownFingerAccessDecision, "UNVERIFIED");
+    assert.equal(candidate.crownPullPushOperabilityDecision, "UNVERIFIED");
+    assert.equal(candidate.candidateReadyForDefaultAdoption, false);
+    assert.deepEqual(
+      new Set(Object.values(candidate.deferredCrownTubeInterfaces)),
+      new Set(["UNVERIFIED"]),
+    );
   }
 });
 
@@ -86,10 +223,13 @@ test("E-BALANCED is recommendation-only and does not alter the normal applicatio
     candidate: "E-BALANCED",
     status: "RECOMMENDED_NOT_ADOPTED",
     rationale:
-      "It preserves every protected anchor while offering materially safer clearances than E-COMPACT without the size and Issue #2 rendering exposure of E-EDUCATIONAL.",
+      "It preserves every protected anchor while balancing the local circular case intersection and positive crown-tube geometry candidate against E-COMPACT's tighter overall clearances and E-EDUCATIONAL's smallest local position-1 crown-center projection, size, and Issue #2 rendering exposure.",
     humanApprovalRequired: true,
     defaultPathChanged: false,
   });
+  assert.equal(CANDIDATE_COMPARISON.criteria["E-COMPACT"].crownInterfaceRisk, "LOW_RISK");
+  assert.equal(CANDIDATE_COMPARISON.criteria["E-BALANCED"].crownInterfaceRisk, "MODERATE_RISK");
+  assert.equal(CANDIDATE_COMPARISON.criteria["E-EDUCATIONAL"].crownInterfaceRisk, "HIGH_RISK");
   const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
   assert.doesNotMatch(indexSource, /final-exterior-audit|E-COMPACT|E-BALANCED|E-EDUCATIONAL/);
   assert.doesNotMatch(indexSource, /caseGeometry|bezelGeometry|casebackGeometry|lugGeometry|strapGeometry/);

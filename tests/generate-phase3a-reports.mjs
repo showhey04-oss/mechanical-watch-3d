@@ -237,7 +237,54 @@ const exteriorInterfaceMap = {
     caseTubeConstruction: {
       value: null,
       classification: "DEFER_TO_EXTERIOR_IMPLEMENTATION",
+      unverified: [
+        "seatDesign",
+        "gasket",
+        "thread",
+        "pressFit",
+        "waterResistance",
+        "manufacturingTolerance",
+      ],
     },
+    candidateInterfaces: Object.fromEntries(
+      Object.entries(EXTERIOR_CANDIDATES).map(([id, candidate]) => [
+        id,
+        {
+          caseOuterIntersectionXAtStemZ:
+            candidate.values.caseOuterIntersectionXAtStemZ,
+          movementCavityIntersectionXAtStemZ:
+            candidate.values.movementCavityIntersectionXAtStemZ,
+          localCaseWallAxialLength:
+            candidate.values.localCaseWallAxialLength,
+          crownCenterProjectionWindLocal:
+            candidate.values.crownCenterProjectionWindLocal,
+          crownCenterProjectionSetLocal:
+            candidate.values.crownCenterProjectionSetLocal,
+          crownOuterProjectionWindLocal:
+            candidate.values.crownOuterProjectionWindLocal,
+          crownOuterProjectionSetLocal:
+            candidate.values.crownOuterProjectionSetLocal,
+          crownTubeOuterDiameter: candidate.values.crownTubeOuterDiameter,
+          crownTubeRadialClearance:
+            candidate.assumptions.crownTubeRadialClearance,
+          crownTubeInnerDiameter: candidate.values.crownTubeInnerDiameter,
+          crownTubeAnnularWall: candidate.values.crownTubeAnnularWall,
+          crownTubeAxialLengthCandidate:
+            candidate.values.crownTubeAxialLengthCandidate,
+          geometricCrownProjectionPassed:
+            candidate.geometricCrownProjectionPassed,
+          crownTubeGeometryCandidatePassed:
+            candidate.crownTubeGeometryCandidatePassed,
+          crownFingerAccessDecision:
+            candidate.crownFingerAccessDecision,
+          crownPullPushOperabilityDecision:
+            candidate.crownPullPushOperabilityDecision,
+          candidateReadyForDefaultAdoption:
+            candidate.candidateReadyForDefaultAdoption,
+          deferredInterfaces: candidate.deferredCrownTubeInterfaces,
+        },
+      ]),
+    ),
   },
   caseAttachment: {
     candidateFields: [
@@ -272,24 +319,59 @@ const clearanceBudget = {
           movementDiameter: 36.6,
           radialMovementClearance: candidate.values.radialMovementClearance.value,
           movementCavityDiameter: candidate.values.movementCavityDiameter.value,
-          caseWall: candidate.derived.caseWall,
+          caseWall: candidate.assumptions.caseWall.value,
           caseOuterDiameter: candidate.values.caseOuterDiameter.value,
         },
         front: {
           applicationYMin: -2.510,
           frontHandClearance: candidate.values.frontHandClearance.value,
           crystalInnerY: candidate.values.crystalInnerY.value,
-          crystalThickness: candidate.derived.crystalThickness,
+          crystalThickness: candidate.assumptions.crystalThickness.value,
           crystalOuterY: candidate.values.crystalOuterY.value,
         },
         rear: {
           bridgeTopY: 4.235,
           rearBridgeClearance: candidate.values.rearBridgeClearance.value,
           casebackInnerY: candidate.values.casebackInnerY.value,
-          casebackThickness: candidate.derived.casebackThickness,
+          casebackThickness: candidate.assumptions.casebackThickness.value,
           casebackOuterY: candidate.values.casebackOuterY.value,
         },
         totalCaseThickness: candidate.values.totalCaseThickness.value,
+        crownInterface: {
+          stemAxisZ: RUNTIME_INTERFACE_ANCHORS.crownStemAxisZ,
+          caseOuterIntersectionXAtStemZ:
+            candidate.values.caseOuterIntersectionXAtStemZ.value,
+          movementCavityIntersectionXAtStemZ:
+            candidate.values.movementCavityIntersectionXAtStemZ.value,
+          localCaseWallAxialLength:
+            candidate.values.localCaseWallAxialLength.value,
+          crownCenterProjectionWindLocal:
+            candidate.values.crownCenterProjectionWindLocal.value,
+          crownCenterProjectionSetLocal:
+            candidate.values.crownCenterProjectionSetLocal.value,
+          crownOuterProjectionWindLocal:
+            candidate.values.crownOuterProjectionWindLocal.value,
+          crownOuterProjectionSetLocal:
+            candidate.values.crownOuterProjectionSetLocal.value,
+          crownTubeOuterDiameter:
+            candidate.values.crownTubeOuterDiameter.value,
+          crownTubeRadialClearance:
+            candidate.assumptions.crownTubeRadialClearance.value,
+          crownTubeInnerDiameter:
+            candidate.values.crownTubeInnerDiameter.value,
+          crownTubeAnnularWall:
+            candidate.values.crownTubeAnnularWall.value,
+          crownTubeAxialLengthCandidate:
+            candidate.values.crownTubeAxialLengthCandidate.value,
+          geometricCrownProjectionPassed:
+            candidate.geometricCrownProjectionPassed,
+          crownTubeGeometryCandidatePassed:
+            candidate.crownTubeGeometryCandidatePassed,
+          crownFingerAccessDecision:
+            candidate.crownFingerAccessDecision,
+          crownPullPushOperabilityDecision:
+            candidate.crownPullPushOperabilityDecision,
+        },
         equationCheck: candidate.constraints.totalThicknessIsBudgetSum,
       },
     ]),
@@ -309,6 +391,12 @@ const decisionSummary = {
   officialDatumDecision: "REFERENCE_DATUM_UNRESOLVED",
   nextPhaseRecommendation: "PHASE_3B_EXTERIOR_IMPLEMENTATION_AFTER_HUMAN_APPROVAL",
   candidateAdoptionRequiresHumanApproval: true,
+  allGeometricAuditChecksPassed: Object.values(EXTERIOR_CANDIDATES).every(
+    candidate => candidate.allGeometricAuditChecksPassed,
+  ),
+  crownFingerAccessDecision: "UNVERIFIED",
+  crownPullPushOperabilityDecision: "UNVERIFIED",
+  candidateReadyForDefaultAdoption: false,
   finalExteriorProportionReconfirmationRequired: true,
   issue2AndPr5Policy: "PR #5, Issue #2, and D2c3 remain deferred and unchanged.",
 };
@@ -343,7 +431,7 @@ const regressionResults = {
   node: {
     passed: verificationStatus === "PASSED",
     count: nodeTestCount,
-    minimumRequired: 69,
+    minimumRequired: 80,
   },
   candidateDerivation: assertExteriorCandidates(),
   captureChecks,

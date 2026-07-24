@@ -89,6 +89,7 @@ const candidateInputs = Object.freeze({
     lugWidth: 18.0,
     strapWidth: 18.0,
     crownTubeOuterDiameter: 0.90,
+    crownTubeRadialClearance: 0.08,
   }),
   "E-BALANCED": Object.freeze({
     radialMovementClearance: 0.60,
@@ -104,6 +105,7 @@ const candidateInputs = Object.freeze({
     lugWidth: 20.0,
     strapWidth: 20.0,
     crownTubeOuterDiameter: 1.00,
+    crownTubeRadialClearance: 0.10,
   }),
   "E-EDUCATIONAL": Object.freeze({
     radialMovementClearance: 0.90,
@@ -119,6 +121,7 @@ const candidateInputs = Object.freeze({
     lugWidth: 22.0,
     strapWidth: 22.0,
     crownTubeOuterDiameter: 1.10,
+    crownTubeRadialClearance: 0.12,
   }),
 });
 
@@ -147,9 +150,41 @@ function buildCandidate(id, inputs) {
   const crownWindOuterX =
     RUNTIME_INTERFACE_ANCHORS.crownCenterXWind +
     RUNTIME_INTERFACE_ANCHORS.crownAxialWidth / 2;
+  const crownCenterXSet =
+    RUNTIME_INTERFACE_ANCHORS.crownCenterXWind +
+    RUNTIME_INTERFACE_ANCHORS.crownPullOut;
   const crownSetOuterX = crownWindOuterX + RUNTIME_INTERFACE_ANCHORS.crownPullOut;
   const crownOuterProjectionWind = crownWindOuterX - caseOuterDiameter / 2;
   const crownOuterProjectionSet = crownSetOuterX - caseOuterDiameter / 2;
+  const crownStemAxisZ = RUNTIME_INTERFACE_ANCHORS.crownStemAxisZ;
+  const caseOuterRadius = caseOuterDiameter / 2;
+  const movementCavityRadius = movementCavityDiameter / 2;
+  const caseIntersectionPrecondition = Math.abs(crownStemAxisZ) < caseOuterRadius;
+  const cavityIntersectionPrecondition =
+    Math.abs(crownStemAxisZ) < movementCavityRadius;
+  const caseOuterIntersectionXAtStemZ = caseIntersectionPrecondition
+    ? Math.sqrt(caseOuterRadius ** 2 - crownStemAxisZ ** 2)
+    : Number.NaN;
+  const movementCavityIntersectionXAtStemZ = cavityIntersectionPrecondition
+    ? Math.sqrt(movementCavityRadius ** 2 - crownStemAxisZ ** 2)
+    : Number.NaN;
+  const localCaseWallAxialLength =
+    caseOuterIntersectionXAtStemZ - movementCavityIntersectionXAtStemZ;
+  const crownCenterProjectionWindLocal =
+    RUNTIME_INTERFACE_ANCHORS.crownCenterXWind - caseOuterIntersectionXAtStemZ;
+  const crownCenterProjectionSetLocal =
+    crownCenterXSet - caseOuterIntersectionXAtStemZ;
+  const crownOuterProjectionWindLocal =
+    crownWindOuterX - caseOuterIntersectionXAtStemZ;
+  const crownOuterProjectionSetLocal =
+    crownSetOuterX - caseOuterIntersectionXAtStemZ;
+  const crownTubeInnerDiameter =
+    2 *
+    (RUNTIME_INTERFACE_ANCHORS.stemRadius +
+      inputs.crownTubeRadialClearance);
+  const crownTubeAnnularWall =
+    (inputs.crownTubeOuterDiameter - crownTubeInnerDiameter) / 2;
+  const crownTubeAxialLengthCandidate = localCaseWallAxialLength;
   const lugToLug = caseOuterDiameter + 2 * inputs.lugExtension;
 
   const commonDependency =
@@ -287,9 +322,152 @@ function buildCandidate(id, inputs) {
       formula: "position-2 crown outer X − caseOuterDiameter ÷ 2",
       sourceInputs: { crownSetOuterX, caseOuterDiameter },
       classification: "EXTERIOR_DESIGN_CANDIDATE",
-      rationale: "Reports the maximum external projection required by the existing A.7 pull travel.",
-      risk: "Local case opening and finger access require geometry review.",
+      rationale:
+        "Retains the original conservative bounding-radius projection for comparison; formal local crown projections use the circular case intersection at stem Z.",
+      risk:
+        "This bounding-radius value is not the local case-wall projection and must not be used for crown finger-access approval.",
       implementationDependency: "Implement and test the crown recess/tube around fixed A.7 positions.",
+    }),
+    caseOuterIntersectionXAtStemZ: dimension({
+      value: caseOuterIntersectionXAtStemZ,
+      formula: "sqrt((caseOuterDiameter ÷ 2)^2 − crownStemAxisZ^2)",
+      sourceInputs: { caseOuterDiameter, crownStemAxisZ },
+      classification: "RUNTIME_DERIVED",
+      rationale:
+        "Locates the circular candidate case outer surface on the protected crown/stem axis.",
+      risk:
+        "Valid only while the stem-axis Z lies strictly inside the candidate case radius.",
+      implementationDependency:
+        "Final exterior implementation must preserve the circular-interface assumption or re-audit the local intersection.",
+    }),
+    movementCavityIntersectionXAtStemZ: dimension({
+      value: movementCavityIntersectionXAtStemZ,
+      formula: "sqrt((movementCavityDiameter ÷ 2)^2 − crownStemAxisZ^2)",
+      sourceInputs: { movementCavityDiameter, crownStemAxisZ },
+      classification: "RUNTIME_DERIVED",
+      rationale:
+        "Locates the circular candidate movement-cavity surface on the protected crown/stem axis.",
+      risk:
+        "Valid only while the stem-axis Z lies strictly inside the candidate cavity radius.",
+      implementationDependency:
+        "Recompute if the final cavity ceases to be circular at the crown interface.",
+    }),
+    localCaseWallAxialLength: dimension({
+      value: localCaseWallAxialLength,
+      formula:
+        "caseOuterIntersectionXAtStemZ − movementCavityIntersectionXAtStemZ",
+      sourceInputs: {
+        caseOuterIntersectionXAtStemZ,
+        movementCavityIntersectionXAtStemZ,
+      },
+      classification: "RUNTIME_DERIVED",
+      rationale:
+        "Measures the candidate case-wall path along the actual crown/stem axis rather than at the maximum case radius.",
+      risk:
+        "Does not include a crown recess, seat, gasket, thread, or manufacturing allowance.",
+      implementationDependency:
+        "Use as an axial tube-length candidate only; verify final case and tube construction.",
+    }),
+    crownCenterProjectionWindLocal: dimension({
+      value: crownCenterProjectionWindLocal,
+      formula: "position-1 crown center X − caseOuterIntersectionXAtStemZ",
+      sourceInputs: {
+        crownCenterXWind: RUNTIME_INTERFACE_ANCHORS.crownCenterXWind,
+        caseOuterIntersectionXAtStemZ,
+      },
+      classification: "RUNTIME_DERIVED",
+      rationale:
+        "Reports the position-1 crown-center projection from the local circular case surface.",
+      risk: "Finger access and recess operability remain unverified.",
+      implementationDependency:
+        "Human and physical interaction review with the implemented exterior.",
+    }),
+    crownCenterProjectionSetLocal: dimension({
+      value: crownCenterProjectionSetLocal,
+      formula: "position-2 crown center X − caseOuterIntersectionXAtStemZ",
+      sourceInputs: { crownCenterXSet, caseOuterIntersectionXAtStemZ },
+      classification: "RUNTIME_DERIVED",
+      rationale:
+        "Reports the position-2 crown-center projection from the local circular case surface.",
+      risk: "Pull/push operability remains unverified.",
+      implementationDependency:
+        "Human and physical interaction review with the implemented exterior.",
+    }),
+    crownOuterProjectionWindLocal: dimension({
+      value: crownOuterProjectionWindLocal,
+      formula: "position-1 crown outer X − caseOuterIntersectionXAtStemZ",
+      sourceInputs: { crownWindOuterX, caseOuterIntersectionXAtStemZ },
+      classification: "RUNTIME_DERIVED",
+      rationale:
+        "Reports the position-1 crown end projection from the local circular case surface.",
+      risk: "Does not establish a finger-access requirement.",
+      implementationDependency:
+        "Validate crown recess and access after exterior Geometry exists.",
+    }),
+    crownOuterProjectionSetLocal: dimension({
+      value: crownOuterProjectionSetLocal,
+      formula: "position-2 crown outer X − caseOuterIntersectionXAtStemZ",
+      sourceInputs: { crownSetOuterX, caseOuterIntersectionXAtStemZ },
+      classification: "RUNTIME_DERIVED",
+      rationale:
+        "Reports the position-2 crown end projection from the local circular case surface.",
+      risk: "Does not establish pull/push operability.",
+      implementationDependency:
+        "Validate crown recess and access after exterior Geometry exists.",
+    }),
+    crownTubeOuterDiameter: dimension({
+      value: inputs.crownTubeOuterDiameter,
+      formula: "candidate crown-tube outer diameter",
+      sourceInputs: { candidate: id },
+      classification: "EXTERIOR_DESIGN_CANDIDATE",
+      rationale:
+        "Provides a formal exterior tube diameter for local geometric comparison.",
+      risk:
+        "Seat, gasket, thread, press-fit, water resistance, and manufacturing tolerance are unverified.",
+      implementationDependency:
+        "Finalize crown-tube construction only in the exterior implementation phase.",
+    }),
+    crownTubeInnerDiameter: dimension({
+      value: crownTubeInnerDiameter,
+      formula: "2 × (stemRadius + crownTubeRadialClearance)",
+      sourceInputs: {
+        stemRadius: RUNTIME_INTERFACE_ANCHORS.stemRadius,
+        crownTubeRadialClearance: inputs.crownTubeRadialClearance,
+      },
+      classification: "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+      rationale:
+        "Creates a traceable positive educational clearance around the protected stem.",
+      risk:
+        "Not a manufacturing bore, running fit, gasket seat, or water-resistance specification.",
+      implementationDependency:
+        "Verify stem fit, sealing, wear, and tolerances during exterior implementation.",
+    }),
+    crownTubeAnnularWall: dimension({
+      value: crownTubeAnnularWall,
+      formula: "(crownTubeOuterDiameter − crownTubeInnerDiameter) ÷ 2",
+      sourceInputs: {
+        crownTubeOuterDiameter: inputs.crownTubeOuterDiameter,
+        crownTubeInnerDiameter,
+      },
+      classification: "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+      rationale:
+        "Makes the candidate tube wall explicit for geometric feasibility checks.",
+      risk:
+        "Not a strength, threading, sealing, or manufacturability approval.",
+      implementationDependency:
+        "Select material and construction before validating a production wall.",
+    }),
+    crownTubeAxialLengthCandidate: dimension({
+      value: crownTubeAxialLengthCandidate,
+      formula: "localCaseWallAxialLength",
+      sourceInputs: { localCaseWallAxialLength },
+      classification: "EXTERIOR_DESIGN_CANDIDATE",
+      rationale:
+        "Uses the local circular case-wall path as a traceable first tube-length candidate.",
+      risk:
+        "Seat depth, gasket, thread, press-fit, and exterior protrusion are not included.",
+      implementationDependency:
+        "Finalize only after case and tube attachment Geometry is designed.",
     }),
     lugToLug: dimension({
       value: lugToLug,
@@ -320,12 +498,101 @@ function buildCandidate(id, inputs) {
     }),
   };
 
+  const assumptions = {
+    caseWall: dimension({
+      value: inputs.caseWall,
+      formula: "(caseOuterDiameter − movementCavityDiameter) ÷ 2",
+      sourceInputs: { caseOuterDiameter, movementCavityDiameter },
+      classification: "EXTERIOR_DESIGN_CANDIDATE",
+      rationale:
+        "Defines the radial case-body budget used to derive the candidate outer diameter.",
+      risk: "Not a structural, machining, sealing, or impact-resistance specification.",
+      implementationDependency:
+        "Finalize material, section profile, fasteners, and local crown opening.",
+    }),
+    bezelInset: dimension({
+      value: inputs.bezelInset,
+      formula: "caseOuterDiameter − bezelOuterDiameter",
+      sourceInputs: { caseOuterDiameter, bezelOuterDiameter },
+      classification: "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+      rationale:
+        "Keeps a consistent comparison offset between the candidate body and bezel.",
+      risk: "Bezel seat, crystal retention, and gasket geometry are unverified.",
+      implementationDependency: "Final bezel and crystal retention design.",
+    }),
+    dialApertureMargin: dimension({
+      value: inputs.dialApertureMargin,
+      formula: "dialApertureDiameter − safeDisplayDiameter",
+      sourceInputs: { dialApertureDiameter, safeDisplayDiameter },
+      classification: "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+      rationale:
+        "Makes each candidate display margin explicit around the protected S86 envelope.",
+      risk: "Physical dial blank and rehaut geometry are unverified.",
+      implementationDependency:
+        "Reconfirm with the physical dial, indices, bezel, and crystal.",
+    }),
+    crystalClearMargin: dimension({
+      value: inputs.crystalClearMargin,
+      formula: "crystalClearDiameter − dialApertureDiameter",
+      sourceInputs: { crystalClearDiameter, dialApertureDiameter },
+      classification: "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+      rationale:
+        "Provides a traceable clear-diameter margin for candidate comparison.",
+      risk: "Optical distortion, seat width, and gasket compression are unverified.",
+      implementationDependency: "Final crystal profile, seat, and gasket design.",
+    }),
+    crystalThickness: dimension({
+      value: inputs.crystalThickness,
+      formula: "crystalInnerY − crystalOuterY",
+      sourceInputs: { crystalInnerY, crystalOuterY },
+      classification: "EXTERIOR_DESIGN_CANDIDATE",
+      rationale:
+        "Completes the explicit front thickness budget without changing the hand stack.",
+      risk: "Not a strength or material specification.",
+      implementationDependency: "Final crystal material and structural review.",
+    }),
+    casebackThickness: dimension({
+      value: inputs.casebackThickness,
+      formula: "casebackOuterY − casebackInnerY",
+      sourceInputs: { casebackOuterY, casebackInnerY },
+      classification: "EXTERIOR_DESIGN_CANDIDATE",
+      rationale:
+        "Completes the explicit rear thickness budget around the bridge envelope.",
+      risk: "Window, gasket, thread, and fastening construction are unverified.",
+      implementationDependency: "Final caseback and observation-window design.",
+    }),
+    lugExtension: dimension({
+      value: inputs.lugExtension,
+      formula: "(lugToLug − caseOuterDiameter) ÷ 2",
+      sourceInputs: { lugToLug, caseOuterDiameter },
+      classification: "EXTERIOR_DESIGN_CANDIDATE",
+      rationale:
+        "Defines the candidate lug reach used only for 2D proportion comparison.",
+      risk: "Wrist fit, spring-bar position, and lug strength are unverified.",
+      implementationDependency: "Human proportion review and final lug Geometry.",
+    }),
+    crownTubeRadialClearance: dimension({
+      value: inputs.crownTubeRadialClearance,
+      formula: "crownTubeInnerDiameter ÷ 2 − stemRadius",
+      sourceInputs: {
+        crownTubeInnerDiameter,
+        stemRadius: RUNTIME_INTERFACE_ANCHORS.stemRadius,
+      },
+      classification: "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+      rationale:
+        "Separates the protected stem radius from the candidate tube bore.",
+      risk:
+        "Not a production fit, lubricant, wear, gasket, or water-resistance allowance.",
+      implementationDependency:
+        "Verify fit class, material, sealing, wear, and manufacturing tolerance.",
+    }),
+  };
+
   const derived = Object.freeze({
     safeDisplayDiameter: round(safeDisplayDiameter),
     caseWall: round(inputs.caseWall),
     crystalThickness: round(inputs.crystalThickness),
     casebackThickness: round(inputs.casebackThickness),
-    crownTubeOuterDiameter: round(inputs.crownTubeOuterDiameter),
     crownWindOuterX: round(crownWindOuterX),
     crownSetOuterX: round(crownSetOuterX),
     crownOuterProjectionWind: round(crownOuterProjectionWind),
@@ -334,6 +601,16 @@ function buildCandidate(id, inputs) {
     lugExtension: round(inputs.lugExtension),
   });
 
+  const geometricCrownProjectionPassed =
+    crownCenterProjectionWindLocal > 0 &&
+    crownCenterProjectionSetLocal > 0 &&
+    crownOuterProjectionWindLocal > 0 &&
+    crownOuterProjectionSetLocal > 0;
+  const crownTubeGeometryCandidatePassed =
+    crownTubeInnerDiameter > 2 * RUNTIME_INTERFACE_ANCHORS.stemRadius &&
+    inputs.crownTubeOuterDiameter > crownTubeInnerDiameter &&
+    crownTubeAnnularWall > 0 &&
+    crownTubeAxialLengthCandidate > 0;
   const constraints = Object.freeze({
     movementCavityContainsMovement: movementCavityDiameter > movementDiameter,
     apertureContainsS86: dialApertureDiameter > safeDisplayDiameter,
@@ -341,7 +618,13 @@ function buildCandidate(id, inputs) {
     casebackIsBehindBridges: casebackInnerY > bridgeTop,
     positiveFrontClearance: inputs.frontHandClearance > 0,
     positiveRearClearance: inputs.rearBridgeClearance > 0,
-    positiveCrownProjectionInBothPositions: crownOuterProjectionWind > 0 && crownOuterProjectionSet > 0,
+    caseIntersectionPrecondition,
+    cavityIntersectionPrecondition,
+    outerIntersectionExceedsCavityIntersection:
+      caseOuterIntersectionXAtStemZ > movementCavityIntersectionXAtStemZ,
+    positiveLocalCaseWallAxialLength: localCaseWallAxialLength > 0,
+    geometricCrownProjectionPassed,
+    crownTubeGeometryCandidatePassed,
     totalThicknessIsBudgetSum:
       round(totalCaseThickness) ===
       round(
@@ -357,9 +640,23 @@ function buildCandidate(id, inputs) {
     id,
     status: "CANDIDATE_NOT_ADOPTED",
     values: Object.freeze(values),
+    assumptions: Object.freeze(assumptions),
     derived,
     constraints,
-    allConstraintsPassed: Object.values(constraints).every(Boolean),
+    deferredCrownTubeInterfaces: Object.freeze({
+      seatDesign: "UNVERIFIED",
+      gasket: "UNVERIFIED",
+      thread: "UNVERIFIED",
+      pressFit: "UNVERIFIED",
+      waterResistance: "UNVERIFIED",
+      manufacturingTolerance: "UNVERIFIED",
+    }),
+    geometricCrownProjectionPassed,
+    crownTubeGeometryCandidatePassed,
+    crownFingerAccessDecision: "UNVERIFIED",
+    crownPullPushOperabilityDecision: "UNVERIFIED",
+    candidateReadyForDefaultAdoption: false,
+    allGeometricAuditChecksPassed: Object.values(constraints).every(Boolean),
   });
 }
 
@@ -379,6 +676,7 @@ export const CANDIDATE_COMPARISON = Object.freeze({
   criteria: Object.freeze({
     "E-COMPACT": Object.freeze({
       interferenceRisk: "HIGH_RISK",
+      crownInterfaceRisk: "LOW_RISK",
       watchProportion: 4,
       mechanismVisibility: 2,
       s86Alignment: 4,
@@ -388,10 +686,12 @@ export const CANDIDATE_COMPARISON = Object.freeze({
       transparencyAlignment: 3,
       issue2Impact: "MODERATE_RISK",
       implementationRegressionRisk: "HIGH_RISK",
-      summary: "Smallest candidate, but its narrow front/rear and radial budgets leave the least implementation margin.",
+      summary:
+        "Smallest candidate with the largest local position-1 crown-center projection, but its narrow front/rear and radial budgets keep overall implementation risk high.",
     }),
     "E-BALANCED": Object.freeze({
       interferenceRisk: "MODERATE_RISK",
+      crownInterfaceRisk: "MODERATE_RISK",
       watchProportion: 5,
       mechanismVisibility: 4,
       s86Alignment: 5,
@@ -401,10 +701,12 @@ export const CANDIDATE_COMPARISON = Object.freeze({
       transparencyAlignment: 4,
       issue2Impact: "MODERATE_RISK",
       implementationRegressionRisk: "MODERATE_RISK",
-      summary: "Balances S86 display framing, movement observation, external size, and implementation margin.",
+      summary:
+        "Balances S86 display framing, movement observation, external size, and a positive local crown/tube geometry candidate.",
     }),
     "E-EDUCATIONAL": Object.freeze({
       interferenceRisk: "LOW_RISK",
+      crownInterfaceRisk: "HIGH_RISK",
       watchProportion: 3,
       mechanismVisibility: 5,
       s86Alignment: 5,
@@ -414,14 +716,15 @@ export const CANDIDATE_COMPARISON = Object.freeze({
       transparencyAlignment: 5,
       issue2Impact: "HIGH_RISK",
       implementationRegressionRisk: "MODERATE_RISK",
-      summary: "Maximizes observation space but increases size and the future transparent-exterior rendering surface.",
+      summary:
+        "Maximizes observation space but has the smallest local position-1 crown-center projection and the largest future transparent-exterior rendering surface.",
     }),
   }),
   recommendation: Object.freeze({
     candidate: "E-BALANCED",
     status: "RECOMMENDED_NOT_ADOPTED",
     rationale:
-      "It preserves every protected anchor while offering materially safer clearances than E-COMPACT without the size and Issue #2 rendering exposure of E-EDUCATIONAL.",
+      "It preserves every protected anchor while balancing the local circular case intersection and positive crown-tube geometry candidate against E-COMPACT's tighter overall clearances and E-EDUCATIONAL's smallest local position-1 crown-center projection, size, and Issue #2 rendering exposure.",
     humanApprovalRequired: true,
     defaultPathChanged: false,
   }),
@@ -429,10 +732,13 @@ export const CANDIDATE_COMPARISON = Object.freeze({
 
 export function assertExteriorCandidates() {
   for (const candidate of Object.values(EXTERIOR_CANDIDATES)) {
-    if (!candidate.allConstraintsPassed) {
+    if (!candidate.allGeometricAuditChecksPassed) {
       throw new Error(`${candidate.id} violates Phase 3A containment constraints`);
     }
-    for (const [name, record] of Object.entries(candidate.values)) {
+    for (const [name, record] of Object.entries({
+      ...candidate.values,
+      ...candidate.assumptions,
+    })) {
       if (!Number.isFinite(record.value)) {
         throw new Error(`${candidate.id}.${name} is not finite`);
       }
@@ -440,8 +746,7 @@ export function assertExteriorCandidates() {
   }
   return {
     candidateCount: Object.keys(EXTERIOR_CANDIDATES).length,
-    allConstraintsPassed: true,
+    allGeometricAuditChecksPassed: true,
     recommendation: CANDIDATE_COMPARISON.recommendation,
   };
 }
-
