@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "phase": "Phase 3A",
   "sourceMainCommit": "fafd3ae3b9e7224f47320b53c7e635b3bb3b8f58",
-  "sourceAuditCommit": "ba62c5497d424152aecd3ea4f8c576d339d12851",
+  "sourceAuditCommit": "263c1afa7d322be3689749dec44e59bb9faf5215",
   "sourceBranch": "audit/final-exterior-interface-phase3a",
   "appVersion": "v3.15.0",
-  "generatedAt": "2026-07-24T06:13:35.660Z",
+  "generatedAt": "2026-07-24T06:49:20.025Z",
   "captureMode": "same-origin unsandboxed iframe harness - actual Three.js scene rendered to offscreen WebGLRenderTarget",
   "normalSceneExteriorGeometryAdded": false,
   "defaultCandidateAdopted": false,
@@ -205,9 +205,150 @@
             "caseOuterDiameter": 39.00000000000001
           },
           "classification": "EXTERIOR_DESIGN_CANDIDATE",
-          "rationale": "Reports the maximum external projection required by the existing A.7 pull travel.",
-          "risk": "Local case opening and finger access require geometry review.",
+          "rationale": "Retains the original conservative bounding-radius projection for comparison; formal local crown projections use the circular case intersection at stem Z.",
+          "risk": "This bounding-radius value is not the local case-wall projection and must not be used for crown finger-access approval.",
           "implementationDependency": "Implement and test the crown recess/tube around fixed A.7 positions."
+        },
+        "caseOuterIntersectionXAtStemZ": {
+          "value": 18.973666,
+          "unit": "model unit",
+          "formula": "sqrt((caseOuterDiameter ÷ 2)^2 − crownStemAxisZ^2)",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.00000000000001,
+            "crownStemAxisZ": -4.5
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Locates the circular candidate case outer surface on the protected crown/stem axis.",
+          "risk": "Valid only while the stem-axis Z lies strictly inside the candidate case radius.",
+          "implementationDependency": "Final exterior implementation must preserve the circular-interface assumption or re-audit the local intersection."
+        },
+        "movementCavityIntersectionXAtStemZ": {
+          "value": 18.098964,
+          "unit": "model unit",
+          "formula": "sqrt((movementCavityDiameter ÷ 2)^2 − crownStemAxisZ^2)",
+          "sourceInputs": {
+            "movementCavityDiameter": 37.300000000000004,
+            "crownStemAxisZ": -4.5
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Locates the circular candidate movement-cavity surface on the protected crown/stem axis.",
+          "risk": "Valid only while the stem-axis Z lies strictly inside the candidate cavity radius.",
+          "implementationDependency": "Recompute if the final cavity ceases to be circular at the crown interface."
+        },
+        "localCaseWallAxialLength": {
+          "value": 0.874702,
+          "unit": "model unit",
+          "formula": "caseOuterIntersectionXAtStemZ − movementCavityIntersectionXAtStemZ",
+          "sourceInputs": {
+            "caseOuterIntersectionXAtStemZ": 18.97366596101028,
+            "movementCavityIntersectionXAtStemZ": 18.098964058752095
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Measures the candidate case-wall path along the actual crown/stem axis rather than at the maximum case radius.",
+          "risk": "Does not include a crown recess, seat, gasket, thread, or manufacturing allowance.",
+          "implementationDependency": "Use as an axial tube-length candidate only; verify final case and tube construction."
+        },
+        "crownCenterProjectionWindLocal": {
+          "value": 0.826334,
+          "unit": "model unit",
+          "formula": "position-1 crown center X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownCenterXWind": 19.8,
+            "caseOuterIntersectionXAtStemZ": 18.97366596101028
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-1 crown-center projection from the local circular case surface.",
+          "risk": "Finger access and recess operability remain unverified.",
+          "implementationDependency": "Human and physical interaction review with the implemented exterior."
+        },
+        "crownCenterProjectionSetLocal": {
+          "value": 2.176334,
+          "unit": "model unit",
+          "formula": "position-2 crown center X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownCenterXSet": 21.150000000000002,
+            "caseOuterIntersectionXAtStemZ": 18.97366596101028
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-2 crown-center projection from the local circular case surface.",
+          "risk": "Pull/push operability remains unverified.",
+          "implementationDependency": "Human and physical interaction review with the implemented exterior."
+        },
+        "crownOuterProjectionWindLocal": {
+          "value": 1.401334,
+          "unit": "model unit",
+          "formula": "position-1 crown outer X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownWindOuterX": 20.375,
+            "caseOuterIntersectionXAtStemZ": 18.97366596101028
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-1 crown end projection from the local circular case surface.",
+          "risk": "Does not establish a finger-access requirement.",
+          "implementationDependency": "Validate crown recess and access after exterior Geometry exists."
+        },
+        "crownOuterProjectionSetLocal": {
+          "value": 2.751334,
+          "unit": "model unit",
+          "formula": "position-2 crown outer X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownSetOuterX": 21.725,
+            "caseOuterIntersectionXAtStemZ": 18.97366596101028
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-2 crown end projection from the local circular case surface.",
+          "risk": "Does not establish pull/push operability.",
+          "implementationDependency": "Validate crown recess and access after exterior Geometry exists."
+        },
+        "crownTubeOuterDiameter": {
+          "value": 0.9,
+          "unit": "model unit",
+          "formula": "candidate crown-tube outer diameter",
+          "sourceInputs": {
+            "candidate": "E-COMPACT"
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Provides a formal exterior tube diameter for local geometric comparison.",
+          "risk": "Seat, gasket, thread, press-fit, water resistance, and manufacturing tolerance are unverified.",
+          "implementationDependency": "Finalize crown-tube construction only in the exterior implementation phase."
+        },
+        "crownTubeInnerDiameter": {
+          "value": 0.48,
+          "unit": "model unit",
+          "formula": "2 × (stemRadius + crownTubeRadialClearance)",
+          "sourceInputs": {
+            "stemRadius": 0.16,
+            "crownTubeRadialClearance": 0.08
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a traceable positive educational clearance around the protected stem.",
+          "risk": "Not a manufacturing bore, running fit, gasket seat, or water-resistance specification.",
+          "implementationDependency": "Verify stem fit, sealing, wear, and tolerances during exterior implementation."
+        },
+        "crownTubeAnnularWall": {
+          "value": 0.21,
+          "unit": "model unit",
+          "formula": "(crownTubeOuterDiameter − crownTubeInnerDiameter) ÷ 2",
+          "sourceInputs": {
+            "crownTubeOuterDiameter": 0.9,
+            "crownTubeInnerDiameter": 0.48
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Makes the candidate tube wall explicit for geometric feasibility checks.",
+          "risk": "Not a strength, threading, sealing, or manufacturability approval.",
+          "implementationDependency": "Select material and construction before validating a production wall."
+        },
+        "crownTubeAxialLengthCandidate": {
+          "value": 0.874702,
+          "unit": "model unit",
+          "formula": "localCaseWallAxialLength",
+          "sourceInputs": {
+            "localCaseWallAxialLength": 0.8747019022581846
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Uses the local circular case-wall path as a traceable first tube-length candidate.",
+          "risk": "Seat depth, gasket, thread, press-fit, and exterior protrusion are not included.",
+          "implementationDependency": "Finalize only after case and tube attachment Geometry is designed."
         },
         "lugToLug": {
           "value": 44,
@@ -247,12 +388,117 @@
           "implementationDependency": "Final strap design after lug Geometry approval."
         }
       },
+      "assumptions": {
+        "caseWall": {
+          "value": 0.85,
+          "unit": "model unit",
+          "formula": "(caseOuterDiameter − movementCavityDiameter) ÷ 2",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.00000000000001,
+            "movementCavityDiameter": 37.300000000000004
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines the radial case-body budget used to derive the candidate outer diameter.",
+          "risk": "Not a structural, machining, sealing, or impact-resistance specification.",
+          "implementationDependency": "Finalize material, section profile, fasteners, and local crown opening."
+        },
+        "bezelInset": {
+          "value": 0.4,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter − bezelOuterDiameter",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.00000000000001,
+            "bezelOuterDiameter": 38.60000000000001
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Keeps a consistent comparison offset between the candidate body and bezel.",
+          "risk": "Bezel seat, crystal retention, and gasket geometry are unverified.",
+          "implementationDependency": "Final bezel and crystal retention design."
+        },
+        "dialApertureMargin": {
+          "value": 0.508,
+          "unit": "model unit",
+          "formula": "dialApertureDiameter − safeDisplayDiameter",
+          "sourceInputs": {
+            "dialApertureDiameter": 28.2,
+            "safeDisplayDiameter": 27.692
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Makes each candidate display margin explicit around the protected S86 envelope.",
+          "risk": "Physical dial blank and rehaut geometry are unverified.",
+          "implementationDependency": "Reconfirm with the physical dial, indices, bezel, and crystal."
+        },
+        "crystalClearMargin": {
+          "value": 0.6,
+          "unit": "model unit",
+          "formula": "crystalClearDiameter − dialApertureDiameter",
+          "sourceInputs": {
+            "crystalClearDiameter": 28.8,
+            "dialApertureDiameter": 28.2
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Provides a traceable clear-diameter margin for candidate comparison.",
+          "risk": "Optical distortion, seat width, and gasket compression are unverified.",
+          "implementationDependency": "Final crystal profile, seat, and gasket design."
+        },
+        "crystalThickness": {
+          "value": 0.75,
+          "unit": "model unit",
+          "formula": "crystalInnerY − crystalOuterY",
+          "sourceInputs": {
+            "crystalInnerY": -2.86,
+            "crystalOuterY": -3.61
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the explicit front thickness budget without changing the hand stack.",
+          "risk": "Not a strength or material specification.",
+          "implementationDependency": "Final crystal material and structural review."
+        },
+        "casebackThickness": {
+          "value": 0.75,
+          "unit": "model unit",
+          "formula": "casebackOuterY − casebackInnerY",
+          "sourceInputs": {
+            "casebackOuterY": 5.335,
+            "casebackInnerY": 4.585
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the explicit rear thickness budget around the bridge envelope.",
+          "risk": "Window, gasket, thread, and fastening construction are unverified.",
+          "implementationDependency": "Final caseback and observation-window design."
+        },
+        "lugExtension": {
+          "value": 2.5,
+          "unit": "model unit",
+          "formula": "(lugToLug − caseOuterDiameter) ÷ 2",
+          "sourceInputs": {
+            "lugToLug": 44.00000000000001,
+            "caseOuterDiameter": 39.00000000000001
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines the candidate lug reach used only for 2D proportion comparison.",
+          "risk": "Wrist fit, spring-bar position, and lug strength are unverified.",
+          "implementationDependency": "Human proportion review and final lug Geometry."
+        },
+        "crownTubeRadialClearance": {
+          "value": 0.08,
+          "unit": "model unit",
+          "formula": "crownTubeInnerDiameter ÷ 2 − stemRadius",
+          "sourceInputs": {
+            "crownTubeInnerDiameter": 0.48,
+            "stemRadius": 0.16
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Separates the protected stem radius from the candidate tube bore.",
+          "risk": "Not a production fit, lubricant, wear, gasket, or water-resistance allowance.",
+          "implementationDependency": "Verify fit class, material, sealing, wear, and manufacturing tolerance."
+        }
+      },
       "derived": {
         "safeDisplayDiameter": 27.692,
         "caseWall": 0.85,
         "crystalThickness": 0.75,
         "casebackThickness": 0.75,
-        "crownTubeOuterDiameter": 0.9,
         "crownWindOuterX": 20.375,
         "crownSetOuterX": 21.725,
         "crownOuterProjectionWind": 0.875,
@@ -267,10 +513,28 @@
         "casebackIsBehindBridges": true,
         "positiveFrontClearance": true,
         "positiveRearClearance": true,
-        "positiveCrownProjectionInBothPositions": true,
+        "caseIntersectionPrecondition": true,
+        "cavityIntersectionPrecondition": true,
+        "outerIntersectionExceedsCavityIntersection": true,
+        "positiveLocalCaseWallAxialLength": true,
+        "geometricCrownProjectionPassed": true,
+        "crownTubeGeometryCandidatePassed": true,
         "totalThicknessIsBudgetSum": true
       },
-      "allConstraintsPassed": true
+      "deferredCrownTubeInterfaces": {
+        "seatDesign": "UNVERIFIED",
+        "gasket": "UNVERIFIED",
+        "thread": "UNVERIFIED",
+        "pressFit": "UNVERIFIED",
+        "waterResistance": "UNVERIFIED",
+        "manufacturingTolerance": "UNVERIFIED"
+      },
+      "geometricCrownProjectionPassed": true,
+      "crownTubeGeometryCandidatePassed": true,
+      "crownFingerAccessDecision": "UNVERIFIED",
+      "crownPullPushOperabilityDecision": "UNVERIFIED",
+      "candidateReadyForDefaultAdoption": false,
+      "allGeometricAuditChecksPassed": true
     },
     "E-BALANCED": {
       "id": "E-BALANCED",
@@ -466,9 +730,150 @@
             "caseOuterDiameter": 39.6
           },
           "classification": "EXTERIOR_DESIGN_CANDIDATE",
-          "rationale": "Reports the maximum external projection required by the existing A.7 pull travel.",
-          "risk": "Local case opening and finger access require geometry review.",
+          "rationale": "Retains the original conservative bounding-radius projection for comparison; formal local crown projections use the circular case intersection at stem Z.",
+          "risk": "This bounding-radius value is not the local case-wall projection and must not be used for crown finger-access approval.",
           "implementationDependency": "Implement and test the crown recess/tube around fixed A.7 positions."
+        },
+        "caseOuterIntersectionXAtStemZ": {
+          "value": 19.281857,
+          "unit": "model unit",
+          "formula": "sqrt((caseOuterDiameter ÷ 2)^2 − crownStemAxisZ^2)",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.6,
+            "crownStemAxisZ": -4.5
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Locates the circular candidate case outer surface on the protected crown/stem axis.",
+          "risk": "Valid only while the stem-axis Z lies strictly inside the candidate case radius.",
+          "implementationDependency": "Final exterior implementation must preserve the circular-interface assumption or re-audit the local intersection."
+        },
+        "movementCavityIntersectionXAtStemZ": {
+          "value": 18.35647,
+          "unit": "model unit",
+          "formula": "sqrt((movementCavityDiameter ÷ 2)^2 − crownStemAxisZ^2)",
+          "sourceInputs": {
+            "movementCavityDiameter": 37.800000000000004,
+            "crownStemAxisZ": -4.5
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Locates the circular candidate movement-cavity surface on the protected crown/stem axis.",
+          "risk": "Valid only while the stem-axis Z lies strictly inside the candidate cavity radius.",
+          "implementationDependency": "Recompute if the final cavity ceases to be circular at the crown interface."
+        },
+        "localCaseWallAxialLength": {
+          "value": 0.925387,
+          "unit": "model unit",
+          "formula": "caseOuterIntersectionXAtStemZ − movementCavityIntersectionXAtStemZ",
+          "sourceInputs": {
+            "caseOuterIntersectionXAtStemZ": 19.281856757065697,
+            "movementCavityIntersectionXAtStemZ": 18.356470248934027
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Measures the candidate case-wall path along the actual crown/stem axis rather than at the maximum case radius.",
+          "risk": "Does not include a crown recess, seat, gasket, thread, or manufacturing allowance.",
+          "implementationDependency": "Use as an axial tube-length candidate only; verify final case and tube construction."
+        },
+        "crownCenterProjectionWindLocal": {
+          "value": 0.518143,
+          "unit": "model unit",
+          "formula": "position-1 crown center X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownCenterXWind": 19.8,
+            "caseOuterIntersectionXAtStemZ": 19.281856757065697
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-1 crown-center projection from the local circular case surface.",
+          "risk": "Finger access and recess operability remain unverified.",
+          "implementationDependency": "Human and physical interaction review with the implemented exterior."
+        },
+        "crownCenterProjectionSetLocal": {
+          "value": 1.868143,
+          "unit": "model unit",
+          "formula": "position-2 crown center X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownCenterXSet": 21.150000000000002,
+            "caseOuterIntersectionXAtStemZ": 19.281856757065697
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-2 crown-center projection from the local circular case surface.",
+          "risk": "Pull/push operability remains unverified.",
+          "implementationDependency": "Human and physical interaction review with the implemented exterior."
+        },
+        "crownOuterProjectionWindLocal": {
+          "value": 1.093143,
+          "unit": "model unit",
+          "formula": "position-1 crown outer X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownWindOuterX": 20.375,
+            "caseOuterIntersectionXAtStemZ": 19.281856757065697
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-1 crown end projection from the local circular case surface.",
+          "risk": "Does not establish a finger-access requirement.",
+          "implementationDependency": "Validate crown recess and access after exterior Geometry exists."
+        },
+        "crownOuterProjectionSetLocal": {
+          "value": 2.443143,
+          "unit": "model unit",
+          "formula": "position-2 crown outer X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownSetOuterX": 21.725,
+            "caseOuterIntersectionXAtStemZ": 19.281856757065697
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-2 crown end projection from the local circular case surface.",
+          "risk": "Does not establish pull/push operability.",
+          "implementationDependency": "Validate crown recess and access after exterior Geometry exists."
+        },
+        "crownTubeOuterDiameter": {
+          "value": 1,
+          "unit": "model unit",
+          "formula": "candidate crown-tube outer diameter",
+          "sourceInputs": {
+            "candidate": "E-BALANCED"
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Provides a formal exterior tube diameter for local geometric comparison.",
+          "risk": "Seat, gasket, thread, press-fit, water resistance, and manufacturing tolerance are unverified.",
+          "implementationDependency": "Finalize crown-tube construction only in the exterior implementation phase."
+        },
+        "crownTubeInnerDiameter": {
+          "value": 0.52,
+          "unit": "model unit",
+          "formula": "2 × (stemRadius + crownTubeRadialClearance)",
+          "sourceInputs": {
+            "stemRadius": 0.16,
+            "crownTubeRadialClearance": 0.1
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a traceable positive educational clearance around the protected stem.",
+          "risk": "Not a manufacturing bore, running fit, gasket seat, or water-resistance specification.",
+          "implementationDependency": "Verify stem fit, sealing, wear, and tolerances during exterior implementation."
+        },
+        "crownTubeAnnularWall": {
+          "value": 0.24,
+          "unit": "model unit",
+          "formula": "(crownTubeOuterDiameter − crownTubeInnerDiameter) ÷ 2",
+          "sourceInputs": {
+            "crownTubeOuterDiameter": 1,
+            "crownTubeInnerDiameter": 0.52
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Makes the candidate tube wall explicit for geometric feasibility checks.",
+          "risk": "Not a strength, threading, sealing, or manufacturability approval.",
+          "implementationDependency": "Select material and construction before validating a production wall."
+        },
+        "crownTubeAxialLengthCandidate": {
+          "value": 0.925387,
+          "unit": "model unit",
+          "formula": "localCaseWallAxialLength",
+          "sourceInputs": {
+            "localCaseWallAxialLength": 0.9253865081316697
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Uses the local circular case-wall path as a traceable first tube-length candidate.",
+          "risk": "Seat depth, gasket, thread, press-fit, and exterior protrusion are not included.",
+          "implementationDependency": "Finalize only after case and tube attachment Geometry is designed."
         },
         "lugToLug": {
           "value": 46.6,
@@ -508,12 +913,117 @@
           "implementationDependency": "Final strap design after lug Geometry approval."
         }
       },
+      "assumptions": {
+        "caseWall": {
+          "value": 0.9,
+          "unit": "model unit",
+          "formula": "(caseOuterDiameter − movementCavityDiameter) ÷ 2",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.6,
+            "movementCavityDiameter": 37.800000000000004
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines the radial case-body budget used to derive the candidate outer diameter.",
+          "risk": "Not a structural, machining, sealing, or impact-resistance specification.",
+          "implementationDependency": "Finalize material, section profile, fasteners, and local crown opening."
+        },
+        "bezelInset": {
+          "value": 0.4,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter − bezelOuterDiameter",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.6,
+            "bezelOuterDiameter": 39.2
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Keeps a consistent comparison offset between the candidate body and bezel.",
+          "risk": "Bezel seat, crystal retention, and gasket geometry are unverified.",
+          "implementationDependency": "Final bezel and crystal retention design."
+        },
+        "dialApertureMargin": {
+          "value": 1.308,
+          "unit": "model unit",
+          "formula": "dialApertureDiameter − safeDisplayDiameter",
+          "sourceInputs": {
+            "dialApertureDiameter": 29,
+            "safeDisplayDiameter": 27.692
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Makes each candidate display margin explicit around the protected S86 envelope.",
+          "risk": "Physical dial blank and rehaut geometry are unverified.",
+          "implementationDependency": "Reconfirm with the physical dial, indices, bezel, and crystal."
+        },
+        "crystalClearMargin": {
+          "value": 0.8,
+          "unit": "model unit",
+          "formula": "crystalClearDiameter − dialApertureDiameter",
+          "sourceInputs": {
+            "crystalClearDiameter": 29.8,
+            "dialApertureDiameter": 29
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Provides a traceable clear-diameter margin for candidate comparison.",
+          "risk": "Optical distortion, seat width, and gasket compression are unverified.",
+          "implementationDependency": "Final crystal profile, seat, and gasket design."
+        },
+        "crystalThickness": {
+          "value": 0.95,
+          "unit": "model unit",
+          "formula": "crystalInnerY − crystalOuterY",
+          "sourceInputs": {
+            "crystalInnerY": -3.0599999999999996,
+            "crystalOuterY": -4.01
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the explicit front thickness budget without changing the hand stack.",
+          "risk": "Not a strength or material specification.",
+          "implementationDependency": "Final crystal material and structural review."
+        },
+        "casebackThickness": {
+          "value": 0.95,
+          "unit": "model unit",
+          "formula": "casebackOuterY − casebackInnerY",
+          "sourceInputs": {
+            "casebackOuterY": 5.835000000000001,
+            "casebackInnerY": 4.885000000000001
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the explicit rear thickness budget around the bridge envelope.",
+          "risk": "Window, gasket, thread, and fastening construction are unverified.",
+          "implementationDependency": "Final caseback and observation-window design."
+        },
+        "lugExtension": {
+          "value": 3.5,
+          "unit": "model unit",
+          "formula": "(lugToLug − caseOuterDiameter) ÷ 2",
+          "sourceInputs": {
+            "lugToLug": 46.6,
+            "caseOuterDiameter": 39.6
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines the candidate lug reach used only for 2D proportion comparison.",
+          "risk": "Wrist fit, spring-bar position, and lug strength are unverified.",
+          "implementationDependency": "Human proportion review and final lug Geometry."
+        },
+        "crownTubeRadialClearance": {
+          "value": 0.1,
+          "unit": "model unit",
+          "formula": "crownTubeInnerDiameter ÷ 2 − stemRadius",
+          "sourceInputs": {
+            "crownTubeInnerDiameter": 0.52,
+            "stemRadius": 0.16
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Separates the protected stem radius from the candidate tube bore.",
+          "risk": "Not a production fit, lubricant, wear, gasket, or water-resistance allowance.",
+          "implementationDependency": "Verify fit class, material, sealing, wear, and manufacturing tolerance."
+        }
+      },
       "derived": {
         "safeDisplayDiameter": 27.692,
         "caseWall": 0.9,
         "crystalThickness": 0.95,
         "casebackThickness": 0.95,
-        "crownTubeOuterDiameter": 1,
         "crownWindOuterX": 20.375,
         "crownSetOuterX": 21.725,
         "crownOuterProjectionWind": 0.575,
@@ -528,10 +1038,28 @@
         "casebackIsBehindBridges": true,
         "positiveFrontClearance": true,
         "positiveRearClearance": true,
-        "positiveCrownProjectionInBothPositions": true,
+        "caseIntersectionPrecondition": true,
+        "cavityIntersectionPrecondition": true,
+        "outerIntersectionExceedsCavityIntersection": true,
+        "positiveLocalCaseWallAxialLength": true,
+        "geometricCrownProjectionPassed": true,
+        "crownTubeGeometryCandidatePassed": true,
         "totalThicknessIsBudgetSum": true
       },
-      "allConstraintsPassed": true
+      "deferredCrownTubeInterfaces": {
+        "seatDesign": "UNVERIFIED",
+        "gasket": "UNVERIFIED",
+        "thread": "UNVERIFIED",
+        "pressFit": "UNVERIFIED",
+        "waterResistance": "UNVERIFIED",
+        "manufacturingTolerance": "UNVERIFIED"
+      },
+      "geometricCrownProjectionPassed": true,
+      "crownTubeGeometryCandidatePassed": true,
+      "crownFingerAccessDecision": "UNVERIFIED",
+      "crownPullPushOperabilityDecision": "UNVERIFIED",
+      "candidateReadyForDefaultAdoption": false,
+      "allGeometricAuditChecksPassed": true
     },
     "E-EDUCATIONAL": {
       "id": "E-EDUCATIONAL",
@@ -727,9 +1255,150 @@
             "caseOuterDiameter": 40.199999999999996
           },
           "classification": "EXTERIOR_DESIGN_CANDIDATE",
-          "rationale": "Reports the maximum external projection required by the existing A.7 pull travel.",
-          "risk": "Local case opening and finger access require geometry review.",
+          "rationale": "Retains the original conservative bounding-radius projection for comparison; formal local crown projections use the circular case intersection at stem Z.",
+          "risk": "This bounding-radius value is not the local case-wall projection and must not be used for crown finger-access approval.",
           "implementationDependency": "Implement and test the crown recess/tube around fixed A.7 positions."
+        },
+        "caseOuterIntersectionXAtStemZ": {
+          "value": 19.589793,
+          "unit": "model unit",
+          "formula": "sqrt((caseOuterDiameter ÷ 2)^2 − crownStemAxisZ^2)",
+          "sourceInputs": {
+            "caseOuterDiameter": 40.199999999999996,
+            "crownStemAxisZ": -4.5
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Locates the circular candidate case outer surface on the protected crown/stem axis.",
+          "risk": "Valid only while the stem-axis Z lies strictly inside the candidate case radius.",
+          "implementationDependency": "Final exterior implementation must preserve the circular-interface assumption or re-audit the local intersection."
+        },
+        "movementCavityIntersectionXAtStemZ": {
+          "value": 18.665208,
+          "unit": "model unit",
+          "formula": "sqrt((movementCavityDiameter ÷ 2)^2 − crownStemAxisZ^2)",
+          "sourceInputs": {
+            "movementCavityDiameter": 38.4,
+            "crownStemAxisZ": -4.5
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Locates the circular candidate movement-cavity surface on the protected crown/stem axis.",
+          "risk": "Valid only while the stem-axis Z lies strictly inside the candidate cavity radius.",
+          "implementationDependency": "Recompute if the final cavity ceases to be circular at the crown interface."
+        },
+        "localCaseWallAxialLength": {
+          "value": 0.924585,
+          "unit": "model unit",
+          "formula": "caseOuterIntersectionXAtStemZ − movementCavityIntersectionXAtStemZ",
+          "sourceInputs": {
+            "caseOuterIntersectionXAtStemZ": 19.58979326077741,
+            "movementCavityIntersectionXAtStemZ": 18.665208276362737
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Measures the candidate case-wall path along the actual crown/stem axis rather than at the maximum case radius.",
+          "risk": "Does not include a crown recess, seat, gasket, thread, or manufacturing allowance.",
+          "implementationDependency": "Use as an axial tube-length candidate only; verify final case and tube construction."
+        },
+        "crownCenterProjectionWindLocal": {
+          "value": 0.210207,
+          "unit": "model unit",
+          "formula": "position-1 crown center X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownCenterXWind": 19.8,
+            "caseOuterIntersectionXAtStemZ": 19.58979326077741
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-1 crown-center projection from the local circular case surface.",
+          "risk": "Finger access and recess operability remain unverified.",
+          "implementationDependency": "Human and physical interaction review with the implemented exterior."
+        },
+        "crownCenterProjectionSetLocal": {
+          "value": 1.560207,
+          "unit": "model unit",
+          "formula": "position-2 crown center X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownCenterXSet": 21.150000000000002,
+            "caseOuterIntersectionXAtStemZ": 19.58979326077741
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-2 crown-center projection from the local circular case surface.",
+          "risk": "Pull/push operability remains unverified.",
+          "implementationDependency": "Human and physical interaction review with the implemented exterior."
+        },
+        "crownOuterProjectionWindLocal": {
+          "value": 0.785207,
+          "unit": "model unit",
+          "formula": "position-1 crown outer X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownWindOuterX": 20.375,
+            "caseOuterIntersectionXAtStemZ": 19.58979326077741
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-1 crown end projection from the local circular case surface.",
+          "risk": "Does not establish a finger-access requirement.",
+          "implementationDependency": "Validate crown recess and access after exterior Geometry exists."
+        },
+        "crownOuterProjectionSetLocal": {
+          "value": 2.135207,
+          "unit": "model unit",
+          "formula": "position-2 crown outer X − caseOuterIntersectionXAtStemZ",
+          "sourceInputs": {
+            "crownSetOuterX": 21.725,
+            "caseOuterIntersectionXAtStemZ": 19.58979326077741
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Reports the position-2 crown end projection from the local circular case surface.",
+          "risk": "Does not establish pull/push operability.",
+          "implementationDependency": "Validate crown recess and access after exterior Geometry exists."
+        },
+        "crownTubeOuterDiameter": {
+          "value": 1.1,
+          "unit": "model unit",
+          "formula": "candidate crown-tube outer diameter",
+          "sourceInputs": {
+            "candidate": "E-EDUCATIONAL"
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Provides a formal exterior tube diameter for local geometric comparison.",
+          "risk": "Seat, gasket, thread, press-fit, water resistance, and manufacturing tolerance are unverified.",
+          "implementationDependency": "Finalize crown-tube construction only in the exterior implementation phase."
+        },
+        "crownTubeInnerDiameter": {
+          "value": 0.56,
+          "unit": "model unit",
+          "formula": "2 × (stemRadius + crownTubeRadialClearance)",
+          "sourceInputs": {
+            "stemRadius": 0.16,
+            "crownTubeRadialClearance": 0.12
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a traceable positive educational clearance around the protected stem.",
+          "risk": "Not a manufacturing bore, running fit, gasket seat, or water-resistance specification.",
+          "implementationDependency": "Verify stem fit, sealing, wear, and tolerances during exterior implementation."
+        },
+        "crownTubeAnnularWall": {
+          "value": 0.27,
+          "unit": "model unit",
+          "formula": "(crownTubeOuterDiameter − crownTubeInnerDiameter) ÷ 2",
+          "sourceInputs": {
+            "crownTubeOuterDiameter": 1.1,
+            "crownTubeInnerDiameter": 0.56
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Makes the candidate tube wall explicit for geometric feasibility checks.",
+          "risk": "Not a strength, threading, sealing, or manufacturability approval.",
+          "implementationDependency": "Select material and construction before validating a production wall."
+        },
+        "crownTubeAxialLengthCandidate": {
+          "value": 0.924585,
+          "unit": "model unit",
+          "formula": "localCaseWallAxialLength",
+          "sourceInputs": {
+            "localCaseWallAxialLength": 0.9245849844146719
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Uses the local circular case-wall path as a traceable first tube-length candidate.",
+          "risk": "Seat depth, gasket, thread, press-fit, and exterior protrusion are not included.",
+          "implementationDependency": "Finalize only after case and tube attachment Geometry is designed."
         },
         "lugToLug": {
           "value": 49.2,
@@ -769,12 +1438,117 @@
           "implementationDependency": "Final strap design after lug Geometry approval."
         }
       },
+      "assumptions": {
+        "caseWall": {
+          "value": 0.9,
+          "unit": "model unit",
+          "formula": "(caseOuterDiameter − movementCavityDiameter) ÷ 2",
+          "sourceInputs": {
+            "caseOuterDiameter": 40.199999999999996,
+            "movementCavityDiameter": 38.4
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines the radial case-body budget used to derive the candidate outer diameter.",
+          "risk": "Not a structural, machining, sealing, or impact-resistance specification.",
+          "implementationDependency": "Finalize material, section profile, fasteners, and local crown opening."
+        },
+        "bezelInset": {
+          "value": 0.4,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter − bezelOuterDiameter",
+          "sourceInputs": {
+            "caseOuterDiameter": 40.199999999999996,
+            "bezelOuterDiameter": 39.8
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Keeps a consistent comparison offset between the candidate body and bezel.",
+          "risk": "Bezel seat, crystal retention, and gasket geometry are unverified.",
+          "implementationDependency": "Final bezel and crystal retention design."
+        },
+        "dialApertureMargin": {
+          "value": 2.508,
+          "unit": "model unit",
+          "formula": "dialApertureDiameter − safeDisplayDiameter",
+          "sourceInputs": {
+            "dialApertureDiameter": 30.2,
+            "safeDisplayDiameter": 27.692
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Makes each candidate display margin explicit around the protected S86 envelope.",
+          "risk": "Physical dial blank and rehaut geometry are unverified.",
+          "implementationDependency": "Reconfirm with the physical dial, indices, bezel, and crystal."
+        },
+        "crystalClearMargin": {
+          "value": 1,
+          "unit": "model unit",
+          "formula": "crystalClearDiameter − dialApertureDiameter",
+          "sourceInputs": {
+            "crystalClearDiameter": 31.2,
+            "dialApertureDiameter": 30.2
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Provides a traceable clear-diameter margin for candidate comparison.",
+          "risk": "Optical distortion, seat width, and gasket compression are unverified.",
+          "implementationDependency": "Final crystal profile, seat, and gasket design."
+        },
+        "crystalThickness": {
+          "value": 1.15,
+          "unit": "model unit",
+          "formula": "crystalInnerY − crystalOuterY",
+          "sourceInputs": {
+            "crystalInnerY": -3.36,
+            "crystalOuterY": -4.51
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the explicit front thickness budget without changing the hand stack.",
+          "risk": "Not a strength or material specification.",
+          "implementationDependency": "Final crystal material and structural review."
+        },
+        "casebackThickness": {
+          "value": 1.15,
+          "unit": "model unit",
+          "formula": "casebackOuterY − casebackInnerY",
+          "sourceInputs": {
+            "casebackOuterY": 6.385,
+            "casebackInnerY": 5.235
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the explicit rear thickness budget around the bridge envelope.",
+          "risk": "Window, gasket, thread, and fastening construction are unverified.",
+          "implementationDependency": "Final caseback and observation-window design."
+        },
+        "lugExtension": {
+          "value": 4.5,
+          "unit": "model unit",
+          "formula": "(lugToLug − caseOuterDiameter) ÷ 2",
+          "sourceInputs": {
+            "lugToLug": 49.199999999999996,
+            "caseOuterDiameter": 40.199999999999996
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines the candidate lug reach used only for 2D proportion comparison.",
+          "risk": "Wrist fit, spring-bar position, and lug strength are unverified.",
+          "implementationDependency": "Human proportion review and final lug Geometry."
+        },
+        "crownTubeRadialClearance": {
+          "value": 0.12,
+          "unit": "model unit",
+          "formula": "crownTubeInnerDiameter ÷ 2 − stemRadius",
+          "sourceInputs": {
+            "crownTubeInnerDiameter": 0.56,
+            "stemRadius": 0.16
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Separates the protected stem radius from the candidate tube bore.",
+          "risk": "Not a production fit, lubricant, wear, gasket, or water-resistance allowance.",
+          "implementationDependency": "Verify fit class, material, sealing, wear, and manufacturing tolerance."
+        }
+      },
       "derived": {
         "safeDisplayDiameter": 27.692,
         "caseWall": 0.9,
         "crystalThickness": 1.15,
         "casebackThickness": 1.15,
-        "crownTubeOuterDiameter": 1.1,
         "crownWindOuterX": 20.375,
         "crownSetOuterX": 21.725,
         "crownOuterProjectionWind": 0.275,
@@ -789,10 +1563,28 @@
         "casebackIsBehindBridges": true,
         "positiveFrontClearance": true,
         "positiveRearClearance": true,
-        "positiveCrownProjectionInBothPositions": true,
+        "caseIntersectionPrecondition": true,
+        "cavityIntersectionPrecondition": true,
+        "outerIntersectionExceedsCavityIntersection": true,
+        "positiveLocalCaseWallAxialLength": true,
+        "geometricCrownProjectionPassed": true,
+        "crownTubeGeometryCandidatePassed": true,
         "totalThicknessIsBudgetSum": true
       },
-      "allConstraintsPassed": true
+      "deferredCrownTubeInterfaces": {
+        "seatDesign": "UNVERIFIED",
+        "gasket": "UNVERIFIED",
+        "thread": "UNVERIFIED",
+        "pressFit": "UNVERIFIED",
+        "waterResistance": "UNVERIFIED",
+        "manufacturingTolerance": "UNVERIFIED"
+      },
+      "geometricCrownProjectionPassed": true,
+      "crownTubeGeometryCandidatePassed": true,
+      "crownFingerAccessDecision": "UNVERIFIED",
+      "crownPullPushOperabilityDecision": "UNVERIFIED",
+      "candidateReadyForDefaultAdoption": false,
+      "allGeometricAuditChecksPassed": true
     }
   }
 }

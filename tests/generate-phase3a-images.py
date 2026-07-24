@@ -250,8 +250,8 @@ def generate_crown_interface(interface: dict, matrix: dict) -> None:
             outline="#f5f8fc",
             width=1,
         )
-        legend_y = 164 + index * 64
-        draw.rectangle((842, legend_y, 1265, legend_y + 56), fill=(7, 12, 20, 202), outline=color, width=2)
+        legend_y = 164 + index * 78
+        draw.rectangle((842, legend_y, 1265, legend_y + 70), fill=(7, 12, 20, 202), outline=color, width=2)
         draw.text((850, legend_y + 6), candidate_id, fill=color, font=FONT)
         draw.text(
             (850, legend_y + 22),
@@ -265,11 +265,17 @@ def generate_crown_interface(interface: dict, matrix: dict) -> None:
             fill="#eef3f8",
             font=FONT,
         )
+        draw.text(
+            (850, legend_y + 54),
+            f"tube wall {values['crownTubeAnnularWall']['value']:.3f}; local P2 center/end {values['crownCenterProjectionSetLocal']['value']:.3f}/{values['crownOuterProjectionSetLocal']['value']:.3f}",
+            fill="#eef3f8",
+            font=FONT,
+        )
         draw.line((outer_x, center_y + 28 + index * 10, x_wind, center_y + 28 + index * 10), fill=color, width=2)
         draw.line((outer_x, center_y + 60 + index * 10, set_outer_x, center_y + 60 + index * 10), fill=color, width=2)
-    draw.text((846, 366), "geometric projection: PASS", fill="#55e0a3", font=FONT)
-    draw.text((846, 386), "finger access: UNVERIFIED", fill="#ffcf72", font=FONT)
-    draw.text((846, 406), "pull/push operability: UNVERIFIED", fill="#ffcf72", font=FONT)
+    draw.text((846, 406), "geometric projection: PASS", fill="#55e0a3", font=FONT)
+    draw.text((846, 426), "finger access: UNVERIFIED", fill="#ffcf72", font=FONT)
+    draw.text((846, 446), "pull/push operability: UNVERIFIED", fill="#ffcf72", font=FONT)
     image.save(IMAGES / "crown-stem-interface.png", format="PNG")
 
 

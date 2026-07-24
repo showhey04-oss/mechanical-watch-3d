@@ -3,7 +3,7 @@
 ## 由来
 
 - source main：`fafd3ae3b9e7224f47320b53c7e635b3bb3b8f58`
-- audit logic：`ba62c5497d424152aecd3ea4f8c576d339d12851`（`Add Phase 3A exterior interface audit model`）
+- audit logic：`263c1afa7d322be3689749dec44e59bb9faf5215`（`Refine Phase 3A crown interface audit`）
 - branch：`audit/final-exterior-interface-phase3a`
 - app：v3.15.0
 - capture mode：same-origin unsandboxed iframe harness — actual Three.js scene rendered to offscreen `WebGLRenderTarget`
@@ -40,8 +40,8 @@
 | `images/mobile-390-front-baseline.png` | 390×844 | 実Three.js scene、front、offscreen WebGLRenderTarget |
 | `images/front-aperture-constraints.png` | 1280×720 | 実desktop front + 実測開口overlay |
 | `images/side-clearance-stack.png` | 1280×720 | 実desktop side + Y予算overlay |
-| `images/crown-stem-interface.png` | 1280×720 | 実desktop front + A.7軸・移動範囲overlay |
-| `images/exterior-candidate-front-comparison.png` | 1280×720 | 実desktop front + 3候補外形overlay |
+| `images/crown-stem-interface.png` | 1280×720 | 実desktop front + stem Z、case/cavity局所交点、tube外径/内径、位置1/2局所突出、操作性判定overlay |
+| `images/exterior-candidate-front-comparison.png` | 1280×720 | 実desktop front + 3候補外形、位置1局所crown中心突出、tube外径overlay |
 | `images/exterior-candidate-side-comparison.png` | 1280×720 | 実desktop side + 3候補前後面overlay |
 
 baseline PNGはブラウザ内の24KBチャンクを個別回収して再構成し、ブラウザSHA-256と保存後SHA-256を一致させた。overlay画像はbaselineを入力として生成し、通常Sceneへ線や候補Object3Dを加えていない。
@@ -54,11 +54,23 @@ baseline PNGはブラウザ内の24KBチャンクを個別回収して再構成�
 | E-BALANCED | 39.600 | 37.800 | 29.000 | 0.550 / 0.650 | 9.845 | `RECOMMENDED_NOT_ADOPTED` |
 | E-EDUCATIONAL | 40.200 | 38.400 | 30.200 | 0.850 / 1.000 | 10.895 | `CANDIDATE_NOT_ADOPTED` |
 
+### りゅうず・ケースチューブ局所値
+
+| 候補 | case / cavity交点X @ Z=-4.500 | 局所wall長 | 位置1 center / outer | 位置2 center / outer | tube OD / ID / wall |
+|---|---:|---:|---:|---:|---:|
+| E-COMPACT | 18.973666 / 18.098964 | 0.874702 | 0.826334 / 1.401334 | 2.176334 / 2.751334 | 0.90 / 0.48 / 0.21 |
+| E-BALANCED | 19.281857 / 18.356470 | 0.925387 | 0.518143 / 1.093143 | 1.868143 / 2.443143 | 1.00 / 0.52 / 0.24 |
+| E-EDUCATIONAL | 19.589793 / 18.665208 | 0.924585 | 0.210207 / 0.785207 | 1.560207 / 2.135207 | 1.10 / 0.56 / 0.27 |
+
+局所値は円形case／cavityの交点式から導出し、手入力転記していない。3候補とも`geometricCrownProjectionPassed=true`および`crownTubeGeometryCandidatePassed=true`である。一方、指掛かりとpull／push操作性、tube座・ガスケット・ねじ・圧入・防水・製造公差は`UNVERIFIED`であり、`candidateReadyForDefaultAdoption=false`を維持する。旧`crownOuterProjection`はcase bounding radius基準の保守値であり、局所突出とは区別する。
+
 ## 判定
 
 - Phase 3A：監査・候補比較のみ
 - 保護アンカー変更：0
 - 通常表示外装Geometry：0
 - E-BALANCED：`RECOMMENDED_NOT_ADOPTED`
+- crown interface risk：E-COMPACT `LOW_RISK`、E-BALANCED `MODERATE_RISK`、E-EDUCATIONAL `HIGH_RISK`
+- 指掛かり／pull-push操作性：`UNVERIFIED`
 - Phase 3B：人間承認とPRマージ後に開始
 - PR #5 / Issue #2 / D2c3：未変更・未採用

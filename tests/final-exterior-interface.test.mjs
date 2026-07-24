@@ -218,6 +218,38 @@ test("formal crown-tube records remain geometric candidates, not operability app
   }
 });
 
+test("saved Phase 3A reports reproduce local crown and tube records from audit logic", async () => {
+  const matrix = JSON.parse(
+    await readFile(new URL("reports/exterior-candidate-matrix.json", evidenceRoot), "utf8"),
+  );
+  const interfaceMap = JSON.parse(
+    await readFile(new URL("reports/exterior-interface-map.json", evidenceRoot), "utf8"),
+  );
+  const clearance = JSON.parse(
+    await readFile(new URL("reports/clearance-budget.json", evidenceRoot), "utf8"),
+  );
+  assert.equal(
+    matrix.sourceAuditCommit,
+    "263c1afa7d322be3689749dec44e59bb9faf5215",
+  );
+  for (const [id, candidate] of Object.entries(EXTERIOR_CANDIDATES)) {
+    const saved = matrix.candidates[id];
+    assert.deepEqual(saved.values, candidate.values);
+    assert.deepEqual(saved.assumptions, candidate.assumptions);
+    assert.equal(saved.allGeometricAuditChecksPassed, true);
+    assert.equal("allConstraintsPassed" in saved, false);
+    assert.deepEqual(
+      interfaceMap.crownStem.candidateInterfaces[id]
+        .caseOuterIntersectionXAtStemZ,
+      candidate.values.caseOuterIntersectionXAtStemZ,
+    );
+    assert.equal(
+      clearance.candidates[id].crownInterface.localCaseWallAxialLength,
+      candidate.values.localCaseWallAxialLength.value,
+    );
+  }
+});
+
 test("E-BALANCED is recommendation-only and does not alter the normal application path", async () => {
   assert.deepEqual(CANDIDATE_COMPARISON.recommendation, {
     candidate: "E-BALANCED",

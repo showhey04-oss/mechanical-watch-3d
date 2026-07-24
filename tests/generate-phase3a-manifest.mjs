@@ -20,6 +20,9 @@ async function walk(directory) {
 }
 
 const files = (await walk(root)).sort();
+const decisionSummary = JSON.parse(
+  await readFile(resolve(root, "reports/decision-summary.json"), "utf8"),
+);
 const records = [];
 for (const path of files) {
   const bytes = await readFile(path);
@@ -33,6 +36,7 @@ for (const path of files) {
 const manifest = {
   schemaVersion: 1,
   sourceMainCommit: "fafd3ae3b9e7224f47320b53c7e635b3bb3b8f58",
+  sourceAuditCommit: decisionSummary.sourceAuditCommit,
   sourceBranch: "audit/final-exterior-interface-phase3a",
   generatedAt: new Date().toISOString(),
   selfIncluded: false,
@@ -54,4 +58,3 @@ const manifest = {
 
 await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`);
 console.log(JSON.stringify({ fileCount: records.length, manifestPath }, null, 2));
-
