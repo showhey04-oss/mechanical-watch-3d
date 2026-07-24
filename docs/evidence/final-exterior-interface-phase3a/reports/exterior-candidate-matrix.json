@@ -1,0 +1,798 @@
+{
+  "schemaVersion": 1,
+  "phase": "Phase 3A",
+  "sourceMainCommit": "fafd3ae3b9e7224f47320b53c7e635b3bb3b8f58",
+  "sourceAuditCommit": "ba62c5497d424152aecd3ea4f8c576d339d12851",
+  "sourceBranch": "audit/final-exterior-interface-phase3a",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-07-24T06:13:35.660Z",
+  "captureMode": "same-origin unsandboxed iframe harness - actual Three.js scene rendered to offscreen WebGLRenderTarget",
+  "normalSceneExteriorGeometryAdded": false,
+  "defaultCandidateAdopted": false,
+  "candidateStatus": "CANDIDATE_NOT_ADOPTED",
+  "candidates": {
+    "E-COMPACT": {
+      "id": "E-COMPACT",
+      "status": "CANDIDATE_NOT_ADOPTED",
+      "values": {
+        "caseOuterDiameter": {
+          "value": 39,
+          "unit": "model unit",
+          "formula": "movementCavityDiameter + 2 × caseWall",
+          "sourceInputs": {
+            "movementCavityDiameter": 37.300000000000004,
+            "caseWall": 0.85
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Bounds the candidate case body without changing the movement.",
+          "risk": "Local crown recess and case-tube geometry remain unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "movementCavityDiameter": {
+          "value": 37.3,
+          "unit": "model unit",
+          "formula": "36.6 + 2 × radialMovementClearance",
+          "sourceInputs": {
+            "movementReferenceDiameter": 36.6,
+            "radialMovementClearance": 0.35
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the protected movement envelope inside the candidate body.",
+          "risk": "Not a manufacturing tolerance or casing-ring specification.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "radialMovementClearance": {
+          "value": 0.35,
+          "unit": "model unit",
+          "formula": "(movementCavityDiameter − 36.6) ÷ 2",
+          "sourceInputs": {
+            "movementReferenceDiameter": 36.6,
+            "movementCavityDiameter": 37.300000000000004
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Provides an explicit non-zero visual and assembly budget.",
+          "risk": "Must be replaced by verified casing and mounting requirements.",
+          "implementationDependency": "Verify casing ring, clamps, fasteners, and shock clearance."
+        },
+        "bezelOuterDiameter": {
+          "value": 38.6,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter − bezelInset",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.00000000000001,
+            "bezelInset": 0.4
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Maintains a readable boundary around the display aperture.",
+          "risk": "Bezel profile and retention system are not yet modeled.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "dialApertureDiameter": {
+          "value": 28.2,
+          "unit": "model unit",
+          "formula": "max(S86 dial ring, index circle, 2 × hand reach) + aperture margin",
+          "sourceInputs": {
+            "safeDisplayDiameter": 27.692,
+            "apertureMargin": 0.508
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the S86 dial ring, index circle, and hand-tip envelopes visible.",
+          "risk": "Physical dial blank and rehaut dimensions remain unverified.",
+          "implementationDependency": "Reconfirm after physical dial, bezel, and crystal integration."
+        },
+        "crystalClearDiameter": {
+          "value": 28.8,
+          "unit": "model unit",
+          "formula": "dialApertureDiameter + crystalClearMargin",
+          "sourceInputs": {
+            "dialApertureDiameter": 28.2,
+            "crystalClearMargin": 0.6
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the clear crystal area outside the candidate display aperture.",
+          "risk": "Crystal seat and optical distortion are not represented.",
+          "implementationDependency": "Define crystal profile, seat, gasket, and bezel retention."
+        },
+        "crystalInnerY": {
+          "value": -2.86,
+          "unit": "model unit",
+          "formula": "application yMin − frontHandClearance",
+          "sourceInputs": {
+            "applicationYMin": -2.51,
+            "frontHandClearance": 0.35
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Places the crystal inner surface in front of the minute-hand extreme.",
+          "risk": "Dynamic hand deflection and manufacturing tolerances are not evaluated.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "crystalOuterY": {
+          "value": -3.61,
+          "unit": "model unit",
+          "formula": "crystalInnerY − crystalThickness",
+          "sourceInputs": {
+            "crystalInnerY": -2.86,
+            "crystalThickness": 0.75
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the candidate front thickness budget.",
+          "risk": "Crystal thickness is an exterior design assumption, not an ETA value.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "frontHandClearance": {
+          "value": 0.35,
+          "unit": "model unit",
+          "formula": "application yMin − crystalInnerY",
+          "sourceInputs": {
+            "applicationYMin": -2.51,
+            "crystalInnerY": -2.86
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a positive explanatory gap ahead of the minute hand.",
+          "risk": "Not a production hand-to-crystal clearance.",
+          "implementationDependency": "Verify hand stack, flex, shock, and crystal geometry."
+        },
+        "casebackInnerY": {
+          "value": 4.585,
+          "unit": "model unit",
+          "formula": "bridge yMax + rearBridgeClearance",
+          "sourceInputs": {
+            "bridgeTopY": 4.235,
+            "rearBridgeClearance": 0.35
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Places the caseback inner surface behind the bridge extreme.",
+          "risk": "Rotor-free educational model still needs local screw and bridge checks.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "casebackOuterY": {
+          "value": 5.335,
+          "unit": "model unit",
+          "formula": "casebackInnerY + casebackThickness",
+          "sourceInputs": {
+            "casebackInnerY": 4.585,
+            "casebackThickness": 0.75
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the candidate rear thickness budget.",
+          "risk": "Caseback profile and transparent-window construction remain unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "rearBridgeClearance": {
+          "value": 0.35,
+          "unit": "model unit",
+          "formula": "casebackInnerY − bridge yMax",
+          "sourceInputs": {
+            "casebackInnerY": 4.585,
+            "bridgeTopY": 4.235
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a positive visual gap behind the bridge envelope.",
+          "risk": "Not a production shock or service clearance.",
+          "implementationDependency": "Verify screws, caseback window, gasket, and service access."
+        },
+        "totalCaseThickness": {
+          "value": 8.945,
+          "unit": "model unit",
+          "formula": "casebackOuterY − crystalOuterY",
+          "sourceInputs": {
+            "casebackOuterY": 5.335,
+            "crystalOuterY": -3.61
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Is fully explained by the protected Y envelope, clearances, crystal, and caseback.",
+          "risk": "ETA 4.50 mm is not used because its datum mapping is unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "crownTubeAxisY": {
+          "value": -1.05,
+          "unit": "model unit",
+          "formula": "WATCH_MECHANISM.keyless.axis.centerY",
+          "sourceInputs": {
+            "keylessAxisCenterY": -1.05
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Keeps the case tube coaxial with the protected crown/stem system.",
+          "risk": "Changing this value would break the established keyless interface.",
+          "implementationDependency": "Case tube must adapt to this fixed axis; the mechanism must not move."
+        },
+        "crownOuterProjection": {
+          "value": 2.225,
+          "unit": "model unit",
+          "formula": "position-2 crown outer X − caseOuterDiameter ÷ 2",
+          "sourceInputs": {
+            "crownSetOuterX": 21.725,
+            "caseOuterDiameter": 39.00000000000001
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Reports the maximum external projection required by the existing A.7 pull travel.",
+          "risk": "Local case opening and finger access require geometry review.",
+          "implementationDependency": "Implement and test the crown recess/tube around fixed A.7 positions."
+        },
+        "lugToLug": {
+          "value": 44,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter + 2 × lugExtension",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.00000000000001,
+            "lugExtension": 2.5
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Expresses the candidate total case length from the case body.",
+          "risk": "Wrist fit and spring-bar construction are not verified.",
+          "implementationDependency": "Human proportion review and final lug Geometry."
+        },
+        "lugWidth": {
+          "value": 18,
+          "unit": "model unit",
+          "formula": "candidate family lug interface width",
+          "sourceInputs": {
+            "candidate": "E-COMPACT"
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines a comparable attachment interface across the candidates.",
+          "risk": "Not derived from a commercial watch or manufacturing standard.",
+          "implementationDependency": "Final lug and spring-bar design."
+        },
+        "strapWidth": {
+          "value": 18,
+          "unit": "model unit",
+          "formula": "lugWidth",
+          "sourceInputs": {
+            "lugWidth": 18
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the strap interface aligned with the candidate lug opening.",
+          "risk": "Strap taper, thickness, and material are deferred.",
+          "implementationDependency": "Final strap design after lug Geometry approval."
+        }
+      },
+      "derived": {
+        "safeDisplayDiameter": 27.692,
+        "caseWall": 0.85,
+        "crystalThickness": 0.75,
+        "casebackThickness": 0.75,
+        "crownTubeOuterDiameter": 0.9,
+        "crownWindOuterX": 20.375,
+        "crownSetOuterX": 21.725,
+        "crownOuterProjectionWind": 0.875,
+        "crownOuterProjectionSet": 2.225,
+        "caseOuterRadius": 19.5,
+        "lugExtension": 2.5
+      },
+      "constraints": {
+        "movementCavityContainsMovement": true,
+        "apertureContainsS86": true,
+        "crystalIsAheadOfHands": true,
+        "casebackIsBehindBridges": true,
+        "positiveFrontClearance": true,
+        "positiveRearClearance": true,
+        "positiveCrownProjectionInBothPositions": true,
+        "totalThicknessIsBudgetSum": true
+      },
+      "allConstraintsPassed": true
+    },
+    "E-BALANCED": {
+      "id": "E-BALANCED",
+      "status": "CANDIDATE_NOT_ADOPTED",
+      "values": {
+        "caseOuterDiameter": {
+          "value": 39.6,
+          "unit": "model unit",
+          "formula": "movementCavityDiameter + 2 × caseWall",
+          "sourceInputs": {
+            "movementCavityDiameter": 37.800000000000004,
+            "caseWall": 0.9
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Bounds the candidate case body without changing the movement.",
+          "risk": "Local crown recess and case-tube geometry remain unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "movementCavityDiameter": {
+          "value": 37.8,
+          "unit": "model unit",
+          "formula": "36.6 + 2 × radialMovementClearance",
+          "sourceInputs": {
+            "movementReferenceDiameter": 36.6,
+            "radialMovementClearance": 0.6
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the protected movement envelope inside the candidate body.",
+          "risk": "Not a manufacturing tolerance or casing-ring specification.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "radialMovementClearance": {
+          "value": 0.6,
+          "unit": "model unit",
+          "formula": "(movementCavityDiameter − 36.6) ÷ 2",
+          "sourceInputs": {
+            "movementReferenceDiameter": 36.6,
+            "movementCavityDiameter": 37.800000000000004
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Provides an explicit non-zero visual and assembly budget.",
+          "risk": "Must be replaced by verified casing and mounting requirements.",
+          "implementationDependency": "Verify casing ring, clamps, fasteners, and shock clearance."
+        },
+        "bezelOuterDiameter": {
+          "value": 39.2,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter − bezelInset",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.6,
+            "bezelInset": 0.4
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Maintains a readable boundary around the display aperture.",
+          "risk": "Bezel profile and retention system are not yet modeled.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "dialApertureDiameter": {
+          "value": 29,
+          "unit": "model unit",
+          "formula": "max(S86 dial ring, index circle, 2 × hand reach) + aperture margin",
+          "sourceInputs": {
+            "safeDisplayDiameter": 27.692,
+            "apertureMargin": 1.308
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the S86 dial ring, index circle, and hand-tip envelopes visible.",
+          "risk": "Physical dial blank and rehaut dimensions remain unverified.",
+          "implementationDependency": "Reconfirm after physical dial, bezel, and crystal integration."
+        },
+        "crystalClearDiameter": {
+          "value": 29.8,
+          "unit": "model unit",
+          "formula": "dialApertureDiameter + crystalClearMargin",
+          "sourceInputs": {
+            "dialApertureDiameter": 29,
+            "crystalClearMargin": 0.8
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the clear crystal area outside the candidate display aperture.",
+          "risk": "Crystal seat and optical distortion are not represented.",
+          "implementationDependency": "Define crystal profile, seat, gasket, and bezel retention."
+        },
+        "crystalInnerY": {
+          "value": -3.06,
+          "unit": "model unit",
+          "formula": "application yMin − frontHandClearance",
+          "sourceInputs": {
+            "applicationYMin": -2.51,
+            "frontHandClearance": 0.55
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Places the crystal inner surface in front of the minute-hand extreme.",
+          "risk": "Dynamic hand deflection and manufacturing tolerances are not evaluated.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "crystalOuterY": {
+          "value": -4.01,
+          "unit": "model unit",
+          "formula": "crystalInnerY − crystalThickness",
+          "sourceInputs": {
+            "crystalInnerY": -3.0599999999999996,
+            "crystalThickness": 0.95
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the candidate front thickness budget.",
+          "risk": "Crystal thickness is an exterior design assumption, not an ETA value.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "frontHandClearance": {
+          "value": 0.55,
+          "unit": "model unit",
+          "formula": "application yMin − crystalInnerY",
+          "sourceInputs": {
+            "applicationYMin": -2.51,
+            "crystalInnerY": -3.0599999999999996
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a positive explanatory gap ahead of the minute hand.",
+          "risk": "Not a production hand-to-crystal clearance.",
+          "implementationDependency": "Verify hand stack, flex, shock, and crystal geometry."
+        },
+        "casebackInnerY": {
+          "value": 4.885,
+          "unit": "model unit",
+          "formula": "bridge yMax + rearBridgeClearance",
+          "sourceInputs": {
+            "bridgeTopY": 4.235,
+            "rearBridgeClearance": 0.65
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Places the caseback inner surface behind the bridge extreme.",
+          "risk": "Rotor-free educational model still needs local screw and bridge checks.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "casebackOuterY": {
+          "value": 5.835,
+          "unit": "model unit",
+          "formula": "casebackInnerY + casebackThickness",
+          "sourceInputs": {
+            "casebackInnerY": 4.885000000000001,
+            "casebackThickness": 0.95
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the candidate rear thickness budget.",
+          "risk": "Caseback profile and transparent-window construction remain unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "rearBridgeClearance": {
+          "value": 0.65,
+          "unit": "model unit",
+          "formula": "casebackInnerY − bridge yMax",
+          "sourceInputs": {
+            "casebackInnerY": 4.885000000000001,
+            "bridgeTopY": 4.235
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a positive visual gap behind the bridge envelope.",
+          "risk": "Not a production shock or service clearance.",
+          "implementationDependency": "Verify screws, caseback window, gasket, and service access."
+        },
+        "totalCaseThickness": {
+          "value": 9.845,
+          "unit": "model unit",
+          "formula": "casebackOuterY − crystalOuterY",
+          "sourceInputs": {
+            "casebackOuterY": 5.835000000000001,
+            "crystalOuterY": -4.01
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Is fully explained by the protected Y envelope, clearances, crystal, and caseback.",
+          "risk": "ETA 4.50 mm is not used because its datum mapping is unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "crownTubeAxisY": {
+          "value": -1.05,
+          "unit": "model unit",
+          "formula": "WATCH_MECHANISM.keyless.axis.centerY",
+          "sourceInputs": {
+            "keylessAxisCenterY": -1.05
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Keeps the case tube coaxial with the protected crown/stem system.",
+          "risk": "Changing this value would break the established keyless interface.",
+          "implementationDependency": "Case tube must adapt to this fixed axis; the mechanism must not move."
+        },
+        "crownOuterProjection": {
+          "value": 1.925,
+          "unit": "model unit",
+          "formula": "position-2 crown outer X − caseOuterDiameter ÷ 2",
+          "sourceInputs": {
+            "crownSetOuterX": 21.725,
+            "caseOuterDiameter": 39.6
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Reports the maximum external projection required by the existing A.7 pull travel.",
+          "risk": "Local case opening and finger access require geometry review.",
+          "implementationDependency": "Implement and test the crown recess/tube around fixed A.7 positions."
+        },
+        "lugToLug": {
+          "value": 46.6,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter + 2 × lugExtension",
+          "sourceInputs": {
+            "caseOuterDiameter": 39.6,
+            "lugExtension": 3.5
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Expresses the candidate total case length from the case body.",
+          "risk": "Wrist fit and spring-bar construction are not verified.",
+          "implementationDependency": "Human proportion review and final lug Geometry."
+        },
+        "lugWidth": {
+          "value": 20,
+          "unit": "model unit",
+          "formula": "candidate family lug interface width",
+          "sourceInputs": {
+            "candidate": "E-BALANCED"
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines a comparable attachment interface across the candidates.",
+          "risk": "Not derived from a commercial watch or manufacturing standard.",
+          "implementationDependency": "Final lug and spring-bar design."
+        },
+        "strapWidth": {
+          "value": 20,
+          "unit": "model unit",
+          "formula": "lugWidth",
+          "sourceInputs": {
+            "lugWidth": 20
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the strap interface aligned with the candidate lug opening.",
+          "risk": "Strap taper, thickness, and material are deferred.",
+          "implementationDependency": "Final strap design after lug Geometry approval."
+        }
+      },
+      "derived": {
+        "safeDisplayDiameter": 27.692,
+        "caseWall": 0.9,
+        "crystalThickness": 0.95,
+        "casebackThickness": 0.95,
+        "crownTubeOuterDiameter": 1,
+        "crownWindOuterX": 20.375,
+        "crownSetOuterX": 21.725,
+        "crownOuterProjectionWind": 0.575,
+        "crownOuterProjectionSet": 1.925,
+        "caseOuterRadius": 19.8,
+        "lugExtension": 3.5
+      },
+      "constraints": {
+        "movementCavityContainsMovement": true,
+        "apertureContainsS86": true,
+        "crystalIsAheadOfHands": true,
+        "casebackIsBehindBridges": true,
+        "positiveFrontClearance": true,
+        "positiveRearClearance": true,
+        "positiveCrownProjectionInBothPositions": true,
+        "totalThicknessIsBudgetSum": true
+      },
+      "allConstraintsPassed": true
+    },
+    "E-EDUCATIONAL": {
+      "id": "E-EDUCATIONAL",
+      "status": "CANDIDATE_NOT_ADOPTED",
+      "values": {
+        "caseOuterDiameter": {
+          "value": 40.2,
+          "unit": "model unit",
+          "formula": "movementCavityDiameter + 2 × caseWall",
+          "sourceInputs": {
+            "movementCavityDiameter": 38.4,
+            "caseWall": 0.9
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Bounds the candidate case body without changing the movement.",
+          "risk": "Local crown recess and case-tube geometry remain unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "movementCavityDiameter": {
+          "value": 38.4,
+          "unit": "model unit",
+          "formula": "36.6 + 2 × radialMovementClearance",
+          "sourceInputs": {
+            "movementReferenceDiameter": 36.6,
+            "radialMovementClearance": 0.9
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the protected movement envelope inside the candidate body.",
+          "risk": "Not a manufacturing tolerance or casing-ring specification.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "radialMovementClearance": {
+          "value": 0.9,
+          "unit": "model unit",
+          "formula": "(movementCavityDiameter − 36.6) ÷ 2",
+          "sourceInputs": {
+            "movementReferenceDiameter": 36.6,
+            "movementCavityDiameter": 38.4
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Provides an explicit non-zero visual and assembly budget.",
+          "risk": "Must be replaced by verified casing and mounting requirements.",
+          "implementationDependency": "Verify casing ring, clamps, fasteners, and shock clearance."
+        },
+        "bezelOuterDiameter": {
+          "value": 39.8,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter − bezelInset",
+          "sourceInputs": {
+            "caseOuterDiameter": 40.199999999999996,
+            "bezelInset": 0.4
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Maintains a readable boundary around the display aperture.",
+          "risk": "Bezel profile and retention system are not yet modeled.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "dialApertureDiameter": {
+          "value": 30.2,
+          "unit": "model unit",
+          "formula": "max(S86 dial ring, index circle, 2 × hand reach) + aperture margin",
+          "sourceInputs": {
+            "safeDisplayDiameter": 27.692,
+            "apertureMargin": 2.508
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the S86 dial ring, index circle, and hand-tip envelopes visible.",
+          "risk": "Physical dial blank and rehaut dimensions remain unverified.",
+          "implementationDependency": "Reconfirm after physical dial, bezel, and crystal integration."
+        },
+        "crystalClearDiameter": {
+          "value": 31.2,
+          "unit": "model unit",
+          "formula": "dialApertureDiameter + crystalClearMargin",
+          "sourceInputs": {
+            "dialApertureDiameter": 30.2,
+            "crystalClearMargin": 1
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the clear crystal area outside the candidate display aperture.",
+          "risk": "Crystal seat and optical distortion are not represented.",
+          "implementationDependency": "Define crystal profile, seat, gasket, and bezel retention."
+        },
+        "crystalInnerY": {
+          "value": -3.36,
+          "unit": "model unit",
+          "formula": "application yMin − frontHandClearance",
+          "sourceInputs": {
+            "applicationYMin": -2.51,
+            "frontHandClearance": 0.85
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Places the crystal inner surface in front of the minute-hand extreme.",
+          "risk": "Dynamic hand deflection and manufacturing tolerances are not evaluated.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "crystalOuterY": {
+          "value": -4.51,
+          "unit": "model unit",
+          "formula": "crystalInnerY − crystalThickness",
+          "sourceInputs": {
+            "crystalInnerY": -3.36,
+            "crystalThickness": 1.15
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the candidate front thickness budget.",
+          "risk": "Crystal thickness is an exterior design assumption, not an ETA value.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "frontHandClearance": {
+          "value": 0.85,
+          "unit": "model unit",
+          "formula": "application yMin − crystalInnerY",
+          "sourceInputs": {
+            "applicationYMin": -2.51,
+            "crystalInnerY": -3.36
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a positive explanatory gap ahead of the minute hand.",
+          "risk": "Not a production hand-to-crystal clearance.",
+          "implementationDependency": "Verify hand stack, flex, shock, and crystal geometry."
+        },
+        "casebackInnerY": {
+          "value": 5.235,
+          "unit": "model unit",
+          "formula": "bridge yMax + rearBridgeClearance",
+          "sourceInputs": {
+            "bridgeTopY": 4.235,
+            "rearBridgeClearance": 1
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Places the caseback inner surface behind the bridge extreme.",
+          "risk": "Rotor-free educational model still needs local screw and bridge checks.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "casebackOuterY": {
+          "value": 6.385,
+          "unit": "model unit",
+          "formula": "casebackInnerY + casebackThickness",
+          "sourceInputs": {
+            "casebackInnerY": 5.235,
+            "casebackThickness": 1.15
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Completes the candidate rear thickness budget.",
+          "risk": "Caseback profile and transparent-window construction remain unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "rearBridgeClearance": {
+          "value": 1,
+          "unit": "model unit",
+          "formula": "casebackInnerY − bridge yMax",
+          "sourceInputs": {
+            "casebackInnerY": 5.235,
+            "bridgeTopY": 4.235
+          },
+          "classification": "EDUCATIONAL_CLEARANCE_ASSUMPTION",
+          "rationale": "Creates a positive visual gap behind the bridge envelope.",
+          "risk": "Not a production shock or service clearance.",
+          "implementationDependency": "Verify screws, caseback window, gasket, and service access."
+        },
+        "totalCaseThickness": {
+          "value": 10.895,
+          "unit": "model unit",
+          "formula": "casebackOuterY − crystalOuterY",
+          "sourceInputs": {
+            "casebackOuterY": 6.385,
+            "crystalOuterY": -4.51
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Is fully explained by the protected Y envelope, clearances, crystal, and caseback.",
+          "risk": "ETA 4.50 mm is not used because its datum mapping is unresolved.",
+          "implementationDependency": "Requires physical exterior Geometry, material, tolerance, and assembly review in the implementation phase."
+        },
+        "crownTubeAxisY": {
+          "value": -1.05,
+          "unit": "model unit",
+          "formula": "WATCH_MECHANISM.keyless.axis.centerY",
+          "sourceInputs": {
+            "keylessAxisCenterY": -1.05
+          },
+          "classification": "RUNTIME_DERIVED",
+          "rationale": "Keeps the case tube coaxial with the protected crown/stem system.",
+          "risk": "Changing this value would break the established keyless interface.",
+          "implementationDependency": "Case tube must adapt to this fixed axis; the mechanism must not move."
+        },
+        "crownOuterProjection": {
+          "value": 1.625,
+          "unit": "model unit",
+          "formula": "position-2 crown outer X − caseOuterDiameter ÷ 2",
+          "sourceInputs": {
+            "crownSetOuterX": 21.725,
+            "caseOuterDiameter": 40.199999999999996
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Reports the maximum external projection required by the existing A.7 pull travel.",
+          "risk": "Local case opening and finger access require geometry review.",
+          "implementationDependency": "Implement and test the crown recess/tube around fixed A.7 positions."
+        },
+        "lugToLug": {
+          "value": 49.2,
+          "unit": "model unit",
+          "formula": "caseOuterDiameter + 2 × lugExtension",
+          "sourceInputs": {
+            "caseOuterDiameter": 40.199999999999996,
+            "lugExtension": 4.5
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Expresses the candidate total case length from the case body.",
+          "risk": "Wrist fit and spring-bar construction are not verified.",
+          "implementationDependency": "Human proportion review and final lug Geometry."
+        },
+        "lugWidth": {
+          "value": 22,
+          "unit": "model unit",
+          "formula": "candidate family lug interface width",
+          "sourceInputs": {
+            "candidate": "E-EDUCATIONAL"
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Defines a comparable attachment interface across the candidates.",
+          "risk": "Not derived from a commercial watch or manufacturing standard.",
+          "implementationDependency": "Final lug and spring-bar design."
+        },
+        "strapWidth": {
+          "value": 22,
+          "unit": "model unit",
+          "formula": "lugWidth",
+          "sourceInputs": {
+            "lugWidth": 22
+          },
+          "classification": "EXTERIOR_DESIGN_CANDIDATE",
+          "rationale": "Keeps the strap interface aligned with the candidate lug opening.",
+          "risk": "Strap taper, thickness, and material are deferred.",
+          "implementationDependency": "Final strap design after lug Geometry approval."
+        }
+      },
+      "derived": {
+        "safeDisplayDiameter": 27.692,
+        "caseWall": 0.9,
+        "crystalThickness": 1.15,
+        "casebackThickness": 1.15,
+        "crownTubeOuterDiameter": 1.1,
+        "crownWindOuterX": 20.375,
+        "crownSetOuterX": 21.725,
+        "crownOuterProjectionWind": 0.275,
+        "crownOuterProjectionSet": 1.625,
+        "caseOuterRadius": 20.1,
+        "lugExtension": 4.5
+      },
+      "constraints": {
+        "movementCavityContainsMovement": true,
+        "apertureContainsS86": true,
+        "crystalIsAheadOfHands": true,
+        "casebackIsBehindBridges": true,
+        "positiveFrontClearance": true,
+        "positiveRearClearance": true,
+        "positiveCrownProjectionInBothPositions": true,
+        "totalThicknessIsBudgetSum": true
+      },
+      "allConstraintsPassed": true
+    }
+  }
+}

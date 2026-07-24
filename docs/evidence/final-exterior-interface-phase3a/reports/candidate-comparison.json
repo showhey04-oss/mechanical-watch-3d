@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "phase": "Phase 3A",
+  "sourceMainCommit": "fafd3ae3b9e7224f47320b53c7e635b3bb3b8f58",
+  "sourceAuditCommit": "ba62c5497d424152aecd3ea4f8c576d339d12851",
+  "sourceBranch": "audit/final-exterior-interface-phase3a",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-07-24T06:13:35.660Z",
+  "captureMode": "same-origin unsandboxed iframe harness - actual Three.js scene rendered to offscreen WebGLRenderTarget",
+  "normalSceneExteriorGeometryAdded": false,
+  "defaultCandidateAdopted": false,
+  "evaluationVocabulary": [
+    "LOW_RISK",
+    "MODERATE_RISK",
+    "HIGH_RISK",
+    "RECOMMENDED_NOT_ADOPTED"
+  ],
+  "criteria": {
+    "E-COMPACT": {
+      "interferenceRisk": "HIGH_RISK",
+      "watchProportion": 4,
+      "mechanismVisibility": 2,
+      "s86Alignment": 4,
+      "mobileReadability": 3,
+      "renderingLoad": 5,
+      "selectionImpact": 3,
+      "transparencyAlignment": 3,
+      "issue2Impact": "MODERATE_RISK",
+      "implementationRegressionRisk": "HIGH_RISK",
+      "summary": "Smallest candidate, but its narrow front/rear and radial budgets leave the least implementation margin."
+    },
+    "E-BALANCED": {
+      "interferenceRisk": "MODERATE_RISK",
+      "watchProportion": 5,
+      "mechanismVisibility": 4,
+      "s86Alignment": 5,
+      "mobileReadability": 4,
+      "renderingLoad": 4,
+      "selectionImpact": 4,
+      "transparencyAlignment": 4,
+      "issue2Impact": "MODERATE_RISK",
+      "implementationRegressionRisk": "MODERATE_RISK",
+      "summary": "Balances S86 display framing, movement observation, external size, and implementation margin."
+    },
+    "E-EDUCATIONAL": {
+      "interferenceRisk": "LOW_RISK",
+      "watchProportion": 3,
+      "mechanismVisibility": 5,
+      "s86Alignment": 5,
+      "mobileReadability": 5,
+      "renderingLoad": 2,
+      "selectionImpact": 5,
+      "transparencyAlignment": 5,
+      "issue2Impact": "HIGH_RISK",
+      "implementationRegressionRisk": "MODERATE_RISK",
+      "summary": "Maximizes observation space but increases size and the future transparent-exterior rendering surface."
+    }
+  },
+  "recommendation": {
+    "candidate": "E-BALANCED",
+    "status": "RECOMMENDED_NOT_ADOPTED",
+    "rationale": "It preserves every protected anchor while offering materially safer clearances than E-COMPACT without the size and Issue #2 rendering exposure of E-EDUCATIONAL.",
+    "humanApprovalRequired": true,
+    "defaultPathChanged": false
+  }
+}

@@ -117,13 +117,14 @@ def draw_circle(
     draw: ImageDraw.ImageDraw,
     diameter: float,
     color: str,
-    label: str,
+    label: str | None,
     width: int = 3,
     center=FRONT_CENTER,
 ) -> None:
     draw.ellipse(circle_box(diameter, center), outline=color, width=width)
-    box = circle_box(diameter, center)
-    draw.text((box[2] + 5, max(66, box[1])), f"{label} {diameter:.3f}", fill=color, font=FONT)
+    if label:
+        box = circle_box(diameter, center)
+        draw.text((box[2] + 5, max(66, box[1])), f"{label} {diameter:.3f}", fill=color, font=FONT)
 
 
 def front_overlay_base(title: str, subtitle: str) -> tuple[Image.Image, ImageDraw.ImageDraw]:
@@ -153,15 +154,25 @@ def generate_front_constraints(interface: dict, matrix: dict) -> None:
         "Measured S86 and movement anchors over actual desktop front capture",
     )
     front = interface["frontDisplay"]
-    draw_circle(draw, front["movementOuterDiameter"]["value"], "#f5cf72", "movement")
-    draw_circle(draw, front["dialRingDiameter"]["value"], "#65d9ff", "S86 dial ring")
-    draw_circle(draw, front["indexCircleDiameter"]["value"], "#55e0a3", "S86 index")
-    draw_circle(draw, front["minuteHandTipDiameter"]["value"], "#ff8b8b", "minute tip")
+    anchor_lines = [
+        ("movement", front["movementOuterDiameter"]["value"], "#f5cf72"),
+        ("S86 dial ring", front["dialRingDiameter"]["value"], "#65d9ff"),
+        ("S86 index", front["indexCircleDiameter"]["value"], "#55e0a3"),
+        ("minute tip", front["minuteHandTipDiameter"]["value"], "#ff8b8b"),
+    ]
+    for label, value, color in anchor_lines:
+        draw_circle(draw, value, color, None)
     colors = {"E-COMPACT": "#f7c873", "E-BALANCED": "#60d9ff", "E-EDUCATIONAL": "#bc8cff"}
     for index, (candidate_id, candidate) in enumerate(matrix["candidates"].items()):
         aperture = candidate["values"]["dialApertureDiameter"]["value"]
-        draw_circle(draw, aperture, colors[candidate_id], f"{candidate_id} aperture", 2)
-        draw.text((18, 90 + index * 24), candidate_id, fill=colors[candidate_id], font=FONT)
+        draw_circle(draw, aperture, colors[candidate_id], None, 2)
+    legend = anchor_lines + [
+        (f"{candidate_id} aperture", candidate["values"]["dialApertureDiameter"]["value"], colors[candidate_id])
+        for candidate_id, candidate in matrix["candidates"].items()
+    ]
+    draw.rectangle((12, 78, 260, 78 + len(legend) * 25 + 12), fill=(7, 12, 20, 202), outline="#536579", width=1)
+    for index, (label, value, color) in enumerate(legend):
+        draw.text((20, 88 + index * 25), f"{label}: {value:.3f}", fill=color, font=FONT)
     image.save(IMAGES / "front-aperture-constraints.png", format="PNG")
 
 
@@ -214,13 +225,7 @@ def generate_crown_interface(interface: dict, matrix: dict) -> None:
     draw.text((870, 156), f"pull travel {crown['pullTravel']['value']:.3f}", fill="#f5cf72", font=FONT)
     colors = {"E-COMPACT": "#f7c873", "E-BALANCED": "#60d9ff", "E-EDUCATIONAL": "#bc8cff"}
     for candidate_id, candidate in matrix["candidates"].items():
-        draw_circle(
-            draw,
-            candidate["values"]["caseOuterDiameter"]["value"],
-            colors[candidate_id],
-            candidate_id,
-            2,
-        )
+        draw_circle(draw, candidate["values"]["caseOuterDiameter"]["value"], colors[candidate_id], None, 2)
     image.save(IMAGES / "crown-stem-interface.png", format="PNG")
 
 
@@ -236,8 +241,8 @@ def generate_front_comparison(matrix: dict) -> None:
         aperture = candidate["values"]["dialApertureDiameter"]["value"]
         lug_to_lug = candidate["values"]["lugToLug"]["value"]
         lug_width = candidate["values"]["lugWidth"]["value"]
-        draw_circle(draw, case_diameter, color, f"{candidate_id} case", 3)
-        draw_circle(draw, aperture, color, f"{candidate_id} aperture", 1)
+        draw_circle(draw, case_diameter, color, None, 3)
+        draw_circle(draw, aperture, color, None, 1)
         case_radius_px = case_diameter * FRONT_SCALE / 2
         lug_half_length_px = lug_to_lug * FRONT_SCALE / 2
         lug_half_width_px = lug_width * FRONT_SCALE / 2
@@ -373,4 +378,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

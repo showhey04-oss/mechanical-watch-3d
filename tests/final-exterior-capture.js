@@ -134,8 +134,6 @@ export async function runFinalExteriorCapture({
       iframeOrigin: frame.contentWindow.location.origin,
       iframeReadyState: frame.contentDocument.readyState,
       appVersion: frame.contentDocument.querySelector("[data-app-version]")?.textContent?.trim(),
-      consoleErrors: 0,
-      consoleWarnings: 0,
       capturedAt: new Date().toISOString(),
     };
     output.textContent = JSON.stringify({ ok: true, metadata }, null, 2);

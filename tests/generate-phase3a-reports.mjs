@@ -22,6 +22,7 @@ const captureMetadataPath = process.argv[2] ? resolve(process.argv[2]) : null;
 const sourceAuditCommit = process.argv[3] || null;
 const verificationStatus = process.argv[4] || "PENDING_VERIFICATION";
 const nodeTestCount = Number(process.argv[5] || 0);
+const browserResultsPath = process.argv[6] ? resolve(process.argv[6]) : null;
 
 await mkdir(reports, { recursive: true });
 await mkdir(images, { recursive: true });
@@ -35,6 +36,9 @@ const phase2cYEnvelopes = await readJson(
 );
 const captureMetadata = captureMetadataPath
   ? JSON.parse(await readFile(captureMetadataPath, "utf8"))
+  : null;
+const browserResults = browserResultsPath
+  ? JSON.parse(await readFile(browserResultsPath, "utf8"))
   : null;
 const generatedAt = new Date().toISOString();
 
@@ -63,6 +67,11 @@ function protectedDiff(directory) {
 
 const phase1Changes = protectedDiff("docs/evidence/movement-dial-dimension-audit");
 const phase2cChanges = protectedDiff("docs/evidence/movement-dial-y-stack-phase2c");
+const normalApplicationChanges = [
+  ...protectedDiff("index.html"),
+  ...protectedDiff("js"),
+  ...protectedDiff("assets"),
+];
 const phase2cDesktopEnvelope = phase2cYEnvelopes.desktop;
 const yEnvelopeConsistency = {
   baseMovement:
@@ -317,8 +326,8 @@ const captureChecks = captureMetadata
       consoleErrorWarningZero:
         ["desktopFront", "desktopSide", "mobile390Front"].every(
           key =>
-            captureMetadata[key]?.consoleErrors === 0 &&
-            captureMetadata[key]?.consoleWarnings === 0,
+            captureMetadata[key]?.observedConsole?.applicationErrorCount === 0 &&
+            captureMetadata[key]?.observedConsole?.applicationWarningCount === 0,
         ),
     }
   : {
@@ -352,19 +361,37 @@ const regressionResults = {
     },
   },
   preservedRegressions: {
-    s86RuntimeToSaved: "5/5",
-    handCoupling: "3/3 one-to-one",
-    smallSecondCenterToFourthArborDistance: 0,
-    a7: "9/9",
-    forbiddenInterference: "position1 0 / position2 0",
+    s86RuntimeToSaved: browserResults?.s86RuntimeToSaved ?? null,
+    handCoupling:
+      captureMetadata?.desktopFront?.diagnostics?.handCoupling?.map(record => ({
+        id: record.id,
+        error: record.error,
+        mountDistance: record.mountDistance,
+      })) ?? null,
+    smallSecondCenterToFourthArborDistance:
+      captureMetadata?.desktopFront?.diagnostics?.handCoupling?.find(
+        record => record.id === "seconds",
+      )?.mountDistance ?? null,
+    a7: browserResults?.desktopIntegration?.a7 ?? null,
+    forbiddenInterference: {
+      browserIntegration: browserResults?.desktopIntegration?.interference ?? null,
+      capturedPosition1:
+        captureMetadata?.desktopFront?.diagnostics?.interference?.forbiddenCount ?? null,
+    },
     transformInvariant:
       captureMetadata &&
       ["desktopFront", "desktopSide", "mobile390Front"].every(
         key => captureMetadata[key]?.stateInvariant?.all === true,
       ),
   },
+  browserIntegration: browserResults,
   browserEnvironmentLimitations: [],
   productCodeChangedForEnvironment: false,
+  normalApplicationDiff: {
+    status: normalApplicationChanges.length ? "CHANGED" : "IDENTICAL_TO_SOURCE_MAIN",
+    changedFiles: normalApplicationChanges.length,
+    paths: normalApplicationChanges,
+  },
   thresholdsChanged: false,
 };
 
@@ -396,4 +423,3 @@ console.log(
     2,
   ),
 );
-

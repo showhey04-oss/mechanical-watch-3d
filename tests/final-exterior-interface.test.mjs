@@ -97,12 +97,20 @@ test("E-BALANCED is recommendation-only and does not alter the normal applicatio
 
 test("Phase 3A reports preserve Phase 1 and Phase 2C evidence directories", async () => {
   const manifest = JSON.parse(await readFile(new URL("evidence-manifest.json", evidenceRoot), "utf8"));
+  const regression = JSON.parse(
+    await readFile(new URL("reports/regression-results.json", evidenceRoot), "utf8"),
+  );
   const phase1 = manifest.protectedEvidence.phase1;
   const phase2c = manifest.protectedEvidence.phase2c;
   assert.equal(phase1.changedFiles, 0);
   assert.equal(phase2c.changedFiles, 0);
   assert.equal(phase1.status, "BYTE_IDENTICAL_TO_SOURCE_MAIN");
   assert.equal(phase2c.status, "BYTE_IDENTICAL_TO_SOURCE_MAIN");
+  assert.deepEqual(regression.normalApplicationDiff, {
+    status: "IDENTICAL_TO_SOURCE_MAIN",
+    changedFiles: 0,
+    paths: [],
+  });
 });
 
 test("Phase 3A evidence images decode as PNGs with required dimensions", async () => {
@@ -153,4 +161,3 @@ test("Phase 3A evidence manifest is a closed-world byte and SHA inventory", asyn
     assert.equal(createHash("sha256").update(bytes).digest("hex"), entry.sha256);
   }
 });
-
