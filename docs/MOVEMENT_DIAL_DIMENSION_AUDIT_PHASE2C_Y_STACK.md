@@ -11,7 +11,7 @@ Phase 2Cは既存Object3Dのworld Box3を読取る監査であり、通常Geomet
 | 包絡 | yMin | yMax | 厚さ | 決定部品 |
 | --- | ---: | ---: | ---: | --- |
 | 基礎ムーブメント | -2.410 | 4.235 | 6.645 | dialWorks / bridges |
-| 針取付・突出軸系 | -2.470 | 2.714 | 5.184 | minuteBoss / fourthArbor |
+| 針取付・突出軸系 | -2.470 | 0.720 | 3.190 | minuteBoss / fourthArbor |
 | 文字板・針を含むアプリ | -2.510 | 4.235 | 6.745 | minuteHand / bridges |
 
 ## ETA 4.50 mmとの対応
@@ -20,6 +20,6 @@ ETA公式4.50 mmは一次情報の高さアンカーとして保持する。た�
 
 ## レイヤー判断
 
-主輪列、脱進機、文字板側輪列、筒かな・時針管・四番車軸、3針は既存の拘束・干渉規則を守る`PROTECTED`。ブリッジ・支持部のみ`LOCAL_REVIEW`、文字板リングとインデックスは物理文字板・風防・ベゼル統合まで`DEFER_TO_EXTERIOR`とする。Phase 2Cでは寸法を変更しない。
+針取付・突出軸系は組立体proxyではなく、`cannonTube`、`hourPipe`、`fourthDialArbor`と3つの針ボスの実Mesh参照から測定した。主輪列、脱進機、文字板側輪列、これらの管・軸、3針は既存の拘束・干渉規則を守る`PROTECTED`。禁止干渉は0であり、保護規則と干渉件数は別項目として記録する。ブリッジ・支持部のみ`LOCAL_REVIEW`、文字板リングとインデックスは物理文字板・風防・ベゼル統合まで`DEFER_TO_EXTERIOR`とする。Phase 2Cでは寸法を変更しない。
 
 実測JSON、viewport比較、画像、SHA-256 manifestは`docs/evidence/movement-dial-y-stack-phase2c/`に保存する。
