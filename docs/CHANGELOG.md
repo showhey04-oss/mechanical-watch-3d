@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — Draft PR #13 Phase 3B.1 E-BALANCED core exterior candidate
+
+- `?exterior=balanced`限定のケース胴を、一定半径の円筒から外径39.000→39.600→39.000の軸方向プロファイルを持つ単一閉合Meshへ変更。
+- りゅうずの実Mesh包絡から位置1の必要最小逃げ0.298836を算出し、生成後gap再計測を含む実採用値0.309461を適用。上限0.330との差0.020539、位置1gap 0.030084、最小壁厚0.590539を確認。
+- 旧上限0.150では物理食い込み0.121192、目標gap込み不足0.151192が残ることを記録。
+- 内周半径18.900を不変とし、CSG、重複Mesh、同一面重ねを使用しない。りゅうず―チューブ／局所カラーは意図接触または未検証シートとして、りゅうず―ケース胴の禁止干渉から分離。
+- `totalCaseThickness=9.845`、`caseBodyAxialThickness=7.945`、前後突出各0.950を名称と恒等式で分離。
+- 通常path、S86、Phase 2C、A.7、機構、カメラ、照明、材質、UI、作動音、APP_VERSIONは変更しない。状態は`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`のまま、PC／物理iPhone確認前に既定採用しない。
+
 ## v3.15.0 — PR #10 S86 dial display proportions
 
 - 人間確認で選定されたS86の文字板表示寸法を通常Geometryへ反映（dial ring 27.692、index円 25.456、分針 12.040、時針 8.600、小秒表示円 7.740、小秒針 3.268）。

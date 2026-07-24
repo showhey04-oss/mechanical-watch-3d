@@ -2,11 +2,11 @@
   "metadata": {
     "schemaVersion": 1,
     "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
-    "sourceImplementationCommit": "5e3081447c23fd94d3ed6c6bc91a7ca4cdc98995",
+    "sourceImplementationCommit": "b27d827ff1f60c8051187a7724e93b9c50af8912",
     "sourceBranch": "feature/final-exterior-balanced-phase3b1",
     "appVersion": "v3.15.0",
-    "capturedAt": "2026-07-24T08:13:02.191Z",
-    "captureMode": "same-origin unsandboxed iframe harness",
+    "capturedAt": "2026-07-24T15:10:13.683Z",
+    "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser WebGL screenshots",
     "candidateId": "E-BALANCED",
     "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
   },
@@ -38,6 +38,9 @@
       "casebackOuterY": 5.835,
       "rearBridgeClearance": 0.65,
       "totalCaseThickness": 9.845,
+      "caseBodyAxialThickness": 7.945,
+      "frontExteriorProjection": 0.95,
+      "rearExteriorProjection": 0.95,
       "crownTubeAxisY": -1.05,
       "crownTubeAxisZ": -4.5,
       "crownTubeOuterDiameter": 1,
@@ -68,6 +71,46 @@
       "crownConnectionInnerDiameter": 0.52,
       "crownConnectionAxialLength": 0.18,
       "crownConnectionOuterX": 19.2
+    },
+    "caseBody": {
+      "innerRadius": 18.9,
+      "outerRadiusProfile": [
+        {
+          "y": -3.06,
+          "outerRadius": 19.5
+        },
+        {
+          "y": -2.55,
+          "outerRadius": 19.68
+        },
+        {
+          "y": -1.7,
+          "outerRadius": 19.8
+        },
+        {
+          "y": 2.6,
+          "outerRadius": 19.8
+        },
+        {
+          "y": 3.65,
+          "outerRadius": 19.68
+        },
+        {
+          "y": 4.885,
+          "outerRadius": 19.5
+        }
+      ],
+      "circumferentialSegments": 192,
+      "axialMaxStep": 0.06,
+      "crownRelief": {
+        "targetGap": 0.03,
+        "geometryMargin": 0.0005,
+        "legacyMaxDepth": 0.15,
+        "maximumDepth": 0.33,
+        "minimumWall": 0.55,
+        "transitionWidth": 0.16,
+        "smoothUnionWidth": 0.004
+      }
     },
     "protectedAnchors": {
       "movementReferenceDiameter": 36.6,

@@ -20,6 +20,11 @@ RUNTIME_IMAGES = (
     "opacity-100-front.png",
     "opacity-50-front.png",
     "opacity-16-front.png",
+    "case-body-selection.png",
+    "opacity-16-internal-selection.png",
+    "desktop-oblique-front.png",
+    "before-profile-desktop-side.png",
+    "before-profile-desktop-oblique-front.png",
 )
 
 

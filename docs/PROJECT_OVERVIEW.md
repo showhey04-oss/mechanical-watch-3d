@@ -39,6 +39,8 @@ Refactor Aで輪列・高さ面・回転状態をパラメータ化し、PR #3�
 
 寸法・比率調整はPR #10のS86採用とPR #11のPhase 2C監査で完了扱いとする。Phase 3Aは外装Geometryを追加せず候補を比較し、E-BALANCEDを`APPROVED_FOR_PHASE_3B_IMPLEMENTATION`かつ`NOT_APPROVED_FOR_DEFAULT_ADOPTION`として選定した。Phase 3B.1では`?exterior=balanced`だけでコア外装を生成し、通常URLのObject3D／Geometry／Material追加数を0に保つ。ラグ、スプリングバー、ストラップ、バックルはPhase 3B.2へ分離する。指掛かりとpull／push操作性、製造公差、防水構造は`UNVERIFIED`であり、人間の実画面確認前に既定採用しない。ETA 4.50 mmは`REFERENCE_DATUM_UNRESOLVED / UNVERIFIED`のまま外装厚さの調整量に使用せず、表示開口と全体比率を外装統合レビューで再確認する。
 
+ケース胴はY=-3.060～4.885の単一閉合Meshとし、外径39.000→39.600→39.000の前後テーパー、内径37.800不変、実りゅうず包絡に対する局所逃げを持つ。局所逃げは必要最小0.298836から生成後gapを再計測して0.309461を採用し、上限0.330、位置1gap 0.030084、最小壁厚0.590539を満たす。CSGは使用せず、りゅうず―チューブの0.056857シート関係は`PHASE3B1_IMPLEMENTATION_ASSUMPTION`のまま禁止干渉から分離する。
+
 ## 本体完成要件
 
 - 寸法・比率調整、最終外装、全体品質とIssue #2の最終調整を完了する

@@ -11,7 +11,7 @@ for (let index = 2; index < process.argv.length; index += 2) {
 }
 const sourcePath = args.get("--source");
 const outputDirectory = args.get("--output");
-const nodePassed = Number(args.get("--node-passed") || 94);
+const nodePassed = Number(args.get("--node-passed") || 105);
 if (!sourcePath || !outputDirectory) {
   throw new Error("--source and --output are required");
 }
@@ -51,6 +51,20 @@ await writeReport("runtime-dimensions.json", {
   viewportInvariant:
     JSON.stringify(source.desktop.dimensions)
       === JSON.stringify(source.mobile.dimensions),
+  thicknessTerminology: {
+    totalCaseThickness:
+      FINAL_EXTERIOR_BALANCED.dimensions.totalCaseThickness,
+    caseBodyAxialThickness:
+      FINAL_EXTERIOR_BALANCED.dimensions.caseBodyAxialThickness,
+    frontExteriorProjection:
+      FINAL_EXTERIOR_BALANCED.dimensions.frontExteriorProjection,
+    rearExteriorProjection:
+      FINAL_EXTERIOR_BALANCED.dimensions.rearExteriorProjection,
+    identity:
+      FINAL_EXTERIOR_BALANCED.dimensions.frontExteriorProjection
+        + FINAL_EXTERIOR_BALANCED.dimensions.caseBodyAxialThickness
+        + FINAL_EXTERIOR_BALANCED.dimensions.rearExteriorProjection,
+  },
 });
 
 await writeReport("exterior-interference.json", {
@@ -75,6 +89,71 @@ await writeReport("exterior-interference.json", {
   },
   crownFingerAccess: "UNVERIFIED",
   crownPullPushOperability: "UNVERIFIED",
+});
+
+const crownBodyCase = source.desktop.interference.crownBodyCase;
+await writeReport("case-body-relief-report.json", {
+  profile: source.desktop.dimensions.caseBodyProfile,
+  actualGeometry: source.desktop.dimensions.caseBodyGeometry,
+  calculation: {
+    legacyMaximumDepth: 0.150,
+    legacyRemainingPhysicalOverlap:
+      crownBodyCase.legacyRemainingOverlap,
+    legacyTargetGapShortfall:
+      source.desktop.dimensions.caseBodyGeometry.relief
+        .legacyTargetGapShortfall,
+    requiredMinimumDepth:
+      crownBodyCase.requiredMinimumDepth,
+    adoptedMaximumDepth:
+      crownBodyCase.adoptedMaximumDepth,
+    maximumAllowedDepth:
+      crownBodyCase.maximumAllowedDepth,
+    maximumDepthMargin:
+      crownBodyCase.maximumDepthMargin,
+  },
+  position1: {
+    crownCoreRadius:
+      source.desktop.dimensions.caseBodyGeometry.relief.coreRadius,
+    crownEnvelope:
+      source.desktop.dimensions.caseBodyGeometry.relief.bounds,
+    baseCaseOuterRadius:
+      FINAL_EXTERIOR_BALANCED.dimensions.caseOuterDiameter / 2,
+    requiredCaseOuterRadius:
+      FINAL_EXTERIOR_BALANCED.dimensions.caseOuterDiameter / 2
+        - crownBodyCase.requiredMinimumDepth,
+    actualMinimumGap: crownBodyCase.position1.minimumGap,
+    actualMinimumGapPoint: crownBodyCase.position1.point,
+    forbiddenInterferenceCount:
+      crownBodyCase.position1.forbiddenInterferenceCount,
+  },
+  position2: {
+    actualMinimumGap: crownBodyCase.position2.minimumGap,
+    actualMinimumGapPoint: crownBodyCase.position2.point,
+    forbiddenInterferenceCount:
+      crownBodyCase.position2.forbiddenInterferenceCount,
+  },
+  wall: {
+    innerRadius:
+      source.desktop.dimensions.caseBodyGeometry.innerRadius,
+    minimumRequired: 0.550,
+    actualMinimum: crownBodyCase.minimumWall,
+    actualMinimumPoint: crownBodyCase.minimumWallPoint,
+  },
+  mesh: {
+    singleClosedMesh: crownBodyCase.closedMesh,
+    csgUsed: false,
+    innerProfileChanged: false,
+    finite: crownBodyCase.finite,
+    vertexCount:
+      source.desktop.dimensions.caseBodyGeometry.vertexCount,
+    indexCount:
+      source.desktop.dimensions.caseBodyGeometry.indexCount,
+    degenerateTriangleCount:
+      crownBodyCase.degenerateTriangleCount,
+    nonManifoldEdgeCount:
+      source.desktop.dimensions.caseBodyGeometry.topology
+        .nonManifoldEdgeCount,
+  },
 });
 
 const crownPair = source.desktop.interference.forbidden.find(
@@ -159,6 +238,7 @@ await writeReport("performance-results.json", {
   durationMs: 10000,
   normal: source.performance.normal,
   candidate: source.performance.candidate,
+  interaction: source.performance.interaction,
   comparison: {
     averageFpsPercent:
       percent(candidatePacing.averageFps, normalPacing.averageFps),
@@ -229,6 +309,22 @@ await writeReport("decision-summary.json", {
     crownFingerAccess: "UNVERIFIED",
     crownPullPushOperability: "UNVERIFIED",
     manufacturingAndWaterResistance: "UNVERIFIED",
+  },
+  caseBodySilhouette: {
+    requiredMinimumRelief:
+      crownBodyCase.requiredMinimumDepth,
+    adoptedRelief:
+      crownBodyCase.adoptedMaximumDepth,
+    allowedMaximumRelief:
+      crownBodyCase.maximumAllowedDepth,
+    actualPosition1Gap:
+      crownBodyCase.position1.minimumGap,
+    actualMinimumWall:
+      crownBodyCase.minimumWall,
+    legacy0150PhysicalOverlap:
+      crownBodyCase.legacyRemainingOverlap,
+    csgUsed: false,
+    innerProfileChanged: false,
   },
   videos: {
     captured: false,
