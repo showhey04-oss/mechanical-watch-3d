@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Phase 3A desktop front capture</title>
+  <style>
+    html,body{margin:0;background:#101820;color:#eef3f8;font:13px system-ui}
+    iframe{width:640px;height:480px;border:0;display:block}
+    output,pre{white-space:pre-wrap;word-break:break-word}
+  </style>
+</head>
+<body data-audit-status="queued" data-capture-stage="queued" data-desktop-front-ready="false">
+  <iframe id="auditApp" title="Mechanical watch audit application"></iframe>
+  <output id="captureResult" data-status="queued"></output>
+  <pre id="captureLog"></pre>
+  <div id="phase3aCaptureChunks" hidden></div>
+  <script type="module">
+    import {runFinalExteriorCapture} from "./final-exterior-capture.js";
+    runFinalExteriorCapture({
+      captureId:"desktop-front-baseline",
+      width:1280,
+      height:720,
+      cameraPreset:"reset",
+      readyKey:"desktopFrontReady",
+    });
+  </script>
+</body>
+</html>
+
