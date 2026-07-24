@@ -86,7 +86,25 @@ frame.addEventListener("load", async () => {
         : dimensions.runtime === null && dimensions.configDiff === null,
       exteriorInterference:
         interference.forbiddenCount === 0
-        && interference.forbidden.length === (expectedExteriorEnabled ? 10 : 0),
+        && interference.forbidden.length === (expectedExteriorEnabled ? 11 : 0),
+      caseBodyProfile: expectedExteriorEnabled
+        ? dimensions.caseBodyGeometry.bounds.size[0] === 39.6
+          && dimensions.caseBodyGeometry.bounds.size[1] === 7.945
+          && dimensions.caseBodyGeometry.innerRadius === 18.9
+        : true,
+      caseBodyGeometry: expectedExteriorEnabled
+        ? dimensions.caseBodyGeometry.finite.positions
+          && dimensions.caseBodyGeometry.finite.normals
+          && dimensions.caseBodyGeometry.finite.indices
+          && dimensions.caseBodyGeometry.degenerateTriangleCount === 0
+          && dimensions.caseBodyGeometry.topology.closed
+        : true,
+      crownBodyCase: expectedExteriorEnabled
+        ? interference.crownBodyCase.position1.minimumGap >= 0.03
+          && interference.crownBodyCase.position2.minimumGap >= 0.03
+          && interference.crownBodyCase.adoptedMaximumDepth <= 0.33
+          && interference.crownBodyCase.minimumWall >= 0.55
+        : true,
       tubeAxis: expectedExteriorEnabled
         ? interference.tubeAxisError === 0
         : interference.tubeAxisError === null,

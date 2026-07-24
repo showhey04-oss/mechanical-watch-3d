@@ -1,0 +1,616 @@
+const TAU = Math.PI * 2;
+
+const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+const smoothStep01 = value => {
+  const t = clamp(value, 0, 1);
+  return t * t * (3 - 2 * t);
+};
+
+const round = (value, digits = 9) => Number(Number(value).toFixed(digits));
+const roundArray = values => values.map(value => round(value));
+const uniqueSorted = (values, tolerance = 1e-7) => {
+  const sorted = [...values].sort((a, b) => a - b);
+  return sorted.filter(
+    (value, index) => index === 0 || value - sorted[index - 1] > tolerance,
+  );
+};
+
+function assertFiniteNumber(value, name) {
+  if (!Number.isFinite(value)) throw new Error(`${name} must be finite`);
+}
+
+export function interpolateCaseBodyRadius(profile, y) {
+  if (!Array.isArray(profile) || profile.length < 2) {
+    throw new Error("case-body radius profile requires at least two points");
+  }
+  if (y <= profile[0].y) return profile[0].outerRadius;
+  if (y >= profile.at(-1).y) return profile.at(-1).outerRadius;
+  for (let index = 1; index < profile.length; index++) {
+    const previous = profile[index - 1];
+    const current = profile[index];
+    if (y <= current.y) {
+      const t = (y - previous.y) / (current.y - previous.y);
+      return previous.outerRadius
+        + (current.outerRadius - previous.outerRadius) * t;
+    }
+  }
+  return profile.at(-1).outerRadius;
+}
+
+function buildAxialSamples(profile, maxStep, relief) {
+  const values = new Set();
+  for (let index = 1; index < profile.length; index++) {
+    const start = profile[index - 1].y;
+    const end = profile[index].y;
+    const steps = Math.max(1, Math.ceil((end - start) / maxStep));
+    for (let step = 0; step <= steps; step++) {
+      values.add(round(start + (end - start) * (step / steps), 12));
+    }
+  }
+  const localValues = [
+    relief.centerY,
+    relief.centerY - relief.coreRadius,
+    relief.centerY + relief.coreRadius,
+    relief.centerY - relief.outerRadius,
+    relief.centerY + relief.outerRadius,
+    relief.centerY - relief.outerRadius - relief.transitionWidth,
+    relief.centerY + relief.outerRadius + relief.transitionWidth,
+    relief.bounds.min[1],
+    relief.bounds.max[1],
+  ];
+  for (const value of localValues) {
+    if (value > profile[0].y && value < profile.at(-1).y) {
+      values.add(round(value, 12));
+    }
+  }
+  return uniqueSorted(values);
+}
+
+const normalizeAngle = angle => {
+  const value = angle % TAU;
+  return value < 0 ? value + TAU : value;
+};
+
+function buildCircumferentialSamples(baseSegments, axialSamples, relief) {
+  const values = new Set();
+  for (let segment = 0; segment < baseSegments; segment++) {
+    values.add(round(segment / baseSegments * TAU, 12));
+  }
+  const targetGap = relief.targetGap + relief.geometryMargin;
+  const envelopes = [
+    {
+      radius: relief.coreRadius,
+      targetX: relief.coreInnerX - targetGap,
+    },
+    {
+      radius: relief.outerRadius,
+      targetX: relief.ridgeInnerX - targetGap,
+    },
+  ];
+  for (const y of axialSamples) {
+    const dy = y - relief.centerY;
+    for (const envelope of envelopes) {
+      if (Math.abs(dy) > envelope.radius) continue;
+      const dz = Math.sqrt(Math.max(0, envelope.radius ** 2 - dy ** 2));
+      for (const z of [relief.centerZ - dz, relief.centerZ + dz]) {
+        values.add(round(normalizeAngle(Math.atan2(z, envelope.targetX)), 12));
+      }
+    }
+  }
+  return uniqueSorted(values);
+}
+
+function falloff(distance, radius, transitionWidth) {
+  if (distance <= radius) return 1;
+  if (distance >= radius + transitionWidth) return 0;
+  return 1 - smoothStep01((distance - radius) / transitionWidth);
+}
+
+function smoothMaximum(first, second, width) {
+  if (first <= 0 && second <= 0) return 0;
+  if (width <= 0 || Math.abs(first - second) >= width) {
+    return Math.max(first, second);
+  }
+  const h = clamp(0.5 + 0.5 * (first - second) / width, 0, 1);
+  return second * (1 - h) + first * h + width * h * (1 - h);
+}
+
+function reliefComponent({
+  baseRadius,
+  y,
+  z,
+  centerY,
+  centerZ,
+  envelopeRadius,
+  transitionWidth,
+  targetX,
+}) {
+  const dy = y - centerY;
+  const dz = z - centerZ;
+  const distance = Math.hypot(dy, dz);
+  const weight = falloff(distance, envelopeRadius, transitionWidth);
+  if (weight <= 0) return 0;
+  const scale = distance > envelopeRadius && distance > 0
+    ? envelopeRadius / distance
+    : 1;
+  const envelopeZ = centerZ + dz * scale;
+  const requiredRadius = Math.hypot(targetX, envelopeZ);
+  return Math.max(0, baseRadius - requiredRadius) * weight;
+}
+
+function evaluateRelief({
+  baseRadius,
+  y,
+  theta,
+  radius,
+  relief,
+}) {
+  const cosine = Math.cos(theta);
+  if (cosine <= 0) return 0;
+  const z = radius * Math.sin(theta);
+  const targetGap = relief.targetGap + relief.geometryMargin;
+  const core = reliefComponent({
+    baseRadius,
+    y,
+    z,
+    centerY: relief.centerY,
+    centerZ: relief.centerZ,
+    envelopeRadius: relief.coreRadius,
+    transitionWidth: relief.transitionWidth,
+    targetX: relief.coreInnerX - targetGap,
+  });
+  const ridges = reliefComponent({
+    baseRadius,
+    y,
+    z,
+    centerY: relief.centerY,
+    centerZ: relief.centerZ,
+    envelopeRadius: relief.outerRadius,
+    transitionWidth: relief.transitionWidth,
+    targetX: relief.ridgeInnerX - targetGap,
+  });
+  return smoothMaximum(core, ridges, relief.smoothUnionWidth);
+}
+
+function solveOuterRadius({ baseRadius, y, theta, relief }) {
+  let radius = baseRadius;
+  for (let iteration = 0; iteration < 12; iteration++) {
+    const requested = evaluateRelief({
+      baseRadius,
+      y,
+      theta,
+      radius,
+      relief,
+    });
+    if (requested > relief.maxDepth + 1e-9) {
+      throw new Error(
+        `required crown relief ${requested} exceeds ${relief.maxDepth}`,
+      );
+    }
+    const next = Math.max(relief.innerRadius + relief.minWall, baseRadius - requested);
+    if (Math.abs(next - radius) <= 1e-10) {
+      radius = next;
+      break;
+    }
+    radius = next;
+  }
+  return radius;
+}
+
+function accumulateVertexNormals(positions, indices) {
+  const normals = new Float64Array(positions.length);
+  let degenerateTriangleCount = 0;
+  for (let index = 0; index < indices.length; index += 3) {
+    const ai = indices[index] * 3;
+    const bi = indices[index + 1] * 3;
+    const ci = indices[index + 2] * 3;
+    const abx = positions[bi] - positions[ai];
+    const aby = positions[bi + 1] - positions[ai + 1];
+    const abz = positions[bi + 2] - positions[ai + 2];
+    const acx = positions[ci] - positions[ai];
+    const acy = positions[ci + 1] - positions[ai + 1];
+    const acz = positions[ci + 2] - positions[ai + 2];
+    const nx = aby * acz - abz * acy;
+    const ny = abz * acx - abx * acz;
+    const nz = abx * acy - aby * acx;
+    const lengthSquared = nx * nx + ny * ny + nz * nz;
+    if (lengthSquared <= 1e-18) {
+      degenerateTriangleCount++;
+      continue;
+    }
+    for (const vertexIndex of [ai, bi, ci]) {
+      normals[vertexIndex] += nx;
+      normals[vertexIndex + 1] += ny;
+      normals[vertexIndex + 2] += nz;
+    }
+  }
+  for (let index = 0; index < normals.length; index += 3) {
+    const length = Math.hypot(
+      normals[index],
+      normals[index + 1],
+      normals[index + 2],
+    );
+    if (length > 0) {
+      normals[index] /= length;
+      normals[index + 1] /= length;
+      normals[index + 2] /= length;
+    }
+  }
+  return { normals, degenerateTriangleCount };
+}
+
+function geometryBounds(positions) {
+  const min = [Infinity, Infinity, Infinity];
+  const max = [-Infinity, -Infinity, -Infinity];
+  for (let index = 0; index < positions.length; index += 3) {
+    for (let axis = 0; axis < 3; axis++) {
+      min[axis] = Math.min(min[axis], positions[index + axis]);
+      max[axis] = Math.max(max[axis], positions[index + axis]);
+    }
+  }
+  return {
+    min: roundArray(min),
+    max: roundArray(max),
+    size: roundArray(max.map((value, axis) => value - min[axis])),
+  };
+}
+
+function closedEdgeReport(indices) {
+  const edges = new Map();
+  for (let index = 0; index < indices.length; index += 3) {
+    const triangle = [indices[index], indices[index + 1], indices[index + 2]];
+    for (let edge = 0; edge < 3; edge++) {
+      const a = triangle[edge];
+      const b = triangle[(edge + 1) % 3];
+      const key = a < b ? `${a}:${b}` : `${b}:${a}`;
+      edges.set(key, (edges.get(key) || 0) + 1);
+    }
+  }
+  const nonManifoldEdges = [...edges.entries()]
+    .filter(([, count]) => count !== 2)
+    .map(([edge, count]) => ({ edge, count }));
+  return {
+    edgeCount: edges.size,
+    nonManifoldEdgeCount: nonManifoldEdges.length,
+    nonManifoldEdges,
+    closed: nonManifoldEdges.length === 0,
+  };
+}
+
+function crownEnvelopeGapAtPoint(point, envelope, positionOffsetX = 0) {
+  const [x, y, z] = point;
+  const dy = y - envelope.centerY;
+  const dz = z - envelope.centerZ;
+  const distance = Math.hypot(dy, dz);
+  if (distance <= envelope.coreRadius + 1e-9) {
+    return {
+      gap: envelope.coreInnerX + positionOffsetX - x,
+      classification: "crown core",
+    };
+  }
+  if (distance <= envelope.outerRadius + 1e-9) {
+    return {
+      gap: envelope.ridgeInnerX + positionOffsetX - x,
+      classification: "crown outer teeth conservative envelope",
+    };
+  }
+  return null;
+}
+
+function sampleCrownGap({
+  positions,
+  indices,
+  outerVertexCount,
+  envelope,
+  positionOffsetX = 0,
+}) {
+  let minimum = {
+    gap: Infinity,
+    point: null,
+    classification: null,
+  };
+  const consider = point => {
+    const result = crownEnvelopeGapAtPoint(point, envelope, positionOffsetX);
+    if (result && result.gap < minimum.gap) {
+      minimum = {
+        gap: result.gap,
+        point: [...point],
+        classification: result.classification,
+      };
+    }
+  };
+  for (let vertex = 0; vertex < outerVertexCount; vertex++) {
+    const offset = vertex * 3;
+    consider(positions.slice(offset, offset + 3));
+  }
+  for (let index = 0; index < indices.length; index += 3) {
+    const triangle = [
+      indices[index],
+      indices[index + 1],
+      indices[index + 2],
+    ];
+    if (triangle.some(vertex => vertex >= outerVertexCount)) continue;
+    const points = triangle.map(vertex => positions.slice(vertex * 3, vertex * 3 + 3));
+    for (const [first, second] of [[0, 1], [1, 2], [2, 0]]) {
+      consider([
+        (points[first][0] + points[second][0]) / 2,
+        (points[first][1] + points[second][1]) / 2,
+        (points[first][2] + points[second][2]) / 2,
+      ]);
+    }
+    consider([
+      (points[0][0] + points[1][0] + points[2][0]) / 3,
+      (points[0][1] + points[1][1] + points[2][1]) / 3,
+      (points[0][2] + points[1][2] + points[2][2]) / 3,
+    ]);
+  }
+  return {
+    minimumGap: round(minimum.gap),
+    point: minimum.point ? roundArray(minimum.point) : null,
+    classification: minimum.classification,
+    forbiddenInterferenceCount: minimum.gap < -1e-7 ? 1 : 0,
+  };
+}
+
+export function createCaseBodyProfileGeometryData({
+  profile,
+  innerRadius,
+  circumferentialSegments = 192,
+  axialMaxStep = 0.12,
+  crownRelief,
+  crownTravel = 1.35,
+}) {
+  if (!Number.isInteger(circumferentialSegments) || circumferentialSegments < 96) {
+    throw new Error("case-body circumferential segments must be an integer >= 96");
+  }
+  for (const [name, value] of Object.entries({
+    innerRadius,
+    axialMaxStep,
+    crownTravel,
+    ...Object.fromEntries(
+      Object.entries(crownRelief)
+        .filter(([, value]) => typeof value === "number"),
+    ),
+  })) {
+    assertFiniteNumber(value, name);
+  }
+  const relief = { ...crownRelief, innerRadius };
+  const axialSamples = buildAxialSamples(profile, axialMaxStep, relief);
+  const angularSamples = buildCircumferentialSamples(
+    circumferentialSegments,
+    axialSamples,
+    relief,
+  );
+  const ringCount = axialSamples.length;
+  const angularCount = angularSamples.length;
+  const outerVertexCount = ringCount * angularCount;
+  const positions = new Float64Array(outerVertexCount * 2 * 3);
+  let maximumRelief = {
+    depth: -Infinity,
+    point: null,
+    baseRadius: null,
+    actualRadius: null,
+  };
+  let minimumWall = {
+    thickness: Infinity,
+    point: null,
+  };
+
+  const setPosition = (vertex, x, y, z) => {
+    const offset = vertex * 3;
+    positions[offset] = x;
+    positions[offset + 1] = y;
+    positions[offset + 2] = z;
+  };
+
+  for (let ring = 0; ring < ringCount; ring++) {
+    const y = axialSamples[ring];
+    const baseRadius = interpolateCaseBodyRadius(profile, y);
+    for (let segment = 0; segment < angularCount; segment++) {
+      const theta = angularSamples[segment];
+      const radius = solveOuterRadius({ baseRadius, y, theta, relief });
+      const cosine = Math.cos(theta);
+      const sine = Math.sin(theta);
+      const outerVertex = ring * angularCount + segment;
+      const innerVertex = outerVertexCount + outerVertex;
+      const outerPoint = [radius * cosine, y, radius * sine];
+      setPosition(outerVertex, ...outerPoint);
+      setPosition(innerVertex, innerRadius * cosine, y, innerRadius * sine);
+      const depth = baseRadius - radius;
+      if (depth > maximumRelief.depth) {
+        maximumRelief = {
+          depth,
+          point: outerPoint,
+          baseRadius,
+          actualRadius: radius,
+        };
+      }
+      const wall = radius - innerRadius;
+      if (wall < minimumWall.thickness) {
+        minimumWall = {
+          thickness: wall,
+          point: outerPoint,
+        };
+      }
+    }
+  }
+
+  const indices = [];
+  const vertex = (inner, ring, segment) =>
+    (inner ? outerVertexCount : 0)
+      + ring * angularCount
+      + (segment + angularCount) % angularCount;
+  for (let ring = 0; ring < ringCount - 1; ring++) {
+    for (let segment = 0; segment < angularCount; segment++) {
+      const next = segment + 1;
+      const o00 = vertex(false, ring, segment);
+      const o01 = vertex(false, ring, next);
+      const o10 = vertex(false, ring + 1, segment);
+      const o11 = vertex(false, ring + 1, next);
+      const i00 = vertex(true, ring, segment);
+      const i01 = vertex(true, ring, next);
+      const i10 = vertex(true, ring + 1, segment);
+      const i11 = vertex(true, ring + 1, next);
+      indices.push(o00, o10, o11, o00, o11, o01);
+      indices.push(i00, i11, i10, i00, i01, i11);
+    }
+  }
+  const frontRing = 0;
+  const backRing = ringCount - 1;
+  for (let segment = 0; segment < angularCount; segment++) {
+    const next = segment + 1;
+    const frontOuter = vertex(false, frontRing, segment);
+    const frontOuterNext = vertex(false, frontRing, next);
+    const frontInner = vertex(true, frontRing, segment);
+    const frontInnerNext = vertex(true, frontRing, next);
+    indices.push(
+      frontOuter,
+      frontInnerNext,
+      frontInner,
+      frontOuter,
+      frontOuterNext,
+      frontInnerNext,
+    );
+    const backOuter = vertex(false, backRing, segment);
+    const backOuterNext = vertex(false, backRing, next);
+    const backInner = vertex(true, backRing, segment);
+    const backInnerNext = vertex(true, backRing, next);
+    indices.push(
+      backOuter,
+      backInner,
+      backInnerNext,
+      backOuter,
+      backInnerNext,
+      backOuterNext,
+    );
+  }
+
+  const indexArray = Uint32Array.from(indices);
+  const { normals, degenerateTriangleCount } =
+    accumulateVertexNormals(positions, indexArray);
+  const topology = closedEdgeReport(indexArray);
+  const position1 = sampleCrownGap({
+    positions,
+    indices: indexArray,
+    outerVertexCount,
+    envelope: relief,
+  });
+  const position2 = sampleCrownGap({
+    positions,
+    indices: indexArray,
+    outerVertexCount,
+    envelope: relief,
+    positionOffsetX: crownTravel,
+  });
+  const requiredMinimumRelief =
+    interpolateCaseBodyRadius(profile, relief.centerY)
+      - Math.hypot(
+        relief.coreInnerX - relief.targetGap,
+        relief.centerZ + relief.coreRadius,
+      );
+  const coreNearZ = relief.centerZ + relief.coreRadius;
+  const legacyRadius =
+    interpolateCaseBodyRadius(profile, relief.centerY) - relief.legacyMaxDepth;
+  const legacyCaseX = Math.sqrt(
+    Math.max(0, legacyRadius * legacyRadius - coreNearZ * coreNearZ),
+  );
+  const legacyRemainingOverlap = legacyCaseX - relief.coreInnerX;
+  const legacyTargetGapShortfall =
+    legacyCaseX - (relief.coreInnerX - relief.targetGap);
+  const finite = {
+    positions: [...positions].every(Number.isFinite),
+    normals: [...normals].every(Number.isFinite),
+    indices: [...indexArray].every(Number.isFinite),
+  };
+  const audit = {
+    profile: profile.map(point => ({ ...point })),
+    innerRadius: round(innerRadius),
+    circumferentialSegments,
+    circumferentialSampleCount: angularCount,
+    axialSampleCount: ringCount,
+    vertexCount: positions.length / 3,
+    indexCount: indexArray.length,
+    triangleCount: indexArray.length / 3,
+    finite,
+    degenerateTriangleCount,
+    topology,
+    bounds: geometryBounds(positions),
+    relief: {
+      center: [round(relief.coreInnerX), round(relief.centerY), round(relief.centerZ)],
+      coreRadius: round(relief.coreRadius),
+      outerRadius: round(relief.outerRadius),
+      bounds: {
+        min: roundArray(relief.bounds.min),
+        max: roundArray(relief.bounds.max),
+      },
+      targetGap: round(relief.targetGap),
+      requestedGeometryMargin: round(
+        relief.requestedGeometryMargin ?? relief.geometryMargin,
+      ),
+      geometryMargin: round(relief.geometryMargin),
+      calibrationIterations: relief.calibrationIteration ?? 0,
+      legacyMaxDepth: round(relief.legacyMaxDepth),
+      legacyRemainingOverlap: round(legacyRemainingOverlap),
+      legacyTargetGapShortfall: round(legacyTargetGapShortfall),
+      requiredMinimumDepth: round(requiredMinimumRelief),
+      adoptedMaximumDepth: round(maximumRelief.depth),
+      adoptedMaximumPoint: roundArray(maximumRelief.point),
+      maximumAllowedDepth: round(relief.maxDepth),
+      maximumDepthMargin: round(relief.maxDepth - maximumRelief.depth),
+      transitionWidth: round(relief.transitionWidth),
+      minimumWall: round(minimumWall.thickness),
+      minimumWallPoint: roundArray(minimumWall.point),
+      minimumWallRequirement: round(relief.minWall),
+      position1,
+      position2,
+    },
+  };
+  if (!Object.values(finite).every(Boolean)) {
+    throw new Error("case-body profile geometry contains non-finite data");
+  }
+  if (degenerateTriangleCount !== 0) {
+    throw new Error("case-body profile geometry contains degenerate triangles");
+  }
+  if (!topology.closed) {
+    throw new Error("case-body profile geometry is not a closed manifold");
+  }
+  if (maximumRelief.depth > relief.maxDepth + 1e-9) {
+    throw new Error("case-body crown relief exceeds the configured maximum");
+  }
+  if (minimumWall.thickness < relief.minWall - 1e-9) {
+    throw new Error("case-body crown relief violates the minimum wall");
+  }
+  if (position1.minimumGap < relief.targetGap - 1e-5) {
+    const calibrationIteration = relief.calibrationIteration ?? 0;
+    if (calibrationIteration >= 6) {
+      throw new Error(
+        `case-body crown relief gap ${position1.minimumGap} does not meet ${relief.targetGap}`,
+      );
+    }
+    const requestedGeometryMargin =
+      relief.requestedGeometryMargin ?? relief.geometryMargin;
+    const nextGeometryMargin =
+      relief.geometryMargin
+        + (relief.targetGap - position1.minimumGap)
+        + 0.0001;
+    return createCaseBodyProfileGeometryData({
+      profile,
+      innerRadius,
+      circumferentialSegments,
+      axialMaxStep,
+      crownTravel,
+      crownRelief: {
+        ...crownRelief,
+        requestedGeometryMargin,
+        geometryMargin: nextGeometryMargin,
+        calibrationIteration: calibrationIteration + 1,
+      },
+    });
+  }
+  return {
+    positions: Float32Array.from(positions),
+    normals: Float32Array.from(normals),
+    indices: indexArray,
+    audit,
+  };
+}

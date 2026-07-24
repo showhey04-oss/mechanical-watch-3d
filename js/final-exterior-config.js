@@ -19,6 +19,9 @@ const dimensions = {
   casebackOuterY: 5.835,
   rearBridgeClearance: 0.650,
   totalCaseThickness: 9.845,
+  caseBodyAxialThickness: 7.945,
+  frontExteriorProjection: 0.950,
+  rearExteriorProjection: 0.950,
   crownTubeAxisY: -1.050,
   crownTubeAxisZ: -4.500,
   crownTubeOuterDiameter: 1.000,
@@ -30,6 +33,29 @@ const dimensions = {
   crownCenterXPosition1: 19.800,
   crownCenterXPosition2: 21.150,
   crownTravel: 1.350,
+};
+
+const caseBody = {
+  innerRadius: dimensions.movementCavityDiameter / 2,
+  outerRadiusProfile: [
+    { y: -3.060, outerRadius: 19.500 },
+    { y: -2.550, outerRadius: 19.680 },
+    { y: -1.700, outerRadius: 19.800 },
+    { y: 2.600, outerRadius: 19.800 },
+    { y: 3.650, outerRadius: 19.680 },
+    { y: 4.885, outerRadius: 19.500 },
+  ],
+  circumferentialSegments: 192,
+  axialMaxStep: 0.060,
+  crownRelief: {
+    targetGap: 0.030,
+    geometryMargin: 0.0005,
+    legacyMaxDepth: 0.150,
+    maximumDepth: 0.330,
+    minimumWall: 0.550,
+    transitionWidth: 0.160,
+    smoothUnionWidth: 0.004,
+  },
 };
 
 const assumptions = {
@@ -68,6 +94,7 @@ export const FINAL_EXTERIOR_BALANCED = deepFreeze({
   },
   dimensions,
   assumptions,
+  caseBody,
   protectedAnchors: {
     movementReferenceDiameter: 36.600,
     dialRingDiameter: 27.692,
@@ -159,6 +186,34 @@ export function assertFinalExteriorConfig(
     totalThickness:
       Math.abs(d.casebackOuterY - d.crystalOuterY - d.totalCaseThickness)
         <= tolerance,
+    caseBodyAxialThickness:
+      Math.abs(
+        a.caseBodyBackY - a.caseBodyFrontY - d.caseBodyAxialThickness,
+      ) <= tolerance,
+    exteriorThicknessIdentity:
+      Math.abs(
+        d.frontExteriorProjection
+          + d.caseBodyAxialThickness
+          + d.rearExteriorProjection
+          - d.totalCaseThickness,
+      ) <= tolerance,
+    caseBodyProfile:
+      config.caseBody.outerRadiusProfile[0].y === a.caseBodyFrontY
+      && config.caseBody.outerRadiusProfile.at(-1).y === a.caseBodyBackY
+      && Math.max(
+        ...config.caseBody.outerRadiusProfile.map(point => point.outerRadius),
+      ) * 2 === d.caseOuterDiameter
+      && config.caseBody.outerRadiusProfile[0].outerRadius * 2 === 39
+      && config.caseBody.outerRadiusProfile.at(-1).outerRadius * 2 === 39,
+    caseBodyWall:
+      Math.min(
+        ...config.caseBody.outerRadiusProfile.map(point =>
+          point.outerRadius - config.caseBody.innerRadius),
+      ) >= config.caseBody.crownRelief.minimumWall,
+    crownRelief:
+      config.caseBody.crownRelief.targetGap >= 0.03
+      && config.caseBody.crownRelief.maximumDepth === 0.33
+      && config.caseBody.crownRelief.legacyMaxDepth === 0.15,
     crownTravel:
       Math.abs(
         d.crownCenterXPosition2

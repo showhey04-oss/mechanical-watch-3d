@@ -50,6 +50,9 @@ test("approved E-BALANCED dimensions match the Phase 3A decision exactly", () =>
     casebackOuterY: 5.835,
     rearBridgeClearance: 0.650,
     totalCaseThickness: 9.845,
+    caseBodyAxialThickness: 7.945,
+    frontExteriorProjection: 0.950,
+    rearExteriorProjection: 0.950,
     crownTubeAxisY: -1.050,
     crownTubeAxisZ: -4.500,
     crownTubeOuterDiameter: 1.000,
@@ -92,6 +95,11 @@ test("configuration assertions preserve radial, Y, aperture, tube, and thickness
     frontClearance: true,
     rearClearance: true,
     totalThickness: true,
+    caseBodyAxialThickness: true,
+    exteriorThicknessIdentity: true,
+    caseBodyProfile: true,
+    caseBodyWall: true,
+    crownRelief: true,
     crownTravel: true,
     crownTubeLength: true,
     crownTubeWall: true,
@@ -151,6 +159,8 @@ test("normal path is guarded before exterior Geometry and Material construction"
 
 test("runtime implements hollow rings, derived dial holes, selection, and diagnostics", async () => {
   const source = await readFile(runtimeSourceUrl, "utf8");
+  assert.match(source, /createProfiledCaseBodyMesh/);
+  assert.match(source, /createCaseBodyProfileGeometryData/);
   assert.match(source, /createAnnularMesh/);
   assert.match(source, /createPerforatedDial/);
   assert.match(source, /createAxialAnnulus/);
@@ -160,6 +170,7 @@ test("runtime implements hollow rings, derived dial holes, selection, and diagno
   assert.match(source, /interiorPriorityPreserved/);
   assert.match(source, /forbiddenCount/);
   assert.match(source, /tubeAxisError/);
+  assert.match(source, /crownBodyToCasePosition1/);
   assert.match(source, /alphaHashUsed: false/);
   assert.match(source, /d2c3Used: false/);
 });

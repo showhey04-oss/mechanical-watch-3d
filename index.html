@@ -499,6 +499,11 @@ if(requestedExteriorConfig){
  const hourHandBox=new THREE.Box3().setFromObject(hourAxis,true);
  const smallSecondHandBox=new THREE.Box3().setFromObject(secAxis,true);
  const crownBox=new THREE.Box3().setFromObject(crown,true);
+ const crownCoreBox=new THREE.Box3().setFromObject(crown.children[0],true);
+ const crownRidgeBoxes=crown.children.slice(1).map(child=>new THREE.Box3().setFromObject(child,true));
+ const crownVertex=new THREE.Vector3();let crownOuterRadialRadius=0;
+ crown.updateWorldMatrix(true,true);
+ crown.traverse(node=>{const positions=node.isMesh?node.geometry?.getAttribute('position'):null;if(!positions)return;for(let index=0;index<positions.count;index++){crownVertex.fromBufferAttribute(positions,index).applyMatrix4(node.matrixWorld);crownOuterRadialRadius=Math.max(crownOuterRadialRadius,Math.hypot(crownVertex.y-KEYLESS.axis.centerY,crownVertex.z-KEYLESS.axis.centerZ))}});
  const smallSecondInterfaceRadius=Math.max(
   (fourthArborBox.max.x-fourthArborBox.min.x)/2,
   (fourthArborBox.max.z-fourthArborBox.min.z)/2
@@ -522,7 +527,14 @@ if(requestedExteriorConfig){
    minuteHandBackY:minuteHandBox.max.y,
    hourHandBackY:hourHandBox.max.y,
    smallSecondHandBackY:smallSecondHandBox.max.y,
-   crownAxialHalfLength:(crownBox.max.x-crownBox.min.x)/2
+   crownAxialHalfLength:(crownBox.max.x-crownBox.min.x)/2,
+   crownEnvelope:{
+    bounds:{min:crownBox.min.toArray(),max:crownBox.max.toArray()},
+    coreRadius:Math.max((crownCoreBox.max.y-crownCoreBox.min.y)/2,(crownCoreBox.max.z-crownCoreBox.min.z)/2),
+    outerRadius:crownOuterRadialRadius,
+    coreInnerX:crownCoreBox.min.x,
+    ridgeInnerX:Math.min(...crownRidgeBoxes.map(box=>box.min.x))
+   }
   },
   config:requestedExteriorConfig
  });

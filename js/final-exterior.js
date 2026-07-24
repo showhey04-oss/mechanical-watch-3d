@@ -4,6 +4,7 @@ import {
   FINAL_EXTERIOR_BALANCED,
   assertFinalExteriorConfig,
 } from "./final-exterior-config.js";
+import { createCaseBodyProfileGeometryData } from "./final-exterior-profile.js";
 
 const round = (value, digits = 6) => Number(Number(value).toFixed(digits));
 const roundArray = values => values.map(value => round(value));
@@ -31,6 +32,46 @@ function createAnnularMesh({
   geometry.center();
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.y = (yMin + yMax) / 2;
+  return mesh;
+}
+
+function createProfiledCaseBodyMesh({
+  config,
+  crownEnvelope,
+  material,
+}) {
+  const data = createCaseBodyProfileGeometryData({
+    profile: config.caseBody.outerRadiusProfile,
+    innerRadius: config.caseBody.innerRadius,
+    circumferentialSegments: config.caseBody.circumferentialSegments,
+    axialMaxStep: config.caseBody.axialMaxStep,
+    crownTravel: config.dimensions.crownTravel,
+    crownRelief: {
+      centerY: config.dimensions.crownTubeAxisY,
+      centerZ: config.dimensions.crownTubeAxisZ,
+      coreRadius: crownEnvelope.coreRadius,
+      outerRadius: crownEnvelope.outerRadius,
+      coreInnerX: crownEnvelope.coreInnerX,
+      ridgeInnerX: crownEnvelope.ridgeInnerX,
+      bounds: crownEnvelope.bounds,
+      targetGap: config.caseBody.crownRelief.targetGap,
+      geometryMargin: config.caseBody.crownRelief.geometryMargin,
+      legacyMaxDepth: config.caseBody.crownRelief.legacyMaxDepth,
+      maxDepth: config.caseBody.crownRelief.maximumDepth,
+      minWall: config.caseBody.crownRelief.minimumWall,
+      transitionWidth: config.caseBody.crownRelief.transitionWidth,
+      smoothUnionWidth: config.caseBody.crownRelief.smoothUnionWidth,
+    },
+  });
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.BufferAttribute(data.positions, 3));
+  geometry.setAttribute("normal", new THREE.BufferAttribute(data.normals, 3));
+  geometry.setIndex(new THREE.BufferAttribute(data.indices, 1));
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+  geometry.userData.caseBodyProfileAudit = data.audit;
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.userData.caseBodyProfileAudit = data.audit;
   return mesh;
 }
 
@@ -179,7 +220,7 @@ export function createBalancedExterior({
   });
 
   const descriptions = {
-    caseBody: "E-BALANCED候補の中空ケース胴。36.6ムーブメントを動かさず、半径0.6の教育用収容余裕を示す。",
+    caseBody: "E-BALANCED候補のプロファイル中空ケース胴。中央バンド、前後テーパー、実りゅうず包絡から導いた局所逃げを1つの閉じたMeshで構成する。",
     bezel: "直径29.0の表示開口と風防保持候補を構成するE-BALANCEDベゼル。",
     crystal: "針最前面から0.55離した固定透明風防候補。光学特性・防水性・保持方式は未検証。",
     rehaut: "S86表示リングを隠さず、直径29.0の表示開口へつなぐ内周リング候補。",
@@ -206,11 +247,9 @@ export function createBalancedExterior({
 
   const caseBody = addPart({
     group: groups.exteriorCase,
-    mesh: createAnnularMesh({
-      outerRadius: d.caseOuterDiameter / 2,
-      innerRadius: d.movementCavityDiameter / 2,
-      yMin: a.caseBodyFrontY,
-      yMax: a.caseBodyBackY,
+    mesh: createProfiledCaseBodyMesh({
+      config,
+      crownEnvelope: anchors.crownEnvelope,
       material: exteriorMaterials.metal,
     }),
     name: "E-BALANCED ケース胴",
@@ -367,6 +406,7 @@ export function createBalancedExterior({
     "crown tube ↔ crown position-1 local seating candidate",
   ];
   const unverified = { ...config.classifications };
+  const caseBodyAudit = caseBody.userData.caseBodyProfileAudit;
 
   const getState = () => {
     const meshes = [];
@@ -398,6 +438,7 @@ export function createBalancedExterior({
     id: config.id,
     status: config.status,
     approved: { ...d },
+    caseBodyProfile: config.caseBody,
     runtime: {
       caseBody: boundsRecord(caseBody),
       bezel: boundsRecord(bezel),
@@ -423,7 +464,10 @@ export function createBalancedExterior({
         round(boundsRecord(crownTube).size[1] - d.crownTubeOuterDiameter),
       crownTubeAxialLength:
         round(boundsRecord(crownTube).size[0] - d.crownTubeAxialLength),
+      caseBodyAxialThickness:
+        round(boundsRecord(caseBody).size[1] - d.caseBodyAxialThickness),
     },
+    caseBodyGeometry: caseBodyAudit,
   });
 
   const getInterferenceReport = () => {
@@ -460,6 +504,10 @@ export function createBalancedExterior({
         d.crownCenterXPosition2
           - anchors.crownAxialHalfLength
           - d.caseIntersectionX,
+      crownBodyToCasePosition1:
+        caseBodyAudit.relief.position1.minimumGap,
+      crownBodyToCasePosition2:
+        caseBodyAudit.relief.position2.minimumGap,
     };
     const forbidden = [
       ["crystal", "minute hand", clearances.minuteHandToCrystal],
@@ -485,6 +533,20 @@ export function createBalancedExterior({
       forbiddenInterference: clearance < -1e-6,
     }));
     forbidden.push({
+      a: "case body",
+      b: "crown core / outer teeth",
+      clearance: round(clearances.crownBodyToCasePosition1),
+      position1MinimumGap: caseBodyAudit.relief.position1.minimumGap,
+      position1MinimumGapPoint: caseBodyAudit.relief.position1.point,
+      position2MinimumGap: caseBodyAudit.relief.position2.minimumGap,
+      position2MinimumGapPoint: caseBodyAudit.relief.position2.point,
+      qualification: "forbidden crown-body to case-body interference",
+      classification: "FORBIDDEN_INTERFERENCE",
+      forbiddenInterference:
+        caseBodyAudit.relief.position1.forbiddenInterferenceCount > 0
+        || caseBodyAudit.relief.position2.forbiddenInterferenceCount > 0,
+    });
+    forbidden.push({
       a: "crown tube",
       b: "crown moving body",
       clearance: 0,
@@ -506,6 +568,20 @@ export function createBalancedExterior({
       ),
       crownFingerAccess: "UNVERIFIED",
       crownPullPushOperability: "UNVERIFIED",
+      crownBodyCase: {
+        position1: caseBodyAudit.relief.position1,
+        position2: caseBodyAudit.relief.position2,
+        requiredMinimumDepth: caseBodyAudit.relief.requiredMinimumDepth,
+        adoptedMaximumDepth: caseBodyAudit.relief.adoptedMaximumDepth,
+        maximumAllowedDepth: caseBodyAudit.relief.maximumAllowedDepth,
+        maximumDepthMargin: caseBodyAudit.relief.maximumDepthMargin,
+        legacyRemainingOverlap: caseBodyAudit.relief.legacyRemainingOverlap,
+        minimumWall: caseBodyAudit.relief.minimumWall,
+        minimumWallPoint: caseBodyAudit.relief.minimumWallPoint,
+        closedMesh: caseBodyAudit.topology.closed,
+        degenerateTriangleCount: caseBodyAudit.degenerateTriangleCount,
+        finite: caseBodyAudit.finite,
+      },
     };
   };
 
