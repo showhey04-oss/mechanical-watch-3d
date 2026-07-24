@@ -275,6 +275,22 @@ def main() -> None:
         evidence / "before-second-desktop-back.png",
         DESKTOP_SIZE,
     )
+    live_second_front = load_rgb(
+        evidence / "live-second-desktop-front.png",
+        DESKTOP_SIZE,
+    )
+    live_second_oblique = load_rgb(
+        evidence / "live-second-desktop-oblique-front.png",
+        DESKTOP_SIZE,
+    )
+    live_second_side = load_rgb(
+        evidence / "live-second-desktop-side.png",
+        DESKTOP_SIZE,
+    )
+    live_second_back = load_rgb(
+        evidence / "live-second-desktop-back.png",
+        DESKTOP_SIZE,
+    )
     current_back = load_rgb(evidence / "desktop-back.png", DESKTOP_SIZE)
 
     save_png(board(
@@ -303,10 +319,15 @@ def main() -> None:
     ), evidence / "case-body-profile-before-after-oblique-front.png")
 
     for name, before, after, view in (
-        ("front", before_second_front, current_front, "front"),
-        ("oblique-front", before_second_oblique, current_oblique, "oblique front"),
-        ("side", before_second_side, current_side, "side"),
-        ("back", before_second_back, current_back, "back"),
+        ("front", before_second_front, live_second_front, "front"),
+        (
+            "oblique-front",
+            before_second_oblique,
+            live_second_oblique,
+            "oblique front",
+        ),
+        ("side", before_second_side, live_second_side, "side"),
+        ("back", before_second_back, live_second_back, "back"),
     ):
         save_png(board(
             before,

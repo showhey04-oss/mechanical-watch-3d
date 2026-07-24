@@ -10,7 +10,7 @@
 - captureMode：same-origin unsandboxed iframe harness + actual in-app Browser Three.js WebGLRenderTarget PNG
 - candidate：E-BALANCED / `IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`
 
-画像は`tests/final-exterior-phase3b1-harness.html`から同一origin・sandboxなしのiframeへ実アプリを読み込み、実際のThree.js WebGL表示をPNGとして取得した。比較ボード左側の固定mainは開始SHAを同じ`127.0.0.1:8000`ルートから別実行し、既存dimension harnessの1280×720 iframe領域を無加工で切り出した。右側は同一条件のE-BALANCED query候補である。
+画像は`tests/final-exterior-phase3b1-harness.html`から同一origin・sandboxなしのiframeへ実アプリを読み込み、実際のThree.js WebGL表示をPNGとして取得した。第2候補A/BはHead 43c8165と新候補をともに1280×720のライブ画面、同一時刻・テーマ・camera presetで取得し、UIを含む同じフレーミング方式へ統一した。固定main／query候補のpixel-exact確認と測定用raw画像は同じWebGLRenderTarget方式を使用する。
 
 ## 画像
 
@@ -35,6 +35,10 @@
 | `main-baseline-side.png` | 固定main側面 | 1280×720 |
 | `before-profile-desktop-side.png` | 旧一定半径ケース胴の固定Head実画面 | 1280×720 |
 | `before-profile-desktop-oblique-front.png` | 旧一定半径ケース胴の正面斜視 | 1280×720 |
+| `live-second-desktop-front.png` | 第2候補の同一フレーミング正面実画面 | 1280×720 |
+| `live-second-desktop-oblique-front.png` | 第2候補の同一フレーミング斜め正面実画面 | 1280×720 |
+| `live-second-desktop-side.png` | 第2候補の同一フレーミング側面実画面 | 1280×720 |
+| `live-second-desktop-back.png` | 第2候補の同一フレーミング裏面実画面 | 1280×720 |
 | `baseline-vs-balanced-front.png` | 固定mainと候補の正面A/B | 2560×772 |
 | `baseline-vs-balanced-side.png` | 固定mainと候補の側面A/B | 2560×772 |
 | `case-body-profile-before-after-side.png` | 旧外形／新外形の側面A/B | 2560×772 |

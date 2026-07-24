@@ -55,6 +55,10 @@ test("Phase 3B.1 evidence images are decoded PNGs with fixed viewports", async (
     ["before-second-desktop-oblique-front.png", [1280, 720]],
     ["before-second-desktop-side.png", [1280, 720]],
     ["before-second-desktop-back.png", [1280, 720]],
+    ["live-second-desktop-front.png", [1280, 720]],
+    ["live-second-desktop-oblique-front.png", [1280, 720]],
+    ["live-second-desktop-side.png", [1280, 720]],
+    ["live-second-desktop-back.png", [1280, 720]],
     ["before-second-mobile-390-front.png", [390, 844]],
     ["before-second-mobile-390-side.png", [390, 844]],
     ["crown-position1-closeup.png", [1280, 720]],
@@ -216,6 +220,7 @@ test("Phase 3B.1 silhouette evidence generator overlays real captures instead of
   assert.match(source, /desktop-oblique-front\.png/);
   assert.match(source, /before-profile-desktop-side\.png/);
   assert.match(source, /before-second-desktop-front\.png/);
+  assert.match(source, /live-second-desktop-front\.png/);
   assert.match(source, /movement-holder-before-after\.png/);
   assert.match(source, /bezel-section-29\.0-vs-29\.8\.png/);
   assert.match(source, /load_rgb/);
