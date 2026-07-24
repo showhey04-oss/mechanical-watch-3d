@@ -527,7 +527,7 @@ function captureAuditStateSnapshot(){
   renderer:{renderTarget:renderer.getRenderTarget()?.uuid||null,viewport:viewport.toArray(),scissor:scissor.toArray(),scissorTest:renderer.getScissorTest()},
   controlsTarget:controls.target.toArray(),renderTarget:renderTarget.toArray(),desiredZoomDistance,
   transformSignature:dimensionTransformSignature(),modelWorldSignature:getModelWorldSignature(),
-  mechanismState:roundDimensionTree({ui:getUiRegressionState(),state:currentMechanismState,kinematics:getKinematicAngles(),hands:getHandCouplingReport(),interference:getInterferenceReport()},9),
+  mechanismState:roundDimensionTree({ui:getUiRegressionState(),state:currentMechanismState,kinematics:{...currentMotionWorksState.angles},hands:getHandCouplingReport(),interference:getInterferenceReport()},9),
  };
 }
 async function captureAuditViewportPng({width,height,cameraPreset='side'}={}){
