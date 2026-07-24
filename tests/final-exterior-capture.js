@@ -73,7 +73,10 @@ export async function runFinalExteriorCapture({
     query.set("capture", captureId);
     frame.src = `../index.html?${query}`;
     const diagnostics = await waitForDiagnostics(frame);
-    await diagnostics.waitForFrames(8);
+    // Let the smoothed render camera finish converging on the requested preset
+    // before taking the exact before/after state snapshot used by the capture
+    // invariant. This is especially important for the close keyless preset.
+    await diagnostics.waitForFrames(90);
     const before = {
       transformSignature: diagnostics.getDimensionDiagnostics({ includeScreenSpace: false })
         .transformInvariant,
