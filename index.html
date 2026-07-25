@@ -601,7 +601,7 @@ function captureAuditStateSnapshot(){
  };
 }
 async function captureAuditViewportPng({width,height,cameraPreset='side'}={}){
- const targetWidth=Math.trunc(Number(width)),targetHeight=Math.trunc(Number(height)),preset=CAMERA_PRESETS[cameraPreset];
+ const targetWidth=Math.trunc(Number(width)),targetHeight=Math.trunc(Number(height)),useCurrentCamera=cameraPreset==='current',preset=useCurrentCamera?{position:camera.position.toArray(),target:renderTarget.toArray(),up:camera.up.toArray()}:CAMERA_PRESETS[cameraPreset];
  if(!Number.isInteger(targetWidth)||targetWidth<1||!Number.isInteger(targetHeight)||targetHeight<1)throw new Error('capture width and height must be positive integers');
  if(!preset)throw new Error(`unknown capture camera preset: ${cameraPreset}`);
  const before=captureAuditStateSnapshot(),previousTarget=renderer.getRenderTarget(),previousViewport=renderer.getViewport(new THREE.Vector4()).clone(),previousScissor=renderer.getScissor(new THREE.Vector4()).clone(),previousScissorTest=renderer.getScissorTest();
@@ -616,7 +616,7 @@ async function captureAuditViewportPng({width,height,cameraPreset='side'}={}){
    const direction=position.clone().sub(target).normalize(),verticalFov=THREE.MathUtils.degToRad(captureCamera.fov),horizontalFov=2*Math.atan(Math.tan(verticalFov/2)*captureAspect),fitDistance=preset.fitRadius/Math.tan(Math.min(verticalFov,horizontalFov)/2);
    position.copy(target).addScaledVector(direction,Math.max(position.distanceTo(target),fitDistance));
   }
-  captureCamera.position.copy(position);captureCamera.up.fromArray(VIEW_UP).normalize();captureCamera.lookAt(target);captureCamera.updateProjectionMatrix();captureCamera.updateMatrixWorld(true);scene.updateMatrixWorld(true);
+  captureCamera.position.copy(position);captureCamera.up.fromArray(preset.up||VIEW_UP).normalize();captureCamera.lookAt(target);captureCamera.updateProjectionMatrix();captureCamera.updateMatrixWorld(true);scene.updateMatrixWorld(true);
   renderer.setRenderTarget(auditTarget);renderer.setViewport(0,0,targetWidth,targetHeight);renderer.setScissor(0,0,targetWidth,targetHeight);renderer.setScissorTest(false);renderer.render(scene,captureCamera);
   pixels=new Uint8Array(targetWidth*targetHeight*4);renderer.readRenderTargetPixels(auditTarget,0,0,targetWidth,targetHeight,pixels);
  }finally{

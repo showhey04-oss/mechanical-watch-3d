@@ -90,4 +90,3 @@ test("rendering clearances preserve protected diameters and total thickness", ()
   assert.equal(config.dimensions.caseOuterDiameter, 39.6);
   assert.equal(config.dimensions.movementCavityDiameter, 37.8);
 });
-
