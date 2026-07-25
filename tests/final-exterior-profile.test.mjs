@@ -42,10 +42,10 @@ test("case-body profile preserves the approved maximum, end diameters, cavity, a
   const profile = config.caseBody.outerRadiusProfile;
   assert.deepEqual(profile, [
     { y: -2.860, outerRadius: 19.450 },
-    { y: -2.300, outerRadius: 19.620 },
-    { y: -1.350, outerRadius: 19.800 },
-    { y: 2.100, outerRadius: 19.800 },
-    { y: 3.250, outerRadius: 19.620 },
+    { y: -2.180, outerRadius: 19.590 },
+    { y: -0.700, outerRadius: 19.800 },
+    { y: 1.250, outerRadius: 19.800 },
+    { y: 2.950, outerRadius: 19.590 },
     { y: 4.635, outerRadius: 19.450 },
   ]);
   assert.equal(Math.max(...profile.map(point => point.outerRadius)) * 2, 39.6);
@@ -60,10 +60,33 @@ test("case-body profile preserves the approved maximum, end diameters, cavity, a
 test("profile interpolation is linear and the central case band stays at maximum diameter", () => {
   const profile = config.caseBody.outerRadiusProfile;
   assert.equal(interpolateCaseBodyRadius(profile, -2.86), 19.45);
-  assert.equal(interpolateCaseBodyRadius(profile, -2.58), 19.535);
-  assert.equal(interpolateCaseBodyRadius(profile, -1.35), 19.8);
-  assert.equal(interpolateCaseBodyRadius(profile, -1.05), 19.8);
-  assert.equal(interpolateCaseBodyRadius(profile, 2.1), 19.8);
+  assert.equal(interpolateCaseBodyRadius(profile, -2.52), 19.52);
+  assert.equal(interpolateCaseBodyRadius(profile, -0.7), 19.8);
+  assert.equal(interpolateCaseBodyRadius(profile, 0.275), 19.8);
+  assert.equal(interpolateCaseBodyRadius(profile, 1.25), 19.8);
+  assert.equal(interpolateCaseBodyRadius(profile, 4.635), 19.45);
+  assert.equal(profile[3].y - profile[2].y, 1.95);
+  assert.equal(2.1 - (-1.35), 3.45);
+  assert.ok(Math.abs(
+    3.45 - (profile[3].y - profile[2].y) - 1.5,
+  ) <= 1e-12);
+});
+
+test("visual-thinness profile lengthens both tapers without changing end or maximum radii", () => {
+  const profile = config.caseBody.outerRadiusProfile;
+  const frontTaperLength = profile[2].y - profile[0].y;
+  const rearTaperLength = profile.at(-1).y - profile[3].y;
+  assert.equal(frontTaperLength, 2.16);
+  assert.equal(rearTaperLength, 3.385);
+  assert.ok(Math.abs(
+    frontTaperLength - (-1.35 - (-2.86)) - 0.65,
+  ) <= 1e-12);
+  assert.ok(Math.abs(
+    rearTaperLength - (4.635 - 2.1) - 0.85,
+  ) <= 1e-12);
+  assert.equal(profile[0].outerRadius, 19.45);
+  assert.equal(profile.at(-1).outerRadius, 19.45);
+  assert.equal(Math.max(...profile.map(point => point.outerRadius)), 19.8);
   assert.equal(interpolateCaseBodyRadius(profile, 4.635), 19.45);
 });
 
@@ -104,7 +127,8 @@ test("generated bounding box retains the approved maximum diameter and constant 
 
 test("actual generated relief is necessary, below 0.330, and preserves wall and position gaps", () => {
   const relief = geometry.audit.relief;
-  assert.ok(Math.abs(relief.requiredMinimumDepth - 0.298836214) <= 1e-9);
+  assert.ok(Math.abs(relief.requiredMinimumDepth - 0.249174052) <= 1e-9);
+  assert.ok(Math.abs(relief.adoptedMaximumDepth - 0.304117544) <= 1e-9);
   assert.ok(relief.adoptedMaximumDepth >= relief.requiredMinimumDepth);
   assert.ok(relief.adoptedMaximumDepth <= 0.330);
   assert.ok(relief.maximumDepthMargin > 0);
@@ -118,8 +142,8 @@ test("actual generated relief is necessary, below 0.330, and preserves wall and 
 test("legacy 0.150 relief remains insufficient while inner geometry stays unchanged", () => {
   const relief = geometry.audit.relief;
   assert.equal(relief.legacyMaxDepth, 0.15);
-  assert.ok(Math.abs(relief.legacyRemainingOverlap - 0.12119177) <= 1e-8);
-  assert.ok(Math.abs(relief.legacyTargetGapShortfall - 0.15119177) <= 1e-8);
+  assert.ok(Math.abs(relief.legacyRemainingOverlap - 0.070747701) <= 1e-9);
+  assert.ok(Math.abs(relief.legacyTargetGapShortfall - 0.100747701) <= 1e-9);
   assert.equal(geometry.audit.innerRadius, 18.9);
 });
 
