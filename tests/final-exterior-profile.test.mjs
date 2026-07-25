@@ -162,6 +162,10 @@ test("bezel profile is a closed indexed taper that thins toward the outer edge",
   assert.equal(bezel.audit.taper.primaryTaperRadialWidth, 3.2);
   assert.equal(bezel.audit.taper.outerClosureWidth, 0.9);
   assert.equal(bezel.audit.taper.primaryTaperCoverageRatio, 0.888888889);
+  assert.equal(
+    bezel.audit.taper.criteria.minimumPrimaryTaperCoverageRatio,
+    0.85,
+  );
   assert.equal(bezel.audit.taper.maximumVisibleFlatIntervalWidth, 0.4);
   assert.equal(bezel.audit.taper.unintendedHorizontalIntervalCount, 0);
   assert.equal(bezel.audit.taper.primarySlopeSign, 1);
@@ -199,6 +203,10 @@ test("caseback and holder rings are closed profiles with exact clearances", () =
   assert.equal(caseback.audit.taper.primaryTaperRadialWidth, 4.426);
   assert.equal(caseback.audit.taper.outerClosureWidth, 0.6);
   assert.equal(caseback.audit.taper.primaryTaperCoverageRatio, 0.956766105);
+  assert.equal(
+    caseback.audit.taper.criteria.minimumPrimaryTaperCoverageRatio,
+    0.9,
+  );
   assert.equal(caseback.audit.taper.maximumVisibleFlatIntervalWidth, 0.2);
   assert.equal(caseback.audit.taper.unintendedHorizontalIntervalCount, 0);
   assert.equal(caseback.audit.taper.primarySlopeSign, -1);

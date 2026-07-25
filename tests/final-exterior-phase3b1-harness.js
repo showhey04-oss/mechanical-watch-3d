@@ -185,7 +185,7 @@ frame.addEventListener("load", async () => {
         ? dimensions.bezelGeometry.bounds.size[0] === 38.8
           && dimensions.bezelGeometry.bounds.size[1] === 0.38
           && dimensions.bezelGeometry.taper.passed
-          && dimensions.bezelGeometry.taper.primaryTaperCoverageRatio >= 0.8
+          && dimensions.bezelGeometry.taper.primaryTaperCoverageRatio >= 0.85
           && dimensions.bezelGeometry.taper.primarySlopeSign === 1
           && dimensions.bezelGeometry.taper.unintendedHorizontalIntervalCount === 0
           && dimensions.bezelGeometry.topology.closed
@@ -194,7 +194,7 @@ frame.addEventListener("load", async () => {
       casebackProfile: expectedExteriorEnabled
         ? dimensions.casebackGeometry.bounds.size[1] === 0.6
           && dimensions.casebackGeometry.taper.passed
-          && dimensions.casebackGeometry.taper.primaryTaperCoverageRatio >= 0.8
+          && dimensions.casebackGeometry.taper.primaryTaperCoverageRatio >= 0.9
           && dimensions.casebackGeometry.taper.primarySlopeSign === -1
           && dimensions.casebackGeometry.taper.unintendedHorizontalIntervalCount === 0
           && dimensions.casebackGeometry.topology.closed

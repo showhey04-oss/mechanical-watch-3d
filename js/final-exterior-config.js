@@ -102,7 +102,7 @@ const annularProfiles = {
       { role: "outerBack", radius: 19.400, y: -2.860 },
     ],
     auditCriteria: {
-      minimumPrimaryTaperCoverageRatio: 0.800,
+      minimumPrimaryTaperCoverageRatio: 0.850,
       maximumInnerRetentionLandWidth: 0.400,
       maximumOuterClosureWidth: 1.000,
       expectedPrimarySlopeSign: 1,
@@ -119,7 +119,7 @@ const annularProfiles = {
       { role: "outerFront", radius: 19.500, y: 4.635 },
     ],
     auditCriteria: {
-      minimumPrimaryTaperCoverageRatio: 0.800,
+      minimumPrimaryTaperCoverageRatio: 0.900,
       maximumInnerRetentionLandWidth: 0.300,
       maximumOuterClosureWidth: 0.700,
       expectedPrimarySlopeSign: -1,
