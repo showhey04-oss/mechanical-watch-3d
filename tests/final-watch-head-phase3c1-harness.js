@@ -78,6 +78,9 @@ frame.addEventListener("load", async () => {
     const yEnvelopes = diagnostics.getYEnvelopeBreakdown();
     const viewport = diagnostics.getViewportReport();
     const webgl = diagnostics.getWebGLContextReport();
+    const luminance = diagnostics.getFrontBackLuminanceReport({
+      themes: "all",
+    });
     const allAudits = [
       geometry.geometryAudits.dial,
       geometry.geometryAudits.smallSecondFace,
@@ -92,6 +95,9 @@ frame.addEventListener("load", async () => {
       "Phase 3C.1 小秒表示",
       "Phase 3C.1 オープンハート縁",
       "Phase 3C.1 ドーム風防",
+      "Phase 3C.1 分針",
+      "Phase 3C.1 時針",
+      "Phase 3C.1 小秒針",
     ].map(partName => {
       const selected = diagnostics.selectPartByNameForAudit(partName);
       const ui = diagnostics.getUiRegressionState();
@@ -162,6 +168,7 @@ frame.addEventListener("load", async () => {
         && material.fogChanged === false
         && material.d2c3Used === false
         && material.alphaHashUsed === false,
+      frontBackLuminance: luminance.allWithinThirtyPercent,
       phase3c2NotApplied:
         material.strapPhase3c2StyleApplied === false
         && state.phase3c2MandatoryBacklog.length >= 12,
@@ -216,6 +223,7 @@ frame.addEventListener("load", async () => {
       state,
       geometry,
       material,
+      luminance,
       selection,
       selections,
       opacityCycle,

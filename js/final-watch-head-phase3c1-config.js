@@ -110,7 +110,7 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
     ],
   },
   dial: {
-    color: 0xf0e5ca,
+    color: 0x9d9278,
     metalness: 0.02,
     roughness: 0.76,
     smallSecondRecessY: -1.985,
@@ -159,7 +159,7 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
       roughness: 0.26,
     },
     ivoryDial: {
-      color: 0xf0e5ca,
+      color: 0x9d9278,
       metalness: 0.02,
       roughness: 0.76,
     },

@@ -286,6 +286,7 @@ export function createPhase3C1WatchHead({
   exteriorRuntime,
   exteriorAttachmentRuntime,
   plate,
+  machiningDetails,
   display,
   mechanism,
   config = FINAL_WATCH_HEAD_PHASE3C1,
@@ -406,6 +407,13 @@ export function createPhase3C1WatchHead({
     plate.parent.add(mesh);
     return mesh;
   });
+  if (Array.isArray(machiningDetails)) {
+    for (const [index, replacement] of plateReplacements.entries()) {
+      const source = [plate.core, plate.topStep, plate.bottomStep][index];
+      const detailIndex = machiningDetails.indexOf(source);
+      if (detailIndex >= 0) machiningDetails.splice(detailIndex, 1, replacement);
+    }
+  }
 
   const physicalDial = createExtrudedDiscWithHoles({
     outerRadius: config.protectedAnchors.dialBlankDiameter / 2,
@@ -736,6 +744,15 @@ export function createPhase3C1WatchHead({
       "platePresentationCutout",
     ],
     hiddenBaseObjectCount: hiddenBaseObjects.length,
+    machiningDetailVisibility: Array.isArray(machiningDetails)
+      ? machiningDetails.map(object => ({
+        partName: object.userData.partName || object.name || null,
+        visible: object.visible,
+        phase3c1Replacement: Boolean(
+          object.userData.openHeartPresentationCutout,
+        ),
+      }))
+      : [],
     plateCutoutMode: config.openHeart.plateCutout.mode,
     phase3c2MandatoryBacklog: config.phase3c2MandatoryBacklog,
   });
@@ -793,6 +810,8 @@ export function createPhase3C1WatchHead({
       openHeartRing,
       openHeartTarget,
       crystal,
+      ...Object.values(handMeshes),
+      mechanism.crown,
       ...plateReplacements,
     ].map(object => object.userData.partName),
     requiredNames: [
@@ -804,6 +823,10 @@ export function createPhase3C1WatchHead({
       "Phase 3C.1 オープンハート縁",
       "Phase 3C.1 オープンハート開口",
       "Phase 3C.1 ドーム風防",
+      "Phase 3C.1 分針",
+      "Phase 3C.1 時針",
+      "Phase 3C.1 小秒針",
+      mechanism.crown.userData.partName,
     ],
     structuralOpacityIntegrated: [
       physicalDial,

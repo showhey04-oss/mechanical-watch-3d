@@ -153,4 +153,38 @@ test("same-origin unsandboxed Phase 3C.1 harness records actual runtime reports"
   assert.match(harness, /getHandCouplingReport/);
   assert.match(harness, /getYEnvelopeBreakdown/);
   assert.match(harness, /document\.body\.dataset\.auditStatus/);
+  assert.match(harness, /Phase 3C\.1 分針/);
+  assert.match(harness, /Phase 3C\.1 時針/);
+  assert.match(harness, /Phase 3C\.1 小秒針/);
+});
+
+test("Phase 3C.1 suite and performance harnesses preserve fixed viewports and thresholds", async () => {
+  const [suiteHtml, suiteSource, performanceHtml, performanceSource] =
+    await Promise.all([
+      readFile(
+        new URL("./final-watch-head-phase3c1-suite-harness.html", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("./final-watch-head-phase3c1-suite-harness.js", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("./final-watch-head-phase3c1-performance-harness.html", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("./final-watch-head-phase3c1-performance-harness.js", import.meta.url),
+        "utf8",
+      ),
+    ]);
+  assert.doesNotMatch(suiteHtml, /sandbox=/);
+  assert.doesNotMatch(performanceHtml, /sandbox=/);
+  assert.match(suiteSource, /frame\.contentWindow\?\.watchModelDiagnostics/);
+  assert.match(suiteSource, /frame\.contentDocument\.getElementById\("audioToggle"\)\?\.click\(\)/);
+  assert.match(performanceSource, /\["front-idle", 10_000\]/);
+  assert.match(performanceSource, /\["pointer-rotate", 3_000\]/);
+  assert.match(performanceSource, /\["wheel-zoom", 3_000\]/);
+  assert.match(performanceSource, /thresholdsChanged: false/);
+  assert.doesNotMatch(performanceSource, /setPixelRatio|toneMapping|exposure|shadowMap/);
 });
