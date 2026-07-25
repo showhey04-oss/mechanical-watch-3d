@@ -103,6 +103,7 @@ test("configuration assertions preserve radial, Y, aperture, tube, and thickness
     caseBodyWall: true,
     bezelProfile: true,
     casebackProfile: true,
+    educationalRenderingClearance: true,
     casebackRingThickness: true,
     movementHolderRadialClearance: true,
     movementHolderAxialDerivation: true,
@@ -166,6 +167,7 @@ test("production runtime does not import Phase 3A test audit logic or add UI", a
   assert.doesNotMatch(runtimeSource, /tests\/final-exterior-audit\.mjs/);
   assert.doesNotMatch(runtimeSource, /document\.|createElement|appendChild|innerHTML/);
   assert.doesNotMatch(runtimeSource, /requestAnimationFrame|setAnimationLoop|setInterval/);
+  assert.doesNotMatch(runtimeSource, /polygonOffset|renderOrder/);
 });
 
 test("normal path is guarded before exterior Geometry and Material construction", async () => {

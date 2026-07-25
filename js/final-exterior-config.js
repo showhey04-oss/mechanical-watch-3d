@@ -63,9 +63,9 @@ const caseBody = {
 const assumptions = {
   caseBodyFrontY: dimensions.crystalInnerY,
   caseBodyBackY: dimensions.casebackInnerY,
-  bezelBackY: dimensions.crystalInnerY,
+  bezelBackY: -2.880,
   bezelInnerFrontY: -3.240,
-  bezelOuterFrontY: -2.890,
+  bezelOuterFrontY: -2.900,
   rehautBackY: -2.720,
   rehautFrontY: dimensions.crystalInnerY,
   dialBlankDiameter: 35.000,
@@ -90,16 +90,22 @@ const assumptions = {
   crownConnectionInnerDiameter: dimensions.crownTubeInnerDiameter,
   crownConnectionAxialLength: 0.180,
   crownConnectionOuterX: 19.200,
+  educationalRenderingClearance: {
+    bezelToCaseBodyAxial: 0.020,
+    casebackToCaseBodyAxial: 0.020,
+    casebackWindowRadial: 0.020,
+  },
 };
 
 const annularProfiles = {
   bezel: {
+    faceWinding: "forward",
     points: [
       { role: "innerBack", radius: 14.900, y: -2.860 },
       { role: "innerFront", radius: 14.900, y: -3.240 },
       { role: "innerRetentionLandOuter", radius: 15.300, y: -3.240 },
-      { role: "primaryTaperOuter", radius: 18.500, y: -2.890 },
-      { role: "outerBack", radius: 19.400, y: -2.860 },
+      { role: "primaryTaperOuter", radius: 18.500, y: -2.900 },
+      { role: "outerBack", radius: 19.400, y: -2.880 },
     ],
     auditCriteria: {
       minimumPrimaryTaperCoverageRatio: 0.850,
@@ -111,12 +117,13 @@ const annularProfiles = {
     },
   },
   casebackRing: {
+    faceWinding: "reverse",
     points: [
-      { role: "innerFront", radius: 14.274, y: 4.635 },
-      { role: "innerRear", radius: 14.274, y: 5.235 },
+      { role: "innerFront", radius: 14.294, y: 4.635 },
+      { role: "innerRear", radius: 14.294, y: 5.235 },
       { role: "innerRetentionLandOuter", radius: 14.474, y: 5.235 },
-      { role: "primaryTaperOuter", radius: 18.900, y: 4.685 },
-      { role: "outerFront", radius: 19.500, y: 4.635 },
+      { role: "primaryTaperOuter", radius: 18.900, y: 4.695 },
+      { role: "outerFront", radius: 19.500, y: 4.655 },
     ],
     auditCriteria: {
       minimumPrimaryTaperCoverageRatio: 0.900,
@@ -266,7 +273,8 @@ export function assertFinalExteriorConfig(
           point.outerRadius - config.caseBody.innerRadius),
       ) >= config.caseBody.crownRelief.minimumWall,
     bezelProfile:
-      Math.abs(
+      config.annularProfiles.bezel.faceWinding === "forward"
+      && Math.abs(
         config.annularProfiles.bezel.points[0].radius * 2
           - d.dialApertureDiameter,
       ) <= tolerance
@@ -286,9 +294,11 @@ export function assertFinalExteriorConfig(
       && config.annularProfiles.bezel.points[3].y === a.bezelOuterFrontY
       && config.annularProfiles.bezel.points[4].y === a.bezelBackY,
     casebackProfile:
-      Math.abs(
-        config.annularProfiles.casebackRing.points[0].radius * 2
-          - a.casebackWindowDiameter,
+      config.annularProfiles.casebackRing.faceWinding === "reverse"
+      && Math.abs(
+        config.annularProfiles.casebackRing.points[0].radius
+          - a.casebackWindowDiameter / 2
+          - a.educationalRenderingClearance.casebackWindowRadial,
       ) <= tolerance
       && config.annularProfiles.casebackRing.points[1].y
         === d.casebackOuterY
@@ -296,12 +306,22 @@ export function assertFinalExteriorConfig(
         config.annularProfiles.casebackRing.points[4].radius * 2
           - a.casebackFrontOuterDiameter,
       ) <= tolerance
-      && config.annularProfiles.casebackRing.points[4].y
-        === d.casebackInnerY
+      && Math.abs(
+        config.annularProfiles.casebackRing.points[4].y
+          - d.casebackInnerY
+          - a.educationalRenderingClearance.casebackToCaseBodyAxial,
+      ) <= tolerance
       && Math.abs(
         config.annularProfiles.casebackRing.points[3].radius * 2
           - a.casebackRearOuterDiameter,
       ) <= tolerance,
+    educationalRenderingClearance:
+      a.educationalRenderingClearance.bezelToCaseBodyAxial >= 0.015
+      && a.educationalRenderingClearance.bezelToCaseBodyAxial <= 0.030
+      && a.educationalRenderingClearance.casebackToCaseBodyAxial >= 0.015
+      && a.educationalRenderingClearance.casebackToCaseBodyAxial <= 0.030
+      && a.educationalRenderingClearance.casebackWindowRadial >= 0.015
+      && a.educationalRenderingClearance.casebackWindowRadial <= 0.030,
     casebackRingThickness:
       Math.abs(
         d.casebackOuterY

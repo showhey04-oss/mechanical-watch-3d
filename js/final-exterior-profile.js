@@ -255,8 +255,9 @@ function geometryBounds(positions) {
   };
 }
 
-function closedEdgeReport(indices) {
+function indexedEdgeReport(indices) {
   const edges = new Map();
+  const directedEdges = new Map();
   for (let index = 0; index < indices.length; index += 3) {
     const triangle = [indices[index], indices[index + 1], indices[index + 2]];
     for (let edge = 0; edge < 3; edge++) {
@@ -264,6 +265,8 @@ function closedEdgeReport(indices) {
       const b = triangle[(edge + 1) % 3];
       const key = a < b ? `${a}:${b}` : `${b}:${a}`;
       edges.set(key, (edges.get(key) || 0) + 1);
+      const direction = a < b ? 1 : -1;
+      directedEdges.set(key, (directedEdges.get(key) || 0) + direction);
     }
   }
   const nonManifoldEdges = [...edges.entries()]
@@ -273,7 +276,183 @@ function closedEdgeReport(indices) {
     edgeCount: edges.size,
     nonManifoldEdgeCount: nonManifoldEdges.length,
     nonManifoldEdges,
+    windingMismatchCount: [...directedEdges.values()]
+      .filter(balance => balance !== 0).length,
     closed: nonManifoldEdges.length === 0,
+  };
+}
+
+const positionKey = (positions, vertex, tolerance = 1e-7) => {
+  const offset = vertex * 3;
+  return [0, 1, 2]
+    .map(axis => Math.round(positions[offset + axis] / tolerance))
+    .join(":");
+};
+
+function weldedGeometryReport(
+  positions,
+  normals,
+  indices,
+  {
+    circumferentialSegments = null,
+    profileEdgeCount = null,
+  } = {},
+) {
+  const weldedVertexIds = new Map();
+  const weldedIndices = new Uint32Array(indices.length);
+  for (let index = 0; index < indices.length; index++) {
+    const key = positionKey(positions, indices[index]);
+    if (!weldedVertexIds.has(key)) {
+      weldedVertexIds.set(key, weldedVertexIds.size);
+    }
+    weldedIndices[index] = weldedVertexIds.get(key);
+  }
+  const topology = indexedEdgeReport(weldedIndices);
+  const triangleOrientations = new Map();
+  let duplicateTriangleCount = 0;
+  let reversedDuplicateTriangleCount = 0;
+  let reversedNormalTriangleCount = 0;
+  const canonicalCycle = triangle => {
+    const rotations = [
+      triangle,
+      [triangle[1], triangle[2], triangle[0]],
+      [triangle[2], triangle[0], triangle[1]],
+    ];
+    return rotations
+      .map(value => value.join(":"))
+      .sort()[0];
+  };
+  for (let index = 0; index < indices.length; index += 3) {
+    const triangle = [
+      weldedIndices[index],
+      weldedIndices[index + 1],
+      weldedIndices[index + 2],
+    ];
+    const unordered = [...triangle].sort((a, b) => a - b).join(":");
+    const orientation = canonicalCycle(triangle);
+    const existing = triangleOrientations.get(unordered);
+    if (existing) {
+      if (existing === orientation) duplicateTriangleCount++;
+      else reversedDuplicateTriangleCount++;
+    } else {
+      triangleOrientations.set(unordered, orientation);
+    }
+
+    const [a, b, c] = [
+      indices[index],
+      indices[index + 1],
+      indices[index + 2],
+    ].map(vertex => vertex * 3);
+    const ab = [
+      positions[b] - positions[a],
+      positions[b + 1] - positions[a + 1],
+      positions[b + 2] - positions[a + 2],
+    ];
+    const ac = [
+      positions[c] - positions[a],
+      positions[c + 1] - positions[a + 1],
+      positions[c + 2] - positions[a + 2],
+    ];
+    const face = [
+      ab[1] * ac[2] - ab[2] * ac[1],
+      ab[2] * ac[0] - ab[0] * ac[2],
+      ab[0] * ac[1] - ab[1] * ac[0],
+    ];
+    const averageNormal = [0, 1, 2].map(axis =>
+      normals[a + axis] + normals[b + axis] + normals[c + axis]);
+    const dot = face.reduce(
+      (sum, value, axis) => sum + value * averageNormal[axis],
+      0,
+    );
+    if (dot < -1e-10) reversedNormalTriangleCount++;
+  }
+  const normalLengths = [];
+  for (let index = 0; index < normals.length; index += 3) {
+    normalLengths.push(Math.hypot(
+      normals[index],
+      normals[index + 1],
+      normals[index + 2],
+    ));
+  }
+  let signedVolume = 0;
+  for (let index = 0; index < indices.length; index += 3) {
+    const [a, b, c] = [
+      indices[index],
+      indices[index + 1],
+      indices[index + 2],
+    ].map(vertex => vertex * 3);
+    signedVolume += (
+      positions[a] * (
+        positions[b + 1] * positions[c + 2]
+        - positions[b + 2] * positions[c + 1]
+      )
+      + positions[a + 1] * (
+        positions[b + 2] * positions[c]
+        - positions[b] * positions[c + 2]
+      )
+      + positions[a + 2] * (
+        positions[b] * positions[c + 1]
+        - positions[b + 1] * positions[c]
+      )
+    ) / 6;
+  }
+  let periodicSeamMismatchCount = 0;
+  if (
+    Number.isInteger(circumferentialSegments)
+    && Number.isInteger(profileEdgeCount)
+  ) {
+    const theta = TAU / circumferentialSegments;
+    const cos = Math.cos(theta);
+    const sin = Math.sin(theta);
+    const vertex = (edgeIndex, endpoint, segment) =>
+      (
+        edgeIndex * 2
+        + endpoint
+      ) * circumferentialSegments + segment;
+    for (let edgeIndex = 0; edgeIndex < profileEdgeCount; edgeIndex++) {
+      for (let endpoint = 0; endpoint < 2; endpoint++) {
+        const first = vertex(edgeIndex, endpoint, 0) * 3;
+        const last = vertex(
+          edgeIndex,
+          endpoint,
+          circumferentialSegments - 1,
+        ) * 3;
+        const rotatedLast = [
+          normals[last] * cos - normals[last + 2] * sin,
+          normals[last + 1],
+          normals[last] * sin + normals[last + 2] * cos,
+        ];
+        const mismatch = Math.hypot(
+          normals[first] - rotatedLast[0],
+          normals[first + 1] - rotatedLast[1],
+          normals[first + 2] - rotatedLast[2],
+        );
+        if (mismatch > 1e-6) periodicSeamMismatchCount++;
+      }
+    }
+  }
+  return {
+    topology,
+    weldedVertexCount: weldedVertexIds.size,
+    renderVertexCount: positions.length / 3,
+    duplicateTriangleCount,
+    reversedDuplicateTriangleCount,
+    signedVolume: round(signedVolume),
+    orientation:
+      signedVolume > 0
+        ? "OUTWARD_POSITIVE"
+        : "INWARD_NEGATIVE",
+    normals: {
+      finite: [...normals].every(Number.isFinite),
+      zeroLengthCount:
+        normalLengths.filter(length => length <= 1e-9).length,
+      maximumUnitLengthError: round(Math.max(
+        0,
+        ...normalLengths.map(length => Math.abs(length - 1)),
+      )),
+      reversedTriangleCount: reversedNormalTriangleCount,
+      periodicSeamMismatchCount,
+    },
   };
 }
 
@@ -281,6 +460,7 @@ export function createAxialProfileAnnulusGeometryData({
   profile,
   circumferentialSegments = 128,
   taperAuditCriteria = null,
+  faceWinding = "forward",
 }) {
   if (!Array.isArray(profile) || profile.length < 4) {
     throw new Error("axial annulus profile requires at least four points");
@@ -292,6 +472,9 @@ export function createAxialProfileAnnulusGeometryData({
     throw new Error(
       "axial annulus circumferential segments must be an integer >= 32",
     );
+  }
+  if (!["forward", "reverse"].includes(faceWinding)) {
+    throw new Error("axial annulus faceWinding must be forward or reverse");
   }
   profile.forEach((point, index) => {
     assertFiniteNumber(point.radius, `profile[${index}].radius`);
@@ -309,32 +492,45 @@ export function createAxialProfileAnnulusGeometryData({
   });
 
   const profileCount = profile.length;
-  const vertexCount = profileCount * circumferentialSegments;
+  const vertexCount =
+    profileCount * 2 * circumferentialSegments;
   const positions = new Float64Array(vertexCount * 3);
-  const vertex = (profileIndex, segment) =>
-    profileIndex * circumferentialSegments
+  const vertex = (edgeIndex, endpoint, segment) =>
+    (
+      edgeIndex * 2
+      + endpoint
+    ) * circumferentialSegments
       + (segment + circumferentialSegments) % circumferentialSegments;
-  for (let profileIndex = 0; profileIndex < profileCount; profileIndex++) {
-    const point = profile[profileIndex];
-    for (let segment = 0; segment < circumferentialSegments; segment++) {
-      const theta = segment / circumferentialSegments * TAU;
-      const offset = vertex(profileIndex, segment) * 3;
-      positions[offset] = point.radius * Math.cos(theta);
-      positions[offset + 1] = point.y;
-      positions[offset + 2] = point.radius * Math.sin(theta);
+  for (let edgeIndex = 0; edgeIndex < profileCount; edgeIndex++) {
+    const points = [
+      profile[edgeIndex],
+      profile[(edgeIndex + 1) % profileCount],
+    ];
+    for (let endpoint = 0; endpoint < 2; endpoint++) {
+      const point = points[endpoint];
+      for (let segment = 0; segment < circumferentialSegments; segment++) {
+        const theta = segment / circumferentialSegments * TAU;
+        const offset = vertex(edgeIndex, endpoint, segment) * 3;
+        positions[offset] = point.radius * Math.cos(theta);
+        positions[offset + 1] = point.y;
+        positions[offset + 2] = point.radius * Math.sin(theta);
+      }
     }
   }
 
   const indices = [];
-  for (let profileIndex = 0; profileIndex < profileCount; profileIndex++) {
-    const nextProfile = (profileIndex + 1) % profileCount;
+  for (let edgeIndex = 0; edgeIndex < profileCount; edgeIndex++) {
     for (let segment = 0; segment < circumferentialSegments; segment++) {
       const nextSegment = segment + 1;
-      const a = vertex(profileIndex, segment);
-      const b = vertex(nextProfile, segment);
-      const c = vertex(nextProfile, nextSegment);
-      const d = vertex(profileIndex, nextSegment);
-      indices.push(a, b, c, a, c, d);
+      const a = vertex(edgeIndex, 0, segment);
+      const b = vertex(edgeIndex, 1, segment);
+      const c = vertex(edgeIndex, 1, nextSegment);
+      const d = vertex(edgeIndex, 0, nextSegment);
+      if (faceWinding === "forward") {
+        indices.push(a, b, c, a, c, d);
+      } else {
+        indices.push(a, c, b, a, d, c);
+      }
     }
   }
 
@@ -344,7 +540,12 @@ export function createAxialProfileAnnulusGeometryData({
       : Uint16Array.from(indices);
   const { normals, degenerateTriangleCount } =
     accumulateVertexNormals(positions, indexArray);
-  const topology = closedEdgeReport(indexArray);
+  const geometryAudit =
+    weldedGeometryReport(positions, normals, indexArray, {
+      circumferentialSegments,
+      profileEdgeCount: profileCount,
+    });
+  const topology = geometryAudit.topology;
   const finite = {
     positions: [...positions].every(Number.isFinite),
     normals: [...normals].every(Number.isFinite),
@@ -357,11 +558,22 @@ export function createAxialProfileAnnulusGeometryData({
       ...(point.role ? { role: point.role } : {}),
     })),
     circumferentialSegments,
+    faceWinding,
     vertexCount,
     indexCount: indexArray.length,
     triangleCount: indexArray.length / 3,
     finite,
     degenerateTriangleCount,
+    duplicateTriangleCount: geometryAudit.duplicateTriangleCount,
+    reversedDuplicateTriangleCount:
+      geometryAudit.reversedDuplicateTriangleCount,
+    normalAudit: geometryAudit.normals,
+    signedVolume: geometryAudit.signedVolume,
+    orientation: geometryAudit.orientation,
+    creaseNormalMode: "SPLIT_AT_PROFILE_BOUNDARIES",
+    creaseBoundaries: profile.map((point, index) =>
+      point.role || `profile-${index}`),
+    weldedVertexCount: geometryAudit.weldedVertexCount,
     topology,
     bounds: geometryBounds(positions),
     taper: taperAuditCriteria
@@ -532,6 +744,261 @@ export function auditAnnularTaperProfile(
     },
     checks,
     passed: Object.values(checks).every(Boolean),
+  };
+}
+
+const overlapInterval = (first, second) => {
+  const min = Math.max(first[0], second[0]);
+  const max = Math.min(first[1], second[1]);
+  return {
+    min: round(min),
+    max: round(max),
+    size: round(Math.max(0, max - min)),
+  };
+};
+
+const profileClosureYAtRadius = (profile, radius) => {
+  const inner = profile[0];
+  const outer = profile.at(-1);
+  const t = (radius - inner.radius) / (outer.radius - inner.radius);
+  return inner.y + (outer.y - inner.y) * t;
+};
+
+export function auditExteriorInterfaceClearances(config) {
+  const d = config.dimensions;
+  const a = config.assumptions;
+  const bezelProfile = config.annularProfiles.bezel.points;
+  const casebackProfile = config.annularProfiles.casebackRing.points;
+  const caseFrontRange = [
+    config.caseBody.innerRadius,
+    config.caseBody.outerRadiusProfile[0].outerRadius,
+  ];
+  const caseBackRange = [
+    config.caseBody.innerRadius,
+    config.caseBody.outerRadiusProfile.at(-1).outerRadius,
+  ];
+  const bezelClosureRange = [
+    bezelProfile[0].radius,
+    bezelProfile.at(-1).radius,
+  ];
+  const casebackClosureRange = [
+    casebackProfile[0].radius,
+    casebackProfile.at(-1).radius,
+  ];
+  const bezelCaseOverlap =
+    overlapInterval(caseFrontRange, bezelClosureRange);
+  const casebackCaseOverlap =
+    overlapInterval(caseBackRange, casebackClosureRange);
+  const bezelCaseClearances = [
+    bezelCaseOverlap.min,
+    bezelCaseOverlap.max,
+  ].map(radius =>
+    d.crystalInnerY - profileClosureYAtRadius(bezelProfile, radius));
+  const casebackCaseClearances = [
+    casebackCaseOverlap.min,
+    casebackCaseOverlap.max,
+  ].map(radius =>
+    profileClosureYAtRadius(casebackProfile, radius) - d.casebackInnerY);
+  const coplanarTolerance = 1e-7;
+  const bezelCaseCoplanar =
+    bezelCaseClearances.every(value => Math.abs(value) <= coplanarTolerance)
+      ? bezelCaseOverlap
+      : { ...bezelCaseOverlap, size: 0 };
+  const casebackCaseCoplanar =
+    casebackCaseClearances.every(value => Math.abs(value) <= coplanarTolerance)
+      ? casebackCaseOverlap
+      : { ...casebackCaseOverlap, size: 0 };
+  const coplanarAnnularArea = interval =>
+    interval.size > 0
+      ? Math.PI * (interval.max ** 2 - interval.min ** 2)
+      : 0;
+  const windowRadius = a.casebackWindowDiameter / 2;
+  const casebackInnerRadius = casebackProfile[0].radius;
+  const casebackWindowY = [
+    d.casebackOuterY - a.casebackWindowThickness,
+    d.casebackOuterY,
+  ];
+  const casebackInnerY = [
+    casebackProfile[0].y,
+    casebackProfile[1].y,
+  ];
+  const windowAxialOverlap =
+    overlapInterval(casebackWindowY, casebackInnerY);
+  const windowRadialClearance = casebackInnerRadius - windowRadius;
+  const record = ({
+    id,
+    first,
+    second,
+    planes = null,
+    cylinderRadii = null,
+    yRange = null,
+    radiusRange = null,
+    signedMinimumClearance,
+    coplanarRadialOverlap = 0,
+    coplanarAxialOverlap = 0,
+    coplanarAreaEquivalent = 0,
+    sameCylinderAxialOverlap = 0,
+    classification,
+    qualification,
+  }) => ({
+    id,
+    pair: [first, second],
+    planes,
+    cylinderRadii,
+    yRange,
+    radiusRange,
+    signedMinimumClearance: round(signedMinimumClearance),
+    coplanarRadialOverlap: round(coplanarRadialOverlap),
+    coplanarAxialOverlap: round(coplanarAxialOverlap),
+    coplanarAreaEquivalent: round(coplanarAreaEquivalent),
+    sameCylinderAxialOverlap: round(sameCylinderAxialOverlap),
+    classification,
+    qualification,
+    forbiddenInterferenceCount:
+      signedMinimumClearance < -1e-7 ? 1 : 0,
+  });
+  const records = [
+    record({
+      id: "bezel-back-to-case-body-front",
+      first: "bezel back closure",
+      second: "case body front face",
+      planes: {
+        caseBodyY: d.crystalInnerY,
+        bezelClosureYRange: roundArray([
+          profileClosureYAtRadius(bezelProfile, bezelCaseOverlap.min),
+          profileClosureYAtRadius(bezelProfile, bezelCaseOverlap.max),
+        ]),
+      },
+      radiusRange: bezelCaseOverlap,
+      signedMinimumClearance: Math.min(...bezelCaseClearances),
+      coplanarRadialOverlap: bezelCaseCoplanar.size,
+      coplanarAreaEquivalent: coplanarAnnularArea(bezelCaseCoplanar),
+      classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+      qualification:
+        "axial reveal removes the former broad coplanar annular overlap",
+    }),
+    record({
+      id: "caseback-front-to-case-body-back",
+      first: "caseback ring front closure",
+      second: "case body back face",
+      planes: {
+        caseBodyY: d.casebackInnerY,
+        casebackClosureYRange: roundArray([
+          profileClosureYAtRadius(casebackProfile, casebackCaseOverlap.min),
+          profileClosureYAtRadius(casebackProfile, casebackCaseOverlap.max),
+        ]),
+      },
+      radiusRange: casebackCaseOverlap,
+      signedMinimumClearance: Math.min(...casebackCaseClearances),
+      coplanarRadialOverlap: casebackCaseCoplanar.size,
+      coplanarAreaEquivalent:
+        coplanarAnnularArea(casebackCaseCoplanar),
+      classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+      qualification:
+        "axial reveal removes the former broad coplanar annular overlap",
+    }),
+    record({
+      id: "caseback-inner-to-window-outer",
+      first: "caseback ring inner wall",
+      second: "transparent caseback window outer wall",
+      cylinderRadii: {
+        caseback: round(casebackInnerRadius),
+        window: round(windowRadius),
+      },
+      yRange: {
+        caseback: roundArray(casebackInnerY),
+        window: roundArray(casebackWindowY),
+        overlap: windowAxialOverlap,
+      },
+      signedMinimumClearance: windowRadialClearance,
+      sameCylinderAxialOverlap:
+        Math.abs(windowRadialClearance) <= 1e-7
+          ? windowAxialOverlap.size
+          : 0,
+      classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+      qualification:
+        "radial reveal preserves the visible window diameter",
+    }),
+    record({
+      id: "caseback-to-movement-holder",
+      first: "caseback ring inner face",
+      second: "movement holder back",
+      planes: {
+        casebackY: d.casebackInnerY,
+        holderY: a.movementHolderBackY,
+      },
+      signedMinimumClearance:
+        d.casebackInnerY - a.movementHolderBackY,
+      classification: "PROTECTED_CLEARANCE",
+      qualification: "no intended visual or physical overlap",
+    }),
+    record({
+      id: "bezel-to-crystal",
+      first: "bezel crystal retention boundary",
+      second: "crystal outer wall",
+      cylinderRadii: {
+        bezel: round(bezelProfile[2].radius),
+        crystal: round(d.crystalClearDiameter / 2),
+      },
+      yRange: {
+        bezelContactY: bezelProfile[2].y,
+        crystal: roundArray([d.crystalOuterY, d.crystalInnerY]),
+      },
+      signedMinimumClearance:
+        bezelProfile[2].radius - d.crystalClearDiameter / 2,
+      classification: "INTENDED_RETENTION_CONTACT",
+      qualification:
+        "single circular retention boundary; no area-equivalent overlap",
+    }),
+    record({
+      id: "caseback-to-window-back",
+      first: "caseback retention land",
+      second: "transparent window rear face",
+      planes: {
+        casebackY: casebackProfile[1].y,
+        windowY: d.casebackOuterY,
+      },
+      radiusRange: {
+        caseback: roundArray([
+          casebackProfile[1].radius,
+          casebackProfile[2].radius,
+        ]),
+        window: roundArray([0, windowRadius]),
+      },
+      signedMinimumClearance: windowRadialClearance,
+      classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+      qualification:
+        "radial reveal separates coplanar rear faces without resizing the window",
+    }),
+  ];
+  return {
+    classification: "READ_ONLY_ACTUAL_GEOMETRY_INTERFACE_AUDIT",
+    records,
+    forbiddenInterferenceCount:
+      records.reduce(
+        (sum, item) => sum + item.forbiddenInterferenceCount,
+        0,
+      ),
+    overlapTotals: {
+      coplanarRadial: round(records.reduce(
+        (sum, item) => sum + item.coplanarRadialOverlap,
+        0,
+      )),
+      coplanarAxial: round(records.reduce(
+        (sum, item) => sum + item.coplanarAxialOverlap,
+        0,
+      )),
+      areaEquivalent: round(records.reduce(
+        (sum, item) => sum + item.coplanarAreaEquivalent,
+        0,
+      )),
+      sameCylinderAxial: round(records.reduce(
+        (sum, item) => sum + item.sameCylinderAxialOverlap,
+        0,
+      )),
+    },
+    educationalRenderingClearance:
+      a.educationalRenderingClearance,
   };
 }
 
@@ -746,7 +1213,9 @@ export function createCaseBodyProfileGeometryData({
   const indexArray = Uint32Array.from(indices);
   const { normals, degenerateTriangleCount } =
     accumulateVertexNormals(positions, indexArray);
-  const topology = closedEdgeReport(indexArray);
+  const geometryAudit =
+    weldedGeometryReport(positions, normals, indexArray);
+  const topology = geometryAudit.topology;
   const position1 = sampleCrownGap({
     positions,
     indices: indexArray,
@@ -791,6 +1260,10 @@ export function createCaseBodyProfileGeometryData({
     triangleCount: indexArray.length / 3,
     finite,
     degenerateTriangleCount,
+    duplicateTriangleCount: geometryAudit.duplicateTriangleCount,
+    reversedDuplicateTriangleCount:
+      geometryAudit.reversedDuplicateTriangleCount,
+    normalAudit: geometryAudit.normals,
     topology,
     bounds: geometryBounds(positions),
     relief: {

@@ -44,11 +44,13 @@ function createProfiledAnnularMesh({
   segments = 128,
   auditKey,
   taperAuditCriteria = null,
+  faceWinding = "forward",
 }) {
   const data = createAxialProfileAnnulusGeometryData({
     profile,
     circumferentialSegments: segments,
     taperAuditCriteria,
+    faceWinding,
   });
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(data.positions, 3));
@@ -217,6 +219,28 @@ function materialRecord(material) {
   };
 }
 
+const overlapInterval = (first, second) => {
+  const min = Math.max(first[0], second[0]);
+  const max = Math.min(first[1], second[1]);
+  return {
+    min: round(min),
+    max: round(max),
+    size: round(Math.max(0, max - min)),
+  };
+};
+
+const annularArea = interval =>
+  interval.size > 0
+    ? round(Math.PI * Math.max(0, interval.max ** 2 - interval.min ** 2))
+    : 0;
+
+function profileClosureYAtRadius(profile, radius) {
+  const inner = profile[0];
+  const outer = profile.at(-1);
+  const t = (radius - inner.radius) / (outer.radius - inner.radius);
+  return inner.y + (outer.y - inner.y) * t;
+}
+
 export function createBalancedExterior({
   register,
   registerStructuralOpacity,
@@ -289,6 +313,7 @@ export function createBalancedExterior({
       profile: config.annularProfiles.bezel.points,
       taperAuditCriteria:
         config.annularProfiles.bezel.auditCriteria,
+      faceWinding: config.annularProfiles.bezel.faceWinding,
       material: exteriorMaterials.bezel,
       auditKey: "bezelProfileAudit",
     }),
@@ -359,6 +384,7 @@ export function createBalancedExterior({
       profile: config.annularProfiles.casebackRing.points,
       taperAuditCriteria:
         config.annularProfiles.casebackRing.auditCriteria,
+      faceWinding: config.annularProfiles.casebackRing.faceWinding,
       material: exteriorMaterials.metal,
       auditKey: "casebackProfileAudit",
     }),
@@ -455,6 +481,324 @@ export function createBalancedExterior({
     movementHolder,
     crownTube,
     crownConnection,
+  };
+  let diagnosticMaterialMode = "original";
+  const diagnosticOriginalMaterials = new Map();
+  const diagnosticMaterials = new Set();
+  const setDiagnosticMaterialMode = (mode = "original") => {
+    const allowed = new Set([
+      "original",
+      "normal-front",
+      "normal-double",
+      "basic-front",
+      "wireframe-front",
+    ]);
+    if (!allowed.has(mode)) {
+      throw new Error(`unknown exterior diagnostic material mode: ${mode}`);
+    }
+    const meshes = [];
+    exteriorRoot.traverse(node => {
+      if (node.isMesh) meshes.push(node);
+    });
+    if (mode === "original") {
+      for (const mesh of meshes) {
+        if (diagnosticOriginalMaterials.has(mesh)) {
+          mesh.material = diagnosticOriginalMaterials.get(mesh);
+        }
+      }
+      for (const material of diagnosticMaterials) material.dispose();
+      diagnosticMaterials.clear();
+      diagnosticOriginalMaterials.clear();
+      diagnosticMaterialMode = mode;
+      return { mode, meshCount: meshes.length, restored: true };
+    }
+    for (const mesh of meshes) {
+      if (!diagnosticOriginalMaterials.has(mesh)) {
+        diagnosticOriginalMaterials.set(mesh, mesh.material);
+      }
+      const original = diagnosticOriginalMaterials.get(mesh);
+      const source = Array.isArray(original) ? original[0] : original;
+      let material;
+      if (mode.startsWith("normal")) {
+        material = new THREE.MeshNormalMaterial({
+          side: mode.endsWith("double") ? THREE.DoubleSide : THREE.FrontSide,
+        });
+      } else {
+        material = new THREE.MeshBasicMaterial({
+          color: mode.startsWith("wireframe") ? 0xffffff : 0xbfc8d4,
+          side: THREE.FrontSide,
+          wireframe: mode.startsWith("wireframe"),
+        });
+      }
+      material.depthTest = true;
+      material.depthWrite = true;
+      material.transparent = false;
+      material.opacity = 1;
+      material.clippingPlanes = source?.clippingPlanes || null;
+      diagnosticMaterials.add(material);
+      mesh.material = material;
+    }
+    diagnosticMaterialMode = mode;
+    return {
+      mode,
+      meshCount: meshes.length,
+      depthTest: true,
+      depthWrite: true,
+      transparent: false,
+    };
+  };
+  const getInterfaceReport = () => {
+    const bezelProfile = config.annularProfiles.bezel.points;
+    const casebackProfile = config.annularProfiles.casebackRing.points;
+    const caseFrontRange = [
+      config.caseBody.innerRadius,
+      config.caseBody.outerRadiusProfile[0].outerRadius,
+    ];
+    const caseBackRange = [
+      config.caseBody.innerRadius,
+      config.caseBody.outerRadiusProfile.at(-1).outerRadius,
+    ];
+    const bezelClosureRange = [
+      bezelProfile[0].radius,
+      bezelProfile.at(-1).radius,
+    ];
+    const casebackClosureRange = [
+      casebackProfile[0].radius,
+      casebackProfile.at(-1).radius,
+    ];
+    const bezelCaseOverlap =
+      overlapInterval(caseFrontRange, bezelClosureRange);
+    const casebackCaseOverlap =
+      overlapInterval(caseBackRange, casebackClosureRange);
+    const bezelCaseClearances = [
+      bezelCaseOverlap.min,
+      bezelCaseOverlap.max,
+    ].map(radius =>
+      d.crystalInnerY - profileClosureYAtRadius(bezelProfile, radius));
+    const casebackCaseClearances = [
+      casebackCaseOverlap.min,
+      casebackCaseOverlap.max,
+    ].map(radius =>
+      profileClosureYAtRadius(casebackProfile, radius) - d.casebackInnerY);
+    const coplanarTolerance = 1e-7;
+    const bezelCaseCoplanar =
+      bezelCaseClearances.every(
+        value => Math.abs(value) <= coplanarTolerance,
+      )
+        ? bezelCaseOverlap
+        : { ...bezelCaseOverlap, size: 0 };
+    const casebackCaseCoplanar =
+      casebackCaseClearances.every(
+        value => Math.abs(value) <= coplanarTolerance,
+      )
+        ? casebackCaseOverlap
+        : { ...casebackCaseOverlap, size: 0 };
+    const casebackInnerRadius = casebackProfile[0].radius;
+    const casebackWindowY = [
+      d.casebackOuterY - a.casebackWindowThickness,
+      d.casebackOuterY,
+    ];
+    const casebackInnerY = [
+      casebackProfile[0].y,
+      casebackProfile[1].y,
+    ];
+    const windowAxialOverlap =
+      overlapInterval(casebackWindowY, casebackInnerY);
+    const windowRadialClearance =
+      casebackInnerRadius - casebackWindowRadius;
+    const record = ({
+      id,
+      first,
+      second,
+      planes = null,
+      cylinderRadii = null,
+      yRange = null,
+      radiusRange = null,
+      signedMinimumClearance,
+      coplanarRadialOverlap = 0,
+      coplanarAxialOverlap = 0,
+      coplanarAreaEquivalent = 0,
+      sameCylinderAxialOverlap = 0,
+      classification,
+      qualification,
+    }) => ({
+      id,
+      pair: [first, second],
+      planes,
+      cylinderRadii,
+      yRange,
+      radiusRange,
+      signedMinimumClearance: round(signedMinimumClearance),
+      coplanarRadialOverlap: round(coplanarRadialOverlap),
+      coplanarAxialOverlap: round(coplanarAxialOverlap),
+      coplanarAreaEquivalent: round(coplanarAreaEquivalent),
+      sameCylinderAxialOverlap: round(sameCylinderAxialOverlap),
+      classification,
+      qualification,
+      forbiddenInterferenceCount:
+        signedMinimumClearance < -1e-7 ? 1 : 0,
+    });
+    const records = [
+      record({
+        id: "bezel-back-to-case-body-front",
+        first: "bezel back closure",
+        second: "case body front face",
+        planes: {
+          caseBodyY: d.crystalInnerY,
+          bezelClosureYRange: roundArray([
+            profileClosureYAtRadius(
+              bezelProfile,
+              bezelCaseOverlap.min,
+            ),
+            profileClosureYAtRadius(
+              bezelProfile,
+              bezelCaseOverlap.max,
+            ),
+          ]),
+        },
+        radiusRange: bezelCaseOverlap,
+        signedMinimumClearance: Math.min(...bezelCaseClearances),
+        coplanarRadialOverlap: bezelCaseCoplanar.size,
+        coplanarAreaEquivalent: annularArea(bezelCaseCoplanar),
+        classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+        qualification:
+          "axial reveal removes the former broad coplanar annular overlap",
+      }),
+      record({
+        id: "caseback-front-to-case-body-back",
+        first: "caseback ring front closure",
+        second: "case body back face",
+        planes: {
+          caseBodyY: d.casebackInnerY,
+          casebackClosureYRange: roundArray([
+            profileClosureYAtRadius(
+              casebackProfile,
+              casebackCaseOverlap.min,
+            ),
+            profileClosureYAtRadius(
+              casebackProfile,
+              casebackCaseOverlap.max,
+            ),
+          ]),
+        },
+        radiusRange: casebackCaseOverlap,
+        signedMinimumClearance: Math.min(...casebackCaseClearances),
+        coplanarRadialOverlap: casebackCaseCoplanar.size,
+        coplanarAreaEquivalent: annularArea(casebackCaseCoplanar),
+        classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+        qualification:
+          "axial reveal removes the former broad coplanar annular overlap",
+      }),
+      record({
+        id: "caseback-inner-to-window-outer",
+        first: "caseback ring inner wall",
+        second: "transparent caseback window outer wall",
+        cylinderRadii: {
+          caseback: round(casebackInnerRadius),
+          window: round(casebackWindowRadius),
+        },
+        yRange: {
+          caseback: roundArray(casebackInnerY),
+          window: roundArray(casebackWindowY),
+          overlap: windowAxialOverlap,
+        },
+        signedMinimumClearance: windowRadialClearance,
+        sameCylinderAxialOverlap:
+          Math.abs(windowRadialClearance) <= 1e-7
+            ? windowAxialOverlap.size
+            : 0,
+        classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+        qualification:
+          "radial reveal preserves the visible window diameter",
+      }),
+      record({
+        id: "caseback-to-movement-holder",
+        first: "caseback ring inner face",
+        second: "movement holder back",
+        planes: {
+          casebackY: d.casebackInnerY,
+          holderY: a.movementHolderBackY,
+        },
+        signedMinimumClearance:
+          d.casebackInnerY - a.movementHolderBackY,
+        classification: "PROTECTED_CLEARANCE",
+        qualification: "no intended visual or physical overlap",
+      }),
+      record({
+        id: "bezel-to-crystal",
+        first: "bezel crystal retention boundary",
+        second: "crystal outer wall",
+        cylinderRadii: {
+          bezel: round(bezelProfile[2].radius),
+          crystal: round(d.crystalClearDiameter / 2),
+        },
+        yRange: {
+          bezelContactY: bezelProfile[2].y,
+          crystal: roundArray([d.crystalOuterY, d.crystalInnerY]),
+        },
+        signedMinimumClearance:
+          bezelProfile[2].radius - d.crystalClearDiameter / 2,
+        classification: "INTENDED_RETENTION_CONTACT",
+        qualification:
+          "single circular retention boundary; no area-equivalent overlap",
+      }),
+      record({
+        id: "caseback-to-window-back",
+        first: "caseback retention land",
+        second: "transparent window rear face",
+        planes: {
+          casebackY: casebackProfile[1].y,
+          windowY: d.casebackOuterY,
+        },
+        radiusRange: {
+          caseback: roundArray([
+            casebackProfile[1].radius,
+            casebackProfile[2].radius,
+          ]),
+          window: roundArray([0, casebackWindowRadius]),
+        },
+        signedMinimumClearance: windowRadialClearance,
+        classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+        qualification:
+          "radial reveal separates coplanar rear faces without resizing the window",
+      }),
+    ];
+    return {
+      classification:
+        "READ_ONLY_ACTUAL_GEOMETRY_INTERFACE_AUDIT",
+      records,
+      forbiddenInterferenceCount:
+        records.reduce(
+          (sum, item) => sum + item.forbiddenInterferenceCount,
+          0,
+        ),
+      overlapTotals: {
+        coplanarRadial: round(records.reduce(
+          (sum, item) => sum + item.coplanarRadialOverlap,
+          0,
+        )),
+        coplanarAxial: round(records.reduce(
+          (sum, item) => sum + item.coplanarAxialOverlap,
+          0,
+        )),
+        areaEquivalent: round(records.reduce(
+          (sum, item) => sum + item.coplanarAreaEquivalent,
+          0,
+        )),
+        sameCylinderAxial: round(records.reduce(
+          (sum, item) => sum + item.sameCylinderAxialOverlap,
+          0,
+        )),
+      },
+      educationalRenderingClearance:
+        a.educationalRenderingClearance,
+      geometry: {
+        caseBody: caseBodyAudit,
+        bezel: bezel.userData.bezelProfileAudit,
+        casebackRing: casebackRing.userData.casebackProfileAudit,
+      },
+      diagnosticMaterialMode,
+    };
   };
   const intendedContacts = [
     "case body ↔ bezel",
@@ -620,6 +964,9 @@ export function createBalancedExterior({
       casebackToMovementHolderAxial:
         d.casebackInnerY - a.movementHolderBackY,
     };
+    const interfaceAudit = getInterfaceReport();
+    const interfaceRecord = id =>
+      interfaceAudit.records.find(item => item.id === id);
     const annularInterfaces = {
       bezelCrystalRetention: {
         clearance: round(clearances.bezelToCrystalRetentionRadial),
@@ -629,16 +976,21 @@ export function createBalancedExterior({
         forbiddenInterferenceCount: 0,
       },
       bezelCaseBodySeat: {
-        clearance: round(clearances.bezelToCaseBodyRadialSeat),
-        classification: "INTENDED_CASE_INTERFACE",
+        clearance: interfaceRecord(
+          "bezel-back-to-case-body-front",
+        ).signedMinimumClearance,
+        radialSeat: round(clearances.bezelToCaseBodyRadialSeat),
+        classification: "EDUCATIONAL_RENDERING_CLEARANCE",
         visibleCoplanarOverlap: false,
         forbiddenInterferenceCount:
-          clearances.bezelToCaseBodyRadialSeat < -1e-6 ? 1 : 0,
+          interfaceRecord(
+            "bezel-back-to-case-body-front",
+          ).forbiddenInterferenceCount,
       },
       casebackWindowRetention: {
         clearance: round(clearances.casebackToWindowRetentionRadial),
-        classification: "INTENDED_RETENTION_CONTACT",
-        sharedBoundaryOnly: true,
+        classification: "EDUCATIONAL_RENDERING_CLEARANCE",
+        sharedBoundaryOnly: false,
         visibleCoplanarOverlap: false,
         forbiddenInterferenceCount: 0,
       },
@@ -650,10 +1002,15 @@ export function createBalancedExterior({
           clearances.casebackToMovementHolderAxial < -1e-6 ? 1 : 0,
       },
       casebackCaseBodySeat: {
-        clearance: 0,
-        classification: "INTENDED_CASE_INTERFACE",
+        clearance: interfaceRecord(
+          "caseback-front-to-case-body-back",
+        ).signedMinimumClearance,
+        classification: "EDUCATIONAL_RENDERING_CLEARANCE",
         visibleCoplanarOverlap: false,
-        forbiddenInterferenceCount: 0,
+        forbiddenInterferenceCount:
+          interfaceRecord(
+            "caseback-front-to-case-body-back",
+          ).forbiddenInterferenceCount,
       },
     };
     const forbidden = [
@@ -720,6 +1077,7 @@ export function createBalancedExterior({
       crownPullPushOperability:
         config.classifications.crownPullPushOperability,
       annularInterfaces,
+      interfaceAudit,
       crownBodyCase: {
         position1: caseBodyAudit.relief.position1,
         position2: caseBodyAudit.relief.position2,
@@ -829,5 +1187,7 @@ export function createBalancedExterior({
     getInterferenceReport,
     getSelectionReport,
     getMaterialReport,
+    getInterfaceReport,
+    setDiagnosticMaterialMode,
   };
 }

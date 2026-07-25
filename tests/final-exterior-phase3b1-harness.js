@@ -130,6 +130,7 @@ frame.addEventListener("load", async () => {
     const state = diagnostics.getExteriorCandidateState();
     const dimensions = diagnostics.getExteriorDimensionReport();
     const interference = diagnostics.getExteriorInterferenceReport();
+    const interfaces = diagnostics.getExteriorInterfaceReport();
     const selection = diagnostics.getExteriorSelectionReport();
     const materials = diagnostics.getExteriorMaterialReport();
     const lighting = diagnostics.getFrontBackLuminanceReport({ themes: "all" });
@@ -204,6 +205,30 @@ frame.addEventListener("load", async () => {
         ? Object.values(interference.annularInterfaces)
           .every(item => item.forbiddenInterferenceCount === 0)
         : true,
+      interfaceClearance: expectedExteriorEnabled
+        ? interfaces.forbiddenInterferenceCount === 0
+          && interfaces.overlapTotals.coplanarRadial === 0
+          && interfaces.overlapTotals.coplanarAxial === 0
+          && interfaces.overlapTotals.areaEquivalent === 0
+          && interfaces.overlapTotals.sameCylinderAxial === 0
+          && interfaces.records
+            .filter(item =>
+              item.classification === "EDUCATIONAL_RENDERING_CLEARANCE")
+            .every(item =>
+              item.signedMinimumClearance >= 0.015
+              && item.signedMinimumClearance <= 0.030)
+        : true,
+      annularGeometryIntegrity: expectedExteriorEnabled
+        ? [dimensions.bezelGeometry, dimensions.casebackGeometry]
+          .every(geometry =>
+            geometry.duplicateTriangleCount === 0
+            && geometry.reversedDuplicateTriangleCount === 0
+            && geometry.orientation === "OUTWARD_POSITIVE"
+            && geometry.topology.windingMismatchCount === 0
+            && geometry.normalAudit.reversedTriangleCount === 0
+            && geometry.normalAudit.periodicSeamMismatchCount === 0
+            && geometry.normalAudit.zeroLengthCount === 0)
+        : true,
       movementHolder: expectedExteriorEnabled
         ? interference.movementHolder.outerDiameter === 37.65
           && interference.movementHolder.innerDiameter === 36.75
@@ -253,6 +278,7 @@ frame.addEventListener("load", async () => {
       state,
       dimensions,
       interference,
+      interfaces,
       selection,
       materials,
       lighting,

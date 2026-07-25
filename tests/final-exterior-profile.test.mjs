@@ -153,6 +153,7 @@ test("bezel profile is a closed indexed taper that thins toward the outer edge",
     profile: profile.points,
     circumferentialSegments: 128,
     taperAuditCriteria: profile.auditCriteria,
+    faceWinding: profile.faceWinding,
   });
   assert.deepEqual(bezel.audit.profile, profile.points);
   assert.equal(bezel.audit.bounds.size[0], 38.8);
@@ -169,11 +170,18 @@ test("bezel profile is a closed indexed taper that thins toward the outer edge",
   assert.equal(bezel.audit.taper.maximumVisibleFlatIntervalWidth, 0.4);
   assert.equal(bezel.audit.taper.unintendedHorizontalIntervalCount, 0);
   assert.equal(bezel.audit.taper.primarySlopeSign, 1);
-  assert.equal(bezel.audit.taper.outerEdgeAxialThickness, 0.03);
+  assert.equal(bezel.audit.taper.outerEdgeAxialThickness, 0.02);
   assert.equal(bezel.audit.taper.passed, true);
   assert.equal(bezel.audit.topology.closed, true);
   assert.equal(bezel.audit.topology.nonManifoldEdgeCount, 0);
   assert.equal(bezel.audit.degenerateTriangleCount, 0);
+  assert.equal(bezel.audit.duplicateTriangleCount, 0);
+  assert.equal(bezel.audit.reversedDuplicateTriangleCount, 0);
+  assert.equal(bezel.audit.normalAudit.reversedTriangleCount, 0);
+  assert.equal(bezel.audit.normalAudit.periodicSeamMismatchCount, 0);
+  assert.equal(bezel.audit.topology.windingMismatchCount, 0);
+  assert.equal(bezel.audit.orientation, "OUTWARD_POSITIVE");
+  assert.equal(bezel.audit.creaseNormalMode, "SPLIT_AT_PROFILE_BOUNDARIES");
 });
 
 test("caseback and holder rings are closed profiles with exact clearances", () => {
@@ -182,6 +190,7 @@ test("caseback and holder rings are closed profiles with exact clearances", () =
   const caseback = createAxialProfileAnnulusGeometryData({
     profile: profile.points,
     taperAuditCriteria: profile.auditCriteria,
+    faceWinding: profile.faceWinding,
   });
   const holder = createAxialProfileAnnulusGeometryData({
     profile: [
@@ -199,19 +208,25 @@ test("caseback and holder rings are closed profiles with exact clearances", () =
   assert.equal(caseback.audit.bounds.size[1], 0.6);
   assert.equal(caseback.audit.bounds.size[0], 39);
   assert.equal(caseback.audit.profile[3].radius * 2, 37.8);
-  assert.equal(caseback.audit.taper.innerRetentionLandWidth, 0.2);
+  assert.equal(caseback.audit.taper.innerRetentionLandWidth, 0.18);
   assert.equal(caseback.audit.taper.primaryTaperRadialWidth, 4.426);
   assert.equal(caseback.audit.taper.outerClosureWidth, 0.6);
-  assert.equal(caseback.audit.taper.primaryTaperCoverageRatio, 0.956766105);
+  assert.equal(caseback.audit.taper.primaryTaperCoverageRatio, 0.960920538);
   assert.equal(
     caseback.audit.taper.criteria.minimumPrimaryTaperCoverageRatio,
     0.9,
   );
-  assert.equal(caseback.audit.taper.maximumVisibleFlatIntervalWidth, 0.2);
+  assert.equal(caseback.audit.taper.maximumVisibleFlatIntervalWidth, 0.18);
   assert.equal(caseback.audit.taper.unintendedHorizontalIntervalCount, 0);
   assert.equal(caseback.audit.taper.primarySlopeSign, -1);
-  assert.equal(caseback.audit.taper.outerEdgeAxialThickness, 0.05);
+  assert.equal(caseback.audit.taper.outerEdgeAxialThickness, 0.04);
   assert.equal(caseback.audit.taper.passed, true);
+  assert.equal(caseback.audit.duplicateTriangleCount, 0);
+  assert.equal(caseback.audit.reversedDuplicateTriangleCount, 0);
+  assert.equal(caseback.audit.normalAudit.reversedTriangleCount, 0);
+  assert.equal(caseback.audit.normalAudit.periodicSeamMismatchCount, 0);
+  assert.equal(caseback.audit.topology.windingMismatchCount, 0);
+  assert.equal(caseback.audit.orientation, "OUTWARD_POSITIVE");
   assert.equal(holder.audit.bounds.size[0], 37.65);
   assert.equal(holder.audit.bounds.size[1], 0.45);
   assert.ok(Math.abs(
