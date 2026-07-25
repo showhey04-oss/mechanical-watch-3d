@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased — Stacked Draft Phase 3B.2 basic attachment candidate
+
+- 人間承認済みPhase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`から別ブランチを作成し、`feature/final-exterior-balanced-phase3b1`をBaseとする積み上げDraftとして基本装着部を分離。
+- `?exterior=balanced`時だけ、閉合indexed Meshの4ラグ、2スプリングバー、構造確認用ストラップ2本、簡略バックルを生成。通常pathの追加Object3Dは0で、固定mainとPNG 237,380 byte／SHA-256 `f3bdd25d543c11a4ae1dc08a3020a60358a85d5d20a90ccff9b8242bc35bd003`が一致。
+- lug-to-lug 46.600、外端Z±23.300、スプリングバー中心Z±21.800／Y2.800、ストラップ幅20.000→16.500、厚さ2.400、中心線長42.000／58.000を実装。
+- 新規9部品を選択・HUD・学習表示へ登録し、外装100%／50%／16%、family非表示、分解、表裏分離、材質・transform復元、16%時の内部選択を維持。
+- 位置1／位置2で機構・既存外装・新規装着部の禁止干渉0。ラグ―ケースは`INTENDED_LUG_CASE_CONNECTION`、バー―ラグ／ストラップは意図接触として禁止干渉から分離。
+- Phase 3B.1、S86、Phase 2Cの3包絡、A.7、三針拘束、カメラ基盤、DPR、照明、影、材質基盤、UI、作動音、APP_VERSIONを変更していない。
+- Desktop 86/86、390×844 88/88、PR #3 UI 22/22、PR #4 HUD 57/57、音声23/23、Phase 3B.2 harness Desktop／Mobile各30/30に合格。A.6の10秒idle／pointer／wheelは同一環境A/Bで絶対・差分基準に合格し、閾値は変更していない。
+- ストラップは`STRUCTURAL_PLACEHOLDER_NOT_PHASE3C_STYLE`。革色・シボ・ステッチ・穴列・コバ・最終バックル意匠、製造公差、防水、耐久、実着脱はPhase 3Cまたは実物設計へ保留。
+- 追加world boundsは24.400×30.070×88.162。既存カメラ定数を変えず、全ストラップ確認は可逆なwheel zoom-outで行う。物理iPhoneの接続・選択・透過・回転／ズーム・操作性は人間確認待ち。
+
 ## Unreleased — Draft PR #13 Phase 3B.1 E-BALANCED core exterior candidate
 
 - `?exterior=balanced`限定の最終候補として、第4候補の全面テーパーと総厚8.695を維持し、ケース胴の最大径帯を3.450から1.950へ短縮。前側／後側テーパーを2.160／3.385へ延長し、最大径39.600、端部径38.900、内径37.800は不変。
