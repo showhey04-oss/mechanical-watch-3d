@@ -35,7 +35,7 @@ test("resolver accepts only exterior=balanced and invalid values return the norm
   );
 });
 
-test("E-BALANCED third-candidate taper proportions are exact", () => {
+test("E-BALANCED fourth-candidate protected proportions are exact", () => {
   assert.deepEqual(FINAL_EXTERIOR_BALANCED.dimensions, {
     caseOuterDiameter: 39.600,
     movementCavityDiameter: 37.800,
@@ -102,6 +102,7 @@ test("configuration assertions preserve radial, Y, aperture, tube, and thickness
     caseBodyProfile: true,
     caseBodyWall: true,
     bezelProfile: true,
+    casebackProfile: true,
     casebackRingThickness: true,
     movementHolderRadialClearance: true,
     movementHolderAxialDerivation: true,
@@ -199,6 +200,8 @@ test("runtime implements hollow rings, derived dial holes, selection, and diagno
   assert.match(source, /crownBodyToCasePosition1/);
   assert.match(source, /movementHolderToCase/);
   assert.match(source, /movementHolderToMovement/);
+  assert.match(source, /annularInterfaces/);
+  assert.match(source, /INTENDED_RETENTION_CONTACT/);
   assert.match(source, /pickPriority: -1/);
   assert.match(source, /alphaHashUsed: false/);
   assert.match(source, /d2c3Used: false/);

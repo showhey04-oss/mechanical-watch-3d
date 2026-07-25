@@ -280,6 +280,7 @@ function closedEdgeReport(indices) {
 export function createAxialProfileAnnulusGeometryData({
   profile,
   circumferentialSegments = 128,
+  taperAuditCriteria = null,
 }) {
   if (!Array.isArray(profile) || profile.length < 4) {
     throw new Error("axial annulus profile requires at least four points");
@@ -353,6 +354,7 @@ export function createAxialProfileAnnulusGeometryData({
     profile: profile.map(point => ({
       radius: round(point.radius),
       y: round(point.y),
+      ...(point.role ? { role: point.role } : {}),
     })),
     circumferentialSegments,
     vertexCount,
@@ -362,6 +364,9 @@ export function createAxialProfileAnnulusGeometryData({
     degenerateTriangleCount,
     topology,
     bounds: geometryBounds(positions),
+    taper: taperAuditCriteria
+      ? auditAnnularTaperProfile(profile, taperAuditCriteria)
+      : null,
   };
   if (!Object.values(finite).every(Boolean)) {
     throw new Error("axial annulus geometry contains non-finite data");
@@ -377,6 +382,156 @@ export function createAxialProfileAnnulusGeometryData({
     normals: Float32Array.from(normals),
     indices: indexArray,
     audit,
+  };
+}
+
+export function auditAnnularTaperProfile(
+  profile,
+  {
+    minimumPrimaryTaperCoverageRatio,
+    maximumInnerRetentionLandWidth,
+    maximumOuterClosureWidth,
+    expectedPrimarySlopeSign,
+    minimumOuterEdgeAxialThickness,
+    maximumOuterEdgeAxialThickness,
+  },
+) {
+  if (!Array.isArray(profile) || profile.length !== 5) {
+    throw new Error("annular taper audit requires the five-point closed profile");
+  }
+  const [innerBack, innerFront, retentionOuter, taperOuter, outerBack] = profile;
+  const tolerance = 1e-9;
+  const radialWidth = (from, to) => to.radius - from.radius;
+  const slope = (from, to) =>
+    (to.y - from.y) / radialWidth(from, to);
+  const totalRadialWidth = radialWidth(innerBack, outerBack);
+  const innerRetentionLandWidth = radialWidth(innerFront, retentionOuter);
+  const primaryTaperRadialWidth = radialWidth(retentionOuter, taperOuter);
+  const outerClosureWidth = radialWidth(taperOuter, outerBack);
+  const visibleMainRadialWidth =
+    innerRetentionLandWidth + primaryTaperRadialWidth;
+  const primaryTaperCoverageRatio =
+    primaryTaperRadialWidth / visibleMainRadialWidth;
+  const totalSectionCoverageRatio =
+    primaryTaperRadialWidth / totalRadialWidth;
+  const primarySlope = slope(retentionOuter, taperOuter);
+  const outerClosureSlope = slope(taperOuter, outerBack);
+  const primarySlopeSign = Math.sign(primarySlope);
+  const outerEdgeAxialThickness = Math.abs(outerBack.y - taperOuter.y);
+  const visibleSegments = [
+    {
+      id: "innerRetentionLand",
+      role: "INTENDED_RETENTION_LAND",
+      radialWidth: innerRetentionLandWidth,
+      deltaY: retentionOuter.y - innerFront.y,
+    },
+    {
+      id: "primaryTaper",
+      role: "PRIMARY_TAPER",
+      radialWidth: primaryTaperRadialWidth,
+      deltaY: taperOuter.y - retentionOuter.y,
+    },
+    {
+      id: "outerClosure",
+      role: "OUTER_CLOSURE",
+      radialWidth: outerClosureWidth,
+      deltaY: outerBack.y - taperOuter.y,
+    },
+  ].map(segment => ({
+    ...segment,
+    horizontal: Math.abs(segment.deltaY) <= tolerance,
+  }));
+  const flatIntervals = [
+    ...visibleSegments
+      .filter(segment => segment.horizontal)
+      .map(segment => ({
+        id: segment.id,
+        role: segment.role,
+        radialWidth: round(segment.radialWidth),
+        intended: segment.id === "innerRetentionLand",
+      })),
+    {
+      id: "structuralBackClosure",
+      role: "STRUCTURAL_BACK_CONTACT",
+      radialWidth: round(totalRadialWidth),
+      intended: true,
+    },
+  ];
+  const unintendedHorizontalIntervals = flatIntervals.filter(
+    interval => !interval.intended,
+  );
+  const maximumVisibleFlatIntervalWidth = Math.max(
+    0,
+    ...visibleSegments
+      .filter(segment => segment.horizontal)
+      .map(segment => segment.radialWidth),
+  );
+  const checks = {
+    radialOrder:
+      innerBack.radius === innerFront.radius
+      && innerFront.radius < retentionOuter.radius
+      && retentionOuter.radius < taperOuter.radius
+      && taperOuter.radius < outerBack.radius,
+    primaryTaperCoverage:
+      primaryTaperCoverageRatio
+        >= minimumPrimaryTaperCoverageRatio - tolerance,
+    innerRetentionLand:
+      innerRetentionLandWidth <= maximumInnerRetentionLandWidth + tolerance,
+    outerClosure:
+      outerClosureWidth <= maximumOuterClosureWidth + tolerance,
+    monotonicPrimarySlope:
+      primarySlopeSign === expectedPrimarySlopeSign
+      && Math.abs(primarySlope) > tolerance,
+    outerClosureContinuesSlope:
+      Math.sign(outerClosureSlope) === expectedPrimarySlopeSign
+      && Math.abs(outerClosureSlope) > tolerance,
+    outerEdgeAxialThickness:
+      outerEdgeAxialThickness >= minimumOuterEdgeAxialThickness - tolerance
+      && outerEdgeAxialThickness <= maximumOuterEdgeAxialThickness + tolerance,
+    unintendedHorizontalIntervals:
+      unintendedHorizontalIntervals.length === 0,
+  };
+  return {
+    definition: {
+      numerator: "primaryTaperRadialWidth",
+      denominator:
+        "visibleMainRadialWidth = innerRetentionLandWidth + primaryTaperRadialWidth",
+      outerClosureTreatment:
+        "excluded from the visible main-face denominator and reported separately",
+      structuralBackClosureTreatment:
+        "intentional hidden contact surface; excluded from visible flat-interval rejection",
+    },
+    totalRadialWidth: round(totalRadialWidth),
+    visibleMainRadialWidth: round(visibleMainRadialWidth),
+    innerRetentionLandWidth: round(innerRetentionLandWidth),
+    primaryTaperRadialWidth: round(primaryTaperRadialWidth),
+    outerClosureWidth: round(outerClosureWidth),
+    primaryTaperCoverageRatio: round(primaryTaperCoverageRatio),
+    totalSectionCoverageRatio: round(totalSectionCoverageRatio),
+    primarySlope: round(primarySlope),
+    primarySlopeSign,
+    expectedPrimarySlopeSign,
+    outerClosureSlope: round(outerClosureSlope),
+    outerEdgeAxialThickness: round(outerEdgeAxialThickness),
+    maximumVisibleFlatIntervalWidth:
+      round(maximumVisibleFlatIntervalWidth),
+    flatIntervals,
+    unintendedHorizontalIntervalCount:
+      unintendedHorizontalIntervals.length,
+    visibleSegments: visibleSegments.map(segment => ({
+      ...segment,
+      radialWidth: round(segment.radialWidth),
+      deltaY: round(segment.deltaY),
+    })),
+    criteria: {
+      minimumPrimaryTaperCoverageRatio,
+      maximumInnerRetentionLandWidth,
+      maximumOuterClosureWidth,
+      minimumOuterEdgeAxialThickness,
+      maximumOuterEdgeAxialThickness,
+    },
+    checks,
+    passed: Object.values(checks).every(Boolean),
   };
 }
 

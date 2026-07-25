@@ -43,10 +43,12 @@ function createProfiledAnnularMesh({
   material,
   segments = 128,
   auditKey,
+  taperAuditCriteria = null,
 }) {
   const data = createAxialProfileAnnulusGeometryData({
     profile,
     circumferentialSegments: segments,
+    taperAuditCriteria,
   });
   const geometry = new THREE.BufferGeometry();
   geometry.setAttribute("position", new THREE.BufferAttribute(data.positions, 3));
@@ -246,11 +248,11 @@ export function createBalancedExterior({
 
   const descriptions = {
     caseBody: "E-BALANCED候補のプロファイル中空ケース胴。中央バンド、前後テーパー、実りゅうず包絡から導いた局所逃げを1つの閉じたMeshで構成する。",
-    bezel: "直径29.8の表示開口から外縁へ向かって軸方向に薄くなる、単一閉合プロファイルのE-BALANCEDベゼル候補。",
+    bezel: "最小風防保持座の直後から外縁まで、見える主環状面の大部分を連続傾斜面とした単一閉合E-BALANCEDベゼル候補。",
     crystal: "針最前面から0.35離した厚さ0.60の固定透明風防候補。光学特性・防水性・保持方式は未検証。",
     rehaut: "S86表示リングを隠さず、直径29.8の表示開口へつなぐ内周リング候補。",
     dialBlank: "中心管と小秒軸の実位置から導いた貫通孔を持つ物理文字板候補。",
-    casebackRing: "ブリッジ上端から0.40離し、軸方向厚さを0.60へ抑えたテーパー付きE-BALANCED裏蓋リング候補。",
+    casebackRing: "最小窓保持座の直後から外縁まで後面の大部分を連続傾斜面とし、軸方向包絡0.60を維持したE-BALANCED裏蓋リング候補。",
     casebackWindow: "ムーブメント裏面を観察する固定透明窓候補。防水・保持・製造公差は未検証。",
     movementHolder: "ケース内周とムーブメント外周の各0.075クリアランスから導いた保持リング候補。固定方式・製造公差・防水性は未検証。",
     crownTube: "A.7巻真軸へ同軸配置した中空ケースチューブ候補。内径0.52、外径1.00。",
@@ -284,24 +286,9 @@ export function createBalancedExterior({
   const bezel = addPart({
     group: groups.exteriorFront,
     mesh: createProfiledAnnularMesh({
-      profile: [
-        {
-          radius: d.dialApertureDiameter / 2,
-          y: a.bezelBackY,
-        },
-        {
-          radius: d.crystalClearDiameter / 2,
-          y: a.bezelInnerFrontY,
-        },
-        {
-          radius: d.bezelFrontOuterDiameter / 2,
-          y: a.bezelOuterFrontY,
-        },
-        {
-          radius: d.bezelBackOuterDiameter / 2,
-          y: a.bezelBackY,
-        },
-      ],
+      profile: config.annularProfiles.bezel.points,
+      taperAuditCriteria:
+        config.annularProfiles.bezel.auditCriteria,
       material: exteriorMaterials.bezel,
       auditKey: "bezelProfileAudit",
     }),
@@ -369,24 +356,9 @@ export function createBalancedExterior({
   const casebackRing = addPart({
     group: groups.exteriorBack,
     mesh: createProfiledAnnularMesh({
-      profile: [
-        {
-          radius: casebackWindowRadius,
-          y: d.casebackOuterY,
-        },
-        {
-          radius: casebackWindowRadius,
-          y: d.casebackInnerY,
-        },
-        {
-          radius: d.caseOuterDiameter / 2 - 0.3,
-          y: d.casebackInnerY,
-        },
-        {
-          radius: a.casebackRearOuterDiameter / 2,
-          y: d.casebackOuterY,
-        },
-      ],
+      profile: config.annularProfiles.casebackRing.points,
+      taperAuditCriteria:
+        config.annularProfiles.casebackRing.auditCriteria,
       material: exteriorMaterials.metal,
       auditKey: "casebackProfileAudit",
     }),
@@ -550,7 +522,7 @@ export function createBalancedExterior({
         round(boundsRecord(bezel).size[0] - d.bezelBackOuterDiameter),
       bezelFrontOuterDiameter:
         round(
-          bezel.userData.bezelProfileAudit.profile[2].radius * 2
+          bezel.userData.bezelProfileAudit.profile[3].radius * 2
             - d.bezelFrontOuterDiameter,
         ),
       crystalClearDiameter:
@@ -636,6 +608,53 @@ export function createBalancedExterior({
         ) / 2,
       movementHolderToCaseback:
         d.casebackInnerY - a.movementHolderBackY,
+      bezelToCaseBodyRadialSeat:
+        config.caseBody.outerRadiusProfile[0].outerRadius
+          - config.annularProfiles.bezel.points[4].radius,
+      bezelToCrystalRetentionRadial:
+        config.annularProfiles.bezel.points[2].radius
+          - d.crystalClearDiameter / 2,
+      casebackToWindowRetentionRadial:
+        config.annularProfiles.casebackRing.points[0].radius
+          - casebackWindowRadius,
+      casebackToMovementHolderAxial:
+        d.casebackInnerY - a.movementHolderBackY,
+    };
+    const annularInterfaces = {
+      bezelCrystalRetention: {
+        clearance: round(clearances.bezelToCrystalRetentionRadial),
+        classification: "INTENDED_RETENTION_CONTACT",
+        sharedBoundaryOnly: true,
+        visibleCoplanarOverlap: false,
+        forbiddenInterferenceCount: 0,
+      },
+      bezelCaseBodySeat: {
+        clearance: round(clearances.bezelToCaseBodyRadialSeat),
+        classification: "INTENDED_CASE_INTERFACE",
+        visibleCoplanarOverlap: false,
+        forbiddenInterferenceCount:
+          clearances.bezelToCaseBodyRadialSeat < -1e-6 ? 1 : 0,
+      },
+      casebackWindowRetention: {
+        clearance: round(clearances.casebackToWindowRetentionRadial),
+        classification: "INTENDED_RETENTION_CONTACT",
+        sharedBoundaryOnly: true,
+        visibleCoplanarOverlap: false,
+        forbiddenInterferenceCount: 0,
+      },
+      casebackMovementHolder: {
+        clearance: round(clearances.casebackToMovementHolderAxial),
+        classification: "PROTECTED_CLEARANCE",
+        visibleCoplanarOverlap: false,
+        forbiddenInterferenceCount:
+          clearances.casebackToMovementHolderAxial < -1e-6 ? 1 : 0,
+      },
+      casebackCaseBodySeat: {
+        clearance: 0,
+        classification: "INTENDED_CASE_INTERFACE",
+        visibleCoplanarOverlap: false,
+        forbiddenInterferenceCount: 0,
+      },
     };
     const forbidden = [
       ["crystal", "minute hand", clearances.minuteHandToCrystal],
@@ -700,6 +719,7 @@ export function createBalancedExterior({
       crownFingerAccess: config.classifications.crownFingerAccess,
       crownPullPushOperability:
         config.classifications.crownPullPushOperability,
+      annularInterfaces,
       crownBodyCase: {
         position1: caseBodyAudit.relief.position1,
         position2: caseBodyAudit.relief.position2,

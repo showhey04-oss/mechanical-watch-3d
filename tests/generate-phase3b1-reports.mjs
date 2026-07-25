@@ -135,6 +135,7 @@ await writeReport("exterior-interference.json", {
   intendedContacts: source.desktop.interference.intendedContacts,
   forbidden: source.desktop.interference.forbidden,
   forbiddenCount: source.desktop.interference.forbiddenCount,
+  annularInterfaces: source.desktop.interference.annularInterfaces,
   clearances: source.desktop.interference.clearances,
   tubeAxisError: source.desktop.interference.tubeAxisError,
   position1: {
@@ -155,6 +156,37 @@ await writeReport("exterior-interference.json", {
   crownFingerAccess: "HUMAN_ACCEPTED_PHASE3B1",
   crownPullPushOperability: "HUMAN_ACCEPTED_PHASE3B1",
   structuralOpacity50: "HUMAN_REVIEW_PENDING",
+});
+
+await writeReport("annular-taper-report.json", {
+  definition: {
+    primaryTaperCoverageRatio:
+      "primaryTaperRadialWidth / visibleMainRadialWidth",
+    visibleMainRadialWidth:
+      "innerRetentionLandWidth + primaryTaperRadialWidth",
+    outerClosure:
+      "reported separately from the visible main-face denominator",
+    structuralBackClosure:
+      "intentional hidden contact surface excluded from visible flat-interval rejection",
+  },
+  bezel: source.desktop.dimensions.bezelGeometry,
+  casebackRing: source.desktop.dimensions.casebackGeometry,
+  interfaces: source.desktop.interference.annularInterfaces,
+  viewportInvariant:
+    JSON.stringify({
+      bezel: source.desktop.dimensions.bezelGeometry,
+      casebackRing: source.desktop.dimensions.casebackGeometry,
+    }) === JSON.stringify({
+      bezel: source.mobile.dimensions.bezelGeometry,
+      casebackRing: source.mobile.dimensions.casebackGeometry,
+    }),
+  passed:
+    source.desktop.dimensions.bezelGeometry.taper.passed
+    && source.desktop.dimensions.casebackGeometry.taper.passed
+    && source.mobile.dimensions.bezelGeometry.taper.passed
+    && source.mobile.dimensions.casebackGeometry.taper.passed
+    && Object.values(source.desktop.interference.annularInterfaces)
+      .every(item => item.forbiddenInterferenceCount === 0),
 });
 
 const crownBodyCase = source.desktop.interference.crownBodyCase;
@@ -434,9 +466,14 @@ await writeReport("decision-summary.json", {
     physicalIPhoneOperability: "HUMAN_ACCEPTED_PHASE3B1",
   },
   thirdCandidateHumanReview: {
-    caseBodyTaper: "REQUIRED",
-    bezelTaper: "REQUIRED",
-    casebackRingTaper: "REQUIRED",
+    caseBodyTaper: "HUMAN_ACCEPTED_PHASE3B1",
+    bezelTaper: "SUPERSEDED_BY_FOURTH_CANDIDATE_REQUIREMENT",
+    casebackRingTaper: "SUPERSEDED_BY_FOURTH_CANDIDATE_REQUIREMENT",
+    structuralOpacity50: "PENDING",
+  },
+  fourthCandidateHumanReview: {
+    bezelFullSurfaceTaper: "REQUIRED",
+    casebackFullSurfaceTaper: "REQUIRED",
     structuralOpacity50: "PENDING",
   },
   unverified: {
@@ -470,5 +507,5 @@ await writeReport("decision-summary.json", {
     ],
   },
   nextPhaseRecommendation:
-    "HUMAN_REVIEW_THIRD_CANDIDATE_TAPER_BEFORE_DEFAULT_ADOPTION_OR_PHASE3B2",
+    "HUMAN_REVIEW_FOURTH_CANDIDATE_FULL_ANNULAR_TAPERS_BEFORE_DEFAULT_ADOPTION_OR_PHASE3B2",
 });

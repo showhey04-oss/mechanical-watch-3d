@@ -3,6 +3,7 @@ import test from "node:test";
 
 import { FINAL_EXTERIOR_BALANCED } from "../js/final-exterior-config.js";
 import {
+  auditAnnularTaperProfile,
   createAxialProfileAnnulusGeometryData,
   createCaseBodyProfileGeometryData,
   interpolateCaseBodyRadius,
@@ -123,23 +124,25 @@ test("legacy 0.150 relief remains insufficient while inner geometry stays unchan
 });
 
 test("bezel profile is a closed indexed taper that thins toward the outer edge", () => {
-  const { dimensions: d, assumptions: a } = config;
+  const profile = config.annularProfiles.bezel;
   const bezel = createAxialProfileAnnulusGeometryData({
-    profile: [
-      { radius: d.dialApertureDiameter / 2, y: a.bezelBackY },
-      { radius: d.crystalClearDiameter / 2, y: a.bezelInnerFrontY },
-      { radius: d.bezelFrontOuterDiameter / 2, y: a.bezelOuterFrontY },
-      { radius: d.bezelBackOuterDiameter / 2, y: a.bezelBackY },
-    ],
+    profile: profile.points,
     circumferentialSegments: 128,
+    taperAuditCriteria: profile.auditCriteria,
   });
+  assert.deepEqual(bezel.audit.profile, profile.points);
   assert.equal(bezel.audit.bounds.size[0], 38.8);
   assert.equal(bezel.audit.bounds.min[1], -3.24);
   assert.equal(bezel.audit.bounds.max[1], -2.86);
-  assert.ok(
-    a.bezelBackY - a.bezelInnerFrontY
-      > a.bezelBackY - a.bezelOuterFrontY,
-  );
+  assert.equal(bezel.audit.taper.innerRetentionLandWidth, 0.4);
+  assert.equal(bezel.audit.taper.primaryTaperRadialWidth, 3.2);
+  assert.equal(bezel.audit.taper.outerClosureWidth, 0.9);
+  assert.equal(bezel.audit.taper.primaryTaperCoverageRatio, 0.888888889);
+  assert.equal(bezel.audit.taper.maximumVisibleFlatIntervalWidth, 0.4);
+  assert.equal(bezel.audit.taper.unintendedHorizontalIntervalCount, 0);
+  assert.equal(bezel.audit.taper.primarySlopeSign, 1);
+  assert.equal(bezel.audit.taper.outerEdgeAxialThickness, 0.03);
+  assert.equal(bezel.audit.taper.passed, true);
   assert.equal(bezel.audit.topology.closed, true);
   assert.equal(bezel.audit.topology.nonManifoldEdgeCount, 0);
   assert.equal(bezel.audit.degenerateTriangleCount, 0);
@@ -147,13 +150,10 @@ test("bezel profile is a closed indexed taper that thins toward the outer edge",
 
 test("caseback and holder rings are closed profiles with exact clearances", () => {
   const { dimensions: d, assumptions: a, protectedAnchors } = config;
+  const profile = config.annularProfiles.casebackRing;
   const caseback = createAxialProfileAnnulusGeometryData({
-    profile: [
-      { radius: a.casebackWindowDiameter / 2, y: d.casebackOuterY },
-      { radius: a.casebackWindowDiameter / 2, y: d.casebackInnerY },
-      { radius: d.caseOuterDiameter / 2 - 0.3, y: d.casebackInnerY },
-      { radius: a.casebackRearOuterDiameter / 2, y: d.casebackOuterY },
-    ],
+    profile: profile.points,
+    taperAuditCriteria: profile.auditCriteria,
   });
   const holder = createAxialProfileAnnulusGeometryData({
     profile: [
@@ -169,7 +169,17 @@ test("caseback and holder rings are closed profiles with exact clearances", () =
     assert.equal(value.audit.degenerateTriangleCount, 0);
   }
   assert.equal(caseback.audit.bounds.size[1], 0.6);
-  assert.equal(caseback.audit.profile.at(-1).radius * 2, 37.8);
+  assert.equal(caseback.audit.bounds.size[0], 39);
+  assert.equal(caseback.audit.profile[3].radius * 2, 37.8);
+  assert.equal(caseback.audit.taper.innerRetentionLandWidth, 0.2);
+  assert.equal(caseback.audit.taper.primaryTaperRadialWidth, 4.426);
+  assert.equal(caseback.audit.taper.outerClosureWidth, 0.6);
+  assert.equal(caseback.audit.taper.primaryTaperCoverageRatio, 0.956766105);
+  assert.equal(caseback.audit.taper.maximumVisibleFlatIntervalWidth, 0.2);
+  assert.equal(caseback.audit.taper.unintendedHorizontalIntervalCount, 0);
+  assert.equal(caseback.audit.taper.primarySlopeSign, -1);
+  assert.equal(caseback.audit.taper.outerEdgeAxialThickness, 0.05);
+  assert.equal(caseback.audit.taper.passed, true);
   assert.equal(holder.audit.bounds.size[0], 37.65);
   assert.equal(holder.audit.bounds.size[1], 0.45);
   assert.ok(Math.abs(
@@ -183,4 +193,36 @@ test("caseback and holder rings are closed profiles with exact clearances", () =
     ) / 2
       - 0.075,
   ) <= 1e-12);
+});
+
+test("annular taper audit records its coverage denominator and rejects a wide flat main face", () => {
+  const profile = config.annularProfiles.bezel;
+  const audit = auditAnnularTaperProfile(
+    profile.points,
+    profile.auditCriteria,
+  );
+  assert.equal(audit.definition.numerator, "primaryTaperRadialWidth");
+  assert.match(audit.definition.denominator, /visibleMainRadialWidth/);
+  assert.equal(audit.totalRadialWidth, 4.5);
+  assert.equal(audit.visibleMainRadialWidth, 3.6);
+  assert.equal(audit.totalSectionCoverageRatio, 0.711111111);
+  assert.deepEqual(
+    audit.flatIntervals.map(interval => [interval.id, interval.intended]),
+    [
+      ["innerRetentionLand", true],
+      ["structuralBackClosure", true],
+    ],
+  );
+
+  const invalid = auditAnnularTaperProfile(
+    profile.points.map(point => (
+      point.role === "primaryTaperOuter"
+        ? { ...point, y: -3.240 }
+        : point
+    )),
+    profile.auditCriteria,
+  );
+  assert.equal(invalid.checks.monotonicPrimarySlope, false);
+  assert.equal(invalid.unintendedHorizontalIntervalCount, 1);
+  assert.equal(invalid.passed, false);
 });

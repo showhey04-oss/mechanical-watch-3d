@@ -184,13 +184,25 @@ frame.addEventListener("load", async () => {
       bezelProfile: expectedExteriorEnabled
         ? dimensions.bezelGeometry.bounds.size[0] === 38.8
           && dimensions.bezelGeometry.bounds.size[1] === 0.38
+          && dimensions.bezelGeometry.taper.passed
+          && dimensions.bezelGeometry.taper.primaryTaperCoverageRatio >= 0.8
+          && dimensions.bezelGeometry.taper.primarySlopeSign === 1
+          && dimensions.bezelGeometry.taper.unintendedHorizontalIntervalCount === 0
           && dimensions.bezelGeometry.topology.closed
           && dimensions.bezelGeometry.degenerateTriangleCount === 0
         : true,
       casebackProfile: expectedExteriorEnabled
         ? dimensions.casebackGeometry.bounds.size[1] === 0.6
+          && dimensions.casebackGeometry.taper.passed
+          && dimensions.casebackGeometry.taper.primaryTaperCoverageRatio >= 0.8
+          && dimensions.casebackGeometry.taper.primarySlopeSign === -1
+          && dimensions.casebackGeometry.taper.unintendedHorizontalIntervalCount === 0
           && dimensions.casebackGeometry.topology.closed
           && dimensions.casebackGeometry.degenerateTriangleCount === 0
+        : true,
+      annularInterfaces: expectedExteriorEnabled
+        ? Object.values(interference.annularInterfaces)
+          .every(item => item.forbiddenInterferenceCount === 0)
         : true,
       movementHolder: expectedExteriorEnabled
         ? interference.movementHolder.outerDiameter === 37.65

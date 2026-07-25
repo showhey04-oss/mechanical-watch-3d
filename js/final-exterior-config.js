@@ -65,7 +65,7 @@ const assumptions = {
   caseBodyBackY: dimensions.casebackInnerY,
   bezelBackY: dimensions.crystalInnerY,
   bezelInnerFrontY: -3.240,
-  bezelOuterFrontY: -2.880,
+  bezelOuterFrontY: -2.890,
   rehautBackY: -2.720,
   rehautFrontY: dimensions.crystalInnerY,
   dialBlankDiameter: 35.000,
@@ -75,6 +75,7 @@ const assumptions = {
   dialSmallSecondHoleClearance: 0.100,
   casebackWindowDiameter: 28.548,
   casebackWindowThickness: 0.380,
+  casebackFrontOuterDiameter: 39.000,
   casebackRearOuterDiameter: 37.800,
   movementHolderOuterDiameter: 37.650,
   movementHolderInnerDiameter: 36.750,
@@ -89,6 +90,43 @@ const assumptions = {
   crownConnectionInnerDiameter: dimensions.crownTubeInnerDiameter,
   crownConnectionAxialLength: 0.180,
   crownConnectionOuterX: 19.200,
+};
+
+const annularProfiles = {
+  bezel: {
+    points: [
+      { role: "innerBack", radius: 14.900, y: -2.860 },
+      { role: "innerFront", radius: 14.900, y: -3.240 },
+      { role: "innerRetentionLandOuter", radius: 15.300, y: -3.240 },
+      { role: "primaryTaperOuter", radius: 18.500, y: -2.890 },
+      { role: "outerBack", radius: 19.400, y: -2.860 },
+    ],
+    auditCriteria: {
+      minimumPrimaryTaperCoverageRatio: 0.800,
+      maximumInnerRetentionLandWidth: 0.400,
+      maximumOuterClosureWidth: 1.000,
+      expectedPrimarySlopeSign: 1,
+      minimumOuterEdgeAxialThickness: 0.020,
+      maximumOuterEdgeAxialThickness: 0.050,
+    },
+  },
+  casebackRing: {
+    points: [
+      { role: "innerFront", radius: 14.274, y: 4.635 },
+      { role: "innerRear", radius: 14.274, y: 5.235 },
+      { role: "innerRetentionLandOuter", radius: 14.474, y: 5.235 },
+      { role: "primaryTaperOuter", radius: 18.900, y: 4.685 },
+      { role: "outerFront", radius: 19.500, y: 4.635 },
+    ],
+    auditCriteria: {
+      minimumPrimaryTaperCoverageRatio: 0.800,
+      maximumInnerRetentionLandWidth: 0.300,
+      maximumOuterClosureWidth: 0.700,
+      expectedPrimarySlopeSign: -1,
+      minimumOuterEdgeAxialThickness: 0.040,
+      maximumOuterEdgeAxialThickness: 0.080,
+    },
+  },
 };
 
 export const FINAL_EXTERIOR_BALANCED = deepFreeze({
@@ -107,6 +145,7 @@ export const FINAL_EXTERIOR_BALANCED = deepFreeze({
   },
   dimensions,
   assumptions,
+  annularProfiles,
   caseBody,
   protectedAnchors: {
     movementReferenceDiameter: 36.600,
@@ -227,10 +266,42 @@ export function assertFinalExteriorConfig(
           point.outerRadius - config.caseBody.innerRadius),
       ) >= config.caseBody.crownRelief.minimumWall,
     bezelProfile:
-      d.bezelBackOuterDiameter > d.bezelFrontOuterDiameter
-      && d.bezelBackOuterDiameter < d.caseOuterDiameter
-      && a.bezelInnerFrontY < a.bezelOuterFrontY
-      && a.bezelOuterFrontY < a.bezelBackY,
+      Math.abs(
+        config.annularProfiles.bezel.points[0].radius * 2
+          - d.dialApertureDiameter,
+      ) <= tolerance
+      && Math.abs(
+        config.annularProfiles.bezel.points[2].radius * 2
+          - d.crystalClearDiameter,
+      ) <= tolerance
+      && Math.abs(
+        config.annularProfiles.bezel.points[3].radius * 2
+          - d.bezelFrontOuterDiameter,
+      ) <= tolerance
+      && Math.abs(
+        config.annularProfiles.bezel.points[4].radius * 2
+          - d.bezelBackOuterDiameter,
+      ) <= tolerance
+      && config.annularProfiles.bezel.points[1].y === a.bezelInnerFrontY
+      && config.annularProfiles.bezel.points[3].y === a.bezelOuterFrontY
+      && config.annularProfiles.bezel.points[4].y === a.bezelBackY,
+    casebackProfile:
+      Math.abs(
+        config.annularProfiles.casebackRing.points[0].radius * 2
+          - a.casebackWindowDiameter,
+      ) <= tolerance
+      && config.annularProfiles.casebackRing.points[1].y
+        === d.casebackOuterY
+      && Math.abs(
+        config.annularProfiles.casebackRing.points[4].radius * 2
+          - a.casebackFrontOuterDiameter,
+      ) <= tolerance
+      && config.annularProfiles.casebackRing.points[4].y
+        === d.casebackInnerY
+      && Math.abs(
+        config.annularProfiles.casebackRing.points[3].radius * 2
+          - a.casebackRearOuterDiameter,
+      ) <= tolerance,
     casebackRingThickness:
       Math.abs(
         d.casebackOuterY
