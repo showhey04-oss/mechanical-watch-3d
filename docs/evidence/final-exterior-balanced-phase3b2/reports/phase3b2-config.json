@@ -1,0 +1,185 @@
+{
+  "sourceImplementationCommit": "51ab089e898cc3d2216d97fece83e334d9cd49c3",
+  "sourceBaseCommit": "d51e4f8790596f7bc894e8c716edb0d54968d260",
+  "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBranch": "feature/final-exterior-balanced-phase3b2",
+  "baseBranch": "feature/final-exterior-balanced-phase3b1",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin browser harness and actual WebGL canvas capture",
+  "config": {
+    "schemaVersion": 1,
+    "id": "E-BALANCED-PHASE3B2-ATTACHMENTS",
+    "status": "STRUCTURAL_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+    "enabledByDefault": false,
+    "source": {
+      "baseBranch": "feature/final-exterior-balanced-phase3b1",
+      "approvedPhase3B1Head": "d51e4f8790596f7bc894e8c716edb0d54968d260",
+      "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+      "dependencyPullRequest": 13
+    },
+    "appVersion": "v3.15.0",
+    "dimensions": {
+      "targetLugToLug": 46.6,
+      "lugOuterZ": 23.3,
+      "lugRootZ": 16.5,
+      "springBarCenterZ": 21.8,
+      "springBarCenterY": 2.8,
+      "strapInnerWidth": 20,
+      "lugOuterWidth": 24.4,
+      "lugWidth": 2,
+      "lugInnerX": 10.2,
+      "lugOuterX": 12.2,
+      "springBarMainDiameter": 1.5,
+      "springBarPinDiameter": 0.8,
+      "springBarMainLength": 20,
+      "springBarEffectiveLength": 20.8,
+      "strapThickness": 2.4,
+      "strap12Length": 42,
+      "strap6Length": 58,
+      "strapEndWidth": 16.5,
+      "buckleOuterWidth": 18.4,
+      "buckleInnerWidth": 16.8,
+      "buckleOuterLength": 4.8,
+      "buckleInnerLength": 3.2,
+      "buckleThickness": 0.65
+    },
+    "lugStations": [
+      {
+        "z": 16.45,
+        "y": 1.65,
+        "thickness": 5
+      },
+      {
+        "z": 17.6,
+        "y": 1.72,
+        "thickness": 4.7
+      },
+      {
+        "z": 20.5,
+        "y": 2.3,
+        "thickness": 3.1
+      },
+      {
+        "z": 23.111989,
+        "y": 2.8,
+        "thickness": 2
+      }
+    ],
+    "strapCenterlineTemplates": {
+      "twelve": [
+        {
+          "backOffset": 0,
+          "radialOffset": 0
+        },
+        {
+          "backOffset": 2,
+          "radialOffset": 7
+        },
+        {
+          "backOffset": 6,
+          "radialOffset": 14
+        },
+        {
+          "backOffset": 12,
+          "radialOffset": 18
+        },
+        {
+          "backOffset": 17,
+          "radialOffset": 14
+        },
+        {
+          "backOffset": 21,
+          "radialOffset": 7
+        },
+        {
+          "backOffset": 23,
+          "radialOffset": 0
+        }
+      ],
+      "six": [
+        {
+          "backOffset": 0,
+          "radialOffset": 0
+        },
+        {
+          "backOffset": 2,
+          "radialOffset": 8
+        },
+        {
+          "backOffset": 6,
+          "radialOffset": 18
+        },
+        {
+          "backOffset": 12,
+          "radialOffset": 25
+        },
+        {
+          "backOffset": 18,
+          "radialOffset": 18
+        },
+        {
+          "backOffset": 23,
+          "radialOffset": 8
+        },
+        {
+          "backOffset": 25,
+          "radialOffset": 0
+        }
+      ]
+    },
+    "clearances": {
+      "educationalRootReveal": 0.02,
+      "strapToCaseTarget": 0.2,
+      "strapToCrownTarget": 0.5
+    },
+    "material": {
+      "metalClassification": "E_BALANCED_METAL_CLONE_NO_PHASE3C_FINISH",
+      "strapClassification": "STRUCTURAL_PLACEHOLDER_NOT_PHASE3C_STYLE",
+      "strapColor": 3488320,
+      "strapMetalness": 0.02,
+      "strapRoughness": 0.72
+    },
+    "classifications": {
+      "lugCase": "INTENDED_LUG_CASE_CONNECTION",
+      "springBarSeat": "INTENDED_SPRING_BAR_SEAT",
+      "strapBar": "INTENDED_STRAP_BAR_CONNECTION",
+      "renderingClearance": "EDUCATIONAL_RENDERING_CLEARANCE",
+      "manufacturing": "UNVERIFIED_MANUFACTURING_INTERFACE"
+    },
+    "unverified": {
+      "springMechanism": "UNVERIFIED",
+      "manufacturingTolerance": "UNVERIFIED",
+      "strapDurability": "UNVERIFIED",
+      "strapBendingStiffness": "UNVERIFIED",
+      "buckleFunction": "UNVERIFIED",
+      "waterResistance": "UNVERIFIED"
+    },
+    "deferredToPhase3C": [
+      "final lug styling",
+      "satin and polished finish",
+      "dark-brown leather color",
+      "leather grain",
+      "stitching",
+      "holes",
+      "edge finishing",
+      "final buckle design"
+    ]
+  },
+  "assertion": {
+    "ok": true,
+    "failures": [],
+    "checks": {
+      "nonDefault": true,
+      "approvedBase": true,
+      "lugToLug": true,
+      "lugWidth": true,
+      "lugOverallWidth": true,
+      "strapWidth": true,
+      "springBar": true,
+      "strapLengths": true,
+      "monotonicTaper": true,
+      "buckle": true,
+      "placeholderMaterial": true
+    }
+  }
+}
