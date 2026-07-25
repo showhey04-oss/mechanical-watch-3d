@@ -11,8 +11,8 @@ const evidence = path.join(
   "docs/evidence/final-exterior-balanced-phase3b1",
 );
 const reports = path.join(evidence, "reports");
-const implementationCommit = "4ac410d9fa8cc60c3c38e1765d17f81d789142d2";
-const captureCommit = "4ac410d9fa8cc60c3c38e1765d17f81d789142d2";
+const implementationCommit = "fc5cc0220004dbcfbff14d4bbca4165e797665ea";
+const captureCommit = "fc5cc0220004dbcfbff14d4bbca4165e797665ea";
 
 const pngDimensions = buffer => {
   assert.deepEqual([...buffer.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
@@ -73,6 +73,14 @@ test("Phase 3B.1 evidence images are decoded PNGs with fixed viewports", async (
     ["live-fourth-mobile-390-front.png", [390, 844]],
     ["live-fourth-mobile-390-side.png", [390, 844]],
     ["live-fourth-mobile-390-opacity-50.png", [390, 844]],
+    ["live-final-desktop-front.png", [1280, 720]],
+    ["live-final-desktop-oblique-front.png", [1280, 720]],
+    ["live-final-desktop-side.png", [1280, 720]],
+    ["live-final-desktop-back.png", [1280, 720]],
+    ["live-final-desktop-opacity-50.png", [1280, 720]],
+    ["live-final-mobile-390-front.png", [390, 844]],
+    ["live-final-mobile-390-side.png", [390, 844]],
+    ["live-final-mobile-390-opacity-50.png", [390, 844]],
     ["before-second-mobile-390-front.png", [390, 844]],
     ["before-second-mobile-390-side.png", [390, 844]],
     ["crown-position1-closeup.png", [1280, 720]],
@@ -110,6 +118,17 @@ test("Phase 3B.1 evidence images are decoded PNGs with fixed viewports", async (
     ["fourth-candidate-caseback-profile.png", [1280, 720]],
     ["fourth-candidate-flat-taper-annotation.png", [1280, 720]],
     ["fourth-opacity-50.png", [1280, 720]],
+    ["final-candidate-before-after-front.png", [2560, 772]],
+    ["final-candidate-before-after-oblique-front.png", [2560, 772]],
+    ["final-candidate-before-after-side.png", [2560, 772]],
+    ["final-candidate-before-after-back.png", [2560, 772]],
+    ["final-candidate-case-profile-comparison.png", [1280, 720]],
+    ["final-candidate-visible-height-annotation.png", [1280, 720]],
+    ["final-candidate-bezel-section.png", [1280, 720]],
+    ["final-candidate-caseback-section.png", [1280, 720]],
+    ["final-opacity-50.png", [1280, 720]],
+    ["final-candidate-mobile-390-front.png", [780, 896]],
+    ["final-candidate-mobile-390-side.png", [780, 896]],
     ["third-opacity-50.png", [1280, 720]],
     ["third-crown-position1.png", [1280, 720]],
     ["third-crown-position2.png", [1280, 720]],
@@ -159,7 +178,7 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
     readJson("exterior-proportions.json"),
     readJson("movement-holder-report.json"),
     readJson("annular-taper-report.json"),
-    readJson("fourth-candidate-capture-metadata.json"),
+    readJson("final-visual-thinness-capture-metadata.json"),
   ]);
   for (const report of [
     dimensions,
@@ -198,7 +217,7 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
   assert.equal(normal.diffCount, 0);
   assert.equal(normal.screenshot.byteIdentical, true);
   assert.equal(performance.thresholdsChanged, false);
-  assert.equal(performance.absoluteThresholdsPassed, false);
+  assert.equal(performance.absoluteThresholdsPassed, true);
   assert.equal(performance.differentialPassed, true);
   assert.equal(performance.thresholdsMaintained, true);
   assert.equal(regression.testThresholdsChanged, false);
@@ -215,11 +234,11 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
   assert.equal(decision.humanReviewRequired, true);
   assert.equal(decision.previouslyAcceptedByHuman.crownPullPush, true);
   assert.equal(decision.thirdCandidateHumanReview.structuralOpacity50, "PENDING");
-  assert.equal(caseBody.calculation.requiredMinimumDepth, 0.298836197);
-  assert.equal(caseBody.calculation.adoptedMaximumDepth, 0.319108426);
+  assert.equal(caseBody.calculation.requiredMinimumDepth, 0.249174035);
+  assert.equal(caseBody.calculation.adoptedMaximumDepth, 0.304117526);
   assert.equal(caseBody.calculation.maximumAllowedDepth, 0.33);
-  assert.equal(caseBody.position1.actualMinimumGap, 0.030026034);
-  assert.equal(caseBody.position2.actualMinimumGap, 1.380026034);
+  assert.equal(caseBody.position1.actualMinimumGap, 0.030063402);
+  assert.equal(caseBody.position2.actualMinimumGap, 1.380063402);
   assert.equal(caseBody.wall.actualMinimum, 0.55);
   assert.equal(caseBody.wall.innerRadius, 18.9);
   assert.equal(caseBody.mesh.singleClosedMesh, true);
@@ -229,8 +248,13 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
   assert.equal(caseBody.mesh.nonManifoldEdgeCount, 0);
   assert.equal(proportions.originalCandidate.totalCaseThickness, 9.845);
   assert.equal(proportions.previousCandidate.totalCaseThickness, 8.695);
+  assert.equal(proportions.fourthCandidate.maximumDiameterBandLength, 3.45);
   assert.equal(proportions.currentCandidate.totalCaseThickness, 8.695);
   assert.equal(proportions.currentCandidate.dialApertureDiameter, 29.8);
+  assert.equal(proportions.currentCandidate.maximumDiameterBandLength, 1.95);
+  assert.equal(proportions.currentCandidate.frontTaperLength, 2.16);
+  assert.equal(proportions.currentCandidate.rearTaperLength, 3.385);
+  assert.equal(proportions.visualThinnessComparison.maximumDiameterBandReduction, 1.5);
   assert.equal(holder.runtime.outerDiameter, 37.65);
   assert.equal(holder.runtime.innerDiameter, 36.75);
   assert.equal(holder.runtime.forbiddenInterferenceCount, 0);
@@ -287,6 +311,10 @@ test("Phase 3B.1 silhouette evidence generator overlays real captures instead of
   assert.match(source, /live-second-desktop-front\.png/);
   assert.match(source, /live-third-desktop-front\.png/);
   assert.match(source, /live-fourth-desktop-front\.png/);
+  assert.match(source, /live-final-desktop-front\.png/);
+  assert.match(source, /final-candidate-case-profile-comparison\.png/);
+  assert.match(source, /final-candidate-visible-height-annotation\.png/);
+  assert.match(source, /final-candidate-mobile-390-front\.png/);
   assert.match(source, /fourth-candidate-bezel-section\.png/);
   assert.match(source, /fourth-candidate-caseback-section\.png/);
   assert.match(source, /fourth-candidate-flat-taper-annotation\.png/);
@@ -294,11 +322,13 @@ test("Phase 3B.1 silhouette evidence generator overlays real captures instead of
   assert.match(source, /movement-holder-before-after\.png/);
   assert.match(source, /bezel-section-29\.0-vs-29\.8\.png/);
   assert.match(source, /load_rgb/);
-  assert.match(source, /local_relief_overlay\(current_side,\s*relief\)/);
+  assert.match(source, /local_relief_overlay\(live_final_side,\s*relief\)/);
   assert.doesNotMatch(source, /save_png\([^\\n]*desktop-side\.png/);
   assert.doesNotMatch(source, /save_png\([^\\n]*mobile-390-side\.png/);
   assert.doesNotMatch(source, /save_png\([^\\n]*live-fourth-desktop-front\.png/);
   assert.doesNotMatch(source, /save_png\([^\\n]*live-fourth-mobile-390-front\.png/);
+  assert.doesNotMatch(source, /save_png\([^\\n]*live-final-desktop-front\.png/);
+  assert.doesNotMatch(source, /save_png\([^\\n]*live-final-mobile-390-front\.png/);
 });
 
 test("Phase 3B.1 evidence manifest is a closed-world byte and SHA inventory", async () => {

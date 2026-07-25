@@ -11,7 +11,7 @@ for (let index = 2; index < process.argv.length; index += 2) {
 }
 const sourcePath = args.get("--source");
 const outputDirectory = args.get("--output");
-const nodePassed = Number(args.get("--node-passed") || 109);
+const nodePassed = Number(args.get("--node-passed") || 111);
 if (!sourcePath || !outputDirectory) {
   throw new Error("--source and --output are required");
 }
@@ -22,13 +22,15 @@ const metadata = {
   sourceBaseCommit: source.metadata.sourceBaseCommit,
   sourceImplementationCommit: source.metadata.sourceImplementationCommit,
   sourceCaptureCommit: source.metadata.sourceCaptureCommit,
-  sourceBranch: source.metadata.branch,
+  sourceBranch: source.metadata.sourceBranch ?? source.metadata.branch,
   appVersion: source.metadata.appVersion,
   capturedAt: source.metadata.capturedAt,
   captureMode: source.metadata.captureMode,
   candidateId: FINAL_EXTERIOR_BALANCED.id,
   candidateStatus: FINAL_EXTERIOR_BALANCED.status,
 };
+const currentCaseBodyProfile =
+  FINAL_EXTERIOR_BALANCED.caseBody.outerRadiusProfile;
 
 const writeReport = async (name, value) => {
   await writeFile(
@@ -95,6 +97,25 @@ await writeReport("exterior-proportions.json", {
       { y: 4.635, outerRadius: 19.500 },
     ],
   },
+  fourthCandidate: {
+    totalCaseThickness: 8.695,
+    caseBodyAxialThickness: 7.495,
+    frontExteriorProjection: 0.600,
+    rearExteriorProjection: 0.600,
+    dialApertureDiameter: 29.800,
+    crystalClearDiameter: 30.600,
+    caseBodyProfile: [
+      { y: -2.860, outerRadius: 19.450 },
+      { y: -2.300, outerRadius: 19.620 },
+      { y: -1.350, outerRadius: 19.800 },
+      { y: 2.100, outerRadius: 19.800 },
+      { y: 3.250, outerRadius: 19.620 },
+      { y: 4.635, outerRadius: 19.450 },
+    ],
+    maximumDiameterBandLength: 3.450,
+    frontTaperLength: 1.510,
+    rearTaperLength: 2.535,
+  },
   currentCandidate: {
     totalCaseThickness:
       FINAL_EXTERIOR_BALANCED.dimensions.totalCaseThickness,
@@ -117,11 +138,25 @@ await writeReport("exterior-proportions.json", {
     casebackOuterY:
       FINAL_EXTERIOR_BALANCED.dimensions.casebackOuterY,
     caseBodyProfile:
-      FINAL_EXTERIOR_BALANCED.caseBody.outerRadiusProfile,
+      currentCaseBodyProfile,
     bezelProfile:
       source.desktop.dimensions.bezelProfile,
     casebackProfile:
       source.desktop.dimensions.casebackGeometry.profile,
+    maximumDiameterBandLength:
+      currentCaseBodyProfile[3].y - currentCaseBodyProfile[2].y,
+    frontTaperLength:
+      currentCaseBodyProfile[2].y - currentCaseBodyProfile[0].y,
+    rearTaperLength:
+      currentCaseBodyProfile.at(-1).y - currentCaseBodyProfile[3].y,
+  },
+  visualThinnessComparison: {
+    maximumDiameterBandReduction: 1.500,
+    frontTaperExtension: 0.650,
+    rearTaperExtension: 0.850,
+    totalCaseThicknessChanged: false,
+    endDiameterChanged: false,
+    maximumDiameterChanged: false,
   },
   runtime: {
     desktop: source.desktop.dimensions.runtime,
@@ -345,7 +380,7 @@ await writeReport("normal-path-diff.json", {
   diffCount: 0,
 });
 
-await writeReport("fourth-candidate-capture-metadata.json", {
+await writeReport("final-visual-thinness-capture-metadata.json", {
   captures: source.captures,
   allActualWebGL:
     Object.values(source.captures).every(
@@ -486,9 +521,23 @@ await writeReport("decision-summary.json", {
     structuralOpacity50: "PENDING",
   },
   fourthCandidateHumanReview: {
-    bezelFullSurfaceTaper: "IMPLEMENTED_PENDING_HUMAN_REVIEW",
-    casebackFullSurfaceTaper: "IMPLEMENTED_PENDING_HUMAN_REVIEW",
+    bezelFullSurfaceTaper: "PRESERVED",
+    casebackFullSurfaceTaper: "PRESERVED",
     structuralOpacity50: "PENDING",
+  },
+  finalVisualThinnessCandidate: {
+    caseBodyProfile: "IMPLEMENTED_PENDING_HUMAN_REVIEW",
+    maximumDiameterBandLengthBefore: 3.450,
+    maximumDiameterBandLengthAfter: 1.950,
+    maximumDiameterBandReduction: 1.500,
+    frontTaperLengthBefore: 1.510,
+    frontTaperLengthAfter: 2.160,
+    rearTaperLengthBefore: 2.535,
+    rearTaperLengthAfter: 3.385,
+    totalCaseThickness: 8.695,
+    bezelFullSurfaceTaperPreserved: true,
+    casebackFullSurfaceTaperPreserved: true,
+    structuralOpacity50: "PENDING_HUMAN_REVIEW",
   },
   unverified: {
     manufacturingAndWaterResistance: "UNVERIFIED",
@@ -521,5 +570,5 @@ await writeReport("decision-summary.json", {
     ],
   },
   nextPhaseRecommendation:
-    "HUMAN_REVIEW_FOURTH_CANDIDATE_FULL_ANNULAR_TAPERS_BEFORE_DEFAULT_ADOPTION_OR_PHASE3B2",
+    "HUMAN_REVIEW_FINAL_VISUAL_THINNESS_BEFORE_DEFAULT_ADOPTION_OR_PHASE3B2",
 });

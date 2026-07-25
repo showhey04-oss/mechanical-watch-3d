@@ -56,6 +56,24 @@ def board(
     return result
 
 
+def mobile_board(
+    left: Image.Image,
+    right: Image.Image,
+    left_label: str,
+    right_label: str,
+) -> Image.Image:
+    result = Image.new("RGB", (780, 896), (13, 16, 21))
+    result.paste(left, (0, BOARD_HEADER))
+    result.paste(right, (390, BOARD_HEADER))
+    draw = ImageDraw.Draw(result)
+    draw.rectangle((0, 0, 389, 51), fill=(28, 33, 42))
+    draw.rectangle((390, 0, 779, 51), fill=(42, 50, 62))
+    draw.text((12, 17), left_label, fill=INK)
+    draw.text((402, 17), right_label, fill=INK)
+    draw.line((390, 0, 390, 896), fill=GOLD, width=2)
+    return result
+
+
 def panel(draw: ImageDraw.ImageDraw, title: str, lines: list[str]) -> None:
     x0, y0, x1 = 26, 60, 540
     y1 = y0 + 44 + len(lines) * 25 + 20
@@ -158,6 +176,82 @@ def annotate_capture(
     panel(draw, title, lines)
     if box:
         draw.rounded_rectangle(box, radius=18, outline=CYAN + (235,), width=4)
+    return image.convert("RGB")
+
+
+def final_case_profile_diagram() -> Image.Image:
+    image = Image.new("RGB", DESKTOP_SIZE, (13, 16, 21))
+    draw = ImageDraw.Draw(image)
+    draw.text((38, 28), "CASE-BODY PROFILE / FOURTH vs FINAL", fill=INK)
+    draw.text(
+        (38, 58),
+        "same 8.695 total thickness / same OD 39.600 / same end OD 38.900",
+        fill=GOLD,
+    )
+    old_profile = [
+        (-2.860, 19.450),
+        (-2.300, 19.620),
+        (-1.350, 19.800),
+        (2.100, 19.800),
+        (3.250, 19.620),
+        (4.635, 19.450),
+    ]
+    new_profile = [
+        (-2.860, 19.450),
+        (-2.180, 19.590),
+        (-0.700, 19.800),
+        (1.250, 19.800),
+        (2.950, 19.590),
+        (4.635, 19.450),
+    ]
+    x0, x1 = 130, 1150
+    y0, y1 = 150, 630
+
+    def point(value: tuple[float, float]) -> tuple[int, int]:
+        y_value, radius = value
+        x = x0 + (y_value + 2.860) / 7.495 * (x1 - x0)
+        py = y1 - (radius - 19.400) / 0.450 * (y1 - y0)
+        return int(x), int(py)
+
+    draw.rectangle((x0, y0, x1, y1), outline=(73, 82, 96), width=2)
+    draw.line((x0, y1, x1, y1), fill=(118, 127, 140), width=2)
+    draw.line([point(item) for item in old_profile], fill=RED, width=5)
+    draw.line([point(item) for item in new_profile], fill=GREEN, width=5)
+    for item in old_profile:
+        x, y = point(item)
+        draw.ellipse((x - 5, y - 5, x + 5, y + 5), fill=RED)
+    for item in new_profile:
+        x, y = point(item)
+        draw.ellipse((x - 5, y - 5, x + 5, y + 5), fill=GREEN)
+    draw.text((140, 660), "fourth: max-OD band 3.450", fill=RED)
+    draw.text((485, 660), "final: max-OD band 1.950 (-1.500)", fill=GREEN)
+    draw.text((840, 660), "front/rear tapers +0.650 / +0.850", fill=CYAN)
+    return image
+
+
+def visible_height_overlay(source: Image.Image) -> Image.Image:
+    image = source.convert("RGBA")
+    draw = ImageDraw.Draw(image, "RGBA")
+    panel(draw, "VISUAL THINNESS / SAME PHYSICAL ENVELOPE", [
+        "total exterior thickness remains 8.695",
+        "max-OD straight band: 3.450 -> 1.950",
+        "front taper: 1.510 -> 2.160",
+        "rear taper: 2.535 -> 3.385",
+    ])
+    # Side preset: these bands annotate the visible case-body silhouette.
+    y_front, y_max_front, y_max_rear, y_rear = 186, 300, 462, 605
+    draw.line((870, y_front, 870, y_rear), fill=GOLD + (240,), width=4)
+    draw.line((850, y_front, 890, y_front), fill=GOLD + (240,), width=4)
+    draw.line((850, y_rear, 890, y_rear), fill=GOLD + (240,), width=4)
+    draw.rectangle(
+        (825, y_max_front, 915, y_max_rear),
+        outline=GREEN + (245,),
+        width=4,
+    )
+    draw.text((930, 292), "final max-OD band 1.950", fill=INK)
+    draw.text((930, 326), "longer front taper", fill=CYAN)
+    draw.text((930, 450), "longer rear taper", fill=CYAN)
+    draw.text((930, 584), "same total envelope 8.695", fill=GOLD)
     return image.convert("RGB")
 
 
@@ -558,6 +652,42 @@ def main() -> None:
         evidence / "live-fourth-opacity-50.png",
         DESKTOP_SIZE,
     )
+    live_final_front = load_rgb(
+        evidence / "live-final-desktop-front.png",
+        DESKTOP_SIZE,
+    )
+    live_final_oblique = load_rgb(
+        evidence / "live-final-desktop-oblique-front.png",
+        DESKTOP_SIZE,
+    )
+    live_final_side = load_rgb(
+        evidence / "live-final-desktop-side.png",
+        DESKTOP_SIZE,
+    )
+    live_final_back = load_rgb(
+        evidence / "live-final-desktop-back.png",
+        DESKTOP_SIZE,
+    )
+    live_final_opacity = load_rgb(
+        evidence / "live-final-desktop-opacity-50.png",
+        DESKTOP_SIZE,
+    )
+    live_fourth_mobile_front = load_rgb(
+        evidence / "live-fourth-mobile-390-front.png",
+        (390, 844),
+    )
+    live_fourth_mobile_side = load_rgb(
+        evidence / "live-fourth-mobile-390-side.png",
+        (390, 844),
+    )
+    live_final_mobile_front = load_rgb(
+        evidence / "live-final-mobile-390-front.png",
+        (390, 844),
+    )
+    live_final_mobile_side = load_rgb(
+        evidence / "live-final-mobile-390-side.png",
+        (390, 844),
+    )
     annular_report = json.loads(
         (evidence / "reports/annular-taper-report.json").read_text(),
     )
@@ -632,6 +762,38 @@ def main() -> None:
             f"fourth candidate: full annular taper {view}",
         ), evidence / f"fourth-candidate-before-after-{name}.png")
 
+    for name, before, after, view in (
+        ("front", live_fourth_front, live_final_front, "front"),
+        ("oblique-front", live_fourth_oblique, live_final_oblique, "oblique front"),
+        ("side", live_fourth_side, live_final_side, "side"),
+        ("back", live_fourth_back, live_final_back, "back"),
+    ):
+        save_png(board(
+            before,
+            after,
+            f"Head a3cd646: fourth candidate {view}",
+            f"final candidate: shorter max-OD band / {view}",
+        ), evidence / f"final-candidate-before-after-{name}.png")
+
+    save_png(
+        mobile_board(
+            live_fourth_mobile_front,
+            live_final_mobile_front,
+            "fourth / front",
+            "final / front",
+        ),
+        evidence / "final-candidate-mobile-390-front.png",
+    )
+    save_png(
+        mobile_board(
+            live_fourth_mobile_side,
+            live_final_mobile_side,
+            "fourth / side",
+            "final / side",
+        ),
+        evidence / "final-candidate-mobile-390-side.png",
+    )
+
     crown1 = load_rgb(evidence / "crown-position1-closeup.png", DESKTOP_SIZE)
     crown2 = load_rgb(evidence / "crown-position2-closeup.png", DESKTOP_SIZE)
     save_png(crown1, evidence / "crown-position-1.png")
@@ -658,9 +820,9 @@ def main() -> None:
         ],
         (760, 160, 1240, 620),
     ), evidence / "crown-position-2-close-up.png")
-    save_png(local_relief_overlay(current_side, relief), evidence / "case-body-wireframe-relief.png")
-    save_png(gap_overlay(current_side, relief), evidence / "crown-minimum-gap-annotated.png")
-    save_png(wall_overlay(current_side, relief), evidence / "case-minimum-wall-annotated.png")
+    save_png(local_relief_overlay(live_final_side, relief), evidence / "case-body-wireframe-relief.png")
+    save_png(gap_overlay(live_final_side, relief), evidence / "crown-minimum-gap-annotated.png")
+    save_png(wall_overlay(live_final_side, relief), evidence / "case-minimum-wall-annotated.png")
 
     save_png(section_diagram(), evidence / "bezel-section-29.0-vs-29.8.png")
     save_png(third_bezel_taper_diagram(), evidence / "third-candidate-bezel-taper-comparison.png")
@@ -713,6 +875,42 @@ def main() -> None:
             ],
         ),
         evidence / "fourth-opacity-50.png",
+    )
+    save_png(
+        final_case_profile_diagram(),
+        evidence / "final-candidate-case-profile-comparison.png",
+    )
+    save_png(
+        visible_height_overlay(live_final_side),
+        evidence / "final-candidate-visible-height-annotation.png",
+    )
+    save_png(
+        annular_section_diagram(
+            "FINAL CANDIDATE / BEZEL FULL-SURFACE TAPER PRESERVED",
+            annular_report["bezel"],
+            "coverage 0.888888889 / land 0.400 / closure 0.900",
+        ),
+        evidence / "final-candidate-bezel-section.png",
+    )
+    save_png(
+        annular_section_diagram(
+            "FINAL CANDIDATE / CASEBACK FULL-SURFACE TAPER PRESERVED",
+            annular_report["casebackRing"],
+            "coverage 0.956766105 / land 0.200 / closure 0.600",
+        ),
+        evidence / "final-candidate-caseback-section.png",
+    )
+    save_png(
+        annotate_capture(
+            live_final_opacity,
+            "FINAL CANDIDATE / STRUCTURAL OPACITY 50%",
+            [
+                "actual desktop WebGL capture",
+                "full-surface bezel and caseback tapers preserved",
+                "visual continuity remains a human confirmation item",
+            ],
+        ),
+        evidence / "final-opacity-50.png",
     )
     save_png(thickness_diagram(), evidence / "total-thickness-9.845-vs-8.695.png")
     holder_absent = load_rgb(evidence / "movement-holder-absent.png", DESKTOP_SIZE)
