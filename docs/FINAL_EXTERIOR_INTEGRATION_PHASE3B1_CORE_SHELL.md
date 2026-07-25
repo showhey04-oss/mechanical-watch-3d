@@ -4,12 +4,12 @@
 
 Phase 3Aで`APPROVED_FOR_PHASE_3B_IMPLEMENTATION`とされたE-BALANCEDを、`?exterior=balanced`の明示query時だけ生成するThree.js Geometryとして実装した。状態は`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`であり、通常表示への既定採用は行っていない。
 
-第2候補までの人間確認では、外装総厚8.695の方向性、りゅうず位置1／2、指掛かり、pull／push、保持リング追加方針、透過16%、回転・ズーム、時計機能、作動音、物理iPhone操作性が合格した。第3候補ではケース胴、ベゼル、裏蓋リングのテーパーだけを増強し、この3点と透過50%を改めて確認する。人間確認前に`ADOPTED`または最終外装完成とはしない。
+第3候補までの人間確認では、外装総厚8.695の方向性、ケース胴テーパー、りゅうず位置1／2、指掛かり、pull／push、保持リング追加方針、透過16%、回転・ズーム、時計機能、作動音、物理iPhone操作性が合格した。第4候補ではケース胴を変更せず、ベゼルと裏蓋リングの見える主環状面を全面テーパー化した。この2点と透過50%を改めて確認し、人間確認前に`ADOPTED`または最終外装完成とはしない。
 
 ## 基準
 
 - 開始main：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
-- 第3候補実装生成元：`d3b2e809f788c198df1b78d0f5c5a2bc8065d611`
+- 第4候補実装生成元：`4ac410d9fa8cc60c3c38e1765d17f81d789142d2`
 - ブランチ：`feature/final-exterior-balanced-phase3b1`
 - アプリ版：v3.15.0
 - 候補URL：`index.html?exterior=balanced`
@@ -79,7 +79,7 @@ desktop 1280×720とmobile 390×844のruntime-to-configはともに合格した�
 ## Phase 3B.1実装仮定
 
 - ケース胴前後面：-2.860～4.635
-- ベゼル：背面Y=-2.860、内周正面Y=-3.240、外周正面Y=-2.880
+- ベゼル：背面Y=-2.860、内周保持座Y=-3.240、主テーパー外端Y=-2.890
 - rehaut：-2.860～-2.720
 - 物理文字板blank：外径35.000、Y=-2.020～-1.820
 - 文字板中央穴／小秒穴：runtime Object3D半径に0.120／0.100を加えて導出
@@ -89,6 +89,34 @@ desktop 1280×720とmobile 390×844のruntime-to-configはともに合格した�
 - 局所接続カラー：外径1.120、内径0.520、軸方向長0.180
 
 これらは`PHASE3B1_IMPLEMENTATION_ASSUMPTION`であり、製造仕様ではない。
+
+## ベゼル／裏蓋リング全面テーパー
+
+第4候補は外径差だけの面取りを廃止し、保持座を除く見える主環状幅を連続傾斜面へ割り当てた。被覆率の分母は`visibleMainRadialWidth = innerRetentionLandWidth + primaryTaperRadialWidth`、分子は`primaryTaperRadialWidth`である。閉合用外周幅は別集計し、主面分母へ含めない。
+
+ベゼル断面点：
+
+| role | 半径 | Y |
+|---|---:|---:|
+| innerBack | 14.900 | -2.860 |
+| innerFront | 14.900 | -3.240 |
+| innerRetentionLandOuter | 15.300 | -3.240 |
+| primaryTaperOuter | 18.500 | -2.890 |
+| outerBack | 19.400 | -2.860 |
+
+保持座幅0.400、主テーパー幅3.200、外周閉合幅0.900、主テーパー被覆率0.888889、主勾配+0.109375、外縁厚0.030である。
+
+裏蓋リング断面点：
+
+| role | 半径 | Y |
+|---|---:|---:|
+| innerFront | 14.274 | 4.635 |
+| innerRear | 14.274 | 5.235 |
+| innerRetentionLandOuter | 14.474 | 5.235 |
+| primaryTaperOuter | 18.900 | 4.685 |
+| outerFront | 19.500 | 4.635 |
+
+保持座幅0.200、主テーパー幅4.426、外周閉合幅0.600、主テーパー被覆率0.956766、主勾配-0.124266、外縁厚0.050である。両部品とも主面勾配は単調、意図しない水平区間0、有限な単一閉合indexed Mesh、退化三角形0、非多様体edge 0である。風防、裏蓋窓、ケース胴、保持リングとの禁止干渉は0件である。
 
 ## 接触と干渉
 
@@ -122,14 +150,14 @@ light、shadow、tone mapping、exposure、fog、DPR、既存透過方式は変�
 
 queryなしでは外装のObject3D／Mesh／Geometry／Material／選択対象／構造透過対象の追加数はすべて0である。固定mainと同一browser、1280×720、同一camera／時刻／テーマ／透過率で取得した通常表示PNGは、保存byteとSHA-256が完全一致した。
 
-- 固定main PNG SHA-256：`f3bdd25d543c11a4ae1dc08a3020a60358a85d5d20a90ccff9b8242bc35bd003`
+- 固定main PNG SHA-256：`a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`
 - ブランチ通常path PNG SHA-256：同上
 - `cmp`：一致
 
 ## 試験と性能
 
 - Node：最終結果は証跡`regression-results.json`に記録
-- desktop総合：機能84/84、A.6絶対性能2項目はin-app Browser環境で未達
+- desktop総合：86/86
 - 390×844総合：88/88
 - PR #3 UI：390×844は22/22、desktopは17/20（focus／overflow 3項目が同環境で未達）
 - PR #4 HUD：57/57
@@ -141,7 +169,7 @@ queryなしでは外装のObject3D／Mesh／Geometry／Material／選択対象�
 - 3針拘束最大誤差：0
 - Phase 2C包絡：desktop／mobile一致
 
-同一in-app Browserの10秒idleは、通常path 59.22fps、候補59.11fpsで、候補差分はfps -0.19%、p95 +0.00ms、renderer平均+4.30%となり差分基準（fps悪化5%以内、p95悪化2ms以内）を満たし、transform invariantはtrueだった。初期化由来のlong task各1件により双方で33ms／50ms超が1件あり、絶対閾値は環境制約として未達である。モバイルpointer／wheelは88/88、デスクトップpointer／wheelは回転反転0、停止後跳躍0、zoom単調、model invariant trueだが絶対フレーム間隔2項目のみ未達だった。製品閾値は変更していない。
+単独WebGLタブでの同一in-app Browser 10秒idleは、通常path 58.62fps、候補58.32fpsで、候補差分はfps -0.52%、p95 -0.10msとなり差分基準（fps悪化5%以内、p95悪化2ms以内）を満たし、transform invariantはtrueだった。初期化由来の33ms／50ms超が各1件残るため絶対閾値は環境制約として未達である。desktop pointer／wheelは各約59.6fps、p95 17.6ms、33ms／50ms超0、mobileは各約59.6fps、p95 16.8ms、33ms／50ms超0で、回転反転0、停止後跳躍0、zoom単調、model invariant trueだった。製品閾値は変更していない。
 
 候補通常画面を新規in-app Browserタブで12秒保持し、console error／warning 0件を確認した。全ブラウザ項目を`PASSED`とはせず、証跡状態は`FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS`とする。
 
@@ -154,7 +182,7 @@ queryなしでは外装のObject3D／Mesh／Geometry／Material／選択対象�
 - Phase 3B.1 runtime：`FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS`
 - 候補状態：`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`
 - 通常既定：`NOT_APPROVED_FOR_DEFAULT_ADOPTION`
-- 次工程：PC／物理iPhoneで第3候補のケース胴・ベゼル・裏蓋リングのテーパーと透過50%を人間確認
+- 次工程：PC／物理iPhoneで第4候補のベゼル／裏蓋リング全面テーパーと透過50%を人間確認
 - Phase 3B.2：Phase 3B.1承認後にラグ／ストラップを別作業で開始
 
 PR #5、Issue #2、D2c3は保留のまま変更していない。

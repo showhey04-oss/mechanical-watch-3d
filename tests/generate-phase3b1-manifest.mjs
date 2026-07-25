@@ -35,8 +35,8 @@ for (const relativePath of files) {
 const manifest = {
   schemaVersion: 1,
   sourceBaseCommit: "293626f13a50224924f8e3ac229a1fc4077ad7a7",
-  sourceImplementationCommit: "d3b2e809f788c198df1b78d0f5c5a2bc8065d611",
-  sourceCaptureCommit: "d3b2e809f788c198df1b78d0f5c5a2bc8065d611",
+  sourceImplementationCommit: "4ac410d9fa8cc60c3c38e1765d17f81d789142d2",
+  sourceCaptureCommit: "4ac410d9fa8cc60c3c38e1765d17f81d789142d2",
   sourceBranch: "feature/final-exterior-balanced-phase3b1",
   appVersion: "v3.15.0",
   closedWorld: true,

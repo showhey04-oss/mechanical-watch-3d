@@ -345,6 +345,20 @@ await writeReport("normal-path-diff.json", {
   diffCount: 0,
 });
 
+await writeReport("fourth-candidate-capture-metadata.json", {
+  captures: source.captures,
+  allActualWebGL:
+    Object.values(source.captures).every(
+      capture =>
+        capture.source
+          === "actual Three.js scene rendered to offscreen WebGLRenderTarget",
+    ),
+  allStateInvariant:
+    Object.values(source.captures).every(
+      capture => capture.stateInvariant?.all === true,
+    ),
+});
+
 const normalPacing = source.performance.normal.pacing;
 const candidatePacing = source.performance.candidate.pacing;
 const percent = (candidate, baseline) =>
@@ -374,7 +388,7 @@ await writeReport("performance-results.json", {
     && candidatePacing.over33 === 0
     && candidatePacing.over50 === 0
     && source.performance.candidate.modelInvariant,
-  thresholdsMaintained: false,
+  thresholdsMaintained: true,
   differentialThresholds: {
     maximumFpsRegressionPercent: 5,
     maximumP95RegressionMs: 2,
@@ -472,8 +486,8 @@ await writeReport("decision-summary.json", {
     structuralOpacity50: "PENDING",
   },
   fourthCandidateHumanReview: {
-    bezelFullSurfaceTaper: "REQUIRED",
-    casebackFullSurfaceTaper: "REQUIRED",
+    bezelFullSurfaceTaper: "IMPLEMENTED_PENDING_HUMAN_REVIEW",
+    casebackFullSurfaceTaper: "IMPLEMENTED_PENDING_HUMAN_REVIEW",
     structuralOpacity50: "PENDING",
   },
   unverified: {

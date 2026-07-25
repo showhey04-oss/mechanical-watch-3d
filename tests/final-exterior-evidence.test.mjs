@@ -11,8 +11,8 @@ const evidence = path.join(
   "docs/evidence/final-exterior-balanced-phase3b1",
 );
 const reports = path.join(evidence, "reports");
-const implementationCommit = "d3b2e809f788c198df1b78d0f5c5a2bc8065d611";
-const captureCommit = "d3b2e809f788c198df1b78d0f5c5a2bc8065d611";
+const implementationCommit = "4ac410d9fa8cc60c3c38e1765d17f81d789142d2";
+const captureCommit = "4ac410d9fa8cc60c3c38e1765d17f81d789142d2";
 
 const pngDimensions = buffer => {
   assert.deepEqual([...buffer.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
@@ -65,6 +65,14 @@ test("Phase 3B.1 evidence images are decoded PNGs with fixed viewports", async (
     ["live-third-desktop-back.png", [1280, 720]],
     ["live-third-mobile-390-front.png", [390, 844]],
     ["live-third-mobile-390-side.png", [390, 844]],
+    ["live-fourth-desktop-front.png", [1280, 720]],
+    ["live-fourth-desktop-oblique-front.png", [1280, 720]],
+    ["live-fourth-desktop-side.png", [1280, 720]],
+    ["live-fourth-desktop-back.png", [1280, 720]],
+    ["live-fourth-opacity-50.png", [1280, 720]],
+    ["live-fourth-mobile-390-front.png", [390, 844]],
+    ["live-fourth-mobile-390-side.png", [390, 844]],
+    ["live-fourth-mobile-390-opacity-50.png", [390, 844]],
     ["before-second-mobile-390-front.png", [390, 844]],
     ["before-second-mobile-390-side.png", [390, 844]],
     ["crown-position1-closeup.png", [1280, 720]],
@@ -92,6 +100,16 @@ test("Phase 3B.1 evidence images are decoded PNGs with fixed viewports", async (
     ["third-candidate-bezel-taper-comparison.png", [1280, 720]],
     ["third-candidate-caseback-taper-comparison.png", [1280, 720]],
     ["third-candidate-case-profile-comparison.png", [1280, 720]],
+    ["fourth-candidate-before-after-front.png", [2560, 772]],
+    ["fourth-candidate-before-after-oblique-front.png", [2560, 772]],
+    ["fourth-candidate-before-after-side.png", [2560, 772]],
+    ["fourth-candidate-before-after-back.png", [2560, 772]],
+    ["fourth-candidate-bezel-section.png", [1280, 720]],
+    ["fourth-candidate-caseback-section.png", [1280, 720]],
+    ["fourth-candidate-bezel-profile.png", [1280, 720]],
+    ["fourth-candidate-caseback-profile.png", [1280, 720]],
+    ["fourth-candidate-flat-taper-annotation.png", [1280, 720]],
+    ["fourth-opacity-50.png", [1280, 720]],
     ["third-opacity-50.png", [1280, 720]],
     ["third-crown-position1.png", [1280, 720]],
     ["third-crown-position2.png", [1280, 720]],
@@ -125,6 +143,8 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
     caseBody,
     proportions,
     holder,
+    annular,
+    captures,
   ] = await Promise.all([
     readJson("runtime-dimensions.json"),
     readJson("exterior-interference.json"),
@@ -138,6 +158,8 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
     readJson("case-body-relief-report.json"),
     readJson("exterior-proportions.json"),
     readJson("movement-holder-report.json"),
+    readJson("annular-taper-report.json"),
+    readJson("fourth-candidate-capture-metadata.json"),
   ]);
   for (const report of [
     dimensions,
@@ -152,6 +174,8 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
     caseBody,
     proportions,
     holder,
+    annular,
+    captures,
   ]) {
     assert.equal(report.metadata.sourceImplementationCommit, implementationCommit);
     assert.equal(report.metadata.sourceCaptureCommit, captureCommit);
@@ -176,13 +200,11 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
   assert.equal(performance.thresholdsChanged, false);
   assert.equal(performance.absoluteThresholdsPassed, false);
   assert.equal(performance.differentialPassed, true);
-  assert.equal(performance.thresholdsMaintained, false);
+  assert.equal(performance.thresholdsMaintained, true);
   assert.equal(regression.testThresholdsChanged, false);
   assert.equal(regression.status, "FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS");
-  assert.deepEqual(regression.desktop.failed, [
-    "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-    "a6-wheel-path-produces-monotonic-continuous-zoom",
-  ]);
+  assert.deepEqual(regression.desktop.failed, []);
+  assert.equal(regression.desktop.passed, 86);
   assert.equal(regression.mobile390.passed, 88);
   assert.equal(regression.ui.mobile390.passed, 22);
   assert.equal(regression.hud.passed, 57);
@@ -215,6 +237,31 @@ test("Phase 3B.1 saved reports reproduce runtime config and protected decisions"
   assert.equal(holder.runtime.profileGeometry.topology.closed, true);
   assert.equal(holder.selection.pickPriority, -1);
   assert.equal(holder.structuralOpacityIntegrated, true);
+  assert.equal(annular.passed, true);
+  assert.equal(annular.viewportInvariant, true);
+  assert.equal(annular.bezel.taper.innerRetentionLandWidth, 0.4);
+  assert.equal(annular.bezel.taper.primaryTaperRadialWidth, 3.2);
+  assert.equal(annular.bezel.taper.outerClosureWidth, 0.9);
+  assert.equal(annular.bezel.taper.primaryTaperCoverageRatio, 0.888888889);
+  assert.equal(annular.bezel.taper.unintendedHorizontalIntervalCount, 0);
+  assert.equal(annular.casebackRing.taper.innerRetentionLandWidth, 0.2);
+  assert.equal(annular.casebackRing.taper.primaryTaperRadialWidth, 4.426);
+  assert.equal(annular.casebackRing.taper.outerClosureWidth, 0.6);
+  assert.equal(annular.casebackRing.taper.primaryTaperCoverageRatio, 0.956766105);
+  assert.equal(annular.casebackRing.taper.unintendedHorizontalIntervalCount, 0);
+  assert.equal(annular.bezel.topology.closed, true);
+  assert.equal(annular.casebackRing.topology.closed, true);
+  assert.equal(annular.bezel.topology.nonManifoldEdgeCount, 0);
+  assert.equal(annular.casebackRing.topology.nonManifoldEdgeCount, 0);
+  assert.equal(annular.bezel.degenerateTriangleCount, 0);
+  assert.equal(annular.casebackRing.degenerateTriangleCount, 0);
+  assert.ok(Object.values(annular.interfaces)
+    .every(item => item.forbiddenInterferenceCount === 0));
+  assert.equal(captures.allActualWebGL, true);
+  assert.equal(captures.allStateInvariant, true);
+  assert.equal(Object.keys(captures.captures).length, 8);
+  assert.ok(Object.values(captures.captures)
+    .every(capture => capture.mimeType === "image/png"));
 });
 
 test("Phase 3B.1 comparison generator only reads browser captures", async () => {
@@ -239,6 +286,10 @@ test("Phase 3B.1 silhouette evidence generator overlays real captures instead of
   assert.match(source, /before-second-desktop-front\.png/);
   assert.match(source, /live-second-desktop-front\.png/);
   assert.match(source, /live-third-desktop-front\.png/);
+  assert.match(source, /live-fourth-desktop-front\.png/);
+  assert.match(source, /fourth-candidate-bezel-section\.png/);
+  assert.match(source, /fourth-candidate-caseback-section\.png/);
+  assert.match(source, /fourth-candidate-flat-taper-annotation\.png/);
   assert.match(source, /third-candidate-bezel-taper-comparison\.png/);
   assert.match(source, /movement-holder-before-after\.png/);
   assert.match(source, /bezel-section-29\.0-vs-29\.8\.png/);
@@ -246,6 +297,8 @@ test("Phase 3B.1 silhouette evidence generator overlays real captures instead of
   assert.match(source, /local_relief_overlay\(current_side,\s*relief\)/);
   assert.doesNotMatch(source, /save_png\([^\\n]*desktop-side\.png/);
   assert.doesNotMatch(source, /save_png\([^\\n]*mobile-390-side\.png/);
+  assert.doesNotMatch(source, /save_png\([^\\n]*live-fourth-desktop-front\.png/);
+  assert.doesNotMatch(source, /save_png\([^\\n]*live-fourth-mobile-390-front\.png/);
 });
 
 test("Phase 3B.1 evidence manifest is a closed-world byte and SHA inventory", async () => {

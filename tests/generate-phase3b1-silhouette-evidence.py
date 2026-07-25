@@ -311,6 +311,157 @@ def third_case_profile_diagram() -> Image.Image:
     return image
 
 
+def annular_profile_diagram(
+    title: str,
+    geometry: dict,
+    radial_direction: str,
+) -> Image.Image:
+    """Render the measured radius/Y section without synthesizing a runtime view."""
+    image = Image.new("RGB", DESKTOP_SIZE, (13, 16, 21))
+    draw = ImageDraw.Draw(image)
+    profile = geometry["profile"]
+    taper = geometry["taper"]
+    radii = [point["radius"] for point in profile]
+    y_values = [point["y"] for point in profile]
+    radius_min, radius_max = min(radii), max(radii)
+    y_min, y_max = min(y_values), max(y_values)
+    plot = (130, 125, 1160, 585)
+
+    def point_xy(point: dict) -> tuple[int, int]:
+        radius_span = max(radius_max - radius_min, 1e-9)
+        y_span = max(y_max - y_min, 1e-9)
+        x = plot[0] + int((point["radius"] - radius_min) / radius_span * (plot[2] - plot[0]))
+        y = plot[3] - int((point["y"] - y_min) / y_span * (plot[3] - plot[1]))
+        return x, y
+
+    draw.text((38, 28), title, fill=INK)
+    draw.text((38, 58), radial_direction, fill=GOLD)
+    draw.rectangle(plot, outline=(73, 84, 99), width=2)
+    coordinates = [point_xy(point) for point in profile]
+    colors = [CYAN, CYAN, GREEN, GOLD]
+    for index in range(len(coordinates) - 1):
+        draw.line(
+            (coordinates[index], coordinates[index + 1]),
+            fill=colors[index],
+            width=7,
+        )
+    for coordinate, point in zip(coordinates, profile):
+        x, y = coordinate
+        draw.ellipse((x - 7, y - 7, x + 7, y + 7), fill=INK)
+        draw.text(
+            (min(x + 12, 990), max(92, y - 20)),
+            f"{point['role']}: R {point['radius']:.3f} / Y {point['y']:.3f}",
+            fill=INK,
+        )
+    draw.text(
+        (80, 625),
+        (
+            f"land {taper['innerRetentionLandWidth']:.3f} | "
+            f"primary {taper['primaryTaperRadialWidth']:.3f} | "
+            f"closure {taper['outerClosureWidth']:.3f} | "
+            f"coverage {taper['primaryTaperCoverageRatio']:.6f}"
+        ),
+        fill=INK,
+    )
+    draw.text(
+        (80, 655),
+        (
+            f"primary slope {taper['primarySlope']:.9f}; "
+            f"unintended horizontal intervals {taper['unintendedHorizontalIntervalCount']}"
+        ),
+        fill=GOLD,
+    )
+    return image
+
+
+def annular_section_diagram(
+    title: str,
+    geometry: dict,
+    face_label: str,
+) -> Image.Image:
+    """Show the closed measured annular profile and its functional regions."""
+    image = Image.new("RGB", DESKTOP_SIZE, (13, 16, 21))
+    draw = ImageDraw.Draw(image)
+    profile = geometry["profile"]
+    taper = geometry["taper"]
+    radii = [point["radius"] for point in profile]
+    y_values = [point["y"] for point in profile]
+    radius_min, radius_max = min(radii), max(radii)
+    y_min, y_max = min(y_values), max(y_values)
+    center_x = 640
+    x_scale = 430 / max(radius_max - radius_min, 1e-9)
+    y_scale = 390 / max(y_max - y_min, 1e-9)
+
+    def section_point(point: dict, sign: int) -> tuple[int, int]:
+        x = center_x + sign * (90 + (point["radius"] - radius_min) * x_scale)
+        y = 570 - (point["y"] - y_min) * y_scale
+        return int(x), int(y)
+
+    draw.text((38, 28), title, fill=INK)
+    draw.text((38, 58), face_label, fill=GOLD)
+    for sign in (-1, 1):
+        coordinates = [section_point(point, sign) for point in profile]
+        draw.polygon(coordinates, fill=(40, 49, 61), outline=INK)
+        for index, color in ((1, CYAN), (2, GREEN), (3, GOLD)):
+            draw.line(
+                (coordinates[index], coordinates[index + 1]),
+                fill=color,
+                width=8,
+            )
+    draw.text((56, 615), "cyan: minimum retention land", fill=CYAN)
+    draw.text((400, 615), "green: primary full-surface taper", fill=GREEN)
+    draw.text((850, 615), "gold: minimum outer closure", fill=GOLD)
+    draw.text(
+        (56, 660),
+        (
+            f"coverage {taper['primaryTaperCoverageRatio']:.6f} >= 0.80; "
+            f"closed={geometry['topology']['closed']}; "
+            f"non-manifold={geometry['topology']['nonManifoldEdgeCount']}; "
+            f"degenerate={geometry['degenerateTriangleCount']}"
+        ),
+        fill=INK,
+    )
+    return image
+
+
+def flat_taper_annotation(source: Image.Image, report: dict) -> Image.Image:
+    """Overlay measured land/taper/closure bands on the actual front capture."""
+    image = source.convert("RGBA")
+    draw = ImageDraw.Draw(image, "RGBA")
+    bezel = report["bezel"]["taper"]
+    caseback = report["casebackRing"]["taper"]
+    panel(draw, "FULL ANNULAR TAPER COVERAGE", [
+        (
+            f"bezel: land {bezel['innerRetentionLandWidth']:.3f}, "
+            f"primary {bezel['primaryTaperRadialWidth']:.3f}, "
+            f"coverage {bezel['primaryTaperCoverageRatio']:.6f}"
+        ),
+        (
+            f"caseback: land {caseback['innerRetentionLandWidth']:.3f}, "
+            f"primary {caseback['primaryTaperRadialWidth']:.3f}, "
+            f"coverage {caseback['primaryTaperCoverageRatio']:.6f}"
+        ),
+        "cyan = retention land / green = primary taper / gold = closure",
+    ])
+    center = (640, 370)
+    for radius, color, width in (
+        (215, CYAN, 6),
+        (270, GREEN, 10),
+        (316, GOLD, 6),
+    ):
+        draw.ellipse(
+            (
+                center[0] - radius,
+                center[1] - radius,
+                center[0] + radius,
+                center[1] + radius,
+            ),
+            outline=color + (230,),
+            width=width,
+        )
+    return image.convert("RGB")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--evidence-dir", type=Path, required=True)
@@ -387,6 +538,29 @@ def main() -> None:
         evidence / "live-third-desktop-back.png",
         DESKTOP_SIZE,
     )
+    live_fourth_front = load_rgb(
+        evidence / "live-fourth-desktop-front.png",
+        DESKTOP_SIZE,
+    )
+    live_fourth_oblique = load_rgb(
+        evidence / "live-fourth-desktop-oblique-front.png",
+        DESKTOP_SIZE,
+    )
+    live_fourth_side = load_rgb(
+        evidence / "live-fourth-desktop-side.png",
+        DESKTOP_SIZE,
+    )
+    live_fourth_back = load_rgb(
+        evidence / "live-fourth-desktop-back.png",
+        DESKTOP_SIZE,
+    )
+    live_fourth_opacity = load_rgb(
+        evidence / "live-fourth-opacity-50.png",
+        DESKTOP_SIZE,
+    )
+    annular_report = json.loads(
+        (evidence / "reports/annular-taper-report.json").read_text(),
+    )
     current_back = load_rgb(evidence / "desktop-back.png", DESKTOP_SIZE)
 
     save_png(board(
@@ -445,6 +619,19 @@ def main() -> None:
             f"third candidate: stronger taper {view}",
         ), evidence / f"third-candidate-before-after-{name}.png")
 
+    for name, before, after, view in (
+        ("front", live_third_front, live_fourth_front, "front"),
+        ("oblique-front", live_third_oblique, live_fourth_oblique, "oblique front"),
+        ("side", live_third_side, live_fourth_side, "side"),
+        ("back", live_third_back, live_fourth_back, "back"),
+    ):
+        save_png(board(
+            before,
+            after,
+            f"Head 9c16e345: third candidate {view}",
+            f"fourth candidate: full annular taper {view}",
+        ), evidence / f"fourth-candidate-before-after-{name}.png")
+
     crown1 = load_rgb(evidence / "crown-position1-closeup.png", DESKTOP_SIZE)
     crown2 = load_rgb(evidence / "crown-position2-closeup.png", DESKTOP_SIZE)
     save_png(crown1, evidence / "crown-position-1.png")
@@ -479,6 +666,54 @@ def main() -> None:
     save_png(third_bezel_taper_diagram(), evidence / "third-candidate-bezel-taper-comparison.png")
     save_png(third_caseback_taper_diagram(), evidence / "third-candidate-caseback-taper-comparison.png")
     save_png(third_case_profile_diagram(), evidence / "third-candidate-case-profile-comparison.png")
+    save_png(
+        annular_section_diagram(
+            "BEZEL FULL-SURFACE TAPER / MEASURED SECTION",
+            annular_report["bezel"],
+            "retention land is the only horizontal visible interval",
+        ),
+        evidence / "fourth-candidate-bezel-section.png",
+    )
+    save_png(
+        annular_section_diagram(
+            "CASEBACK RING FULL-SURFACE TAPER / MEASURED SECTION",
+            annular_report["casebackRing"],
+            "window land transitions directly into the primary taper",
+        ),
+        evidence / "fourth-candidate-caseback-section.png",
+    )
+    save_png(
+        annular_profile_diagram(
+            "BEZEL Y-RADIUS PROFILE",
+            annular_report["bezel"],
+            "inner/front is negative Y; outer closure returns toward case-body Y",
+        ),
+        evidence / "fourth-candidate-bezel-profile.png",
+    )
+    save_png(
+        annular_profile_diagram(
+            "CASEBACK RING Y-RADIUS PROFILE",
+            annular_report["casebackRing"],
+            "inner/rear is positive Y; outer closure returns toward case-body Y",
+        ),
+        evidence / "fourth-candidate-caseback-profile.png",
+    )
+    save_png(
+        flat_taper_annotation(live_fourth_front, annular_report),
+        evidence / "fourth-candidate-flat-taper-annotation.png",
+    )
+    save_png(
+        annotate_capture(
+            live_fourth_opacity,
+            "FOURTH CANDIDATE / STRUCTURAL OPACITY 50%",
+            [
+                "actual desktop WebGL capture",
+                "bezel and caseback ring remain continuous structural surfaces",
+                "final visual acceptance remains a human review item",
+            ],
+        ),
+        evidence / "fourth-opacity-50.png",
+    )
     save_png(thickness_diagram(), evidence / "total-thickness-9.845-vs-8.695.png")
     holder_absent = load_rgb(evidence / "movement-holder-absent.png", DESKTOP_SIZE)
     holder_present = load_rgb(evidence / "movement-holder-present.png", DESKTOP_SIZE)

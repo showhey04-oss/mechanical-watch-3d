@@ -2,67 +2,111 @@
   "metadata": {
     "schemaVersion": 1,
     "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
-    "sourceImplementationCommit": "d3b2e809f788c198df1b78d0f5c5a2bc8065d611",
-    "sourceCaptureCommit": "d3b2e809f788c198df1b78d0f5c5a2bc8065d611",
+    "sourceImplementationCommit": "4ac410d9fa8cc60c3c38e1765d17f81d789142d2",
+    "sourceCaptureCommit": "4ac410d9fa8cc60c3c38e1765d17f81d789142d2",
     "sourceBranch": "feature/final-exterior-balanced-phase3b1",
     "appVersion": "v3.15.0",
-    "capturedAt": "2026-07-24T23:08:41.876Z",
+    "capturedAt": "2026-07-25T00:47:11.990Z",
     "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser runtime screenshots and Three.js WebGLRenderTarget PNG",
     "candidateId": "E-BALANCED",
     "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
   },
   "profile": {
-    "axialMaxStep": 0.06,
+    "innerRadius": 18.9,
+    "outerRadiusProfile": [
+      {
+        "y": -2.86,
+        "outerRadius": 19.45
+      },
+      {
+        "y": -2.3,
+        "outerRadius": 19.62
+      },
+      {
+        "y": -1.35,
+        "outerRadius": 19.8
+      },
+      {
+        "y": 2.1,
+        "outerRadius": 19.8
+      },
+      {
+        "y": 3.25,
+        "outerRadius": 19.62
+      },
+      {
+        "y": 4.635,
+        "outerRadius": 19.45
+      }
+    ],
     "circumferentialSegments": 192,
+    "axialMaxStep": 0.06,
     "crownRelief": {
+      "targetGap": 0.03,
       "geometryMargin": 0.0005,
       "legacyMaxDepth": 0.15,
       "maximumDepth": 0.33,
       "minimumWall": 0.55,
-      "smoothUnionWidth": 0.004,
-      "targetGap": 0.03,
-      "transitionWidth": 0.16
-    },
-    "innerRadius": 18.9,
-    "outerRadiusProfile": [
-      {
-        "outerRadius": 19.45,
-        "y": -2.86
-      },
-      {
-        "outerRadius": 19.62,
-        "y": -2.3
-      },
-      {
-        "outerRadius": 19.8,
-        "y": -1.35
-      },
-      {
-        "outerRadius": 19.8,
-        "y": 2.1
-      },
-      {
-        "outerRadius": 19.62,
-        "y": 3.25
-      },
-      {
-        "outerRadius": 19.45,
-        "y": 4.635
-      }
-    ]
+      "transitionWidth": 0.16,
+      "smoothUnionWidth": 0.004
+    }
   },
   "actualGeometry": {
+    "profile": [
+      {
+        "y": -2.86,
+        "outerRadius": 19.45
+      },
+      {
+        "y": -2.3,
+        "outerRadius": 19.62
+      },
+      {
+        "y": -1.35,
+        "outerRadius": 19.8
+      },
+      {
+        "y": 2.1,
+        "outerRadius": 19.8
+      },
+      {
+        "y": 3.25,
+        "outerRadius": 19.62
+      },
+      {
+        "y": 4.635,
+        "outerRadius": 19.45
+      }
+    ],
+    "innerRadius": 18.9,
+    "circumferentialSegments": 192,
+    "circumferentialSampleCount": 353,
     "axialSampleCount": 138,
+    "vertexCount": 97428,
+    "indexCount": 584568,
+    "triangleCount": 194856,
+    "finite": {
+      "positions": true,
+      "normals": true,
+      "indices": true
+    },
+    "degenerateTriangleCount": 0,
+    "topology": {
+      "edgeCount": 292284,
+      "nonManifoldEdgeCount": 0,
+      "nonManifoldEdges": [],
+      "closed": true
+    },
     "bounds": {
-      "max": [
-        19.8,
-        4.635,
-        19.8
-      ],
       "min": [
         -19.8,
         -2.86,
         -19.8
+      ],
+      "max": [
+        19.8,
+        4.635,
+        19.8
       ],
       "size": [
         39.6,
@@ -70,74 +114,43 @@
         39.6
       ]
     },
-    "circumferentialSampleCount": 353,
-    "circumferentialSegments": 192,
-    "degenerateTriangleCount": 0,
-    "finite": {
-      "indices": true,
-      "normals": true,
-      "positions": true
-    },
-    "indexCount": 584568,
-    "innerRadius": 18.9,
-    "profile": [
-      {
-        "outerRadius": 19.45,
-        "y": -2.86
-      },
-      {
-        "outerRadius": 19.62,
-        "y": -2.3
-      },
-      {
-        "outerRadius": 19.8,
-        "y": -1.35
-      },
-      {
-        "outerRadius": 19.8,
-        "y": 2.1
-      },
-      {
-        "outerRadius": 19.62,
-        "y": 3.25
-      },
-      {
-        "outerRadius": 19.45,
-        "y": 4.635
-      }
-    ],
     "relief": {
-      "adoptedMaximumDepth": 0.319108426,
-      "adoptedMaximumPoint": [
-        19.174403525,
-        -1.052586207,
-        -3.442003192
-      ],
-      "bounds": {
-        "max": [
-          20.374999988,
-          0.145000002,
-          -3.304999998
-        ],
-        "min": [
-          19.225000012,
-          -2.245000002,
-          -5.695000002
-        ]
-      },
-      "calibrationIterations": 2,
       "center": [
         19.225000012,
         -1.05,
         -4.5
       ],
       "coreRadius": 1.057999969,
+      "outerRadius": 1.250390262,
+      "bounds": {
+        "min": [
+          19.225000012,
+          -2.245000002,
+          -5.695000002
+        ],
+        "max": [
+          20.374999988,
+          0.145000002,
+          -3.304999998
+        ]
+      },
+      "targetGap": 0.03,
+      "requestedGeometryMargin": 0.0005,
       "geometryMargin": 0.020596487,
+      "calibrationIterations": 2,
       "legacyMaxDepth": 0.15,
       "legacyRemainingOverlap": 0.121191752,
       "legacyTargetGapShortfall": 0.151191752,
+      "requiredMinimumDepth": 0.298836197,
+      "adoptedMaximumDepth": 0.319108426,
+      "adoptedMaximumPoint": [
+        19.174403525,
+        -1.052586207,
+        -3.442003192
+      ],
       "maximumAllowedDepth": 0.33,
       "maximumDepthMargin": 0.010891574,
+      "transitionWidth": 0.16,
       "minimumWall": 0.55,
       "minimumWallPoint": [
         19.45,
@@ -145,40 +158,27 @@
         0
       ],
       "minimumWallRequirement": 0.55,
-      "outerRadius": 1.250390262,
       "position1": {
-        "classification": "crown core",
-        "forbiddenInterferenceCount": 0,
         "minimumGap": 0.030026034,
         "point": [
           19.194973978,
           -0.190086207,
           -3.892564444
-        ]
+        ],
+        "classification": "crown core",
+        "forbiddenInterferenceCount": 0
       },
       "position2": {
-        "classification": "crown core",
-        "forbiddenInterferenceCount": 0,
         "minimumGap": 1.380026034,
         "point": [
           19.194973978,
           -0.190086207,
           -3.892564444
-        ]
-      },
-      "requestedGeometryMargin": 0.0005,
-      "requiredMinimumDepth": 0.298836197,
-      "targetGap": 0.03,
-      "transitionWidth": 0.16
-    },
-    "topology": {
-      "closed": true,
-      "edgeCount": 292284,
-      "nonManifoldEdgeCount": 0,
-      "nonManifoldEdges": []
-    },
-    "triangleCount": 194856,
-    "vertexCount": 97428
+        ],
+        "classification": "crown core",
+        "forbiddenInterferenceCount": 0
+      }
+    }
   },
   "calculation": {
     "legacyMaximumDepth": 0.15,
@@ -192,15 +192,15 @@
   "position1": {
     "crownCoreRadius": 1.057999969,
     "crownEnvelope": {
-      "max": [
-        20.374999988,
-        0.145000002,
-        -3.304999998
-      ],
       "min": [
         19.225000012,
         -2.245000002,
         -5.695000002
+      ],
+      "max": [
+        20.374999988,
+        0.145000002,
+        -3.304999998
       ]
     },
     "baseCaseOuterRadius": 19.8,
@@ -237,9 +237,9 @@
     "csgUsed": false,
     "innerProfileChanged": false,
     "finite": {
-      "indices": true,
+      "positions": true,
       "normals": true,
-      "positions": true
+      "indices": true
     },
     "vertexCount": 97428,
     "indexCount": 584568,

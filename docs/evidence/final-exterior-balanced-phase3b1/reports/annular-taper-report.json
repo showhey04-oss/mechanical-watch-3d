@@ -1,0 +1,334 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+    "sourceImplementationCommit": "4ac410d9fa8cc60c3c38e1765d17f81d789142d2",
+    "sourceCaptureCommit": "4ac410d9fa8cc60c3c38e1765d17f81d789142d2",
+    "sourceBranch": "feature/final-exterior-balanced-phase3b1",
+    "appVersion": "v3.15.0",
+    "capturedAt": "2026-07-25T00:47:11.990Z",
+    "captureMode": "same-origin unsandboxed iframe harness + actual in-app Browser runtime screenshots and Three.js WebGLRenderTarget PNG",
+    "candidateId": "E-BALANCED",
+    "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
+  },
+  "definition": {
+    "primaryTaperCoverageRatio": "primaryTaperRadialWidth / visibleMainRadialWidth",
+    "visibleMainRadialWidth": "innerRetentionLandWidth + primaryTaperRadialWidth",
+    "outerClosure": "reported separately from the visible main-face denominator",
+    "structuralBackClosure": "intentional hidden contact surface excluded from visible flat-interval rejection"
+  },
+  "bezel": {
+    "profile": [
+      {
+        "radius": 14.9,
+        "y": -2.86,
+        "role": "innerBack"
+      },
+      {
+        "radius": 14.9,
+        "y": -3.24,
+        "role": "innerFront"
+      },
+      {
+        "radius": 15.3,
+        "y": -3.24,
+        "role": "innerRetentionLandOuter"
+      },
+      {
+        "radius": 18.5,
+        "y": -2.89,
+        "role": "primaryTaperOuter"
+      },
+      {
+        "radius": 19.4,
+        "y": -2.86,
+        "role": "outerBack"
+      }
+    ],
+    "circumferentialSegments": 128,
+    "vertexCount": 640,
+    "indexCount": 3840,
+    "triangleCount": 1280,
+    "finite": {
+      "positions": true,
+      "normals": true,
+      "indices": true
+    },
+    "degenerateTriangleCount": 0,
+    "topology": {
+      "edgeCount": 1920,
+      "nonManifoldEdgeCount": 0,
+      "nonManifoldEdges": [],
+      "closed": true
+    },
+    "bounds": {
+      "min": [
+        -19.4,
+        -3.24,
+        -19.4
+      ],
+      "max": [
+        19.4,
+        -2.86,
+        19.4
+      ],
+      "size": [
+        38.8,
+        0.38,
+        38.8
+      ]
+    },
+    "taper": {
+      "definition": {
+        "numerator": "primaryTaperRadialWidth",
+        "denominator": "visibleMainRadialWidth = innerRetentionLandWidth + primaryTaperRadialWidth",
+        "outerClosureTreatment": "excluded from the visible main-face denominator and reported separately",
+        "structuralBackClosureTreatment": "intentional hidden contact surface; excluded from visible flat-interval rejection"
+      },
+      "totalRadialWidth": 4.5,
+      "visibleMainRadialWidth": 3.6,
+      "innerRetentionLandWidth": 0.4,
+      "primaryTaperRadialWidth": 3.2,
+      "outerClosureWidth": 0.9,
+      "primaryTaperCoverageRatio": 0.888888889,
+      "totalSectionCoverageRatio": 0.711111111,
+      "primarySlope": 0.109375,
+      "primarySlopeSign": 1,
+      "expectedPrimarySlopeSign": 1,
+      "outerClosureSlope": 0.033333333,
+      "outerEdgeAxialThickness": 0.03,
+      "maximumVisibleFlatIntervalWidth": 0.4,
+      "flatIntervals": [
+        {
+          "id": "innerRetentionLand",
+          "role": "INTENDED_RETENTION_LAND",
+          "radialWidth": 0.4,
+          "intended": true
+        },
+        {
+          "id": "structuralBackClosure",
+          "role": "STRUCTURAL_BACK_CONTACT",
+          "radialWidth": 4.5,
+          "intended": true
+        }
+      ],
+      "unintendedHorizontalIntervalCount": 0,
+      "visibleSegments": [
+        {
+          "id": "innerRetentionLand",
+          "role": "INTENDED_RETENTION_LAND",
+          "radialWidth": 0.4,
+          "deltaY": 0,
+          "horizontal": true
+        },
+        {
+          "id": "primaryTaper",
+          "role": "PRIMARY_TAPER",
+          "radialWidth": 3.2,
+          "deltaY": 0.35,
+          "horizontal": false
+        },
+        {
+          "id": "outerClosure",
+          "role": "OUTER_CLOSURE",
+          "radialWidth": 0.9,
+          "deltaY": 0.03,
+          "horizontal": false
+        }
+      ],
+      "criteria": {
+        "minimumPrimaryTaperCoverageRatio": 0.8,
+        "maximumInnerRetentionLandWidth": 0.4,
+        "maximumOuterClosureWidth": 1,
+        "minimumOuterEdgeAxialThickness": 0.02,
+        "maximumOuterEdgeAxialThickness": 0.05
+      },
+      "checks": {
+        "radialOrder": true,
+        "primaryTaperCoverage": true,
+        "innerRetentionLand": true,
+        "outerClosure": true,
+        "monotonicPrimarySlope": true,
+        "outerClosureContinuesSlope": true,
+        "outerEdgeAxialThickness": true,
+        "unintendedHorizontalIntervals": true
+      },
+      "passed": true
+    }
+  },
+  "casebackRing": {
+    "profile": [
+      {
+        "radius": 14.274,
+        "y": 4.635,
+        "role": "innerFront"
+      },
+      {
+        "radius": 14.274,
+        "y": 5.235,
+        "role": "innerRear"
+      },
+      {
+        "radius": 14.474,
+        "y": 5.235,
+        "role": "innerRetentionLandOuter"
+      },
+      {
+        "radius": 18.9,
+        "y": 4.685,
+        "role": "primaryTaperOuter"
+      },
+      {
+        "radius": 19.5,
+        "y": 4.635,
+        "role": "outerFront"
+      }
+    ],
+    "circumferentialSegments": 128,
+    "vertexCount": 640,
+    "indexCount": 3840,
+    "triangleCount": 1280,
+    "finite": {
+      "positions": true,
+      "normals": true,
+      "indices": true
+    },
+    "degenerateTriangleCount": 0,
+    "topology": {
+      "edgeCount": 1920,
+      "nonManifoldEdgeCount": 0,
+      "nonManifoldEdges": [],
+      "closed": true
+    },
+    "bounds": {
+      "min": [
+        -19.5,
+        4.635,
+        -19.5
+      ],
+      "max": [
+        19.5,
+        5.235,
+        19.5
+      ],
+      "size": [
+        39,
+        0.6,
+        39
+      ]
+    },
+    "taper": {
+      "definition": {
+        "numerator": "primaryTaperRadialWidth",
+        "denominator": "visibleMainRadialWidth = innerRetentionLandWidth + primaryTaperRadialWidth",
+        "outerClosureTreatment": "excluded from the visible main-face denominator and reported separately",
+        "structuralBackClosureTreatment": "intentional hidden contact surface; excluded from visible flat-interval rejection"
+      },
+      "totalRadialWidth": 5.226,
+      "visibleMainRadialWidth": 4.626,
+      "innerRetentionLandWidth": 0.2,
+      "primaryTaperRadialWidth": 4.426,
+      "outerClosureWidth": 0.6,
+      "primaryTaperCoverageRatio": 0.956766105,
+      "totalSectionCoverageRatio": 0.84691925,
+      "primarySlope": -0.124265703,
+      "primarySlopeSign": -1,
+      "expectedPrimarySlopeSign": -1,
+      "outerClosureSlope": -0.083333333,
+      "outerEdgeAxialThickness": 0.05,
+      "maximumVisibleFlatIntervalWidth": 0.2,
+      "flatIntervals": [
+        {
+          "id": "innerRetentionLand",
+          "role": "INTENDED_RETENTION_LAND",
+          "radialWidth": 0.2,
+          "intended": true
+        },
+        {
+          "id": "structuralBackClosure",
+          "role": "STRUCTURAL_BACK_CONTACT",
+          "radialWidth": 5.226,
+          "intended": true
+        }
+      ],
+      "unintendedHorizontalIntervalCount": 0,
+      "visibleSegments": [
+        {
+          "id": "innerRetentionLand",
+          "role": "INTENDED_RETENTION_LAND",
+          "radialWidth": 0.2,
+          "deltaY": 0,
+          "horizontal": true
+        },
+        {
+          "id": "primaryTaper",
+          "role": "PRIMARY_TAPER",
+          "radialWidth": 4.426,
+          "deltaY": -0.55,
+          "horizontal": false
+        },
+        {
+          "id": "outerClosure",
+          "role": "OUTER_CLOSURE",
+          "radialWidth": 0.6,
+          "deltaY": -0.05,
+          "horizontal": false
+        }
+      ],
+      "criteria": {
+        "minimumPrimaryTaperCoverageRatio": 0.8,
+        "maximumInnerRetentionLandWidth": 0.3,
+        "maximumOuterClosureWidth": 0.7,
+        "minimumOuterEdgeAxialThickness": 0.04,
+        "maximumOuterEdgeAxialThickness": 0.08
+      },
+      "checks": {
+        "radialOrder": true,
+        "primaryTaperCoverage": true,
+        "innerRetentionLand": true,
+        "outerClosure": true,
+        "monotonicPrimarySlope": true,
+        "outerClosureContinuesSlope": true,
+        "outerEdgeAxialThickness": true,
+        "unintendedHorizontalIntervals": true
+      },
+      "passed": true
+    }
+  },
+  "interfaces": {
+    "bezelCrystalRetention": {
+      "clearance": 0,
+      "classification": "INTENDED_RETENTION_CONTACT",
+      "sharedBoundaryOnly": true,
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    },
+    "bezelCaseBodySeat": {
+      "clearance": 0.05,
+      "classification": "INTENDED_CASE_INTERFACE",
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    },
+    "casebackWindowRetention": {
+      "clearance": 0,
+      "classification": "INTENDED_RETENTION_CONTACT",
+      "sharedBoundaryOnly": true,
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    },
+    "casebackMovementHolder": {
+      "clearance": 0.15,
+      "classification": "PROTECTED_CLEARANCE",
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    },
+    "casebackCaseBodySeat": {
+      "clearance": 0,
+      "classification": "INTENDED_CASE_INTERFACE",
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    }
+  },
+  "viewportInvariant": true,
+  "passed": true
+}
