@@ -1,13 +1,13 @@
 {
   "metadata": {
-    "schemaVersion": 1,
+    "schemaVersion": 2,
     "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
-    "sourceImplementationCommit": "fc5cc0220004dbcfbff14d4bbca4165e797665ea",
-    "sourceCaptureCommit": "fc5cc0220004dbcfbff14d4bbca4165e797665ea",
+    "sourceApprovedStartCommit": "8d0946bcf4bb9afbeacf06f89c8ae1882cf8cef9",
+    "sourceImplementationCommit": "a4e12477525ec12d7fbb569e81f442b46d572fef",
+    "sourceCaptureCommit": "02952fc7ca5b44e762327fd4342401ed719e5777",
     "sourceBranch": "feature/final-exterior-balanced-phase3b1",
     "appVersion": "v3.15.0",
-    "capturedAt": "2026-07-25T07:45:50.961Z",
-    "captureMode": "same-origin unsandboxed iframe harness with actual WebGL canvas PNG capture",
+    "captureMode": "same-origin unsandboxed iframe harness with actual Three.js WebGLRenderTarget PNG and GIF capture",
     "candidateId": "E-BALANCED",
     "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
   },
@@ -18,35 +18,7 @@
     "structuralBackClosure": "intentional hidden contact surface excluded from visible flat-interval rejection"
   },
   "bezel": {
-    "profile": [
-      {
-        "radius": 14.9,
-        "y": -2.86,
-        "role": "innerBack"
-      },
-      {
-        "radius": 14.9,
-        "y": -3.24,
-        "role": "innerFront"
-      },
-      {
-        "radius": 15.3,
-        "y": -3.24,
-        "role": "innerRetentionLandOuter"
-      },
-      {
-        "radius": 18.5,
-        "y": -2.89,
-        "role": "primaryTaperOuter"
-      },
-      {
-        "radius": 19.4,
-        "y": -2.86,
-        "role": "outerBack"
-      }
-    ],
-    "circumferentialSegments": 128,
-    "vertexCount": 640,
+    "vertexCount": 1280,
     "indexCount": 3840,
     "triangleCount": 1280,
     "finite": {
@@ -54,30 +26,25 @@
       "normals": true,
       "indices": true
     },
-    "degenerateTriangleCount": 0,
     "topology": {
       "edgeCount": 1920,
       "nonManifoldEdgeCount": 0,
       "nonManifoldEdges": [],
+      "windingMismatchCount": 0,
       "closed": true
     },
-    "bounds": {
-      "min": [
-        -19.4,
-        -3.24,
-        -19.4
-      ],
-      "max": [
-        19.4,
-        -2.86,
-        19.4
-      ],
-      "size": [
-        38.8,
-        0.38,
-        38.8
-      ]
+    "degenerateTriangleCount": 0,
+    "duplicateTriangleCount": 0,
+    "reversedDuplicateTriangleCount": 0,
+    "normalAudit": {
+      "finite": true,
+      "zeroLengthCount": 0,
+      "maximumUnitLengthError": 0,
+      "reversedTriangleCount": 0,
+      "periodicSeamMismatchCount": 0
     },
+    "orientation": "OUTWARD_POSITIVE",
+    "creaseNormalMode": "SPLIT_AT_PROFILE_BOUNDARIES",
     "taper": {
       "definition": {
         "numerator": "primaryTaperRadialWidth",
@@ -92,11 +59,11 @@
       "outerClosureWidth": 0.9,
       "primaryTaperCoverageRatio": 0.888888889,
       "totalSectionCoverageRatio": 0.711111111,
-      "primarySlope": 0.109375,
+      "primarySlope": 0.10625,
       "primarySlopeSign": 1,
       "expectedPrimarySlopeSign": 1,
-      "outerClosureSlope": 0.033333333,
-      "outerEdgeAxialThickness": 0.03,
+      "outerClosureSlope": 0.022222222,
+      "outerEdgeAxialThickness": 0.02,
       "maximumVisibleFlatIntervalWidth": 0.4,
       "flatIntervals": [
         {
@@ -125,14 +92,14 @@
           "id": "primaryTaper",
           "role": "PRIMARY_TAPER",
           "radialWidth": 3.2,
-          "deltaY": 0.35,
+          "deltaY": 0.34,
           "horizontal": false
         },
         {
           "id": "outerClosure",
           "role": "OUTER_CLOSURE",
           "radialWidth": 0.9,
-          "deltaY": 0.03,
+          "deltaY": 0.02,
           "horizontal": false
         }
       ],
@@ -157,35 +124,7 @@
     }
   },
   "casebackRing": {
-    "profile": [
-      {
-        "radius": 14.274,
-        "y": 4.635,
-        "role": "innerFront"
-      },
-      {
-        "radius": 14.274,
-        "y": 5.235,
-        "role": "innerRear"
-      },
-      {
-        "radius": 14.474,
-        "y": 5.235,
-        "role": "innerRetentionLandOuter"
-      },
-      {
-        "radius": 18.9,
-        "y": 4.685,
-        "role": "primaryTaperOuter"
-      },
-      {
-        "radius": 19.5,
-        "y": 4.635,
-        "role": "outerFront"
-      }
-    ],
-    "circumferentialSegments": 128,
-    "vertexCount": 640,
+    "vertexCount": 1280,
     "indexCount": 3840,
     "triangleCount": 1280,
     "finite": {
@@ -193,30 +132,25 @@
       "normals": true,
       "indices": true
     },
-    "degenerateTriangleCount": 0,
     "topology": {
       "edgeCount": 1920,
       "nonManifoldEdgeCount": 0,
       "nonManifoldEdges": [],
+      "windingMismatchCount": 0,
       "closed": true
     },
-    "bounds": {
-      "min": [
-        -19.5,
-        4.635,
-        -19.5
-      ],
-      "max": [
-        19.5,
-        5.235,
-        19.5
-      ],
-      "size": [
-        39,
-        0.6,
-        39
-      ]
+    "degenerateTriangleCount": 0,
+    "duplicateTriangleCount": 0,
+    "reversedDuplicateTriangleCount": 0,
+    "normalAudit": {
+      "finite": true,
+      "zeroLengthCount": 0,
+      "maximumUnitLengthError": 0,
+      "reversedTriangleCount": 0,
+      "periodicSeamMismatchCount": 0
     },
+    "orientation": "OUTWARD_POSITIVE",
+    "creaseNormalMode": "SPLIT_AT_PROFILE_BOUNDARIES",
     "taper": {
       "definition": {
         "numerator": "primaryTaperRadialWidth",
@@ -224,30 +158,30 @@
         "outerClosureTreatment": "excluded from the visible main-face denominator and reported separately",
         "structuralBackClosureTreatment": "intentional hidden contact surface; excluded from visible flat-interval rejection"
       },
-      "totalRadialWidth": 5.226,
-      "visibleMainRadialWidth": 4.626,
-      "innerRetentionLandWidth": 0.2,
+      "totalRadialWidth": 5.206,
+      "visibleMainRadialWidth": 4.606,
+      "innerRetentionLandWidth": 0.18,
       "primaryTaperRadialWidth": 4.426,
       "outerClosureWidth": 0.6,
-      "primaryTaperCoverageRatio": 0.956766105,
-      "totalSectionCoverageRatio": 0.84691925,
-      "primarySlope": -0.124265703,
+      "primaryTaperCoverageRatio": 0.960920538,
+      "totalSectionCoverageRatio": 0.850172877,
+      "primarySlope": -0.122006326,
       "primarySlopeSign": -1,
       "expectedPrimarySlopeSign": -1,
-      "outerClosureSlope": -0.083333333,
-      "outerEdgeAxialThickness": 0.05,
-      "maximumVisibleFlatIntervalWidth": 0.2,
+      "outerClosureSlope": -0.066666667,
+      "outerEdgeAxialThickness": 0.04,
+      "maximumVisibleFlatIntervalWidth": 0.18,
       "flatIntervals": [
         {
           "id": "innerRetentionLand",
           "role": "INTENDED_RETENTION_LAND",
-          "radialWidth": 0.2,
+          "radialWidth": 0.18,
           "intended": true
         },
         {
           "id": "structuralBackClosure",
           "role": "STRUCTURAL_BACK_CONTACT",
-          "radialWidth": 5.226,
+          "radialWidth": 5.206,
           "intended": true
         }
       ],
@@ -256,7 +190,7 @@
         {
           "id": "innerRetentionLand",
           "role": "INTENDED_RETENTION_LAND",
-          "radialWidth": 0.2,
+          "radialWidth": 0.18,
           "deltaY": 0,
           "horizontal": true
         },
@@ -264,14 +198,14 @@
           "id": "primaryTaper",
           "role": "PRIMARY_TAPER",
           "radialWidth": 4.426,
-          "deltaY": -0.55,
+          "deltaY": -0.54,
           "horizontal": false
         },
         {
           "id": "outerClosure",
           "role": "OUTER_CLOSURE",
           "radialWidth": 0.6,
-          "deltaY": -0.05,
+          "deltaY": -0.04,
           "horizontal": false
         }
       ],
@@ -296,39 +230,61 @@
     }
   },
   "interfaces": {
-    "bezelCrystalRetention": {
-      "clearance": 0,
-      "classification": "INTENDED_RETENTION_CONTACT",
-      "sharedBoundaryOnly": true,
-      "visibleCoplanarOverlap": false,
+    "bezel-back-to-case-body-front": {
+      "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+      "signedMinimumClearance": 0.017777778,
+      "coplanarRadialOverlap": 0,
+      "coplanarAxialOverlap": 0,
+      "sameCylinderAxialOverlap": 0,
       "forbiddenInterferenceCount": 0
     },
-    "bezelCaseBodySeat": {
-      "clearance": 0.05,
-      "classification": "INTENDED_CASE_INTERFACE",
-      "visibleCoplanarOverlap": false,
+    "caseback-front-to-case-body-back": {
+      "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+      "signedMinimumClearance": 0.017694967,
+      "coplanarRadialOverlap": 0,
+      "coplanarAxialOverlap": 0,
+      "sameCylinderAxialOverlap": 0,
       "forbiddenInterferenceCount": 0
     },
-    "casebackWindowRetention": {
-      "clearance": 0,
-      "classification": "INTENDED_RETENTION_CONTACT",
-      "sharedBoundaryOnly": true,
-      "visibleCoplanarOverlap": false,
+    "caseback-inner-to-window-outer": {
+      "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+      "signedMinimumClearance": 0.02,
+      "coplanarRadialOverlap": 0,
+      "coplanarAxialOverlap": 0,
+      "sameCylinderAxialOverlap": 0,
       "forbiddenInterferenceCount": 0
     },
-    "casebackMovementHolder": {
-      "clearance": 0.15,
+    "caseback-to-movement-holder": {
       "classification": "PROTECTED_CLEARANCE",
-      "visibleCoplanarOverlap": false,
+      "signedMinimumClearance": 0.15,
+      "coplanarRadialOverlap": 0,
+      "coplanarAxialOverlap": 0,
+      "sameCylinderAxialOverlap": 0,
       "forbiddenInterferenceCount": 0
     },
-    "casebackCaseBodySeat": {
-      "clearance": 0,
-      "classification": "INTENDED_CASE_INTERFACE",
-      "visibleCoplanarOverlap": false,
+    "bezel-to-crystal": {
+      "classification": "INTENDED_RETENTION_CONTACT",
+      "signedMinimumClearance": 0,
+      "coplanarRadialOverlap": 0,
+      "coplanarAxialOverlap": 0,
+      "sameCylinderAxialOverlap": 0,
+      "forbiddenInterferenceCount": 0
+    },
+    "caseback-to-window-back": {
+      "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+      "signedMinimumClearance": 0.02,
+      "coplanarRadialOverlap": 0,
+      "coplanarAxialOverlap": 0,
+      "sameCylinderAxialOverlap": 0,
       "forbiddenInterferenceCount": 0
     }
   },
   "viewportInvariant": true,
-  "passed": true
+  "passed": true,
+  "interfaceOverlapTotals": {
+    "coplanarRadial": 0,
+    "coplanarAxial": 0,
+    "areaEquivalent": 0,
+    "sameCylinderAxial": 0
+  }
 }

@@ -4,12 +4,16 @@
 
 Phase 3Aで`APPROVED_FOR_PHASE_3B_IMPLEMENTATION`とされたE-BALANCEDを、`?exterior=balanced`の明示query時だけ生成するThree.js Geometryとして実装した。状態は`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`であり、通常表示への既定採用は行っていない。
 
-第3候補までの人間確認では、外装総厚8.695の方向性、ケース胴テーパー、りゅうず位置1／2、指掛かり、pull／push、保持リング追加方針、透過16%、回転・ズーム、時計機能、作動音、物理iPhone操作性が合格した。第4候補でベゼルと裏蓋リングの見える主環状面を全面テーパー化し、最終微修正ではこの断面を維持したままケース胴の最大径ストレート帯を3.450から1.950へ短縮した。実厚8.695、端部径38.900、最大径39.600は不変で、視覚的薄型化と透過50%を人間確認するまで`ADOPTED`または最終外装完成とはしない。
+第3候補までの人間確認では、外装総厚8.695の方向性、ケース胴テーパー、りゅうず位置1／2、指掛かり、pull／push、保持リング追加方針、透過16%、回転・ズーム、時計機能、作動音、物理iPhone操作性が合格した。第4候補でベゼルと裏蓋リングの見える主環状面を全面テーパー化し、最終微修正ではこの断面を維持したままケース胴の最大径ストレート帯を3.450から1.950へ短縮した。
+
+最終幾何調整では、裏蓋リング端部の角度依存チラつきを、MaterialやIssue #2ではなくGeometryの深度競合、裏蓋リングの面向き、異なる役割面の法線平均化に起因すると確定した。ベゼル―ケース胴、ケース胴―裏蓋リング、裏蓋リング―透明窓へ`EDUCATIONAL_RENDERING_CLEARANCE`を設け、面積を持つ同一面重複と同一円筒面重複を0にした。実厚8.695、端部径38.900、最大径39.600、各開口径は不変である。PC／物理iPhoneで5本の回転証跡と透過50%を人間確認するまで`ADOPTED`または最終外装完成とはしない。
 
 ## 基準
 
 - 開始main：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
-- 最終微修正実装生成元：`fc5cc0220004dbcfbff14d4bbca4165e797665ea`
+- 承認済み作業開始Head：`8d0946bcf4bb9afbeacf06f89c8ae1882cf8cef9`
+- 外装取り合い実装生成元：`a4e12477525ec12d7fbb569e81f442b46d572fef`
+- 実画面キャプチャ生成元：`02952fc7ca5b44e762327fd4342401ed719e5777`
 - ブランチ：`feature/final-exterior-balanced-phase3b1`
 - アプリ版：v3.15.0
 - 候補URL：`index.html?exterior=balanced`
@@ -103,22 +107,39 @@ desktop 1280×720とmobile 390×844のruntime-to-configはともに合格した�
 | innerBack | 14.900 | -2.860 |
 | innerFront | 14.900 | -3.240 |
 | innerRetentionLandOuter | 15.300 | -3.240 |
-| primaryTaperOuter | 18.500 | -2.890 |
-| outerBack | 19.400 | -2.860 |
+| primaryTaperOuter | 18.500 | -2.900 |
+| outerBack | 19.400 | -2.880 |
 
-保持座幅0.400、主テーパー幅3.200、外周閉合幅0.900、主テーパー被覆率0.888889、主勾配+0.109375、外縁厚0.030である。
+保持座幅0.400、主テーパー幅3.200、外周閉合幅0.900、主テーパー被覆率0.888889、外縁側の軸方向エッジブレークは0.020である。
 
 裏蓋リング断面点：
 
 | role | 半径 | Y |
 |---|---:|---:|
-| innerFront | 14.274 | 4.635 |
-| innerRear | 14.274 | 5.235 |
+| innerFront | 14.294 | 4.655 |
+| innerRear | 14.294 | 5.235 |
 | innerRetentionLandOuter | 14.474 | 5.235 |
-| primaryTaperOuter | 18.900 | 4.685 |
-| outerFront | 19.500 | 4.635 |
+| primaryTaperOuter | 18.900 | 4.695 |
+| outerFront | 19.500 | 4.655 |
 
-保持座幅0.200、主テーパー幅4.426、外周閉合幅0.600、主テーパー被覆率0.956766、主勾配-0.124266、外縁厚0.050である。両部品とも主面勾配は単調、意図しない水平区間0、有限な単一閉合indexed Mesh、退化三角形0、非多様体edge 0である。風防、裏蓋窓、ケース胴、保持リングとの禁止干渉は0件である。
+保持座幅0.180、主テーパー幅4.426、外周閉合幅0.600、主テーパー被覆率0.960921、外縁側の軸方向エッジブレークは0.040である。裏蓋窓の見える半径14.274は維持し、裏蓋リング内周を14.294へ後退させて半径方向0.020の表示用逃げを設けた。両部品とも主面勾配は単調、意図しない水平区間0、有限な単一閉合indexed Mesh、退化三角形0、非多様体edge 0である。風防、裏蓋窓、ケース胴、保持リングとの禁止干渉は0件である。
+
+## 外装取り合い・法線
+
+修正前の承認Headでは、ベゼル背面―ケース胴前面に半径方向0.500、裏蓋リング前面―ケース胴後面に0.550の面積付き同一面重複があった。裏蓋リング内周―透明窓外周は同一半径14.274の円筒面が軸方向0.380重なっていた。面積相当値の合計は126.425542である。MeshNormalMaterial、MeshBasicMaterial、wireframe、FrontSide／DoubleSideの診断でもGeometry境界が再現したため、選択方式、照明、影、tone mapping、透明方式を原因から除外した。
+
+修正後は次の最小変更だけを適用した。
+
+- ベゼル―ケース胴：実Geometry最小軸方向gap 0.017778
+- ケース胴―裏蓋リング：実Geometry最小軸方向gap 0.017695
+- 裏蓋リング―透明窓：半径方向gap 0.020
+- 裏蓋リング―透明窓後面：軸方向gap 0.020
+- ベゼル外縁：軸方向エッジブレーク0.020
+- 裏蓋リング外縁：軸方向エッジブレーク0.040
+
+これらは製造公差ではなく教育用描画安定化の`EDUCATIONAL_RENDERING_CLEARANCE`である。面積付きcoplanar overlap、同一円筒面軸方向重複、重複三角形、逆向き重複三角形、退化三角形、非多様体edgeはすべて0となった。
+
+profiled annulusは各断面境界でrender頂点を分離し、保持座、primary taper、外周閉合面、裏側逃げ面の法線を役割ごとに分離した。primary taper内部の周方向連続性は維持している。ベゼル／裏蓋リングとも外向き面、反転法線0、zero-length法線0、周方向seam不整合0である。裏蓋リングだけは断面の見える後面を外向きにするためprofile windingを反転した。polygonOffset、renderOrder、depthTest／depthWrite、両面化、alphaHash、D2c3は使用していない。
 
 ## 接触と干渉
 
@@ -171,13 +192,21 @@ queryなしでは外装のObject3D／Mesh／Geometry／Material／選択対象�
 - 3針拘束最大誤差：0
 - Phase 2C包絡：desktop／mobile一致
 
-単独WebGLタブでの同一in-app Browser 10秒idleは、通常path 59.909fps、候補59.910fpsで、候補差分はfps +0.002%、p95 +0.400msとなり差分基準（fps悪化5%以内、p95悪化2ms以内）と絶対閾値を満たし、transform invariantはtrueだった。desktop pointer／wheelは各約59.4～59.6fps、p95 16.8～16.9ms、33ms／50ms超0、mobileは各約59.6fps、p95 16.8ms、33ms／50ms超0で、回転反転0、停止後跳躍0、zoom単調、model invariant trueだった。製品閾値は変更していない。
+最終回帰の同一in-app Browserでは、評価処理による約3秒のlong taskと約12Hzのframe pacingが通常path／候補の双方に発生し、A.6絶対閾値は環境制約により未達だった。通常pathと候補を同一タブで交互比較すると、10秒idleはfps差-4.128%、p95差+0.800ms、pointerはfps差-3.564%、p95差0ms、wheelはfps差+0.615%、p95差-16.200msで、差分基準（fps悪化5%以内、p95悪化2ms以内）に合格した。pointerは回転反転0・停止後跳躍0、wheelはzoom単調、全シナリオでmodel invariant trueである。製品閾値は変更していない。
 
 候補通常画面を新規in-app Browserタブで12秒保持し、console error／warning 0件を確認した。全ブラウザ項目を`PASSED`とはせず、証跡状態は`FUNCTIONAL_PASS_WITH_BROWSER_ENVIRONMENT_LIMITATIONS`とする。
 
 ## 動画
 
-今回のin-app Browser環境には、リポジトリへ安全に保存できるWebM取得経路がなかったため動画は生成していない。代替として、A.6 pointer／wheel診断、位置1／位置2の絶対座標・ドリフト診断、固定状態の実WebGL PNGを保存した。
+同一origin・sandboxなしのiframeから既存Arcball入力を方向一定で実行し、モデルObject3Dを回転させず、平滑化後の描画cameraを32フレーム取得した。各フレームは実Three.js sceneをoffscreen WebGLRenderTargetへ1回描画したPNGで、6.4秒のGIFに再構成した。
+
+- 裏面・未選択・透過100%
+- 裏面・裏蓋リング選択・透過100%
+- 裏面・透過50%
+- 斜め正面・ベゼル
+- 390×844・裏面
+
+全5本で32/32フレームのcapture state invariant、model world transform invariantがtrueである。黒い断続三角形、面の交互切替、角度依存チラつきは取得列では認めなかった。最終合格はPCと物理iPhoneでの人間確認後とする。
 
 ## 判断
 

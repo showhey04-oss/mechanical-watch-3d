@@ -3,14 +3,17 @@
 ## 由来
 
 - sourceBaseCommit：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
-- sourceImplementationCommit：`fc5cc0220004dbcfbff14d4bbca4165e797665ea`
-- sourceCaptureCommit：`fc5cc0220004dbcfbff14d4bbca4165e797665ea`
+- sourceApprovedStartCommit：`8d0946bcf4bb9afbeacf06f89c8ae1882cf8cef9`
+- sourceImplementationCommit：`a4e12477525ec12d7fbb569e81f442b46d572fef`
+- sourceCaptureCommit：`02952fc7ca5b44e762327fd4342401ed719e5777`
 - sourceBranch：`feature/final-exterior-balanced-phase3b1`
 - APP_VERSION：v3.15.0
 - captureMode：same-origin unsandboxed iframe harness + actual in-app Browser Three.js WebGLRenderTarget PNG
 - candidate：E-BALANCED / `IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`
 
-画像は`tests/final-exterior-phase3b1-harness.html`から同一origin・sandboxなしのiframeへ実アプリを読み込み、実際のThree.js WebGL表示をPNGとして取得した。最終A/Bは承認Head a3cd646と実装コミットfc5cc022をともに1280×720／390×844のライブ画面、同一時刻・テーマ・camera presetで取得し、UIを含む同じフレーミング方式へ統一した。固定main／通常pathのpixel-exact確認は同じWebGLRenderTarget方式を使用する。
+画像は`tests/final-exterior-phase3b1-harness.html`から同一origin・sandboxなしのiframeへ実アプリを読み込み、実際のThree.js WebGL表示をPNGとして取得した。過去候補の比較画像は各履歴Headの証跡であり、最終取り合いA/Bは承認Head `8d0946b`と実装コミット`a4e1247`を1280×720／390×844、同一時刻・テーマ・camera presetで取得した。固定main／通常pathのpixel-exact確認も同じWebGLRenderTarget方式を使用する。
+
+回転証跡は`tests/final-exterior-interface-video-capture.html`から既存Arcball入力を方向一定で実行し、モデルObject3Dを回転せず、平滑化後の描画cameraを使って32枚の実WebGL PNGを取得した。GIFはこの32枚だけから生成しており、合成モデルや静止画パンではない。
 
 ## 画像
 
@@ -88,6 +91,28 @@
 | `total-thickness-9.845-vs-8.695.png` | 旧／新外装総厚と前後突出の比較 | 1280×720 |
 | `movement-holder-before-after.png` | 保持リングなし／あり比較 | 2560×772 |
 | `opacity-100.png` / `opacity-50.png` / `opacity-16.png` | 第2候補の透過率固定比較 | 1280×720 |
+| `interface-before-after-back.png` | 承認Head／最終取り合いの裏面A/B | 2560×796 |
+| `interface-before-after-oblique-back.png` | 承認Head／最終取り合いの斜め裏面A/B | 2560×796 |
+| `interface-before-after-side.png` | 承認Head／最終取り合いの側面A/B | 2560×796 |
+| `interface-after-unselected-back.png` / `interface-after-selected-back.png` | 裏蓋リング未選択／選択 | 1280×720 |
+| `interface-after-opacity-50.png` / `interface-after-opacity-16.png` | 最終取り合いの透過50%／16% | 1280×720 |
+| `interface-after-mobile-390-back.png` / `interface-after-mobile-390-selected-back.png` | 390×844裏面未選択／選択 | 390×844 |
+| `interface-diagnostic-wireframe.png` / `interface-diagnostic-normal.png` | Geometry・法線診断 | 1280×720 |
+| `interface-section-bezel-case-body.png` | ベゼル―ケース胴の表示用逃げ断面 | 1280×720 |
+| `interface-section-case-body-caseback.png` | ケース胴―裏蓋リングの表示用逃げ断面 | 1280×720 |
+| `interface-section-caseback-window.png` | 裏蓋リング―透明窓の表示用逃げ断面 | 1280×720 |
+
+## 角度変化動画
+
+| ファイル | 内容 | 寸法／長さ |
+|---|---|---:|
+| `interface-rotation-back-unselected.gif` | 裏面・未選択・透過100% | 640×360 / 6.4秒 |
+| `interface-rotation-back-selected.gif` | 裏面・裏蓋リング選択・透過100% | 640×360 / 6.4秒 |
+| `interface-rotation-back-opacity-50.gif` | 裏面・透過50% | 640×360 / 6.4秒 |
+| `interface-rotation-front-bezel.gif` | 斜め正面・ベゼル外縁 | 640×360 / 6.4秒 |
+| `interface-rotation-mobile-390-back.gif` | 390×844・裏面 | 390×844 / 6.4秒 |
+
+全動画は32フレーム、model world transform invariant、capture state invariantである。取得列では黒い断続三角形、面の交互切替、角度依存チラつきを認めなかった。最終判定はPC／物理iPhoneでの人間確認後とする。
 
 desktop／mobile、位置1／位置2、透過、選択、修正前固定Headの各raw画像は実ランタイムキャプチャである。close-up注記、比較ボード、局所逃げ・gap・壁厚図は実WebGL PNGを背景として測定値を重ねた診断画像である。ベゼル断面と総厚比較だけは設定値から生成した独立模式図で、本番Sceneへ診断Geometryは追加していない。
 
@@ -109,6 +134,12 @@ desktop／mobile、位置1／位置2、透過、選択、修正前固定Headの�
 - `performance-results.json`：通常path／候補の10秒実測
 - `regression-results.json`：Node、desktop、mobile、UI、HUD、音声、S86、A.7
 - `decision-summary.json`：採用状態、未確認事項、次工程
+- `exterior-interface-diagnosis.json`：Material置換診断、確定原因、除外した描画方式
+- `exterior-interface-audit.json`：修正前後6接続、表示用逃げ、重複・法線・閉合性
+- `exterior-interface-capture-metadata.json`：実WebGL静止画のbrowser SHAと保存SHA
+- `exterior-interface-video-metadata.json`：5動画、32フレーム、camera／model invariant
+- `exterior-interface-normal-path.json`：固定mainと現行通常pathのbyte／SHA一致
+- `exterior-interface-visual-validation.json`：選択、透過、角度変化の判定
 - `evidence-manifest.json`：manifest自身を除くclosed-world SHA-256一覧
 
 ## 判定
@@ -118,8 +149,12 @@ desktop／mobile、位置1／位置2、透過、選択、修正前固定Headの�
 - forbidden interference：位置1 0／位置2 0
 - 外装総厚：第2候補から8.695を維持
 - ベゼル：保持座0.400、主テーパー3.200、閉合0.900、被覆率0.888889、意図しない水平区間0
-- 裏蓋リング：保持座0.200、主テーパー4.426、閉合0.600、被覆率0.956766、意図しない水平区間0
+- 裏蓋リング：保持座0.180、主テーパー4.426、閉合0.600、被覆率0.960921、意図しない水平区間0
 - 環状Mesh：両方とも閉合、退化三角形0、非多様体edge 0、関連禁止干渉0
+- 修正前coplanar overlap area相当126.425542／修正後0
+- 修正前same-cylinder axial overlap 0.380／修正後0
+- ベゼル―ケース胴gap 0.017778、ケース胴―裏蓋リングgap 0.017695、裏蓋リング―窓gap 0.020
+- 重複三角形0、逆向き重複三角形0、反転法線0、周方向法線seam不整合0
 - 保持リング：外径37.650、内径36.750、Y=4.035～4.485、禁止干渉0
 - ケース胴最大径帯：3.450から1.950へ1.500短縮
 - 前側／後側テーパー：1.510→2.160、2.535→3.385
@@ -130,7 +165,7 @@ desktop／mobile、位置1／位置2、透過、選択、修正前固定Headの�
 - 既定採用：`NOT_APPROVED_FOR_DEFAULT_ADOPTION`
 - 指掛かり／pull・push操作性：第1候補の物理iPhone人間確認で合格
 - 透過50%：`HUMAN_REVIEW_PENDING`
-- in-app Browser単独タブ10秒idle：通常59.909fps／候補59.910fps、候補差分fps +0.002%、p95 +0.400msで絶対／差分基準内、閾値変更なし
-- 動画：実行環境にリポジトリ保存可能なWebM経路がなく未取得。A.6診断、位置サイクル診断、PNGを代替証跡とする
+- 最終in-app Browser A/B：絶対性能は環境の約12Hz pacingにより未達。通常path比でidle fps -4.128%／p95 +0.800ms、pointer -3.564%／0ms、wheel +0.615%／-16.200msとなり差分基準内、閾値変更なし
+- 動画：実WebGL 32フレーム×5本、各6.4秒。モデル回転なし、camera回転、全state invariant
 
 次はPCと物理iPhoneで最終候補の視覚的薄型化、維持したベゼル／裏蓋リング全面テーパー、透過50%を人間確認する。合格前にPhase 3B.2または既定採用へ進めない。

@@ -1,0 +1,62 @@
+{
+  "metadata": {
+    "schemaVersion": 2,
+    "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+    "sourceApprovedStartCommit": "8d0946bcf4bb9afbeacf06f89c8ae1882cf8cef9",
+    "sourceImplementationCommit": "a4e12477525ec12d7fbb569e81f442b46d572fef",
+    "sourceCaptureCommit": "02952fc7ca5b44e762327fd4342401ed719e5777",
+    "sourceBranch": "feature/final-exterior-balanced-phase3b1",
+    "appVersion": "v3.15.0",
+    "captureMode": "same-origin unsandboxed iframe harness with actual Three.js WebGLRenderTarget PNG and GIF capture",
+    "candidateId": "E-BALANCED",
+    "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
+  },
+  "status": "PASSED_WITH_HUMAN_CONFIRMATION_REQUIRED",
+  "staticCaptures": {
+    "beforeAfter": [
+      "interface-before-after-back.png",
+      "interface-before-after-oblique-back.png",
+      "interface-before-after-side.png"
+    ],
+    "states": [
+      "interface-after-unselected-back.png",
+      "interface-after-selected-back.png",
+      "interface-after-opacity-50.png",
+      "interface-after-opacity-16.png",
+      "interface-after-mobile-390-back.png",
+      "interface-after-mobile-390-selected-back.png",
+      "interface-after-mobile-390-opacity-50.png"
+    ],
+    "diagnostics": [
+      "interface-diagnostic-wireframe.png",
+      "interface-diagnostic-normal.png"
+    ],
+    "sections": [
+      "interface-section-bezel-case-body.png",
+      "interface-section-case-body-caseback.png",
+      "interface-section-caseback-window.png"
+    ]
+  },
+  "rotationVideos": [
+    "interface-rotation-back-unselected.gif",
+    "interface-rotation-back-selected.gif",
+    "interface-rotation-back-opacity-50.gif",
+    "interface-rotation-front-bezel.gif",
+    "interface-rotation-mobile-390-back.gif"
+  ],
+  "observations": {
+    "selected": "no black intermittent triangles in 32-frame rotation sequence",
+    "unselected": "no edge switching in 32-frame rotation sequence",
+    "opacity100": "stable",
+    "opacity50": "stable; human visual acceptance remains pending",
+    "opacity16": "stable static capture; existing transparency behavior unchanged",
+    "mobile390": "stable 32-frame rotation sequence",
+    "modelRotated": false,
+    "cameraRotated": true
+  },
+  "humanReview": [
+    "PC: slowly rotate through the supplied selected/unselected back views",
+    "physical iPhone: repeat the back rotation at opacity 100% and 50%",
+    "confirm that the small intentional interface reveals are visually acceptable"
+  ]
+}
