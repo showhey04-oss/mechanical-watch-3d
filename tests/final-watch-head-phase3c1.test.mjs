@@ -104,9 +104,53 @@ test("Phase 3C.2 required strap and buckle refinements remain explicit backlog",
 });
 
 test("production integration cannot hide failures with forbidden rendering shortcuts", async () => {
-  const source = await readFile(
-    new URL("../js/final-watch-head-phase3c1-config.js", import.meta.url),
-    "utf8",
+  const [configSource, runtimeSource, indexSource] = await Promise.all([
+    readFile(
+      new URL("../js/final-watch-head-phase3c1-config.js", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../js/final-watch-head-phase3c1.js", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../index.html", import.meta.url), "utf8"),
+  ]);
+  for (const source of [configSource, runtimeSource]) {
+    assert.doesNotMatch(source, /\.polygonOffset(?:Factor|Units)?\s*=/);
+    assert.doesNotMatch(source, /\.renderOrder\s*=/);
+    assert.doesNotMatch(source, /\.alphaHash\s*=/);
+    assert.doesNotMatch(source, /\brequestAnimationFrame\s*\(/);
+    assert.doesNotMatch(
+      source,
+      /\b(?:import|new)\s+CSG\b|\bCSG\s*\.\s*(?:fromMesh|toMesh|subtract)\b/,
+    );
+  }
+  assert.match(indexSource, /resolvePhase3C1WatchHead\(initialPageParameters\)/);
+  assert.match(indexSource, /if\(requestedWatchHeadConfig\)/);
+  assert.match(indexSource, /getPhase3C1OpenHeartReport/);
+  assert.equal(
+    indexSource.indexOf("if(requestedWatchHeadConfig)")
+      > indexSource.indexOf("if(requestedExteriorConfig)"),
+    true,
   );
-  assert.doesNotMatch(source, /polygonOffset|renderOrder|alphaHash|requestAnimationFrame/);
+});
+
+test("same-origin unsandboxed Phase 3C.1 harness records actual runtime reports", async () => {
+  const [html, harness] = await Promise.all([
+    readFile(
+      new URL("./final-watch-head-phase3c1-harness.html", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("./final-watch-head-phase3c1-harness.js", import.meta.url),
+      "utf8",
+    ),
+  ]);
+  assert.doesNotMatch(html, /sandbox=/);
+  assert.match(harness, /frame\.contentWindow\.watchModelDiagnostics/);
+  assert.match(harness, /getPhase3C1GeometryReport/);
+  assert.match(harness, /getPhase3C1OpenHeartReport|lineOfSight/);
+  assert.match(harness, /getHandCouplingReport/);
+  assert.match(harness, /getYEnvelopeBreakdown/);
+  assert.match(harness, /document\.body\.dataset\.auditStatus/);
 });

@@ -191,6 +191,8 @@ import {FINAL_EXTERIOR_BALANCED,resolveFinalExteriorCandidate} from "./js/final-
 import {createBalancedExterior} from "./js/final-exterior.js";
 import {FINAL_EXTERIOR_ATTACHMENTS_PHASE3B2} from "./js/final-exterior-attachments-config.js";
 import {createBalancedExteriorAttachments} from "./js/final-exterior-attachments.js";
+import {FINAL_WATCH_HEAD_PHASE3C1,resolvePhase3C1WatchHead} from "./js/final-watch-head-phase3c1-config.js";
+import {createPhase3C1WatchHead} from "./js/final-watch-head-phase3c1.js";
 
 const APP_VERSION='v3.15.0';
 const initialPageParameters=new URLSearchParams(location.search);
@@ -493,8 +495,10 @@ const smallRing=new THREE.Mesh(new THREE.TorusGeometry(DIAL_DISPLAY_DIMENSIONS.s
 // The normal path does not create exterior Object3D, Geometry, Material, DOM, or
 // animation work. All candidate objects live below exteriorRoot when enabled.
 const requestedExteriorConfig=resolveFinalExteriorCandidate(initialPageParameters);
+const requestedWatchHeadConfig=resolvePhase3C1WatchHead(initialPageParameters);
 let exteriorRuntime=null;
 let exteriorAttachmentRuntime=null;
+let watchHeadRuntime=null;
 if(requestedExteriorConfig){
  if(!fourthDialArbor.geometry.boundingBox)fourthDialArbor.geometry.computeBoundingBox();
  const fourthArborBox=fourthDialArbor.geometry.boundingBox;
@@ -553,6 +557,45 @@ if(requestedExteriorConfig){
  });
  exteriorRuntime.root.add(exteriorAttachmentRuntime.root);
  root.add(exteriorRuntime.root);
+ if(requestedWatchHeadConfig){
+  watchHeadRuntime=createPhase3C1WatchHead({
+   register,
+   registerStructuralOpacity,
+   materials:MAT,
+   exteriorRuntime,
+   exteriorAttachmentRuntime,
+   plate:{
+    parent:mainPlate,
+    core:plateCore,
+    topStep:plateTopStep,
+    bottomStep:plateBottomStep,
+    centerHoleRadius:CENTER_AXIS.plateHoleRadius,
+    dialCenterHoleRadius:Math.max(CENTER_AXIS.cannonOuterRadius,CENTER_AXIS.hourOuterRadius)+requestedExteriorConfig.assumptions.dialCenterHoleClearance
+   },
+   display:{
+    legacyDialRing:dialRing,
+    legacyTwelveMarker:twelveMarker,
+    legacySmallSecondRing:smallRing,
+    legacyDialMarkers:groups.motion.children.filter(object=>object.isMesh&&Math.abs(object.position.y+2.10)<1e-6),
+    legacyMinuteHand:minuteHand,
+    legacyHourHand:hourHand,
+    legacySmallSecondHand:secHand,
+    minuteAxis,
+    hourAxis,
+    smallSecondAxis:secAxis
+   },
+   mechanism:{
+    crown,
+    balance:groups.balance,
+    escapement:groups.esc,
+    bridge:groups.bridge,
+    dialWorks:groups.dial
+   },
+   config:requestedWatchHeadConfig
+  });
+  document.body.dataset.watchHeadCandidate=requestedWatchHeadConfig.id;
+  document.body.dataset.watchHeadStatus=requestedWatchHeadConfig.status;
+ }
  document.body.dataset.exteriorCandidate=requestedExteriorConfig.id;
  document.body.dataset.exteriorStatus=requestedExteriorConfig.status;
 }
@@ -568,6 +611,11 @@ function getExteriorSelectionReport(){return exteriorRuntime?exteriorRuntime.get
 function getExteriorMaterialReport(){return exteriorRuntime?exteriorRuntime.getMaterialReport():{enabled:false,structuralOpacityIntegrated:false,fixedTransparencyIndependent:false,materials:{},alphaHashUsed:false,d2c3Used:false}}
 function getExteriorInterfaceReport(){return exteriorRuntime?exteriorRuntime.getInterfaceReport():{enabled:false,records:[],forbiddenInterferenceCount:0,overlapTotals:{coplanarRadial:0,coplanarAxial:0,areaEquivalent:0,sameCylinderAxial:0}}}
 function getExteriorAttachmentState(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getState():{enabled:false,defaultEnabled:false,id:FINAL_EXTERIOR_ATTACHMENTS_PHASE3B2.id,status:'DISABLED_NORMAL_PATH',objectCount:0,meshCount:0,geometryCount:0,materialCount:0,registeredPartCount:0}}
+function getPhase3C1WatchHeadState(){return watchHeadRuntime?watchHeadRuntime.getState():{enabled:false,defaultEnabled:false,id:FINAL_WATCH_HEAD_PHASE3C1.id,status:'DISABLED_NORMAL_PATH'}}
+function getPhase3C1GeometryReport(){return watchHeadRuntime?watchHeadRuntime.getGeometryReport():{enabled:false,id:FINAL_WATCH_HEAD_PHASE3C1.id}}
+function getPhase3C1OpenHeartReport(){return watchHeadRuntime?watchHeadRuntime.getLineOfSightReport():{enabled:false,id:FINAL_WATCH_HEAD_PHASE3C1.id}}
+function getPhase3C1MaterialReport(){return watchHeadRuntime?watchHeadRuntime.getMaterialReport():{enabled:false,id:FINAL_WATCH_HEAD_PHASE3C1.id}}
+function getPhase3C1SelectionReport(){return watchHeadRuntime?watchHeadRuntime.getSelectionReport():{enabled:false,id:FINAL_WATCH_HEAD_PHASE3C1.id}}
 function getExteriorAttachmentGeometryReport(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getGeometryReport():{enabled:false,lugs:{},springBars:{},straps:{},buckle:null}}
 function getExteriorAttachmentInterferenceReport(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getInterferenceReport():{enabled:false,position1:{attachmentForbiddenCount:0},position2:{attachmentForbiddenCount:0},records:[],intendedContacts:[],forbiddenInterferenceCount:0}}
 function getExteriorAttachmentSelectionReport(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getSelectionReport():{enabled:false,registeredParts:[],interiorPriorityPreservedAtOpacity16:true}}
@@ -1275,7 +1323,7 @@ window.watchModelDiagnostics={
  getState:()=>currentMechanismState,getMovingParts:()=>WATCH_MECHANISM.motionStates[currentMechanismState]||[],getStructuralOpacity:()=>structuralOpacityRatio,getStructuralTargetCount:()=>structuralOpacityTargets.length,getCrownPosition:()=>crownPosition,getCrownTransition:()=>crownTransition,getKeylessPositionGeometry,getKeylessBasePositions,getKeylessDriftReport,runCrownPositionCycleTest,holdCrownPosition,getSelection:()=>selectedRoot?.userData?.partName||null,getInputAngle:()=>settingInputAngle,
  getPartRotations,getWindingPartRotations,getKinematicAngles:()=>({...currentMotionWorksState.angles}),getConnectedPath:()=>[...motionRuntimeConnections.filter(connection=>currentMotionWorksState.activeConnections.includes(connection.id)),...windingRuntimeConnections.filter(connection=>currentWindingState.activeConnections.includes(connection.id))].map(connection=>({id:connection.id,input:connection.input,output:connection.output,permanent:connection.permanent,inputObject:connection.inputObject?.uuid??null,outputObject:connection.outputObject?.uuid??null})),
  getMotionWorksTopology,getWindingTopology,getWindingTransmissionReport,getRatchetState,getBarrelEnergyState,getFrontConvention,getDialProjectionReport,getHandScreenDirectionReport,getMotionSource,getPermanentMeshAngles,getClutchConnectionState,getHandCouplingReport,getGearModuleReport,getStateTransitionContinuityReport:()=>({...stateTransitionContinuityReport}),getInterferenceReport,getPickLayerReport,getCameraManipulating:()=>cameraGestureActive,getCameraControlType:()=> 'ArcballControls',getCameraOrientation,getCameraQuaternion:()=>camera.quaternion.toArray(),getCameraTarget:()=>renderTarget.toArray(),getCameraSmoothingState,getViewUpConvention,getRotationFreedomReport,getLightingRigReport,getVisibleLightContributionReport,getFrontBackLuminanceReport,getModelWorldSignature,getViewportReport:()=>({width:innerWidth,height:innerHeight,devicePixelRatio,renderPixelRatio:renderer.getPixelRatio(),coarsePointer:matchMedia('(pointer: coarse)').matches,panelOpen:panel.classList.contains('open'),panelCollapsed:panel.classList.contains('collapsed')}),getMobileOverlayHudReport,getTimeInputReport,getToggleCardReport,getSoundUiReport,parseTimeInputValue,clearTimeInputDiagnostics,getUiRegressionState,startPerformanceCapture,stopPerformanceCapture,getFramePacingReport,getCameraMotionSmoothnessReport,getZoomSmoothnessReport,getAdaptivePixelRatioState,getInteractionQualityMode:()=>interactionQualityMode,getRenderCostBreakdown,runPerformanceScenario,simulateArcballDrag,simulateTouchGesture,getWatchTime:()=>watchTimeSec,getPowerReserve:()=>powerReserveHours,getLiveSyncState:()=>({enabled:liveSync,offsetSec:liveSyncOffsetSec,transitionMs:LIVE_SYNC_TRANSITION_MS,progress:liveSync?Math.min(1,(performance.now()-liveSyncTransitionStartedAt)/LIVE_SYNC_TRANSITION_MS):0}),getAudioDiagnostics:()=>({...mechanicalAudio.getDiagnostics(),mechanismIntegrity:{...lastAudioMechanismIntegrity}}),getCrownDetentAudioReport:()=>({...lastCrownDetentAudioReport}),clearAudioEventLog:()=>mechanicalAudio.clearEventLog(),startAudioEvidenceRecording,stopAudioEvidenceRecording,
- getDimensionDiagnostics,getYDatumMap,getYEnvelopeBreakdown,getYLayerStack,getOfficialHeightDatumAssessment,captureAuditViewportPng,installDimensionAuditOverlay,getExteriorCandidateState,getExteriorDimensionReport,getExteriorInterferenceReport,getExteriorSelectionReport,getExteriorMaterialReport,getExteriorInterfaceReport,setExteriorDiagnosticMaterialMode,selectPartByNameForAudit,getExteriorAttachmentState,getExteriorAttachmentGeometryReport,getExteriorAttachmentInterferenceReport,getExteriorAttachmentSelectionReport,getExteriorAttachmentMaterialReport,getExteriorAttachmentWorldBoundsReport,getExteriorAttachmentCameraOccupancyReport,getExteriorAttachmentVisibilityReport,setExteriorAttachmentVisibility,getWebGLContextReport,
+ getDimensionDiagnostics,getYDatumMap,getYEnvelopeBreakdown,getYLayerStack,getOfficialHeightDatumAssessment,captureAuditViewportPng,installDimensionAuditOverlay,getExteriorCandidateState,getExteriorDimensionReport,getExteriorInterferenceReport,getExteriorSelectionReport,getExteriorMaterialReport,getExteriorInterfaceReport,setExteriorDiagnosticMaterialMode,selectPartByNameForAudit,getExteriorAttachmentState,getExteriorAttachmentGeometryReport,getExteriorAttachmentInterferenceReport,getExteriorAttachmentSelectionReport,getExteriorAttachmentMaterialReport,getExteriorAttachmentWorldBoundsReport,getExteriorAttachmentCameraOccupancyReport,getExteriorAttachmentVisibilityReport,setExteriorAttachmentVisibility,getPhase3C1WatchHeadState,getPhase3C1GeometryReport,getPhase3C1OpenHeartReport,getPhase3C1MaterialReport,getPhase3C1SelectionReport,getWebGLContextReport,
  setWatchTime:value=>{const before=transitionSnapshot();setWatchTime(Number(value)||0);return recordStateTransition('explicit-time',before)},setCrownPosition,setCrownTurnRate,setRunning:value=>{running=Boolean(value)},setRuntimeScale:value=>{runtimeScale=Math.max(.1,Number(value)||1);runtimeScaleInput.value=String(runtimeScale)},setPowerReserve:value=>{powerReserveHours=Math.max(0,Math.min(52,Number(value)||0))},setLiveSync:value=>setSyncUI(Boolean(value)),setStructuralOpacity:applyStructuralOpacity,setBackgroundTheme:value=>{const control=document.getElementById('backgroundTheme');control.value=applyBackgroundTheme(value);return control.value},setPanelOpen:setPanelExpanded,setFunctionalMode:value=>{const control=document.getElementById('mode');control.value=value;control.dispatchEvent(new Event('change'));return control.value},setAudioVisibilityForTest:visible=>{audioEventResetPending=true;pendingCrownAudioDetent=null;return mechanicalAudio.setVisible(Boolean(visible))},disableAudio:()=>{pendingCrownAudioDetent=null;return mechanicalAudio.disable()},clearSelectionInfo,pickProjectedPart,waitForFrames,applyCameraPreset
 };
 if(initialPageParameters.get('dimensionAudit')==='1'){waitForFrames(8).then(()=>{const report=getDimensionDiagnostics(),output=document.createElement('output');output.setAttribute('id','dimensionAuditResult');output.hidden=true;output.value=JSON.stringify(report);output.textContent=JSON.stringify(report);output.dataset.status=report.transformInvariant.unchanged?'passed':'failed';document.body.append(output);window.dimensionAuditResult=report;const overlayMode=initialPageParameters.get('dimensionOverlay');if(overlayMode)installDimensionAuditOverlay(overlayMode);document.body.dataset.dimensionAuditStatus=output.dataset.status})}
