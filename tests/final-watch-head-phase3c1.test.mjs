@@ -39,8 +39,8 @@ test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
 });
 
 test("human-review revision uses bright ivory and educational silver compensation", () => {
-  assert.equal(config.dial.color, 0xbdac8f);
-  assert.equal(config.dial.smallSecondColor, 0xcdb9a0);
+  assert.equal(config.dial.color, 0xbcab8e);
+  assert.equal(config.dial.smallSecondColor, 0xccb89f);
   assert.ok(config.dial.roughness >= 0.8);
   assert.ok(config.dial.roughness <= 0.86);
   assert.deepEqual(config.materials.polishedSteel, {

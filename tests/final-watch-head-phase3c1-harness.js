@@ -153,8 +153,8 @@ frame.addEventListener("load", async () => {
         geometry.interferences.openHeartToSmallSecondClearance >= 0.2
         && geometry.interferences.openHeartToNearestIndexClearance >= 0.3,
       referenceAlignedMaterials:
-        material.dialFinish.color === 0xbdac8f
-        && material.smallSecondDialFinish.color === 0xcdb9a0
+        material.dialFinish.color === 0xbcab8e
+        && material.smallSecondDialFinish.color === 0xccb89f
         && material.caseFinish.color === 0xeef1f3
         && material.caseFinish.metalness >= 0.9
         && material.caseFinish.roughness >= 0.16

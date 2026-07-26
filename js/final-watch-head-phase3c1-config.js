@@ -137,10 +137,10 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
     ],
   },
   dial: {
-    color: 0xbdac8f,
+    color: 0xbcab8e,
     metalness: 0.02,
     roughness: 0.86,
-    smallSecondColor: 0xcdb9a0,
+    smallSecondColor: 0xccb89f,
     smallSecondMetalness: 0,
     smallSecondRoughness: 0.86,
     smallSecondRecessY: -1.985,
@@ -228,7 +228,7 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
       classification: "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
     },
     ivoryDial: {
-      color: 0xbdac8f,
+      color: 0xbcab8e,
       metalness: 0.02,
       roughness: 0.86,
     },
@@ -390,8 +390,8 @@ export function assertPhase3C1WatchHeadConfig(
       && config.hands.smallSecond.width >= 0.1
       && config.hands.smallSecond.width <= 0.15,
     dialRevision:
-      config.dial.color === 0xbdac8f
-      && config.dial.smallSecondColor === 0xcdb9a0
+      config.dial.color === 0xbcab8e
+      && config.dial.smallSecondColor === 0xccb89f
       && config.dial.indexRadialLength >= 1.3
       && config.dial.indexRadialLength <= 1.5
       && config.dial.indexTangentialWidth >= 0.28
