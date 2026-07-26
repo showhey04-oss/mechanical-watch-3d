@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "6d7eeac2b243609a7c7b4e9c734b235459376469",
-  "sourceAuditCommit": "9d9e6c83395adb0ec72ad269c3bac1a7f7c3a0d9",
+  "sourceImplementationCommit": "11c37f22936c5606673c80628cc1422d620fa7e2",
+  "sourceAuditCommit": "ba3d77ad951ba88f12193550eb7253d1aaf4bebc",
   "sourceBaseCommit": "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
@@ -10,7 +10,7 @@
   "config": {
     "schemaVersion": 1,
     "id": "E-BALANCED-PHASE3C1-WATCH-HEAD",
-    "status": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+    "status": "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
     "enabledByDefault": false,
     "query": {
       "parameter": "watchHead",
@@ -30,7 +30,15 @@
     "appVersion": "v3.15.0",
     "humanAcceptance": {
       "phase3b2": "HUMAN_ACCEPTED_PHASE3B2_WITH_MANDATORY_PHASE3C_REFINEMENTS",
-      "phase3c1": "HUMAN_REVIEW_REQUIRED"
+      "phase3c1": "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+      "revision": "REFERENCE_ALIGNED_REVISION_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
+      "physicalIPhoneThermalObservation": {
+        "classification": "MILD_WARMING_AFTER_15_MINUTES",
+        "blocking": false,
+        "observedFailure": false,
+        "finalReviewDurationMinutes": 15,
+        "note": "Recheck temperature alongside visual acceptance; do not alter DPR, lighting, materials, or thresholds in this revision."
+      }
     },
     "protectedAnchors": {
       "caseOuterDiameter": 39.6,
@@ -73,8 +81,50 @@
       "centerTolerance": 0.1,
       "equivalentDiameter": 6.6,
       "openingRadius": 3.3,
-      "edgeRingWidth": 0.32,
-      "edgeRingOuterRadius": 3.62,
+      "edgeRingWidth": 0.36,
+      "edgeRingOuterRadius": 3.66,
+      "rimProfile": {
+        "innerDiameter": 6.6,
+        "outerDiameter": 7.32,
+        "visibleTopLip": 0.25,
+        "innerChamfer": 0.06,
+        "outerChamfer": 0.05,
+        "axialHeight": 0.16,
+        "profile": [
+          {
+            "radius": 3.3,
+            "y": -2.03,
+            "role": "inner-wall-back"
+          },
+          {
+            "radius": 3.3,
+            "y": -2.16,
+            "role": "inner-wall-front"
+          },
+          {
+            "radius": 3.36,
+            "y": -2.19,
+            "role": "inner-chamfer"
+          },
+          {
+            "radius": 3.61,
+            "y": -2.19,
+            "role": "visible-top-lip"
+          },
+          {
+            "radius": 3.66,
+            "y": -2.16,
+            "role": "outer-chamfer"
+          },
+          {
+            "radius": 3.66,
+            "y": -2.03,
+            "role": "outer-wall-back"
+          }
+        ],
+        "circumferentialSegments": 128,
+        "classification": "PRECISION_PROFILED_POLISHED_EDGE"
+      },
       "balanceCenterRadius": 7.907591289387686,
       "balanceClockAngleDeg": 76.84245725998517,
       "balanceOuterDiameter": 6.5,
@@ -117,40 +167,69 @@
       ]
     },
     "dial": {
-      "color": 10326648,
+      "color": 12364686,
       "metalness": 0.02,
-      "roughness": 0.76,
+      "roughness": 0.86,
+      "smallSecondColor": 13416607,
+      "smallSecondMetalness": 0,
+      "smallSecondRoughness": 0.86,
       "smallSecondRecessY": -1.985,
       "smallSecondRecessThickness": 0.06,
+      "smallSecondOutlineTubeRadius": 0.025,
+      "smallSecondMinorMarkLength": 0.12,
+      "smallSecondMajorMarkLength": 0.24,
+      "smallSecondMarkTangentialWidth": 0.028,
       "mainMinuteTrackRadius": 13.58,
-      "minuteMarkMajorLength": 0.32,
-      "minuteMarkMinorLength": 0.17,
-      "indexRadialLength": 0.72,
-      "indexTangentialWidth": 0.18,
-      "indexThickness": 0.12,
+      "minuteDotMinorDiameter": 0.115,
+      "minuteDotMajorDiameter": 0.18,
+      "minuteDotAxialHeight": 0.04,
+      "minuteDotOpenHeartClearance": 0.03,
+      "indexRadialLength": 1.4,
+      "indexTangentialWidth": 0.32,
+      "indexThickness": 0.19,
+      "twelveIndexLengthScale": 1.08,
+      "twelveIndexGap": 0.22,
       "indexFrontY": -2.11,
-      "omittedIndices": []
+      "omittedIndices": [
+        6
+      ],
+      "minuteMarkMaterial": {
+        "color": 6972766,
+        "metalness": 0.05,
+        "roughness": 0.62
+      }
     },
     "hands": {
       "minute": {
         "length": 12.04,
-        "width": 0.5,
-        "thickness": 0.09
+        "width": 0.56,
+        "tipWidth": 0.06,
+        "thickness": 0.12,
+        "counterweightLength": 0.34
       },
       "hour": {
         "length": 8.6,
-        "width": 0.7,
-        "thickness": 0.1
+        "width": 0.78,
+        "tipWidth": 0.08,
+        "thickness": 0.13,
+        "counterweightLength": 0.34
       },
       "smallSecond": {
         "length": 3.268,
-        "width": 0.14,
-        "thickness": 0.08
+        "width": 0.13,
+        "tipWidth": 0.04,
+        "thickness": 0.07,
+        "counterweightLength": 0.42
       },
       "material": {
-        "color": 14476007,
-        "metalness": 0.98,
-        "roughness": 0.18
+        "color": 15856629,
+        "metalness": 0.93,
+        "roughness": 0.19
+      },
+      "smallSecondMaterial": {
+        "color": 2774386,
+        "metalness": 0.86,
+        "roughness": 0.24
       }
     },
     "crystal": {
@@ -161,19 +240,23 @@
         },
         {
           "radius": 3.825,
-          "y": -3.445
+          "y": -3.45
         },
         {
           "radius": 7.65,
-          "y": -3.4
+          "y": -3.405
         },
         {
           "radius": 11.475,
-          "y": -3.325
+          "y": -3.295
+        },
+        {
+          "radius": 14,
+          "y": -3.12
         },
         {
           "radius": 15.3,
-          "y": -3.2
+          "y": -3
         },
         {
           "radius": 15.3,
@@ -185,23 +268,25 @@
         }
       ],
       "radialSegments": 128,
-      "classification": "GENTLE_DOME_WITHIN_PROTECTED_ENVELOPE"
+      "classification": "VISIBLE_GENTLE_DOME_WITHIN_PROTECTED_ENVELOPE"
     },
     "materials": {
       "polishedSteel": {
-        "color": 13029078,
-        "metalness": 0.98,
-        "roughness": 0.19
+        "color": 15659507,
+        "metalness": 0.92,
+        "roughness": 0.19,
+        "classification": "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION"
       },
       "subduedPolishedSteel": {
-        "color": 11450562,
-        "metalness": 0.96,
-        "roughness": 0.26
+        "color": 14212835,
+        "metalness": 0.9,
+        "roughness": 0.27,
+        "classification": "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION"
       },
       "ivoryDial": {
-        "color": 10326648,
+        "color": 12364686,
         "metalness": 0.02,
-        "roughness": 0.76
+        "roughness": 0.86
       }
     },
     "phase3c2MandatoryBacklog": [
@@ -237,6 +322,8 @@
       "indexClearance": true,
       "handLengths": true,
       "handWidths": true,
+      "dialRevision": true,
+      "rimRevision": true,
       "crystalEnvelope": true
     }
   }

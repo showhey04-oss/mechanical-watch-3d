@@ -262,24 +262,24 @@ def main() -> None:
     open_source("desktop-side.png", DESKTOP_SIZE).save(EVIDENCE / "crown-position-1.png", format="PNG")
 
     board("comparison-front.png", [
-        ("before-phase3b2-front.png", "Phase 3B.2", "approved structural exterior"),
-        ("desktop-front.png", "Phase 3C.1", "formal watch-head candidate"),
+        ("before-revision-front.png", "Initial Phase 3C.1", "human-review rejected"),
+        ("desktop-front.png", "Revised Phase 3C.1", "warm ivory + silver hierarchy"),
     ])
     board("comparison-oblique-front.png", [
-        ("before-phase3b2-oblique-front.png", "Phase 3B.2", "structural placeholder dial"),
-        ("desktop-oblique-front.png", "Phase 3C.1", "ivory dial + dome + open heart"),
+        ("before-revision-oblique-front.png", "Initial Phase 3C.1", "dark dial / weak hierarchy"),
+        ("desktop-oblique-front.png", "Revised Phase 3C.1", "ivory dial + dome + profiled rim"),
     ])
     board("comparison-side.png", [
-        ("before-phase3b2-side.png", "Phase 3B.2", "protected 8.695 envelope"),
-        ("desktop-side.png", "Phase 3C.1", "same exterior envelope"),
+        ("before-revision-side.png", "Initial Phase 3C.1", "dome visually weak"),
+        ("desktop-side.png", "Revised Phase 3C.1", "stronger dome / same 8.695 envelope"),
     ])
     board("comparison-back.png", [
-        ("before-phase3b2-back.png", "Phase 3B.2", "approved rear structure"),
-        ("desktop-back.png", "Phase 3C.1", "rear exterior unchanged"),
+        ("before-revision-back.png", "Initial Phase 3C.1", "rear geometry"),
+        ("desktop-back.png", "Revised Phase 3C.1", "protected rear geometry unchanged"),
     ])
     board("comparison-oblique-back.png", [
-        ("before-phase3b2-oblique-back.png", "Phase 3B.2", "approved attachment structure"),
-        ("desktop-oblique-back.png", "Phase 3C.1", "mechanism and attachments preserved"),
+        ("before-revision-oblique-back.png", "Initial Phase 3C.1", "existing attachment structure"),
+        ("desktop-oblique-back.png", "Revised Phase 3C.1", "silver compensation / structure preserved"),
     ])
     board("opacity-board.png", [
         ("desktop-front.png", "100%", "candidate watch head"),
@@ -361,19 +361,23 @@ def main() -> None:
         "actual balance and hairspring line of sight",
     ])
     closeup("desktop-front.png", "small-second-close.png", (500, 385, 780, 665), "6 o'clock small seconds", [
-        "recessed face / 12 major + 48 minor marks",
+        "lighter recessed face / 12 major + 48 minor marks",
+        "blue-steel-tone hand #2A5572",
         "S86 center and fourth-arbor coupling unchanged",
     ])
     closeup("desktop-front.png", "indices-close.png", (410, 90, 870, 360), "Polished bar indices", [
-        "12 bars with a double marker at 12",
+        "faceted 1.400 × 0.320 × 0.190 bars",
+        "double marker at 12 / 6 omitted for small seconds",
         "S86 index circle 25.456 unchanged",
     ])
-    closeup("desktop-front.png", "hands-close.png", (430, 190, 850, 555), "Thin polished hands", [
+    closeup("desktop-front.png", "hands-close.png", (430, 190, 850, 555), "Faceted polished hands", [
         "minute 12.040 / hour 8.600 / small second 3.268",
+        "shared tapered silhouette with raised center ridge",
         "all three remain 1:1 coupled to their physical drivers",
     ])
-    closeup("desktop-side.png", "domed-crystal-side.png", (300, 100, 980, 620), "Gentle dome crystal", [
+    closeup("desktop-side.png", "domed-crystal-side.png", (300, 100, 980, 620), "Strengthened dome crystal", [
         "protected Y envelope -3.460 to -2.860",
+        "outer profile: -3.460 / -3.450 / -3.405 / -3.295 / -3.120 / -3.000",
         "existing camera, light, shadow, tone mapping unchanged",
     ])
     closeup("crown-position-1.png", "crown-position-1-close.png", (650, 170, 1090, 610), "Crown position 1", [
@@ -384,9 +388,88 @@ def main() -> None:
     ])
 
     board("open-heart-before-after.png", [
-        ("before-phase3b2-front.png", "Before", "Phase 3B.2 physical dial placeholder"),
-        ("desktop-front.png", "After", "Phase 3C.1 limited open heart"),
+        ("before-revision-front.png", "Before revision", "simple ring / dark dial"),
+        ("desktop-front.png", "Revised", "profiled silver rim / warm ivory"),
     ])
+    board("comparison-open-heart.png", [
+        ("before-revision-open-heart-close.png", "Initial open heart", "human-review rejected"),
+        ("open-heart-close.png", "Revised open heart", "profiled closed metal rim"),
+    ])
+    board("comparison-indices.png", [
+        ("before-revision-indices-close.png", "Initial indices / minute track", "short bars and line marks"),
+        ("indices-close.png", "Revised indices / minute dots", "faceted bars + circular dots"),
+    ])
+    board("comparison-hands.png", [
+        ("before-revision-hands-close.png", "Initial hands", "flat thin silhouette"),
+        ("hands-close.png", "Revised hands", "tapered facets + center ridge"),
+    ])
+    board("comparison-small-second.png", [
+        ("before-revision-small-second-close.png", "Initial small seconds", "low hierarchy"),
+        ("small-second-close.png", "Revised small seconds", "lighter recess + blue hand"),
+    ])
+    board("comparison-domed-crystal.png", [
+        ("before-revision-domed-crystal-side.png", "Initial crystal", "dome hard to read"),
+        ("domed-crystal-side.png", "Revised crystal", "stronger protected profile"),
+    ])
+    board("comparison-crown.png", [
+        ("crown-position-1-close.png", "Position 1", "protected Phase 3B.1 placement"),
+        ("crown-position-2-close.png", "Position 2", "absolute no-drift placement"),
+    ])
+
+    annotate_full(
+        "desktop-front.png",
+        "revision-reference-alignment.png",
+        "Reference-aligned revision (not a geometry copy)",
+        [
+            "warm ivory #BCAB8E / small seconds #CCB89F",
+            "educational polished steel visibility compensation",
+            "faceted bars + double 12 + circular minute dots",
+            "faceted silver hands + blue small-second hand",
+            "stronger dome within the protected 8.695 envelope",
+        ],
+        ellipse=open_heart_box,
+    )
+    annotate_full(
+        "desktop-front.png",
+        "issue2-shadow-boundary.png",
+        "Issue #2 separation — inherited rectangular shadow boundary",
+        [
+            "boundary intentionally retained in normal rendering",
+            "lighting / shadow map / transparent / depthWrite unchanged",
+            "100→99 and 55→54 continuity remain deferred to Issue #2",
+        ],
+        arrows=[((80, 170), (600, 290), "known rectangular boundary")],
+    )
+    closeup(
+        "desktop-front.png",
+        "dial-outside-shadow-close.png",
+        (300, 65, 665, 310),
+        "Dial region outside the inherited shadow",
+        [
+            "warm ivory without emissive or white-out",
+            "round minute dots and faceted bars remain readable",
+        ],
+    )
+    closeup(
+        "desktop-side.png",
+        "silver-case-side.png",
+        (240, 90, 1040, 630),
+        "Silver case midtone — protected lighting",
+        [
+            "educational visibility compensation only",
+            "light, shadow, environment, exposure, and D2c3 unchanged",
+        ],
+    )
+    closeup(
+        "desktop-oblique-front.png",
+        "domed-crystal-oblique.png",
+        (250, 40, 1030, 620),
+        "Domed crystal — oblique view",
+        [
+            "curvature is visible without changing the total case thickness",
+            "bezel interface and protected clear diameter are unchanged",
+        ],
+    )
 
     make_gif("video-01-watch-head-views.gif", [
         ("desktop-front.png", "front"),
@@ -395,42 +478,41 @@ def main() -> None:
         ("desktop-oblique-back.png", "oblique back"),
         ("desktop-back.png", "back"),
     ])
-    make_gif("video-02-open-heart-review.gif", [
-        ("before-phase3b2-front.png", "Phase 3B.2 before"),
-        ("desktop-front.png", "Phase 3C.1"),
+    make_gif("video-02-dial-close-review.gif", [
+        ("indices-close.png", "faceted bars + minute dots"),
+        ("hands-close.png", "faceted silver hands"),
+        ("small-second-close.png", "lighter small seconds"),
+    ])
+    make_gif("video-03-open-heart-review.gif", [
+        ("before-revision-front.png", "initial candidate rejected"),
+        ("desktop-front.png", "revised candidate"),
         ("open-heart-close.png", "open-heart close"),
     ])
-    make_gif("video-03-dial-detail-review.gif", [
-        ("indices-close.png", "indices"),
-        ("hands-close.png", "hands"),
-        ("small-second-close.png", "small seconds"),
+    make_gif("video-04-small-second-review.gif", [
+        ("before-revision-small-second-close.png", "initial small seconds"),
+        ("small-second-close.png", "revised small seconds"),
+        ("desktop-front.png", "revised whole dial"),
     ])
-    make_gif("video-04-opacity-cycle.gif", [
-        ("desktop-front.png", "100%"),
-        ("opacity-50.png", "50%"),
-        ("opacity-16.png", "16%"),
-        ("desktop-front.png", "100% restored"),
+    make_gif("video-05-hands-review.gif", [
+        ("before-revision-hands-close.png", "initial hands"),
+        ("hands-close.png", "revised faceted hands"),
+        ("desktop-front.png", "10:10:30 coupling"),
     ])
-    make_gif("video-05-crown-position-cycle.gif", [
+    make_gif("video-06-crystal-side-review.gif", [
+        ("before-revision-domed-crystal-side.png", "initial dome"),
+        ("domed-crystal-side.png", "revised dome"),
+        ("desktop-oblique-front.png", "oblique curvature"),
+    ])
+    make_gif("video-07-crown-position-cycle.gif", [
         ("crown-position-1.png", "position 1"),
         ("crown-position-2.png", "position 2"),
         ("crown-position-1.png", "position 1 restored"),
     ])
-    make_gif("video-06-mobile-review.gif", [
+    make_gif("video-08-mobile-review.gif", [
         ("mobile-390-front.png", "390×844 front"),
         ("mobile-390-oblique-front.png", "390×844 oblique"),
         ("mobile-390-side.png", "390×844 side"),
         ("mobile-390-opacity-16.png", "390×844 at 16%"),
-    ])
-    make_gif("video-07-selection-review.gif", [
-        ("desktop-front.png", "no selection"),
-        ("part-selection-ui.png", "selected part + HUD"),
-        ("opacity-16.png", "internal relation at 16%"),
-    ])
-    make_gif("video-08-phase3c2-backlog.gif", [
-        ("desktop-front.png", "Phase 3C.1 watch head"),
-        ("desktop-oblique-back.png", "Phase 3B.2 attachments preserved"),
-        ("desktop-back.png", "Phase 3C.2 strap styling not implemented"),
     ])
 
     raw_names = [
@@ -441,7 +523,7 @@ def main() -> None:
         "mobile-390-opacity-16.png", "normal-base-phase3b2.png", "normal-branch.png",
     ]
     image_report = {
-        "sourceImplementationCommit": "6d7eeac2b243609a7c7b4e9c734b235459376469",
+        "sourceImplementationCommit": "11c37f22936c5606673c80628cc1422d620fa7e2",
         "sourceBaseCommit": "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
         "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
         "sourceBranch": "feature/final-exterior-balanced-phase3c1-watch-head",

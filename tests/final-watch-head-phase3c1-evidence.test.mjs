@@ -64,6 +64,11 @@ test("Phase 3C.1 purpose-specific images and review GIFs are distinct", () => {
     "indices-close.png",
     "hands-close.png",
     "domed-crystal-side.png",
+    "revision-reference-alignment.png",
+    "issue2-shadow-boundary.png",
+    "dial-outside-shadow-close.png",
+    "silver-case-side.png",
+    "domed-crystal-oblique.png",
   ];
   const hashes = required.map(name => {
     const buffer = fs.readFileSync(path.join(evidence, name));
@@ -91,7 +96,14 @@ test("Phase 3C.1 reports reproduce the protected geometry and actual audit", () 
   const geometry = readJson("geometry-report.json");
   assert.equal(config.assertion.ok, true);
   assert.equal(config.config.enabledByDefault, false);
-  assert.equal(config.config.status, "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT");
+  assert.equal(
+    config.config.status,
+    "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+  );
+  assert.equal(
+    config.sourceImplementationCommit,
+    "11c37f22936c5606673c80628cc1422d620fa7e2",
+  );
   assert.equal(openHeart.actualGeometryAudit.cutout.openingDiameter, 6.6);
   assert.ok(openHeart.actualGeometryAudit.cutout.openingAreaRatio <= 0.1);
   assert.equal(
@@ -110,11 +122,20 @@ test("Phase 3C.1 regression, normal-path, suites, and performance pass", () => {
   const normal = readJson("normal-path-diff.json");
   assert.equal(
     regression.status,
+    "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+  );
+  assert.equal(
+    regression.revisionVerification,
     "AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW",
   );
   assert.equal(regression.defaultAdoption, false);
   assert.equal(regression.allAutomatedPassed, true);
   assert.equal(regression.humanReview.physicalIPhone, "PENDING");
+  assert.equal(
+    regression.humanReview.thermalObservation,
+    "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN",
+  );
+  assert.equal(regression.humanReview.thermalBlocking, false);
   assert.equal(normal.pixelExact, true);
   assert.equal(normal.normalPathObjectAdditionCount, 0);
   assert.equal(performance.thresholds.changed, false);

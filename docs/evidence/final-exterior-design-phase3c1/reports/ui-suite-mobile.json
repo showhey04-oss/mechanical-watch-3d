@@ -1,260 +1,263 @@
 {
+  "ok": true,
   "checks": [
     {
-      "detail": {
-        "activeIndex": 0,
-        "activeView": "operation",
-        "scrollPositions": {
-          "learning": 0,
-          "operation": 0,
-          "technical": 0
-        },
-        "scrollTop": 0,
-        "tabs": [
-          {
-            "hidden": false,
-            "panelId": "panelViewOperation",
-            "selected": true,
-            "tabId": "panelTabOperation",
-            "tabIndex": 0,
-            "view": "operation"
-          },
-          {
-            "hidden": true,
-            "panelId": "panelViewLearning",
-            "selected": false,
-            "tabId": "panelTabLearning",
-            "tabIndex": -1,
-            "view": "learning"
-          },
-          {
-            "hidden": true,
-            "panelId": "panelViewTechnical",
-            "selected": false,
-            "tabId": "panelTabTechnical",
-            "tabIndex": -1,
-            "view": "technical"
-          }
-        ]
-      },
       "name": "ui-default-operation-and-aria-contract",
-      "ok": true
-    },
-    {
+      "ok": true,
       "detail": {
-        "activeIndex": 1,
-        "activeView": "learning",
+        "activeView": "operation",
+        "activeIndex": 0,
+        "scrollTop": 0,
         "scrollPositions": {
-          "learning": 0,
           "operation": 0,
+          "learning": 0,
           "technical": 0
         },
-        "scrollTop": 0,
         "tabs": [
           {
-            "hidden": true,
-            "panelId": "panelViewOperation",
-            "selected": false,
+            "view": "operation",
             "tabId": "panelTabOperation",
-            "tabIndex": -1,
-            "view": "operation"
-          },
-          {
-            "hidden": false,
-            "panelId": "panelViewLearning",
+            "panelId": "panelViewOperation",
             "selected": true,
-            "tabId": "panelTabLearning",
             "tabIndex": 0,
-            "view": "learning"
+            "hidden": false
           },
           {
-            "hidden": true,
+            "view": "learning",
+            "tabId": "panelTabLearning",
+            "panelId": "panelViewLearning",
+            "selected": false,
+            "tabIndex": -1,
+            "hidden": true
+          },
+          {
+            "view": "technical",
+            "tabId": "panelTabTechnical",
             "panelId": "panelViewTechnical",
             "selected": false,
-            "tabId": "panelTabTechnical",
             "tabIndex": -1,
-            "view": "technical"
+            "hidden": true
           }
         ]
-      },
-      "name": "ui-click-activates-only-target-panel",
-      "ok": true
+      }
     },
     {
+      "name": "ui-click-activates-only-target-panel",
+      "ok": true,
       "detail": {
-        "arrowReturn": {
-          "activeIndex": 0,
-          "activeView": "operation",
+        "activeView": "learning",
+        "activeIndex": 1,
+        "scrollTop": 0,
+        "scrollPositions": {
+          "operation": 0,
+          "learning": 0,
+          "technical": 0
+        },
+        "tabs": [
+          {
+            "view": "operation",
+            "tabId": "panelTabOperation",
+            "panelId": "panelViewOperation",
+            "selected": false,
+            "tabIndex": -1,
+            "hidden": true
+          },
+          {
+            "view": "learning",
+            "tabId": "panelTabLearning",
+            "panelId": "panelViewLearning",
+            "selected": true,
+            "tabIndex": 0,
+            "hidden": false
+          },
+          {
+            "view": "technical",
+            "tabId": "panelTabTechnical",
+            "panelId": "panelViewTechnical",
+            "selected": false,
+            "tabIndex": -1,
+            "hidden": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "ui-arrow-keys-wrap-and-move-focus",
+      "ok": true,
+      "detail": {
+        "arrowWrap": {
+          "activeView": "technical",
+          "activeIndex": 2,
+          "scrollTop": 0,
           "scrollPositions": {
-            "learning": 0,
             "operation": 0,
+            "learning": 0,
             "technical": 0
           },
-          "scrollTop": 0,
           "tabs": [
             {
-              "hidden": false,
-              "panelId": "panelViewOperation",
-              "selected": true,
+              "view": "operation",
               "tabId": "panelTabOperation",
-              "tabIndex": 0,
-              "view": "operation"
+              "panelId": "panelViewOperation",
+              "selected": false,
+              "tabIndex": -1,
+              "hidden": true
             },
             {
-              "hidden": true,
+              "view": "learning",
+              "tabId": "panelTabLearning",
               "panelId": "panelViewLearning",
               "selected": false,
-              "tabId": "panelTabLearning",
               "tabIndex": -1,
-              "view": "learning"
+              "hidden": true
             },
             {
-              "hidden": true,
-              "panelId": "panelViewTechnical",
-              "selected": false,
+              "view": "technical",
               "tabId": "panelTabTechnical",
-              "tabIndex": -1,
-              "view": "technical"
+              "panelId": "panelViewTechnical",
+              "selected": true,
+              "tabIndex": 0,
+              "hidden": false
             }
           ]
         },
-        "arrowWrap": {
-          "activeIndex": 2,
-          "activeView": "technical",
+        "arrowReturn": {
+          "activeView": "operation",
+          "activeIndex": 0,
+          "scrollTop": 0,
           "scrollPositions": {
-            "learning": 0,
             "operation": 0,
+            "learning": 0,
             "technical": 0
           },
-          "scrollTop": 0,
           "tabs": [
             {
-              "hidden": true,
-              "panelId": "panelViewOperation",
-              "selected": false,
+              "view": "operation",
               "tabId": "panelTabOperation",
-              "tabIndex": -1,
-              "view": "operation"
+              "panelId": "panelViewOperation",
+              "selected": true,
+              "tabIndex": 0,
+              "hidden": false
             },
             {
-              "hidden": true,
+              "view": "learning",
+              "tabId": "panelTabLearning",
               "panelId": "panelViewLearning",
               "selected": false,
-              "tabId": "panelTabLearning",
               "tabIndex": -1,
-              "view": "learning"
+              "hidden": true
             },
             {
-              "hidden": false,
-              "panelId": "panelViewTechnical",
-              "selected": true,
+              "view": "technical",
               "tabId": "panelTabTechnical",
-              "tabIndex": 0,
-              "view": "technical"
+              "panelId": "panelViewTechnical",
+              "selected": false,
+              "tabIndex": -1,
+              "hidden": true
             }
           ]
         }
-      },
-      "name": "ui-arrow-keys-wrap-and-move-focus",
-      "ok": true
+      }
     },
     {
+      "name": "ui-home-end-select-boundaries-and-focus",
+      "ok": true,
       "detail": {
         "endState": {
-          "activeIndex": 2,
           "activeView": "technical",
+          "activeIndex": 2,
+          "scrollTop": 0,
           "scrollPositions": {
-            "learning": 0,
             "operation": 0,
+            "learning": 0,
             "technical": 0
           },
-          "scrollTop": 0,
           "tabs": [
             {
-              "hidden": true,
+              "view": "operation",
+              "tabId": "panelTabOperation",
               "panelId": "panelViewOperation",
               "selected": false,
-              "tabId": "panelTabOperation",
               "tabIndex": -1,
-              "view": "operation"
+              "hidden": true
             },
             {
-              "hidden": true,
+              "view": "learning",
+              "tabId": "panelTabLearning",
               "panelId": "panelViewLearning",
               "selected": false,
-              "tabId": "panelTabLearning",
               "tabIndex": -1,
-              "view": "learning"
+              "hidden": true
             },
             {
-              "hidden": false,
+              "view": "technical",
+              "tabId": "panelTabTechnical",
               "panelId": "panelViewTechnical",
               "selected": true,
-              "tabId": "panelTabTechnical",
               "tabIndex": 0,
-              "view": "technical"
+              "hidden": false
             }
           ]
         },
         "homeState": {
-          "activeIndex": 0,
           "activeView": "operation",
+          "activeIndex": 0,
+          "scrollTop": 0,
           "scrollPositions": {
-            "learning": 0,
             "operation": 0,
+            "learning": 0,
             "technical": 0
           },
-          "scrollTop": 0,
           "tabs": [
             {
-              "hidden": false,
+              "view": "operation",
+              "tabId": "panelTabOperation",
               "panelId": "panelViewOperation",
               "selected": true,
-              "tabId": "panelTabOperation",
               "tabIndex": 0,
-              "view": "operation"
+              "hidden": false
             },
             {
-              "hidden": true,
+              "view": "learning",
+              "tabId": "panelTabLearning",
               "panelId": "panelViewLearning",
               "selected": false,
-              "tabId": "panelTabLearning",
               "tabIndex": -1,
-              "view": "learning"
+              "hidden": true
             },
             {
-              "hidden": true,
+              "view": "technical",
+              "tabId": "panelTabTechnical",
               "panelId": "panelViewTechnical",
               "selected": false,
-              "tabId": "panelTabTechnical",
               "tabIndex": -1,
-              "view": "technical"
+              "hidden": true
             }
           ]
         }
-      },
-      "name": "ui-home-end-select-boundaries-and-focus",
-      "ok": true
+      }
     },
     {
+      "name": "ui-hidden-panels-have-no-layout-or-focusable-descendants",
+      "ok": true,
       "detail": {
-        "hiddenFocusable": 25,
         "hiddenPanels": [
           "learning",
           "technical"
-        ]
-      },
-      "name": "ui-hidden-panels-have-no-layout-or-focusable-descendants",
-      "ok": true
+        ],
+        "hiddenFocusable": 25
+      }
     },
     {
+      "name": "ui-existing-control-ids-remain-unique",
+      "ok": true,
       "detail": {
         "count": 100
-      },
-      "name": "ui-existing-control-ids-remain-unique",
-      "ok": true
+      }
     },
     {
+      "name": "ui-operation-panel-owns-general-controls-and-three-view-groups",
+      "ok": true,
       "detail": {
         "operationIds": [
           "play",
@@ -283,12 +286,19 @@
           "backgroundTheme",
           "mode"
         ]
-      },
-      "name": "ui-operation-panel-owns-general-controls-and-three-view-groups",
-      "ok": true
+      }
     },
     {
+      "name": "ui-learning-panel-owns-selection-structure-groups-and-legend",
+      "ok": true,
       "detail": {
+        "learningIds": [
+          "learningPartName",
+          "learningPartDesc",
+          "machiningToggle",
+          "supportToggle",
+          "datumToggle"
+        ],
         "groups": [
           "plate",
           "bridge",
@@ -299,19 +309,12 @@
           "dial",
           "motion",
           "diagnostic"
-        ],
-        "learningIds": [
-          "learningPartName",
-          "learningPartDesc",
-          "machiningToggle",
-          "supportToggle",
-          "datumToggle"
         ]
-      },
-      "name": "ui-learning-panel-owns-selection-structure-groups-and-legend",
-      "ok": true
+      }
     },
     {
+      "name": "ui-technical-panel-owns-diagnostics-balance-power-and-notice",
+      "ok": true,
       "detail": {
         "technicalIds": [
           "meshGuide",
@@ -330,167 +333,167 @@
           "clearHistory",
           "historyCanvas"
         ]
-      },
-      "name": "ui-technical-panel-owns-diagnostics-balance-power-and-notice",
-      "ok": true
+      }
     },
     {
-      "detail": {
-        "balance": {
-          "amplitude": 245,
-          "autoAmplitude": false,
-          "beatErrorMs": 0,
-          "positionMode": "dialUp",
-          "rateAdjustSecDay": 0
-        },
-        "crownPosition": "set",
-        "currentBackgroundTheme": "walnut",
-        "explodeAmount": 0.5,
-        "functionalMode": "wind",
-        "groups": {
-          "balance": false,
-          "bridge": false,
-          "diagnostic": true,
-          "dial": true,
-          "esc": false,
-          "motion": false,
-          "plate": true,
-          "train": false,
-          "wind": true
-        },
-        "guides": {
-          "datum": false,
-          "mesh": true,
-          "pivot": false
-        },
-        "power": {
-          "historyLength": 2,
-          "runtimeScale": 1,
-          "trainEfficiency": 0.79
-        },
-        "running": false,
-        "selection": "丸穴車・クラウン歯",
-        "selectionOutputs": {
-          "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-          "learningName": "丸穴車・クラウン歯",
-          "topDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-          "topName": "丸穴車・クラウン歯"
-        },
-        "sideSplitAmount": 0.37,
-        "structuralOpacityRatio": 0.16,
-        "watchTimeSec": 49062
-      },
       "name": "ui-tab-roundtrip-preserves-play-crown-time-opacity-explode-split-theme-mode",
-      "ok": true
-    },
-    {
+      "ok": true,
       "detail": {
-        "balance": {
-          "amplitude": 245,
-          "autoAmplitude": false,
-          "beatErrorMs": 0,
-          "positionMode": "dialUp",
-          "rateAdjustSecDay": 0
-        },
+        "running": false,
+        "watchTimeSec": 49062,
         "crownPosition": "set",
-        "currentBackgroundTheme": "walnut",
+        "structuralOpacityRatio": 0.16,
         "explodeAmount": 0.5,
+        "sideSplitAmount": 0.37,
+        "currentBackgroundTheme": "walnut",
         "functionalMode": "wind",
         "groups": {
-          "balance": false,
-          "bridge": false,
-          "diagnostic": true,
-          "dial": true,
-          "esc": false,
-          "motion": false,
           "plate": true,
+          "bridge": false,
           "train": false,
-          "wind": true
+          "esc": false,
+          "balance": false,
+          "wind": true,
+          "dial": true,
+          "motion": false,
+          "diagnostic": true
         },
         "guides": {
-          "datum": false,
           "mesh": true,
-          "pivot": false
+          "pivot": false,
+          "datum": false
+        },
+        "balance": {
+          "autoAmplitude": false,
+          "amplitude": 245,
+          "rateAdjustSecDay": 0,
+          "beatErrorMs": 0,
+          "positionMode": "dialUp"
         },
         "power": {
-          "historyLength": 2,
+          "trainEfficiency": 0.79,
           "runtimeScale": 1,
-          "trainEfficiency": 0.79
+          "historyLength": 2
         },
-        "running": false,
         "selection": "丸穴車・クラウン歯",
         "selectionOutputs": {
-          "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-          "learningName": "丸穴車・クラウン歯",
+          "topName": "丸穴車・クラウン歯",
           "topDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-          "topName": "丸穴車・クラウン歯"
-        },
-        "sideSplitAmount": 0.37,
-        "structuralOpacityRatio": 0.16,
-        "watchTimeSec": 49062
-      },
-      "name": "ui-tab-roundtrip-preserves-guides-groups-amplitude-efficiency",
-      "ok": true
-    },
-    {
-      "detail": {
-        "after": {
-          "bitmap": 15882,
-          "height": 300,
-          "length": 2,
-          "width": 640
-        },
-        "before": {
-          "bitmap": 15882,
-          "height": 300,
-          "length": 2,
-          "width": 640
+          "learningName": "丸穴車・クラウン歯",
+          "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。"
         }
-      },
-      "name": "ui-hidden-technical-panel-preserves-history-data-and-canvas-bitmap",
-      "ok": true
+      }
     },
     {
+      "name": "ui-tab-roundtrip-preserves-guides-groups-amplitude-efficiency",
+      "ok": true,
       "detail": {
-        "first": {
-          "learningDescription": "ミニッツホイールと設定車1の間をピッチ半径和で配置し、時刻合わせ回転を日の裏輪列へ伝える。",
-          "learningName": "設定車2",
-          "topDescription": "ミニッツホイールと設定車1の間をピッチ半径和で配置し、時刻合わせ回転を日の裏輪列へ伝える。",
-          "topName": "設定車2"
+        "running": false,
+        "watchTimeSec": 49062,
+        "crownPosition": "set",
+        "structuralOpacityRatio": 0.16,
+        "explodeAmount": 0.5,
+        "sideSplitAmount": 0.37,
+        "currentBackgroundTheme": "walnut",
+        "functionalMode": "wind",
+        "groups": {
+          "plate": true,
+          "bridge": false,
+          "train": false,
+          "esc": false,
+          "balance": false,
+          "wind": true,
+          "dial": true,
+          "motion": false,
+          "diagnostic": true
         },
-        "firstSelection": "設定車2",
-        "second": {
-          "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-          "learningName": "丸穴車・クラウン歯",
+        "guides": {
+          "mesh": true,
+          "pivot": false,
+          "datum": false
+        },
+        "balance": {
+          "autoAmplitude": false,
+          "amplitude": 245,
+          "rateAdjustSecDay": 0,
+          "beatErrorMs": 0,
+          "positionMode": "dialUp"
+        },
+        "power": {
+          "trainEfficiency": 0.79,
+          "runtimeScale": 1,
+          "historyLength": 2
+        },
+        "selection": "丸穴車・クラウン歯",
+        "selectionOutputs": {
+          "topName": "丸穴車・クラウン歯",
           "topDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-          "topName": "丸穴車・クラウン歯"
-        },
-        "secondSelection": "丸穴車・クラウン歯"
-      },
-      "name": "ui-two-selected-parts-update-top-and-learning-copy-from-one-source",
-      "ok": true
+          "learningName": "丸穴車・クラウン歯",
+          "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。"
+        }
+      }
     },
     {
+      "name": "ui-hidden-technical-panel-preserves-history-data-and-canvas-bitmap",
+      "ok": true,
       "detail": {
-        "cameraAfter": {
-          "quaternion": [
-            0.6911258945804654,
-            0.016482210876295998,
-            0.01722242997864956,
-            0.7223411399543928
-          ],
-          "target": [
-            -2.8,
-            0.7,
-            -2.1
-          ]
+        "before": {
+          "length": 2,
+          "bitmap": 15882,
+          "width": 640,
+          "height": 300
         },
+        "after": {
+          "length": 2,
+          "bitmap": 15882,
+          "width": 640,
+          "height": 300
+        }
+      }
+    },
+    {
+      "name": "ui-two-selected-parts-update-top-and-learning-copy-from-one-source",
+      "ok": true,
+      "detail": {
+        "firstSelection": "設定車2",
+        "secondSelection": "丸穴車・クラウン歯",
+        "first": {
+          "topName": "設定車2",
+          "topDescription": "ミニッツホイールと設定車1の間をピッチ半径和で配置し、時刻合わせ回転を日の裏輪列へ伝える。",
+          "learningName": "設定車2",
+          "learningDescription": "ミニッツホイールと設定車1の間をピッチ半径和で配置し、時刻合わせ回転を日の裏輪列へ伝える。"
+        },
+        "second": {
+          "topName": "丸穴車・クラウン歯",
+          "topDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
+          "learningName": "丸穴車・クラウン歯",
+          "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。"
+        }
+      }
+    },
+    {
+      "name": "ui-tab-switch-does-not-change-model-world-or-camera",
+      "ok": true,
+      "detail": {
         "cameraBefore": {
           "quaternion": [
-            0.6911258945804654,
-            0.016482210876295998,
-            0.01722242997864956,
-            0.7223411399543928
+            0.6911297010818636,
+            0.016483946446125625,
+            0.017223212206364632,
+            0.7223374396730033
+          ],
+          "target": [
+            -2.8,
+            0.7,
+            -2.1
+          ]
+        },
+        "cameraAfter": {
+          "quaternion": [
+            0.6911297010818636,
+            0.016483946446125625,
+            0.017223212206364632,
+            0.7223374396730033
           ],
           "target": [
             -2.8,
@@ -498,368 +501,333 @@
             -2.1
           ]
         }
-      },
-      "name": "ui-tab-switch-does-not-change-model-world-or-camera",
-      "ok": true
+      }
     },
     {
-      "detail": {
-        "restoredScroll": {
-          "learning": 67,
-          "operation": 36,
-          "technical": 98
-        },
-        "scrollTargets": {
-          "learning": 67,
-          "operation": 36,
-          "technical": 98
-        }
-      },
       "name": "ui-each-tab-restores-independent-scroll-position",
-      "ok": true
+      "ok": true,
+      "detail": {
+        "scrollTargets": {
+          "operation": 36,
+          "learning": 67,
+          "technical": 98
+        },
+        "restoredScroll": {
+          "operation": 36,
+          "learning": 67,
+          "technical": 98
+        }
+      }
     },
     {
+      "name": "ui-panel-close-open-preserves-active-tab-and-scroll",
+      "ok": true,
       "detail": {
-        "afterPanelToggle": {
-          "activeIndex": 2,
+        "beforePanelToggle": {
           "activeView": "technical",
+          "activeIndex": 2,
+          "scrollTop": 98,
           "scrollPositions": {
-            "learning": 67,
             "operation": 36,
+            "learning": 67,
             "technical": 98
           },
-          "scrollTop": 98,
           "tabs": [
             {
-              "hidden": true,
+              "view": "operation",
+              "tabId": "panelTabOperation",
               "panelId": "panelViewOperation",
               "selected": false,
-              "tabId": "panelTabOperation",
               "tabIndex": -1,
-              "view": "operation"
+              "hidden": true
             },
             {
-              "hidden": true,
+              "view": "learning",
+              "tabId": "panelTabLearning",
               "panelId": "panelViewLearning",
               "selected": false,
-              "tabId": "panelTabLearning",
               "tabIndex": -1,
-              "view": "learning"
+              "hidden": true
             },
             {
-              "hidden": false,
+              "view": "technical",
+              "tabId": "panelTabTechnical",
               "panelId": "panelViewTechnical",
               "selected": true,
-              "tabId": "panelTabTechnical",
               "tabIndex": 0,
-              "view": "technical"
+              "hidden": false
             }
           ]
         },
-        "beforePanelToggle": {
-          "activeIndex": 2,
+        "afterPanelToggle": {
           "activeView": "technical",
+          "activeIndex": 2,
+          "scrollTop": 98,
           "scrollPositions": {
-            "learning": 67,
             "operation": 36,
+            "learning": 67,
             "technical": 98
           },
-          "scrollTop": 98,
           "tabs": [
             {
-              "hidden": true,
+              "view": "operation",
+              "tabId": "panelTabOperation",
               "panelId": "panelViewOperation",
               "selected": false,
-              "tabId": "panelTabOperation",
               "tabIndex": -1,
-              "view": "operation"
+              "hidden": true
             },
             {
-              "hidden": true,
+              "view": "learning",
+              "tabId": "panelTabLearning",
               "panelId": "panelViewLearning",
               "selected": false,
-              "tabId": "panelTabLearning",
               "tabIndex": -1,
-              "view": "learning"
+              "hidden": true
             },
             {
-              "hidden": false,
+              "view": "technical",
+              "tabId": "panelTabTechnical",
               "panelId": "panelViewTechnical",
               "selected": true,
-              "tabId": "panelTabTechnical",
               "tabIndex": 0,
-              "view": "technical"
+              "hidden": false
             }
           ]
         }
-      },
-      "name": "ui-panel-close-open-preserves-active-tab-and-scroll",
-      "ok": true
+      }
     },
     {
+      "name": "ui-layout-has-zero-horizontal-overflow",
+      "ok": true,
       "detail": {
-        "documentScrollWidth": 390,
-        "panelClientWidth": 388,
-        "panelRect": {
-          "bottom": 844,
-          "height": 472.6328125,
-          "left": 0,
-          "right": 390,
-          "top": 371.3671875,
-          "width": 390,
-          "x": 0,
-          "y": 371.3671875
-        },
-        "panelScrollWidth": 388,
         "viewport": [
           390,
           844
-        ]
-      },
-      "name": "ui-layout-has-zero-horizontal-overflow",
-      "ok": true
+        ],
+        "documentScrollWidth": 390,
+        "panelScrollWidth": 388,
+        "panelClientWidth": 388,
+        "panelRect": {
+          "x": 0,
+          "y": 371.3671875,
+          "width": 390,
+          "height": 472.6328125,
+          "top": 371.3671875,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
+        }
+      }
     },
     {
+      "name": "ui-tabs-are-equal-width-sticky-and-at-least-44px",
+      "ok": true,
       "detail": {
-        "position": "sticky",
         "rects": [
           {
-            "bottom": 496.3671875,
-            "height": 44,
-            "left": 17,
-            "right": 131.6640625,
-            "top": 452.3671875,
-            "width": 114.6640625,
             "x": 17,
-            "y": 452.3671875
+            "y": 452.3671875,
+            "width": 114.6640625,
+            "height": 44,
+            "top": 452.3671875,
+            "right": 131.6640625,
+            "bottom": 496.3671875,
+            "left": 17
           },
           {
-            "bottom": 496.3671875,
-            "height": 44,
-            "left": 137.6640625,
-            "right": 252.328125,
-            "top": 452.3671875,
-            "width": 114.6640625,
             "x": 137.6640625,
-            "y": 452.3671875
-          },
-          {
-            "bottom": 496.3671875,
-            "height": 44,
-            "left": 258.328125,
-            "right": 372.9921875,
-            "top": 452.3671875,
+            "y": 452.3671875,
             "width": 114.6640625,
-            "x": 258.328125,
-            "y": 452.3671875
-          }
-        ]
-      },
-      "name": "ui-tabs-are-equal-width-sticky-and-at-least-44px",
-      "ok": true
-    },
-    {
-      "detail": {
-        "tabAttributeMutations": 0
-      },
-      "name": "ui-tab-attributes-do-not-mutate-during-60-idle-raf-frames",
-      "ok": true
-    },
-    {
-      "detail": {
-        "cameraArchitecture": "dual-camera",
-        "completedTurns": 0.08,
-        "controlType": "ArcballControls",
-        "cumulativeRadians": 0.5026548245743669,
-        "direction": "horizontal",
-        "finite": true,
-        "hardStop": false,
-        "modelInvariant": true,
-        "path": [
-          {
-            "cameraSide": "front",
-            "normalDot": 0.9825981219105522,
-            "position": [
-              -0.6687932454584642,
-              -10.913164921560172,
-              -1.5734875499838603
-            ],
-            "quaternion": [
-              0.687696327875097,
-              0.07052675891396704,
-              0.0737160453421417,
-              0.7187946031818224
-            ],
-            "step": 1
+            "height": 44,
+            "top": 452.3671875,
+            "right": 252.328125,
+            "bottom": 496.3671875,
+            "left": 137.6640625
           },
           {
-            "cameraSide": "front",
-            "normalDot": 0.9294941325534603,
-            "position": [
-              1.4710091803143488,
-              -10.144710109157787,
-              -1.5734875499838603
-            ],
-            "quaternion": [
-              0.6763509259347183,
-              0.14300240586455557,
-              0.14946910927249898,
-              0.7069361514857505
-            ],
-            "step": 2
+            "x": 258.328125,
+            "y": 452.3671875,
+            "width": 114.6640625,
+            "height": 44,
+            "top": 452.3671875,
+            "right": 372.9921875,
+            "bottom": 496.3671875,
+            "left": 258.328125
           }
         ],
+        "position": "sticky"
+      }
+    },
+    {
+      "name": "ui-tab-attributes-do-not-mutate-during-60-idle-raf-frames",
+      "ok": true,
+      "detail": {
+        "tabAttributeMutations": 0
+      }
+    },
+    {
+      "name": "ui-3d-rotation-continues-after-tab-and-panel-interactions",
+      "ok": true,
+      "detail": {
+        "tested": true,
+        "source": "quaternion-trackball-control-api",
+        "controlType": "ArcballControls",
+        "cameraArchitecture": "dual-camera",
+        "direction": "horizontal",
         "pointerType": "control-api",
         "requestedTurns": 0.08,
-        "sameDirection": true,
+        "cumulativeRadians": 0.5026548245743669,
+        "completedTurns": 0.08,
         "segments": 2,
+        "hardStop": false,
+        "sameDirection": true,
+        "visitedFront": true,
+        "visitedBack": false,
+        "finite": true,
+        "modelInvariant": true,
         "settled": {
           "frames": 36,
-          "positionError": 0.00023739207301429587,
-          "rotationError": 0.000003005752964764632,
+          "positionError": 0.00023917389854647027,
+          "rotationError": 0.0000030307657805479547,
           "targetError": 0,
           "zoomError": 0
         },
-        "source": "quaternion-trackball-control-api",
-        "tested": true,
-        "visitedBack": false,
-        "visitedFront": true
-      },
-      "name": "ui-3d-rotation-continues-after-tab-and-panel-interactions",
-      "ok": true
+        "path": [
+          {
+            "step": 1,
+            "cameraSide": "front",
+            "normalDot": 0.9830256979809027,
+            "position": [
+              -0.696553499263065,
+              -10.918025138619551,
+              -1.573487557705462
+            ],
+            "quaternion": [
+              0.68778269523974,
+              0.06967946056450755,
+              0.0728304313637187,
+              0.7188848761599962
+            ]
+          },
+          {
+            "step": 2,
+            "cameraSide": "front",
+            "normalDot": 0.9299069337878345,
+            "position": [
+              1.4577643292013829,
+              -10.147028908564478,
+              -1.573487557705462
+            ],
+            "quaternion": [
+              0.6764188879982239,
+              0.14268059102431552,
+              0.1491327416622441,
+              0.7070071868577438
+            ]
+          }
+        ]
+      }
     },
     {
+      "name": "ui-mobile-safe-area-and-exact-viewport",
+      "ok": true,
       "detail": {
+        "width": 390,
         "height": 844,
         "panelRect": {
-          "bottom": 844,
-          "height": 472.6328125,
-          "left": 0,
-          "right": 390,
-          "top": 371.3671875,
-          "width": 390,
           "x": 0,
-          "y": 371.3671875
+          "y": 371.3671875,
+          "width": 390,
+          "height": 472.6328125,
+          "top": 371.3671875,
+          "right": 390,
+          "bottom": 844,
+          "left": 0
         },
         "tabRects": [
           {
-            "bottom": 496.3671875,
-            "height": 44,
-            "left": 17,
-            "right": 131.6640625,
-            "top": 452.3671875,
-            "width": 114.6640625,
             "x": 17,
-            "y": 452.3671875
+            "y": 452.3671875,
+            "width": 114.6640625,
+            "height": 44,
+            "top": 452.3671875,
+            "right": 131.6640625,
+            "bottom": 496.3671875,
+            "left": 17
           },
           {
-            "bottom": 496.3671875,
-            "height": 44,
-            "left": 137.6640625,
-            "right": 252.328125,
-            "top": 452.3671875,
-            "width": 114.6640625,
             "x": 137.6640625,
-            "y": 452.3671875
+            "y": 452.3671875,
+            "width": 114.6640625,
+            "height": 44,
+            "top": 452.3671875,
+            "right": 252.328125,
+            "bottom": 496.3671875,
+            "left": 137.6640625
           },
           {
-            "bottom": 496.3671875,
-            "height": 44,
-            "left": 258.328125,
-            "right": 372.9921875,
-            "top": 452.3671875,
-            "width": 114.6640625,
             "x": 258.328125,
-            "y": 452.3671875
+            "y": 452.3671875,
+            "width": 114.6640625,
+            "height": 44,
+            "top": 452.3671875,
+            "right": 372.9921875,
+            "bottom": 496.3671875,
+            "left": 258.328125
           }
-        ],
-        "width": 390
-      },
-      "name": "ui-mobile-safe-area-and-exact-viewport",
-      "ok": true
+        ]
+      }
     },
     {
+      "name": "ui-mobile-two-finger-navigation-continues-after-tab-close",
+      "ok": true,
       "detail": {
-        "after": {
-          "orientation": {
-            "cameraUp": [
-              0.5224471032465257,
-              -0.851523411656361,
-              0.04423690439470012
-            ],
-            "control": {
-              "cameraUp": [
-                0.5224479696501356,
-                -0.851524823785844,
-                0.04419947380838887
-              ],
-              "direction": [
-                -0.5224479696501357,
-                0.8515248237858439,
-                -0.04419947380838886
-              ],
-              "distance": 17.984945000282373,
-              "finite": true,
-              "position": [
-                6.367089691503697,
-                -14.711196077926202,
-                -0.4574107898859952
-              ],
-              "preset": "free",
-              "quaternion": [
-                0.6652977849411049,
-                0.1878273687412589,
-                0.1963210991662881,
-                0.6953831770515698
-              ],
-              "role": "control",
-              "target": [
-                -3.0291083081631447,
-                0.6034310442373578,
-                -1.2523358953714263
-              ]
-            },
-            "direction": [
-              -0.5224479696501357,
-              0.851524823785844,
-              -0.04419947380838885
-            ],
-            "distance": 17.98423998457069,
-            "finite": true,
-            "position": [
-              6.366747932554164,
-              -14.710584542578623,
-              -0.4575403596027887
-            ],
-            "preset": "free",
-            "quaternion": [
-              0.6652977849411049,
-              0.1878273687412589,
-              0.1963210991662881,
-              0.6953831770515698
-            ],
-            "role": "render",
-            "target": [
-              -3.029081710083456,
-              0.6034422553051774,
-              -1.252434304013107
-            ]
-          },
-          "selection": "丸穴車・クラウン歯",
-          "target": [
-            -3.029081710083456,
-            0.6034422553051774,
-            -1.252434304013107
-          ]
-        },
         "before": {
           "orientation": {
+            "role": "render",
+            "position": [
+              3.4232732568418878,
+              -9.443604393700499,
+              -1.573487557705462
+            ],
+            "quaternion": [
+              0.6652980695666709,
+              0.187826360574502,
+              0.19632004540928127,
+              0.6953834745481776
+            ],
             "cameraUp": [
               0,
               0,
               1
             ],
+            "direction": [
+              -0.5224453889121441,
+              0.8515264071768411,
+              -0.044199473808396506
+            ],
+            "target": [
+              -2.8,
+              0.7,
+              -2.1
+            ],
+            "distance": 11.912138996717358,
+            "preset": "free",
+            "finite": true,
             "control": {
+              "role": "control",
+              "position": [
+                3.4234984440031795,
+                -9.443523802782057,
+                -1.573487557705462
+              ],
+              "quaternion": [
+                0.6652977849411023,
+                0.1878273687412582,
+                0.19632109916628726,
+                0.6953831770515728
+              ],
               "cameraUp": [
                 0,
                 0,
@@ -870,52 +838,15 @@
                 0.8515248237858449,
                 -0.044199473808396506
               ],
-              "distance": 11.912188192523685,
-              "finite": true,
-              "position": [
-                3.4234985352742937,
-                -9.44352395154255,
-                -1.5734875499838603
-              ],
-              "preset": "free",
-              "quaternion": [
-                0.6652977849411023,
-                0.1878273687412582,
-                0.1963210991662873,
-                0.6953831770515728
-              ],
-              "role": "control",
               "target": [
                 -2.8,
                 0.7,
                 -2.1
-              ]
-            },
-            "direction": [
-              -0.5224454101776467,
-              0.8515263941296074,
-              -0.044199473808396506
-            ],
-            "distance": 11.912139791681476,
-            "finite": true,
-            "position": [
-              3.4232751137673256,
-              -9.443604187610214,
-              -1.5734875499838603
-            ],
-            "preset": "free",
-            "quaternion": [
-              0.6652980672213402,
-              0.1878263688818767,
-              0.19632005409232334,
-              0.6953834720967889
-            ],
-            "role": "render",
-            "target": [
-              -2.8,
-              0.7,
-              -2.1
-            ]
+              ],
+              "distance": 11.91218801782473,
+              "preset": "free",
+              "finite": true
+            }
           },
           "selection": "丸穴車・クラウン歯",
           "target": [
@@ -924,217 +855,132 @@
             -2.1
           ]
         },
-        "distanceChanged": true,
-        "finite": true,
-        "selectionUnchanged": true,
-        "targetChanged": true
-      },
-      "name": "ui-mobile-two-finger-navigation-continues-after-tab-close",
-      "ok": true
-    }
-  ],
-  "harness": {
-    "appVersion": "v3.15.0",
-    "audioGestureApplied": false,
-    "iframeOrigin": "http://127.0.0.1:8000",
-    "iframeReadyState": "complete",
-    "iframeUrl": "http://127.0.0.1:8000/index.html?exterior=balanced&theme=navy&camera=front&time=10%3A10%3A30&paused=1&opacity=1&panel=open&uiTest=1&watchHead=phase3c1",
-    "mode": "candidate",
-    "parentOrigin": "http://127.0.0.1:8000",
-    "parentUrl": "http://127.0.0.1:8000/tests/final-watch-head-phase3c1-suite-harness.html?suite=ui&width=390&height=844&mode=candidate&cache=1785022336758",
-    "suite": "ui",
-    "viewport": {
-      "coarsePointer": false,
-      "devicePixelRatio": 2,
-      "height": 844,
-      "panelCollapsed": false,
-      "panelOpen": false,
-      "renderPixelRatio": 1,
-      "width": 390
-    }
-  },
-  "measurements": {
-    "configured": {
-      "balance": {
-        "amplitude": 245,
-        "autoAmplitude": false,
-        "beatErrorMs": 0,
-        "positionMode": "dialUp",
-        "rateAdjustSecDay": 0
-      },
-      "crownPosition": "set",
-      "currentBackgroundTheme": "walnut",
-      "explodeAmount": 0.5,
-      "functionalMode": "wind",
-      "groups": {
-        "balance": false,
-        "bridge": false,
-        "diagnostic": true,
-        "dial": true,
-        "esc": false,
-        "motion": false,
-        "plate": true,
-        "train": false,
-        "wind": true
-      },
-      "guides": {
-        "datum": false,
-        "mesh": true,
-        "pivot": false
-      },
-      "power": {
-        "historyLength": 2,
-        "runtimeScale": 1,
-        "trainEfficiency": 0.79
-      },
-      "running": false,
-      "selection": "丸穴車・クラウン歯",
-      "selectionOutputs": {
-        "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-        "learningName": "丸穴車・クラウン歯",
-        "topDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-        "topName": "丸穴車・クラウン歯"
-      },
-      "sideSplitAmount": 0.37,
-      "structuralOpacityRatio": 0.16,
-      "watchTimeSec": 49062
-    },
-    "initial": {
-      "activeIndex": 0,
-      "activeView": "operation",
-      "scrollPositions": {
-        "learning": 0,
-        "operation": 0,
-        "technical": 0
-      },
-      "scrollTop": 0,
-      "tabs": [
-        {
-          "hidden": false,
-          "panelId": "panelViewOperation",
-          "selected": true,
-          "tabId": "panelTabOperation",
-          "tabIndex": 0,
-          "view": "operation"
-        },
-        {
-          "hidden": true,
-          "panelId": "panelViewLearning",
-          "selected": false,
-          "tabId": "panelTabLearning",
-          "tabIndex": -1,
-          "view": "learning"
-        },
-        {
-          "hidden": true,
-          "panelId": "panelViewTechnical",
-          "selected": false,
-          "tabId": "panelTabTechnical",
-          "tabIndex": -1,
-          "view": "technical"
-        }
-      ]
-    },
-    "layout": {
-      "documentScrollWidth": 390,
-      "panelClientWidth": 388,
-      "panelRect": {
-        "bottom": 844,
-        "height": 472.6328125,
-        "left": 0,
-        "right": 390,
-        "top": 371.3671875,
-        "width": 390,
-        "x": 0,
-        "y": 371.3671875
-      },
-      "panelScrollWidth": 388,
-      "viewport": [
-        390,
-        844
-      ]
-    },
-    "mobileTouch": {
-      "after": {
-        "orientation": {
-          "cameraUp": [
-            0.5224471032465257,
-            -0.851523411656361,
-            0.04423690439470012
-          ],
-          "control": {
+        "after": {
+          "orientation": {
+            "role": "render",
+            "position": [
+              6.3667524591959594,
+              -14.710592642205865,
+              -0.4575386455670965
+            ],
+            "quaternion": [
+              0.665297784941104,
+              0.18782736874125855,
+              0.19632109916628795,
+              0.6953831770515709
+            ],
             "cameraUp": [
-              0.5224479696501356,
-              -0.851524823785844,
-              0.04419947380838887
+              0.5224471163504147,
+              -0.8515234330140624,
+              0.04423633851350862
             ],
             "direction": [
-              -0.5224479696501357,
-              0.8515248237858439,
-              -0.04419947380838886
+              -0.522447969650135,
+              0.8515248237858443,
+              -0.04419947380839162
             ],
-            "distance": 17.984945000282373,
-            "finite": true,
-            "position": [
-              6.367089691503697,
-              -14.711196077926202,
-              -0.4574107898859952
-            ],
-            "preset": "free",
-            "quaternion": [
-              0.6652977849411049,
-              0.1878273687412589,
-              0.1963210991662881,
-              0.6953831770515698
-            ],
-            "role": "control",
             "target": [
-              -3.0291083081631447,
-              0.6034310442373578,
-              -1.2523358953714263
-            ]
+              -3.029082062058188,
+              0.6034421068994925,
+              -1.2524330026999275
+            ],
+            "distance": 17.984249322298645,
+            "preset": "free",
+            "finite": true,
+            "control": {
+              "role": "control",
+              "position": [
+                6.367089691816263,
+                -14.711196077843098,
+                -0.45741079197959195
+              ],
+              "quaternion": [
+                0.665297784941104,
+                0.18782736874125855,
+                0.19632109916628795,
+                0.6953831770515709
+              ],
+              "cameraUp": [
+                0.5224479696501347,
+                -0.8515248237858444,
+                0.044199473808392176
+              ],
+              "direction": [
+                -0.522447969650135,
+                0.8515248237858443,
+                -0.04419947380839162
+              ],
+              "target": [
+                -3.029108307850579,
+                0.6034310443204619,
+                -1.2523358974650223
+              ],
+              "distance": 17.984945000282373,
+              "preset": "free",
+              "finite": true
+            }
           },
-          "direction": [
-            -0.5224479696501357,
-            0.851524823785844,
-            -0.04419947380838885
-          ],
-          "distance": 17.98423998457069,
-          "finite": true,
-          "position": [
-            6.366747932554164,
-            -14.710584542578623,
-            -0.4575403596027887
-          ],
-          "preset": "free",
-          "quaternion": [
-            0.6652977849411049,
-            0.1878273687412589,
-            0.1963210991662881,
-            0.6953831770515698
-          ],
-          "role": "render",
+          "selection": "丸穴車・クラウン歯",
           "target": [
-            -3.029081710083456,
-            0.6034422553051774,
-            -1.252434304013107
+            -3.029082062058188,
+            0.6034421068994925,
+            -1.2524330026999275
           ]
         },
-        "selection": "丸穴車・クラウン歯",
-        "target": [
-          -3.029081710083456,
-          0.6034422553051774,
-          -1.252434304013107
-        ]
-      },
+        "distanceChanged": true,
+        "targetChanged": true,
+        "selectionUnchanged": true,
+        "finite": true
+      }
+    }
+  ],
+  "measurements": {
+    "mobileTouch": {
       "before": {
         "orientation": {
+          "role": "render",
+          "position": [
+            3.4232732568418878,
+            -9.443604393700499,
+            -1.573487557705462
+          ],
+          "quaternion": [
+            0.6652980695666709,
+            0.187826360574502,
+            0.19632004540928127,
+            0.6953834745481776
+          ],
           "cameraUp": [
             0,
             0,
             1
           ],
+          "direction": [
+            -0.5224453889121441,
+            0.8515264071768411,
+            -0.044199473808396506
+          ],
+          "target": [
+            -2.8,
+            0.7,
+            -2.1
+          ],
+          "distance": 11.912138996717358,
+          "preset": "free",
+          "finite": true,
           "control": {
+            "role": "control",
+            "position": [
+              3.4234984440031795,
+              -9.443523802782057,
+              -1.573487557705462
+            ],
+            "quaternion": [
+              0.6652977849411023,
+              0.1878273687412582,
+              0.19632109916628726,
+              0.6953831770515728
+            ],
             "cameraUp": [
               0,
               0,
@@ -1145,52 +991,15 @@
               0.8515248237858449,
               -0.044199473808396506
             ],
-            "distance": 11.912188192523685,
-            "finite": true,
-            "position": [
-              3.4234985352742937,
-              -9.44352395154255,
-              -1.5734875499838603
-            ],
-            "preset": "free",
-            "quaternion": [
-              0.6652977849411023,
-              0.1878273687412582,
-              0.1963210991662873,
-              0.6953831770515728
-            ],
-            "role": "control",
             "target": [
               -2.8,
               0.7,
               -2.1
-            ]
-          },
-          "direction": [
-            -0.5224454101776467,
-            0.8515263941296074,
-            -0.044199473808396506
-          ],
-          "distance": 11.912139791681476,
-          "finite": true,
-          "position": [
-            3.4232751137673256,
-            -9.443604187610214,
-            -1.5734875499838603
-          ],
-          "preset": "free",
-          "quaternion": [
-            0.6652980672213402,
-            0.1878263688818767,
-            0.19632005409232334,
-            0.6953834720967889
-          ],
-          "role": "render",
-          "target": [
-            -2.8,
-            0.7,
-            -2.1
-          ]
+            ],
+            "distance": 11.91218801782473,
+            "preset": "free",
+            "finite": true
+          }
         },
         "selection": "丸穴車・クラウン歯",
         "target": [
@@ -1199,125 +1008,317 @@
           -2.1
         ]
       },
+      "after": {
+        "orientation": {
+          "role": "render",
+          "position": [
+            6.3667524591959594,
+            -14.710592642205865,
+            -0.4575386455670965
+          ],
+          "quaternion": [
+            0.665297784941104,
+            0.18782736874125855,
+            0.19632109916628795,
+            0.6953831770515709
+          ],
+          "cameraUp": [
+            0.5224471163504147,
+            -0.8515234330140624,
+            0.04423633851350862
+          ],
+          "direction": [
+            -0.522447969650135,
+            0.8515248237858443,
+            -0.04419947380839162
+          ],
+          "target": [
+            -3.029082062058188,
+            0.6034421068994925,
+            -1.2524330026999275
+          ],
+          "distance": 17.984249322298645,
+          "preset": "free",
+          "finite": true,
+          "control": {
+            "role": "control",
+            "position": [
+              6.367089691816263,
+              -14.711196077843098,
+              -0.45741079197959195
+            ],
+            "quaternion": [
+              0.665297784941104,
+              0.18782736874125855,
+              0.19632109916628795,
+              0.6953831770515709
+            ],
+            "cameraUp": [
+              0.5224479696501347,
+              -0.8515248237858444,
+              0.044199473808392176
+            ],
+            "direction": [
+              -0.522447969650135,
+              0.8515248237858443,
+              -0.04419947380839162
+            ],
+            "target": [
+              -3.029108307850579,
+              0.6034310443204619,
+              -1.2523358974650223
+            ],
+            "distance": 17.984945000282373,
+            "preset": "free",
+            "finite": true
+          }
+        },
+        "selection": "丸穴車・クラウン歯",
+        "target": [
+          -3.029082062058188,
+          0.6034421068994925,
+          -1.2524330026999275
+        ]
+      },
       "distanceChanged": true,
-      "finite": true,
+      "targetChanged": true,
       "selectionUnchanged": true,
-      "targetChanged": true
+      "finite": true
+    },
+    "initial": {
+      "activeView": "operation",
+      "activeIndex": 0,
+      "scrollTop": 0,
+      "scrollPositions": {
+        "operation": 0,
+        "learning": 0,
+        "technical": 0
+      },
+      "tabs": [
+        {
+          "view": "operation",
+          "tabId": "panelTabOperation",
+          "panelId": "panelViewOperation",
+          "selected": true,
+          "tabIndex": 0,
+          "hidden": false
+        },
+        {
+          "view": "learning",
+          "tabId": "panelTabLearning",
+          "panelId": "panelViewLearning",
+          "selected": false,
+          "tabIndex": -1,
+          "hidden": true
+        },
+        {
+          "view": "technical",
+          "tabId": "panelTabTechnical",
+          "panelId": "panelViewTechnical",
+          "selected": false,
+          "tabIndex": -1,
+          "hidden": true
+        }
+      ]
+    },
+    "configured": {
+      "running": false,
+      "watchTimeSec": 49062,
+      "crownPosition": "set",
+      "structuralOpacityRatio": 0.16,
+      "explodeAmount": 0.5,
+      "sideSplitAmount": 0.37,
+      "currentBackgroundTheme": "walnut",
+      "functionalMode": "wind",
+      "groups": {
+        "plate": true,
+        "bridge": false,
+        "train": false,
+        "esc": false,
+        "balance": false,
+        "wind": true,
+        "dial": true,
+        "motion": false,
+        "diagnostic": true
+      },
+      "guides": {
+        "mesh": true,
+        "pivot": false,
+        "datum": false
+      },
+      "balance": {
+        "autoAmplitude": false,
+        "amplitude": 245,
+        "rateAdjustSecDay": 0,
+        "beatErrorMs": 0,
+        "positionMode": "dialUp"
+      },
+      "power": {
+        "trainEfficiency": 0.79,
+        "runtimeScale": 1,
+        "historyLength": 2
+      },
+      "selection": "丸穴車・クラウン歯",
+      "selectionOutputs": {
+        "topName": "丸穴車・クラウン歯",
+        "topDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
+        "learningName": "丸穴車・クラウン歯",
+        "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。"
+      }
+    },
+    "roundTrip": {
+      "running": false,
+      "watchTimeSec": 49062,
+      "crownPosition": "set",
+      "structuralOpacityRatio": 0.16,
+      "explodeAmount": 0.5,
+      "sideSplitAmount": 0.37,
+      "currentBackgroundTheme": "walnut",
+      "functionalMode": "wind",
+      "groups": {
+        "plate": true,
+        "bridge": false,
+        "train": false,
+        "esc": false,
+        "balance": false,
+        "wind": true,
+        "dial": true,
+        "motion": false,
+        "diagnostic": true
+      },
+      "guides": {
+        "mesh": true,
+        "pivot": false,
+        "datum": false
+      },
+      "balance": {
+        "autoAmplitude": false,
+        "amplitude": 245,
+        "rateAdjustSecDay": 0,
+        "beatErrorMs": 0,
+        "positionMode": "dialUp"
+      },
+      "power": {
+        "trainEfficiency": 0.79,
+        "runtimeScale": 1,
+        "historyLength": 2
+      },
+      "selection": "丸穴車・クラウン歯",
+      "selectionOutputs": {
+        "topName": "丸穴車・クラウン歯",
+        "topDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
+        "learningName": "丸穴車・クラウン歯",
+        "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。"
+      }
+    },
+    "layout": {
+      "viewport": [
+        390,
+        844
+      ],
+      "documentScrollWidth": 390,
+      "panelScrollWidth": 388,
+      "panelClientWidth": 388,
+      "panelRect": {
+        "x": 0,
+        "y": 371.3671875,
+        "width": 390,
+        "height": 472.6328125,
+        "top": 371.3671875,
+        "right": 390,
+        "bottom": 844,
+        "left": 0
+      }
+    },
+    "scrollTargets": {
+      "operation": 36,
+      "learning": 67,
+      "technical": 98
     },
     "restoredScroll": {
-      "learning": 67,
       "operation": 36,
+      "learning": 67,
       "technical": 98
     },
     "rotation": {
-      "cameraArchitecture": "dual-camera",
-      "completedTurns": 0.08,
+      "tested": true,
+      "source": "quaternion-trackball-control-api",
       "controlType": "ArcballControls",
-      "cumulativeRadians": 0.5026548245743669,
+      "cameraArchitecture": "dual-camera",
       "direction": "horizontal",
-      "finite": true,
-      "hardStop": false,
-      "modelInvariant": true,
-      "path": [
-        {
-          "cameraSide": "front",
-          "normalDot": 0.9825981219105522,
-          "position": [
-            -0.6687932454584642,
-            -10.913164921560172,
-            -1.5734875499838603
-          ],
-          "quaternion": [
-            0.687696327875097,
-            0.07052675891396704,
-            0.0737160453421417,
-            0.7187946031818224
-          ],
-          "step": 1
-        },
-        {
-          "cameraSide": "front",
-          "normalDot": 0.9294941325534603,
-          "position": [
-            1.4710091803143488,
-            -10.144710109157787,
-            -1.5734875499838603
-          ],
-          "quaternion": [
-            0.6763509259347183,
-            0.14300240586455557,
-            0.14946910927249898,
-            0.7069361514857505
-          ],
-          "step": 2
-        }
-      ],
       "pointerType": "control-api",
       "requestedTurns": 0.08,
-      "sameDirection": true,
+      "cumulativeRadians": 0.5026548245743669,
+      "completedTurns": 0.08,
       "segments": 2,
+      "hardStop": false,
+      "sameDirection": true,
+      "visitedFront": true,
+      "visitedBack": false,
+      "finite": true,
+      "modelInvariant": true,
       "settled": {
         "frames": 36,
-        "positionError": 0.00023739207301429587,
-        "rotationError": 0.000003005752964764632,
+        "positionError": 0.00023917389854647027,
+        "rotationError": 0.0000030307657805479547,
         "targetError": 0,
         "zoomError": 0
       },
-      "source": "quaternion-trackball-control-api",
-      "tested": true,
-      "visitedBack": false,
-      "visitedFront": true
-    },
-    "roundTrip": {
-      "balance": {
-        "amplitude": 245,
-        "autoAmplitude": false,
-        "beatErrorMs": 0,
-        "positionMode": "dialUp",
-        "rateAdjustSecDay": 0
-      },
-      "crownPosition": "set",
-      "currentBackgroundTheme": "walnut",
-      "explodeAmount": 0.5,
-      "functionalMode": "wind",
-      "groups": {
-        "balance": false,
-        "bridge": false,
-        "diagnostic": true,
-        "dial": true,
-        "esc": false,
-        "motion": false,
-        "plate": true,
-        "train": false,
-        "wind": true
-      },
-      "guides": {
-        "datum": false,
-        "mesh": true,
-        "pivot": false
-      },
-      "power": {
-        "historyLength": 2,
-        "runtimeScale": 1,
-        "trainEfficiency": 0.79
-      },
-      "running": false,
-      "selection": "丸穴車・クラウン歯",
-      "selectionOutputs": {
-        "learningDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-        "learningName": "丸穴車・クラウン歯",
-        "topDescription": "短いX軸巻上げピニオンと実ピッチ接触し、90度方向転換する教育用クラウン歯。",
-        "topName": "丸穴車・クラウン歯"
-      },
-      "sideSplitAmount": 0.37,
-      "structuralOpacityRatio": 0.16,
-      "watchTimeSec": 49062
-    },
-    "scrollTargets": {
-      "learning": 67,
-      "operation": 36,
-      "technical": 98
+      "path": [
+        {
+          "step": 1,
+          "cameraSide": "front",
+          "normalDot": 0.9830256979809027,
+          "position": [
+            -0.696553499263065,
+            -10.918025138619551,
+            -1.573487557705462
+          ],
+          "quaternion": [
+            0.68778269523974,
+            0.06967946056450755,
+            0.0728304313637187,
+            0.7188848761599962
+          ]
+        },
+        {
+          "step": 2,
+          "cameraSide": "front",
+          "normalDot": 0.9299069337878345,
+          "position": [
+            1.4577643292013829,
+            -10.147028908564478,
+            -1.573487557705462
+          ],
+          "quaternion": [
+            0.6764188879982239,
+            0.14268059102431552,
+            0.1491327416622441,
+            0.7070071868577438
+          ]
+        }
+      ]
     }
   },
-  "ok": true
+  "harness": {
+    "parentUrl": "http://127.0.0.1:8000/tests/final-watch-head-phase3c1-suite-harness.html?suite=ui&width=390&height=844&mode=candidate&cache=11c37f2-ui-mobile",
+    "iframeUrl": "http://127.0.0.1:8000/index.html?exterior=balanced&theme=navy&camera=front&time=10%3A10%3A30&paused=1&opacity=1&panel=open&uiTest=1&watchHead=phase3c1",
+    "parentOrigin": "http://127.0.0.1:8000",
+    "iframeOrigin": "http://127.0.0.1:8000",
+    "iframeReadyState": "complete",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 2,
+      "renderPixelRatio": 1,
+      "coarsePointer": false,
+      "panelOpen": false,
+      "panelCollapsed": false
+    },
+    "appVersion": "v3.15.0",
+    "suite": "ui",
+    "mode": "candidate",
+    "audioGestureApplied": false
+  },
+  "_harnessStatus": "passed"
 }

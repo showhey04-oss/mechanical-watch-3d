@@ -15,9 +15,9 @@ const evidence = path.join(
 );
 const reports = path.join(evidence, "reports");
 const sourceImplementationCommit =
-  "6d7eeac2b243609a7c7b4e9c734b235459376469";
+  "11c37f22936c5606673c80628cc1422d620fa7e2";
 const sourceAuditCommit =
-  "9d9e6c83395adb0ec72ad269c3bac1a7f7c3a0d9";
+  "ba3d77ad951ba88f12193550eb7253d1aaf4bebc";
 const sourceBaseCommit =
   "98d83781aa7aa001836a0d57f1ad6e3d058a15c4";
 const mainCommit =
@@ -231,7 +231,7 @@ await writeJson("performance-results.json", {
     item => item.candidate.modelInvariant,
   ),
   environmentNote:
-    "One earlier full-suite run recorded a single Browser long-task outlier; the dedicated repeated A/B runs and the final full-suite retry passed without threshold changes.",
+    "Dedicated same-browser A/B runs passed absolute and differential thresholds without changing DPR, frame pacing, camera, rendering, or test thresholds.",
 });
 
 const runtimeFailures = [
@@ -247,14 +247,19 @@ const allPerformancePassed =
   );
 await writeJson("regression-results.json", {
   ...metadata,
-  status:
+  status: "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+  revisionVerification:
     "AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW",
-  decision: "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+  decision: "REVISED_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
   defaultAdoption: false,
   humanReview: {
+    initialCandidate: "REJECTED",
     pc: "PENDING",
     physicalIPhone: "PENDING",
     adoption: "NOT_APPROVED",
+    thermalObservation: "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN",
+    thermalBlocking: false,
+    finalContinuousReviewMinutes: 15,
   },
   runtime: {
     desktop: {
@@ -317,10 +322,13 @@ await writeJson("regression-results.json", {
     actualRuntimeCaptureCount: imageEvidence.images.length,
   },
   knownLimitations: [
+    "The initial Phase 3C.1 candidate failed human review; this revision remains pending PC and physical iPhone confirmation.",
     "PC human visual confirmation is pending.",
     "Physical iPhone human confirmation is pending.",
+    "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN is recorded as non-blocking because no progressive frame drop, Safari reload, audio failure, touch failure, or thermal warning has been observed; the final integration review must include a continuous 15-minute run.",
     "The actual balance projects near 2:34; the reference image's nominal open-heart position was intentionally not copied.",
-    "The protected inherited shadow rig can form a visible boundary over the large ivory dial; lighting, shadow, material depth policy, and Issue #2 were not changed in this candidate.",
+    "The protected inherited shadow rig can form a visible rectangular boundary over the large ivory dial. The 100→99 transparent discontinuity, 55→54 depthWrite discontinuity, opacity dark/depth ordering, and PC/iPhone lighting differences remain separated to open Issue #2.",
+    "Lighting, shadow camera/map, castShadow/receiveShadow policy, transparent/depthWrite policy, tone mapping, exposure, fog, and D2c3 were not changed.",
     "Phase 3C.2 strap and buckle styling remains mandatory backlog.",
   ],
   allAutomatedPassed:
