@@ -19,7 +19,7 @@ const plateWindowRadius = 1.32;
 export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   schemaVersion: 1,
   id: "E-BALANCED-PHASE3C1-WATCH-HEAD",
-  status: "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+  status: "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
   enabledByDefault: false,
   query: {
     parameter: "watchHead",
@@ -37,8 +37,8 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   appVersion: "v3.15.0",
   humanAcceptance: {
     phase3b2: "HUMAN_ACCEPTED_PHASE3B2_WITH_MANDATORY_PHASE3C_REFINEMENTS",
-    phase3c1: "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
-    revision: "THIRD_CANDIDATE_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
+    phase3c1: "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
+    revision: "FOURTH_CANDIDATE_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
     physicalIPhoneThermalObservation: {
       classification: "MILD_WARMING_AFTER_15_MINUTES",
       blocking: false,
@@ -150,7 +150,7 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
     smallSecondMinorMarkLength: 0.138,
     smallSecondMajorMarkLength: 0.276,
     smallSecondMarkTangentialWidth: 0.032,
-    mainMinuteTrackRadius: 13.58,
+    mainMinuteTrackRadius: 14.2,
     minuteDotMinorDiameter: 0.165,
     minuteDotMajorDiameter: 0.25,
     minuteDotAxialHeight: 0.04,
@@ -214,17 +214,34 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
       { radius: 0, y: -2.86 },
     ],
     radialSegments: 128,
-    classification: "VISIBLE_PRONOUNCED_DOME_WITHIN_PROTECTED_ENVELOPE",
+    classification: "EDUCATIONAL_NON_REFRACTIVE_DOME_CRYSTAL",
     material: {
-      color: 0xffffff,
+      color: 0xfafcfd,
       metalness: 0,
-      roughness: 0.06,
-      transmission: 0.96,
-      ior: 1.47,
-      thickness: 0.6,
+      roughness: 0.025,
+      transmission: 0,
+      transparent: true,
+      opacity: 0.1,
+      ior: 1.45,
+      thickness: 0.05,
+      clearcoat: 1,
+      clearcoatRoughness: 0.03,
+      envMapIntensity: 0.35,
+      depthWrite: false,
+      depthTest: true,
     },
   },
   materials: {
+    stableExteriorSilver: {
+      color: 0xe7eaed,
+      metalness: 0.52,
+      roughness: 0.2,
+      envMapIntensity: 0.35,
+      opacity: 1,
+      transparent: false,
+      depthWrite: true,
+      classification: "EDUCATIONAL_STABLE_SILVER_MATERIAL",
+    },
     polishedSteel: {
       color: 0xe9edf0,
       metalness: 0.8,
@@ -253,6 +270,15 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
       PLATE: { splitDirection: 0 },
     },
   },
+  exteriorDisplayGroup: {
+    queryOnly: true,
+    label: "外装",
+    helper:
+      "ケース・風防・文字板・針・ラグ・ストラップ・裏蓋",
+    restoreTolerance: 1e-7,
+  },
+  uiSimplificationBacklog:
+    "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2",
   phase3c2MandatoryBacklog: [
     "spring-bar leather wrap",
     "practical twelve-side and six-side lengths",
@@ -370,6 +396,165 @@ export function derivePhase3C1OpenHeartAudit(
   });
 }
 
+export function derivePhase3C1MinuteTrackAudit(
+  config = FINAL_WATCH_HEAD_PHASE3C1,
+) {
+  const dial = config.dial;
+  const indexRadius = config.protectedAnchors.indexCircleDiameter / 2;
+  const openingRadius = config.protectedAnchors.dialApertureDiameter / 2;
+  const indexBars = [];
+  for (let index = 0; index < 12; index++) {
+    if (dial.omittedIndices.includes(index)) continue;
+    const angle = index * Math.PI * 2 / 12;
+    const double = index === 0;
+    const tangentialOffsets = double
+      ? [
+        -(dial.twelveIndexGap / 2 + dial.indexTangentialWidth / 2),
+        dial.twelveIndexGap / 2 + dial.indexTangentialWidth / 2,
+      ]
+      : [0];
+    for (const tangentialOffset of tangentialOffsets) {
+      indexBars.push({
+        index,
+        double,
+        angle,
+        tangentialOffset,
+        radialHalfLength:
+          dial.indexRadialLength
+          * (double ? dial.twelveIndexLengthScale : 1)
+          / 2,
+        tangentialHalfWidth: dial.indexTangentialWidth / 2,
+      });
+    }
+  }
+  const dots = Array.from({ length: 60 }, (_, index) => {
+    const angle = index * Math.PI * 2 / 60;
+    const major = index % 5 === 0;
+    const radius = (
+      major ? dial.minuteDotMajorDiameter : dial.minuteDotMinorDiameter
+    ) / 2;
+    const center = [
+      Math.sin(angle) * dial.mainMinuteTrackRadius,
+      Math.cos(angle) * dial.mainMinuteTrackRadius,
+    ];
+    const indexClearances = indexBars.map(bar => {
+      const radialUnit = [Math.sin(bar.angle), Math.cos(bar.angle)];
+      const tangentUnit = [Math.cos(bar.angle), -Math.sin(bar.angle)];
+      const radial =
+        center[0] * radialUnit[0]
+        + center[1] * radialUnit[1]
+        - indexRadius;
+      const tangential =
+        center[0] * tangentUnit[0]
+        + center[1] * tangentUnit[1]
+        - bar.tangentialOffset;
+      const radialDistance =
+        Math.max(Math.abs(radial) - bar.radialHalfLength, 0);
+      const tangentialDistance =
+        Math.max(Math.abs(tangential) - bar.tangentialHalfWidth, 0);
+      return {
+        index: bar.index,
+        double: bar.double,
+        clearance:
+          Math.hypot(radialDistance, tangentialDistance) - radius,
+      };
+    });
+    const openHeartClearance =
+      Math.hypot(
+        center[0] - config.openHeart.projectedCenter[0],
+        center[1] - config.openHeart.projectedCenter[1],
+      )
+      - config.openHeart.edgeRingOuterRadius
+      - radius;
+    return {
+      index,
+      major,
+      radius,
+      center,
+      nearestIndex: indexClearances.reduce(
+        (nearest, entry) =>
+          entry.clearance < nearest.clearance ? entry : nearest,
+        { index: null, double: false, clearance: Infinity },
+      ),
+      openingClearance: openingRadius
+        - dial.mainMinuteTrackRadius
+        - radius,
+      openHeartClearance,
+      omitted:
+        openHeartClearance < dial.minuteDotOpenHeartClearance,
+    };
+  });
+  const visibleDots = dots.filter(dot => !dot.omitted);
+  const minimumIndex = visibleDots.reduce(
+    (nearest, dot) =>
+      dot.nearestIndex.clearance < nearest.clearance
+        ? { dotIndex: dot.index, ...dot.nearestIndex }
+        : nearest,
+    { dotIndex: null, index: null, double: false, clearance: Infinity },
+  );
+  const minimumTwelve = visibleDots
+    .flatMap(dot => indexBars
+      .filter(bar => bar.double)
+      .map(bar => {
+        const radialUnit = [Math.sin(bar.angle), Math.cos(bar.angle)];
+        const tangentUnit = [Math.cos(bar.angle), -Math.sin(bar.angle)];
+        const radial =
+          dot.center[0] * radialUnit[0]
+          + dot.center[1] * radialUnit[1]
+          - indexRadius;
+        const tangential =
+          dot.center[0] * tangentUnit[0]
+          + dot.center[1] * tangentUnit[1]
+          - bar.tangentialOffset;
+        const radialDistance =
+          Math.max(Math.abs(radial) - bar.radialHalfLength, 0);
+        const tangentialDistance =
+          Math.max(Math.abs(tangential) - bar.tangentialHalfWidth, 0);
+        return {
+          dotIndex: dot.index,
+          clearance:
+            Math.hypot(radialDistance, tangentialDistance) - dot.radius,
+        };
+      }))
+    .reduce(
+      (nearest, entry) =>
+        entry.clearance < nearest.clearance ? entry : nearest,
+      { dotIndex: null, clearance: Infinity },
+    );
+  return deepFreeze({
+    radius: dial.mainMinuteTrackRadius,
+    configuredDotCount: dots.length,
+    displayedDotCount: visibleDots.length,
+    omittedDotCount: dots.length - visibleDots.length,
+    indexOuterRadius:
+      indexRadius + dial.indexRadialLength / 2,
+    normalIndexRadialClearance:
+      dial.mainMinuteTrackRadius
+      - dial.minuteDotMajorDiameter / 2
+      - (indexRadius + dial.indexRadialLength / 2),
+    minimumIndexClearance: minimumIndex,
+    minimumTwelveDoubleBarClearance: minimumTwelve,
+    openingClearance: Math.min(
+      ...visibleDots.map(dot => dot.openingClearance),
+    ),
+    minimumOpenHeartClearance: Math.min(
+      ...visibleDots.map(dot => dot.openHeartClearance),
+    ),
+    indexOverlapCount: visibleDots.filter(
+      dot => dot.nearestIndex.clearance < 0,
+    ).length,
+    twelveDoubleBarOverlapCount: visibleDots.filter(dot =>
+      dot.nearestIndex.double && dot.nearestIndex.clearance < 0).length,
+    openingOverlapCount: visibleDots.filter(
+      dot => dot.openingClearance < 0,
+    ).length,
+    bezelRehautOverlapCount: visibleDots.filter(
+      dot => dot.openingClearance < 0,
+    ).length,
+    dots,
+  });
+}
+
 export function assertPhase3C1WatchHeadConfig(
   config = FINAL_WATCH_HEAD_PHASE3C1,
   tolerance = 1e-6,
@@ -377,6 +562,7 @@ export function assertPhase3C1WatchHeadConfig(
   const p = config.protectedAnchors;
   const o = config.openHeart;
   const audit = derivePhase3C1OpenHeartAudit(config);
+  const minuteTrack = derivePhase3C1MinuteTrackAudit(config);
   const checks = {
     queryOnly: config.enabledByDefault === false,
     approvedBase:
@@ -422,6 +608,28 @@ export function assertPhase3C1WatchHeadConfig(
       && config.dial.minuteDotMajorDiameter <= 0.27
       && config.dial.smallSecondVisualRecessDiameter >= 8.3
       && config.dial.smallSecondVisualRecessDiameter <= 8.6,
+    stableExteriorSilver:
+      config.materials.stableExteriorSilver.color === 0xe7eaed
+      && config.materials.stableExteriorSilver.metalness >= 0.45
+      && config.materials.stableExteriorSilver.metalness <= 0.62
+      && config.materials.stableExteriorSilver.roughness >= 0.18
+      && config.materials.stableExteriorSilver.roughness <= 0.24
+      && config.materials.stableExteriorSilver.envMapIntensity >= 0.25
+      && config.materials.stableExteriorSilver.envMapIntensity <= 0.5
+      && config.materials.stableExteriorSilver.opacity === 1
+      && config.materials.stableExteriorSilver.transparent === false
+      && config.materials.stableExteriorSilver.depthWrite === true,
+    minuteTrackRevision:
+      minuteTrack.radius === 14.2
+      && minuteTrack.displayedDotCount === 60
+      && minuteTrack.indexOverlapCount === 0
+      && minuteTrack.twelveDoubleBarOverlapCount === 0
+      && minuteTrack.openingOverlapCount === 0
+      && minuteTrack.bezelRehautOverlapCount === 0
+      && minuteTrack.normalIndexRadialClearance >= 0.437 - tolerance
+      && minuteTrack.minimumTwelveDoubleBarClearance.clearance
+        >= 0.3 - tolerance
+      && minuteTrack.openingClearance >= 0.575 - tolerance,
     rimRevision:
       o.rimProfile.innerDiameter === o.equivalentDiameter
       && o.rimProfile.outerDiameter >= 7.08
@@ -437,6 +645,21 @@ export function assertPhase3C1WatchHeadConfig(
         === -2.86
       && Math.max(...config.crystal.profile.map(point => point.radius))
         === 15.3,
+    crystalReadability:
+      config.crystal.classification
+        === "EDUCATIONAL_NON_REFRACTIVE_DOME_CRYSTAL"
+      && config.crystal.material.transmission === 0
+      && config.crystal.material.transparent === true
+      && config.crystal.material.opacity >= 0.07
+      && config.crystal.material.opacity <= 0.15
+      && config.crystal.material.depthWrite === false
+      && config.crystal.material.depthTest === true,
+    exteriorDisplayGroup:
+      config.exteriorDisplayGroup.queryOnly === true
+      && config.exteriorDisplayGroup.label === "外装"
+      && config.exteriorDisplayGroup.restoreTolerance === 1e-7
+      && config.uiSimplificationBacklog
+        === "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2",
   };
   return deepFreeze({
     ok: Object.values(checks).every(Boolean),

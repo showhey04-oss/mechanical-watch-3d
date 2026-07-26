@@ -5,6 +5,7 @@ import test from "node:test";
 import {
   FINAL_WATCH_HEAD_PHASE3C1,
   assertPhase3C1WatchHeadConfig,
+  derivePhase3C1MinuteTrackAudit,
   derivePhase3C1OpenHeartAudit,
   resolvePhase3C1WatchHead,
 } from "../js/final-watch-head-phase3c1-config.js";
@@ -15,7 +16,7 @@ test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
   assert.equal(config.enabledByDefault, false);
   assert.equal(
     config.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+    "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
   );
   assert.equal(
     config.source.baseBranch,
@@ -38,7 +39,7 @@ test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
   );
 });
 
-test("third candidate uses near-white ivory and a unified silver visibility family", () => {
+test("fourth candidate preserves ivory while isolating stable exterior silver", () => {
   assert.equal(config.dial.color, 0xf2ede5);
   assert.equal(config.dial.smallSecondColor, 0xf5f1ea);
   assert.ok(config.dial.roughness >= 0.84);
@@ -53,6 +54,16 @@ test("third candidate uses near-white ivory and a unified silver visibility fami
     config.materials.subduedPolishedSteel.classification,
     "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
   );
+  assert.deepEqual(config.materials.stableExteriorSilver, {
+    color: 0xe7eaed,
+    metalness: 0.52,
+    roughness: 0.2,
+    envMapIntensity: 0.35,
+    opacity: 1,
+    transparent: false,
+    depthWrite: true,
+    classification: "EDUCATIONAL_STABLE_SILVER_MATERIAL",
+  });
   assert.equal(config.hands.material.color, 0xe9edf0);
   assert.equal(config.hands.smallSecondMaterial.color, 0x2a5572);
 });
@@ -94,7 +105,7 @@ test("open-heart rim is a bounded profiled metal section at the actual balance",
   assert.deepEqual(config.openHeart.projectedCenter, [7.7, 1.8]);
 });
 
-test("domed crystal strengthens curvature inside the protected envelope", () => {
+test("domed crystal preserves geometry with a non-refractive educational material", () => {
   assert.deepEqual(config.crystal.profile, [
     { radius: 0, y: -3.46 },
     { radius: 3.825, y: -3.455 },
@@ -108,10 +119,39 @@ test("domed crystal strengthens curvature inside the protected envelope", () => 
   ]);
   assert.equal(
     config.crystal.classification,
-    "VISIBLE_PRONOUNCED_DOME_WITHIN_PROTECTED_ENVELOPE",
+    "EDUCATIONAL_NON_REFRACTIVE_DOME_CRYSTAL",
   );
-  assert.equal(config.crystal.material.transmission, 0.96);
-  assert.equal(config.crystal.material.ior, 1.47);
+  assert.deepEqual(config.crystal.material, {
+    color: 0xfafcfd,
+    metalness: 0,
+    roughness: 0.025,
+    transmission: 0,
+    transparent: true,
+    opacity: 0.1,
+    ior: 1.45,
+    thickness: 0.05,
+    clearcoat: 1,
+    clearcoatRoughness: 0.03,
+    envMapIntensity: 0.35,
+    depthWrite: false,
+    depthTest: true,
+  });
+});
+
+test("fourth candidate places all 60 minute dots outside the indices", () => {
+  const audit = derivePhase3C1MinuteTrackAudit();
+  assert.equal(audit.radius, 14.2);
+  assert.equal(audit.configuredDotCount, 60);
+  assert.equal(audit.displayedDotCount, 60);
+  assert.equal(audit.omittedDotCount, 0);
+  assert.equal(audit.indexOuterRadius, 13.638);
+  assert.ok(Math.abs(audit.normalIndexRadialClearance - 0.437) < 1e-9);
+  assert.ok(audit.minimumTwelveDoubleBarClearance.clearance >= 0.3);
+  assert.ok(Math.abs(audit.openingClearance - 0.575) < 1e-9);
+  assert.equal(audit.indexOverlapCount, 0);
+  assert.equal(audit.twelveDoubleBarOverlapCount, 0);
+  assert.equal(audit.openingOverlapCount, 0);
+  assert.equal(audit.bezelRehautOverlapCount, 0);
 });
 
 test("display families reuse split and explode semantics without a new UI system", () => {
@@ -123,6 +163,16 @@ test("display families reuse split and explode semantics without a new UI system
     BACK: { splitDirection: 1 },
     PLATE: { splitDirection: 0 },
   });
+  assert.deepEqual(config.exteriorDisplayGroup, {
+    queryOnly: true,
+    label: "外装",
+    helper: "ケース・風防・文字板・針・ラグ・ストラップ・裏蓋",
+    restoreTolerance: 1e-7,
+  });
+  assert.equal(
+    config.uiSimplificationBacklog,
+    "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2",
+  );
 });
 
 test("open-heart projection follows the real balance instead of reference imagery", () => {
@@ -219,9 +269,14 @@ test("production integration cannot hide failures with forbidden rendering short
   assert.match(indexSource, /if\(requestedWatchHeadConfig\)/);
   assert.match(indexSource, /getPhase3C1OpenHeartReport/);
   assert.match(indexSource, /getPhase3C1DisplayGroupReport/);
+  assert.match(indexSource, /getPhase3C1ExteriorGroupReport/);
+  assert.match(indexSource, /setPhase3C1ExteriorGroupVisible/);
+  assert.match(indexSource, /setPhase3C1CrystalDiagnosticVisible/);
+  assert.match(indexSource, /data-phase3c1-exterior-control/);
   assert.match(runtimeSource, /applyDynamicCoreState/);
   assert.match(runtimeSource, /applyDisplayState/);
-  assert.match(runtimeSource, /existing-structural-opacity-clone/);
+  assert.match(runtimeSource, /candidate-local-clone/);
+  assert.match(runtimeSource, /applyExteriorVisibilityComposition/);
   assert.equal(
     indexSource.indexOf("if(requestedWatchHeadConfig)")
       > indexSource.indexOf("if(requestedExteriorConfig)"),
@@ -247,6 +302,9 @@ test("same-origin unsandboxed Phase 3C.1 harness records actual runtime reports"
   assert.match(harness, /getHandCouplingReport/);
   assert.match(harness, /getYEnvelopeBreakdown/);
   assert.match(harness, /getPhase3C1DisplayGroupReport/);
+  assert.match(harness, /getPhase3C1ExteriorGroupReport/);
+  assert.match(harness, /setExteriorGroupByUi/);
+  assert.match(harness, /setPhase3C1CrystalDiagnosticVisible/);
   assert.match(harness, /displayExactRestore/);
   assert.match(harness, /splitDirections/);
   assert.match(harness, /explodeDirections/);

@@ -3,6 +3,7 @@ import * as THREE from "three";
 import {
   FINAL_WATCH_HEAD_PHASE3C1,
   assertPhase3C1WatchHeadConfig,
+  derivePhase3C1MinuteTrackAudit,
   derivePhase3C1OpenHeartAudit,
 } from "./final-watch-head-phase3c1-config.js";
 import {
@@ -356,6 +357,10 @@ function makeMaterial(spec, clippingPlanes = null) {
     color: spec.color,
     metalness: spec.metalness,
     roughness: spec.roughness,
+    envMapIntensity: spec.envMapIntensity ?? 1,
+    opacity: spec.opacity ?? 1,
+    transparent: spec.transparent ?? false,
+    depthWrite: spec.depthWrite ?? true,
     clippingPlanes,
   });
 }
@@ -368,9 +373,13 @@ function makeCrystalMaterial(spec, clippingPlanes = null) {
     transmission: spec.transmission,
     ior: spec.ior,
     thickness: spec.thickness,
-    transparent: true,
-    opacity: 1,
-    depthWrite: false,
+    transparent: spec.transparent,
+    opacity: spec.opacity,
+    depthWrite: spec.depthWrite,
+    depthTest: spec.depthTest,
+    clearcoat: spec.clearcoat,
+    clearcoatRoughness: spec.clearcoatRoughness,
+    envMapIntensity: spec.envMapIntensity,
     side: THREE.DoubleSide,
     clippingPlanes,
   });
@@ -381,12 +390,24 @@ function mutateMaterial(material, spec) {
   material.color.setHex(spec.color);
   if (Number.isFinite(material.metalness)) material.metalness = spec.metalness;
   if (Number.isFinite(material.roughness)) material.roughness = spec.roughness;
+  if (
+    Number.isFinite(material.envMapIntensity)
+    && Number.isFinite(spec.envMapIntensity)
+  ) material.envMapIntensity = spec.envMapIntensity;
+  if (Number.isFinite(spec.opacity)) material.opacity = spec.opacity;
+  if (typeof spec.transparent === "boolean") {
+    material.transparent = spec.transparent;
+  }
+  if (typeof spec.depthWrite === "boolean") {
+    material.depthWrite = spec.depthWrite;
+  }
+  if (typeof spec.depthTest === "boolean") material.depthTest = spec.depthTest;
   material.needsUpdate = true;
 }
 
 function applyObjectMaterialFamily(object, spec, {
   partId,
-  cloneUnregistered = false,
+  candidateLocalClone = false,
 } = {}) {
   const records = [];
   object?.traverse(node => {
@@ -395,7 +416,10 @@ function applyObjectMaterialFamily(object, spec, {
       ? node.material
       : [node.material];
     const structuralClone = Boolean(node.userData.structuralOpacityBase);
-    const shouldClone = cloneUnregistered && !structuralClone;
+    const structuralBases = structuralClone
+      ? node.userData.structuralOpacityBase
+      : null;
+    const shouldClone = candidateLocalClone;
     const appliedMaterials = sourceMaterials.map(source => {
       const material = shouldClone ? source.clone() : source;
       mutateMaterial(material, spec);
@@ -416,6 +440,19 @@ function applyObjectMaterialFamily(object, spec, {
     node.material = Array.isArray(node.material)
       ? appliedMaterials
       : appliedMaterials[0];
+    if (structuralBases && shouldClone) {
+      node.userData.structuralOpacityBase = appliedMaterials.map(
+        (material, index) => {
+          const previous = structuralBases[index] || structuralBases[0];
+          return {
+            material,
+            opacity: spec.opacity ?? previous.opacity,
+            transparent: spec.transparent ?? previous.transparent,
+            depthWrite: spec.depthWrite ?? previous.depthWrite,
+          };
+        },
+      );
+    }
   });
   object.userData.phase3c1MaterialApplication = records;
   return records;
@@ -431,6 +468,24 @@ function materialRecord(material) {
     opacity: round(material.opacity),
     transparent: material.transparent,
     depthWrite: material.depthWrite,
+    depthTest: material.depthTest,
+    transmission:
+      Number.isFinite(material.transmission)
+        ? round(material.transmission)
+        : null,
+    ior: Number.isFinite(material.ior) ? round(material.ior) : null,
+    thickness:
+      Number.isFinite(material.thickness)
+        ? round(material.thickness)
+        : null,
+    clearcoat:
+      Number.isFinite(material.clearcoat)
+        ? round(material.clearcoat)
+        : null,
+    clearcoatRoughness:
+      Number.isFinite(material.clearcoatRoughness)
+        ? round(material.clearcoatRoughness)
+        : null,
     envMapIntensity:
       Number.isFinite(material.envMapIntensity)
         ? round(material.envMapIntensity)
@@ -505,6 +560,7 @@ export function createPhase3C1WatchHead({
   const validation = assertPhase3C1WatchHeadConfig(config);
   if (!validation.ok) throw new Error("invalid Phase 3C.1 watch-head configuration");
   const clippingPlanes = materials.steel.clippingPlanes;
+  const stableExteriorSilver = config.materials.stableExteriorSilver;
   const polished = config.materials.polishedSteel;
   const subdued = config.materials.subduedPolishedSteel;
   const ivory = makeMaterial(config.materials.ivoryDial, clippingPlanes);
@@ -532,13 +588,17 @@ export function createPhase3C1WatchHead({
     "bezel",
     "rehaut",
     "casebackRing",
-    "movementHolder",
     "crownTube",
     "crownConnection",
   ]) {
-    applyObjectMaterialFamily(exteriorRuntime.objects[key], polished, {
+    applyObjectMaterialFamily(
+      exteriorRuntime.objects[key],
+      stableExteriorSilver,
+      {
       partId: key,
-    });
+        candidateLocalClone: true,
+      },
+    );
   }
   for (const key of [
     "twelveLeftLug",
@@ -551,13 +611,13 @@ export function createPhase3C1WatchHead({
   ]) {
     applyObjectMaterialFamily(
       exteriorAttachmentRuntime.objects[key],
-      polished,
-      { partId: key },
+      stableExteriorSilver,
+      { partId: key, candidateLocalClone: true },
     );
   }
-  applyObjectMaterialFamily(mechanism.crown, polished, {
+  applyObjectMaterialFamily(mechanism.crown, stableExteriorSilver, {
     partId: "crown",
-    cloneUnregistered: true,
+    candidateLocalClone: true,
   });
   applyObjectMaterialFamily(
     exteriorRuntime.objects.movementHolder,
@@ -1015,6 +1075,87 @@ export function createPhase3C1WatchHead({
       object.userData.phase3c1DisplayFamily = family;
     });
   }
+  const exteriorGroupParts = [
+    ...new Set([
+      ...displayFamilyParts.FRONT.parts,
+      ...displayFamilyParts.CORE.parts,
+      ...displayFamilyParts.BACK.parts,
+    ]),
+  ];
+  const exteriorVisibilityMask = new Map(
+    exteriorGroupParts.map(object => [object, object.visible]),
+  );
+  let exteriorGroupVisible = true;
+  let crystalDiagnosticVisible = true;
+  exteriorGroupParts.forEach(object => {
+    object.userData.phase3c1ExteriorDisplayGroup = true;
+  });
+  const applyExteriorVisibilityComposition = () => {
+    exteriorGroupParts.forEach(object => {
+      const partVisible = exteriorVisibilityMask.get(object) !== false;
+      const diagnosticVisible =
+        object !== crystal || crystalDiagnosticVisible;
+      object.visible =
+        exteriorGroupVisible && partVisible && diagnosticVisible;
+    });
+  };
+  const setExteriorGroupVisible = visible => {
+    const next = Boolean(visible);
+    if (exteriorGroupVisible && !next) {
+      exteriorGroupParts.forEach(object => {
+        if (object === crystal && !crystalDiagnosticVisible) return;
+        exteriorVisibilityMask.set(object, object.visible);
+      });
+    }
+    exteriorGroupVisible = next;
+    applyExteriorVisibilityComposition();
+    return getExteriorGroupReport();
+  };
+  const setCrystalDiagnosticVisible = visible => {
+    const next = Boolean(visible);
+    if (crystalDiagnosticVisible && !next && exteriorGroupVisible) {
+      exteriorVisibilityMask.set(crystal, crystal.visible);
+    }
+    crystalDiagnosticVisible = next;
+    applyExteriorVisibilityComposition();
+    return getCrystalDiagnosticReport();
+  };
+  const getCrystalDiagnosticReport = () => ({
+    classification: config.crystal.classification,
+    productUiControl: false,
+    diagnosticVisible: crystalDiagnosticVisible,
+    effectiveVisible: crystal.visible,
+    exteriorGroupVisible,
+    geometryUnchanged: true,
+    material: materialRecord(crystal.material),
+  });
+  function getExteriorGroupReport() {
+    const parts = exteriorGroupParts.map(object => ({
+      uuid: object.uuid,
+      name: object.userData.partName || object.name || null,
+      displayFamily: object.userData.phase3c1DisplayFamily || null,
+      partVisibilityMask: exteriorVisibilityMask.get(object) !== false,
+      effectiveVisible: object.visible,
+      transform: transformRecord(object),
+    }));
+    return {
+      enabled: exteriorGroupVisible,
+      queryOnly: config.exteriorDisplayGroup.queryOnly,
+      label: config.exteriorDisplayGroup.label,
+      helper: config.exteriorDisplayGroup.helper,
+      restoreTolerance: config.exteriorDisplayGroup.restoreTolerance,
+      visibilityComposition:
+        "exterior-group AND part-mask AND split/explode state AND opacity state AND existing hidden masks",
+      platePresentationCutoutExcluded: true,
+      mechanismExcluded: true,
+      partCount: parts.length,
+      visiblePartCount:
+        parts.filter(part => part.effectiveVisible).length,
+      selectedExteriorClearedByHost: true,
+      state: { ...displayState },
+      parts,
+    };
+  }
 
   const transformRecord = object => {
     object.updateWorldMatrix(true, false);
@@ -1171,6 +1312,8 @@ export function createPhase3C1WatchHead({
   });
 
   applyDisplayState();
+  applyExteriorVisibilityComposition();
+  const minuteTrackAudit = derivePhase3C1MinuteTrackAudit(config);
   const geometryAudits = {
     dial: physicalDial.userData.phase3c1GeometryAudit,
     smallSecondFace: smallSecondFace.userData.phase3c1GeometryAudit,
@@ -1292,6 +1435,7 @@ export function createPhase3C1WatchHead({
     status: config.status,
     phase3b2HumanAcceptance: config.humanAcceptance.phase3b2,
     phase3c1HumanAcceptance: config.humanAcceptance.phase3c1,
+    revision: config.humanAcceptance.revision,
     objectNames: [
       "physicalDial",
       "smallSecondFace",
@@ -1317,12 +1461,23 @@ export function createPhase3C1WatchHead({
       : [],
     plateCutoutMode: config.openHeart.plateCutout.mode,
     phase3c2MandatoryBacklog: config.phase3c2MandatoryBacklog,
+    uiSimplificationBacklog: config.uiSimplificationBacklog,
+    exteriorDisplayGroup: {
+      label: config.exteriorDisplayGroup.label,
+      helper: config.exteriorDisplayGroup.helper,
+      queryOnly: config.exteriorDisplayGroup.queryOnly,
+    },
   });
 
   const getGeometryReport = () => ({
     validation,
     geometryAudits,
     openHeart: derivePhase3C1OpenHeartAudit(config),
+    minuteTrack: {
+      ...minuteTrackAudit,
+      actualDisplayedDotCount: minuteTrack.children.length,
+      omittedForOpenHeart: omittedMinuteDotCount,
+    },
     lineOfSight: getLineOfSightReport(),
     dimensions: {
       protected: config.protectedAnchors,
@@ -1344,31 +1499,38 @@ export function createPhase3C1WatchHead({
       handToCrystalInnerClearance:
         round(config.protectedAnchors.dialFrontY
           - config.protectedAnchors.crystalInnerY),
+      minuteTrackToIndexOverlapCount:
+        minuteTrackAudit.indexOverlapCount,
+      minuteTrackToTwelveDoubleBarOverlapCount:
+        minuteTrackAudit.twelveDoubleBarOverlapCount,
+      minuteTrackToOpeningOverlapCount:
+        minuteTrackAudit.openingOverlapCount,
+      minuteTrackToBezelRehautOverlapCount:
+        minuteTrackAudit.bezelRehautOverlapCount,
       coplanarOverlapCount: 0,
       zFightingCount: 0,
     },
   });
 
-  const visibleSilverObjects = {
+  const stableSilverObjects = {
     caseBody: exteriorRuntime.objects.caseBody,
     bezel: exteriorRuntime.objects.bezel,
+    rehaut: exteriorRuntime.objects.rehaut,
     twelveLeftLug: exteriorAttachmentRuntime.objects.twelveLeftLug,
     twelveRightLug: exteriorAttachmentRuntime.objects.twelveRightLug,
     sixLeftLug: exteriorAttachmentRuntime.objects.sixLeftLug,
     sixRightLug: exteriorAttachmentRuntime.objects.sixRightLug,
     casebackRing: exteriorRuntime.objects.casebackRing,
     crown: mechanism.crown,
+    crownTube: exteriorRuntime.objects.crownTube,
+    crownConnection: exteriorRuntime.objects.crownConnection,
     twelveSpringBar: exteriorAttachmentRuntime.objects.twelveSpringBar,
     sixSpringBar: exteriorAttachmentRuntime.objects.sixSpringBar,
-    openHeartRim: openHeartRing,
-    indices: indexGroup,
-    minuteHand: handMeshes.minute,
-    hourHand: handMeshes.hour,
     buckle: exteriorAttachmentRuntime.objects.buckle,
   };
 
   const getMaterialReport = () => {
-    const runtimeMaterials = Object.entries(visibleSilverObjects)
+    const runtimeMaterials = Object.entries(stableSilverObjects)
       .flatMap(([partId, object]) => objectMaterialRecord(object, partId));
     const usage = runtimeMaterials.reduce((map, record) => {
       map.set(record.uuid, (map.get(record.uuid) || 0) + 1);
@@ -1378,7 +1540,7 @@ export function createPhase3C1WatchHead({
       record.sharedWithinCandidate = usage.get(record.uuid) > 1;
     });
     const silverRecords = runtimeMaterials.filter(record =>
-      record.color === "0xE9EDF0");
+      record.color === "0xE7EAED");
     const roughnessValues = silverRecords
       .map(record => record.roughness)
       .filter(Number.isFinite);
@@ -1395,11 +1557,10 @@ export function createPhase3C1WatchHead({
       alphaHashUsed: false,
       humanReviewStatus: config.status,
       visibilityCompensationClassification:
-        polished.classification,
+        stableExteriorSilver.classification,
       unifiedSilverFamily: {
-        classification:
-          "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
-        baseColor: "0xE9EDF0",
+        classification: stableExteriorSilver.classification,
+        baseColor: "0xE7EAED",
         roughnessRange: roughnessValues.length
           ? [
             round(Math.min(...roughnessValues)),
@@ -1419,11 +1580,16 @@ export function createPhase3C1WatchHead({
           ? round(Math.max(...metalnessValues) - Math.min(...metalnessValues))
           : null,
         allRequiredPartsRecorded:
-          Object.keys(visibleSilverObjects).every(partId =>
+          Object.keys(stableSilverObjects).every(partId =>
             runtimeMaterials.some(record => record.partId === partId)),
+        candidateLocalCloneCount:
+          runtimeMaterials.filter(record => record.clonedForCandidate).length,
+        baseSharedCount:
+          runtimeMaterials.filter(record => record.sharedWithBase).length,
         runtimeMaterials,
       },
-      caseFinish: polished,
+      stableExteriorFinish: stableExteriorSilver,
+      caseFinish: stableExteriorSilver,
       subduedCaseFinish: subdued,
       dialFinish: config.materials.ivoryDial,
       smallSecondDialFinish: {
@@ -1436,6 +1602,12 @@ export function createPhase3C1WatchHead({
       crystalFinish: {
         ...config.crystal.material,
         runtime: materialRecord(crystal.material),
+      },
+      acceptedThirdCandidateSilverParts: {
+        indices: config.materials.polishedSteel,
+        openHeartRim: config.materials.polishedSteel,
+        hourAndMinuteHands: config.hands.material,
+        movementHolder: config.materials.subduedPolishedSteel,
       },
       strapPhase3c2StyleApplied: false,
     };
@@ -1500,5 +1672,9 @@ export function createPhase3C1WatchHead({
     applyDisplayState,
     applyDynamicCoreState,
     getDisplayGroupReport,
+    setExteriorGroupVisible,
+    getExteriorGroupReport,
+    setCrystalDiagnosticVisible,
+    getCrystalDiagnosticReport,
   };
 }

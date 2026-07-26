@@ -108,6 +108,63 @@ function displayTransformSignature(report) {
   );
 }
 
+async function edgeContrastScore(blob) {
+  const bitmap = await createImageBitmap(blob);
+  const canvas = document.createElement("canvas");
+  canvas.width = bitmap.width;
+  canvas.height = bitmap.height;
+  const context = canvas.getContext("2d", { willReadFrequently: true });
+  context.drawImage(bitmap, 0, 0);
+  bitmap.close();
+  const { data, width, height } = context.getImageData(
+    0,
+    0,
+    canvas.width,
+    canvas.height,
+  );
+  const luminance = index =>
+    data[index] * 0.2126
+    + data[index + 1] * 0.7152
+    + data[index + 2] * 0.0722;
+  let gradient = 0;
+  let samples = 0;
+  const xMin = Math.floor(width * 0.22);
+  const xMax = Math.ceil(width * 0.78);
+  const yMin = Math.floor(height * 0.12);
+  const yMax = Math.ceil(height * 0.88);
+  for (let y = yMin; y < yMax - 1; y++) {
+    for (let x = xMin; x < xMax - 1; x++) {
+      const index = (y * width + x) * 4;
+      const right = index + 4;
+      const down = index + width * 4;
+      gradient += Math.abs(luminance(index) - luminance(right));
+      gradient += Math.abs(luminance(index) - luminance(down));
+      samples += 2;
+    }
+  }
+  return {
+    score: samples ? gradient / samples : 0,
+    sampleCount: samples,
+    width,
+    height,
+    region: { xMin, xMax, yMin, yMax },
+  };
+}
+
+async function setExteriorGroupByUi(diagnostics, visible) {
+  const control =
+    frame.contentDocument.querySelector('[data-group="exterior"]');
+  if (!control) throw new Error("Phase 3C.1 exterior control is missing");
+  if (control.checked !== Boolean(visible)) control.click();
+  await diagnostics.waitForFrames(3);
+  return {
+    controlChecked: control.checked,
+    group: diagnostics.getPhase3C1ExteriorGroupReport(),
+    selection: diagnostics.getSelection(),
+    ui: diagnostics.getUiRegressionState(),
+  };
+}
+
 frame.addEventListener("load", async () => {
   try {
     const diagnostics = await waitForDiagnostics();
@@ -117,6 +174,8 @@ frame.addEventListener("load", async () => {
     const geometry = diagnostics.getPhase3C1GeometryReport();
     const material = diagnostics.getPhase3C1MaterialReport();
     const selection = diagnostics.getPhase3C1SelectionReport();
+    const exteriorGroupInitial =
+      diagnostics.getPhase3C1ExteriorGroupReport();
     const displayNormal = await setDisplayState(diagnostics);
     const displaySplit = await setDisplayState(diagnostics, { split: 1 });
     const displayExploded = await setDisplayState(diagnostics, { explode: 1 });
@@ -125,6 +184,92 @@ frame.addEventListener("load", async () => {
       { explode: 1, split: 1 },
     );
     const displayRestored = await setDisplayState(diagnostics);
+    const selectedExterior =
+      diagnostics.selectPartByNameForAudit("Phase 3C.1 アイボリー文字板");
+    const exteriorOff = await setExteriorGroupByUi(diagnostics, false);
+    const exteriorOn = await setExteriorGroupByUi(diagnostics, true);
+    const displayBeforeSplitGroupCycle =
+      diagnostics.getPhase3C1DisplayGroupReport();
+    const splitBeforeGroupCycle = await setDisplayState(
+      diagnostics,
+      { split: 1 },
+    );
+    const splitExteriorOff = await setExteriorGroupByUi(diagnostics, false);
+    const splitExteriorOn = await setExteriorGroupByUi(diagnostics, true);
+    const splitAfterGroupCycle =
+      diagnostics.getPhase3C1DisplayGroupReport();
+    const explodedBeforeGroupCycle = await setDisplayState(
+      diagnostics,
+      { explode: 1 },
+    );
+    const explodedExteriorOff =
+      await setExteriorGroupByUi(diagnostics, false);
+    const explodedExteriorOn =
+      await setExteriorGroupByUi(diagnostics, true);
+    const explodedAfterGroupCycle =
+      diagnostics.getPhase3C1DisplayGroupReport();
+    await setDisplayState(diagnostics);
+    const opacityGroupCycles = [];
+    for (const opacity of [0.5, 0.16]) {
+      diagnostics.setStructuralOpacity(opacity);
+      const before =
+        diagnostics.getPhase3C1ExteriorGroupReport();
+      const off = await setExteriorGroupByUi(diagnostics, false);
+      const on = await setExteriorGroupByUi(diagnostics, true);
+      opacityGroupCycles.push({
+        opacity,
+        before,
+        off,
+        on,
+        actualOpacity: diagnostics.getStructuralOpacity(),
+      });
+    }
+    diagnostics.setStructuralOpacity(1);
+    frame.contentDocument.getElementById("panelTabLearning").click();
+    diagnostics.setPanelOpen(true);
+    await diagnostics.waitForFrames(12);
+    const mobilePanelOpen = {
+      group: diagnostics.getPhase3C1ExteriorGroupReport(),
+      hud: diagnostics.getMobileOverlayHudReport(),
+      toggle: diagnostics.getToggleCardReport()
+        .find(entry => entry.group === "exterior"),
+    };
+    diagnostics.setPanelOpen(false);
+    await diagnostics.waitForFrames(12);
+    const mobilePanelClosed = {
+      group: diagnostics.getPhase3C1ExteriorGroupReport(),
+      hud: diagnostics.getMobileOverlayHudReport(),
+    };
+    frame.contentDocument.getElementById("panelTabOperation").click();
+    const crystalVisibleCapture = await diagnostics.captureAuditViewportPng({
+      width: 640,
+      height: 360,
+      cameraPreset: "front",
+    });
+    const crystalVisibleContrast =
+      await edgeContrastScore(crystalVisibleCapture.blob);
+    diagnostics.setPhase3C1CrystalDiagnosticVisible(false);
+    await diagnostics.waitForFrames(2);
+    const crystalHiddenCapture = await diagnostics.captureAuditViewportPng({
+      width: 640,
+      height: 360,
+      cameraPreset: "front",
+    });
+    const crystalHiddenContrast =
+      await edgeContrastScore(crystalHiddenCapture.blob);
+    diagnostics.setPhase3C1CrystalDiagnosticVisible(true);
+    await diagnostics.waitForFrames(2);
+    const crystalContrast = {
+      withCrystal: crystalVisibleContrast,
+      crystalHidden: crystalHiddenContrast,
+      retentionRatio:
+        crystalHiddenContrast.score > 0
+          ? crystalVisibleContrast.score / crystalHiddenContrast.score
+          : null,
+      visibleCapture: crystalVisibleCapture.metadata,
+      hiddenCapture: crystalHiddenCapture.metadata,
+      restored: diagnostics.getPhase3C1CrystalDiagnosticReport(),
+    };
     const exterior = diagnostics.getExteriorDimensionReport();
     const attachment = diagnostics.getExteriorAttachmentGeometryReport();
     const exteriorInterference = diagnostics.getExteriorInterferenceReport();
@@ -184,9 +329,11 @@ frame.addEventListener("load", async () => {
       enabled: state.enabled === true && state.defaultEnabled === false,
       humanReviewRevision:
         state.status
-          === "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED"
+          === "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED"
         && state.phase3c1HumanAcceptance
-          === "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+          === "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED"
+        && state.revision
+          === "FOURTH_CANDIDATE_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
       sourceHead:
         geometry.validation?.audit?.projection?.dialPlaneCenter?.[0] === 7.7,
       openHeartCenter:
@@ -200,35 +347,62 @@ frame.addEventListener("load", async () => {
       openHeartClearances:
         geometry.interferences.openHeartToSmallSecondClearance >= 0.2
         && geometry.interferences.openHeartToNearestIndexClearance >= 0.3,
-      referenceAlignedMaterials:
+      stableExteriorMaterials:
         material.dialFinish.color === 0xf2ede5
         && material.smallSecondDialFinish.color === 0xf5f1ea
-        && material.caseFinish.color === 0xe9edf0
-        && material.caseFinish.metalness >= 0.74
-        && material.caseFinish.metalness <= 0.82
+        && material.caseFinish.color === 0xe7eaed
+        && material.caseFinish.metalness === 0.52
         && material.caseFinish.roughness >= 0.18
-        && material.caseFinish.roughness <= 0.23
+        && material.caseFinish.roughness <= 0.24
+        && material.caseFinish.envMapIntensity === 0.35
         && material.visibilityCompensationClassification
-          === "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL"
+          === "EDUCATIONAL_STABLE_SILVER_MATERIAL"
         && material.handsFinish.color === 0xe9edf0
         && material.smallSecondHandFinish.color === 0x2a5572,
       runtimeMaterialAudit:
         material.unifiedSilverFamily.allRequiredPartsRecorded
-        && material.unifiedSilverFamily.runtimeMaterials.length >= 15
+        && material.unifiedSilverFamily.runtimeMaterials.length >= 14
         && material.unifiedSilverFamily.runtimeMaterials.every(record =>
           record.uuid
           && record.objectUuid
           && record.meshUuid
-          && record.color === "0xE9EDF0"
+          && record.color === "0xE7EAED"
+          && record.metalness === 0.52
+          && record.roughness === 0.2
+          && record.envMapIntensity === 0.35
+          && record.opacity === 1
+          && record.transparent === false
+          && record.depthWrite === true
           && Number.isFinite(record.metalness)
           && Number.isFinite(record.roughness)
           && Number.isFinite(record.opacity)
           && typeof record.transparent === "boolean"
           && typeof record.depthWrite === "boolean"
-          && typeof record.clonedForCandidate === "boolean"
+          && record.clonedForCandidate === true
+          && record.sharedWithBase === false
           && typeof record.sharedWithinCandidate === "boolean")
-        && material.unifiedSilverFamily.roughnessDelta <= 0.06
-        && material.unifiedSilverFamily.metalnessDelta <= 0.05,
+        && material.unifiedSilverFamily.baseSharedCount === 0
+        && material.unifiedSilverFamily.roughnessDelta === 0
+        && material.unifiedSilverFamily.metalnessDelta === 0,
+      minuteTrackClearance:
+        geometry.minuteTrack.actualDisplayedDotCount === 60
+        && geometry.minuteTrack.omittedForOpenHeart === 0
+        && geometry.minuteTrack.indexOverlapCount === 0
+        && geometry.minuteTrack.twelveDoubleBarOverlapCount === 0
+        && geometry.minuteTrack.openingOverlapCount === 0
+        && geometry.minuteTrack.bezelRehautOverlapCount === 0
+        && geometry.minuteTrack.normalIndexRadialClearance >= 0.437 - 1e-7
+        && geometry.minuteTrack.minimumTwelveDoubleBarClearance.clearance
+          >= 0.3
+        && geometry.minuteTrack.openingClearance >= 0.575 - 1e-7,
+      nonRefractiveCrystal:
+        material.crystalFinish.transmission === 0
+        && material.crystalFinish.opacity === 0.1
+        && material.crystalFinish.runtime.depthWrite === false
+        && material.crystalFinish.runtime.depthTest === true
+        && crystalContrast.retentionRatio >= 0.9
+        && crystalContrast.restored.diagnosticVisible === true
+        && crystalContrast.restored.effectiveVisible === true,
       referenceAlignedDialGeometry:
         geometry.geometryAudits.indices.normal.topology.closed
         && geometry.geometryAudits.indices.twelve.topology.closed
@@ -285,6 +459,44 @@ frame.addEventListener("load", async () => {
           Math.abs(entry.requested - entry.actual) <= 1e-9),
       internalSelectionAtOpacity16:
         internalSelectionAtOpacity16 === "設定車2",
+      exteriorGroup:
+        exteriorGroupInitial.enabled === true
+        && exteriorGroupInitial.queryOnly === true
+        && exteriorGroupInitial.label === "外装"
+        && exteriorGroupInitial.platePresentationCutoutExcluded === true
+        && exteriorGroupInitial.mechanismExcluded === true
+        && selectedExterior === "Phase 3C.1 アイボリー文字板"
+        && exteriorOff.controlChecked === false
+        && exteriorOff.group.visiblePartCount === 0
+        && exteriorOff.selection === null
+        && exteriorOn.controlChecked === true
+        && exteriorOn.group.visiblePartCount
+          === exteriorOn.group.partCount,
+      exteriorGroupSplitRestore:
+        splitExteriorOff.group.visiblePartCount === 0
+        && splitExteriorOn.group.enabled === true
+        && JSON.stringify(displayTransformSignature(splitBeforeGroupCycle))
+          === JSON.stringify(displayTransformSignature(splitAfterGroupCycle)),
+      exteriorGroupExplodeRestore:
+        explodedExteriorOff.group.visiblePartCount === 0
+        && explodedExteriorOn.group.enabled === true
+        && JSON.stringify(displayTransformSignature(explodedBeforeGroupCycle))
+          === JSON.stringify(displayTransformSignature(
+            explodedAfterGroupCycle,
+          )),
+      exteriorGroupOpacityRestore:
+        opacityGroupCycles.every(entry =>
+          entry.off.group.visiblePartCount === 0
+          && entry.on.group.enabled === true
+          && entry.on.group.visiblePartCount === entry.on.group.partCount
+          && Math.abs(entry.actualOpacity - entry.opacity) <= 1e-9),
+      exteriorGroupMobileUi:
+        mobilePanelOpen.group.enabled === true
+        && mobilePanelClosed.group.enabled === true
+        && mobilePanelOpen.hud.horizontalOverflow === 0
+        && mobilePanelClosed.hud.horizontalOverflow === 0
+        && mobilePanelOpen.toggle?.layout.minHeightMet
+        && mobilePanelOpen.toggle?.layout.insideViewport,
       phase3b1Envelope:
         exterior.approved.totalCaseThickness === 8.695
         && exterior.approved.dialApertureDiameter === 29.8
@@ -377,6 +589,31 @@ frame.addEventListener("load", async () => {
         combined: displayCombined,
         restored: displayRestored,
       },
+      exteriorDisplayGroup: {
+        initial: exteriorGroupInitial,
+        selectedExterior,
+        off: exteriorOff,
+        on: exteriorOn,
+        displayBeforeSplitGroupCycle,
+        split: {
+          before: splitBeforeGroupCycle,
+          off: splitExteriorOff,
+          on: splitExteriorOn,
+          after: splitAfterGroupCycle,
+        },
+        explode: {
+          before: explodedBeforeGroupCycle,
+          off: explodedExteriorOff,
+          on: explodedExteriorOn,
+          after: explodedAfterGroupCycle,
+        },
+        opacity: opacityGroupCycles,
+        mobilePanel: {
+          open: mobilePanelOpen,
+          closed: mobilePanelClosed,
+        },
+      },
+      crystalContrast,
       selections,
       opacityCycle,
       internalSelectionAtOpacity16,
