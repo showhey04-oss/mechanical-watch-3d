@@ -10,7 +10,9 @@ boards, close-ups, diagrams, and review GIFs from those sources.
 from __future__ import annotations
 
 import hashlib
+import io
 import json
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -23,6 +25,9 @@ REPORTS = EVIDENCE / "reports"
 BASE_EVIDENCE = ROOT / "docs/evidence/final-exterior-balanced-phase3b2"
 DESKTOP_SIZE = (1280, 720)
 MOBILE_SIZE = (390, 844)
+SOURCE_IMPLEMENTATION_COMMIT = "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2"
+SOURCE_BASE_COMMIT = "98d83781aa7aa001836a0d57f1ad6e3d058a15c4"
+THIRD_CANDIDATE_COMMIT = "658ee82ec902184a325862cdb878a38205376206"
 
 
 def font(size: int, bold: bool = False) -> ImageFont.ImageFont:
@@ -73,6 +78,21 @@ def normalize_browser_screenshot(name: str) -> None:
 def copy_base_capture(source_name: str, target_name: str) -> None:
     image = open_image(BASE_EVIDENCE / source_name, DESKTOP_SIZE)
     image.save(EVIDENCE / target_name, format="PNG")
+
+
+def copy_git_capture(commit: str, source_name: str, target_name: str) -> None:
+    source_path = (
+        f"docs/evidence/final-exterior-design-phase3c1/{source_name}"
+    )
+    completed = subprocess.run(
+        ["git", "show", f"{commit}:{source_path}"],
+        cwd=ROOT,
+        check=True,
+        stdout=subprocess.PIPE,
+    )
+    image = Image.open(io.BytesIO(completed.stdout))
+    image.load()
+    image.convert("RGB").save(EVIDENCE / target_name, format="PNG")
 
 
 def labelled_panel(
@@ -256,6 +276,18 @@ def main() -> None:
     copy_base_capture("desktop-side.png", "before-phase3b2-side.png")
     copy_base_capture("desktop-back.png", "before-phase3b2-back.png")
     copy_base_capture("desktop-oblique-back.png", "before-phase3b2-oblique-back.png")
+    for source_name in [
+        "desktop-front.png",
+        "desktop-oblique-front.png",
+        "desktop-side.png",
+        "desktop-back.png",
+        "desktop-oblique-back.png",
+    ]:
+        copy_git_capture(
+            THIRD_CANDIDATE_COMMIT,
+            source_name,
+            f"before-fourth-{source_name.removeprefix('desktop-')}",
+        )
 
     required = {
         "desktop-front.png": DESKTOP_SIZE,
@@ -276,6 +308,12 @@ def main() -> None:
         "display-restored.png": DESKTOP_SIZE,
         "normal-base-phase3b2.png": DESKTOP_SIZE,
         "normal-branch.png": DESKTOP_SIZE,
+        "crystal-hidden-front.png": DESKTOP_SIZE,
+        "exterior-off.png": DESKTOP_SIZE,
+        "exterior-internal-selection.png": DESKTOP_SIZE,
+        "exterior-split-off.png": DESKTOP_SIZE,
+        "exterior-explode-off.png": DESKTOP_SIZE,
+        "exterior-opacity16-off.png": DESKTOP_SIZE,
     }
     for name, expected in required.items():
         open_source(name, expected)
@@ -285,24 +323,24 @@ def main() -> None:
     open_source("desktop-side.png", DESKTOP_SIZE).save(EVIDENCE / "crown-position-1.png", format="PNG")
 
     board("comparison-front.png", [
-        ("before-third-front.png", "Second candidate", "human-review rejected"),
-        ("desktop-front.png", "Third candidate", "near-white ivory + unified silver"),
+        ("before-fourth-front.png", "Third candidate", "human-review revision base"),
+        ("desktop-front.png", "Fourth candidate", "stable silver + radius 14.2 track"),
     ])
     board("comparison-oblique-front.png", [
-        ("before-third-oblique-front.png", "Second candidate", "warm/darker dial"),
-        ("desktop-oblique-front.png", "Third candidate", "near-white dial + stronger dome"),
+        ("before-fourth-oblique-front.png", "Third candidate", "transmissive dome / mixed highlights"),
+        ("desktop-oblique-front.png", "Fourth candidate", "non-refractive dome / stable silver"),
     ])
     board("comparison-side.png", [
-        ("before-third-side.png", "Second candidate", "dome less legible"),
-        ("desktop-side.png", "Third candidate", "stronger dome / same 8.695 envelope"),
+        ("before-fourth-side.png", "Third candidate", "transmissive dome"),
+        ("desktop-side.png", "Fourth candidate", "same geometry / non-refractive material"),
     ])
     board("comparison-back.png", [
-        ("before-third-back.png", "Second candidate", "mixed silver families"),
-        ("desktop-back.png", "Third candidate", "unified silver / geometry unchanged"),
+        ("before-fourth-back.png", "Third candidate", "accepted structure"),
+        ("desktop-back.png", "Fourth candidate", "stable exterior silver clones"),
     ])
     board("comparison-oblique-back.png", [
-        ("before-third-oblique-back.png", "Second candidate", "mixed visible metal tones"),
-        ("desktop-oblique-back.png", "Third candidate", "unified silver / structure preserved"),
+        ("before-fourth-oblique-back.png", "Third candidate", "review baseline"),
+        ("desktop-oblique-back.png", "Fourth candidate", "structure and mechanisms preserved"),
     ])
     board("opacity-board.png", [
         ("desktop-front.png", "100%", "candidate watch head"),
@@ -398,7 +436,8 @@ def main() -> None:
     closeup("desktop-front.png", "indices-close.png", (410, 90, 870, 360), "Polished bar indices", [
         "faceted 1.820 × 0.440 × 0.230 bars",
         "double marker at 12 / 6 omitted for small seconds",
-        "0.165 minute dots / 0.250 five-minute dots",
+        "60 equal-size minute dots on radius 14.200",
+        "normal / 12 o'clock / opening clearances are all positive",
         "S86 index circle 25.456 unchanged",
     ])
     closeup("desktop-front.png", "hands-close.png", (430, 190, 850, 555), "Faceted polished hands", [
@@ -408,8 +447,9 @@ def main() -> None:
     ])
     closeup("desktop-side.png", "domed-crystal-side.png", (300, 100, 980, 620), "Strengthened dome crystal", [
         "protected Y envelope -3.460 to -2.860",
-        "outer profile: -3.460 / -3.455 / -3.420 / -3.315 / -3.110 / -2.960",
-        "MeshPhysical: transmission .96 / ior 1.47 / roughness .06",
+        "geometry, profile, and depth state preserved",
+        "MeshPhysical: opacity .10 / transmission 0 / roughness .025",
+        "clearcoat 1.0 / clearcoat roughness .03 / env .35",
         "existing camera, light, shadow, tone mapping unchanged",
     ])
     closeup("crown-position-1.png", "crown-position-1-close.png", (650, 170, 1090, 610), "Crown position 1", [
@@ -420,28 +460,28 @@ def main() -> None:
     ])
 
     board("open-heart-before-after.png", [
-        ("before-third-front.png", "Second candidate", "thicker rim / warmer dial"),
-        ("desktop-front.png", "Third candidate", "fine rim / near-white ivory"),
+        ("before-fourth-front.png", "Third candidate", "revision base"),
+        ("desktop-front.png", "Fourth candidate", "geometry retained"),
     ])
     comparison_crop_board("comparison-open-heart.png", [
-        ("before-third-front.png", (690, 210, 930, 450), "Second candidate", "rim visually heavy"),
-        ("desktop-front.png", (690, 210, 930, 450), "Third candidate", "7.120 fine profiled rim"),
+        ("before-fourth-front.png", (690, 210, 930, 450), "Third candidate", "accepted open-heart geometry"),
+        ("desktop-front.png", (690, 210, 930, 450), "Fourth candidate", "same 7.120 fine rim"),
     ])
     comparison_crop_board("comparison-indices.png", [
-        ("before-third-front.png", (410, 90, 870, 360), "Second candidate", "smaller bars and minute dots"),
-        ("desktop-front.png", (410, 90, 870, 360), "Third candidate", "larger bars + circular dots"),
+        ("before-fourth-front.png", (410, 90, 870, 360), "Third candidate", "previous minute-track placement"),
+        ("desktop-front.png", (410, 90, 870, 360), "Fourth candidate", "radius 14.200 / 60 equal dots"),
     ])
     comparison_crop_board("comparison-hands.png", [
-        ("before-third-front.png", (430, 190, 850, 555), "Second candidate", "mixed visible silver"),
-        ("desktop-front.png", (430, 190, 850, 555), "Third candidate", "unified E9EDF0 silver"),
+        ("before-fourth-front.png", (430, 190, 850, 555), "Third candidate", "accepted hand geometry"),
+        ("desktop-front.png", (430, 190, 850, 555), "Fourth candidate", "hand geometry/material unchanged"),
     ])
     comparison_crop_board("comparison-small-second.png", [
-        ("before-third-front.png", (500, 385, 780, 665), "Second candidate", "thick outline / smaller recess"),
-        ("desktop-front.png", (500, 385, 780, 665), "Third candidate", "8.500 recess + narrow bevel"),
+        ("before-fourth-front.png", (500, 385, 780, 665), "Third candidate", "accepted small seconds"),
+        ("desktop-front.png", (500, 385, 780, 665), "Fourth candidate", "unchanged 8.500 recess"),
     ])
     comparison_crop_board("comparison-domed-crystal.png", [
-        ("before-third-side.png", (300, 100, 980, 620), "Second candidate", "dome less visible"),
-        ("desktop-side.png", (300, 100, 980, 620), "Third candidate", "stronger protected profile"),
+        ("before-fourth-side.png", (300, 100, 980, 620), "Third candidate", "transmissive material"),
+        ("desktop-side.png", (300, 100, 980, 620), "Fourth candidate", "non-refractive material / same profile"),
     ])
     board("comparison-crown.png", [
         ("crown-position-1-close.png", "Position 1", "protected Phase 3B.1 placement"),
@@ -451,25 +491,25 @@ def main() -> None:
     annotate_full(
         "desktop-front.png",
         "revision-reference-alignment.png",
-        "Phase 3C.1 third candidate (not default-adopted)",
+        "Phase 3C.1 fourth candidate (not default-adopted)",
         [
             "near-white ivory #F2EDE5 / small seconds #F5F1EA",
-            "unified educational silver #E9EDF0",
-            "1.820 × 0.440 × 0.230 bars + larger circular dots",
+            "stable exterior silver #E7EAED / metalness .52 / roughness .20",
+            "60 equal-size minute dots at radius 14.200",
             "8.500 small-second recess / 7.120 open-heart rim",
-            "stronger dome within the protected 8.695 envelope",
+            "non-refractive dome within the protected 8.695 envelope",
         ],
         ellipse=open_heart_box,
     )
     annotate_full(
         "desktop-oblique-front.png",
         "unified-silver-material-audit.png",
-        "Runtime unified silver material audit",
+        "Runtime stable exterior silver material audit",
         [
-            "base color #E9EDF0 across case / bezel / lugs / caseback / crown",
-            "metalness 0.78–0.80 (delta 0.02 <= 0.05)",
-            "roughness 0.19–0.23 (delta 0.04 <= 0.06)",
-            "spring bars / open-heart rim / indices / hands / buckle recorded",
+            "candidate-local clone on case / bezel / rehaut / lugs / caseback",
+            "crown / tube / collar / spring bars / buckle also use #E7EAED",
+            "metalness .52 / roughness .20 / env .35 exactly",
+            "base Phase 3B.2 material UUIDs are not shared",
             "lighting / environment / exposure / tone mapping unchanged",
         ],
         arrows=[
@@ -514,10 +554,45 @@ def main() -> None:
         (250, 40, 1030, 620),
         "Domed crystal — oblique view",
         [
-            "curvature is visible without changing the total case thickness",
+            "curvature and edge highlight retained without refraction",
             "bezel interface and protected clear diameter are unchanged",
         ],
     )
+
+    comparison_crop_board("crystal-edge-comparison.png", [
+        ("crystal-hidden-front.png", (250, 35, 1030, 645), "Crystal hidden", "diagnostic-only control"),
+        ("desktop-front.png", (250, 35, 1030, 645), "Crystal visible", "edge contrast retained ≥ 90%"),
+    ])
+    closeup(
+        "desktop-front.png",
+        "minute-track-close.png",
+        (350, 55, 930, 355),
+        "Minute track — fourth candidate",
+        [
+            "radius 14.200 / 60 equal-size dots",
+            "normal, 12 o'clock, and open-heart overlap count: 0",
+        ],
+    )
+    closeup(
+        "desktop-oblique-front.png",
+        "stable-silver-close.png",
+        (220, 30, 1080, 650),
+        "Stable exterior silver",
+        [
+            "#E7EAED / metalness .52 / roughness .20 / env .35",
+            "candidate-local clones; no shared base material UUID",
+        ],
+    )
+    board("exterior-group-board.png", [
+        ("desktop-front.png", "Exterior ON", "watch-head and attachments visible"),
+        ("exterior-off.png", "Exterior OFF", "internal mechanism remains"),
+        ("display-split-100.png", "Split + ON", "existing split transform"),
+        ("exterior-split-off.png", "Split + OFF", "restore-safe visibility mask"),
+        ("display-explode-100.png", "Explode + ON", "existing explode transform"),
+        ("exterior-explode-off.png", "Explode + OFF", "transform unchanged"),
+        ("opacity-16.png", "Opacity 16% + ON", "interior selection preserved"),
+        ("exterior-opacity16-off.png", "Opacity 16% + OFF", "no stale exterior selection"),
+    ])
 
     make_gif("video-01-watch-head-views.gif", [
         ("desktop-front.png", "front"),
@@ -532,23 +607,23 @@ def main() -> None:
         ("small-second-close.png", "lighter small seconds"),
     ])
     make_gif("video-03-open-heart-review.gif", [
-        ("before-third-front.png", "second candidate rejected"),
-        ("desktop-front.png", "third candidate"),
+        ("before-fourth-front.png", "third candidate"),
+        ("desktop-front.png", "fourth candidate"),
         ("open-heart-close.png", "open-heart close"),
     ])
     make_gif("video-04-small-second-review.gif", [
-        ("before-third-small-second-close.png", "second candidate"),
-        ("small-second-close.png", "third candidate"),
-        ("desktop-front.png", "third-candidate dial"),
+        ("before-fourth-front.png", "third candidate"),
+        ("small-second-close.png", "fourth candidate"),
+        ("desktop-front.png", "fourth-candidate dial"),
     ])
     make_gif("video-05-hands-review.gif", [
-        ("before-third-hands-close.png", "second candidate"),
-        ("hands-close.png", "third candidate unified silver"),
+        ("before-fourth-front.png", "third candidate"),
+        ("hands-close.png", "fourth candidate stable exterior silver"),
         ("desktop-front.png", "10:10:30 coupling"),
     ])
     make_gif("video-06-crystal-side-review.gif", [
-        ("before-third-domed-crystal-side.png", "second-candidate dome"),
-        ("domed-crystal-side.png", "third-candidate dome"),
+        ("before-fourth-side.png", "third-candidate dome"),
+        ("domed-crystal-side.png", "fourth-candidate non-refractive dome"),
         ("desktop-oblique-front.png", "oblique curvature"),
     ])
     make_gif("video-07-crown-position-cycle.gif", [
@@ -568,6 +643,17 @@ def main() -> None:
         ("display-explode-100.png", "explode 100%"),
         ("display-restored.png", "restored exactly"),
     ], duration=1500)
+    make_gif("video-10-exterior-group.gif", [
+        ("desktop-front.png", "exterior ON"),
+        ("exterior-off.png", "exterior OFF"),
+        ("display-split-100.png", "split + exterior ON"),
+        ("exterior-split-off.png", "split + exterior OFF"),
+        ("display-explode-100.png", "explode + exterior ON"),
+        ("exterior-explode-off.png", "explode + exterior OFF"),
+        ("opacity-16.png", "opacity 16% + exterior ON"),
+        ("exterior-opacity16-off.png", "opacity 16% + exterior OFF"),
+        ("desktop-front.png", "restored"),
+    ], duration=700)
 
     raw_names = [
         "desktop-front.png", "desktop-oblique-front.png", "desktop-side.png",
@@ -577,14 +663,17 @@ def main() -> None:
         "mobile-390-opacity-16.png", "normal-base-phase3b2.png", "normal-branch.png",
         "display-normal.png", "display-split-100.png",
         "display-explode-100.png", "display-restored.png",
+        "crystal-hidden-front.png", "exterior-off.png",
+        "exterior-internal-selection.png", "exterior-split-off.png",
+        "exterior-explode-off.png", "exterior-opacity16-off.png",
     ]
     image_report = {
-        "sourceImplementationCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
-        "sourceBaseCommit": "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
+        "sourceImplementationCommit": SOURCE_IMPLEMENTATION_COMMIT,
+        "sourceBaseCommit": SOURCE_BASE_COMMIT,
         "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
         "sourceBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
         "appVersion": "v3.15.0",
-        "captureMode": "same-origin browser harness and actual WebGL canvas capture",
+        "captureMode": "same-origin browser harness and actual Three.js WebGLRenderTarget PNG capture",
         "rawCaptureCreationByThisScript": False,
         "images": [image_metric(EVIDENCE / name, "actual runtime capture") for name in raw_names],
         "browserScreenshots": [
@@ -624,13 +713,19 @@ def main() -> None:
         "display-restored.png": {"viewport": "desktop", "camera": "side", "display": "restored"},
         "normal-base-phase3b2.png": {"viewport": "desktop", "camera": "front", "mode": "phase3b2-base"},
         "normal-branch.png": {"viewport": "desktop", "camera": "front", "mode": "normal-path"},
+        "crystal-hidden-front.png": {"viewport": "desktop", "camera": "front", "crystal": "diagnostic-hidden"},
+        "exterior-off.png": {"viewport": "desktop", "camera": "front", "exteriorGroup": "off"},
+        "exterior-internal-selection.png": {"viewport": "desktop", "camera": "dialMechanism", "opacity": 0.16, "exteriorGroup": "off", "selection": "設定車2"},
+        "exterior-split-off.png": {"viewport": "desktop", "camera": "side", "display": "split", "exteriorGroup": "off"},
+        "exterior-explode-off.png": {"viewport": "desktop", "camera": "side", "display": "explode", "exteriorGroup": "off"},
+        "exterior-opacity16-off.png": {"viewport": "desktop", "camera": "front", "opacity": 0.16, "exteriorGroup": "off"},
     }
     capture_metadata = {
-        "sourceImplementationCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
-        "sourceBaseCommit": "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
+        "sourceImplementationCommit": SOURCE_IMPLEMENTATION_COMMIT,
+        "sourceBaseCommit": SOURCE_BASE_COMMIT,
         "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "captureMode": "same-origin browser harness and actual WebGL canvas capture",
-        "harness": "tests/final-exterior-phase3b1-capture.html",
+        "captureMode": "same-origin browser harness and actual Three.js WebGLRenderTarget PNG capture",
+        "harness": "tests/final-watch-head-phase3c1-fourth-capture.html",
         "query": "exterior=balanced&watchHead=phase3c1&dimensionAudit=1",
         "environments": {
             "desktop": desktop_runtime["environment"],
@@ -648,6 +743,9 @@ def main() -> None:
         ],
     }
     (REPORTS / "capture-metadata.json").write_text(
+        json.dumps(capture_metadata, ensure_ascii=False, indent=2) + "\n"
+    )
+    (REPORTS / "browser-capture-metadata.json").write_text(
         json.dumps(capture_metadata, ensure_ascii=False, indent=2) + "\n"
     )
 

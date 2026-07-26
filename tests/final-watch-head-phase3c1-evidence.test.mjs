@@ -32,9 +32,12 @@ test("Phase 3C.1 runtime captures are real fixed-viewport PNG evidence", () => {
   assert.equal(imageReport.rawCaptureCreationByThisScript, false);
   assert.equal(
     captureMetadata.sourceImplementationCommit,
-    "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
+    "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
   );
-  assert.match(captureMetadata.captureMode, /actual WebGL canvas capture/);
+  assert.match(
+    captureMetadata.captureMode,
+    /actual Three\.js WebGLRenderTarget PNG capture/,
+  );
   for (const [name, dimensions] of Object.entries({
     "desktop-front.png": [1280, 720],
     "desktop-side.png": [1280, 720],
@@ -85,6 +88,10 @@ test("Phase 3C.1 purpose-specific images and review GIFs are distinct", () => {
     "domed-crystal-oblique.png",
     "unified-silver-material-audit.png",
     "display-transform-board.png",
+    "crystal-edge-comparison.png",
+    "minute-track-close.png",
+    "stable-silver-close.png",
+    "exterior-group-board.png",
   ];
   const hashes = required.map(name => {
     const buffer = fs.readFileSync(path.join(evidence, name));
@@ -96,7 +103,7 @@ test("Phase 3C.1 purpose-specific images and review GIFs are distinct", () => {
   const gifs = fs.readdirSync(evidence)
     .filter(file => /^video-\d{2}-.*\.gif$/.test(file))
     .sort();
-  assert.equal(gifs.length, 9);
+  assert.equal(gifs.length, 10);
   for (const file of gifs) {
     const buffer = fs.readFileSync(path.join(evidence, file));
     assert.ok(buffer.length > 20_000);
@@ -114,11 +121,11 @@ test("Phase 3C.1 reports reproduce the protected geometry and actual audit", () 
   assert.equal(config.config.enabledByDefault, false);
   assert.equal(
     config.config.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+    "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
   );
   assert.equal(
     config.sourceImplementationCommit,
-    "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
+    "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
   );
   assert.equal(openHeart.actualGeometryAudit.cutout.openingDiameter, 6.6);
   assert.ok(openHeart.actualGeometryAudit.cutout.openingAreaRatio <= 0.1);
@@ -132,18 +139,20 @@ test("Phase 3C.1 reports reproduce the protected geometry and actual audit", () 
   assert.deepEqual(geometry.protectedDimensions.phase2c, [6.645, 3.19, 6.745]);
 });
 
-test("Phase 3C.1 regression, normal-path, suites, and performance pass", () => {
+test("Phase 3C.1 regression records known environment failures without threshold changes", () => {
   const regression = readJson("regression-results.json");
   const performance = readJson("performance-results.json");
   const normal = readJson("normal-path-diff.json");
   assert.equal(
     regression.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+    "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
   );
   assert.equal(
     regression.revisionVerification,
-    "THIRD_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
+    "FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
   );
+  assert.equal(regression.humanReview.thirdCandidate, "REJECTED");
+  assert.equal(regression.humanReview.fourthCandidate, "PENDING");
   assert.equal(regression.defaultAdoption, false);
   assert.equal(regression.allAutomatedPassed, false);
   assert.equal(regression.humanReview.physicalIPhone, "PENDING");
@@ -180,8 +189,11 @@ test("Phase 3C.1 regression, normal-path, suites, and performance pass", () => {
 test("Phase 3C.1 runtime material and display-family evidence is complete", () => {
   const material = readJson("material-runtime-audit.json");
   const display = readJson("phase3c1-display-group-report.json");
+  const fourth = readJson("fourth-candidate-visual-audit.json");
   assert.equal(material.requiredPartsRecorded, true);
   assert.equal(material.baseColorConsistent, true);
+  assert.equal(material.candidateLocalClones, 46);
+  assert.equal(material.sharedBaseMaterialCount, 0);
   assert.ok(
     material.actualRoughnessDelta <= material.maximumRoughnessDelta,
   );
@@ -191,6 +203,39 @@ test("Phase 3C.1 runtime material and display-family evidence is complete", () =
   assert.equal(display.desktopPassed, true);
   assert.equal(display.mobile390Passed, true);
   assert.equal(display.restoreTolerance, 1e-7);
+  for (const viewport of ["desktop", "mobile390"]) {
+    const finish = fourth.material[viewport];
+    assert.equal(finish.color, 0xE7EAED);
+    assert.equal(finish.metalness, 0.52);
+    assert.equal(finish.roughness, 0.2);
+    assert.equal(finish.envMapIntensity, 0.35);
+    assert.equal(finish.opacity, 1);
+    assert.equal(finish.transparent, false);
+    assert.equal(finish.depthWrite, true);
+  }
+  assert.equal(fourth.minuteTrack.configured.radius, 14.2);
+  assert.equal(fourth.minuteTrack.desktop.displayedDotCount, 60);
+  assert.equal(fourth.minuteTrack.desktop.indexOverlapCount, 0);
+  assert.equal(fourth.minuteTrack.desktop.twelveDoubleBarOverlapCount, 0);
+  assert.equal(fourth.minuteTrack.desktop.openingOverlapCount, 0);
+  assert.equal(fourth.minuteTrack.desktop.bezelRehautOverlapCount, 0);
+  assert.equal(fourth.minuteTrack.worldValuesEqual, true);
+  for (const viewport of ["desktop", "mobile390"]) {
+    const crystal = fourth.crystal[viewport];
+    assert.ok(crystal.retentionRatio >= 0.9);
+    assert.equal(crystal.restored.material.transmission, 0);
+    assert.equal(crystal.restored.material.opacity, 0.1);
+    assert.equal(crystal.restored.material.depthWrite, false);
+    const exterior = fourth.exteriorGroup[viewport];
+    assert.equal(exterior.initial.partCount, 29);
+    assert.equal(exterior.off.group.visiblePartCount, 0);
+    assert.equal(exterior.on.group.visiblePartCount, 29);
+    assert.equal(exterior.off.selection, null);
+  }
+  assert.deepEqual(
+    fourth.backlog,
+    ["UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"],
+  );
   for (const viewport of ["desktop", "mobile390"]) {
     const report = display[viewport];
     assert.equal(report.split.families.FRONT.root.position[1], -5.5);

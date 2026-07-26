@@ -69,6 +69,7 @@ export async function runFinalExteriorCapture({
     document.body.dataset.captureStage = "waiting-for-iframe";
     document.body.dataset.captureError = "";
     document.body.dataset[readyKey] = "false";
+    output.dataset.captureId = captureId;
     const query = new URLSearchParams(appQuery);
     query.set("camera", cameraPreset);
     query.set("capture", captureId);
@@ -146,6 +147,7 @@ export async function runFinalExteriorCapture({
     };
     output.textContent = JSON.stringify({ ok: true, metadata }, null, 2);
     output.dataset.status = "passed";
+    output.dataset.captureId = captureId;
     log.textContent = JSON.stringify(
       {
         captureId,

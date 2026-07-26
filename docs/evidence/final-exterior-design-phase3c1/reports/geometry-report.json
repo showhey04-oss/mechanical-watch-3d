@@ -1,12 +1,12 @@
 {
-  "sourceImplementationCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
-  "sourceAuditCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
+  "sourceImplementationCommit": "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
+  "sourceAuditCommit": "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
   "sourceBaseCommit": "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
   "baseBranch": "feature/final-exterior-balanced-phase3b2",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin browser harness and actual WebGL canvas capture",
+  "captureMode": "same-origin browser harness and actual Three.js WebGLRenderTarget PNG capture",
   "desktop": {
     "validation": {
       "ok": true,
@@ -25,8 +25,12 @@
         "handLengths": true,
         "handWidths": true,
         "dialRevision": true,
+        "stableExteriorSilver": true,
+        "minuteTrackRevision": true,
         "rimRevision": true,
-        "crystalEnvelope": true
+        "crystalEnvelope": true,
+        "crystalReadability": true,
+        "exteriorDisplayGroup": true
       },
       "audit": {
         "classification": "READ_ONLY_PREIMPLEMENTATION_OPEN_HEART_AUDIT",
@@ -1108,6 +1112,1054 @@
         "jewels",
         "screw seats"
       ]
+    },
+    "minuteTrack": {
+      "radius": 14.2,
+      "configuredDotCount": 60,
+      "displayedDotCount": 60,
+      "omittedDotCount": 0,
+      "indexOuterRadius": 13.638,
+      "normalIndexRadialClearance": 0.4369999999999994,
+      "minimumIndexClearance": {
+        "dotIndex": 0,
+        "index": 0,
+        "double": true,
+        "clearance": 0.3811784665510767
+      },
+      "minimumTwelveDoubleBarClearance": {
+        "dotIndex": 0,
+        "clearance": 0.3811784665510767
+      },
+      "openingClearance": 0.5750000000000011,
+      "minimumOpenHeartClearance": 2.6535493197661273,
+      "indexOverlapCount": 0,
+      "twelveDoubleBarOverlapCount": 0,
+      "openingOverlapCount": 0,
+      "bezelRehautOverlapCount": 0,
+      "dots": [
+        {
+          "index": 0,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            0,
+            14.2
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 0.3811784665510767
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 10.911232390586276,
+          "omitted": false
+        },
+        {
+          "index": 1,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            1.484304178400679,
+            14.12221091422948
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 0.9201021499019826
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 10.158650544842388,
+          "omitted": false
+        },
+        {
+          "index": 2,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            2.952346009612182,
+            13.88969593042004
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 2.3065534241485555
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 9.345993604050479,
+          "omitted": false
+        },
+        {
+          "index": 3,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            4.388041320124253,
+            13.50500253139118
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 2.6614142766554534
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 8.522044979450659,
+          "omitted": false
+        },
+        {
+          "index": 4,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            5.775660331676362,
+            12.972345498524932
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 1.2713557031605558
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 7.694359666481464,
+          "omitted": false
+        },
+        {
+          "index": 5,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            7.099999999999999,
+            12.29756073373903
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 0.4370000000000013
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 6.8296935931837535,
+          "omitted": false
+        },
+        {
+          "index": 6,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            8.346550582553117,
+            11.488041320124253
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 1.2713557031605573
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 6.067091766713709,
+          "omitted": false
+        },
+        {
+          "index": 7,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            9.501654610295786,
+            10.552656521778998
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 2.6614142766554556
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 5.2936599987377395,
+          "omitted": false
+        },
+        {
+          "index": 8,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            10.552656521778996,
+            9.501654610295786
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 2.6614142766554525
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 4.570485630544994,
+          "omitted": false
+        },
+        {
+          "index": 9,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            11.488041320124253,
+            8.346550582553117
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 1.2713557031605551
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 3.9210032605860135,
+          "omitted": false
+        },
+        {
+          "index": 10,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            12.297560733739028,
+            7.100000000000001
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 3.331235792817895,
+          "omitted": false
+        },
+        {
+          "index": 11,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            12.972345498524932,
+            5.775660331676365
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 1.2713557031605582
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 2.960794793410418,
+          "omitted": false
+        },
+        {
+          "index": 12,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            13.50500253139118,
+            4.388041320124254
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 2.661414276655456
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 2.713285731451972,
+          "omitted": false
+        },
+        {
+          "index": 13,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            13.88969593042004,
+            2.9523460096121807
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 2.661414276655452
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 2.6535493197661273,
+          "omitted": false
+        },
+        {
+          "index": 14,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            14.12221091422948,
+            1.484304178400679
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 1.2713557031605558
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 2.7874655425689125,
+          "omitted": false
+        },
+        {
+          "index": 15,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            14.2,
+            4.022532617330065e-15
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 3.059627491566897,
+          "omitted": false
+        },
+        {
+          "index": 16,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            14.122210914229482,
+            -1.4843041784006772
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 1.2713557031605567
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 3.570782675946398,
+          "omitted": false
+        },
+        {
+          "index": 17,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            13.88969593042004,
+            -2.9523460096121825
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 2.6614142766554556
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 4.161161211645162,
+          "omitted": false
+        },
+        {
+          "index": 18,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            13.505002531391181,
+            -4.388041320124252
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 2.6614142766554534
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 4.842186780843658,
+          "omitted": false
+        },
+        {
+          "index": 19,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            12.972345498524934,
+            -5.77566033167636
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 1.2713557031605567
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 5.587248453601047,
+          "omitted": false
+        },
+        {
+          "index": 20,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            12.29756073373903,
+            -7.099999999999996
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 6.332363161052857,
+          "omitted": false
+        },
+        {
+          "index": 21,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            11.488041320124253,
+            -8.346550582553117
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 1.2713557031605591
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 7.188093047810341,
+          "omitted": false
+        },
+        {
+          "index": 22,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            10.552656521779001,
+            -9.501654610295782
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 2.661414276655452
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 8.013616255497292,
+          "omitted": false
+        },
+        {
+          "index": 23,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            9.501654610295788,
+            -10.552656521778994
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 2.6614142766554587
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 8.840852213241808,
+          "omitted": false
+        },
+        {
+          "index": 24,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            8.34655058255312,
+            -11.488041320124251
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 1.27135570316056
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 9.661261489936942,
+          "omitted": false
+        },
+        {
+          "index": 25,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            7.099999999999999,
+            -12.29756073373903
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 0.4370000000000013
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 10.42532312321233,
+          "omitted": false
+        },
+        {
+          "index": 26,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            5.77566033167636,
+            -12.972345498524934
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 1.271355703160559
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 11.25465659738038,
+          "omitted": false
+        },
+        {
+          "index": 27,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            4.3880413201242545,
+            -13.50500253139118
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 2.661414276655452
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 12.01675198670405,
+          "omitted": false
+        },
+        {
+          "index": 28,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            2.952346009612182,
+            -13.88969593042004
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 4.0855413201242525
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 12.749777962549453,
+          "omitted": false
+        },
+        {
+          "index": 29,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            1.4843041784006767,
+            -14.122210914229482
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 5.4731603316763655
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 13.449944966822498,
+          "omitted": false
+        },
+        {
+          "index": 30,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            8.04506523466013e-15,
+            -14.2
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 6.754999999999992
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 14.071407294269859,
+          "omitted": false
+        },
+        {
+          "index": 31,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -1.4843041784006732,
+            -14.122210914229482
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 5.4731603316763655
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 14.738692660940051,
+          "omitted": false
+        },
+        {
+          "index": 32,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -2.9523460096121785,
+            -13.88969593042004
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 4.085541320124253
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 15.321651283343519,
+          "omitted": false
+        },
+        {
+          "index": 33,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -4.388041320124251,
+            -13.505002531391181
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 2.661414276655453
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 15.860418895460798,
+          "omitted": false
+        },
+        {
+          "index": 34,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -5.775660331676363,
+            -12.972345498524932
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 1.2713557031605531
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 16.352889791212018,
+          "omitted": false
+        },
+        {
+          "index": 35,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -7.099999999999996,
+            -12.297560733739031
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 16.754697126950305,
+          "omitted": false
+        },
+        {
+          "index": 36,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -8.346550582553117,
+            -11.488041320124255
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 1.27135570316056
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.19169851407213,
+          "omitted": false
+        },
+        {
+          "index": 37,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -9.501654610295786,
+            -10.552656521778998
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 2.6614142766554587
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.534965487563888,
+          "omitted": false
+        },
+        {
+          "index": 38,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -10.552656521778994,
+            -9.50165461029579
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 2.661414276655452
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.825775828125124,
+          "omitted": false
+        },
+        {
+          "index": 39,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -11.488041320124251,
+            -8.34655058255312
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 1.2713557031605518
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.06310799487323,
+          "omitted": false
+        },
+        {
+          "index": 40,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -12.297560733739024,
+            -7.100000000000006
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 18.203637127504788,
+          "omitted": false
+        },
+        {
+          "index": 41,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -12.972345498524927,
+            -5.775660331676372
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 1.2713557031605536
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.374232225090054,
+          "omitted": false
+        },
+        {
+          "index": 42,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -13.50500253139118,
+            -4.388041320124255
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 2.661414276655459
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.446954219963686,
+          "omitted": false
+        },
+        {
+          "index": 43,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -13.88969593042004,
+            -2.9523460096121887
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 2.661414276655458
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.464054751093002,
+          "omitted": false
+        },
+        {
+          "index": 44,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -14.12221091422948,
+            -1.48430417840069
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 1.2713557031605647
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.42547551025867,
+          "omitted": false
+        },
+        {
+          "index": 45,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -14.2,
+            -2.608497682183862e-15
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 18.288848092675984,
+          "omitted": false
+        },
+        {
+          "index": 46,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -14.122210914229482,
+            1.4843041784006723
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 1.2713557031605536
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.18199433633897,
+          "omitted": false
+        },
+        {
+          "index": 47,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -13.88969593042004,
+            2.952346009612184
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 2.6614142766554583
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.977927185739524,
+          "omitted": false
+        },
+        {
+          "index": 48,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -13.505002531391181,
+            4.38804132012425
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 2.661414276655459
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.719852169903408,
+          "omitted": false
+        },
+        {
+          "index": 49,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -12.972345498524934,
+            5.775660331676356
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 1.2713557031605642
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.408669646441243,
+          "omitted": false
+        },
+        {
+          "index": 50,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -12.297560733739028,
+            7.100000000000001
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 17.002978037971257,
+          "omitted": false
+        },
+        {
+          "index": 51,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -11.488041320124255,
+            8.346550582553116
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 1.2713557031605531
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 16.63157838183335,
+          "omitted": false
+        },
+        {
+          "index": 52,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -10.552656521778994,
+            9.50165461029579
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 2.661414276655457
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 16.168480637977808,
+          "omitted": false
+        },
+        {
+          "index": 53,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -9.501654610295786,
+            10.552656521778998
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 2.6614142766554467
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 15.657912366583018,
+          "omitted": false
+        },
+        {
+          "index": 54,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -8.346550582553121,
+            11.488041320124251
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 1.2713557031605531
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 15.101830615385301,
+          "omitted": false
+        },
+        {
+          "index": 55,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -7.099999999999995,
+            12.297560733739031
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 14.459938174558198,
+          "omitted": false
+        },
+        {
+          "index": 56,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -5.775660331676362,
+            12.972345498524934
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 1.2713557031605651
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 13.862205804815064,
+          "omitted": false
+        },
+        {
+          "index": 57,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -4.388041320124256,
+            13.50500253139118
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 2.6614142766554587
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 13.183902682002627,
+          "omitted": false
+        },
+        {
+          "index": 58,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -2.952346009612177,
+            13.88969593042004
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 2.3065534241485506
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 12.470638216949402,
+          "omitted": false
+        },
+        {
+          "index": 59,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -1.4843041784006785,
+            14.12221091422948
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 0.9201021499019821
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 11.725919731909467,
+          "omitted": false
+        }
+      ],
+      "actualDisplayedDotCount": 60,
+      "omittedForOpenHeart": 0
     },
     "lineOfSight": {
       "classification": "ACTUAL_GEOMETRY_POSITIVE_Y_RAYCAST",
@@ -7593,6 +8645,10 @@
       "openHeartToSmallSecondClearance": 3.249419,
       "openHeartToNearestIndexClearance": 0.870485,
       "handToCrystalInnerClearance": 0.84,
+      "minuteTrackToIndexOverlapCount": 0,
+      "minuteTrackToTwelveDoubleBarOverlapCount": 0,
+      "minuteTrackToOpeningOverlapCount": 0,
+      "minuteTrackToBezelRehautOverlapCount": 0,
       "coplanarOverlapCount": 0,
       "zFightingCount": 0
     }
@@ -7615,8 +8671,12 @@
         "handLengths": true,
         "handWidths": true,
         "dialRevision": true,
+        "stableExteriorSilver": true,
+        "minuteTrackRevision": true,
         "rimRevision": true,
-        "crystalEnvelope": true
+        "crystalEnvelope": true,
+        "crystalReadability": true,
+        "exteriorDisplayGroup": true
       },
       "audit": {
         "classification": "READ_ONLY_PREIMPLEMENTATION_OPEN_HEART_AUDIT",
@@ -8698,6 +9758,1054 @@
         "jewels",
         "screw seats"
       ]
+    },
+    "minuteTrack": {
+      "radius": 14.2,
+      "configuredDotCount": 60,
+      "displayedDotCount": 60,
+      "omittedDotCount": 0,
+      "indexOuterRadius": 13.638,
+      "normalIndexRadialClearance": 0.4369999999999994,
+      "minimumIndexClearance": {
+        "dotIndex": 0,
+        "index": 0,
+        "double": true,
+        "clearance": 0.3811784665510767
+      },
+      "minimumTwelveDoubleBarClearance": {
+        "dotIndex": 0,
+        "clearance": 0.3811784665510767
+      },
+      "openingClearance": 0.5750000000000011,
+      "minimumOpenHeartClearance": 2.6535493197661273,
+      "indexOverlapCount": 0,
+      "twelveDoubleBarOverlapCount": 0,
+      "openingOverlapCount": 0,
+      "bezelRehautOverlapCount": 0,
+      "dots": [
+        {
+          "index": 0,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            0,
+            14.2
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 0.3811784665510767
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 10.911232390586276,
+          "omitted": false
+        },
+        {
+          "index": 1,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            1.484304178400679,
+            14.12221091422948
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 0.9201021499019826
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 10.158650544842388,
+          "omitted": false
+        },
+        {
+          "index": 2,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            2.952346009612182,
+            13.88969593042004
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 2.3065534241485555
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 9.345993604050479,
+          "omitted": false
+        },
+        {
+          "index": 3,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            4.388041320124253,
+            13.50500253139118
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 2.6614142766554534
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 8.522044979450659,
+          "omitted": false
+        },
+        {
+          "index": 4,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            5.775660331676362,
+            12.972345498524932
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 1.2713557031605558
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 7.694359666481464,
+          "omitted": false
+        },
+        {
+          "index": 5,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            7.099999999999999,
+            12.29756073373903
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 0.4370000000000013
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 6.8296935931837535,
+          "omitted": false
+        },
+        {
+          "index": 6,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            8.346550582553117,
+            11.488041320124253
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 1.2713557031605573
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 6.067091766713709,
+          "omitted": false
+        },
+        {
+          "index": 7,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            9.501654610295786,
+            10.552656521778998
+          ],
+          "nearestIndex": {
+            "index": 1,
+            "double": false,
+            "clearance": 2.6614142766554556
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 5.2936599987377395,
+          "omitted": false
+        },
+        {
+          "index": 8,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            10.552656521778996,
+            9.501654610295786
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 2.6614142766554525
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 4.570485630544994,
+          "omitted": false
+        },
+        {
+          "index": 9,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            11.488041320124253,
+            8.346550582553117
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 1.2713557031605551
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 3.9210032605860135,
+          "omitted": false
+        },
+        {
+          "index": 10,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            12.297560733739028,
+            7.100000000000001
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 3.331235792817895,
+          "omitted": false
+        },
+        {
+          "index": 11,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            12.972345498524932,
+            5.775660331676365
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 1.2713557031605582
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 2.960794793410418,
+          "omitted": false
+        },
+        {
+          "index": 12,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            13.50500253139118,
+            4.388041320124254
+          ],
+          "nearestIndex": {
+            "index": 2,
+            "double": false,
+            "clearance": 2.661414276655456
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 2.713285731451972,
+          "omitted": false
+        },
+        {
+          "index": 13,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            13.88969593042004,
+            2.9523460096121807
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 2.661414276655452
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 2.6535493197661273,
+          "omitted": false
+        },
+        {
+          "index": 14,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            14.12221091422948,
+            1.484304178400679
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 1.2713557031605558
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 2.7874655425689125,
+          "omitted": false
+        },
+        {
+          "index": 15,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            14.2,
+            4.022532617330065e-15
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 3.059627491566897,
+          "omitted": false
+        },
+        {
+          "index": 16,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            14.122210914229482,
+            -1.4843041784006772
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 1.2713557031605567
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 3.570782675946398,
+          "omitted": false
+        },
+        {
+          "index": 17,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            13.88969593042004,
+            -2.9523460096121825
+          ],
+          "nearestIndex": {
+            "index": 3,
+            "double": false,
+            "clearance": 2.6614142766554556
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 4.161161211645162,
+          "omitted": false
+        },
+        {
+          "index": 18,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            13.505002531391181,
+            -4.388041320124252
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 2.6614142766554534
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 4.842186780843658,
+          "omitted": false
+        },
+        {
+          "index": 19,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            12.972345498524934,
+            -5.77566033167636
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 1.2713557031605567
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 5.587248453601047,
+          "omitted": false
+        },
+        {
+          "index": 20,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            12.29756073373903,
+            -7.099999999999996
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 6.332363161052857,
+          "omitted": false
+        },
+        {
+          "index": 21,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            11.488041320124253,
+            -8.346550582553117
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 1.2713557031605591
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 7.188093047810341,
+          "omitted": false
+        },
+        {
+          "index": 22,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            10.552656521779001,
+            -9.501654610295782
+          ],
+          "nearestIndex": {
+            "index": 4,
+            "double": false,
+            "clearance": 2.661414276655452
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 8.013616255497292,
+          "omitted": false
+        },
+        {
+          "index": 23,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            9.501654610295788,
+            -10.552656521778994
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 2.6614142766554587
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 8.840852213241808,
+          "omitted": false
+        },
+        {
+          "index": 24,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            8.34655058255312,
+            -11.488041320124251
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 1.27135570316056
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 9.661261489936942,
+          "omitted": false
+        },
+        {
+          "index": 25,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            7.099999999999999,
+            -12.29756073373903
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 0.4370000000000013
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 10.42532312321233,
+          "omitted": false
+        },
+        {
+          "index": 26,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            5.77566033167636,
+            -12.972345498524934
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 1.271355703160559
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 11.25465659738038,
+          "omitted": false
+        },
+        {
+          "index": 27,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            4.3880413201242545,
+            -13.50500253139118
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 2.661414276655452
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 12.01675198670405,
+          "omitted": false
+        },
+        {
+          "index": 28,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            2.952346009612182,
+            -13.88969593042004
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 4.0855413201242525
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 12.749777962549453,
+          "omitted": false
+        },
+        {
+          "index": 29,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            1.4843041784006767,
+            -14.122210914229482
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 5.4731603316763655
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 13.449944966822498,
+          "omitted": false
+        },
+        {
+          "index": 30,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            8.04506523466013e-15,
+            -14.2
+          ],
+          "nearestIndex": {
+            "index": 5,
+            "double": false,
+            "clearance": 6.754999999999992
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 14.071407294269859,
+          "omitted": false
+        },
+        {
+          "index": 31,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -1.4843041784006732,
+            -14.122210914229482
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 5.4731603316763655
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 14.738692660940051,
+          "omitted": false
+        },
+        {
+          "index": 32,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -2.9523460096121785,
+            -13.88969593042004
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 4.085541320124253
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 15.321651283343519,
+          "omitted": false
+        },
+        {
+          "index": 33,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -4.388041320124251,
+            -13.505002531391181
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 2.661414276655453
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 15.860418895460798,
+          "omitted": false
+        },
+        {
+          "index": 34,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -5.775660331676363,
+            -12.972345498524932
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 1.2713557031605531
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 16.352889791212018,
+          "omitted": false
+        },
+        {
+          "index": 35,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -7.099999999999996,
+            -12.297560733739031
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 16.754697126950305,
+          "omitted": false
+        },
+        {
+          "index": 36,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -8.346550582553117,
+            -11.488041320124255
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 1.27135570316056
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.19169851407213,
+          "omitted": false
+        },
+        {
+          "index": 37,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -9.501654610295786,
+            -10.552656521778998
+          ],
+          "nearestIndex": {
+            "index": 7,
+            "double": false,
+            "clearance": 2.6614142766554587
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.534965487563888,
+          "omitted": false
+        },
+        {
+          "index": 38,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -10.552656521778994,
+            -9.50165461029579
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 2.661414276655452
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.825775828125124,
+          "omitted": false
+        },
+        {
+          "index": 39,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -11.488041320124251,
+            -8.34655058255312
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 1.2713557031605518
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.06310799487323,
+          "omitted": false
+        },
+        {
+          "index": 40,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -12.297560733739024,
+            -7.100000000000006
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 18.203637127504788,
+          "omitted": false
+        },
+        {
+          "index": 41,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -12.972345498524927,
+            -5.775660331676372
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 1.2713557031605536
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.374232225090054,
+          "omitted": false
+        },
+        {
+          "index": 42,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -13.50500253139118,
+            -4.388041320124255
+          ],
+          "nearestIndex": {
+            "index": 8,
+            "double": false,
+            "clearance": 2.661414276655459
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.446954219963686,
+          "omitted": false
+        },
+        {
+          "index": 43,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -13.88969593042004,
+            -2.9523460096121887
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 2.661414276655458
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.464054751093002,
+          "omitted": false
+        },
+        {
+          "index": 44,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -14.12221091422948,
+            -1.48430417840069
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 1.2713557031605647
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.42547551025867,
+          "omitted": false
+        },
+        {
+          "index": 45,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -14.2,
+            -2.608497682183862e-15
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 18.288848092675984,
+          "omitted": false
+        },
+        {
+          "index": 46,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -14.122210914229482,
+            1.4843041784006723
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 1.2713557031605536
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 18.18199433633897,
+          "omitted": false
+        },
+        {
+          "index": 47,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -13.88969593042004,
+            2.952346009612184
+          ],
+          "nearestIndex": {
+            "index": 9,
+            "double": false,
+            "clearance": 2.6614142766554583
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.977927185739524,
+          "omitted": false
+        },
+        {
+          "index": 48,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -13.505002531391181,
+            4.38804132012425
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 2.661414276655459
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.719852169903408,
+          "omitted": false
+        },
+        {
+          "index": 49,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -12.972345498524934,
+            5.775660331676356
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 1.2713557031605642
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 17.408669646441243,
+          "omitted": false
+        },
+        {
+          "index": 50,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -12.297560733739028,
+            7.100000000000001
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 17.002978037971257,
+          "omitted": false
+        },
+        {
+          "index": 51,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -11.488041320124255,
+            8.346550582553116
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 1.2713557031605531
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 16.63157838183335,
+          "omitted": false
+        },
+        {
+          "index": 52,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -10.552656521778994,
+            9.50165461029579
+          ],
+          "nearestIndex": {
+            "index": 10,
+            "double": false,
+            "clearance": 2.661414276655457
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 16.168480637977808,
+          "omitted": false
+        },
+        {
+          "index": 53,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -9.501654610295786,
+            10.552656521778998
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 2.6614142766554467
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 15.657912366583018,
+          "omitted": false
+        },
+        {
+          "index": 54,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -8.346550582553121,
+            11.488041320124251
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 1.2713557031605531
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 15.101830615385301,
+          "omitted": false
+        },
+        {
+          "index": 55,
+          "major": true,
+          "radius": 0.125,
+          "center": [
+            -7.099999999999995,
+            12.297560733739031
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 0.4369999999999995
+          },
+          "openingClearance": 0.5750000000000011,
+          "openHeartClearance": 14.459938174558198,
+          "omitted": false
+        },
+        {
+          "index": 56,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -5.775660331676362,
+            12.972345498524934
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 1.2713557031605651
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 13.862205804815064,
+          "omitted": false
+        },
+        {
+          "index": 57,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -4.388041320124256,
+            13.50500253139118
+          ],
+          "nearestIndex": {
+            "index": 11,
+            "double": false,
+            "clearance": 2.6614142766554587
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 13.183902682002627,
+          "omitted": false
+        },
+        {
+          "index": 58,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -2.952346009612177,
+            13.88969593042004
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 2.3065534241485506
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 12.470638216949402,
+          "omitted": false
+        },
+        {
+          "index": 59,
+          "major": false,
+          "radius": 0.0825,
+          "center": [
+            -1.4843041784006785,
+            14.12221091422948
+          ],
+          "nearestIndex": {
+            "index": 0,
+            "double": true,
+            "clearance": 0.9201021499019821
+          },
+          "openingClearance": 0.617500000000001,
+          "openHeartClearance": 11.725919731909467,
+          "omitted": false
+        }
+      ],
+      "actualDisplayedDotCount": 60,
+      "omittedForOpenHeart": 0
     },
     "lineOfSight": {
       "classification": "ACTUAL_GEOMETRY_POSITIVE_Y_RAYCAST",
@@ -15183,6 +17291,10 @@
       "openHeartToSmallSecondClearance": 3.249419,
       "openHeartToNearestIndexClearance": 0.870485,
       "handToCrystalInnerClearance": 0.84,
+      "minuteTrackToIndexOverlapCount": 0,
+      "minuteTrackToTwelveDoubleBarOverlapCount": 0,
+      "minuteTrackToOpeningOverlapCount": 0,
+      "minuteTrackToBezelRehautOverlapCount": 0,
       "coplanarOverlapCount": 0,
       "zFightingCount": 0
     }

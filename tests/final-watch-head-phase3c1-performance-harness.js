@@ -17,6 +17,7 @@ const query = new URLSearchParams({
   paused: "0",
   opacity: "1",
   panel: "collapsed",
+  cache: params.get("cache") || String(Date.now()),
 });
 if (mode === "candidate") query.set("watchHead", "phase3c1");
 frame.src = `../index.html?${query}`;

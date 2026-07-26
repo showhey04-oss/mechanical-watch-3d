@@ -33,7 +33,7 @@ Refactor Aで輪列・高さ面・回転状態をパラメータ化し、PR #3�
 
 作動音は教育・演出用の合成音であり、実物のETA 6498-1の録音ではない。初期状態はOFFとし、ユーザーがONにした後にだけWeb Audioと音源を初期化する。音イベント系は機構状態へ値を書き戻さず、初期化・診断・状態復元も発音契機にしない。
 
-現在の改修フェーズは「最終外装統合 — Phase 3C.1 正式時計本体意匠候補」とする。Phase 3C.1は人間承認済みPhase 3B.2 Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`へ積み上げる別Draftであり、初回と第2候補は人間非承認、第3候補はPC／物理iPhone再確認待ち・既定未採用である。v3.15.0はS86を通常寸法として採用し、v3.14.0の内部機構、レンダリング、照明、影、構造透過、DPR、カメラを維持している。継承した矩形影、transparent／depthWrite不連続、透過時の暗部・深度順、PC／iPhone照明差は、PR #5のD2c3を取り込まずIssue #2へ分離する。
+現在の改修フェーズは「最終外装統合 — Phase 3C.1 正式時計本体意匠候補」とする。Phase 3C.1は人間承認済みPhase 3B.2 Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`へ積み上げる別Draftであり、初回、第2候補、第3候補は人間非承認、第4候補はPC／物理iPhone再確認待ち・既定未採用である。v3.15.0はS86を通常寸法として採用し、v3.14.0の内部機構、レンダリング、照明、影、構造透過、DPR、カメラを維持している。継承した矩形影、transparent／depthWrite不連続、透過時の暗部・深度順、PC／iPhone照明差は、PR #5のD2c3を取り込まずIssue #2へ分離する。
 
 人間確認で選定したS86をv3.15.0の通常文字板表示寸法として採用する。対象は文字板表示系だけで、dial ring径27.692、index円径25.456、分針長12.040、時針長8.600、小秒表示円径7.740、小秒針長3.268である。内部機構、小秒中心、四番車軸、Y方向配置、針と軸／管の1:1回転拘束は維持する。試験状態は`ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION`であり、実施済みA/BでPR固有回帰は0件、全ブラウザ試験行列は環境制約により未完了である。
 
@@ -41,7 +41,7 @@ Refactor Aで輪列・高さ面・回転状態をパラメータ化し、PR #3�
 
 Phase 3B.2では、Phase 3B.1のGeometryを変更せず、query時だけ4ラグ、2スプリングバー、簡略ストラップ2本、簡略バックルを追加する。lug-to-lug 46.600、ラグ側幅20.000、ストラップ中心線長42.000／58.000を構造候補として実装し、位置1／位置2の新規禁止干渉0、Phase 2C包絡・S86・A.7・三針拘束・通常path pixel exactを維持する。ストラップ材質とバックルは教育表示用placeholderで、製造公差、防水、耐久、着脱機構とPhase 3C意匠は`UNVERIFIED`または`DEFERRED`である。追加world boundsのため全装着部の確認にはwheel zoom-outが必要だが、カメラ基盤とプリセット定数は変更しない。物理iPhoneでの接続、回転・ズーム、選択、透過、操作性は人間確認待ちである。ETA 4.50 mmは`REFERENCE_DATUM_UNRESOLVED / UNVERIFIED`のまま外装厚さの調整量に使用せず、表示開口と全体比率を外装統合レビューで再確認する。
 
-Phase 3C.1では、Phase 3B.2構造を保護したまま、query時だけ正式時計本体意匠を生成する。実テンプworld中心[7.700,1.730,1.800]を文字板へ投影し、直径6.600、細身profiled metal rim、中央軸受landを保持する2つの物理地板窓を配置する。第3候補は白系アイボリー`#F2EDE5`、共通silver`#E9EDF0`、大型faceted bar／minute dots、視覚径8.500の小秒recess、外径7.120のopen-heart rim、候補専用MeshPhysical domeを実装し、FRONT／CORE／BACK／PLATEを既存表裏分離・分解transformへ統合した。機構・照明・影・transparent／depthWrite・UI・音響は変更しない。状態は`HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED`、第3候補はPC／物理iPhone確認前に採用しない。DesktopのA.5前後面明度差と、Base／候補双方の音声integration timeoutは閾値を変えず未達として記録する。`PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`は非ブロッキング観察事項として最終15分連続確認へ残す。黒革、実用長、巻込み、穴列、定革・遊革、尾錠枠・つく棒・取付バーはPhase 3C.2の必須工程とする。
+Phase 3C.1では、Phase 3B.2構造を保護したまま、query時だけ正式時計本体意匠を生成する。実テンプworld中心[7.700,1.730,1.800]を文字板へ投影し、直径6.600、細身profiled metal rim、中央軸受landを保持する2つの物理地板窓を配置する。第4候補は白系アイボリー`#F2EDE5`、安定silver`#E7EAED`、大型faceted bar、半径14.200の同径60 minute dots、視覚径8.500の小秒recess、外径7.120のopen-heart rim、非屈折近似domeを実装する。候補専用「外装」表示グループは29部品を既存FRONT／CORE／BACK／PLATEの表裏分離・分解・透過状態と合成し、通常pathへDOMを追加しない。機構・照明・影・transparent／depthWrite基盤・音響は変更しない。状態は`HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED`、第4候補はPC／物理iPhone確認前に採用しない。DesktopのA.5前後面明度差と、Base／候補双方の音声integration timeoutは閾値を変えず未達として記録する。表裏分離／断面クリップのUX整理は`UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2`へ申し送り、`PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`は非ブロッキング観察事項として最終15分連続確認へ残す。黒革、実用長、巻込み、穴列、定革・遊革、尾錠枠・つく棒・取付バーはPhase 3C.2の必須工程とする。
 
 ケース胴はY=-2.860～4.635の単一閉合Meshとし、外径38.900→39.600→38.900の前後テーパー、内径37.800不変、実りゅうず包絡に対する局所逃げを持つ。局所逃げは必要最小0.249174から生成後gapを再計測して0.304118を採用し、上限0.330、位置1gap 0.030063、最小壁厚0.550000を満たす。CSGは使用せず、りゅうず―チューブの0.056857シート関係は`PHASE3B1_IMPLEMENTATION_ASSUMPTION`のまま禁止干渉から分離する。
 

@@ -49,6 +49,7 @@ if (!selectedSuite) {
     opacity: "1",
     panel: suite === "ui" || suite === "hud" ? "open" : "collapsed",
     [queryName]: "1",
+    cache: params.get("cache") || String(Date.now()),
   });
   if (mode === "candidate") query.set("watchHead", "phase3c1");
   frame.src = `../index.html?${query}`;

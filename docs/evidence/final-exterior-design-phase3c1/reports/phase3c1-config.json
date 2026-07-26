@@ -1,16 +1,16 @@
 {
-  "sourceImplementationCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
-  "sourceAuditCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
+  "sourceImplementationCommit": "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
+  "sourceAuditCommit": "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
   "sourceBaseCommit": "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
   "baseBranch": "feature/final-exterior-balanced-phase3b2",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin browser harness and actual WebGL canvas capture",
+  "captureMode": "same-origin browser harness and actual Three.js WebGLRenderTarget PNG capture",
   "config": {
     "schemaVersion": 1,
     "id": "E-BALANCED-PHASE3C1-WATCH-HEAD",
-    "status": "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+    "status": "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
     "enabledByDefault": false,
     "query": {
       "parameter": "watchHead",
@@ -30,8 +30,8 @@
     "appVersion": "v3.15.0",
     "humanAcceptance": {
       "phase3b2": "HUMAN_ACCEPTED_PHASE3B2_WITH_MANDATORY_PHASE3C_REFINEMENTS",
-      "phase3c1": "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
-      "revision": "THIRD_CANDIDATE_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
+      "phase3c1": "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
+      "revision": "FOURTH_CANDIDATE_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
       "physicalIPhoneThermalObservation": {
         "classification": "MILD_WARMING_AFTER_15_MINUTES",
         "blocking": false,
@@ -180,7 +180,7 @@
       "smallSecondMinorMarkLength": 0.138,
       "smallSecondMajorMarkLength": 0.276,
       "smallSecondMarkTangentialWidth": 0.032,
-      "mainMinuteTrackRadius": 13.58,
+      "mainMinuteTrackRadius": 14.2,
       "minuteDotMinorDiameter": 0.165,
       "minuteDotMajorDiameter": 0.25,
       "minuteDotAxialHeight": 0.04,
@@ -273,17 +273,34 @@
         }
       ],
       "radialSegments": 128,
-      "classification": "VISIBLE_PRONOUNCED_DOME_WITHIN_PROTECTED_ENVELOPE",
+      "classification": "EDUCATIONAL_NON_REFRACTIVE_DOME_CRYSTAL",
       "material": {
-        "color": 16777215,
+        "color": 16448765,
         "metalness": 0,
-        "roughness": 0.06,
-        "transmission": 0.96,
-        "ior": 1.47,
-        "thickness": 0.6
+        "roughness": 0.025,
+        "transmission": 0,
+        "transparent": true,
+        "opacity": 0.1,
+        "ior": 1.45,
+        "thickness": 0.05,
+        "clearcoat": 1,
+        "clearcoatRoughness": 0.03,
+        "envMapIntensity": 0.35,
+        "depthWrite": false,
+        "depthTest": true
       }
     },
     "materials": {
+      "stableExteriorSilver": {
+        "color": 15198957,
+        "metalness": 0.52,
+        "roughness": 0.2,
+        "envMapIntensity": 0.35,
+        "opacity": 1,
+        "transparent": false,
+        "depthWrite": true,
+        "classification": "EDUCATIONAL_STABLE_SILVER_MATERIAL"
+      },
       "polishedSteel": {
         "color": 15330800,
         "metalness": 0.8,
@@ -320,6 +337,13 @@
         }
       }
     },
+    "exteriorDisplayGroup": {
+      "queryOnly": true,
+      "label": "外装",
+      "helper": "ケース・風防・文字板・針・ラグ・ストラップ・裏蓋",
+      "restoreTolerance": 1e-7
+    },
+    "uiSimplificationBacklog": "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2",
     "phase3c2MandatoryBacklog": [
       "spring-bar leather wrap",
       "practical twelve-side and six-side lengths",
@@ -354,8 +378,12 @@
       "handLengths": true,
       "handWidths": true,
       "dialRevision": true,
+      "stableExteriorSilver": true,
+      "minuteTrackRevision": true,
       "rimRevision": true,
-      "crystalEnvelope": true
+      "crystalEnvelope": true,
+      "crystalReadability": true,
+      "exteriorDisplayGroup": true
     }
   }
 }

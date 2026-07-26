@@ -77,16 +77,19 @@
 
 ### Phase 3C.1 正式時計本体意匠候補
 
-- 初回と第2候補の人間非承認を保持し、状態を`HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED`として第3候補を別評価する
+- 初回、第2候補、第3候補の人間非承認を保持し、状態を`HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED`として第4候補を別評価する
 - `?exterior=balanced&watchHead=phase3c1`だけで有効になり、通常URLのPhase 3C.1 Object3D追加数が0である
 - テンプworld中心[7.700,1.730,1.800]を文字板へ[7.700,1.800]として投影し、中心誤差0、視覚offset 0である
 - 開口径6.600、縁幅0.260、文字板面積比3.5559%、小秒clearance 3.1894、index clearance 1.3605である
 - 文字板と地板の物理holeを使い、中央下側耐震軸受land 0.100を保持する。機構移動、部品非表示、固定透明化、CSG、トゥールビヨン風ケージを使用しない
 - actual +Y Raycaster 709 sampleで機構first-hit率0.165021、テンプ0.133992、脱進機0.001410を記録する
 - 文字板、限定開口地板、ドーム風防、profiled rim、index、丸型分目盛、3針、小秒表示の17 Geometryがfinite、indexed、closed、outwardで、退化・重複・反転triangle、non-manifold edge、winding mismatch、reversed normal、非有限法線が0である
-- 白系アイボリー`#F2EDE5`、小秒面`#F5F1EA`、共通silver`#E9EDF0`、1.820×0.440×0.230 faceted bar、12時double marker、0.165／0.250丸型60分目盛を実装し、S86中心・回転拘束を変更しない
+- 白系アイボリー`#F2EDE5`、小秒面`#F5F1EA`、安定silver`#E7EAED`（metalness 0.52／roughness 0.20／envMapIntensity 0.35）、1.820×0.440×0.230 faceted bar、12時double marker、半径14.200の0.165／0.250丸型60分目盛を実装し、S86中心・回転拘束を変更しない
+- 安定silver対象46 Meshはcandidate-local cloneで、Base Material共有0、選択解除後にopacity 100／50／16%各状態のMaterialへ完全復元する
+- 分目盛は通常indexとのclearance 0.437、12時double bar最小clearance 0.381178、表示開口clearance 0.575を確保し、index／double bar／opening／bezel・rehautとの重複が0である
 - 小秒はS86目盛基準径7.740を維持し、視覚recess径8.500と狭いbevel 0.080で表現し、太い独立outline torusを使用しない
-- ドーム風防はY=-3.460～-2.860、clear diameter 30.600、外装総厚8.695の保護値を維持し、候補専用MeshPhysicalMaterialでもmobile fps差5%超／p95差2ms超を生じない
+- ドーム風防はY=-3.460～-2.860、clear diameter 30.600、外装総厚8.695のGeometryとdepth stateを維持し、transmission 0／opacity 0.10／roughness 0.025の非屈折近似で文字板edge contrastを風防非表示時の90%以上に保つ
+- 候補専用「外装」表示グループは29部品を制御し、OFF時visible 0と選択解除、ON時visible 29、split／explode／opacity 50／16%／ボトムシート開閉後のtransform・visibility復元誤差1e-7以下、通常path DOM追加0を満たす
 - 文字板、index、分目盛、3針、小秒、オープンハート縁・開口、風防、りゅうずを選択し、強調、HUD、学習表示、解除を確認できる
 - 透過100／50／16／100で状態を復元し、16%で内部の設定車2を選択できる
 - FRONT／CORE／BACK／PLATEを既存表裏分離・分解transformへ統合し、split／explode 100%後のposition／quaternion／scaleを誤差1e-7以内、parent／visibility／material／selectionを基準状態へ復元する
@@ -95,7 +98,8 @@
 - Desktop／390×844のidle・pointer・wheelが既存絶対閾値と差分基準へ合格し、閾値、DPR、カメラ、照明、影を変更しない
 - Desktopの白系文字板によるA.5前後面明度差未達を隠さず記録し、30%閾値、照明、影、tone mapping、exposure、transparent、depthWriteを変更しない
 - 矩形影、100%→99% transparent、55%→54% depthWrite、透過時の暗部・深度順、PC／iPhone照明差をIssue #2へ分離する
-- 第3候補は`THIRD_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE`とし、人間再確認前に既定採用、Ready化、マージを行わない
+- 第4候補は`FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE`とし、人間再確認前に既定採用、Ready化、マージを行わない
+- 表裏分離／断面クリップは削除せず、`UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2`としてPhase 3C.2とIssue #2完了後の人間判断へ残す
 - `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`を非ブロッキング観察事項として記録し、最終統合で15分連続試験を行う
 - Phase 3C.2の黒革、実用長、巻込み部、穴列、定革・遊革、尾錠枠・つく棒・取付バー、シボ、ステッチ、コバを必須後続工程として維持する
 

@@ -1,20 +1,21 @@
 {
-  "sourceImplementationCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
-  "sourceAuditCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
+  "sourceImplementationCommit": "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
+  "sourceAuditCommit": "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
   "sourceBaseCommit": "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
   "baseBranch": "feature/final-exterior-balanced-phase3b2",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin browser harness and actual WebGL canvas capture",
-  "status": "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
-  "revisionVerification": "THIRD_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
-  "decision": "THIRD_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+  "captureMode": "same-origin browser harness and actual Three.js WebGLRenderTarget PNG capture",
+  "status": "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
+  "revisionVerification": "FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
+  "decision": "FOURTH_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
   "defaultAdoption": false,
   "humanReview": {
     "initialCandidate": "REJECTED",
     "secondCandidate": "REJECTED",
-    "thirdCandidate": "PENDING",
+    "thirdCandidate": "REJECTED",
+    "fourthCandidate": "PENDING",
     "pc": "PENDING",
     "physicalIPhone": "PENDING",
     "adoption": "NOT_APPROVED",
@@ -109,7 +110,7 @@
       "passed": 0,
       "total": 0,
       "failed": [],
-      "error": "Error: audio integration wait timed out\n    at waitUntil (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:7:9)\n    at async runMechanicalAudioIntegrationTest (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:74:22)\n    at async HTMLButtonElement.start (http://127.0.0.1:8000/index.html?exterior=balanced&theme=navy&camera=front&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&audioTest=1&watchHead=phase3c1:1340:460)",
+      "error": "Error: audio integration wait timed out\n    at waitUntil (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:7:9)\n    at async runMechanicalAudioIntegrationTest (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:22:19)\n    at async HTMLButtonElement.start (http://127.0.0.1:8000/index.html?exterior=balanced&theme=navy&camera=front&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&audioTest=1&cache=1785082226045&watchHead=phase3c1:1348:460)",
       "gesture": "actual in-app Browser trusted click",
       "baselineAlsoTimedOut": true
     }
@@ -117,7 +118,9 @@
   "performance": {
     "absolutePassed": true,
     "differentialPassed": true,
-    "thresholdsChanged": false
+    "thresholdsChanged": false,
+    "inheritedThirdCandidateDesktopIdleFpsDeltaPercent": -4.217,
+    "fourthCandidateDesktopIdleFpsDeltaPercent": 0.004966969651820641
   },
   "normalPath": {
     "pixelExact": true,
@@ -148,10 +151,10 @@
   },
   "imageEvidence": {
     "rawCaptureCreationByGenerator": false,
-    "actualRuntimeCaptureCount": 18
+    "actualRuntimeCaptureCount": 24
   },
   "knownLimitations": [
-    "The initial and second Phase 3C.1 candidates failed human review; this third candidate remains pending PC and physical iPhone confirmation.",
+    "The initial, second, and third Phase 3C.1 candidates failed human review; this fourth candidate remains pending PC and physical iPhone confirmation.",
     "PC human visual confirmation is pending.",
     "Physical iPhone human confirmation is pending.",
     "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN is recorded as non-blocking because no progressive frame drop, Safari reload, audio failure, touch failure, or thermal warning has been observed; the final integration review must include a continuous 15-minute run.",
@@ -160,7 +163,8 @@
     "Lighting, shadow camera/map, castShadow/receiveShadow policy, transparent/depthWrite policy, tone mapping, exposure, fog, and D2c3 were not changed.",
     "Phase 3C.2 strap and buckle styling remains mandatory backlog.",
     "The desktop A.5 front/back luminance-balance assertion fails for the near-white dial while the Phase 3B.2 baseline passes; the threshold and protected lighting rig were not changed, so this remains visible in the evidence instead of being waived.",
-    "The trusted-gesture audio integration timed out for both the candidate and Phase 3B.2 baseline in the same in-app Browser session; Node audio tests remain authoritative until physical-device review."
+    "The trusted-gesture audio integration timed out for both the candidate and Phase 3B.2 baseline in the same in-app Browser session; Node audio tests remain authoritative until physical-device review.",
+    "Front/back split and section clipping remain unchanged; their UX overlap with explode and advanced-detail views is tracked as UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2."
   ],
   "allAutomatedPassed": false
 }

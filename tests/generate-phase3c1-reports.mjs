@@ -5,6 +5,7 @@ import { fileURLToPath } from "node:url";
 import {
   FINAL_WATCH_HEAD_PHASE3C1,
   assertPhase3C1WatchHeadConfig,
+  derivePhase3C1MinuteTrackAudit,
   derivePhase3C1OpenHeartAudit,
 } from "../js/final-watch-head-phase3c1-config.js";
 
@@ -15,9 +16,9 @@ const evidence = path.join(
 );
 const reports = path.join(evidence, "reports");
 const sourceImplementationCommit =
-  "7b660b768580d7dd1a7abe7c2c8520dc9f066985";
+  "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2";
 const sourceAuditCommit =
-  "7b660b768580d7dd1a7abe7c2c8520dc9f066985";
+  "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2";
 const sourceBaseCommit =
   "98d83781aa7aa001836a0d57f1ad6e3d058a15c4";
 const mainCommit =
@@ -32,7 +33,7 @@ const metadata = {
   baseBranch: "feature/final-exterior-balanced-phase3b2",
   appVersion: "v3.15.0",
   captureMode:
-    "same-origin browser harness and actual WebGL canvas capture",
+    "same-origin browser harness and actual Three.js WebGLRenderTarget PNG capture",
 };
 const readJson = async file =>
   JSON.parse(await fs.readFile(path.join(reports, file), "utf8"));
@@ -87,6 +88,7 @@ suites.audioMobile390 = {
 };
 
 const audit = derivePhase3C1OpenHeartAudit();
+const minuteTrackAudit = derivePhase3C1MinuteTrackAudit();
 const assertion = assertPhase3C1WatchHeadConfig();
 const same = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 const worldValuesEqual =
@@ -220,14 +222,50 @@ await writeJson("material-runtime-audit.json", {
     desktop.material.unifiedSilverFamily.allRequiredPartsRecorded
     && mobile.material.unifiedSilverFamily.allRequiredPartsRecorded,
   baseColorConsistent:
-    desktop.material.unifiedSilverFamily.baseColor === "0xE9EDF0"
-    && mobile.material.unifiedSilverFamily.baseColor === "0xE9EDF0",
-  maximumRoughnessDelta: 0.06,
+    desktop.material.unifiedSilverFamily.baseColor === "0xE7EAED"
+    && mobile.material.unifiedSilverFamily.baseColor === "0xE7EAED",
+  candidateLocalClones:
+    desktop.material.unifiedSilverFamily.candidateLocalCloneCount,
+  sharedBaseMaterialCount:
+    desktop.material.unifiedSilverFamily.baseSharedCount,
+  maximumRoughnessDelta: 0,
   actualRoughnessDelta:
     desktop.material.unifiedSilverFamily.roughnessDelta,
-  maximumMetalnessDelta: 0.05,
+  maximumMetalnessDelta: 0,
   actualMetalnessDelta:
     desktop.material.unifiedSilverFamily.metalnessDelta,
+});
+await writeJson("fourth-candidate-visual-audit.json", {
+  ...metadata,
+  material: {
+    desktop: desktop.material.stableExteriorFinish,
+    mobile390: mobile.material.stableExteriorFinish,
+    requiredPartsRecorded:
+      desktop.material.unifiedSilverFamily.allRequiredPartsRecorded,
+    candidateLocalCloneCount:
+      desktop.material.unifiedSilverFamily.candidateLocalCloneCount,
+    baseSharedCount:
+      desktop.material.unifiedSilverFamily.baseSharedCount,
+  },
+  minuteTrack: {
+    configured: minuteTrackAudit,
+    desktop: desktop.geometry.minuteTrack,
+    mobile390: mobile.geometry.minuteTrack,
+    worldValuesEqual:
+      same(desktop.geometry.minuteTrack, mobile.geometry.minuteTrack),
+  },
+  crystal: {
+    desktop: desktop.crystalContrast,
+    mobile390: mobile.crystalContrast,
+    minimumEdgeContrastRetention: 0.9,
+  },
+  exteriorGroup: {
+    desktop: desktop.exteriorDisplayGroup,
+    mobile390: mobile.exteriorDisplayGroup,
+  },
+  backlog: [
+    "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2",
+  ],
 });
 await writeJson("phase3c1-display-group-report.json", {
   ...metadata,
@@ -265,6 +303,11 @@ await writeJson("performance-results.json", {
     maximumDifferentialP95RegressionMs: 2,
   },
   comparisons: performanceComparisons,
+  inheritedThirdCandidateDesktopIdleFpsDeltaPercent: -4.217,
+  fourthCandidateDesktopIdleFpsDeltaPercent:
+    performanceComparisons.find(
+      item => item.viewport === "1280x720" && item.type === "front-idle",
+    )?.differential.averageFpsPercent ?? null,
   absolutePassed: performanceComparisons.every(item => item.absolutePassed),
   differentialPassed:
     performanceComparisons.every(item => item.differentialPassed),
@@ -288,15 +331,16 @@ const allPerformancePassed =
   );
 await writeJson("regression-results.json", {
   ...metadata,
-  status: "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+  status: "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
   revisionVerification:
-    "THIRD_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
-  decision: "THIRD_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+    "FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
+  decision: "FOURTH_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
   defaultAdoption: false,
   humanReview: {
     initialCandidate: "REJECTED",
     secondCandidate: "REJECTED",
-    thirdCandidate: "PENDING",
+    thirdCandidate: "REJECTED",
+    fourthCandidate: "PENDING",
     pc: "PENDING",
     physicalIPhone: "PENDING",
     adoption: "NOT_APPROVED",
@@ -327,6 +371,11 @@ await writeJson("regression-results.json", {
     differentialPassed:
       performanceComparisons.every(item => item.differentialPassed),
     thresholdsChanged: false,
+    inheritedThirdCandidateDesktopIdleFpsDeltaPercent: -4.217,
+    fourthCandidateDesktopIdleFpsDeltaPercent:
+      performanceComparisons.find(
+        item => item.viewport === "1280x720" && item.type === "front-idle",
+      )?.differential.averageFpsPercent ?? null,
   },
   normalPath: {
     pixelExact: normalPath.exact,
@@ -365,7 +414,7 @@ await writeJson("regression-results.json", {
     actualRuntimeCaptureCount: imageEvidence.images.length,
   },
   knownLimitations: [
-    "The initial and second Phase 3C.1 candidates failed human review; this third candidate remains pending PC and physical iPhone confirmation.",
+    "The initial, second, and third Phase 3C.1 candidates failed human review; this fourth candidate remains pending PC and physical iPhone confirmation.",
     "PC human visual confirmation is pending.",
     "Physical iPhone human confirmation is pending.",
     "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN is recorded as non-blocking because no progressive frame drop, Safari reload, audio failure, touch failure, or thermal warning has been observed; the final integration review must include a continuous 15-minute run.",
@@ -375,6 +424,7 @@ await writeJson("regression-results.json", {
     "Phase 3C.2 strap and buckle styling remains mandatory backlog.",
     "The desktop A.5 front/back luminance-balance assertion fails for the near-white dial while the Phase 3B.2 baseline passes; the threshold and protected lighting rig were not changed, so this remains visible in the evidence instead of being waived.",
     "The trusted-gesture audio integration timed out for both the candidate and Phase 3B.2 baseline in the same in-app Browser session; Node audio tests remain authoritative until physical-device review.",
+    "Front/back split and section clipping remain unchanged; their UX overlap with explode and advanced-detail views is tracked as UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2.",
   ],
   allAutomatedPassed:
     runtimeFailures.length === 0

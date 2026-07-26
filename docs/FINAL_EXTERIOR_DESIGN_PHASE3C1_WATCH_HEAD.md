@@ -2,9 +2,9 @@
 
 ## 結論
 
-Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、正式時計本体意匠のquery限定候補を実装した。初回と第2候補はいずれも人間確認で非承認となり、状態を`HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED`へ更新した。本書は、その指摘を反映した第3候補を記録する。起動条件は`?exterior=balanced&watchHead=phase3c1`で、通常URLへPhase 3C.1 Object3Dは追加せず、固定Baseと237,334 byte／SHA-256 `a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`でpixel exactを確認した。
+Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、正式時計本体意匠のquery限定候補を実装した。初回、第2候補、第3候補はいずれも人間確認で非承認となり、状態を`HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED`へ更新した。本書は、第3候補の指摘を反映した第4候補を記録する。起動条件は`?exterior=balanced&watchHead=phase3c1`で、通常URLへPhase 3C.1 Object3D／DOMは追加せず、固定Baseと237,334 byte／SHA-256 `a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`でpixel exactを確認した。
 
-第3候補はGeometry、表示family、選択・透過、UI／HUD、通常path、性能A/Bを実ブラウザで検証した。Desktop総合では、白系文字板によりA.5前後面明度差だけが既存30%閾値を超え、音声統合は同一環境のPhase 3B.2 Baseと候補の双方でtimeoutした。閾値、照明、製品コードを試験へ合わせて変更せず、この2項目を未達として証跡へ残す。検証状態は`THIRD_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE`、採用判断は`THIRD_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`とする。
+第4候補は安定シルバー、半径14.200の60分目盛、非屈折ドーム風防、候補専用「外装」表示グループ、Geometry、表示family、選択・透過、UI／HUD、通常path、性能A/Bを実ブラウザで検証した。Desktop総合では、白系文字板によりA.5前後面明度差だけが既存30%閾値を超え、音声統合は同一環境のPhase 3B.2 Baseと候補の双方でtimeoutした。閾値、照明、製品コードを試験へ合わせて変更せず、この2項目を未達として証跡へ残す。検証状態は`FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE`、採用判断は`FOURTH_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`とする。
 
 ## 構成と由来
 
@@ -12,13 +12,13 @@ Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、正式�
 - Baseブランチ：`feature/final-exterior-balanced-phase3b2`
 - Base SHA：`98d83781aa7aa001836a0d57f1ad6e3d058a15c4`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
-- 第3候補実装・ブラウザハーネス基準：`7b660b768580d7dd1a7abe7c2c8520dc9f066985`
+- 第4候補実装・ブラウザハーネス基準：`a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2`
 - APP_VERSION：`v3.15.0`
 - Phase 3B.2人間承認：`HUMAN_ACCEPTED_PHASE3B2_WITH_MANDATORY_PHASE3C_REFINEMENTS`
 
 ## 正式デザイン基準
 
-第3候補は、共通`#E9EDF0`シルバーのケース／ベゼル／ラグ／裏蓋／りゅうず、側面で認識できるドーム風防、白に近いアイボリー文字板、大型ポリッシュバーインデックスと丸型分目盛、面のあるシルバー時分針、ブルースチール調小秒針、6時小秒、細身の限定オープンハート縁で構成する。ドレスウォッチ寄りだが、古典装飾を増やさず、全面スケルトンまたはトゥールビヨン風にはしていない。
+第4候補は、教育表示上の同一素材認識を優先した`#E7EAED`安定シルバーのケース／ベゼル／rehaut／ラグ／裏蓋／りゅうず／装着金具、側面では輪郭を認識でき正面では文字板をぼかさない非屈折近似ドーム風防、白に近いアイボリー文字板、大型ポリッシュバーインデックスと半径14.200の丸型60分目盛、面のあるシルバー時分針、ブルースチール調小秒針、6時小秒、細身の限定オープンハート縁で構成する。ドレスウォッチ寄りだが、古典装飾を増やさず、全面スケルトンまたはトゥールビヨン風にはしていない。
 
 参照画像は雰囲気と構成だけの参考であり、Geometryの模写元ではない。特にオープンハートは、画像上の名目的な9時位置ではなく、実モデルのテンプ中心へ合わせている。
 
@@ -67,14 +67,14 @@ Geometry監査では、文字板、地板置換Mesh、風防、オープンハ�
 - 主文字板：色`#F2EDE5`、metalness 0、roughness 0.88。emissive、MeshBasicMaterial、露出変更を使わない白系アイボリーである
 - 小秒文字板：色`#F5F1EA`、metalness 0、roughness 0.88
 - インデックス：radial 1.820／tangential 0.440／厚さ0.230のfaceted bar。12時は1.08倍のダブルバー、中央gap 0.260、6時は小秒と競合するため省略し、S86 index円25.456を維持
-- 分目盛：丸点60個。minor径0.165、5分位置径0.250、厚さ0.045
+- 分目盛：中心半径14.200の丸点60個。minor径0.165、5分位置径0.250、厚さ0.045。通常indexとのradial clearance 0.437、12時double barとの最小clearance 0.381178、表示開口clearance 0.575で、重複0
 - 分針：長さ12.040、最大幅0.560、先端幅0.060、中央稜線0.120
 - 時針：長さ8.600、最大幅0.780、先端幅0.080、中央稜線0.130
 - 小秒針：長さ3.268、最大幅0.130、先端幅0.040、中央稜線0.070、色`#2A5572`
 - 小秒表示：中心[0,-5.600]、S86目盛基準径7.740、視覚recess径8.500、狭いbevel 0.080、12主要目盛＋48補助目盛。太い独立outline torusは使用しない
 - オープンハート縁：内径6.600／外径7.120／radial幅0.260／top lip 0.160／高さ0.130の単一閉合profile Mesh
-- 主外装金属：base color `#E9EDF0`、metalness 0.78～0.80、roughness 0.19～0.23。分類は`EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL`で、roughness差0.04、metalness差0.02
-- ドーム風防：中心Y=-3.460、外周Y=-2.920、内面Y=-2.860を維持する強調profile。候補専用`MeshPhysicalMaterial`はroughness 0.06、transmission 0.96、ior 1.47、thickness 0.60で、外装総厚8.695は不変
+- 主外装金属：base color `#E7EAED`、metalness 0.52、roughness 0.20、envMapIntensity 0.35、opacity 1、transparent false、depthWrite true。分類は`EDUCATIONAL_STABLE_SILVER_MATERIAL`。対象46 Meshへcandidate-local cloneを割り当て、Base Material共有0とした
+- ドーム風防：中心Y=-3.460、外周Y=-2.920、内面Y=-2.860のprofileと既存depth stateを維持する。候補専用`MeshPhysicalMaterial`はcolor `#FAFCFD`、roughness 0.025、metalness 0、transmission 0、opacity 0.10、ior 1.45、thickness 0.05、clearcoat 1、clearcoatRoughness 0.03、envMapIntensity 0.35で、外装総厚8.695は不変。edge contrast保持率はDesktop 0.964600、390×844 0.963935
 
 3針のpivot、position、rotation、scale、回転符号、位相は変更していない。分針―筒かな、時針―時針管、小秒針―四番車軸の1:1拘束と取付中心距離0を維持する。
 
@@ -83,6 +83,8 @@ Geometry監査では、文字板、地板置換Mesh、風防、オープンハ�
 文字板、バーインデックス、分目盛、小秒表示、小秒目盛、オープンハート縁、オープンハート開口、ドーム風防、分針、時針、小秒針、りゅうず、限定開口地板を既存の部品選択・HUD・学習表示へ登録した。
 
 構造透過は既存方式へ統合し、100%→50%→16%→100%で復元する。16%では内部の設定車2を選択できる。通常の選択・Raycaster基盤、透過材質切替、DPR、照明、影を変更していない。
+
+第4候補query時だけ、学習タブの表示グループへ「外装」（補助説明：ケース・風防・文字板・針・ラグ・ストラップ・裏蓋）を追加した。前面、ケース／装着部、裏面の29部品を対象とし、地板の`OPEN_HEART_PRESENTATION_CUTOUT`と内部機構は対象外である。OFF時はvisible 0かつ選択中外装を解除し、ON時は29部品を現在のsplit／explode／opacity状態へ復元する。Desktop／390×844でsplit 100%、explode 100%、opacity 50%／16%、ボトムシート開閉後の状態合成を確認し、通常pathのDOM追加は0である。
 
 ## 分離・分解表示
 
@@ -97,7 +99,7 @@ Geometry監査では、文字板、地板置換Mesh、風防、オープンハ�
 
 ## 回帰と性能
 
-- Node：154/154
+- Node：155/155
 - Phase 3C.1 harness：Desktop／390×844とも全check合格（表示familyと完全復元を含む）
 - desktop総合：85/86。白系文字板によるA.5前後面明度差のみ未達（Baseは86/86）
 - 390×844総合：88/88
@@ -108,13 +110,13 @@ Geometry監査では、文字板、地板置換Mesh、風防、オープンハ�
 - 位置1／位置2の機構・外装・装着部禁止干渉：0／0
 - console error／warning：0
 
-Desktop／390×844で10秒idle、3秒pointer、3秒wheelをPhase 3B.2とA/B比較した。全条件で既存絶対閾値と差分基準へ合格した。Desktop idleは平均fps差-4.217%、p95差+0.100ms、mobile idleは+0.005%／-0.800msで、風防`MeshPhysicalMaterial`の停止条件（mobile fps -5%超またはp95 +2ms超）に該当しない。
+Desktop／390×844で10秒idle、3秒pointer、3秒wheelをPhase 3B.2とA/B比較した。全条件で既存絶対閾値と差分基準へ合格した。第4候補のDesktop idleは平均fps差+0.005%、p95差-0.200msで、第3候補の平均fps差-4.217%より悪化していない。390×844 idleは+1.657%／-0.100msで、停止条件（fps -5%超またはp95 +2ms超）に該当しない。
 
 ## 既知制約
 
 既存の保護されたshadow rigは、大面積のアイボリー文字板上で大きな矩形影境界を生じる。Phase 3C.1ではfrontKey、shadow camera／map、castShadow／receiveShadow基盤、lighting、tone mapping、exposure、fog、transparent、depthWriteを変更していない。100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順、PC／iPhone間の照明差も、PR #5のD2c3を取り込まずOpenのIssue #2へ分離したままとする。
 
-PCと物理iPhoneでは、色、金属階調、開口位置、テンプ可視性、小秒、針、選択、100／50／16%透過、回転、ズーム、巻上げ、時刻合わせ、秒停止、作動音を人間確認する。
+PCと物理iPhoneでは、安定シルバーの同一素材認識、分目盛の離隔、風防越しの文字板鮮明さ、斜め／側面のドーム輪郭、「外装」ON／OFFと復元、開口位置、テンプ可視性、小秒、針、選択、100／50／16%透過、回転、ズーム、巻上げ、時刻合わせ、秒停止、作動音を人間確認する。
 
 物理iPhoneでは`PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`を観察事項として記録する。progressive frame drop、Safari reload、audio failure、touch failure、thermal warningは確認されていないため現時点では非ブロッキングだが、最終統合レビューでは15分連続確認を必須とする。
 
@@ -128,6 +130,10 @@ Phase 3B.2の構造プレースホルダは維持し、Phase 3C.1へ中途半端
 - 6時側穴列、定革、遊革
 - 尾錠枠、つく棒、取付バー
 - 尾錠側ストラップ巻込み部と穴列の位置整合
+
+## UI簡素化レビューの申し送り
+
+表裏分離と断面クリップは今回削除・名称変更せず、`UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2`へ登録した。分解表示との機能重複、学習上の価値、断面クリップの利用場面、詳細表示への移動、初期UIからの折りたたみ、廃止可否はPhase 3C.2とIssue #2完了後に人間判断する。
 
 ## 証跡
 
