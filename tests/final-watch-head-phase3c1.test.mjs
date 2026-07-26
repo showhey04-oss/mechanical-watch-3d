@@ -15,7 +15,7 @@ test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
   assert.equal(config.enabledByDefault, false);
   assert.equal(
     config.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+    "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
   );
   assert.equal(
     config.source.baseBranch,
@@ -38,38 +38,40 @@ test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
   );
 });
 
-test("human-review revision uses bright ivory and educational silver compensation", () => {
-  assert.equal(config.dial.color, 0xbcab8e);
-  assert.equal(config.dial.smallSecondColor, 0xccb89f);
-  assert.ok(config.dial.roughness >= 0.8);
-  assert.ok(config.dial.roughness <= 0.86);
+test("third candidate uses near-white ivory and a unified silver visibility family", () => {
+  assert.equal(config.dial.color, 0xf2ede5);
+  assert.equal(config.dial.smallSecondColor, 0xf5f1ea);
+  assert.ok(config.dial.roughness >= 0.84);
+  assert.ok(config.dial.roughness <= 0.9);
   assert.deepEqual(config.materials.polishedSteel, {
-    color: 0xeef1f3,
-    metalness: 0.92,
-    roughness: 0.19,
-    classification: "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
+    color: 0xe9edf0,
+    metalness: 0.8,
+    roughness: 0.2,
+    classification: "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
   });
   assert.equal(
     config.materials.subduedPolishedSteel.classification,
-    "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
+    "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
   );
-  assert.equal(config.hands.material.color, 0xf1f3f5);
+  assert.equal(config.hands.material.color, 0xe9edf0);
   assert.equal(config.hands.smallSecondMaterial.color, 0x2a5572);
 });
 
 test("reference-aligned dial dimensions preserve S86 while strengthening hierarchy", () => {
-  assert.ok(config.dial.indexRadialLength >= 1.3);
-  assert.ok(config.dial.indexRadialLength <= 1.5);
-  assert.ok(config.dial.indexTangentialWidth >= 0.28);
-  assert.ok(config.dial.indexTangentialWidth <= 0.36);
-  assert.ok(config.dial.indexThickness >= 0.16);
-  assert.ok(config.dial.indexThickness <= 0.22);
-  assert.equal(config.dial.twelveIndexGap, 0.22);
+  assert.ok(config.dial.indexRadialLength >= 1.75);
+  assert.ok(config.dial.indexRadialLength <= 1.9);
+  assert.ok(config.dial.indexTangentialWidth >= 0.4);
+  assert.ok(config.dial.indexTangentialWidth <= 0.48);
+  assert.ok(config.dial.indexThickness >= 0.2);
+  assert.ok(config.dial.indexThickness <= 0.26);
+  assert.equal(config.dial.twelveIndexGap, 0.26);
   assert.deepEqual(config.dial.omittedIndices, [6]);
-  assert.ok(config.dial.minuteDotMinorDiameter >= 0.1);
-  assert.ok(config.dial.minuteDotMinorDiameter <= 0.13);
-  assert.ok(config.dial.minuteDotMajorDiameter >= 0.16);
-  assert.ok(config.dial.minuteDotMajorDiameter <= 0.2);
+  assert.ok(config.dial.minuteDotMinorDiameter >= 0.155);
+  assert.ok(config.dial.minuteDotMinorDiameter <= 0.18);
+  assert.ok(config.dial.minuteDotMajorDiameter >= 0.23);
+  assert.ok(config.dial.minuteDotMajorDiameter <= 0.27);
+  assert.ok(config.dial.smallSecondVisualRecessDiameter >= 8.3);
+  assert.ok(config.dial.smallSecondVisualRecessDiameter <= 8.6);
   assert.equal(config.hands.minute.length, 12.04);
   assert.equal(config.hands.hour.length, 8.6);
   assert.equal(config.hands.smallSecond.length, 3.268);
@@ -78,16 +80,16 @@ test("reference-aligned dial dimensions preserve S86 while strengthening hierarc
 test("open-heart rim is a bounded profiled metal section at the actual balance", () => {
   const rim = config.openHeart.rimProfile;
   assert.equal(rim.innerDiameter, 6.6);
-  assert.ok(rim.outerDiameter >= 7.2);
-  assert.ok(rim.outerDiameter <= 7.32);
-  assert.ok(rim.visibleTopLip >= 0.24);
-  assert.ok(rim.visibleTopLip <= 0.32);
-  assert.ok(rim.innerChamfer >= 0.06);
+  assert.ok(rim.outerDiameter >= 7.08);
+  assert.ok(rim.outerDiameter <= 7.14);
+  assert.ok(rim.visibleTopLip >= 0.14);
+  assert.ok(rim.visibleTopLip <= 0.18);
+  assert.ok(rim.innerChamfer >= 0.05);
   assert.ok(rim.innerChamfer <= 0.1);
   assert.ok(rim.outerChamfer >= 0.05);
   assert.ok(rim.outerChamfer <= 0.08);
-  assert.ok(rim.axialHeight >= 0.1);
-  assert.ok(rim.axialHeight <= 0.16);
+  assert.ok(rim.axialHeight >= 0.11);
+  assert.ok(rim.axialHeight <= 0.14);
   assert.equal(config.openHeart.equivalentDiameter, 6.6);
   assert.deepEqual(config.openHeart.projectedCenter, [7.7, 1.8]);
 });
@@ -95,18 +97,32 @@ test("open-heart rim is a bounded profiled metal section at the actual balance",
 test("domed crystal strengthens curvature inside the protected envelope", () => {
   assert.deepEqual(config.crystal.profile, [
     { radius: 0, y: -3.46 },
-    { radius: 3.825, y: -3.45 },
-    { radius: 7.65, y: -3.405 },
-    { radius: 11.475, y: -3.295 },
-    { radius: 14, y: -3.12 },
-    { radius: 15.3, y: -3 },
+    { radius: 3.825, y: -3.455 },
+    { radius: 7.65, y: -3.42 },
+    { radius: 11.475, y: -3.315 },
+    { radius: 13.8, y: -3.11 },
+    { radius: 15, y: -2.96 },
+    { radius: 15.3, y: -2.92 },
     { radius: 15.3, y: -2.86 },
     { radius: 0, y: -2.86 },
   ]);
   assert.equal(
     config.crystal.classification,
-    "VISIBLE_GENTLE_DOME_WITHIN_PROTECTED_ENVELOPE",
+    "VISIBLE_PRONOUNCED_DOME_WITHIN_PROTECTED_ENVELOPE",
   );
+  assert.equal(config.crystal.material.transmission, 0.96);
+  assert.equal(config.crystal.material.ior, 1.47);
+});
+
+test("display families reuse split and explode semantics without a new UI system", () => {
+  assert.equal(config.displayFamilies.splitDistance, 5.5);
+  assert.equal(config.displayFamilies.explodeDistance, 10);
+  assert.deepEqual(config.displayFamilies.families, {
+    FRONT: { splitDirection: -1 },
+    CORE: { splitDirection: 0 },
+    BACK: { splitDirection: 1 },
+    PLATE: { splitDirection: 0 },
+  });
 });
 
 test("open-heart projection follows the real balance instead of reference imagery", () => {
@@ -202,6 +218,10 @@ test("production integration cannot hide failures with forbidden rendering short
   assert.match(indexSource, /resolvePhase3C1WatchHead\(initialPageParameters\)/);
   assert.match(indexSource, /if\(requestedWatchHeadConfig\)/);
   assert.match(indexSource, /getPhase3C1OpenHeartReport/);
+  assert.match(indexSource, /getPhase3C1DisplayGroupReport/);
+  assert.match(runtimeSource, /applyDynamicCoreState/);
+  assert.match(runtimeSource, /applyDisplayState/);
+  assert.match(runtimeSource, /existing-structural-opacity-clone/);
   assert.equal(
     indexSource.indexOf("if(requestedWatchHeadConfig)")
       > indexSource.indexOf("if(requestedExteriorConfig)"),
@@ -226,6 +246,10 @@ test("same-origin unsandboxed Phase 3C.1 harness records actual runtime reports"
   assert.match(harness, /getPhase3C1OpenHeartReport|lineOfSight/);
   assert.match(harness, /getHandCouplingReport/);
   assert.match(harness, /getYEnvelopeBreakdown/);
+  assert.match(harness, /getPhase3C1DisplayGroupReport/);
+  assert.match(harness, /displayExactRestore/);
+  assert.match(harness, /splitDirections/);
+  assert.match(harness, /explodeDirections/);
   assert.match(harness, /document\.body\.dataset\.auditStatus/);
   assert.match(harness, /Phase 3C\.1 分針/);
   assert.match(harness, /Phase 3C\.1 時針/);

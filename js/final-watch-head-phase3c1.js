@@ -10,7 +10,8 @@ import {
 } from "./final-exterior-profile.js";
 
 const round = (value, digits = 6) => Number(Number(value).toFixed(digits));
-const roundArray = values => values.map(value => round(value));
+const roundArray = (values, digits = 6) =>
+  values.map(value => round(value, digits));
 const reverseTriangleWinding = indices => {
   const reversed = [];
   for (let index = 0; index < indices.length; index += 3) {
@@ -269,6 +270,30 @@ function createProfiledOpenHeartRim(config, materials) {
   return mesh;
 }
 
+function createProfiledAnnulus(profile, material, segments = 96) {
+  const data = createAxialProfileAnnulusGeometryData({
+    profile,
+    circumferentialSegments: segments,
+  });
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(data.positions, 3),
+  );
+  geometry.setAttribute(
+    "normal",
+    new THREE.BufferAttribute(data.normals, 3),
+  );
+  geometry.setIndex(new THREE.BufferAttribute(data.indices, 1));
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+  geometry.userData.phase3c1GeometryAudit = auditGeometry(geometry);
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.userData.phase3c1GeometryAudit =
+    geometry.userData.phase3c1GeometryAudit;
+  return mesh;
+}
+
 function createDomedCrystal(config, material) {
   const profile = config.crystal.profile;
   const rings = profile.slice(1, -1);
@@ -335,6 +360,22 @@ function makeMaterial(spec, clippingPlanes = null) {
   });
 }
 
+function makeCrystalMaterial(spec, clippingPlanes = null) {
+  return new THREE.MeshPhysicalMaterial({
+    color: spec.color,
+    metalness: spec.metalness,
+    roughness: spec.roughness,
+    transmission: spec.transmission,
+    ior: spec.ior,
+    thickness: spec.thickness,
+    transparent: true,
+    opacity: 1,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+    clippingPlanes,
+  });
+}
+
 function mutateMaterial(material, spec) {
   if (!material || !material.color) return;
   material.color.setHex(spec.color);
@@ -343,14 +384,92 @@ function mutateMaterial(material, spec) {
   material.needsUpdate = true;
 }
 
-function mutateObjectMaterials(object, spec) {
+function applyObjectMaterialFamily(object, spec, {
+  partId,
+  cloneUnregistered = false,
+} = {}) {
+  const records = [];
+  object?.traverse(node => {
+    if (!node.isMesh) return;
+    const sourceMaterials = Array.isArray(node.material)
+      ? node.material
+      : [node.material];
+    const structuralClone = Boolean(node.userData.structuralOpacityBase);
+    const shouldClone = cloneUnregistered && !structuralClone;
+    const appliedMaterials = sourceMaterials.map(source => {
+      const material = shouldClone ? source.clone() : source;
+      mutateMaterial(material, spec);
+      records.push({
+        partId: partId || object.name || object.uuid,
+        meshUuid: node.uuid,
+        sourceMaterialUuid: source.uuid,
+        materialUuid: material.uuid,
+        application:
+          shouldClone
+            ? "candidate-local-clone"
+            : structuralClone
+              ? "existing-structural-opacity-clone"
+              : "candidate-owned-or-isolated",
+      });
+      return material;
+    });
+    node.material = Array.isArray(node.material)
+      ? appliedMaterials
+      : appliedMaterials[0];
+  });
+  object.userData.phase3c1MaterialApplication = records;
+  return records;
+}
+
+function materialRecord(material) {
+  return {
+    uuid: material.uuid,
+    type: material.type,
+    color: material.color ? `0x${material.color.getHexString().toUpperCase()}` : null,
+    metalness: Number.isFinite(material.metalness) ? round(material.metalness) : null,
+    roughness: Number.isFinite(material.roughness) ? round(material.roughness) : null,
+    opacity: round(material.opacity),
+    transparent: material.transparent,
+    depthWrite: material.depthWrite,
+    envMapIntensity:
+      Number.isFinite(material.envMapIntensity)
+        ? round(material.envMapIntensity)
+        : null,
+  };
+}
+
+function objectMaterialRecord(object, partId) {
+  const records = [];
   object?.traverse(node => {
     if (!node.isMesh) return;
     const materials = Array.isArray(node.material)
       ? node.material
       : [node.material];
-    materials.forEach(material => mutateMaterial(material, spec));
+    const applications =
+      node.userData.phase3c1MaterialApplication
+      || object.userData.phase3c1MaterialApplication
+      || [];
+    materials.forEach((material, materialIndex) => {
+      const application = applications.find(record =>
+        record.meshUuid === node.uuid
+        && record.materialUuid === material.uuid);
+      records.push({
+        partId,
+        objectUuid: object.uuid,
+        meshUuid: node.uuid,
+        materialIndex,
+        ...materialRecord(material),
+        clonedForCandidate:
+          application?.application === "candidate-local-clone",
+        sharedWithBase:
+          application
+            ? application.sourceMaterialUuid === application.materialUuid
+            : false,
+        application: application?.application || "candidate-owned",
+      });
+    });
   });
+  return records;
 }
 
 function partNameForHit(hit) {
@@ -400,6 +519,10 @@ export function createPhase3C1WatchHead({
     ...config.dial.minuteMarkMaterial,
     clippingPlanes,
   });
+  const crystalMaterial = makeCrystalMaterial(
+    config.crystal.material,
+    clippingPlanes,
+  );
   const root = new THREE.Group();
   root.name = "finalWatchHeadPhase3C1";
   root.userData.watchHeadCandidate = config.id;
@@ -413,7 +536,9 @@ export function createPhase3C1WatchHead({
     "crownTube",
     "crownConnection",
   ]) {
-    mutateObjectMaterials(exteriorRuntime.objects[key], polished);
+    applyObjectMaterialFamily(exteriorRuntime.objects[key], polished, {
+      partId: key,
+    });
   }
   for (const key of [
     "twelveLeftLug",
@@ -424,10 +549,21 @@ export function createPhase3C1WatchHead({
     "sixSpringBar",
     "buckle",
   ]) {
-    mutateObjectMaterials(exteriorAttachmentRuntime.objects[key], polished);
+    applyObjectMaterialFamily(
+      exteriorAttachmentRuntime.objects[key],
+      polished,
+      { partId: key },
+    );
   }
-  mutateObjectMaterials(mechanism.crown, polished);
-  mutateObjectMaterials(exteriorRuntime.objects.movementHolder, subdued);
+  applyObjectMaterialFamily(mechanism.crown, polished, {
+    partId: "crown",
+    cloneUnregistered: true,
+  });
+  applyObjectMaterialFamily(
+    exteriorRuntime.objects.movementHolder,
+    subdued,
+    { partId: "movementHolder" },
+  );
 
   const hiddenBaseObjects = [
     exteriorRuntime.objects.dialBlank,
@@ -516,7 +652,7 @@ export function createPhase3C1WatchHead({
     circularHoles: [
       {
         center: config.protectedAnchors.smallSecondCenter,
-        radius: config.protectedAnchors.smallSecondRingDiameter / 2 + 0.12,
+        radius: config.dial.smallSecondVisualRecessDiameter / 2,
       },
       {
         center: config.openHeart.projectedCenter,
@@ -543,8 +679,12 @@ export function createPhase3C1WatchHead({
     roughness: config.dial.smallSecondRoughness,
     clippingPlanes,
   });
+  const smallSecondRecessRadius =
+    config.dial.smallSecondVisualRecessDiameter / 2;
+  const smallSecondFaceRadius =
+    smallSecondRecessRadius - config.dial.smallSecondBevelWidth;
   const smallSecondFace = createExtrudedDiscWithHoles({
-    outerRadius: config.protectedAnchors.smallSecondRingDiameter / 2,
+    outerRadius: smallSecondFaceRadius,
     centerHoleRadius: 0.23,
     yMin: config.dial.smallSecondRecessY,
     yMax: config.dial.smallSecondRecessY
@@ -563,6 +703,40 @@ export function createPhase3C1WatchHead({
     { pickPriority: 1 },
   );
   root.add(smallSecondFace);
+
+  const smallSecondBevel = createProfiledAnnulus([
+    {
+      radius: smallSecondFaceRadius,
+      y: config.dial.smallSecondRecessY
+        + config.dial.smallSecondRecessThickness,
+    },
+    {
+      radius: smallSecondFaceRadius,
+      y: config.dial.smallSecondRecessY,
+    },
+    {
+      radius: smallSecondRecessRadius,
+      y: config.protectedAnchors.dialFrontY,
+    },
+    {
+      radius: smallSecondRecessRadius,
+      y: config.dial.smallSecondRecessY
+        + config.dial.smallSecondRecessThickness,
+    },
+  ], smallSecondMaterial, 96);
+  smallSecondBevel.position.x =
+    config.protectedAnchors.smallSecondCenter[0];
+  smallSecondBevel.position.z =
+    config.protectedAnchors.smallSecondCenter[1];
+  registerStructuralOpacity(smallSecondBevel);
+  register(
+    smallSecondBevel,
+    "Phase 3C.1 小秒凹部ベベル",
+    "S86小秒中心・表示円径・針長を維持しつつ、太い輪郭線を使わず、狭い段差と連続斜面で直径8.500の視覚的凹部を示す。",
+    "exterior",
+    { pickPriority: 0 },
+  );
+  root.add(smallSecondBevel);
 
   const indexGroup = new THREE.Group();
   const indexRadius = config.protectedAnchors.indexCircleDiameter / 2;
@@ -714,26 +888,6 @@ export function createPhase3C1WatchHead({
   );
   root.add(smallSecondMarks);
 
-  const smallSecondOutline = new THREE.Mesh(
-    new THREE.TorusGeometry(
-      config.protectedAnchors.smallSecondRingDiameter / 2
-        - config.dial.smallSecondOutlineTubeRadius,
-      config.dial.smallSecondOutlineTubeRadius,
-      8,
-      96,
-    ),
-    darkMarkMaterial,
-  );
-  smallSecondOutline.rotation.x = Math.PI / 2;
-  smallSecondOutline.position.set(
-    config.protectedAnchors.smallSecondCenter[0],
-    config.dial.indexFrontY + 0.025,
-    config.protectedAnchors.smallSecondCenter[1],
-  );
-  smallSecondOutline.geometry.userData.phase3c1GeometryAudit =
-    auditGeometry(ensureIndexed(smallSecondOutline.geometry));
-  root.add(smallSecondOutline);
-
   const openHeartRing = createProfiledOpenHeartRim(
     config,
     [polishedMaterial, subduedMaterial],
@@ -793,7 +947,7 @@ export function createPhase3C1WatchHead({
 
   const crystal = createDomedCrystal(
     config,
-    exteriorRuntime.objects.crystal.material,
+    crystalMaterial,
   );
   crystal.castShadow = false;
   crystal.receiveShadow = false;
@@ -807,6 +961,216 @@ export function createPhase3C1WatchHead({
   root.add(crystal);
 
   exteriorRuntime.root.add(root);
+  const displayFamilyParts = {
+    FRONT: {
+      root,
+      parts: [
+        crystal,
+        exteriorRuntime.objects.bezel,
+        exteriorRuntime.objects.rehaut,
+        physicalDial,
+        indexGroup,
+        minuteTrack,
+        smallSecondFace,
+        smallSecondBevel,
+        smallSecondMarks,
+        openHeartRing,
+        ...Object.values(handMeshes),
+      ],
+    },
+    CORE: {
+      root: exteriorRuntime.groups.exteriorCase,
+      parts: [
+        exteriorRuntime.objects.caseBody,
+        exteriorRuntime.objects.crownTube,
+        exteriorRuntime.objects.crownConnection,
+        mechanism.crown,
+        exteriorAttachmentRuntime.objects.twelveLeftLug,
+        exteriorAttachmentRuntime.objects.twelveRightLug,
+        exteriorAttachmentRuntime.objects.sixLeftLug,
+        exteriorAttachmentRuntime.objects.sixRightLug,
+        exteriorAttachmentRuntime.objects.twelveSpringBar,
+        exteriorAttachmentRuntime.objects.sixSpringBar,
+        exteriorAttachmentRuntime.objects.twelveStrap,
+        exteriorAttachmentRuntime.objects.sixStrap,
+        exteriorAttachmentRuntime.objects.buckle,
+      ].filter(Boolean),
+    },
+    BACK: {
+      root: exteriorRuntime.groups.exteriorBack,
+      parts: [
+        exteriorRuntime.objects.casebackRing,
+        exteriorRuntime.objects.casebackWindow,
+        exteriorRuntime.objects.movementHolder,
+      ],
+    },
+    PLATE: {
+      root: plate.parent,
+      parts: [...plateReplacements],
+    },
+  };
+  for (const [family, entry] of Object.entries(displayFamilyParts)) {
+    entry.root.userData.phase3c1DisplayFamily = family;
+    entry.parts.forEach(object => {
+      object.userData.phase3c1DisplayFamily = family;
+    });
+  }
+
+  const transformRecord = object => {
+    object.updateWorldMatrix(true, false);
+    return {
+      uuid: object.uuid,
+      name: object.userData.partName || object.name || null,
+      position: roundArray(object.position.toArray(), 9),
+      quaternion: roundArray(object.quaternion.toArray(), 9),
+      scale: roundArray(object.scale.toArray(), 9),
+      worldPosition: roundArray(
+        object.getWorldPosition(new THREE.Vector3()).toArray(),
+        9,
+      ),
+      worldQuaternion: roundArray(
+        object.getWorldQuaternion(new THREE.Quaternion()).toArray(),
+        9,
+      ),
+      worldScale: roundArray(
+        object.getWorldScale(new THREE.Vector3()).toArray(),
+        9,
+      ),
+      visible: object.visible,
+      parentUuid: object.parent?.uuid || null,
+    };
+  };
+  const baseDisplayTransforms = {
+    frontCandidateRoot: {
+      object: root,
+      position: root.position.clone(),
+    },
+    frontExteriorRoot: {
+      object: exteriorRuntime.groups.exteriorFront,
+      position: exteriorRuntime.groups.exteriorFront.position.clone(),
+    },
+    backExteriorRoot: {
+      object: exteriorRuntime.groups.exteriorBack,
+      position: exteriorRuntime.groups.exteriorBack.position.clone(),
+    },
+  };
+  const crownBasePosition = new THREE.Vector3().fromArray(
+    mechanism.crownBasePosition || mechanism.crown.position.toArray(),
+  );
+  const crownExplodeVector = new THREE.Vector3().fromArray(
+    mechanism.crownExplodeVector || [0, 0, 0],
+  );
+  let displayState = {
+    explodeAmount: 0,
+    sideSplitAmount: 0,
+  };
+
+  const applyDynamicCoreState = ({
+    explodeAmount = displayState.explodeAmount,
+    sideSplitAmount = displayState.sideSplitAmount,
+  } = {}) => {
+    const explode = THREE.MathUtils.clamp(Number(explodeAmount) || 0, 0, 1);
+    const split = THREE.MathUtils.clamp(Number(sideSplitAmount) || 0, 0, 1);
+    mechanism.crown.position.y =
+      crownBasePosition.y
+      + crownExplodeVector.y * explode
+      - config.displayFamilies.splitDistance * split;
+    mechanism.crown.updateWorldMatrix(true, false);
+    return {
+      crownLocalY: round(mechanism.crown.position.y, 9),
+      expectedCrownLocalY: round(
+        crownBasePosition.y
+          + crownExplodeVector.y * explode
+          - config.displayFamilies.splitDistance * split,
+        9,
+      ),
+      coreWorldSplitCancellation:
+        round(mechanism.crown.getWorldPosition(new THREE.Vector3()).y, 9),
+    };
+  };
+
+  const applyDisplayState = ({
+    explodeAmount = 0,
+    sideSplitAmount = 0,
+  } = {}) => {
+    const explode = THREE.MathUtils.clamp(Number(explodeAmount) || 0, 0, 1);
+    const split = THREE.MathUtils.clamp(Number(sideSplitAmount) || 0, 0, 1);
+    const frontOffset =
+      -config.displayFamilies.splitDistance * split
+      - config.displayFamilies.explodeDistance * explode;
+    const backOffset =
+      config.displayFamilies.splitDistance * split
+      + config.displayFamilies.explodeDistance * explode;
+    baseDisplayTransforms.frontCandidateRoot.object.position
+      .copy(baseDisplayTransforms.frontCandidateRoot.position);
+    baseDisplayTransforms.frontCandidateRoot.object.position.y += frontOffset;
+    baseDisplayTransforms.frontExteriorRoot.object.position
+      .copy(baseDisplayTransforms.frontExteriorRoot.position);
+    baseDisplayTransforms.frontExteriorRoot.object.position.y += frontOffset;
+    baseDisplayTransforms.backExteriorRoot.object.position
+      .copy(baseDisplayTransforms.backExteriorRoot.position);
+    baseDisplayTransforms.backExteriorRoot.object.position.y += backOffset;
+    exteriorAttachmentRuntime.applyDisplayState({
+      explodeAmount: explode,
+      sideSplitAmount: 0,
+    });
+    displayState = {
+      explodeAmount: explode,
+      sideSplitAmount: split,
+    };
+    const core = applyDynamicCoreState(displayState);
+    const exactManagedRestore =
+      explode === 0
+      && split === 0
+      && Object.values(baseDisplayTransforms).every(entry =>
+        entry.object.position.distanceTo(entry.position) <= 1e-9);
+    return {
+      ...displayState,
+      frontOffset: round(frontOffset, 9),
+      backOffset: round(backOffset, 9),
+      exactManagedRestore:
+        explode === 0 && split === 0 ? exactManagedRestore : null,
+      core,
+    };
+  };
+
+  const getDisplayGroupReport = () => ({
+    contract: {
+      classification: "EXISTING_SPLIT_EXPLODE_TRANSFORM_CONTRACT",
+      queryOnly: true,
+      splitDistance: config.displayFamilies.splitDistance,
+      explodeDistance: config.displayFamilies.explodeDistance,
+      restoreTolerance: 1e-7,
+      frontDirection: "negative-Y",
+      backDirection: "positive-Y",
+      coreDirection: "central-with-existing-part-explode",
+      plateDirection: "existing-plate-and-movement-behavior",
+    },
+    state: { ...displayState },
+    families: Object.fromEntries(
+      Object.entries(displayFamilyParts).map(([family, entry]) => [
+        family,
+        {
+          configured: config.displayFamilies.families[family],
+          root: transformRecord(entry.root),
+          parts: entry.parts.map(transformRecord),
+        },
+      ]),
+    ),
+    managedRestore: Object.fromEntries(
+      Object.entries(baseDisplayTransforms).map(([id, entry]) => [
+        id,
+        {
+          basePosition: roundArray(entry.position.toArray(), 9),
+          currentPosition: roundArray(entry.object.position.toArray(), 9),
+          error: round(entry.object.position.distanceTo(entry.position), 9),
+        },
+      ]),
+    ),
+    core: applyDynamicCoreState(displayState),
+  });
+
+  applyDisplayState();
   const geometryAudits = {
     dial: physicalDial.userData.phase3c1GeometryAudit,
     smallSecondFace: smallSecondFace.userData.phase3c1GeometryAudit,
@@ -822,8 +1186,8 @@ export function createPhase3C1WatchHead({
     smallSecondMarks: {
       minor: smallSecondMinorMarkGeometry.userData.phase3c1GeometryAudit,
       major: smallSecondMajorMarkGeometry.userData.phase3c1GeometryAudit,
-      outline:
-        smallSecondOutline.geometry.userData.phase3c1GeometryAudit,
+      bevel:
+        smallSecondBevel.geometry.userData.phase3c1GeometryAudit,
     },
     openHeartRim: openHeartRing.userData.phase3c1GeometryAudit,
     plate: Object.fromEntries(plateReplacements.map((mesh, index) => [
@@ -985,28 +1349,97 @@ export function createPhase3C1WatchHead({
     },
   });
 
-  const getMaterialReport = () => ({
-    lightingChanged: false,
-    exposureChanged: false,
-    toneMappingChanged: false,
-    fogChanged: false,
-    d2c3Used: false,
-    alphaHashUsed: false,
-    humanReviewStatus: config.status,
-    visibilityCompensationClassification:
-      polished.classification,
-    caseFinish: polished,
-    subduedCaseFinish: subdued,
-    dialFinish: config.materials.ivoryDial,
-    smallSecondDialFinish: {
-      color: config.dial.smallSecondColor,
-      metalness: config.dial.smallSecondMetalness,
-      roughness: config.dial.smallSecondRoughness,
-    },
-    handsFinish: config.hands.material,
-    smallSecondHandFinish: config.hands.smallSecondMaterial,
-    strapPhase3c2StyleApplied: false,
-  });
+  const visibleSilverObjects = {
+    caseBody: exteriorRuntime.objects.caseBody,
+    bezel: exteriorRuntime.objects.bezel,
+    twelveLeftLug: exteriorAttachmentRuntime.objects.twelveLeftLug,
+    twelveRightLug: exteriorAttachmentRuntime.objects.twelveRightLug,
+    sixLeftLug: exteriorAttachmentRuntime.objects.sixLeftLug,
+    sixRightLug: exteriorAttachmentRuntime.objects.sixRightLug,
+    casebackRing: exteriorRuntime.objects.casebackRing,
+    crown: mechanism.crown,
+    twelveSpringBar: exteriorAttachmentRuntime.objects.twelveSpringBar,
+    sixSpringBar: exteriorAttachmentRuntime.objects.sixSpringBar,
+    openHeartRim: openHeartRing,
+    indices: indexGroup,
+    minuteHand: handMeshes.minute,
+    hourHand: handMeshes.hour,
+    buckle: exteriorAttachmentRuntime.objects.buckle,
+  };
+
+  const getMaterialReport = () => {
+    const runtimeMaterials = Object.entries(visibleSilverObjects)
+      .flatMap(([partId, object]) => objectMaterialRecord(object, partId));
+    const usage = runtimeMaterials.reduce((map, record) => {
+      map.set(record.uuid, (map.get(record.uuid) || 0) + 1);
+      return map;
+    }, new Map());
+    runtimeMaterials.forEach(record => {
+      record.sharedWithinCandidate = usage.get(record.uuid) > 1;
+    });
+    const silverRecords = runtimeMaterials.filter(record =>
+      record.color === "0xE9EDF0");
+    const roughnessValues = silverRecords
+      .map(record => record.roughness)
+      .filter(Number.isFinite);
+    const metalnessValues = silverRecords
+      .map(record => record.metalness)
+      .filter(Number.isFinite);
+    return {
+      lightingChanged: false,
+      shadowChanged: false,
+      exposureChanged: false,
+      toneMappingChanged: false,
+      fogChanged: false,
+      d2c3Used: false,
+      alphaHashUsed: false,
+      humanReviewStatus: config.status,
+      visibilityCompensationClassification:
+        polished.classification,
+      unifiedSilverFamily: {
+        classification:
+          "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
+        baseColor: "0xE9EDF0",
+        roughnessRange: roughnessValues.length
+          ? [
+            round(Math.min(...roughnessValues)),
+            round(Math.max(...roughnessValues)),
+          ]
+          : [],
+        roughnessDelta: roughnessValues.length
+          ? round(Math.max(...roughnessValues) - Math.min(...roughnessValues))
+          : null,
+        metalnessRange: metalnessValues.length
+          ? [
+            round(Math.min(...metalnessValues)),
+            round(Math.max(...metalnessValues)),
+          ]
+          : [],
+        metalnessDelta: metalnessValues.length
+          ? round(Math.max(...metalnessValues) - Math.min(...metalnessValues))
+          : null,
+        allRequiredPartsRecorded:
+          Object.keys(visibleSilverObjects).every(partId =>
+            runtimeMaterials.some(record => record.partId === partId)),
+        runtimeMaterials,
+      },
+      caseFinish: polished,
+      subduedCaseFinish: subdued,
+      dialFinish: config.materials.ivoryDial,
+      smallSecondDialFinish: {
+        color: config.dial.smallSecondColor,
+        metalness: config.dial.smallSecondMetalness,
+        roughness: config.dial.smallSecondRoughness,
+      },
+      handsFinish: config.hands.material,
+      smallSecondHandFinish: config.hands.smallSecondMaterial,
+      crystalFinish: {
+        ...config.crystal.material,
+        runtime: materialRecord(crystal.material),
+      },
+      strapPhase3c2StyleApplied: false,
+    };
+  };
 
   const getSelectionReport = () => ({
     registeredParts: [
@@ -1039,6 +1472,7 @@ export function createPhase3C1WatchHead({
     structuralOpacityIntegrated: [
       physicalDial,
       smallSecondFace,
+      smallSecondBevel,
       ...plateReplacements,
     ].every(object => Boolean(object.userData.structuralOpacityBase)),
   });
@@ -1051,7 +1485,7 @@ export function createPhase3C1WatchHead({
       indexGroup,
       minuteTrack,
       smallSecondMarks,
-      smallSecondOutline,
+      smallSecondBevel,
       openHeartRing,
       openHeartTarget,
       crystal,
@@ -1063,5 +1497,8 @@ export function createPhase3C1WatchHead({
     getLineOfSightReport,
     getMaterialReport,
     getSelectionReport,
+    applyDisplayState,
+    applyDynamicCoreState,
+    getDisplayGroupReport,
   };
 }

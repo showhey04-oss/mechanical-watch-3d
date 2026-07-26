@@ -69,6 +69,45 @@ function writeResult(result, status) {
   window.phase3c1HarnessResult = result;
 }
 
+async function setDisplayState(diagnostics, {
+  explode = 0,
+  split = 0,
+} = {}) {
+  const explodeInput = frame.contentDocument.getElementById("explode");
+  const splitInput = frame.contentDocument.getElementById("sideSplit");
+  explodeInput.value = String(Math.round(explode * 100));
+  explodeInput.dispatchEvent(new Event("input", { bubbles: true }));
+  splitInput.value = String(Math.round(split * 100));
+  splitInput.dispatchEvent(new Event("input", { bubbles: true }));
+  await diagnostics.waitForFrames(4);
+  return diagnostics.getPhase3C1DisplayGroupReport();
+}
+
+function displayTransformSignature(report) {
+  return Object.fromEntries(
+    Object.entries(report.families).map(([family, entry]) => [
+      family,
+      {
+        root: {
+          position: entry.root.position,
+          quaternion: entry.root.quaternion,
+          scale: entry.root.scale,
+          visible: entry.root.visible,
+          parentUuid: entry.root.parentUuid,
+        },
+        parts: entry.parts.map(part => ({
+          uuid: part.uuid,
+          position: part.position,
+          quaternion: part.quaternion,
+          scale: part.scale,
+          visible: part.visible,
+          parentUuid: part.parentUuid,
+        })),
+      },
+    ]),
+  );
+}
+
 frame.addEventListener("load", async () => {
   try {
     const diagnostics = await waitForDiagnostics();
@@ -78,6 +117,14 @@ frame.addEventListener("load", async () => {
     const geometry = diagnostics.getPhase3C1GeometryReport();
     const material = diagnostics.getPhase3C1MaterialReport();
     const selection = diagnostics.getPhase3C1SelectionReport();
+    const displayNormal = await setDisplayState(diagnostics);
+    const displaySplit = await setDisplayState(diagnostics, { split: 1 });
+    const displayExploded = await setDisplayState(diagnostics, { explode: 1 });
+    const displayCombined = await setDisplayState(
+      diagnostics,
+      { explode: 1, split: 1 },
+    );
+    const displayRestored = await setDisplayState(diagnostics);
     const exterior = diagnostics.getExteriorDimensionReport();
     const attachment = diagnostics.getExteriorAttachmentGeometryReport();
     const exteriorInterference = diagnostics.getExteriorInterferenceReport();
@@ -136,9 +183,10 @@ frame.addEventListener("load", async () => {
       viewport: viewport.width === width && viewport.height === height,
       enabled: state.enabled === true && state.defaultEnabled === false,
       humanReviewRevision:
-        state.status === "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED"
+        state.status
+          === "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED"
         && state.phase3c1HumanAcceptance
-          === "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+          === "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
       sourceHead:
         geometry.validation?.audit?.projection?.dialPlaneCenter?.[0] === 7.7,
       openHeartCenter:
@@ -153,16 +201,34 @@ frame.addEventListener("load", async () => {
         geometry.interferences.openHeartToSmallSecondClearance >= 0.2
         && geometry.interferences.openHeartToNearestIndexClearance >= 0.3,
       referenceAlignedMaterials:
-        material.dialFinish.color === 0xbcab8e
-        && material.smallSecondDialFinish.color === 0xccb89f
-        && material.caseFinish.color === 0xeef1f3
-        && material.caseFinish.metalness >= 0.9
-        && material.caseFinish.roughness >= 0.16
-        && material.caseFinish.roughness <= 0.21
+        material.dialFinish.color === 0xf2ede5
+        && material.smallSecondDialFinish.color === 0xf5f1ea
+        && material.caseFinish.color === 0xe9edf0
+        && material.caseFinish.metalness >= 0.74
+        && material.caseFinish.metalness <= 0.82
+        && material.caseFinish.roughness >= 0.18
+        && material.caseFinish.roughness <= 0.23
         && material.visibilityCompensationClassification
-          === "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION"
-        && material.handsFinish.color === 0xf1f3f5
+          === "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL"
+        && material.handsFinish.color === 0xe9edf0
         && material.smallSecondHandFinish.color === 0x2a5572,
+      runtimeMaterialAudit:
+        material.unifiedSilverFamily.allRequiredPartsRecorded
+        && material.unifiedSilverFamily.runtimeMaterials.length >= 15
+        && material.unifiedSilverFamily.runtimeMaterials.every(record =>
+          record.uuid
+          && record.objectUuid
+          && record.meshUuid
+          && record.color === "0xE9EDF0"
+          && Number.isFinite(record.metalness)
+          && Number.isFinite(record.roughness)
+          && Number.isFinite(record.opacity)
+          && typeof record.transparent === "boolean"
+          && typeof record.depthWrite === "boolean"
+          && typeof record.clonedForCandidate === "boolean"
+          && typeof record.sharedWithinCandidate === "boolean")
+        && material.unifiedSilverFamily.roughnessDelta <= 0.06
+        && material.unifiedSilverFamily.metalnessDelta <= 0.05,
       referenceAlignedDialGeometry:
         geometry.geometryAudits.indices.normal.topology.closed
         && geometry.geometryAudits.indices.twelve.topology.closed
@@ -238,6 +304,35 @@ frame.addEventListener("load", async () => {
         && yEnvelopes.handMountAndProtrudingArbor.ySize === 3.19
         && yEnvelopes.applicationIncludingDialAndHandsWithoutExternalCrown.ySize
           === 6.745,
+      splitDirections:
+        displaySplit.families.FRONT.root.worldPosition[1]
+          < displayNormal.families.FRONT.root.worldPosition[1]
+        && displaySplit.families.BACK.root.worldPosition[1]
+          > displayNormal.families.BACK.root.worldPosition[1]
+        && Math.abs(
+          displaySplit.families.CORE.parts
+            .find(part => part.name?.includes("りゅうず"))?.worldPosition[1]
+          - displayNormal.families.CORE.parts
+            .find(part => part.name?.includes("りゅうず"))?.worldPosition[1],
+        ) <= 1e-7
+        && Math.abs(
+          displaySplit.families.PLATE.root.worldPosition[1]
+          - displayNormal.families.PLATE.root.worldPosition[1],
+        ) <= 1e-7,
+      explodeDirections:
+        displayExploded.families.FRONT.root.worldPosition[1]
+          < displayNormal.families.FRONT.root.worldPosition[1]
+        && displayExploded.families.BACK.root.worldPosition[1]
+          > displayNormal.families.BACK.root.worldPosition[1]
+        && displayCombined.state.explodeAmount === 1
+        && displayCombined.state.sideSplitAmount === 1,
+      displayExactRestore:
+        displayRestored.state.explodeAmount === 0
+        && displayRestored.state.sideSplitAmount === 0
+        && Object.values(displayRestored.managedRestore)
+          .every(entry => entry.error <= 1e-7)
+        && JSON.stringify(displayTransformSignature(displayNormal))
+          === JSON.stringify(displayTransformSignature(displayRestored)),
       modelTransformInvariant:
         JSON.stringify(modelBefore) === JSON.stringify(modelAfter),
     };
@@ -275,6 +370,13 @@ frame.addEventListener("load", async () => {
       material,
       luminance,
       selection,
+      display: {
+        normal: displayNormal,
+        split: displaySplit,
+        exploded: displayExploded,
+        combined: displayCombined,
+        restored: displayRestored,
+      },
       selections,
       opacityCycle,
       internalSelectionAtOpacity16,

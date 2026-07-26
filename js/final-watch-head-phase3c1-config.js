@@ -19,7 +19,7 @@ const plateWindowRadius = 1.32;
 export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   schemaVersion: 1,
   id: "E-BALANCED-PHASE3C1-WATCH-HEAD",
-  status: "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+  status: "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
   enabledByDefault: false,
   query: {
     parameter: "watchHead",
@@ -37,8 +37,8 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   appVersion: "v3.15.0",
   humanAcceptance: {
     phase3b2: "HUMAN_ACCEPTED_PHASE3B2_WITH_MANDATORY_PHASE3C_REFINEMENTS",
-    phase3c1: "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
-    revision: "REFERENCE_ALIGNED_REVISION_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
+    phase3c1: "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+    revision: "THIRD_CANDIDATE_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
     physicalIPhoneThermalObservation: {
       classification: "MILD_WARMING_AFTER_15_MINUTES",
       blocking: false,
@@ -76,22 +76,22 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
     centerTolerance: 0.1,
     equivalentDiameter: 6.6,
     openingRadius: 3.3,
-    edgeRingWidth: 0.36,
-    edgeRingOuterRadius: 3.66,
+    edgeRingWidth: 0.26,
+    edgeRingOuterRadius: 3.56,
     rimProfile: {
       innerDiameter: 6.6,
-      outerDiameter: 7.32,
-      visibleTopLip: 0.25,
-      innerChamfer: 0.06,
+      outerDiameter: 7.12,
+      visibleTopLip: 0.16,
+      innerChamfer: 0.05,
       outerChamfer: 0.05,
-      axialHeight: 0.16,
+      axialHeight: 0.13,
       profile: [
         { radius: 3.3, y: -2.03, role: "inner-wall-back" },
-        { radius: 3.3, y: -2.16, role: "inner-wall-front" },
-        { radius: 3.36, y: -2.19, role: "inner-chamfer" },
-        { radius: 3.61, y: -2.19, role: "visible-top-lip" },
-        { radius: 3.66, y: -2.16, role: "outer-chamfer" },
-        { radius: 3.66, y: -2.03, role: "outer-wall-back" },
+        { radius: 3.3, y: -2.13, role: "inner-wall-front" },
+        { radius: 3.35, y: -2.16, role: "inner-chamfer" },
+        { radius: 3.51, y: -2.16, role: "visible-top-lip" },
+        { radius: 3.56, y: -2.13, role: "outer-chamfer" },
+        { radius: 3.56, y: -2.03, role: "outer-wall-back" },
       ],
       circumferentialSegments: 128,
       classification: "PRECISION_PROFILED_POLISHED_EDGE",
@@ -137,28 +137,29 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
     ],
   },
   dial: {
-    color: 0xbcab8e,
-    metalness: 0.02,
-    roughness: 0.86,
-    smallSecondColor: 0xccb89f,
+    color: 0xf2ede5,
+    metalness: 0,
+    roughness: 0.88,
+    smallSecondColor: 0xf5f1ea,
     smallSecondMetalness: 0,
-    smallSecondRoughness: 0.86,
-    smallSecondRecessY: -1.985,
+    smallSecondRoughness: 0.88,
+    smallSecondVisualRecessDiameter: 8.5,
+    smallSecondRecessY: -1.96,
     smallSecondRecessThickness: 0.06,
-    smallSecondOutlineTubeRadius: 0.025,
-    smallSecondMinorMarkLength: 0.12,
-    smallSecondMajorMarkLength: 0.24,
-    smallSecondMarkTangentialWidth: 0.028,
+    smallSecondBevelWidth: 0.08,
+    smallSecondMinorMarkLength: 0.138,
+    smallSecondMajorMarkLength: 0.276,
+    smallSecondMarkTangentialWidth: 0.032,
     mainMinuteTrackRadius: 13.58,
-    minuteDotMinorDiameter: 0.115,
-    minuteDotMajorDiameter: 0.18,
+    minuteDotMinorDiameter: 0.165,
+    minuteDotMajorDiameter: 0.25,
     minuteDotAxialHeight: 0.04,
     minuteDotOpenHeartClearance: 0.03,
-    indexRadialLength: 1.4,
-    indexTangentialWidth: 0.32,
-    indexThickness: 0.19,
+    indexRadialLength: 1.82,
+    indexTangentialWidth: 0.44,
+    indexThickness: 0.23,
     twelveIndexLengthScale: 1.08,
-    twelveIndexGap: 0.22,
+    twelveIndexGap: 0.26,
     indexFrontY: -2.11,
     omittedIndices: [6],
     minuteMarkMaterial: {
@@ -190,8 +191,8 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
       counterweightLength: 0.42,
     },
     material: {
-      color: 0xf1f3f5,
-      metalness: 0.93,
+      color: 0xe9edf0,
+      metalness: 0.8,
       roughness: 0.19,
     },
     smallSecondMaterial: {
@@ -203,34 +204,53 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   crystal: {
     profile: [
       { radius: 0, y: -3.46 },
-      { radius: 3.825, y: -3.45 },
-      { radius: 7.65, y: -3.405 },
-      { radius: 11.475, y: -3.295 },
-      { radius: 14, y: -3.12 },
-      { radius: 15.3, y: -3 },
+      { radius: 3.825, y: -3.455 },
+      { radius: 7.65, y: -3.42 },
+      { radius: 11.475, y: -3.315 },
+      { radius: 13.8, y: -3.11 },
+      { radius: 15, y: -2.96 },
+      { radius: 15.3, y: -2.92 },
       { radius: 15.3, y: -2.86 },
       { radius: 0, y: -2.86 },
     ],
     radialSegments: 128,
-    classification: "VISIBLE_GENTLE_DOME_WITHIN_PROTECTED_ENVELOPE",
+    classification: "VISIBLE_PRONOUNCED_DOME_WITHIN_PROTECTED_ENVELOPE",
+    material: {
+      color: 0xffffff,
+      metalness: 0,
+      roughness: 0.06,
+      transmission: 0.96,
+      ior: 1.47,
+      thickness: 0.6,
+    },
   },
   materials: {
     polishedSteel: {
-      color: 0xeef1f3,
-      metalness: 0.92,
-      roughness: 0.19,
-      classification: "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
+      color: 0xe9edf0,
+      metalness: 0.8,
+      roughness: 0.2,
+      classification: "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
     },
     subduedPolishedSteel: {
-      color: 0xd8dee3,
-      metalness: 0.9,
-      roughness: 0.27,
-      classification: "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
+      color: 0xe9edf0,
+      metalness: 0.78,
+      roughness: 0.23,
+      classification: "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
     },
     ivoryDial: {
-      color: 0xbcab8e,
-      metalness: 0.02,
-      roughness: 0.86,
+      color: 0xf2ede5,
+      metalness: 0,
+      roughness: 0.88,
+    },
+  },
+  displayFamilies: {
+    splitDistance: 5.5,
+    explodeDistance: 10,
+    families: {
+      FRONT: { splitDirection: -1 },
+      CORE: { splitDirection: 0 },
+      BACK: { splitDirection: 1 },
+      PLATE: { splitDirection: 0 },
     },
   },
   phase3c2MandatoryBacklog: [
@@ -390,24 +410,26 @@ export function assertPhase3C1WatchHeadConfig(
       && config.hands.smallSecond.width >= 0.1
       && config.hands.smallSecond.width <= 0.15,
     dialRevision:
-      config.dial.color === 0xbcab8e
-      && config.dial.smallSecondColor === 0xccb89f
-      && config.dial.indexRadialLength >= 1.3
-      && config.dial.indexRadialLength <= 1.5
-      && config.dial.indexTangentialWidth >= 0.28
-      && config.dial.indexTangentialWidth <= 0.36
-      && config.dial.minuteDotMinorDiameter >= 0.1
-      && config.dial.minuteDotMinorDiameter <= 0.13
-      && config.dial.minuteDotMajorDiameter >= 0.16
-      && config.dial.minuteDotMajorDiameter <= 0.2,
+      config.dial.color === 0xf2ede5
+      && config.dial.smallSecondColor === 0xf5f1ea
+      && config.dial.indexRadialLength >= 1.75
+      && config.dial.indexRadialLength <= 1.9
+      && config.dial.indexTangentialWidth >= 0.4
+      && config.dial.indexTangentialWidth <= 0.48
+      && config.dial.minuteDotMinorDiameter >= 0.155
+      && config.dial.minuteDotMinorDiameter <= 0.18
+      && config.dial.minuteDotMajorDiameter >= 0.23
+      && config.dial.minuteDotMajorDiameter <= 0.27
+      && config.dial.smallSecondVisualRecessDiameter >= 8.3
+      && config.dial.smallSecondVisualRecessDiameter <= 8.6,
     rimRevision:
       o.rimProfile.innerDiameter === o.equivalentDiameter
-      && o.rimProfile.outerDiameter >= 7.2
-      && o.rimProfile.outerDiameter <= 7.32
-      && o.rimProfile.visibleTopLip >= 0.24
-      && o.rimProfile.visibleTopLip <= 0.32
-      && o.rimProfile.axialHeight >= 0.1
-      && o.rimProfile.axialHeight <= 0.16,
+      && o.rimProfile.outerDiameter >= 7.08
+      && o.rimProfile.outerDiameter <= 7.14
+      && o.rimProfile.visibleTopLip >= 0.14
+      && o.rimProfile.visibleTopLip <= 0.18
+      && o.rimProfile.axialHeight >= 0.11
+      && o.rimProfile.axialHeight <= 0.14,
     crystalEnvelope:
       Math.min(...config.crystal.profile.map(point => point.y))
         === -3.46

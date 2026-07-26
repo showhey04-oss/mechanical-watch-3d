@@ -48,6 +48,7 @@ export async function runFinalExteriorCapture({
   cameraPreset,
   readyKey,
   appQuery = "dimensionAudit=1&theme=navy&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed",
+  prepare = null,
 }) {
   const frame = document.getElementById("auditApp");
   const output = document.getElementById("captureResult");
@@ -73,6 +74,10 @@ export async function runFinalExteriorCapture({
     query.set("capture", captureId);
     frame.src = `../index.html?${query}`;
     const diagnostics = await waitForDiagnostics(frame);
+    if (typeof prepare === "function") {
+      document.body.dataset.captureStage = "preparing-display-state";
+      await prepare({ frame, diagnostics });
+    }
     // Let the smoothed render camera finish converging on the requested preset
     // before taking the exact before/after state snapshot used by the capture
     // invariant. This is especially important for the close keyless preset.
