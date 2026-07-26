@@ -16,7 +16,7 @@ test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
   assert.equal(config.enabledByDefault, false);
   assert.equal(
     config.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
+    "PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION",
   );
   assert.equal(
     config.source.baseBranch,
@@ -76,7 +76,7 @@ test("reference-aligned dial dimensions preserve S86 while strengthening hierarc
   assert.ok(config.dial.indexThickness >= 0.2);
   assert.ok(config.dial.indexThickness <= 0.26);
   assert.equal(config.dial.twelveIndexGap, 0.26);
-  assert.deepEqual(config.dial.omittedIndices, [6]);
+  assert.deepEqual(config.dial.omittedIndices, []);
   assert.ok(config.dial.minuteDotMinorDiameter >= 0.155);
   assert.ok(config.dial.minuteDotMinorDiameter <= 0.18);
   assert.ok(config.dial.minuteDotMajorDiameter >= 0.23);
@@ -152,6 +152,15 @@ test("fourth candidate places all 60 minute dots outside the indices", () => {
   assert.equal(audit.twelveDoubleBarOverlapCount, 0);
   assert.equal(audit.openingOverlapCount, 0);
   assert.equal(audit.bezelRehautOverlapCount, 0);
+  assert.equal(audit.indexBarCount, 13);
+  assert.equal(audit.sixIndex.present, true);
+  assert.ok(
+    Math.abs(audit.sixIndex.smallSecondRecessClearance - 1.968) < 1e-9,
+  );
+  assert.ok(
+    Math.abs(audit.sixIndex.majorMinuteDotClearance - 0.437) < 1e-9,
+  );
+  assert.ok(audit.sixIndex.openingClearance >= 0.3);
 });
 
 test("display families reuse split and explode semantics without a new UI system", () => {
@@ -166,7 +175,7 @@ test("display families reuse split and explode semantics without a new UI system
   assert.deepEqual(config.exteriorDisplayGroup, {
     queryOnly: true,
     label: "外装",
-    helper: "ケース・風防・文字板・針・ラグ・ストラップ・裏蓋",
+    helper: null,
     restoreTolerance: 1e-7,
   });
   assert.equal(
@@ -272,7 +281,21 @@ test("production integration cannot hide failures with forbidden rendering short
   assert.match(indexSource, /getPhase3C1ExteriorGroupReport/);
   assert.match(indexSource, /setPhase3C1ExteriorGroupVisible/);
   assert.match(indexSource, /setPhase3C1CrystalDiagnosticVisible/);
+  assert.match(indexSource, /getPickHitStack/);
+  assert.match(indexSource, /inspectPickAtWorldPoint/);
   assert.match(indexSource, /data-phase3c1-exterior-control/);
+  assert.match(
+    runtimeSource,
+    /physicalDial,[\s\S]*?\{ pickPriority: 1 \}/,
+  );
+  assert.match(
+    runtimeSource,
+    /crystal,[\s\S]*?\{ pickPriority: 0 \}/,
+  );
+  assert.doesNotMatch(
+    runtimeSource,
+    /crystal,[\s\S]{0,300}\{[^}]*pickable:\s*false/,
+  );
   assert.match(runtimeSource, /applyDynamicCoreState/);
   assert.match(runtimeSource, /applyDisplayState/);
   assert.match(runtimeSource, /candidate-local-clone/);

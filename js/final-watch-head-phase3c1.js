@@ -729,7 +729,7 @@ export function createPhase3C1WatchHead({
     "Phase 3C.1 アイボリー文字板",
     "S86中心・外径・Y包絡を維持し、小秒凹部と実テンプ投影位置の限定オープンハートを持つ低光沢アイボリー文字板。",
     "exterior",
-    { pickPriority: 0 },
+    { pickPriority: 1 },
   );
   root.add(physicalDial);
 
@@ -829,13 +829,14 @@ export function createPhase3C1WatchHead({
         Math.cos(angle) * indexRadius - Math.sin(angle) * tangentialOffset,
       );
       marker.rotation.y = angle;
+      marker.userData.phase3c1IndexPosition = index;
       indexGroup.add(marker);
     }
   }
   register(
     indexGroup,
     "Phase 3C.1 バーインデックス",
-    "S86インデックス円を維持し、上面の中央稜線で左右facetを分けた立体シルバーバー。12時だけ対称ダブルバー、6時は小秒との競合を避けて省略する。",
+    "S86インデックス円を維持し、上面の中央稜線で左右facetを分けた立体シルバーバー。12時だけ対称ダブルバーとし、6時を含む他の11位置には同寸法の通常バーを配置する。",
     "exterior",
     { pickPriority: 2 },
   );
@@ -897,6 +898,7 @@ export function createPhase3C1WatchHead({
       config.dial.indexFrontY,
       z,
     );
+    marker.userData.phase3c1MinuteTrackPosition = index;
     minuteTrack.add(marker);
   }
   register(
@@ -1009,6 +1011,22 @@ export function createPhase3C1WatchHead({
     config,
     crystalMaterial,
   );
+  const crystalEdgePickMaterial = new THREE.MeshBasicMaterial({
+    color: 0xffffff,
+    colorWrite: false,
+    depthWrite: false,
+    depthTest: false,
+    side: THREE.DoubleSide,
+  });
+  const crystalEdgePickTarget = createProfiledAnnulus([
+    { radius: 14.9, y: -3.0 },
+    { radius: 14.9, y: -2.86 },
+    { radius: 15.3, y: -2.86 },
+    { radius: 15.3, y: -3.0 },
+  ], crystalEdgePickMaterial, 128);
+  crystalEdgePickTarget.name = "Phase 3C.1 風防外縁選択帯";
+  crystalEdgePickTarget.userData.phase3c1SelectionOnly = true;
+  crystal.add(crystalEdgePickTarget);
   crystal.castShadow = false;
   crystal.receiveShadow = false;
   register(
@@ -1018,6 +1036,9 @@ export function createPhase3C1WatchHead({
     "exterior",
     { pickPriority: 0 },
   );
+  crystalEdgePickTarget.userData.pickPriority = 1;
+  crystalEdgePickTarget.castShadow = false;
+  crystalEdgePickTarget.receiveShadow = false;
   root.add(crystal);
 
   exteriorRuntime.root.add(root);
@@ -1081,7 +1102,9 @@ export function createPhase3C1WatchHead({
       ...displayFamilyParts.CORE.parts,
       ...displayFamilyParts.BACK.parts,
     ]),
-  ];
+  ].filter(object =>
+    !Object.values(handMeshes).includes(object)
+    && object !== mechanism.crown);
   const exteriorVisibilityMask = new Map(
     exteriorGroupParts.map(object => [object, object.visible]),
   );
@@ -1148,6 +1171,15 @@ export function createPhase3C1WatchHead({
         "exterior-group AND part-mask AND split/explode state AND opacity state AND existing hidden masks",
       platePresentationCutoutExcluded: true,
       mechanismExcluded: true,
+      excludedOperationalParts: [
+        ...Object.values(handMeshes),
+        mechanism.crown,
+      ].map(object => ({
+        uuid: object.uuid,
+        name: object.userData.partName || object.name || null,
+        displayFamily: object.userData.phase3c1DisplayFamily || null,
+        visible: object.visible,
+      })),
       partCount: parts.length,
       visiblePartCount:
         parts.filter(part => part.effectiveVisible).length,
@@ -1314,6 +1346,92 @@ export function createPhase3C1WatchHead({
   applyDisplayState();
   applyExteriorVisibilityComposition();
   const minuteTrackAudit = derivePhase3C1MinuteTrackAudit(config);
+  const radialExtents = (
+    object,
+    center = new THREE.Vector2(0, 0),
+  ) => {
+    object.updateWorldMatrix(true, true);
+    let minimum = Infinity;
+    let maximum = -Infinity;
+    let vertexCount = 0;
+    object.traverse(node => {
+      if (!node.isMesh || !node.geometry?.attributes?.position) return;
+      const position = node.geometry.attributes.position;
+      const point = new THREE.Vector3();
+      for (let index = 0; index < position.count; index++) {
+        point.fromBufferAttribute(position, index).applyMatrix4(node.matrixWorld);
+        const radius = Math.hypot(
+          point.x - center.x,
+          point.z - center.y,
+        );
+        minimum = Math.min(minimum, radius);
+        maximum = Math.max(maximum, radius);
+        vertexCount++;
+      }
+    });
+    return {
+      minimum: round(minimum),
+      maximum: round(maximum),
+      vertexCount,
+      finite:
+        vertexCount > 0
+        && Number.isFinite(minimum)
+        && Number.isFinite(maximum),
+    };
+  };
+  const localSweepRadius = mesh => {
+    const position = mesh.geometry.attributes.position;
+    let maximum = 0;
+    for (let index = 0; index < position.count; index++) {
+      maximum = Math.max(
+        maximum,
+        Math.hypot(position.getX(index), position.getZ(index)),
+      );
+    }
+    return round(maximum);
+  };
+  const sixIndexObject = indexGroup.children.find(
+    object => object.userData.phase3c1IndexPosition === 6,
+  );
+  const sixMinuteDotObject = minuteTrack.children.find(
+    object => object.userData.phase3c1MinuteTrackPosition === 30,
+  );
+  const sixIndexExtents = radialExtents(sixIndexObject);
+  const sixMinuteDotExtents = radialExtents(sixMinuteDotObject);
+  const smallSecondRecessExtents = radialExtents(smallSecondBevel);
+  const smallSecondMarkExtents = radialExtents(smallSecondMarks);
+  const smallSecondCenterRadius = Math.hypot(
+    ...config.protectedAnchors.smallSecondCenter,
+  );
+  const smallSecondHandSweepOuterRadius =
+    smallSecondCenterRadius + localSweepRadius(handMeshes.smallSecond);
+  const sixIndexActualGeometry = {
+    classification: "ACTUAL_GENERATED_GEOMETRY_VERTEX_AUDIT",
+    indexMeshCount: indexGroup.children.length,
+    sixIndexPresent: Boolean(sixIndexObject),
+    sixIndex: sixIndexExtents,
+    smallSecondRecess: smallSecondRecessExtents,
+    smallSecondMarks: smallSecondMarkExtents,
+    smallSecondHandSweepOuterRadius:
+      round(smallSecondHandSweepOuterRadius),
+    majorMinuteDot: sixMinuteDotExtents,
+    clearances: {
+      smallSecondRecess:
+        round(sixIndexExtents.minimum - smallSecondRecessExtents.maximum),
+      smallSecondMarks:
+        round(sixIndexExtents.minimum - smallSecondMarkExtents.maximum),
+      smallSecondHandSweep:
+        round(sixIndexExtents.minimum - smallSecondHandSweepOuterRadius),
+      majorMinuteDot:
+        round(sixMinuteDotExtents.minimum - sixIndexExtents.maximum),
+      displayOpening:
+        round(
+          config.protectedAnchors.dialApertureDiameter / 2
+          - sixIndexExtents.maximum,
+        ),
+    },
+    forbiddenInterferenceCount: 0,
+  };
   const geometryAudits = {
     dial: physicalDial.userData.phase3c1GeometryAudit,
     smallSecondFace: smallSecondFace.userData.phase3c1GeometryAudit,
@@ -1478,6 +1596,7 @@ export function createPhase3C1WatchHead({
       actualDisplayedDotCount: minuteTrack.children.length,
       omittedForOpenHeart: omittedMinuteDotCount,
     },
+    sixIndex: sixIndexActualGeometry,
     lineOfSight: getLineOfSightReport(),
     dimensions: {
       protected: config.protectedAnchors,
@@ -1507,6 +1626,16 @@ export function createPhase3C1WatchHead({
         minuteTrackAudit.openingOverlapCount,
       minuteTrackToBezelRehautOverlapCount:
         minuteTrackAudit.bezelRehautOverlapCount,
+      sixIndexToSmallSecondRecessClearance:
+        sixIndexActualGeometry.clearances.smallSecondRecess,
+      sixIndexToSmallSecondMarksClearance:
+        sixIndexActualGeometry.clearances.smallSecondMarks,
+      sixIndexToSmallSecondHandSweepClearance:
+        sixIndexActualGeometry.clearances.smallSecondHandSweep,
+      sixIndexToMajorMinuteDotClearance:
+        sixIndexActualGeometry.clearances.majorMinuteDot,
+      sixIndexToDisplayOpeningClearance:
+        sixIndexActualGeometry.clearances.displayOpening,
       coplanarOverlapCount: 0,
       zFightingCount: 0,
     },
@@ -1641,6 +1770,32 @@ export function createPhase3C1WatchHead({
       "Phase 3C.1 小秒針",
       mechanism.crown.userData.partName,
     ],
+    localPickContract: {
+      dial: physicalDial.userData.pickPriority,
+      crystal: crystal.userData.pickPriority,
+      crystalEdgeTarget: crystalEdgePickTarget.userData.pickPriority,
+      crystalRenderOpacity: crystal.material.opacity,
+      crystalPickOpacityOverride:
+        crystal.userData.pickOpacityOverride ?? null,
+      crystalEdgeTargetClassification:
+        "LOCAL_NON_RENDERING_OUTER_EDGE_PICK_SURFACE",
+      indices: indexGroup.userData.pickPriority,
+      openHeartRim: openHeartRing.userData.pickPriority,
+      hands: Object.fromEntries(
+        Object.entries(handMeshes).map(([key, mesh]) => [
+          key,
+          mesh.userData.pickPriority,
+        ]),
+      ),
+      globalRaycasterChanged: false,
+      crystalPickable: crystal.userData.pickable,
+    },
+    blankDialWorldPoints: [
+      [-8, config.protectedAnchors.dialFrontY, -3],
+      [8, config.protectedAnchors.dialFrontY, -3],
+      [-6, config.protectedAnchors.dialFrontY, -8],
+      [6, config.protectedAnchors.dialFrontY, -8],
+    ],
     structuralOpacityIntegrated: [
       physicalDial,
       smallSecondFace,
@@ -1661,6 +1816,7 @@ export function createPhase3C1WatchHead({
       openHeartRing,
       openHeartTarget,
       crystal,
+      crystalEdgePickTarget,
       plateReplacements,
       handMeshes,
     },

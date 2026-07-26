@@ -165,6 +165,22 @@ async function setExteriorGroupByUi(diagnostics, visible) {
   };
 }
 
+async function findCrystalEdgeSelection(diagnostics) {
+  for (const preset of ["side", "leftSide", "dialMechanism", "structure"]) {
+    diagnostics.applyCameraPreset(preset);
+    await diagnostics.waitForFrames(12);
+    const report = diagnostics.findProjectedPickSampleForPart(
+      "Phase 3C.1 ドーム風防",
+      { select: true },
+    );
+    if (report.selection === "Phase 3C.1 ドーム風防") {
+      return { preset, ...report };
+    }
+    diagnostics.clearSelectionInfo();
+  }
+  return { preset: null, found: false, selected: false, selection: null };
+}
+
 frame.addEventListener("load", async () => {
   try {
     const diagnostics = await waitForDiagnostics();
@@ -174,6 +190,7 @@ frame.addEventListener("load", async () => {
     const geometry = diagnostics.getPhase3C1GeometryReport();
     const material = diagnostics.getPhase3C1MaterialReport();
     const selection = diagnostics.getPhase3C1SelectionReport();
+    const pickLayer = diagnostics.getPickLayerReport();
     const exteriorGroupInitial =
       diagnostics.getPhase3C1ExteriorGroupReport();
     const displayNormal = await setDisplayState(diagnostics);
@@ -187,6 +204,24 @@ frame.addEventListener("load", async () => {
     const selectedExterior =
       diagnostics.selectPartByNameForAudit("Phase 3C.1 アイボリー文字板");
     const exteriorOff = await setExteriorGroupByUi(diagnostics, false);
+    const exteriorOffOperationalSelections = [
+      "Phase 3C.1 分針",
+      "Phase 3C.1 時針",
+      "Phase 3C.1 小秒針",
+      exteriorOff.group.excludedOperationalParts.find(
+        part => part.name?.includes("りゅうず"),
+      )?.name,
+    ].filter(Boolean).map(partName => {
+      const selected = diagnostics.selectPartByNameForAudit(partName);
+      const ui = diagnostics.getUiRegressionState();
+      diagnostics.clearSelectionInfo();
+      return {
+        partName,
+        selected,
+        topName: ui.selectionOutputs.topName,
+        learningName: ui.selectionOutputs.learningName,
+      };
+    });
     const exteriorOn = await setExteriorGroupByUi(diagnostics, true);
     const displayBeforeSplitGroupCycle =
       diagnostics.getPhase3C1DisplayGroupReport();
@@ -233,6 +268,12 @@ frame.addEventListener("load", async () => {
       hud: diagnostics.getMobileOverlayHudReport(),
       toggle: diagnostics.getToggleCardReport()
         .find(entry => entry.group === "exterior"),
+      helperElementCount: frame.contentDocument.querySelectorAll(
+        "[data-phase3c1-exterior-control] .toggleText small",
+      ).length,
+      labelText: frame.contentDocument.querySelector(
+        "[data-phase3c1-exterior-control] .toggleText",
+      )?.textContent.trim() || null,
     };
     diagnostics.setPanelOpen(false);
     await diagnostics.waitForFrames(12);
@@ -284,6 +325,41 @@ frame.addEventListener("load", async () => {
       themes: "all",
     });
     const allAudits = collectGeometryAudits(geometry.geometryAudits);
+    diagnostics.applyCameraPreset("reset");
+    await diagnostics.waitForFrames(12);
+    diagnostics.setStructuralOpacity(1);
+    const dialBlankPointSelections = selection.blankDialWorldPoints.map(
+      worldPoint => {
+        const before = diagnostics.inspectPickAtWorldPoint(worldPoint);
+        const after = diagnostics.inspectPickAtWorldPoint(
+          worldPoint,
+          { select: true },
+        );
+        const ui = diagnostics.getUiRegressionState();
+        diagnostics.clearSelectionInfo();
+        return {
+          worldPoint,
+          before,
+          after,
+          ui: {
+            topName: ui.selectionOutputs.topName,
+            learningName: ui.selectionOutputs.learningName,
+          },
+        };
+      },
+    );
+    diagnostics.setStructuralOpacity(0.5);
+    const opacity50DialSelection = diagnostics.inspectPickAtWorldPoint(
+      selection.blankDialWorldPoints[0],
+      { select: true },
+    );
+    diagnostics.clearSelectionInfo();
+    diagnostics.setStructuralOpacity(1);
+    const crystalSideSelection =
+      await findCrystalEdgeSelection(diagnostics);
+    diagnostics.clearSelectionInfo();
+    diagnostics.applyCameraPreset("reset");
+    await diagnostics.waitForFrames(12);
     const selections = [
       "Phase 3C.1 アイボリー文字板",
       "Phase 3C.1 バーインデックス",
@@ -329,11 +405,11 @@ frame.addEventListener("load", async () => {
       enabled: state.enabled === true && state.defaultEnabled === false,
       humanReviewRevision:
         state.status
-          === "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED"
+          === "PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION"
         && state.phase3c1HumanAcceptance
-          === "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED"
+          === "FOURTH_CANDIDATE_HUMAN_ACCEPTED"
         && state.revision
-          === "FOURTH_CANDIDATE_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
+          === "FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION",
       sourceHead:
         geometry.validation?.audit?.projection?.dialPlaneCenter?.[0] === 7.7,
       openHeartCenter:
@@ -395,6 +471,16 @@ frame.addEventListener("load", async () => {
         && geometry.minuteTrack.minimumTwelveDoubleBarClearance.clearance
           >= 0.3
         && geometry.minuteTrack.openingClearance >= 0.575 - 1e-7,
+      sixIndexActualGeometry:
+        geometry.sixIndex.indexMeshCount === 13
+        && geometry.sixIndex.sixIndexPresent === true
+        && geometry.sixIndex.sixIndex.finite === true
+        && geometry.sixIndex.clearances.smallSecondRecess >= 1.5
+        && geometry.sixIndex.clearances.smallSecondMarks >= 0
+        && geometry.sixIndex.clearances.smallSecondHandSweep >= 0
+        && geometry.sixIndex.clearances.majorMinuteDot >= 0.3
+        && geometry.sixIndex.clearances.displayOpening >= 0.3
+        && geometry.sixIndex.forbiddenInterferenceCount === 0,
       nonRefractiveCrystal:
         material.crystalFinish.transmission === 0
         && material.crystalFinish.opacity === 0.1
@@ -459,15 +545,59 @@ frame.addEventListener("load", async () => {
           Math.abs(entry.requested - entry.actual) <= 1e-9),
       internalSelectionAtOpacity16:
         internalSelectionAtOpacity16 === "設定車2",
+      localPickPriorityContract:
+        selection.localPickContract.dial === 1
+        && selection.localPickContract.crystal === 0
+        && selection.localPickContract.crystalEdgeTarget === 1
+        && selection.localPickContract.indices === 2
+        && selection.localPickContract.openHeartRim === 2
+        && Object.values(selection.localPickContract.hands)
+          .every(priority => priority === 3)
+        && selection.localPickContract.crystalRenderOpacity === 0.1
+        && selection.localPickContract.crystalPickOpacityOverride === null
+        && selection.localPickContract.crystalEdgeTargetClassification
+          === "LOCAL_NON_RENDERING_OUTER_EDGE_PICK_SURFACE"
+        && selection.localPickContract.globalRaycasterChanged === false
+        && selection.localPickContract.crystalPickable === true,
+      dialBlankPointerSelection:
+        dialBlankPointSelections.length === 4
+        && dialBlankPointSelections.every(entry =>
+          entry.before.inside
+          && entry.before.stack.hits.some(hit =>
+            hit.partName === "Phase 3C.1 アイボリー文字板")
+          && entry.after.selection === "Phase 3C.1 アイボリー文字板"
+          && entry.ui.topName === "Phase 3C.1 アイボリー文字板"
+          && entry.ui.learningName === "Phase 3C.1 アイボリー文字板"),
+      opacity50DialSelection:
+        opacity50DialSelection.selection
+          === "Phase 3C.1 アイボリー文字板",
+      crystalSideSelection:
+        crystalSideSelection.selection === "Phase 3C.1 ドーム風防"
+        && ["side", "leftSide", "dialMechanism", "structure"].includes(
+          crystalSideSelection.preset,
+        ),
       exteriorGroup:
         exteriorGroupInitial.enabled === true
         && exteriorGroupInitial.queryOnly === true
         && exteriorGroupInitial.label === "外装"
         && exteriorGroupInitial.platePresentationCutoutExcluded === true
         && exteriorGroupInitial.mechanismExcluded === true
+        && exteriorGroupInitial.partCount === 25
+        && exteriorGroupInitial.helper === null
+        && exteriorGroupInitial.excludedOperationalParts.length === 4
+        && exteriorGroupInitial.excludedOperationalParts.every(
+          part => part.visible,
+        )
         && selectedExterior === "Phase 3C.1 アイボリー文字板"
         && exteriorOff.controlChecked === false
         && exteriorOff.group.visiblePartCount === 0
+        && exteriorOff.group.excludedOperationalParts.every(
+          part => part.visible,
+        )
+        && exteriorOffOperationalSelections.every(entry =>
+          entry.selected === entry.partName
+          && entry.topName === entry.partName
+          && entry.learningName === entry.partName)
         && exteriorOff.selection === null
         && exteriorOn.controlChecked === true
         && exteriorOn.group.visiblePartCount
@@ -495,6 +625,8 @@ frame.addEventListener("load", async () => {
         && mobilePanelClosed.group.enabled === true
         && mobilePanelOpen.hud.horizontalOverflow === 0
         && mobilePanelClosed.hud.horizontalOverflow === 0
+        && mobilePanelOpen.labelText === "外装"
+        && mobilePanelOpen.helperElementCount === 0
         && mobilePanelOpen.toggle?.layout.minHeightMet
         && mobilePanelOpen.toggle?.layout.insideViewport,
       phase3b1Envelope:
@@ -582,6 +714,10 @@ frame.addEventListener("load", async () => {
       material,
       luminance,
       selection,
+      pickLayer,
+      dialBlankPointSelections,
+      opacity50DialSelection,
+      crystalSideSelection,
       display: {
         normal: displayNormal,
         split: displaySplit,
@@ -592,6 +728,7 @@ frame.addEventListener("load", async () => {
       exteriorDisplayGroup: {
         initial: exteriorGroupInitial,
         selectedExterior,
+        exteriorOffOperationalSelections,
         off: exteriorOff,
         on: exteriorOn,
         displayBeforeSplitGroupCycle,

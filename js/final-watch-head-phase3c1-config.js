@@ -19,7 +19,7 @@ const plateWindowRadius = 1.32;
 export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   schemaVersion: 1,
   id: "E-BALANCED-PHASE3C1-WATCH-HEAD",
-  status: "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
+  status: "PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION",
   enabledByDefault: false,
   query: {
     parameter: "watchHead",
@@ -37,8 +37,8 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   appVersion: "v3.15.0",
   humanAcceptance: {
     phase3b2: "HUMAN_ACCEPTED_PHASE3B2_WITH_MANDATORY_PHASE3C_REFINEMENTS",
-    phase3c1: "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
-    revision: "FOURTH_CANDIDATE_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
+    phase3c1: "FOURTH_CANDIDATE_HUMAN_ACCEPTED",
+    revision: "FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION",
     physicalIPhoneThermalObservation: {
       classification: "MILD_WARMING_AFTER_15_MINUTES",
       blocking: false,
@@ -161,7 +161,7 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
     twelveIndexLengthScale: 1.08,
     twelveIndexGap: 0.26,
     indexFrontY: -2.11,
-    omittedIndices: [6],
+    omittedIndices: [],
     minuteMarkMaterial: {
       color: 0x6a655e,
       metalness: 0.05,
@@ -273,8 +273,7 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   exteriorDisplayGroup: {
     queryOnly: true,
     label: "外装",
-    helper:
-      "ケース・風防・文字板・針・ラグ・ストラップ・裏蓋",
+    helper: null,
     restoreTolerance: 1e-7,
   },
   uiSimplificationBacklog:
@@ -485,6 +484,15 @@ export function derivePhase3C1MinuteTrackAudit(
     };
   });
   const visibleDots = dots.filter(dot => !dot.omitted);
+  const sixIndex = indexBars.find(bar => bar.index === 6);
+  const sixMajorDot = dots.find(dot => dot.index === 30);
+  const sixIndexInnerRadius =
+    indexRadius - (sixIndex?.radialHalfLength ?? 0);
+  const sixIndexOuterRadius =
+    indexRadius + (sixIndex?.radialHalfLength ?? 0);
+  const smallSecondRecessOuterRadius =
+    Math.hypot(...config.protectedAnchors.smallSecondCenter)
+    + dial.smallSecondVisualRecessDiameter / 2;
   const minimumIndex = visibleDots.reduce(
     (nearest, dot) =>
       dot.nearestIndex.clearance < nearest.clearance
@@ -523,6 +531,20 @@ export function derivePhase3C1MinuteTrackAudit(
     );
   return deepFreeze({
     radius: dial.mainMinuteTrackRadius,
+    indexBarCount: indexBars.length,
+    sixIndex: {
+      present: Boolean(sixIndex),
+      innerRadius: sixIndexInnerRadius,
+      outerRadius: sixIndexOuterRadius,
+      smallSecondRecessClearance:
+        sixIndexInnerRadius - smallSecondRecessOuterRadius,
+      majorMinuteDotClearance:
+        (sixMajorDot?.center
+          ? Math.hypot(...sixMajorDot.center) - sixMajorDot.radius
+          : Infinity)
+        - sixIndexOuterRadius,
+      openingClearance: openingRadius - sixIndexOuterRadius,
+    },
     configuredDotCount: dots.length,
     displayedDotCount: visibleDots.length,
     omittedDotCount: dots.length - visibleDots.length,
@@ -607,7 +629,13 @@ export function assertPhase3C1WatchHeadConfig(
       && config.dial.minuteDotMajorDiameter >= 0.23
       && config.dial.minuteDotMajorDiameter <= 0.27
       && config.dial.smallSecondVisualRecessDiameter >= 8.3
-      && config.dial.smallSecondVisualRecessDiameter <= 8.6,
+      && config.dial.smallSecondVisualRecessDiameter <= 8.6
+      && config.dial.omittedIndices.length === 0
+      && minuteTrack.indexBarCount === 13
+      && minuteTrack.sixIndex.present
+      && minuteTrack.sixIndex.smallSecondRecessClearance >= 1.5
+      && minuteTrack.sixIndex.majorMinuteDotClearance >= 0.3
+      && minuteTrack.sixIndex.openingClearance >= 0.3,
     stableExteriorSilver:
       config.materials.stableExteriorSilver.color === 0xe7eaed
       && config.materials.stableExteriorSilver.metalness >= 0.45
