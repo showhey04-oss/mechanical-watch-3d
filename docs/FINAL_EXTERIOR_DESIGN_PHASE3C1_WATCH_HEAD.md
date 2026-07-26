@@ -2,9 +2,9 @@
 
 ## 結論
 
-Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、正式時計本体意匠のquery限定候補を実装した。起動条件は`?exterior=balanced&watchHead=phase3c1`で、状態は`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`である。通常URLへPhase 3C.1 Object3Dは追加せず、固定Baseと237,334 byte／SHA-256 `a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`でpixel exactを確認した。
+Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、正式時計本体意匠のquery限定候補を実装した。初回候補は人間確認で非承認となり、状態を`HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED`へ変更した。本書は、その指摘を反映した再調整候補を記録する。起動条件は`?exterior=balanced&watchHead=phase3c1`で、通常URLへPhase 3C.1 Object3Dは追加せず、固定Baseと237,334 byte／SHA-256 `a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`でpixel exactを確認した。
 
-自動・実ブラウザ試験は合格したが、PCと物理iPhoneの人間確認前に既定採用、Ready化、マージを行わない。判定は`AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW`とする。
+再調整候補の自動・実ブラウザ試験は合格したが、初回の人間非承認は取り消さない。再調整候補の検証状態は`AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW`、採用判断は`REVISED_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`とする。PCと物理iPhoneの再確認前に既定採用、Ready化、マージを行わない。
 
 ## 構成と由来
 
@@ -12,14 +12,14 @@ Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、正式�
 - Baseブランチ：`feature/final-exterior-balanced-phase3b2`
 - Base SHA：`98d83781aa7aa001836a0d57f1ad6e3d058a15c4`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
-- 監査コミット：`9d9e6c83395adb0ec72ad269c3bac1a7f7c3a0d9`
-- 実装・ブラウザハーネス基準：`6d7eeac2b243609a7c7b4e9c734b235459376469`
+- Geometry監査基準：`ba3d77ad951ba88f12193550eb7253d1aaf4bebc`
+- 実装・ブラウザハーネス基準：`11c37f22936c5606673c80628cc1422d620fa7e2`
 - APP_VERSION：`v3.15.0`
 - Phase 3B.2人間承認：`HUMAN_ACCEPTED_PHASE3B2_WITH_MANDATORY_PHASE3C_REFINEMENTS`
 
 ## 正式デザイン基準
 
-候補は、ポリッシュ主体の丸型ステンレスケース、細いベゼル、緩やかなドーム風防、低光沢のアイボリー文字板、立体的なポリッシュバーインデックス、細身のシルバー3針、6時小秒、限定オープンハートで構成する。ドレスウォッチ寄りだが、古典装飾を増やさず、全面スケルトンまたはトゥールビヨン風にはしていない。
+再調整候補は、明るいシルバーの丸型ステンレスケース、細いベゼル、側面で認識できるドーム風防、温かいアイボリー文字板、立体的なポリッシュバーインデックス、丸型分目盛、面のあるシルバー時分針、ブルースチール調小秒針、6時小秒、限定オープンハートで構成する。ドレスウォッチ寄りだが、古典装飾を増やさず、全面スケルトンまたはトゥールビヨン風にはしていない。
 
 参照画像は雰囲気と構成だけの参考であり、Geometryの模写元ではない。特にオープンハートは、画像上の名目的な9時位置ではなく、実モデルのテンプ中心へ合わせている。
 
@@ -61,18 +61,21 @@ Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、正式�
 
 風防はclear diameter 30.600、Y=-3.460～-2.860の保護包絡内で中央だけを緩やかに膨らませた閉合profile Meshである。外装総厚8.695とベゼル保持境界を維持する。
 
-Geometry監査では、文字板、地板置換Mesh、風防を含む全対象でfinite、indexed、closedを確認し、退化・重複・反転triangle、non-manifold edge、非有限法線を0とした。`polygonOffset`、`renderOrder`、CSGによる隠蔽は使用していない。
+Geometry監査では、文字板、地板置換Mesh、風防、オープンハート縁、バーインデックス、丸型分目盛、3針、小秒表示を含む17対象でfinite、indexed、closed、outwardを確認し、退化・重複・反転triangle、non-manifold edge、winding mismatch、reversed normal、非有限法線を0とした。`polygonOffset`、`renderOrder`、CSGによる隠蔽は使用していない。
 
 ## 表示意匠
 
-- 文字板：色`#9d9278`、metalness 0.02、roughness 0.76
-- インデックス：12本、12時はダブルバー、S86 index円25.456を維持
-- 分目盛：60本、5分位置をわずかに強調
-- 分針：長さ12.040、最大幅0.500、厚さ0.090
-- 時針：長さ8.600、最大幅0.700、厚さ0.100
-- 小秒針：長さ3.268、最大幅0.140、厚さ0.080
+- 主文字板：色`#BCAB8E`、metalness 0.02、roughness 0.86。初期値`#F0E7D7`から、保護された照明・影・tone mappingを変えず全テーマの前後面明度差30%以内へ収めた暖色アイボリーである
+- 小秒文字板：色`#CCB89F`、metalness 0、roughness 0.86。主文字板よりわずかに明るい
+- インデックス：radial 1.400／tangential 0.320／厚さ0.190のfaceted bar。12時は1.08倍のダブルバー、6時は小秒と競合するため省略し、S86 index円25.456を維持
+- 分目盛：半径13.580上の丸点60個。minor径0.115、5分位置径0.180、厚さ0.040
+- 分針：長さ12.040、最大幅0.560、先端幅0.060、中央稜線0.120
+- 時針：長さ8.600、最大幅0.780、先端幅0.080、中央稜線0.130
+- 小秒針：長さ3.268、最大幅0.130、先端幅0.040、中央稜線0.070、色`#2A5572`
 - 小秒表示：中心[0,-5.600]、径7.740、12主要目盛＋48補助目盛
-- ケース／ベゼル／裏蓋／ラグ：既存寸法を変えず、候補pathだけpolished steel相当へ統一
+- オープンハート縁：内径6.600／外径7.320／top lip 0.250／内面取り0.060／外面取り0.050／高さ0.160の単一閉合profile Mesh
+- ケース／ベゼル／裏蓋／ラグ：既存寸法を変えず、候補pathだけ`EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION`へ統一
+- ドーム風防：中心Y=-3.460、外周Y=-3.000、内面Y=-2.860を維持する強調profile。clear diameter 30.600、外装総厚8.695は不変
 
 3針のpivot、position、rotation、scale、回転符号、位相は変更していない。分針―筒かな、時針―時針管、小秒針―四番車軸の1:1拘束と取付中心距離0を維持する。
 
@@ -84,7 +87,7 @@ Geometry監査では、文字板、地板置換Mesh、風防を含む全対象�
 
 ## 回帰と性能
 
-- Node：148/148
+- Node：152/152
 - Phase 3C.1 harness：Desktop／390×844とも全check合格
 - desktop総合：86/86
 - 390×844総合：88/88
@@ -99,9 +102,11 @@ Desktop／390×844で10秒idle、3秒pointer、3秒wheelをPhase 3B.2とA/B比�
 
 ## 既知制約
 
-既存の保護されたshadow rigは、大面積のアイボリー文字板上で影範囲の境界が目立つ場合がある。Phase 3C.1では照明、shadow map、shadow camera、tone mapping、exposure、材質depth policyを変更していない。この画質課題はPR #5のD2c3を取り込まず、OpenのIssue #2へ分離したままとする。
+既存の保護されたshadow rigは、大面積のアイボリー文字板上で大きな矩形影境界を生じる。Phase 3C.1ではfrontKey、shadow camera／map、castShadow／receiveShadow基盤、lighting、tone mapping、exposure、fog、transparent、depthWriteを変更していない。100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順、PC／iPhone間の照明差も、PR #5のD2c3を取り込まずOpenのIssue #2へ分離したままとする。
 
 PCと物理iPhoneでは、色、金属階調、開口位置、テンプ可視性、小秒、針、選択、100／50／16%透過、回転、ズーム、巻上げ、時刻合わせ、秒停止、作動音を人間確認する。
+
+物理iPhoneでは`PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`を観察事項として記録する。progressive frame drop、Safari reload、audio failure、touch failure、thermal warningは確認されていないため現時点では非ブロッキングだが、最終統合レビューでは15分連続確認を必須とする。
 
 ## Phase 3C.2 必須バックログ
 

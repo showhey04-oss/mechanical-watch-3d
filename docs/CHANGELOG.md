@@ -2,15 +2,20 @@
 
 ## Unreleased — Stacked Draft Phase 3C.1 formal watch-head candidate
 
+- 初回候補はPC人間確認で非承認。`HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED`を履歴として保持し、参照デザイン整合の再調整を同じDraft PR #15へ追加。
 - 人間承認済みPhase 3B.2 Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から別ブランチを作り、`feature/final-exterior-balanced-phase3b2`をBaseとする積み上げDraftとして正式時計本体意匠を分離。
-- `?exterior=balanced&watchHead=phase3c1`時だけ、ポリッシュ主体のケース仕上げ、緩やかなドーム風防、アイボリー文字板、12本の立体バーindex、60分目盛、細身のシルバー3針、6時小秒を生成。
+- `?exterior=balanced&watchHead=phase3c1`時だけ、暖色アイボリー`#BCAB8E`／小秒面`#CCB89F`、教育表示用のシルバー中間階調、faceted bar、12時ダブルバー、丸型60分目盛、faceted silver hands、blue-steel-tone小秒針、強調ドーム風防を生成。
+- オープンハート縁を内径6.600／外径7.320／top lip 0.250／高さ0.160の単一閉合profile Meshへ再構成。ケース、縁、index、針へ`EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION`を適用し、照明・影・tone mapping・exposure・D2c3は変更しない。
 - 実テンプworld中心[7.700,1.730,1.800]を文字板へ[7.700,1.800]として投影し、径6.600、縁0.320、文字板面積比3.5559%、中心誤差0の限定オープンハートを実装。参照画像の名目的な9時位置を模写せず、実モデル約2時34分方向を優先。
 - 事前遮蔽判定`B_PARTIAL_PLATE_OCCLUSION`に対し、半径1.320／中心offset 1.900の2つの物理地板窓を設け、中央下側耐震軸受land 0.100を保持。機構移動、非表示、透明化、CSG、トゥールビヨン風ケージは使用しない。
 - actual +Y Raycaster 709 sampleで機構first-hit率0.165021、テンプ0.133992、脱進機0.001410を記録。文字板、小秒、index、分針clearanceを維持。
 - Phase 3C.1部品を選択・HUD・学習表示へ登録し、透過100／50／16／100、16%内部選択、分解・表裏分離、位置1／2、巻上げ、時刻合わせ、秒停止、作動音を回帰。
 - 通常pathはPhase 3B.2とPNG 237,334 byte／SHA-256 `a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`で一致。APP_VERSION、S86、Phase 2C、A.7、機構、カメラ、DPR、照明、影、tone mapping、UI、音響を変更していない。
 - Desktop 86/86、390×844 88/88、UI 20/20・22/22、HUD 45/45・57/57、実スピーカー操作の音声23/23に合格。idle／pointer／wheelはDesktop／390×844の絶対閾値とPhase 3B.2差分基準へ合格し、閾値は変更していない。
-- 状態は`AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW`。PC／物理iPhone確認前に既定採用、Ready化、マージを行わない。
+- 全テーマの前後面明度差はDesktop最大29.530%、390×844最大29.899%。製品30%基準、DPR、照明、影、透過方式を変更していない。
+- 矩形影、100%→99% transparent、55%→54% depthWrite、透過時の暗部・深度順、PC／iPhone照明差はIssue #2へ分離し、最終成果で隠していない。
+- 再調整候補の状態は`AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW`。初回人間非承認を維持し、PC／物理iPhone再確認前に既定採用、Ready化、マージを行わない。
+- `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`を非ブロッキング観察事項として記録し、最終統合レビューで15分連続確認する。
 - 黒革、実用長、スプリングバー巻込み、6時側穴列、定革・遊革、尾錠枠・つく棒・取付バー、シボ、ステッチ、コバはPhase 3C.2の必須後続工程として維持。
 
 ## Unreleased — Stacked Draft Phase 3B.2 basic attachment candidate
