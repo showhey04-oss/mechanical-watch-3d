@@ -34,9 +34,9 @@ entries.sort((left, right) => left.path < right.path ? -1 : left.path > right.pa
 const manifest = {
   schemaVersion: 1,
   sourceImplementationCommit:
-    "11c37f22936c5606673c80628cc1422d620fa7e2",
+    "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
   sourceAuditCommit:
-    "ba3d77ad951ba88f12193550eb7253d1aaf4bebc",
+    "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
   sourceBaseCommit:
     "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
   sourceBranch: "feature/final-exterior-balanced-phase3c1-watch-head",

@@ -1,18 +1,20 @@
 {
-  "sourceImplementationCommit": "11c37f22936c5606673c80628cc1422d620fa7e2",
-  "sourceAuditCommit": "ba3d77ad951ba88f12193550eb7253d1aaf4bebc",
+  "sourceImplementationCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
+  "sourceAuditCommit": "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
   "sourceBaseCommit": "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
   "baseBranch": "feature/final-exterior-balanced-phase3b2",
   "appVersion": "v3.15.0",
   "captureMode": "same-origin browser harness and actual WebGL canvas capture",
-  "status": "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
-  "revisionVerification": "AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW",
-  "decision": "REVISED_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+  "status": "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
+  "revisionVerification": "THIRD_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
+  "decision": "THIRD_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
   "defaultAdoption": false,
   "humanReview": {
     "initialCandidate": "REJECTED",
+    "secondCandidate": "REJECTED",
+    "thirdCandidate": "PENDING",
     "pc": "PENDING",
     "physicalIPhone": "PENDING",
     "adoption": "NOT_APPROVED",
@@ -28,7 +30,7 @@
         "width": 1280,
         "height": 720,
         "devicePixelRatio": 2,
-        "renderPixelRatio": 1.25,
+        "renderPixelRatio": 1.3,
         "coarsePointer": false,
         "panelOpen": false,
         "panelCollapsed": true
@@ -41,7 +43,7 @@
         "width": 390,
         "height": 844,
         "devicePixelRatio": 2,
-        "renderPixelRatio": 1,
+        "renderPixelRatio": 1.05,
         "coarsePointer": false,
         "panelOpen": false,
         "panelCollapsed": false
@@ -55,50 +57,61 @@
       "ok": true,
       "passed": 86,
       "total": 86,
-      "failed": []
+      "failed": [],
+      "error": null
     },
     "desktop": {
-      "ok": true,
-      "passed": 86,
+      "ok": false,
+      "passed": 85,
       "total": 86,
-      "failed": []
+      "failed": [
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent"
+      ],
+      "error": null
     },
     "mobile390": {
       "ok": true,
       "passed": 88,
       "total": 88,
-      "failed": []
+      "failed": [],
+      "error": null
     },
     "uiDesktop": {
       "ok": true,
       "passed": 20,
       "total": 20,
-      "failed": []
+      "failed": [],
+      "error": null
     },
     "uiMobile390": {
       "ok": true,
       "passed": 22,
       "total": 22,
-      "failed": []
+      "failed": [],
+      "error": null
     },
     "hudDesktop": {
       "ok": true,
       "passed": 45,
       "total": 45,
-      "failed": []
+      "failed": [],
+      "error": null
     },
     "hudMobile390": {
       "ok": true,
       "passed": 57,
       "total": 57,
-      "failed": []
+      "failed": [],
+      "error": null
     },
     "audioMobile390": {
-      "ok": true,
-      "passed": 23,
-      "total": 23,
+      "ok": false,
+      "passed": 0,
+      "total": 0,
       "failed": [],
-      "gesture": "actual in-app Browser trusted click"
+      "error": "Error: audio integration wait timed out\n    at waitUntil (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:7:9)\n    at async runMechanicalAudioIntegrationTest (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:74:22)\n    at async HTMLButtonElement.start (http://127.0.0.1:8000/index.html?exterior=balanced&theme=navy&camera=front&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&audioTest=1&watchHead=phase3c1:1340:460)",
+      "gesture": "actual in-app Browser trusted click",
+      "baselineAlsoTimedOut": true
     }
   },
   "performance": {
@@ -135,17 +148,19 @@
   },
   "imageEvidence": {
     "rawCaptureCreationByGenerator": false,
-    "actualRuntimeCaptureCount": 14
+    "actualRuntimeCaptureCount": 18
   },
   "knownLimitations": [
-    "The initial Phase 3C.1 candidate failed human review; this revision remains pending PC and physical iPhone confirmation.",
+    "The initial and second Phase 3C.1 candidates failed human review; this third candidate remains pending PC and physical iPhone confirmation.",
     "PC human visual confirmation is pending.",
     "Physical iPhone human confirmation is pending.",
     "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN is recorded as non-blocking because no progressive frame drop, Safari reload, audio failure, touch failure, or thermal warning has been observed; the final integration review must include a continuous 15-minute run.",
     "The actual balance projects near 2:34; the reference image's nominal open-heart position was intentionally not copied.",
     "The protected inherited shadow rig can form a visible rectangular boundary over the large ivory dial. The 100→99 transparent discontinuity, 55→54 depthWrite discontinuity, opacity dark/depth ordering, and PC/iPhone lighting differences remain separated to open Issue #2.",
     "Lighting, shadow camera/map, castShadow/receiveShadow policy, transparent/depthWrite policy, tone mapping, exposure, fog, and D2c3 were not changed.",
-    "Phase 3C.2 strap and buckle styling remains mandatory backlog."
+    "Phase 3C.2 strap and buckle styling remains mandatory backlog.",
+    "The desktop A.5 front/back luminance-balance assertion fails for the near-white dial while the Phase 3B.2 baseline passes; the threshold and protected lighting rig were not changed, so this remains visible in the evidence instead of being waived.",
+    "The trusted-gesture audio integration timed out for both the candidate and Phase 3B.2 baseline in the same in-app Browser session; Node audio tests remain authoritative until physical-device review."
   ],
-  "allAutomatedPassed": true
+  "allAutomatedPassed": false
 }

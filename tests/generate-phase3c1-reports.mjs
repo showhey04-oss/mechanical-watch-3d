@@ -15,9 +15,9 @@ const evidence = path.join(
 );
 const reports = path.join(evidence, "reports");
 const sourceImplementationCommit =
-  "11c37f22936c5606673c80628cc1422d620fa7e2";
+  "7b660b768580d7dd1a7abe7c2c8520dc9f066985";
 const sourceAuditCommit =
-  "ba3d77ad951ba88f12193550eb7253d1aaf4bebc";
+  "7b660b768580d7dd1a7abe7c2c8520dc9f066985";
 const sourceBaseCommit =
   "98d83781aa7aa001836a0d57f1ad6e3d058a15c4";
 const mainCommit =
@@ -46,9 +46,12 @@ const failedObjectChecks = checks =>
   Object.entries(checks).filter(([, ok]) => !ok).map(([id]) => id);
 const suiteSummary = result => ({
   ok: result.ok,
-  passed: result.checks.filter(item => item.ok).length,
-  total: result.checks.length,
-  failed: result.checks.filter(item => !item.ok).map(item => item.name),
+  passed: (result.checks ?? []).filter(item => item.ok).length,
+  total: (result.checks ?? []).length,
+  failed: (result.checks ?? [])
+    .filter(item => !item.ok)
+    .map(item => item.name),
+  error: result.error ?? null,
 });
 
 const desktop = await readJson("desktop-runtime.json");
@@ -57,6 +60,7 @@ const performanceRaw = await readJson("performance-raw.json");
 const normalPath = await readJson("normal-path-capture.json");
 const imageEvidence = await readJson("image-evidence-report.json");
 const audio = await readJson("audio-suite-mobile-trusted-gesture.json");
+const baseAudio = await readJson("audio-suite-phase3b2-base-mobile.json");
 const suites = Object.fromEntries(
   await Promise.all([
     ["phase3b2BaseDesktop", "browser-suite-phase3b2-base-desktop.json"],
@@ -70,10 +74,16 @@ const suites = Object.fromEntries(
 );
 suites.audioMobile390 = {
   ok: audio.ok,
-  passed: audio.checks.filter(item => item.ok).length,
-  total: audio.checks.length,
-  failed: audio.checks.filter(item => !item.ok).map(item => item.name),
+  passed: (audio.checks ?? []).filter(item => item.ok).length,
+  total: (audio.checks ?? []).length,
+  failed: (audio.checks ?? [])
+    .filter(item => !item.ok)
+    .map(item => item.name),
+  error: audio.error ?? null,
   gesture: "actual in-app Browser trusted click",
+  baselineAlsoTimedOut:
+    !baseAudio.ok
+    && /audio integration wait timed out/.test(baseAudio.error ?? ""),
 };
 
 const audit = derivePhase3C1OpenHeartAudit();
@@ -202,6 +212,37 @@ await writeJson("selection-opacity-report.json", {
   mobileSelection: mobile.selection,
   actualBrowserScreenshot: "part-selection-ui.png",
 });
+await writeJson("material-runtime-audit.json", {
+  ...metadata,
+  desktop: desktop.material,
+  mobile390: mobile.material,
+  requiredPartsRecorded:
+    desktop.material.unifiedSilverFamily.allRequiredPartsRecorded
+    && mobile.material.unifiedSilverFamily.allRequiredPartsRecorded,
+  baseColorConsistent:
+    desktop.material.unifiedSilverFamily.baseColor === "0xE9EDF0"
+    && mobile.material.unifiedSilverFamily.baseColor === "0xE9EDF0",
+  maximumRoughnessDelta: 0.06,
+  actualRoughnessDelta:
+    desktop.material.unifiedSilverFamily.roughnessDelta,
+  maximumMetalnessDelta: 0.05,
+  actualMetalnessDelta:
+    desktop.material.unifiedSilverFamily.metalnessDelta,
+});
+await writeJson("phase3c1-display-group-report.json", {
+  ...metadata,
+  desktop: desktop.display,
+  mobile390: mobile.display,
+  restoreTolerance: 1e-7,
+  desktopPassed:
+    desktop.checks.splitDirections
+    && desktop.checks.explodeDirections
+    && desktop.checks.displayExactRestore,
+  mobile390Passed:
+    mobile.checks.splitDirections
+    && mobile.checks.explodeDirections
+    && mobile.checks.displayExactRestore,
+});
 await writeJson("normal-path-diff.json", {
   ...metadata,
   normalPathObjectAdditionCount: 0,
@@ -247,13 +288,15 @@ const allPerformancePassed =
   );
 await writeJson("regression-results.json", {
   ...metadata,
-  status: "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+  status: "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
   revisionVerification:
-    "AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW",
-  decision: "REVISED_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+    "THIRD_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
+  decision: "THIRD_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
   defaultAdoption: false,
   humanReview: {
     initialCandidate: "REJECTED",
+    secondCandidate: "REJECTED",
+    thirdCandidate: "PENDING",
     pc: "PENDING",
     physicalIPhone: "PENDING",
     adoption: "NOT_APPROVED",
@@ -322,7 +365,7 @@ await writeJson("regression-results.json", {
     actualRuntimeCaptureCount: imageEvidence.images.length,
   },
   knownLimitations: [
-    "The initial Phase 3C.1 candidate failed human review; this revision remains pending PC and physical iPhone confirmation.",
+    "The initial and second Phase 3C.1 candidates failed human review; this third candidate remains pending PC and physical iPhone confirmation.",
     "PC human visual confirmation is pending.",
     "Physical iPhone human confirmation is pending.",
     "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN is recorded as non-blocking because no progressive frame drop, Safari reload, audio failure, touch failure, or thermal warning has been observed; the final integration review must include a continuous 15-minute run.",
@@ -330,6 +373,8 @@ await writeJson("regression-results.json", {
     "The protected inherited shadow rig can form a visible rectangular boundary over the large ivory dial. The 100→99 transparent discontinuity, 55→54 depthWrite discontinuity, opacity dark/depth ordering, and PC/iPhone lighting differences remain separated to open Issue #2.",
     "Lighting, shadow camera/map, castShadow/receiveShadow policy, transparent/depthWrite policy, tone mapping, exposure, fog, and D2c3 were not changed.",
     "Phase 3C.2 strap and buckle styling remains mandatory backlog.",
+    "The desktop A.5 front/back luminance-balance assertion fails for the near-white dial while the Phase 3B.2 baseline passes; the threshold and protected lighting rig were not changed, so this remains visible in the evidence instead of being waived.",
+    "The trusted-gesture audio integration timed out for both the candidate and Phase 3B.2 baseline in the same in-app Browser session; Node audio tests remain authoritative until physical-device review.",
   ],
   allAutomatedPassed:
     runtimeFailures.length === 0

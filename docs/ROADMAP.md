@@ -122,8 +122,10 @@
 - Desktop／390×844自動回帰、選択、透過、非表示、分解、禁止干渉0、A.6性能差分を合格し、物理iPhone人間確認を待つ
 - Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、`?exterior=balanced&watchHead=phase3c1`限定でポリッシュケース、ドーム風防、アイボリー文字板、バーindex、細身3針、6時小秒、限定オープンハートを実装する
 - オープンハートは実テンプ投影[7.700,1.800]、径6.600、文字板面積比3.5559%、中心誤差0とし、中央軸受を保持する2つの物理地板窓を使う。参照画像位置の模写、機構移動、透明化、部品非表示、CSG、トゥールビヨン風ケージを行わない
-- 初回候補は`HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED`。再調整候補では暖色アイボリー、silver midtone、faceted bar／hands、12時double marker、丸型分目盛、blue small-second hand、profiled rim、強調domeを実装する
-- 通常pathはPhase 3B.2とpixel exact、Desktop／390×844回帰とA.6性能差分は合格。再調整候補は`REVISED_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`で、PC／物理iPhone再確認待ちとする
+- 初回と第2候補は人間非承認。第3候補では白系アイボリー`#F2EDE5`、共通silver`#E9EDF0`、大型faceted barと分目盛、8.500小秒recess、7.120 open-heart rim、候補専用MeshPhysical domeを実装する
+- Phase 3C.1外装を既存FRONT／CORE／BACK／PLATEの表裏分離・分解transformへ統合し、100% split／explodeと誤差1e-7以内の復元をDesktop／390×844で検証する
+- 通常pathはPhase 3B.2とpixel exact、A.6性能の絶対・差分基準は合格。Desktop総合は白系文字板によるA.5前後面明度差だけ未達、音声integrationはBaseと候補の双方で同一timeoutとして記録する
+- 第3候補は`THIRD_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`で、PC／物理iPhone再確認待ちとする
 - 矩形影、100%→99% transparent、55%→54% depthWrite、透過時の暗部・深度順、PC／iPhone照明差はIssue #2へ分離し、本工程でlighting／shadow／D2c3を変更しない
 - `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`は非ブロッキング観察事項。最終統合レビューで15分連続確認を行う
 - Phase 3C.2で黒革、実用長、巻込み部、穴列、定革・遊革、尾錠枠・つく棒・取付バー、シボ、ステッチ、コバを必須実装する。Phase 3C.1へ先行混在させない
@@ -135,7 +137,7 @@
 
 ### 1. 最終外装
 
-- Phase 3C.1再調整候補のケースsilver midtone、暖色アイボリー、faceted index／hands、小秒、profiled open heart、強調domeをPC／物理iPhoneで人間確認し、Draftの次判断を行う
+- Phase 3C.1第3候補の白系アイボリー、統一silver、大型index／minute dots、小秒recess、細身open-heart rim、強調dome、表裏分離／分解／復元をPC／物理iPhoneで人間確認し、Draftの次判断を行う
 - Phase 3C.1承認後だけ、Phase 3C.2で黒革ストラップと尾錠の必須意匠を実装する
 - 実装時に表示開口と全体比率を再確認する
 

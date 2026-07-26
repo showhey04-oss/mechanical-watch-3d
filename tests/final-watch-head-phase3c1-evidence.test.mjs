@@ -28,13 +28,23 @@ const pngDimensions = buffer => {
 
 test("Phase 3C.1 runtime captures are real fixed-viewport PNG evidence", () => {
   const imageReport = readJson("image-evidence-report.json");
+  const captureMetadata = readJson("capture-metadata.json");
   assert.equal(imageReport.rawCaptureCreationByThisScript, false);
+  assert.equal(
+    captureMetadata.sourceImplementationCommit,
+    "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
+  );
+  assert.match(captureMetadata.captureMode, /actual WebGL canvas capture/);
   for (const [name, dimensions] of Object.entries({
     "desktop-front.png": [1280, 720],
     "desktop-side.png": [1280, 720],
     "desktop-back.png": [1280, 720],
     "mobile-390-front.png": [390, 844],
     "mobile-390-side.png": [390, 844],
+    "display-normal.png": [1280, 720],
+    "display-split-100.png": [1280, 720],
+    "display-explode-100.png": [1280, 720],
+    "display-restored.png": [1280, 720],
   })) {
     const buffer = fs.readFileSync(path.join(evidence, name));
     assert.deepEqual(Object.values(pngDimensions(buffer)), dimensions);
@@ -48,6 +58,10 @@ test("Phase 3C.1 runtime captures are real fixed-viewport PNG evidence", () => {
     assert.ok(
       metric.dominantColorRatio === null
       || metric.dominantColorRatio < 0.96,
+    );
+    assert.ok(
+      captureMetadata.captures.some(item => item.file === name),
+      name,
     );
   }
 });
@@ -69,6 +83,8 @@ test("Phase 3C.1 purpose-specific images and review GIFs are distinct", () => {
     "dial-outside-shadow-close.png",
     "silver-case-side.png",
     "domed-crystal-oblique.png",
+    "unified-silver-material-audit.png",
+    "display-transform-board.png",
   ];
   const hashes = required.map(name => {
     const buffer = fs.readFileSync(path.join(evidence, name));
@@ -80,7 +96,7 @@ test("Phase 3C.1 purpose-specific images and review GIFs are distinct", () => {
   const gifs = fs.readdirSync(evidence)
     .filter(file => /^video-\d{2}-.*\.gif$/.test(file))
     .sort();
-  assert.equal(gifs.length, 8);
+  assert.equal(gifs.length, 9);
   for (const file of gifs) {
     const buffer = fs.readFileSync(path.join(evidence, file));
     assert.ok(buffer.length > 20_000);
@@ -98,11 +114,11 @@ test("Phase 3C.1 reports reproduce the protected geometry and actual audit", () 
   assert.equal(config.config.enabledByDefault, false);
   assert.equal(
     config.config.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+    "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
   );
   assert.equal(
     config.sourceImplementationCommit,
-    "11c37f22936c5606673c80628cc1422d620fa7e2",
+    "7b660b768580d7dd1a7abe7c2c8520dc9f066985",
   );
   assert.equal(openHeart.actualGeometryAudit.cutout.openingDiameter, 6.6);
   assert.ok(openHeart.actualGeometryAudit.cutout.openingAreaRatio <= 0.1);
@@ -122,14 +138,14 @@ test("Phase 3C.1 regression, normal-path, suites, and performance pass", () => {
   const normal = readJson("normal-path-diff.json");
   assert.equal(
     regression.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+    "HUMAN_REVIEW_FAILED_PHASE3C1_SECOND_REVISION_REQUIRED",
   );
   assert.equal(
     regression.revisionVerification,
-    "AUTOMATED_PASS_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW",
+    "THIRD_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
   );
   assert.equal(regression.defaultAdoption, false);
-  assert.equal(regression.allAutomatedPassed, true);
+  assert.equal(regression.allAutomatedPassed, false);
   assert.equal(regression.humanReview.physicalIPhone, "PENDING");
   assert.equal(
     regression.humanReview.thermalObservation,
@@ -142,9 +158,51 @@ test("Phase 3C.1 regression, normal-path, suites, and performance pass", () => {
   assert.equal(performance.absolutePassed, true);
   assert.equal(performance.differentialPassed, true);
   assert.equal(performance.transformInvariant, true);
-  for (const suite of Object.values(regression.suites)) {
-    assert.equal(suite.ok, true);
-    assert.deepEqual(suite.failed, []);
+  assert.deepEqual(
+    regression.suites.desktop.failed,
+    ["a5-all-background-themes-keep-front-back-luminance-within-thirty-percent"],
+  );
+  assert.equal(regression.suites.audioMobile390.ok, false);
+  assert.equal(regression.suites.audioMobile390.baselineAlsoTimedOut, true);
+  for (const id of [
+    "phase3b2BaseDesktop",
+    "mobile390",
+    "uiDesktop",
+    "uiMobile390",
+    "hudDesktop",
+    "hudMobile390",
+  ]) {
+    assert.equal(regression.suites[id].ok, true, id);
+    assert.deepEqual(regression.suites[id].failed, [], id);
+  }
+});
+
+test("Phase 3C.1 runtime material and display-family evidence is complete", () => {
+  const material = readJson("material-runtime-audit.json");
+  const display = readJson("phase3c1-display-group-report.json");
+  assert.equal(material.requiredPartsRecorded, true);
+  assert.equal(material.baseColorConsistent, true);
+  assert.ok(
+    material.actualRoughnessDelta <= material.maximumRoughnessDelta,
+  );
+  assert.ok(
+    material.actualMetalnessDelta <= material.maximumMetalnessDelta,
+  );
+  assert.equal(display.desktopPassed, true);
+  assert.equal(display.mobile390Passed, true);
+  assert.equal(display.restoreTolerance, 1e-7);
+  for (const viewport of ["desktop", "mobile390"]) {
+    const report = display[viewport];
+    assert.equal(report.split.families.FRONT.root.position[1], -5.5);
+    assert.equal(report.split.families.BACK.root.position[1], 5.5);
+    assert.equal(report.split.families.CORE.root.position[1], 0);
+    assert.equal(report.exploded.state.explodeAmount, 1);
+    assert.equal(report.restored.state.explodeAmount, 0);
+    assert.equal(report.restored.state.sideSplitAmount, 0);
+    assert.ok(
+      Object.values(report.restored.managedRestore)
+        .every(item => item.error <= 1e-7),
+    );
   }
 });
 
