@@ -19,7 +19,7 @@ const plateWindowRadius = 1.32;
 export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   schemaVersion: 1,
   id: "E-BALANCED-PHASE3C1-WATCH-HEAD",
-  status: "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+  status: "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
   enabledByDefault: false,
   query: {
     parameter: "watchHead",
@@ -37,7 +37,16 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
   appVersion: "v3.15.0",
   humanAcceptance: {
     phase3b2: "HUMAN_ACCEPTED_PHASE3B2_WITH_MANDATORY_PHASE3C_REFINEMENTS",
-    phase3c1: "HUMAN_REVIEW_REQUIRED",
+    phase3c1: "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+    revision: "REFERENCE_ALIGNED_REVISION_PENDING_PC_AND_PHYSICAL_IPHONE_REVIEW",
+    physicalIPhoneThermalObservation: {
+      classification: "MILD_WARMING_AFTER_15_MINUTES",
+      blocking: false,
+      observedFailure: false,
+      finalReviewDurationMinutes: 15,
+      note:
+        "Recheck temperature alongside visual acceptance; do not alter DPR, lighting, materials, or thresholds in this revision.",
+    },
   },
   protectedAnchors: {
     caseOuterDiameter: 39.6,
@@ -67,8 +76,26 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
     centerTolerance: 0.1,
     equivalentDiameter: 6.6,
     openingRadius: 3.3,
-    edgeRingWidth: 0.32,
-    edgeRingOuterRadius: 3.62,
+    edgeRingWidth: 0.36,
+    edgeRingOuterRadius: 3.66,
+    rimProfile: {
+      innerDiameter: 6.6,
+      outerDiameter: 7.32,
+      visibleTopLip: 0.25,
+      innerChamfer: 0.06,
+      outerChamfer: 0.05,
+      axialHeight: 0.16,
+      profile: [
+        { radius: 3.3, y: -2.03, role: "inner-wall-back" },
+        { radius: 3.3, y: -2.16, role: "inner-wall-front" },
+        { radius: 3.36, y: -2.19, role: "inner-chamfer" },
+        { radius: 3.61, y: -2.19, role: "visible-top-lip" },
+        { radius: 3.66, y: -2.16, role: "outer-chamfer" },
+        { radius: 3.66, y: -2.03, role: "outer-wall-back" },
+      ],
+      circumferentialSegments: 128,
+      classification: "PRECISION_PROFILED_POLISHED_EDGE",
+    },
     balanceCenterRadius,
     balanceClockAngleDeg,
     balanceOuterDiameter: balanceRadius * 2,
@@ -110,58 +137,100 @@ export const FINAL_WATCH_HEAD_PHASE3C1 = deepFreeze({
     ],
   },
   dial: {
-    color: 0x9d9278,
-    metalness: 0.02,
-    roughness: 0.76,
+    color: 0xf0e7d7,
+    metalness: 0.01,
+    roughness: 0.84,
+    smallSecondColor: 0xf3ebdd,
+    smallSecondMetalness: 0,
+    smallSecondRoughness: 0.84,
     smallSecondRecessY: -1.985,
     smallSecondRecessThickness: 0.06,
+    smallSecondOutlineTubeRadius: 0.025,
+    smallSecondMinorMarkLength: 0.12,
+    smallSecondMajorMarkLength: 0.24,
+    smallSecondMarkTangentialWidth: 0.028,
     mainMinuteTrackRadius: 13.58,
-    minuteMarkMajorLength: 0.32,
-    minuteMarkMinorLength: 0.17,
-    indexRadialLength: 0.72,
-    indexTangentialWidth: 0.18,
-    indexThickness: 0.12,
+    minuteDotMinorDiameter: 0.115,
+    minuteDotMajorDiameter: 0.18,
+    minuteDotAxialHeight: 0.04,
+    minuteDotOpenHeartClearance: 0.03,
+    indexRadialLength: 1.4,
+    indexTangentialWidth: 0.32,
+    indexThickness: 0.19,
+    twelveIndexLengthScale: 1.08,
+    twelveIndexGap: 0.22,
     indexFrontY: -2.11,
-    omittedIndices: [],
+    omittedIndices: [6],
+    minuteMarkMaterial: {
+      color: 0x6a655e,
+      metalness: 0.05,
+      roughness: 0.62,
+    },
   },
   hands: {
-    minute: { length: 12.04, width: 0.5, thickness: 0.09 },
-    hour: { length: 8.6, width: 0.7, thickness: 0.1 },
-    smallSecond: { length: 3.268, width: 0.14, thickness: 0.08 },
+    minute: {
+      length: 12.04,
+      width: 0.56,
+      tipWidth: 0.06,
+      thickness: 0.12,
+      counterweightLength: 0.34,
+    },
+    hour: {
+      length: 8.6,
+      width: 0.78,
+      tipWidth: 0.08,
+      thickness: 0.13,
+      counterweightLength: 0.34,
+    },
+    smallSecond: {
+      length: 3.268,
+      width: 0.13,
+      tipWidth: 0.04,
+      thickness: 0.07,
+      counterweightLength: 0.42,
+    },
     material: {
-      color: 0xdce2e7,
-      metalness: 0.98,
-      roughness: 0.18,
+      color: 0xf1f3f5,
+      metalness: 0.93,
+      roughness: 0.19,
+    },
+    smallSecondMaterial: {
+      color: 0x2a5572,
+      metalness: 0.86,
+      roughness: 0.24,
     },
   },
   crystal: {
     profile: [
       { radius: 0, y: -3.46 },
-      { radius: 3.825, y: -3.445 },
-      { radius: 7.65, y: -3.4 },
-      { radius: 11.475, y: -3.325 },
-      { radius: 15.3, y: -3.2 },
+      { radius: 3.825, y: -3.45 },
+      { radius: 7.65, y: -3.405 },
+      { radius: 11.475, y: -3.295 },
+      { radius: 14, y: -3.12 },
+      { radius: 15.3, y: -3 },
       { radius: 15.3, y: -2.86 },
       { radius: 0, y: -2.86 },
     ],
     radialSegments: 128,
-    classification: "GENTLE_DOME_WITHIN_PROTECTED_ENVELOPE",
+    classification: "VISIBLE_GENTLE_DOME_WITHIN_PROTECTED_ENVELOPE",
   },
   materials: {
     polishedSteel: {
-      color: 0xc6ced6,
-      metalness: 0.98,
+      color: 0xeef1f3,
+      metalness: 0.92,
       roughness: 0.19,
+      classification: "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
     },
     subduedPolishedSteel: {
-      color: 0xaeb8c2,
-      metalness: 0.96,
-      roughness: 0.26,
+      color: 0xd8dee3,
+      metalness: 0.9,
+      roughness: 0.27,
+      classification: "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
     },
     ivoryDial: {
-      color: 0x9d9278,
-      metalness: 0.02,
-      roughness: 0.76,
+      color: 0xf0e7d7,
+      metalness: 0.01,
+      roughness: 0.84,
     },
   },
   phase3c2MandatoryBacklog: [
@@ -213,9 +282,11 @@ export function derivePhase3C1OpenHeartAudit(
       Math.sin(angle) * indexRadius,
       Math.cos(angle) * indexRadius,
     ];
+    const omitted = config.dial.omittedIndices.includes(index);
     return {
       index,
       center,
+      omitted,
       clearance:
         Math.hypot(
           center[0] - o.projectedCenter[0],
@@ -261,7 +332,9 @@ export function derivePhase3C1OpenHeartAudit(
         smallSecondCenterDistance
         - o.edgeRingOuterRadius
         - p.smallSecondRingDiameter / 2,
-      nearestIndex: Math.min(...indexClearances.map(item => item.clearance)),
+      nearestIndex: Math.min(...indexClearances
+        .filter(item => !item.omitted)
+        .map(item => item.clearance)),
       indices: indexClearances,
       minuteHandAxial:
         p.dialBlankDiameter > 0 ? 0.39 : null,
@@ -310,12 +383,31 @@ export function assertPhase3C1WatchHeadConfig(
       && config.hands.hour.length === p.hourHandLength
       && config.hands.smallSecond.length === p.smallSecondHandLength,
     handWidths:
-      config.hands.minute.width >= 0.45
-      && config.hands.minute.width <= 0.6
-      && config.hands.hour.width >= 0.6
-      && config.hands.hour.width <= 0.8
+      config.hands.minute.width >= 0.52
+      && config.hands.minute.width <= 0.62
+      && config.hands.hour.width >= 0.72
+      && config.hands.hour.width <= 0.85
       && config.hands.smallSecond.width >= 0.1
-      && config.hands.smallSecond.width <= 0.18,
+      && config.hands.smallSecond.width <= 0.15,
+    dialRevision:
+      config.dial.color === 0xf0e7d7
+      && config.dial.smallSecondColor === 0xf3ebdd
+      && config.dial.indexRadialLength >= 1.3
+      && config.dial.indexRadialLength <= 1.5
+      && config.dial.indexTangentialWidth >= 0.28
+      && config.dial.indexTangentialWidth <= 0.36
+      && config.dial.minuteDotMinorDiameter >= 0.1
+      && config.dial.minuteDotMinorDiameter <= 0.13
+      && config.dial.minuteDotMajorDiameter >= 0.16
+      && config.dial.minuteDotMajorDiameter <= 0.2,
+    rimRevision:
+      o.rimProfile.innerDiameter === o.equivalentDiameter
+      && o.rimProfile.outerDiameter >= 7.2
+      && o.rimProfile.outerDiameter <= 7.32
+      && o.rimProfile.visibleTopLip >= 0.24
+      && o.rimProfile.visibleTopLip <= 0.32
+      && o.rimProfile.axialHeight >= 0.1
+      && o.rimProfile.axialHeight <= 0.16,
     crystalEnvelope:
       Math.min(...config.crystal.profile.map(point => point.y))
         === -3.46

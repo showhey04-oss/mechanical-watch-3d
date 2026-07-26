@@ -13,7 +13,10 @@ const config = FINAL_WATCH_HEAD_PHASE3C1;
 
 test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
   assert.equal(config.enabledByDefault, false);
-  assert.equal(config.status, "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT");
+  assert.equal(
+    config.status,
+    "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
+  );
   assert.equal(
     config.source.baseBranch,
     "feature/final-exterior-balanced-phase3b2",
@@ -32,6 +35,77 @@ test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
       "?exterior=balanced&watchHead=phase3c1",
     )?.id,
     config.id,
+  );
+});
+
+test("human-review revision uses bright ivory and educational silver compensation", () => {
+  assert.equal(config.dial.color, 0xf0e7d7);
+  assert.equal(config.dial.smallSecondColor, 0xf3ebdd);
+  assert.ok(config.dial.roughness >= 0.8);
+  assert.ok(config.dial.roughness <= 0.86);
+  assert.deepEqual(config.materials.polishedSteel, {
+    color: 0xeef1f3,
+    metalness: 0.92,
+    roughness: 0.19,
+    classification: "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
+  });
+  assert.equal(
+    config.materials.subduedPolishedSteel.classification,
+    "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION",
+  );
+  assert.equal(config.hands.material.color, 0xf1f3f5);
+  assert.equal(config.hands.smallSecondMaterial.color, 0x2a5572);
+});
+
+test("reference-aligned dial dimensions preserve S86 while strengthening hierarchy", () => {
+  assert.ok(config.dial.indexRadialLength >= 1.3);
+  assert.ok(config.dial.indexRadialLength <= 1.5);
+  assert.ok(config.dial.indexTangentialWidth >= 0.28);
+  assert.ok(config.dial.indexTangentialWidth <= 0.36);
+  assert.ok(config.dial.indexThickness >= 0.16);
+  assert.ok(config.dial.indexThickness <= 0.22);
+  assert.equal(config.dial.twelveIndexGap, 0.22);
+  assert.deepEqual(config.dial.omittedIndices, [6]);
+  assert.ok(config.dial.minuteDotMinorDiameter >= 0.1);
+  assert.ok(config.dial.minuteDotMinorDiameter <= 0.13);
+  assert.ok(config.dial.minuteDotMajorDiameter >= 0.16);
+  assert.ok(config.dial.minuteDotMajorDiameter <= 0.2);
+  assert.equal(config.hands.minute.length, 12.04);
+  assert.equal(config.hands.hour.length, 8.6);
+  assert.equal(config.hands.smallSecond.length, 3.268);
+});
+
+test("open-heart rim is a bounded profiled metal section at the actual balance", () => {
+  const rim = config.openHeart.rimProfile;
+  assert.equal(rim.innerDiameter, 6.6);
+  assert.ok(rim.outerDiameter >= 7.2);
+  assert.ok(rim.outerDiameter <= 7.32);
+  assert.ok(rim.visibleTopLip >= 0.24);
+  assert.ok(rim.visibleTopLip <= 0.32);
+  assert.ok(rim.innerChamfer >= 0.06);
+  assert.ok(rim.innerChamfer <= 0.1);
+  assert.ok(rim.outerChamfer >= 0.05);
+  assert.ok(rim.outerChamfer <= 0.08);
+  assert.ok(rim.axialHeight >= 0.1);
+  assert.ok(rim.axialHeight <= 0.16);
+  assert.equal(config.openHeart.equivalentDiameter, 6.6);
+  assert.deepEqual(config.openHeart.projectedCenter, [7.7, 1.8]);
+});
+
+test("domed crystal strengthens curvature inside the protected envelope", () => {
+  assert.deepEqual(config.crystal.profile, [
+    { radius: 0, y: -3.46 },
+    { radius: 3.825, y: -3.45 },
+    { radius: 7.65, y: -3.405 },
+    { radius: 11.475, y: -3.295 },
+    { radius: 14, y: -3.12 },
+    { radius: 15.3, y: -3 },
+    { radius: 15.3, y: -2.86 },
+    { radius: 0, y: -2.86 },
+  ]);
+  assert.equal(
+    config.crystal.classification,
+    "VISIBLE_GENTLE_DOME_WITHIN_PROTECTED_ENVELOPE",
   );
 });
 

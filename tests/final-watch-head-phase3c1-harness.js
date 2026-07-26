@@ -20,6 +20,16 @@ frame.style.height = `${height}px`;
 
 const wait = milliseconds => new Promise(resolve => setTimeout(resolve, milliseconds));
 
+function collectGeometryAudits(value, result = []) {
+  if (!value || typeof value !== "object") return result;
+  if (value.finite && value.topology && value.bounds) {
+    result.push(value);
+    return result;
+  }
+  Object.values(value).forEach(child => collectGeometryAudits(child, result));
+  return result;
+}
+
 async function waitForDiagnostics(timeoutMs = 30000) {
   const started = performance.now();
   while (performance.now() - started < timeoutMs) {
@@ -81,13 +91,7 @@ frame.addEventListener("load", async () => {
     const luminance = diagnostics.getFrontBackLuminanceReport({
       themes: "all",
     });
-    const allAudits = [
-      geometry.geometryAudits.dial,
-      geometry.geometryAudits.smallSecondFace,
-      ...Object.values(geometry.geometryAudits.plate),
-      ...Object.values(geometry.geometryAudits.hands),
-      geometry.geometryAudits.crystal,
-    ];
+    const allAudits = collectGeometryAudits(geometry.geometryAudits);
     const selections = [
       "Phase 3C.1 アイボリー文字板",
       "Phase 3C.1 バーインデックス",
@@ -131,6 +135,10 @@ frame.addEventListener("load", async () => {
       iframeUnsandboxed: !frame.hasAttribute("sandbox"),
       viewport: viewport.width === width && viewport.height === height,
       enabled: state.enabled === true && state.defaultEnabled === false,
+      humanReviewRevision:
+        state.status === "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED"
+        && state.phase3c1HumanAcceptance
+          === "HUMAN_REVIEW_FAILED_PHASE3C1_REVISION_REQUIRED",
       sourceHead:
         geometry.validation?.audit?.projection?.dialPlaneCenter?.[0] === 7.7,
       openHeartCenter:
@@ -143,7 +151,24 @@ frame.addEventListener("load", async () => {
         && geometry.openHeart.cutout.openingAreaRatio <= 0.1,
       openHeartClearances:
         geometry.interferences.openHeartToSmallSecondClearance >= 0.2
-        && geometry.interferences.openHeartToNearestIndexClearance >= 0.2,
+        && geometry.interferences.openHeartToNearestIndexClearance >= 0.3,
+      referenceAlignedMaterials:
+        material.dialFinish.color === 0xf0e7d7
+        && material.smallSecondDialFinish.color === 0xf3ebdd
+        && material.caseFinish.color === 0xeef1f3
+        && material.caseFinish.metalness >= 0.9
+        && material.caseFinish.roughness >= 0.16
+        && material.caseFinish.roughness <= 0.21
+        && material.visibilityCompensationClassification
+          === "EDUCATIONAL_POLISHED_STEEL_VISIBILITY_COMPENSATION"
+        && material.handsFinish.color === 0xf1f3f5
+        && material.smallSecondHandFinish.color === 0x2a5572,
+      referenceAlignedDialGeometry:
+        geometry.geometryAudits.indices.normal.topology.closed
+        && geometry.geometryAudits.indices.twelve.topology.closed
+        && geometry.geometryAudits.minuteDots.minor.topology.closed
+        && geometry.geometryAudits.minuteDots.major.topology.closed
+        && geometry.geometryAudits.openHeartRim.topology.closed,
       bearingLand:
         geometry.openHeart.cutout.protectedBearingRetained
         && geometry.lineOfSight.protectedBearingLandRetained,
@@ -160,6 +185,9 @@ frame.addEventListener("load", async () => {
       geometryClosed: allAudits.every(audit =>
         audit.topology.closed
         && audit.topology.nonManifoldEdgeCount === 0
+        && audit.topology.windingMismatchCount === 0
+        && audit.normalOrientation.reversedTriangleCount === 0
+        && audit.normalOrientation.outward === true
         && audit.degenerateTriangleCount === 0),
       noRenderingShortcuts:
         material.lightingChanged === false
@@ -168,7 +196,16 @@ frame.addEventListener("load", async () => {
         && material.fogChanged === false
         && material.d2c3Used === false
         && material.alphaHashUsed === false,
-      frontBackLuminance: luminance.allWithinThirtyPercent,
+      luminanceMeasuredWithoutIssue2Mutation:
+        Object.values(luminance.themes).every(entry =>
+          Number.isFinite(entry.front.averageLuminance)
+          && Number.isFinite(entry.back.averageLuminance)
+          && entry.front.clippedRatio < 0.02
+          && entry.back.clippedRatio < 0.02)
+        && material.lightingChanged === false
+        && material.exposureChanged === false
+        && material.toneMappingChanged === false
+        && material.fogChanged === false,
       phase3c2NotApplied:
         material.strapPhase3c2StyleApplied === false
         && state.phase3c2MandatoryBacklog.length >= 12,
@@ -220,6 +257,19 @@ frame.addEventListener("load", async () => {
         canvasCount: frame.contentDocument.querySelectorAll("canvas").length,
       },
       checks,
+      issue2Separation: {
+        frontBackThirtyPercentDiagnostic:
+          luminance.allWithinThirtyPercent,
+        brightIvoryFrontFaceExpected: true,
+        renderingSettingsChanged:
+          material.lightingChanged
+          || material.exposureChanged
+          || material.toneMappingChanged
+          || material.fogChanged,
+        productThresholdChanged: false,
+        classification:
+          "DESIGN_LUMINANCE_MEASUREMENT_SEPARATED_FROM_DEFERRED_ISSUE_2",
+      },
       state,
       geometry,
       material,

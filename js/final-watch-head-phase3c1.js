@@ -5,9 +5,19 @@ import {
   assertPhase3C1WatchHeadConfig,
   derivePhase3C1OpenHeartAudit,
 } from "./final-watch-head-phase3c1-config.js";
+import {
+  createAxialProfileAnnulusGeometryData,
+} from "./final-exterior-profile.js";
 
 const round = (value, digits = 6) => Number(Number(value).toFixed(digits));
 const roundArray = values => values.map(value => round(value));
+const reverseTriangleWinding = indices => {
+  const reversed = [];
+  for (let index = 0; index < indices.length; index += 3) {
+    reversed.push(indices[index], indices[index + 2], indices[index + 1]);
+  }
+  return reversed;
+};
 
 function ensureIndexed(geometry) {
   if (!geometry.index) {
@@ -54,6 +64,7 @@ function auditGeometry(geometry) {
   const triangleMap = new Map();
   let degenerateTriangleCount = 0;
   let reversedDuplicateTriangleCount = 0;
+  let signedVolume = 0;
   const a = new THREE.Vector3();
   const b = new THREE.Vector3();
   const c = new THREE.Vector3();
@@ -64,6 +75,7 @@ function auditGeometry(geometry) {
     a.fromBufferAttribute(positions, ia);
     b.fromBufferAttribute(positions, ib);
     c.fromBufferAttribute(positions, ic);
+    signedVolume += a.dot(b.clone().cross(c)) / 6;
     if (b.clone().sub(a).cross(c.clone().sub(a)).lengthSq() <= 1e-16) {
       degenerateTriangleCount++;
     }
@@ -109,6 +121,13 @@ function auditGeometry(geometry) {
       windingMismatchCount,
       closed: nonManifoldEdgeCount === 0,
     },
+    normalOrientation: {
+      windingMismatchCount,
+      reversedTriangleCount:
+        windingMismatchCount === 0 ? 0 : windingMismatchCount,
+      signedVolume: round(signedVolume),
+      outward: signedVolume > 0,
+    },
     bounds: {
       min: roundArray(box.min.toArray()),
       max: roundArray(box.max.toArray()),
@@ -152,29 +171,102 @@ function createExtrudedDiscWithHoles({
   return mesh;
 }
 
-function createHandGeometry({ length, width, thickness }) {
+function createFacetedBarIndexGeometry({ length, width, thickness }) {
   const shape = new THREE.Shape();
-  shape.moveTo(-0.34, -width * 0.28);
-  shape.lineTo(length * 0.18, -width * 0.48);
-  shape.lineTo(length * 0.72, -width * 0.28);
-  shape.lineTo(length, 0);
-  shape.lineTo(length * 0.72, width * 0.28);
-  shape.lineTo(length * 0.18, width * 0.48);
-  shape.lineTo(-0.34, width * 0.28);
+  shape.moveTo(-width / 2, thickness / 2);
+  shape.lineTo(width / 2, thickness / 2);
+  shape.lineTo(width / 2, -thickness * 0.08);
+  shape.lineTo(0, -thickness / 2);
+  shape.lineTo(-width / 2, -thickness * 0.08);
   shape.closePath();
   const geometry = ensureIndexed(new THREE.ExtrudeGeometry(shape, {
-    depth: thickness,
-    bevelEnabled: true,
-    bevelSize: Math.min(0.018, thickness * 0.18),
-    bevelThickness: Math.min(0.014, thickness * 0.14),
-    bevelSegments: 1,
-    curveSegments: 12,
+    depth: length,
+    bevelEnabled: false,
+    curveSegments: 4,
   }));
-  geometry.rotateX(Math.PI / 2);
-  geometry.center();
-  geometry.translate((length - 0.34) / 2, 0, 0);
+  geometry.translate(0, 0, -length / 2);
+  removeDegenerateTriangles(geometry);
   geometry.userData.phase3c1GeometryAudit = auditGeometry(geometry);
   return geometry;
+}
+
+function createFacetedHandGeometry({
+  length,
+  width,
+  tipWidth,
+  thickness,
+  counterweightLength,
+}) {
+  const stations = [
+    { x: -counterweightLength, width: width * 0.34 },
+    { x: 0, width },
+    { x: length * 0.48, width: width * 0.64 },
+    { x: length, width: tipWidth },
+  ];
+  const crossSection = station => [
+    [station.x, thickness / 2, -station.width / 2],
+    [station.x, thickness / 2, station.width / 2],
+    [station.x, -thickness * 0.08, station.width / 2],
+    [station.x, -thickness / 2, 0],
+    [station.x, -thickness * 0.08, -station.width / 2],
+  ];
+  const vertices = stations.flatMap(crossSection).flat();
+  const indices = [];
+  const sectionSize = 5;
+  for (let station = 0; station < stations.length - 1; station++) {
+    for (let face = 0; face < sectionSize; face++) {
+      const nextFace = (face + 1) % sectionSize;
+      const a = station * sectionSize + face;
+      const b = (station + 1) * sectionSize + face;
+      const c = (station + 1) * sectionSize + nextFace;
+      const d = station * sectionSize + nextFace;
+      indices.push(a, b, c, a, c, d);
+    }
+  }
+  for (let face = 1; face < sectionSize - 1; face++) {
+    indices.push(0, face, face + 1);
+    const last = (stations.length - 1) * sectionSize;
+    indices.push(last, last + face + 1, last + face);
+  }
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.Float32BufferAttribute(vertices, 3),
+  );
+  geometry.setIndex(reverseTriangleWinding(indices));
+  removeDegenerateTriangles(geometry);
+  geometry.userData.phase3c1GeometryAudit = auditGeometry(geometry);
+  return geometry;
+}
+
+function createProfiledOpenHeartRim(config, materials) {
+  const profile = config.openHeart.rimProfile;
+  const data = createAxialProfileAnnulusGeometryData({
+    profile: profile.profile,
+    circumferentialSegments: profile.circumferentialSegments,
+  });
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(data.positions, 3),
+  );
+  geometry.setAttribute(
+    "normal",
+    new THREE.BufferAttribute(data.normals, 3),
+  );
+  geometry.setIndex(new THREE.BufferAttribute(data.indices, 1));
+  const indicesPerEdge = profile.circumferentialSegments * 6;
+  profile.profile.forEach((point, edgeIndex) => {
+    const materialIndex = point.role.startsWith("inner-wall") ? 1 : 0;
+    geometry.addGroup(edgeIndex * indicesPerEdge, indicesPerEdge, materialIndex);
+  });
+  geometry.computeBoundingBox();
+  geometry.computeBoundingSphere();
+  geometry.userData.phase3c1GeometryAudit = auditGeometry(geometry);
+  const mesh = new THREE.Mesh(geometry, materials);
+  mesh.userData.phase3c1GeometryAudit =
+    geometry.userData.phase3c1GeometryAudit;
+  return mesh;
 }
 
 function createDomedCrystal(config, material) {
@@ -226,7 +318,7 @@ function createDomedCrystal(config, material) {
     "position",
     new THREE.Float32BufferAttribute(vertices, 3),
   );
-  geometry.setIndex(indices);
+  geometry.setIndex(reverseTriangleWinding(indices));
   geometry.userData.phase3c1GeometryAudit = auditGeometry(geometry);
   const mesh = new THREE.Mesh(geometry, material);
   mesh.userData.phase3c1GeometryAudit =
@@ -298,11 +390,14 @@ export function createPhase3C1WatchHead({
   const subdued = config.materials.subduedPolishedSteel;
   const ivory = makeMaterial(config.materials.ivoryDial, clippingPlanes);
   const polishedMaterial = makeMaterial(polished, clippingPlanes);
+  const subduedMaterial = makeMaterial(subdued, clippingPlanes);
   const handMaterial = makeMaterial(config.hands.material, clippingPlanes);
+  const smallSecondHandMaterial = makeMaterial(
+    config.hands.smallSecondMaterial,
+    clippingPlanes,
+  );
   const darkMarkMaterial = new THREE.MeshStandardMaterial({
-    color: 0x6d665b,
-    metalness: 0.08,
-    roughness: 0.64,
+    ...config.dial.minuteMarkMaterial,
     clippingPlanes,
   });
   const root = new THREE.Group();
@@ -442,13 +537,19 @@ export function createPhase3C1WatchHead({
   );
   root.add(physicalDial);
 
+  const smallSecondMaterial = new THREE.MeshStandardMaterial({
+    color: config.dial.smallSecondColor,
+    metalness: config.dial.smallSecondMetalness,
+    roughness: config.dial.smallSecondRoughness,
+    clippingPlanes,
+  });
   const smallSecondFace = createExtrudedDiscWithHoles({
     outerRadius: config.protectedAnchors.smallSecondRingDiameter / 2,
     centerHoleRadius: 0.23,
     yMin: config.dial.smallSecondRecessY,
     yMax: config.dial.smallSecondRecessY
       + config.dial.smallSecondRecessThickness,
-    material: ivory.clone(),
+    material: smallSecondMaterial,
     curveSegments: 64,
   });
   smallSecondFace.position.x = config.protectedAnchors.smallSecondCenter[0];
@@ -457,7 +558,7 @@ export function createPhase3C1WatchHead({
   register(
     smallSecondFace,
     "Phase 3C.1 小秒表示",
-    "現行四番車軸中心を維持し、主文字板面よりわずかに奥へ置いた6時位置の小秒表示。12本の主要目盛と48本の補助目盛を持つ。",
+    "現行四番車軸中心を維持し、主文字板よりわずかに明るいアイボリーで独立させた6時位置の凹面小秒表示。12本の主要目盛と48本の補助目盛を持つ。",
     "exterior",
     { pickPriority: 1 },
   );
@@ -465,22 +566,33 @@ export function createPhase3C1WatchHead({
 
   const indexGroup = new THREE.Group();
   const indexRadius = config.protectedAnchors.indexCircleDiameter / 2;
+  const normalIndexGeometry = createFacetedBarIndexGeometry({
+    length: config.dial.indexRadialLength,
+    width: config.dial.indexTangentialWidth,
+    thickness: config.dial.indexThickness,
+  });
+  const twelveIndexGeometry = createFacetedBarIndexGeometry({
+    length:
+      config.dial.indexRadialLength * config.dial.twelveIndexLengthScale,
+    width: config.dial.indexTangentialWidth,
+    thickness: config.dial.indexThickness,
+  });
   for (let index = 0; index < 12; index++) {
     if (config.dial.omittedIndices.includes(index)) continue;
     const angle = index * Math.PI * 2 / 12;
     const double = index === 0;
-    for (const offset of double ? [-0.17, 0.17] : [0]) {
-      const width = config.dial.indexTangentialWidth;
-      const length = config.dial.indexRadialLength * (index % 3 === 0 ? 1 : 0.82);
+    const doubleOffset =
+      config.dial.twelveIndexGap / 2
+      + config.dial.indexTangentialWidth / 2;
+    for (const tangentialOffset of double ? [-doubleOffset, doubleOffset] : [0]) {
       const marker = new THREE.Mesh(
-        new THREE.BoxGeometry(width, config.dial.indexThickness, length),
+        double ? twelveIndexGeometry : normalIndexGeometry,
         polishedMaterial,
       );
-      const radius = indexRadius + offset;
       marker.position.set(
-        Math.sin(angle) * radius + Math.cos(angle) * offset,
+        Math.sin(angle) * indexRadius + Math.cos(angle) * tangentialOffset,
         config.dial.indexFrontY,
-        Math.cos(angle) * radius - Math.sin(angle) * offset,
+        Math.cos(angle) * indexRadius - Math.sin(angle) * tangentialOffset,
       );
       marker.rotation.y = angle;
       indexGroup.add(marker);
@@ -489,47 +601,100 @@ export function createPhase3C1WatchHead({
   register(
     indexGroup,
     "Phase 3C.1 バーインデックス",
-    "S86インデックス円を維持した細身の立体シルバーバー。12時だけダブルバーとし、数字や過度な装飾を使用しない。",
+    "S86インデックス円を維持し、上面の中央稜線で左右facetを分けた立体シルバーバー。12時だけ対称ダブルバー、6時は小秒との競合を避けて省略する。",
     "exterior",
     { pickPriority: 2 },
   );
   root.add(indexGroup);
 
   const minuteTrack = new THREE.Group();
+  const minorDotGeometry = ensureIndexed(new THREE.CylinderGeometry(
+    config.dial.minuteDotMinorDiameter / 2,
+    config.dial.minuteDotMinorDiameter / 2,
+    config.dial.minuteDotAxialHeight,
+    12,
+    1,
+    false,
+  ));
+  removeDegenerateTriangles(minorDotGeometry);
+  minorDotGeometry.userData.phase3c1GeometryAudit =
+    auditGeometry(minorDotGeometry);
+  const majorDotGeometry = ensureIndexed(new THREE.CylinderGeometry(
+    config.dial.minuteDotMajorDiameter / 2,
+    config.dial.minuteDotMajorDiameter / 2,
+    config.dial.minuteDotAxialHeight,
+    16,
+    1,
+    false,
+  ));
+  removeDegenerateTriangles(majorDotGeometry);
+  majorDotGeometry.userData.phase3c1GeometryAudit =
+    auditGeometry(majorDotGeometry);
+  let omittedMinuteDotCount = 0;
   for (let index = 0; index < 60; index++) {
     const angle = index * Math.PI * 2 / 60;
     const major = index % 5 === 0;
-    const length = major
-      ? config.dial.minuteMarkMajorLength
-      : config.dial.minuteMarkMinorLength;
+    const dotRadius = (
+      major
+        ? config.dial.minuteDotMajorDiameter
+        : config.dial.minuteDotMinorDiameter
+    ) / 2;
+    const x = Math.sin(angle) * config.dial.mainMinuteTrackRadius;
+    const z = Math.cos(angle) * config.dial.mainMinuteTrackRadius;
+    const openHeartDistance = Math.hypot(
+      x - config.openHeart.projectedCenter[0],
+      z - config.openHeart.projectedCenter[1],
+    );
+    if (
+      openHeartDistance
+      < config.openHeart.edgeRingOuterRadius
+        + dotRadius
+        + config.dial.minuteDotOpenHeartClearance
+    ) {
+      omittedMinuteDotCount++;
+      continue;
+    }
     const marker = new THREE.Mesh(
-      new THREE.BoxGeometry(major ? 0.055 : 0.035, 0.045, length),
+      major ? majorDotGeometry : minorDotGeometry,
       darkMarkMaterial,
     );
     marker.position.set(
-      Math.sin(angle) * config.dial.mainMinuteTrackRadius,
-      config.dial.indexFrontY + 0.015,
-      Math.cos(angle) * config.dial.mainMinuteTrackRadius,
+      x,
+      config.dial.indexFrontY,
+      z,
     );
-    marker.rotation.y = angle;
     minuteTrack.add(marker);
   }
   register(
     minuteTrack,
     "Phase 3C.1 分目盛",
-    "レイルウェイ式を避けた控えめな60本の短線目盛。5分位置だけをわずかに強調する。",
+    "外周へ配置した控えめな丸型60分目盛。5分位置だけを大きくし、実際のオープンハート包絡と接触する点だけを省略する。",
     "exterior",
     { pickPriority: 1 },
   );
   root.add(minuteTrack);
 
   const smallSecondMarks = new THREE.Group();
+  const smallSecondMinorMarkGeometry = ensureIndexed(new THREE.BoxGeometry(
+    config.dial.smallSecondMarkTangentialWidth,
+    0.035,
+    config.dial.smallSecondMinorMarkLength,
+  ));
+  smallSecondMinorMarkGeometry.userData.phase3c1GeometryAudit =
+    auditGeometry(smallSecondMinorMarkGeometry);
+  const smallSecondMajorMarkGeometry = ensureIndexed(new THREE.BoxGeometry(
+    config.dial.smallSecondMarkTangentialWidth * 1.35,
+    0.035,
+    config.dial.smallSecondMajorMarkLength,
+  ));
+  smallSecondMajorMarkGeometry.userData.phase3c1GeometryAudit =
+    auditGeometry(smallSecondMajorMarkGeometry);
   for (let index = 0; index < 60; index++) {
     const angle = index * Math.PI * 2 / 60;
     const major = index % 5 === 0;
     const radius = config.protectedAnchors.smallSecondRingDiameter / 2 - 0.27;
     const marker = new THREE.Mesh(
-      new THREE.BoxGeometry(major ? 0.05 : 0.026, 0.04, major ? 0.25 : 0.14),
+      major ? smallSecondMajorMarkGeometry : smallSecondMinorMarkGeometry,
       darkMarkMaterial,
     );
     marker.position.set(
@@ -549,25 +714,39 @@ export function createPhase3C1WatchHead({
   );
   root.add(smallSecondMarks);
 
-  const openHeartRing = new THREE.Mesh(
+  const smallSecondOutline = new THREE.Mesh(
     new THREE.TorusGeometry(
-      config.openHeart.openingRadius + config.openHeart.edgeRingWidth / 2,
-      config.openHeart.edgeRingWidth / 2,
-      10,
+      config.protectedAnchors.smallSecondRingDiameter / 2
+        - config.dial.smallSecondOutlineTubeRadius,
+      config.dial.smallSecondOutlineTubeRadius,
+      8,
       96,
     ),
-    polishedMaterial,
+    darkMarkMaterial,
   );
-  openHeartRing.rotation.x = Math.PI / 2;
+  smallSecondOutline.rotation.x = Math.PI / 2;
+  smallSecondOutline.position.set(
+    config.protectedAnchors.smallSecondCenter[0],
+    config.dial.indexFrontY + 0.025,
+    config.protectedAnchors.smallSecondCenter[1],
+  );
+  smallSecondOutline.geometry.userData.phase3c1GeometryAudit =
+    auditGeometry(ensureIndexed(smallSecondOutline.geometry));
+  root.add(smallSecondOutline);
+
+  const openHeartRing = createProfiledOpenHeartRim(
+    config,
+    [polishedMaterial, subduedMaterial],
+  );
   openHeartRing.position.set(
     config.openHeart.projectedCenter[0],
-    config.dial.indexFrontY - 0.01,
+    0,
     config.openHeart.projectedCenter[1],
   );
   register(
     openHeartRing,
     "Phase 3C.1 オープンハート縁",
-    "実テンプ中心の文字板投影へ誤差0で配置した限定開口のポリッシュ縁。トゥールビヨンではなく、機構を移動しない教育用表示で、製造用設計ではない。",
+    "内周面、面取り、ポリッシュ上面、外周面を持つ単一閉合profile Mesh。実テンプ中心への誤差0配置と開口径6.600を維持し、機構を移動しない教育用表示である。",
     "exterior",
     { pickPriority: 2 },
   );
@@ -594,14 +773,17 @@ export function createPhase3C1WatchHead({
     ["hour", display.hourAxis, config.hands.hour, "Phase 3C.1 時針"],
     ["smallSecond", display.smallSecondAxis, config.hands.smallSecond, "Phase 3C.1 小秒針"],
   ]) {
-    const mesh = new THREE.Mesh(createHandGeometry(spec), handMaterial);
+    const mesh = new THREE.Mesh(
+      createFacetedHandGeometry(spec),
+      key === "smallSecond" ? smallSecondHandMaterial : handMaterial,
+    );
     mesh.name = name;
     register(
       mesh,
       name,
       key === "smallSecond"
-        ? "現行四番車軸との1:1拘束とS86長3.268を維持した細身シルバー小秒針。"
-        : `現行${key === "minute" ? "筒かな" : "時針管"}との1:1拘束とS86長を維持した細身シルバー針。`,
+        ? "現行四番車軸との1:1拘束とS86長3.268を維持したブルースチール調小秒針。"
+        : `現行${key === "minute" ? "筒かな" : "時針管"}との1:1拘束とS86長を維持し、中央稜線と左右facetを持つ細身ドーフィン／ランス型シルバー針。`,
       "motion",
       { pickPriority: 3 },
     );
@@ -628,6 +810,22 @@ export function createPhase3C1WatchHead({
   const geometryAudits = {
     dial: physicalDial.userData.phase3c1GeometryAudit,
     smallSecondFace: smallSecondFace.userData.phase3c1GeometryAudit,
+    indices: {
+      normal: normalIndexGeometry.userData.phase3c1GeometryAudit,
+      twelve: twelveIndexGeometry.userData.phase3c1GeometryAudit,
+    },
+    minuteDots: {
+      minor: minorDotGeometry.userData.phase3c1GeometryAudit,
+      major: majorDotGeometry.userData.phase3c1GeometryAudit,
+      omittedForOpenHeart: omittedMinuteDotCount,
+    },
+    smallSecondMarks: {
+      minor: smallSecondMinorMarkGeometry.userData.phase3c1GeometryAudit,
+      major: smallSecondMajorMarkGeometry.userData.phase3c1GeometryAudit,
+      outline:
+        smallSecondOutline.geometry.userData.phase3c1GeometryAudit,
+    },
+    openHeartRim: openHeartRing.userData.phase3c1GeometryAudit,
     plate: Object.fromEntries(plateReplacements.map((mesh, index) => [
       ["core", "topStep", "bottomStep"][index],
       mesh.userData.phase3c1GeometryAudit,
@@ -794,9 +992,19 @@ export function createPhase3C1WatchHead({
     fogChanged: false,
     d2c3Used: false,
     alphaHashUsed: false,
+    humanReviewStatus: config.status,
+    visibilityCompensationClassification:
+      polished.classification,
     caseFinish: polished,
+    subduedCaseFinish: subdued,
     dialFinish: config.materials.ivoryDial,
+    smallSecondDialFinish: {
+      color: config.dial.smallSecondColor,
+      metalness: config.dial.smallSecondMetalness,
+      roughness: config.dial.smallSecondRoughness,
+    },
     handsFinish: config.hands.material,
+    smallSecondHandFinish: config.hands.smallSecondMaterial,
     strapPhase3c2StyleApplied: false,
   });
 
@@ -843,6 +1051,7 @@ export function createPhase3C1WatchHead({
       indexGroup,
       minuteTrack,
       smallSecondMarks,
+      smallSecondOutline,
       openHeartRing,
       openHeartTarget,
       crystal,
