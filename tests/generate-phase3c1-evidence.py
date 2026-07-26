@@ -25,7 +25,7 @@ REPORTS = EVIDENCE / "reports"
 BASE_EVIDENCE = ROOT / "docs/evidence/final-exterior-balanced-phase3b2"
 DESKTOP_SIZE = (1280, 720)
 MOBILE_SIZE = (390, 844)
-SOURCE_IMPLEMENTATION_COMMIT = "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2"
+SOURCE_IMPLEMENTATION_COMMIT = "50d651bea6d91b4be978e9e3b40a73053497c104"
 SOURCE_BASE_COMMIT = "98d83781aa7aa001836a0d57f1ad6e3d058a15c4"
 THIRD_CANDIDATE_COMMIT = "658ee82ec902184a325862cdb878a38205376206"
 
@@ -268,7 +268,15 @@ def main() -> None:
     EVIDENCE.mkdir(parents=True, exist_ok=True)
     REPORTS.mkdir(parents=True, exist_ok=True)
 
-    for name in ["panel-open-browser.png", "panel-collapsed-browser.png", "part-selection-ui.png"]:
+    for name in [
+        "panel-open-browser.png",
+        "panel-collapsed-browser.png",
+        "part-selection-ui.png",
+        "index-selection-ui.png",
+        "hand-selection-ui.png",
+        "crystal-selection-ui.png",
+        "opacity16-internal-selection-ui.png",
+    ]:
         normalize_browser_screenshot(name)
 
     copy_base_capture("desktop-front.png", "before-phase3b2-front.png")
@@ -314,6 +322,15 @@ def main() -> None:
         "exterior-split-off.png": DESKTOP_SIZE,
         "exterior-explode-off.png": DESKTOP_SIZE,
         "exterior-opacity16-off.png": DESKTOP_SIZE,
+        "exterior-off-hands-t0.png": DESKTOP_SIZE,
+        "exterior-off-hands-t1.png": DESKTOP_SIZE,
+        "exterior-off-hands-t2.png": DESKTOP_SIZE,
+        "exterior-off-crown-position1.png": DESKTOP_SIZE,
+        "exterior-off-crown-position2.png": DESKTOP_SIZE,
+        "index-selection-ui.png": DESKTOP_SIZE,
+        "hand-selection-ui.png": DESKTOP_SIZE,
+        "crystal-selection-ui.png": DESKTOP_SIZE,
+        "opacity16-internal-selection-ui.png": DESKTOP_SIZE,
     }
     for name, expected in required.items():
         open_source(name, expected)
@@ -435,9 +452,9 @@ def main() -> None:
     ])
     closeup("desktop-front.png", "indices-close.png", (410, 90, 870, 360), "Polished bar indices", [
         "faceted 1.820 × 0.440 × 0.230 bars",
-        "double marker at 12 / 6 omitted for small seconds",
+        "double marker at 12 / standard marker at 6",
         "60 equal-size minute dots on radius 14.200",
-        "normal / 12 o'clock / opening clearances are all positive",
+        "13 meshes / 6 o'clock forbidden interference count 0",
         "S86 index circle 25.456 unchanged",
     ])
     closeup("desktop-front.png", "hands-close.png", (430, 190, 850, 555), "Faceted polished hands", [
@@ -573,6 +590,126 @@ def main() -> None:
             "normal, 12 o'clock, and open-heart overlap count: 0",
         ],
     )
+    annotate_full(
+        "desktop-front.png",
+        "six-index-front.png",
+        "6 o'clock index — actual generated geometry",
+        [
+            "standard bar 1.820 × 0.440 × 0.230 at radius 12.728",
+            "12 o'clock double + eleven standard positions = 13 meshes",
+            "actual vertex audit: finite / closed / outward",
+            "forbidden interference count: 0",
+        ],
+        arrows=[((450, 650), (640, 616), "6 o'clock standard bar")],
+    )
+    closeup(
+        "desktop-front.png",
+        "six-index-small-second-clearance.png",
+        (430, 350, 850, 710),
+        "6 o'clock index ↔ small seconds",
+        [
+            "index inner radius 11.818",
+            "recess clearance 1.968 (required ≥ 1.500)",
+            "small-second marks clearance 2.479975",
+            "small-second hand sweep clearance 2.949939",
+        ],
+    )
+    closeup(
+        "desktop-front.png",
+        "six-index-minute-clearance.png",
+        (430, 350, 850, 710),
+        "6 o'clock index ↔ minute dot / opening",
+        [
+            "major minute dot clearance 0.435226 (required ≥ 0.300)",
+            "display opening clearance 1.260226 (required ≥ 0.300)",
+            "no local dimension exception at 6 o'clock",
+        ],
+    )
+    annotate_full(
+        "exterior-off.png",
+        "exterior-off-operational-parts.png",
+        "Exterior OFF — operational parts stay visible",
+        [
+            "25 exterior-managed parts hidden",
+            "minute / hour / small-second hands remain",
+            "crown and all internal mechanisms remain",
+            "OPEN_HEART_PRESENTATION_CUTOUT plate remains",
+        ],
+        arrows=[
+            ((370, 205), (640, 365), "hands"),
+            ((950, 410), (1035, 450), "crown"),
+        ],
+    )
+    annotate_full(
+        "panel-open-browser.png",
+        "exterior-ui-label.png",
+        "Learning tab display group",
+        [
+            'label: "外装"',
+            "helper DOM count: 0",
+            "tap target height: 44 px",
+            "horizontal overflow: 0",
+        ],
+        arrows=[((80, 300), (276, 365), 'single label "外装"')],
+    )
+    annotate_full(
+        "desktop-front.png",
+        "dial-selection-four-points.png",
+        "Blank-dial pointer audit — 4 / 4",
+        [
+            "dial priority 1 / crystal render priority 0",
+            "indices + open-heart rim priority 2 / hands priority 3",
+            "all four blank points selected the ivory dial",
+            "global Raycaster and opacity threshold unchanged",
+        ],
+        arrows=[
+            ((300, 210), (505, 280), "blank A"),
+            ((860, 205), (775, 275), "blank B"),
+            ((340, 520), (515, 485), "blank C"),
+            ((910, 520), (775, 485), "blank D"),
+        ],
+    )
+    annotate_full(
+        "crystal-selection-ui.png",
+        "crystal-side-selection.png",
+        "Crystal side / edge selection",
+        [
+            "actual dome material remains opacity 0.10 and pickable",
+            "local non-rendering outer-edge hit surface only",
+            "global Raycaster ranking and threshold unchanged",
+            "HUD and learning description synchronized",
+        ],
+    )
+    annotate_full(
+        "index-selection-ui.png",
+        "index-selection.png",
+        "Index selection",
+        [
+            "priority 2 wins on the bar surface",
+            "6 o'clock is included in the registered index assembly",
+            "highlight / HUD / learning description synchronized",
+        ],
+    )
+    annotate_full(
+        "hand-selection-ui.png",
+        "hand-selection.png",
+        "Hand selection",
+        [
+            "minute / hour / small-second priority remains 3",
+            "hands remain FRONT-family members",
+            "Exterior OFF does not remove operational hands",
+        ],
+    )
+    annotate_full(
+        "opacity16-internal-selection-ui.png",
+        "opacity16-internal-selection.png",
+        "Opacity 16% internal selection",
+        [
+            "setting wheel 2 remains selectable",
+            "dial priority change does not steal internal selection",
+            "existing opacity / depthWrite behavior is unchanged",
+        ],
+    )
     closeup(
         "desktop-oblique-front.png",
         "stable-silver-close.png",
@@ -654,6 +791,33 @@ def main() -> None:
         ("exterior-opacity16-off.png", "opacity 16% + exterior OFF"),
         ("desktop-front.png", "restored"),
     ], duration=700)
+    make_gif("video-11-exterior-on-off-on.gif", [
+        ("desktop-front.png", "exterior ON"),
+        ("exterior-off.png", "exterior OFF — hands + crown remain"),
+        ("desktop-front.png", "exterior ON restored"),
+    ], duration=2000)
+    make_gif("video-12-exterior-off-hand-motion.gif", [
+        ("exterior-off-hands-t0.png", "10:10:30"),
+        ("exterior-off-hands-t1.png", "10:11:30"),
+        ("exterior-off-hands-t2.png", "10:12:30"),
+    ], duration=2000)
+    make_gif("video-13-exterior-off-crown-cycle.gif", [
+        ("exterior-off-crown-position1.png", "position 1"),
+        ("exterior-off-crown-position2.png", "position 2"),
+        ("exterior-off-crown-position1.png", "position 1 restored"),
+    ], duration=2000)
+    make_gif("video-14-selection-sequence.gif", [
+        ("part-selection-ui.png", "dial"),
+        ("index-selection-ui.png", "index"),
+        ("hand-selection-ui.png", "minute hand"),
+    ], duration=2000)
+    make_gif("video-15-split-explode-composition.gif", [
+        ("desktop-front.png", "normal + exterior ON"),
+        ("exterior-off.png", "normal + exterior OFF"),
+        ("exterior-split-off.png", "split + exterior OFF"),
+        ("exterior-explode-off.png", "explode + exterior OFF"),
+        ("desktop-front.png", "restored"),
+    ], duration=1200)
 
     raw_names = [
         "desktop-front.png", "desktop-oblique-front.png", "desktop-side.png",
@@ -666,6 +830,9 @@ def main() -> None:
         "crystal-hidden-front.png", "exterior-off.png",
         "exterior-internal-selection.png", "exterior-split-off.png",
         "exterior-explode-off.png", "exterior-opacity16-off.png",
+        "exterior-off-hands-t0.png", "exterior-off-hands-t1.png",
+        "exterior-off-hands-t2.png", "exterior-off-crown-position1.png",
+        "exterior-off-crown-position2.png",
     ]
     image_report = {
         "sourceImplementationCommit": SOURCE_IMPLEMENTATION_COMMIT,
@@ -678,7 +845,15 @@ def main() -> None:
         "images": [image_metric(EVIDENCE / name, "actual runtime capture") for name in raw_names],
         "browserScreenshots": [
             image_metric(EVIDENCE / name, "actual in-app Browser screenshot")
-            for name in ["panel-open-browser.png", "panel-collapsed-browser.png", "part-selection-ui.png"]
+            for name in [
+                "panel-open-browser.png",
+                "panel-collapsed-browser.png",
+                "part-selection-ui.png",
+                "index-selection-ui.png",
+                "hand-selection-ui.png",
+                "crystal-selection-ui.png",
+                "opacity16-internal-selection-ui.png",
+            ]
         ],
     }
     for metric in image_report["images"]:
@@ -719,6 +894,11 @@ def main() -> None:
         "exterior-split-off.png": {"viewport": "desktop", "camera": "side", "display": "split", "exteriorGroup": "off"},
         "exterior-explode-off.png": {"viewport": "desktop", "camera": "side", "display": "explode", "exteriorGroup": "off"},
         "exterior-opacity16-off.png": {"viewport": "desktop", "camera": "front", "opacity": 0.16, "exteriorGroup": "off"},
+        "exterior-off-hands-t0.png": {"viewport": "desktop", "camera": "front", "time": "10:10:30", "exteriorGroup": "off"},
+        "exterior-off-hands-t1.png": {"viewport": "desktop", "camera": "front", "time": "10:11:30", "exteriorGroup": "off"},
+        "exterior-off-hands-t2.png": {"viewport": "desktop", "camera": "front", "time": "10:12:30", "exteriorGroup": "off"},
+        "exterior-off-crown-position1.png": {"viewport": "desktop", "camera": "winding", "crown": "wind", "exteriorGroup": "off"},
+        "exterior-off-crown-position2.png": {"viewport": "desktop", "camera": "winding", "crown": "set", "exteriorGroup": "off"},
     }
     capture_metadata = {
         "sourceImplementationCommit": SOURCE_IMPLEMENTATION_COMMIT,

@@ -122,11 +122,13 @@
 - Desktop／390×844自動回帰、選択、透過、非表示、分解、禁止干渉0、A.6性能差分を合格し、物理iPhone人間確認を待つ
 - Phase 3B.2承認Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から、`?exterior=balanced&watchHead=phase3c1`限定でポリッシュケース、ドーム風防、アイボリー文字板、バーindex、細身3針、6時小秒、限定オープンハートを実装する
 - オープンハートは実テンプ投影[7.700,1.800]、径6.600、文字板面積比3.5559%、中心誤差0とし、中央軸受を保持する2つの物理地板窓を使う。参照画像位置の模写、機構移動、透明化、部品非表示、CSG、トゥールビヨン風ケージを行わない
-- 初回、第2候補、第3候補は人間非承認。第4候補では白系アイボリー`#F2EDE5`、安定silver`#E7EAED`、大型faceted bar、半径14.200の同径60分目盛、8.500小秒recess、7.120 open-heart rim、非屈折近似domeを実装する
-- 候補query時だけ学習タブへ29部品の「外装」表示グループを追加し、split／explode／opacity 50／16%とのAND状態合成と完全復元を行う。通常pathのDOM追加は0とする
+- 初回、第2候補、第3候補は人間非承認。第4候補の白系アイボリー`#F2EDE5`、安定silver`#E7EAED`、大型faceted bar、半径14.200の同径60分目盛、8.500小秒recess、7.120 open-heart rim、非屈折近似domeはPC／物理iPhoneで人間確認合格
+- 最終微修正で6時通常バーを追加し、12時ダブルを含む13 Mesh、小秒凹面／目盛／針掃引／major dot／表示開口との禁止干渉0を実Geometryで確認する
+- 候補query時だけ学習タブへ25部品の「外装」表示グループを追加し、針3本とりゅうずはON／OFF対象外のままsplit／explode familyへ残す。helper DOMは生成せず、split／explode／opacity 50／16%とのAND状態合成と完全復元を行う。通常pathのDOM追加は0とする
+- 文字板priorityを1へ局所変更し、文字板空白4点4／4、opacity 50%、index、針、小秒、open-heart、風防側面、opacity 16%内部選択を回帰する。グローバルRaycasterは変更しない
 - Phase 3C.1外装を既存FRONT／CORE／BACK／PLATEの表裏分離・分解transformへ統合し、100% split／explodeと誤差1e-7以内の復元をDesktop／390×844で検証する
 - 通常pathはPhase 3B.2とpixel exact、A.6性能の絶対・差分基準は合格。Desktop総合は白系文字板によるA.5前後面明度差だけ未達、音声integrationはBaseと候補の双方で同一timeoutとして記録する
-- 第4候補は`FOURTH_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`で、PC／物理iPhone再確認待ちとする
+- 状態は`PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION`とし、最終微修正のPC／物理iPhone確認前に既定採用、Ready化、マージを行わない
 - 表裏分離／断面クリップは維持し、`UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2`としてPhase 3C.2とIssue #2完了後にUXを人間判断する
 - 矩形影、100%→99% transparent、55%→54% depthWrite、透過時の暗部・深度順、PC／iPhone照明差はIssue #2へ分離し、本工程でlighting／shadow／D2c3を変更しない
 - `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`は非ブロッキング観察事項。最終統合レビューで15分連続確認を行う
@@ -139,7 +141,7 @@
 
 ### 1. 最終外装
 
-- Phase 3C.1第4候補の白系アイボリー、安定silver、半径14.200のminute dots、小秒recess、細身open-heart rim、非屈折近似dome、候補専用「外装」グループ、表裏分離／分解／復元をPC／物理iPhoneで人間確認し、Draftの次判断を行う
+- Phase 3C.1最終微修正の6時index、外装OFF時の針・りゅうず維持、helperなし「外装」UI、文字板4点／風防側面／opacity別選択をPC／物理iPhoneで人間確認し、Draftの次判断を行う
 - Phase 3C.1承認後だけ、Phase 3C.2で黒革ストラップと尾錠の必須意匠を実装する
 - 実装時に表示開口と全体比率を再確認する
 

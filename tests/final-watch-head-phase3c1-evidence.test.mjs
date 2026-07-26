@@ -32,7 +32,7 @@ test("Phase 3C.1 runtime captures are real fixed-viewport PNG evidence", () => {
   assert.equal(imageReport.rawCaptureCreationByThisScript, false);
   assert.equal(
     captureMetadata.sourceImplementationCommit,
-    "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
+    "50d651bea6d91b4be978e9e3b40a73053497c104",
   );
   assert.match(
     captureMetadata.captureMode,
@@ -92,6 +92,16 @@ test("Phase 3C.1 purpose-specific images and review GIFs are distinct", () => {
     "minute-track-close.png",
     "stable-silver-close.png",
     "exterior-group-board.png",
+    "six-index-front.png",
+    "six-index-small-second-clearance.png",
+    "six-index-minute-clearance.png",
+    "exterior-off-operational-parts.png",
+    "exterior-ui-label.png",
+    "dial-selection-four-points.png",
+    "crystal-side-selection.png",
+    "index-selection.png",
+    "hand-selection.png",
+    "opacity16-internal-selection.png",
   ];
   const hashes = required.map(name => {
     const buffer = fs.readFileSync(path.join(evidence, name));
@@ -103,7 +113,7 @@ test("Phase 3C.1 purpose-specific images and review GIFs are distinct", () => {
   const gifs = fs.readdirSync(evidence)
     .filter(file => /^video-\d{2}-.*\.gif$/.test(file))
     .sort();
-  assert.equal(gifs.length, 10);
+  assert.equal(gifs.length, 15);
   for (const file of gifs) {
     const buffer = fs.readFileSync(path.join(evidence, file));
     assert.ok(buffer.length > 20_000);
@@ -121,11 +131,11 @@ test("Phase 3C.1 reports reproduce the protected geometry and actual audit", () 
   assert.equal(config.config.enabledByDefault, false);
   assert.equal(
     config.config.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
+    "PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION",
   );
   assert.equal(
     config.sourceImplementationCommit,
-    "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2",
+    "50d651bea6d91b4be978e9e3b40a73053497c104",
   );
   assert.equal(openHeart.actualGeometryAudit.cutout.openingDiameter, 6.6);
   assert.ok(openHeart.actualGeometryAudit.cutout.openingAreaRatio <= 0.1);
@@ -145,17 +155,21 @@ test("Phase 3C.1 regression records known environment failures without threshold
   const normal = readJson("normal-path-diff.json");
   assert.equal(
     regression.status,
-    "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
+    "PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION",
   );
   assert.equal(
     regression.revisionVerification,
-    "FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
+    "FINAL_MINOR_REVISION_AUTOMATED_VERIFICATION_COMPLETE",
   );
   assert.equal(regression.humanReview.thirdCandidate, "REJECTED");
-  assert.equal(regression.humanReview.fourthCandidate, "PENDING");
+  assert.equal(regression.humanReview.fourthCandidate, "ACCEPTED");
+  assert.equal(regression.humanReview.finalMinorRevision, "PENDING");
   assert.equal(regression.defaultAdoption, false);
   assert.equal(regression.allAutomatedPassed, false);
-  assert.equal(regression.humanReview.physicalIPhone, "PENDING");
+  assert.equal(
+    regression.humanReview.physicalIPhone,
+    "FOURTH_CANDIDATE_ACCEPTED_FINAL_MINOR_REVISION_PENDING",
+  );
   assert.equal(
     regression.humanReview.thermalObservation,
     "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN",
@@ -178,11 +192,25 @@ test("Phase 3C.1 regression records known environment failures without threshold
     "mobile390",
     "uiDesktop",
     "uiMobile390",
-    "hudDesktop",
-    "hudMobile390",
   ]) {
     assert.equal(regression.suites[id].ok, true, id);
     assert.deepEqual(regression.suites[id].failed, [], id);
+  }
+  for (const id of [
+    "hudDesktop",
+    "hudMobile390",
+    "phase3b2BaseHudDesktop",
+  ]) {
+    assert.equal(regression.suites[id].ok, false, id);
+    assert.deepEqual(
+      regression.suites[id].failed,
+      [
+        "hud-speaker-focus-visible-is-present",
+        "hud-time-hhmmss-records-input-change-blur-order",
+        "hud-time-input-blur-fallback-and-late-change-apply-only-once",
+      ],
+      id,
+    );
   }
 });
 
@@ -218,7 +246,7 @@ test("Phase 3C.1 runtime material and display-family evidence is complete", () =
   assert.equal(fourth.minuteTrack.desktop.indexOverlapCount, 0);
   assert.equal(fourth.minuteTrack.desktop.twelveDoubleBarOverlapCount, 0);
   assert.equal(fourth.minuteTrack.desktop.openingOverlapCount, 0);
-  assert.equal(fourth.minuteTrack.desktop.bezelRehautOverlapCount, 0);
+    assert.equal(fourth.minuteTrack.desktop.bezelRehautOverlapCount, 0);
   assert.equal(fourth.minuteTrack.worldValuesEqual, true);
   for (const viewport of ["desktop", "mobile390"]) {
     const crystal = fourth.crystal[viewport];
@@ -227,11 +255,32 @@ test("Phase 3C.1 runtime material and display-family evidence is complete", () =
     assert.equal(crystal.restored.material.opacity, 0.1);
     assert.equal(crystal.restored.material.depthWrite, false);
     const exterior = fourth.exteriorGroup[viewport];
-    assert.equal(exterior.initial.partCount, 29);
+    assert.equal(exterior.initial.partCount, 25);
     assert.equal(exterior.off.group.visiblePartCount, 0);
-    assert.equal(exterior.on.group.visiblePartCount, 29);
+    assert.equal(exterior.on.group.visiblePartCount, 25);
     assert.equal(exterior.off.selection, null);
+    assert.deepEqual(
+      exterior.initial.excludedOperationalParts.map(item => item.name),
+      [
+        "Phase 3C.1 分針",
+        "Phase 3C.1 時針",
+        "Phase 3C.1 小秒針",
+        "りゅうず",
+      ],
+    );
   }
+  assert.equal(fourth.sixOClockIndex.worldValuesEqual, true);
+  assert.equal(fourth.sixOClockIndex.desktop.indexMeshCount, 13);
+  assert.equal(
+    fourth.sixOClockIndex.desktop.forbiddenInterferenceCount,
+    0,
+  );
+  assert.ok(
+    fourth.sixOClockIndex.desktop.clearances.smallSecondRecess >= 1.5,
+  );
+  assert.ok(
+    fourth.sixOClockIndex.desktop.clearances.majorMinuteDot >= 0.3,
+  );
   assert.deepEqual(
     fourth.backlog,
     ["UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"],

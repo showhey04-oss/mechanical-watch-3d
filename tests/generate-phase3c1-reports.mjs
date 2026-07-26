@@ -16,9 +16,9 @@ const evidence = path.join(
 );
 const reports = path.join(evidence, "reports");
 const sourceImplementationCommit =
-  "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2";
+  "50d651bea6d91b4be978e9e3b40a73053497c104";
 const sourceAuditCommit =
-  "a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2";
+  "50d651bea6d91b4be978e9e3b40a73053497c104";
 const sourceBaseCommit =
   "98d83781aa7aa001836a0d57f1ad6e3d058a15c4";
 const mainCommit =
@@ -71,6 +71,7 @@ const suites = Object.fromEntries(
     ["uiMobile390", "ui-suite-mobile.json"],
     ["hudDesktop", "hud-suite-desktop.json"],
     ["hudMobile390", "hud-suite-mobile.json"],
+    ["phase3b2BaseHudDesktop", "hud-suite-phase3b2-base-desktop.json"],
   ].map(async ([id, file]) => [id, suiteSummary(await readJson(file))])),
 );
 suites.audioMobile390 = {
@@ -212,6 +213,20 @@ await writeJson("selection-opacity-report.json", {
   opacityCycle: desktop.opacityCycle,
   internalSelectionAtOpacity16: desktop.internalSelectionAtOpacity16,
   mobileSelection: mobile.selection,
+  dialBlankPointSelections: {
+    desktop: desktop.dialBlankPointSelections,
+    mobile390: mobile.dialBlankPointSelections,
+  },
+  dialBlankPointSelectionsAtOpacity50: {
+    desktop: desktop.opacity50DialSelection,
+    mobile390: mobile.opacity50DialSelection,
+  },
+  crystalSideSelection: {
+    desktop: desktop.crystalSideSelection,
+    mobile390: mobile.crystalSideSelection,
+  },
+  localPickContract: desktop.selection.localPickContract,
+  globalRaycasterChanged: false,
   actualBrowserScreenshot: "part-selection-ui.png",
 });
 await writeJson("material-runtime-audit.json", {
@@ -262,6 +277,13 @@ await writeJson("fourth-candidate-visual-audit.json", {
   exteriorGroup: {
     desktop: desktop.exteriorDisplayGroup,
     mobile390: mobile.exteriorDisplayGroup,
+  },
+  sixOClockIndex: {
+    configured: minuteTrackAudit.sixIndex,
+    desktop: desktop.geometry.sixIndex,
+    mobile390: mobile.geometry.sixIndex,
+    worldValuesEqual:
+      same(desktop.geometry.sixIndex, mobile.geometry.sixIndex),
   },
   backlog: [
     "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2",
@@ -331,18 +353,20 @@ const allPerformancePassed =
   );
 await writeJson("regression-results.json", {
   ...metadata,
-  status: "HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED",
+  status: "PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION",
   revisionVerification:
-    "FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE",
-  decision: "FOURTH_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+    "FINAL_MINOR_REVISION_AUTOMATED_VERIFICATION_COMPLETE",
+  decision: "FINAL_MINOR_REVISION_NOT_DEFAULT_PENDING_HUMAN_CONFIRMATION",
   defaultAdoption: false,
   humanReview: {
     initialCandidate: "REJECTED",
     secondCandidate: "REJECTED",
     thirdCandidate: "REJECTED",
-    fourthCandidate: "PENDING",
-    pc: "PENDING",
-    physicalIPhone: "PENDING",
+    fourthCandidate: "ACCEPTED",
+    finalMinorRevision: "PENDING",
+    pc: "FOURTH_CANDIDATE_ACCEPTED_FINAL_MINOR_REVISION_PENDING",
+    physicalIPhone:
+      "FOURTH_CANDIDATE_ACCEPTED_FINAL_MINOR_REVISION_PENDING",
     adoption: "NOT_APPROVED",
     thermalObservation: "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN",
     thermalBlocking: false,
@@ -407,6 +431,30 @@ await writeJson("regression-results.json", {
       desktop.exteriorInterference.forbiddenCount
       + desktop.attachmentInterference.position2.attachmentForbiddenCount
       + desktop.mechanismInterference.forbiddenCount,
+    sixOClockIndex: desktop.geometry.sixIndex,
+  },
+  exteriorDisplayGroup: {
+    managedPartCount: desktop.exteriorDisplayGroup.initial.partCount,
+    excludedOperationalParts:
+      desktop.exteriorDisplayGroup.initial.excludedOperationalParts,
+    helperDomCount:
+      desktop.exteriorDisplayGroup.mobilePanel.open.helperElementCount,
+    label: desktop.exteriorDisplayGroup.mobilePanel.open.labelText,
+  },
+  selection: {
+    dialBlankOpacity100Passed:
+      desktop.checks.dialBlankPointerSelection
+      && mobile.checks.dialBlankPointerSelection,
+    dialBlankOpacity50Passed:
+      desktop.checks.opacity50DialSelection
+      && mobile.checks.opacity50DialSelection,
+    crystalSideEdgePassed:
+      desktop.checks.crystalSideSelection
+      && mobile.checks.crystalSideSelection,
+    opacity16InternalPassed:
+      desktop.checks.internalSelectionAtOpacity16
+      && mobile.checks.internalSelectionAtOpacity16,
+    globalRaycasterChanged: false,
   },
   imageEvidence: {
     rawCaptureCreationByGenerator:
@@ -414,9 +462,8 @@ await writeJson("regression-results.json", {
     actualRuntimeCaptureCount: imageEvidence.images.length,
   },
   knownLimitations: [
-    "The initial, second, and third Phase 3C.1 candidates failed human review; this fourth candidate remains pending PC and physical iPhone confirmation.",
-    "PC human visual confirmation is pending.",
-    "Physical iPhone human confirmation is pending.",
+    "The initial, second, and third Phase 3C.1 candidates failed human review; the fourth candidate passed PC and physical iPhone review.",
+    "The final minor revision adds the 6 o'clock index, narrows Exterior ON/OFF semantics, and improves dial selection; final PC and physical iPhone confirmation of only these changes remains pending.",
     "PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN is recorded as non-blocking because no progressive frame drop, Safari reload, audio failure, touch failure, or thermal warning has been observed; the final integration review must include a continuous 15-minute run.",
     "The actual balance projects near 2:34; the reference image's nominal open-heart position was intentionally not copied.",
     "The protected inherited shadow rig can form a visible rectangular boundary over the large ivory dial. The 100→99 transparent discontinuity, 55→54 depthWrite discontinuity, opacity dark/depth ordering, and PC/iPhone lighting differences remain separated to open Issue #2.",
@@ -424,6 +471,7 @@ await writeJson("regression-results.json", {
     "Phase 3C.2 strap and buckle styling remains mandatory backlog.",
     "The desktop A.5 front/back luminance-balance assertion fails for the near-white dial while the Phase 3B.2 baseline passes; the threshold and protected lighting rig were not changed, so this remains visible in the evidence instead of being waived.",
     "The trusted-gesture audio integration timed out for both the candidate and Phase 3B.2 baseline in the same in-app Browser session; Node audio tests remain authoritative until physical-device review.",
+    "The HUD suite reproduced the same focus-visible and time-input blur event-order failures on the candidate and Phase 3B.2 baseline in this in-app Browser; no PR-specific HUD regression was detected.",
     "Front/back split and section clipping remain unchanged; their UX overlap with explode and advanced-detail views is tracked as UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2.",
   ],
   allAutomatedPassed:

@@ -2,23 +2,25 @@
 
 ## Unreleased — Stacked Draft Phase 3C.1 formal watch-head candidate
 
-- 初回、第2候補、第3候補は人間非承認。状態を`HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED`とし、第4候補を同じDraft PR #15へ追加。
+- 初回、第2候補、第3候補は人間非承認。第4候補はPC／物理iPhoneで合格し、残る6時index、外装グループ、文字板選択性だけを同じDraft PR #15で最終微修正。状態は`PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION`。
 - 人間承認済みPhase 3B.2 Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`から別ブランチを作り、`feature/final-exterior-balanced-phase3b2`をBaseとする積み上げDraftとして正式時計本体意匠を分離。
 - `?exterior=balanced&watchHead=phase3c1`時だけ、白系アイボリー`#F2EDE5`／小秒面`#F5F1EA`、1.820×0.440×0.230 faceted bar、半径14.200の0.165／0.250丸型60分目盛、視覚径8.500小秒recessを生成。
 - ケース、ベゼル、rehaut、ラグ、裏蓋、りゅうず、ケースチューブ、接続カラー、spring bar、仮buckleへ`EDUCATIONAL_STABLE_SILVER_MATERIAL`（`#E7EAED`、metalness 0.52、roughness 0.20、envMapIntensity 0.35）をcandidate-local cloneとして適用し、Base Material共有を0にした。index、hands、open-heart rim、内部機構、movement holderは対象外。
 - 分目盛を半径14.200へ移し、通常index clearance 0.437、12時double bar最小clearance 0.381178、表示開口clearance 0.575を確保。60点を維持し、index／double bar／opening／bezel・rehautとの重複を0にした。
 - 風防のGeometry、保護包絡Y=-3.460～-2.860、clear diameter 30.600、depth stateを維持し、候補専用`EDUCATIONAL_NON_REFRACTIVE_DOME_CRYSTAL`（roughness 0.025、transmission 0、opacity 0.10、ior 1.45、thickness 0.05、clearcoat 1）へ変更。edge contrast保持率はDesktop 96.460%、390×844 96.394%。
-- 学習タブへquery限定の「外装」表示グループを追加し、29部品を制御する。OFF時visible 0と外装選択解除、ON時29部品復元、split／explode／opacity 50／16%／ボトムシートとのAND状態合成をDesktop／390×844で確認。通常pathのDOM追加は0。
+- 6時に通常バーを追加し、12時ダブルを含む13 Meshとした。実Geometry clearanceは小秒凹面1.968、小秒目盛2.479975、小秒針掃引2.949939、major dot 0.435226、表示開口1.260226、禁止干渉0。
+- 学習タブのquery限定表示をhelperなしの「外装」だけへ整理し、管理対象を25部品とした。針3本とりゅうずはOFF対象外のままFRONT／CORE family、選択、機構操作を維持する。OFF／ON、split／explode／opacity 16%、ボトムシートとの状態合成をDesktop／390×844で確認。通常pathのDOM追加は0。
+- 文字板priorityを1へ局所変更し、空白4点4／4、opacity 50%、index、針、小秒、open-heart、風防側面、opacity 16%内部選択を確認。風防はpickableのまま局所非描画外縁面で側面選択を維持し、global Raycaster／opacity閾値は変更していない。
 - 実テンプworld中心[7.700,1.730,1.800]を文字板へ[7.700,1.800]として投影し、径6.600、文字板面積比3.5559%、中心誤差0の限定オープンハートを維持。参照画像の名目的な位置を模写しない。
 - 事前遮蔽判定`B_PARTIAL_PLATE_OCCLUSION`に対し、半径1.320／中心offset 1.900の2つの物理地板窓を設け、中央下側耐震軸受land 0.100を保持。機構移動、非表示、透明化、CSG、トゥールビヨン風ケージは使用しない。
 - actual +Y Raycaster 709 sampleで機構first-hit率0.165021、テンプ0.133992、脱進機0.001410を記録。文字板、小秒、index、分針clearanceを維持。
 - Phase 3C.1部品を既存FRONT／CORE／BACK／PLATEの表裏分離・分解transformへ統合。split／explode 100%とposition／quaternion／scale誤差1e-7以内の復元をDesktop／390×844で確認。
 - Phase 3C.1部品を選択・HUD・学習表示へ登録し、透過100／50／16／100、16%内部選択、位置1／2、巻上げ、時刻合わせ、秒停止を回帰。
 - 通常pathはPhase 3B.2とPNG 237,334 byte／SHA-256 `a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`で一致。APP_VERSION、S86、Phase 2C、A.7、機構、カメラ、DPR、照明、影、tone mapping、UI、音響を変更していない。
-- Desktop 85/86（白系文字板によるA.5前後面明度差のみ未達）、390×844 88/88、UI 20/20・22/22、HUD 45/45・57/57。音声integrationは候補とPhase 3B.2 Baseの双方で同一timeout、Node音声試験は合格。
-- idle／pointer／wheelはDesktop／390×844の絶対閾値とPhase 3B.2差分基準へ合格。第4候補Desktop idle差はfps +0.005%、p95 -0.200msで、第3候補のfps -4.217%より悪化していない。閾値は変更していない。
+- Desktop総合は白系文字板によるA.5前後面明度差のみ未達、390×844総合とUIは合格。HUDのfocus-visible／時刻blur順3項目は候補とPhase 3B.2 Baseで同一未達、音声integrationも双方で同一timeout。閾値・製品コードは変更していない。
+- idle／pointer／wheelはDesktop／390×844の絶対閾値とPhase 3B.2差分基準へ合格。最終微修正Desktop idleのBase比はfps -0.001%、p95差0.000msで、明確な悪化はない。
 - 矩形影、100%→99% transparent、55%→54% depthWrite、透過時の暗部・深度順、PC／iPhone照明差はIssue #2へ分離し、最終成果で隠していない。
-- 第4候補の状態は`FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE`、判断は`FOURTH_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`。PC／物理iPhone再確認前に既定採用、Ready化、マージを行わない。
+- 第4候補本体の人間確認は合格済み。最終微修正は`FINAL_MINOR_REVISION_NOT_DEFAULT_PENDING_HUMAN_CONFIRMATION`で、PC／物理iPhone再確認前に既定採用、Ready化、マージを行わない。
 - 表裏分離／断面クリップは変更せず、`UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2`として分解表示との重複、学習上の価値、詳細表示への移動、初期UIからの折りたたみ、廃止可否を後続人間判断へ残す。
 - `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`を非ブロッキング観察事項として記録し、最終統合レビューで15分連続確認する。
 - 黒革、実用長、スプリングバー巻込み、6時側穴列、定革・遊革、尾錠枠・つく棒・取付バー、シボ、ステッチ、コバはPhase 3C.2の必須後続工程として維持。

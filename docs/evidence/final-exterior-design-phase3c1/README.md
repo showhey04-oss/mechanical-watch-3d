@@ -4,15 +4,16 @@
 
 - Base：`feature/final-exterior-balanced-phase3b2`
 - Base SHA：`98d83781aa7aa001836a0d57f1ad6e3d058a15c4`
-- 第4候補実装・browser harness基準：`a2b1658d16bcd6ed8eb9766bd7d8979dbc4916d2`
+- 最終微修正実装・browser harness基準：`50d651bea6d91b4be978e9e3b40a73053497c104`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
 - APP_VERSION：`v3.15.0`
 - query：`?exterior=balanced&watchHead=phase3c1`
 - capture mode：same-origin Browser harness、actual Three.js WebGLRenderTarget PNG capture、actual in-app Browser screenshot
 - 初回／第2候補／第3候補人間確認：非承認
-- 状態：`HUMAN_REVIEW_FAILED_PHASE3C1_THIRD_REVISION_REQUIRED`
-- 第4候補：`FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE`
-- 採用状態：`FOURTH_IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`
+- 状態：`PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION`
+- 第4候補：PC／物理iPhone人間確認合格
+- 最終微修正：`FINAL_MINOR_REVISION_AUTOMATED_VERIFICATION_COMPLETE`
+- 採用状態：`FINAL_MINOR_REVISION_NOT_DEFAULT_PENDING_HUMAN_CONFIRMATION`
 
 `desktop-*.png`、`mobile-390-*.png`、opacity、crown、normal-path画像は実Three.js sceneを同一origin harnessから描画・取得した。`panel-*.png`と`part-selection-ui.png`は実in-app Browser screenshotである。`tests/generate-phase3c1-evidence.py`は正本runtime captureを生成せず、正本と承認済みPhase 3B.2画像を入力に比較板、注記図、close-up、review GIFを生成する。
 
@@ -38,7 +39,10 @@
 - 外装安定シルバー：`#E7EAED`、metalness 0.52、roughness 0.20、envMapIntensity 0.35。対象46 Meshはcandidate-local cloneでbase共有0
 - 分目盛：中心半径14.200、同径60点、通常index clearance 0.437、12時double bar最小clearance 0.381178、表示開口clearance 0.575、重複0
 - 非屈折ドーム風防：opacity 0.10、transmission 0、roughness 0.025、edge contrast保持率Desktop 96.460%／390×844 96.394%
-- 外装表示グループ：29部品、OFF時visible 0／ON復元29、選択中外装の解除、split／explode／opacity 50／16%との状態合成を確認
+- 6時index：1.820×0.440×0.230、バー総数13、実Geometry禁止干渉0。小秒凹面／目盛／針掃引／major dot／表示開口clearanceは1.968／2.479975／2.949939／0.435226／1.260226
+- 外装表示グループ：25部品、OFF時管理対象visible 0／ON復元25。針3本とりゅうずはOFF対象外でsplit／explode family・操作・選択を維持
+- UI：ラベル「外装」、helper DOM 0、操作領域44px、横overflow 0
+- 選択：文字板priority 1、空白4点4／4、opacity 50%文字板、風防側面、index、針、opacity 16%内部選択。global Raycaster変更0
 - desktop全テーマ前後面明度差：最大37.996%（A.5未達、閾値変更なし）
 - 390×844全テーマ前後面明度差：最大28.901%
 - Geometry監査：17対象、winding mismatch／reversed normal／退化／non-manifoldすべて0
@@ -70,14 +74,23 @@
 - `exterior-split-off.png`
 - `exterior-explode-off.png`
 - `exterior-opacity16-off.png`
+- `exterior-off-hands-t0.png`
+- `exterior-off-hands-t1.png`
+- `exterior-off-hands-t2.png`
+- `exterior-off-crown-position1.png`
+- `exterior-off-crown-position2.png`
 
 ## 実in-app Browser
 
 - `part-selection-ui.png`
+- `index-selection-ui.png`
+- `hand-selection-ui.png`
+- `crystal-selection-ui.png`
+- `opacity16-internal-selection-ui.png`
 - `panel-open-browser.png`
 - `panel-collapsed-browser.png`
 
-パネル画像は実Browser viewport 664×814である。固定390×844については、WebGL captureとUI 22/22／HUD 57/57の実測結果を別途保存している。
+`panel-open-browser.png`と各選択UI画像は実Browser viewport 1280×720、既存の`panel-collapsed-browser.png`は履歴証跡として664×814である。固定390×844についてはWebGL captureとUI 22/22を保存した。HUDはfocus-visible／時刻blur順の3項目が同一環境のPhase 3B.2 Baseでも未達であり、今回固有の回帰ではない。
 
 ## 監査・比較画像
 
@@ -119,6 +132,16 @@
 - `minute-track-close.png`
 - `stable-silver-close.png`
 - `exterior-group-board.png`
+- `six-index-front.png`
+- `six-index-small-second-clearance.png`
+- `six-index-minute-clearance.png`
+- `exterior-off-operational-parts.png`
+- `exterior-ui-label.png`
+- `dial-selection-four-points.png`
+- `crystal-side-selection.png`
+- `index-selection.png`
+- `hand-selection.png`
+- `opacity16-internal-selection.png`
 
 ## Review GIF
 
@@ -132,6 +155,11 @@
 - `video-08-mobile-review.gif`
 - `video-09-split-explode-restore.gif`
 - `video-10-exterior-group.gif`
+- `video-11-exterior-on-off-on.gif`
+- `video-12-exterior-off-hand-motion.gif`
+- `video-13-exterior-off-crown-cycle.gif`
+- `video-14-selection-sequence.gif`
+- `video-15-split-explode-composition.gif`
 
 GIFは実runtime captureを順序付けたreview animationであり、連続WebM録画ではない。入力連続性はA.6 pointer／wheel診断、モデル不変はtransform invariantで検証する。
 
@@ -157,6 +185,7 @@ GIFは実runtime captureを順序付けたreview animationであり、連続WebM
 - `reports/ui-suite-mobile.json`
 - `reports/hud-suite-desktop.json`
 - `reports/hud-suite-mobile.json`
+- `reports/hud-suite-phase3b2-base-desktop.json`
 - `reports/audio-suite-mobile-trusted-gesture.json`
 - `reports/audio-suite-phase3b2-base-mobile.json`
 - `reports/performance-raw.json`
@@ -168,35 +197,31 @@ GIFは実runtime captureを順序付けたreview animationであり、連続WebM
 
 ## 試験状態
 
-初回、第2候補、第3候補の人間非承認を維持し、第4候補を`FOURTH_CANDIDATE_AUTOMATED_REVIEW_PENDING_PC_AND_PHYSICAL_IPHONE`として評価する。
+初回、第2候補、第3候補の人間非承認と第4候補のPC／物理iPhone合格を維持し、最終微修正を`PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION`として評価する。
 
 - Phase 3C.1 runtime harness：Desktop／390×844とも合格。安定シルバー、60分目盛、風防edge contrast、外装表示グループ、FRONT／CORE／BACK／PLATEのsplit／explodeと誤差1e-7以内の復元を含む
 - Node：155/155
 - Desktop総合：85/86。白系文字板によりA.5前後面明度差のみ未達（Phase 3B.2 Baseは86/86）
 - 390×844総合：88/88
 - UI：20/20、22/22
-- HUD：45/45、57/57
+- HUD：focus-visible／時刻blur順3項目がDesktop／390×844で未達。同一環境のPhase 3B.2 Baseにも同じ3 IDを再現し、PR固有回帰0
 - 音声：trusted clickを与えたが候補とPhase 3B.2 Baseの双方で同じintegration wait timeout。Node音声試験は合格
 - 通常path：237,334 byte／SHA-256 `a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`でBaseと一致
 - Desktop／390×844のidle・pointer・wheel：絶対閾値と差分基準に合格
-- 第4候補desktop idleのBase比はfps +0.005%、p95 -0.200msで、第3候補のfps -4.217%より悪化していない
+- 最終微修正desktop idleのBase比はfps -0.001%、p95差0.000ms、390×844 idleは差0.000%／0.000ms
 - 閾値変更：なし
 - Issue #2対象のlighting／shadow／transparent／depthWrite／D2c3変更：なし
 - `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`：非ブロッキング観察事項。最終統合レビューでは15分連続確認を必須とする
 
 ## 人間確認
 
-PCと物理iPhoneは未確認である。次を確認するまで既定採用、Ready化、マージを行わない。
+第4候補本体のPC／物理iPhone確認は合格済みである。次の最終微修正を確認するまで既定採用、Ready化、マージを行わない。
 
-- 白系アイボリー色と安定シルバー`#E7EAED`の既存照明下での同一素材認識
-- 半径14.200の60分目盛とバーインデックス、12時double bar、表示開口の離隔
-- 非屈折ドーム風防越しの文字板・針・分目盛の鮮明さと、斜め／側面のドーム視認性
-- 学習タブ「外装」のON／OFF、選択解除、内部選択、split／explode／opacity 50／16%からの復元
-- 実テンプ位置へ合わせた開口の見え方
-- 小秒、インデックス、3針の主従関係
-- 100／50／16%透過、選択と解除
-- 表裏分離100%、分解100%、復元後の全Phase 3C.1部品
-- 回転、ズーム、位置1／2、巻上げ、時刻合わせ、秒停止、作動音
+- 6時バーが小秒へ接触して見えず、他の通常バーと同寸法に見えること
+- 外装OFFでも3針とりゅうずが残り、針運動、pull／push、巻上げ、時刻合わせ、秒停止、作動音、選択が維持されること
+- 学習タブが補助文なしの「外装」だけで、PC／390×844／物理iPhoneで扱いやすいこと
+- 文字板空白、index、分目盛、3針、小秒、open-heart、風防側面、opacity 16%内部部品を通常クリック／タップで区別できること
+- split／explode／opacity 16%と外装OFF／ONを合成し、復元後の状態が自然であること
 - 既存Issue #2へ分離した影範囲境界
 - 100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順、PC／iPhone照明差はIssue #2のままであること
 - Phase 3C.2の黒革ストラップ・尾錠意匠が未実装であること
