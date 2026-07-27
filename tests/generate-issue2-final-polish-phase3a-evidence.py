@@ -19,6 +19,7 @@ GIFS = EVIDENCE / "gifs"
 CANDIDATES = ["issue2-baseline", "issue2-d2a", "issue2-d2c3"]
 VIEWPORTS = ["1280x720", "390x844"]
 SOURCE_BASE = "191ff2682398356da59e747e608c82120dacebd9"
+SOURCE_AUDIT = "67959f5fc0d16babbec0520812e936f3d6010196"
 SOURCE_PR5 = "79feee0f81bc719de0118042b356a2b63007090c"
 CAPTURED_AT = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
 
@@ -368,6 +369,37 @@ def build_gifs():
     )
 
 
+def build_manifest():
+    files = []
+    for path in sorted(EVIDENCE.rglob("*")):
+        if (
+            not path.is_file()
+            or path.name == "evidence-manifest.json"
+        ):
+            continue
+        files.append({
+            "path": path.relative_to(EVIDENCE).as_posix(),
+            "bytes": path.stat().st_size,
+            "sha256": sha256(path),
+        })
+    save_json(EVIDENCE / "evidence-manifest.json", {
+        "schemaVersion": 1,
+        "sourceBaseCommit": SOURCE_BASE,
+        "sourceAuditCommit": SOURCE_AUDIT,
+        "sourcePr5Head": SOURCE_PR5,
+        "sourceBranch": "feature/issue2-final-polish-phase3a-final-exterior",
+        "appVersion": "v3.15.0",
+        "captureMode": (
+            "same-origin unsandboxed iframe harness; "
+            "actual Three.js offscreen WebGL PNG"
+        ),
+        "closedWorld": True,
+        "selfIncluded": False,
+        "fileCount": len(files),
+        "files": files,
+    })
+
+
 def failed_check_names(report):
     checks = report.get("checks") or report.get("items") or []
     return [
@@ -593,7 +625,7 @@ def build_regression_summary(metadata, coverage, raw_inventory):
         "status": (
             "COMPARISON_COMPLETE_WITH_CANDIDATE_REGRESSIONS_NOT_ADOPTED"
         ),
-        "node": {"status": "passed", "passed": 205, "total": 205},
+        "node": {"status": "passed", "passed": 210, "total": 210},
         "browser": {
             "coverageRuns": 6,
             "captureCount": len(raw_inventory),
@@ -678,6 +710,7 @@ def main():
 
     metadata = {
         "sourceBaseCommit": SOURCE_BASE,
+        "sourceAuditCommit": SOURCE_AUDIT,
         "sourcePr5Head": SOURCE_PR5,
         "sourceBranch": "feature/issue2-final-polish-phase3a-final-exterior",
         "captureMode": "same-origin unsandboxed iframe harness; actual Three.js offscreen WebGL PNG",
@@ -695,6 +728,20 @@ def main():
         **metadata,
         "artifactCount": len(raw_inventory),
         "allNonFlat": all(not item["authenticity"]["singleColor"] for item in raw_inventory),
+        "allD2aAndD2c3NonFlat": all(
+            not item["authenticity"]["singleColor"]
+            for item in raw_inventory
+            if not item["path"].startswith("raw/issue2-baseline/")
+        ),
+        "baselineFlatCaptures": [
+            item["path"]
+            for item in raw_inventory
+            if item["authenticity"]["singleColor"]
+        ],
+        "baselineFlatCaptureInterpretation": (
+            "actual current-baseline mobile full-length/far black-out; "
+            "retained as a rendering-quality failure rather than hidden"
+        ),
         "allDimensionsMatch": all(
             (item["width"], item["height"]) == tuple(map(int, item["path"].split("/")[2].split("x")))
             for item in raw_inventory
@@ -751,6 +798,7 @@ def main():
     })
     build_boards()
     build_gifs()
+    build_manifest()
 
 
 if __name__ == "__main__":
