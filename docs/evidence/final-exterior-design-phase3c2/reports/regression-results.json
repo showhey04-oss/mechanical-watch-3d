@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
-  "sourceAuditCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
+  "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+  "sourceAuditCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
   "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
@@ -22,8 +22,8 @@
   "thresholdsChanged": false,
   "node": {
     "status": "passed",
-    "passed": 181,
-    "total": 181
+    "passed": 183,
+    "total": 183
   },
   "runtimeHarness": {
     "desktop": true,
@@ -98,8 +98,8 @@
       "phase3c2DomAdded": 0
     },
     "lugContinuityFinal": {
-      "sourceImplementationCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
-      "sourceAuditCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
+      "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+      "sourceAuditCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
       "sourceStartCommit": "752418e72d3bb7b1dd86952638a3bb85fdf6d582",
       "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
       "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
@@ -132,6 +132,51 @@
       ],
       "allDecodedPixelsExact": true,
       "phase3c2Object3DAddedOutsideCandidatePath": 0,
+      "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
+      "phase3c1Acceptance": {
+        "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+        "head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+        "deferred": [
+          "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
+          "A5_FRONT_BACK_LUMINANCE_DIFFERENCE",
+          "ISSUE_2_RECTANGULAR_SHADOW_AND_TRANSPARENCY_CONTINUITY",
+          "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
+        ]
+      }
+    },
+    "lugSurfacingFinal": {
+      "schemaVersion": 1,
+      "classification": "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+      "sourceStartCommit": "9b55d5d3971ef456de5474b3bff6d3f26d6879f8",
+      "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+      "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+      "appVersion": "v3.15.0",
+      "paths": [
+        {
+          "id": "normal-path",
+          "baseFile": "images/normal-path-base.png",
+          "currentFile": "images/lug-surfacing-final/raw-after/normal-path-protected.png",
+          "basePngSha256": "a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c",
+          "currentPngSha256": "a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c",
+          "decodedPixelExact": true,
+          "changedPixelCount": 0
+        },
+        {
+          "id": "phase3c1-only-path",
+          "baseFile": "images/phase3c1-path-base.png",
+          "currentFile": "images/lug-surfacing-final/raw-after/phase3c1-path-protected.png",
+          "basePngSha256": "d126e6ee95f46376babfc76ae8fb5e9c861107068b3d98a52e3f8ff939a6b648",
+          "currentPngSha256": "d126e6ee95f46376babfc76ae8fb5e9c861107068b3d98a52e3f8ff939a6b648",
+          "decodedPixelExact": true,
+          "changedPixelCount": 0
+        }
+      ],
+      "allDecodedPixelsExact": true,
+      "phase3c2Object3DAddedOutsideCandidatePath": 0,
+      "sourceAuditCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+      "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+      "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
+      "baseBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
       "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
       "phase3c1Acceptance": {
         "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
@@ -208,7 +253,7 @@
   },
   "performance": {
     "sourceBase": "Phase 3C.1 approved head 4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
-    "candidate": "Phase 3C.2 pre-lug-continuity implementation commit 292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+    "candidate": "Phase 3C.2 refined lug surfacing commit 00983f49b4dea623247e211cca54f3aac3f559ec",
     "thresholdsChanged": false,
     "environments": {
       "desktop": {
@@ -4587,6 +4632,166 @@
           }
         ]
       }
+    },
+    "lugSurfacingFinal": {
+      "sourceStartCommit": "9b55d5d3971ef456de5474b3bff6d3f26d6879f8",
+      "overallStatus": "DIFFERENTIAL_PASS",
+      "comparisons": {
+        "desktop": {
+          "front-idle": {
+            "baseMedian": {
+              "averageFps": 13.670738801628854,
+              "p50": 66.70000000000073,
+              "p95": 83.79999999999927,
+              "p99": 85.20000000000073,
+              "over33": 141,
+              "over50": 141
+            },
+            "candidateMedian": {
+              "averageFps": 13.745101479807749,
+              "p50": 66.70000000000437,
+              "p95": 83.40000000000146,
+              "p99": 85,
+              "over33": 141,
+              "over50": 141
+            },
+            "fpsDeltaPercent": 0.543955079955407,
+            "p95DeltaMs": -0.3999999999978172,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          },
+          "pointer-rotate": {
+            "baseMedian": {
+              "averageFps": 13.580582236678385,
+              "p50": 66.70000000000437,
+              "p95": 84,
+              "p99": 84.79999999999563,
+              "over33": 56,
+              "over50": 56
+            },
+            "candidateMedian": {
+              "averageFps": 13.648549841579333,
+              "p50": 66.70000000000437,
+              "p95": 83.40000000000146,
+              "p99": 83.69999999999709,
+              "over33": 56,
+              "over50": 56
+            },
+            "fpsDeltaPercent": 0.5004763692486003,
+            "p95DeltaMs": -0.5999999999985448,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          },
+          "wheel-zoom": {
+            "baseMedian": {
+              "averageFps": 13.466618325043006,
+              "p50": 66.70000000000437,
+              "p95": 83.5,
+              "p99": 84.90000000000146,
+              "over33": 52,
+              "over50": 52
+            },
+            "candidateMedian": {
+              "averageFps": 13.300208286161347,
+              "p50": 66.79999999999563,
+              "p95": 84,
+              "p99": 85.09999999999854,
+              "over33": 52,
+              "over50": 52
+            },
+            "fpsDeltaPercent": -1.2357225464109096,
+            "p95DeltaMs": 0.5,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          }
+        },
+        "mobile390": {
+          "front-idle": {
+            "baseMedian": {
+              "averageFps": 14.592291378908097,
+              "p50": 66.70000000000073,
+              "p95": 83.40000000000146,
+              "p99": 83.5,
+              "over33": 150,
+              "over50": 144
+            },
+            "candidateMedian": {
+              "averageFps": 14.661323428794839,
+              "p50": 66.70000000000073,
+              "p95": 83.30000000000291,
+              "p99": 83.5,
+              "over33": 150,
+              "over50": 145
+            },
+            "fpsDeltaPercent": 0.4730720357360854,
+            "p95DeltaMs": -0.09999999999854481,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          },
+          "pointer-rotate": {
+            "baseMedian": {
+              "averageFps": 14.189514189514188,
+              "p50": 66.69999999999709,
+              "p95": 83.39999999999418,
+              "p99": 83.40000000000146,
+              "over33": 59,
+              "over50": 58
+            },
+            "candidateMedian": {
+              "averageFps": 14.186784649377437,
+              "p50": 66.69999999999709,
+              "p95": 83.39999999999418,
+              "p99": 83.40000000000146,
+              "over33": 59,
+              "over50": 59
+            },
+            "fpsDeltaPercent": -0.0192363184552776,
+            "p95DeltaMs": 0,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          },
+          "wheel-zoom": {
+            "baseMedian": {
+              "averageFps": 14.465903611356383,
+              "p50": 66.69999999999709,
+              "p95": 83.30000000000291,
+              "p99": 84,
+              "over33": 56,
+              "over50": 54
+            },
+            "candidateMedian": {
+              "averageFps": 14.446838170067165,
+              "p50": 66.69999999999709,
+              "p95": 83.30000000000291,
+              "p99": 83.40000000000146,
+              "over33": 57,
+              "over50": 56
+            },
+            "fpsDeltaPercent": -0.13179571633707496,
+            "p95DeltaMs": 0,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          }
+        }
+      }
     }
   },
   "console": {
@@ -4619,11 +4824,30 @@
       "count": 4,
       "queryOnly": true,
       "protectedAnchorsUnchanged": true,
-      "classification": "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
-      "rootProfile": "CASE_RADIUS_MATCHED_CHORD_TO_MONOTONIC_TAPERED_SWEPT_PRISM",
+      "classification": "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+      "rootProfile": "CASE_RADIUS_MATCHED_ROUNDED_SUPERELLIPSE_EASED_SWEEP",
       "rootEmbed": 0.26,
       "edgeBreak": 0.055,
       "rootTransitionLength": 4.297,
+      "surfacing": {
+        "stationCount": 16,
+        "crossSectionSegments": 24,
+        "crossSectionExponent": 2.4,
+        "taperEasing": "45_PERCENT_LINEAR_PLUS_55_PERCENT_SMOOTHSTEP",
+        "widthTaperEasing": "SMOOTHSTEP_TO_FULL_WIDTH_TAPER_AT_70_PERCENT",
+        "widthTaperEndProgress": 0.7,
+        "rootZ": 16.203,
+        "tipCenterZ": 23.094,
+        "rootY": 1.35,
+        "tipY": 2.8,
+        "rootWidth": 3.4,
+        "tipWidth": 2,
+        "rootThickness": 5.4,
+        "tipThickness": 2,
+        "midWaistCount": 0,
+        "sectionStyle": "ROUNDED_SUPERELLIPSE",
+        "highlightFlow": "SHARED_VERTEX_LONGITUDINAL_AND_CIRCUMFERENTIAL_NORMALS"
+      },
       "technicalClosure": "RESOLVED_PENDING_HUMAN_CONFIRMATION"
     },
     "leatherOpaqueAt100Percent": true,
@@ -4651,5 +4875,16 @@
     "desktopHarnessPassed": true,
     "mobileHarnessPassed": true,
     "protectedPathsPixelExact": true
+  },
+  "lugSurfacingFinal": {
+    "status": "TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+    "classification": "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+    "allTechnicalItemsResolved": true,
+    "humanConfirmationRequired": true,
+    "forbiddenInterferenceCount": 0,
+    "desktopHarnessPassed": true,
+    "mobileHarnessPassed": true,
+    "protectedPathsPixelExact": true,
+    "performanceDifferential": "DIFFERENTIAL_PASS"
   }
 }

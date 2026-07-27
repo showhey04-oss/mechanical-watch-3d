@@ -13,11 +13,13 @@ const reports = path.join(
   "docs/evidence/final-exterior-design-phase3c2/reports",
 );
 const sourceImplementationCommit =
-  "2a9cfe31de83c631e6d99d50851f2cb4463684dc";
+  "00983f49b4dea623247e211cca54f3aac3f559ec";
 const sourceStartCommit =
   "d3f414350c088250f9de3cc38182d1b3364d1e30";
 const lugContinuityStartCommit =
   "752418e72d3bb7b1dd86952638a3bb85fdf6d582";
+const lugSurfacingStartCommit =
+  "9b55d5d3971ef456de5474b3bff6d3f26d6879f8";
 const sourceBaseCommit =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
 const mainCommit =
@@ -96,8 +98,17 @@ const lugContinuityPerformance = await readJson(
 const lugContinuityProtectedPaths = await readJson(
   "lug-continuity-protected-paths.json",
 );
+const lugSurfacingPerformance = await readJson(
+  "lug-surfacing-performance.json",
+);
+const lugSurfacingProtectedPaths = await readJson(
+  "lug-surfacing-protected-paths.json",
+);
+const lugSurfacingClosure = await readJson(
+  "phase3c2-lug-surfacing-closure.json",
+);
 performance.candidate =
-  "Phase 3C.2 pre-lug-continuity implementation commit 292fb96a858c55a2f6bdd97bb3cff680d36ec671";
+  `Phase 3C.2 refined lug surfacing commit ${sourceImplementationCommit}`;
 
 await writeJson("geometry-report.json", {
   ...metadata,
@@ -446,8 +457,8 @@ await writeJson(
 
 regression.node = {
   status: "passed",
-  passed: 181,
-  total: 181,
+  passed: 183,
+  total: 183,
 };
 regression.moduleSyntax = { status: "passed" };
 regression.gitDiffCheck = { status: "passed" };
@@ -475,6 +486,7 @@ regression.paths = {
     phase3c2DomAdded: phase3c1Path.phase3c2DomAdded,
   },
   lugContinuityFinal: lugContinuityProtectedPaths,
+  lugSurfacingFinal: lugSurfacingProtectedPaths,
 };
 regression.suites = {
   desktop: suites.desktop,
@@ -489,6 +501,11 @@ regression.performance = {
   lugContinuityFinal: {
     overallStatus: lugContinuityPerformance.overallStatus,
     comparisons: lugContinuityPerformance.comparisons,
+  },
+  lugSurfacingFinal: {
+    sourceStartCommit: lugSurfacingStartCommit,
+    overallStatus: lugSurfacingPerformance.overallStatus,
+    comparisons: lugSurfacingPerformance.comparisons,
   },
 };
 regression.humanConfirmation = {
@@ -507,13 +524,15 @@ regression.detailRefinement = {
     count: 4,
     queryOnly: true,
     protectedAnchorsUnchanged: true,
-    classification: "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+    classification:
+      desktopRuntime.geometry.refinedLugs.classification,
     rootProfile:
       desktopRuntime.geometry.refinedLugs.rootProfile,
     rootEmbed: desktopRuntime.geometry.refinedLugs.rootEmbed,
     edgeBreak: desktopRuntime.geometry.refinedLugs.edgeBreak,
     rootTransitionLength:
       desktopRuntime.geometry.refinedLugs.rootTransitionLength,
+    surfacing: desktopRuntime.geometry.refinedLugs.surfacing,
     technicalClosure: "RESOLVED_PENDING_HUMAN_CONFIRMATION",
   },
   leatherOpaqueAt100Percent: true,
@@ -566,6 +585,22 @@ regression.lugContinuityFinal = {
   protectedPathsPixelExact:
     lugContinuityProtectedPaths.allDecodedPixelsExact,
 };
+regression.lugSurfacingFinal = {
+  status: lugSurfacingClosure.status,
+  classification: lugSurfacingClosure.classification,
+  allTechnicalItemsResolved:
+    lugSurfacingClosure.allTechnicalItemsResolved,
+  humanConfirmationRequired:
+    lugSurfacingClosure.humanConfirmationRequired,
+  forbiddenInterferenceCount:
+    desktopRuntime.interference.forbiddenInterferenceCount,
+  desktopHarnessPassed: desktopRuntime.ok,
+  mobileHarnessPassed: mobileRuntime.ok,
+  protectedPathsPixelExact:
+    lugSurfacingProtectedPaths.allDecodedPixelsExact,
+  performanceDifferential:
+    lugSurfacingPerformance.overallStatus,
+};
 await writeJson("regression-results.json", { ...regression, ...metadata });
 
 performance.lugContinuityFinal = {
@@ -575,7 +610,18 @@ performance.lugContinuityFinal = {
   comparisons: lugContinuityPerformance.comparisons,
   overallStatus: lugContinuityPerformance.overallStatus,
 };
-performance.overallStatus = lugContinuityPerformance.overallStatus;
+performance.lugSurfacingFinal = {
+  classification: "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+  sourceStartCommit: lugSurfacingStartCommit,
+  sourceImplementationCommit,
+  thresholdsChanged: false,
+  comparisons: lugSurfacingPerformance.comparisons,
+  overallStatus: lugSurfacingPerformance.overallStatus,
+};
+performance.overallStatus = (
+  lugContinuityPerformance.overallStatus === "DIFFERENTIAL_PASS"
+  && lugSurfacingPerformance.overallStatus === "DIFFERENTIAL_PASS"
+) ? "DIFFERENTIAL_PASS" : "DIFFERENTIAL_FAIL";
 await writeJson(
   "performance-results.json",
   { ...performance, ...metadata },

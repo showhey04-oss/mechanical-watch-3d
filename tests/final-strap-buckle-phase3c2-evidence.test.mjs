@@ -14,7 +14,7 @@ const images = path.join(evidence, "images");
 const reports = path.join(evidence, "reports");
 const videos = path.join(evidence, "videos");
 const implementationCommit =
-  "2a9cfe31de83c631e6d99d50851f2cb4463684dc";
+  "00983f49b4dea623247e211cca54f3aac3f559ec";
 const baseCommit =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
 
@@ -284,6 +284,10 @@ test("Phase 3C.2 final lug-continuity geometry and closure are explicit", () => 
   const closure = json("phase3c2-lug-continuity-closure.json");
   assert.equal(
     geometry.refinedLugs.classification,
+    "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+  );
+  assert.equal(
+    closure.classification,
     "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
   );
   assert.equal(geometry.refinedLugs.candidateLugsVisible, 4);
@@ -365,6 +369,122 @@ test("Phase 3C.2 final lug-continuity protected paths and performance pass", () 
   assert.equal(performance.thresholdsChanged, false);
   assert.equal(performance.overallStatus, "DIFFERENTIAL_PASS");
   for (const comparison of Object.values(performance.comparisons).flat()) {
+    assert.equal(comparison.differentialPass, true);
+    assert.equal(comparison.reversalCount, 0);
+    assert.equal(comparison.stopThenJumpCount, 0);
+    assert.equal(comparison.zoomMonotonic, true);
+    assert.equal(comparison.transformInvariant, true);
+  }
+});
+
+test("Phase 3C.2 refined-lug surfacing evidence uses actual captures", () => {
+  const directory = path.join(images, "lug-surfacing-final");
+  const required = [
+    ["raw-before/front.png", 1280, 720],
+    ["raw-before/oblique.png", 1280, 720],
+    ["raw-before/side.png", 1280, 720],
+    ["raw-before/review-angle.png", 1280, 720],
+    ["raw-before/top.png", 1280, 720],
+    ["raw-before/bottom.png", 1280, 720],
+    ["raw-before/mobile.png", 390, 844],
+    ["raw-after/front.png", 1280, 720],
+    ["raw-after/oblique.png", 1280, 720],
+    ["raw-after/side.png", 1280, 720],
+    ["raw-after/review-angle.png", 1280, 720],
+    ["raw-after/top.png", 1280, 720],
+    ["raw-after/bottom.png", 1280, 720],
+    ["raw-after/mobile.png", 390, 844],
+    ["comparison-front.png", 1920, 590],
+    ["comparison-oblique.png", 1920, 590],
+    ["comparison-side.png", 1920, 590],
+    ["comparison-review-angle.png", 1920, 590],
+    ["lug-12-left-closeup.png", 960, 540],
+    ["lug-12-right-closeup.png", 960, 540],
+    ["lug-6-left-closeup.png", 960, 540],
+    ["lug-6-right-closeup.png", 960, 540],
+    ["surfacing-continuity-annotation.png", 1280, 720],
+    ["surfacing-profile.png", 1280, 720],
+  ];
+  const hashes = new Set();
+  for (const [relative, width, height] of required) {
+    const buffer = fs.readFileSync(path.join(directory, relative));
+    assert.ok(buffer.length > 0, relative);
+    assert.deepEqual(
+      [...buffer.subarray(0, 8)],
+      [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a],
+      relative,
+    );
+    assert.deepEqual(pngDimensions(buffer), { width, height }, relative);
+    hashes.add(sha256(buffer));
+  }
+  assert.equal(hashes.size, required.length);
+  const metrics = json("lug-surfacing-image-metrics.json");
+  for (const metric of metrics.images) {
+    assert.equal(
+      metric.provenance,
+      "actual runtime WebGLRenderTarget capture",
+      metric.file,
+    );
+    assert.ok(metric.uniqueRgbCount > 500, metric.file);
+    assert.ok(metric.dominantColorRatio < 0.95, metric.file);
+    assert.ok(metric.luminanceVariance > 1, metric.file);
+  }
+  const gif = fs.readFileSync(path.join(
+    videos,
+    "lug-surfacing-final/front-oblique-side-continuous.gif",
+  ));
+  assert.ok(["GIF87a", "GIF89a"].includes(
+    gif.subarray(0, 6).toString("ascii"),
+  ));
+  assert.equal(
+    (gif.toString("latin1").match(/\x21\xF9\x04/g) ?? []).length,
+    18,
+  );
+});
+
+test("Phase 3C.2 refined-lug surfacing closes technical gates only", () => {
+  const desktop = json("lug-surfacing-desktop-runtime.json");
+  const mobile = json("lug-surfacing-mobile-runtime.json");
+  const closure = json("phase3c2-lug-surfacing-closure.json");
+  const paths = json("lug-surfacing-protected-paths.json");
+  const performance = json("lug-surfacing-performance.json");
+  for (const runtime of [desktop, mobile]) {
+    const lugs = runtime.geometry.refinedLugs;
+    assert.equal(runtime.ok, true);
+    assert.equal(runtime.interference.forbiddenInterferenceCount, 0);
+    assert.equal(lugs.classification, "PHASE3C2_REFINED_LUG_SURFACING_FINAL");
+    assert.equal(lugs.surfacing.stationCount, 16);
+    assert.equal(lugs.surfacing.crossSectionSegments, 24);
+    assert.equal(lugs.surfacing.crossSectionExponent, 2.4);
+    assert.equal(lugs.surfacing.midWaistCount, 0);
+    for (const audit of Object.values(lugs.geometryAudit)) {
+      assert.equal(audit.finite, true);
+      assert.equal(audit.indexed, true);
+      assert.equal(audit.closed, true);
+      assert.equal(audit.outward, true);
+      assert.equal(audit.degenerateTriangleCount, 0);
+      assert.equal(audit.duplicateTriangleCount, 0);
+      assert.equal(audit.reversedDuplicateTriangleCount, 0);
+      assert.equal(audit.nonManifoldEdgeCount, 0);
+      assert.equal(audit.windingMismatchCount, 0);
+      assert.equal(audit.missingFaceCount, 0);
+      assert.equal(audit.coplanarOverlapCount, 0);
+      assert.equal(audit.zFightingCount, 0);
+    }
+  }
+  assert.equal(closure.items.length, 4);
+  assert.equal(
+    closure.items.every(item => item.finalStatus === "RESOLVED"),
+    true,
+  );
+  assert.equal(closure.humanConfirmationRequired, true);
+  assert.equal(closure.readyOrMergeAllowed, false);
+  assert.equal(paths.allDecodedPixelsExact, true);
+  assert.equal(performance.thresholdsChanged, false);
+  assert.equal(performance.overallStatus, "DIFFERENTIAL_PASS");
+  for (const comparison of Object.values(performance.comparisons).flatMap(
+    environment => Object.values(environment),
+  )) {
     assert.equal(comparison.differentialPass, true);
     assert.equal(comparison.reversalCount, 0);
     assert.equal(comparison.stopThenJumpCount, 0);

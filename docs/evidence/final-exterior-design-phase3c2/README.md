@@ -5,14 +5,16 @@
 - Base：`feature/final-exterior-balanced-phase3c1-watch-head`
 - Base SHA：`4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`
 - 最終局所修正作業開始Head：`752418e72d3bb7b1dd86952638a3bb85fdf6d582`
-- 最終局所修正実装・browser harness基準：`2a9cfe31de83c631e6d99d50851f2cb4463684dc`
+- lug-case continuity実装基準：`2a9cfe31de83c631e6d99d50851f2cb4463684dc`
+- surfacing修正作業開始Head：`9b55d5d3971ef456de5474b3bff6d3f26d6879f8`
+- surfacing実装・browser harness基準：`00983f49b4dea623247e211cca54f3aac3f559ec`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
 - branch：`feature/final-exterior-balanced-phase3c2-strap-buckle`
 - APP_VERSION：`v3.15.0`
 - query：`?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`
 - capture mode：same-origin unsandboxed iframe harness、actual Three.js WebGLRenderTarget PNG capture
 - Phase 3C.1：`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`
-- Phase 3C.2：`TECHNICAL_REQUIREMENTS_RESOLVED_PENDING_HUMAN_CONFIRMATION`
+- Phase 3C.2：`REFINED_LUG_SURFACING_TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION`
 
 正本の`desktop-*`／`mobile-390-*`と`images/revision2`は実Three.js sceneのWebGLRenderTarget PNGである。`tests/generate-phase3c2-evidence.py`は正本captureを生成せず、実captureを入力としてclose-up、比較板、UI crop、review GIFを作る。GIFは実captureのreview animationであり連続WebM録画ではない。
 
@@ -27,10 +29,11 @@
 - 終端接線角：95°／120°
 - 非ラグ領域surface clearance：63.575
 - refined lug：4本、root embed 0.260、edge break 0.055、transition 4.297
-- root断面：幅3.600 × 厚さ5.800、tip断面：幅2.000 × 厚さ2.000
-- root profile：ケース半径追従chordから6 stationで単調に絞る閉合indexed Mesh
+- root断面：幅3.400 × 厚さ5.400、tip断面：幅2.000 × 厚さ2.000
+- surfacing：16 station、24分割rounded superellipse、exponent 2.400
+- root profile：ケース半径追従rootからeasingで単調に絞る閉合indexed Mesh
+- mid-waist／S字反転：0、lug ↔ strap最小clearance：0.060889
 - lug-to-lug：46.600、ラグ間20.000、外端Z ±23.300
-- lug ↔ strap最小禁止clearance：0.045833
 - 禁止干渉：位置1／位置2とも0
 - 登録部品：11
 - blank selection：Desktop 10/10、390×844 10/10
@@ -90,7 +93,7 @@
 
 既存正本、close-up、review board、GIFも同じ実装基準で再生成した。全一覧とbytes／SHA-256は`evidence-manifest.json`を正とする。
 
-## refined lug最終局所修正の証跡
+## refined lug接続修正の履歴証跡
 
 `images/lug-continuity-final/raw-before`は作業開始Head、`raw-after`は最終局所修正実装のactual Three.js captureである。比較板、close-up、接続注記、profile図はこれらの実captureと実装値だけから生成した。
 
@@ -109,6 +112,22 @@
 - `videos/lug-continuity-final/split-explode-restore.gif`
 - `videos/lug-continuity-final/mobile-rotate-zoom.gif`
 
+## refined lug surfacing最終局所修正の証跡
+
+`images/lug-surfacing-final/raw-before`は人間確認で未承認となった作業開始Head `9b55d5d`、`raw-after`はsurfacing実装基準 `00983f4` のactual Three.js WebGLRenderTarget captureである。比較板、4ラグclose-up、注記図、profile図はこれらの実captureと実測runtime JSONだけから生成した。
+
+- `images/lug-surfacing-final/comparison-front.png`
+- `images/lug-surfacing-final/comparison-oblique.png`
+- `images/lug-surfacing-final/comparison-side.png`
+- `images/lug-surfacing-final/comparison-review-angle.png`
+- `images/lug-surfacing-final/lug-12-left-closeup.png`
+- `images/lug-surfacing-final/lug-12-right-closeup.png`
+- `images/lug-surfacing-final/lug-6-left-closeup.png`
+- `images/lug-surfacing-final/lug-6-right-closeup.png`
+- `images/lug-surfacing-final/surfacing-continuity-annotation.png`
+- `images/lug-surfacing-final/surfacing-profile.png`
+- `videos/lug-surfacing-final/front-oblique-side-continuous.gif`
+
 ## Reports
 
 - `reports/phase3c2-config.json`
@@ -116,6 +135,14 @@
 - `reports/phase3c2-defect-diagnosis-after.json`
 - `reports/phase3c2-human-requirement-closure.json`
 - `reports/phase3c2-lug-continuity-closure.json`
+- `reports/phase3c2-lug-surfacing-closure.json`
+- `reports/lug-surfacing-capture-metadata.json`
+- `reports/lug-surfacing-image-metrics.json`
+- `reports/lug-surfacing-desktop-runtime.json`
+- `reports/lug-surfacing-mobile-runtime.json`
+- `reports/lug-surfacing-protected-paths.json`
+- `reports/lug-surfacing-performance.json`
+- `reports/lug-surfacing-rotation-metadata.json`
 - `reports/lug-continuity-capture-metadata.json`
 - `reports/lug-continuity-image-metrics.json`
 - `reports/lug-continuity-protected-paths.json`
@@ -143,7 +170,7 @@
 
 ## 試験状態
 
-- Node：181/181
+- Node：183/183
 - runtime harness：Desktop 1280×720／390×844合格
 - Geometry：finite、indexed、closed、outward。退化、重複・反転triangle、non-manifold edge、winding mismatch、coplanar overlap、z-fighting 0
 - Material：opacity 100%で不透明、50%／16%契約と100%復帰合格

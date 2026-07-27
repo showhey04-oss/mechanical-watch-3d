@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
-  "sourceAuditCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
+  "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+  "sourceAuditCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
   "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
@@ -18,7 +18,7 @@
     ]
   },
   "sourceBase": "Phase 3C.1 approved head 4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
-  "candidate": "Phase 3C.2 pre-lug-continuity implementation commit 292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "candidate": "Phase 3C.2 refined lug surfacing commit 00983f49b4dea623247e211cca54f3aac3f559ec",
   "thresholdsChanged": false,
   "differentialCriteria": {
     "averageFpsMinimumRelativePercent": -5,
@@ -4245,7 +4245,7 @@
   "overallStatus": "DIFFERENTIAL_PASS",
   "lugContinuityFinal": {
     "classification": "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
-    "sourceImplementationCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
+    "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
     "thresholdsChanged": false,
     "comparisons": {
       "desktop": [
@@ -4408,6 +4408,169 @@
           "transformInvariant": true
         }
       ]
+    },
+    "overallStatus": "DIFFERENTIAL_PASS"
+  },
+  "lugSurfacingFinal": {
+    "classification": "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+    "sourceStartCommit": "9b55d5d3971ef456de5474b3bff6d3f26d6879f8",
+    "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+    "thresholdsChanged": false,
+    "comparisons": {
+      "desktop": {
+        "front-idle": {
+          "baseMedian": {
+            "averageFps": 13.670738801628854,
+            "p50": 66.70000000000073,
+            "p95": 83.79999999999927,
+            "p99": 85.20000000000073,
+            "over33": 141,
+            "over50": 141
+          },
+          "candidateMedian": {
+            "averageFps": 13.745101479807749,
+            "p50": 66.70000000000437,
+            "p95": 83.40000000000146,
+            "p99": 85,
+            "over33": 141,
+            "over50": 141
+          },
+          "fpsDeltaPercent": 0.543955079955407,
+          "p95DeltaMs": -0.3999999999978172,
+          "differentialPass": true,
+          "reversalCount": 0,
+          "stopThenJumpCount": 0,
+          "zoomMonotonic": true,
+          "transformInvariant": true
+        },
+        "pointer-rotate": {
+          "baseMedian": {
+            "averageFps": 13.580582236678385,
+            "p50": 66.70000000000437,
+            "p95": 84,
+            "p99": 84.79999999999563,
+            "over33": 56,
+            "over50": 56
+          },
+          "candidateMedian": {
+            "averageFps": 13.648549841579333,
+            "p50": 66.70000000000437,
+            "p95": 83.40000000000146,
+            "p99": 83.69999999999709,
+            "over33": 56,
+            "over50": 56
+          },
+          "fpsDeltaPercent": 0.5004763692486003,
+          "p95DeltaMs": -0.5999999999985448,
+          "differentialPass": true,
+          "reversalCount": 0,
+          "stopThenJumpCount": 0,
+          "zoomMonotonic": true,
+          "transformInvariant": true
+        },
+        "wheel-zoom": {
+          "baseMedian": {
+            "averageFps": 13.466618325043006,
+            "p50": 66.70000000000437,
+            "p95": 83.5,
+            "p99": 84.90000000000146,
+            "over33": 52,
+            "over50": 52
+          },
+          "candidateMedian": {
+            "averageFps": 13.300208286161347,
+            "p50": 66.79999999999563,
+            "p95": 84,
+            "p99": 85.09999999999854,
+            "over33": 52,
+            "over50": 52
+          },
+          "fpsDeltaPercent": -1.2357225464109096,
+          "p95DeltaMs": 0.5,
+          "differentialPass": true,
+          "reversalCount": 0,
+          "stopThenJumpCount": 0,
+          "zoomMonotonic": true,
+          "transformInvariant": true
+        }
+      },
+      "mobile390": {
+        "front-idle": {
+          "baseMedian": {
+            "averageFps": 14.592291378908097,
+            "p50": 66.70000000000073,
+            "p95": 83.40000000000146,
+            "p99": 83.5,
+            "over33": 150,
+            "over50": 144
+          },
+          "candidateMedian": {
+            "averageFps": 14.661323428794839,
+            "p50": 66.70000000000073,
+            "p95": 83.30000000000291,
+            "p99": 83.5,
+            "over33": 150,
+            "over50": 145
+          },
+          "fpsDeltaPercent": 0.4730720357360854,
+          "p95DeltaMs": -0.09999999999854481,
+          "differentialPass": true,
+          "reversalCount": 0,
+          "stopThenJumpCount": 0,
+          "zoomMonotonic": true,
+          "transformInvariant": true
+        },
+        "pointer-rotate": {
+          "baseMedian": {
+            "averageFps": 14.189514189514188,
+            "p50": 66.69999999999709,
+            "p95": 83.39999999999418,
+            "p99": 83.40000000000146,
+            "over33": 59,
+            "over50": 58
+          },
+          "candidateMedian": {
+            "averageFps": 14.186784649377437,
+            "p50": 66.69999999999709,
+            "p95": 83.39999999999418,
+            "p99": 83.40000000000146,
+            "over33": 59,
+            "over50": 59
+          },
+          "fpsDeltaPercent": -0.0192363184552776,
+          "p95DeltaMs": 0,
+          "differentialPass": true,
+          "reversalCount": 0,
+          "stopThenJumpCount": 0,
+          "zoomMonotonic": true,
+          "transformInvariant": true
+        },
+        "wheel-zoom": {
+          "baseMedian": {
+            "averageFps": 14.465903611356383,
+            "p50": 66.69999999999709,
+            "p95": 83.30000000000291,
+            "p99": 84,
+            "over33": 56,
+            "over50": 54
+          },
+          "candidateMedian": {
+            "averageFps": 14.446838170067165,
+            "p50": 66.69999999999709,
+            "p95": 83.30000000000291,
+            "p99": 83.40000000000146,
+            "over33": 57,
+            "over50": 56
+          },
+          "fpsDeltaPercent": -0.13179571633707496,
+          "p95DeltaMs": 0,
+          "differentialPass": true,
+          "reversalCount": 0,
+          "stopThenJumpCount": 0,
+          "zoomMonotonic": true,
+          "transformInvariant": true
+        }
+      }
     },
     "overallStatus": "DIFFERENTIAL_PASS"
   }
