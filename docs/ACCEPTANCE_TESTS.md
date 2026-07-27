@@ -330,7 +330,13 @@
 - 絶対性能のin-app Browserフレームペーシング変動は製品閾値の緩和に使わず、環境制約として差分判定と分離する
 - Issue #2の矩形影、100%／99%、55%／54%、前後輝度差、PC／iPhone差、D2c3を変更せず引継ぎ文書へ記録する
 - 表裏分離／断面クリップは`DEFERRED_UNTIL_POST_ISSUE2_UI_SIMPLIFICATION_REVIEW`として維持する
-- PC／物理iPhone人間確認前は`AUTOMATED_ACCEPTED_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW`で、Ready化・マージ・既定採用しない
+- 承認Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`は`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`
+- PCで完成時計、小秒表示、opacity 16%内部選択、選択解除、外装OFF、split／explode／復元、全長ズーム、りゅうず・時計機能、作動音、学習モードを人間確認合格
+- 物理iPhoneで初期表示、回転・ズーム、小秒表示、opacity 16%内部選択、空白タップ解除10回、外装OFF、split／explode／復元、りゅうず・時計機能、作動音、学習モードを人間確認合格
+- 代表22部品を既存diagnostics／partsInfoで選択し、HUDと学習タブの名称・説明同期を22/22確認
+- 15分後の軽微な発熱を`THERMAL_WARMTH_OBSERVED_NO_REPORTED_FUNCTIONAL_DEGRADATION`とし、Issue #2最終候補で15分再試験する
+- progressive frame drop、Safari reload、音・タッチ異常は`NO_ABNORMALITY_REPORTED_IN_HUMAN_REVIEW`であり、実証済みPASSとはしない
+- 人間承認後もReady化・マージ・既定採用は許可せず、Issue #2比較専用監査だけを開始可能とする
 
 ## M. v3.14 機構同期作動音 Phase 1
 

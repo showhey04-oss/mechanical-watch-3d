@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：最終外装統合 — Phase 3C.3 完成外装の統合確認・局所調整（Phase 3C.2への積み上げDraft）
+- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3Aの比較専用監査を開始可能
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
@@ -26,7 +26,7 @@ Phase 3C.1はHead `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`を`HUMAN_ACCEPTED_P
 
 Phase 3C.2は、承認済みPhase 3C.1へ積み上げるquery限定Draftである。`?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`時だけ、中心線長75.000／115.000、幅19.700→16.000、厚さ2.600→2.050の黒革ストラップ、実スプリングバーポケット、直径2.000・pitch 7.000の7貫通穴、定革・遊革、尾錠枠・つく棒・取付バー、尾錠側巻込み、procedural calf grain、同系色ステッチ、黒いコバを生成する。位置1／位置2の禁止干渉0、10部品の選択・HUD・学習同期、opacity 16%内部選択、外装ON／OFF・split・explode・復元、通常path／Phase 3C.1-only path pixel exact、Desktop／390×844性能基準を確認した。Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`で、Ready化・マージ・既定採用は未実施である。
 
-Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`である。Phase 3C.3は`integration=phase3c3`追加時だけ完成時計を統合監査し、小秒凹面の空白4点へ非描画selection proxyを追加する。Desktop／390×844の100%／50%で4/4、16%越しの設定車2選択、外装ON/OFF、split、explode、完全復元、位置1／2の禁止干渉0、保護3 pathのpixel exact、性能差分合格を確認した。Geometry・照明・影・透過基盤・UI・音響・APP_VERSIONは変更しておらず、状態は`AUTOMATED_ACCEPTED_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW`である。
+Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`である。Phase 3C.3は`integration=phase3c3`追加時だけ完成時計を統合監査し、小秒凹面の空白4点へ非描画selection proxyを追加する。Desktop／390×844の100%／50%で4/4、16%越しの設定車2選択、外装ON/OFF、split、explode、完全復元、位置1／2の禁止干渉0、保護3 pathのpixel exact、性能差分合格を確認した。承認Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`はPCと物理iPhoneの人間確認に合格し、状態は`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`である。物理iPhoneの15分確認では軽微な発熱を観察したが機能劣化は報告されず、Issue #2最終候補で再試験する。Geometry・照明・影・透過基盤・UI・音響・APP_VERSIONは変更しておらず、Ready化・マージ・既定採用も未実施である。
 
 ## 実装済み
 

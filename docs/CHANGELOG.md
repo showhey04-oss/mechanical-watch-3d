@@ -7,7 +7,9 @@
 - Object3D orphan・二重登録・visibility・Material復元・parent・query残留を0、split／explode／外装ON/OFF後の復元誤差を`1e-7`以下、位置1／2禁止干渉を0/0で確認。
 - queryなし、Phase 3C.1-only、Phase 3C.2-onlyを承認Headとpixel exactで照合。Geometry、機構、カメラ、DPR、照明、影、透過基盤、UI、音響、APP_VERSION、試験閾値を変更していない。
 - Desktop／390×844のidle、pointer、wheel、opacity 16%、外装OFF、split、explode、学習選択は`DIFFERENTIAL_PASS`。in-app Browserの絶対フレームペーシング変動は環境制約として分離。
-- 矩形影、100%／99%、55%／54%、前後輝度差、PC／iPhone差、金属階調、D2c3をIssue #2へ引き継ぐ。PC／物理iPhone人間確認待ちでReady化・マージ・既定採用は未実施。
+- 承認Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`はPC／物理iPhoneで合格し、`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`とした。代表22部品の選択・HUD・学習タブ同期も22/22確認。
+- 物理iPhoneは15分後にやや発熱したが機能劣化の報告はなく、Issue #2最終候補で再試験する。progressive frame drop、Safari reload、音・タッチ異常は報告なしであり、実証済みPASSとは記載しない。
+- 矩形影、100%／99%、55%／54%、前後輝度差、PC／iPhone差、金属階調、D2c3をIssue #2へ引き継ぐ。Ready化・マージ・既定採用は未実施。
 
 ## Unreleased — Stacked Draft Phase 3C.2 formal leather strap and buckle
 

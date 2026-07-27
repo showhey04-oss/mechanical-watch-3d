@@ -104,13 +104,15 @@
 
 ## 現在の改修フェーズ
 
-### 最終外装統合 — Phase 3C.3 完成外装の統合確認・局所調整
+### Issue #2 Final Polish Phase 3A — 完成外装基準の比較専用監査
 
 - Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として固定する
 - `integration=phase3c3`限定で完成時計を統合監査し、小秒凹面の非描画selection proxyだけを局所追加する
 - Desktop／390×844で小秒空白4/4、opacity 16%内部選択、外装ON/OFF、split、explode、復元、位置1／2禁止干渉0を確認する
 - queryなし／Phase 3C.1-only／Phase 3C.2-onlyをpixel exactに保護する
-- Issue #2の描画品質と表裏分離／断面クリップのUI判断を変更せず、PC／物理iPhone統合確認後にDraftの次判断を行う
+- Phase 3C.3承認Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`はPC／物理iPhoneで合格し、`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`とする
+- 15分後の軽微な発熱は現工程のブロッカーにせず、Issue #2最終候補で15分再試験する
+- Issue #2の描画品質を完成外装基準でquery限定比較し、表裏分離／断面クリップのUI判断は方式確定後まで保留する
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする
 - Phase 3Aで承認されたE-BALANCEDを`?exterior=balanced`限定で実装し、Phase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`を人間承認済み依存基準とする

@@ -59,14 +59,19 @@
 - `protected-paths.json`
 - `regression-results.json`
 - `capture-metadata.json`
+- `phase3c3-human-acceptance.json`
+- `learning-mode-representative-matrix.json`
 
 `evidence-manifest.json`は自己参照を含めず、証跡ディレクトリをclosed-worldで管理する。
 
-## 人間確認待ち
+## 人間確認
 
-- PC統合レビュー
-- 物理iPhone統合レビュー
-- 15分連続操作と温度観察
-- Issue #2描画品質の最終判断
+- 承認Head: `2b94f51acf71a62b8fdca59f64de39566d6e23ee`
+- 状態: `HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`
+- PC統合レビュー: 合格
+- 物理iPhone統合レビュー: 合格
+- 15分後: やや発熱あり。機能劣化の報告なし
+- Issue #2最終候補で15分温度再試験: 必須
+- 代表22部品の選択、HUD、学習タブ名称・説明同期: 22/22
 
-PRはDraftのまま維持し、Ready化・マージ・既定採用を行わない。
+PRはDraftのまま維持し、Ready化・マージ・既定採用を行わない。Issue #2描画品質の最終判断は別の比較専用Draftで行う。

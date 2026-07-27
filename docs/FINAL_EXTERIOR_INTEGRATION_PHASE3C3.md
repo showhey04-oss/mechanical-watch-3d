@@ -7,10 +7,11 @@ Phase 3C.1承認時計本体とPhase 3C.2承認装着部を、query限定の完�
 - Phase 3C.1承認Head: `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`
 - Phase 3C.2承認Head: `f245a5a9d68d5205e7609479ffefd711376e4930`
 - Phase 3C.2承認状態: `HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`
-- Phase 3C.3状態: `AUTOMATED_ACCEPTED_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW`
+- Phase 3C.3承認Head: `2b94f51acf71a62b8fdca59f64de39566d6e23ee`
+- Phase 3C.3状態: `HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`
 - 有効query: `?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3`
 
-Phase 3C.3は既定採用していない。Draft PRのReady化・マージ前にPCおよび物理iPhoneの人間確認を行う。
+Phase 3C.3はPCおよび物理iPhoneの人間確認に合格したが、既定採用していない。Draft PRのReady化・マージも未実施である。Issue #2 Final Polish Phase 3Aの比較専用監査を開始できる。
 
 ## 局所変更
 
@@ -92,11 +93,10 @@ in-app Browserの絶対フレームペーシングは実行中に変動し、製
 
 ## 人間確認
 
-自動・実ブラウザ証跡は完了した。以下は未完了である。
+PCでは完成時計全体、小秒空白部・小秒針・小秒目盛・主文字板の選択、opacity 16%内部選択、空白クリック解除、外装OFF、split／explode／復元、全長ズームと時計本体への復帰、りゅうず・時計機能、作動音、学習モードを合格とした。
 
-- PCでの完成時計比率、全長ズーム、選択、外装OFF、opacity、split/explodeの人間確認
-- 物理iPhoneでの初期占有率、回転・ズーム、小秒タップ、内部選択、ボトムシート、作動音
-- 物理iPhone 15分連続操作と温度観察
-- Issue #2で保留した描画品質の採否
+物理iPhoneでは初期表示と全体比率、回転・ズーム、小秒文字板・小秒針・小秒目盛のタップ、opacity 16%内部選択、空白タップ解除10回、外装OFF、split／explode／復元、りゅうず・時計機能、作動音、学習モードを合格とした。
 
-物理iPhone用GIFは操作順の案内であり、実機合格を表す証跡ではない。
+15分後にやや発熱を観察し、`THERMAL_WARMTH_OBSERVED_NO_REPORTED_FUNCTIONAL_DEGRADATION`と分類した。現工程のブロッカーではないが、Issue #2最終候補で15分再試験する。progressive frame drop、Safari reload、音・タッチ異常はユーザー報告上の異常なしであり、`NO_ABNORMALITY_REPORTED_IN_HUMAN_REVIEW`と記録するが、実証済みPASSとは主張しない。
+
+既存diagnosticsと共有`partsInfo`で代表22部品を選択し、HUDと学習タブの名称・説明同期を22/22確認した。製造用途は禁止し、教育用近似として扱う。
