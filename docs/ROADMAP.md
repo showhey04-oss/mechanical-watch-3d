@@ -113,6 +113,9 @@
 - Phase 3C.3承認Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`はPC／物理iPhoneで合格し、`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`とする
 - 15分後の軽微な発熱は現工程のブロッカーにせず、Issue #2最終候補で15分再試験する
 - Issue #2の描画品質を完成外装基準でquery限定比較し、表裏分離／断面クリップのUI判断は方式確定後まで保留する
+- baseline／D2a／D2c3の3候補、2 viewport、計198枚の実WebGL PNG比較を完了
+- D2a／D2c3は矩形影と暗部を改善するが、前後輝度差、既存A.5ライト契約、性能差分を満たさないため非採用
+- Phase 3Aは`RETAIN_COMPARISON_HISTORY_NO_ADOPTION`とし、Issue #2の次候補は完成外装baselineの前後均衡と性能を維持する別設計とする
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする
 - Phase 3Aで承認されたE-BALANCEDを`?exterior=balanced`限定で実装し、Phase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`を人間承認済み依存基準とする

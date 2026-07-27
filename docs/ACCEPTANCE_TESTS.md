@@ -338,6 +338,18 @@
 - progressive frame drop、Safari reload、音・タッチ異常は`NO_ABNORMALITY_REPORTED_IN_HUMAN_REVIEW`であり、実証済みPASSとはしない
 - 人間承認後もReady化・マージ・既定採用は許可せず、Issue #2比較専用監査だけを開始可能とする
 
+## Issue #2 Final Polish Phase 3A 完成外装比較
+
+- 完成外装queryへ`rendering=issue2-baseline|issue2-d2a|issue2-d2c3`を追加した場合だけ候補を有効化する
+- queryなし、Phase 3C.1-only、Phase 3C.2-only、Phase 3C.3-onlyを変更しない
+- 3候補×2 viewport×33状態、計198枚の実WebGL PNGを取得する
+- 100／99／75／56／55／54／53／50／25／16／8%を比較し、100→99と55→54の現行不連続を隠さない
+- Node 210/210、完成外装統合回帰6/6、UI 20/20・22/22、HUD 45/45・57/57を維持する
+- 位置1／位置2禁止干渉0/0、三針拘束、S86、Phase 2C、A.7、外装ON/OFF、split／explode／restoreを維持する
+- 同一環境性能差分は平均fps悪化5%以内かつp95悪化2ms以内を使用し、絶対A.6閾値を代替しない
+- D2a／D2c3は性能差分とA.5ライト契約を満たさないため、`RETAIN_AS_VISUAL_REFERENCE_REJECT_FOR_ADOPTION`とする
+- `ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED`を維持し、Ready化・マージ・既定採用を行わない
+
 ## M. v3.14 機構同期作動音 Phase 1
 
 - 初期表示で作動音はOFF、`AudioContext`は未生成、音源は未読込で、自動再生しない

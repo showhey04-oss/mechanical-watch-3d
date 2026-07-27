@@ -2,6 +2,15 @@
 
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
 
+### Issue #2 Final Polish Phase 3A
+
+- Phase 3C.3完成外装へbaseline／D2a／D2c3をquery限定で移植し、通常pathおよびPhase 3C.1／3C.2／3C.3-onlyを維持
+- 1280×720／390×844、3候補×33状態の実WebGL PNG 198枚と輝度・opacity・性能・回帰JSONを保存
+- D2a／D2c3は矩形影と暗部を改善するが、前後輝度差、既存A.5ライト契約、性能差分を満たさないため非採用
+- Node 210/210、完成外装統合回帰6/6、UI／HUD合格、console error／warning 0、禁止干渉0/0を確認
+- 100→99%のtransparent切替、55→54%のdepthWrite切替は再現記録のみで、alphaHash、影閾値切替、試験閾値緩和を追加していない
+- 状態は`ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED`。PR #5、Issue #2、D2c3の保留を維持
+
 - Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として継承し、別Draftで完成時計を統合監査。
 - `integration=phase3c3`時だけ小秒凹面の空白4点へ非描画selection proxyを追加。Desktop／390×844の100%／50%で4/4、16%越しの設定車2選択を維持。
 - Object3D orphan・二重登録・visibility・Material復元・parent・query残留を0、split／explode／外装ON/OFF後の復元誤差を`1e-7`以下、位置1／2禁止干渉を0/0で確認。
