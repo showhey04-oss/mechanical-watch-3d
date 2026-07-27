@@ -25,6 +25,9 @@ const dimensions = {
   springBarPocketRadialClearance: 0.150,
   springBarPocketLeatherThickness: 1.050,
   springBarPocketWidth: 19.700,
+  springBarWrapTransitionLength: 2.450,
+  springBarWrapTransitionHalfAngleDeg: 58.000,
+  springBarBodyJoinDistance: 4.150,
   holeCount: 7,
   holeDiameter: 2.000,
   holePitch: 7.000,
@@ -39,6 +42,9 @@ const dimensions = {
   buckleBarLength: 17.000,
   buckleWrapInnerDiameter: 1.600,
   buckleWrapLeatherThickness: 1.000,
+  buckleWrapTransitionLength: 2.200,
+  buckleWrapTransitionHalfAngleDeg: 58.000,
+  buckleBodyJoinDistance: 3.750,
   tangLength: 13.000,
   tangRootWidth: 1.100,
   tangTipWidth: 0.600,
@@ -69,7 +75,13 @@ const material = {
   stitchColor: 0x2b2824,
   stitchRoughness: 0.760,
   grainTextureSize: 128,
-  grainBumpScale: 0.025,
+  grainRepeatAcross: 3.000,
+  grainRepeatAlong: 14.000,
+  grainBumpScale: 0.048,
+  hardwareColor: 0xe7eaed,
+  hardwareMetalness: 0.500,
+  hardwareRoughness: 0.240,
+  hardwareEnvMapIntensity: 0.480,
 };
 
 export const FINAL_STRAP_BUCKLE_PHASE3C2 = deepFreeze({
@@ -298,6 +310,23 @@ export function assertFinalStrapBucklePhase3C2(
       && Math.abs((
         d.springBarPocketInnerDiameter - d.springBarMainDiameter
       ) / 2 - d.springBarPocketRadialClearance) <= tolerance,
+    wrapTransitions:
+      d.springBarWrapTransitionLength > d.springBarPocketLeatherThickness
+      && d.springBarBodyJoinDistance
+        < (
+          d.springBarPocketInnerDiameter / 2
+          + d.springBarPocketLeatherThickness
+          + d.springBarWrapTransitionLength
+        )
+      && d.buckleWrapTransitionLength > d.buckleWrapLeatherThickness
+      && d.buckleBodyJoinDistance
+        < (
+          d.buckleWrapInnerDiameter / 2
+          + d.buckleWrapLeatherThickness
+          + d.buckleWrapTransitionLength
+        )
+      && d.springBarWrapTransitionHalfAngleDeg >= 45
+      && d.buckleWrapTransitionHalfAngleDeg >= 45,
     buckle:
       d.buckleInnerWidth > d.buckleWidthNominal
       && d.buckleOuterWidth > d.buckleInnerWidth
@@ -310,7 +339,15 @@ export function assertFinalStrapBucklePhase3C2(
       && d.keeperClearance <= 0.25,
     material:
       config.material.classification
-      === "EDUCATIONAL_PROCEDURAL_CALF_LEATHER",
+      === "EDUCATIONAL_PROCEDURAL_CALF_LEATHER"
+      && config.material.grainBumpScale >= 0.04
+      && config.material.hardwareColor === 0xe7eaed
+      && config.material.hardwareMetalness >= 0.45
+      && config.material.hardwareMetalness <= 0.62
+      && config.material.hardwareRoughness >= 0.18
+      && config.material.hardwareRoughness <= 0.28
+      && config.material.hardwareEnvMapIntensity >= 0.25
+      && config.material.hardwareEnvMapIntensity <= 0.5,
   };
   return deepFreeze({
     ok: Object.values(checks).every(Boolean),

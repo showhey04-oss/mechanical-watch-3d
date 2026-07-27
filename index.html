@@ -616,6 +616,7 @@ if(requestedExteriorConfig){
    strapBuckleRuntime:strapBucklePhase3C2Runtime,
    config:requestedWatchHeadConfig
   });
+  strapBucklePhase3C2Runtime?.applyHardwareMaterialRefinement();
   const exteriorVisibilityController={};
   Object.defineProperty(exteriorVisibilityController,'visible',{enumerable:true,get:()=>watchHeadRuntime.getExteriorGroupReport().enabled,set:value=>watchHeadRuntime.setExteriorGroupVisible(value)});
   groups.exterior=exteriorVisibilityController;

@@ -87,7 +87,12 @@ const orientOutward = (positions, sourceIndices) => {
   return indices;
 };
 
-const finishGeometry = (positions, rawIndices, triangleMaterials = null) => {
+const finishGeometry = (
+  positions,
+  rawIndices,
+  triangleMaterials = null,
+  uvs = null,
+) => {
   const typedPositions = new Float32Array(positions);
   const typedIndices = new Uint32Array(orientOutward(positions, rawIndices));
   const materialGroups = [];
@@ -114,6 +119,9 @@ const finishGeometry = (positions, rawIndices, triangleMaterials = null) => {
     indices: typedIndices,
     audit: auditIndexedGeometry(typedPositions, typedIndices),
     materialGroups,
+    ...(Array.isArray(uvs) && uvs.length === typedPositions.length / 3 * 2
+      ? { uvs: new Float32Array(uvs) }
+      : {}),
   };
 };
 
@@ -122,20 +130,53 @@ export function createAxialHollowSleeveGeometryData({
   outerRadius,
   length,
   segments = 48,
+  outwardDirection = [0, 1],
+  transitionLength = 0,
+  transitionHalfAngleDeg = 58,
 }) {
-  if (!(innerRadius > 0 && outerRadius > innerRadius && length > 0)) {
+  const directionLength = Math.hypot(...outwardDirection);
+  if (
+    !(
+      innerRadius > 0
+      && outerRadius > innerRadius
+      && length > 0
+      && directionLength > 0
+      && transitionLength >= 0
+      && transitionHalfAngleDeg > 0
+      && transitionHalfAngleDeg < 90
+    )
+  ) {
     throw new Error("invalid hollow sleeve dimensions");
   }
+  const outward = outwardDirection.map(value => value / directionLength);
+  const perpendicular = [-outward[1], outward[0]];
+  const halfAngle = transitionHalfAngleDeg * Math.PI / 180;
+  const transitionWeight = angle => {
+    if (transitionLength <= 0) return 0;
+    const offset = Math.acos(Math.max(-1, Math.min(1, Math.cos(angle))));
+    if (offset >= halfAngle) return 0;
+    const unit = 1 - offset / halfAngle;
+    return unit * unit * (3 - 2 * unit);
+  };
   const positions = [];
+  const uvs = [];
   for (const x of [-length / 2, length / 2]) {
     for (const radius of [outerRadius, innerRadius]) {
       for (let segment = 0; segment < segments; segment++) {
         const angle = segment / segments * Math.PI * 2;
+        const radialScale = radius === outerRadius
+          ? radius + transitionLength * transitionWeight(angle)
+          : radius;
+        const radialY =
+          outward[0] * Math.cos(angle) + perpendicular[0] * Math.sin(angle);
+        const radialZ =
+          outward[1] * Math.cos(angle) + perpendicular[1] * Math.sin(angle);
         positions.push(
           x,
-          radius * Math.cos(angle),
-          radius * Math.sin(angle),
+          radialScale * radialY,
+          radialScale * radialZ,
         );
+        uvs.push((x + length / 2) / length, segment / segments);
       }
     }
   }
@@ -173,7 +214,16 @@ export function createAxialHollowSleeveGeometryData({
       rightOuter + next,
     );
   }
-  return finishGeometry(positions, rawIndices);
+  return {
+    ...finishGeometry(positions, rawIndices, null, uvs),
+    transition: {
+      outwardDirection: [...outward],
+      length: transitionLength,
+      halfAngleDeg: transitionHalfAngleDeg,
+      outerTipRadius: outerRadius + transitionLength,
+      tangentContinuousWeight: true,
+    },
+  };
 }
 
 const cumulativeStations = stations => {
@@ -258,6 +308,7 @@ export function createPerforatedSweptStrapGeometryData({
     .sort((a, b) => a - b);
   const records = distances.map(distance => interpolateStation(stations, distance));
   const positions = [];
+  const uvs = [];
   const rawIndices = [];
   const triangleMaterials = [];
   const vertexMap = new Map();
@@ -271,6 +322,10 @@ export function createPerforatedSweptStrapGeometryData({
     if (vertexMap.has(key)) return vertexMap.get(key);
     const index = positions.length / 3;
     positions.push(...point);
+    uvs.push(
+      Math.max(0, Math.min(1, x / Math.max(record.width, 1e-9) + 0.5)),
+      Math.max(0, Math.min(1, record.distance / Math.max(totalLength, 1e-9))),
+    );
     vertexMap.set(key, index);
     return index;
   };
@@ -372,7 +427,7 @@ export function createPerforatedSweptStrapGeometryData({
   }
 
   return {
-    ...finishGeometry(positions, rawIndices, triangleMaterials),
+    ...finishGeometry(positions, rawIndices, triangleMaterials, uvs),
     holeCount: holeCenters.length,
     holeCenters: [...holeCenters],
     holeRadius,

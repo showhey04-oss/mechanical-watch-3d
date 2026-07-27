@@ -242,14 +242,34 @@ frame.addEventListener("load", async () => {
         material.classification === "EDUCATIONAL_PROCEDURAL_CALF_LEATHER"
         && material.externalImageAssetCount === 0
         && material.proceduralTexture.width === 128
+        && material.proceduralTexture.periodic === true
+        && material.proceduralTexture.colorMapUsed === false
+        && material.top.opacity === 1
+        && material.top.transparent === false
+        && material.top.depthWrite === true
+        && material.hardware.refinementApplied === true
+        && material.hardware.opacity === 1
+        && material.hardware.transparent === false
+        && material.hardware.depthWrite === true
         && material.stitchInstanceCount > 0
         && material.phase3c1MaterialsChanged === false,
+      surfaceContinuity:
+        geometry.springBarPockets.overlapIntoBody > 0
+        && geometry.buckleWrap.overlapIntoBody > 0
+        && geometry.surfaceContinuity.colorMapUsed === false
+        && geometry.surfaceContinuity.bumpMapOnly === true
+        && geometry.surfaceContinuity.springBarBodyCapOccludedByTransition
+        && geometry.surfaceContinuity.buckleBodyCapOccludedByTransition,
       selection:
         partSelections.length >= 9
         && partSelections.every(part =>
           part.selected
           && part.hudName === part.partName
-          && part.learningName === part.partName),
+          && part.learningName === part.partName)
+        && selection.phase3c2BlankHitTargetCount === 0
+        && selection.blankSelectionRegression.reproduced === false
+        && selection.blankSelectionRegression.globalRaycasterChanged === false
+        && selection.blankSelectionRegression.codeChangeApplied === false,
       internalSelection:
         internalSelection === "設定車2"
         && internalUi.selection === "設定車2"

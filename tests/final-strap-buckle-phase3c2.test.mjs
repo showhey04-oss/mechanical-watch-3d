@@ -129,6 +129,61 @@ test("spring-bar and buckle wraps are closed annular tunnels", () => {
   }
 });
 
+test("wrap transitions are finite closed tongues that overlap their strap bodies", () => {
+  const d = FINAL_STRAP_BUCKLE_PHASE3C2.dimensions;
+  for (const candidate of [
+    {
+      innerRadius: d.springBarPocketInnerDiameter / 2,
+      outerRadius:
+        d.springBarPocketInnerDiameter / 2
+        + d.springBarPocketLeatherThickness,
+      length: d.springBarPocketWidth,
+      outwardDirection: [0, 1],
+      transitionLength: d.springBarWrapTransitionLength,
+      transitionHalfAngleDeg: d.springBarWrapTransitionHalfAngleDeg,
+      bodyJoinDistance: d.springBarBodyJoinDistance,
+    },
+    {
+      innerRadius: d.buckleWrapInnerDiameter / 2,
+      outerRadius:
+        d.buckleWrapInnerDiameter / 2 + d.buckleWrapLeatherThickness,
+      length: d.strapEndWidth,
+      outwardDirection: [0, -1],
+      transitionLength: d.buckleWrapTransitionLength,
+      transitionHalfAngleDeg: d.buckleWrapTransitionHalfAngleDeg,
+      bodyJoinDistance: d.buckleBodyJoinDistance,
+    },
+  ]) {
+    const data = createAxialHollowSleeveGeometryData(candidate);
+    assertClosedGeometry(data);
+    assert.equal(data.transition.tangentContinuousWeight, true);
+    assert.ok(data.transition.outerTipRadius > candidate.bodyJoinDistance);
+    assert.ok(data.transition.halfAngleDeg >= 45);
+    assert.equal(data.uvs.length, data.positions.length / 3 * 2);
+  }
+});
+
+test("leather and silver detail refinements stay opaque and candidate-local", async () => {
+  const [runtimeSource, indexSource] = await Promise.all([
+    readFile(
+      new URL("../js/final-strap-buckle-phase3c2.js", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../index.html", import.meta.url), "utf8"),
+  ]);
+  const material = FINAL_STRAP_BUCKLE_PHASE3C2.material;
+  assert.ok(material.grainBumpScale >= 0.04);
+  assert.ok(material.hardwareColor >= 0xd0d0d0);
+  assert.ok(material.hardwareMetalness >= 0.4);
+  assert.ok(material.hardwareRoughness >= 0.2);
+  assert.match(runtimeSource, /colorMapUsed:\s*false/);
+  assert.match(runtimeSource, /periodic:\s*true/);
+  assert.match(runtimeSource, /transparent:\s*false/);
+  assert.match(runtimeSource, /phase3c2BlankHitTargetCount:\s*0/);
+  assert.match(runtimeSource, /globalRaycasterChanged:\s*false/);
+  assert.match(indexSource, /applyHardwareMaterialRefinement/);
+});
+
 test("production integration preserves both protected display paths", async () => {
   const indexSource = await readFile(
     new URL("../index.html", import.meta.url),

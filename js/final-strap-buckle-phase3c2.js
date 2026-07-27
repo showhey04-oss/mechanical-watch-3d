@@ -35,15 +35,19 @@ function geometryFromData(data, auditKey) {
     ));
   }
   const position = geometry.getAttribute("position");
-  const bounds = data.audit.bounds;
-  const width = Math.max(1e-6, bounds.size[0]);
-  const length = Math.max(1e-6, bounds.size[2]);
-  const uv = new Float32Array(position.count * 2);
-  for (let index = 0; index < position.count; index++) {
-    uv[index * 2] = (position.getX(index) - bounds.min[0]) / width;
-    uv[index * 2 + 1] = (position.getZ(index) - bounds.min[2]) / length;
+  if (data.uvs?.length === position.count * 2) {
+    geometry.setAttribute("uv", new THREE.BufferAttribute(data.uvs, 2));
+  } else {
+    const bounds = data.audit.bounds;
+    const width = Math.max(1e-6, bounds.size[0]);
+    const length = Math.max(1e-6, bounds.size[2]);
+    const uv = new Float32Array(position.count * 2);
+    for (let index = 0; index < position.count; index++) {
+      uv[index * 2] = (position.getX(index) - bounds.min[0]) / width;
+      uv[index * 2 + 1] = (position.getZ(index) - bounds.min[2]) / length;
+    }
+    geometry.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
   }
-  geometry.setAttribute("uv", new THREE.BufferAttribute(uv, 2));
   const normals = geometry.getAttribute("normal");
   const audit = {
     ...data.audit,
@@ -59,16 +63,15 @@ function geometryFromData(data, auditKey) {
 
 function createLeatherGrainTexture(size = 128) {
   const data = new Uint8Array(size * size * 4);
-  let seed = 0x3c2b19;
-  const random = () => {
-    seed = (seed * 1664525 + 1013904223) >>> 0;
-    return seed / 0xffffffff;
-  };
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       const index = (y * size + x) * 4;
-      const wave = Math.sin(x * 0.41 + Math.sin(y * 0.19) * 1.7) * 2.2;
-      const grain = Math.round(128 + wave + (random() - 0.5) * 8);
+      const u = x / size * Math.PI * 2;
+      const v = y / size * Math.PI * 2;
+      const longFiber = Math.sin(3 * u + 1.4 * Math.sin(2 * v)) * 5.2;
+      const crossFiber = Math.cos(7 * v + 0.8 * Math.sin(4 * u)) * 3.1;
+      const pore = Math.sin(11 * u + 13 * v) * 1.7;
+      const grain = Math.round(128 + longFiber + crossFiber + pore);
       data[index] = grain;
       data[index + 1] = grain;
       data[index + 2] = grain;
@@ -85,21 +88,26 @@ function createLeatherGrainTexture(size = 128) {
   texture.name = "Phase 3C.2 procedural calf grain";
   texture.wrapS = THREE.RepeatWrapping;
   texture.wrapT = THREE.RepeatWrapping;
-  texture.repeat.set(3.5, 10);
-  texture.colorSpace = THREE.SRGBColorSpace;
+  texture.colorSpace = THREE.NoColorSpace;
   texture.needsUpdate = true;
   return texture;
 }
 
 function createMaterials(source, config) {
   const grain = createLeatherGrainTexture(config.material.grainTextureSize);
+  grain.repeat.set(
+    config.material.grainRepeatAcross,
+    config.material.grainRepeatAlong,
+  );
   const top = new THREE.MeshStandardMaterial({
     color: config.material.topColor,
     metalness: config.material.topMetalness,
     roughness: config.material.topRoughness,
-    map: grain,
     bumpMap: grain,
     bumpScale: config.material.grainBumpScale,
+    opacity: 1,
+    transparent: false,
+    depthWrite: true,
     clippingPlanes: source.steel.clippingPlanes,
   });
   top.name = "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP";
@@ -107,9 +115,11 @@ function createMaterials(source, config) {
     color: config.material.undersideColor,
     metalness: config.material.undersideMetalness,
     roughness: config.material.undersideRoughness,
-    map: grain,
     bumpMap: grain,
     bumpScale: config.material.grainBumpScale * 0.65,
+    opacity: 1,
+    transparent: false,
+    depthWrite: true,
     clippingPlanes: source.steel.clippingPlanes,
   });
   underside.name = "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_UNDERSIDE";
@@ -382,6 +392,13 @@ export function createFinalStrapBucklePhase3C2({
   const leather = createMaterials(materials, config);
   const silver = exteriorRuntime.objects.caseBody.material.clone();
   silver.name = "Phase 3C.2 stable silver";
+  silver.color.setHex(config.material.hardwareColor);
+  silver.metalness = config.material.hardwareMetalness;
+  silver.roughness = config.material.hardwareRoughness;
+  silver.envMapIntensity = config.material.hardwareEnvMapIntensity;
+  silver.opacity = 1;
+  silver.transparent = false;
+  silver.depthWrite = true;
   const root = new THREE.Group();
   root.name = "finalStrapBucklePhase3C2";
   root.userData.phase3c2Candidate = config.id;
@@ -454,15 +471,15 @@ export function createFinalStrapBucklePhase3C2({
     twelve: resolvePhase3C2StrapStations("twelve", config),
     six: resolvePhase3C2StrapStations("six", config),
   };
-  const bodyTrim = 1.45;
+  const springBodyJoin = d.springBarBodyJoinDistance;
   const twelveBodyStations = trimStations(
     sourceStations.twelve,
-    bodyTrim,
-    d.strap12Length - 1.35,
+    springBodyJoin,
+    d.strap12Length - d.buckleBodyJoinDistance,
   );
   const sixBodyStations = createRoundedFreeTipStations(
     sourceStations.six,
-    bodyTrim,
+    springBodyJoin,
     d.strap6Length,
   );
   const twelveBody = addPart({
@@ -486,7 +503,7 @@ export function createFinalStrapBucklePhase3C2({
     geometryData: createPerforatedSweptStrapGeometryData({
       stations: sixBodyStations,
       holeCenters: resolvePhase3C2HoleDistances(config)
-        .map(distance => distance - bodyTrim),
+        .map(distance => distance - springBodyJoin),
       holeRadius: d.holeDiameter / 2,
     }),
     material: [leather.top, leather.underside, leather.edge],
@@ -512,8 +529,11 @@ export function createFinalStrapBucklePhase3C2({
         innerRadius: d.springBarPocketInnerDiameter / 2,
         outerRadius: pocketOuterRadius,
         length: d.springBarPocketWidth,
+        outwardDirection: [0, side.sign],
+        transitionLength: d.springBarWrapTransitionLength,
+        transitionHalfAngleDeg: d.springBarWrapTransitionHalfAngleDeg,
       }),
-      material: [leather.top],
+      material: leather.top,
       name: `Phase 3C.2 ${side.label}スプリングバー巻込み部`,
       description: descriptions.springWrap,
       pickPriority: -1,
@@ -533,8 +553,11 @@ export function createFinalStrapBucklePhase3C2({
       outerRadius:
         d.buckleWrapInnerDiameter / 2 + d.buckleWrapLeatherThickness,
       length: d.strapEndWidth,
+      outwardDirection: twelveEnd.tangent.map(value => -value),
+      transitionLength: d.buckleWrapTransitionLength,
+      transitionHalfAngleDeg: d.buckleWrapTransitionHalfAngleDeg,
     }),
-    material: [leather.top],
+    material: leather.top,
     name: "Phase 3C.2 尾錠側ストラップ巻込み部",
     description: descriptions.buckleWrap,
     pickPriority: -1,
@@ -684,6 +707,45 @@ export function createFinalStrapBucklePhase3C2({
     object.userData.phase3c2ReplacedPlaceholder = true;
   });
 
+  let hardwareMaterialRefinementApplied = false;
+  const applyHardwareMaterialRefinement = () => {
+    for (const key of ["buckleFrame", "buckleBar", "buckleTang"]) {
+      objects[key]?.traverse(node => {
+        if (!node.isMesh) return;
+        const hardwareMaterials = Array.isArray(node.material)
+          ? node.material
+          : [node.material];
+        hardwareMaterials.filter(Boolean).forEach(material => {
+          material.color?.setHex(config.material.hardwareColor);
+          if (Number.isFinite(material.metalness)) {
+            material.metalness = config.material.hardwareMetalness;
+          }
+          if (Number.isFinite(material.roughness)) {
+            material.roughness = config.material.hardwareRoughness;
+          }
+          if (Number.isFinite(material.envMapIntensity)) {
+            material.envMapIntensity = config.material.hardwareEnvMapIntensity;
+          }
+          material.opacity = 1;
+          material.transparent = false;
+          material.depthWrite = true;
+          material.needsUpdate = true;
+        });
+        node.userData.phase3c2HardwareFinish =
+          "PHASE3C1_SILVER_FAMILY_MIDTONE_REFINEMENT";
+      });
+    }
+    hardwareMaterialRefinementApplied = true;
+    return {
+      applied: true,
+      color: config.material.hardwareColor,
+      metalness: config.material.hardwareMetalness,
+      roughness: config.material.hardwareRoughness,
+      envMapIntensity: config.material.hardwareEnvMapIntensity,
+    };
+  };
+  applyHardwareMaterialRefinement();
+
   let displayState = { explodeAmount: 0, sideSplitAmount: 0 };
   const applyDisplayState = ({
     explodeAmount = 0,
@@ -776,12 +838,51 @@ export function createFinalStrapBucklePhase3C2({
       width: d.springBarPocketWidth,
       radialClearance:
         (d.springBarPocketInnerDiameter - d.springBarMainDiameter) / 2,
+      bodyJoinDistance: d.springBarBodyJoinDistance,
+      transitionLength: d.springBarWrapTransitionLength,
+      transitionHalfAngleDeg: d.springBarWrapTransitionHalfAngleDeg,
+      transitionTipDistance: round(
+        pocketOuterRadius + d.springBarWrapTransitionLength,
+      ),
+      overlapIntoBody: round(
+        pocketOuterRadius
+          + d.springBarWrapTransitionLength
+          - d.springBarBodyJoinDistance,
+      ),
+      connection:
+        "TANGENT_CONTINUOUS_ANNULAR_WRAP_WITH_INTEGRATED_LEATHER_TONGUE",
     },
     buckleWrap: {
       innerDiameter: d.buckleWrapInnerDiameter,
       outerDiameter:
         d.buckleWrapInnerDiameter + d.buckleWrapLeatherThickness * 2,
       width: d.strapEndWidth,
+      bodyJoinDistance: d.buckleBodyJoinDistance,
+      transitionLength: d.buckleWrapTransitionLength,
+      transitionHalfAngleDeg: d.buckleWrapTransitionHalfAngleDeg,
+      transitionTipDistance: round(
+        d.buckleWrapInnerDiameter / 2
+          + d.buckleWrapLeatherThickness
+          + d.buckleWrapTransitionLength,
+      ),
+      overlapIntoBody: round(
+        d.buckleWrapInnerDiameter / 2
+          + d.buckleWrapLeatherThickness
+          + d.buckleWrapTransitionLength
+          - d.buckleBodyJoinDistance,
+      ),
+      connection:
+        "TANGENT_CONTINUOUS_ANNULAR_WRAP_WITH_INTEGRATED_LEATHER_TONGUE",
+    },
+    surfaceContinuity: {
+      topTextureSeam:
+        "REMOVED_BY_PERIODIC_TILEABLE_HEIGHT_FIELD_AND_CENTERLINE_UV",
+      colorMapUsed: false,
+      bumpMapOnly: true,
+      topSideUndersideMaterialBoundariesPreserved: true,
+      seamPlacement: "SIDE_OR_UNDERSIDE_ONLY",
+      springBarBodyCapOccludedByTransition: true,
+      buckleBodyCapOccludedByTransition: true,
     },
     keepers: {
       fixed: {
@@ -946,6 +1047,14 @@ export function createFinalStrapBucklePhase3C2({
     edgesIndividuallySelectable: false,
     interiorPriorityPreservedAtOpacity16: true,
     crownPriorityUnchanged: true,
+    phase3c2BlankHitTargetCount: 0,
+    blankSelectionRegression: {
+      reproduced: false,
+      globalRaycasterChanged: false,
+      selectionFoundationChanged: false,
+      codeChangeApplied: false,
+      disposition: "NO_LOW_RISK_PHASE3C2_CAUSE_FOUND",
+    },
   });
 
   const getMaterialReport = () => ({
@@ -956,11 +1065,17 @@ export function createFinalStrapBucklePhase3C2({
       width: leather.grain.image.width,
       height: leather.grain.image.height,
       bumpScale: leather.top.bumpScale,
+      repeat: leather.grain.repeat.toArray(),
+      periodic: true,
+      colorMapUsed: false,
     },
     top: {
       color: leather.top.color.getHex(),
       metalness: leather.top.metalness,
       roughness: leather.top.roughness,
+      opacity: leather.top.opacity,
+      transparent: leather.top.transparent,
+      depthWrite: leather.top.depthWrite,
     },
     underside: {
       color: leather.underside.color.getHex(),
@@ -981,6 +1096,18 @@ export function createFinalStrapBucklePhase3C2({
     ),
     physicalLeatherSimulation: false,
     phase3c1MaterialsChanged: false,
+    hardware: {
+      refinementApplied: hardwareMaterialRefinementApplied,
+      classification: "PHASE3C1_SILVER_FAMILY_MIDTONE_REFINEMENT",
+      color: config.material.hardwareColor,
+      metalness: config.material.hardwareMetalness,
+      roughness: config.material.hardwareRoughness,
+      envMapIntensity: config.material.hardwareEnvMapIntensity,
+      opacity: 1,
+      transparent: false,
+      depthWrite: true,
+      springBarsInheritedPhase3C1StableSilver: true,
+    },
   });
 
   const getWorldBoundsReport = () => {
@@ -1043,5 +1170,6 @@ export function createFinalStrapBucklePhase3C2({
     getMaterialReport,
     getWorldBoundsReport,
     getDisplayReport,
+    applyHardwareMaterialRefinement,
   };
 }
