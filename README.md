@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：最終外装統合 — Phase 3C.1 正式時計本体意匠候補（Phase 3B.2への積み上げDraft）
+- 現在の改修フェーズ：最終外装統合 — Phase 3C.2 正式黒革ストラップ・尾錠候補（Phase 3C.1への積み上げDraft）
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
@@ -22,7 +22,9 @@ Phase 3B.1最終候補は第4候補の全面テーパー断面を維持し、ケ
 
 Phase 3B.2は、人間承認済みPhase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`へ積み上げるquery限定候補である。`?exterior=balanced`時だけ4本のラグ、2本の簡略スプリングバー、12時側／6時側の構造確認用ストラップ、簡略バックルを生成し、通常URLは固定mainとpixel exactを維持する。lug-to-lugは46.600、ストラップはラグ側幅20.000、厚さ2.400、中心線長42.000／58.000で、禁止干渉は位置1／位置2とも0件である。ストラップは`STRUCTURAL_PLACEHOLDER_NOT_PHASE3C_STYLE`であり、革色・シボ・ステッチ・穴列・コバ・最終バックル意匠はPhase 3Cへ残す。既存カメラ定数は変更せず、全ストラップ確認には可逆なwheel zoom-outを使用する。PC自動回帰と390×844実ブラウザ回帰は合格し、物理iPhoneは人間確認待ちである。
 
-Phase 3C.1は、人間承認済みPhase 3B.2 Head `98d83781aa7aa001836a0d57f1ad6e3d058a15c4`へ積み上げる別Draftである。初回、第2候補、第3候補は人間非承認、第4候補の白系アイボリー、安定silver、針・小秒・オープンハート、非屈折近似dome、分離／分解／透過、時計機能、作動音、物理iPhone操作・性能は人間確認合格済みである。最終微修正では6時の通常バーを追加して12時ダブルを含む13 Meshとし、実Geometry clearanceは小秒凹面1.968、小秒目盛2.479975、小秒針掃引2.949939、6時major dot 0.435226、表示開口1.260226、禁止干渉0を確認した。学習タブは補助文なしの「外装」だけを表示し、管理対象を25部品へ整理して時針・分針・小秒針・りゅうずをON／OFF対象外としたが、FRONT／CORE family、split／explode、機構動作、選択・HUDは維持する。文字板priorityを1へ局所変更し、空白4点4／4、opacity 50%、風防側面、index、針、opacity 16%内部選択を確認した。グローバルRaycaster、風防Material／pickable、照明、影、透過基盤、S86、機構は変更していない。状態は`PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION`で、最終微修正のPC／物理iPhone確認前に既定採用、Ready化、マージを行わない。DesktopのA.5前後面明度差とIssue #2は未解決のまま、Phase 3C.2も未着手である。
+Phase 3C.1はHead `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`を`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承する。白系アイボリー、安定silver、針・小秒・オープンハート、非屈折近似dome、6時index、外装表示グループ、分離／分解／透過、時計機能、作動音、PC／物理iPhone操作・性能は合格済みである。小秒文字板の選択性、A.5前後面明度差、矩形影、透過不連続、PC／iPhone照明差、表裏分離・断面クリップのUX判断は保留を維持する。
+
+Phase 3C.2は、承認済みPhase 3C.1へ積み上げるquery限定Draftである。`?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`時だけ、中心線長75.000／115.000、幅19.700→16.000、厚さ2.600→2.050の黒革ストラップ、実スプリングバーポケット、直径2.000・pitch 7.000の7貫通穴、定革・遊革、尾錠枠・つく棒・取付バー、尾錠側巻込み、procedural calf grain、同系色ステッチ、黒いコバを生成する。位置1／位置2の禁止干渉0、10部品の選択・HUD・学習同期、opacity 16%内部選択、外装ON／OFF・split・explode・復元、通常path／Phase 3C.1-only path pixel exact、Desktop／390×844性能基準を確認した。状態は`PHASE3C2_IMPLEMENTATION_CANDIDATE_PENDING_HUMAN_CONFIRMATION`で、PC／物理iPhone確認前に既定採用、Ready化、マージを行わない。
 
 ## 実装済み
 
@@ -181,6 +183,7 @@ Phase 3C.1は、人間承認済みPhase 3B.2 Head `98d83781aa7aa001836a0d57f1ad6
 - `docs/REFACTOR_A5_CAMERA_CONTROLS.md`
 - `docs/REFACTOR_A6_SUMMARY.md`
 - `docs/FINAL_EXTERIOR_DESIGN_PHASE3C1_WATCH_HEAD.md`
+- `docs/FINAL_EXTERIOR_DESIGN_PHASE3C2_STRAP_BUCKLE.md`
 - `docs/REFACTOR_A6_FRAME_PACING.md`
 - `docs/REFACTOR_A6_CAMERA_SMOOTHING.md`
 - `docs/REFACTOR_A7_SUMMARY.md`

@@ -105,6 +105,27 @@
 - `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`を非ブロッキング観察事項として記録し、最終統合で15分連続試験を行う
 - Phase 3C.2の黒革、実用長、巻込み部、穴列、定革・遊革、尾錠枠・つく棒・取付バー、シボ、ステッチ、コバを必須後続工程として維持する
 
+### Phase 3C.2 正式黒革ストラップ・尾錠候補
+
+- Phase 3C.1 Head `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`を`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承する
+- `?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`だけで有効になり、通常pathとPhase 3C.1-only pathが承認Headとpixel exactである
+- 12時側／6時側の中心線長が75.000／115.000、幅が19.700→16.000、厚さが2.600→2.300→2.050へ単調減少する
+- 初期直線12.000、正Y手首側の同一曲率言語、曲率符号反転・自己交差・波打ち0を満たす
+- 内径1.800相当の2つの実スプリングバーポケットと尾錠側巻込みが、内周壁を持つ閉合indexed Geometryである
+- 6時側に直径2.000、pitch 7.000、自由端から24.000〜66.000の7貫通穴があり、透明disc、decal、黒い円、CSGを使用しない
+- 自由端が左右対称の穏やかな丸端で、非有限値・退化triangleを生じない
+- 定革・遊革が独立閉合loopで、ストラップとのclearance 0.150を持つ
+- 尾錠枠、つく棒、取付バーが独立した閉合部品で、frame/bar、tang pivot、strap wrapを意図接続として分類する
+- procedural calf grain、同系色ステッチ、黒いコバを持ち、外部画像asset、革物理、締結アニメーションを追加しない
+- 全新規Geometryでfinite、indexed、closed、outwardを満たし、退化・重複・反転triangle、non-manifold edge、winding mismatch、非有限法線、z-fighting、面積付きcoplanar overlapが0である
+- 位置1／位置2の禁止干渉0とし、意図接触を禁止干渉へ混在させない
+- 10登録部品の選択強調、右上HUD、学習表示が一致し、穴・ステッチ・コバは独立選択対象にしない
+- opacity 100／50／16／100、16%内部選択、外装ON／OFF、split、explode、復元誤差1e-7以下を満たす
+- Desktop／390×844のidle、pointer、wheelが既存絶対・差分基準へ合格し、reversal 0、stop-then-jump 0、zoom monotonic、transform invariantを維持する
+- Desktop総合のA.5前後面明度差は承認済みPhase 3C.1にも同一IDで再現し、Phase 3C.2固有回帰ではない。閾値、照明、影、透過を変更しない
+- 小秒選択性、Issue #2、D2c3、表裏分離・断面クリップUXを変更しない
+- PC／物理iPhoneで全長、巻込み、穴列、定革・遊革、尾錠、回転・ズーム、選択、透過、機構、作動音、15分連続発熱を確認するまでReady化・マージしない
+
 - 筒かなとミニッツホイールが噛み合って見える
 - ミニッツかなと時針車が噛み合って見える
 - 筒かな12枚とミニッツホイール36歯のモジュール・ピッチ径・中心距離が一致する

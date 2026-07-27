@@ -1,5 +1,18 @@
 # Changelog
 
+## Unreleased — Stacked Draft Phase 3C.2 formal leather strap and buckle
+
+- 人間承認済みPhase 3C.1 Head `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`から別ブランチを作り、`feature/final-exterior-balanced-phase3c1-watch-head`をBaseとする積み上げDraftとして正式ストラップ・尾錠を分離。
+- `?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`時だけ、Phase 3B.2の構造確認用ストラップ2本と簡略バックルを非表示にし、ラグとスプリングバーを再利用。通常pathとPhase 3C.1-only pathのObject3D／Material／DOM追加0とpixel exactを確認。
+- 中心線長75.000／115.000、幅19.700→16.000、厚さ2.600→2.300→2.050の閉合swept-prismを実装。最初の12.000をほぼ直線、その後を正Y手首側へ曲げ、曲率符号反転・自己交差・波打ちを0とした。
+- 内径1.800相当の実スプリングバーポケット2つ、尾錠側巻込み、直径2.000／pitch 7.000の7つの実貫通穴、左右対称の丸い自由端をCSGなしで実装。
+- 定革・遊革、外幅19.000／内幅16.600の尾錠枠、径1.200の取付バー、長さ13.000の静的つく棒を実装。実締結・遊革スライド・革変形・ばね挙動は再現せず、製造公差・耐久・防水を`UNVERIFIED_MANUFACTURING_INTERFACE`とした。
+- 上面`#151311`、裏面`#27221E`、コバ`#0B0908`、同系色ステッチ、128×128 procedural calf DataTextureを追加。外部画像、クロコ型押し、厚いパッド、大型ロゴ、派手なコントラストステッチは追加していない。
+- 10部品を選択・HUD・学習表示へ登録し、穴・ステッチ・コバは独立選択対象から除外。opacity 16%の内部選択、外装ON／OFF、split、explode、誤差1e-7以下の復元をDesktop／390×844で確認。
+- 位置1／位置2の禁止干渉0。意図接触をstrap/bar、strap/body wrap、frame/bar、tang pivot、buckle strap wrapとして分離。全新規Geometryの退化・重複・反転triangle、non-manifold edge、winding mismatch、非有限法線、coplanar overlap、z-fightingは0。
+- Desktop／390×844のidle・pointer・wheelは絶対・差分基準に合格し、閾値変更なし。Desktop総合のA.5前後面明度差は承認済みPhase 3C.1にも同じIDで再現し、Phase 3C.2固有回帰0。
+- Phase 3C.1は`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承。小秒選択性、Issue #2、D2c3、表裏分離・断面クリップUXを変更しない。Phase 3C.2はPC／物理iPhone人間確認待ちで、Ready化・マージしない。
+
 ## Unreleased — Stacked Draft Phase 3C.1 formal watch-head candidate
 
 - 初回、第2候補、第3候補は人間非承認。第4候補はPC／物理iPhoneで合格し、残る6時index、外装グループ、文字板選択性だけを同じDraft PR #15で最終微修正。状態は`PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION`。

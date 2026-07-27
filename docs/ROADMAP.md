@@ -104,7 +104,7 @@
 
 ## 現在の改修フェーズ
 
-### 最終外装統合 — Phase 3C.1 正式時計本体意匠候補
+### 最終外装統合 — Phase 3C.2 正式黒革ストラップ・尾錠候補
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする
 - Phase 3Aで承認されたE-BALANCEDを`?exterior=balanced`限定で実装し、Phase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`を人間承認済み依存基準とする
@@ -128,11 +128,14 @@
 - 文字板priorityを1へ局所変更し、文字板空白4点4／4、opacity 50%、index、針、小秒、open-heart、風防側面、opacity 16%内部選択を回帰する。グローバルRaycasterは変更しない
 - Phase 3C.1外装を既存FRONT／CORE／BACK／PLATEの表裏分離・分解transformへ統合し、100% split／explodeと誤差1e-7以内の復元をDesktop／390×844で検証する
 - 通常pathはPhase 3B.2とpixel exact、A.6性能の絶対・差分基準は合格。Desktop総合は白系文字板によるA.5前後面明度差だけ未達、音声integrationはBaseと候補の双方で同一timeoutとして記録する
-- 状態は`PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION`とし、最終微修正のPC／物理iPhone確認前に既定採用、Ready化、マージを行わない
+- Phase 3C.1 Head `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`を`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承する
 - 表裏分離／断面クリップは維持し、`UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2`としてPhase 3C.2とIssue #2完了後にUXを人間判断する
 - 矩形影、100%→99% transparent、55%→54% depthWrite、透過時の暗部・深度順、PC／iPhone照明差はIssue #2へ分離し、本工程でlighting／shadow／D2c3を変更しない
 - `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`は非ブロッキング観察事項。最終統合レビューで15分連続確認を行う
-- Phase 3C.2で黒革、実用長、巻込み部、穴列、定革・遊革、尾錠枠・つく棒・取付バー、シボ、ステッチ、コバを必須実装する。Phase 3C.1へ先行混在させない
+- Phase 3C.2は承認済みPhase 3C.1へ積み上げ、query時だけ75.000／115.000の黒革ストラップ、20→16相当taper、実巻込み、7貫通穴、定革・遊革、尾錠枠・つく棒・取付バー、procedural calf grain、ステッチ、コバを実装する
+- Phase 3B.2プレースホルダはPhase 3C.2有効時だけ非表示とし、通常pathとPhase 3C.1-only pathをpixel exactに維持する
+- 位置1／2禁止干渉0、10部品の選択、opacity 16%内部選択、外装ON／OFF、split／explode、復元、Desktop／390×844性能基準を自動確認する
+- 状態は`PHASE3C2_IMPLEMENTATION_CANDIDATE_PENDING_HUMAN_CONFIRMATION`とし、PC／物理iPhone確認前に既定採用、Ready化、マージを行わない
 - v3.15.0の機構、描画、UI、作動音、カメラ、性能基準を維持する
 - Issue #2、PR #5、D2c3、照明最終調整は本工程へ混在させず、保留中の独立課題として扱う
 - ETA 4.50 mmの基準面対応は未解決のままとし、差分を外装厚さの調整量に使わない
@@ -141,8 +144,7 @@
 
 ### 1. 最終外装
 
-- Phase 3C.1最終微修正の6時index、外装OFF時の針・りゅうず維持、helperなし「外装」UI、文字板4点／風防側面／opacity別選択をPC／物理iPhoneで人間確認し、Draftの次判断を行う
-- Phase 3C.1承認後だけ、Phase 3C.2で黒革ストラップと尾錠の必須意匠を実装する
+- Phase 3C.2の全長、巻込み、穴列、自由端、定革・遊革、尾錠、シボ、ステッチ、コバをPC／物理iPhoneで人間確認し、Draftの次判断を行う
 - 実装時に表示開口と全体比率を再確認する
 
 ### 2. 全体品質・Issue #2最終調整
