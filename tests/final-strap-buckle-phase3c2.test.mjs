@@ -97,7 +97,7 @@ test("refined lugs use a case-matched rounded section and eased taper", () => {
   const lug = FINAL_STRAP_BUCKLE_PHASE3C2.refinedLugs;
   assert.equal(
     lug.classification,
-    "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+    "PHASE3C2_REFINED_LUG_DESIGN_REFINEMENT_CANDIDATE",
   );
   assert.ok(lug.rootEmbed >= 0.18);
   assert.ok(lug.rootEmbed <= 0.32);
@@ -109,22 +109,37 @@ test("refined lugs use a case-matched rounded section and eased taper", () => {
   assert.equal(lug.stations[0].radialRootEmbed, lug.rootEmbed);
   assert.ok(lug.stations[0].width > lug.stations.at(-1).width);
   assert.ok(lug.stations[0].thickness > lug.stations.at(-1).thickness);
-  assert.equal(lug.stations.length, 16);
-  assert.equal(lug.surfacing.crossSectionSegments, 24);
-  assert.equal(lug.surfacing.crossSectionExponent, 2.4);
+  assert.equal(lug.stations.length, 24);
+  assert.equal(lug.surfacing.crossSectionSegments, 36);
+  assert.equal(lug.surfacing.crossSectionExponent, 2.2);
   assert.equal(
     lug.surfacing.taperEasing,
     "45_PERCENT_LINEAR_PLUS_55_PERCENT_SMOOTHSTEP",
   );
   assert.equal(
     lug.surfacing.widthTaperEasing,
-    "SMOOTHSTEP_TO_FULL_WIDTH_TAPER_AT_70_PERCENT",
+    "35_PERCENT_LINEAR_PLUS_65_PERCENT_SMOOTHSTEP_TO_SPRING_BAR",
   );
-  assert.equal(lug.surfacing.widthTaperEndProgress, 0.7);
+  assert.equal(
+    lug.surfacing.undersideTaperEasing,
+    "70_PERCENT_LINEAR_PLUS_30_PERCENT_SMOOTHSTEP",
+  );
+  assert.equal(lug.surfacing.widthTaperEndProgress, 0.8);
   lug.stations.slice(1).forEach((station, index) => {
     const previous = lug.stations[index];
     assert.ok(station.width <= previous.width + 1e-9);
     assert.ok(station.thickness <= previous.thickness + 1e-9);
+    assert.ok(station.frontExtent <= previous.frontExtent + 1e-9);
+    assert.ok(
+      station.undersideExtent <= previous.undersideExtent + 1e-9,
+    );
+    assert.ok(
+      Math.abs(
+        station.frontExtent
+        + station.undersideExtent
+        - station.thickness
+      ) <= 1e-6,
+    );
     assert.ok(station.z > previous.z);
   });
   const widths = lug.stations.map(station => station.width);
@@ -139,8 +154,16 @@ test("refined lugs use a case-matched rounded section and eased taper", () => {
       value < Math.min(thicknesses[index], thicknesses[index + 2])),
     false,
   );
-  assert.ok(widths[11] <= 2 + 1e-9);
-  assert.ok(widths.slice(11).every(value => Math.abs(value - 2) <= 1e-9));
+  assert.equal(lug.stations[0].width, 2.8);
+  assert.equal(lug.stations[0].thickness, 3.5);
+  assert.equal(lug.stations[0].frontExtent, 2.2);
+  assert.equal(lug.stations[0].undersideExtent, 1.3);
+  assert.ok(lug.stations[19].width <= 2 + 1e-9);
+  assert.ok(
+    lug.stations.slice(19).every(station =>
+      Math.abs(station.width - 2) <= 1e-9
+    ),
+  );
 });
 
 test("all four rounded refined lug meshes remain closed and outward", () => {
@@ -154,6 +177,8 @@ test("all four rounded refined lug meshes remain closed and outward", () => {
           z: sideSign * station.z,
           width: station.width,
           thickness: station.thickness,
+          frontExtent: station.frontExtent,
+          undersideExtent: station.undersideExtent,
           radialRootRadius: station.radialRootRadius,
           radialRootEmbed: station.radialRootEmbed,
         })),
@@ -163,8 +188,9 @@ test("all four rounded refined lug meshes remain closed and outward", () => {
         },
       );
       assertClosedGeometry(data);
-      assert.equal(data.audit.surfacing.stationCount, 16);
-      assert.equal(data.audit.surfacing.crossSectionSegments, 24);
+      assert.equal(data.audit.surfacing.stationCount, 24);
+      assert.equal(data.audit.surfacing.crossSectionSegments, 36);
+      assert.equal(data.audit.surfacing.asymmetricSection, true);
       const absoluteOuterZ = Math.max(
         Math.abs(data.audit.bounds.min[2]),
         Math.abs(data.audit.bounds.max[2]),

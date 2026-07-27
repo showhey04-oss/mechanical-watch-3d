@@ -89,28 +89,45 @@ const material = {
 };
 
 const refinedLugSurfacing = {
-  stationCount: 16,
-  crossSectionSegments: 24,
-  crossSectionExponent: 2.400,
+  stationCount: 24,
+  crossSectionSegments: 36,
+  crossSectionExponent: 2.200,
   taperEasing:
     "45_PERCENT_LINEAR_PLUS_55_PERCENT_SMOOTHSTEP",
-  widthTaperEasing: "SMOOTHSTEP_TO_FULL_WIDTH_TAPER_AT_70_PERCENT",
-  widthTaperEndProgress: 0.700,
+  undersideTaperEasing:
+    "70_PERCENT_LINEAR_PLUS_30_PERCENT_SMOOTHSTEP",
+  widthTaperEasing:
+    "35_PERCENT_LINEAR_PLUS_65_PERCENT_SMOOTHSTEP_TO_SPRING_BAR",
+  widthTaperEndProgress: 0.800,
+  rootEmbed: 0.290,
   rootZ: 16.203,
   tipCenterZ: 23.094,
   rootY: 1.350,
   tipY: 2.800,
-  rootWidth: 3.400,
+  rootWidth: 2.800,
   tipWidth: 2.000,
-  rootThickness: 5.400,
+  rootFrontExtent: 2.200,
+  rootUndersideExtent: 1.300,
+  tipFrontExtent: 1.000,
+  tipUndersideExtent: 1.000,
+  rootThickness: 3.500,
   tipThickness: 2.000,
 };
 
 const smoothStep01 = value => value * value * (3 - 2 * value);
 const refinedLugTaperProgress = value =>
   0.45 * value + 0.55 * smoothStep01(value);
+const refinedLugUndersideProgress = value =>
+  0.70 * value + 0.30 * smoothStep01(value);
 const refinedLugWidthProgress = value =>
-  smoothStep01(Math.min(1, value / refinedLugSurfacing.widthTaperEndProgress));
+  0.35 * Math.min(
+    1,
+    value / refinedLugSurfacing.widthTaperEndProgress,
+  )
+  + 0.65 * smoothStep01(Math.min(
+    1,
+    value / refinedLugSurfacing.widthTaperEndProgress,
+  ));
 const interpolate = (start, end, progress) =>
   start + (end - start) * progress;
 const fixed6 = value => Number(value.toFixed(6));
@@ -120,7 +137,18 @@ const refinedLugStations = Array.from(
   (_, index) => {
     const progress = index / (refinedLugSurfacing.stationCount - 1);
     const taperProgress = refinedLugTaperProgress(progress);
+    const undersideProgress = refinedLugUndersideProgress(progress);
     const widthProgress = refinedLugWidthProgress(progress);
+    const frontExtent = fixed6(interpolate(
+      refinedLugSurfacing.rootFrontExtent,
+      refinedLugSurfacing.tipFrontExtent,
+      taperProgress,
+    ));
+    const undersideExtent = fixed6(interpolate(
+      refinedLugSurfacing.rootUndersideExtent,
+      refinedLugSurfacing.tipUndersideExtent,
+      undersideProgress,
+    ));
     return {
       z: fixed6(interpolate(
         refinedLugSurfacing.rootZ,
@@ -132,11 +160,9 @@ const refinedLugStations = Array.from(
         refinedLugSurfacing.tipY,
         progress,
       )),
-      thickness: fixed6(interpolate(
-        refinedLugSurfacing.rootThickness,
-        refinedLugSurfacing.tipThickness,
-        taperProgress,
-      )),
+      frontExtent,
+      undersideExtent,
+      thickness: fixed6(frontExtent + undersideExtent),
       centerX: 11.000,
       width: fixed6(interpolate(
         refinedLugSurfacing.rootWidth,
@@ -145,7 +171,7 @@ const refinedLugStations = Array.from(
       )),
       ...(index === 0 ? {
         radialRootRadius: 19.800,
-        radialRootEmbed: 0.260,
+        radialRootEmbed: refinedLugSurfacing.rootEmbed,
       } : {}),
     };
   },
@@ -175,13 +201,14 @@ export const FINAL_STRAP_BUCKLE_PHASE3C2 = deepFreeze({
   dimensions,
   material,
   refinedLugs: {
-    classification: "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+    classification:
+      "PHASE3C2_REFINED_LUG_DESIGN_REFINEMENT_CANDIDATE",
     baseLugReplacementCount: 4,
-    rootEmbed: 0.260,
+    rootEmbed: refinedLugSurfacing.rootEmbed,
     edgeBreak: 0.055,
     rootTransitionLength: 4.297,
     rootProfile:
-      "CASE_RADIUS_MATCHED_ROUNDED_SUPERELLIPSE_EASED_SWEEP",
+      "CASE_RADIUS_MATCHED_ASYMMETRIC_ROUNDED_SUPERELLIPSE_EASED_SWEEP",
     surfacing: refinedLugSurfacing,
     outerZ: 23.300,
     innerGap: 20.000,
@@ -464,7 +491,7 @@ export function assertFinalStrapBucklePhase3C2(
     refinedLugs:
       config.refinedLugs.baseLugReplacementCount === 4
       && config.refinedLugs.classification
-        === "PHASE3C2_REFINED_LUG_SURFACING_FINAL"
+        === "PHASE3C2_REFINED_LUG_DESIGN_REFINEMENT_CANDIDATE"
       && config.refinedLugs.rootEmbed >= 0.18
       && config.refinedLugs.rootEmbed <= 0.32
       && config.refinedLugs.edgeBreak >= 0.05
@@ -481,13 +508,22 @@ export function assertFinalStrapBucklePhase3C2(
           station.width <= stations[index - 1].width + tolerance
           && station.thickness <= stations[index - 1].thickness + tolerance
         ))
-      && config.refinedLugs.surfacing.stationCount >= 12
-      && config.refinedLugs.surfacing.stationCount <= 16
-      && config.refinedLugs.surfacing.crossSectionSegments >= 16
+      && config.refinedLugs.surfacing.stationCount >= 16
+      && config.refinedLugs.surfacing.stationCount <= 24
+      && config.refinedLugs.surfacing.crossSectionSegments >= 24
       && config.refinedLugs.surfacing.crossSectionExponent >= 2
       && config.refinedLugs.surfacing.crossSectionExponent <= 3
-      && config.refinedLugs.surfacing.widthTaperEndProgress >= 0.65
-      && config.refinedLugs.surfacing.widthTaperEndProgress <= 0.75
+      && config.refinedLugs.surfacing.widthTaperEndProgress >= 0.75
+      && config.refinedLugs.surfacing.widthTaperEndProgress <= 0.82
+      && config.refinedLugs.stations.every(station =>
+        station.frontExtent > 0
+        && station.undersideExtent > 0
+        && Math.abs(
+          station.frontExtent
+          + station.undersideExtent
+          - station.thickness
+        ) <= 1e-6
+      )
       && config.refinedLugs.outerZ === 23.3
       && config.refinedLugs.innerGap === 20
       && config.refinedLugs.springBarCenterY === d.springBarCenterY

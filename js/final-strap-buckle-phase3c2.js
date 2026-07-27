@@ -690,6 +690,8 @@ export function createFinalStrapBucklePhase3C2({
         z: side.sign * station.z,
         width: station.width,
         thickness: station.thickness,
+        frontExtent: station.frontExtent,
+        undersideExtent: station.undersideExtent,
         radialRootRadius: station.radialRootRadius,
         radialRootEmbed: station.radialRootEmbed,
       }));
@@ -1200,13 +1202,41 @@ export function createFinalStrapBucklePhase3C2({
             );
           })
           .length,
+        localBulgeCount: config.refinedLugs.stations
+          .slice(1, -1)
+          .filter((station, index) => {
+            const previous = config.refinedLugs.stations[index];
+            const next = config.refinedLugs.stations[index + 2];
+            return (
+              station.width > previous.width + 1e-9
+              && station.width > next.width + 1e-9
+            ) || (
+              station.thickness > previous.thickness + 1e-9
+              && station.thickness > next.thickness + 1e-9
+            );
+          })
+          .length,
         sectionStyle: "ROUNDED_SUPERELLIPSE",
+        sectionSymmetry: "FRONT_UNDERSIDE_ASYMMETRIC",
+        rootAreaProxy:
+          config.refinedLugs.stations[0].width
+          * config.refinedLugs.stations[0].thickness,
+        previousRootAreaProxy: 3.4 * 5.4,
+        rootAreaReductionRatio: 1 - (
+          config.refinedLugs.stations[0].width
+          * config.refinedLugs.stations[0].thickness
+        ) / (3.4 * 5.4),
+        undersideReliefAtRoot: 2.7
+          - config.refinedLugs.stations[0].undersideExtent,
         highlightFlow:
           "SHARED_VERTEX_LONGITUDINAL_AND_CIRCUMFERENTIAL_NORMALS",
       },
       rootSection: {
         width: config.refinedLugs.stations[0].width,
         thickness: config.refinedLugs.stations[0].thickness,
+        frontExtent: config.refinedLugs.stations[0].frontExtent,
+        undersideExtent:
+          config.refinedLugs.stations[0].undersideExtent,
         centerX: config.refinedLugs.stations[0].centerX,
         radialRootRadius:
           config.refinedLugs.stations[0].radialRootRadius,

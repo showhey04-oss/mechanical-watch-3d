@@ -231,12 +231,22 @@ export function createRoundedSweptLugGeometryData(
     const [normalY, normalZ] = stationNormal(stations, index);
     const halfWidth = station.width / 2;
     const halfThickness = station.thickness / 2;
+    const frontExtent = Number.isFinite(station.frontExtent)
+      ? station.frontExtent
+      : halfThickness;
+    const undersideExtent = Number.isFinite(station.undersideExtent)
+      ? station.undersideExtent
+      : halfThickness;
     for (let segment = 0; segment < crossSectionSegments; segment++) {
       const angle = segment / crossSectionSegments * Math.PI * 2;
       const xOffset =
         halfWidth * signedPow(Math.cos(angle), sectionPower);
-      const normalOffset =
-        halfThickness * signedPow(Math.sin(angle), sectionPower);
+      const signedSectionOffset =
+        signedPow(Math.sin(angle), sectionPower);
+      const pointsTowardFront = signedSectionOffset * normalY < 0;
+      const normalOffset = signedSectionOffset * (
+        pointsTowardFront ? frontExtent : undersideExtent
+      );
       const x = station.x + xOffset;
       const radialRootRadius = Number(station.radialRootRadius);
       const radialRootEmbed = Number(station.radialRootEmbed);
@@ -304,6 +314,37 @@ export function createRoundedSweptLugGeometryData(
         crossSectionExponent,
         longitudinalSegmentCount: stations.length - 1,
         angularStepDegrees: 360 / crossSectionSegments,
+        asymmetricSection: stations.some(station =>
+          Number.isFinite(station.frontExtent)
+          && Number.isFinite(station.undersideExtent)
+          && Math.abs(
+            station.frontExtent - station.undersideExtent
+          ) > 1e-9
+        ),
+        frontExtentRange: [
+          Math.min(...stations.map(station =>
+            Number.isFinite(station.frontExtent)
+              ? station.frontExtent
+              : station.thickness / 2
+          )),
+          Math.max(...stations.map(station =>
+            Number.isFinite(station.frontExtent)
+              ? station.frontExtent
+              : station.thickness / 2
+          )),
+        ],
+        undersideExtentRange: [
+          Math.min(...stations.map(station =>
+            Number.isFinite(station.undersideExtent)
+              ? station.undersideExtent
+              : station.thickness / 2
+          )),
+          Math.max(...stations.map(station =>
+            Number.isFinite(station.undersideExtent)
+              ? station.undersideExtent
+              : station.thickness / 2
+          )),
+        ],
       },
     },
   };
