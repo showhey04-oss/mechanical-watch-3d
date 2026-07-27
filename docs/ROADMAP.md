@@ -104,7 +104,13 @@
 
 ## 現在の改修フェーズ
 
-### 最終外装統合 — Phase 3C.2 正式黒革ストラップ・尾錠候補
+### 最終外装統合 — Phase 3C.3 完成外装の統合確認・局所調整
+
+- Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として固定する
+- `integration=phase3c3`限定で完成時計を統合監査し、小秒凹面の非描画selection proxyだけを局所追加する
+- Desktop／390×844で小秒空白4/4、opacity 16%内部選択、外装ON/OFF、split、explode、復元、位置1／2禁止干渉0を確認する
+- queryなし／Phase 3C.1-only／Phase 3C.2-onlyをpixel exactに保護する
+- Issue #2の描画品質と表裏分離／断面クリップのUI判断を変更せず、PC／物理iPhone統合確認後にDraftの次判断を行う
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする
 - Phase 3Aで承認されたE-BALANCEDを`?exterior=balanced`限定で実装し、Phase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`を人間承認済み依存基準とする
@@ -135,7 +141,7 @@
 - Phase 3C.2は承認済みPhase 3C.1へ積み上げ、query時だけ75.000／115.000の黒革ストラップ、20→16相当taper、実巻込み、7貫通穴、定革・遊革、尾錠枠・つく棒・取付バー、procedural calf grain、ステッチ、コバを実装する
 - Phase 3B.2プレースホルダはPhase 3C.2有効時だけ非表示とし、通常pathとPhase 3C.1-only pathをpixel exactに維持する
 - 位置1／2禁止干渉0、10部品の選択、opacity 16%内部選択、外装ON／OFF、split／explode、復元、Desktop／390×844性能基準を自動確認する
-- 状態は`PHASE3C2_IMPLEMENTATION_CANDIDATE_PENDING_HUMAN_CONFIRMATION`とし、PC／物理iPhone確認前に既定採用、Ready化、マージを行わない
+- Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`。Ready化・マージ・既定採用は未実施
 - v3.15.0の機構、描画、UI、作動音、カメラ、性能基準を維持する
 - Issue #2、PR #5、D2c3、照明最終調整は本工程へ混在させず、保留中の独立課題として扱う
 - ETA 4.50 mmの基準面対応は未解決のままとし、差分を外装厚さの調整量に使わない
@@ -144,7 +150,7 @@
 
 ### 1. 最終外装
 
-- Phase 3C.2の全長、巻込み、穴列、自由端、定革・遊革、尾錠、シボ、ステッチ、コバをPC／物理iPhoneで人間確認し、Draftの次判断を行う
+- Phase 3C.2の全長、巻込み、穴列、自由端、定革・遊革、尾錠、シボ、ステッチ、コバはPC／物理iPhoneで人間承認済み。Phase 3C.3で完成時計全体を再確認する
 - 実装時に表示開口と全体比率を再確認する
 
 ### 2. 全体品質・Issue #2最終調整

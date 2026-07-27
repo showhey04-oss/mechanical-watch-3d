@@ -316,6 +316,22 @@
 - ライト、影、露出、tone mapping、材質、背景、構造透過、適応DPR、ArcballControls、カメラ、Raycaster候補選定、animation loop、内部機構を変更しない
 - Issue #2の照明・透明・影課題を実装せず、IssueをOpenのまま維持する
 
+## Phase 3C.3 完成外装統合
+
+- 有効queryは`exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3`に限定し、queryなし／Phase 3C.1-only／Phase 3C.2-onlyを承認Headとpixel exactに保つ
+- Phase 3C.1／3C.2のGeometry、S86、Phase 2C、A.7、機構、カメラ、DPR、照明、影、透過基盤、UI、音響、APP_VERSIONを変更しない
+- 小秒凹面の空白4点はDesktop 1280×720と390×844のopacity 100%／50%で小秒表示4/4、opacity 16%では設定車2等の内部選択を維持する
+- 小秒針、小秒目盛、主文字板、オープンハート縁、風防の既存選択優先度を維持し、proxyを独立部品登録しない
+- 統合Object3Dのorphan、二重登録、visibility不整合、Material復元不整合、parent不整合、query残留、非有限transformを0にする
+- 外装ON／OFF、opacity全条件、split、explode、split＋explode、内部選択、表示モード切替を確認し、完全復元誤差を`1e-7`以下にする
+- 位置1／位置2の機構・外装禁止干渉0/0、三針1:1拘束、S86、Phase 2C、A.7を維持する
+- Node 197/197、Desktop／390×844統合ハーネス、console error／warning 0、manifest closed-worldへ合格する
+- performanceはidle、pointer、wheel、opacity 16%、外装OFF、split、explode、学習選択でPhase 3C.2との差分合格、reversal 0、stop-then-jump 0、wheel monotonic、transform invariant、閾値変更なしとする
+- 絶対性能のin-app Browserフレームペーシング変動は製品閾値の緩和に使わず、環境制約として差分判定と分離する
+- Issue #2の矩形影、100%／99%、55%／54%、前後輝度差、PC／iPhone差、D2c3を変更せず引継ぎ文書へ記録する
+- 表裏分離／断面クリップは`DEFERRED_UNTIL_POST_ISSUE2_UI_SIMPLIFICATION_REVIEW`として維持する
+- PC／物理iPhone人間確認前は`AUTOMATED_ACCEPTED_PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_REVIEW`で、Ready化・マージ・既定採用しない
+
 ## M. v3.14 機構同期作動音 Phase 1
 
 - 初期表示で作動音はOFF、`AudioContext`は未生成、音源は未読込で、自動再生しない

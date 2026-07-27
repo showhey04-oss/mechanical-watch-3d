@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
+
+- Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として継承し、別Draftで完成時計を統合監査。
+- `integration=phase3c3`時だけ小秒凹面の空白4点へ非描画selection proxyを追加。Desktop／390×844の100%／50%で4/4、16%越しの設定車2選択を維持。
+- Object3D orphan・二重登録・visibility・Material復元・parent・query残留を0、split／explode／外装ON/OFF後の復元誤差を`1e-7`以下、位置1／2禁止干渉を0/0で確認。
+- queryなし、Phase 3C.1-only、Phase 3C.2-onlyを承認Headとpixel exactで照合。Geometry、機構、カメラ、DPR、照明、影、透過基盤、UI、音響、APP_VERSION、試験閾値を変更していない。
+- Desktop／390×844のidle、pointer、wheel、opacity 16%、外装OFF、split、explode、学習選択は`DIFFERENTIAL_PASS`。in-app Browserの絶対フレームペーシング変動は環境制約として分離。
+- 矩形影、100%／99%、55%／54%、前後輝度差、PC／iPhone差、金属階調、D2c3をIssue #2へ引き継ぐ。PC／物理iPhone人間確認待ちでReady化・マージ・既定採用は未実施。
+
 ## Unreleased — Stacked Draft Phase 3C.2 formal leather strap and buckle
 
 - 人間承認済みPhase 3C.1 Head `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`から別ブランチを作り、`feature/final-exterior-balanced-phase3c1-watch-head`をBaseとする積み上げDraftとして正式ストラップ・尾錠を分離。
@@ -11,7 +20,7 @@
 - 10部品を選択・HUD・学習表示へ登録し、穴・ステッチ・コバは独立選択対象から除外。opacity 16%の内部選択、外装ON／OFF、split、explode、誤差1e-7以下の復元をDesktop／390×844で確認。
 - 位置1／位置2の禁止干渉0。意図接触をstrap/bar、strap/body wrap、frame/bar、tang pivot、buckle strap wrapとして分離。全新規Geometryの退化・重複・反転triangle、non-manifold edge、winding mismatch、非有限法線、coplanar overlap、z-fightingは0。
 - Desktop／390×844のidle・pointer・wheelは絶対・差分基準に合格し、閾値変更なし。Desktop総合のA.5前後面明度差は承認済みPhase 3C.1にも同じIDで再現し、Phase 3C.2固有回帰0。
-- Phase 3C.1は`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承。小秒選択性、Issue #2、D2c3、表裏分離・断面クリップUXを変更しない。Phase 3C.2はPC／物理iPhone人間確認待ちで、Ready化・マージしない。
+- Phase 3C.1は`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承。小秒選択性、Issue #2、D2c3、表裏分離・断面クリップUXを変更しない。Phase 3C.2 Head `f245a5a9d68d5205e7609479ffefd711376e4930`は後続人間確認で`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`となり、Ready化・マージ・既定採用は未実施。
 
 ## Unreleased — Stacked Draft Phase 3C.1 formal watch-head candidate
 
