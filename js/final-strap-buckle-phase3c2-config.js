@@ -88,59 +88,68 @@ const material = {
   hardwareEnvMapIntensity: 0.480,
 };
 
-const refinedLugStations = [
-  {
-    z: 16.203,
-    y: 1.350,
-    thickness: 5.800,
-    centerX: 11.000,
-    width: 3.600,
-    radialRootRadius: 19.800,
-    radialRootEmbed: 0.260,
+const refinedLugSurfacing = {
+  stationCount: 16,
+  crossSectionSegments: 24,
+  crossSectionExponent: 2.400,
+  taperEasing:
+    "45_PERCENT_LINEAR_PLUS_55_PERCENT_SMOOTHSTEP",
+  widthTaperEasing: "SMOOTHSTEP_TO_FULL_WIDTH_TAPER_AT_70_PERCENT",
+  widthTaperEndProgress: 0.700,
+  rootZ: 16.203,
+  tipCenterZ: 23.094,
+  rootY: 1.350,
+  tipY: 2.800,
+  rootWidth: 3.400,
+  tipWidth: 2.000,
+  rootThickness: 5.400,
+  tipThickness: 2.000,
+};
+
+const smoothStep01 = value => value * value * (3 - 2 * value);
+const refinedLugTaperProgress = value =>
+  0.45 * value + 0.55 * smoothStep01(value);
+const refinedLugWidthProgress = value =>
+  smoothStep01(Math.min(1, value / refinedLugSurfacing.widthTaperEndProgress));
+const interpolate = (start, end, progress) =>
+  start + (end - start) * progress;
+const fixed6 = value => Number(value.toFixed(6));
+
+const refinedLugStations = Array.from(
+  { length: refinedLugSurfacing.stationCount },
+  (_, index) => {
+    const progress = index / (refinedLugSurfacing.stationCount - 1);
+    const taperProgress = refinedLugTaperProgress(progress);
+    const widthProgress = refinedLugWidthProgress(progress);
+    return {
+      z: fixed6(interpolate(
+        refinedLugSurfacing.rootZ,
+        refinedLugSurfacing.tipCenterZ,
+        progress,
+      )),
+      y: fixed6(interpolate(
+        refinedLugSurfacing.rootY,
+        refinedLugSurfacing.tipY,
+        progress,
+      )),
+      thickness: fixed6(interpolate(
+        refinedLugSurfacing.rootThickness,
+        refinedLugSurfacing.tipThickness,
+        taperProgress,
+      )),
+      centerX: 11.000,
+      width: fixed6(interpolate(
+        refinedLugSurfacing.rootWidth,
+        refinedLugSurfacing.tipWidth,
+        widthProgress,
+      )),
+      ...(index === 0 ? {
+        radialRootRadius: 19.800,
+        radialRootEmbed: 0.260,
+      } : {}),
+    };
   },
-  {
-    z: 17.550,
-    y: 1.380,
-    thickness: 5.500,
-    centerX: 11.000,
-    width: 3.300,
-  },
-  {
-    z: 18.600,
-    y: 1.650,
-    thickness: 4.800,
-    centerX: 11.000,
-    width: 2.900,
-  },
-  {
-    z: 19.600,
-    y: 1.950,
-    thickness: 4.000,
-    centerX: 11.000,
-    width: 2.250,
-  },
-  {
-    z: 20.500,
-    y: 2.280,
-    thickness: 3.100,
-    centerX: 11.000,
-    width: 2.150,
-  },
-  {
-    z: 22.300,
-    y: 2.640,
-    thickness: 2.250,
-    centerX: 11.000,
-    width: 2.000,
-  },
-  {
-    z: 23.10508,
-    y: 2.800,
-    thickness: 2.000,
-    centerX: 11.000,
-    width: 2.000,
-  },
-];
+);
 
 export const FINAL_STRAP_BUCKLE_PHASE3C2 = deepFreeze({
   schemaVersion: 1,
@@ -166,13 +175,14 @@ export const FINAL_STRAP_BUCKLE_PHASE3C2 = deepFreeze({
   dimensions,
   material,
   refinedLugs: {
-    classification: "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+    classification: "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
     baseLugReplacementCount: 4,
     rootEmbed: 0.260,
     edgeBreak: 0.055,
     rootTransitionLength: 4.297,
     rootProfile:
-      "CASE_RADIUS_MATCHED_CHORD_TO_MONOTONIC_TAPERED_SWEPT_PRISM",
+      "CASE_RADIUS_MATCHED_ROUNDED_SUPERELLIPSE_EASED_SWEEP",
+    surfacing: refinedLugSurfacing,
     outerZ: 23.300,
     innerGap: 20.000,
     springBarCenterY: 2.800,
@@ -454,7 +464,7 @@ export function assertFinalStrapBucklePhase3C2(
     refinedLugs:
       config.refinedLugs.baseLugReplacementCount === 4
       && config.refinedLugs.classification
-        === "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL"
+        === "PHASE3C2_REFINED_LUG_SURFACING_FINAL"
       && config.refinedLugs.rootEmbed >= 0.18
       && config.refinedLugs.rootEmbed <= 0.32
       && config.refinedLugs.edgeBreak >= 0.05
@@ -471,11 +481,19 @@ export function assertFinalStrapBucklePhase3C2(
           station.width <= stations[index - 1].width + tolerance
           && station.thickness <= stations[index - 1].thickness + tolerance
         ))
+      && config.refinedLugs.surfacing.stationCount >= 12
+      && config.refinedLugs.surfacing.stationCount <= 16
+      && config.refinedLugs.surfacing.crossSectionSegments >= 16
+      && config.refinedLugs.surfacing.crossSectionExponent >= 2
+      && config.refinedLugs.surfacing.crossSectionExponent <= 3
+      && config.refinedLugs.surfacing.widthTaperEndProgress >= 0.65
+      && config.refinedLugs.surfacing.widthTaperEndProgress <= 0.75
       && config.refinedLugs.outerZ === 23.3
       && config.refinedLugs.innerGap === 20
       && config.refinedLugs.springBarCenterY === d.springBarCenterY
       && config.refinedLugs.springBarCenterZ === d.springBarCenterZ
-      && config.refinedLugs.stations.length >= 6,
+      && config.refinedLugs.stations.length
+        === config.refinedLugs.surfacing.stationCount,
   };
   return deepFreeze({
     ok: Object.values(checks).every(Boolean),

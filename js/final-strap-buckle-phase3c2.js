@@ -14,9 +14,10 @@ import {
 } from "./final-strap-buckle-phase3c2-geometry.js";
 import {
   createAxialSolidGeometryData,
+  createRoundedSweptLugGeometryData,
   createRectangularRingGeometryData,
   createSweptPrismGeometryData,
-} from "./final-exterior-attachments-geometry.js";
+} from "./final-exterior-attachments-geometry.js?phase3c2Surfacing=1";
 
 const round = (value, digits = 6) => Number(Number(value).toFixed(digits));
 const roundArray = values => values.map(value => round(value));
@@ -695,7 +696,12 @@ export function createFinalStrapBucklePhase3C2({
       addPart({
         key,
         group: groups.lugs,
-        geometryData: createSweptPrismGeometryData(stations),
+        geometryData: createRoundedSweptLugGeometryData(stations, {
+          crossSectionSegments:
+            config.refinedLugs.surfacing.crossSectionSegments,
+          crossSectionExponent:
+            config.refinedLugs.surfacing.crossSectionExponent,
+        }),
         material: silver,
         name: `Phase 3C.2 ${side.label}${hand.label} refined lug`,
         description: descriptions.lug,
@@ -1178,6 +1184,26 @@ export function createFinalStrapBucklePhase3C2({
       edgeBreak: config.refinedLugs.edgeBreak,
       rootTransitionLength: config.refinedLugs.rootTransitionLength,
       rootProfile: config.refinedLugs.rootProfile,
+      surfacing: {
+        ...config.refinedLugs.surfacing,
+        midWaistCount: config.refinedLugs.stations
+          .slice(1, -1)
+          .filter((station, index) => {
+            const previous = config.refinedLugs.stations[index];
+            const next = config.refinedLugs.stations[index + 2];
+            return (
+              station.width < previous.width - 1e-9
+              && station.width < next.width - 1e-9
+            ) || (
+              station.thickness < previous.thickness - 1e-9
+              && station.thickness < next.thickness - 1e-9
+            );
+          })
+          .length,
+        sectionStyle: "ROUNDED_SUPERELLIPSE",
+        highlightFlow:
+          "SHARED_VERTEX_LONGITUDINAL_AND_CIRCUMFERENTIAL_NORMALS",
+      },
       rootSection: {
         width: config.refinedLugs.stations[0].width,
         thickness: config.refinedLugs.stations[0].thickness,

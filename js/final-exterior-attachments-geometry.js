@@ -200,6 +200,115 @@ export function createSweptPrismGeometryData(stations) {
   };
 }
 
+const signedPow = (value, exponent) =>
+  Math.sign(value) * Math.abs(value) ** exponent;
+
+export function createRoundedSweptLugGeometryData(
+  stations,
+  {
+    crossSectionSegments = 24,
+    crossSectionExponent = 2.4,
+  } = {},
+) {
+  if (!Array.isArray(stations) || stations.length < 12) {
+    throw new Error("rounded swept lug requires at least twelve stations");
+  }
+  if (!Number.isInteger(crossSectionSegments) || crossSectionSegments < 12) {
+    throw new Error("rounded swept lug requires at least twelve section segments");
+  }
+  if (
+    !Number.isFinite(crossSectionExponent)
+    || crossSectionExponent < 2
+    || crossSectionExponent > 4
+  ) {
+    throw new Error("rounded swept lug section exponent must be between 2 and 4");
+  }
+
+  const positions = [];
+  const sectionPower = 2 / crossSectionExponent;
+  for (let index = 0; index < stations.length; index++) {
+    const station = stations[index];
+    const [normalY, normalZ] = stationNormal(stations, index);
+    const halfWidth = station.width / 2;
+    const halfThickness = station.thickness / 2;
+    for (let segment = 0; segment < crossSectionSegments; segment++) {
+      const angle = segment / crossSectionSegments * Math.PI * 2;
+      const xOffset =
+        halfWidth * signedPow(Math.cos(angle), sectionPower);
+      const normalOffset =
+        halfThickness * signedPow(Math.sin(angle), sectionPower);
+      const x = station.x + xOffset;
+      const radialRootRadius = Number(station.radialRootRadius);
+      const radialRootEmbed = Number(station.radialRootEmbed);
+      const radialRootZ = (
+        Number.isFinite(radialRootRadius)
+        && Number.isFinite(radialRootEmbed)
+      )
+        ? Math.sign(station.z || 1) * (
+          Math.sqrt(Math.max(0, radialRootRadius ** 2 - x ** 2))
+          - radialRootEmbed
+        )
+        : station.z;
+      positions.push(
+        x,
+        station.y + normalOffset * normalY,
+        radialRootZ + normalOffset * normalZ,
+      );
+    }
+  }
+
+  const rawIndices = [];
+  for (let station = 0; station < stations.length - 1; station++) {
+    const current = station * crossSectionSegments;
+    const next = (station + 1) * crossSectionSegments;
+    for (let segment = 0; segment < crossSectionSegments; segment++) {
+      const following = (segment + 1) % crossSectionSegments;
+      rawIndices.push(
+        current + segment,
+        current + following,
+        next + following,
+        current + segment,
+        next + following,
+        next + segment,
+      );
+    }
+  }
+
+  const startCenter = positions.length / 3;
+  positions.push(stations[0].x, stations[0].y, stations[0].z);
+  const endCenter = positions.length / 3;
+  positions.push(stations.at(-1).x, stations.at(-1).y, stations.at(-1).z);
+  const end = (stations.length - 1) * crossSectionSegments;
+  for (let segment = 0; segment < crossSectionSegments; segment++) {
+    const following = (segment + 1) % crossSectionSegments;
+    rawIndices.push(startCenter, following, segment);
+    rawIndices.push(
+      endCenter,
+      end + segment,
+      end + following,
+    );
+  }
+
+  const oriented = orientOutward(positions, rawIndices);
+  const typedPositions = new Float32Array(positions);
+  const typedIndices = new Uint32Array(oriented.indices);
+  const audit = auditIndexedGeometry(typedPositions, typedIndices);
+  return {
+    positions: typedPositions,
+    indices: typedIndices,
+    audit: {
+      ...audit,
+      surfacing: {
+        stationCount: stations.length,
+        crossSectionSegments,
+        crossSectionExponent,
+        longitudinalSegmentCount: stations.length - 1,
+        angularStepDegrees: 360 / crossSectionSegments,
+      },
+    },
+  };
+}
+
 export function createAxialSolidGeometryData(profile, segments = 48) {
   if (!Array.isArray(profile) || profile.length < 2) {
     throw new Error("axial solid requires at least two profile stations");

@@ -16,7 +16,7 @@ import {
   createPerforatedSweptStrapGeometryData,
 } from "../js/final-strap-buckle-phase3c2-geometry.js";
 import {
-  createSweptPrismGeometryData,
+  createRoundedSweptLugGeometryData,
 } from "../js/final-exterior-attachments-geometry.js";
 
 const approvedPhase3C1 =
@@ -93,11 +93,11 @@ test("formal straps preserve exact lengths and monotonic width/thickness", () =>
   }
 });
 
-test("refined lugs use a case-matched root and monotonic local taper", () => {
+test("refined lugs use a case-matched rounded section and eased taper", () => {
   const lug = FINAL_STRAP_BUCKLE_PHASE3C2.refinedLugs;
   assert.equal(
     lug.classification,
-    "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+    "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
   );
   assert.ok(lug.rootEmbed >= 0.18);
   assert.ok(lug.rootEmbed <= 0.32);
@@ -109,28 +109,67 @@ test("refined lugs use a case-matched root and monotonic local taper", () => {
   assert.equal(lug.stations[0].radialRootEmbed, lug.rootEmbed);
   assert.ok(lug.stations[0].width > lug.stations.at(-1).width);
   assert.ok(lug.stations[0].thickness > lug.stations.at(-1).thickness);
+  assert.equal(lug.stations.length, 16);
+  assert.equal(lug.surfacing.crossSectionSegments, 24);
+  assert.equal(lug.surfacing.crossSectionExponent, 2.4);
+  assert.equal(
+    lug.surfacing.taperEasing,
+    "45_PERCENT_LINEAR_PLUS_55_PERCENT_SMOOTHSTEP",
+  );
+  assert.equal(
+    lug.surfacing.widthTaperEasing,
+    "SMOOTHSTEP_TO_FULL_WIDTH_TAPER_AT_70_PERCENT",
+  );
+  assert.equal(lug.surfacing.widthTaperEndProgress, 0.7);
   lug.stations.slice(1).forEach((station, index) => {
     const previous = lug.stations[index];
     assert.ok(station.width <= previous.width + 1e-9);
     assert.ok(station.thickness <= previous.thickness + 1e-9);
     assert.ok(station.z > previous.z);
   });
+  const widths = lug.stations.map(station => station.width);
+  const thicknesses = lug.stations.map(station => station.thickness);
+  assert.equal(
+    widths.slice(1, -1).some((value, index) =>
+      value < Math.min(widths[index], widths[index + 2])),
+    false,
+  );
+  assert.equal(
+    thicknesses.slice(1, -1).some((value, index) =>
+      value < Math.min(thicknesses[index], thicknesses[index + 2])),
+    false,
+  );
+  assert.ok(widths[11] <= 2 + 1e-9);
+  assert.ok(widths.slice(11).every(value => Math.abs(value - 2) <= 1e-9));
 });
 
-test("all four case-matched refined lug meshes remain closed and outward", () => {
+test("all four rounded refined lug meshes remain closed and outward", () => {
   const lug = FINAL_STRAP_BUCKLE_PHASE3C2.refinedLugs;
   for (const sideSign of [-1, 1]) {
     for (const handSign of [-1, 1]) {
-      const data = createSweptPrismGeometryData(lug.stations.map(station => ({
-        x: handSign * station.centerX,
-        y: station.y,
-        z: sideSign * station.z,
-        width: station.width,
-        thickness: station.thickness,
-        radialRootRadius: station.radialRootRadius,
-        radialRootEmbed: station.radialRootEmbed,
-      })));
+      const data = createRoundedSweptLugGeometryData(
+        lug.stations.map(station => ({
+          x: handSign * station.centerX,
+          y: station.y,
+          z: sideSign * station.z,
+          width: station.width,
+          thickness: station.thickness,
+          radialRootRadius: station.radialRootRadius,
+          radialRootEmbed: station.radialRootEmbed,
+        })),
+        {
+          crossSectionSegments: lug.surfacing.crossSectionSegments,
+          crossSectionExponent: lug.surfacing.crossSectionExponent,
+        },
+      );
       assertClosedGeometry(data);
+      assert.equal(data.audit.surfacing.stationCount, 16);
+      assert.equal(data.audit.surfacing.crossSectionSegments, 24);
+      const absoluteOuterZ = Math.max(
+        Math.abs(data.audit.bounds.min[2]),
+        Math.abs(data.audit.bounds.max[2]),
+      );
+      assert.ok(Math.abs(absoluteOuterZ - lug.outerZ) <= 0.002);
     }
   }
 });
