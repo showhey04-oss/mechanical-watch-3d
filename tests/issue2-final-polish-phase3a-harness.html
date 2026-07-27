@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Issue 2 Final Polish Phase 3A Harness</title>
+  <style>
+    html,body{margin:0;background:#11151b;color:#e9eef5;font:13px/1.4 system-ui,sans-serif}
+    #appFrame{position:fixed;left:-20000px;top:0;border:0}
+    #preview{display:block;max-width:100%;height:auto;margin:0 auto;background:#080a0e}
+    #status{position:fixed;left:8px;bottom:8px;padding:5px 8px;background:#000b;border-radius:5px}
+    #issue2Phase3AResult{display:none}
+    #captureChunks{display:none}
+  </style>
+</head>
+<body data-audit-ready="false" data-audit-status="running">
+  <iframe id="appFrame" title="same-origin completed-watch candidate"></iframe>
+  <img id="preview" alt="actual Three.js offscreen capture">
+  <output id="status">running</output>
+  <output id="issue2Phase3AResult"></output>
+  <div id="captureChunks"></div>
+  <script type="module" src="./issue2-final-polish-phase3a-harness.js"></script>
+</body>
+</html>
