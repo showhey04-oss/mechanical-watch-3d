@@ -16,7 +16,7 @@
   <pre id="captureLog"></pre>
   <div id="phase3aCaptureChunks" hidden></div>
   <script type="module">
-    import {runFinalExteriorCapture} from "./final-exterior-capture.js?phase3c2=3";
+    import {runFinalExteriorCapture} from "./final-exterior-capture.js?phase3c2=4";
 
     const params = new URLSearchParams(location.search);
     const width = Math.max(320, Number(params.get("width")) || 1280);
@@ -33,11 +33,20 @@
     ];
     const displayMode = params.get("display") || "normal";
     const prepareMode = params.get("prepare") || "none";
+    const diagnosticMode = params.get("diagnostic") || "product";
     const opacity = params.get("opacity") || "1";
+    const pathMode = params.get("pathMode") || "phase3c2";
+    const candidateQuery = pathMode === "normal"
+      ? []
+      : pathMode === "phase3c1"
+        ? ["exterior=balanced", "watchHead=phase3c1"]
+        : [
+          "exterior=balanced",
+          "watchHead=phase3c1",
+          "strapStyle=phase3c2",
+        ];
     const appQuery = [
-      "exterior=balanced",
-      "watchHead=phase3c1",
-      "strapStyle=phase3c2",
+      ...candidateQuery,
       "dimensionAudit=1",
       "theme=navy",
       "time=10%3A10%3A30",
@@ -63,9 +72,13 @@
       targetOffset,
       readyKey: "phase3c2CaptureReady",
       appQuery,
-      prepare: displayMode === "normal" && prepareMode === "none"
+      prepare:
+        displayMode === "normal"
+        && prepareMode === "none"
+        && diagnosticMode === "product"
         ? null
         : async ({frame, diagnostics}) => {
+          diagnostics.setPhase3C2DiagnosticMode(diagnosticMode);
           if (displayMode === "split") {
             setRange(frame, "sideSplit", 100);
           } else if (displayMode === "explode") {

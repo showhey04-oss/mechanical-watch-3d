@@ -13,6 +13,9 @@ const dimensions = {
   lugSideClearance: 0.150,
   strap12Length: 75.000,
   strap6Length: 115.000,
+  strapInitialStraightLength: 12.000,
+  strap12TerminalTangentAngleDeg: 95.000,
+  strap6TerminalTangentAngleDeg: 120.000,
   strapLugThickness: 2.600,
   strapMidThickness: 2.300,
   strapEndThickness: 2.050,
@@ -63,10 +66,10 @@ const dimensions = {
 };
 
 const material = {
-  classification: "EDUCATIONAL_PROCEDURAL_CALF_LEATHER",
-  topColor: 0x151311,
+  classification: "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED",
+  topColor: 0x211b17,
   topMetalness: 0,
-  topRoughness: 0.740,
+  topRoughness: 0.710,
   undersideColor: 0x27221e,
   undersideMetalness: 0,
   undersideRoughness: 0.800,
@@ -77,12 +80,58 @@ const material = {
   grainTextureSize: 128,
   grainRepeatAcross: 3.000,
   grainRepeatAlong: 14.000,
-  grainBumpScale: 0.048,
+  grainBumpScale: 0.065,
+  grainRoughnessAmplitude: 0.060,
   hardwareColor: 0xe7eaed,
   hardwareMetalness: 0.500,
   hardwareRoughness: 0.240,
   hardwareEnvMapIntensity: 0.480,
 };
+
+const refinedLugStations = [
+  {
+    z: 16.280,
+    y: 1.580,
+    thickness: 5.050,
+    centerX: 11.000,
+    width: 2.400,
+  },
+  {
+    z: 16.850,
+    y: 1.620,
+    thickness: 4.980,
+    centerX: 11.000,
+    width: 2.350,
+  },
+  {
+    z: 18.400,
+    y: 1.820,
+    thickness: 4.350,
+    centerX: 11.000,
+    width: 2.250,
+  },
+  {
+    z: 20.500,
+    y: 2.280,
+    thickness: 3.100,
+    centerX: 11.000,
+    width: 2.100,
+  },
+  {
+    z: 22.300,
+    y: 2.640,
+    thickness: 2.250,
+    centerX: 11.000,
+    width: 2.000,
+  },
+  {
+    z: 23.10508,
+    y: 2.800,
+    thickness: 2.000,
+    centerX: 11.000,
+    width: 2.000,
+  },
+];
 
 export const FINAL_STRAP_BUCKLE_PHASE3C2 = deepFreeze({
   schemaVersion: 1,
@@ -107,6 +156,17 @@ export const FINAL_STRAP_BUCKLE_PHASE3C2 = deepFreeze({
   },
   dimensions,
   material,
+  refinedLugs: {
+    classification: "QUERY_ONLY_PHASE3C2_REFINED_LUGS",
+    baseLugReplacementCount: 4,
+    rootEmbed: 0.170,
+    edgeBreak: 0.075,
+    outerZ: 23.300,
+    innerGap: 20.000,
+    springBarCenterY: 2.800,
+    springBarCenterZ: 21.800,
+    stations: refinedLugStations,
+  },
   classifications: {
     springBarPocket: "INTENDED_STRAP_BAR_CONNECTION",
     strapPocket: "INTENDED_STRAP_BODY_WRAP_CONNECTION",
@@ -134,25 +194,42 @@ const pathLength = stations => stations.slice(1).reduce((sum, station, index) =>
   );
 }, 0);
 
-const rawCenterline = (side, sampleCount = 64) => {
+const smoothStep = value => {
+  const t = Math.max(0, Math.min(1, value));
+  return t * t * (3 - 2 * t);
+};
+
+const rawCenterline = (
+  side,
+  config = FINAL_STRAP_BUCKLE_PHASE3C2,
+  sampleCount = 64,
+) => {
   const isTwelve = side !== "six";
   const sign = isTwelve ? 1 : -1;
+  const d = config.dimensions;
   const target = isTwelve
-    ? dimensions.strap12Length
-    : dimensions.strap6Length;
-  const straightLength = 12;
-  const wristRadius = 22;
+    ? d.strap12Length
+    : d.strap6Length;
+  const straightLength = d.strapInitialStraightLength;
+  const terminalAngle = (
+    isTwelve
+      ? d.strap12TerminalTangentAngleDeg
+      : d.strap6TerminalTangentAngleDeg
+  ) * Math.PI / 180;
   const segmentLength = target / sampleCount;
   const stations = [{
     x: 0,
-    y: dimensions.springBarCenterY,
-    z: sign * dimensions.springBarCenterZ,
+    y: d.springBarCenterY,
+    z: sign * d.springBarCenterZ,
     progress: 0,
   }];
   for (let index = 1; index <= sampleCount; index++) {
     const progress = index / sampleCount;
-    const midpointDistance = (index - 0.5) * segmentLength;
-    const angle = Math.max(0, midpointDistance - straightLength) / wristRadius;
+    const endpointDistance = index * segmentLength;
+    const bendProgress = (
+      endpointDistance - straightLength
+    ) / (target - straightLength);
+    const angle = terminalAngle * smoothStep(bendProgress);
     const previous = stations.at(-1);
     stations.push({
       x: 0,
@@ -172,7 +249,7 @@ export function resolvePhase3C2StrapStations(
   const target = isTwelve
     ? config.dimensions.strap12Length
     : config.dimensions.strap6Length;
-  const raw = rawCenterline(isTwelve ? "twelve" : "six");
+  const raw = rawCenterline(isTwelve ? "twelve" : "six", config);
   const start = raw[0];
   const scale = target / pathLength(raw);
   return raw.map(station => {
@@ -296,6 +373,15 @@ export function assertFinalStrapBucklePhase3C2(
       && twelveCenterline.initialStraightLength <= 14
       && sixCenterline.initialStraightLength >= 10
       && sixCenterline.initialStraightLength <= 14,
+    terminalTangents:
+      Math.abs(
+        twelveCenterline.finalBendAngle
+        - d.strap12TerminalTangentAngleDeg * Math.PI / 180
+      ) <= tolerance
+      && Math.abs(
+        sixCenterline.finalBendAngle
+        - d.strap6TerminalTangentAngleDeg * Math.PI / 180
+      ) <= tolerance,
     holes:
       holes.length === 7
       && holes.every((distance, index) =>
@@ -339,8 +425,13 @@ export function assertFinalStrapBucklePhase3C2(
       && d.keeperClearance <= 0.25,
     material:
       config.material.classification
-      === "EDUCATIONAL_PROCEDURAL_CALF_LEATHER"
-      && config.material.grainBumpScale >= 0.04
+      === "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED"
+      && config.material.topColor === 0x211b17
+      && config.material.topRoughness >= 0.68
+      && config.material.topRoughness <= 0.74
+      && config.material.grainBumpScale >= 0.055
+      && config.material.grainBumpScale <= 0.075
+      && config.material.grainRoughnessAmplitude === 0.06
       && config.material.hardwareColor === 0xe7eaed
       && config.material.hardwareMetalness >= 0.45
       && config.material.hardwareMetalness <= 0.62
@@ -348,6 +439,17 @@ export function assertFinalStrapBucklePhase3C2(
       && config.material.hardwareRoughness <= 0.28
       && config.material.hardwareEnvMapIntensity >= 0.25
       && config.material.hardwareEnvMapIntensity <= 0.5,
+    refinedLugs:
+      config.refinedLugs.baseLugReplacementCount === 4
+      && config.refinedLugs.rootEmbed >= 0.15
+      && config.refinedLugs.rootEmbed <= 0.3
+      && config.refinedLugs.edgeBreak >= 0.05
+      && config.refinedLugs.edgeBreak <= 0.1
+      && config.refinedLugs.outerZ === 23.3
+      && config.refinedLugs.innerGap === 20
+      && config.refinedLugs.springBarCenterY === d.springBarCenterY
+      && config.refinedLugs.springBarCenterZ === d.springBarCenterZ
+      && config.refinedLugs.stations.length >= 6,
   };
   return deepFreeze({
     ok: Object.values(checks).every(Boolean),

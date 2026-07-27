@@ -10,7 +10,9 @@ import {
   resolvePhase3C2StrapStations,
 } from "../js/final-strap-buckle-phase3c2-config.js";
 import {
+  createAxialHollowPocketGeometryData,
   createAxialHollowSleeveGeometryData,
+  mergeClosedGeometryData,
   createPerforatedSweptStrapGeometryData,
 } from "../js/final-strap-buckle-phase3c2-geometry.js";
 
@@ -129,38 +131,46 @@ test("spring-bar and buckle wraps are closed annular tunnels", () => {
   }
 });
 
-test("wrap transitions are finite closed tongues that overlap their strap bodies", () => {
+test("wrap and strap use a shared-vertex closed shell without visible overlap", () => {
   const d = FINAL_STRAP_BUCKLE_PHASE3C2.dimensions;
-  for (const candidate of [
-    {
-      innerRadius: d.springBarPocketInnerDiameter / 2,
-      outerRadius:
-        d.springBarPocketInnerDiameter / 2
-        + d.springBarPocketLeatherThickness,
-      length: d.springBarPocketWidth,
-      outwardDirection: [0, 1],
-      transitionLength: d.springBarWrapTransitionLength,
-      transitionHalfAngleDeg: d.springBarWrapTransitionHalfAngleDeg,
-      bodyJoinDistance: d.springBarBodyJoinDistance,
-    },
-    {
-      innerRadius: d.buckleWrapInnerDiameter / 2,
-      outerRadius:
-        d.buckleWrapInnerDiameter / 2 + d.buckleWrapLeatherThickness,
-      length: d.strapEndWidth,
-      outwardDirection: [0, -1],
-      transitionLength: d.buckleWrapTransitionLength,
-      transitionHalfAngleDeg: d.buckleWrapTransitionHalfAngleDeg,
-      bodyJoinDistance: d.buckleBodyJoinDistance,
-    },
-  ]) {
-    const data = createAxialHollowSleeveGeometryData(candidate);
-    assertClosedGeometry(data);
-    assert.equal(data.transition.tangentContinuousWeight, true);
-    assert.ok(data.transition.outerTipRadius > candidate.bodyJoinDistance);
-    assert.ok(data.transition.halfAngleDeg >= 45);
-    assert.equal(data.uvs.length, data.positions.length / 3 * 2);
-  }
+  const pocket = createAxialHollowPocketGeometryData({
+    innerRadius: d.springBarPocketInnerDiameter / 2,
+    outerRadius:
+      d.springBarPocketInnerDiameter / 2
+      + d.springBarPocketLeatherThickness,
+    length: d.springBarPocketWidth,
+    outwardDirection: [0, 1],
+    bodyJoinDistance: d.springBarBodyJoinDistance,
+    bodyThickness: d.strapLugThickness,
+  });
+  const body = createPerforatedSweptStrapGeometryData({
+    stations: [
+      {
+        x: 0,
+        y: 0,
+        z: d.springBarBodyJoinDistance,
+        width: d.strapLugWidth,
+        nominalWidth: d.strapLugWidth,
+        thickness: d.strapLugThickness,
+      },
+      {
+        x: 0,
+        y: 0,
+        z: 10,
+        width: d.strapLugWidth,
+        nominalWidth: d.strapLugWidth,
+        thickness: d.strapLugThickness,
+      },
+    ],
+    holeCenters: [],
+    holeRadius: 0,
+    openStart: true,
+  });
+  const merged = mergeClosedGeometryData([pocket, body]);
+  assert.equal(pocket.transition.openThroat, true);
+  assert.equal(pocket.transition.sharedVertexCompatible, true);
+  assert.ok(merged.sharedVertexCount >= 4);
+  assertClosedGeometry(merged);
 });
 
 test("leather and silver detail refinements stay opaque and candidate-local", async () => {
@@ -172,13 +182,21 @@ test("leather and silver detail refinements stay opaque and candidate-local", as
     readFile(new URL("../index.html", import.meta.url), "utf8"),
   ]);
   const material = FINAL_STRAP_BUCKLE_PHASE3C2.material;
-  assert.ok(material.grainBumpScale >= 0.04);
+  assert.equal(
+    material.classification,
+    "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED",
+  );
+  assert.ok(material.grainBumpScale >= 0.055);
+  assert.equal(material.grainRoughnessAmplitude, 0.06);
   assert.ok(material.hardwareColor >= 0xd0d0d0);
   assert.ok(material.hardwareMetalness >= 0.4);
   assert.ok(material.hardwareRoughness >= 0.2);
   assert.match(runtimeSource, /colorMapUsed:\s*false/);
   assert.match(runtimeSource, /periodic:\s*true/);
   assert.match(runtimeSource, /transparent:\s*false/);
+  assert.match(runtimeSource, /roughnessMap:\s*textures\.roughness/);
+  assert.match(runtimeSource, /visibleTopOverlap:\s*0/);
+  assert.match(runtimeSource, /high-saturation-backplane/);
   assert.match(runtimeSource, /phase3c2BlankHitTargetCount:\s*0/);
   assert.match(runtimeSource, /globalRaycasterChanged:\s*false/);
   assert.match(indexSource, /applyHardwareMaterialRefinement/);
@@ -222,6 +240,9 @@ test("Phase 3C.2 harness is same-origin, unsandboxed, and audits runtime state",
   assert.match(script, /selectPartByNameForAudit/);
   assert.match(script, /getModelWorldSignature/);
   assert.match(script, /strapStyle=phase3c2/);
+  assert.match(script, /getPhase3C2DefectDiagnosticReport/);
+  assert.match(script, /getPickHitStack/);
+  assert.match(script, /INTER_STRAP_PROJECTION_OVERLAP/);
 });
 
 test("Phase 3C.2 capture is query-only and reuses the state-safe PNG path", async () => {
@@ -233,6 +254,8 @@ test("Phase 3C.2 capture is query-only and reuses the state-safe PNG path", asyn
   assert.match(html, /distanceMultiplier/);
   assert.match(html, /strapStyle=phase3c2/);
   assert.match(html, /watchHead=phase3c1/);
+  assert.match(html, /diagnosticMode/);
+  assert.match(html, /setPhase3C2DiagnosticMode/);
   assert.match(html, /data-phase3c2-capture-ready="false"/);
   assert.doesNotMatch(html, /\bsandbox=/);
 });

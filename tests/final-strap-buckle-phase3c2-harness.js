@@ -110,6 +110,62 @@ function sameTransform(first, second) {
   return JSON.stringify(first) === JSON.stringify(second);
 }
 
+function collectProjectionEvidence(diagnostics) {
+  const samples = [];
+  let phase3c2HitCount = 0;
+  let mixedDepthStackCount = 0;
+  let twelveSixSameRayCount = 0;
+  let projectedStrapBehindWatchHeadCount = 0;
+  for (let clientY = 18; clientY < height; clientY += 24) {
+    for (let clientX = 18; clientX < width; clientX += 24) {
+      const stack = diagnostics.getPickHitStack(clientX, clientY);
+      const phase3c2Hits = stack.hits.filter(hit =>
+        hit.partName?.startsWith("Phase 3C.2"));
+      if (!phase3c2Hits.length) continue;
+      phase3c2HitCount++;
+      const uniqueParts = new Set(phase3c2Hits.map(hit => hit.partName));
+      const hasTwelve = [...uniqueParts].some(name =>
+        name.includes("12時側"));
+      const hasSix = [...uniqueParts].some(name =>
+        name.includes("6時側"));
+      if (hasTwelve && hasSix) twelveSixSameRayCount++;
+      const mixed = stack.hits.some(hit =>
+        hit.partName && !hit.partName.startsWith("Phase 3C.2"));
+      if (mixed) mixedDepthStackCount++;
+      const hasStrapSurface = phase3c2Hits.some(hit =>
+        /ストラップ|巻込み部/.test(hit.partName || ""));
+      if (mixed && hasStrapSurface) projectedStrapBehindWatchHeadCount++;
+      if (
+        samples.length < 24
+        && (mixed || (hasTwelve && hasSix) || phase3c2Hits.length > 1)
+      ) {
+        samples.push({
+          client: stack.client,
+          selectedPart: stack.selectedPart,
+          hits: stack.hits.slice(0, 8),
+        });
+      }
+    }
+  }
+  return {
+    stepPx: 24,
+    sampleCount: samples.length,
+    phase3c2HitCount,
+    mixedDepthStackCount,
+    twelveSixSameRayCount,
+    projectedStrapBehindWatchHeadCount,
+    samples,
+    classification:
+      twelveSixSameRayCount > 0
+        ? "INTER_STRAP_PROJECTION_OVERLAP"
+        : "RESOLVED_NO_INTER_STRAP_PROJECTION_OVERLAP",
+    watchHeadProjectionOcclusion:
+      projectedStrapBehindWatchHeadCount > 0
+        ? "CAMERA_COMPOSITION_OBSERVATION"
+        : "NONE",
+  };
+}
+
 frame.addEventListener("load", async () => {
   try {
     const diagnostics = await waitForDiagnostics();
@@ -120,6 +176,8 @@ frame.addEventListener("load", async () => {
       diagnostics.getPhase3C2StrapBuckleInterferenceReport();
     const selection = diagnostics.getPhase3C2StrapBuckleSelectionReport();
     const material = diagnostics.getPhase3C2StrapBuckleMaterialReport();
+    const defectDiagnosis = diagnostics.getPhase3C2DefectDiagnosticReport();
+    const projectionEvidence = collectProjectionEvidence(diagnostics);
     const worldBounds =
       diagnostics.getPhase3C2StrapBuckleWorldBoundsReport();
     const cameraOccupancy =
@@ -165,6 +223,17 @@ frame.addEventListener("load", async () => {
         learningName: ui.selectionOutputs.learningName,
       };
     });
+    const blankSelectionCycles = [];
+    for (let index = 0; index < 10; index++) {
+      diagnostics.selectPartByNameForAudit(
+        selection.registeredParts[index % selection.registeredParts.length]
+          .partName,
+      );
+      await new Promise(resolve => setTimeout(resolve, 190));
+      blankSelectionCycles.push(await diagnostics.simulateBlankPointerTap({
+        pointerType: width <= 390 ? "touch" : "mouse",
+      }));
+    }
     diagnostics.setStructuralOpacity(0.16);
     const internalSelection = diagnostics.pickProjectedPart("設定車2");
     const internalUi = diagnostics.getUiRegressionState();
@@ -209,7 +278,7 @@ frame.addEventListener("load", async () => {
         state.deferredSmallSecondPicking
         === "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
       placeholdersReplaced:
-        state.placeholderReplacement.hiddenCount === 3
+        state.placeholderReplacement.hiddenCount === 7
         && state.placeholderReplacement.baseGeometryChanged === false
         && state.placeholderReplacement.baseMaterialChanged === false,
       exactLengths:
@@ -239,11 +308,14 @@ frame.addEventListener("load", async () => {
         && position2.crownPosition === "set"
         && position2.crownTransition === 1,
       material:
-        material.classification === "EDUCATIONAL_PROCEDURAL_CALF_LEATHER"
+        material.classification
+        === "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED"
         && material.externalImageAssetCount === 0
         && material.proceduralTexture.width === 128
         && material.proceduralTexture.periodic === true
         && material.proceduralTexture.colorMapUsed === false
+        && material.proceduralTexture.roughnessMapUsed === true
+        && material.proceduralTexture.roughnessAmplitude === 0.06
         && material.top.opacity === 1
         && material.top.transparent === false
         && material.top.depthWrite === true
@@ -254,12 +326,15 @@ frame.addEventListener("load", async () => {
         && material.stitchInstanceCount > 0
         && material.phase3c1MaterialsChanged === false,
       surfaceContinuity:
-        geometry.springBarPockets.overlapIntoBody > 0
-        && geometry.buckleWrap.overlapIntoBody > 0
+        geometry.springBarPockets.overlapIntoBody === 0
+        && geometry.buckleWrap.overlapIntoBody === 0
+        && geometry.springBarPockets.sharedVertexConnection === true
+        && geometry.buckleWrap.sharedVertexConnection === true
         && geometry.surfaceContinuity.colorMapUsed === false
-        && geometry.surfaceContinuity.bumpMapOnly === true
-        && geometry.surfaceContinuity.springBarBodyCapOccludedByTransition
-        && geometry.surfaceContinuity.buckleBodyCapOccludedByTransition,
+        && geometry.surfaceContinuity.bumpMapOnly === false
+        && geometry.surfaceContinuity.proceduralRoughnessMap === true
+        && geometry.surfaceContinuity.springBarBodyCapRemoved
+        && geometry.surfaceContinuity.buckleBodyCapRemoved,
       selection:
         partSelections.length >= 9
         && partSelections.every(part =>
@@ -269,7 +344,9 @@ frame.addEventListener("load", async () => {
         && selection.phase3c2BlankHitTargetCount === 0
         && selection.blankSelectionRegression.reproduced === false
         && selection.blankSelectionRegression.globalRaycasterChanged === false
-        && selection.blankSelectionRegression.codeChangeApplied === false,
+        && selection.blankSelectionRegression.codeChangeApplied === false
+        && blankSelectionCycles.length === 10
+        && blankSelectionCycles.every(cycle => cycle.cleared),
       internalSelection:
         internalSelection === "設定車2"
         && internalUi.selection === "設定車2"
@@ -300,6 +377,18 @@ frame.addEventListener("load", async () => {
       phase3c1Protected:
         phase3c1.state.enabled
         && phase3c1.material.strapPhase3c2StyleApplied === true,
+      defectDiagnosis:
+        defectDiagnosis.status
+        === "IMPLEMENTED_PENDING_HUMAN_CONFIRMATION"
+        && defectDiagnosis.diagnosedCause
+        === "STRAP_BODY_WRAP_MESH_BOUNDARY"
+        && defectDiagnosis.connections.sixSpringBarWrap.continuousOuterShell
+        && defectDiagnosis.connections.sixSpringBarWrap.visibleTopOverlap === 0
+        && defectDiagnosis.connections.buckleStrapWrap.continuousOuterShell
+        && defectDiagnosis.connections.buckleStrapWrap.visibleTopOverlap === 0
+        && projectionEvidence.classification
+        === "RESOLVED_NO_INTER_STRAP_PROJECTION_OVERLAP"
+        && defectDiagnosis.centerlines.physicalClearance.surfaceClearance >= 4,
       cameraConstantsUnchanged:
         worldBounds.initialCameraConstantsChanged === false
         && cameraOccupancy.cameraConstantsChanged === false
@@ -326,6 +415,10 @@ frame.addEventListener("load", async () => {
       interference,
       selection,
       material,
+      defectDiagnosis: {
+        ...defectDiagnosis,
+        projectionEvidence,
+      },
       worldBounds,
       cameraOccupancy,
       phase3c1,
@@ -340,6 +433,7 @@ frame.addEventListener("load", async () => {
         opacityCycles,
       },
       partSelections,
+      blankSelectionCycles,
       internalSelection: {
         selected: internalSelection,
         ui: internalUi,
