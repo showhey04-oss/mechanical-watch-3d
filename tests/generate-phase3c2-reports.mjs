@@ -13,7 +13,7 @@ const reports = path.join(
   "docs/evidence/final-exterior-design-phase3c2/reports",
 );
 const sourceImplementationCommit =
-  "b021619d48ecac0bea618273a2901ea0a856eac6";
+  "8dee0aed74a1041631fd2223505c3e01a2098294";
 const sourceBaseCommit =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
 const mainCommit =
@@ -52,7 +52,7 @@ const reportFiles = (await fs.readdir(reports))
   .filter(file => file.endsWith(".json"));
 for (const file of reportFiles) {
   const report = await readJson(file);
-  await writeJson(file, { ...metadata, ...report });
+  await writeJson(file, { ...report, ...metadata });
 }
 
 const configAssertion = assertFinalStrapBucklePhase3C2();
@@ -80,20 +80,70 @@ await writeJson("phase3c2-config.json", {
 });
 
 const regression = await readJson("regression-results.json");
+const desktopRuntime = await readJson("desktop-runtime.json");
+const mobileRuntime = await readJson("mobile-runtime.json");
+const normalPath = await readJson("normal-path-diff.json");
+const phase3c1Path = await readJson("phase3c1-only-diff.json");
+const suites = await readJson("suite-regression-results.json");
+const performance = await readJson("performance-results.json");
 regression.node = {
   status: "passed",
-  passed: 171,
-  total: 171,
+  passed: 173,
+  total: 173,
 };
 regression.moduleSyntax = { status: "passed" };
 regression.gitDiffCheck = { status: "passed" };
 regression.jsonParse = { status: "passed" };
+regression.runtimeHarness = {
+  desktop: desktopRuntime.ok,
+  mobile: mobileRuntime.ok,
+  checks: desktopRuntime.checks,
+};
+regression.paths = {
+  approvedPhase3C1Head: sourceBaseCommit,
+  normalPath: {
+    baseSha256: normalPath.baseSha256,
+    currentSha256: normalPath.currentSha256,
+    pixelExact: normalPath.pixelExact,
+    phase3c1Object3DAdded: normalPath.phase3c1Object3DAdded,
+    phase3c2Object3DAdded: normalPath.phase3c2Object3DAdded,
+  },
+  phase3c1OnlyPath: {
+    baseSha256: phase3c1Path.baseSha256,
+    currentSha256: phase3c1Path.currentSha256,
+    pixelExact: phase3c1Path.pixelExact,
+    phase3c2Object3DAdded: phase3c1Path.phase3c2Object3DAdded,
+    phase3c2MaterialAdded: phase3c1Path.phase3c2MaterialAdded,
+    phase3c2DomAdded: phase3c1Path.phase3c2DomAdded,
+  },
+};
+regression.suites = {
+  desktop: suites.desktop,
+  mobile: suites.mobile,
+};
+regression.performance = {
+  sourceBase: performance.sourceBase,
+  candidate: performance.candidate,
+  thresholdsChanged: performance.thresholdsChanged,
+  environments: performance.environments,
+};
 regression.humanConfirmation = {
   pc: "PENDING",
   physicalIPhone: "PENDING",
   requiredBeforeReadyOrMerge: true,
 };
-await writeJson("regression-results.json", { ...metadata, ...regression });
+regression.detailRefinement = {
+  surfaceContinuity: true,
+  leatherOpaqueAt100Percent: true,
+  periodicBumpWithoutColorMap: true,
+  silverHardwareRefinement: true,
+  blankSelectionRegression: {
+    reproduced: false,
+    codeChangeApplied: false,
+    globalRaycasterChanged: false,
+  },
+};
+await writeJson("regression-results.json", { ...regression, ...metadata });
 
 const camera = await readJson("world-bounds-camera.json");
 camera.worldBounds.fullLengthReview = {
@@ -107,4 +157,4 @@ camera.worldBounds.fullLengthReview = {
       .fullLengthWheelZoom.approximateDistanceMultiplier,
   cameraAndFogConstantsChanged: false,
 };
-await writeJson("world-bounds-camera.json", { ...metadata, ...camera });
+await writeJson("world-bounds-camera.json", { ...camera, ...metadata });

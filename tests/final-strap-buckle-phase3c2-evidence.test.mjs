@@ -14,7 +14,7 @@ const images = path.join(evidence, "images");
 const reports = path.join(evidence, "reports");
 const videos = path.join(evidence, "videos");
 const implementationCommit =
-  "b021619d48ecac0bea618273a2901ea0a856eac6";
+  "8dee0aed74a1041631fd2223505c3e01a2098294";
 const baseCommit =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
 
@@ -53,6 +53,12 @@ test("Phase 3C.2 raw and derived evidence images are valid purpose-distinct PNGs
     ["mobile-390-panel-open.png", 390, 844],
     ["desktop-full-length.png", 1280, 720],
     ["mobile-390-full-length.png", 390, 844],
+    ["strap-top-seam-closeup.png", 960, 540],
+    ["lug-12-wrap-closeup.png", 960, 540],
+    ["lug-6-wrap-closeup.png", 960, 540],
+    ["buckle-wrap-connection.png", 960, 540],
+    ["leather-grain-stitch-edge-closeup.png", 960, 540],
+    ["hardware-silver-closeup.png", 960, 540],
   ];
   const hashes = new Set();
   for (const [name, width, height] of required) {
@@ -123,8 +129,23 @@ test("Phase 3C.2 reports preserve geometry, paths, selection, interference, and 
   const regression = json("regression-results.json");
   assert.equal(geometry.allGeometryValid, true);
   assert.equal(geometry.csgUsed, false);
+  assert.equal(
+    geometry.surfaceContinuity.topTextureSeam,
+    "REMOVED_BY_PERIODIC_TILEABLE_HEIGHT_FIELD_AND_CENTERLINE_UV",
+  );
+  assert.equal(
+    geometry.springBarPockets.connection,
+    "TANGENT_CONTINUOUS_ANNULAR_WRAP_WITH_INTEGRATED_LEATHER_TONGUE",
+  );
+  assert.equal(
+    geometry.buckleWrap.connection,
+    "TANGENT_CONTINUOUS_ANNULAR_WRAP_WITH_INTEGRATED_LEATHER_TONGUE",
+  );
   assert.equal(interference.forbiddenInterferenceCount, 0);
   assert.equal(selection.selection.registeredParts.length, 10);
+  assert.equal(selection.selection.phase3c2BlankHitTargetCount, 0);
+  assert.equal(selection.selection.blankSelectionRegression.reproduced, false);
+  assert.equal(selection.selection.blankSelectionRegression.codeChangeApplied, false);
   assert.equal(selection.internalSelection.selected, "設定車2");
   assert.equal(normalPath.pixelExact, true);
   assert.equal(phase3c1Path.pixelExact, true);

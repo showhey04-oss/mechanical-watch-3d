@@ -221,11 +221,25 @@ def main() -> None:
         "actual spring-bar and leather-pocket view",
     )
     crop_board(
+        "desktop-top-strap.png",
+        "lug-12-wrap-closeup.png",
+        (350, 330, 930, 720),
+        "12 o'clock leather wrap",
+        "continuous tongue overlaps the strap body around the real spring bar",
+    )
+    crop_board(
         "desktop-bottom-strap.png",
         "lug-6-connection.png",
         (360, 0, 920, 360),
         "6 o'clock lug connection",
         "actual spring-bar and leather-pocket view",
+    )
+    crop_board(
+        "desktop-bottom-strap.png",
+        "lug-6-wrap-closeup.png",
+        (350, 0, 930, 390),
+        "6 o'clock leather wrap",
+        "continuous tongue overlaps the strap body around the real spring bar",
     )
     crop_board(
         "top-strap-back.png",
@@ -251,6 +265,20 @@ def main() -> None:
     )
     crop_board(
         "buckle-detail.png",
+        "buckle-wrap-connection.png",
+        (300, 0, 980, 620),
+        "Buckle-side leather connection",
+        "real leather tongue wraps the attachment bar; frame is not floating",
+    )
+    crop_board(
+        "buckle-detail.png",
+        "hardware-silver-closeup.png",
+        (320, 210, 1000, 720),
+        "Silver frame / bar / tang",
+        "opaque midtone silver in the accepted Phase 3C.1 material family",
+    )
+    crop_board(
+        "buckle-detail.png",
         "keepers.png",
         (350, 0, 1160, 470),
         "Fixed and floating keepers",
@@ -262,6 +290,20 @@ def main() -> None:
         (500, 0, 1080, 560),
         "Calf grain / tonal stitch / black edge",
         "128x128 procedural texture; no external image asset",
+    )
+    crop_board(
+        "desktop-bottom-strap.png",
+        "leather-grain-stitch-edge-closeup.png",
+        (420, 150, 860, 690),
+        "Opaque black calf / stitch / edge",
+        "periodic bump-only grain; top, underside, and edge remain distinct",
+    )
+    crop_board(
+        "desktop-top-strap.png",
+        "strap-top-seam-closeup.png",
+        (430, 0, 850, 620),
+        "Continuous strap top surface",
+        "periodic height field and centerline UV remove the former cut-like seam",
     )
 
     make_gif(

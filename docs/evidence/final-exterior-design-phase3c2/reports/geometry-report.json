@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "b021619d48ecac0bea618273a2901ea0a856eac6",
-  "sourceAuditCommit": "b021619d48ecac0bea618273a2901ea0a856eac6",
+  "sourceImplementationCommit": "8dee0aed74a1041631fd2223505c3e01a2098294",
+  "sourceAuditCommit": "8dee0aed74a1041631fd2223505c3e01a2098294",
   "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
@@ -17,1322 +17,1694 @@
       "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
     ]
   },
-  "validation": {
-    "ok": true,
-    "checks": {
-      "queryOnly": true,
-      "approvedBase": true,
-      "widths": true,
-      "lengths": true,
-      "lengthRanges": true,
-      "monotonicWidthAndThickness": true,
-      "centerlines": true,
-      "holes": true,
-      "pocket": true,
-      "buckle": true,
-      "keepers": true,
-      "material": true
+  "allGeometryValid": true,
+  "audits": {
+    "buckleBar": {
+      "bounds": {
+        "max": [
+          8.5,
+          0.6000000238418579,
+          0.6000000238418579
+        ],
+        "min": [
+          -8.5,
+          -0.6000000238418579,
+          -0.6000000238418579
+        ],
+        "size": [
+          17,
+          1.2000000476837158,
+          1.2000000476837158
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 576,
+      "materialGroupCount": 0,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 19.171687424998105,
+      "topology": {
+        "closed": true,
+        "edgeCount": 288,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 192,
+      "vertexCount": 98
     },
-    "audit": {
-      "twelveCenterlineLength": 74.99999999999999,
-      "sixCenterlineLength": 114.99999999999999,
-      "holeDistancesFromSpringBar": [
-        49,
-        56,
-        63,
-        70,
-        77,
-        84,
-        91
-      ],
-      "holeDistancesFromFreeEnd": [
-        66,
-        59,
-        52,
-        45,
-        38,
-        31,
-        24
-      ],
-      "centerlines": {
-        "twelve": {
-          "finite": true,
-          "armSideOnly": true,
-          "noCurvatureSignReversal": true,
-          "initialStraightLength": 11.718749999999996,
-          "finalBendAngle": 2.837002840909092
-        },
-        "six": {
-          "finite": true,
-          "armSideOnly": true,
-          "noCurvatureSignReversal": true,
-          "initialStraightLength": 12.578124999999996,
-          "finalBendAngle": 4.640980113636363
-        }
-      }
+    "buckleFrame": {
+      "bounds": {
+        "max": [
+          9.5,
+          51.032527923583984,
+          40.6523551940918
+        ],
+        "min": [
+          -9.5,
+          45.143890380859375,
+          25.475948333740234
+        ],
+        "size": [
+          19,
+          5.888637542724609,
+          15.176406860351562
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 96,
+      "materialGroupCount": 0,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 106.62588421659594,
+      "topology": {
+        "closed": true,
+        "edgeCount": 48,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 32,
+      "vertexCount": 16
+    },
+    "buckleStrapWrap": {
+      "bounds": {
+        "max": [
+          8,
+          1.7983523607254028,
+          3.840486526489258
+        ],
+        "min": [
+          -8,
+          -2.0957159996032715,
+          -1.7983523607254028
+        ],
+        "size": [
+          16,
+          3.8940683603286743,
+          5.638838887214661
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 1152,
+      "materialGroupCount": 0,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 222.54744967175,
+      "topology": {
+        "closed": true,
+        "edgeCount": 576,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 384,
+      "vertexCount": 192
+    },
+    "buckleTang": {
+      "bounds": {
+        "max": [
+          0.550000011920929,
+          50.19152069091797,
+          39.94230651855469
+        ],
+        "min": [
+          -0.550000011920929,
+          45.62501525878906,
+          27.330764770507812
+        ],
+        "size": [
+          1.100000023841858,
+          4.566505432128906,
+          12.611541748046875
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 60,
+      "materialGroupCount": 0,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 7.734995157365685,
+      "topology": {
+        "closed": true,
+        "edgeCount": 30,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 20,
+      "vertexCount": 12
+    },
+    "fixedKeeper": {
+      "bounds": {
+        "max": [
+          9.074999809265137,
+          43.98444366455078,
+          51.33843994140625
+        ],
+        "min": [
+          -9.074999809265137,
+          38.323631286621094,
+          45.67891311645508
+        ],
+        "size": [
+          18.149999618530273,
+          5.6608123779296875,
+          5.659526824951172
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 96,
+      "materialGroupCount": 0,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 131.62656455410274,
+      "topology": {
+        "closed": true,
+        "edgeCount": 48,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 32,
+      "vertexCount": 16
+    },
+    "floatingKeeper": {
+      "bounds": {
+        "max": [
+          9.074999809265137,
+          37.555702209472656,
+          56.08149719238281
+        ],
+        "min": [
+          -9.074999809265137,
+          32.15129089355469,
+          50.64611053466797
+        ],
+        "size": [
+          18.149999618530273,
+          5.404411315917969,
+          5.435386657714844
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 96,
+      "materialGroupCount": 0,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 131.96819248105697,
+      "topology": {
+        "closed": true,
+        "edgeCount": 48,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 32,
+      "vertexCount": 16
+    },
+    "sixSpringBarWrap": {
+      "bounds": {
+        "max": [
+          9.850000381469727,
+          1.9500000476837158,
+          1.9500000476837158
+        ],
+        "min": [
+          -9.850000381469727,
+          -1.9500000476837158,
+          -4.400000095367432
+        ],
+        "size": [
+          19.700000762939453,
+          3.9000000953674316,
+          6.3500001430511475
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 1152,
+      "materialGroupCount": 0,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 322.8509896505443,
+      "topology": {
+        "closed": true,
+        "edgeCount": 576,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 384,
+      "vertexCount": 192
+    },
+    "sixStrap": {
+      "bounds": {
+        "max": [
+          9.793695449829102,
+          47.900856018066406,
+          -10.781683921813965
+        ],
+        "min": [
+          -9.793695449829102,
+          1.5091304779052734,
+          -56.98289489746094
+        ],
+        "size": [
+          19.587390899658203,
+          46.39172554016113,
+          46.20121097564697
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 8292,
+      "materialGroupCount": 950,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 391.05273901040215,
+      "topology": {
+        "closed": true,
+        "edgeCount": 4146,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 2764,
+      "vertexCount": 1370
+    },
+    "twelveSpringBarWrap": {
+      "bounds": {
+        "max": [
+          9.850000381469727,
+          1.9500000476837158,
+          4.400000095367432
+        ],
+        "min": [
+          -9.850000381469727,
+          -1.9500000476837158,
+          -1.9500000476837158
+        ],
+        "size": [
+          19.700000762939453,
+          3.9000000953674316,
+          6.3500001430511475
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 1152,
+      "materialGroupCount": 0,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 322.8509896505443,
+      "topology": {
+        "closed": true,
+        "edgeCount": 576,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 384,
+      "vertexCount": 192
+    },
+    "twelveStrap": {
+      "bounds": {
+        "max": [
+          9.763667106628418,
+          45.80416488647461,
+          56.919002532958984
+        ],
+        "min": [
+          -9.763667106628418,
+          1.5140000581741333,
+          25.299999237060547
+        ],
+        "size": [
+          19.527334213256836,
+          44.290164828300476,
+          31.619003295898438
+        ]
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "finite": {
+        "indices": true,
+        "normals": true,
+        "positions": true
+      },
+      "indexCount": 2184,
+      "materialGroupCount": 300,
+      "orientation": "OUTWARD_POSITIVE",
+      "reversedDuplicateTriangleCount": 0,
+      "signedVolume": 1067.9673331402737,
+      "topology": {
+        "closed": true,
+        "edgeCount": 1092,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0
+      },
+      "triangleCount": 728,
+      "vertexCount": 366
     }
   },
-  "dimensions": {
-    "lugWidthNominal": 20,
-    "buckleWidthNominal": 16,
-    "strapLugWidth": 19.7,
-    "strapEndWidth": 16,
-    "lugSideClearance": 0.15,
-    "strap12Length": 75,
-    "strap6Length": 115,
-    "strapLugThickness": 2.6,
-    "strapMidThickness": 2.3,
-    "strapEndThickness": 2.05,
-    "springBarCenterY": 2.8,
-    "springBarCenterZ": 21.8,
-    "springBarMainDiameter": 1.5,
-    "springBarPinDiameter": 0.8,
-    "springBarEffectiveLength": 20.8,
-    "springBarPocketInnerDiameter": 1.8,
-    "springBarPocketRadialClearance": 0.15,
-    "springBarPocketLeatherThickness": 1.05,
-    "springBarPocketWidth": 19.7,
-    "holeCount": 7,
-    "holeDiameter": 2,
-    "holePitch": 7,
-    "firstHoleFromFreeEnd": 24,
-    "lastHoleFromFreeEnd": 66,
-    "buckleOuterWidth": 19,
-    "buckleInnerWidth": 16.6,
-    "buckleOuterLength": 15.5,
-    "buckleInnerLength": 12.8,
-    "buckleFrameThickness": 1.3,
-    "buckleBarDiameter": 1.2,
-    "buckleBarLength": 17,
-    "buckleWrapInnerDiameter": 1.6,
-    "buckleWrapLeatherThickness": 1,
-    "tangLength": 13,
-    "tangRootWidth": 1.1,
-    "tangTipWidth": 0.6,
-    "tangThickness": 0.7,
-    "fixedKeeperDistanceFromBuckle": 10,
-    "floatingKeeperDistanceFromBuckle": 18,
-    "keeperInnerWidth": 16.55,
-    "keeperClearance": 0.15,
-    "keeperWallThickness": 0.8,
-    "keeperLength": 4,
-    "stitchInset": 1.2,
-    "stitchLength": 1.5,
-    "stitchPitch": 2.5,
-    "stitchWidth": 0.26,
-    "edgeWidth": 0.18
+  "buckle": {
+    "bar": {
+      "diameter": 1.2,
+      "length": 17
+    },
+    "frame": {
+      "innerLength": 12.8,
+      "innerWidth": 16.6,
+      "outerLength": 15.5,
+      "outerWidth": 19
+    },
+    "tang": {
+      "length": 13,
+      "rootWidth": 1.1,
+      "thickness": 0.7,
+      "tipWidth": 0.6
+    }
+  },
+  "buckleWrap": {
+    "bodyJoinDistance": 3.2,
+    "connection": "TANGENT_CONTINUOUS_ANNULAR_WRAP_WITH_INTEGRATED_LEATHER_TONGUE",
+    "innerDiameter": 1.6,
+    "outerDiameter": 3.6,
+    "overlapIntoBody": 0.8,
+    "transitionHalfAngleDeg": 58,
+    "transitionLength": 2.2,
+    "transitionTipDistance": 4,
+    "width": 16
   },
   "centerlines": {
-    "twelve": {
-      "length": 75,
-      "stations": [
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 21.8,
-          "width": 19.7,
-          "nominalWidth": 19.7,
-          "thickness": 2.6,
-          "progress": 0
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 22.971875,
-          "width": 19.6421875,
-          "nominalWidth": 19.6421875,
-          "thickness": 2.590625,
-          "progress": 0.015625
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 24.14375,
-          "width": 19.584374999999998,
-          "nominalWidth": 19.584374999999998,
-          "thickness": 2.5812500000000003,
-          "progress": 0.03125
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 25.315625,
-          "width": 19.5265625,
-          "nominalWidth": 19.5265625,
-          "thickness": 2.571875,
-          "progress": 0.046875
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 26.4875,
-          "width": 19.46875,
-          "nominalWidth": 19.46875,
-          "thickness": 2.5625,
-          "progress": 0.0625
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 27.659375,
-          "width": 19.4109375,
-          "nominalWidth": 19.4109375,
-          "thickness": 2.553125,
-          "progress": 0.078125
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 28.831250000000004,
-          "width": 19.353125,
-          "nominalWidth": 19.353125,
-          "thickness": 2.54375,
-          "progress": 0.09375
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 30.003125000000004,
-          "width": 19.295312499999998,
-          "nominalWidth": 19.295312499999998,
-          "thickness": 2.534375,
-          "progress": 0.109375
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 31.175000000000004,
-          "width": 19.2375,
-          "nominalWidth": 19.2375,
-          "thickness": 2.525,
-          "progress": 0.125
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 32.346875,
-          "width": 19.1796875,
-          "nominalWidth": 19.1796875,
-          "thickness": 2.515625,
-          "progress": 0.140625
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": 33.51875,
-          "width": 19.121875,
-          "nominalWidth": 19.121875,
-          "thickness": 2.50625,
-          "progress": 0.15625
-        },
-        {
-          "x": 0,
-          "y": 2.8162292840859173,
-          "z": 34.690512615021944,
-          "width": 19.0640625,
-          "nominalWidth": 19.0640625,
-          "thickness": 2.496875,
-          "progress": 0.171875
-        },
-        {
-          "x": 0,
-          "y": 2.8948223695148583,
-          "z": 35.85974917900194,
-          "width": 19.006249999999998,
-          "nominalWidth": 19.006249999999998,
-          "thickness": 2.4875,
-          "progress": 0.1875
-        },
-        {
-          "x": 0,
-          "y": 3.0355563107074977,
-          "z": 37.02314291004117,
-          "width": 18.9484375,
-          "nominalWidth": 18.9484375,
-          "thickness": 2.478125,
-          "progress": 0.203125
-        },
-        {
-          "x": 0,
-          "y": 3.238031886665213,
-          "z": 38.177393600647676,
-          "width": 18.890625,
-          "nominalWidth": 18.890625,
-          "thickness": 2.46875,
-          "progress": 0.21875
-        },
-        {
-          "x": 0,
-          "y": 3.501674733443205,
-          "z": 39.319226979459046,
-          "width": 18.8328125,
-          "nominalWidth": 18.8328125,
-          "thickness": 2.459375,
-          "progress": 0.234375
-        },
-        {
-          "x": 0,
-          "y": 3.8257369734528934,
-          "z": 40.44540399939193,
-          "width": 18.775,
-          "nominalWidth": 18.775,
-          "thickness": 2.45,
-          "progress": 0.25
-        },
-        {
-          "x": 0,
-          "y": 4.209299336971734,
-          "z": 41.55273002587052,
-          "width": 18.717187499999998,
-          "nominalWidth": 18.717187499999998,
-          "thickness": 2.440625,
-          "progress": 0.265625
-        },
-        {
-          "x": 0,
-          "y": 4.651273769842355,
-          "z": 42.63806389906976,
-          "width": 18.659375,
-          "nominalWidth": 18.659375,
-          "thickness": 2.43125,
-          "progress": 0.28125
-        },
-        {
-          "x": 0,
-          "y": 5.1504065199637274,
-          "z": 43.698326844466465,
-          "width": 18.6015625,
-          "nominalWidth": 18.6015625,
-          "thickness": 2.421875,
-          "progress": 0.296875
-        },
-        {
-          "x": 0,
-          "y": 5.705281693818904,
-          "z": 44.730511206421326,
-          "width": 18.54375,
-          "nominalWidth": 18.54375,
-          "thickness": 2.4125,
-          "progress": 0.3125
-        },
-        {
-          "x": 0,
-          "y": 6.314325272950504,
-          "z": 45.73168898001779,
-          "width": 18.4859375,
-          "nominalWidth": 18.4859375,
-          "thickness": 2.4031249999999997,
-          "progress": 0.328125
-        },
-        {
-          "x": 0,
-          "y": 6.975809578990356,
-          "z": 46.69902011695487,
-          "width": 18.428125,
-          "nominalWidth": 18.428125,
-          "thickness": 2.39375,
-          "progress": 0.34375
-        },
-        {
-          "x": 0,
-          "y": 7.6878581745773475,
-          "z": 47.62976058193294,
-          "width": 18.3703125,
-          "nominalWidth": 18.3703125,
-          "thickness": 2.384375,
-          "progress": 0.359375
-        },
-        {
-          "x": 0,
-          "y": 8.448451186260986,
-          "z": 48.521270136678716,
-          "width": 18.3125,
-          "nominalWidth": 18.3125,
-          "thickness": 2.375,
-          "progress": 0.375
-        },
-        {
-          "x": 0,
-          "y": 9.255431034291163,
-          "z": 49.371019829528436,
-          "width": 18.2546875,
-          "nominalWidth": 18.2546875,
-          "thickness": 2.3656249999999996,
-          "progress": 0.390625
-        },
-        {
-          "x": 0,
-          "y": 10.106508553040392,
-          "z": 50.1765991693235,
-          "width": 18.196875,
-          "nominalWidth": 18.196875,
-          "thickness": 2.3562499999999997,
-          "progress": 0.40625
-        },
-        {
-          "x": 0,
-          "y": 10.999269484696654,
-          "z": 50.93572296326837,
-          "width": 18.1390625,
-          "nominalWidth": 18.1390625,
-          "thickness": 2.346875,
-          "progress": 0.421875
-        },
-        {
-          "x": 0,
-          "y": 11.931181327806161,
-          "z": 51.64623779935361,
-          "width": 18.08125,
-          "nominalWidth": 18.08125,
-          "thickness": 2.3375,
-          "progress": 0.4375
-        },
-        {
-          "x": 0,
-          "y": 12.899600521238735,
-          "z": 52.30612815495551,
-          "width": 18.0234375,
-          "nominalWidth": 18.0234375,
-          "thickness": 2.328125,
-          "progress": 0.453125
-        },
-        {
-          "x": 0,
-          "y": 13.901779943196942,
-          "z": 52.91352211428381,
-          "width": 17.965625,
-          "nominalWidth": 17.965625,
-          "thickness": 2.3187499999999996,
-          "progress": 0.46875
-        },
-        {
-          "x": 0,
-          "y": 14.934876703996594,
-          "z": 53.466696678458874,
-          "width": 17.9078125,
-          "nominalWidth": 17.9078125,
-          "thickness": 2.3093749999999997,
-          "progress": 0.484375
-        },
-        {
-          "x": 0,
-          "y": 15.995960210512628,
-          "z": 53.96408265315523,
-          "width": 17.85,
-          "nominalWidth": 17.85,
-          "thickness": 2.3,
-          "progress": 0.5
-        },
-        {
-          "x": 0,
-          "y": 17.082020479414062,
-          "z": 54.40426909994652,
-          "width": 17.7921875,
-          "nominalWidth": 17.7921875,
-          "thickness": 2.2921875,
-          "progress": 0.515625
-        },
-        {
-          "x": 0,
-          "y": 18.189976675605674,
-          "z": 54.786007338724886,
-          "width": 17.734375,
-          "nominalWidth": 17.734375,
-          "thickness": 2.284375,
-          "progress": 0.53125
-        },
-        {
-          "x": 0,
-          "y": 19.316685851655414,
-          "z": 55.10821448984093,
-          "width": 17.6765625,
-          "nominalWidth": 17.6765625,
-          "thickness": 2.2765625,
-          "progress": 0.546875
-        },
-        {
-          "x": 0,
-          "y": 20.458951863416328,
-          "z": 55.36997654591633,
-          "width": 17.61875,
-          "nominalWidth": 17.61875,
-          "thickness": 2.26875,
-          "progress": 0.5625
-        },
-        {
-          "x": 0,
-          "y": 21.61353443655201,
-          "z": 55.570550964615194,
-          "width": 17.5609375,
-          "nominalWidth": 17.5609375,
-          "thickness": 2.2609375,
-          "progress": 0.578125
-        },
-        {
-          "x": 0,
-          "y": 22.77715835824646,
-          "z": 55.70936877501943,
-          "width": 17.503125,
-          "nominalWidth": 17.503125,
-          "thickness": 2.253125,
-          "progress": 0.59375
-        },
-        {
-          "x": 0,
-          "y": 23.94652276802421,
-          "z": 55.786036191632604,
-          "width": 17.4453125,
-          "nominalWidth": 17.4453125,
-          "thickness": 2.2453125,
-          "progress": 0.609375
-        },
-        {
-          "x": 0,
-          "y": 25.11831052132532,
-          "z": 55.800335731434174,
-          "width": 17.3875,
-          "nominalWidth": 17.3875,
-          "thickness": 2.2375,
-          "progress": 0.625
-        },
-        {
-          "x": 0,
-          "y": 26.28919759927359,
-          "z": 55.75222683081519,
-          "width": 17.3296875,
-          "nominalWidth": 17.3296875,
-          "thickness": 2.2296875,
-          "progress": 0.640625
-        },
-        {
-          "x": 0,
-          "y": 27.455862537945162,
-          "z": 55.64184596064531,
-          "width": 17.271875,
-          "nominalWidth": 17.271875,
-          "thickness": 2.221875,
-          "progress": 0.65625
-        },
-        {
-          "x": 0,
-          "y": 28.614995850389498,
-          "z": 55.46950623914496,
-          "width": 17.2140625,
-          "nominalWidth": 17.2140625,
-          "thickness": 2.2140625,
-          "progress": 0.671875
-        },
-        {
-          "x": 0,
-          "y": 29.763309414675177,
-          "z": 55.23569654366054,
-          "width": 17.15625,
-          "nominalWidth": 17.15625,
-          "thickness": 2.20625,
-          "progress": 0.6875
-        },
-        {
-          "x": 0,
-          "y": 30.897545801329386,
-          "z": 54.94108012386252,
-          "width": 17.0984375,
-          "nominalWidth": 17.0984375,
-          "thickness": 2.1984375,
-          "progress": 0.703125
-        },
-        {
-          "x": 0,
-          "y": 32.014487513711885,
-          "z": 54.58649272030023,
-          "width": 17.040625,
-          "nominalWidth": 17.040625,
-          "thickness": 2.190625,
-          "progress": 0.71875
-        },
-        {
-          "x": 0,
-          "y": 33.11096611511123,
-          "z": 54.17294019365056,
-          "width": 16.9828125,
-          "nominalWidth": 16.9828125,
-          "thickness": 2.1828125,
-          "progress": 0.734375
-        },
-        {
-          "x": 0,
-          "y": 34.18387121667234,
-          "z": 53.70159567138563,
-          "width": 16.925,
-          "nominalWidth": 16.925,
-          "thickness": 2.175,
-          "progress": 0.75
-        },
-        {
-          "x": 0,
-          "y": 35.230159300659224,
-          "z": 53.17379621995351,
-          "width": 16.8671875,
-          "nominalWidth": 16.8671875,
-          "thickness": 2.1671875,
-          "progress": 0.765625
-        },
-        {
-          "x": 0,
-          "y": 36.24686235402404,
-          "z": 52.59103905191208,
-          "width": 16.809375,
-          "nominalWidth": 16.809375,
-          "thickness": 2.159375,
-          "progress": 0.78125
-        },
-        {
-          "x": 0,
-          "y": 37.23109628779131,
-          "z": 51.95497727877522,
-          "width": 16.7515625,
-          "nominalWidth": 16.7515625,
-          "thickness": 2.1515625,
-          "progress": 0.796875
-        },
-        {
-          "x": 0,
-          "y": 38.18006911837423,
-          "z": 51.26741522161933,
-          "width": 16.69375,
-          "nominalWidth": 16.69375,
-          "thickness": 2.14375,
-          "progress": 0.8125
-        },
-        {
-          "x": 0,
-          "y": 39.091088887614866,
-          "z": 50.53030329275253,
-          "width": 16.6359375,
-          "nominalWidth": 16.6359375,
-          "thickness": 2.1359375,
-          "progress": 0.828125
-        },
-        {
-          "x": 0,
-          "y": 39.961571299081534,
-          "z": 49.74573246296584,
-          "width": 16.578125,
-          "nominalWidth": 16.578125,
-          "thickness": 2.128125,
-          "progress": 0.84375
-        },
-        {
-          "x": 0,
-          "y": 40.78904704896135,
-          "z": 48.91592833006107,
-          "width": 16.5203125,
-          "nominalWidth": 16.5203125,
-          "thickness": 2.1203125,
-          "progress": 0.859375
-        },
-        {
-          "x": 0,
-          "y": 41.571168830752384,
-          "z": 48.04324480548127,
-          "width": 16.4625,
-          "nominalWidth": 16.4625,
-          "thickness": 2.1125,
-          "progress": 0.875
-        },
-        {
-          "x": 0,
-          "y": 42.30571799388517,
-          "z": 47.13015743695298,
-          "width": 16.4046875,
-          "nominalWidth": 16.4046875,
-          "thickness": 2.1046875,
-          "progress": 0.890625
-        },
-        {
-          "x": 0,
-          "y": 42.99061083738494,
-          "z": 46.17925638608186,
-          "width": 16.346875,
-          "nominalWidth": 16.346875,
-          "thickness": 2.096875,
-          "progress": 0.90625
-        },
-        {
-          "x": 0,
-          "y": 43.62390452072146,
-          "z": 45.19323908082242,
-          "width": 16.2890625,
-          "nominalWidth": 16.2890625,
-          "thickness": 2.0890625,
-          "progress": 0.921875
-        },
-        {
-          "x": 0,
-          "y": 44.203802575078875,
-          "z": 44.17490256366443,
-          "width": 16.23125,
-          "nominalWidth": 16.23125,
-          "thickness": 2.08125,
-          "progress": 0.9375
-        },
-        {
-          "x": 0,
-          "y": 44.72865999941197,
-          "z": 43.127135557242,
-          "width": 16.1734375,
-          "nominalWidth": 16.1734375,
-          "thickness": 2.0734375,
-          "progress": 0.953125
-        },
-        {
-          "x": 0,
-          "y": 45.19698792683261,
-          "z": 42.05291026987305,
-          "width": 16.115625,
-          "nominalWidth": 16.115625,
-          "thickness": 2.065625,
-          "progress": 0.96875
-        },
-        {
-          "x": 0,
-          "y": 45.60745784808936,
-          "z": 40.9552739642743,
-          "width": 16.0578125,
-          "nominalWidth": 16.0578125,
-          "thickness": 2.0578125,
-          "progress": 0.984375
-        },
-        {
-          "x": 0,
-          "y": 45.958905380159315,
-          "z": 39.837340313368784,
-          "width": 16,
-          "nominalWidth": 16,
-          "thickness": 2.05,
-          "progress": 1
-        }
-      ],
-      "initialTangent": [
-        0,
-        1
-      ],
-      "finalTangent": [
-        0.2999018940330288,
-        -0.9539700487727074
-      ]
-    },
     "six": {
-      "length": 115,
-      "stations": [
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": -21.8,
-          "width": 19.7,
-          "nominalWidth": 19.7,
-          "thickness": 2.6,
-          "progress": 0
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": -23.596875,
-          "width": 19.6421875,
-          "nominalWidth": 19.6421875,
-          "thickness": 2.590625,
-          "progress": 0.015625
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": -25.39375,
-          "width": 19.584374999999998,
-          "nominalWidth": 19.584374999999998,
-          "thickness": 2.5812500000000003,
-          "progress": 0.03125
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": -27.190625,
-          "width": 19.5265625,
-          "nominalWidth": 19.5265625,
-          "thickness": 2.571875,
-          "progress": 0.046875
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": -28.987500000000004,
-          "width": 19.46875,
-          "nominalWidth": 19.46875,
-          "thickness": 2.5625,
-          "progress": 0.0625
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": -30.784375000000004,
-          "width": 19.4109375,
-          "nominalWidth": 19.4109375,
-          "thickness": 2.553125,
-          "progress": 0.078125
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": -32.58125,
-          "width": 19.353125,
-          "nominalWidth": 19.353125,
-          "thickness": 2.54375,
-          "progress": 0.09375
-        },
-        {
-          "x": 0,
-          "y": 2.8,
-          "z": -34.378125,
-          "width": 19.295312499999998,
-          "nominalWidth": 19.295312499999998,
-          "thickness": 2.534375,
-          "progress": 0.109375
-        },
-        {
-          "x": 0,
-          "y": 2.920509397657709,
-          "z": -36.170954398102666,
-          "width": 19.2375,
-          "nominalWidth": 19.2375,
-          "thickness": 2.525,
-          "progress": 0.125
-        },
-        {
-          "x": 0,
-          "y": 3.1868856857699144,
-          "z": -37.947975343042984,
-          "width": 19.1796875,
-          "nominalWidth": 19.1796875,
-          "thickness": 2.515625,
-          "progress": 0.140625
-        },
-        {
-          "x": 0,
-          "y": 3.5973528580886507,
-          "z": -39.69733993227922,
-          "width": 19.121875,
-          "nominalWidth": 19.121875,
-          "thickness": 2.50625,
-          "progress": 0.15625
-        },
-        {
-          "x": 0,
-          "y": 4.149174213581745,
-          "z": -41.40738465603552,
-          "width": 19.0640625,
-          "nominalWidth": 19.0640625,
-          "thickness": 2.496875,
-          "progress": 0.171875
-        },
-        {
-          "x": 0,
-          "y": 4.838670602794636,
-          "z": -43.06670816122893,
-          "width": 19.006249999999998,
-          "nominalWidth": 19.006249999999998,
-          "thickness": 2.4875,
-          "progress": 0.1875
-        },
-        {
-          "x": 0,
-          "y": 5.6612449577830635,
-          "z": -44.66424726752348,
-          "width": 18.9484375,
-          "nominalWidth": 18.9484375,
-          "thickness": 2.478125,
-          "progress": 0.203125
-        },
-        {
-          "x": 0,
-          "y": 6.611412942068624,
-          "z": -46.189350728690535,
-          "width": 18.890625,
-          "nominalWidth": 18.890625,
-          "thickness": 2.46875,
-          "progress": 0.21875
-        },
-        {
-          "x": 0,
-          "y": 7.682839516265238,
-          "z": -47.63185024748779,
-          "width": 18.8328125,
-          "nominalWidth": 18.8328125,
-          "thickness": 2.459375,
-          "progress": 0.234375
-        },
-        {
-          "x": 0,
-          "y": 8.868381175583144,
-          "z": -48.98212827058035,
-          "width": 18.775,
-          "nominalWidth": 18.775,
-          "thickness": 2.45,
-          "progress": 0.25
-        },
-        {
-          "x": 0,
-          "y": 10.160133577600972,
-          "z": -50.23118211149601,
-          "width": 18.717187499999998,
-          "nominalWidth": 18.717187499999998,
-          "thickness": 2.440625,
-          "progress": 0.265625
-        },
-        {
-          "x": 0,
-          "y": 11.549484242758073,
-          "z": -51.370683974088834,
-          "width": 18.659375,
-          "nominalWidth": 18.659375,
-          "thickness": 2.43125,
-          "progress": 0.28125
-        },
-        {
-          "x": 0,
-          "y": 13.02716997619795,
-          "z": -52.39303647631752,
-          "width": 18.6015625,
-          "nominalWidth": 18.6015625,
-          "thickness": 2.421875,
-          "progress": 0.296875
-        },
-        {
-          "x": 0,
-          "y": 14.583338628115087,
-          "z": -53.29142330414582,
-          "width": 18.54375,
-          "nominalWidth": 18.54375,
-          "thickness": 2.4125,
-          "progress": 0.3125
-        },
-        {
-          "x": 0,
-          "y": 16.207614780831438,
-          "z": -54.059854657841115,
-          "width": 18.4859375,
-          "nominalWidth": 18.4859375,
-          "thickness": 2.4031249999999997,
-          "progress": 0.328125
-        },
-        {
-          "x": 0,
-          "y": 17.889168924648185,
-          "z": -54.693207187667696,
-          "width": 18.428125,
-          "nominalWidth": 18.428125,
-          "thickness": 2.39375,
-          "progress": 0.34375
-        },
-        {
-          "x": 0,
-          "y": 19.616789661257783,
-          "z": -55.1872581527123,
-          "width": 18.3703125,
-          "nominalWidth": 18.3703125,
-          "thickness": 2.384375,
-          "progress": 0.359375
-        },
-        {
-          "x": 0,
-          "y": 21.37895845331565,
-          "z": -55.53871357509517,
-          "width": 18.3125,
-          "nominalWidth": 18.3125,
-          "thickness": 2.375,
-          "progress": 0.375
-        },
-        {
-          "x": 0,
-          "y": 23.163926421794883,
-          "z": -55.74523020185465,
-          "width": 18.2546875,
-          "nominalWidth": 18.2546875,
-          "thickness": 2.3656249999999996,
-          "progress": 0.390625
-        },
-        {
-          "x": 0,
-          "y": 24.959792679094328,
-          "z": -55.805431128079164,
-          "width": 18.196875,
-          "nominalWidth": 18.196875,
-          "thickness": 2.3562499999999997,
-          "progress": 0.40625
-        },
-        {
-          "x": 0,
-          "y": 26.75458367563088,
-          "z": -55.71891497712265,
-          "width": 18.1390625,
-          "nominalWidth": 18.1390625,
-          "thickness": 2.346875,
-          "progress": 0.421875
-        },
-        {
-          "x": 0,
-          "y": 28.536333030889853,
-          "z": -55.48625857669653,
-          "width": 18.08125,
-          "nominalWidth": 18.08125,
-          "thickness": 2.3375,
-          "progress": 0.4375
-        },
-        {
-          "x": 0,
-          "y": 30.293161316677114,
-          "z": -55.10901311299578,
-          "width": 18.0234375,
-          "nominalWidth": 18.0234375,
-          "thickness": 2.328125,
-          "progress": 0.453125
-        },
-        {
-          "x": 0,
-          "y": 32.01335526063546,
-          "z": -54.58969378850068,
-          "width": 17.965625,
-          "nominalWidth": 17.965625,
-          "thickness": 2.3187499999999996,
-          "progress": 0.46875
-        },
-        {
-          "x": 0,
-          "y": 33.68544584195288,
-          "z": -53.93176305240867,
-          "width": 17.9078125,
-          "nominalWidth": 17.9078125,
-          "thickness": 2.3093749999999997,
-          "progress": 0.484375
-        },
-        {
-          "x": 0,
-          "y": 35.29828475857656,
-          "z": -53.139607515503734,
-          "width": 17.85,
-          "nominalWidth": 17.85,
-          "thickness": 2.3,
-          "progress": 0.5
-        },
-        {
-          "x": 0,
-          "y": 36.84111875610392,
-          "z": -52.21850870337838,
-          "width": 17.7921875,
-          "nominalWidth": 17.7921875,
-          "thickness": 2.2921875,
-          "progress": 0.515625
-        },
-        {
-          "x": 0,
-          "y": 38.30366132277897,
-          "z": -51.174607843004885,
-          "width": 17.734375,
-          "nominalWidth": 17.734375,
-          "thickness": 2.284375,
-          "progress": 0.53125
-        },
-        {
-          "x": 0,
-          "y": 39.67616127258311,
-          "z": -50.014864917433606,
-          "width": 17.6765625,
-          "nominalWidth": 17.6765625,
-          "thickness": 2.2765625,
-          "progress": 0.546875
-        },
-        {
-          "x": 0,
-          "y": 40.94946775915737,
-          "z": -48.74701226161239,
-          "width": 17.61875,
-          "nominalWidth": 17.61875,
-          "thickness": 2.26875,
-          "progress": 0.5625
-        },
-        {
-          "x": 0,
-          "y": 42.115091287089996,
-          "z": -47.37950300871685,
-          "width": 17.5609375,
-          "nominalWidth": 17.5609375,
-          "thickness": 2.2609375,
-          "progress": 0.578125
-        },
-        {
-          "x": 0,
-          "y": 43.16526031378965,
-          "z": -45.92145473071447,
-          "width": 17.503125,
-          "nominalWidth": 17.503125,
-          "thickness": 2.253125,
-          "progress": 0.59375
-        },
-        {
-          "x": 0,
-          "y": 44.092973064563644,
-          "z": -44.382588648926856,
-          "width": 17.4453125,
-          "nominalWidth": 17.4453125,
-          "thickness": 2.2453125,
-          "progress": 0.609375
-        },
-        {
-          "x": 0,
-          "y": 44.89204421543525,
-          "z": -42.773164819890596,
-          "width": 17.3875,
-          "nominalWidth": 17.3875,
-          "thickness": 2.2375,
-          "progress": 0.625
-        },
-        {
-          "x": 0,
-          "y": 45.55714613245261,
-          "z": -41.10391372865092,
-          "width": 17.3296875,
-          "nominalWidth": 17.3296875,
-          "thickness": 2.2296875,
-          "progress": 0.640625
-        },
-        {
-          "x": 0,
-          "y": 46.08384439253501,
-          "z": -39.38596474557512,
-          "width": 17.271875,
-          "nominalWidth": 17.271875,
-          "thickness": 2.221875,
-          "progress": 0.65625
-        },
-        {
-          "x": 0,
-          "y": 46.468627349029056,
-          "z": -37.63077192368441,
-          "width": 17.2140625,
-          "nominalWidth": 17.2140625,
-          "thickness": 2.2140625,
-          "progress": 0.671875
-        },
-        {
-          "x": 0,
-          "y": 46.708929544852616,
-          "z": -35.850037631234414,
-          "width": 17.15625,
-          "nominalWidth": 17.15625,
-          "thickness": 2.20625,
-          "progress": 0.6875
-        },
-        {
-          "x": 0,
-          "y": 46.803148817124736,
-          "z": -34.0556345287077,
-          "width": 17.0984375,
-          "nominalWidth": 17.0984375,
-          "thickness": 2.1984375,
-          "progress": 0.703125
-        },
-        {
-          "x": 0,
-          "y": 46.75065697923984,
-          "z": -32.25952641041959,
-          "width": 17.040625,
-          "nominalWidth": 17.040625,
-          "thickness": 2.190625,
-          "progress": 0.71875
-        },
-        {
-          "x": 0,
-          "y": 46.551804009165984,
-          "z": -30.47368843850898,
-          "width": 16.9828125,
-          "nominalWidth": 16.9828125,
-          "thickness": 2.1828125,
-          "progress": 0.734375
-        },
-        {
-          "x": 0,
-          "y": 46.207915716042486,
-          "z": -28.710027301136613,
-          "width": 16.925,
-          "nominalWidth": 16.925,
-          "thickness": 2.175,
-          "progress": 0.75
-        },
-        {
-          "x": 0,
-          "y": 45.72128490063445,
-          "z": -26.980301827218767,
-          "width": 16.8671875,
-          "nominalWidth": 16.8671875,
-          "thickness": 2.1671875,
-          "progress": 0.765625
-        },
-        {
-          "x": 0,
-          "y": 45.095156068579904,
-          "z": -25.296044586980504,
-          "width": 16.809375,
-          "nominalWidth": 16.809375,
-          "thickness": 2.159375,
-          "progress": 0.78125
-        },
-        {
-          "x": 0,
-          "y": 44.33370379835068,
-          "z": -23.66848500103971,
-          "width": 16.7515625,
-          "nominalWidth": 16.7515625,
-          "thickness": 2.1515625,
-          "progress": 0.796875
-        },
-        {
-          "x": 0,
-          "y": 43.44200490815399,
-          "z": -22.108474470675574,
-          "width": 16.69375,
-          "nominalWidth": 16.69375,
-          "thickness": 2.14375,
-          "progress": 0.8125
-        },
-        {
-          "x": 0,
-          "y": 42.426004607345796,
-          "z": -20.62641402845918,
-          "width": 16.6359375,
-          "nominalWidth": 16.6359375,
-          "thickness": 2.1359375,
-          "progress": 0.828125
-        },
-        {
-          "x": 0,
-          "y": 41.2924768580342,
-          "z": -19.23218499161997,
-          "width": 16.578125,
-          "nominalWidth": 16.578125,
-          "thickness": 2.128125,
-          "progress": 0.84375
-        },
-        {
-          "x": 0,
-          "y": 40.04897921115321,
-          "z": -17.935083080501787,
-          "width": 16.5203125,
-          "nominalWidth": 16.5203125,
-          "thickness": 2.1203125,
-          "progress": 0.859375
-        },
-        {
-          "x": 0,
-          "y": 38.7038024181276,
-          "z": -16.743756441359384,
-          "width": 16.4625,
-          "nominalWidth": 16.4625,
-          "thickness": 2.1125,
-          "progress": 0.875
-        },
-        {
-          "x": 0,
-          "y": 37.26591515408218,
-          "z": -15.66614798671504,
-          "width": 16.4046875,
-          "nominalWidth": 16.4046875,
-          "thickness": 2.1046875,
-          "progress": 0.890625
-        },
-        {
-          "x": 0,
-          "y": 35.74490422114153,
-          "z": -14.709442437708438,
-          "width": 16.346875,
-          "nominalWidth": 16.346875,
-          "thickness": 2.096875,
-          "progress": 0.90625
-        },
-        {
-          "x": 0,
-          "y": 34.150910630501784,
-          "z": -13.880018421523472,
-          "width": 16.2890625,
-          "nominalWidth": 16.2890625,
-          "thickness": 2.0890625,
-          "progress": 0.921875
-        },
-        {
-          "x": 0,
-          "y": 32.49456198943329,
-          "z": -13.183405943272072,
-          "width": 16.23125,
-          "nominalWidth": 16.23125,
-          "thickness": 2.08125,
-          "progress": 0.9375
-        },
-        {
-          "x": 0,
-          "y": 30.786901644009365,
-          "z": -12.624249515881997,
-          "width": 16.1734375,
-          "nominalWidth": 16.1734375,
-          "thickness": 2.0734375,
-          "progress": 0.953125
-        },
-        {
-          "x": 0,
-          "y": 29.039315049986477,
-          "z": -12.206277193812118,
-          "width": 16.115625,
-          "nominalWidth": 16.115625,
-          "thickness": 2.065625,
-          "progress": 0.96875
-        },
-        {
-          "x": 0,
-          "y": 27.26345386274222,
-          "z": -11.932275717056202,
-          "width": 16.0578125,
-          "nominalWidth": 16.0578125,
-          "thickness": 2.0578125,
-          "progress": 0.984375
-        },
-        {
-          "x": 0,
-          "y": 25.47115825238489,
-          "z": -11.804071931157138,
-          "width": 16,
-          "nominalWidth": 16,
-          "thickness": 2.05,
-          "progress": 1
-        }
+      "finalTangent": [
+        -0.9974514701119043,
+        0.07134819389165291
       ],
       "initialTangent": [
         0,
         -1
       ],
+      "length": 115,
+      "stations": [
+        {
+          "nominalWidth": 19.7,
+          "progress": 0,
+          "thickness": 2.6,
+          "width": 19.7,
+          "x": 0,
+          "y": 2.8,
+          "z": -21.8
+        },
+        {
+          "nominalWidth": 19.6421875,
+          "progress": 0.015625,
+          "thickness": 2.590625,
+          "width": 19.6421875,
+          "x": 0,
+          "y": 2.8,
+          "z": -23.596875
+        },
+        {
+          "nominalWidth": 19.584374999999998,
+          "progress": 0.03125,
+          "thickness": 2.5812500000000003,
+          "width": 19.584374999999998,
+          "x": 0,
+          "y": 2.8,
+          "z": -25.39375
+        },
+        {
+          "nominalWidth": 19.5265625,
+          "progress": 0.046875,
+          "thickness": 2.571875,
+          "width": 19.5265625,
+          "x": 0,
+          "y": 2.8,
+          "z": -27.190625
+        },
+        {
+          "nominalWidth": 19.46875,
+          "progress": 0.0625,
+          "thickness": 2.5625,
+          "width": 19.46875,
+          "x": 0,
+          "y": 2.8,
+          "z": -28.987500000000004
+        },
+        {
+          "nominalWidth": 19.4109375,
+          "progress": 0.078125,
+          "thickness": 2.553125,
+          "width": 19.4109375,
+          "x": 0,
+          "y": 2.8,
+          "z": -30.784375000000004
+        },
+        {
+          "nominalWidth": 19.353125,
+          "progress": 0.09375,
+          "thickness": 2.54375,
+          "width": 19.353125,
+          "x": 0,
+          "y": 2.8,
+          "z": -32.58125
+        },
+        {
+          "nominalWidth": 19.295312499999998,
+          "progress": 0.109375,
+          "thickness": 2.534375,
+          "width": 19.295312499999998,
+          "x": 0,
+          "y": 2.8,
+          "z": -34.378125
+        },
+        {
+          "nominalWidth": 19.2375,
+          "progress": 0.125,
+          "thickness": 2.525,
+          "width": 19.2375,
+          "x": 0,
+          "y": 2.920509397657709,
+          "z": -36.170954398102666
+        },
+        {
+          "nominalWidth": 19.1796875,
+          "progress": 0.140625,
+          "thickness": 2.515625,
+          "width": 19.1796875,
+          "x": 0,
+          "y": 3.1868856857699144,
+          "z": -37.947975343042984
+        },
+        {
+          "nominalWidth": 19.121875,
+          "progress": 0.15625,
+          "thickness": 2.50625,
+          "width": 19.121875,
+          "x": 0,
+          "y": 3.5973528580886507,
+          "z": -39.69733993227922
+        },
+        {
+          "nominalWidth": 19.0640625,
+          "progress": 0.171875,
+          "thickness": 2.496875,
+          "width": 19.0640625,
+          "x": 0,
+          "y": 4.149174213581745,
+          "z": -41.40738465603552
+        },
+        {
+          "nominalWidth": 19.006249999999998,
+          "progress": 0.1875,
+          "thickness": 2.4875,
+          "width": 19.006249999999998,
+          "x": 0,
+          "y": 4.838670602794636,
+          "z": -43.06670816122893
+        },
+        {
+          "nominalWidth": 18.9484375,
+          "progress": 0.203125,
+          "thickness": 2.478125,
+          "width": 18.9484375,
+          "x": 0,
+          "y": 5.6612449577830635,
+          "z": -44.66424726752348
+        },
+        {
+          "nominalWidth": 18.890625,
+          "progress": 0.21875,
+          "thickness": 2.46875,
+          "width": 18.890625,
+          "x": 0,
+          "y": 6.611412942068624,
+          "z": -46.189350728690535
+        },
+        {
+          "nominalWidth": 18.8328125,
+          "progress": 0.234375,
+          "thickness": 2.459375,
+          "width": 18.8328125,
+          "x": 0,
+          "y": 7.682839516265238,
+          "z": -47.63185024748779
+        },
+        {
+          "nominalWidth": 18.775,
+          "progress": 0.25,
+          "thickness": 2.45,
+          "width": 18.775,
+          "x": 0,
+          "y": 8.868381175583144,
+          "z": -48.98212827058035
+        },
+        {
+          "nominalWidth": 18.717187499999998,
+          "progress": 0.265625,
+          "thickness": 2.440625,
+          "width": 18.717187499999998,
+          "x": 0,
+          "y": 10.160133577600972,
+          "z": -50.23118211149601
+        },
+        {
+          "nominalWidth": 18.659375,
+          "progress": 0.28125,
+          "thickness": 2.43125,
+          "width": 18.659375,
+          "x": 0,
+          "y": 11.549484242758073,
+          "z": -51.370683974088834
+        },
+        {
+          "nominalWidth": 18.6015625,
+          "progress": 0.296875,
+          "thickness": 2.421875,
+          "width": 18.6015625,
+          "x": 0,
+          "y": 13.02716997619795,
+          "z": -52.39303647631752
+        },
+        {
+          "nominalWidth": 18.54375,
+          "progress": 0.3125,
+          "thickness": 2.4125,
+          "width": 18.54375,
+          "x": 0,
+          "y": 14.583338628115087,
+          "z": -53.29142330414582
+        },
+        {
+          "nominalWidth": 18.4859375,
+          "progress": 0.328125,
+          "thickness": 2.4031249999999997,
+          "width": 18.4859375,
+          "x": 0,
+          "y": 16.207614780831438,
+          "z": -54.059854657841115
+        },
+        {
+          "nominalWidth": 18.428125,
+          "progress": 0.34375,
+          "thickness": 2.39375,
+          "width": 18.428125,
+          "x": 0,
+          "y": 17.889168924648185,
+          "z": -54.693207187667696
+        },
+        {
+          "nominalWidth": 18.3703125,
+          "progress": 0.359375,
+          "thickness": 2.384375,
+          "width": 18.3703125,
+          "x": 0,
+          "y": 19.616789661257783,
+          "z": -55.1872581527123
+        },
+        {
+          "nominalWidth": 18.3125,
+          "progress": 0.375,
+          "thickness": 2.375,
+          "width": 18.3125,
+          "x": 0,
+          "y": 21.37895845331565,
+          "z": -55.53871357509517
+        },
+        {
+          "nominalWidth": 18.2546875,
+          "progress": 0.390625,
+          "thickness": 2.3656249999999996,
+          "width": 18.2546875,
+          "x": 0,
+          "y": 23.163926421794883,
+          "z": -55.74523020185465
+        },
+        {
+          "nominalWidth": 18.196875,
+          "progress": 0.40625,
+          "thickness": 2.3562499999999997,
+          "width": 18.196875,
+          "x": 0,
+          "y": 24.959792679094328,
+          "z": -55.805431128079164
+        },
+        {
+          "nominalWidth": 18.1390625,
+          "progress": 0.421875,
+          "thickness": 2.346875,
+          "width": 18.1390625,
+          "x": 0,
+          "y": 26.75458367563088,
+          "z": -55.71891497712265
+        },
+        {
+          "nominalWidth": 18.08125,
+          "progress": 0.4375,
+          "thickness": 2.3375,
+          "width": 18.08125,
+          "x": 0,
+          "y": 28.536333030889853,
+          "z": -55.48625857669653
+        },
+        {
+          "nominalWidth": 18.0234375,
+          "progress": 0.453125,
+          "thickness": 2.328125,
+          "width": 18.0234375,
+          "x": 0,
+          "y": 30.293161316677114,
+          "z": -55.10901311299578
+        },
+        {
+          "nominalWidth": 17.965625,
+          "progress": 0.46875,
+          "thickness": 2.3187499999999996,
+          "width": 17.965625,
+          "x": 0,
+          "y": 32.01335526063546,
+          "z": -54.58969378850068
+        },
+        {
+          "nominalWidth": 17.9078125,
+          "progress": 0.484375,
+          "thickness": 2.3093749999999997,
+          "width": 17.9078125,
+          "x": 0,
+          "y": 33.68544584195288,
+          "z": -53.93176305240867
+        },
+        {
+          "nominalWidth": 17.85,
+          "progress": 0.5,
+          "thickness": 2.3,
+          "width": 17.85,
+          "x": 0,
+          "y": 35.29828475857656,
+          "z": -53.139607515503734
+        },
+        {
+          "nominalWidth": 17.7921875,
+          "progress": 0.515625,
+          "thickness": 2.2921875,
+          "width": 17.7921875,
+          "x": 0,
+          "y": 36.84111875610392,
+          "z": -52.21850870337838
+        },
+        {
+          "nominalWidth": 17.734375,
+          "progress": 0.53125,
+          "thickness": 2.284375,
+          "width": 17.734375,
+          "x": 0,
+          "y": 38.30366132277897,
+          "z": -51.174607843004885
+        },
+        {
+          "nominalWidth": 17.6765625,
+          "progress": 0.546875,
+          "thickness": 2.2765625,
+          "width": 17.6765625,
+          "x": 0,
+          "y": 39.67616127258311,
+          "z": -50.014864917433606
+        },
+        {
+          "nominalWidth": 17.61875,
+          "progress": 0.5625,
+          "thickness": 2.26875,
+          "width": 17.61875,
+          "x": 0,
+          "y": 40.94946775915737,
+          "z": -48.74701226161239
+        },
+        {
+          "nominalWidth": 17.5609375,
+          "progress": 0.578125,
+          "thickness": 2.2609375,
+          "width": 17.5609375,
+          "x": 0,
+          "y": 42.115091287089996,
+          "z": -47.37950300871685
+        },
+        {
+          "nominalWidth": 17.503125,
+          "progress": 0.59375,
+          "thickness": 2.253125,
+          "width": 17.503125,
+          "x": 0,
+          "y": 43.16526031378965,
+          "z": -45.92145473071447
+        },
+        {
+          "nominalWidth": 17.4453125,
+          "progress": 0.609375,
+          "thickness": 2.2453125,
+          "width": 17.4453125,
+          "x": 0,
+          "y": 44.092973064563644,
+          "z": -44.382588648926856
+        },
+        {
+          "nominalWidth": 17.3875,
+          "progress": 0.625,
+          "thickness": 2.2375,
+          "width": 17.3875,
+          "x": 0,
+          "y": 44.89204421543525,
+          "z": -42.773164819890596
+        },
+        {
+          "nominalWidth": 17.3296875,
+          "progress": 0.640625,
+          "thickness": 2.2296875,
+          "width": 17.3296875,
+          "x": 0,
+          "y": 45.55714613245261,
+          "z": -41.10391372865092
+        },
+        {
+          "nominalWidth": 17.271875,
+          "progress": 0.65625,
+          "thickness": 2.221875,
+          "width": 17.271875,
+          "x": 0,
+          "y": 46.08384439253501,
+          "z": -39.38596474557512
+        },
+        {
+          "nominalWidth": 17.2140625,
+          "progress": 0.671875,
+          "thickness": 2.2140625,
+          "width": 17.2140625,
+          "x": 0,
+          "y": 46.468627349029056,
+          "z": -37.63077192368441
+        },
+        {
+          "nominalWidth": 17.15625,
+          "progress": 0.6875,
+          "thickness": 2.20625,
+          "width": 17.15625,
+          "x": 0,
+          "y": 46.708929544852616,
+          "z": -35.850037631234414
+        },
+        {
+          "nominalWidth": 17.0984375,
+          "progress": 0.703125,
+          "thickness": 2.1984375,
+          "width": 17.0984375,
+          "x": 0,
+          "y": 46.803148817124736,
+          "z": -34.0556345287077
+        },
+        {
+          "nominalWidth": 17.040625,
+          "progress": 0.71875,
+          "thickness": 2.190625,
+          "width": 17.040625,
+          "x": 0,
+          "y": 46.75065697923984,
+          "z": -32.25952641041959
+        },
+        {
+          "nominalWidth": 16.9828125,
+          "progress": 0.734375,
+          "thickness": 2.1828125,
+          "width": 16.9828125,
+          "x": 0,
+          "y": 46.551804009165984,
+          "z": -30.47368843850898
+        },
+        {
+          "nominalWidth": 16.925,
+          "progress": 0.75,
+          "thickness": 2.175,
+          "width": 16.925,
+          "x": 0,
+          "y": 46.207915716042486,
+          "z": -28.710027301136613
+        },
+        {
+          "nominalWidth": 16.8671875,
+          "progress": 0.765625,
+          "thickness": 2.1671875,
+          "width": 16.8671875,
+          "x": 0,
+          "y": 45.72128490063445,
+          "z": -26.980301827218767
+        },
+        {
+          "nominalWidth": 16.809375,
+          "progress": 0.78125,
+          "thickness": 2.159375,
+          "width": 16.809375,
+          "x": 0,
+          "y": 45.095156068579904,
+          "z": -25.296044586980504
+        },
+        {
+          "nominalWidth": 16.7515625,
+          "progress": 0.796875,
+          "thickness": 2.1515625,
+          "width": 16.7515625,
+          "x": 0,
+          "y": 44.33370379835068,
+          "z": -23.66848500103971
+        },
+        {
+          "nominalWidth": 16.69375,
+          "progress": 0.8125,
+          "thickness": 2.14375,
+          "width": 16.69375,
+          "x": 0,
+          "y": 43.44200490815399,
+          "z": -22.108474470675574
+        },
+        {
+          "nominalWidth": 16.6359375,
+          "progress": 0.828125,
+          "thickness": 2.1359375,
+          "width": 16.6359375,
+          "x": 0,
+          "y": 42.426004607345796,
+          "z": -20.62641402845918
+        },
+        {
+          "nominalWidth": 16.578125,
+          "progress": 0.84375,
+          "thickness": 2.128125,
+          "width": 16.578125,
+          "x": 0,
+          "y": 41.2924768580342,
+          "z": -19.23218499161997
+        },
+        {
+          "nominalWidth": 16.5203125,
+          "progress": 0.859375,
+          "thickness": 2.1203125,
+          "width": 16.5203125,
+          "x": 0,
+          "y": 40.04897921115321,
+          "z": -17.935083080501787
+        },
+        {
+          "nominalWidth": 16.4625,
+          "progress": 0.875,
+          "thickness": 2.1125,
+          "width": 16.4625,
+          "x": 0,
+          "y": 38.7038024181276,
+          "z": -16.743756441359384
+        },
+        {
+          "nominalWidth": 16.4046875,
+          "progress": 0.890625,
+          "thickness": 2.1046875,
+          "width": 16.4046875,
+          "x": 0,
+          "y": 37.26591515408218,
+          "z": -15.66614798671504
+        },
+        {
+          "nominalWidth": 16.346875,
+          "progress": 0.90625,
+          "thickness": 2.096875,
+          "width": 16.346875,
+          "x": 0,
+          "y": 35.74490422114153,
+          "z": -14.709442437708438
+        },
+        {
+          "nominalWidth": 16.2890625,
+          "progress": 0.921875,
+          "thickness": 2.0890625,
+          "width": 16.2890625,
+          "x": 0,
+          "y": 34.150910630501784,
+          "z": -13.880018421523472
+        },
+        {
+          "nominalWidth": 16.23125,
+          "progress": 0.9375,
+          "thickness": 2.08125,
+          "width": 16.23125,
+          "x": 0,
+          "y": 32.49456198943329,
+          "z": -13.183405943272072
+        },
+        {
+          "nominalWidth": 16.1734375,
+          "progress": 0.953125,
+          "thickness": 2.0734375,
+          "width": 16.1734375,
+          "x": 0,
+          "y": 30.786901644009365,
+          "z": -12.624249515881997
+        },
+        {
+          "nominalWidth": 16.115625,
+          "progress": 0.96875,
+          "thickness": 2.065625,
+          "width": 16.115625,
+          "x": 0,
+          "y": 29.039315049986477,
+          "z": -12.206277193812118
+        },
+        {
+          "nominalWidth": 16.0578125,
+          "progress": 0.984375,
+          "thickness": 2.0578125,
+          "width": 16.0578125,
+          "x": 0,
+          "y": 27.26345386274222,
+          "z": -11.932275717056202
+        },
+        {
+          "nominalWidth": 16,
+          "progress": 1,
+          "thickness": 2.05,
+          "width": 16,
+          "x": 0,
+          "y": 25.47115825238489,
+          "z": -11.804071931157138
+        }
+      ]
+    },
+    "twelve": {
       "finalTangent": [
-        -0.9974514701119043,
-        0.07134819389165291
+        0.2999018940330288,
+        -0.9539700487727074
+      ],
+      "initialTangent": [
+        0,
+        1
+      ],
+      "length": 75,
+      "stations": [
+        {
+          "nominalWidth": 19.7,
+          "progress": 0,
+          "thickness": 2.6,
+          "width": 19.7,
+          "x": 0,
+          "y": 2.8,
+          "z": 21.8
+        },
+        {
+          "nominalWidth": 19.6421875,
+          "progress": 0.015625,
+          "thickness": 2.590625,
+          "width": 19.6421875,
+          "x": 0,
+          "y": 2.8,
+          "z": 22.971875
+        },
+        {
+          "nominalWidth": 19.584374999999998,
+          "progress": 0.03125,
+          "thickness": 2.5812500000000003,
+          "width": 19.584374999999998,
+          "x": 0,
+          "y": 2.8,
+          "z": 24.14375
+        },
+        {
+          "nominalWidth": 19.5265625,
+          "progress": 0.046875,
+          "thickness": 2.571875,
+          "width": 19.5265625,
+          "x": 0,
+          "y": 2.8,
+          "z": 25.315625
+        },
+        {
+          "nominalWidth": 19.46875,
+          "progress": 0.0625,
+          "thickness": 2.5625,
+          "width": 19.46875,
+          "x": 0,
+          "y": 2.8,
+          "z": 26.4875
+        },
+        {
+          "nominalWidth": 19.4109375,
+          "progress": 0.078125,
+          "thickness": 2.553125,
+          "width": 19.4109375,
+          "x": 0,
+          "y": 2.8,
+          "z": 27.659375
+        },
+        {
+          "nominalWidth": 19.353125,
+          "progress": 0.09375,
+          "thickness": 2.54375,
+          "width": 19.353125,
+          "x": 0,
+          "y": 2.8,
+          "z": 28.831250000000004
+        },
+        {
+          "nominalWidth": 19.295312499999998,
+          "progress": 0.109375,
+          "thickness": 2.534375,
+          "width": 19.295312499999998,
+          "x": 0,
+          "y": 2.8,
+          "z": 30.003125000000004
+        },
+        {
+          "nominalWidth": 19.2375,
+          "progress": 0.125,
+          "thickness": 2.525,
+          "width": 19.2375,
+          "x": 0,
+          "y": 2.8,
+          "z": 31.175000000000004
+        },
+        {
+          "nominalWidth": 19.1796875,
+          "progress": 0.140625,
+          "thickness": 2.515625,
+          "width": 19.1796875,
+          "x": 0,
+          "y": 2.8,
+          "z": 32.346875
+        },
+        {
+          "nominalWidth": 19.121875,
+          "progress": 0.15625,
+          "thickness": 2.50625,
+          "width": 19.121875,
+          "x": 0,
+          "y": 2.8,
+          "z": 33.51875
+        },
+        {
+          "nominalWidth": 19.0640625,
+          "progress": 0.171875,
+          "thickness": 2.496875,
+          "width": 19.0640625,
+          "x": 0,
+          "y": 2.8162292840859173,
+          "z": 34.690512615021944
+        },
+        {
+          "nominalWidth": 19.006249999999998,
+          "progress": 0.1875,
+          "thickness": 2.4875,
+          "width": 19.006249999999998,
+          "x": 0,
+          "y": 2.8948223695148583,
+          "z": 35.85974917900194
+        },
+        {
+          "nominalWidth": 18.9484375,
+          "progress": 0.203125,
+          "thickness": 2.478125,
+          "width": 18.9484375,
+          "x": 0,
+          "y": 3.0355563107074977,
+          "z": 37.02314291004117
+        },
+        {
+          "nominalWidth": 18.890625,
+          "progress": 0.21875,
+          "thickness": 2.46875,
+          "width": 18.890625,
+          "x": 0,
+          "y": 3.238031886665213,
+          "z": 38.177393600647676
+        },
+        {
+          "nominalWidth": 18.8328125,
+          "progress": 0.234375,
+          "thickness": 2.459375,
+          "width": 18.8328125,
+          "x": 0,
+          "y": 3.501674733443205,
+          "z": 39.319226979459046
+        },
+        {
+          "nominalWidth": 18.775,
+          "progress": 0.25,
+          "thickness": 2.45,
+          "width": 18.775,
+          "x": 0,
+          "y": 3.8257369734528934,
+          "z": 40.44540399939193
+        },
+        {
+          "nominalWidth": 18.717187499999998,
+          "progress": 0.265625,
+          "thickness": 2.440625,
+          "width": 18.717187499999998,
+          "x": 0,
+          "y": 4.209299336971734,
+          "z": 41.55273002587052
+        },
+        {
+          "nominalWidth": 18.659375,
+          "progress": 0.28125,
+          "thickness": 2.43125,
+          "width": 18.659375,
+          "x": 0,
+          "y": 4.651273769842355,
+          "z": 42.63806389906976
+        },
+        {
+          "nominalWidth": 18.6015625,
+          "progress": 0.296875,
+          "thickness": 2.421875,
+          "width": 18.6015625,
+          "x": 0,
+          "y": 5.1504065199637274,
+          "z": 43.698326844466465
+        },
+        {
+          "nominalWidth": 18.54375,
+          "progress": 0.3125,
+          "thickness": 2.4125,
+          "width": 18.54375,
+          "x": 0,
+          "y": 5.705281693818904,
+          "z": 44.730511206421326
+        },
+        {
+          "nominalWidth": 18.4859375,
+          "progress": 0.328125,
+          "thickness": 2.4031249999999997,
+          "width": 18.4859375,
+          "x": 0,
+          "y": 6.314325272950504,
+          "z": 45.73168898001779
+        },
+        {
+          "nominalWidth": 18.428125,
+          "progress": 0.34375,
+          "thickness": 2.39375,
+          "width": 18.428125,
+          "x": 0,
+          "y": 6.975809578990356,
+          "z": 46.69902011695487
+        },
+        {
+          "nominalWidth": 18.3703125,
+          "progress": 0.359375,
+          "thickness": 2.384375,
+          "width": 18.3703125,
+          "x": 0,
+          "y": 7.6878581745773475,
+          "z": 47.62976058193294
+        },
+        {
+          "nominalWidth": 18.3125,
+          "progress": 0.375,
+          "thickness": 2.375,
+          "width": 18.3125,
+          "x": 0,
+          "y": 8.448451186260986,
+          "z": 48.521270136678716
+        },
+        {
+          "nominalWidth": 18.2546875,
+          "progress": 0.390625,
+          "thickness": 2.3656249999999996,
+          "width": 18.2546875,
+          "x": 0,
+          "y": 9.255431034291163,
+          "z": 49.371019829528436
+        },
+        {
+          "nominalWidth": 18.196875,
+          "progress": 0.40625,
+          "thickness": 2.3562499999999997,
+          "width": 18.196875,
+          "x": 0,
+          "y": 10.106508553040392,
+          "z": 50.1765991693235
+        },
+        {
+          "nominalWidth": 18.1390625,
+          "progress": 0.421875,
+          "thickness": 2.346875,
+          "width": 18.1390625,
+          "x": 0,
+          "y": 10.999269484696654,
+          "z": 50.93572296326837
+        },
+        {
+          "nominalWidth": 18.08125,
+          "progress": 0.4375,
+          "thickness": 2.3375,
+          "width": 18.08125,
+          "x": 0,
+          "y": 11.931181327806161,
+          "z": 51.64623779935361
+        },
+        {
+          "nominalWidth": 18.0234375,
+          "progress": 0.453125,
+          "thickness": 2.328125,
+          "width": 18.0234375,
+          "x": 0,
+          "y": 12.899600521238735,
+          "z": 52.30612815495551
+        },
+        {
+          "nominalWidth": 17.965625,
+          "progress": 0.46875,
+          "thickness": 2.3187499999999996,
+          "width": 17.965625,
+          "x": 0,
+          "y": 13.901779943196942,
+          "z": 52.91352211428381
+        },
+        {
+          "nominalWidth": 17.9078125,
+          "progress": 0.484375,
+          "thickness": 2.3093749999999997,
+          "width": 17.9078125,
+          "x": 0,
+          "y": 14.934876703996594,
+          "z": 53.466696678458874
+        },
+        {
+          "nominalWidth": 17.85,
+          "progress": 0.5,
+          "thickness": 2.3,
+          "width": 17.85,
+          "x": 0,
+          "y": 15.995960210512628,
+          "z": 53.96408265315523
+        },
+        {
+          "nominalWidth": 17.7921875,
+          "progress": 0.515625,
+          "thickness": 2.2921875,
+          "width": 17.7921875,
+          "x": 0,
+          "y": 17.082020479414062,
+          "z": 54.40426909994652
+        },
+        {
+          "nominalWidth": 17.734375,
+          "progress": 0.53125,
+          "thickness": 2.284375,
+          "width": 17.734375,
+          "x": 0,
+          "y": 18.189976675605674,
+          "z": 54.786007338724886
+        },
+        {
+          "nominalWidth": 17.6765625,
+          "progress": 0.546875,
+          "thickness": 2.2765625,
+          "width": 17.6765625,
+          "x": 0,
+          "y": 19.316685851655414,
+          "z": 55.10821448984093
+        },
+        {
+          "nominalWidth": 17.61875,
+          "progress": 0.5625,
+          "thickness": 2.26875,
+          "width": 17.61875,
+          "x": 0,
+          "y": 20.458951863416328,
+          "z": 55.36997654591633
+        },
+        {
+          "nominalWidth": 17.5609375,
+          "progress": 0.578125,
+          "thickness": 2.2609375,
+          "width": 17.5609375,
+          "x": 0,
+          "y": 21.61353443655201,
+          "z": 55.570550964615194
+        },
+        {
+          "nominalWidth": 17.503125,
+          "progress": 0.59375,
+          "thickness": 2.253125,
+          "width": 17.503125,
+          "x": 0,
+          "y": 22.77715835824646,
+          "z": 55.70936877501943
+        },
+        {
+          "nominalWidth": 17.4453125,
+          "progress": 0.609375,
+          "thickness": 2.2453125,
+          "width": 17.4453125,
+          "x": 0,
+          "y": 23.94652276802421,
+          "z": 55.786036191632604
+        },
+        {
+          "nominalWidth": 17.3875,
+          "progress": 0.625,
+          "thickness": 2.2375,
+          "width": 17.3875,
+          "x": 0,
+          "y": 25.11831052132532,
+          "z": 55.800335731434174
+        },
+        {
+          "nominalWidth": 17.3296875,
+          "progress": 0.640625,
+          "thickness": 2.2296875,
+          "width": 17.3296875,
+          "x": 0,
+          "y": 26.28919759927359,
+          "z": 55.75222683081519
+        },
+        {
+          "nominalWidth": 17.271875,
+          "progress": 0.65625,
+          "thickness": 2.221875,
+          "width": 17.271875,
+          "x": 0,
+          "y": 27.455862537945162,
+          "z": 55.64184596064531
+        },
+        {
+          "nominalWidth": 17.2140625,
+          "progress": 0.671875,
+          "thickness": 2.2140625,
+          "width": 17.2140625,
+          "x": 0,
+          "y": 28.614995850389498,
+          "z": 55.46950623914496
+        },
+        {
+          "nominalWidth": 17.15625,
+          "progress": 0.6875,
+          "thickness": 2.20625,
+          "width": 17.15625,
+          "x": 0,
+          "y": 29.763309414675177,
+          "z": 55.23569654366054
+        },
+        {
+          "nominalWidth": 17.0984375,
+          "progress": 0.703125,
+          "thickness": 2.1984375,
+          "width": 17.0984375,
+          "x": 0,
+          "y": 30.897545801329386,
+          "z": 54.94108012386252
+        },
+        {
+          "nominalWidth": 17.040625,
+          "progress": 0.71875,
+          "thickness": 2.190625,
+          "width": 17.040625,
+          "x": 0,
+          "y": 32.014487513711885,
+          "z": 54.58649272030023
+        },
+        {
+          "nominalWidth": 16.9828125,
+          "progress": 0.734375,
+          "thickness": 2.1828125,
+          "width": 16.9828125,
+          "x": 0,
+          "y": 33.11096611511123,
+          "z": 54.17294019365056
+        },
+        {
+          "nominalWidth": 16.925,
+          "progress": 0.75,
+          "thickness": 2.175,
+          "width": 16.925,
+          "x": 0,
+          "y": 34.18387121667234,
+          "z": 53.70159567138563
+        },
+        {
+          "nominalWidth": 16.8671875,
+          "progress": 0.765625,
+          "thickness": 2.1671875,
+          "width": 16.8671875,
+          "x": 0,
+          "y": 35.230159300659224,
+          "z": 53.17379621995351
+        },
+        {
+          "nominalWidth": 16.809375,
+          "progress": 0.78125,
+          "thickness": 2.159375,
+          "width": 16.809375,
+          "x": 0,
+          "y": 36.24686235402404,
+          "z": 52.59103905191208
+        },
+        {
+          "nominalWidth": 16.7515625,
+          "progress": 0.796875,
+          "thickness": 2.1515625,
+          "width": 16.7515625,
+          "x": 0,
+          "y": 37.23109628779131,
+          "z": 51.95497727877522
+        },
+        {
+          "nominalWidth": 16.69375,
+          "progress": 0.8125,
+          "thickness": 2.14375,
+          "width": 16.69375,
+          "x": 0,
+          "y": 38.18006911837423,
+          "z": 51.26741522161933
+        },
+        {
+          "nominalWidth": 16.6359375,
+          "progress": 0.828125,
+          "thickness": 2.1359375,
+          "width": 16.6359375,
+          "x": 0,
+          "y": 39.091088887614866,
+          "z": 50.53030329275253
+        },
+        {
+          "nominalWidth": 16.578125,
+          "progress": 0.84375,
+          "thickness": 2.128125,
+          "width": 16.578125,
+          "x": 0,
+          "y": 39.961571299081534,
+          "z": 49.74573246296584
+        },
+        {
+          "nominalWidth": 16.5203125,
+          "progress": 0.859375,
+          "thickness": 2.1203125,
+          "width": 16.5203125,
+          "x": 0,
+          "y": 40.78904704896135,
+          "z": 48.91592833006107
+        },
+        {
+          "nominalWidth": 16.4625,
+          "progress": 0.875,
+          "thickness": 2.1125,
+          "width": 16.4625,
+          "x": 0,
+          "y": 41.571168830752384,
+          "z": 48.04324480548127
+        },
+        {
+          "nominalWidth": 16.4046875,
+          "progress": 0.890625,
+          "thickness": 2.1046875,
+          "width": 16.4046875,
+          "x": 0,
+          "y": 42.30571799388517,
+          "z": 47.13015743695298
+        },
+        {
+          "nominalWidth": 16.346875,
+          "progress": 0.90625,
+          "thickness": 2.096875,
+          "width": 16.346875,
+          "x": 0,
+          "y": 42.99061083738494,
+          "z": 46.17925638608186
+        },
+        {
+          "nominalWidth": 16.2890625,
+          "progress": 0.921875,
+          "thickness": 2.0890625,
+          "width": 16.2890625,
+          "x": 0,
+          "y": 43.62390452072146,
+          "z": 45.19323908082242
+        },
+        {
+          "nominalWidth": 16.23125,
+          "progress": 0.9375,
+          "thickness": 2.08125,
+          "width": 16.23125,
+          "x": 0,
+          "y": 44.203802575078875,
+          "z": 44.17490256366443
+        },
+        {
+          "nominalWidth": 16.1734375,
+          "progress": 0.953125,
+          "thickness": 2.0734375,
+          "width": 16.1734375,
+          "x": 0,
+          "y": 44.72865999941197,
+          "z": 43.127135557242
+        },
+        {
+          "nominalWidth": 16.115625,
+          "progress": 0.96875,
+          "thickness": 2.065625,
+          "width": 16.115625,
+          "x": 0,
+          "y": 45.19698792683261,
+          "z": 42.05291026987305
+        },
+        {
+          "nominalWidth": 16.0578125,
+          "progress": 0.984375,
+          "thickness": 2.0578125,
+          "width": 16.0578125,
+          "x": 0,
+          "y": 45.60745784808936,
+          "z": 40.9552739642743
+        },
+        {
+          "nominalWidth": 16,
+          "progress": 1,
+          "thickness": 2.05,
+          "width": 16,
+          "x": 0,
+          "y": 45.958905380159315,
+          "z": 39.837340313368784
+        }
       ]
     }
   },
+  "coplanarOverlapCount": 0,
+  "csgUsed": false,
+  "dimensions": {
+    "buckleBarDiameter": 1.2,
+    "buckleBarLength": 17,
+    "buckleBodyJoinDistance": 3.2,
+    "buckleFrameThickness": 1.3,
+    "buckleInnerLength": 12.8,
+    "buckleInnerWidth": 16.6,
+    "buckleOuterLength": 15.5,
+    "buckleOuterWidth": 19,
+    "buckleWidthNominal": 16,
+    "buckleWrapInnerDiameter": 1.6,
+    "buckleWrapLeatherThickness": 1,
+    "buckleWrapTransitionHalfAngleDeg": 58,
+    "buckleWrapTransitionLength": 2.2,
+    "edgeWidth": 0.18,
+    "firstHoleFromFreeEnd": 24,
+    "fixedKeeperDistanceFromBuckle": 10,
+    "floatingKeeperDistanceFromBuckle": 18,
+    "holeCount": 7,
+    "holeDiameter": 2,
+    "holePitch": 7,
+    "keeperClearance": 0.15,
+    "keeperInnerWidth": 16.55,
+    "keeperLength": 4,
+    "keeperWallThickness": 0.8,
+    "lastHoleFromFreeEnd": 66,
+    "lugSideClearance": 0.15,
+    "lugWidthNominal": 20,
+    "springBarBodyJoinDistance": 3.5,
+    "springBarCenterY": 2.8,
+    "springBarCenterZ": 21.8,
+    "springBarEffectiveLength": 20.8,
+    "springBarMainDiameter": 1.5,
+    "springBarPinDiameter": 0.8,
+    "springBarPocketInnerDiameter": 1.8,
+    "springBarPocketLeatherThickness": 1.05,
+    "springBarPocketRadialClearance": 0.15,
+    "springBarPocketWidth": 19.7,
+    "springBarWrapTransitionHalfAngleDeg": 58,
+    "springBarWrapTransitionLength": 2.45,
+    "stitchInset": 1.2,
+    "stitchLength": 1.5,
+    "stitchPitch": 2.5,
+    "stitchWidth": 0.26,
+    "strap12Length": 75,
+    "strap6Length": 115,
+    "strapEndThickness": 2.05,
+    "strapEndWidth": 16,
+    "strapLugThickness": 2.6,
+    "strapLugWidth": 19.7,
+    "strapMidThickness": 2.3,
+    "tangLength": 13,
+    "tangRootWidth": 1.1,
+    "tangThickness": 0.7,
+    "tangTipWidth": 0.6
+  },
+  "freeTip": {
+    "capStationCount": 13,
+    "minimumTerminalClosureWidth": 0.12,
+    "nominalBodyWidth": 16,
+    "pointed": false,
+    "style": "GENTLE_ROUNDED_END",
+    "symmetric": true
+  },
   "holes": {
-    "count": 7,
-    "diameter": 2,
-    "pitch": 7,
-    "centersFromSpringBar": [
-      49,
-      56,
-      63,
-      70,
-      77,
-      84,
-      91
-    ],
+    "actualInnerWallCount": 7,
     "centersFromFreeEnd": [
       66,
       59,
@@ -1342,484 +1714,140 @@
       31,
       24
     ],
-    "actualInnerWallCount": 7,
-    "decalOrTransparentDiscCount": 0
-  },
-  "freeTip": {
-    "style": "GENTLE_ROUNDED_END",
-    "symmetric": true,
-    "nominalBodyWidth": 16,
-    "minimumTerminalClosureWidth": 0.12,
-    "capStationCount": 13,
-    "pointed": false
-  },
-  "springBarPockets": {
-    "count": 2,
-    "innerDiameter": 1.8,
-    "outerDiameter": 3.9000000000000004,
-    "width": 19.7,
-    "radialClearance": 0.15000000000000002
-  },
-  "buckleWrap": {
-    "innerDiameter": 1.6,
-    "outerDiameter": 3.6,
-    "width": 16
+    "centersFromSpringBar": [
+      49,
+      56,
+      63,
+      70,
+      77,
+      84,
+      91
+    ],
+    "count": 7,
+    "decalOrTransparentDiscCount": 0,
+    "diameter": 2,
+    "pitch": 7
   },
   "keepers": {
     "fixed": {
-      "distanceFromBuckle": 10,
       "bounds": {
-        "min": [
-          -9.075,
-          38.323631,
-          45.678913
-        ],
         "max": [
           9.075,
           43.984444,
           51.33844
+        ],
+        "min": [
+          -9.075,
+          38.323631,
+          45.678913
         ],
         "size": [
           18.15,
           5.660812,
           5.659527
         ]
-      }
+      },
+      "distanceFromBuckle": 10
     },
     "floating": {
-      "distanceFromBuckle": 18,
-      "clearance": 0.15,
       "bounds": {
-        "min": [
-          -9.075,
-          32.151291,
-          50.646111
-        ],
         "max": [
           9.075,
           37.555702,
           56.081497
+        ],
+        "min": [
+          -9.075,
+          32.151291,
+          50.646111
         ],
         "size": [
           18.15,
           5.404411,
           5.435387
         ]
-      }
+      },
+      "clearance": 0.15,
+      "distanceFromBuckle": 18
     }
   },
-  "buckle": {
-    "frame": {
-      "outerWidth": 19,
-      "innerWidth": 16.6,
-      "outerLength": 15.5,
-      "innerLength": 12.8
-    },
-    "tang": {
-      "length": 13,
-      "rootWidth": 1.1,
-      "tipWidth": 0.6,
-      "thickness": 0.7
-    },
-    "bar": {
-      "diameter": 1.2,
-      "length": 17
-    }
+  "springBarPockets": {
+    "bodyJoinDistance": 3.5,
+    "connection": "TANGENT_CONTINUOUS_ANNULAR_WRAP_WITH_INTEGRATED_LEATHER_TONGUE",
+    "count": 2,
+    "innerDiameter": 1.8,
+    "outerDiameter": 3.9000000000000004,
+    "overlapIntoBody": 0.9,
+    "radialClearance": 0.15000000000000002,
+    "transitionHalfAngleDeg": 58,
+    "transitionLength": 2.45,
+    "transitionTipDistance": 4.4,
+    "width": 19.7
   },
-  "audits": {
-    "twelveStrap": {
-      "vertexCount": 378,
-      "indexCount": 2256,
-      "triangleCount": 752,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 1128,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 1110.0107001335366,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -9.814233779907227,
-          1.5058000087738037,
-          23.25
-        ],
-        "max": [
-          9.814233779907227,
-          46.50934600830078,
-          56.919002532958984
-        ],
-        "size": [
-          19.628467559814453,
-          45.00354599952698,
-          33.669002532958984
-        ]
-      },
-      "materialGroupCount": 310
-    },
-    "sixStrap": {
-      "vertexCount": 1376,
-      "indexCount": 8328,
-      "triangleCount": 2776,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 4164,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 286.9954758924237,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -9.82667350769043,
-          1.5037826299667358,
-          -56.98289489746094
-        ],
-        "max": [
-          9.82667350769043,
-          47.900856018066406,
-          -10.781683921813965
-        ],
-        "size": [
-          19.65334701538086,
-          46.39707338809967,
-          46.20121097564697
-        ]
-      },
-      "materialGroupCount": 955
-    },
-    "twelveSpringBarWrap": {
-      "vertexCount": 192,
-      "indexCount": 1152,
-      "triangleCount": 384,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 576,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 184.6755125510118,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -9.850000381469727,
-          -1.9500000476837158,
-          -1.9500000476837158
-        ],
-        "max": [
-          9.850000381469727,
-          1.9500000476837158,
-          1.9500000476837158
-        ],
-        "size": [
-          19.700000762939453,
-          3.9000000953674316,
-          3.9000000953674316
-        ]
-      },
-      "materialGroupCount": 0
-    },
-    "sixSpringBarWrap": {
-      "vertexCount": 192,
-      "indexCount": 1152,
-      "triangleCount": 384,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 576,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 184.6755125510118,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -9.850000381469727,
-          -1.9500000476837158,
-          -1.9500000476837158
-        ],
-        "max": [
-          9.850000381469727,
-          1.9500000476837158,
-          1.9500000476837158
-        ],
-        "size": [
-          19.700000762939453,
-          3.9000000953674316,
-          3.9000000953674316
-        ]
-      },
-      "materialGroupCount": 0
-    },
-    "buckleStrapWrap": {
-      "vertexCount": 192,
-      "indexCount": 1152,
-      "triangleCount": 384,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 576,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 130.31735149091776,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -8,
-          -1.7999999523162842,
-          -1.7999999523162842
-        ],
-        "max": [
-          8,
-          1.7999999523162842,
-          1.7999999523162842
-        ],
-        "size": [
-          16,
-          3.5999999046325684,
-          3.5999999046325684
-        ]
-      },
-      "materialGroupCount": 0
-    },
-    "buckleFrame": {
-      "vertexCount": 16,
-      "indexCount": 96,
-      "triangleCount": 32,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 48,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 106.62588421659594,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -9.5,
-          45.143890380859375,
-          25.475948333740234
-        ],
-        "max": [
-          9.5,
-          51.032527923583984,
-          40.6523551940918
-        ],
-        "size": [
-          19,
-          5.888637542724609,
-          15.176406860351562
-        ]
-      },
-      "materialGroupCount": 0
-    },
-    "buckleBar": {
-      "vertexCount": 98,
-      "indexCount": 576,
-      "triangleCount": 192,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 288,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 19.171687424998105,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -8.5,
-          -0.6000000238418579,
-          -0.6000000238418579
-        ],
-        "max": [
-          8.5,
-          0.6000000238418579,
-          0.6000000238418579
-        ],
-        "size": [
-          17,
-          1.2000000476837158,
-          1.2000000476837158
-        ]
-      },
-      "materialGroupCount": 0
-    },
-    "buckleTang": {
-      "vertexCount": 12,
-      "indexCount": 60,
-      "triangleCount": 20,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 30,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 7.734995157365685,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -0.550000011920929,
-          45.62501525878906,
-          27.330764770507812
-        ],
-        "max": [
-          0.550000011920929,
-          50.19152069091797,
-          39.94230651855469
-        ],
-        "size": [
-          1.100000023841858,
-          4.566505432128906,
-          12.611541748046875
-        ]
-      },
-      "materialGroupCount": 0
-    },
-    "fixedKeeper": {
-      "vertexCount": 16,
-      "indexCount": 96,
-      "triangleCount": 32,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 48,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 131.62656455410274,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -9.074999809265137,
-          38.323631286621094,
-          45.67891311645508
-        ],
-        "max": [
-          9.074999809265137,
-          43.98444366455078,
-          51.33843994140625
-        ],
-        "size": [
-          18.149999618530273,
-          5.6608123779296875,
-          5.659526824951172
-        ]
-      },
-      "materialGroupCount": 0
-    },
-    "floatingKeeper": {
-      "vertexCount": 16,
-      "indexCount": 96,
-      "triangleCount": 32,
-      "finite": {
-        "positions": true,
-        "indices": true,
-        "normals": true
-      },
-      "degenerateTriangleCount": 0,
-      "duplicateTriangleCount": 0,
-      "reversedDuplicateTriangleCount": 0,
-      "topology": {
-        "edgeCount": 48,
-        "nonManifoldEdgeCount": 0,
-        "windingMismatchCount": 0,
-        "closed": true
-      },
-      "signedVolume": 131.96819248105697,
-      "orientation": "OUTWARD_POSITIVE",
-      "bounds": {
-        "min": [
-          -9.074999809265137,
-          32.15129089355469,
-          50.64611053466797
-        ],
-        "max": [
-          9.074999809265137,
-          37.555702209472656,
-          56.08149719238281
-        ],
-        "size": [
-          18.149999618530273,
-          5.404411315917969,
-          5.435386657714844
-        ]
-      },
-      "materialGroupCount": 0
-    }
+  "surfaceContinuity": {
+    "buckleBodyCapOccludedByTransition": true,
+    "bumpMapOnly": true,
+    "colorMapUsed": false,
+    "seamPlacement": "SIDE_OR_UNDERSIDE_ONLY",
+    "springBarBodyCapOccludedByTransition": true,
+    "topSideUndersideMaterialBoundariesPreserved": true,
+    "topTextureSeam": "REMOVED_BY_PERIODIC_TILEABLE_HEIGHT_FIELD_AND_CENTERLINE_UV"
   },
-  "allGeometryValid": true,
-  "csgUsed": false,
-  "coplanarOverlapCount": 0,
+  "validation": {
+    "audit": {
+      "centerlines": {
+        "six": {
+          "armSideOnly": true,
+          "finalBendAngle": 4.640980113636363,
+          "finite": true,
+          "initialStraightLength": 12.578124999999996,
+          "noCurvatureSignReversal": true
+        },
+        "twelve": {
+          "armSideOnly": true,
+          "finalBendAngle": 2.837002840909092,
+          "finite": true,
+          "initialStraightLength": 11.718749999999996,
+          "noCurvatureSignReversal": true
+        }
+      },
+      "holeDistancesFromFreeEnd": [
+        66,
+        59,
+        52,
+        45,
+        38,
+        31,
+        24
+      ],
+      "holeDistancesFromSpringBar": [
+        49,
+        56,
+        63,
+        70,
+        77,
+        84,
+        91
+      ],
+      "sixCenterlineLength": 114.99999999999999,
+      "twelveCenterlineLength": 74.99999999999999
+    },
+    "checks": {
+      "approvedBase": true,
+      "buckle": true,
+      "centerlines": true,
+      "holes": true,
+      "keepers": true,
+      "lengthRanges": true,
+      "lengths": true,
+      "material": true,
+      "monotonicWidthAndThickness": true,
+      "pocket": true,
+      "queryOnly": true,
+      "widths": true,
+      "wrapTransitions": true
+    },
+    "ok": true
+  },
   "zFightingCount": 0
 }

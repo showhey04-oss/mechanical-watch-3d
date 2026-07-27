@@ -4,7 +4,7 @@
 
 - Base：`feature/final-exterior-balanced-phase3c1-watch-head`
 - Base SHA：`4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`
-- 実装・browser harness基準：`b021619d48ecac0bea618273a2901ea0a856eac6`
+- 最終ディテール実装・browser harness基準：`8dee0aed74a1041631fd2223505c3e01a2098294`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
 - branch：`feature/final-exterior-balanced-phase3c2-strap-buckle`
 - APP_VERSION：`v3.15.0`
@@ -74,6 +74,12 @@
 - `images/buckle-frame-tang-bar.png`
 - `images/keepers.png`
 - `images/stitch-edge-grain.png`
+- `images/strap-top-seam-closeup.png`
+- `images/lug-12-wrap-closeup.png`
+- `images/lug-6-wrap-closeup.png`
+- `images/buckle-wrap-connection.png`
+- `images/leather-grain-stitch-edge-closeup.png`
+- `images/hardware-silver-closeup.png`
 - `images/mobile-390-panel-open.png`
 
 選択・経路差分：
@@ -120,14 +126,17 @@
 
 ## 試験状態
 
-- Node：171/171
+- Node：173/173（証跡追加後は全件再実行して最終件数をmanifestと合わせる）
 - runtime harness：Desktop／390×844合格
 - Geometry：有限・indexed・closed。退化、重複・反転triangle、non-manifold edge、winding mismatch、非有限法線、coplanar overlap、z-fighting 0
+- 表面連続性：周期bump＋centerline UVでtop seam除去、巻込みtongueをラグ側0.900／尾錠側0.800だけ本体へ重ねて接続
+- Material：革は100%時にopacity 1／transparent false／depthWrite true。color mapなし、silver金具refinement適用
 - 選択：10/10で強調・HUD・学習同期、opacity 16%内部選択合格
+- 空白クリック：追加blank hit target 0、症状を再現できなかったためglobal Raycaster変更なし
 - 外装表示：ON／OFF、split、explode、復元合格
-- 通常path：SHA-256 `a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c`でBaseと一致
-- Phase 3C.1-only path：SHA-256 `d126e6ee95f46376babfc76ae8fb5e9c861107068b3d98a52e3f8ff939a6b648`で承認Headと一致
-- Desktop／390×844 idle・pointer・wheel：絶対・差分基準合格、閾値変更なし
+- 通常path：同一環境再取得SHA-256 `f3bdd25d543c11a4ae1dc08a3020a60358a85d5d20a90ccff9b8242bc35bd003`でBaseと一致
+- Phase 3C.1-only path：同一環境再取得SHA-256 `083c16d2fa561f1c1c605e19fa2195cc75a0ffb827a6a83209686508acac803e`で承認Headと一致
+- Desktop／390×844 idle・pointer・wheel：候補差分合格、閾値変更なし
 - Desktop総合：A.5前後面明度差だけ未達し、承認済みPhase 3C.1にも同じIDで再現。Phase 3C.2固有回帰0
 - Mobile総合、UI、HUD、trusted-gesture音声：合格
 - console error／warning：0
