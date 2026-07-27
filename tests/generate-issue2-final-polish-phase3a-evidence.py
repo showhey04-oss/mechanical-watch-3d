@@ -766,15 +766,42 @@ def main():
     })
     save_json(REPORTS / "decision-summary.json", {
         **metadata,
+        "formalAuditDecision": (
+            "ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION"
+        ),
         "phaseDecision": "RETAIN_COMPARISON_HISTORY_NO_ADOPTION",
+        "coverageClassification": (
+            "DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN"
+        ),
+        "coverageSufficiency": {
+            "candidateRejection": True,
+            "finalCandidateAdoption": False,
+            "nextCandidateRequirement": (
+                "ADD_IMPORTANT_CONDITION_CARTESIAN_COMPARISON"
+            ),
+        },
         "candidateDecisions": {
             "issue2-baseline": "RETAIN_AS_COMPLETED_EXTERIOR_BASELINE",
             "issue2-d2a": (
                 "RETAIN_AS_VISUAL_REFERENCE_REJECT_FOR_ADOPTION"
             ),
             "issue2-d2c3": (
-                "RETAIN_AS_VISUAL_REFERENCE_REJECT_FOR_ADOPTION"
+                "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED"
             ),
+        },
+        "d2c3FallbackPolicy": {
+            "queryImplementationRetained": True,
+            "evidenceRetained": True,
+            "currentlyAdopted": False,
+            "reconsiderOnlyIf": [
+                "NO_BASELINE_PRESERVING_CANDIDATE_PASSES_TECHNICAL_GATES",
+                "HUMAN_VISUALLY_PREFERS_D2C3",
+                "HUMAN_EXPLICITLY_ACCEPTS_PERFORMANCE_REGRESSION",
+                "PC_INTERACTION_CONFIRMED",
+                "PHYSICAL_IPHONE_INTERACTION_CONFIRMED",
+                "FIFTEEN_MINUTE_OPERATION_AND_THERMAL_CHECK_CONFIRMED",
+                "READY_MERGE_DEFAULT_ADOPTION_SEPARATELY_APPROVED",
+            ],
         },
         "adoptedCandidate": None,
         "physicalIPhoneDecision": "NOT_PERFORMED",

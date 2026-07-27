@@ -347,7 +347,8 @@
 - Node 210/210、完成外装統合回帰6/6、UI 20/20・22/22、HUD 45/45・57/57を維持する
 - 位置1／位置2禁止干渉0/0、三針拘束、S86、Phase 2C、A.7、外装ON/OFF、split／explode／restoreを維持する
 - 同一環境性能差分は平均fps悪化5%以内かつp95悪化2ms以内を使用し、絶対A.6閾値を代替しない
-- D2a／D2c3は性能差分とA.5ライト契約を満たさないため、`RETAIN_AS_VISUAL_REFERENCE_REJECT_FOR_ADOPTION`とする
+- Phase 3A比較監査は`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`、198枚のcoverageは`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`とする
+- D2aは性能差分とA.5ライト契約を満たさないため`RETAIN_AS_VISUAL_REFERENCE_REJECT_FOR_ADOPTION`、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`とする
 - `ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED`を維持し、Ready化・マージ・既定採用を行わない
 
 ## M. v3.14 機構同期作動音 Phase 1

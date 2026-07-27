@@ -114,7 +114,9 @@
 - 15分後の軽微な発熱は現工程のブロッカーにせず、Issue #2最終候補で15分再試験する
 - Issue #2の描画品質を完成外装基準でquery限定比較し、表裏分離／断面クリップのUI判断は方式確定後まで保留する
 - baseline／D2a／D2c3の3候補、2 viewport、計198枚の実WebGL PNG比較を完了
-- D2a／D2c3は矩形影と暗部を改善するが、前後輝度差、既存A.5ライト契約、性能差分を満たさないため非採用
+- Phase 3A比較監査は`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`として合格。198枚は`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`で候補棄却には十分、最終採用には不足
+- D2aは矩形影と暗部を改善するが、前後輝度差、既存A.5ライト契約、性能差分を満たさないため視覚参考として棄却
+- D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`としてquery実装と証跡を維持し、baseline-preserving候補が成立しない場合の最終対抗案に限定
 - Phase 3Aは`RETAIN_COMPARISON_HISTORY_NO_ADOPTION`とし、Issue #2の次候補は完成外装baselineの前後均衡と性能を維持する別設計とする
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする

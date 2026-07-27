@@ -6,7 +6,8 @@
 
 - Phase 3C.3完成外装へbaseline／D2a／D2c3をquery限定で移植し、通常pathおよびPhase 3C.1／3C.2／3C.3-onlyを維持
 - 1280×720／390×844、3候補×33状態の実WebGL PNG 198枚と輝度・opacity・性能・回帰JSONを保存
-- D2a／D2c3は矩形影と暗部を改善するが、前後輝度差、既存A.5ライト契約、性能差分を満たさないため非採用
+- Phase 3A比較監査を`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`として合格とし、198枚を`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`へ分類
+- D2aは視覚参考として棄却。D2c3は性能・前後輝度差・透過不連続が未解決のため既定採用せず、`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`として保持
 - Node 210/210、完成外装統合回帰6/6、UI／HUD合格、console error／warning 0、禁止干渉0/0を確認
 - 100→99%のtransparent切替、55→54%のdepthWrite切替は再現記録のみで、alphaHash、影閾値切替、試験閾値緩和を追加していない
 - 状態は`ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED`。PR #5、Issue #2、D2c3の保留を維持

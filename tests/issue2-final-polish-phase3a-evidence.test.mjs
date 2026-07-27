@@ -25,6 +25,18 @@ test("Issue 2 Phase 3A evidence preserves comparison-only decisions", async () =
     decision.status,
     "ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED",
   );
+  assert.equal(
+    decision.formalAuditDecision,
+    "ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION",
+  );
+  assert.equal(
+    decision.coverageClassification,
+    "DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN",
+  );
+  assert.equal(
+    decision.candidateDecisions["issue2-d2c3"],
+    "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+  );
   assert.equal(decision.adoptedCandidate, null);
   assert.equal(decision.defaultAdoptionAllowed, false);
   assert.equal(
