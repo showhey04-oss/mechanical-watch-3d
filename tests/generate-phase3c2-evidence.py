@@ -225,7 +225,7 @@ def main() -> None:
         "lug-12-wrap-closeup.png",
         (350, 330, 930, 720),
         "12 o'clock leather wrap",
-        "continuous tongue overlaps the strap body around the real spring bar",
+        "shared-vertex outer shell connects the real spring-bar tunnel",
     )
     crop_board(
         "desktop-bottom-strap.png",
@@ -239,7 +239,7 @@ def main() -> None:
         "lug-6-wrap-closeup.png",
         (350, 0, 930, 390),
         "6 o'clock leather wrap",
-        "continuous tongue overlaps the strap body around the real spring bar",
+        "shared-vertex outer shell connects the real spring-bar tunnel",
     )
     crop_board(
         "top-strap-back.png",
@@ -296,14 +296,14 @@ def main() -> None:
         "leather-grain-stitch-edge-closeup.png",
         (420, 150, 860, 690),
         "Opaque black calf / stitch / edge",
-        "periodic bump-only grain; top, underside, and edge remain distinct",
+        "periodic bump and low-amplitude roughness; no color texture",
     )
     crop_board(
         "desktop-top-strap.png",
         "strap-top-seam-closeup.png",
         (430, 0, 850, 620),
         "Continuous strap top surface",
-        "periodic height field and centerline UV remove the former cut-like seam",
+        "C1 shared-vertex shell removes the former body/wrap overlap edge",
     )
 
     make_gif(

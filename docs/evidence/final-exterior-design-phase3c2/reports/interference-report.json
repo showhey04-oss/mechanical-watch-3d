@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "8dee0aed74a1041631fd2223505c3e01a2098294",
-  "sourceAuditCommit": "8dee0aed74a1041631fd2223505c3e01a2098294",
+  "sourceImplementationCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceAuditCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
   "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
@@ -17,236 +17,366 @@
       "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
     ]
   },
-  "forbiddenInterferenceCount": 0,
-  "intendedContacts": [
-    {
-      "classification": "INTENDED_STRAP_BAR_CONNECTION",
-      "clearance": 0.15,
-      "id": "spring-bar-pocket",
-      "pair": [
-        "spring bars",
-        "two leather tunnels"
-      ]
-    },
-    {
-      "classification": "INTENDED_STRAP_BODY_WRAP_CONNECTION",
-      "clearance": 0,
-      "id": "strap-pocket",
-      "pair": [
-        "strap bodies",
-        "spring-bar wraps"
-      ]
-    },
-    {
-      "classification": "INTENDED_BUCKLE_FRAME_BAR_CONNECTION",
-      "clearance": 0,
-      "id": "buckle-frame-bar",
-      "pair": [
-        "buckle frame",
-        "buckle bar"
-      ]
-    },
-    {
-      "classification": "INTENDED_BUCKLE_TANG_PIVOT",
-      "clearance": 0,
-      "id": "buckle-tang-pivot",
-      "pair": [
-        "tang",
-        "buckle bar"
-      ]
-    },
-    {
-      "classification": "INTENDED_BUCKLE_STRAP_WRAP",
-      "clearance": 0.2,
-      "id": "buckle-strap-wrap",
-      "pair": [
-        "buckle strap wrap",
-        "buckle bar"
-      ]
-    },
-    {
-      "classification": "INTENDED_KEEPER_STRAP_CLEARANCE",
-      "clearance": 0.15,
-      "id": "fixed-keeper-strap",
-      "pair": [
-        "fixed keeper",
-        "twelve strap"
-      ]
-    },
-    {
-      "classification": "INTENDED_KEEPER_STRAP_CLEARANCE",
-      "clearance": 0.15,
-      "id": "floating-keeper-strap",
-      "pair": [
-        "floating keeper",
-        "twelve strap"
-      ]
-    }
-  ],
-  "manufacturingInterfaces": "UNVERIFIED_MANUFACTURING_INTERFACE",
   "position1": {
-    "existingExteriorForbiddenCount": 0,
     "mechanismForbiddenCount": 0,
+    "existingExteriorForbiddenCount": 0,
     "phase3c2ForbiddenCount": 0
   },
   "position2": {
-    "existingExteriorForbiddenCount": 0,
     "mechanismForbiddenCount": 0,
+    "existingExteriorForbiddenCount": 0,
     "phase3c2ForbiddenCount": 0
   },
   "records": [
     {
-      "classification": "FORBIDDEN_INTERFERENCE",
-      "clearance": 5.532611,
+      "id": "twelveLeftRefinedLug-to-case-body",
+      "pair": [
+        "twelveLeftRefinedLug",
+        "case body"
+      ],
+      "clearance": -3.696758,
+      "target": 0,
+      "classification": "INTENDED_LUG_CASE_CONNECTION"
+    },
+    {
+      "id": "twelveLeftRefinedLug-to-bezel",
+      "pair": [
+        "twelveLeftRefinedLug",
+        "bezel"
+      ],
+      "clearance": 1.921194,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
+    },
+    {
+      "id": "twelveLeftRefinedLug-to-caseback-ring",
+      "pair": [
+        "twelveLeftRefinedLug",
+        "caseback ring"
+      ],
+      "clearance": 0.536195,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
+    },
+    {
+      "id": "twelveRightRefinedLug-to-case-body",
+      "pair": [
+        "twelveRightRefinedLug",
+        "case body"
+      ],
+      "clearance": -3.696758,
+      "target": 0,
+      "classification": "INTENDED_LUG_CASE_CONNECTION"
+    },
+    {
+      "id": "twelveRightRefinedLug-to-bezel",
+      "pair": [
+        "twelveRightRefinedLug",
+        "bezel"
+      ],
+      "clearance": 1.921194,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
+    },
+    {
+      "id": "twelveRightRefinedLug-to-caseback-ring",
+      "pair": [
+        "twelveRightRefinedLug",
+        "caseback ring"
+      ],
+      "clearance": 0.536195,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
+    },
+    {
+      "id": "sixLeftRefinedLug-to-case-body",
+      "pair": [
+        "sixLeftRefinedLug",
+        "case body"
+      ],
+      "clearance": -3.696758,
+      "target": 0,
+      "classification": "INTENDED_LUG_CASE_CONNECTION"
+    },
+    {
+      "id": "sixLeftRefinedLug-to-bezel",
+      "pair": [
+        "sixLeftRefinedLug",
+        "bezel"
+      ],
+      "clearance": 1.921194,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
+    },
+    {
+      "id": "sixLeftRefinedLug-to-caseback-ring",
+      "pair": [
+        "sixLeftRefinedLug",
+        "caseback ring"
+      ],
+      "clearance": 0.536195,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
+    },
+    {
+      "id": "sixRightRefinedLug-to-case-body",
+      "pair": [
+        "sixRightRefinedLug",
+        "case body"
+      ],
+      "clearance": -3.696758,
+      "target": 0,
+      "classification": "INTENDED_LUG_CASE_CONNECTION"
+    },
+    {
+      "id": "sixRightRefinedLug-to-bezel",
+      "pair": [
+        "sixRightRefinedLug",
+        "bezel"
+      ],
+      "clearance": 1.921194,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
+    },
+    {
+      "id": "sixRightRefinedLug-to-caseback-ring",
+      "pair": [
+        "sixRightRefinedLug",
+        "caseback ring"
+      ],
+      "clearance": 0.536195,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
+    },
+    {
       "id": "twelveStrap-to-case",
       "pair": [
         "twelveStrap",
         "case body"
       ],
+      "clearance": 2.534566,
       "point": [
-        0,
-        1.514,
-        25.299999
+        -9.85,
+        2.514271,
+        19.871048
       ],
-      "target": 0.2
+      "target": 0.2,
+      "classification": "FORBIDDEN_INTERFERENCE"
     },
     {
-      "classification": "FORBIDDEN_INTERFERENCE",
-      "clearance": 5.532009,
       "id": "sixStrap-to-case",
       "pair": [
         "sixStrap",
         "case body"
       ],
-      "point": [
-        0,
-        1.50913,
-        -25.299999
-      ],
-      "target": 0.2
-    },
-    {
-      "classification": "FORBIDDEN_INTERFERENCE",
-      "clearance": 2.53451,
-      "id": "twelveSpringBarWrap-to-case",
-      "pair": [
-        "twelveSpringBarWrap",
-        "case body"
-      ],
+      "clearance": 2.534566,
       "point": [
         -9.85,
-        2.545474,
-        19.866683
+        2.514271,
+        -19.871048
       ],
-      "target": 0.2
+      "target": 0.2,
+      "classification": "FORBIDDEN_INTERFERENCE"
     },
     {
-      "classification": "FORBIDDEN_INTERFERENCE",
-      "clearance": 2.53451,
-      "id": "sixSpringBarWrap-to-case",
-      "pair": [
-        "sixSpringBarWrap",
-        "case body"
-      ],
-      "point": [
-        -9.85,
-        2.545474,
-        -19.866683
-      ],
-      "target": 0.2
-    },
-    {
-      "classification": "FORBIDDEN_INTERFERENCE",
-      "clearance": 30.160188,
       "id": "twelveStrap-to-crown",
       "pair": [
         "twelveStrap",
         "crown positions 1 and 2 envelope"
       ],
-      "target": 0.5
+      "clearance": 24.990852,
+      "target": 0.5,
+      "classification": "FORBIDDEN_INTERFERENCE"
     },
     {
-      "classification": "FORBIDDEN_INTERFERENCE",
-      "clearance": 10.80207,
       "id": "sixStrap-to-crown",
       "pair": [
         "sixStrap",
         "crown positions 1 and 2 envelope"
       ],
-      "target": 0.5
+      "clearance": 16.992724,
+      "target": 0.5,
+      "classification": "FORBIDDEN_INTERFERENCE"
     },
     {
-      "classification": "FORBIDDEN_INTERFERENCE",
-      "clearance": 36.081683,
       "id": "twelve-to-six-strap",
       "pair": [
         "twelveStrap",
         "sixStrap"
       ],
-      "target": 0
+      "clearance": 39.700001,
+      "target": 0,
+      "classification": "FORBIDDEN_INTERFERENCE"
     },
     {
-      "classification": "INTENDED_STRAP_BAR_CONNECTION",
-      "clearance": 0.15,
       "id": "spring-bar-pocket",
       "pair": [
         "spring bars",
         "two leather tunnels"
-      ]
+      ],
+      "clearance": 0.15,
+      "classification": "INTENDED_STRAP_BAR_CONNECTION"
     },
     {
-      "classification": "INTENDED_STRAP_BODY_WRAP_CONNECTION",
-      "clearance": 0,
       "id": "strap-pocket",
       "pair": [
         "strap bodies",
         "spring-bar wraps"
-      ]
+      ],
+      "clearance": 0,
+      "classification": "INTENDED_STRAP_BODY_WRAP_CONNECTION"
     },
     {
-      "classification": "INTENDED_BUCKLE_FRAME_BAR_CONNECTION",
-      "clearance": 0,
       "id": "buckle-frame-bar",
       "pair": [
         "buckle frame",
         "buckle bar"
-      ]
+      ],
+      "clearance": 0,
+      "classification": "INTENDED_BUCKLE_FRAME_BAR_CONNECTION"
     },
     {
-      "classification": "INTENDED_BUCKLE_TANG_PIVOT",
-      "clearance": 0,
       "id": "buckle-tang-pivot",
       "pair": [
         "tang",
         "buckle bar"
-      ]
+      ],
+      "clearance": 0,
+      "classification": "INTENDED_BUCKLE_TANG_PIVOT"
     },
     {
-      "classification": "INTENDED_BUCKLE_STRAP_WRAP",
-      "clearance": 0.2,
       "id": "buckle-strap-wrap",
       "pair": [
         "buckle strap wrap",
         "buckle bar"
-      ]
+      ],
+      "clearance": 0.2,
+      "classification": "INTENDED_BUCKLE_STRAP_WRAP"
     },
     {
-      "classification": "INTENDED_KEEPER_STRAP_CLEARANCE",
-      "clearance": 0.15,
       "id": "fixed-keeper-strap",
       "pair": [
         "fixed keeper",
         "twelve strap"
-      ]
+      ],
+      "clearance": 0.15,
+      "classification": "INTENDED_KEEPER_STRAP_CLEARANCE"
     },
     {
-      "classification": "INTENDED_KEEPER_STRAP_CLEARANCE",
-      "clearance": 0.15,
       "id": "floating-keeper-strap",
       "pair": [
         "floating keeper",
         "twelve strap"
-      ]
+      ],
+      "clearance": 0.15,
+      "classification": "INTENDED_KEEPER_STRAP_CLEARANCE"
     }
-  ]
+  ],
+  "intendedContacts": [
+    {
+      "id": "twelveLeftRefinedLug-to-case-body",
+      "pair": [
+        "twelveLeftRefinedLug",
+        "case body"
+      ],
+      "clearance": -3.696758,
+      "target": 0,
+      "classification": "INTENDED_LUG_CASE_CONNECTION"
+    },
+    {
+      "id": "twelveRightRefinedLug-to-case-body",
+      "pair": [
+        "twelveRightRefinedLug",
+        "case body"
+      ],
+      "clearance": -3.696758,
+      "target": 0,
+      "classification": "INTENDED_LUG_CASE_CONNECTION"
+    },
+    {
+      "id": "sixLeftRefinedLug-to-case-body",
+      "pair": [
+        "sixLeftRefinedLug",
+        "case body"
+      ],
+      "clearance": -3.696758,
+      "target": 0,
+      "classification": "INTENDED_LUG_CASE_CONNECTION"
+    },
+    {
+      "id": "sixRightRefinedLug-to-case-body",
+      "pair": [
+        "sixRightRefinedLug",
+        "case body"
+      ],
+      "clearance": -3.696758,
+      "target": 0,
+      "classification": "INTENDED_LUG_CASE_CONNECTION"
+    },
+    {
+      "id": "spring-bar-pocket",
+      "pair": [
+        "spring bars",
+        "two leather tunnels"
+      ],
+      "clearance": 0.15,
+      "classification": "INTENDED_STRAP_BAR_CONNECTION"
+    },
+    {
+      "id": "strap-pocket",
+      "pair": [
+        "strap bodies",
+        "spring-bar wraps"
+      ],
+      "clearance": 0,
+      "classification": "INTENDED_STRAP_BODY_WRAP_CONNECTION"
+    },
+    {
+      "id": "buckle-frame-bar",
+      "pair": [
+        "buckle frame",
+        "buckle bar"
+      ],
+      "clearance": 0,
+      "classification": "INTENDED_BUCKLE_FRAME_BAR_CONNECTION"
+    },
+    {
+      "id": "buckle-tang-pivot",
+      "pair": [
+        "tang",
+        "buckle bar"
+      ],
+      "clearance": 0,
+      "classification": "INTENDED_BUCKLE_TANG_PIVOT"
+    },
+    {
+      "id": "buckle-strap-wrap",
+      "pair": [
+        "buckle strap wrap",
+        "buckle bar"
+      ],
+      "clearance": 0.2,
+      "classification": "INTENDED_BUCKLE_STRAP_WRAP"
+    },
+    {
+      "id": "fixed-keeper-strap",
+      "pair": [
+        "fixed keeper",
+        "twelve strap"
+      ],
+      "clearance": 0.15,
+      "classification": "INTENDED_KEEPER_STRAP_CLEARANCE"
+    },
+    {
+      "id": "floating-keeper-strap",
+      "pair": [
+        "floating keeper",
+        "twelve strap"
+      ],
+      "clearance": 0.15,
+      "classification": "INTENDED_KEEPER_STRAP_CLEARANCE"
+    }
+  ],
+  "forbiddenInterferenceCount": 0,
+  "manufacturingInterfaces": "UNVERIFIED_MANUFACTURING_INTERFACE"
 }

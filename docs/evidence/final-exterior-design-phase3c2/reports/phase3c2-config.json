@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "8dee0aed74a1041631fd2223505c3e01a2098294",
-  "sourceAuditCommit": "8dee0aed74a1041631fd2223505c3e01a2098294",
+  "sourceImplementationCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceAuditCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
   "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
@@ -33,6 +33,9 @@
     "lugSideClearance": 0.15,
     "strap12Length": 75,
     "strap6Length": 115,
+    "strapInitialStraightLength": 12,
+    "strap12TerminalTangentAngleDeg": 95,
+    "strap6TerminalTangentAngleDeg": 120,
     "strapLugThickness": 2.6,
     "strapMidThickness": 2.3,
     "strapEndThickness": 2.05,
@@ -87,14 +90,14 @@
       "armSideOnly": true,
       "noCurvatureSignReversal": true,
       "initialStraightLength": 11.718749999999996,
-      "finalBendAngle": 2.837002840909092
+      "finalBendAngle": 1.6580627893946158
     },
     "six": {
       "finite": true,
       "armSideOnly": true,
       "noCurvatureSignReversal": true,
-      "initialStraightLength": 12.578124999999996,
-      "finalBendAngle": 4.640980113636363
+      "initialStraightLength": 10.781249999999996,
+      "finalBendAngle": 2.094395102393194
     }
   },
   "holeDistances": {
@@ -135,16 +138,18 @@
       "lengthRanges": true,
       "monotonicWidthAndThickness": true,
       "centerlines": true,
+      "terminalTangents": true,
       "holes": true,
       "pocket": true,
       "wrapTransitions": true,
       "buckle": true,
       "keepers": true,
-      "material": true
+      "material": true,
+      "refinedLugs": true
     },
     "audit": {
-      "twelveCenterlineLength": 74.99999999999999,
-      "sixCenterlineLength": 114.99999999999999,
+      "twelveCenterlineLength": 75,
+      "sixCenterlineLength": 115,
       "holeDistancesFromSpringBar": [
         49,
         56,
@@ -169,14 +174,14 @@
           "armSideOnly": true,
           "noCurvatureSignReversal": true,
           "initialStraightLength": 11.718749999999996,
-          "finalBendAngle": 2.837002840909092
+          "finalBendAngle": 1.6580627893946158
         },
         "six": {
           "finite": true,
           "armSideOnly": true,
           "noCurvatureSignReversal": true,
-          "initialStraightLength": 12.578124999999996,
-          "finalBendAngle": 4.640980113636363
+          "initialStraightLength": 10.781249999999996,
+          "finalBendAngle": 2.094395102393194
         }
       }
     }

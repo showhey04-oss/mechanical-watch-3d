@@ -1,0 +1,148 @@
+{
+  "sourceImplementationCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceAuditCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
+  "baseBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
+  "phase3c1Acceptance": {
+    "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+    "head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+    "deferred": [
+      "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
+      "A5_FRONT_BACK_LUMINANCE_DIFFERENCE",
+      "ISSUE_2_RECTANGULAR_SHADOW_AND_TRANSPARENCY_CONTINUITY",
+      "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
+    ]
+  },
+  "schemaVersion": 1,
+  "sourceStartCommit": "d3f414350c088250f9de3cc38182d1b3364d1e30",
+  "status": "TECHNICAL_REQUIREMENTS_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+  "items": [
+    {
+      "id": "strap-visual-cut-seam",
+      "requirement": "strap visual cut/seam",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "STRAP_BODY_WRAP_MESH_BOUNDARY",
+      "codeChange": "replaced overlapping body/wrap meshes with one shared-vertex closed outer shell and real annular tunnels",
+      "quantitativeResult": {
+        "visibleTopOverlap": 0,
+        "twelveStrapClosed": true,
+        "sixStrapClosed": true,
+        "nonManifoldEdgeCount": 0,
+        "restPoseSurfaceClearance": 63.575
+      },
+      "evidence": [
+        "reports/phase3c2-defect-diagnosis-before.json",
+        "reports/phase3c2-defect-diagnosis-after.json",
+        "images/revision2/diagnostics-before/product.png",
+        "images/revision2/after/desktop-top-strap.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "lug-case-interface",
+      "requirement": "lug-case interface",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "PHASE3B2_BLOCK_LUG_VISUAL_INTERFACE",
+      "codeChange": "query-only replacement with four tapered closed indexed refined lugs using the protected anchors",
+      "quantitativeResult": {
+        "refinedLugCount": 4,
+        "rootEmbed": 0.17,
+        "edgeBreak": 0.075,
+        "lugToLug": 46.6,
+        "innerGap": 20,
+        "forbiddenInterferenceCount": 0
+      },
+      "evidence": [
+        "reports/geometry-report.json",
+        "reports/interference-report.json",
+        "images/revision2/after/desktop-front.png",
+        "images/revision2/after/desktop-oblique.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "six-side-wrap-opacity",
+      "requirement": "6-side wrap opacity",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "SEPARATE_WRAP_SHELL_BOUNDARY_AND_VISUAL_GAP",
+      "codeChange": "integrated the spring-bar tunnel into the six-side closed strap shell and preserved opaque material state at 100 percent",
+      "quantitativeResult": {
+        "opacity": 1,
+        "transparent": false,
+        "depthWrite": true,
+        "visibleTopOverlap": 0,
+        "closed": true
+      },
+      "evidence": [
+        "images/revision2/after/desktop-bottom-strap.png",
+        "images/revision2/after/diagnostic-basic-front.png",
+        "images/revision2/after/diagnostic-backplane-bottom.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "buckle-side-wrap-opacity",
+      "requirement": "buckle-side wrap opacity",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "SEPARATE_BUCKLE_WRAP_SHELL_BOUNDARY_AND_VISUAL_GAP",
+      "codeChange": "integrated the buckle tunnel into the twelve-side closed strap shell and preserved opaque material state at 100 percent",
+      "quantitativeResult": {
+        "opacity": 1,
+        "transparent": false,
+        "depthWrite": true,
+        "visibleTopOverlap": 0,
+        "closed": true
+      },
+      "evidence": [
+        "images/revision2/after/buckle-detail.png",
+        "images/revision2/after/diagnostic-basic-double.png",
+        "images/revision2/after/diagnostic-backplane-top.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "local-leather-readability",
+      "requirement": "local leather readability",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "LOW_BUMP_AMPLITUDE_WITHOUT_MICRO_ROUGHNESS_VARIATION",
+      "codeChange": "refined the procedural calf bump and added a low-amplitude roughness map from the same periodic data",
+      "quantitativeResult": {
+        "color": 2169623,
+        "roughness": 0.71,
+        "bumpScale": 0.065,
+        "roughnessAmplitude": 0.06,
+        "colorMapUsed": false,
+        "externalImageAssetCount": 0
+      },
+      "evidence": [
+        "reports/material-report.json",
+        "images/leather-grain-stitch-edge-closeup.png",
+        "images/revision2/after/desktop-oblique.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "global-rendering-polish",
+      "requirement": "global rendering polish",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "GLOBAL_LIGHTING_SHADOW_AND_TRANSPARENCY_QUALITY_OUTSIDE_PHASE3C2_SCOPE",
+      "codeChange": "none",
+      "quantitativeResult": {
+        "phase3c2LightingChanged": false,
+        "phase3c2ShadowChanged": false,
+        "phase3c2TransparencyFoundationChanged": false
+      },
+      "evidence": [
+        "reports/regression-results.json",
+        "Issue #2"
+      ],
+      "finalStatus": "DEFERRED_TO_ISSUE_2"
+    }
+  ],
+  "allBlockingItemsResolved": true,
+  "humanConfirmationRequired": true
+}

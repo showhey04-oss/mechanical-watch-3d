@@ -1,0 +1,4950 @@
+{
+  "schemaVersion": 1,
+  "status": "DIAGNOSED_BEFORE_REVISION_2",
+  "sourceHead": "d3f414350c088250f9de3cc38182d1b3364d1e30",
+  "classification": "STRAP_BODY_WRAP_MESH_BOUNDARY",
+  "diagnosis": {
+    "status": "HUMAN_REVIEW_FAILED_PHASE3C2_REQUIREMENTS_NOT_CLOSED",
+    "candidatePath": "exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2",
+    "centerlines": {
+      "twelve": {
+        "length": 75,
+        "finalTangentAngleDeg": 162.548289,
+        "targetBandDeg": [
+          85,
+          100
+        ]
+      },
+      "six": {
+        "length": 115,
+        "finalTangentAngleDeg": 265.908573,
+        "targetBandDeg": [
+          110,
+          130
+        ]
+      },
+      "physicalClearance": {
+        "centerlineDistance": 50.676815,
+        "surfaceClearance": 48.39869,
+        "firstSegment": 10,
+        "secondSegment": 63,
+        "skipLength": 12
+      },
+      "actualCrossing": false
+    },
+    "initialClassification": "INTER_STRAP_PROJECTION_OVERLAP",
+    "classificationBasis": [
+      "front-view human evidence places a strap surface across the watch-head projection",
+      "unbounded final tangent angles exceed the requested rest-pose bands",
+      "measured non-lug 3D centerline clearance excludes physical strap crossing",
+      "runtime hit-stack evidence is required before Geometry correction"
+    ],
+    "connections": {
+      "sixSpringBarWrap": {
+        "objectName": "Phase 3C.2 6時側スプリングバー巻込み部",
+        "partName": "Phase 3C.2 6時側スプリングバー巻込み部",
+        "visible": true,
+        "parentVisible": true,
+        "structuralOpacityRegistrationCount": 1,
+        "materials": [
+          {
+            "uuid": "85e42961-91cb-451b-8e1c-78ff0b50851a",
+            "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+            "type": "MeshStandardMaterial",
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "depthTest": true,
+            "blending": 1,
+            "side": 0,
+            "alphaTest": 0
+          }
+        ],
+        "geometry": {
+          "vertexCount": 192,
+          "indexCount": 1152,
+          "triangleCount": 384,
+          "finite": {
+            "positions": true,
+            "indices": true,
+            "normals": true
+          },
+          "degenerateTriangleCount": 0,
+          "duplicateTriangleCount": 0,
+          "reversedDuplicateTriangleCount": 0,
+          "topology": {
+            "edgeCount": 576,
+            "nonManifoldEdgeCount": 0,
+            "windingMismatchCount": 0,
+            "closed": true
+          },
+          "signedVolume": 322.8509896505443,
+          "orientation": "OUTWARD_POSITIVE",
+          "bounds": {
+            "min": [
+              -9.850000381469727,
+              -1.9500000476837158,
+              -4.400000095367432
+            ],
+            "max": [
+              9.850000381469727,
+              1.9500000476837158,
+              1.9500000476837158
+            ],
+            "size": [
+              19.700000762939453,
+              3.9000000953674316,
+              6.3500001430511475
+            ]
+          },
+          "materialGroupCount": 0
+        }
+      },
+      "buckleStrapWrap": {
+        "objectName": "Phase 3C.2 尾錠側ストラップ巻込み部",
+        "partName": "Phase 3C.2 尾錠側ストラップ巻込み部",
+        "visible": true,
+        "parentVisible": true,
+        "structuralOpacityRegistrationCount": 1,
+        "materials": [
+          {
+            "uuid": "95dfb467-e182-4320-8398-9c2dd6d1ad7c",
+            "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+            "type": "MeshStandardMaterial",
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "depthTest": true,
+            "blending": 1,
+            "side": 0,
+            "alphaTest": 0
+          }
+        ],
+        "geometry": {
+          "vertexCount": 192,
+          "indexCount": 1152,
+          "triangleCount": 384,
+          "finite": {
+            "positions": true,
+            "indices": true,
+            "normals": true
+          },
+          "degenerateTriangleCount": 0,
+          "duplicateTriangleCount": 0,
+          "reversedDuplicateTriangleCount": 0,
+          "topology": {
+            "edgeCount": 576,
+            "nonManifoldEdgeCount": 0,
+            "windingMismatchCount": 0,
+            "closed": true
+          },
+          "signedVolume": 222.54744967175,
+          "orientation": "OUTWARD_POSITIVE",
+          "bounds": {
+            "min": [
+              -8,
+              -2.0957159996032715,
+              -1.7983523607254028
+            ],
+            "max": [
+              8,
+              1.7983523607254028,
+              3.840486526489258
+            ],
+            "size": [
+              16,
+              3.8940683603286743,
+              5.638838887214661
+            ]
+          },
+          "materialGroupCount": 0
+        }
+      }
+    },
+    "texture": {
+      "topMaterial": {
+        "uuid": "f0559137-e7f2-4943-b954-8514942c5f55",
+        "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+        "type": "MeshStandardMaterial",
+        "opacity": 1,
+        "transparent": false,
+        "depthWrite": true,
+        "depthTest": true,
+        "blending": 1,
+        "side": 0,
+        "alphaTest": 0
+      },
+      "bumpTexture": "Phase 3C.2 procedural calf grain",
+      "roughnessMapPresent": false
+    },
+    "globalRenderingPolish": "DEFERRED_GLOBAL_RENDERING_POLISH_TO_ISSUE_2",
+    "projectionEvidence": {
+      "stepPx": 24,
+      "sampleCount": 24,
+      "phase3c2HitCount": 74,
+      "mixedDepthStackCount": 74,
+      "twelveSixSameRayCount": 0,
+      "samples": [
+        {
+          "client": [
+            642,
+            18
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.13821919948109,
+              "depth": 48.138219,
+              "worldPosition": [
+                0.096446,
+                -3.109737,
+                16.523637
+              ],
+              "triangleIndex": 575,
+              "material": {
+                "uuid": "70a4059b-b429-405d-ae4d-7e8a59cd5746",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 48.4032279324992,
+              "depth": 48.403228,
+              "worldPosition": [
+                0.096976,
+                -2.86,
+                16.612298
+              ],
+              "triangleIndex": 580,
+              "material": {
+                "uuid": "567ba665-9c87-4270-83c5-053f109c4582",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 49.29459491058775,
+              "depth": 49.294595,
+              "worldPosition": [
+                0.098762,
+                -2.02,
+                16.910513
+              ],
+              "triangleIndex": 968,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 51.00198713770205,
+              "depth": 51.001987,
+              "worldPosition": [
+                0.102183,
+                -0.411,
+                17.481736
+              ],
+              "triangleIndex": 1138,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 51.056105832378215,
+              "depth": 51.056106,
+              "worldPosition": [
+                0.102292,
+                -0.36,
+                17.499842
+              ],
+              "triangleIndex": 1138,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 51.82066526274505,
+              "depth": 51.820665,
+              "worldPosition": [
+                0.103823,
+                0.3605,
+                17.755632
+              ],
+              "triangleIndex": 1124,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 6,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 55.23578353396766,
+              "depth": 55.235784,
+              "worldPosition": [
+                0.110666,
+                3.578815,
+                18.898189
+              ],
+              "triangleIndex": 166806,
+              "material": {
+                "uuid": "d624a30a-aa4a-4cc2-98b5-2c2483cae274",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 7,
+              "objectName": null,
+              "partName": "E-BALANCED 裏蓋リング",
+              "distance": 56.376893434508446,
+              "depth": 56.376893,
+              "worldPosition": [
+                0.112952,
+                4.654166,
+                19.279957
+              ],
+              "triangleIndex": 1087,
+              "material": {
+                "uuid": "8bc644a5-caf8-4d1b-89ad-24bcc6a2deba",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13332300136325032,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            642,
+            42
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 47.63071561900442,
+              "depth": 47.630716,
+              "worldPosition": [
+                0.096196,
+                -3.236804,
+                15.327715
+              ],
+              "triangleIndex": 575,
+              "material": {
+                "uuid": "70a4059b-b429-405d-ae4d-7e8a59cd5746",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 48.027457917328505,
+              "depth": 48.027458,
+              "worldPosition": [
+                0.096998,
+                -2.86,
+                15.451901
+              ],
+              "triangleIndex": 666,
+              "material": {
+                "uuid": "567ba665-9c87-4270-83c5-053f109c4582",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 48.91190492339893,
+              "depth": 48.911905,
+              "worldPosition": [
+                0.098784,
+                -2.02,
+                15.728747
+              ],
+              "triangleIndex": 981,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 50.60604210884578,
+              "depth": 50.606042,
+              "worldPosition": [
+                0.102205,
+                -0.411,
+                16.259037
+              ],
+              "triangleIndex": 1147,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 50.65974066247789,
+              "depth": 50.659741,
+              "worldPosition": [
+                0.102314,
+                -0.36,
+                16.275846
+              ],
+              "triangleIndex": 1147,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 51.418364569099325,
+              "depth": 51.418365,
+              "worldPosition": [
+                0.103846,
+                0.3605,
+                16.513306
+              ],
+              "triangleIndex": 1138,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 6,
+              "objectName": null,
+              "partName": "E-BALANCED 裏蓋リング",
+              "distance": 55.93374730016939,
+              "depth": 55.933747,
+              "worldPosition": [
+                0.112965,
+                4.648967,
+                17.926689
+              ],
+              "triangleIndex": 1087,
+              "material": {
+                "uuid": "8bc644a5-caf8-4d1b-89ad-24bcc6a2deba",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13332300136325032,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 7,
+              "objectName": "Phase 3C.2 つく棒",
+              "partName": "Phase 3C.2 つく棒",
+              "distance": 101.56766154122123,
+              "depth": 101.567662,
+              "worldPosition": [
+                0.205129,
+                47.989594,
+                32.210795
+              ],
+              "triangleIndex": 8,
+              "material": {
+                "uuid": "78422022-b263-4b61-b941-8283db31f04a",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.004106149380278386,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            642,
+            66
+          ],
+          "selectedPart": "Phase 3C.1 アイボリー文字板",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 48.55481823347496,
+              "depth": 48.554818,
+              "worldPosition": [
+                0.098805,
+                -2.02,
+                14.546465
+              ],
+              "triangleIndex": 989,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 50.2365871858551,
+              "depth": 50.236587,
+              "worldPosition": [
+                0.102228,
+                -0.411,
+                15.035805
+              ],
+              "triangleIndex": 1147,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 50.289893707346984,
+              "depth": 50.289894,
+              "worldPosition": [
+                0.102336,
+                -0.36,
+                15.051316
+              ],
+              "triangleIndex": 1147,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 51.04297919750035,
+              "depth": 51.042979,
+              "worldPosition": [
+                0.103869,
+                0.3605,
+                15.270439
+              ],
+              "triangleIndex": 1147,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "E-BALANCED 裏蓋リング",
+              "distance": 55.519961583425,
+              "depth": 55.519962,
+              "worldPosition": [
+                0.112979,
+                4.643767,
+                16.573097
+              ],
+              "triangleIndex": 1087,
+              "material": {
+                "uuid": "8bc644a5-caf8-4d1b-89ad-24bcc6a2deba",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13332300136325032,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": "Phase 3C.2 つく棒",
+              "partName": "Phase 3C.2 つく棒",
+              "distance": 101.56246540770522,
+              "depth": 101.562465,
+              "worldPosition": [
+                0.206672,
+                48.694044,
+                29.969979
+              ],
+              "triangleIndex": 8,
+              "material": {
+                "uuid": "78422022-b263-4b61-b941-8283db31f04a",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.004106149380278386,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            642,
+            90
+          ],
+          "selectedPart": "Phase 3C.1 アイボリー文字板",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 48.22394143378161,
+              "depth": 48.223941,
+              "worldPosition": [
+                0.098827,
+                -2.02,
+                13.363667
+              ],
+              "triangleIndex": 989,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 49.894249971953,
+              "depth": 49.89425,
+              "worldPosition": [
+                0.10225,
+                -0.411,
+                13.812039
+              ],
+              "triangleIndex": 1147,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.94719323616422,
+              "depth": 49.947193,
+              "worldPosition": [
+                0.102358,
+                -0.36,
+                13.826251
+              ],
+              "triangleIndex": 1147,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 50.69514682538699,
+              "depth": 50.695147,
+              "worldPosition": [
+                0.103891,
+                0.3605,
+                14.02703
+              ],
+              "triangleIndex": 1147,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "E-BALANCED 裏蓋リング",
+              "distance": 55.13622125465904,
+              "depth": 55.136221,
+              "worldPosition": [
+                0.112993,
+                4.638565,
+                15.219178
+              ],
+              "triangleIndex": 1087,
+              "material": {
+                "uuid": "8bc644a5-caf8-4d1b-89ad-24bcc6a2deba",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13332300136325032,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": "Phase 3C.2 つく棒",
+              "partName": "Phase 3C.2 つく棒",
+              "distance": 101.61274574706802,
+              "depth": 101.612746,
+              "worldPosition": [
+                0.208238,
+                49.409173,
+                27.695194
+              ],
+              "triangleIndex": 9,
+              "material": {
+                "uuid": "78422022-b263-4b61-b941-8283db31f04a",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.004106149380278386,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            570,
+            498
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.20386235843594,
+              "depth": 47.203862,
+              "worldPosition": [
+                -3.476306,
+                -1.96,
+                -6.832514
+              ],
+              "triangleIndex": 385,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.77583988148522,
+              "depth": 48.77584,
+              "worldPosition": [
+                -3.592073,
+                -0.411,
+                -7.073989
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.82759639008934,
+              "depth": 48.827596,
+              "worldPosition": [
+                -3.595885,
+                -0.36,
+                -7.081939
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.55878414273057,
+              "depth": 49.558784,
+              "worldPosition": [
+                -3.649733,
+                0.3605,
+                -7.194258
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 77.55759884602394,
+              "depth": 77.557599,
+              "worldPosition": [
+                -5.711692,
+                27.950057,
+                -11.495221
+              ],
+              "triangleIndex": 2205,
+              "material": {
+                "uuid": "37febdf0-3719-4c0b-a0ad-e7064efd954f",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_EDGE_FINISH",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            594,
+            498
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.13107825226005,
+              "depth": 47.131078,
+              "worldPosition": [
+                -2.28443,
+                -1.96,
+                -6.832514
+              ],
+              "triangleIndex": 442,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.700631927487834,
+              "depth": 48.700632,
+              "worldPosition": [
+                -2.360505,
+                -0.411,
+                -7.073989
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.75230863221512,
+              "depth": 48.752309,
+              "worldPosition": [
+                -2.36301,
+                -0.36,
+                -7.081939
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.48236895916778,
+              "depth": 49.482369,
+              "worldPosition": [
+                -2.398396,
+                0.3605,
+                -7.194258
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 52.343198087103175,
+              "depth": 52.343198,
+              "worldPosition": [
+                -2.53706,
+                3.183866,
+                -7.634396
+              ],
+              "triangleIndex": 557,
+              "material": {
+                "uuid": "b615b317-f63d-4235-9910-29382143a8f7",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.019417649333748437,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 75.89358055921927,
+              "depth": 75.893581,
+              "worldPosition": [
+                -3.67854,
+                26.425851,
+                -11.257611
+              ],
+              "triangleIndex": 2241,
+              "material": {
+                "uuid": "37febdf0-3719-4c0b-a0ad-e7064efd954f",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_EDGE_FINISH",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            618,
+            498
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.088359402638496,
+              "depth": 47.088359,
+              "worldPosition": [
+                -1.092553,
+                -1.96,
+                -6.832514
+              ],
+              "triangleIndex": 442,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.6564904597147,
+              "depth": 48.65649,
+              "worldPosition": [
+                -1.128937,
+                -0.411,
+                -7.073989
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.70812032550981,
+              "depth": 48.70812,
+              "worldPosition": [
+                -1.130135,
+                -0.36,
+                -7.081939
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.43751893754996,
+              "depth": 49.437519,
+              "worldPosition": [
+                -1.147059,
+                0.3605,
+                -7.194258
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 52.28677962504462,
+              "depth": 52.28678,
+              "worldPosition": [
+                -1.213168,
+                3.175,
+                -7.633014
+              ],
+              "triangleIndex": 257,
+              "material": {
+                "uuid": "b615b317-f63d-4235-9910-29382143a8f7",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.019417649333748437,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 53.07337607088403,
+              "depth": 53.073376,
+              "worldPosition": [
+                -1.231419,
+                3.952,
+                -7.754141
+              ],
+              "triangleIndex": 257,
+              "material": {
+                "uuid": "437aac32-40db-46cb-9505-f7ded119cab3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.018464492535906454,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 6,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 75.11629019310921,
+              "depth": 75.11629,
+              "worldPosition": [
+                -1.742863,
+                25.725993,
+                -11.148509
+              ],
+              "triangleIndex": 2265,
+              "material": {
+                "uuid": "37febdf0-3719-4c0b-a0ad-e7064efd954f",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_EDGE_FINISH",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            642,
+            498
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.07578765765205,
+              "depth": 47.075788,
+              "worldPosition": [
+                0.099323,
+                -1.96,
+                -6.832514
+              ],
+              "triangleIndex": 470,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.64350005194185,
+              "depth": 48.6435,
+              "worldPosition": [
+                0.102631,
+                -0.411,
+                -7.073989
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.69511613349145,
+              "depth": 48.695116,
+              "worldPosition": [
+                0.10274,
+                -0.36,
+                -7.081939
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.424320009221816,
+              "depth": 49.42432,
+              "worldPosition": [
+                0.104278,
+                0.3605,
+                -7.194258
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 52.27281999536231,
+              "depth": 52.27282,
+              "worldPosition": [
+                0.110288,
+                3.175,
+                -7.633014
+              ],
+              "triangleIndex": 271,
+              "material": {
+                "uuid": "b615b317-f63d-4235-9910-29382143a8f7",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.019417649333748437,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 53.059206434099124,
+              "depth": 53.059206,
+              "worldPosition": [
+                0.111947,
+                3.952,
+                -7.754141
+              ],
+              "triangleIndex": 271,
+              "material": {
+                "uuid": "437aac32-40db-46cb-9505-f7ded119cab3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.018464492535906454,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 6,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 74.89494272867191,
+              "depth": 74.894943,
+              "worldPosition": [
+                0.158017,
+                25.527102,
+                -11.117504
+              ],
+              "triangleIndex": 2279,
+              "material": {
+                "uuid": "37febdf0-3719-4c0b-a0ad-e7064efd954f",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_EDGE_FINISH",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            666,
+            498
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.09338716093308,
+              "depth": 47.093387,
+              "worldPosition": [
+                1.291199,
+                -1.96,
+                -6.832514
+              ],
+              "triangleIndex": 508,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.66168565183006,
+              "depth": 48.661686,
+              "worldPosition": [
+                1.334199,
+                -0.411,
+                -7.073989
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.713321030293045,
+              "depth": 48.713321,
+              "worldPosition": [
+                1.335614,
+                -0.36,
+                -7.081939
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.44279752230116,
+              "depth": 49.442798,
+              "worldPosition": [
+                1.355615,
+                0.3605,
+                -7.194258
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 52.29236243347736,
+              "depth": 52.292362,
+              "worldPosition": [
+                1.433744,
+                3.175,
+                -7.633014
+              ],
+              "triangleIndex": 271,
+              "material": {
+                "uuid": "b615b317-f63d-4235-9910-29382143a8f7",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.019417649333748437,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 53.07904286646041,
+              "depth": 53.079043,
+              "worldPosition": [
+                1.455313,
+                3.952,
+                -7.754141
+              ],
+              "triangleIndex": 271,
+              "material": {
+                "uuid": "437aac32-40db-46cb-9505-f7ded119cab3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.018464492535906454,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 6,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 75.18793365311328,
+              "depth": 75.187934,
+              "worldPosition": [
+                2.061491,
+                25.788833,
+                -11.158305
+              ],
+              "triangleIndex": 2266,
+              "material": {
+                "uuid": "37febdf0-3719-4c0b-a0ad-e7064efd954f",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_EDGE_FINISH",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            690,
+            498
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.14112412040709,
+              "depth": 47.141124,
+              "worldPosition": [
+                2.483076,
+                -1.96,
+                -6.832514
+              ],
+              "triangleIndex": 508,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.71101234196513,
+              "depth": 48.711012,
+              "worldPosition": [
+                2.565767,
+                -0.411,
+                -7.073989
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.76270006144918,
+              "depth": 48.7627,
+              "worldPosition": [
+                2.568489,
+                -0.36,
+                -7.081939
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.492915998883404,
+              "depth": 49.492916,
+              "worldPosition": [
+                2.606952,
+                0.3605,
+                -7.194258
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 52.345369416766886,
+              "depth": 52.345369,
+              "worldPosition": [
+                2.7572,
+                3.175,
+                -7.633014
+              ],
+              "triangleIndex": 271,
+              "material": {
+                "uuid": "b615b317-f63d-4235-9910-29382143a8f7",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.019417649333748437,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": null,
+              "partName": "輪列受（石入）",
+              "distance": 53.1328472808589,
+              "depth": 53.132847,
+              "worldPosition": [
+                2.798679,
+                3.952,
+                -7.754141
+              ],
+              "triangleIndex": 271,
+              "material": {
+                "uuid": "437aac32-40db-46cb-9505-f7ded119cab3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.018464492535906454,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 6,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 76.07435461102014,
+              "depth": 76.074355,
+              "worldPosition": [
+                4.007083,
+                26.588258,
+                -11.282929
+              ],
+              "triangleIndex": 2231,
+              "material": {
+                "uuid": "37febdf0-3719-4c0b-a0ad-e7064efd954f",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_EDGE_FINISH",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            714,
+            498
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.218907131853605,
+              "depth": 47.218907,
+              "worldPosition": [
+                3.674952,
+                -1.96,
+                -6.832514
+              ],
+              "triangleIndex": 378,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.7913856741939,
+              "depth": 48.791386,
+              "worldPosition": [
+                3.797335,
+                -0.411,
+                -7.073989
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.84315867858684,
+              "depth": 48.843159,
+              "worldPosition": [
+                3.801364,
+                -0.36,
+                -7.081939
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.574579474744304,
+              "depth": 49.574579,
+              "worldPosition": [
+                3.858289,
+                0.3605,
+                -7.194258
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 78.01469605783657,
+              "depth": 78.014696,
+              "worldPosition": [
+                6.071726,
+                28.37598,
+                -11.561618
+              ],
+              "triangleIndex": 2207,
+              "material": {
+                "uuid": "37febdf0-3719-4c0b-a0ad-e7064efd954f",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_EDGE_FINISH",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            570,
+            522
+          ],
+          "selectedPart": "Phase 3C.1 アイボリー文字板",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒凹部ベベル",
+              "distance": 47.35317803144537,
+              "depth": 47.353178,
+              "worldPosition": [
+                -3.473489,
+                -2.007868,
+                -8.017505
+              ],
+              "triangleIndex": 306,
+              "material": {
+                "uuid": "3d628bda-f6c2-43ad-8873-04f41f75d6c2",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 0,
+              "opacity": 1,
+              "projectedArea": 0.00821274189188125,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 47.46133205604296,
+              "depth": 47.461332,
+              "worldPosition": [
+                -3.481423,
+                -1.90174,
+                -8.036773
+              ],
+              "triangleIndex": 2466,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.9805343847191,
+              "depth": 48.980534,
+              "worldPosition": [
+                -3.59286,
+                -0.411,
+                -8.307423
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.03250809661164,
+              "depth": 49.032508,
+              "worldPosition": [
+                -3.596673,
+                -0.36,
+                -8.316682
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.76676437896269,
+              "depth": 49.766764,
+              "worldPosition": [
+                -3.650533,
+                0.3605,
+                -8.447492
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 82.33315709009493,
+              "depth": 82.333157,
+              "worldPosition": [
+                -6.039369,
+                32.316762,
+                -14.249275
+              ],
+              "triangleIndex": 2139,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            594,
+            522
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.329448593977006,
+              "depth": 47.329449,
+              "worldPosition": [
+                -2.28493,
+                -1.96,
+                -8.026196
+              ],
+              "triangleIndex": 385,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.90560837520626,
+              "depth": 48.905608,
+              "worldPosition": [
+                -2.361022,
+                -0.411,
+                -8.307423
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.95750258239595,
+              "depth": 48.957503,
+              "worldPosition": [
+                -2.363528,
+                -0.36,
+                -8.316682
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.69063566562541,
+              "depth": 49.690636,
+              "worldPosition": [
+                -2.398921,
+                0.3605,
+                -8.447492
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 82.2072112426507,
+              "depth": 82.207211,
+              "worldPosition": [
+                -3.968728,
+                32.316762,
+                -14.249275
+              ],
+              "triangleIndex": 2139,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            618,
+            522
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.28689030486748,
+              "depth": 47.28689,
+              "worldPosition": [
+                -1.092793,
+                -1.96,
+                -8.026196
+              ],
+              "triangleIndex": 442,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.86163281491261,
+              "depth": 48.861633,
+              "worldPosition": [
+                -1.129185,
+                -0.411,
+                -8.307423
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.91348035921613,
+              "depth": 48.91348,
+              "worldPosition": [
+                -1.130383,
+                -0.36,
+                -8.316682
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.64595421461514,
+              "depth": 49.645954,
+              "worldPosition": [
+                -1.14731,
+                0.3605,
+                -8.447492
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 82.1332911280733,
+              "depth": 82.133291,
+              "worldPosition": [
+                -1.898087,
+                32.316762,
+                -14.249275
+              ],
+              "triangleIndex": 2138,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            642,
+            522
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.27436586967052,
+              "depth": 47.274366,
+              "worldPosition": [
+                0.099345,
+                -1.96,
+                -8.026196
+              ],
+              "triangleIndex": 508,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.848691292434346,
+              "depth": 48.848691,
+              "worldPosition": [
+                0.102653,
+                -0.411,
+                -8.307423
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.900525104365,
+              "depth": 48.900525,
+              "worldPosition": [
+                0.102762,
+                -0.36,
+                -8.316682
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.632804956282804,
+              "depth": 49.632805,
+              "worldPosition": [
+                0.104301,
+                0.3605,
+                -8.447492
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 82.11153725346631,
+              "depth": 82.111537,
+              "worldPosition": [
+                0.172553,
+                32.316762,
+                -14.249275
+              ],
+              "triangleIndex": 2143,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            666,
+            522
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.29189915022034,
+              "depth": 47.291899,
+              "worldPosition": [
+                1.291482,
+                -1.96,
+                -8.026196
+              ],
+              "triangleIndex": 508,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.866808464249665,
+              "depth": 48.866808,
+              "worldPosition": [
+                1.334491,
+                -0.411,
+                -8.307423
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.91866150048403,
+              "depth": 48.918662,
+              "worldPosition": [
+                1.335907,
+                -0.36,
+                -8.316682
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.651212942889565,
+              "depth": 49.651213,
+              "worldPosition": [
+                1.355912,
+                0.3605,
+                -8.447492
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 82.14199106479843,
+              "depth": 82.141991,
+              "worldPosition": [
+                2.243194,
+                32.316762,
+                -14.249275
+              ],
+              "triangleIndex": 2143,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            690,
+            522
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.339456748784016,
+              "depth": 47.339457,
+              "worldPosition": [
+                2.48362,
+                -1.96,
+                -8.026196
+              ],
+              "triangleIndex": 386,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.91594982041829,
+              "depth": 48.91595,
+              "worldPosition": [
+                2.566329,
+                -0.411,
+                -8.307423
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 48.96785500101408,
+              "depth": 48.967855,
+              "worldPosition": [
+                2.569052,
+                -0.36,
+                -8.316682
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.70114311054551,
+              "depth": 49.701143,
+              "worldPosition": [
+                2.607523,
+                0.3605,
+                -8.447492
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 82.22459455305915,
+              "depth": 82.224595,
+              "worldPosition": [
+                4.313835,
+                32.316762,
+                -14.249275
+              ],
+              "triangleIndex": 2143,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            714,
+            522
+          ],
+          "selectedPart": "Phase 3C.1 アイボリー文字板",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 47.35578342880089,
+              "depth": 47.355783,
+              "worldPosition": [
+                3.671015,
+                -2.02,
+                -8.015303
+              ],
+              "triangleIndex": 1320,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 48.99602201240018,
+              "depth": 48.996022,
+              "worldPosition": [
+                3.798167,
+                -0.411,
+                -8.307423
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.04801215836209,
+              "depth": 49.048012,
+              "worldPosition": [
+                3.802197,
+                -0.36,
+                -8.316682
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.7825006122904,
+              "depth": 49.782501,
+              "worldPosition": [
+                3.859134,
+                0.3605,
+                -8.447492
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 82.35919080530113,
+              "depth": 82.359191,
+              "worldPosition": [
+                6.384476,
+                32.316762,
+                -14.249275
+              ],
+              "triangleIndex": 2142,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            570,
+            546
+          ],
+          "selectedPart": "Phase 3C.1 アイボリー文字板",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 47.567825484644544,
+              "depth": 47.567825,
+              "worldPosition": [
+                -3.473343,
+                -2.02,
+                -9.207967
+              ],
+              "triangleIndex": 1165,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 49.21540846287018,
+              "depth": 49.215408,
+              "worldPosition": [
+                -3.593648,
+                -0.411,
+                -9.541397
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.267631401885744,
+              "depth": 49.267631,
+              "worldPosition": [
+                -3.597461,
+                -0.36,
+                -9.551966
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 50.0054086292328,
+              "depth": 50.005409,
+              "worldPosition": [
+                -3.651332,
+                0.3605,
+                -9.701274
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 88.48969128156925,
+              "depth": 88.489691,
+              "worldPosition": [
+                -6.461406,
+                37.943561,
+                -17.489538
+              ],
+              "triangleIndex": 2090,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            594,
+            546
+          ],
+          "selectedPart": "Phase 3C.1 アイボリー文字板",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 47.49572229215403,
+              "depth": 47.495722,
+              "worldPosition": [
+                -2.282483,
+                -2.02,
+                -9.207967
+              ],
+              "triangleIndex": 1125,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 49.14080786816687,
+              "depth": 49.140808,
+              "worldPosition": [
+                -2.36154,
+                -0.411,
+                -9.541397
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.19295164778033,
+              "depth": 49.192952,
+              "worldPosition": [
+                -2.364046,
+                -0.36,
+                -9.551966
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.92961055422672,
+              "depth": 49.929611,
+              "worldPosition": [
+                -2.399447,
+                0.3605,
+                -9.701274
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 88.35555882588316,
+              "depth": 88.355559,
+              "worldPosition": [
+                -4.246067,
+                37.943561,
+                -17.489538
+              ],
+              "triangleIndex": 2090,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            618,
+            546
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.514694951314276,
+              "depth": 47.514695,
+              "worldPosition": [
+                -1.093032,
+                -1.96,
+                -9.220401
+              ],
+              "triangleIndex": 385,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 49.09702378514669,
+              "depth": 49.097024,
+              "worldPosition": [
+                -1.129432,
+                -0.411,
+                -9.541397
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.14912110505234,
+              "depth": 49.149121,
+              "worldPosition": [
+                -1.130631,
+                -0.36,
+                -9.551966
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.88512365406146,
+              "depth": 49.885124,
+              "worldPosition": [
+                -1.147562,
+                0.3605,
+                -9.701274
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 88.27683470044134,
+              "depth": 88.276835,
+              "worldPosition": [
+                -2.030728,
+                37.943561,
+                -17.489538
+              ],
+              "triangleIndex": 2090,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            642,
+            546
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.50222511597741,
+              "depth": 47.502225,
+              "worldPosition": [
+                0.099367,
+                -1.96,
+                -9.220401
+              ],
+              "triangleIndex": 508,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 49.08413868080668,
+              "depth": 49.084139,
+              "worldPosition": [
+                0.102676,
+                -0.411,
+                -9.541397
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.1362223282053,
+              "depth": 49.136222,
+              "worldPosition": [
+                0.102785,
+                -0.36,
+                -9.551966
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.87203171948495,
+              "depth": 49.872032,
+              "worldPosition": [
+                0.104324,
+                0.3605,
+                -9.701274
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 88.25366718155267,
+              "depth": 88.253667,
+              "worldPosition": [
+                0.184612,
+                37.943561,
+                -17.489538
+              ],
+              "triangleIndex": 2095,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            666,
+            546
+          ],
+          "selectedPart": "Phase 3C.1 小秒表示",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 小秒表示",
+              "distance": 47.519681969216016,
+              "depth": 47.519682,
+              "worldPosition": [
+                1.291765,
+                -1.96,
+                -9.220401
+              ],
+              "triangleIndex": 386,
+              "material": {
+                "uuid": "0f0b9c60-442d-4c76-ad04-3b9e6854b045",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.007895280089780429,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 49.102176880137385,
+              "depth": 49.102177,
+              "worldPosition": [
+                1.334783,
+                -0.411,
+                -9.541397
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.15427966804125,
+              "depth": 49.15428,
+              "worldPosition": [
+                1.3362,
+                -0.36,
+                -9.551966
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.890359465949714,
+              "depth": 49.890359,
+              "worldPosition": [
+                1.356209,
+                0.3605,
+                -9.701274
+              ],
+              "triangleIndex": 1445,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 88.28610000574132,
+              "depth": 88.2861,
+              "worldPosition": [
+                2.399951,
+                37.943561,
+                -17.489538
+              ],
+              "triangleIndex": 2094,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            690,
+            546
+          ],
+          "selectedPart": "Phase 3C.1 アイボリー文字板",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 47.50567406643555,
+              "depth": 47.505674,
+              "worldPosition": [
+                2.480959,
+                -2.02,
+                -9.207967
+              ],
+              "triangleIndex": 1300,
+              "material": {
+                "uuid": "1d4ac833-83e6-4c6d-9ac6-436d31cb3146",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 49.15110433707636,
+              "depth": 49.151104,
+              "worldPosition": [
+                2.566891,
+                -0.411,
+                -9.541397
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "c2e618fe-b4e7-4bef-ae1e-306f29743ca3",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 49.20325904237115,
+              "depth": 49.203259,
+              "worldPosition": [
+                2.569615,
+                -0.36,
+                -9.551966
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "75d0e5bc-7e3f-4b32-afae-1aba98c86c49",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep",
+              "distance": 49.940072300889796,
+              "depth": 49.940072,
+              "worldPosition": [
+                2.608095,
+                0.3605,
+                -9.701274
+              ],
+              "triangleIndex": 1556,
+              "material": {
+                "uuid": "306723e8-4679-4e00-837f-1c805f6139dc",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13449457370875767,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": "Phase 3C.2 6時側黒革ストラップ",
+              "partName": "Phase 3C.2 6時側黒革ストラップ",
+              "distance": 88.37407195791947,
+              "depth": 88.374072,
+              "worldPosition": [
+                4.61529,
+                37.943561,
+                -17.489538
+              ],
+              "triangleIndex": 2094,
+              "material": {
+                "uuid": "8b859adc-b6a0-40ab-ba38-ea08e8630730",
+                "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_TOP",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": -2,
+              "opacity": 1,
+              "projectedArea": 0.10833633577598807,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        }
+      ],
+      "classification": "INTER_STRAP_PROJECTION_OVERLAP"
+    }
+  },
+  "images": [
+    {
+      "mode": "twelve-only",
+      "path": "images/revision2/diagnostics-before/twelve-only.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165494,
+      "sha256": "d126e6ee95f46376babfc76ae8fb5e9c861107068b3d98a52e3f8ff939a6b648"
+    },
+    {
+      "mode": "product",
+      "path": "images/revision2/diagnostics-before/product.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165530,
+      "sha256": "7639ec1f3d8dadf316c0b1a56711c5b0cb31dc508e2398bd8679383510c79c2b"
+    },
+    {
+      "mode": "six-only",
+      "path": "images/revision2/diagnostics-before/six-only.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165530,
+      "sha256": "7639ec1f3d8dadf316c0b1a56711c5b0cb31dc508e2398bd8679383510c79c2b"
+    },
+    {
+      "mode": "both-straps",
+      "path": "images/revision2/diagnostics-before/both-straps.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165530,
+      "sha256": "7639ec1f3d8dadf316c0b1a56711c5b0cb31dc508e2398bd8679383510c79c2b"
+    },
+    {
+      "mode": "bodies-only",
+      "path": "images/revision2/diagnostics-before/bodies-only.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165494,
+      "sha256": "d126e6ee95f46376babfc76ae8fb5e9c861107068b3d98a52e3f8ff939a6b648"
+    },
+    {
+      "mode": "wraps-only",
+      "path": "images/revision2/diagnostics-before/wraps-only.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165530,
+      "sha256": "7639ec1f3d8dadf316c0b1a56711c5b0cb31dc508e2398bd8679383510c79c2b"
+    },
+    {
+      "mode": "wireframe",
+      "path": "images/revision2/diagnostics-before/wireframe.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165525,
+      "sha256": "0255f850644b99b4c4a8f540dfb24b20022971e9b33fd0442132ddf43d0abc71"
+    },
+    {
+      "mode": "normal",
+      "path": "images/revision2/diagnostics-before/normal.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165529,
+      "sha256": "ae705f84d4ff355fdd0bf8f406811ed6126cc5ff0a33288fff0507192b0cecc3"
+    },
+    {
+      "mode": "basic-front",
+      "path": "images/revision2/diagnostics-before/basic-front.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165522,
+      "sha256": "57fbd72ecb3466cf072570c537a0061d58781fa0d6cfb752ac5666ab089a884d"
+    },
+    {
+      "mode": "basic-double",
+      "path": "images/revision2/diagnostics-before/basic-double.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165522,
+      "sha256": "57fbd72ecb3466cf072570c537a0061d58781fa0d6cfb752ac5666ab089a884d"
+    },
+    {
+      "mode": "object-id",
+      "path": "images/revision2/diagnostics-before/object-id.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165524,
+      "sha256": "b33ac8cb3f508c199b9daa2ca80816454d034bab1a093a88a4b41188e041d697"
+    },
+    {
+      "mode": "depth",
+      "path": "images/revision2/diagnostics-before/depth.png",
+      "width": 1280,
+      "height": 720,
+      "bytes": 165524,
+      "sha256": "ce2907b3701ccecb0cbaf3f7860336a94b8dc38cd0af86b136a9970973a35f2e"
+    }
+  ],
+  "sourceImplementationCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceAuditCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
+  "baseBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
+  "phase3c1Acceptance": {
+    "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+    "head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+    "deferred": [
+      "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
+      "A5_FRONT_BACK_LUMINANCE_DIFFERENCE",
+      "ISSUE_2_RECTANGULAR_SHADOW_AND_TRANSPARENCY_CONTINUITY",
+      "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
+    ]
+  },
+  "supersededAutomatedHypothesis": "INTER_STRAP_PROJECTION_OVERLAP",
+  "causeAssessment": {
+    "confirmedBy": [
+      "the visible line coincided with the former separate body/wrap mesh boundary and 0.900 overlap",
+      "MeshBasic FrontSide and DoubleSide showed the same line, excluding a missing backface",
+      "wireframe, normal, object-id, and depth views localized the transition boundary",
+      "UV, bump, material opacity, and inter-strap geometry crossing were excluded"
+    ],
+    "humanReviewAngleRequired": true
+  }
+}

@@ -14,7 +14,7 @@ const images = path.join(evidence, "images");
 const reports = path.join(evidence, "reports");
 const videos = path.join(evidence, "videos");
 const implementationCommit =
-  "8dee0aed74a1041631fd2223505c3e01a2098294";
+  "292fb96a858c55a2f6bdd97bb3cff680d36ec671";
 const baseCommit =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
 
@@ -131,18 +131,20 @@ test("Phase 3C.2 reports preserve geometry, paths, selection, interference, and 
   assert.equal(geometry.csgUsed, false);
   assert.equal(
     geometry.surfaceContinuity.topTextureSeam,
-    "REMOVED_BY_PERIODIC_TILEABLE_HEIGHT_FIELD_AND_CENTERLINE_UV",
+    "NO_UV_OR_BUMP_SEAM_FOUND; CUT_LINE_CLASSIFIED_AS_STRAP_BODY_WRAP_MESH_BOUNDARY",
   );
   assert.equal(
     geometry.springBarPockets.connection,
-    "TANGENT_CONTINUOUS_ANNULAR_WRAP_WITH_INTEGRATED_LEATHER_TONGUE",
+    "C1_SHARED_VERTEX_ANNULAR_TUNNEL_TO_STRAP_SHELL",
   );
   assert.equal(
     geometry.buckleWrap.connection,
-    "TANGENT_CONTINUOUS_ANNULAR_WRAP_WITH_INTEGRATED_LEATHER_TONGUE",
+    "C1_SHARED_VERTEX_ANNULAR_TUNNEL_TO_STRAP_SHELL",
   );
+  assert.equal(geometry.springBarPockets.visibleTopOverlap, 0);
+  assert.equal(geometry.buckleWrap.visibleTopOverlap, 0);
   assert.equal(interference.forbiddenInterferenceCount, 0);
-  assert.equal(selection.selection.registeredParts.length, 10);
+  assert.equal(selection.selection.registeredParts.length, 11);
   assert.equal(selection.selection.phase3c2BlankHitTargetCount, 0);
   assert.equal(selection.selection.blankSelectionRegression.reproduced, false);
   assert.equal(selection.selection.blankSelectionRegression.codeChangeApplied, false);
@@ -150,8 +152,84 @@ test("Phase 3C.2 reports preserve geometry, paths, selection, interference, and 
   assert.equal(normalPath.pixelExact, true);
   assert.equal(phase3c1Path.pixelExact, true);
   assert.equal(performance.thresholdsChanged, false);
+  assert.equal(performance.overallStatus, "DIFFERENTIAL_PASS");
   assert.equal(regression.phase3c2SpecificRegressionDetected, false);
   assert.equal(regression.thresholdsChanged, false);
+});
+
+test("Phase 3C.2 requirement closure uses only approved final states", () => {
+  const closure = json("phase3c2-human-requirement-closure.json");
+  assert.equal(
+    closure.status,
+    "TECHNICAL_REQUIREMENTS_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+  );
+  assert.equal(closure.allBlockingItemsResolved, true);
+  assert.equal(closure.humanConfirmationRequired, true);
+  const allowed = new Set([
+    "RESOLVED",
+    "DEFERRED_TO_ISSUE_2",
+    "UNRESOLVED",
+  ]);
+  for (const item of closure.items) {
+    assert.equal(allowed.has(item.finalStatus), true, item.id);
+  }
+  for (const id of [
+    "strap-visual-cut-seam",
+    "lug-case-interface",
+    "six-side-wrap-opacity",
+    "buckle-side-wrap-opacity",
+    "local-leather-readability",
+  ]) {
+    assert.equal(
+      closure.items.find(item => item.id === id)?.finalStatus,
+      "RESOLVED",
+      id,
+    );
+  }
+  assert.equal(
+    closure.items.find(item => item.id === "global-rendering-polish")
+      ?.finalStatus,
+    "DEFERRED_TO_ISSUE_2",
+  );
+});
+
+test("Phase 3C.2 revision 2 diagnostic images are valid PNG evidence", () => {
+  const required = [
+    "diagnostics-before/twelve-only.png",
+    "diagnostics-before/six-only.png",
+    "diagnostics-before/both-straps.png",
+    "diagnostics-before/bodies-only.png",
+    "diagnostics-before/wraps-only.png",
+    "diagnostics-before/wireframe.png",
+    "diagnostics-before/normal.png",
+    "diagnostics-before/basic-front.png",
+    "diagnostics-before/basic-double.png",
+    "diagnostics-before/object-id.png",
+    "diagnostics-before/depth.png",
+    "after/diagnostic-both-straps.png",
+    "after/diagnostic-wireframe.png",
+    "after/diagnostic-normal.png",
+    "after/diagnostic-object-id.png",
+    "after/diagnostic-depth.png",
+    "after/diagnostic-backplane-top.png",
+    "after/diagnostic-backplane-bottom.png",
+  ];
+  for (const relative of required) {
+    const buffer = fs.readFileSync(
+      path.join(images, "revision2", relative),
+    );
+    assert.ok(buffer.length > 0, relative);
+    assert.deepEqual(
+      [...buffer.subarray(0, 8)],
+      [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a],
+      relative,
+    );
+    assert.deepEqual(
+      pngDimensions(buffer),
+      { width: 1280, height: 720 },
+      relative,
+    );
+  }
 });
 
 test("Phase 3C.2 manifest is a closed-world byte and SHA inventory", () => {

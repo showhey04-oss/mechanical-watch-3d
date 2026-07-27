@@ -1,0 +1,2781 @@
+{
+  "sourceImplementationCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceAuditCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
+  "baseBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
+  "phase3c1Acceptance": {
+    "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+    "head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+    "deferred": [
+      "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
+      "A5_FRONT_BACK_LUMINANCE_DIFFERENCE",
+      "ISSUE_2_RECTANGULAR_SHADOW_AND_TRANSPARENCY_CONTINUITY",
+      "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
+    ]
+  },
+  "sourceStartCommit": "d3f414350c088250f9de3cc38182d1b3364d1e30",
+  "status": "TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+  "classification": "STRAP_BODY_WRAP_MESH_BOUNDARY",
+  "diagnosis": {
+    "status": "IMPLEMENTED_PENDING_HUMAN_CONFIRMATION",
+    "candidatePath": "exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2",
+    "diagnosedCause": "STRAP_BODY_WRAP_MESH_BOUNDARY",
+    "resolution": "CONTINUOUS_SHARED_VERTEX_OUTER_SHELL_WITH_REAL_ANNULAR_TUNNELS",
+    "restPoseClassification": "EDUCATIONAL_UNFASTENED_STRAP_REST_POSE",
+    "centerlines": {
+      "twelve": {
+        "length": 75,
+        "finalTangentAngleDeg": 95,
+        "targetBandDeg": [
+          85,
+          100
+        ]
+      },
+      "six": {
+        "length": 115,
+        "finalTangentAngleDeg": 120,
+        "targetBandDeg": [
+          110,
+          130
+        ]
+      },
+      "physicalClearance": {
+        "centerlineDistance": 66.1,
+        "surfaceClearance": 63.575,
+        "firstSegment": 10,
+        "secondSegment": 6,
+        "skipLength": 12
+      },
+      "actualCrossing": false
+    },
+    "initialClassification": "STRAP_BODY_WRAP_MESH_BOUNDARY",
+    "classificationBasis": [
+      "the visible cut line coincided with the former 0.9 model-unit overlap between separate body and wrap meshes",
+      "front-side and double-side basic diagnostics produced the same line, excluding missing backfaces",
+      "geometry and material inspection excluded UV, bump, and opacity seams as the primary cause",
+      "the replacement shares throat vertices and removes both coincident caps and visible overlap"
+    ],
+    "secondaryRestPoseCorrection": {
+      "status": "RESOLVED",
+      "method": "CAPPED_TERMINAL_TANGENT_REST_POSE",
+      "nonLugPhysicalCrossing": false
+    },
+    "connections": {
+      "sixSpringBarWrap": {
+        "objectName": "Phase 3C.2 6時側黒革ストラップ",
+        "partName": "Phase 3C.2 6時側黒革ストラップ",
+        "visible": true,
+        "parentVisible": true,
+        "structuralOpacityRegistrationCount": 1,
+        "materials": [
+          {
+            "uuid": "30270d27-1f9b-4ce0-ba65-3c21f55647b0",
+            "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED_TOP",
+            "type": "MeshStandardMaterial",
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "depthTest": true,
+            "blending": 1,
+            "side": 0,
+            "alphaTest": 0
+          },
+          {
+            "uuid": "5ebe2494-aa97-4f5f-8d62-18dc0a30a331",
+            "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED_UNDERSIDE",
+            "type": "MeshStandardMaterial",
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "depthTest": true,
+            "blending": 1,
+            "side": 0,
+            "alphaTest": 0
+          },
+          {
+            "uuid": "1985ce91-6de3-475b-83c4-324607912838",
+            "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED_EDGE_FINISH",
+            "type": "MeshStandardMaterial",
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "depthTest": true,
+            "blending": 1,
+            "side": 0,
+            "alphaTest": 0
+          }
+        ],
+        "geometry": {
+          "vertexCount": 1946,
+          "indexCount": 11760,
+          "triangleCount": 3920,
+          "finite": {
+            "positions": true,
+            "indices": true,
+            "normals": true
+          },
+          "degenerateTriangleCount": 0,
+          "duplicateTriangleCount": 0,
+          "reversedDuplicateTriangleCount": 0,
+          "topology": {
+            "edgeCount": 5880,
+            "nonManifoldEdgeCount": 0,
+            "windingMismatchCount": 0,
+            "closed": true
+          },
+          "signedVolume": 2577.7921666933044,
+          "orientation": "OUTWARD_POSITIVE",
+          "bounds": {
+            "min": [
+              -9.850000381469727,
+              0.8506949543952942,
+              -83.6717758178711
+            ],
+            "max": [
+              9.850000381469727,
+              71.09552764892578,
+              -19.850000381469727
+            ],
+            "size": [
+              19.700000762939453,
+              70.24483269453049,
+              63.82177543640137
+            ]
+          },
+          "materialGroupCount": 951
+        },
+        "subassembly": "six-side integrated strap and spring-bar tunnel",
+        "continuousOuterShell": true,
+        "visibleTopOverlap": 0
+      },
+      "buckleStrapWrap": {
+        "objectName": "Phase 3C.2 12時側黒革ストラップ",
+        "partName": "Phase 3C.2 12時側黒革ストラップ",
+        "visible": true,
+        "parentVisible": true,
+        "structuralOpacityRegistrationCount": 1,
+        "materials": [
+          {
+            "uuid": "a93319e2-9027-49ea-8685-12e7c2f8b234",
+            "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED_TOP",
+            "type": "MeshStandardMaterial",
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "depthTest": true,
+            "blending": 1,
+            "side": 0,
+            "alphaTest": 0
+          },
+          {
+            "uuid": "15f84ad1-c9b0-41ff-93b6-d622de718977",
+            "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED_UNDERSIDE",
+            "type": "MeshStandardMaterial",
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "depthTest": true,
+            "blending": 1,
+            "side": 0,
+            "alphaTest": 0
+          },
+          {
+            "uuid": "32a7b81a-37df-4872-ae9c-afccf2f914dd",
+            "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED_EDGE_FINISH",
+            "type": "MeshStandardMaterial",
+            "opacity": 1,
+            "transparent": false,
+            "depthWrite": true,
+            "depthTest": true,
+            "blending": 1,
+            "side": 0,
+            "alphaTest": 0
+          }
+        ],
+        "geometry": {
+          "vertexCount": 1518,
+          "indexCount": 9120,
+          "triangleCount": 3040,
+          "finite": {
+            "positions": true,
+            "indices": true,
+            "normals": true
+          },
+          "degenerateTriangleCount": 0,
+          "duplicateTriangleCount": 0,
+          "reversedDuplicateTriangleCount": 0,
+          "topology": {
+            "edgeCount": 4560,
+            "nonManifoldEdgeCount": 0,
+            "windingMismatchCount": 0,
+            "closed": true
+          },
+          "signedVolume": 2540.1199813992985,
+          "orientation": "OUTWARD_POSITIVE",
+          "bounds": {
+            "min": [
+              -9.850000381469727,
+              0.8506949543952942,
+              19.850000381469727
+            ],
+            "max": [
+              9.850000381469727,
+              44.20204162597656,
+              70.71643829345703
+            ],
+            "size": [
+              19.700000762939453,
+              43.35134667158127,
+              50.866437911987305
+            ]
+          },
+          "materialGroupCount": 302
+        },
+        "subassembly": "twelve-side integrated strap, spring-bar tunnel, and buckle tunnel",
+        "continuousOuterShell": true,
+        "visibleTopOverlap": 0
+      }
+    },
+    "texture": {
+      "topMaterial": {
+        "uuid": "91fc3a29-2777-43e4-bb39-6b83b33db002",
+        "name": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED_TOP",
+        "type": "MeshStandardMaterial",
+        "opacity": 1,
+        "transparent": false,
+        "depthWrite": true,
+        "depthTest": true,
+        "blending": 1,
+        "side": 0,
+        "alphaTest": 0
+      },
+      "bumpTexture": "Phase 3C.2 refined calf bump",
+      "roughnessMapPresent": true
+    },
+    "globalRenderingPolish": "DEFERRED_GLOBAL_RENDERING_POLISH_TO_ISSUE_2",
+    "projectionEvidence": {
+      "stepPx": 24,
+      "sampleCount": 18,
+      "phase3c2HitCount": 26,
+      "mixedDepthStackCount": 18,
+      "twelveSixSameRayCount": 0,
+      "projectedStrapBehindWatchHeadCount": 0,
+      "samples": [
+        {
+          "client": [
+            450,
+            18
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.24061032340292,
+              "depth": 49.24061,
+              "worldPosition": [
+                -9.206879,
+                -2.889135,
+                16.601955
+              ],
+              "triangleIndex": 852,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 49.27208232192286,
+              "depth": 49.272082,
+              "worldPosition": [
+                -9.212764,
+                -2.86,
+                16.612298
+              ],
+              "triangleIndex": 193696,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": "Phase 3C.2 12時側左 refined lug",
+              "partName": "Phase 3C.2 12時側左 refined lug",
+              "distance": 52.65908968383813,
+              "depth": 52.65909,
+              "worldPosition": [
+                -9.846057,
+                0.27554,
+                17.725469
+              ],
+              "triangleIndex": 10,
+              "material": {
+                "uuid": "b70da7d1-95c6-4e4b-940c-34947d970fb4",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            834,
+            18
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.279536729421345,
+              "depth": 49.279537,
+              "worldPosition": [
+                9.40115,
+                -2.886992,
+                16.602716
+              ],
+              "triangleIndex": 810,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 49.308715243296994,
+              "depth": 49.308715,
+              "worldPosition": [
+                9.406717,
+                -2.86,
+                16.612298
+              ],
+              "triangleIndex": 193572,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": "Phase 3C.2 12時側右 refined lug",
+              "partName": "Phase 3C.2 12時側右 refined lug",
+              "distance": 51.5534150236072,
+              "depth": 51.553415,
+              "worldPosition": [
+                9.834942,
+                -0.783501,
+                17.349491
+              ],
+              "triangleIndex": 12,
+              "material": {
+                "uuid": "a3180b14-bb97-48cb-b49c-8105e9b3b850",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            426,
+            42
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.09529342278732,
+              "depth": 49.095293,
+              "worldPosition": [
+                -10.370148,
+                -2.897781,
+                15.43945
+              ],
+              "triangleIndex": 856,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 49.13599127321982,
+              "depth": 49.135991,
+              "worldPosition": [
+                -10.378744,
+                -2.86,
+                15.451901
+              ],
+              "triangleIndex": 572,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 49.90342140895783,
+              "depth": 49.903421,
+              "worldPosition": [
+                -10.540845,
+                -2.14758,
+                15.686699
+              ],
+              "triangleIndex": 21446,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 12時側左 refined lug",
+              "partName": "Phase 3C.2 12時側左 refined lug",
+              "distance": 52.20708299614999,
+              "depth": 52.207083,
+              "worldPosition": [
+                -11.027435,
+                -0.009046,
+                16.391512
+              ],
+              "triangleIndex": 41,
+              "material": {
+                "uuid": "b70da7d1-95c6-4e4b-940c-34947d970fb4",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            450,
+            42
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.798284834838576,
+              "depth": 48.798285,
+              "worldPosition": [
+                -9.194972,
+                -2.958014,
+                15.419598
+              ],
+              "triangleIndex": 597,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 48.90336743244921,
+              "depth": 48.903367,
+              "worldPosition": [
+                -9.214773,
+                -2.86,
+                15.451901
+              ],
+              "triangleIndex": 622,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 51.41787350144214,
+              "depth": 51.417874,
+              "worldPosition": [
+                -9.688577,
+                -0.514632,
+                16.224882
+              ],
+              "triangleIndex": 63799,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 12時側左 refined lug",
+              "partName": "Phase 3C.2 12時側左 refined lug",
+              "distance": 52.01307551965081,
+              "depth": 52.013076,
+              "worldPosition": [
+                -9.80073,
+                0.040534,
+                16.407853
+              ],
+              "triangleIndex": 2,
+              "material": {
+                "uuid": "b70da7d1-95c6-4e4b-940c-34947d970fb4",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            834,
+            42
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.847212962243695,
+              "depth": 48.847213,
+              "worldPosition": [
+                9.390874,
+                -2.946753,
+                15.423309
+              ],
+              "triangleIndex": 552,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 48.94029244089647,
+              "depth": 48.940292,
+              "worldPosition": [
+                9.408768,
+                -2.86,
+                15.451901
+              ],
+              "triangleIndex": 704,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 51.16727258999058,
+              "depth": 51.167273,
+              "worldPosition": [
+                9.836905,
+                -0.784385,
+                16.135978
+              ],
+              "triangleIndex": 56606,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 12時側右 refined lug",
+              "partName": "Phase 3C.2 12時側右 refined lug",
+              "distance": 51.99915261932002,
+              "depth": 51.999153,
+              "worldPosition": [
+                9.996834,
+                -0.009046,
+                16.391512
+              ],
+              "triangleIndex": 41,
+              "material": {
+                "uuid": "a3180b14-bb97-48cb-b49c-8105e9b3b850",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            858,
+            42
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.1393003591652,
+              "depth": 49.1393,
+              "worldPosition": [
+                10.564563,
+                -2.895277,
+                15.440275
+              ],
+              "triangleIndex": 807,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 49.1773334587713,
+              "depth": 49.177333,
+              "worldPosition": [
+                10.57274,
+                -2.86,
+                15.451901
+              ],
+              "triangleIndex": 569,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 49.645376502088155,
+              "depth": 49.645377,
+              "worldPosition": [
+                10.673365,
+                -2.425872,
+                15.59498
+              ],
+              "triangleIndex": 11415,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 12時側右 refined lug",
+              "partName": "Phase 3C.2 12時側右 refined lug",
+              "distance": 52.25100914593144,
+              "depth": 52.251009,
+              "worldPosition": [
+                11.233556,
+                -0.009046,
+                16.391512
+              ],
+              "triangleIndex": 41,
+              "material": {
+                "uuid": "a3180b14-bb97-48cb-b49c-8105e9b3b850",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            426,
+            66
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.650551476437165,
+              "depth": 48.650551,
+              "worldPosition": [
+                -10.35053,
+                -2.993922,
+                14.250269
+              ],
+              "triangleIndex": 601,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 48.79380976188586,
+              "depth": 48.79381,
+              "worldPosition": [
+                -10.381008,
+                -2.86,
+                14.290998
+              ],
+              "triangleIndex": 581,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 52.271405368615994,
+              "depth": 52.271405,
+              "worldPosition": [
+                -11.120876,
+                0.390958,
+                15.279702
+              ],
+              "triangleIndex": 90638,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 12時側左 refined lug",
+              "partName": "Phase 3C.2 12時側左 refined lug",
+              "distance": 55.36860643803887,
+              "depth": 55.368606,
+              "worldPosition": [
+                -11.779813,
+                3.286313,
+                16.160258
+              ],
+              "triangleIndex": 40,
+              "material": {
+                "uuid": "b70da7d1-95c6-4e4b-940c-34947d970fb4",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            450,
+            66
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.33978990319172,
+              "depth": 48.33979,
+              "worldPosition": [
+                -9.175092,
+                -3.06633,
+                14.228247
+              ],
+              "triangleIndex": 599,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 48.559444270186475,
+              "depth": 48.559444,
+              "worldPosition": [
+                -9.216783,
+                -2.86,
+                14.290998
+              ],
+              "triangleIndex": 628,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 49.453688041637776,
+              "depth": 49.453688,
+              "worldPosition": [
+                -9.386514,
+                -2.02,
+                14.546465
+              ],
+              "triangleIndex": 969,
+              "material": {
+                "uuid": "052ca480-aac9-47a1-819d-f0253eb0f8fa",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep",
+              "distance": 51.16659069795501,
+              "depth": 51.166591,
+              "worldPosition": [
+                -9.71163,
+                -0.411,
+                15.035805
+              ],
+              "triangleIndex": 1104,
+              "material": {
+                "uuid": "303ffd5c-299b-48e1-a1f6-d4abd344cc3d",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.13947914672058212,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 51.220884055037885,
+              "depth": 51.220884,
+              "worldPosition": [
+                -9.721935,
+                -0.36,
+                15.051316
+              ],
+              "triangleIndex": 1138,
+              "material": {
+                "uuid": "e04d33bd-c12e-493f-9c59-ed8e44f9ccac",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 54.07662357162375,
+              "depth": 54.076624,
+              "worldPosition": [
+                -10.263967,
+                2.322514,
+                15.867141
+              ],
+              "triangleIndex": 137227,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 6,
+              "objectName": "Phase 3C.2 12時側左 refined lug",
+              "partName": "Phase 3C.2 12時側左 refined lug",
+              "distance": 55.10266100897961,
+              "depth": 55.102661,
+              "worldPosition": [
+                -10.458713,
+                3.286313,
+                16.160258
+              ],
+              "triangleIndex": 40,
+              "material": {
+                "uuid": "b70da7d1-95c6-4e4b-940c-34947d970fb4",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            834,
+            66
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.38900096130113,
+              "depth": 48.389001,
+              "worldPosition": [
+                9.37061,
+                -3.054901,
+                14.231723
+              ],
+              "triangleIndex": 552,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 48.596646820593975,
+              "depth": 48.596647,
+              "worldPosition": [
+                9.410821,
+                -2.86,
+                14.290998
+              ],
+              "triangleIndex": 712,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "Phase 3C.1 アイボリー文字板",
+              "distance": 49.491575693563284,
+              "depth": 49.491576,
+              "worldPosition": [
+                9.584125,
+                -2.02,
+                14.546465
+              ],
+              "triangleIndex": 946,
+              "material": {
+                "uuid": "052ca480-aac9-47a1-819d-f0253eb0f8fa",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.14130038417055563,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": null,
+              "partName": "OPEN_HEART_PRESENTATION_CUTOUT 地板core",
+              "distance": 51.26012559805003,
+              "depth": 51.260126,
+              "worldPosition": [
+                9.926608,
+                -0.36,
+                15.051316
+              ],
+              "triangleIndex": 1123,
+              "material": {
+                "uuid": "e04d33bd-c12e-493f-9c59-ed8e44f9ccac",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 0.92,
+                "transparent": true,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 0.92,
+              "projectedArea": 0.142568049662895,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 4,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 53.77850637498426,
+              "depth": 53.778506,
+              "worldPosition": [
+                10.414296,
+                2.003808,
+                15.770214
+              ],
+              "triangleIndex": 128614,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 5,
+              "objectName": "Phase 3C.2 12時側右 refined lug",
+              "partName": "Phase 3C.2 12時側右 refined lug",
+              "distance": 55.14487647405716,
+              "depth": 55.144876,
+              "worldPosition": [
+                10.678896,
+                3.286313,
+                16.160258
+              ],
+              "triangleIndex": 40,
+              "material": {
+                "uuid": "a3180b14-bb97-48cb-b49c-8105e9b3b850",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            858,
+            66
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.70529191018497,
+              "depth": 48.705292,
+              "worldPosition": [
+                10.546859,
+                -2.981581,
+                14.254022
+              ],
+              "triangleIndex": 550,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 48.83545978336164,
+              "depth": 48.83546,
+              "worldPosition": [
+                10.575046,
+                -2.86,
+                14.290998
+              ],
+              "triangleIndex": 730,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 51.96932561374869,
+              "depth": 51.969326,
+              "worldPosition": [
+                11.253667,
+                0.067131,
+                15.181218
+              ],
+              "triangleIndex": 77774,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 12時側右 refined lug",
+              "partName": "Phase 3C.2 12時側右 refined lug",
+              "distance": 55.41586865548986,
+              "depth": 55.415869,
+              "worldPosition": [
+                11.999997,
+                3.286313,
+                16.160258
+              ],
+              "triangleIndex": 40,
+              "material": {
+                "uuid": "a3180b14-bb97-48cb-b49c-8105e9b3b850",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006914997540194063,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            426,
+            666
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.153987325219504,
+              "depth": 49.153987,
+              "worldPosition": [
+                -10.420625,
+                -2.935633,
+                -14.871699
+              ],
+              "triangleIndex": 678,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 49.23562608636339,
+              "depth": 49.235626,
+              "worldPosition": [
+                -10.437932,
+                -2.86,
+                -14.897094
+              ],
+              "triangleIndex": 576,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 51.11600796464414,
+              "depth": 51.116008,
+              "worldPosition": [
+                -10.836572,
+                -1.117938,
+                -15.482023
+              ],
+              "triangleIndex": 47098,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 6時側左 refined lug",
+              "partName": "Phase 3C.2 6時側左 refined lug",
+              "distance": 53.74124676957343,
+              "depth": 53.741247,
+              "worldPosition": [
+                -11.393122,
+                1.31419,
+                -16.298653
+              ],
+              "triangleIndex": 41,
+              "material": {
+                "uuid": "6c052601-0676-4825-b1d8-e8a6462d6c84",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006839745873617478,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            450,
+            666
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.84272063344568,
+              "depth": 48.842721,
+              "worldPosition": [
+                -9.237423,
+                -3.007166,
+                -14.847681
+              ],
+              "triangleIndex": 680,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 49.00081350135536,
+              "depth": 49.000814,
+              "worldPosition": [
+                -9.267323,
+                -2.86,
+                -14.897094
+              ],
+              "triangleIndex": 631,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 52.71110631646866,
+              "depth": 52.711106,
+              "worldPosition": [
+                -9.969035,
+                0.593838,
+                -16.056782
+              ],
+              "triangleIndex": 95114,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 6時側左 refined lug",
+              "partName": "Phase 3C.2 6時側左 refined lug",
+              "distance": 53.484946158032855,
+              "depth": 53.484946,
+              "worldPosition": [
+                -10.115388,
+                1.31419,
+                -16.298653
+              ],
+              "triangleIndex": 40,
+              "material": {
+                "uuid": "6c052601-0676-4825-b1d8-e8a6462d6c84",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006839745873617478,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            834,
+            666
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 48.89228169737595,
+              "depth": 48.892282,
+              "worldPosition": [
+                9.43429,
+                -2.995624,
+                -14.851556
+              ],
+              "triangleIndex": 726,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 49.038086485328755,
+              "depth": 49.038086,
+              "worldPosition": [
+                9.462424,
+                -2.86,
+                -14.897094
+              ],
+              "triangleIndex": 715,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 52.442548779931975,
+              "depth": 52.442549,
+              "worldPosition": [
+                10.119352,
+                0.306738,
+                -15.960383
+              ],
+              "triangleIndex": 88191,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 6時側右 refined lug",
+              "partName": "Phase 3C.2 6時側右 refined lug",
+              "distance": 53.525630044656715,
+              "depth": 53.52563,
+              "worldPosition": [
+                10.328344,
+                1.31419,
+                -16.298653
+              ],
+              "triangleIndex": 41,
+              "material": {
+                "uuid": "bd575f32-6bf4-48ae-b073-05e9243b2a88",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006839745873617478,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            858,
+            666
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.20911065291061,
+              "depth": 49.209111,
+              "worldPosition": [
+                10.618307,
+                -2.923172,
+                -14.875883
+              ],
+              "triangleIndex": 728,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 49.277356399848166,
+              "depth": 49.277356,
+              "worldPosition": [
+                10.633033,
+                -2.86,
+                -14.897094
+              ],
+              "triangleIndex": 578,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 50.854671851412895,
+              "depth": 50.854672,
+              "worldPosition": [
+                10.973386,
+                -1.399948,
+                -15.387333
+              ],
+              "triangleIndex": 41599,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 6時側右 refined lug",
+              "partName": "Phase 3C.2 6時側右 refined lug",
+              "distance": 53.78679588213723,
+              "depth": 53.786796,
+              "worldPosition": [
+                11.606077,
+                1.31419,
+                -16.298653
+              ],
+              "triangleIndex": 40,
+              "material": {
+                "uuid": "bd575f32-6bf4-48ae-b073-05e9243b2a88",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006839745873617478,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            426,
+            690
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.58631497929622,
+              "depth": 49.586315,
+              "worldPosition": [
+                -10.434415,
+                -2.885372,
+                -16.062106
+              ],
+              "triangleIndex": 936,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 49.61391157375431,
+              "depth": 49.613912,
+              "worldPosition": [
+                -10.440222,
+                -2.86,
+                -16.071278
+              ],
+              "triangleIndex": 193948,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": "Phase 3C.2 6時側左 refined lug",
+              "partName": "Phase 3C.2 6時側左 refined lug",
+              "distance": 51.74783121432505,
+              "depth": 51.747831,
+              "worldPosition": [
+                -10.889261,
+                -0.898123,
+                -16.780515
+              ],
+              "triangleIndex": 0,
+              "material": {
+                "uuid": "6c052601-0676-4825-b1d8-e8a6462d6c84",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006839745873617478,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            450,
+            690
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.33849351304707,
+              "depth": 49.338494,
+              "worldPosition": [
+                -9.261415,
+                -2.899075,
+                -16.057152
+              ],
+              "triangleIndex": 939,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 49.38079521082388,
+              "depth": 49.380795,
+              "worldPosition": [
+                -9.269356,
+                -2.86,
+                -16.071278
+              ],
+              "triangleIndex": 639,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 50.28665215856591,
+              "depth": 50.286652,
+              "worldPosition": [
+                -9.439396,
+                -2.023244,
+                -16.373773
+              ],
+              "triangleIndex": 25930,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 6時側左 refined lug",
+              "partName": "Phase 3C.2 6時側左 refined lug",
+              "distance": 52.343348714326794,
+              "depth": 52.343349,
+              "worldPosition": [
+                -9.825462,
+                -0.123439,
+                -17.060571
+              ],
+              "triangleIndex": 10,
+              "material": {
+                "uuid": "6c052601-0676-4825-b1d8-e8a6462d6c84",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006839745873617478,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            834,
+            690
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.377800508970495,
+              "depth": 49.377801,
+              "worldPosition": [
+                9.45684,
+                -2.896919,
+                -16.057931
+              ],
+              "triangleIndex": 981,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED リハウト",
+              "distance": 49.41779782160453,
+              "depth": 49.417798,
+              "worldPosition": [
+                9.4645,
+                -2.86,
+                -16.071278
+              ],
+              "triangleIndex": 717,
+              "material": {
+                "uuid": "78ed62fc-936e-4726-a79a-d1ef079aad7f",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.17042247497748675,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 50.05977518054085,
+              "depth": 50.059775,
+              "worldPosition": [
+                9.587452,
+                -2.267439,
+                -16.285494
+              ],
+              "triangleIndex": 17586,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 3,
+              "objectName": "Phase 3C.2 6時側右 refined lug",
+              "partName": "Phase 3C.2 6時側右 refined lug",
+              "distance": 51.5432826285521,
+              "depth": 51.543283,
+              "worldPosition": [
+                9.871573,
+                -0.898123,
+                -16.780515
+              ],
+              "triangleIndex": 1,
+              "material": {
+                "uuid": "bd575f32-6bf4-48ae-b073-05e9243b2a88",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006839745873617478,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        },
+        {
+          "client": [
+            858,
+            690
+          ],
+          "selectedPart": "E-BALANCED ベゼル",
+          "hits": [
+            {
+              "index": 0,
+              "objectName": null,
+              "partName": "E-BALANCED ベゼル",
+              "distance": 49.63027183102284,
+              "depth": 49.630272,
+              "worldPosition": [
+                10.629997,
+                -2.88303,
+                -16.062952
+              ],
+              "triangleIndex": 983,
+              "material": {
+                "uuid": "dc29cf41-7a94-4764-b900-c33372ccf892",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.18240275905038494,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": true
+            },
+            {
+              "index": 1,
+              "objectName": null,
+              "partName": "E-BALANCED ケース胴",
+              "distance": 49.655342142476435,
+              "depth": 49.655342,
+              "worldPosition": [
+                10.635366,
+                -2.86,
+                -16.071278
+              ],
+              "triangleIndex": 194089,
+              "material": {
+                "uuid": "8dfb0ce3-2acc-460b-bcfb-c870d6f8de6e",
+                "name": "",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.16192255651248558,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            },
+            {
+              "index": 2,
+              "objectName": "Phase 3C.2 6時側右 refined lug",
+              "partName": "Phase 3C.2 6時側右 refined lug",
+              "distance": 51.791043732938064,
+              "depth": 51.791044,
+              "worldPosition": [
+                11.092799,
+                -0.898123,
+                -16.780515
+              ],
+              "triangleIndex": 0,
+              "material": {
+                "uuid": "bd575f32-6bf4-48ae-b073-05e9243b2a88",
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true,
+                "depthTest": true,
+                "blending": 1,
+                "side": 0,
+                "alphaTest": 0
+              },
+              "pickPriority": 1,
+              "opacity": 1,
+              "projectedArea": 0.006839745873617478,
+              "visibleChain": true,
+              "groupVisible": true,
+              "pickable": true,
+              "selected": false
+            }
+          ]
+        }
+      ],
+      "classification": "RESOLVED_NO_INTER_STRAP_PROJECTION_OVERLAP",
+      "watchHeadProjectionOcclusion": "NONE"
+    }
+  },
+  "quantitativeResult": {
+    "twelveStrapClosed": true,
+    "sixStrapClosed": true,
+    "twelveStrapNonManifoldEdges": 0,
+    "sixStrapNonManifoldEdges": 0,
+    "springBarVisibleTopOverlap": 0,
+    "buckleVisibleTopOverlap": 0,
+    "sharedVertexSpringBarConnection": true,
+    "sharedVertexBuckleConnection": true
+  }
+}

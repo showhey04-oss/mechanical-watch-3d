@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "8dee0aed74a1041631fd2223505c3e01a2098294",
-  "sourceAuditCommit": "8dee0aed74a1041631fd2223505c3e01a2098294",
+  "sourceImplementationCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceAuditCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
   "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
@@ -17,54 +17,57 @@
       "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
     ]
   },
-  "classification": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER",
-  "edge": {
-    "color": 723208,
-    "roughness": 0.63
-  },
+  "classification": "EDUCATIONAL_PROCEDURAL_CALF_LEATHER_REFINED",
   "externalImageAssetCount": 0,
-  "hardware": {
-    "classification": "PHASE3C1_SILVER_FAMILY_MIDTONE_REFINEMENT",
-    "color": 15198957,
-    "depthWrite": true,
-    "envMapIntensity": 0.48,
-    "metalness": 0.5,
-    "opacity": 1,
-    "refinementApplied": true,
-    "roughness": 0.24,
-    "springBarsInheritedPhase3C1StableSilver": true,
-    "transparent": false
-  },
-  "phase3c1MaterialsChanged": false,
-  "physicalLeatherSimulation": false,
   "proceduralTexture": {
-    "bumpScale": 0.048,
-    "colorMapUsed": false,
+    "type": "DataTexture",
+    "width": 128,
     "height": 128,
-    "periodic": true,
+    "bumpScale": 0.065,
     "repeat": [
       3,
       14
     ],
-    "type": "DataTexture",
-    "width": 128
+    "periodic": true,
+    "colorMapUsed": false,
+    "roughnessMapUsed": true,
+    "roughnessMapName": "Phase 3C.2 refined calf roughness",
+    "roughnessAmplitude": 0.06
+  },
+  "top": {
+    "color": 2169623,
+    "metalness": 0,
+    "roughness": 0.71,
+    "opacity": 1,
+    "transparent": false,
+    "depthWrite": true
+  },
+  "underside": {
+    "color": 2564638,
+    "metalness": 0,
+    "roughness": 0.8
+  },
+  "edge": {
+    "color": 723208,
+    "roughness": 0.63
   },
   "stitch": {
     "color": 2828324,
     "roughness": 0.76
   },
   "stitchInstanceCount": 102,
-  "top": {
-    "color": 1381137,
-    "depthWrite": true,
-    "metalness": 0,
+  "physicalLeatherSimulation": false,
+  "phase3c1MaterialsChanged": false,
+  "hardware": {
+    "refinementApplied": true,
+    "classification": "PHASE3C1_SILVER_FAMILY_MIDTONE_REFINEMENT",
+    "color": 15198957,
+    "metalness": 0.5,
+    "roughness": 0.24,
+    "envMapIntensity": 0.48,
     "opacity": 1,
-    "roughness": 0.74,
-    "transparent": false
-  },
-  "underside": {
-    "color": 2564638,
-    "metalness": 0,
-    "roughness": 0.8
+    "transparent": false,
+    "depthWrite": true,
+    "springBarsInheritedPhase3C1StableSilver": true
   }
 }
