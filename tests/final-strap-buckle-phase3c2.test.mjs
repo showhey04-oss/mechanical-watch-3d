@@ -15,6 +15,9 @@ import {
   mergeClosedGeometryData,
   createPerforatedSweptStrapGeometryData,
 } from "../js/final-strap-buckle-phase3c2-geometry.js";
+import {
+  createSweptPrismGeometryData,
+} from "../js/final-exterior-attachments-geometry.js";
 
 const approvedPhase3C1 =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
@@ -87,6 +90,48 @@ test("formal straps preserve exact lengths and monotonic width/thickness", () =>
     assert.equal(audit[side].noCurvatureSignReversal, true);
     assert.ok(audit[side].initialStraightLength >= 10);
     assert.ok(audit[side].initialStraightLength <= 14);
+  }
+});
+
+test("refined lugs use a case-matched root and monotonic local taper", () => {
+  const lug = FINAL_STRAP_BUCKLE_PHASE3C2.refinedLugs;
+  assert.equal(
+    lug.classification,
+    "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+  );
+  assert.ok(lug.rootEmbed >= 0.18);
+  assert.ok(lug.rootEmbed <= 0.32);
+  assert.ok(lug.edgeBreak >= 0.04);
+  assert.ok(lug.edgeBreak <= 0.08);
+  assert.ok(lug.rootTransitionLength >= 3);
+  assert.ok(lug.rootTransitionLength <= 4.5);
+  assert.equal(lug.stations[0].radialRootRadius, 19.8);
+  assert.equal(lug.stations[0].radialRootEmbed, lug.rootEmbed);
+  assert.ok(lug.stations[0].width > lug.stations.at(-1).width);
+  assert.ok(lug.stations[0].thickness > lug.stations.at(-1).thickness);
+  lug.stations.slice(1).forEach((station, index) => {
+    const previous = lug.stations[index];
+    assert.ok(station.width <= previous.width + 1e-9);
+    assert.ok(station.thickness <= previous.thickness + 1e-9);
+    assert.ok(station.z > previous.z);
+  });
+});
+
+test("all four case-matched refined lug meshes remain closed and outward", () => {
+  const lug = FINAL_STRAP_BUCKLE_PHASE3C2.refinedLugs;
+  for (const sideSign of [-1, 1]) {
+    for (const handSign of [-1, 1]) {
+      const data = createSweptPrismGeometryData(lug.stations.map(station => ({
+        x: handSign * station.centerX,
+        y: station.y,
+        z: sideSign * station.z,
+        width: station.width,
+        thickness: station.thickness,
+        radialRootRadius: station.radialRootRadius,
+        radialRootEmbed: station.radialRootEmbed,
+      })));
+      assertClosedGeometry(data);
+    }
   }
 });
 
@@ -199,6 +244,11 @@ test("leather and silver detail refinements stay opaque and candidate-local", as
   assert.match(runtimeSource, /high-saturation-backplane/);
   assert.match(runtimeSource, /phase3c2BlankHitTargetCount:\s*0/);
   assert.match(runtimeSource, /globalRaycasterChanged:\s*false/);
+  assert.match(runtimeSource, /missingFaceCount:\s*audit\.topology\.closed/);
+  assert.match(
+    runtimeSource,
+    /INDEXED_LUG_SURFACE_TO_SPRING_BAR_WRAP_ENVELOPE/,
+  );
   assert.match(indexSource, /applyHardwareMaterialRefinement/);
 });
 

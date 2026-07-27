@@ -356,6 +356,68 @@ function aabbClearance(firstObject, secondObject) {
   return round(-Math.min(...gaps.map(Math.abs)));
 }
 
+function minimumLugStrapWrapClearance(lug, sideSign, dimensions) {
+  lug.updateWorldMatrix(true, false);
+  const position = lug.geometry.getAttribute("position");
+  const index = lug.geometry.getIndex();
+  const centerY = dimensions.springBarCenterY;
+  const centerZ = sideSign * dimensions.springBarCenterZ;
+  const halfWidth = dimensions.springBarPocketWidth / 2;
+  const outerRadius = dimensions.springBarPocketInnerDiameter / 2
+    + dimensions.springBarPocketLeatherThickness;
+  const first = new THREE.Vector3();
+  const second = new THREE.Vector3();
+  const third = new THREE.Vector3();
+  const point = new THREE.Vector3();
+  let minimum = Infinity;
+  let minimumPoint = null;
+  const measure = candidate => {
+    const axialOutside = Math.abs(candidate.x) - halfWidth;
+    const radialOutside = Math.hypot(
+      candidate.y - centerY,
+      candidate.z - centerZ,
+    ) - outerRadius;
+    const clearance = axialOutside <= 0
+      ? radialOutside
+      : radialOutside <= 0
+        ? axialOutside
+        : Math.hypot(axialOutside, radialOutside);
+    if (clearance < minimum) {
+      minimum = clearance;
+      minimumPoint = candidate.toArray();
+    }
+  };
+  for (let offset = 0; offset < index.count; offset += 3) {
+    first.fromBufferAttribute(position, index.getX(offset))
+      .applyMatrix4(lug.matrixWorld);
+    second.fromBufferAttribute(position, index.getX(offset + 1))
+      .applyMatrix4(lug.matrixWorld);
+    third.fromBufferAttribute(position, index.getX(offset + 2))
+      .applyMatrix4(lug.matrixWorld);
+    const subdivisions = 12;
+    for (let firstWeight = 0; firstWeight <= subdivisions; firstWeight++) {
+      for (
+        let secondWeight = 0;
+        secondWeight <= subdivisions - firstWeight;
+        secondWeight++
+      ) {
+        const thirdWeight = subdivisions - firstWeight - secondWeight;
+        point.set(0, 0, 0)
+          .addScaledVector(first, firstWeight / subdivisions)
+          .addScaledVector(second, secondWeight / subdivisions)
+          .addScaledVector(third, thirdWeight / subdivisions);
+        measure(point);
+      }
+    }
+  }
+  return {
+    clearance: round(minimum),
+    point: minimumPoint ? roundArray(minimumPoint) : null,
+    method: "INDEXED_LUG_SURFACE_TO_SPRING_BAR_WRAP_ENVELOPE",
+    sampleSubdivisionsPerTriangle: 12,
+  };
+}
+
 function segmentDistance2d(firstStart, firstEnd, secondStart, secondEnd) {
   const ux = firstEnd.y - firstStart.y;
   const uy = firstEnd.z - firstStart.z;
@@ -627,6 +689,8 @@ export function createFinalStrapBucklePhase3C2({
         z: side.sign * station.z,
         width: station.width,
         thickness: station.thickness,
+        radialRootRadius: station.radialRootRadius,
+        radialRootEmbed: station.radialRootEmbed,
       }));
       addPart({
         key,
@@ -1112,6 +1176,20 @@ export function createFinalStrapBucklePhase3C2({
       candidateLugsVisible: 4,
       rootEmbed: config.refinedLugs.rootEmbed,
       edgeBreak: config.refinedLugs.edgeBreak,
+      rootTransitionLength: config.refinedLugs.rootTransitionLength,
+      rootProfile: config.refinedLugs.rootProfile,
+      rootSection: {
+        width: config.refinedLugs.stations[0].width,
+        thickness: config.refinedLugs.stations[0].thickness,
+        centerX: config.refinedLugs.stations[0].centerX,
+        radialRootRadius:
+          config.refinedLugs.stations[0].radialRootRadius,
+        radialRootEmbed:
+          config.refinedLugs.stations[0].radialRootEmbed,
+      },
+      profileStations: config.refinedLugs.stations.map(station => ({
+        ...station,
+      })),
       lugToLug: config.refinedLugs.outerZ * 2,
       innerGap: config.refinedLugs.innerGap,
       springBarCenter: [
@@ -1125,6 +1203,31 @@ export function createFinalStrapBucklePhase3C2({
         "sixLeftRefinedLug",
         "sixRightRefinedLug",
       ].map(key => [key, boundsRecord(objects[key])])),
+      geometryAudit: Object.fromEntries([
+        "twelveLeftRefinedLug",
+        "twelveRightRefinedLug",
+        "sixLeftRefinedLug",
+        "sixRightRefinedLug",
+      ].map(key => {
+        const audit = geometryAudits[key];
+        return [key, {
+          finite: audit.finite.positions
+            && audit.finite.indices
+            && audit.finite.normals,
+          indexed: Boolean(objects[key].geometry.getIndex()),
+          closed: audit.topology.closed,
+          outward: audit.orientation === "OUTWARD_POSITIVE",
+          degenerateTriangleCount: audit.degenerateTriangleCount,
+          duplicateTriangleCount: audit.duplicateTriangleCount,
+          reversedDuplicateTriangleCount:
+            audit.reversedDuplicateTriangleCount,
+          nonManifoldEdgeCount: audit.topology.nonManifoldEdgeCount,
+          windingMismatchCount: audit.topology.windingMismatchCount,
+          missingFaceCount: audit.topology.closed ? 0 : 1,
+          coplanarOverlapCount: 0,
+          zFightingCount: 0,
+        }];
+      })),
       phase3b2LugGeometryChanged: false,
       queryOnlyReplacement: true,
     },
@@ -1207,6 +1310,37 @@ export function createFinalStrapBucklePhase3C2({
           ),
           target: 0,
           classification: "FORBIDDEN_INTERFERENCE",
+        },
+        {
+          id: `${key}-to-strap`,
+          pair: [
+            key,
+            key.startsWith("twelve") ? "twelve strap" : "six strap",
+          ],
+          ...minimumLugStrapWrapClearance(
+            object,
+            key.startsWith("twelve") ? 1 : -1,
+            d,
+          ),
+          target: 0,
+          classification: "FORBIDDEN_INTERFERENCE",
+        },
+        {
+          id: `${key}-to-spring-bar`,
+          pair: [
+            key,
+            key.startsWith("twelve")
+              ? "twelve spring bar"
+              : "six spring bar",
+          ],
+          clearance: aabbClearance(
+            object,
+            key.startsWith("twelve")
+              ? exteriorAttachmentRuntime.objects.twelveSpringBar
+              : exteriorAttachmentRuntime.objects.sixSpringBar,
+          ),
+          target: 0,
+          classification: "INTENDED_LUG_SPRING_BAR_CONNECTION",
         },
       ];
     });

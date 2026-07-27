@@ -152,10 +152,22 @@ export function createSweptPrismGeometryData(stations) {
       [1, 1],
       [-1, 1],
     ]) {
+      const x = station.x + xSign * halfWidth;
+      const radialRootRadius = Number(station.radialRootRadius);
+      const radialRootEmbed = Number(station.radialRootEmbed);
+      const radialRootZ = (
+        Number.isFinite(radialRootRadius)
+        && Number.isFinite(radialRootEmbed)
+      )
+        ? Math.sign(station.z || 1) * (
+          Math.sqrt(Math.max(0, radialRootRadius ** 2 - x ** 2))
+          - radialRootEmbed
+        )
+        : station.z;
       positions.push(
-        station.x + xSign * halfWidth,
+        x,
         station.y + normalSign * normalY * halfThickness,
-        station.z + normalSign * normalZ * halfThickness,
+        radialRootZ + normalSign * normalZ * halfThickness,
       );
     }
   }

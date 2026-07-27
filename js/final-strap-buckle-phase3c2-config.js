@@ -90,23 +90,32 @@ const material = {
 
 const refinedLugStations = [
   {
-    z: 16.280,
-    y: 1.580,
-    thickness: 5.050,
+    z: 16.203,
+    y: 1.350,
+    thickness: 5.800,
     centerX: 11.000,
-    width: 2.400,
+    width: 3.600,
+    radialRootRadius: 19.800,
+    radialRootEmbed: 0.260,
   },
   {
-    z: 16.850,
-    y: 1.620,
-    thickness: 4.980,
+    z: 17.550,
+    y: 1.380,
+    thickness: 5.500,
     centerX: 11.000,
-    width: 2.350,
+    width: 3.300,
   },
   {
-    z: 18.400,
-    y: 1.820,
-    thickness: 4.350,
+    z: 18.600,
+    y: 1.650,
+    thickness: 4.800,
+    centerX: 11.000,
+    width: 2.900,
+  },
+  {
+    z: 19.600,
+    y: 1.950,
+    thickness: 4.000,
     centerX: 11.000,
     width: 2.250,
   },
@@ -115,7 +124,7 @@ const refinedLugStations = [
     y: 2.280,
     thickness: 3.100,
     centerX: 11.000,
-    width: 2.100,
+    width: 2.150,
   },
   {
     z: 22.300,
@@ -157,10 +166,13 @@ export const FINAL_STRAP_BUCKLE_PHASE3C2 = deepFreeze({
   dimensions,
   material,
   refinedLugs: {
-    classification: "QUERY_ONLY_PHASE3C2_REFINED_LUGS",
+    classification: "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
     baseLugReplacementCount: 4,
-    rootEmbed: 0.170,
-    edgeBreak: 0.075,
+    rootEmbed: 0.260,
+    edgeBreak: 0.055,
+    rootTransitionLength: 4.297,
+    rootProfile:
+      "CASE_RADIUS_MATCHED_CHORD_TO_MONOTONIC_TAPERED_SWEPT_PRISM",
     outerZ: 23.300,
     innerGap: 20.000,
     springBarCenterY: 2.800,
@@ -441,10 +453,24 @@ export function assertFinalStrapBucklePhase3C2(
       && config.material.hardwareEnvMapIntensity <= 0.5,
     refinedLugs:
       config.refinedLugs.baseLugReplacementCount === 4
-      && config.refinedLugs.rootEmbed >= 0.15
-      && config.refinedLugs.rootEmbed <= 0.3
+      && config.refinedLugs.classification
+        === "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL"
+      && config.refinedLugs.rootEmbed >= 0.18
+      && config.refinedLugs.rootEmbed <= 0.32
       && config.refinedLugs.edgeBreak >= 0.05
-      && config.refinedLugs.edgeBreak <= 0.1
+      && config.refinedLugs.edgeBreak <= 0.08
+      && config.refinedLugs.rootTransitionLength >= 3
+      && config.refinedLugs.rootTransitionLength <= 4.5
+      && config.refinedLugs.stations[0].width
+        > config.refinedLugs.stations.at(-1).width
+      && config.refinedLugs.stations[0].thickness
+        > config.refinedLugs.stations.at(-1).thickness
+      && config.refinedLugs.stations.every((station, index, stations) =>
+        index === 0
+        || (
+          station.width <= stations[index - 1].width + tolerance
+          && station.thickness <= stations[index - 1].thickness + tolerance
+        ))
       && config.refinedLugs.outerZ === 23.3
       && config.refinedLugs.innerGap === 20
       && config.refinedLugs.springBarCenterY === d.springBarCenterY
