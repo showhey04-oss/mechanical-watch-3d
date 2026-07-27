@@ -8,13 +8,15 @@
 - lug-case continuity実装基準：`2a9cfe31de83c631e6d99d50851f2cb4463684dc`
 - surfacing修正作業開始Head：`9b55d5d3971ef456de5474b3bff6d3f26d6879f8`
 - surfacing実装・browser harness基準：`00983f49b4dea623247e211cca54f3aac3f559ec`
+- 意匠精査作業開始Head：`832d33a941af7f92ba10ae81079af09e59410e37`
+- 意匠精査実装・browser harness基準：`5d51a74a21b12185fb854f9348e060c8eab440d5`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
 - branch：`feature/final-exterior-balanced-phase3c2-strap-buckle`
 - APP_VERSION：`v3.15.0`
 - query：`?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`
 - capture mode：same-origin unsandboxed iframe harness、actual Three.js WebGLRenderTarget PNG capture
 - Phase 3C.1：`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`
-- Phase 3C.2：`REFINED_LUG_SURFACING_TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION`
+- Phase 3C.2：`LUG_DESIGN_REFINEMENT_TECHNICALLY_RESOLVED_PENDING_HUMAN_DESIGN_CONFIRMATION`
 
 正本の`desktop-*`／`mobile-390-*`と`images/revision2`は実Three.js sceneのWebGLRenderTarget PNGである。`tests/generate-phase3c2-evidence.py`は正本captureを生成せず、実captureを入力としてclose-up、比較板、UI crop、review GIFを作る。GIFは実captureのreview animationであり連続WebM録画ではない。
 
@@ -128,6 +130,29 @@
 - `images/lug-surfacing-final/surfacing-profile.png`
 - `videos/lug-surfacing-final/front-oblique-side-continuous.gif`
 
+## refined lug意匠最終精査の証跡
+
+`images/lug-design-refinement-final/raw-before`は人間確認で野暮ったさ・でっぷり感が残ると判定された作業開始Head `832d33a`、`raw-after`は意匠精査実装基準 `5d51a74` のactual Three.js WebGLRenderTarget captureである。比較板、4ラグclose-up、断面減衰図、注記図はこれらの実captureとruntime JSONから生成した。
+
+- `images/lug-design-refinement-final/comparison-front.png`
+- `images/lug-design-refinement-final/comparison-oblique.png`
+- `images/lug-design-refinement-final/comparison-side.png`
+- `images/lug-design-refinement-final/comparison-review-angle.png`
+- `images/lug-design-refinement-final/design-reference-alignment-board.png`
+- `images/lug-design-refinement-final/lug-12-left-closeup.png`
+- `images/lug-design-refinement-final/lug-12-right-closeup.png`
+- `images/lug-design-refinement-final/lug-6-left-closeup.png`
+- `images/lug-design-refinement-final/lug-6-right-closeup.png`
+- `images/lug-design-refinement-final/surfacing-continuity-annotation.png`
+- `images/lug-design-refinement-final/surfacing-profile.png`
+- `videos/lug-design-refinement-final/front-oblique-side-continuous.gif`
+- `videos/lug-design-refinement-final/four-lug-comparison.gif`
+- `videos/lug-design-refinement-final/split-explode-restore.gif`
+- `videos/lug-design-refinement-final/opacity-100-50-16-100.gif`
+- `videos/lug-design-refinement-final/mobile-rotate-zoom.gif`
+
+元の人間参照画像はリポジトリへ保存されていない。`design-reference-alignment-board.png`は、元画像の雰囲気と構成を受けて承認済みとなったPhase 3C.1 alignment artifactを意匠基準側に置き、今回候補とのドレス感・軽快感の整合を確認する。
+
 ## Reports
 
 - `reports/phase3c2-config.json`
@@ -136,6 +161,19 @@
 - `reports/phase3c2-human-requirement-closure.json`
 - `reports/phase3c2-lug-continuity-closure.json`
 - `reports/phase3c2-lug-surfacing-closure.json`
+- `reports/phase3c2-lug-design-refinement-closure.json`
+- `reports/lug-design-capture-metadata.json`
+- `reports/lug-design-image-metrics.json`
+- `reports/lug-design-desktop-runtime.json`
+- `reports/lug-design-mobile-runtime.json`
+- `reports/lug-design-geometry-report.json`
+- `reports/lug-design-interference-report.json`
+- `reports/lug-design-protected-paths.json`
+- `reports/lug-design-performance.json`
+- `reports/lug-design-regression-results.json`
+- `reports/lug-design-rotation-metadata.json`
+- `reports/lug-design-split-explode-restore-metadata.json`
+- `reports/lug-design-mobile-rotate-zoom-metadata.json`
 - `reports/lug-surfacing-capture-metadata.json`
 - `reports/lug-surfacing-image-metrics.json`
 - `reports/lug-surfacing-desktop-runtime.json`
@@ -170,7 +208,7 @@
 
 ## 試験状態
 
-- Node：183/183
+- Node：186/186
 - runtime harness：Desktop 1280×720／390×844合格
 - Geometry：finite、indexed、closed、outward。退化、重複・反転triangle、non-manifold edge、winding mismatch、coplanar overlap、z-fighting 0
 - Material：opacity 100%で不透明、50%／16%契約と100%復帰合格
@@ -178,10 +216,12 @@
 - 外装表示：ON／OFF、split、explode、restore合格
 - performance：Desktop／390×844のidle・pointer・wheelは`DIFFERENTIAL_PASS`。最大fps低下1.619%、最大p95増加0.100ms
 - console error／warning：0
-- 音声：Desktop／390×844ともスピーカーの信頼済みpointer gestureで23/23
+- 音声：Node音声試験合格。実ブラウザ統合は信頼済みpointer gesture後も開始Head／候補の双方でtimeoutし、候補固有回帰なしの環境制約として記録
 - 試験閾値：変更なし
 - refined lug最終局所修正：4視点の技術閉鎖項目は`RESOLVED`
 - PC／物理iPhone人間確認：最終局所修正後は未実施
+
+意匠精査候補では24 station／36断面分割、root 2.800 × 3.500、front／underside非対称断面、root面積proxy 46.623%削減、underside relief 1.400を実装した。Desktop／390×844 runtimeは全check合格、位置1／位置2禁止干渉0／0、通常path／Phase 3C.1-only pathはpixel exact、性能は各viewport 3反復中央値で`DIFFERENTIAL_PASS`、console error／warning 0である。ブロッキング5項目は技術的に`RESOLVED`だが、人間の意匠確認前にReady化・マージ・既定採用しない。
 
 通常pathとPhase 3C.1-only pathにはPhase 3C.2 Object3D／Material／DOMを追加していない。承認Base `4de3c018...`と候補を同一Browser、同一固定状態で再取得し、両経路ともPNG bytes／SHA-256まで一致した。
 

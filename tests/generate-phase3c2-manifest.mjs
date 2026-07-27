@@ -36,9 +36,9 @@ entries.sort((left, right) =>
 const manifest = {
   schemaVersion: 1,
   sourceImplementationCommit:
-    "00983f49b4dea623247e211cca54f3aac3f559ec",
+    "5d51a74a21b12185fb854f9348e060c8eab440d5",
   sourceAuditCommit:
-    "00983f49b4dea623247e211cca54f3aac3f559ec",
+    "5d51a74a21b12185fb854f9348e060c8eab440d5",
   sourceBaseCommit:
     "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   mainCommit:

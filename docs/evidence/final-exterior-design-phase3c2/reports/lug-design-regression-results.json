@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "classification": "PHASE3C2_REFINED_LUG_DESIGN_REFINEMENT_CANDIDATE",
+  "sourceStartCommit": "832d33a941af7f92ba10ae81079af09e59410e37",
+  "sourceImplementationCommit": "5d51a74a21b12185fb854f9348e060c8eab440d5",
+  "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "appVersion": "v3.15.0",
+  "status": "TECHNICAL_PASS_WITH_KNOWN_ENVIRONMENT_LIMITATIONS_PENDING_HUMAN_DESIGN_CONFIRMATION",
+  "humanDesignConfirmationRequired": true,
+  "readyOrMergeAllowed": false,
+  "thresholdsChanged": false,
+  "phase3c2SpecificRegressionDetected": false,
+  "completed": {
+    "node": {
+      "passed": 186,
+      "total": 186
+    },
+    "runtimeHarness": {
+      "desktop": "PASSED",
+      "mobile390": "PASSED"
+    },
+    "ui": {
+      "passed": 20,
+      "total": 20
+    },
+    "hud": {
+      "passed": 57,
+      "total": 57
+    },
+    "protectedPaths": {
+      "normalPixelExact": true,
+      "phase3c1OnlyPixelExact": true
+    },
+    "performanceDifferential": "PASSED",
+    "geometry": "PASSED",
+    "interference": {
+      "position1": 0,
+      "position2": 0
+    },
+    "selectionHudLearning": "PASSED",
+    "opacityCycle": "PASSED",
+    "exteriorOnOff": "PASSED",
+    "splitExplodeRestore": "PASSED",
+    "console": {
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "browserSuites": {
+    "desktop": {
+      "passed": 83,
+      "total": 86,
+      "failed": [
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ],
+      "status": "KNOWN_ENVIRONMENT_LIMITATIONS"
+    },
+    "mobile390": {
+      "passed": 86,
+      "total": 88,
+      "failed": [
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ],
+      "status": "KNOWN_ENVIRONMENT_LIMITATIONS"
+    },
+    "audio": {
+      "candidate": {
+        "trustedGestureApplied": true,
+        "status": "ENVIRONMENT_BLOCKED",
+        "error": "audio integration wait timed out"
+      },
+      "startHead": {
+        "trustedGestureApplied": true,
+        "status": "ENVIRONMENT_BLOCKED",
+        "error": "audio integration wait timed out"
+      },
+      "candidateSpecificRegressionDetected": false,
+      "nodeAudioTests": "PASSED"
+    }
+  },
+  "knownLimitations": [
+    {
+      "id": "a5-front-back-luminance",
+      "scope": "Issue #2",
+      "candidateSpecific": false
+    },
+    {
+      "id": "a6-absolute-performance",
+      "scope": "in-app Browser environment; differential pass against start Head",
+      "candidateSpecific": false
+    },
+    {
+      "id": "web-audio-integration-timeout",
+      "scope": "in-app Browser trusted-gesture environment; reproduced on start Head",
+      "candidateSpecific": false
+    }
+  ],
+  "unchanged": {
+    "caseGeometry": true,
+    "strapAndBuckleGeometry": true,
+    "springBarCenters": true,
+    "phase3c1WatchHead": true,
+    "camera": true,
+    "dpr": true,
+    "lighting": true,
+    "ui": true,
+    "audio": true,
+    "appVersion": true,
+    "testThresholds": true
+  }
+}

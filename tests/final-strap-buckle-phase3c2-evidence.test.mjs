@@ -14,6 +14,8 @@ const images = path.join(evidence, "images");
 const reports = path.join(evidence, "reports");
 const videos = path.join(evidence, "videos");
 const implementationCommit =
+  "5d51a74a21b12185fb854f9348e060c8eab440d5";
+const legacyImplementationCommit =
   "00983f49b4dea623247e211cca54f3aac3f559ec";
 const baseCommit =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
@@ -30,7 +32,14 @@ const pngDimensions = buffer => ({
 test("Phase 3C.2 evidence reports are tied to the implementation and accepted base", () => {
   for (const file of fs.readdirSync(reports).filter(name => name.endsWith(".json"))) {
     const report = json(file);
-    assert.equal(report.sourceImplementationCommit, implementationCommit, file);
+    const designRefinement =
+      file.startsWith("lug-design-")
+      || file === "phase3c2-lug-design-refinement-closure.json";
+    assert.equal(
+      report.sourceImplementationCommit,
+      designRefinement ? implementationCommit : legacyImplementationCommit,
+      file,
+    );
     assert.equal(report.sourceBaseCommit, baseCommit, file);
     assert.equal(report.appVersion, "v3.15.0", file);
   }
@@ -490,6 +499,194 @@ test("Phase 3C.2 refined-lug surfacing closes technical gates only", () => {
     assert.equal(comparison.stopThenJumpCount, 0);
     assert.equal(comparison.zoomMonotonic, true);
     assert.equal(comparison.transformInvariant, true);
+  }
+});
+
+test("Phase 3C.2 lug-design refinement evidence uses actual captures", () => {
+  const directory = path.join(images, "lug-design-refinement-final");
+  const required = [
+    ["raw-before/front.png", 1280, 720],
+    ["raw-before/oblique.png", 1280, 720],
+    ["raw-before/side.png", 1280, 720],
+    ["raw-before/review-angle.png", 1280, 720],
+    ["raw-after/front.png", 1280, 720],
+    ["raw-after/oblique.png", 1280, 720],
+    ["raw-after/side.png", 1280, 720],
+    ["raw-after/review-angle.png", 1280, 720],
+    ["raw-after/top.png", 1280, 720],
+    ["raw-after/bottom.png", 1280, 720],
+    ["raw-after/mobile.png", 390, 844],
+    ["raw-after/opacity-50.png", 1280, 720],
+    ["raw-after/opacity-16.png", 1280, 720],
+    ["comparison-front.png", 1920, 590],
+    ["comparison-oblique.png", 1920, 590],
+    ["comparison-side.png", 1920, 590],
+    ["comparison-review-angle.png", 1920, 590],
+    ["design-reference-alignment-board.png", 1920, 640],
+    ["lug-12-left-closeup.png", 960, 540],
+    ["lug-12-right-closeup.png", 960, 540],
+    ["lug-6-left-closeup.png", 960, 540],
+    ["lug-6-right-closeup.png", 960, 540],
+    ["surfacing-continuity-annotation.png", 1280, 720],
+    ["surfacing-profile.png", 1280, 720],
+  ];
+  const hashes = new Set();
+  for (const [relative, width, height] of required) {
+    const buffer = fs.readFileSync(path.join(directory, relative));
+    assert.ok(buffer.length > 0, relative);
+    assert.deepEqual(
+      [...buffer.subarray(0, 8)],
+      [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a],
+      relative,
+    );
+    assert.deepEqual(pngDimensions(buffer), { width, height }, relative);
+    hashes.add(sha256(buffer));
+  }
+  assert.equal(hashes.size, required.length);
+  const metrics = json("lug-design-image-metrics.json");
+  for (const metric of metrics.images) {
+    assert.equal(
+      metric.provenance,
+      "actual runtime WebGLRenderTarget capture",
+      metric.file,
+    );
+    assert.ok(metric.uniqueRgbCount > 500, metric.file);
+    assert.ok(metric.dominantColorRatio < 0.95, metric.file);
+    assert.ok(metric.luminanceVariance > 1, metric.file);
+  }
+  const generator = fs.readFileSync(
+    path.join(root, "tests/generate-phase3c2-lug-design-refinement-evidence.py"),
+    "utf8",
+  );
+  assert.doesNotMatch(generator, /Image\.new\([^)]*raw-after/);
+  assert.match(generator, /open_rgb\(AFTER/);
+});
+
+test("Phase 3C.2 lug-design refinement closes technical design gates only", () => {
+  const desktop = json("lug-design-desktop-runtime.json");
+  const mobile = json("lug-design-mobile-runtime.json");
+  const geometry = json("lug-design-geometry-report.json");
+  const interference = json("lug-design-interference-report.json");
+  const closure = json("phase3c2-lug-design-refinement-closure.json");
+  const paths = json("lug-design-protected-paths.json");
+  const performance = json("lug-design-performance.json");
+  for (const runtime of [desktop, mobile]) {
+    assert.equal(runtime.ok, true);
+    assert.equal(
+      Object.values(runtime.checks).every(Boolean),
+      true,
+    );
+    assert.equal(runtime.interference.forbiddenInterferenceCount, 0);
+    assert.equal(
+      runtime.geometry.refinedLugs.classification,
+      "PHASE3C2_REFINED_LUG_DESIGN_REFINEMENT_CANDIDATE",
+    );
+    assert.equal(runtime.geometry.refinedLugs.surfacing.stationCount, 24);
+    assert.equal(
+      runtime.geometry.refinedLugs.surfacing.crossSectionSegments,
+      36,
+    );
+    assert.equal(runtime.geometry.refinedLugs.surfacing.localBulgeCount, 0);
+    assert.equal(runtime.geometry.refinedLugs.surfacing.midWaistCount, 0);
+  }
+  assert.equal(geometry.widthMonotonic, true);
+  assert.equal(geometry.thicknessMonotonic, true);
+  assert.equal(geometry.frontExtentMonotonic, true);
+  assert.equal(geometry.undersideExtentMonotonic, true);
+  assert.equal(geometry.caseGeometryChanged, false);
+  assert.equal(geometry.strapAndBuckleGeometryChanged, false);
+  for (const audit of Object.values(geometry.audits)) {
+    assert.equal(audit.finite, true);
+    assert.equal(audit.indexed, true);
+    assert.equal(audit.closed, true);
+    assert.equal(audit.outward, true);
+    assert.equal(audit.degenerateTriangleCount, 0);
+    assert.equal(audit.duplicateTriangleCount, 0);
+    assert.equal(audit.reversedDuplicateTriangleCount, 0);
+    assert.equal(audit.nonManifoldEdgeCount, 0);
+    assert.equal(audit.windingMismatchCount, 0);
+    assert.equal(audit.missingFaceCount, 0);
+    assert.equal(audit.coplanarOverlapCount, 0);
+    assert.equal(audit.zFightingCount, 0);
+  }
+  assert.equal(interference.forbiddenInterferenceCount, 0);
+  assert.equal(interference.position1.phase3c2ForbiddenCount, 0);
+  assert.equal(interference.position2.phase3c2ForbiddenCount, 0);
+  assert.equal(
+    closure.status,
+    "TECHNICALLY_RESOLVED_PENDING_HUMAN_DESIGN_CONFIRMATION",
+  );
+  for (const id of [
+    "lug-case-visual-integration",
+    "lug-visual-heaviness",
+    "lug-root-shoulder-reduction",
+    "lug-tipward-taper-elegance",
+    "lug-perceived-thickness-reduction",
+  ]) {
+    assert.equal(
+      closure.items.find(item => item.id === id)?.finalStatus,
+      "RESOLVED",
+      id,
+    );
+  }
+  assert.equal(closure.humanConfirmationRequired, true);
+  assert.equal(closure.readyOrMergeAllowed, false);
+  assert.equal(paths.allDecodedPixelsExact, true);
+  assert.equal(performance.thresholdsChanged, false);
+  assert.equal(performance.overallStatus, "DIFFERENTIAL_PASS");
+  for (const viewport of [performance.desktop, performance.mobile390]) {
+    for (const comparison of Object.values(viewport.medians)) {
+      assert.equal(comparison.differentialPass, true);
+    }
+    for (const run of [...viewport.start, ...viewport.current]) {
+      assert.equal(run.ok, true);
+      assert.equal(run.modelTransformInvariant, true);
+      for (const scenario of run.scenarios) {
+        assert.equal(scenario.modelInvariant, true);
+        assert.equal(scenario.motion.reversalCount, 0);
+        assert.equal(scenario.motion.stopThenJumpCount, 0);
+        if (scenario.type === "wheel-zoom") {
+          assert.equal(scenario.zoom.monotonic, true);
+        }
+      }
+    }
+  }
+});
+
+test("Phase 3C.2 lug-design refinement videos use actual invariant frames", () => {
+  const directory = path.join(videos, "lug-design-refinement-final");
+  for (const [file, minimumFrames] of [
+    ["front-oblique-side-continuous.gif", 18],
+    ["split-explode-restore.gif", 18],
+    ["mobile-rotate-zoom.gif", 18],
+    ["four-lug-comparison.gif", 4],
+    ["opacity-100-50-16-100.gif", 4],
+  ]) {
+    const buffer = fs.readFileSync(path.join(directory, file));
+    assert.ok(buffer.length > 1000, file);
+    assert.ok(
+      ["GIF87a", "GIF89a"].includes(buffer.subarray(0, 6).toString("ascii")),
+      file,
+    );
+    assert.ok(
+      (buffer.toString("latin1").match(/\x21\xF9\x04/g) ?? []).length
+        >= minimumFrames,
+      file,
+    );
+  }
+  for (const file of [
+    "lug-design-rotation-metadata.json",
+    "lug-design-split-explode-restore-metadata.json",
+    "lug-design-mobile-rotate-zoom-metadata.json",
+  ]) {
+    const metadata = json(file);
+    assert.equal(metadata.ok, true, file);
+    assert.equal(metadata.modelInvariant, true, file);
+    assert.equal(
+      metadata.frames.every(frame => frame.stateInvariant.all),
+      true,
+      file,
+    );
   }
 });
 

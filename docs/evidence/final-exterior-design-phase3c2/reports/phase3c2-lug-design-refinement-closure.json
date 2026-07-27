@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "classification": "PHASE3C2_REFINED_LUG_DESIGN_REFINEMENT_CANDIDATE",
+  "sourceStartCommit": "832d33a941af7f92ba10ae81079af09e59410e37",
+  "sourceImplementationCommit": "5d51a74a21b12185fb854f9348e060c8eab440d5",
+  "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "appVersion": "v3.15.0",
+  "previousHumanReview": "HUMAN_REVIEW_FAILED_PHASE3C2_LUG_DESIGN_REFINEMENT_REQUIRED",
+  "status": "TECHNICALLY_RESOLVED_PENDING_HUMAN_DESIGN_CONFIRMATION",
+  "items": [
+    {
+      "id": "lug-case-visual-integration",
+      "requirement": "caseから自然に生えた一体面に見える",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "対称5.400厚root断面がcase下側へ張り出し、接続肩と差込み感を強調していた",
+      "codeChange": "rootを2.800 x 3.500へ再配分し、case-matched embed 0.290と非対称丸断面を使用",
+      "quantitativeResult": {
+        "rootEmbed": 0.29,
+        "rootProfile": "CASE_RADIUS_MATCHED_ASYMMETRIC_ROUNDED_SUPERELLIPSE_EASED_SWEEP",
+        "caseGeometryChanged": false,
+        "geometryAuditFailures": 0
+      },
+      "evidence": [
+        "images/lug-design-refinement-final/comparison-review-angle.png",
+        "images/lug-design-refinement-final/surfacing-continuity-annotation.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "lug-visual-heaviness",
+      "requirement": "ラグ全体のでっぷり感を減らす",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "root面積proxy 18.360と下面extent 2.700がケース厚に近い量感を生んでいた",
+      "codeChange": "root面積proxyを9.800へ削減し、下面extentを1.300へ独立縮小",
+      "quantitativeResult": {
+        "previousRootAreaProxy": 18.36,
+        "rootAreaProxy": 9.799999999999999,
+        "rootAreaReductionRatio": 0.46623093681917216,
+        "undersideReliefAtRoot": 1.4000000000000001
+      },
+      "evidence": [
+        "images/lug-design-refinement-final/comparison-side.png",
+        "images/lug-design-refinement-final/comparison-oblique.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "lug-root-shoulder-reduction",
+      "requirement": "case根元の肩感と厚ぼったさを減らす",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "root幅3.400、厚さ5.400の対称断面が接続部の肩を大きく見せていた",
+      "codeChange": "root幅2.800、front 2.200、underside 1.300の非対称断面へ変更",
+      "quantitativeResult": {
+        "rootWidth": 2.8,
+        "rootFrontExtent": 2.2,
+        "rootUndersideExtent": 1.3,
+        "rootThickness": 3.5
+      },
+      "evidence": [
+        "images/lug-design-refinement-final/lug-12-left-closeup.png",
+        "images/lug-design-refinement-final/lug-12-right-closeup.png",
+        "images/lug-design-refinement-final/lug-6-left-closeup.png",
+        "images/lug-design-refinement-final/lug-6-right-closeup.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "lug-tipward-taper-elegance",
+      "requirement": "rootからtipへ上品かつ早めに収束する",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "旧幅taperが中腹まで量感を残し、tip近傍の収束が鈍く見えていた",
+      "codeChange": "24 station、36断面分割と早期width taperを適用し、progress 0.800で保護tip幅へ到達",
+      "quantitativeResult": {
+        "stationCount": 24,
+        "crossSectionSegments": 36,
+        "widthTaperEndProgress": 0.8,
+        "midWaistCount": 0,
+        "localBulgeCount": 0
+      },
+      "evidence": [
+        "images/lug-design-refinement-final/surfacing-profile.png",
+        "videos/lug-design-refinement-final/front-oblique-side-continuous.gif"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "lug-perceived-thickness-reduction",
+      "requirement": "下面から側面の流れで視覚的に薄く見せる",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "front/underside対称断面により、下面量感を上面とは独立して調整できなかった",
+      "codeChange": "front/underside extentを独立補間し、下面をrootで1.400 relief",
+      "quantitativeResult": {
+        "sectionSymmetry": "FRONT_UNDERSIDE_ASYMMETRIC",
+        "undersideReliefAtRoot": 1.4000000000000001,
+        "frontExtentMonotonic": true,
+        "undersideExtentMonotonic": true
+      },
+      "evidence": [
+        "images/lug-design-refinement-final/comparison-side.png",
+        "images/lug-design-refinement-final/surfacing-continuity-annotation.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "global-rendering-polish",
+      "requirement": "全体CG感の最終調整",
+      "previousStatus": "DEFERRED_TO_ISSUE_2",
+      "rootCause": "lighting/material全体品質はIssue #2の範囲",
+      "codeChange": "none",
+      "quantitativeResult": {
+        "issue": 2
+      },
+      "evidence": [],
+      "finalStatus": "DEFERRED_TO_ISSUE_2"
+    }
+  ],
+  "allBlockingItemsTechnicallyResolved": true,
+  "humanConfirmationRequired": true,
+  "readyOrMergeAllowed": false,
+  "defaultAdopted": false
+}

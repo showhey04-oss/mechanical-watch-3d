@@ -2,13 +2,15 @@
 
 ## 状態と由来
 
-- 状態：`REFINED_LUG_SURFACING_TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION`
+- 状態：`LUG_DESIGN_REFINEMENT_TECHNICALLY_RESOLVED_PENDING_HUMAN_DESIGN_CONFIRMATION`
 - Base：`feature/final-exterior-balanced-phase3c1-watch-head`
 - 人間承認済みPhase 3C.1 Head：`4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`
 - 最終局所修正作業開始Head：`752418e72d3bb7b1dd86952638a3bb85fdf6d582`
 - lug-case continuity実装基準：`2a9cfe31de83c631e6d99d50851f2cb4463684dc`
 - surfacing修正作業開始Head：`9b55d5d3971ef456de5474b3bff6d3f26d6879f8`
 - surfacing実装基準：`00983f49b4dea623247e211cca54f3aac3f559ec`
+- 意匠精査作業開始Head：`832d33a941af7f92ba10ae81079af09e59410e37`
+- 意匠精査実装基準：`5d51a74a21b12185fb854f9348e060c8eab440d5`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
 - APP_VERSION：`v3.15.0`
 - query：`?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`
@@ -63,6 +65,27 @@ Phase 3C.2はquery限定の未採用候補である。Phase 3C.1の時計本体�
 
 前段のlug-case continuity修正で接続自体は改善したが、7 stationの矩形swept prismが中腹のくびれ、面折れ、ボコつきとして残り、ハイライトが上面・側面・下面で途切れて見えた。surfacing修正では、ケース半径に合わせたrootとembed 0.260を維持したまま、16 station／24分割の丸み付き共有頂点断面へ局所置換した。width／thicknessは別のeasingで単調配分し、革巻込み位置より前に内側gapを確保する。ケースGeometry、ケース径・厚さ、lug-to-lug 46.600、ラグ間20.000、外端Z ±23.300、スプリングバー中心は変更していない。
 
+## refined lug意匠最終精査候補
+
+人間確認では接続性は改善した一方、対称なroot断面3.400 × 5.400がケース下側まで張り出し、中腹まで量感が残るため、まだ野暮ったく、でっぷり見えると判定された。今回のquery-only候補は、この意匠指摘だけを対象とする。
+
+- 分類：`PHASE3C2_REFINED_LUG_DESIGN_REFINEMENT_CANDIDATE`
+- root断面：幅2.800、front extent 2.200、underside extent 1.300、合計厚3.500
+- tip断面：幅2.000、front／underside各1.000、合計厚2.000
+- case埋込み：0.290
+- 長手station：24、断面分割：36、superellipse exponent：2.200
+- 幅：35% linear + 65% smoothstepで進行0.800までにtip幅へ収束
+- front：45% linear + 55% smoothstep
+- underside：70% linear + 30% smoothstep
+- root面積proxy：18.360から9.800へ46.623%削減
+- underside relief：rootで1.400
+- mid-waist／局所膨らみ：0／0
+- width／thickness／front extent／underside extent：全て単調
+
+断面の前面と下面を独立させ、上面のケース接続量を保ちながら下面だけを逃がした。幅の絞りはスプリングバー手前で完了するため、中腹に太さを残したまま先端だけ急に細くする形ではない。4本ともfinite、indexed、closed、outwardで、退化・重複・反転重複・non-manifold edge・winding mismatch・missing face・coplanar overlap・z-fightingは0である。
+
+元の人間参照画像はリポジトリに保存されていないため、証跡の`design-reference-alignment-board.png`は、参照意匠を受けて人間承認済みとなったPhase 3C.1 alignment artifactと今回候補を並べる。単純模写ではなく、承認済み時計本体の軽いドレス感と、caseからtipへ自然に収束するラグの整合を確認するための比較である。
+
 ## Materialと不透明性
 
 - 上面：`#211B17`、metalness 0、roughness 0.71
@@ -99,9 +122,11 @@ opacity 100%ではtop／underside／edgeがopacity 1、transparent false、depth
 
 Desktop／390×844のidle、pointer、wheel差分は`DIFFERENTIAL_PASS`。最終局所修正で候補のfps低下は最大1.619%、p95増加は最大0.100msであり、5%／2msの差分基準内だった。reversal 0、stop-then-jump 0、wheel monotonic、transform invariantを維持し、試験閾値は変更していない。
 
-最終回帰はNode 183/183、Desktop runtime、390×844 runtime、UI、HUD、音声23/23、外装表示、選択、A.7、S86、Phase 2C不変を確認した。Desktop browser総合の85/86は、候補と承認済みPhase 3C.1で共通するA.5前後面明度差1件だけであり、Phase 3C.2固有失敗は0である。音声はWeb Audio要件どおり、Desktop／390×844ともスピーカーの信頼済みpointer gestureから実行した。
+最終意匠精査回帰はNode 186/186、Desktop runtime、390×844 runtime、UI 20/20、HUD 57/57、外装表示、選択、A.7、S86、Phase 2C不変を確認した。Desktop browser総合83/86と390×844 browser総合86/88の未達は、開始Headでも再現するA.5明度差とin-app Browser環境のA.6 absolute性能であり、Phase 3C.2固有失敗は0である。Web Audio統合は信頼済みpointer gesture後も開始Headと候補の双方でtimeoutしたため環境制約として分離し、Node音声試験の合格を維持した。
 
 surfacing差分性能は作業開始Head `9b55d5d` と実装基準 `00983f4` を各viewport 3反復で直接比較した。desktopのfps差はidle +0.544%、pointer +0.500%、wheel −1.236%、p95差は最大+0.500ms。390×844はidle +0.473%、pointer −0.019%、wheel −0.132%、p95差は最大0msで、全て5%／2ms差分基準内だった。閾値変更、reversal、stop-then-jump、transform driftは0である。
+
+意匠精査差分性能は開始Head `832d33a` と実装基準 `5d51a74` を同一Browserで各viewport 3反復した。desktopのfps低下は最大0%（全シナリオで同等または微増）、p95増加は最大0.100ms。390×844もfps低下0%、p95増加0msで、5%／2ms差分基準に合格した。全12実行でreversal 0、stop-then-jump 0、wheel monotonic、transform invariantを維持し、閾値は変更していない。
 
 全体の安っぽいCG感、A.5前後面明度差、矩形影、透過連続性は本工程へ混在させず、`DEFERRED_GLOBAL_RENDERING_POLISH_TO_ISSUE_2`としてIssue #2へ保留する。PR #5とD2c3も変更していない。
 
@@ -109,11 +134,14 @@ surfacing差分性能は作業開始Head `9b55d5d` と実装基準 `00983f4` を
 
 `phase3c2-human-requirement-closure.json`では従来の切れ目、wrap不透明性、局所革質感を技術的に`RESOLVED`とした。`phase3c2-lug-continuity-closure.json`はlug-case接続の履歴を保持する。今回の`phase3c2-lug-surfacing-closure.json`では、自然な量感減衰、中腹のくびれ0、連続ハイライト、保護anchorと禁止干渉0を技術的に`RESOLVED`とした。全体CG感だけを`DEFERRED_TO_ISSUE_2`とする。
 
-これは既定採用または人間受入完了を意味しない。`HUMAN_REVIEW_FAILED_PHASE3C2_LUG_SURFACING_NOT_CLOSED`の技術項目は閉じたが、修正後の人間確認を待つ。次をPC／物理iPhoneで確認するまでPR #16をDraftに維持する。
+`phase3c2-lug-design-refinement-closure.json`では、caseとの視覚統合、全体の重さ、root肩、tipward taper、知覚厚の5項目を実装値と実WebGL証跡により技術的に`RESOLVED`とした。全体CG感だけを`DEFERRED_TO_ISSUE_2`とする。
+
+これは既定採用または人間受入完了を意味しない。`HUMAN_REVIEW_FAILED_PHASE3C2_LUG_DESIGN_REFINEMENT_REQUIRED`の技術ゲートは閉じたが、上品さ・軽やかさは人間の意匠判断を待つ。次をPC／物理iPhoneで確認するまでPR #16をDraftに維持する。
 
 - 添付画像相当角度、正面、斜め、側面で4つのrefined lugがケースから自然に生えて見えること
 - 4ラグのハイライトが途中で折れず、中腹のくびれ・ボコつき・S字崩れがないこと
-- rootの幅・厚さがケース腹からtipへ過度な大型化や埋まり込みなく連続していること
+- root幅2.800／合計厚3.500が、ケース腹からtipへ過度な大型化や埋まり込みなく連続していること
+- asymmetric underside relief 1.400により側面・斜めで軽く見えること
 - 6時側spring-bar tunnelと12時側buckle tunnelの不透明性
 - 黒革シボ、ステッチ、コバ、silver金具
 - 空白クリック／タップ10/10
