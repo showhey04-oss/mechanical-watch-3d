@@ -101,3 +101,67 @@ test("Phase 3C.3 harness uses the exact integration query and fixed viewports", 
   assert.match(harness, /getPhase3C3IntegrationObjectAudit/);
   assert.match(harness, /getPhase3C3SelectionReport/);
 });
+
+test("Phase 3C.3 performance harness compares the approved Phase 3C.2 path", async () => {
+  const [html, source] = await Promise.all([
+    readFile(
+      new URL(
+        "./final-exterior-integration-phase3c3-performance-harness.html",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+    readFile(
+      new URL(
+        "./final-exterior-integration-phase3c3-performance-harness.js",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  ]);
+  assert.doesNotMatch(html, /sandbox=/);
+  assert.match(source, /params\.get\("mode"\) === "phase3c2"/);
+  assert.match(source, /query\.set\("integration", "phase3c3"\)/);
+  assert.match(source, /type: "front-idle", durationMs: 10_000/);
+  assert.match(source, /type: "pointer-rotate", durationMs: 3_000/);
+  assert.match(source, /type: "wheel-zoom", durationMs: 3_000/);
+  assert.match(source, /type: "opacity-16"/);
+  assert.match(source, /type: "exterior-off"/);
+  assert.match(source, /type: "split"/);
+  assert.match(source, /type: "explode"/);
+  assert.match(source, /type: "learning-selection"/);
+  assert.match(source, /params\.get\("scenario"\)/);
+  assert.match(source, /thresholdsChanged: false/);
+  assert.doesNotMatch(
+    source,
+    /setPixelRatio|toneMapping|exposure|shadowMap|threshold\s*=/,
+  );
+});
+
+test("Phase 3C.3 visual harness changes only explicit evidence state", async () => {
+  const [html, source] = await Promise.all([
+    readFile(
+      new URL(
+        "./final-exterior-integration-phase3c3-visual-harness.html",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+    readFile(
+      new URL(
+        "./final-exterior-integration-phase3c3-visual-harness.js",
+        import.meta.url,
+      ),
+      "utf8",
+    ),
+  ]);
+  assert.doesNotMatch(html, /sandbox=/);
+  assert.match(source, /integration: "phase3c3"/);
+  assert.match(source, /state === "exterior-off"/);
+  assert.match(source, /state === "crown-position-2"/);
+  assert.match(source, /state === "opacity-16-internal"/);
+  assert.doesNotMatch(
+    source,
+    /setPixelRatio|toneMapping|exposure|shadowMap|APP_VERSION/,
+  );
+});
