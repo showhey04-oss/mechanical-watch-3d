@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
-  "sourceAuditCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceImplementationCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
+  "sourceAuditCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
   "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
@@ -1527,11 +1527,73 @@
     "outerShellAssemblyCount": 2
   },
   "refinedLugs": {
-    "classification": "QUERY_ONLY_PHASE3C2_REFINED_LUGS",
+    "classification": "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
     "baseLugsHidden": 4,
     "candidateLugsVisible": 4,
-    "rootEmbed": 0.17,
-    "edgeBreak": 0.075,
+    "rootEmbed": 0.26,
+    "edgeBreak": 0.055,
+    "rootTransitionLength": 4.297,
+    "rootProfile": "CASE_RADIUS_MATCHED_CHORD_TO_MONOTONIC_TAPERED_SWEPT_PRISM",
+    "rootSection": {
+      "width": 3.6,
+      "thickness": 5.8,
+      "centerX": 11,
+      "radialRootRadius": 19.8,
+      "radialRootEmbed": 0.26
+    },
+    "profileStations": [
+      {
+        "z": 16.203,
+        "y": 1.35,
+        "thickness": 5.8,
+        "centerX": 11,
+        "width": 3.6,
+        "radialRootRadius": 19.8,
+        "radialRootEmbed": 0.26
+      },
+      {
+        "z": 17.55,
+        "y": 1.38,
+        "thickness": 5.5,
+        "centerX": 11,
+        "width": 3.3
+      },
+      {
+        "z": 18.6,
+        "y": 1.65,
+        "thickness": 4.8,
+        "centerX": 11,
+        "width": 2.9
+      },
+      {
+        "z": 19.6,
+        "y": 1.95,
+        "thickness": 4,
+        "centerX": 11,
+        "width": 2.25
+      },
+      {
+        "z": 20.5,
+        "y": 2.28,
+        "thickness": 3.1,
+        "centerX": 11,
+        "width": 2.15
+      },
+      {
+        "z": 22.3,
+        "y": 2.64,
+        "thickness": 2.25,
+        "centerX": 11,
+        "width": 2
+      },
+      {
+        "z": 23.10508,
+        "y": 2.8,
+        "thickness": 2,
+        "centerX": 11,
+        "width": 2
+      }
+    ],
     "lugToLug": 46.6,
     "innerGap": 20,
     "springBarCenter": [
@@ -1542,71 +1604,129 @@
     "bounds": {
       "twelveLeftRefinedLug": {
         "min": [
-          -12.2,
-          -0.938806,
-          16.103241
+          -12.8,
+          -1.549281,
+          16.138428
         ],
         "max": [
-          -9.8,
-          4.098805,
+          -9.2,
+          4.249281,
           23.300005
         ],
         "size": [
-          2.4,
-          5.037611,
-          7.196764
+          3.6,
+          5.798562,
+          7.161577
         ]
       },
       "twelveRightRefinedLug": {
         "min": [
-          9.8,
-          -0.938806,
-          16.103241
+          9.2,
+          -1.549281,
+          16.138428
         ],
         "max": [
-          12.2,
-          4.098805,
+          12.8,
+          4.249281,
           23.300005
         ],
         "size": [
-          2.4,
-          5.037611,
-          7.196764
+          3.6,
+          5.798562,
+          7.161577
         ]
       },
       "sixLeftRefinedLug": {
         "min": [
-          -12.2,
-          -0.938806,
+          -12.8,
+          -1.549281,
           -23.300005
         ],
         "max": [
-          -9.8,
-          4.098805,
-          -16.103241
+          -9.2,
+          4.249281,
+          -16.138428
         ],
         "size": [
-          2.4,
-          5.037611,
-          7.196764
+          3.6,
+          5.798562,
+          7.161577
         ]
       },
       "sixRightRefinedLug": {
         "min": [
-          9.8,
-          -0.938806,
+          9.2,
+          -1.549281,
           -23.300005
         ],
         "max": [
-          12.2,
-          4.098805,
-          -16.103241
+          12.8,
+          4.249281,
+          -16.138428
         ],
         "size": [
-          2.4,
-          5.037611,
-          7.196764
+          3.6,
+          5.798562,
+          7.161577
         ]
+      }
+    },
+    "geometryAudit": {
+      "twelveLeftRefinedLug": {
+        "finite": true,
+        "indexed": true,
+        "closed": true,
+        "outward": true,
+        "degenerateTriangleCount": 0,
+        "duplicateTriangleCount": 0,
+        "reversedDuplicateTriangleCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0,
+        "missingFaceCount": 0,
+        "coplanarOverlapCount": 0,
+        "zFightingCount": 0
+      },
+      "twelveRightRefinedLug": {
+        "finite": true,
+        "indexed": true,
+        "closed": true,
+        "outward": true,
+        "degenerateTriangleCount": 0,
+        "duplicateTriangleCount": 0,
+        "reversedDuplicateTriangleCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0,
+        "missingFaceCount": 0,
+        "coplanarOverlapCount": 0,
+        "zFightingCount": 0
+      },
+      "sixLeftRefinedLug": {
+        "finite": true,
+        "indexed": true,
+        "closed": true,
+        "outward": true,
+        "degenerateTriangleCount": 0,
+        "duplicateTriangleCount": 0,
+        "reversedDuplicateTriangleCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0,
+        "missingFaceCount": 0,
+        "coplanarOverlapCount": 0,
+        "zFightingCount": 0
+      },
+      "sixRightRefinedLug": {
+        "finite": true,
+        "indexed": true,
+        "closed": true,
+        "outward": true,
+        "degenerateTriangleCount": 0,
+        "duplicateTriangleCount": 0,
+        "reversedDuplicateTriangleCount": 0,
+        "nonManifoldEdgeCount": 0,
+        "windingMismatchCount": 0,
+        "missingFaceCount": 0,
+        "coplanarOverlapCount": 0,
+        "zFightingCount": 0
       }
     },
     "phase3b2LugGeometryChanged": false,
@@ -1675,9 +1795,9 @@
   },
   "audits": {
     "twelveLeftRefinedLug": {
-      "vertexCount": 24,
-      "indexCount": 132,
-      "triangleCount": 44,
+      "vertexCount": 28,
+      "indexCount": 156,
+      "triangleCount": 52,
       "finite": {
         "positions": true,
         "indices": true,
@@ -1687,36 +1807,36 @@
       "duplicateTriangleCount": 0,
       "reversedDuplicateTriangleCount": 0,
       "topology": {
-        "edgeCount": 66,
+        "edgeCount": 78,
         "nonManifoldEdgeCount": 0,
         "windingMismatchCount": 0,
         "closed": true
       },
-      "signedVolume": 54.57982622614813,
+      "signedVolume": 76.49774050733386,
       "orientation": "OUTWARD_POSITIVE",
       "bounds": {
         "min": [
-          -12.199999809265137,
-          -0.9388055801391602,
-          16.103240966796875
+          -12.800000190734863,
+          -1.5492810010910034,
+          16.138427734375
         ],
         "max": [
-          -9.800000190734863,
-          4.0988054275512695,
+          -9.199999809265137,
+          4.24928092956543,
           23.300004959106445
         ],
         "size": [
-          2.3999996185302734,
-          5.03761100769043,
-          7.19676399230957
+          3.6000003814697266,
+          5.798561930656433,
+          7.161577224731445
         ]
       },
       "materialGroupCount": 0
     },
     "twelveRightRefinedLug": {
-      "vertexCount": 24,
-      "indexCount": 132,
-      "triangleCount": 44,
+      "vertexCount": 28,
+      "indexCount": 156,
+      "triangleCount": 52,
       "finite": {
         "positions": true,
         "indices": true,
@@ -1726,36 +1846,36 @@
       "duplicateTriangleCount": 0,
       "reversedDuplicateTriangleCount": 0,
       "topology": {
-        "edgeCount": 66,
+        "edgeCount": 78,
         "nonManifoldEdgeCount": 0,
         "windingMismatchCount": 0,
         "closed": true
       },
-      "signedVolume": 54.57982622614813,
+      "signedVolume": 76.49774050733377,
       "orientation": "OUTWARD_POSITIVE",
       "bounds": {
         "min": [
-          9.800000190734863,
-          -0.9388055801391602,
-          16.103240966796875
+          9.199999809265137,
+          -1.5492810010910034,
+          16.138427734375
         ],
         "max": [
-          12.199999809265137,
-          4.0988054275512695,
+          12.800000190734863,
+          4.24928092956543,
           23.300004959106445
         ],
         "size": [
-          2.3999996185302734,
-          5.03761100769043,
-          7.19676399230957
+          3.6000003814697266,
+          5.798561930656433,
+          7.161577224731445
         ]
       },
       "materialGroupCount": 0
     },
     "sixLeftRefinedLug": {
-      "vertexCount": 24,
-      "indexCount": 132,
-      "triangleCount": 44,
+      "vertexCount": 28,
+      "indexCount": 156,
+      "triangleCount": 52,
       "finite": {
         "positions": true,
         "indices": true,
@@ -1765,36 +1885,36 @@
       "duplicateTriangleCount": 0,
       "reversedDuplicateTriangleCount": 0,
       "topology": {
-        "edgeCount": 66,
+        "edgeCount": 78,
         "nonManifoldEdgeCount": 0,
         "windingMismatchCount": 0,
         "closed": true
       },
-      "signedVolume": 54.579826226148114,
+      "signedVolume": 76.49774050733383,
       "orientation": "OUTWARD_POSITIVE",
       "bounds": {
         "min": [
-          -12.199999809265137,
-          -0.9388055801391602,
+          -12.800000190734863,
+          -1.5492810010910034,
           -23.300004959106445
         ],
         "max": [
-          -9.800000190734863,
-          4.0988054275512695,
-          -16.103240966796875
+          -9.199999809265137,
+          4.24928092956543,
+          -16.138427734375
         ],
         "size": [
-          2.3999996185302734,
-          5.03761100769043,
-          7.19676399230957
+          3.6000003814697266,
+          5.798561930656433,
+          7.161577224731445
         ]
       },
       "materialGroupCount": 0
     },
     "sixRightRefinedLug": {
-      "vertexCount": 24,
-      "indexCount": 132,
-      "triangleCount": 44,
+      "vertexCount": 28,
+      "indexCount": 156,
+      "triangleCount": 52,
       "finite": {
         "positions": true,
         "indices": true,
@@ -1804,28 +1924,28 @@
       "duplicateTriangleCount": 0,
       "reversedDuplicateTriangleCount": 0,
       "topology": {
-        "edgeCount": 66,
+        "edgeCount": 78,
         "nonManifoldEdgeCount": 0,
         "windingMismatchCount": 0,
         "closed": true
       },
-      "signedVolume": 54.57982622614813,
+      "signedVolume": 76.4977405073338,
       "orientation": "OUTWARD_POSITIVE",
       "bounds": {
         "min": [
-          9.800000190734863,
-          -0.9388055801391602,
+          9.199999809265137,
+          -1.5492810010910034,
           -23.300004959106445
         ],
         "max": [
-          12.199999809265137,
-          4.0988054275512695,
-          -16.103240966796875
+          12.800000190734863,
+          4.24928092956543,
+          -16.138427734375
         ],
         "size": [
-          2.3999996185302734,
-          5.03761100769043,
-          7.19676399230957
+          3.6000003814697266,
+          5.798561930656433,
+          7.161577224731445
         ]
       },
       "materialGroupCount": 0

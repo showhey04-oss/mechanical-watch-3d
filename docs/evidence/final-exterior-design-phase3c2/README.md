@@ -4,8 +4,8 @@
 
 - Base：`feature/final-exterior-balanced-phase3c1-watch-head`
 - Base SHA：`4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`
-- 再修正作業開始Head：`d3f414350c088250f9de3cc38182d1b3364d1e30`
-- 再修正実装・browser harness基準：`292fb96a858c55a2f6bdd97bb3cff680d36ec671`
+- 最終局所修正作業開始Head：`752418e72d3bb7b1dd86952638a3bb85fdf6d582`
+- 最終局所修正実装・browser harness基準：`2a9cfe31de83c631e6d99d50851f2cb4463684dc`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
 - branch：`feature/final-exterior-balanced-phase3c2-strap-buckle`
 - APP_VERSION：`v3.15.0`
@@ -26,8 +26,11 @@
 - 中心線長：75.000／115.000
 - 終端接線角：95°／120°
 - 非ラグ領域surface clearance：63.575
-- refined lug：4本、root embed 0.170、edge break 0.075
+- refined lug：4本、root embed 0.260、edge break 0.055、transition 4.297
+- root断面：幅3.600 × 厚さ5.800、tip断面：幅2.000 × 厚さ2.000
+- root profile：ケース半径追従chordから6 stationで単調に絞る閉合indexed Mesh
 - lug-to-lug：46.600、ラグ間20.000、外端Z ±23.300
+- lug ↔ strap最小禁止clearance：0.045833
 - 禁止干渉：位置1／位置2とも0
 - 登録部品：11
 - blank selection：Desktop 10/10、390×844 10/10
@@ -87,12 +90,40 @@
 
 既存正本、close-up、review board、GIFも同じ実装基準で再生成した。全一覧とbytes／SHA-256は`evidence-manifest.json`を正とする。
 
+## refined lug最終局所修正の証跡
+
+`images/lug-continuity-final/raw-before`は作業開始Head、`raw-after`は最終局所修正実装のactual Three.js captureである。比較板、close-up、接続注記、profile図はこれらの実captureと実装値だけから生成した。
+
+- `images/lug-continuity-final/comparison-front.png`
+- `images/lug-continuity-final/comparison-oblique.png`
+- `images/lug-continuity-final/comparison-side.png`
+- `images/lug-continuity-final/comparison-review-angle.png`
+- `images/lug-continuity-final/lug-12-left-closeup.png`
+- `images/lug-continuity-final/lug-12-right-closeup.png`
+- `images/lug-continuity-final/lug-6-left-closeup.png`
+- `images/lug-continuity-final/lug-6-right-closeup.png`
+- `images/lug-continuity-final/lug-case-connection-annotation.png`
+- `images/lug-continuity-final/root-profile-comparison.png`
+- `videos/lug-continuity-final/front-oblique-side-continuous.gif`
+- `videos/lug-continuity-final/review-angle-closeup-rotation.gif`
+- `videos/lug-continuity-final/split-explode-restore.gif`
+- `videos/lug-continuity-final/mobile-rotate-zoom.gif`
+
 ## Reports
 
 - `reports/phase3c2-config.json`
 - `reports/phase3c2-defect-diagnosis-before.json`
 - `reports/phase3c2-defect-diagnosis-after.json`
 - `reports/phase3c2-human-requirement-closure.json`
+- `reports/phase3c2-lug-continuity-closure.json`
+- `reports/lug-continuity-capture-metadata.json`
+- `reports/lug-continuity-image-metrics.json`
+- `reports/lug-continuity-protected-paths.json`
+- `reports/lug-continuity-performance.json`
+- `reports/lug-continuity-rotation-metadata.json`
+- `reports/lug-continuity-closeup-rotation-metadata.json`
+- `reports/lug-continuity-split-explode-restore-metadata.json`
+- `reports/lug-continuity-mobile-rotate-zoom-metadata.json`
 - `reports/geometry-report.json`
 - `reports/interference-report.json`
 - `reports/selection-opacity-report.json`
@@ -112,17 +143,18 @@
 
 ## 試験状態
 
-- Node：175/175
+- Node：181/181
 - runtime harness：Desktop 1280×720／390×844合格
 - Geometry：finite、indexed、closed、outward。退化、重複・反転triangle、non-manifold edge、winding mismatch、coplanar overlap、z-fighting 0
 - Material：opacity 100%で不透明、50%／16%契約と100%復帰合格
 - 選択：11/11 HUD・学習同期、opacity 16%内部選択合格、空白解除10/10＋10/10
 - 外装表示：ON／OFF、split、explode、restore合格
-- performance：Desktop／390×844のidle・pointer・wheelは`DIFFERENTIAL_PASS`
+- performance：Desktop／390×844のidle・pointer・wheelは`DIFFERENTIAL_PASS`。最大fps低下1.619%、最大p95増加0.100ms
 - console error／warning：0
 - 音声：Desktop／390×844ともスピーカーの信頼済みpointer gestureで23/23
 - 試験閾値：変更なし
-- PC／物理iPhone人間確認：再修正後は未実施
+- refined lug最終局所修正：4視点の技術閉鎖項目は`RESOLVED`
+- PC／物理iPhone人間確認：最終局所修正後は未実施
 
 通常pathとPhase 3C.1-only pathにはPhase 3C.2 Object3D／Material／DOMを追加していない。承認Base `4de3c018...`と候補を同一Browser、同一固定状態で再取得し、両経路ともPNG bytes／SHA-256まで一致した。
 

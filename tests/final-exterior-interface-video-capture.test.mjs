@@ -31,5 +31,8 @@ test("video harness is same-origin, unsandboxed, and publishes individual PNG ch
   assert.match(script, /const CHUNK_BYTES = 24_000/);
   assert.match(script, /application\/octet-stream/);
   assert.match(script, /pngSha256/);
+  assert.match(script, /requestedStrapStyle/);
+  assert.match(script, /mobile-rotate-zoom/);
+  assert.match(script, /split-explode-restore/);
   assert.doesNotMatch(script, /pngBase64/);
 });

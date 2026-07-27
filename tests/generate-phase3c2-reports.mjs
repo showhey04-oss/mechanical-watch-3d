@@ -13,9 +13,11 @@ const reports = path.join(
   "docs/evidence/final-exterior-design-phase3c2/reports",
 );
 const sourceImplementationCommit =
-  "292fb96a858c55a2f6bdd97bb3cff680d36ec671";
+  "2a9cfe31de83c631e6d99d50851f2cb4463684dc";
 const sourceStartCommit =
   "d3f414350c088250f9de3cc38182d1b3364d1e30";
+const lugContinuityStartCommit =
+  "752418e72d3bb7b1dd86952638a3bb85fdf6d582";
 const sourceBaseCommit =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
 const mainCommit =
@@ -88,6 +90,14 @@ const normalPath = await readJson("normal-path-diff.json");
 const phase3c1Path = await readJson("phase3c1-only-diff.json");
 const suites = await readJson("suite-regression-results.json");
 const performance = await readJson("performance-results.json");
+const lugContinuityPerformance = await readJson(
+  "lug-continuity-performance.json",
+);
+const lugContinuityProtectedPaths = await readJson(
+  "lug-continuity-protected-paths.json",
+);
+performance.candidate =
+  "Phase 3C.2 pre-lug-continuity implementation commit 292fb96a858c55a2f6bdd97bb3cff680d36ec671";
 
 await writeJson("geometry-report.json", {
   ...metadata,
@@ -205,25 +215,35 @@ const requirementClosure = {
     {
       id: "lug-case-interface",
       requirement: "lug-case interface",
-      previousStatus: "UNRESOLVED",
-      rootCause: "PHASE3B2_BLOCK_LUG_VISUAL_INTERFACE",
+      previousStatus:
+        "HUMAN_REVIEW_FAILED_PHASE3C2_LUG_CASE_CONTINUITY_NOT_CLOSED",
+      rootCause:
+        "NARROW_CONSTANT_Z_ROOT_CAP_WITH_INSUFFICIENT_SECTION_GROWTH",
       codeChange:
-        "query-only replacement with four tapered closed indexed refined lugs using the protected anchors",
+        "replaced the four query-only lug roots with case-radius-matched embedded chords and a monotonic 4.297-unit taper to the protected tips",
       quantitativeResult: {
         refinedLugCount:
           desktopRuntime.geometry.refinedLugs.candidateLugsVisible,
         rootEmbed: desktopRuntime.geometry.refinedLugs.rootEmbed,
         edgeBreak: desktopRuntime.geometry.refinedLugs.edgeBreak,
+        rootTransitionLength:
+          desktopRuntime.geometry.refinedLugs.rootTransitionLength,
+        rootWidth:
+          desktopRuntime.geometry.refinedLugs.rootSection.width,
+        rootThickness:
+          desktopRuntime.geometry.refinedLugs.rootSection.thickness,
         lugToLug: desktopRuntime.geometry.refinedLugs.lugToLug,
         innerGap: desktopRuntime.geometry.refinedLugs.innerGap,
         forbiddenInterferenceCount:
           desktopRuntime.interference.forbiddenInterferenceCount,
       },
       evidence: [
+        "reports/phase3c2-lug-continuity-closure.json",
         "reports/geometry-report.json",
         "reports/interference-report.json",
-        "images/revision2/after/desktop-front.png",
-        "images/revision2/after/desktop-oblique.png",
+        "images/lug-continuity-final/comparison-front.png",
+        "images/lug-continuity-final/comparison-oblique.png",
+        "images/lug-continuity-final/lug-case-connection-annotation.png",
       ],
       finalStatus: "RESOLVED",
     },
@@ -323,10 +343,111 @@ await writeJson(
   requirementClosure,
 );
 
+const lugContinuityClosure = {
+  ...metadata,
+  schemaVersion: 1,
+  sourceStartCommit: lugContinuityStartCommit,
+  classification: "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+  status: "TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+  items: [
+    {
+      id: "lug-case-continuity-review-angle",
+      requirement: "lug-case continuity at attached review angle",
+      previousStatus:
+        "HUMAN_REVIEW_FAILED_PHASE3C2_LUG_CASE_CONTINUITY_NOT_CLOSED",
+      rootCause:
+        "the former 2.400-wide constant-Z root cap remained visibly detached from the circular case silhouette",
+      codeChange:
+        "case-radius-matched 0.260 embedded root chord, 3.600 x 5.800 root section and 4.297 monotonic transition",
+      quantitativeResult: {
+        oldRootWidth: 2.4,
+        newRootWidth: 3.6,
+        widthIncreasePercent: 50,
+        rootEmbed: 0.26,
+        rootTransitionLength: 4.297,
+      },
+      evidence: [
+        "images/lug-continuity-final/comparison-review-angle.png",
+        "images/lug-continuity-final/lug-case-connection-annotation.png",
+        "videos/lug-continuity-final/review-angle-closeup-rotation.gif",
+      ],
+      finalStatus: "RESOLVED",
+    },
+    {
+      id: "lug-case-continuity-front",
+      requirement: "lug-case continuity front view",
+      previousStatus: "UNRESOLVED",
+      rootCause: "root width and thickness changed too little from the tip",
+      codeChange:
+        "broadened the root section while preserving the 20.000 inner gap, 46.600 lug-to-lug and spring-bar anchors",
+      quantitativeResult: {
+        fourRefinedLugs: 4,
+        rootWidth: 3.6,
+        tipWidth: 2,
+        rootThickness: 5.8,
+        tipThickness: 2,
+      },
+      evidence: [
+        "images/lug-continuity-final/comparison-front.png",
+        "images/lug-continuity-final/lug-12-left-closeup.png",
+        "images/lug-continuity-final/lug-12-right-closeup.png",
+      ],
+      finalStatus: "RESOLVED",
+    },
+    {
+      id: "lug-case-continuity-oblique",
+      requirement: "lug-case continuity oblique view",
+      previousStatus: "UNRESOLVED",
+      rootCause:
+        "the planar root cap produced a hard attached-block shoulder under oblique light",
+      codeChange:
+        "matched the hidden root chord to the case radius and retained a 0.055 visible edge break without coplanar overlap",
+      quantitativeResult: {
+        edgeBreak: 0.055,
+        coplanarOverlapCount: 0,
+        zFightingCount: 0,
+      },
+      evidence: [
+        "images/lug-continuity-final/comparison-oblique.png",
+        "videos/lug-continuity-final/front-oblique-side-continuous.gif",
+      ],
+      finalStatus: "RESOLVED",
+    },
+    {
+      id: "lug-case-continuity-side",
+      requirement: "lug-case continuity side view",
+      previousStatus: "UNRESOLVED",
+      rootCause:
+        "short narrow root transition preserved excessive visual separation",
+      codeChange:
+        "redistributed root thickness into the case belly and tapered it monotonically to the protected spring-bar tip",
+      quantitativeResult: {
+        rootThickness: 5.8,
+        tipThickness: 2,
+        rootTransitionLength: 4.297,
+        forbiddenInterferenceCount:
+          desktopRuntime.interference.forbiddenInterferenceCount,
+      },
+      evidence: [
+        "images/lug-continuity-final/comparison-side.png",
+        "images/lug-continuity-final/root-profile-comparison.png",
+      ],
+      finalStatus: "RESOLVED",
+    },
+  ],
+  allTechnicalItemsResolved: true,
+  humanConfirmationRequired: true,
+  readyOrMergeAllowed: false,
+};
+await writeJson(
+  "phase3c2-lug-continuity-closure.json",
+  lugContinuityClosure,
+);
+
 regression.node = {
   status: "passed",
-  passed: 175,
-  total: 175,
+  passed: 181,
+  total: 181,
 };
 regression.moduleSyntax = { status: "passed" };
 regression.gitDiffCheck = { status: "passed" };
@@ -353,6 +474,7 @@ regression.paths = {
     phase3c2MaterialAdded: phase3c1Path.phase3c2MaterialAdded,
     phase3c2DomAdded: phase3c1Path.phase3c2DomAdded,
   },
+  lugContinuityFinal: lugContinuityProtectedPaths,
 };
 regression.suites = {
   desktop: suites.desktop,
@@ -364,6 +486,10 @@ regression.performance = {
   thresholdsChanged: performance.thresholdsChanged,
   environments: performance.environments,
   overallStatus: performance.overallStatus,
+  lugContinuityFinal: {
+    overallStatus: lugContinuityPerformance.overallStatus,
+    comparisons: lugContinuityPerformance.comparisons,
+  },
 };
 regression.humanConfirmation = {
   pc: "PENDING",
@@ -381,6 +507,14 @@ regression.detailRefinement = {
     count: 4,
     queryOnly: true,
     protectedAnchorsUnchanged: true,
+    classification: "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+    rootProfile:
+      desktopRuntime.geometry.refinedLugs.rootProfile,
+    rootEmbed: desktopRuntime.geometry.refinedLugs.rootEmbed,
+    edgeBreak: desktopRuntime.geometry.refinedLugs.edgeBreak,
+    rootTransitionLength:
+      desktopRuntime.geometry.refinedLugs.rootTransitionLength,
+    technicalClosure: "RESOLVED_PENDING_HUMAN_CONFIRMATION",
   },
   leatherOpaqueAt100Percent: true,
   periodicBumpAndRoughnessWithoutColorMap: true,
@@ -418,7 +552,34 @@ regression.requirementClosure = {
   allBlockingItemsResolved: requirementClosure.allBlockingItemsResolved,
   humanConfirmationRequired: requirementClosure.humanConfirmationRequired,
 };
+regression.lugContinuityFinal = {
+  status: lugContinuityClosure.status,
+  classification: lugContinuityClosure.classification,
+  allTechnicalItemsResolved:
+    lugContinuityClosure.allTechnicalItemsResolved,
+  humanConfirmationRequired:
+    lugContinuityClosure.humanConfirmationRequired,
+  forbiddenInterferenceCount:
+    desktopRuntime.interference.forbiddenInterferenceCount,
+  desktopHarnessPassed: desktopRuntime.ok,
+  mobileHarnessPassed: mobileRuntime.ok,
+  protectedPathsPixelExact:
+    lugContinuityProtectedPaths.allDecodedPixelsExact,
+};
 await writeJson("regression-results.json", { ...regression, ...metadata });
+
+performance.lugContinuityFinal = {
+  classification: "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+  sourceImplementationCommit,
+  thresholdsChanged: false,
+  comparisons: lugContinuityPerformance.comparisons,
+  overallStatus: lugContinuityPerformance.overallStatus,
+};
+performance.overallStatus = lugContinuityPerformance.overallStatus;
+await writeJson(
+  "performance-results.json",
+  { ...performance, ...metadata },
+);
 
 const camera = await readJson("world-bounds-camera.json");
 camera.worldBounds.fullLengthReview = {

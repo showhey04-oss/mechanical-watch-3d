@@ -5,8 +5,8 @@
 - 状態：`TECHNICAL_REQUIREMENTS_RESOLVED_PENDING_HUMAN_CONFIRMATION`
 - Base：`feature/final-exterior-balanced-phase3c1-watch-head`
 - 人間承認済みPhase 3C.1 Head：`4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`
-- 再修正作業開始Head：`d3f414350c088250f9de3cc38182d1b3364d1e30`
-- 再修正実装基準：`292fb96a858c55a2f6bdd97bb3cff680d36ec671`
+- 最終局所修正作業開始Head：`752418e72d3bb7b1dd86952638a3bb85fdf6d582`
+- 最終局所修正実装基準：`2a9cfe31de83c631e6d99d50851f2cb4463684dc`
 - main比較基準：`293626f13a50224924f8e3ac229a1fc4077ad7a7`
 - APP_VERSION：`v3.15.0`
 - query：`?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`
@@ -34,22 +34,28 @@ Phase 3C.2はquery限定の未採用候補である。Phase 3C.1の時計本体�
 
 休止形状は長さ75.000／115.000、初期直線区間約12.000を維持し、終端接線角を95°／120°に収束させた。曲率符号反転と実交差は0、非ラグ領域の最小surface clearanceは63.575である。これは`EDUCATIONAL_UNFASTENED_STRAP_REST_POSE`であり、革の物理変形シミュレーションではない。
 
-## refined lug
+## refined lugとケースの最終局所修正
 
 `strapStyle=phase3c2`時だけPhase 3B.2の4ラグを非表示にし、同じ保護アンカーを使うrefined lug 4本へ置き換える。Phase 3C.1-only pathでは既存ラグを維持する。
 
-- 分類：`PHASE3C2_REFINED_LUG_CASE_INTERFACE`
+- 分類：`PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL`
 - lug-to-lug：46.600
 - ラグ外端：Z ±23.300
 - ラグ間：20.000
 - スプリングバー中心：Y 2.800、Z ±21.800
-- case埋込み：0.170
-- visible edge break：0.075
-- 4本ともclosed indexed Mesh、non-manifold edge 0
+- root profile：`CASE_RADIUS_MATCHED_CHORD_TO_MONOTONIC_TAPERED_SWEPT_PRISM`
+- case埋込み：0.260
+- visible edge break：0.055
+- root transition長：4.297
+- root断面：幅3.600 × 厚さ5.800（旧2.400 × 5.050）
+- tip断面：幅2.000 × 厚さ2.000
+- 4本ともfinite／indexed／closed／outward
+- 退化、重複、反転重複、non-manifold edge、winding mismatch、missing face、coplanar overlap、z-fighting：全て0
 - refined lug ↔ case body：意図接続
-- refined lug ↔ bezel／caseback：禁止干渉0
+- refined lug ↔ spring bar：意図接続
+- refined lug ↔ bezel／caseback／strap：禁止干渉0
 
-ケースGeometry、ケース径・厚さ、りゅうずclearanceは変更していない。
+旧形状はrootが幅2.400の一定Z平面capで、ケース円周への追従がなく、人間確認角度で細い角材を貼り付けたように見えていた。最終形状では、非表示側のroot chordをケース半径に合わせ、root断面を広げてケース腹へ厚さを再配分し、6 stationで保護済みtipへ単調に絞った。ケースGeometry、ケース径・厚さ、りゅうずclearance、スプリングバー中心は変更していない。
 
 ## Materialと不透明性
 
@@ -85,20 +91,20 @@ opacity 100%ではtop／underside／edgeがopacity 1、transparent false、depth
 
 通常pathとPhase 3C.1-only pathでは、Phase 3C.2 Object3D、Material、DOMの追加は0である。承認Base `4de3c018...`と候補を同一Browser、同一固定状態で再取得し、両経路ともPNG bytes／SHA-256まで一致した。
 
-Desktop／390×844のidle、pointer、wheel差分は`DIFFERENTIAL_PASS`。候補のfps低下は最大0.029%未満、p95増加は最大0.200ms、33ms／50ms超過は全て0、reversal 0、stop-then-jump 0、wheel monotonic、transform invariantを維持した。試験閾値は変更していない。
+Desktop／390×844のidle、pointer、wheel差分は`DIFFERENTIAL_PASS`。最終局所修正で候補のfps低下は最大1.619%、p95増加は最大0.100msであり、5%／2msの差分基準内だった。reversal 0、stop-then-jump 0、wheel monotonic、transform invariantを維持し、試験閾値は変更していない。
 
-最終回帰はNode 175/175、Desktop runtime、390×844 runtime、UI、HUD、音声23/23、外装表示、選択、A.7、S86、Phase 2C不変を確認した。Desktop browser総合の85/86は、候補と承認済みPhase 3C.1で共通するA.5前後面明度差1件だけであり、Phase 3C.2固有失敗は0である。音声はWeb Audio要件どおり、Desktop／390×844ともスピーカーの信頼済みpointer gestureから実行した。
+最終回帰はNode 181/181、Desktop runtime、390×844 runtime、UI、HUD、音声23/23、外装表示、選択、A.7、S86、Phase 2C不変を確認した。Desktop browser総合の85/86は、候補と承認済みPhase 3C.1で共通するA.5前後面明度差1件だけであり、Phase 3C.2固有失敗は0である。音声はWeb Audio要件どおり、Desktop／390×844ともスピーカーの信頼済みpointer gestureから実行した。
 
 全体の安っぽいCG感、A.5前後面明度差、矩形影、透過連続性は本工程へ混在させず、`DEFERRED_GLOBAL_RENDERING_POLISH_TO_ISSUE_2`としてIssue #2へ保留する。PR #5とD2c3も変更していない。
 
 ## 判断
 
-`phase3c2-human-requirement-closure.json`では、切れ目、lug-case interface、6時側wrap不透明性、尾錠側wrap不透明性、局所革質感を技術的に`RESOLVED`とした。全体CG感だけを`DEFERRED_TO_ISSUE_2`とする。
+`phase3c2-human-requirement-closure.json`では従来の切れ目、wrap不透明性、局所革質感を技術的に`RESOLVED`とした。さらに`phase3c2-lug-continuity-closure.json`で、人間指摘角度、正面、斜め、側面のlug-case continuityを全て`RESOLVED`とした。全体CG感だけを`DEFERRED_TO_ISSUE_2`とする。
 
-これは既定採用または人間受入完了を意味しない。次をPC／物理iPhoneで確認するまでPR #16をDraftに維持する。
+これは既定採用または人間受入完了を意味しない。`HUMAN_REVIEW_FAILED_PHASE3C2_LUG_CASE_CONTINUITY_NOT_CLOSED`の技術項目は閉じたが、修正後の人間確認を待つ。次をPC／物理iPhoneで確認するまでPR #16をDraftに維持する。
 
-- 人間確認角度で旧切れ目が消え、連続曲面の陰影だけになっていること
-- 4つのrefined lugとケース胴の接続
+- 添付画像相当角度、正面、斜め、側面で4つのrefined lugがケースから自然に生えて見えること
+- rootの幅・厚さがケース腹からtipへ過度な大型化なく連続していること
 - 6時側spring-bar tunnelと12時側buckle tunnelの不透明性
 - 黒革シボ、ステッチ、コバ、silver金具
 - 空白クリック／タップ10/10

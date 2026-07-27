@@ -1,6 +1,6 @@
 {
-  "sourceImplementationCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
-  "sourceAuditCommit": "292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+  "sourceImplementationCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
+  "sourceAuditCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
   "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
   "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
   "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
@@ -22,8 +22,8 @@
   "thresholdsChanged": false,
   "node": {
     "status": "passed",
-    "passed": 175,
-    "total": 175
+    "passed": 181,
+    "total": 181
   },
   "runtimeHarness": {
     "desktop": true,
@@ -96,6 +96,53 @@
       "phase3c2Object3DAdded": 0,
       "phase3c2MaterialAdded": 0,
       "phase3c2DomAdded": 0
+    },
+    "lugContinuityFinal": {
+      "sourceImplementationCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
+      "sourceAuditCommit": "2a9cfe31de83c631e6d99d50851f2cb4463684dc",
+      "sourceStartCommit": "752418e72d3bb7b1dd86952638a3bb85fdf6d582",
+      "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+      "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+      "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
+      "baseBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
+      "appVersion": "v3.15.0",
+      "classification": "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+      "schemaVersion": 1,
+      "paths": [
+        {
+          "id": "normal-path",
+          "baseFile": "images/normal-path-base.png",
+          "currentFile": "images/lug-continuity-final/raw-after/normal-path-protected.png",
+          "basePngSha256": "a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c",
+          "currentPngSha256": "a114aca62e07f03c9d67e7ada497b05f8007030a8b003f2171e4a8d82555ee5c",
+          "decodedPixelExact": true,
+          "changedPixelCount": 0,
+          "pngByteStreamMayDifferBecauseBrowserEncoder": true
+        },
+        {
+          "id": "phase3c1-only-path",
+          "baseFile": "images/phase3c1-path-base.png",
+          "currentFile": "images/lug-continuity-final/raw-after/phase3c1-path-protected.png",
+          "basePngSha256": "d126e6ee95f46376babfc76ae8fb5e9c861107068b3d98a52e3f8ff939a6b648",
+          "currentPngSha256": "d126e6ee95f46376babfc76ae8fb5e9c861107068b3d98a52e3f8ff939a6b648",
+          "decodedPixelExact": true,
+          "changedPixelCount": 0,
+          "pngByteStreamMayDifferBecauseBrowserEncoder": true
+        }
+      ],
+      "allDecodedPixelsExact": true,
+      "phase3c2Object3DAddedOutsideCandidatePath": 0,
+      "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
+      "phase3c1Acceptance": {
+        "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+        "head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+        "deferred": [
+          "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
+          "A5_FRONT_BACK_LUMINANCE_DIFFERENCE",
+          "ISSUE_2_RECTANGULAR_SHADOW_AND_TRANSPARENCY_CONTINUITY",
+          "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
+        ]
+      }
     }
   },
   "suites": {
@@ -161,7 +208,7 @@
   },
   "performance": {
     "sourceBase": "Phase 3C.1 approved head 4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
-    "candidate": "Phase 3C.2 implementation commit 292fb96a858c55a2f6bdd97bb3cff680d36ec671",
+    "candidate": "Phase 3C.2 pre-lug-continuity implementation commit 292fb96a858c55a2f6bdd97bb3cff680d36ec671",
     "thresholdsChanged": false,
     "environments": {
       "desktop": {
@@ -4375,7 +4422,172 @@
         "status": "DIFFERENTIAL_PASS"
       }
     },
-    "overallStatus": "DIFFERENTIAL_PASS"
+    "overallStatus": "DIFFERENTIAL_PASS",
+    "lugContinuityFinal": {
+      "overallStatus": "DIFFERENTIAL_PASS",
+      "comparisons": {
+        "desktop": [
+          {
+            "type": "front-idle",
+            "base": {
+              "averageFps": 58.74868287650356,
+              "p50": 16.69999999999891,
+              "p95": 17.700000000000728,
+              "p99": 17.80000000000109,
+              "over33": 5,
+              "over50": 2
+            },
+            "candidate": {
+              "averageFps": 57.797727814445906,
+              "p50": 16.69999999999891,
+              "p95": 17.700000000000728,
+              "p99": 33.30000000000109,
+              "over33": 7,
+              "over50": 2
+            },
+            "fpsDeltaPercent": -1.61868320359908,
+            "p95DeltaMs": 0,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          },
+          {
+            "type": "pointer-rotate",
+            "base": {
+              "averageFps": 59.1589831046713,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.105431309904155,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "fpsDeltaPercent": -0.0905218311011106,
+            "p95DeltaMs": -3.637978807091713e-12,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          },
+          {
+            "type": "wheel-zoom",
+            "base": {
+              "averageFps": 59.710873664057,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.799999999999272,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.676774598518904,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "fpsDeltaPercent": -0.05710696133829885,
+            "p95DeltaMs": -0.09999999999854481,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          }
+        ],
+        "mobile390": [
+          {
+            "type": "front-idle",
+            "base": {
+              "averageFps": 59.88142881256449,
+              "p50": 16.69999999999891,
+              "p95": 17.699999999999818,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.89153969932202,
+              "p50": 16.699999999999818,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "fpsDeltaPercent": 0.01688484553229145,
+            "p95DeltaMs": -9.094947017729282e-13,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          },
+          {
+            "type": "pointer-rotate",
+            "base": {
+              "averageFps": 59.723580243274775,
+              "p50": 16.69999999999891,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.72764195326273,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "fpsDeltaPercent": 0.00680084812634063,
+            "p95DeltaMs": 0.09999999999672582,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          },
+          {
+            "type": "wheel-zoom",
+            "base": {
+              "averageFps": 59.72241693537081,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.73482205163992,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "fpsDeltaPercent": 0.020771289752944472,
+            "p95DeltaMs": 0.09999999999490683,
+            "differentialPass": true,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true
+          }
+        ]
+      }
+    }
   },
   "console": {
     "errors": 0,
@@ -4406,7 +4618,13 @@
     "refinedLugs": {
       "count": 4,
       "queryOnly": true,
-      "protectedAnchorsUnchanged": true
+      "protectedAnchorsUnchanged": true,
+      "classification": "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+      "rootProfile": "CASE_RADIUS_MATCHED_CHORD_TO_MONOTONIC_TAPERED_SWEPT_PRISM",
+      "rootEmbed": 0.26,
+      "edgeBreak": 0.055,
+      "rootTransitionLength": 4.297,
+      "technicalClosure": "RESOLVED_PENDING_HUMAN_CONFIRMATION"
     },
     "leatherOpaqueAt100Percent": true,
     "periodicBumpAndRoughnessWithoutColorMap": true,
@@ -4423,5 +4641,15 @@
     "status": "TECHNICAL_REQUIREMENTS_RESOLVED_PENDING_HUMAN_CONFIRMATION",
     "allBlockingItemsResolved": true,
     "humanConfirmationRequired": true
+  },
+  "lugContinuityFinal": {
+    "status": "TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+    "classification": "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+    "allTechnicalItemsResolved": true,
+    "humanConfirmationRequired": true,
+    "forbiddenInterferenceCount": 0,
+    "desktopHarnessPassed": true,
+    "mobileHarnessPassed": true,
+    "protectedPathsPixelExact": true
   }
 }

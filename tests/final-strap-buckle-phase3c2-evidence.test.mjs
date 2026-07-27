@@ -14,7 +14,7 @@ const images = path.join(evidence, "images");
 const reports = path.join(evidence, "reports");
 const videos = path.join(evidence, "videos");
 const implementationCommit =
-  "292fb96a858c55a2f6bdd97bb3cff680d36ec671";
+  "2a9cfe31de83c631e6d99d50851f2cb4463684dc";
 const baseCommit =
   "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914";
 
@@ -229,6 +229,147 @@ test("Phase 3C.2 revision 2 diagnostic images are valid PNG evidence", () => {
       { width: 1280, height: 720 },
       relative,
     );
+  }
+});
+
+test("Phase 3C.2 final lug-continuity captures and comparisons are authentic", () => {
+  const directory = path.join(images, "lug-continuity-final");
+  const required = [
+    ["raw-before/front.png", 1280, 720],
+    ["raw-before/oblique.png", 1280, 720],
+    ["raw-before/side.png", 1280, 720],
+    ["raw-after/front.png", 1280, 720],
+    ["raw-after/oblique.png", 1280, 720],
+    ["raw-after/side.png", 1280, 720],
+    ["raw-after/review-angle.png", 1280, 720],
+    ["raw-after/mobile.png", 390, 844],
+    ["comparison-front.png", 1920, 540],
+    ["comparison-oblique.png", 1920, 540],
+    ["comparison-side.png", 1920, 540],
+    ["comparison-review-angle.png", 1920, 540],
+    ["lug-12-left-closeup.png", 960, 540],
+    ["lug-12-right-closeup.png", 960, 540],
+    ["lug-6-left-closeup.png", 960, 540],
+    ["lug-6-right-closeup.png", 960, 540],
+    ["lug-case-connection-annotation.png", 1280, 720],
+    ["root-profile-comparison.png", 1280, 720],
+  ];
+  const hashes = new Set();
+  for (const [relative, width, height] of required) {
+    const buffer = fs.readFileSync(path.join(directory, relative));
+    assert.deepEqual(
+      [...buffer.subarray(0, 8)],
+      [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a],
+      relative,
+    );
+    assert.deepEqual(pngDimensions(buffer), { width, height }, relative);
+    hashes.add(sha256(buffer));
+  }
+  assert.equal(hashes.size, required.length);
+  const metrics = json("lug-continuity-image-metrics.json").images;
+  for (const metric of metrics) {
+    assert.equal(
+      metric.provenance,
+      "actual runtime WebGLRenderTarget capture",
+      metric.file,
+    );
+    assert.ok(metric.uniqueRgbCount > 500, metric.file);
+    assert.ok(metric.dominantColorRatio < 0.95, metric.file);
+    assert.ok(metric.luminanceVariance > 1, metric.file);
+  }
+});
+
+test("Phase 3C.2 final lug-continuity geometry and closure are explicit", () => {
+  const geometry = json("geometry-report.json");
+  const closure = json("phase3c2-lug-continuity-closure.json");
+  assert.equal(
+    geometry.refinedLugs.classification,
+    "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+  );
+  assert.equal(geometry.refinedLugs.candidateLugsVisible, 4);
+  assert.equal(geometry.refinedLugs.rootEmbed, 0.26);
+  assert.equal(geometry.refinedLugs.edgeBreak, 0.055);
+  assert.equal(geometry.refinedLugs.rootTransitionLength, 4.297);
+  for (const audit of Object.values(geometry.refinedLugs.geometryAudit)) {
+    assert.equal(audit.finite, true);
+    assert.equal(audit.indexed, true);
+    assert.equal(audit.closed, true);
+    assert.equal(audit.outward, true);
+    assert.equal(audit.degenerateTriangleCount, 0);
+    assert.equal(audit.duplicateTriangleCount, 0);
+    assert.equal(audit.reversedDuplicateTriangleCount, 0);
+    assert.equal(audit.nonManifoldEdgeCount, 0);
+    assert.equal(audit.windingMismatchCount, 0);
+    assert.equal(audit.missingFaceCount, 0);
+    assert.equal(audit.coplanarOverlapCount, 0);
+    assert.equal(audit.zFightingCount, 0);
+  }
+  assert.equal(
+    closure.status,
+    "TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+  );
+  assert.equal(closure.items.length, 4);
+  assert.equal(
+    closure.items.every(item => item.finalStatus === "RESOLVED"),
+    true,
+  );
+  assert.equal(closure.humanConfirmationRequired, true);
+  assert.equal(closure.readyOrMergeAllowed, false);
+});
+
+test("Phase 3C.2 final lug-continuity videos use actual invariant frames", () => {
+  const directory = path.join(videos, "lug-continuity-final");
+  const required = [
+    "front-oblique-side-continuous.gif",
+    "review-angle-closeup-rotation.gif",
+    "split-explode-restore.gif",
+    "mobile-rotate-zoom.gif",
+  ];
+  for (const file of required) {
+    const buffer = fs.readFileSync(path.join(directory, file));
+    assert.ok(buffer.length > 1000, file);
+    assert.ok(
+      ["GIF87a", "GIF89a"].includes(buffer.subarray(0, 6).toString("ascii")),
+      file,
+    );
+    assert.ok(
+      (buffer.toString("latin1").match(/\x21\xF9\x04/g) ?? []).length >= 8,
+      file,
+    );
+  }
+  for (const file of [
+    "lug-continuity-rotation-metadata.json",
+    "lug-continuity-closeup-rotation-metadata.json",
+    "lug-continuity-split-explode-restore-metadata.json",
+    "lug-continuity-mobile-rotate-zoom-metadata.json",
+  ]) {
+    const metadata = json(file);
+    assert.equal(metadata.ok, true, file);
+    assert.equal(metadata.modelInvariant, true, file);
+    assert.equal(
+      metadata.frames.every(frame => frame.stateInvariant.all),
+      true,
+      file,
+    );
+  }
+});
+
+test("Phase 3C.2 final lug-continuity protected paths and performance pass", () => {
+  const protectedPaths = json("lug-continuity-protected-paths.json");
+  const performance = json("lug-continuity-performance.json");
+  assert.equal(protectedPaths.allDecodedPixelsExact, true);
+  assert.equal(
+    protectedPaths.paths.every(pathReport => pathReport.changedPixelCount === 0),
+    true,
+  );
+  assert.equal(performance.thresholdsChanged, false);
+  assert.equal(performance.overallStatus, "DIFFERENTIAL_PASS");
+  for (const comparison of Object.values(performance.comparisons).flat()) {
+    assert.equal(comparison.differentialPass, true);
+    assert.equal(comparison.reversalCount, 0);
+    assert.equal(comparison.stopThenJumpCount, 0);
+    assert.equal(comparison.zoomMonotonic, true);
+    assert.equal(comparison.transformInvariant, true);
   }
 });
 
