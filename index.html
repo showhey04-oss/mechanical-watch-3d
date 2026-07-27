@@ -193,6 +193,8 @@ import {FINAL_EXTERIOR_ATTACHMENTS_PHASE3B2} from "./js/final-exterior-attachmen
 import {createBalancedExteriorAttachments} from "./js/final-exterior-attachments.js";
 import {FINAL_WATCH_HEAD_PHASE3C1,resolvePhase3C1WatchHead} from "./js/final-watch-head-phase3c1-config.js";
 import {createPhase3C1WatchHead} from "./js/final-watch-head-phase3c1.js";
+import {FINAL_STRAP_BUCKLE_PHASE3C2,resolveFinalStrapBucklePhase3C2} from "./js/final-strap-buckle-phase3c2-config.js";
+import {createFinalStrapBucklePhase3C2} from "./js/final-strap-buckle-phase3c2.js";
 
 const APP_VERSION='v3.15.0';
 const initialPageParameters=new URLSearchParams(location.search);
@@ -496,9 +498,11 @@ const smallRing=new THREE.Mesh(new THREE.TorusGeometry(DIAL_DISPLAY_DIMENSIONS.s
 // animation work. All candidate objects live below exteriorRoot when enabled.
 const requestedExteriorConfig=resolveFinalExteriorCandidate(initialPageParameters);
 const requestedWatchHeadConfig=resolvePhase3C1WatchHead(initialPageParameters);
+const requestedStrapBuckleConfig=resolveFinalStrapBucklePhase3C2(initialPageParameters);
 let exteriorRuntime=null;
 let exteriorAttachmentRuntime=null;
 let watchHeadRuntime=null;
+let strapBucklePhase3C2Runtime=null;
 if(requestedExteriorConfig){
  if(!fourthDialArbor.geometry.boundingBox)fourthDialArbor.geometry.computeBoundingBox();
  const fourthArborBox=fourthDialArbor.geometry.boundingBox;
@@ -555,6 +559,21 @@ if(requestedExteriorConfig){
   coreBounds:{min:coreExteriorBox.min.toArray(),max:coreExteriorBox.max.toArray(),size:coreExteriorSize.toArray()},
   coreObjects:exteriorRuntime.objects
  });
+ if(requestedWatchHeadConfig&&requestedStrapBuckleConfig){
+  strapBucklePhase3C2Runtime=createFinalStrapBucklePhase3C2({
+   register,
+   registerStructuralOpacity,
+   materials:MAT,
+   caseConfig:requestedExteriorConfig,
+   exteriorRuntime,
+   exteriorAttachmentRuntime,
+   crown,
+   config:requestedStrapBuckleConfig
+  });
+  exteriorAttachmentRuntime.root.add(strapBucklePhase3C2Runtime.root);
+  document.body.dataset.strapStyleCandidate=requestedStrapBuckleConfig.id;
+  document.body.dataset.strapStyleStatus=requestedStrapBuckleConfig.status;
+ }
  exteriorRuntime.root.add(exteriorAttachmentRuntime.root);
  root.add(exteriorRuntime.root);
  if(requestedWatchHeadConfig){
@@ -594,6 +613,7 @@ if(requestedExteriorConfig){
     bridge:groups.bridge,
     dialWorks:groups.dial
    },
+   strapBuckleRuntime:strapBucklePhase3C2Runtime,
    config:requestedWatchHeadConfig
   });
   const exteriorVisibilityController={};
@@ -629,6 +649,29 @@ function getPhase3C1ExteriorGroupReport(){return watchHeadRuntime?watchHeadRunti
 function setPhase3C1ExteriorGroupVisible(visible){return watchHeadRuntime?watchHeadRuntime.setExteriorGroupVisible(visible):getPhase3C1ExteriorGroupReport()}
 function getPhase3C1CrystalDiagnosticReport(){return watchHeadRuntime?watchHeadRuntime.getCrystalDiagnosticReport():{enabled:false,id:FINAL_WATCH_HEAD_PHASE3C1.id}}
 function setPhase3C1CrystalDiagnosticVisible(visible){return watchHeadRuntime?watchHeadRuntime.setCrystalDiagnosticVisible(visible):getPhase3C1CrystalDiagnosticReport()}
+function getPhase3C2StrapBuckleState(){return strapBucklePhase3C2Runtime?strapBucklePhase3C2Runtime.getState():{enabled:false,defaultEnabled:false,id:FINAL_STRAP_BUCKLE_PHASE3C2.id,status:'DISABLED_NORMAL_PATH'}}
+function getPhase3C2StrapBuckleGeometryReport(){return strapBucklePhase3C2Runtime?strapBucklePhase3C2Runtime.getGeometryReport():{enabled:false,id:FINAL_STRAP_BUCKLE_PHASE3C2.id}}
+function getPhase3C2StrapBuckleInterferenceReport(){return strapBucklePhase3C2Runtime?strapBucklePhase3C2Runtime.getInterferenceReport():{enabled:false,id:FINAL_STRAP_BUCKLE_PHASE3C2.id,forbiddenInterferenceCount:0}}
+function getPhase3C2StrapBuckleSelectionReport(){return strapBucklePhase3C2Runtime?strapBucklePhase3C2Runtime.getSelectionReport():{enabled:false,id:FINAL_STRAP_BUCKLE_PHASE3C2.id,registeredParts:[]}}
+function getPhase3C2StrapBuckleMaterialReport(){return strapBucklePhase3C2Runtime?strapBucklePhase3C2Runtime.getMaterialReport():{enabled:false,id:FINAL_STRAP_BUCKLE_PHASE3C2.id}}
+function getPhase3C2StrapBuckleWorldBoundsReport(){return strapBucklePhase3C2Runtime?strapBucklePhase3C2Runtime.getWorldBoundsReport():{enabled:false,id:FINAL_STRAP_BUCKLE_PHASE3C2.id}}
+function getPhase3C2StrapBuckleDisplayReport(){return strapBucklePhase3C2Runtime?strapBucklePhase3C2Runtime.getDisplayReport():{enabled:false,id:FINAL_STRAP_BUCKLE_PHASE3C2.id}}
+function getPhase3C2StrapBuckleCameraOccupancyReport(){
+ if(!strapBucklePhase3C2Runtime)return {enabled:false,id:FINAL_STRAP_BUCKLE_PHASE3C2.id,cameraConstantsChanged:false,viewports:{}};
+ const world=getPhase3C2StrapBuckleWorldBoundsReport(),preset=CAMERA_PRESETS.front;
+ const projectBounds=(bounds,width,height)=>{
+  const aspect=width/height,auditCamera=new THREE.PerspectiveCamera(camera.fov,aspect,camera.near,camera.far),target=new THREE.Vector3(...preset.target),position=new THREE.Vector3(...preset.position);
+  if(preset.fitRadius){const direction=position.clone().sub(target).normalize(),verticalFov=THREE.MathUtils.degToRad(auditCamera.fov),horizontalFov=2*Math.atan(Math.tan(verticalFov/2)*aspect),fitDistance=preset.fitRadius/Math.tan(Math.min(verticalFov,horizontalFov)/2);position.copy(target).addScaledVector(direction,Math.max(position.distanceTo(target),fitDistance))}
+  auditCamera.position.copy(position);auditCamera.up.fromArray(VIEW_UP).normalize();auditCamera.lookAt(target);auditCamera.updateProjectionMatrix();auditCamera.updateMatrixWorld(true);
+  const ndc=[],depths=[];
+  for(const x of [bounds.min[0],bounds.max[0]])for(const y of [bounds.min[1],bounds.max[1]])for(const z of [bounds.min[2],bounds.max[2]]){const worldPoint=new THREE.Vector3(x,y,z),viewPoint=worldPoint.clone().applyMatrix4(auditCamera.matrixWorldInverse);depths.push(-viewPoint.z);ndc.push(worldPoint.project(auditCamera))}
+  const min=[Math.min(...ndc.map(point=>point.x)),Math.min(...ndc.map(point=>point.y)),Math.min(...ndc.map(point=>point.z))],max=[Math.max(...ndc.map(point=>point.x)),Math.max(...ndc.map(point=>point.y)),Math.max(...ndc.map(point=>point.z))],widthRatio=(max[0]-min[0])/2,heightRatio=(max[1]-min[1])/2,shortSideOccupancy=Math.max(widthRatio,heightRatio);
+  return {ndcMin:min.map(value=>Number(value.toFixed(6))),ndcMax:max.map(value=>Number(value.toFixed(6))),widthRatio:Number(widthRatio.toFixed(6)),heightRatio:Number(heightRatio.toFixed(6)),shortSideOccupancy:Number(shortSideOccupancy.toFixed(6)),allCornersInside:ndc.every(point=>Math.abs(point.x)<=1&&Math.abs(point.y)<=1&&point.z>=-1&&point.z<=1),depthRange:[Number(Math.min(...depths).toFixed(6)),Number(Math.max(...depths).toFixed(6))],nearMargin:Number((Math.min(...depths)-camera.near).toFixed(6)),farMargin:Number((camera.far-Math.max(...depths)).toFixed(6))};
+ };
+ const viewports={};
+ for(const [id,width,height] of [['desktop-1280x720',1280,720],['mobile-390x844',390,844]]){const phase3c1=projectBounds(world.phase3c1,width,height),phase3c2=projectBounds(world.phase3c2,width,height),combined=projectBounds(world.combined,width,height);viewports[id]={width,height,aspect:Number((width/height).toFixed(6)),front:{phase3c1,phase3c2,combined},fullLengthWheelZoom:{direction:'out',targetOccupancy:0.9,approximateDistanceMultiplier:Number(Math.max(1,combined.shortSideOccupancy/0.9).toFixed(6)),reversible:true}}}
+ return {enabled:true,id:FINAL_STRAP_BUCKLE_PHASE3C2.id,cameraConstants:{fov:camera.fov,near:camera.near,far:camera.far,minDistance:controls.minDistance,maxDistance:controls.maxDistance,viewUp:[...VIEW_UP]},cameraConstantsChanged:false,initialWatchHeadCompositionPreserved:true,viewports};
+}
 function getExteriorAttachmentGeometryReport(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getGeometryReport():{enabled:false,lugs:{},springBars:{},straps:{},buckle:null}}
 function getExteriorAttachmentInterferenceReport(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getInterferenceReport():{enabled:false,position1:{attachmentForbiddenCount:0},position2:{attachmentForbiddenCount:0},records:[],intendedContacts:[],forbiddenInterferenceCount:0}}
 function getExteriorAttachmentSelectionReport(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getSelectionReport():{enabled:false,registeredParts:[],interiorPriorityPreservedAtOpacity16:true}}
@@ -701,22 +744,25 @@ function captureAuditStateSnapshot(){
   mechanismState:roundDimensionTree({ui:getUiRegressionState(),state:currentMechanismState,kinematics:{...currentMotionWorksState.angles},hands:getHandCouplingReport(),interference:getInterferenceReport()},9),
  };
 }
-async function captureAuditViewportPng({width,height,cameraPreset='side'}={}){
+async function captureAuditViewportPngInternal({width,height,cameraPreset='side',distanceMultiplier=1,targetOffset=[0,0,0]}={}){
  const targetWidth=Math.trunc(Number(width)),targetHeight=Math.trunc(Number(height)),useCurrentCamera=cameraPreset==='current',preset=useCurrentCamera?{position:camera.position.toArray(),target:renderTarget.toArray(),up:camera.up.toArray()}:CAMERA_PRESETS[cameraPreset];
  if(!Number.isInteger(targetWidth)||targetWidth<1||!Number.isInteger(targetHeight)||targetHeight<1)throw new Error('capture width and height must be positive integers');
  if(!preset)throw new Error(`unknown capture camera preset: ${cameraPreset}`);
+ if(!Number.isFinite(Number(distanceMultiplier))||Number(distanceMultiplier)<1||Number(distanceMultiplier)>4)throw new Error('capture distance multiplier must be in [1,4]');
+ if(!Array.isArray(targetOffset)||targetOffset.length!==3||!targetOffset.every(value=>Number.isFinite(Number(value))&&Math.abs(Number(value))<=100))throw new Error('capture target offset must contain three finite values within 100 model units');
  const before=captureAuditStateSnapshot(),previousTarget=renderer.getRenderTarget(),previousViewport=renderer.getViewport(new THREE.Vector4()).clone(),previousScissor=renderer.getScissor(new THREE.Vector4()).clone(),previousScissorTest=renderer.getScissorTest();
  const captureCamera=camera.clone();
  const auditTarget=new THREE.WebGLRenderTarget(targetWidth,targetHeight,{minFilter:THREE.LinearFilter,magFilter:THREE.LinearFilter,format:THREE.RGBAFormat,type:THREE.UnsignedByteType,depthBuffer:true,stencilBuffer:false});
  auditTarget.texture.colorSpace=renderer.outputColorSpace;
  let pixels=null;
  try{
-  const target=new THREE.Vector3(...preset.target),position=new THREE.Vector3(...preset.position),captureAspect=targetWidth/targetHeight;
+  const auditOffset=new THREE.Vector3(...targetOffset.map(Number)),target=new THREE.Vector3(...preset.target).add(auditOffset),position=new THREE.Vector3(...preset.position).add(auditOffset),captureAspect=targetWidth/targetHeight;
   captureCamera.aspect=captureAspect;
   if(preset.fitRadius){
    const direction=position.clone().sub(target).normalize(),verticalFov=THREE.MathUtils.degToRad(captureCamera.fov),horizontalFov=2*Math.atan(Math.tan(verticalFov/2)*captureAspect),fitDistance=preset.fitRadius/Math.tan(Math.min(verticalFov,horizontalFov)/2);
    position.copy(target).addScaledVector(direction,Math.max(position.distanceTo(target),fitDistance));
   }
+  if(Number(distanceMultiplier)!==1){const offset=position.clone().sub(target).multiplyScalar(Number(distanceMultiplier));position.copy(target).add(offset)}
   captureCamera.position.copy(position);captureCamera.up.fromArray(preset.up||VIEW_UP).normalize();captureCamera.lookAt(target);captureCamera.updateProjectionMatrix();captureCamera.updateMatrixWorld(true);scene.updateMatrixWorld(true);
   renderer.setRenderTarget(auditTarget);renderer.setViewport(0,0,targetWidth,targetHeight);renderer.setScissor(0,0,targetWidth,targetHeight);renderer.setScissorTest(false);renderer.render(scene,captureCamera);
   pixels=new Uint8Array(targetWidth*targetHeight*4);renderer.readRenderTargetPixels(auditTarget,0,0,targetWidth,targetHeight,pixels);
@@ -744,8 +790,10 @@ async function captureAuditViewportPng({width,height,cameraPreset='side'}={}){
  const context=canvas.getContext('2d');if(!context)throw new Error('2D canvas unavailable for PNG encoding');
  context.putImageData(new ImageData(flipped,targetWidth,targetHeight),0,0);
  const blob=await new Promise((resolve,reject)=>canvas.toBlob(value=>value?resolve(value):reject(new Error('offscreen PNG toBlob returned null')),'image/png'));
- return {blob,metadata:{source:'actual Three.js scene rendered to offscreen WebGLRenderTarget',cameraPreset,renderTargetWidth:targetWidth,renderTargetHeight:targetHeight,stateInvariant}};
+ return {blob,metadata:{source:'actual Three.js scene rendered to offscreen WebGLRenderTarget',cameraPreset,distanceMultiplier:Number(distanceMultiplier),targetOffset:targetOffset.map(Number),renderTargetWidth:targetWidth,renderTargetHeight:targetHeight,stateInvariant}};
 }
+async function captureAuditViewportPng({width,height,cameraPreset='side'}={}){return captureAuditViewportPngInternal({width,height,cameraPreset})}
+async function capturePhase3C2AuditViewportPng({width,height,cameraPreset='side',distanceMultiplier=1,targetOffset=[0,0,0]}={}){return captureAuditViewportPngInternal({width,height,cameraPreset,distanceMultiplier,targetOffset})}
 function dimensionObjectTransform(object){return {position:object.position.toArray(),quaternion:object.quaternion.toArray(),scale:object.scale.toArray(),worldPosition:object.getWorldPosition(new THREE.Vector3()).toArray(),worldQuaternion:object.getWorldQuaternion(new THREE.Quaternion()).toArray()}}
 function dimensionTransformSignature(){scene.updateMatrixWorld(true);return roundDimensionTree(Object.fromEntries(Object.entries({root,mainPlate,dialRing,barrel:barrelWindingRoot,center,third,fourth,escape,pallet,balance:balanceG,crown,stem,slidingClutch,driverCannon,hourWheelDial,minuteAxis,hourAxis,secAxis}).map(([id,object])=>[id,dimensionObjectTransform(object)])),9)}
 function dimensionProjectedBox(box){camera.updateMatrixWorld(true);const corners=[];for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z])corners.push(projectWorldPoint(new THREE.Vector3(x,y,z)));const screens=corners.map(item=>item.screen),left=Math.min(...screens.map(item=>item[0])),right=Math.max(...screens.map(item=>item[0])),top=Math.min(...screens.map(item=>item[1])),bottom=Math.max(...screens.map(item=>item[1])),inside=corners.every(item=>item.inside),record={left,top,right,bottom,width:right-left,height:bottom-top,widthRatio:(right-left)/innerWidth,heightRatio:(bottom-top)/innerHeight,inside};if(record.widthRatio>1||record.heightRatio>1||!inside)Object.assign(record,{decision:'REVIEW',reviewReason:'cameraComposition',dimensionAdjustmentEvidence:false});return record}
@@ -1340,7 +1388,7 @@ window.watchModelDiagnostics={
  getState:()=>currentMechanismState,getMovingParts:()=>WATCH_MECHANISM.motionStates[currentMechanismState]||[],getStructuralOpacity:()=>structuralOpacityRatio,getStructuralTargetCount:()=>structuralOpacityTargets.length,getCrownPosition:()=>crownPosition,getCrownTransition:()=>crownTransition,getKeylessPositionGeometry,getKeylessBasePositions,getKeylessDriftReport,runCrownPositionCycleTest,holdCrownPosition,getSelection:()=>selectedRoot?.userData?.partName||null,getInputAngle:()=>settingInputAngle,
  getPartRotations,getWindingPartRotations,getKinematicAngles:()=>({...currentMotionWorksState.angles}),getConnectedPath:()=>[...motionRuntimeConnections.filter(connection=>currentMotionWorksState.activeConnections.includes(connection.id)),...windingRuntimeConnections.filter(connection=>currentWindingState.activeConnections.includes(connection.id))].map(connection=>({id:connection.id,input:connection.input,output:connection.output,permanent:connection.permanent,inputObject:connection.inputObject?.uuid??null,outputObject:connection.outputObject?.uuid??null})),
  getMotionWorksTopology,getWindingTopology,getWindingTransmissionReport,getRatchetState,getBarrelEnergyState,getFrontConvention,getDialProjectionReport,getHandScreenDirectionReport,getMotionSource,getPermanentMeshAngles,getClutchConnectionState,getHandCouplingReport,getGearModuleReport,getStateTransitionContinuityReport:()=>({...stateTransitionContinuityReport}),getInterferenceReport,getPickLayerReport,getCameraManipulating:()=>cameraGestureActive,getCameraControlType:()=> 'ArcballControls',getCameraOrientation,getCameraQuaternion:()=>camera.quaternion.toArray(),getCameraTarget:()=>renderTarget.toArray(),getCameraSmoothingState,getViewUpConvention,getRotationFreedomReport,getLightingRigReport,getVisibleLightContributionReport,getFrontBackLuminanceReport,getModelWorldSignature,getViewportReport:()=>({width:innerWidth,height:innerHeight,devicePixelRatio,renderPixelRatio:renderer.getPixelRatio(),coarsePointer:matchMedia('(pointer: coarse)').matches,panelOpen:panel.classList.contains('open'),panelCollapsed:panel.classList.contains('collapsed')}),getMobileOverlayHudReport,getTimeInputReport,getToggleCardReport,getSoundUiReport,parseTimeInputValue,clearTimeInputDiagnostics,getUiRegressionState,startPerformanceCapture,stopPerformanceCapture,getFramePacingReport,getCameraMotionSmoothnessReport,getZoomSmoothnessReport,getAdaptivePixelRatioState,getInteractionQualityMode:()=>interactionQualityMode,getRenderCostBreakdown,runPerformanceScenario,simulateArcballDrag,simulateTouchGesture,getWatchTime:()=>watchTimeSec,getPowerReserve:()=>powerReserveHours,getLiveSyncState:()=>({enabled:liveSync,offsetSec:liveSyncOffsetSec,transitionMs:LIVE_SYNC_TRANSITION_MS,progress:liveSync?Math.min(1,(performance.now()-liveSyncTransitionStartedAt)/LIVE_SYNC_TRANSITION_MS):0}),getAudioDiagnostics:()=>({...mechanicalAudio.getDiagnostics(),mechanismIntegrity:{...lastAudioMechanismIntegrity}}),getCrownDetentAudioReport:()=>({...lastCrownDetentAudioReport}),clearAudioEventLog:()=>mechanicalAudio.clearEventLog(),startAudioEvidenceRecording,stopAudioEvidenceRecording,
- getDimensionDiagnostics,getYDatumMap,getYEnvelopeBreakdown,getYLayerStack,getOfficialHeightDatumAssessment,captureAuditViewportPng,installDimensionAuditOverlay,getExteriorCandidateState,getExteriorDimensionReport,getExteriorInterferenceReport,getExteriorSelectionReport,getExteriorMaterialReport,getExteriorInterfaceReport,setExteriorDiagnosticMaterialMode,selectPartByNameForAudit,getExteriorAttachmentState,getExteriorAttachmentGeometryReport,getExteriorAttachmentInterferenceReport,getExteriorAttachmentSelectionReport,getExteriorAttachmentMaterialReport,getExteriorAttachmentWorldBoundsReport,getExteriorAttachmentCameraOccupancyReport,getExteriorAttachmentVisibilityReport,setExteriorAttachmentVisibility,getPhase3C1WatchHeadState,getPhase3C1GeometryReport,getPhase3C1OpenHeartReport,getPhase3C1MaterialReport,getPhase3C1SelectionReport,getPhase3C1DisplayGroupReport,getPhase3C1ExteriorGroupReport,setPhase3C1ExteriorGroupVisible,getPhase3C1CrystalDiagnosticReport,setPhase3C1CrystalDiagnosticVisible,getPickHitStack,pickAtForAudit,inspectPickAtWorldPoint,findProjectedPickSampleForPart,getWebGLContextReport,
+ getDimensionDiagnostics,getYDatumMap,getYEnvelopeBreakdown,getYLayerStack,getOfficialHeightDatumAssessment,captureAuditViewportPng,capturePhase3C2AuditViewportPng,installDimensionAuditOverlay,getExteriorCandidateState,getExteriorDimensionReport,getExteriorInterferenceReport,getExteriorSelectionReport,getExteriorMaterialReport,getExteriorInterfaceReport,setExteriorDiagnosticMaterialMode,selectPartByNameForAudit,getExteriorAttachmentState,getExteriorAttachmentGeometryReport,getExteriorAttachmentInterferenceReport,getExteriorAttachmentSelectionReport,getExteriorAttachmentMaterialReport,getExteriorAttachmentWorldBoundsReport,getExteriorAttachmentCameraOccupancyReport,getExteriorAttachmentVisibilityReport,setExteriorAttachmentVisibility,getPhase3C1WatchHeadState,getPhase3C1GeometryReport,getPhase3C1OpenHeartReport,getPhase3C1MaterialReport,getPhase3C1SelectionReport,getPhase3C1DisplayGroupReport,getPhase3C1ExteriorGroupReport,setPhase3C1ExteriorGroupVisible,getPhase3C1CrystalDiagnosticReport,setPhase3C1CrystalDiagnosticVisible,getPhase3C2StrapBuckleState,getPhase3C2StrapBuckleGeometryReport,getPhase3C2StrapBuckleInterferenceReport,getPhase3C2StrapBuckleSelectionReport,getPhase3C2StrapBuckleMaterialReport,getPhase3C2StrapBuckleWorldBoundsReport,getPhase3C2StrapBuckleCameraOccupancyReport,getPhase3C2StrapBuckleDisplayReport,getPickHitStack,pickAtForAudit,inspectPickAtWorldPoint,findProjectedPickSampleForPart,getWebGLContextReport,
  setWatchTime:value=>{const before=transitionSnapshot();setWatchTime(Number(value)||0);return recordStateTransition('explicit-time',before)},setCrownPosition,setCrownTurnRate,setRunning:value=>{running=Boolean(value)},setRuntimeScale:value=>{runtimeScale=Math.max(.1,Number(value)||1);runtimeScaleInput.value=String(runtimeScale)},setPowerReserve:value=>{powerReserveHours=Math.max(0,Math.min(52,Number(value)||0))},setLiveSync:value=>setSyncUI(Boolean(value)),setStructuralOpacity:applyStructuralOpacity,setBackgroundTheme:value=>{const control=document.getElementById('backgroundTheme');control.value=applyBackgroundTheme(value);return control.value},setPanelOpen:setPanelExpanded,setFunctionalMode:value=>{const control=document.getElementById('mode');control.value=value;control.dispatchEvent(new Event('change'));return control.value},setAudioVisibilityForTest:visible=>{audioEventResetPending=true;pendingCrownAudioDetent=null;return mechanicalAudio.setVisible(Boolean(visible))},disableAudio:()=>{pendingCrownAudioDetent=null;return mechanicalAudio.disable()},clearSelectionInfo,pickProjectedPart,waitForFrames,applyCameraPreset
 };
 if(initialPageParameters.get('dimensionAudit')==='1'){waitForFrames(8).then(()=>{const report=getDimensionDiagnostics(),output=document.createElement('output');output.setAttribute('id','dimensionAuditResult');output.hidden=true;output.value=JSON.stringify(report);output.textContent=JSON.stringify(report);output.dataset.status=report.transformInvariant.unchanged?'passed':'failed';document.body.append(output);window.dimensionAuditResult=report;const overlayMode=initialPageParameters.get('dimensionOverlay');if(overlayMode)installDimensionAuditOverlay(overlayMode);document.body.dataset.dimensionAuditStatus=output.dataset.status})}

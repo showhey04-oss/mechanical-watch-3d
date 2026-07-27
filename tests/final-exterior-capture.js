@@ -46,6 +46,8 @@ export async function runFinalExteriorCapture({
   width,
   height,
   cameraPreset,
+  distanceMultiplier = 1,
+  targetOffset = [0, 0, 0],
   readyKey,
   appQuery = "dimensionAudit=1&theme=navy&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed",
   prepare = null,
@@ -97,7 +99,18 @@ export async function runFinalExteriorCapture({
       screenSpace: diagnostics.getDimensionDiagnostics({ includeScreenSpace: true }).screenSpace,
     };
     document.body.dataset.captureStage = "rendering-offscreen";
-    const capture = await diagnostics.captureAuditViewportPng({ width, height, cameraPreset });
+    const capture = (
+      distanceMultiplier !== 1
+      || targetOffset.some(value => Number(value) !== 0)
+    )
+      ? await diagnostics.capturePhase3C2AuditViewportPng({
+        width,
+        height,
+        cameraPreset,
+        distanceMultiplier,
+        targetOffset,
+      })
+      : await diagnostics.captureAuditViewportPng({ width, height, cameraPreset });
     if (!capture?.blob || capture.blob.type !== "image/png") {
       throw new Error("capture API did not return a PNG Blob");
     }
@@ -128,6 +141,8 @@ export async function runFinalExteriorCapture({
       captureMode:
         "same-origin unsandboxed iframe harness - actual Three.js scene rendered to offscreen WebGLRenderTarget",
       cameraPreset: capture.metadata.cameraPreset,
+      distanceMultiplier: capture.metadata.distanceMultiplier,
+      targetOffset: capture.metadata.targetOffset,
       width: capture.metadata.renderTargetWidth,
       height: capture.metadata.renderTargetHeight,
       mimeType: capture.blob.type,
