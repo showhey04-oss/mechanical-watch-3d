@@ -147,7 +147,7 @@ test("Phase 3B.1c index hook suppresses only opacity-driven refresh", () => {
   );
   assert.match(
     indexSource,
-    /if\(!issue2Phase3B1cRuntime\?\.ownsOpacityShadowRefreshSuppression\(\)\)requestShadowRefresh\(\)/,
+    /if\(!issue2Phase3B1cRuntime\?\.ownsOpacityShadowRefreshSuppression\(\)&&!issue2Phase3B2Runtime\?\.ownsOpacityShadowRefreshSuppression\(\)\)requestShadowRefresh\(\)/,
   );
   assert.match(indexSource, /getIssue2Phase3B1cShadowReport/);
 });
