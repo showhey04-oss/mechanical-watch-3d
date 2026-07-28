@@ -156,6 +156,10 @@ test("Phase 3B.1b harness captures the exact Stage 1 matrix", async () => {
     source,
     /actual Three\.js scene rendered to offscreen WebGLRenderTarget/,
   );
+  assert.match(source, /matrix === "motion"/);
+  assert.match(source, /category: "camera-rotate-zoom"/);
+  assert.match(source, /id: "front-near"[\s\S]*distanceMultiplier: 1/);
+  assert.match(source, /distanceMultiplier: 1\.28/);
 });
 
 test("Phase 3B.1b performance and protected harnesses enforce requested scope", async () => {

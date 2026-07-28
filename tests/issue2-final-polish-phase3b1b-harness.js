@@ -312,8 +312,50 @@ function stage1Scenarios() {
   return scenarios;
 }
 
+function motionScenarios() {
+  return [
+    {
+      id: "front-near",
+      view: "front",
+      cameraPreset: "front",
+      distanceMultiplier: 1,
+    },
+    {
+      id: "dial-mechanism",
+      view: "dialMechanism",
+      cameraPreset: "dialMechanism",
+      distanceMultiplier: 1.05,
+    },
+    {
+      id: "side",
+      view: "side",
+      cameraPreset: "side",
+      distanceMultiplier: 1.1,
+    },
+    {
+      id: "movement-back",
+      view: "movementBack",
+      cameraPreset: "movementBack",
+      distanceMultiplier: 1.15,
+    },
+    {
+      id: "front-far",
+      view: "front",
+      cameraPreset: "front",
+      distanceMultiplier: 1.28,
+    },
+  ].map(scenario => ({
+    category: "camera-rotate-zoom",
+    theme: "navy",
+    opacity: 0.16,
+    state: "normal",
+    ...scenario,
+  }));
+}
+
 function requestedScenarios() {
   if (matrix === "stage1") return stage1Scenarios();
+  if (matrix === "motion") return motionScenarios();
   return [{
     category: "shadow",
     id: "single",
@@ -397,7 +439,7 @@ function requestedScenarios() {
     });
     const pixels = await analyzePng(capture.blob);
     const path = evidencePath(
-      "raw",
+      matrix === "motion" ? "motion" : "raw",
       candidate,
       viewportId,
       `${scenario.id}.png`,
@@ -426,7 +468,9 @@ function requestedScenarios() {
   report.finalShadow = diagnostics.getIssue2Phase3B1bShadowReport();
   const reportPath = evidencePath(
     "reports",
-    `stage1-${candidate}-${viewportId}.json`,
+    `${
+      matrix === "motion" ? "motion" : "stage1"
+    }-${candidate}-${viewportId}.json`,
   );
   await postEvidence(
     reportPath,

@@ -1,0 +1,55 @@
+{
+  "sourceBaseCommit": "27533b91100c5dddca6507414c6fe3b282ed07c2",
+  "sourceImplementationCommit": "e79a26ce4e18d30a81cbf840e45dfa1c4f063d51",
+  "sourceQueryCompatibilityCommit": "3e6917ec8cc0781f04af84254dbe317f0fc6a0b9",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1b-discrete-shadow",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness",
+  "captureTimestamp": "2026-07-28T04:19:39.090930+00:00",
+  "viewports": {
+    "desktop": [
+      1280,
+      720
+    ],
+    "mobile": [
+      390,
+      844
+    ]
+  },
+  "status": "NO_TECHNICAL_FINALIST_NO_ADOPTION",
+  "phase3B1HumanDiagnosticReview": {
+    "baseline": "HUMAN_REJECTED_RENDERING_BASELINE",
+    "shadowOff": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
+    "d2c3": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+    "mobile": "DEFERRED_MOBILE_FULL_LENGTH_FRAMING_AND_ZOOM_LIMIT"
+  },
+  "decisions": {
+    "issue2-phase3b1b-baseline": {
+      "decision": "RETAINED_DIAGNOSTIC_ONLY",
+      "reason": "HUMAN_REJECTED_RENDERING_BASELINE",
+      "defaultAdopted": false
+    },
+    "issue2-phase3b1b-shadow-off": {
+      "decision": "RETAINED_DIAGNOSTIC_ONLY",
+      "reason": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
+      "defaultAdopted": false
+    },
+    "issue2-phase3b1b-state-tight-512": {
+      "decision": "REJECTED_SHADOW_RESOLUTION",
+      "reason": "central rectangle removed, but visible diagonal shadow bands cover the transparent watch surfaces",
+      "defaultAdopted": false
+    },
+    "issue2-phase3b1b-state-tight-1024": {
+      "decision": "REJECTED_SHADOW_RESOLUTION",
+      "reason": "1024 reduces texel size but does not remove visible diagonal shadow bands; mobile also adds a front/back gate failure",
+      "defaultAdopted": false
+    }
+  },
+  "technicalFinalists": [],
+  "stage2Executed": false,
+  "defaultAdopted": false,
+  "issue2Status": "OPEN",
+  "pr5Status": "OPEN_DRAFT_UNCHANGED",
+  "d2c3Status": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+  "deferredGeometryCleanup": "DEFERRED_POST_ISSUE2_GEOMETRY_CLEANUP"
+}
