@@ -1,0 +1,3572 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "audio-default-is-off-without-autoplay-context",
+      "ok": true,
+      "detail": {
+        "initial": {
+          "audioSupported": true,
+          "audioEnabled": false,
+          "audioContextState": "not-created",
+          "status": "off",
+          "buffersLoaded": [],
+          "bufferCompleteness": {
+            "complete": false,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [],
+            "missing": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ]
+          },
+          "failedAssets": [],
+          "masterGain": 0.36,
+          "busGains": {
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          },
+          "lastEventType": null,
+          "lastEventTime": null,
+          "eventCounts": {
+            "escapementTick": 0,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "droppedEvents": 0,
+          "suppressedEvents": 0,
+          "activeSources": 0,
+          "eventLog": [],
+          "highRatePolicy": {
+            "maxEscapementEventsPerSecond": 8,
+            "maxPhaseEventsPerFrame": 1
+          },
+          "mechanismIntegrity": {
+            "checked": false,
+            "unchanged": true,
+            "before": null,
+            "after": null,
+            "eventTypes": []
+          }
+        },
+        "ui": {
+          "toggle": {
+            "pressed": false,
+            "disabled": false,
+            "ariaLabel": "作動音をオンにする",
+            "rect": {
+              "left": 336,
+              "top": 10,
+              "right": 380,
+              "bottom": 54,
+              "width": 44,
+              "height": 44
+            },
+            "tagName": "BUTTON",
+            "state": "off",
+            "visibleText": ""
+          },
+          "status": {
+            "text": "作動音 OFF",
+            "state": "off",
+            "role": "status"
+          },
+          "fixedGains": {
+            "master": 0.36,
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          }
+        }
+      }
+    },
+    {
+      "name": "audio-speaker-is-native-labeled-44px-button",
+      "ok": true,
+      "detail": {
+        "toggle": {
+          "pressed": false,
+          "disabled": false,
+          "ariaLabel": "作動音をオンにする",
+          "rect": {
+            "left": 336,
+            "top": 10,
+            "right": 380,
+            "bottom": 54,
+            "width": 44,
+            "height": 44
+          },
+          "tagName": "BUTTON",
+          "state": "off",
+          "visibleText": ""
+        },
+        "status": {
+          "text": "作動音 OFF",
+          "state": "off",
+          "role": "status"
+        },
+        "fixedGains": {
+          "master": 0.36,
+          "escapement": 0.24,
+          "winding": 0.32,
+          "reverse": 0.24,
+          "crown": 0.38
+        }
+      }
+    },
+    {
+      "name": "audio-pointer-enable-loads-all-six-atomic-buffers",
+      "ok": true,
+      "detail": {
+        "audioSupported": true,
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "buffersLoaded": [
+          "crownPull",
+          "crownPush",
+          "escapementTick",
+          "escapementTock",
+          "reverse",
+          "winding"
+        ],
+        "bufferCompleteness": {
+          "complete": true,
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": []
+        },
+        "failedAssets": [],
+        "masterGain": 0.36,
+        "busGains": {
+          "escapement": 0.24,
+          "winding": 0.32,
+          "reverse": 0.24,
+          "crown": 0.38
+        },
+        "lastEventType": null,
+        "lastEventTime": null,
+        "eventCounts": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 0,
+          "crownPush": 0
+        },
+        "droppedEvents": 0,
+        "suppressedEvents": 0,
+        "activeSources": 0,
+        "eventLog": [],
+        "highRatePolicy": {
+          "maxEscapementEventsPerSecond": 8,
+          "maxPhaseEventsPerFrame": 1
+        },
+        "mechanismIntegrity": {
+          "checked": false,
+          "unchanged": true,
+          "before": null,
+          "after": null,
+          "eventTypes": []
+        }
+      }
+    },
+    {
+      "name": "audio-master-and-bus-gains-remain-fixed",
+      "ok": true,
+      "detail": {
+        "audioSupported": true,
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "buffersLoaded": [
+          "crownPull",
+          "crownPush",
+          "escapementTick",
+          "escapementTock",
+          "reverse",
+          "winding"
+        ],
+        "bufferCompleteness": {
+          "complete": true,
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": []
+        },
+        "failedAssets": [],
+        "masterGain": 0.36,
+        "busGains": {
+          "escapement": 0.24,
+          "winding": 0.32,
+          "reverse": 0.24,
+          "crown": 0.38
+        },
+        "lastEventType": null,
+        "lastEventTime": null,
+        "eventCounts": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 0,
+          "crownPush": 0
+        },
+        "droppedEvents": 0,
+        "suppressedEvents": 0,
+        "activeSources": 0,
+        "eventLog": [],
+        "highRatePolicy": {
+          "maxEscapementEventsPerSecond": 8,
+          "maxPhaseEventsPerFrame": 1
+        },
+        "mechanismIntegrity": {
+          "checked": false,
+          "unchanged": true,
+          "before": null,
+          "after": null,
+          "eventTypes": []
+        }
+      }
+    },
+    {
+      "name": "audio-speaker-on-state-updates-aria-and-status",
+      "ok": true,
+      "detail": {
+        "toggle": {
+          "pressed": true,
+          "disabled": false,
+          "ariaLabel": "作動音をオフにする",
+          "rect": {
+            "left": 336,
+            "top": 10,
+            "right": 380,
+            "bottom": 54,
+            "width": 44,
+            "height": 44
+          },
+          "tagName": "BUTTON",
+          "state": "on",
+          "visibleText": ""
+        },
+        "status": {
+          "text": "作動音 ON",
+          "state": "on",
+          "role": "status"
+        },
+        "fixedGains": {
+          "master": 0.36,
+          "escapement": 0.24,
+          "winding": 0.32,
+          "reverse": 0.24,
+          "crown": 0.38
+        }
+      }
+    },
+    {
+      "name": "audio-escapement-follows-five-beats-per-second-and-alternates",
+      "ok": true,
+      "detail": {
+        "escapementTick": 3,
+        "escapementTock": 4,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      }
+    },
+    {
+      "name": "audio-pause-stops-escapement-events",
+      "ok": true,
+      "detail": {
+        "pausedStart": 7,
+        "pausedEnd": 7
+      }
+    },
+    {
+      "name": "audio-resume-does-not-replay-a-backlog",
+      "ok": true,
+      "detail": {
+        "pausedEnd": 7,
+        "resumed": 9
+      }
+    },
+    {
+      "name": "audio-position-one-forward-produces-w3-only",
+      "ok": true,
+      "detail": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 14,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      }
+    },
+    {
+      "name": "audio-position-one-reverse-produces-r2-only",
+      "ok": true,
+      "detail": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 13,
+        "crownPull": 0,
+        "crownPush": 0
+      }
+    },
+    {
+      "name": "audio-user-pull-fires-once-at-directional-detent-before-endpoint",
+      "ok": true,
+      "detail": {
+        "audio": {
+          "audioSupported": true,
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "buffersLoaded": [
+            "crownPull",
+            "crownPush",
+            "escapementTick",
+            "escapementTock",
+            "reverse",
+            "winding"
+          ],
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "failedAssets": [],
+          "masterGain": 0.36,
+          "busGains": {
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          },
+          "lastEventType": "crownPull",
+          "lastEventTime": 10462,
+          "eventCounts": {
+            "escapementTick": 0,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 1,
+            "crownPush": 0
+          },
+          "droppedEvents": 0,
+          "suppressedEvents": 0,
+          "activeSources": 1,
+          "eventLog": [
+            {
+              "type": "crownPull",
+              "time": 10462,
+              "beatIndex": 183159,
+              "crownPosition": "set",
+              "ratchetMode": "held",
+              "crownTransition": 0.9999782820814855
+            }
+          ],
+          "highRatePolicy": {
+            "maxEscapementEventsPerSecond": 8,
+            "maxPhaseEventsPerFrame": 1
+          },
+          "mechanismIntegrity": {
+            "checked": true,
+            "unchanged": true,
+            "before": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "set",
+              "crownTransition": 0.9999782820814855,
+              "crownRotation": 0.006800000000002512,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "hack",
+              "cannon": 63.934552093365724,
+              "settingInput": 0,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "after": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "set",
+              "crownTransition": 0.9999782820814855,
+              "crownRotation": 0.006800000000002512,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "hack",
+              "cannon": 63.934552093365724,
+              "settingInput": 0,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "eventTypes": [
+              "crownPull"
+            ]
+          }
+        },
+        "transition": 0.9999782820814855,
+        "detent": {
+          "event": "crownPull",
+          "direction": "pull",
+          "threshold": 0.999975,
+          "transition": 0.9999782820814855,
+          "requestedAt": 9369.599999964237,
+          "firedAt": 10462
+        }
+      }
+    },
+    {
+      "name": "audio-user-pull-does-not-repeat-at-position-two-endpoint",
+      "ok": true,
+      "detail": {
+        "counts": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 0
+        },
+        "transition": 1
+      }
+    },
+    {
+      "name": "audio-same-position-reselection-is-silent",
+      "ok": true,
+      "detail": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 0
+      }
+    },
+    {
+      "name": "audio-position-two-suppresses-winding-and-reverse",
+      "ok": true,
+      "detail": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 0
+      }
+    },
+    {
+      "name": "audio-user-push-fires-once-at-directional-detent-before-endpoint",
+      "ok": true,
+      "detail": {
+        "audio": {
+          "audioSupported": true,
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "buffersLoaded": [
+            "crownPull",
+            "crownPush",
+            "escapementTick",
+            "escapementTock",
+            "reverse",
+            "winding"
+          ],
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "failedAssets": [],
+          "masterGain": 0.36,
+          "busGains": {
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          },
+          "lastEventType": "crownPush",
+          "lastEventTime": 13511.9,
+          "eventCounts": {
+            "escapementTick": 0,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 1,
+            "crownPush": 1
+          },
+          "droppedEvents": 0,
+          "suppressedEvents": 0,
+          "activeSources": 1,
+          "eventLog": [
+            {
+              "type": "crownPull",
+              "time": 10462,
+              "beatIndex": 183159,
+              "crownPosition": "set",
+              "ratchetMode": "held",
+              "crownTransition": 0.9999782820814855
+            },
+            {
+              "type": "crownPush",
+              "time": 13511.9,
+              "beatIndex": 183159,
+              "crownPosition": "wind",
+              "ratchetMode": "held",
+              "crownTransition": 0.000021932568341862287
+            }
+          ],
+          "highRatePolicy": {
+            "maxEscapementEventsPerSecond": 8,
+            "maxPhaseEventsPerFrame": 1
+          },
+          "mechanismIntegrity": {
+            "checked": true,
+            "unchanged": true,
+            "before": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "after": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "eventTypes": [
+              "crownPush"
+            ]
+          }
+        },
+        "transition": 0.000021932568341862287,
+        "detent": {
+          "event": "crownPush",
+          "direction": "push",
+          "threshold": 0.000025,
+          "transition": 0.000021932568341862287,
+          "requestedAt": 12419.599999964237,
+          "firedAt": 13511.9
+        }
+      }
+    },
+    {
+      "name": "audio-user-push-does-not-repeat-at-position-one-endpoint",
+      "ok": true,
+      "detail": {
+        "counts": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 1
+        },
+        "transition": 0
+      }
+    },
+    {
+      "name": "audio-diagnostic-one-hundred-cycle-restore-is-silent",
+      "ok": true,
+      "detail": {
+        "beforeCycle": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 1
+        },
+        "afterCycle": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 1
+        },
+        "cycle": {
+          "type": "deterministic-object3d-cycle",
+          "count": 100,
+          "finalGeometry": {
+            "crownPosition": "wind",
+            "transition": 0,
+            "explodeAmount": 0,
+            "crownX": 19.8,
+            "expectedCrownX": 19.8,
+            "stemX": 0,
+            "expectedStemX": 0,
+            "slidingClutchX": -2.6953173099927072,
+            "expectedSlidingClutchX": -2.6953173099927072,
+            "maxDrift": 0,
+            "finite": true,
+            "parts": {
+              "crown": {
+                "uuid": "a03cc310-d77e-415b-96ba-41bb81872dc2",
+                "position": [
+                  19.8,
+                  -1.05,
+                  -4.5
+                ],
+                "expectedPosition": [
+                  19.8,
+                  -1.05,
+                  -4.5
+                ],
+                "axisErrors": [
+                  0,
+                  0,
+                  0
+                ],
+                "drift": 0,
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "quaternion": [
+                  0.006799947594794795,
+                  0,
+                  0,
+                  0.9999768800890889
+                ]
+              },
+              "stem": {
+                "uuid": "b8858d80-fe83-4b7f-a6dd-f521837d659f",
+                "position": [
+                  0,
+                  -1.05,
+                  -4.5
+                ],
+                "expectedPosition": [
+                  0,
+                  -1.05,
+                  -4.5
+                ],
+                "axisErrors": [
+                  0,
+                  0,
+                  0
+                ],
+                "drift": 0,
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "quaternion": [
+                  0.006799947594794795,
+                  0,
+                  0,
+                  0.9999768800890889
+                ]
+              },
+              "slidingClutch": {
+                "uuid": "af7af0d1-d851-47dd-b3b1-a863ec5c2662",
+                "position": [
+                  -2.6953173099927072,
+                  -1.05,
+                  -4.5
+                ],
+                "expectedPosition": [
+                  -2.6953173099927072,
+                  -1.05,
+                  -4.5
+                ],
+                "axisErrors": [
+                  0,
+                  0,
+                  0
+                ],
+                "drift": 0,
+                "scale": [
+                  1,
+                  1,
+                  1
+                ],
+                "quaternion": [
+                  0.006799947594794795,
+                  0,
+                  0,
+                  0.9999768800890889
+                ]
+              }
+            }
+          },
+          "maxEndpointError": 0,
+          "cumulativeError": 0,
+          "endpointSpans": {
+            "wind": [
+              0,
+              0,
+              0
+            ],
+            "set": [
+              0,
+              0,
+              0
+            ]
+          },
+          "monotonicViolationCount": 0,
+          "scaleInvariant": true,
+          "quaternionInvariant": true,
+          "mechanismAnglesInvariant": true,
+          "maxMechanismAngleError": 0,
+          "topologyInvariant": true,
+          "frameRates": {
+            "results": [
+              {
+                "fps": 30,
+                "frames": 300,
+                "transition": 1,
+                "positions": [
+                  21.150000000000002,
+                  1.35,
+                  4.28
+                ],
+                "maxDrift": 0
+              },
+              {
+                "fps": 60,
+                "frames": 600,
+                "transition": 1,
+                "positions": [
+                  21.150000000000002,
+                  1.35,
+                  4.28
+                ],
+                "maxDrift": 0
+              },
+              {
+                "fps": 120,
+                "frames": 1200,
+                "transition": 1,
+                "positions": [
+                  21.150000000000002,
+                  1.35,
+                  4.28
+                ],
+                "maxDrift": 0
+              }
+            ],
+            "allFinalPositionsEqual": true
+          },
+          "longHold": {
+            "frames": 3600,
+            "maxDrift": 0,
+            "positionDelta": 0,
+            "finite": true,
+            "selectionLightFinite": true,
+            "interferenceStable": true,
+            "forbiddenInterference": [
+              0,
+              0
+            ],
+            "memory": {
+              "supported": true,
+              "beforeBytes": 64371068,
+              "afterBytes": 64371068,
+              "deltaBytes": 0
+            }
+          },
+          "restoredState": {
+            "crownPosition": "wind",
+            "transition": 0,
+            "running": false,
+            "crownTurnRate": 0,
+            "liveSync": false,
+            "primaryStateExact": true
+          }
+        }
+      }
+    },
+    {
+      "name": "audio-reset-during-crown-transition-cancels-pending-detent",
+      "ok": true,
+      "detail": {
+        "before": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 1
+        },
+        "after": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 1
+        }
+      }
+    },
+    {
+      "name": "audio-hidden-suspends-and-visible-resumes-without-backlog",
+      "ok": true,
+      "detail": {
+        "beforeHidden": {
+          "audioSupported": true,
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "buffersLoaded": [
+            "crownPull",
+            "crownPush",
+            "escapementTick",
+            "escapementTock",
+            "reverse",
+            "winding"
+          ],
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "failedAssets": [],
+          "masterGain": 0.36,
+          "busGains": {
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          },
+          "lastEventType": "crownPush",
+          "lastEventTime": 13511.9,
+          "eventCounts": {
+            "escapementTick": 0,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 1,
+            "crownPush": 1
+          },
+          "droppedEvents": 0,
+          "suppressedEvents": 0,
+          "activeSources": 0,
+          "eventLog": [
+            {
+              "type": "crownPull",
+              "time": 10462,
+              "beatIndex": 183159,
+              "crownPosition": "set",
+              "ratchetMode": "held",
+              "crownTransition": 0.9999782820814855
+            },
+            {
+              "type": "crownPush",
+              "time": 13511.9,
+              "beatIndex": 183159,
+              "crownPosition": "wind",
+              "ratchetMode": "held",
+              "crownTransition": 0.000021932568341862287
+            }
+          ],
+          "highRatePolicy": {
+            "maxEscapementEventsPerSecond": 8,
+            "maxPhaseEventsPerFrame": 1
+          },
+          "mechanismIntegrity": {
+            "checked": true,
+            "unchanged": true,
+            "before": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "after": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "eventTypes": [
+              "crownPush"
+            ]
+          }
+        },
+        "hidden": {
+          "audioSupported": true,
+          "audioEnabled": true,
+          "audioContextState": "suspended",
+          "status": "on",
+          "buffersLoaded": [
+            "crownPull",
+            "crownPush",
+            "escapementTick",
+            "escapementTock",
+            "reverse",
+            "winding"
+          ],
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "failedAssets": [],
+          "masterGain": 0.36,
+          "busGains": {
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          },
+          "lastEventType": "crownPush",
+          "lastEventTime": 13511.9,
+          "eventCounts": {
+            "escapementTick": 0,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 1,
+            "crownPush": 1
+          },
+          "droppedEvents": 0,
+          "suppressedEvents": 0,
+          "activeSources": 0,
+          "eventLog": [
+            {
+              "type": "crownPull",
+              "time": 10462,
+              "beatIndex": 183159,
+              "crownPosition": "set",
+              "ratchetMode": "held",
+              "crownTransition": 0.9999782820814855
+            },
+            {
+              "type": "crownPush",
+              "time": 13511.9,
+              "beatIndex": 183159,
+              "crownPosition": "wind",
+              "ratchetMode": "held",
+              "crownTransition": 0.000021932568341862287
+            }
+          ],
+          "highRatePolicy": {
+            "maxEscapementEventsPerSecond": 8,
+            "maxPhaseEventsPerFrame": 1
+          },
+          "mechanismIntegrity": {
+            "checked": true,
+            "unchanged": true,
+            "before": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "after": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "eventTypes": [
+              "crownPush"
+            ]
+          }
+        },
+        "visible": {
+          "audioSupported": true,
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "buffersLoaded": [
+            "crownPull",
+            "crownPush",
+            "escapementTick",
+            "escapementTock",
+            "reverse",
+            "winding"
+          ],
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "failedAssets": [],
+          "masterGain": 0.36,
+          "busGains": {
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          },
+          "lastEventType": "crownPush",
+          "lastEventTime": 13511.9,
+          "eventCounts": {
+            "escapementTick": 0,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 1,
+            "crownPush": 1
+          },
+          "droppedEvents": 0,
+          "suppressedEvents": 0,
+          "activeSources": 0,
+          "eventLog": [
+            {
+              "type": "crownPull",
+              "time": 10462,
+              "beatIndex": 183159,
+              "crownPosition": "set",
+              "ratchetMode": "held",
+              "crownTransition": 0.9999782820814855
+            },
+            {
+              "type": "crownPush",
+              "time": 13511.9,
+              "beatIndex": 183159,
+              "crownPosition": "wind",
+              "ratchetMode": "held",
+              "crownTransition": 0.000021932568341862287
+            }
+          ],
+          "highRatePolicy": {
+            "maxEscapementEventsPerSecond": 8,
+            "maxPhaseEventsPerFrame": 1
+          },
+          "mechanismIntegrity": {
+            "checked": true,
+            "unchanged": true,
+            "before": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "after": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "eventTypes": [
+              "crownPush"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "name": "audio-reset-clears-active-sources",
+      "ok": true,
+      "detail": {
+        "audioSupported": true,
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "buffersLoaded": [
+          "crownPull",
+          "crownPush",
+          "escapementTick",
+          "escapementTock",
+          "reverse",
+          "winding"
+        ],
+        "bufferCompleteness": {
+          "complete": true,
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": []
+        },
+        "failedAssets": [],
+        "masterGain": 0.36,
+        "busGains": {
+          "escapement": 0.24,
+          "winding": 0.32,
+          "reverse": 0.24,
+          "crown": 0.38
+        },
+        "lastEventType": "crownPush",
+        "lastEventTime": 13511.9,
+        "eventCounts": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 1
+        },
+        "droppedEvents": 0,
+        "suppressedEvents": 0,
+        "activeSources": 0,
+        "eventLog": [
+          {
+            "type": "crownPull",
+            "time": 10462,
+            "beatIndex": 183159,
+            "crownPosition": "set",
+            "ratchetMode": "held",
+            "crownTransition": 0.9999782820814855
+          },
+          {
+            "type": "crownPush",
+            "time": 13511.9,
+            "beatIndex": 183159,
+            "crownPosition": "wind",
+            "ratchetMode": "held",
+            "crownTransition": 0.000021932568341862287
+          }
+        ],
+        "highRatePolicy": {
+          "maxEscapementEventsPerSecond": 8,
+          "maxPhaseEventsPerFrame": 1
+        },
+        "mechanismIntegrity": {
+          "checked": true,
+          "unchanged": true,
+          "before": {
+            "watchTimeSec": 36631.80000009158,
+            "trainTimeSec": 36631.80000009158,
+            "crownPosition": "wind",
+            "crownTransition": 0.000021932568341862287,
+            "crownRotation": 0.013600000000013934,
+            "powerReserveHours": 31.524499999999993,
+            "mechanismState": "paused",
+            "cannon": 63.94475209336574,
+            "settingInput": 0.0068000000000111305,
+            "ratchetWheel": -1.2972968536564626
+          },
+          "after": {
+            "watchTimeSec": 36631.80000009158,
+            "trainTimeSec": 36631.80000009158,
+            "crownPosition": "wind",
+            "crownTransition": 0.000021932568341862287,
+            "crownRotation": 0.013600000000013934,
+            "powerReserveHours": 31.524499999999993,
+            "mechanismState": "paused",
+            "cannon": 63.94475209336574,
+            "settingInput": 0.0068000000000111305,
+            "ratchetWheel": -1.2972968536564626
+          },
+          "eventTypes": [
+            "crownPush"
+          ]
+        }
+      }
+    },
+    {
+      "name": "audio-events-do-not-mutate-mechanism-state",
+      "ok": true,
+      "detail": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPush"
+        ]
+      }
+    },
+    {
+      "name": "audio-event-log-records-mechanism-context",
+      "ok": true,
+      "detail": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        },
+        {
+          "type": "crownPush",
+          "time": 13511.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0.000021932568341862287
+        }
+      ]
+    },
+    {
+      "name": "audio-speaker-one-click-disables-and-restores-off-aria",
+      "ok": true,
+      "detail": {
+        "disabled": {
+          "audioSupported": true,
+          "audioEnabled": false,
+          "audioContextState": "suspended",
+          "status": "off",
+          "buffersLoaded": [
+            "crownPull",
+            "crownPush",
+            "escapementTick",
+            "escapementTock",
+            "reverse",
+            "winding"
+          ],
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "failedAssets": [],
+          "masterGain": 0.36,
+          "busGains": {
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          },
+          "lastEventType": "crownPush",
+          "lastEventTime": 13511.9,
+          "eventCounts": {
+            "escapementTick": 0,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 1,
+            "crownPush": 1
+          },
+          "droppedEvents": 0,
+          "suppressedEvents": 0,
+          "activeSources": 0,
+          "eventLog": [
+            {
+              "type": "crownPull",
+              "time": 10462,
+              "beatIndex": 183159,
+              "crownPosition": "set",
+              "ratchetMode": "held",
+              "crownTransition": 0.9999782820814855
+            },
+            {
+              "type": "crownPush",
+              "time": 13511.9,
+              "beatIndex": 183159,
+              "crownPosition": "wind",
+              "ratchetMode": "held",
+              "crownTransition": 0.000021932568341862287
+            }
+          ],
+          "highRatePolicy": {
+            "maxEscapementEventsPerSecond": 8,
+            "maxPhaseEventsPerFrame": 1
+          },
+          "mechanismIntegrity": {
+            "checked": true,
+            "unchanged": true,
+            "before": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "after": {
+              "watchTimeSec": 36631.80000009158,
+              "trainTimeSec": 36631.80000009158,
+              "crownPosition": "wind",
+              "crownTransition": 0.000021932568341862287,
+              "crownRotation": 0.013600000000013934,
+              "powerReserveHours": 31.524499999999993,
+              "mechanismState": "paused",
+              "cannon": 63.94475209336574,
+              "settingInput": 0.0068000000000111305,
+              "ratchetWheel": -1.2972968536564626
+            },
+            "eventTypes": [
+              "crownPush"
+            ]
+          }
+        },
+        "disabledUi": {
+          "toggle": {
+            "pressed": false,
+            "disabled": false,
+            "ariaLabel": "作動音をオンにする",
+            "rect": {
+              "left": 336,
+              "top": 10,
+              "right": 380,
+              "bottom": 54,
+              "width": 44,
+              "height": 44
+            },
+            "tagName": "BUTTON",
+            "state": "off",
+            "visibleText": ""
+          },
+          "status": {
+            "text": "作動音 OFF",
+            "state": "off",
+            "role": "status"
+          },
+          "fixedGains": {
+            "master": 0.36,
+            "escapement": 0.24,
+            "winding": 0.32,
+            "reverse": 0.24,
+            "crown": 0.38
+          }
+        }
+      }
+    }
+  ],
+  "measurements": {
+    "initial": {
+      "audioSupported": true,
+      "audioEnabled": false,
+      "audioContextState": "not-created",
+      "status": "off",
+      "buffersLoaded": [],
+      "bufferCompleteness": {
+        "complete": false,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [],
+        "missing": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ]
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": null,
+      "lastEventTime": null,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": false,
+        "unchanged": true,
+        "before": null,
+        "after": null,
+        "eventTypes": []
+      }
+    },
+    "settled": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": null,
+      "lastEventTime": null,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": false,
+        "unchanged": true,
+        "before": null,
+        "after": null,
+        "eventTypes": []
+      }
+    },
+    "fixedGainReport": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": null,
+      "lastEventTime": null,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": false,
+        "unchanged": true,
+        "before": null,
+        "after": null,
+        "eventTypes": []
+      }
+    },
+    "escapement": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "escapementTock",
+      "lastEventTime": 5111.3,
+      "eventCounts": {
+        "escapementTick": 3,
+        "escapementTock": 4,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "escapementTock",
+          "time": 3911.3,
+          "beatIndex": 183151,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0
+        },
+        {
+          "type": "escapementTick",
+          "time": 4112.2,
+          "beatIndex": 183152,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0
+        },
+        {
+          "type": "escapementTock",
+          "time": 4311.3,
+          "beatIndex": 183153,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0
+        },
+        {
+          "type": "escapementTick",
+          "time": 4512.2,
+          "beatIndex": 183154,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0
+        },
+        {
+          "type": "escapementTock",
+          "time": 4711.6,
+          "beatIndex": 183155,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0
+        },
+        {
+          "type": "escapementTick",
+          "time": 4912.2,
+          "beatIndex": 183156,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0
+        },
+        {
+          "type": "escapementTock",
+          "time": 5111.3,
+          "beatIndex": 183157,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.40000007122,
+          "trainTimeSec": 36631.40000007122,
+          "crownPosition": "wind",
+          "crownTransition": 0,
+          "crownRotation": 0,
+          "powerReserveHours": 25.9996111111111,
+          "mechanismState": "run",
+          "cannon": 63.933853961629374,
+          "settingInput": 0,
+          "ratchetWheel": 0.11936981301020388
+        },
+        "after": {
+          "watchTimeSec": 36631.40000007122,
+          "trainTimeSec": 36631.40000007122,
+          "crownPosition": "wind",
+          "crownTransition": 0,
+          "crownRotation": 0,
+          "powerReserveHours": 25.9996111111111,
+          "mechanismState": "run",
+          "cannon": 63.933853961629374,
+          "settingInput": 0,
+          "ratchetWheel": 0.11936981301020388
+        },
+        "eventTypes": [
+          "escapementTock"
+        ]
+      }
+    },
+    "forward": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "winding",
+      "lastEventTime": 8077.8,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 14,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 1,
+      "eventLog": [
+        {
+          "type": "winding",
+          "time": 6878.8,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 6961.2,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7062.1,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7145.4,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7244.6,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7327.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7427.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7511.2,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7612.1,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7695.3,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7795.5,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7894.5,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 7978.8,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        },
+        {
+          "type": "winding",
+          "time": 8077.8,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "engaged",
+          "crownTransition": 0
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0,
+          "crownRotation": 8.26676,
+          "powerReserveHours": 31.37289399999999,
+          "mechanismState": "wind",
+          "cannon": 63.93455209336572,
+          "settingInput": 0,
+          "ratchetWheel": -1.2584235203231293
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0,
+          "crownRotation": 8.26676,
+          "powerReserveHours": 31.37289399999999,
+          "mechanismState": "wind",
+          "cannon": 63.93455209336572,
+          "settingInput": 0,
+          "ratchetWheel": -1.2584235203231293
+        },
+        "eventTypes": [
+          "winding"
+        ]
+      }
+    },
+    "reverse": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "reverse",
+      "lastEventTime": 9278.7,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 13,
+        "crownPull": 0,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "reverse",
+          "time": 8162.1,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8262.1,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8362.1,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8445.5,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8544.4,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8627.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8728.7,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8812.1,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8912.1,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 8994.5,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 9095.4,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 9177.8,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        },
+        {
+          "type": "reverse",
+          "time": 9278.7,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "freewheel",
+          "crownTransition": 0
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0,
+          "crownRotation": 0.5671200000000001,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "freewheel",
+          "cannon": 63.93455209336572,
+          "settingInput": 0,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0,
+          "crownRotation": 0.5671200000000001,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "freewheel",
+          "cannon": 63.93455209336572,
+          "settingInput": 0,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "reverse"
+        ]
+      }
+    },
+    "pullDetent": {
+      "audio": {
+        "audioSupported": true,
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "buffersLoaded": [
+          "crownPull",
+          "crownPush",
+          "escapementTick",
+          "escapementTock",
+          "reverse",
+          "winding"
+        ],
+        "bufferCompleteness": {
+          "complete": true,
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": []
+        },
+        "failedAssets": [],
+        "masterGain": 0.36,
+        "busGains": {
+          "escapement": 0.24,
+          "winding": 0.32,
+          "reverse": 0.24,
+          "crown": 0.38
+        },
+        "lastEventType": "crownPull",
+        "lastEventTime": 10462,
+        "eventCounts": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 0
+        },
+        "droppedEvents": 0,
+        "suppressedEvents": 0,
+        "activeSources": 1,
+        "eventLog": [
+          {
+            "type": "crownPull",
+            "time": 10462,
+            "beatIndex": 183159,
+            "crownPosition": "set",
+            "ratchetMode": "held",
+            "crownTransition": 0.9999782820814855
+          }
+        ],
+        "highRatePolicy": {
+          "maxEscapementEventsPerSecond": 8,
+          "maxPhaseEventsPerFrame": 1
+        },
+        "mechanismIntegrity": {
+          "checked": true,
+          "unchanged": true,
+          "before": {
+            "watchTimeSec": 36631.80000009158,
+            "trainTimeSec": 36631.80000009158,
+            "crownPosition": "set",
+            "crownTransition": 0.9999782820814855,
+            "crownRotation": 0.006800000000002512,
+            "powerReserveHours": 31.524499999999993,
+            "mechanismState": "hack",
+            "cannon": 63.934552093365724,
+            "settingInput": 0,
+            "ratchetWheel": -1.2972968536564626
+          },
+          "after": {
+            "watchTimeSec": 36631.80000009158,
+            "trainTimeSec": 36631.80000009158,
+            "crownPosition": "set",
+            "crownTransition": 0.9999782820814855,
+            "crownRotation": 0.006800000000002512,
+            "powerReserveHours": 31.524499999999993,
+            "mechanismState": "hack",
+            "cannon": 63.934552093365724,
+            "settingInput": 0,
+            "ratchetWheel": -1.2972968536564626
+          },
+          "eventTypes": [
+            "crownPull"
+          ]
+        }
+      },
+      "transition": 0.9999782820814855,
+      "detent": {
+        "event": "crownPull",
+        "direction": "pull",
+        "threshold": 0.999975,
+        "transition": 0.9999782820814855,
+        "requestedAt": 9369.599999964237,
+        "firedAt": 10462
+      }
+    },
+    "pulled": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "crownPull",
+      "lastEventTime": 10462,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "set",
+          "crownTransition": 0.9999782820814855,
+          "crownRotation": 0.006800000000002512,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "hack",
+          "cannon": 63.934552093365724,
+          "settingInput": 0,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "set",
+          "crownTransition": 0.9999782820814855,
+          "crownRotation": 0.006800000000002512,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "hack",
+          "cannon": 63.934552093365724,
+          "settingInput": 0,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPull"
+        ]
+      }
+    },
+    "samePosition": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "crownPull",
+      "lastEventTime": 10462,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "set",
+          "crownTransition": 0.9999782820814855,
+          "crownRotation": 0.006800000000002512,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "hack",
+          "cannon": 63.934552093365724,
+          "settingInput": 0,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "set",
+          "crownTransition": 0.9999782820814855,
+          "crownRotation": 0.006800000000002512,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "hack",
+          "cannon": 63.934552093365724,
+          "settingInput": 0,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPull"
+        ]
+      }
+    },
+    "setting": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "crownPull",
+      "lastEventTime": 10462,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 0
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "set",
+          "crownTransition": 0.9999782820814855,
+          "crownRotation": 0.006800000000002512,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "hack",
+          "cannon": 63.934552093365724,
+          "settingInput": 0,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "set",
+          "crownTransition": 0.9999782820814855,
+          "crownRotation": 0.006800000000002512,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "hack",
+          "cannon": 63.934552093365724,
+          "settingInput": 0,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPull"
+        ]
+      }
+    },
+    "pushDetent": {
+      "audio": {
+        "audioSupported": true,
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "buffersLoaded": [
+          "crownPull",
+          "crownPush",
+          "escapementTick",
+          "escapementTock",
+          "reverse",
+          "winding"
+        ],
+        "bufferCompleteness": {
+          "complete": true,
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": []
+        },
+        "failedAssets": [],
+        "masterGain": 0.36,
+        "busGains": {
+          "escapement": 0.24,
+          "winding": 0.32,
+          "reverse": 0.24,
+          "crown": 0.38
+        },
+        "lastEventType": "crownPush",
+        "lastEventTime": 13511.9,
+        "eventCounts": {
+          "escapementTick": 0,
+          "escapementTock": 0,
+          "winding": 0,
+          "reverse": 0,
+          "crownPull": 1,
+          "crownPush": 1
+        },
+        "droppedEvents": 0,
+        "suppressedEvents": 0,
+        "activeSources": 1,
+        "eventLog": [
+          {
+            "type": "crownPull",
+            "time": 10462,
+            "beatIndex": 183159,
+            "crownPosition": "set",
+            "ratchetMode": "held",
+            "crownTransition": 0.9999782820814855
+          },
+          {
+            "type": "crownPush",
+            "time": 13511.9,
+            "beatIndex": 183159,
+            "crownPosition": "wind",
+            "ratchetMode": "held",
+            "crownTransition": 0.000021932568341862287
+          }
+        ],
+        "highRatePolicy": {
+          "maxEscapementEventsPerSecond": 8,
+          "maxPhaseEventsPerFrame": 1
+        },
+        "mechanismIntegrity": {
+          "checked": true,
+          "unchanged": true,
+          "before": {
+            "watchTimeSec": 36631.80000009158,
+            "trainTimeSec": 36631.80000009158,
+            "crownPosition": "wind",
+            "crownTransition": 0.000021932568341862287,
+            "crownRotation": 0.013600000000013934,
+            "powerReserveHours": 31.524499999999993,
+            "mechanismState": "paused",
+            "cannon": 63.94475209336574,
+            "settingInput": 0.0068000000000111305,
+            "ratchetWheel": -1.2972968536564626
+          },
+          "after": {
+            "watchTimeSec": 36631.80000009158,
+            "trainTimeSec": 36631.80000009158,
+            "crownPosition": "wind",
+            "crownTransition": 0.000021932568341862287,
+            "crownRotation": 0.013600000000013934,
+            "powerReserveHours": 31.524499999999993,
+            "mechanismState": "paused",
+            "cannon": 63.94475209336574,
+            "settingInput": 0.0068000000000111305,
+            "ratchetWheel": -1.2972968536564626
+          },
+          "eventTypes": [
+            "crownPush"
+          ]
+        }
+      },
+      "transition": 0.000021932568341862287,
+      "detent": {
+        "event": "crownPush",
+        "direction": "push",
+        "threshold": 0.000025,
+        "transition": 0.000021932568341862287,
+        "requestedAt": 12419.599999964237,
+        "firedAt": 13511.9
+      }
+    },
+    "pushed": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "crownPush",
+      "lastEventTime": 13511.9,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 1
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        },
+        {
+          "type": "crownPush",
+          "time": 13511.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0.000021932568341862287
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPush"
+        ]
+      }
+    },
+    "cycle": {
+      "type": "deterministic-object3d-cycle",
+      "count": 100,
+      "finalGeometry": {
+        "crownPosition": "wind",
+        "transition": 0,
+        "explodeAmount": 0,
+        "crownX": 19.8,
+        "expectedCrownX": 19.8,
+        "stemX": 0,
+        "expectedStemX": 0,
+        "slidingClutchX": -2.6953173099927072,
+        "expectedSlidingClutchX": -2.6953173099927072,
+        "maxDrift": 0,
+        "finite": true,
+        "parts": {
+          "crown": {
+            "uuid": "a03cc310-d77e-415b-96ba-41bb81872dc2",
+            "position": [
+              19.8,
+              -1.05,
+              -4.5
+            ],
+            "expectedPosition": [
+              19.8,
+              -1.05,
+              -4.5
+            ],
+            "axisErrors": [
+              0,
+              0,
+              0
+            ],
+            "drift": 0,
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "quaternion": [
+              0.006799947594794795,
+              0,
+              0,
+              0.9999768800890889
+            ]
+          },
+          "stem": {
+            "uuid": "b8858d80-fe83-4b7f-a6dd-f521837d659f",
+            "position": [
+              0,
+              -1.05,
+              -4.5
+            ],
+            "expectedPosition": [
+              0,
+              -1.05,
+              -4.5
+            ],
+            "axisErrors": [
+              0,
+              0,
+              0
+            ],
+            "drift": 0,
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "quaternion": [
+              0.006799947594794795,
+              0,
+              0,
+              0.9999768800890889
+            ]
+          },
+          "slidingClutch": {
+            "uuid": "af7af0d1-d851-47dd-b3b1-a863ec5c2662",
+            "position": [
+              -2.6953173099927072,
+              -1.05,
+              -4.5
+            ],
+            "expectedPosition": [
+              -2.6953173099927072,
+              -1.05,
+              -4.5
+            ],
+            "axisErrors": [
+              0,
+              0,
+              0
+            ],
+            "drift": 0,
+            "scale": [
+              1,
+              1,
+              1
+            ],
+            "quaternion": [
+              0.006799947594794795,
+              0,
+              0,
+              0.9999768800890889
+            ]
+          }
+        }
+      },
+      "maxEndpointError": 0,
+      "cumulativeError": 0,
+      "endpointSpans": {
+        "wind": [
+          0,
+          0,
+          0
+        ],
+        "set": [
+          0,
+          0,
+          0
+        ]
+      },
+      "monotonicViolationCount": 0,
+      "scaleInvariant": true,
+      "quaternionInvariant": true,
+      "mechanismAnglesInvariant": true,
+      "maxMechanismAngleError": 0,
+      "topologyInvariant": true,
+      "frameRates": {
+        "results": [
+          {
+            "fps": 30,
+            "frames": 300,
+            "transition": 1,
+            "positions": [
+              21.150000000000002,
+              1.35,
+              4.28
+            ],
+            "maxDrift": 0
+          },
+          {
+            "fps": 60,
+            "frames": 600,
+            "transition": 1,
+            "positions": [
+              21.150000000000002,
+              1.35,
+              4.28
+            ],
+            "maxDrift": 0
+          },
+          {
+            "fps": 120,
+            "frames": 1200,
+            "transition": 1,
+            "positions": [
+              21.150000000000002,
+              1.35,
+              4.28
+            ],
+            "maxDrift": 0
+          }
+        ],
+        "allFinalPositionsEqual": true
+      },
+      "longHold": {
+        "frames": 3600,
+        "maxDrift": 0,
+        "positionDelta": 0,
+        "finite": true,
+        "selectionLightFinite": true,
+        "interferenceStable": true,
+        "forbiddenInterference": [
+          0,
+          0
+        ],
+        "memory": {
+          "supported": true,
+          "beforeBytes": 64371068,
+          "afterBytes": 64371068,
+          "deltaBytes": 0
+        }
+      },
+      "restoredState": {
+        "crownPosition": "wind",
+        "transition": 0,
+        "running": false,
+        "crownTurnRate": 0,
+        "liveSync": false,
+        "primaryStateExact": true
+      }
+    },
+    "afterResetTransition": {
+      "escapementTick": 0,
+      "escapementTock": 0,
+      "winding": 0,
+      "reverse": 0,
+      "crownPull": 1,
+      "crownPush": 1
+    },
+    "hidden": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "suspended",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "crownPush",
+      "lastEventTime": 13511.9,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 1
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        },
+        {
+          "type": "crownPush",
+          "time": 13511.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0.000021932568341862287
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPush"
+        ]
+      }
+    },
+    "visible": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "crownPush",
+      "lastEventTime": 13511.9,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 1
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        },
+        {
+          "type": "crownPush",
+          "time": 13511.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0.000021932568341862287
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPush"
+        ]
+      }
+    },
+    "reset": {
+      "audioSupported": true,
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "crownPush",
+      "lastEventTime": 13511.9,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 1
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        },
+        {
+          "type": "crownPush",
+          "time": 13511.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0.000021932568341862287
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPush"
+        ]
+      }
+    },
+    "disabled": {
+      "audioSupported": true,
+      "audioEnabled": false,
+      "audioContextState": "suspended",
+      "status": "off",
+      "buffersLoaded": [
+        "crownPull",
+        "crownPush",
+        "escapementTick",
+        "escapementTock",
+        "reverse",
+        "winding"
+      ],
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "failedAssets": [],
+      "masterGain": 0.36,
+      "busGains": {
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      },
+      "lastEventType": "crownPush",
+      "lastEventTime": 13511.9,
+      "eventCounts": {
+        "escapementTick": 0,
+        "escapementTock": 0,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 1,
+        "crownPush": 1
+      },
+      "droppedEvents": 0,
+      "suppressedEvents": 0,
+      "activeSources": 0,
+      "eventLog": [
+        {
+          "type": "crownPull",
+          "time": 10462,
+          "beatIndex": 183159,
+          "crownPosition": "set",
+          "ratchetMode": "held",
+          "crownTransition": 0.9999782820814855
+        },
+        {
+          "type": "crownPush",
+          "time": 13511.9,
+          "beatIndex": 183159,
+          "crownPosition": "wind",
+          "ratchetMode": "held",
+          "crownTransition": 0.000021932568341862287
+        }
+      ],
+      "highRatePolicy": {
+        "maxEscapementEventsPerSecond": 8,
+        "maxPhaseEventsPerFrame": 1
+      },
+      "mechanismIntegrity": {
+        "checked": true,
+        "unchanged": true,
+        "before": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "after": {
+          "watchTimeSec": 36631.80000009158,
+          "trainTimeSec": 36631.80000009158,
+          "crownPosition": "wind",
+          "crownTransition": 0.000021932568341862287,
+          "crownRotation": 0.013600000000013934,
+          "powerReserveHours": 31.524499999999993,
+          "mechanismState": "paused",
+          "cannon": 63.94475209336574,
+          "settingInput": 0.0068000000000111305,
+          "ratchetWheel": -1.2972968536564626
+        },
+        "eventTypes": [
+          "crownPush"
+        ]
+      }
+    }
+  },
+  "harness": {
+    "parentUrl": "http://127.0.0.1:8000/tests/issue2-final-polish-phase3b1c-suite-harness.html?suite=audio&candidate=issue2-shadow-attenuation&width=390&height=844&upload=1&externalAudioGesture=1&cache=1785218930534",
+    "iframeUrl": "http://127.0.0.1:8000/index.html?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3&rendering=issue2-shadow-attenuation&theme=navy&camera=front&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&audioTest=1&cache=1785218930534",
+    "parentOrigin": "http://127.0.0.1:8000",
+    "iframeOrigin": "http://127.0.0.1:8000",
+    "iframeReadyState": "complete",
+    "viewport": {
+      "width": 390,
+      "height": 844,
+      "devicePixelRatio": 2,
+      "renderPixelRatio": 1.25,
+      "coarsePointer": false,
+      "panelOpen": false,
+      "panelCollapsed": false
+    },
+    "appVersion": "v3.15.0",
+    "suite": "audio",
+    "candidate": "issue2-shadow-attenuation",
+    "audioGestureApplied": false,
+    "actualBrowserRun": true,
+    "source": "same-origin unsandboxed iframe using existing application suite"
+  }
+}
