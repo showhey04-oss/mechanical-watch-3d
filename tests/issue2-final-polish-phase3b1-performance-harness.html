@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Issue 2 Phase 3B.1 Performance Harness</title>
+  <style>
+    html,body{margin:0;background:#11151b;color:#e9eef5;font:13px system-ui,sans-serif}
+    #appFrame{position:fixed;left:-20000px;top:0;border:0}
+    #status{position:fixed;left:8px;bottom:8px;padding:5px 8px;background:#000b}
+    #issue2Phase3B1PerformanceResult{display:none}
+  </style>
+</head>
+<body data-performance-ready="false" data-performance-status="running">
+  <iframe id="appFrame" title="same-origin Phase 3B.1 performance candidate"></iframe>
+  <output id="status">running</output>
+  <output id="issue2Phase3B1PerformanceResult"></output>
+  <script type="module" src="./issue2-final-polish-phase3b1-performance-harness.js"></script>
+</body>
+</html>
