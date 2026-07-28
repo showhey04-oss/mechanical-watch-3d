@@ -2,7 +2,9 @@
 
 ## 結論
 
-このフォルダはShadow-off／D2c3の2 baselineで構造透過の連続性を比較したquery限定証跡である。最終状態は`TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`、技術finalist 0件、既定採用0件である。
+このフォルダはShadow-off／D2c3の2 baselineで構造透過の連続性を比較したquery限定証跡である。技術状態は`TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`、技術finalist 0件、既定採用0件である。
+
+人間判断は`ISSUE2_PHASE3B2_AUDIT_ACCEPTED`、`ACCEPT_CURRENT_TRANSPARENCY_DISCONTINUITIES_AS_KNOWN_REALTIME_RENDERING_LIMITATION`、`OIT_DEFERRED_POST_COMPLETION_EXPERIMENT`である。100%／99%と55%／54%の不連続を既知制約として受容し、現行透過方式を維持する。OITは完成後の独立実験へ延期し、Issue #2の完成前Mustから外した。
 
 ## 由来
 
@@ -46,5 +48,8 @@
 - Stage 2: 未実施（技術finalist 0）
 - 物理iPhone: 未実施
 - OIT: 未実装
+- Phase 3B.2 human audit: accepted
+- current discontinuities: accepted known real-time rendering limitation
+- next: current-transparency Shadow-off／D2c3 final human review
 
 全ファイルは`evidence-manifest.json`でbytes／SHA-256を検証する。比較ボードやGIFは元の実WebGL captureから生成し、製品Sceneへ診断Geometryを追加していない。

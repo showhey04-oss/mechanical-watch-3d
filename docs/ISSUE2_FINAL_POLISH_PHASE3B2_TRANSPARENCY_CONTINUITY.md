@@ -6,7 +6,15 @@ Phase 3B.2は、Shadow-offとD2c3を独立した描画baselineとして、構造
 
 `TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`
 
-固定深度プロパティによる軽量3候補は、13段階のopacityでプロパティ切替0件を達成した。しかし、内部視認性または同一環境性能差分の必須ゲートを満たす候補はなく、技術finalistは0件である。Stage 2、PC人間比較、物理iPhone確認、既定採用は実施しない。OITは本工程へ実装せず、次工程へ進む前に対象範囲・性能予算・採用ゲートの明示判断を必要とする。
+固定深度プロパティによる軽量3候補は、13段階のopacityでプロパティ切替0件を達成した。しかし、内部視認性または同一環境性能差分の必須ゲートを満たす候補はなく、技術finalistは0件である。Stage 2、PC人間比較、物理iPhone確認、既定採用は実施しない。
+
+人間の製品判断は次のとおり確定した。技術判断は変更しない。
+
+- `ISSUE2_PHASE3B2_AUDIT_ACCEPTED`
+- `ACCEPT_CURRENT_TRANSPARENCY_DISCONTINUITIES_AS_KNOWN_REALTIME_RENDERING_LIMITATION`
+- `OIT_DEFERRED_POST_COMPLETION_EXPERIMENT`
+
+現行の100%／99%と55%／54%の不連続は、完成前の必須修正ではなく既知のリアルタイム描画制約として受容する。OITは本体完成条件から外し、完成後の独立実験へ延期する。軽量3候補は引き続き棄却し、現行透過方式を維持する。
 
 ## 基準と隔離
 
@@ -100,6 +108,8 @@ Stage 1は13 opacity、normal／selected／split／explode／exterior OFF、両v
 
 ## 次判断
 
-固定depthWriteによる軽量方式は完了とする。次に進める場合は、OITの方式、対象Material、描画pass数、モバイル性能予算、選択・影・split／explodeとの契約、fallback、比較行列を先に承認する。承認なしにweighted blended OIT、depth peeling、透明専用renderer、Material置換へ進まない。
+固定depthWriteによる軽量方式は完了とする。OITは`OIT_DEFERRED_POST_COMPLETION_EXPERIMENT`として完成後へ延期し、本体完成のMust／Issue #2の最終候補選定ゲートには含めない。完成後に再開する場合だけ、方式、対象Material、描画pass数、モバイル性能予算、選択・影・split／explodeとの契約、fallback、比較行列を先に承認する。承認なしにweighted blended OIT、depth peeling、透明専用renderer、Material置換へ進まない。
+
+製品上の優先順位は、現行透過方式を維持したShadow-offとD2c3の最終人間比較、PC実操作、物理iPhone実操作、15分連続操作・温度確認、候補選定、Issue #2の採否判断の順とする。Phase 3B.2の追加アルゴリズム探索は行わない。
 
 Issue #2はOpen、PR #5はOpen／Draft、D2c3は未採用、APP_VERSIONはv3.15.0を維持する。Ready化、マージ、既定採用は行わない。

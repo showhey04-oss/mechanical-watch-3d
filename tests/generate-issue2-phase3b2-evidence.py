@@ -861,7 +861,22 @@ def make_stage_decisions(
         "shadowOffAdopted": False,
         "d2c3Adopted": False,
         "issue2Closed": False,
-        "nextAction": "EXPLICIT_OIT_SCOPE_DECISION",
+        "humanProductDecision": {
+            "audit": "ISSUE2_PHASE3B2_AUDIT_ACCEPTED",
+            "currentTransparency": (
+                "ACCEPT_CURRENT_TRANSPARENCY_DISCONTINUITIES_AS_KNOWN_"
+                "REALTIME_RENDERING_LIMITATION"
+            ),
+            "oit": "OIT_DEFERRED_POST_COMPLETION_EXPERIMENT",
+            "completionGateRequiresOit": False,
+        },
+        "knownRealtimeRenderingLimitations": [
+            "structural transparency 100/99 property discontinuity",
+            "structural transparency 55/54 depth-write discontinuity",
+        ],
+        "currentTransparencyRetained": True,
+        "oitDeferredUntilAfterProductCompletion": True,
+        "nextAction": "PREPARE_FINAL_RETAINED_CANDIDATE_HUMAN_REVIEW",
     }
     return stage1, stage2, decision
 

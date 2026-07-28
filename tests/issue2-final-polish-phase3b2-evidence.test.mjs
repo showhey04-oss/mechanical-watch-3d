@@ -42,6 +42,19 @@ test("Phase 3B.2 evidence records the lightweight route exhaustion decision", ()
   assert.equal(decision.technicalFinalist, null);
   assert.equal(decision.candidateAdopted, false);
   assert.equal(decision.issue2Closed, false);
+  assert.deepEqual(decision.humanProductDecision, {
+    audit: "ISSUE2_PHASE3B2_AUDIT_ACCEPTED",
+    currentTransparency:
+      "ACCEPT_CURRENT_TRANSPARENCY_DISCONTINUITIES_AS_KNOWN_REALTIME_RENDERING_LIMITATION",
+    oit: "OIT_DEFERRED_POST_COMPLETION_EXPERIMENT",
+    completionGateRequiresOit: false,
+  });
+  assert.equal(decision.currentTransparencyRetained, true);
+  assert.equal(decision.oitDeferredUntilAfterProductCompletion, true);
+  assert.equal(
+    decision.nextAction,
+    "PREPARE_FINAL_RETAINED_CANDIDATE_HUMAN_REVIEW",
+  );
   assert.deepEqual(decision.candidateDecisions, {
     "issue2-current": "RETAINED_DIAGNOSTIC_ONLY",
     "issue2-stable-depth-off": "REJECTED_PERFORMANCE",
