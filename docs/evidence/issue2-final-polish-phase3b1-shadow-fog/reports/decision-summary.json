@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "sourcePhase3C3Commit": "191ff2682398356da59e747e608c82120dacebd9",
+  "sourcePhase3ACommit": "3d7f84ea3f122fbc1df715b4eff3c8cebf64f46d",
+  "sourceImplementationCommit": "5df265176ededfc7cd8da22de8bb83fde6fe3546",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1-shadow-fog",
+  "capturedAt": "2026-07-28T01:07:09.704303Z",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness; actual Three.js offscreen WebGL PNG",
+  "defaultAdopted": false,
+  "status": "ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST",
+  "candidateGates": {
+    "issue2-phase3b1-baseline": {
+      "shadow": false,
+      "frontBackBalance": true,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "RETAINED_DIAGNOSTIC_ONLY"
+    },
+    "issue2-shadow-off": {
+      "shadow": true,
+      "frontBackBalance": false,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_FRONT_BACK_BALANCE"
+    },
+    "issue2-shadow-fit": {
+      "shadow": false,
+      "frontBackBalance": false,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_SHADOW_ARTIFACT"
+    },
+    "issue2-fog-only": {
+      "shadow": false,
+      "frontBackBalance": true,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_FOG_VISIBILITY"
+    },
+    "issue2-shadow-off-fog": {
+      "shadow": true,
+      "frontBackBalance": false,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_FRONT_BACK_BALANCE"
+    },
+    "issue2-shadow-fit-fog": {
+      "shadow": false,
+      "frontBackBalance": false,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_SHADOW_ARTIFACT"
+    }
+  },
+  "candidateDecisions": {
+    "issue2-phase3b1-baseline": "RETAINED_DIAGNOSTIC_ONLY",
+    "issue2-shadow-off": "REJECTED_FRONT_BACK_BALANCE",
+    "issue2-shadow-fit": "REJECTED_SHADOW_ARTIFACT",
+    "issue2-fog-only": "REJECTED_FOG_VISIBILITY",
+    "issue2-shadow-off-fog": "REJECTED_FRONT_BACK_BALANCE",
+    "issue2-shadow-fit-fog": "REJECTED_SHADOW_ARTIFACT"
+  },
+  "technicalFinalistsForHumanPcReview": [],
+  "stage2": "SKIPPED_ZERO_TECHNICAL_GATE_CANDIDATES",
+  "physicalIPhone": "NOT_PERFORMED",
+  "adoptedCandidate": null,
+  "defaultAdoptionAllowed": false,
+  "knownTransparencyContinuity": {
+    "opacity100to99": "KNOWN_UNRESOLVED_PROTECTED_FOR_PHASE3B2",
+    "opacity55to54": "KNOWN_UNRESOLVED_PROTECTED_FOR_PHASE3B2",
+    "phase3b1ChangedTransparency": false
+  },
+  "d2c3": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+  "postIssue2GeometryCleanup": [
+    "DEFERRED_CENTER_HAND_RING_GEOMETRY_INTERFERENCE",
+    "DEFERRED_MINUTE_WHEEL_ARBOR_DIAL_PROTRUSION"
+  ]
+}

@@ -104,7 +104,7 @@
 
 ## 現在の改修フェーズ
 
-### Issue #2 Final Polish Phase 3A — 完成外装基準の比較専用監査
+### Issue #2 Final Polish Phase 3B.1 — baseline-preserving shadow / fog
 
 - Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として固定する
 - `integration=phase3c3`限定で完成時計を統合監査し、小秒凹面の非描画selection proxyだけを局所追加する
@@ -118,6 +118,10 @@
 - D2aは矩形影と暗部を改善するが、前後輝度差、既存A.5ライト契約、性能差分を満たさないため視覚参考として棄却
 - D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`としてquery実装と証跡を維持し、baseline-preserving候補が成立しない場合の最終対抗案に限定
 - Phase 3Aは`RETAIN_COMPARISON_HISTORY_NO_ADOPTION`とし、Issue #2の次候補は完成外装baselineの前後均衡と性能を維持する別設計とする
+- Phase 3B.1でshadow carrier OFF、5状態固定shadow fit、fog 160／260の6候補をquery限定比較し、1056枚の実WebGL PNGと性能・回帰を保存
+- shadow-offは前後面バランス、shadow-fitは512² mapの広域fit解像度、fog候補はMobile far visibilityを満たさず、技術ゲート合格0件
+- 状態を`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`、Stage 2を`SKIPPED_ZERO_TECHNICAL_GATE_CANDIDATES`とし、PC候補選択・物理iPhone・採用へ進めない
+- 100／99と55／54の透過連続性は変更せずPhase 3B.2へ分離し、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`を維持
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする
 - Phase 3Aで承認されたE-BALANCEDを`?exterior=balanced`限定で実装し、Phase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`を人間承認済み依存基準とする

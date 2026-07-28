@@ -2,6 +2,16 @@
 
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
 
+### Issue #2 Final Polish Phase 3B.1
+
+- Phase 3A判断記録Headから別ブランチを作り、既存DirectionalLightのshadow carrier OFF、5状態固定shadow fit、fog 160／260を単独・単純合成した6候補を完成外装query限定で比較
+- 6候補×2 viewport×88条件、計1056枚の実WebGL PNG、7条件×10秒性能、14 protected path、browser／UI／HUD／audio回帰を保存
+- shadow-offは矩形影を除去したが前後面バランス悪化、shadow-fitは512² mapの固定広域fitによる縞状解像度劣化、fog候補はMobile farのflat描画が残り、技術ゲート合格候補0件
+- 状態を`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`、Stage 2を`SKIPPED_ZERO_TECHNICAL_GATE_CANDIDATES`とし、PC候補選択・物理iPhone・既定採用へ進めない
+- 性能差分は全6候補で合格、console error／warning 0、禁止干渉0/0、UI／HUD全件合格、protected path 14/14 pixel exact、Node 225/225
+- RectAreaLight、light値、shadow map、bias、Material、透過処理、DPR、camera、Geometry、試験閾値を変更せず、100／99と55／54はPhase 3B.2へ分離
+- D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`、PR #5はOpen／Draft、Issue #2はOpenを維持
+
 ### Issue #2 Final Polish Phase 3A
 
 - Phase 3C.3完成外装へbaseline／D2a／D2c3をquery限定で移植し、通常pathおよびPhase 3C.1／3C.2／3C.3-onlyを維持

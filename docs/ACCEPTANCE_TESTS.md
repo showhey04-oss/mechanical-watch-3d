@@ -349,6 +349,19 @@
 - 同一環境性能差分は平均fps悪化5%以内かつp95悪化2ms以内を使用し、絶対A.6閾値を代替しない
 - Phase 3A比較監査は`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`、198枚のcoverageは`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`とする
 - D2aは性能差分とA.5ライト契約を満たさないため`RETAIN_AS_VISUAL_REFERENCE_REJECT_FOR_ADOPTION`、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`とする
+
+## Issue #2 Final Polish Phase 3B.1 shadow／fog比較
+
+- 完成外装queryへbaseline、shadow-off、shadow-fit、fog-only、shadow-off-fog、shadow-fit-fogの6候補を追加し、既定OFFとする
+- 既存DirectionalLightの強度・色・位置、shadow map size、bias、normalBias、Material、透過処理、camera、DPRを変更しない
+- 固定shadow fitはnormal、full-length、split、explode、split＋explodeの実world bounds unionを初期化時に1回だけ測定し、per-frame更新を行わない
+- Stage 1は6候補×2 viewport×88条件、実WebGL PNG 1056枚、console error／warning 0、transform invariant true、禁止干渉0/0を満たす
+- 前後面相対差0.30以下、baseline比悪化+0.05以下、fps悪化5%以内、p95悪化2ms以内、Mobile full-length／far non-flatを変更しない技術ゲートとする
+- shadow-offは前後面、shadow-fitは影解像度、fog候補はMobile farを満たさないため、`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`とする
+- 技術ゲート合格0件のためStage 2、PC候補選択、物理iPhone、15分温度確認を実施しない
+- 100→99%と55→54%の透過処理はbyte／AST保護し、Phase 3B.2へ分離する
+- queryなし、Phase 3C.1／3C.2／3C.3-only、Phase 3A baseline／D2a／D2c3の14条件を比較元とpixel exactにする
+- D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`、PR #5はOpen／Draft、Issue #2はOpenを維持する
 - `ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED`を維持し、Ready化・マージ・既定採用を行わない
 
 ## M. v3.14 機構同期作動音 Phase 1
