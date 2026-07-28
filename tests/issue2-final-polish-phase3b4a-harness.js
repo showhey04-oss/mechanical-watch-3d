@@ -370,11 +370,7 @@ async function runPerformance(diagnostics, report) {
   for (const scenario of scenarios) {
     for (let repetition = 1; repetition <= 3; repetition += 1) {
       await resetState(diagnostics);
-      if (framing && width <= 420) {
-        diagnostics.setIssue2Phase3B4aDistanceForAudit(
-          diagnostics.getIssue2Phase3B4aState().candidateMaxDistance,
-        );
-      } else if (!framing && width <= 420) {
+      if (width <= 420) {
         await wheelToLimit(diagnostics, "out");
       }
       const transformBefore = diagnostics.getModelWorldSignature();
