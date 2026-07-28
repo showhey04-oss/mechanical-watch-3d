@@ -38,6 +38,7 @@ const candidates = {
     label: "discrete-state tight frontKey shadow camera at 512",
     shadowMode: "state-tight",
     shadowMapSize: 512,
+    publicRenderingQuery: "issue2-state-tight-512",
   },
   "issue2-phase3b1b-state-tight-1024": {
     ...common,
@@ -45,7 +46,13 @@ const candidates = {
     label: "discrete-state tight frontKey shadow camera at 1024",
     shadowMode: "state-tight",
     shadowMapSize: 1024,
+    publicRenderingQuery: "issue2-state-tight-1024",
   },
+};
+
+const renderingAliases = {
+  "issue2-state-tight-512": "issue2-phase3b1b-state-tight-512",
+  "issue2-state-tight-1024": "issue2-phase3b1b-state-tight-1024",
 };
 
 export const ISSUE2_FINAL_POLISH_PHASE3B1B = deepFreeze({
@@ -104,7 +111,9 @@ export function resolveIssue2FinalPolishPhase3B1b(search = "") {
   if (Object.entries(exact).some(([key, value]) => params.get(key) !== value)) {
     return null;
   }
-  return ISSUE2_FINAL_POLISH_PHASE3B1B.candidates[params.get("rendering")] || null;
+  const requested = params.get("rendering");
+  const resolved = renderingAliases[requested] || requested;
+  return ISSUE2_FINAL_POLISH_PHASE3B1B.candidates[resolved] || null;
 }
 
 export function assertIssue2FinalPolishPhase3B1b(
@@ -129,6 +138,15 @@ export function assertIssue2FinalPolishPhase3B1b(
       config.candidates["issue2-phase3b1b-state-tight-512"].shadowMapSize === 512
       && config.candidates["issue2-phase3b1b-state-tight-1024"].shadowMapSize
         === 1024,
+    requestedQueries:
+      resolveIssue2FinalPolishPhase3B1b(
+        "exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2"
+          + "&integration=phase3c3&rendering=issue2-state-tight-512",
+      )?.shadowMapSize === 512
+      && resolveIssue2FinalPolishPhase3B1b(
+        "exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2"
+          + "&integration=phase3c3&rendering=issue2-state-tight-1024",
+      )?.shadowMapSize === 1024,
     twelveTexelMargin: config.fit.xyMarginTexels === 12,
     noAdoption: profiles.every(profile => profile.defaultAdopted === false),
     protectedRendering: profiles.every(profile =>

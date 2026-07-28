@@ -31,6 +31,18 @@ test("Phase 3B.1b resolves only exact complete-watch candidate queries", () => {
   }
   assert.equal(
     resolveIssue2FinalPolishPhase3B1b(
+      `${exteriorQuery}&rendering=issue2-state-tight-512`,
+    )?.shadowMapSize,
+    512,
+  );
+  assert.equal(
+    resolveIssue2FinalPolishPhase3B1b(
+      `${exteriorQuery}&rendering=issue2-state-tight-1024`,
+    )?.shadowMapSize,
+    1024,
+  );
+  assert.equal(
+    resolveIssue2FinalPolishPhase3B1b(
       "rendering=issue2-phase3b1b-state-tight-512",
     ),
     null,
