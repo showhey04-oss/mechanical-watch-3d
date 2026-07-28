@@ -122,3 +122,46 @@ browser総合ではbaselineと複合候補に時計回り表示3件の共通未�
 ## 次工程
 
 技術ゲート合格候補が0件のため、Stage 2、PC候補選択、物理iPhone、15分温度確認を実施しない。D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`のまま保持する。Issue #2はOpen、PR #5はOpen／Draftを維持し、次の設計判断またはPhase 3B.2透過連続性の独立評価には新たな承認が必要である。
+
+## 人間診断レビュー
+
+Phase 3B.1の自動判定後に行ったPC／スマートフォン比較について、次を正式な人間診断結果として記録する。技術ゲートは緩和せず、採用判断とは分離する。
+
+### Baseline
+
+- 状態: `HUMAN_REJECTED_RENDERING_BASELINE`
+- 中央矩形影が強い
+- 裏面がやや暗い
+- 立体感が弱い
+- 総合不合格
+- 今後は比較基準・再現基準としてだけ保持する
+
+### Shadow-off
+
+- 状態: `HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL`
+- 中央矩形影は見えない
+- 前後面バランスは人間評価上許容できる
+- D2c3より立体感が弱い
+- ズームアウト時に暗くなる
+- 技術ゲート上の前後面差不合格は維持する
+- 完全棄却せず、状態別tight shadow方式が成立しない場合の軽量対抗案として保持する
+
+### D2c3
+
+- 状態: `RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`
+- 外装を含む視認性と立体感は良好
+- ズームアウト時に暗く落ち込みにくい
+- 外装非表示時は角度により輝度差がある
+- PCズームイン時の回転にもっさり感がある
+- スマートフォン操作感は許容
+- 未採用の最終妥協案として保持する
+
+人間評価の優先順位はBaselineを明確に最下位とし、Shadow-offとD2c3の選択は未決定とする。次のPhase 3B.1bでは状態別shadow camera方式を追加検討する。
+
+## モバイル全長表示の保留
+
+`DEFERRED_MOBILE_FULL_LENGTH_FRAMING_AND_ZOOM_LIMIT`
+
+スマートフォンではズームアウト上限へ早く到達し、ベルトを含む完成時計全体を十分俯瞰できない。現時点ではD2c3固有の問題と断定せず、baseline、shadow-off、D2c3、Phase 3C.3-onlyを同一viewport・camera preset・最大zoom-outで比較する。
+
+後続監査ではcamera distance、`controls.maxDistance`、watch world bounds、projected occupancy、strap端のscreen margin、camera preset、viewport、DPRを記録する。Phase 3B.1bではcamera preset、zoom limit、Geometryを変更しない。

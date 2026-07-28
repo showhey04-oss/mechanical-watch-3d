@@ -77,6 +77,65 @@
     "opacity55to54": "KNOWN_UNRESOLVED_PROTECTED_FOR_PHASE3B2",
     "phase3b1ChangedTransparency": false
   },
+  "humanDiagnosticReview": {
+    "status": "PHASE3B1_HUMAN_DIAGNOSTIC_RECORDED_NO_ADOPTION",
+    "priority": [
+      "SHADOW_OFF_OR_D2C3_UNDECIDED",
+      "HUMAN_REJECTED_RENDERING_BASELINE"
+    ],
+    "baseline": {
+      "decision": "HUMAN_REJECTED_RENDERING_BASELINE",
+      "findings": [
+        "strong central rectangular shadow",
+        "movement back slightly dark",
+        "weak depth impression",
+        "retain only as comparison and reproduction baseline"
+      ]
+    },
+    "shadowOff": {
+      "decision": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
+      "technicalGateRelaxed": false,
+      "findings": [
+        "no central rectangular shadow",
+        "human front-back balance acceptable",
+        "weaker depth impression than D2c3",
+        "darkens at maximum zoom-out",
+        "retain as lightweight counterproposal"
+      ]
+    },
+    "d2c3": {
+      "decision": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+      "findings": [
+        "good completed-exterior visibility",
+        "stronger depth impression",
+        "less darkening at maximum zoom-out",
+        "angle-dependent brightness without exterior",
+        "sluggish PC close-zoom rotation",
+        "acceptable smartphone interaction"
+      ]
+    },
+    "nextComparison": "DISCRETE_STATE_TIGHT_SHADOW_CAMERA"
+  },
+  "mobileFullLengthFraming": {
+    "status": "DEFERRED_MOBILE_FULL_LENGTH_FRAMING_AND_ZOOM_LIMIT",
+    "phase3b1bChangesAllowed": false,
+    "comparePaths": [
+      "baseline",
+      "shadow-off",
+      "D2c3",
+      "Phase 3C.3-only"
+    ],
+    "measurements": [
+      "camera distance",
+      "controls.maxDistance",
+      "watch world bounds",
+      "projected occupancy",
+      "strap screen margin",
+      "camera preset",
+      "viewport",
+      "DPR"
+    ]
+  },
   "d2c3": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
   "postIssue2GeometryCleanup": [
     "DEFERRED_CENTER_HAND_RING_GEOMETRY_INTERFERENCE",

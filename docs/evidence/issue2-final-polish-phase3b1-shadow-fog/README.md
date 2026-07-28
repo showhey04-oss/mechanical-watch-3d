@@ -51,3 +51,21 @@
 `shadow-off`は矩形影を消すがDesktopの前後面バランス悪化が+0.081097となる。`shadow-fit`は投影境界を時計外へ出すが、512²のまま固定範囲を拡大したため斜め勾配がbaseline比最大3.424倍となる。fog 160／260はDesktopを改善するがMobile far 4themeがflatのままである。よって全ゲート同時通過候補はない。
 
 100→99%と55→54%の透過不連続は保護したままPhase 3B.2へ分離する。D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`であり、採用していない。
+
+## 人間診断結果
+
+- baseline: `HUMAN_REJECTED_RENDERING_BASELINE`
+  - 中央矩形影、裏面の暗さ、立体感不足により総合不合格
+  - 比較・再現基準としてだけ保持
+- shadow-off: `HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL`
+  - 中央矩形影なし、前後面バランスは人間評価上OK
+  - D2c3より立体感が弱く、ズームアウト時に暗い
+  - 技術ゲートは緩和せず、軽量対抗案として保持
+- D2c3: `RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`
+  - 視認性と立体感は良いが、角度別輝度差とPCズームイン時の操作負荷が残る
+  - スマートフォン操作感は許容
+  - 既定採用しない
+
+Baselineは明確に最下位である。Shadow-offとD2c3の優先順位は未決定で、状態別tight shadow camera候補をPhase 3B.1bで比較する。
+
+スマートフォンで完成時計全長を十分俯瞰できない現象は`DEFERRED_MOBILE_FULL_LENGTH_FRAMING_AND_ZOOM_LIMIT`として独立保留する。Phase 3B.1bではcameraやzoom limitを変更しない。
