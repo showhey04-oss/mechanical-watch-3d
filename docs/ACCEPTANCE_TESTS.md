@@ -399,7 +399,10 @@
 - 候補×viewportごとに回転、zoom、wheel、opacity、外装、split／explode、選択解除、full-lengthの9操作GIFを保存する
 - 11性能scenarioを各3反復し、合計132 run、平均fps悪化5%以内、p95悪化2ms以内、reversal 0、stop-then-jump 0、wheel monotonic、transform invariantを確認する
 - `index.html`と`js/*.js`がPhase 3B.2人間判断Headとbyte exactであることを確認する
-- PC確認と物理iPhone候補別15分確認が未完了の間、候補選定、既定採用、Ready化、マージ、Issue #2クローズを行わない
+- PC比較はmacOS／Chrome／13.3インチで交互に実施し、両候補をPC合格、D2c3を性能tradeoff込みの選定候補とする
+- 物理iPhone 16／iOS 26.5.2／ホーム画面起動で各15分確認し、Shadow-offは暗いfull-length表示で不合格、D2c3は合格・安定化待ちとする
+- 冷却5分を`COOLDOWN_PROTOCOL_DEVIATION_5MIN`、progressive frame drop／Safari reloadを`NOT_REPORTED`として保存し、異常なしへ補完しない
+- D2c3を`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`とし、既定採用、Ready化、マージ、Issue #2クローズを行わない
 
 ## M. v3.14 機構同期作動音 Phase 1
 

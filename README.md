@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.2の技術監査と製品判断を完了し、現行の100／99・55／54不連続を既知のリアルタイム描画制約として受容、OITを完成後へ延期した。Phase 3B.3では現行透過方式のShadow-offとD2c3だけを最終PC／物理iPhone比較へ残し、状態を`AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`とする
+- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.3のPC／物理iPhone比較でD2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として最終候補に選定した。状態は`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`であり、モバイル全長構図、iOS音響ペーシング、温度再試験の完了までquery限定・未採用を維持する
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
@@ -36,7 +36,7 @@ Issue #2 Final Polish Phase 3B.1bではtight 512／1024が中央projection bound
 
 Issue #2 Final Polish Phase 3B.2では、100%→99%の`transparent`と55%→54%の`depthWrite`切替を実ランタイムで再現し、Shadow-off／D2c3、Desktop／390×844、13 opacityで固定深度3候補を比較した。3候補はproperty toggle 0を達成したが、`stable-depth-base`は内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能に不合格となった。候補固有browser failure 0、UI 22/22、HUD 57/57、audio 23/23、protected path 42/42を維持したが技術finalistは0件であり、Stage 2、物理iPhone、OIT実装、採用は行っていない。
 
-Issue #2 Final Polish Phase 3B.3は製品コードを変更せず、`continuity=issue2-current`を共有するShadow-offとD2c3を、2 viewport×4 theme×16 scenarioの実WebGL PNG 256枚、36操作GIF、11 scenario×3反復×2候補×2 viewportの性能測定で最終人間比較用に整理する。Shadow-offは`RETAINED_FINAL_HUMAN_REVIEW_CANDIDATE_NOT_ADOPTED`、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`で、候補選定、既定採用、Ready化、マージ、Issue #2クローズは人間判断前に行わない。
+Issue #2 Final Polish Phase 3B.3は製品コードを変更せず、`continuity=issue2-current`を共有するShadow-offとD2c3を、2 viewport×4 theme×16 scenarioの実WebGL PNG 256枚、36操作GIF、11 scenario×3反復×2候補×2 viewportの性能測定で最終人間比較用に整理した。PCでは両候補合格、物理iPhoneではShadow-offを暗いfull-length表示のため不合格、D2c3を性能tradeoff込みで合格・選定した。D2c3はまだ既定採用せず、Shadow-offは比較履歴として保持する。冷却5分は手順差、progressive frame dropとSafari reloadは`NOT_REPORTED`、テンプ音遅れは候補独立性未確定として後続安定化へ分離する。
 
 ## 実装済み
 

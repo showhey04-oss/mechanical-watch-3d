@@ -1,38 +1,23 @@
-# Phase 3B.3 PC人間確認票
+# Phase 3B.3 PC人間確認結果
 
-- status: `AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`
-- pcReviewComplete: `false`
-- selectedCandidate: `null`
-
-固定URLは`reports/candidate-urls.json`を使用する。候補間で同じbrowser、viewport、DPR、theme、時刻、操作順を揃え、各表示前に完全再読込する。
-
-## 候補別確認
+- status: `D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`
+- pcReviewComplete: `true`
+- selectedCandidate: `d2c3`
+- decision: `HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`
+- environment: macOS / Chrome / 13.3 inch
+- reviewOrder: alternating
 
 | 項目 | Shadow-off | D2c3 |
 |---|---|---|
-| 初期表示 | 未確認 | 未確認 |
-| 完成時計全体の立体感 | 未確認 | 未確認 |
-| ケース・ラグ・尾錠の金属階調 | 未確認 | 未確認 |
-| 文字板・オープンハート | 未確認 | 未確認 |
-| front／backバランス | 未確認 | 未確認 |
-| side | 未確認 | 未確認 |
-| exterior OFF | 未確認 | 未確認 |
-| opacity 16内部視認 | 未確認 | 未確認 |
-| opacity 100／99 | 未確認 | 未確認 |
-| opacity 55／54 | 未確認 | 未確認 |
-| 選択・HUD・学習同期・解除 | 未確認 | 未確認 |
-| split／explode／restore | 未確認 | 未確認 |
-| zoom-in回転 | 未確認 | 未確認 |
-| zoom-out明るさ | 未確認 | 未確認 |
-| full-length | 未確認 | 未確認 |
-| navy／obsidian／walnut／gallery | 未確認 | 未確認 |
-| 作動音 | 未確認 | 未確認 |
-| console error／warning | 未確認 | 未確認 |
-| 総合完成度 | 未確認 | 未確認 |
-| 許容できない欠点 | 未確認 | 未確認 |
+| 立体感 | D2c3よりやや平坦 | Shadow-offより良好 |
+| 金属階調 | D2c3よりやや弱い | Shadow-offより良好 |
+| exterior OFF | やや暗い | 角度別highlight／shadowあり |
+| opacity 16 | 良好 | 良好 |
+| 100／99・55／54 | 許容可能 | 許容可能 |
+| zoom-in回転 | ややもっさり、許容可能 | ややもっさり、許容可能 |
+| full-length | 全長は見えるが暗く消える | PCで全長視認可能 |
+| 4 theme | 全体的にやや暗い | 許容可能 |
+| 操作感 | OK | OK |
+| PC合格 | はい | はい |
 
-- preferredCandidate: `null`
-- proceedToPhysicalIPhone: `false`
-- notes:
-
-PC確認完了前に候補を採用しない。
+D2c3を性能トレードオフ込みで選定する。Shadow-offは比較履歴として残し、削除しない。

@@ -104,12 +104,14 @@
 
 ## 現在の改修フェーズ
 
-### Issue #2 Final Polish Phase 3B.3 — final retained-candidate human review
+### Issue #2 Final Polish Phase 3B.4a — selected D2c3 mobile full-length stabilization
 
-- Phase 3B.2監査を人間承認し、100／99と55／54を既知のリアルタイム描画制約として受容、OITを完成後の独立実験へ延期する
-- 現行透過方式のShadow-offとD2c3を、256枚の固定比較、操作GIF、132性能runで最終PC／物理iPhone比較する
-- PC確認後、候補ごとに物理iPhoneで15分連続操作し、候補間でcooldownを挟む
-- 人間判断前は`AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`、候補選定・採用・Ready化・マージ・Issue #2クローズを行わない
+- Phase 3B.3のPC／物理iPhone比較でD2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として選定した
+- Shadow-offはiPhoneの暗いfull-length表示により`HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY`とし、比較履歴を維持する
+- D2c3は`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`でquery限定・未採用を維持する
+- モバイルmaxDistanceのquery限定候補を実測fit距離から検証し、初期表示、Desktop、D2c3描画、選択、操作、性能を保護する
+- iOSテンプ音ペーシング、温度再試験、未報告のprogressive frame drop／Safari reloadは別保留とする
+- 安定化と物理iPhone再確認前にReady化、マージ、既定採用、Issue #2クローズを行わない
 
 ### Issue #2 Final Polish Phase 3B.2 — dual-baseline transparency continuity
 

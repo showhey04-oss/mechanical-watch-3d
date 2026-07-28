@@ -2,16 +2,16 @@
 
 ## 状態
 
-`AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`
+`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`
 
 このフォルダは、現行透過方式を共有するShadow-offとD2c3を、PC／物理iPhoneで最終比較するための証跡である。新しい描画アルゴリズム、Light、Material、Geometry、camera、DPR、UI、audioは追加していない。
 
 ## 候補
 
-- Shadow-off: `RETAINED_FINAL_HUMAN_REVIEW_CANDIDATE_NOT_ADOPTED`
-- D2c3: `RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`
+- Shadow-off: `HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY`
+- D2c3: `HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`
 - continuity: `issue2-current`
-- candidate selected: `null`
+- candidate selected: `d2c3`
 - adopted: `false`
 
 ## 由来
@@ -38,4 +38,4 @@
 
 ## 人間確認
 
-最終候補URLは`reports/candidate-urls.json`に保存する。PC確認後、物理iPhoneで候補ごとに15分連続操作し、cooldownを挟む。結果が記録されるまで候補選定、既定採用、Ready化、マージ、Issue #2クローズを行わない。
+最終候補URLは`reports/candidate-urls.json`に保存する。PC比較と物理iPhone候補別15分確認を完了し、D2c3を性能tradeoff込みで選定した。冷却5分は手順差、progressive frame drop／Safari reloadは未報告、テンプ音の遅れは候補独立性未確定として保存する。D2c3はモバイル全長構図、音響、温度の安定化前に既定採用、Ready化、マージ、Issue #2クローズを行わない。

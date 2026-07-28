@@ -6,11 +6,11 @@
   "sourceBranch": "feature/issue2-final-polish-phase3b3-final-candidate-review",
   "reviewCommit": "03270869ebdeef9f8cc2dd96f841a603b7766dee",
   "appVersion": "v3.15.0",
-  "generatedAt": "2026-07-28T12:09:34.014212+00:00",
+  "generatedAt": "2026-07-28T15:11:25Z",
   "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
   "queryOnly": true,
   "defaultAdopted": false,
-  "status": "AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION",
+  "status": "D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION",
   "phase3b2HumanProductDecision": {
     "audit": "ISSUE2_PHASE3B2_AUDIT_ACCEPTED",
     "currentTransparency": "ACCEPT_CURRENT_TRANSPARENCY_DISCONTINUITIES_AS_KNOWN_REALTIME_RENDERING_LIMITATION",
@@ -18,12 +18,13 @@
   },
   "candidates": {
     "shadow-off": {
-      "status": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
-      "reviewRole": "RETAINED_FINAL_HUMAN_REVIEW_CANDIDATE_NOT_ADOPTED",
+      "status": "HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY",
+      "reviewRole": "RETAINED_COMPARISON_HISTORY_NOT_ADOPTED",
       "rendering": "issue2-phase3b1c-shadow-off"
     },
     "d2c3": {
-      "status": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+      "status": "HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF",
+      "reviewRole": "D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION",
       "rendering": "issue2-d2c3"
     }
   },
@@ -32,15 +33,27 @@
   "continuityOmittedPngByteExact": false,
   "performanceDifferentialPassed": false,
   "protectedProductFilesByteExact": true,
-  "humanPcReviewCompleted": false,
-  "physicalIPhoneReviewCompleted": false,
-  "candidateSelected": null,
+  "humanPcReviewCompleted": true,
+  "physicalIPhoneReviewCompleted": true,
+  "thermalReviewCompleted": false,
+  "candidateSelected": "d2c3",
+  "performanceTradeoffAccepted": true,
+  "transparencyDiscontinuitiesAccepted": true,
+  "oitDeferredPostCompletion": true,
+  "cooldownProtocol": "COOLDOWN_PROTOCOL_DEVIATION_5MIN",
+  "thermalDecision": "THERMAL_ACCEPTED_WITH_MILD_WARMTH_RETEST_REQUIRED",
+  "audioCandidateIndependence": "CANDIDATE_INDEPENDENCE_SUSPECTED_NOT_CONFIRMED",
   "candidateAdopted": false,
   "issue2Closed": false,
   "readyForReview": false,
   "mergeApproved": false,
   "knownLimitations": [
     "structural transparency 100/99 discontinuity",
-    "structural transparency 55/54 discontinuity"
+    "structural transparency 55/54 discontinuity",
+    "DEFERRED_MOBILE_FULL_LENGTH_FRAMING_AND_ZOOM_LIMIT",
+    "DEFERRED_IOS_BALANCE_AUDIO_PACING_SLOWDOWN",
+    "PROGRESSIVE_FRAME_DROP_NOT_REPORTED",
+    "SAFARI_RELOAD_NOT_REPORTED",
+    "THERMAL_RETEST_REQUIRED_AFTER_STABILIZATION"
   ]
 }

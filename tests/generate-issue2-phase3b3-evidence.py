@@ -922,7 +922,8 @@ def make_decision(
         "schemaVersion": 1,
         **metadata(),
         "status": (
-            "AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION"
+            "D2C3_SELECTED_FOR_FINAL_POLISH_"
+            "PENDING_POST_SELECTION_STABILIZATION"
         ),
         "phase3b2HumanProductDecision": {
             "audit": "ISSUE2_PHASE3B2_AUDIT_ACCEPTED",
@@ -934,14 +935,21 @@ def make_decision(
         },
         "candidates": {
             "shadow-off": {
-                "status": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
-                "reviewRole": (
-                    "RETAINED_FINAL_HUMAN_REVIEW_CANDIDATE_NOT_ADOPTED"
+                "status": (
+                    "HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_"
+                    "MOBILE_VISIBILITY"
                 ),
+                "reviewRole": "RETAINED_COMPARISON_HISTORY_NOT_ADOPTED",
                 "rendering": "issue2-phase3b1c-shadow-off",
             },
             "d2c3": {
-                "status": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+                "status": (
+                    "HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF"
+                ),
+                "reviewRole": (
+                    "D2C3_SELECTED_FOR_FINAL_POLISH_"
+                    "PENDING_POST_SELECTION_STABILIZATION"
+                ),
                 "rendering": "issue2-d2c3",
             },
         },
@@ -954,9 +962,20 @@ def make_decision(
         "continuityOmittedPngByteExact": equivalence["allPixelExact"],
         "performanceDifferentialPassed": performance["differentialPassed"],
         "protectedProductFilesByteExact": protected["byteExact"],
-        "humanPcReviewCompleted": False,
-        "physicalIPhoneReviewCompleted": False,
-        "candidateSelected": None,
+        "humanPcReviewCompleted": True,
+        "physicalIPhoneReviewCompleted": True,
+        "thermalReviewCompleted": False,
+        "candidateSelected": "d2c3",
+        "performanceTradeoffAccepted": True,
+        "transparencyDiscontinuitiesAccepted": True,
+        "oitDeferredPostCompletion": True,
+        "cooldownProtocol": "COOLDOWN_PROTOCOL_DEVIATION_5MIN",
+        "thermalDecision": (
+            "THERMAL_ACCEPTED_WITH_MILD_WARMTH_RETEST_REQUIRED"
+        ),
+        "audioCandidateIndependence": (
+            "CANDIDATE_INDEPENDENCE_SUSPECTED_NOT_CONFIRMED"
+        ),
         "candidateAdopted": False,
         "issue2Closed": False,
         "readyForReview": False,
@@ -964,6 +983,11 @@ def make_decision(
         "knownLimitations": [
             "structural transparency 100/99 discontinuity",
             "structural transparency 55/54 discontinuity",
+            "DEFERRED_MOBILE_FULL_LENGTH_FRAMING_AND_ZOOM_LIMIT",
+            "DEFERRED_IOS_BALANCE_AUDIO_PACING_SLOWDOWN",
+            "PROGRESSIVE_FRAME_DROP_NOT_REPORTED",
+            "SAFARI_RELOAD_NOT_REPORTED",
+            "THERMAL_RETEST_REQUIRED_AFTER_STABILIZATION",
         ],
     }
 
@@ -973,12 +997,38 @@ def make_human_review_status() -> dict:
         "schemaVersion": 1,
         **metadata(),
         "status": (
-            "AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION"
+            "D2C3_SELECTED_FOR_FINAL_POLISH_"
+            "PENDING_POST_SELECTION_STABILIZATION"
         ),
-        "pcReviewComplete": False,
-        "physicalIPhoneReviewComplete": False,
+        "pcReviewComplete": True,
+        "physicalIPhoneReviewComplete": True,
         "thermalReviewComplete": False,
-        "selectedCandidate": None,
+        "selectedCandidate": "d2c3",
+        "selectionDecision": (
+            "HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF"
+        ),
+        "shadowOffDecision": (
+            "HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY"
+        ),
+        "performanceTradeoffAccepted": True,
+        "transparencyDiscontinuitiesAccepted": True,
+        "oitDeferredPostCompletion": True,
+        "cooldownProtocol": "COOLDOWN_PROTOCOL_DEVIATION_5MIN",
+        "thermalDecision": (
+            "THERMAL_ACCEPTED_WITH_MILD_WARMTH_RETEST_REQUIRED"
+        ),
+        "progressiveFrameDrop": "NOT_REPORTED",
+        "safariReload": "NOT_REPORTED",
+        "audioCandidateIndependence": (
+            "CANDIDATE_INDEPENDENCE_SUSPECTED_NOT_CONFIRMED"
+        ),
+        "unresolved": [
+            "DEFERRED_MOBILE_FULL_LENGTH_FRAMING_AND_ZOOM_LIMIT",
+            "DEFERRED_IOS_BALANCE_AUDIO_PACING_SLOWDOWN",
+            "PROGRESSIVE_FRAME_DROP_NOT_REPORTED",
+            "SAFARI_RELOAD_NOT_REPORTED",
+            "THERMAL_RETEST_REQUIRED_AFTER_STABILIZATION",
+        ],
         "candidateAdopted": False,
         "issue2Closed": False,
         "readyAllowed": False,

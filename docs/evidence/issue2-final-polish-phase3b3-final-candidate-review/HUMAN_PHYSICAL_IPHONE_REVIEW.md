@@ -1,42 +1,33 @@
-# Phase 3B.3 物理iPhone人間確認票
+# Phase 3B.3 物理iPhone人間確認結果
 
-- status: `AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`
-- physicalIPhoneReviewComplete: `false`
+- status: `D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`
+- physicalIPhoneReviewComplete: `true`
 - thermalReviewComplete: `false`
-- selectedCandidate: `null`
-
-## 共通条件
-
-- 同一端末／iOS／Safari条件
-- 充電ケーブルを外す
-- 低電力モード、画面輝度、端末ケース、室温を記録
-- 候補ごとに15分連続操作
-- 候補間は10分以上、または試験前の体感温度へ戻るまでcooldown
-- Safariタブ起動／ホーム画面起動と試験順序を記録
-
-## 15分操作
-
-回転、zoom-in／out、full-length、opacity、選択、exterior ON／OFF、split、explode、りゅうず、巻上げ、時刻合わせ、秒停止、作動音、学習モードを行う。
+- selectedCandidate: `d2c3`
+- device: iPhone 16 / iOS 26.5.2
+- launch: home screen
+- brightness: 50%
+- lowPowerMode: OFF
+- case: installed
+- roomTemperatureCelsius: 24
+- reviewOrder: Shadow-off -> D2c3
+- cooldownMinutes: 5
+- cooldownProtocol: `COOLDOWN_PROTOCOL_DEVIATION_5MIN`
 
 | 項目 | Shadow-off | D2c3 |
 |---|---|---|
-| 初期表示・立体感 | 未確認 | 未確認 |
-| front／back／角度別輝度差 | 未確認 | 未確認 |
-| exterior OFF | 未確認 | 未確認 |
-| full-length／最大zoom-out | 未確認 | 未確認 |
-| タッチ応答 | 未確認 | 未確認 |
-| 音異常 | 未確認 | 未確認 |
-| progressive frame drop | 未確認 | 未確認 |
-| Safari reload | 未確認 | 未確認 |
-| WebGL context loss | 未確認 | 未確認 |
-| 15分後の発熱 | 未確認 | 未確認 |
-| 操作継続可否 | 未確認 | 未確認 |
-| 総合評価 | 未確認 | 未確認 |
+| 実施時間 | 15分 | 15分 |
+| 初期表示 | 暗い、操作良好 | 明るさ・操作とも良好 |
+| 15分後操作 | 良好 | 良好 |
+| 音 | 時折テンプ音が遅い | 約1分後にテンプ音がやや遅い |
+| 発熱 | やや発熱、許容可能 | やや発熱、許容可能 |
+| full-length | 暗くて見えない | zoom-out余地が少ない |
+| 角度別輝度差 | 暗さが選定上の弱点 | OK |
+| iPhone合格 | いいえ | 合格、安定化課題あり |
 
-D2c3では、zoom-in回転のもっさり感、連続回転、発熱、角度別明暗、gallery highlight、navy／obsidian暗部、Safariタブ／ホーム差を追加確認する。
+- progressiveFrameDrop: `NOT_REPORTED`
+- safariReload: `NOT_REPORTED`
+- thermalDecision: `THERMAL_ACCEPTED_WITH_MILD_WARMTH_RETEST_REQUIRED`
+- audioCandidateIndependence: `CANDIDATE_INDEPENDENCE_SUSPECTED_NOT_CONFIRMED`
 
-- cooldownCompleted: `false`
-- preferredCandidate: `null`
-- notes:
-
-物理iPhone確認だけで自動採用しない。
+冷却時間が当初手順を満たさないため、温度合格は確定せず安定化後に再試験する。

@@ -2,43 +2,44 @@
 
 ## 状態
 
-- review completed: `false`
-- device: `null`
-- iOS／Safari: `null`
-- selected candidate: `null`
+- review completed: `true`
+- device: `iPhone 16`
+- iOS: `26.5.2`
+- launch mode: home-screen launch
+- screen brightness: `50%`
+- low power mode: `OFF`
+- device case: `installed`
+- room temperature: `24°C`
+- review order: `Shadow-off -> D2c3`
+- cooldown: `5 minutes`
+- selected candidate: `d2c3`
+- thermal review completed: `false`
 
-PCで確認対象を絞った後に実施する。候補ごとに15分連続操作し、次の候補へ移る前に端末温度が通常へ戻るまでcooldownを取る。
-
-## 候補ごとの15分確認
+## 候補別15分確認
 
 | 項目 | Shadow-off | D2c3 |
 |---|---|---|
-| 固定commit URL | 未確認 | 未確認 |
-| v3.15.0起動 | 未確認 | 未確認 |
-| front／back／side視認性 | 未確認 | 未確認 |
-| 4 theme | 未確認 | 未確認 |
-| opacity 100／99／55／54／16 | 未確認 | 未確認 |
-| 内部選択、HUD、学習同期、解除 | 未確認 | 未確認 |
-| exterior ON／OFF | 未確認 | 未確認 |
-| split／explode／restore | 未確認 | 未確認 |
-| 回転／pinch zoom | 未確認 | 未確認 |
-| 位置1／位置2 | 未確認 | 未確認 |
-| 巻上げ／時刻合わせ／秒停止 | 未確認 | 未確認 |
-| 作動音OFF→ON | 未確認 | 未確認 |
-| progressive frame drop | 未確認 | 未確認 |
-| Safari reload | 未確認 | 未確認 |
-| タッチ／音の異常 | 未確認 | 未確認 |
-| 15分後の発熱 | 未確認 | 未確認 |
-| console error／warning | 未確認 | 未確認 |
+| 実施時間 | 15分 | 15分 |
+| 初期表示 | 操作は良好だが暗い | 明るさ・操作とも良好 |
+| 15分後操作 | 良好 | 良好 |
+| タッチ | 異常報告なし | 異常報告なし |
+| 音 | テンプ音が時折遅くなる | 約1分後にテンプ音がやや遅くなる |
+| 発熱 | やや発熱、許容可能 | やや発熱、許容可能 |
+| full-length | 暗くて見えない | zoom-out余地が少ない |
+| 角度別輝度差 | 暗部が選定上の弱点 | OK |
+| iPhone判断 | 不合格 | 合格、課題は安定化対象 |
 
-## 記録
+## 未報告項目
 
-- Shadow-off elapsed minutes: `null`
-- Shadow-off thermal observation: `null`
-- D2c3 elapsed minutes: `null`
-- D2c3 thermal observation: `null`
-- cooldown completed: `false`
-- preferred candidate: `null`
-- notes:
+- progressive frame drop: `NOT_REPORTED`
+- Safari reload: `NOT_REPORTED`
 
-物理iPhone確認だけで自動的に採用しない。最終判断票で、人間が性能差・視認性・既知透過制約を明示的に受容した場合だけ次へ進む。
+未報告項目を異常なしへ変換しない。
+
+## 手順差と温度判断
+
+- cooldown protocol: `COOLDOWN_PROTOCOL_DEVIATION_5MIN`
+- thermal decision: `THERMAL_ACCEPTED_WITH_MILD_WARMTH_RETEST_REQUIRED`
+- thermal review completed: `false`
+
+当初手順の10分以上のcooldownを満たしていないため、熱評価は安定化後の再試験を必要とする。テンプ音の遅れは両候補で報告されており、`CANDIDATE_INDEPENDENCE_SUSPECTED_NOT_CONFIRMED`として音響工程へ分離する。

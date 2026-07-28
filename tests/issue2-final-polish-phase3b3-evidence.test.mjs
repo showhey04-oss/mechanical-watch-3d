@@ -203,9 +203,17 @@ test("Phase 3B.3 remains unadopted and the product paths are byte exact", async 
   const urls = await readJson(join(REPORTS, "candidate-urls.json"));
   assert.equal(
     decision.status,
-    "AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION",
+    "D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION",
   );
-  assert.equal(decision.candidateSelected, null);
+  assert.equal(decision.candidateSelected, "d2c3");
+  assert.equal(
+    decision.candidates.d2c3.status,
+    "HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF",
+  );
+  assert.equal(
+    decision.candidates["shadow-off"].status,
+    "HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY",
+  );
   assert.equal(decision.candidateAdopted, false);
   assert.equal(decision.issue2Closed, false);
   assert.equal(protectedPaths.mismatchCount, 0);
@@ -218,10 +226,16 @@ test("Phase 3B.3 remains unadopted and the product paths are byte exact", async 
   assert.equal(urls.urls["shadow-off"].length, 8);
   assert.equal(urls.urls.d2c3.length, 8);
   assert.match(urls.fixedCommit, /^[0-9a-f]{40}$/);
-  assert.equal(human.pcReviewComplete, false);
-  assert.equal(human.physicalIPhoneReviewComplete, false);
+  assert.equal(human.pcReviewComplete, true);
+  assert.equal(human.physicalIPhoneReviewComplete, true);
   assert.equal(human.thermalReviewComplete, false);
-  assert.equal(human.selectedCandidate, null);
+  assert.equal(human.selectedCandidate, "d2c3");
+  assert.equal(
+    human.cooldownProtocol,
+    "COOLDOWN_PROTOCOL_DEVIATION_5MIN",
+  );
+  assert.equal(human.progressiveFrameDrop, "NOT_REPORTED");
+  assert.equal(human.safariReload, "NOT_REPORTED");
   assert.equal(human.candidateAdopted, false);
   assert.equal(human.issue2Closed, false);
   assert.equal(human.readyAllowed, false);

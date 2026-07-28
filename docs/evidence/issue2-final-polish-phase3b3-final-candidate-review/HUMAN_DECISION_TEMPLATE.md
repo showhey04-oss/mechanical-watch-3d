@@ -1,9 +1,11 @@
-# Phase 3B.3 最終人間判断テンプレート
+# Phase 3B.3 最終人間判断記録
 
-- pcReviewComplete: `false`
-- physicalIPhoneReviewComplete: `false`
+- pcReviewComplete: `true`
+- physicalIPhoneReviewComplete: `true`
 - thermalReviewComplete: `false`
-- selectedCandidate: `null`
+- selectedCandidate: `d2c3`
+- decision: `HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`
+- currentStatus: `D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`
 - candidateAdopted: `false`
 - issue2Closed: `false`
 - readyAllowed: `false`
@@ -11,37 +13,27 @@
 
 ## Shadow-off
 
-- PC評価:
-- 物理iPhone評価:
-- 15分温度:
-- 性能体感:
-- 視覚品質:
-- 許容する弱点:
-- 採用可否:
-
-選択時は、D2c3より立体感が弱いこと、遠距離で暗く見える場合があること、本工程で追加照明調整を行わないことを明示受容する。
+- finalStatus: `HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY`
+- PC: 合格
+- iPhone: 初期表示とfull-lengthが暗く不合格
+- comparisonHistoryRetained: `true`
 
 ## D2c3
 
-- PC評価:
-- 物理iPhone評価:
-- 15分温度:
-- 性能体感:
-- 視覚品質:
-- 許容する弱点:
-- 採用可否:
+- PC: 合格
+- iPhone: 合格、安定化課題あり
+- performanceTradeoffAccepted: `true`
+- transparencyDiscontinuitiesAccepted: `true`
+- OITDeferredPostCompletion: `true`
+- defaultAdopted: `false`
 
-選択時は、Shadow-offよりPC性能が低いこと、zoom-in回転のもっさり感、角度別輝度差、RectAreaLight 3灯とPMREMの負荷を明示受容し、物理iPhone15分試験へ合格する必要がある。
+## 安定化待ち
 
-## 使用可能な最終判断
+- mobile full-length framing / zoom limit
+- iOS balance audio pacing slowdown
+- progressive frame drop: `NOT_REPORTED`
+- Safari reload: `NOT_REPORTED`
+- thermal retest after stabilization
+- cooldown: `COOLDOWN_PROTOCOL_DEVIATION_5MIN`
 
-- `HUMAN_SELECT_SHADOW_OFF_FOR_FINAL_POLISH`
-- `HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`
-- `HUMAN_HOLD_FINAL_CANDIDATE_SELECTION`
-
-- decision: `null`
-- rationale:
-- approver:
-- date:
-
-未記入の間、候補は未採用、PRはDraft、Issue #2はOpenのままとする。
+採用、Ready化、マージ、Issue #2クローズは未承認である。

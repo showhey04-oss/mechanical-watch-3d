@@ -2,16 +2,16 @@
 
 ## 結論
 
-Phase 3B.3は、新しい描画方式を実装せず、現行透過方式を共有する次の2候補を最終人間比較用に整理する工程である。
+Phase 3B.3は、新しい描画方式を実装せず、現行透過方式を共有する次の2候補を最終人間比較し、D2c3を性能tradeoff込みの最終候補として選定した工程である。
 
-- Shadow-off: `RETAINED_FINAL_HUMAN_REVIEW_CANDIDATE_NOT_ADOPTED`
-- D2c3: `RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`
+- Shadow-off: `HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY`
+- D2c3: `HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`
 
 現在の状態は次とする。
 
-`AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`
+`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`
 
-候補選定、既定採用、Ready化、マージ、Issue #2のクローズは行っていない。
+D2c3は選定済みだがquery限定・未採用であり、Ready化、マージ、Issue #2のクローズは行っていない。
 
 ## Phase 3B.2の製品判断
 
@@ -139,13 +139,13 @@ Phase 3B.2人間判断commit `b303b8d6192309e21e6dea95595c8e808c258ffe`を基準
 - 100／99と55／54の現行挙動
 - APP_VERSION、試験閾値
 
-## 人間確認
+## 人間確認結果
 
-PCでは同一ブラウザ、同一viewport、同一theme、同一時刻、同一操作順でShadow-offとD2c3を比較する。
+PCはmacOS／Chrome／13.3インチで候補を交互に確認した。両候補ともPC合格だが、D2c3は立体感、金属階調、4 theme、full-length視認性でShadow-offより良好と判断された。D2c3のPC性能tradeoff、zoom-in回転の軽いもっさり感、100／99・55／54の既知不連続、OIT完成後延期を明示受容した。
 
-物理iPhoneでは候補ごとに15分連続操作し、候補間でcooldownを挟む。確認対象は視認性、前後面バランス、金属階調、opacity 16内部視認、選択、外装ON／OFF、split／explode、回転、zoom、wheel相当、音、発熱、Safari reloadである。
+物理iPhone 16／iOS 26.5.2では各候補を15分操作した。Shadow-offは初期表示とfull-lengthが暗く不合格、D2c3は明るさ・操作・角度別輝度差を合格とした。両候補でテンプ音遅れ、両候補で軽い発熱が報告された。冷却は5分で当初手順を満たさないため`COOLDOWN_PROTOCOL_DEVIATION_5MIN`、温度は`THERMAL_ACCEPTED_WITH_MILD_WARMTH_RETEST_REQUIRED`、音は`CANDIDATE_INDEPENDENCE_SUSPECTED_NOT_CONFIRMED`とする。progressive frame dropとSafari reloadは`NOT_REPORTED`である。
 
-回答は[PC確認票](./HUMAN_PC_REVIEW_ISSUE2_PHASE3B3.md)、[物理iPhone確認票](./HUMAN_PHYSICAL_IPHONE_REVIEW_ISSUE2_PHASE3B3.md)、[最終判断票](./HUMAN_DECISION_TEMPLATE_ISSUE2_PHASE3B3.md)へ記録する。自動試験だけで候補を採用しない。
+D2c3は`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`であり、モバイル全長構図、iOS音響ペーシング、温度再試験を完了するまで既定採用しない。
 
 ## 保留
 

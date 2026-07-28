@@ -8,7 +8,9 @@
 - 製品コードを変更せず、現行透過方式のShadow-offとD2c3を最終PC／物理iPhone比較用に整理
 - 2候補×2 viewport×4 theme×16 scenarioの256実WebGL PNG、36操作GIF、132性能run、明示current／省略時同値性、protected product pathsを証跡化。DesktopはPNG byte exact、Mobileは最大12 pixel・3階調のGPU量子化差のみでMaterial／transform／source contract一致
 - D2c3はShadow-off比22性能比較中9比較で差分基準を満たさず、既知の性能tradeoffとして人間確認へ引き継ぐ
-- 状態は`AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`。候補選定、既定採用、Ready化、マージ、Issue #2クローズは未実施
+- PCでは両候補合格、物理iPhoneではShadow-offを暗いfull-length表示のため不合格、D2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として選定
+- D2c3は`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`。モバイル全長構図、iOS音響ペーシング、温度再試験を保留し、既定採用、Ready化、マージ、Issue #2クローズは未実施
+- 冷却5分は`COOLDOWN_PROTOCOL_DEVIATION_5MIN`、progressive frame drop／Safari reloadは`NOT_REPORTED`として記録
 
 ### Issue #2 Final Polish Phase 3B.2
 
