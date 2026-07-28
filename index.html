@@ -208,6 +208,7 @@ import {createIssue2FinalPolishPhase3B1cRuntime} from "./js/issue2-final-polish-
 import {createIssue2Phase3B1cAttributionRuntime} from "./js/issue2-final-polish-phase3b1c-attribution.js";
 import {ISSUE2_FINAL_POLISH_PHASE3B2,resolveIssue2FinalPolishPhase3B2} from "./js/issue2-final-polish-phase3b2-config.js";
 import {createIssue2FinalPolishPhase3B2Runtime} from "./js/issue2-final-polish-phase3b2.js";
+import {ISSUE2_FINAL_POLISH_PHASE3B4A,deriveIssue2MobileFullLengthFit,resolveIssue2FinalPolishPhase3B4a} from "./js/issue2-final-polish-phase3b4a-config.js";
 
 const APP_VERSION='v3.15.0';
 const initialPageParameters=new URLSearchParams(location.search);
@@ -216,6 +217,7 @@ const requestedIssue2Phase3B1Profile=resolveIssue2FinalPolishPhase3B1(initialPag
 const requestedIssue2Phase3B1bProfile=resolveIssue2FinalPolishPhase3B1b(initialPageParameters);
 const requestedIssue2Phase3B1cProfile=resolveIssue2FinalPolishPhase3B1c(initialPageParameters);
 const requestedIssue2Phase3B2Profile=resolveIssue2FinalPolishPhase3B2(initialPageParameters);
+const requestedIssue2Phase3B4aFraming=resolveIssue2FinalPolishPhase3B4a({parameters:initialPageParameters,viewportWidth:innerWidth});
 let issue2Phase3B1bRuntime=null;
 let issue2Phase3B1cRuntime=null;
 let issue2Phase3B1cAttributionRuntime=null;
@@ -232,7 +234,7 @@ renderer.setPixelRatio(adaptivePixelRatio);renderer.setSize(innerWidth,innerHeig
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x0d1015);scene.fog=new THREE.Fog(0x0d1015,68,125);
 const backgroundThemes={navy:{bg:0x0d1015,fog:0x0d1015,exposure:1.08},obsidian:{bg:0x050607,fog:0x070809,exposure:1.12},walnut:{bg:0x1b120d,fog:0x140d09,exposure:1.05},gallery:{bg:0x9da3aa,fog:0xa5a9ae,exposure:.82}};
 let currentBackgroundTheme='navy';function applyBackgroundTheme(name){const selected=backgroundThemes[name]?name:'navy',t=backgroundThemes[selected];currentBackgroundTheme=selected;scene.background.setHex(t.bg);scene.fog.color.setHex(t.fog);renderer.toneMappingExposure=t.exposure;return selected}
-const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,300),controlCamera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,300),renderTarget=new THREE.Vector3(...CAMERA_PRESETS.reset.target);camera.position.fromArray(CAMERA_PRESETS.reset.position);camera.up.fromArray(VIEW_UP).normalize();camera.lookAt(renderTarget);controlCamera.position.copy(camera.position);controlCamera.up.copy(camera.up);controlCamera.quaternion.copy(camera.quaternion);const controls=new ArcballControls(controlCamera,renderer.domElement,scene);controls.target.copy(renderTarget);controls.minDistance=18;controls.maxDistance=120;controls.scaleFactor=1.03;controls.rotateSpeed=.88;controls.enableAnimations=false;controls.enableFocus=false;controls.enableGrid=false;controls.enableGizmos=false;controls.setGizmosVisible(false);controls.update();
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,300),controlCamera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,300),renderTarget=new THREE.Vector3(...CAMERA_PRESETS.reset.target);camera.position.fromArray(CAMERA_PRESETS.reset.position);camera.up.fromArray(VIEW_UP).normalize();camera.lookAt(renderTarget);controlCamera.position.copy(camera.position);controlCamera.up.copy(camera.up);controlCamera.quaternion.copy(camera.quaternion);const controls=new ArcballControls(controlCamera,renderer.domElement,scene);controls.target.copy(renderTarget);controls.minDistance=18;controls.maxDistance=requestedIssue2Phase3B4aFraming.maxDistance;controls.scaleFactor=1.03;controls.rotateSpeed=.88;controls.enableAnimations=false;controls.enableFocus=false;controls.enableGrid=false;controls.enableGizmos=false;controls.setGizmosVisible(false);controls.update();
 let desiredZoomDistance=controlCamera.position.distanceTo(controls.target),zoomInputActive=false;
 let currentCameraPreset='reset';
 function applyCameraPreset(name){const preset=CAMERA_PRESETS[name];if(!preset)return false;const target=new THREE.Vector3(...preset.target),position=new THREE.Vector3(...preset.position);if(preset.fitRadius){const direction=position.clone().sub(target).normalize();const verticalFov=THREE.MathUtils.degToRad(camera.fov),horizontalFov=2*Math.atan(Math.tan(verticalFov/2)*camera.aspect);const fitDistance=preset.fitRadius/Math.tan(Math.min(verticalFov,horizontalFov)/2);position.copy(target).addScaledVector(direction,Math.max(position.distanceTo(target),fitDistance))}for(const viewCamera of [camera,controlCamera]){viewCamera.position.copy(position);viewCamera.up.fromArray(VIEW_UP).normalize();viewCamera.lookAt(target);viewCamera.updateMatrixWorld(true)}controls.target.copy(target);renderTarget.copy(target);controls.update();controls.saveState();desiredZoomDistance=position.distanceTo(target);zoomInputActive=false;currentCameraPreset=name;updateCameraDataset();return true}applyCameraPreset('reset');
@@ -720,6 +722,90 @@ function getPhase3C2StrapBuckleCameraOccupancyReport(){
  const viewports={};
  for(const [id,width,height] of [['desktop-1280x720',1280,720],['mobile-390x844',390,844]]){const phase3c1=projectBounds(world.phase3c1,width,height),phase3c2=projectBounds(world.phase3c2,width,height),combined=projectBounds(world.combined,width,height);viewports[id]={width,height,aspect:Number((width/height).toFixed(6)),front:{phase3c1,phase3c2,combined},fullLengthWheelZoom:{direction:'out',targetOccupancy:0.9,approximateDistanceMultiplier:Number(Math.max(1,combined.shortSideOccupancy/0.9).toFixed(6)),reversible:true}}}
  return {enabled:true,id:FINAL_STRAP_BUCKLE_PHASE3C2.id,cameraConstants:{fov:camera.fov,near:camera.near,far:camera.far,minDistance:controls.minDistance,maxDistance:controls.maxDistance,viewUp:[...VIEW_UP]},cameraConstantsChanged:false,initialWatchHeadCompositionPreserved:true,viewports};
+}
+function getIssue2Phase3B4aSafeArea(){
+ const probe=document.createElement('div');
+ probe.setAttribute('aria-hidden','true');
+ probe.style.cssText='position:fixed;inset:0;visibility:hidden;pointer-events:none;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)';
+ document.body.append(probe);
+ const style=getComputedStyle(probe),value=name=>Number.parseFloat(style.getPropertyValue(name))||0;
+ const safeArea={top:value('padding-top'),right:value('padding-right'),bottom:value('padding-bottom'),left:value('padding-left')};
+ probe.remove();
+ return safeArea;
+}
+function getIssue2Phase3B4aMeasuredPoints(){
+ root.updateMatrixWorld(true);
+ const points=[],partCounts={};
+ root.traverse(object=>{
+  const position=object.geometry?.attributes?.position;
+  if(!position||!visibleHierarchy(object)||object.userData?.auditOverlay===true)return;
+  const partName=object.userData?.partName||object.name||object.parent?.userData?.partName||object.parent?.name||object.type;
+  partCounts[partName]=(partCounts[partName]||0)+position.count;
+  const point=new THREE.Vector3();
+  for(let index=0;index<position.count;index++){
+   point.fromBufferAttribute(position,index).applyMatrix4(object.matrixWorld);
+   if(Number.isFinite(point.x)&&Number.isFinite(point.y)&&Number.isFinite(point.z))points.push({partName,position:[point.x,point.y,point.z]});
+  }
+ });
+ return {points,partCounts};
+}
+function getIssue2Phase3B4aNamedBounds(pattern){
+ root.updateMatrixWorld(true);
+ const box=new THREE.Box3(),matched=[];
+ root.traverse(object=>{
+  const partName=object.userData?.partName||object.name||'';
+  if(!object.geometry||!visibleHierarchy(object)||!pattern.test(partName))return;
+  box.expandByObject(object,true);
+  matched.push(partName);
+ });
+ if(box.isEmpty())return {matchedParts:[],min:null,max:null,size:null,center:null};
+ const size=box.getSize(new THREE.Vector3()),center=box.getCenter(new THREE.Vector3());
+ return {matchedParts:[...new Set(matched)].sort(),min:box.min.toArray().map(value=>Number(value.toFixed(6))),max:box.max.toArray().map(value=>Number(value.toFixed(6))),size:size.toArray().map(value=>Number(value.toFixed(6))),center:center.toArray().map(value=>Number(value.toFixed(6)))};
+}
+function getIssue2Phase3B4aProjection(points,distance){
+ const preset=CAMERA_PRESETS.front,target=new THREE.Vector3(...preset.target),source=new THREE.Vector3(...preset.position),direction=source.sub(target).normalize(),auditCamera=new THREE.PerspectiveCamera(camera.fov,innerWidth/innerHeight,camera.near,camera.far);
+ auditCamera.position.copy(target).addScaledVector(direction,distance);auditCamera.up.fromArray(VIEW_UP).normalize();auditCamera.lookAt(target);auditCamera.updateProjectionMatrix();auditCamera.updateMatrixWorld(true);
+ let minX=Infinity,maxX=-Infinity,minY=Infinity,maxY=-Infinity,minDepth=Infinity,maxDepth=-Infinity,left=null,right=null,top=null,bottom=null;
+ const worldPoint=new THREE.Vector3(),viewPoint=new THREE.Vector3();
+ for(const entry of points){
+  worldPoint.fromArray(entry.position);viewPoint.copy(worldPoint).applyMatrix4(auditCamera.matrixWorldInverse);
+  const depth=-viewPoint.z,ndc=worldPoint.clone().project(auditCamera);
+  if(ndc.x<minX){minX=ndc.x;left=entry}if(ndc.x>maxX){maxX=ndc.x;right=entry}
+  if(ndc.y<minY){minY=ndc.y;bottom=entry}if(ndc.y>maxY){maxY=ndc.y;top=entry}
+  minDepth=Math.min(minDepth,depth);maxDepth=Math.max(maxDepth,depth);
+ }
+ const record=entry=>entry?{partName:entry.partName,position:entry.position.map(value=>Number(value.toFixed(6)))}:null;
+ return {
+  distance:Number(distance.toFixed(6)),
+  ndc:{minX:Number(minX.toFixed(6)),maxX:Number(maxX.toFixed(6)),minY:Number(minY.toFixed(6)),maxY:Number(maxY.toFixed(6))},
+  margins:{left:Number(((minX+1)/2).toFixed(6)),right:Number(((1-maxX)/2).toFixed(6)),top:Number(((1-maxY)/2).toFixed(6)),bottom:Number(((minY+1)/2).toFixed(6))},
+  projectedOccupancy:{width:Number(((maxX-minX)/2).toFixed(6)),height:Number(((maxY-minY)/2).toFixed(6))},
+  depthRange:[Number(minDepth.toFixed(6)),Number(maxDepth.toFixed(6))],
+  nearMargin:Number((minDepth-camera.near).toFixed(6)),farMargin:Number((camera.far-maxDepth).toFixed(6)),
+  clipped:minX < -1||maxX > 1||minY < -1||maxY > 1||minDepth < camera.near||maxDepth > camera.far,
+  limitingParts:{left:record(left),right:record(right),top:record(top),bottom:record(bottom)},
+ };
+}
+function getIssue2Phase3B4aCameraFitReport(){
+ const measured=getIssue2Phase3B4aMeasuredPoints(),preset=CAMERA_PRESETS.front,fit=deriveIssue2MobileFullLengthFit({points:measured.points,target:preset.target,sourcePosition:preset.position,viewUp:VIEW_UP,verticalFovDegrees:camera.fov,aspect:innerWidth/innerHeight,near:camera.near,far:camera.far,viewportMarginRatio:ISSUE2_FINAL_POLISH_PHASE3B4A.viewportMarginRatio,safetyMarginRatio:ISSUE2_FINAL_POLISH_PHASE3B4A.safetyMarginRatio});
+ const world=getPhase3C2StrapBuckleWorldBoundsReport(),safeArea=getIssue2Phase3B4aSafeArea(),panelRect=panel.getBoundingClientRect(),canvasRect=renderer.domElement.getBoundingClientRect(),currentProjection=getIssue2Phase3B4aProjection(measured.points,ISSUE2_FINAL_POLISH_PHASE3B4A.currentMaxDistance),candidateProjection=getIssue2Phase3B4aProjection(measured.points,ISSUE2_FINAL_POLISH_PHASE3B4A.candidateMaxDistance);
+ const combined=world.combined||null,boundingSphere=combined?(()=>{const box=new THREE.Box3(new THREE.Vector3(...combined.min),new THREE.Vector3(...combined.max)),sphere=box.getBoundingSphere(new THREE.Sphere());return {center:sphere.center.toArray().map(value=>Number(value.toFixed(6))),radius:Number(sphere.radius.toFixed(6))}})():null;
+ return {
+  schemaVersion:1,phase:ISSUE2_FINAL_POLISH_PHASE3B4A.id,status:ISSUE2_FINAL_POLISH_PHASE3B4A.status,appVersion:APP_VERSION,documentUrl:location.href,
+  framing:getIssue2Phase3B4aState(),viewport:{width:innerWidth,height:innerHeight,aspect:Number((innerWidth/innerHeight).toFixed(6)),devicePixelRatio,renderPixelRatio:renderer.getPixelRatio(),visualViewport:window.visualViewport?{width:window.visualViewport.width,height:window.visualViewport.height,offsetLeft:window.visualViewport.offsetLeft,offsetTop:window.visualViewport.offsetTop,scale:window.visualViewport.scale}:null,canvas:{left:canvasRect.left,top:canvasRect.top,width:canvasRect.width,height:canvasRect.height},safeArea,bottomSheet:{collapsed:panel.classList.contains('collapsed'),rect:{left:panelRect.left,top:panelRect.top,width:panelRect.width,height:panelRect.height}}},
+  camera:{target:[...preset.target],sourcePosition:[...preset.position],fov:camera.fov,horizontalFov:Number((2*Math.atan(Math.tan(THREE.MathUtils.degToRad(camera.fov)/2)*(innerWidth/innerHeight))*180/Math.PI).toFixed(6)),near:camera.near,far:camera.far,minDistance:controls.minDistance,maxDistance:controls.maxDistance,viewUp:[...VIEW_UP]},
+  bounds:{watchHead:world.phase3c1||null,strapAndAttachments:world.phase3c2||null,buckle:getIssue2Phase3B4aNamedBounds(/尾錠|buckle|つく棒|tang/i),combined,boundingSphere},
+  measuredGeometry:{pointCount:measured.points.length,partCounts:measured.partCounts},
+  fit,currentProjection,candidateProjection,
+  limits:{safeCameraBudget:ISSUE2_FINAL_POLISH_PHASE3B4A.safeCameraBudget,requiredDistanceWithinSafeBudget:fit.distanceWithSafety<=ISSUE2_FINAL_POLISH_PHASE3B4A.safeCameraBudget,nearFarFeasible:fit.nearFarFeasible},
+  invariants:{targetChanged:false,fovChanged:false,nearFarChanged:false,desktopMaxDistanceChanged:innerWidth>ISSUE2_FINAL_POLISH_PHASE3B4A.mobileBreakpointMaxWidth?controls.maxDistance!==ISSUE2_FINAL_POLISH_PHASE3B4A.currentMaxDistance:false,perFrameBoundsCalculations:0,candidateAdopted:false},
+ };
+}
+function getIssue2Phase3B4aState(){return {...requestedIssue2Phase3B4aFraming,controls:{minDistance:controls.minDistance,maxDistance:controls.maxDistance,desiredZoomDistance:Number(desiredZoomDistance.toFixed(6))},camera:{position:camera.position.toArray().map(value=>Number(value.toFixed(6))),quaternion:camera.quaternion.toArray().map(value=>Number(value.toFixed(9))),target:renderTarget.toArray().map(value=>Number(value.toFixed(6))),fov:camera.fov,near:camera.near,far:camera.far},defaultAdopted:false}}
+function setIssue2Phase3B4aDistanceForAudit(value){
+ if(!requestedIssue2Phase3B4aFraming.enabled)throw new Error('Phase 3B.4a framing query is not enabled');
+ const distance=Math.max(controls.minDistance,Math.min(controls.maxDistance,Number(value))),direction=controlCamera.position.clone().sub(controls.target).normalize();
+ controlCamera.position.copy(controls.target).addScaledVector(direction,distance);camera.position.copy(controlCamera.position);controlCamera.lookAt(controls.target);camera.lookAt(renderTarget);controlCamera.updateMatrixWorld(true);camera.updateMatrixWorld(true);controls.update();desiredZoomDistance=distance;zoomInputActive=false;updateCameraDataset();return getIssue2Phase3B4aState();
 }
 function getExteriorAttachmentGeometryReport(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getGeometryReport():{enabled:false,lugs:{},springBars:{},straps:{},buckle:null}}
 function getExteriorAttachmentInterferenceReport(){return exteriorAttachmentRuntime?exteriorAttachmentRuntime.getInterferenceReport():{enabled:false,position1:{attachmentForbiddenCount:0},position2:{attachmentForbiddenCount:0},records:[],intendedContacts:[],forbiddenInterferenceCount:0}}
@@ -1514,12 +1600,17 @@ if(initialPageParameters.get('issue2Phase3B1cAttribution')==='1'){
 }
 function getIssue2Phase3B1cShadowCasterInventory(){return issue2Phase3B1cAttributionRuntime?issue2Phase3B1cAttributionRuntime.getInventory():{enabled:false,queryOnly:true,status:'DISABLED_PROTECTED_PATH'}}
 async function captureIssue2Phase3B1cShadowCasterGroup(options){if(!issue2Phase3B1cAttributionRuntime)throw new Error('Phase 3B.1c attribution query is not enabled');return issue2Phase3B1cAttributionRuntime.captureGroup(options)}
+if(requestedIssue2Phase3B4aFraming.enabled){
+ document.body.dataset.issue2Phase3B4aFraming=requestedIssue2Phase3B4aFraming.framing;
+ document.body.dataset.issue2Phase3B4aApplied=String(requestedIssue2Phase3B4aFraming.applied);
+ document.body.dataset.issue2Phase3B4aStatus=requestedIssue2Phase3B4aFraming.status;
+}
 window.watchModelDiagnostics={
  config:WATCH_MECHANISM,validation:mechanismConfigReport,
  getState:()=>currentMechanismState,getMovingParts:()=>WATCH_MECHANISM.motionStates[currentMechanismState]||[],getStructuralOpacity:()=>structuralOpacityRatio,getStructuralTargetCount:()=>structuralOpacityTargets.length,getCrownPosition:()=>crownPosition,getCrownTransition:()=>crownTransition,getKeylessPositionGeometry,getKeylessBasePositions,getKeylessDriftReport,runCrownPositionCycleTest,holdCrownPosition,getSelection:()=>selectedRoot?.userData?.partName||null,getInputAngle:()=>settingInputAngle,
  getPartRotations,getWindingPartRotations,getKinematicAngles:()=>({...currentMotionWorksState.angles}),getConnectedPath:()=>[...motionRuntimeConnections.filter(connection=>currentMotionWorksState.activeConnections.includes(connection.id)),...windingRuntimeConnections.filter(connection=>currentWindingState.activeConnections.includes(connection.id))].map(connection=>({id:connection.id,input:connection.input,output:connection.output,permanent:connection.permanent,inputObject:connection.inputObject?.uuid??null,outputObject:connection.outputObject?.uuid??null})),
  getMotionWorksTopology,getWindingTopology,getWindingTransmissionReport,getRatchetState,getBarrelEnergyState,getFrontConvention,getDialProjectionReport,getHandScreenDirectionReport,getMotionSource,getPermanentMeshAngles,getClutchConnectionState,getHandCouplingReport,getGearModuleReport,getStateTransitionContinuityReport:()=>({...stateTransitionContinuityReport}),getInterferenceReport,getPickLayerReport,getCameraManipulating:()=>cameraGestureActive,getCameraControlType:()=> 'ArcballControls',getCameraOrientation,getCameraQuaternion:()=>camera.quaternion.toArray(),getCameraTarget:()=>renderTarget.toArray(),getCameraSmoothingState,getViewUpConvention,getRotationFreedomReport,getLightingRigReport,getVisibleLightContributionReport,getFrontBackLuminanceReport,getIssue2FinalPolishState,getIssue2FinalPolishLightingReport,getIssue2FinalPolishFrameMetrics,getIssue2FinalPolishOpacityAudit,getIssue2FinalPolishReport,getIssue2Phase3B1State,getIssue2Phase3B1ShadowReport,getIssue2Phase3B1CompletedWatchBoundsReport,getIssue2Phase3B1bState,getIssue2Phase3B1bShadowReport,getIssue2Phase3B1bStateBoundsReport,getIssue2Phase3B1cState,getIssue2Phase3B1cShadowReport,getIssue2Phase3B1cShadowCasterInventory,captureIssue2Phase3B1cShadowCasterGroup,getIssue2Phase3B2State,getIssue2Phase3B2MaterialInventory,getIssue2Phase3B2PropertyContinuity,getIssue2Phase3B2DiscontinuityDiagnosis,getModelWorldSignature,getViewportReport:()=>({width:innerWidth,height:innerHeight,devicePixelRatio,renderPixelRatio:renderer.getPixelRatio(),coarsePointer:matchMedia('(pointer: coarse)').matches,panelOpen:panel.classList.contains('open'),panelCollapsed:panel.classList.contains('collapsed')}),getMobileOverlayHudReport,getTimeInputReport,getToggleCardReport,getSoundUiReport,parseTimeInputValue,clearTimeInputDiagnostics,getUiRegressionState,startPerformanceCapture,stopPerformanceCapture,getFramePacingReport,getCameraMotionSmoothnessReport,getZoomSmoothnessReport,getAdaptivePixelRatioState,getInteractionQualityMode:()=>interactionQualityMode,getRenderCostBreakdown,runPerformanceScenario,simulateArcballDrag,simulateTouchGesture,getWatchTime:()=>watchTimeSec,getPowerReserve:()=>powerReserveHours,getLiveSyncState:()=>({enabled:liveSync,offsetSec:liveSyncOffsetSec,transitionMs:LIVE_SYNC_TRANSITION_MS,progress:liveSync?Math.min(1,(performance.now()-liveSyncTransitionStartedAt)/LIVE_SYNC_TRANSITION_MS):0}),getAudioDiagnostics:()=>({...mechanicalAudio.getDiagnostics(),mechanismIntegrity:{...lastAudioMechanismIntegrity}}),getCrownDetentAudioReport:()=>({...lastCrownDetentAudioReport}),clearAudioEventLog:()=>mechanicalAudio.clearEventLog(),startAudioEvidenceRecording,stopAudioEvidenceRecording,
- getDimensionDiagnostics,getYDatumMap,getYEnvelopeBreakdown,getYLayerStack,getOfficialHeightDatumAssessment,captureAuditViewportPng,capturePhase3C2AuditViewportPng,installDimensionAuditOverlay,getExteriorCandidateState,getExteriorDimensionReport,getExteriorInterferenceReport,getExteriorSelectionReport,getExteriorMaterialReport,getExteriorInterfaceReport,setExteriorDiagnosticMaterialMode,selectPartByNameForAudit,getExteriorAttachmentState,getExteriorAttachmentGeometryReport,getExteriorAttachmentInterferenceReport,getExteriorAttachmentSelectionReport,getExteriorAttachmentMaterialReport,getExteriorAttachmentWorldBoundsReport,getExteriorAttachmentCameraOccupancyReport,getExteriorAttachmentVisibilityReport,setExteriorAttachmentVisibility,getPhase3C1WatchHeadState,getPhase3C1GeometryReport,getPhase3C1OpenHeartReport,getPhase3C1MaterialReport,getPhase3C1SelectionReport,getPhase3C1DisplayGroupReport,getPhase3C1ExteriorGroupReport,setPhase3C1ExteriorGroupVisible,getPhase3C1CrystalDiagnosticReport,setPhase3C1CrystalDiagnosticVisible,getPhase3C2StrapBuckleState,getPhase3C2StrapBuckleGeometryReport,getPhase3C2StrapBuckleInterferenceReport,getPhase3C2StrapBuckleSelectionReport,getPhase3C2StrapBuckleMaterialReport,getPhase3C2StrapBuckleWorldBoundsReport,getPhase3C2StrapBuckleCameraOccupancyReport,getPhase3C2StrapBuckleDisplayReport,getPhase3C2DefectDiagnosticReport,setPhase3C2DiagnosticMode,getPhase3C3IntegrationState,getPhase3C3IntegrationObjectAudit,getPhase3C3SelectionReport,getPhase3C3ProportionAudit,getPhase3C3UiDecisionReport,getPhase3C3Issue2HandoffReport,getPickHitStack,pickAtForAudit,inspectPickAtWorldPoint,findProjectedPickSampleForPart,getWebGLContextReport,
+ getDimensionDiagnostics,getYDatumMap,getYEnvelopeBreakdown,getYLayerStack,getOfficialHeightDatumAssessment,captureAuditViewportPng,capturePhase3C2AuditViewportPng,installDimensionAuditOverlay,getExteriorCandidateState,getExteriorDimensionReport,getExteriorInterferenceReport,getExteriorSelectionReport,getExteriorMaterialReport,getExteriorInterfaceReport,setExteriorDiagnosticMaterialMode,selectPartByNameForAudit,getExteriorAttachmentState,getExteriorAttachmentGeometryReport,getExteriorAttachmentInterferenceReport,getExteriorAttachmentSelectionReport,getExteriorAttachmentMaterialReport,getExteriorAttachmentWorldBoundsReport,getExteriorAttachmentCameraOccupancyReport,getExteriorAttachmentVisibilityReport,setExteriorAttachmentVisibility,getPhase3C1WatchHeadState,getPhase3C1GeometryReport,getPhase3C1OpenHeartReport,getPhase3C1MaterialReport,getPhase3C1SelectionReport,getPhase3C1DisplayGroupReport,getPhase3C1ExteriorGroupReport,setPhase3C1ExteriorGroupVisible,getPhase3C1CrystalDiagnosticReport,setPhase3C1CrystalDiagnosticVisible,getPhase3C2StrapBuckleState,getPhase3C2StrapBuckleGeometryReport,getPhase3C2StrapBuckleInterferenceReport,getPhase3C2StrapBuckleSelectionReport,getPhase3C2StrapBuckleMaterialReport,getPhase3C2StrapBuckleWorldBoundsReport,getPhase3C2StrapBuckleCameraOccupancyReport,getPhase3C2StrapBuckleDisplayReport,getPhase3C2DefectDiagnosticReport,setPhase3C2DiagnosticMode,getPhase3C3IntegrationState,getPhase3C3IntegrationObjectAudit,getPhase3C3SelectionReport,getPhase3C3ProportionAudit,getPhase3C3UiDecisionReport,getPhase3C3Issue2HandoffReport,getIssue2Phase3B4aState,getIssue2Phase3B4aCameraFitReport,setIssue2Phase3B4aDistanceForAudit,getPickHitStack,pickAtForAudit,inspectPickAtWorldPoint,findProjectedPickSampleForPart,getWebGLContextReport,
 	 setWatchTime:value=>{const before=transitionSnapshot();setWatchTime(Number(value)||0);return recordStateTransition('explicit-time',before)},setCrownPosition,setCrownTurnRate,setRunning:value=>{running=Boolean(value)},setRuntimeScale:value=>{runtimeScale=Math.max(.1,Number(value)||1);runtimeScaleInput.value=String(runtimeScale)},setPowerReserve:value=>{powerReserveHours=Math.max(0,Math.min(52,Number(value)||0))},setLiveSync:value=>setSyncUI(Boolean(value)),setStructuralOpacity:applyStructuralOpacity,setBackgroundTheme:value=>{const control=document.getElementById('backgroundTheme');control.value=applyBackgroundTheme(value);return control.value},setPanelOpen:setPanelExpanded,setFunctionalMode:value=>{const control=document.getElementById('mode');control.value=value;control.dispatchEvent(new Event('change'));return control.value},setAudioVisibilityForTest:visible=>{audioEventResetPending=true;pendingCrownAudioDetent=null;return mechanicalAudio.setVisible(Boolean(visible))},disableAudio:()=>{pendingCrownAudioDetent=null;return mechanicalAudio.disable()},clearSelectionInfo,pickProjectedPart,simulateBlankPointerTap,waitForFrames,applyCameraPreset
 };
 if(initialPageParameters.get('dimensionAudit')==='1'){waitForFrames(8).then(()=>{const report=getDimensionDiagnostics(),output=document.createElement('output');output.setAttribute('id','dimensionAuditResult');output.hidden=true;output.value=JSON.stringify(report);output.textContent=JSON.stringify(report);output.dataset.status=report.transformInvariant.unchanged?'passed':'failed';document.body.append(output);window.dimensionAuditResult=report;const overlayMode=initialPageParameters.get('dimensionOverlay');if(overlayMode)installDimensionAuditOverlay(overlayMode);document.body.dataset.dimensionAuditStatus=output.dataset.status})}

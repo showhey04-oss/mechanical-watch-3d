@@ -12,6 +12,7 @@ const rendering = {
 }[candidate];
 const upload = params.get("upload") === "1";
 const externalAudioGesture = params.get("externalAudioGesture") === "1";
+const phase3b4a = params.get("phase3b4a") === "1";
 const suiteMap = {
   browser: ["browserTest", "browserTestResult"],
   ui: ["uiTest", "uiTestResult"],
@@ -27,7 +28,9 @@ const wait = milliseconds =>
 
 async function uploadJson(path, value) {
   if (!upload) return null;
-  const response = await fetch("/__phase3b3_upload", {
+  const response = await fetch(
+    phase3b4a ? "/__phase3b4a_upload" : "/__phase3b3_upload",
+    {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -61,9 +64,11 @@ async function publish(result, resultStatus) {
   document.body.dataset.suiteStatus = resultStatus;
   if (resultStatus === "passed" || resultStatus === "failed") {
     const viewport = `${width}x${height}`;
+    const evidenceFolder = phase3b4a
+      ? "issue2-final-polish-phase3b4a-mobile-full-length-framing"
+      : "issue2-final-polish-phase3b3-final-candidate-review";
     const path =
-      "docs/evidence/" +
-      "issue2-final-polish-phase3b3-final-candidate-review/" +
+      `docs/evidence/${evidenceFolder}/` +
       `reports/suite-${suite}-${candidate}-${viewport}.json`;
     const saved = await uploadJson(path, result);
     if (saved) document.body.dataset.uploaded = "true";
@@ -94,6 +99,9 @@ if (!selectedSuite || !rendering) {
     [queryName]: "1",
     cache: params.get("cache") || String(Date.now()),
   });
+  if (phase3b4a) {
+    query.set("framing", "issue2-mobile-full-length-fit");
+  }
   frame.src = `../index.html?${query}`;
 
   (async () => {
