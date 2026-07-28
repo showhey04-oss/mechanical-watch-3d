@@ -57,6 +57,8 @@ Issue #2 Phase 3B.2はShadow-offとD2c3をdual baselineとし、13 opacityで`tr
 
 Issue #2 Phase 3B.3は新しい描画方式を追加せず、現行透過方式を共有するShadow-offとD2c3の最終人間レビューpackageを作成した。PCでは両候補合格、物理iPhone 15分ではShadow-offを暗いfull-length表示のため不合格、D2c3を性能tradeoff込みで合格・選定した。D2c3は既定採用せず、モバイル全長構図、iOS音響ペーシング、温度再試験を安定化工程へ残す。冷却5分は`COOLDOWN_PROTOCOL_DEVIATION_5MIN`、progressive frame dropとSafari reloadは`NOT_REPORTED`である。
 
+Issue #2 Phase 3B.4aは、選定D2c3のモバイル全長構図だけをquery限定で変更する。390×844の実Geometry 407,428頂点からraw fit 199.068109、2.5%安全余裕込み204.044811を導出し、静的`maxDistance=204.1`を採用候補とした。最小余白4.0265%、near／far clipping 0、初期／復帰32比較とDesktop固定画像48比較はpixel exact、Desktop selected 8比較は選択・camera・transform exact、pinch／wheel、復帰、差分性能6比較に合格した。判定は`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`で、物理iPhone未確認、query限定、未採用、Issue #2 Openを維持する。
+
 ケース胴はY=-2.860～4.635の単一閉合Meshとし、外径38.900→39.600→38.900の前後テーパー、内径37.800不変、実りゅうず包絡に対する局所逃げを持つ。局所逃げは必要最小0.249174から生成後gapを再計測して0.304118を採用し、上限0.330、位置1gap 0.030063、最小壁厚0.550000を満たす。CSGは使用せず、りゅうず―チューブの0.056857シート関係は`PHASE3B1_IMPLEMENTATION_ASSUMPTION`のまま禁止干渉から分離する。
 
 ## 本体完成要件

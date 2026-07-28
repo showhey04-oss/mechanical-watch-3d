@@ -2,6 +2,14 @@
 
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
 
+### Issue #2 Final Polish Phase 3B.4a
+
+- Phase 3B.3で選定されたD2c3のモバイル全長構図をquery限定で安定化
+- 390×844の完成時計407,428頂点からraw fit 199.068109、安全余裕込み204.044811を算定し、幅420以下だけ`maxDistance=204.1`を適用
+- 初期／復帰32/32とDesktop固定画像48/48をPNG byte exact、Desktop selected 8/8をstate exact、最小余白4.0265%、near／far clipping 0、pinch／wheel reversal 0、selection／restore合格
+- 224 actual WebGL PNG、26 motion frame、6 board、3 GIF、Desktop／Mobile各3反復の差分性能を保存
+- 判定は`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`。物理iPhone確認待ち、query限定、未採用、Issue #2 Open、PR #5 Open／Draftを維持
+
 ### Issue #2 Final Polish Phase 3B.3
 
 - Phase 3B.2の人間判断を記録し、現行100／99・55／54不連続を既知制約として受容、OITを完成後へ延期

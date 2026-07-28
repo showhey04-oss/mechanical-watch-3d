@@ -404,6 +404,19 @@
 - 冷却5分を`COOLDOWN_PROTOCOL_DEVIATION_5MIN`、progressive frame drop／Safari reloadを`NOT_REPORTED`として保存し、異常なしへ補完しない
 - D2c3を`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`とし、既定採用、Ready化、マージ、Issue #2クローズを行わない
 
+## Issue #2 Final Polish Phase 3B.4a — Mobile full-length framing
+
+- 完成時計の実Geometry全頂点から390×844、FOV 42、target不変のfit距離を算定し、必要距離240超では実装を停止する
+- raw fit 199.068109、安全余裕込み204.044811、静的候補`maxDistance=204.1`を記録する
+- 候補は完成外装＋D2c3／Shadow-off＋`framing=issue2-mobile-full-length-fit`＋幅420以下だけに適用する
+- 初期camera、target、FOV、near／far、Desktop `maxDistance=120`、Geometry、Light、fog、Material、透過、UI、audioを不変にする
+- D2c3／Shadow-off、2 viewport、4 theme、7 captureの224 actual WebGL PNGを保存する
+- Mobile最大距離で上下ストラップ、尾錠、ケースを含み、各辺3%以上、clipping 0、fog完全消失0とする
+- pinch／wheelを単調、reversal 0、stop-then-jump 0、target drift 0、transform invariant trueとする
+- 最大距離で部品選択・解除・初期距離復帰を確認する
+- current／fitを3反復し、平均fps悪化5%以内、p95悪化2ms以内、per-frame bounds計算0、閾値変更0を確認する
+- 判定を`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`とし、物理iPhone確認前に既定採用、Ready化、マージ、Issue #2クローズを行わない
+
 ## M. v3.14 機構同期作動音 Phase 1
 
 - 初期表示で作動音はOFF、`AudioContext`は未生成、音源は未読込で、自動再生しない

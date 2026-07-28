@@ -110,6 +110,9 @@
 - Shadow-offはiPhoneの暗いfull-length表示により`HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY`とし、比較履歴を維持する
 - D2c3は`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`でquery限定・未採用を維持する
 - モバイルmaxDistanceのquery限定候補を実測fit距離から検証し、初期表示、Desktop、D2c3描画、選択、操作、性能を保護する
+- 407,428頂点からraw fit 199.068109、安全余裕込み204.044811を導出し、静的`maxDistance=204.1`を技術候補とする
+- 390×844の最小余白4.0265%、clipping 0、初期表示32/32とDesktop固定画像48/48 pixel exact、Desktop selected 8/8 state exact、操作・性能差分合格を確認する
+- 判定は`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`。物理iPhone 5分以上の全長、pinch、preset、選択、reload、context loss確認を次の人間ゲートとする
 - iOSテンプ音ペーシング、温度再試験、未報告のprogressive frame drop／Safari reloadは別保留とする
 - 安定化と物理iPhone再確認前にReady化、マージ、既定採用、Issue #2クローズを行わない
 

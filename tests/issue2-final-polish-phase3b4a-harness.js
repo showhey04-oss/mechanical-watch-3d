@@ -100,13 +100,13 @@ async function captureScenario(diagnostics, report, scenario) {
   let distanceMultiplier = 1;
   let capturePreset = "current";
   if (scenario.maximum) {
-    if (framing) {
+    const state = diagnostics.getIssue2Phase3B4aState();
+    if (framing && state.applied) {
       diagnostics.setIssue2Phase3B4aDistanceForAudit(
-        diagnostics.getIssue2Phase3B4aState().candidateMaxDistance,
+        state.candidateMaxDistance,
       );
       await diagnostics.waitForFrames(4);
     } else {
-      const state = diagnostics.getIssue2Phase3B4aState();
       distanceMultiplier = state.currentMaxDistance
         / state.controls.desiredZoomDistance;
       capturePreset = scenario.cameraPreset;

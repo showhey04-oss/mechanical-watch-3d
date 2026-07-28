@@ -38,6 +38,8 @@ Issue #2 Final Polish Phase 3B.2では、100%→99%の`transparent`と55%→54%�
 
 Issue #2 Final Polish Phase 3B.3は製品コードを変更せず、`continuity=issue2-current`を共有するShadow-offとD2c3を、2 viewport×4 theme×16 scenarioの実WebGL PNG 256枚、36操作GIF、11 scenario×3反復×2候補×2 viewportの性能測定で最終人間比較用に整理した。PCでは両候補合格、物理iPhoneではShadow-offを暗いfull-length表示のため不合格、D2c3を性能tradeoff込みで合格・選定した。D2c3はまだ既定採用せず、Shadow-offは比較履歴として保持する。冷却5分は手順差、progressive frame dropとSafari reloadは`NOT_REPORTED`、テンプ音遅れは候補独立性未確定として後続安定化へ分離する。
 
+Issue #2 Final Polish Phase 3B.4aは、選定D2c3のモバイル全長構図をquery限定で安定化する。390×844の完成時計407,428頂点からraw fit距離199.068109、2.5%安全余裕込み204.044811を算定し、`framing=issue2-mobile-full-length-fit`時だけモバイル`maxDistance=204.1`を適用する。初期表示32/32とDesktop固定画像48/48はPNG byte exact、Desktop selected 8/8は選択・camera・transform exact、最小余白4.0265%、clipping 0、pinch／wheel reversal 0、性能差分6/6合格である。状態は`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`で、物理iPhone確認前に既定採用、Ready化、マージ、Issue #2クローズを行わない。
+
 ## 実装済み
 
 - 輪列側／文字板側の分離
