@@ -7,11 +7,27 @@
   "appVersion": "v3.15.0",
   "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
   "defaultAdopted": false,
-  "status": "ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST",
+  "status": "ISSUE2_PHASE3B1C_AUDIT_ACCEPTED_SHADOW_ROUTE_EXHAUSTED",
+  "technicalResult": "ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST",
+  "auditAccepted": true,
   "stage0": {
     "status": "CONCLUSIVE",
     "majorCasterGroup": "dial-exterior",
-    "hypothesis": "OPAQUE_SHADOW_DEPTH_FOR_TRANSPARENT_STRUCTURAL_MESHES_SUSPECTED"
+    "hypothesis": "OPAQUE_SHADOW_DEPTH_FOR_TRANSPARENT_STRUCTURAL_MESHES_SUSPECTED",
+    "hypothesisQualification": "SUSPECTED_NOT_PROVEN",
+    "meshCount": 589,
+    "casterCount": 553,
+    "receiverCount": 553,
+    "dialExteriorCasterCount": 241,
+    "structuralOpacityTargetCount": 135,
+    "structuralCasterReceiverOverlapCount": 106,
+    "customDepthMaterialCount": 0,
+    "alphaTestMaterialCount": 0,
+    "shadowDepthTargetCountInvariantAtOpacity100And16": true
+  },
+  "baseline": {
+    "status": "HUMAN_REJECTED_RENDERING_BASELINE",
+    "adopted": false
   },
   "candidateDecisions": {
     "issue2-phase3b1c-baseline": [
@@ -40,7 +56,23 @@
   },
   "issue2": "OPEN",
   "pr5": "OPEN_DRAFT_UNCHANGED",
-  "nextStep": "Human product decision between retained Shadow-off and D2c3; no additional shadow-route experiment is recommended.",
   "stage2Performed": false,
+  "physicalIPhonePerformed": false,
+  "shadowExperimentRouteClosed": true,
+  "prohibitedFollowUpExperiments": [
+    "shadow-camera-fit",
+    "shadow-map-2048",
+    "attenuation-curve-retune",
+    "bias-sweep",
+    "custom-depth-material",
+    "alpha-test-shadow-material",
+    "alpha-hash",
+    "dithered-transparency",
+    "opacity-threshold-cast-shadow-toggle",
+    "opacity-threshold-receive-shadow-toggle",
+    "additional-shadow-light",
+    "fog-retune"
+  ],
+  "nextStep": "Evaluate transparency continuity without reopening the shadow route.",
   "candidateAdopted": false
 }

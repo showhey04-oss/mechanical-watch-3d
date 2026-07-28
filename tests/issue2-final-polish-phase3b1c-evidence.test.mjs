@@ -64,17 +64,28 @@ test("Phase 3B.1c required reports are present and parseable", () => {
   }
 });
 
-test("Phase 3B.1c decision closes the shadow route without adoption", () => {
+test("Phase 3B.1c audit accepts the evidence and closes the shadow route", () => {
   const decision = readJson(join(REPORTS, "decision-summary.json"));
   const stage2 = readJson(join(REPORTS, "stage2-status.json"));
   assert.equal(
     decision.status,
+    "ISSUE2_PHASE3B1C_AUDIT_ACCEPTED_SHADOW_ROUTE_EXHAUSTED",
+  );
+  assert.equal(
+    decision.technicalResult,
     "ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST",
   );
+  assert.equal(decision.auditAccepted, true);
   assert.equal(decision.stage2Performed, false);
+  assert.equal(decision.physicalIPhonePerformed, false);
   assert.equal(decision.candidateAdopted, false);
+  assert.equal(decision.shadowExperimentRouteClosed, true);
   assert.equal(stage2.performed, false);
   assert.equal(stage2.technicalFinalistCount, 0);
+  assert.equal(
+    decision.baseline.status,
+    "HUMAN_REJECTED_RENDERING_BASELINE",
+  );
   assert.equal(
     decision.shadowOff.status,
     "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
@@ -83,6 +94,18 @@ test("Phase 3B.1c decision closes the shadow route without adoption", () => {
     decision.d2c3.status,
     "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
   );
+  assert.equal(decision.stage0.casterCount, 553);
+  assert.equal(decision.stage0.dialExteriorCasterCount, 241);
+  assert.equal(decision.stage0.structuralOpacityTargetCount, 135);
+  assert.equal(decision.stage0.structuralCasterReceiverOverlapCount, 106);
+  assert.equal(decision.stage0.customDepthMaterialCount, 0);
+  assert.equal(decision.stage0.alphaTestMaterialCount, 0);
+  assert.equal(
+    decision.stage0.shadowDepthTargetCountInvariantAtOpacity100And16,
+    true,
+  );
+  assert.ok(decision.prohibitedFollowUpExperiments.includes("shadow-camera-fit"));
+  assert.ok(decision.prohibitedFollowUpExperiments.includes("alpha-hash"));
 });
 
 test("Phase 3B.1c attribution and attenuation invariants are complete", () => {

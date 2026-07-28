@@ -844,13 +844,29 @@ def make_stage_summaries(
     decision = {
         "schemaVersion": 1,
         **metadata(),
-        "status": "ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST",
+        "status": "ISSUE2_PHASE3B1C_AUDIT_ACCEPTED_SHADOW_ROUTE_EXHAUSTED",
+        "technicalResult": "ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST",
+        "auditAccepted": True,
         "stage0": {
             "status": attribution["status"],
             "majorCasterGroup": attribution["majorCasterGroup"],
             "hypothesis": attribution["hypothesis"],
+            "hypothesisQualification": "SUSPECTED_NOT_PROVEN",
+            "meshCount": 589,
+            "casterCount": 553,
+            "receiverCount": 553,
+            "dialExteriorCasterCount": 241,
+            "structuralOpacityTargetCount": 135,
+            "structuralCasterReceiverOverlapCount": 106,
+            "customDepthMaterialCount": 0,
+            "alphaTestMaterialCount": 0,
+            "shadowDepthTargetCountInvariantAtOpacity100And16": True,
         },
         "candidateDecisions": decisions,
+        "baseline": {
+            "status": "HUMAN_REJECTED_RENDERING_BASELINE",
+            "adopted": False,
+        },
         "shadowOff": {
             "status": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
             "adopted": False,
@@ -863,11 +879,24 @@ def make_stage_summaries(
         },
         "issue2": "OPEN",
         "pr5": "OPEN_DRAFT_UNCHANGED",
-        "nextStep": (
-            "Human product decision between retained Shadow-off and D2c3; "
-            "no additional shadow-route experiment is recommended."
-        ),
         "stage2Performed": False,
+        "physicalIPhonePerformed": False,
+        "shadowExperimentRouteClosed": True,
+        "prohibitedFollowUpExperiments": [
+            "shadow-camera-fit",
+            "shadow-map-2048",
+            "attenuation-curve-retune",
+            "bias-sweep",
+            "custom-depth-material",
+            "alpha-test-shadow-material",
+            "alpha-hash",
+            "dithered-transparency",
+            "opacity-threshold-cast-shadow-toggle",
+            "opacity-threshold-receive-shadow-toggle",
+            "additional-shadow-light",
+            "fog-retune",
+        ],
+        "nextStep": "Evaluate transparency continuity without reopening the shadow route.",
         "candidateAdopted": False,
     }
     return stage1_summary, stage2, decision

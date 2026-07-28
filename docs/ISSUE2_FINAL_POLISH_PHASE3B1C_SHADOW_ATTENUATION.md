@@ -3,15 +3,18 @@
 ## 結論
 
 正式判定は
-`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`
-である。
+`ISSUE2_PHASE3B1C_AUDIT_ACCEPTED_SHADOW_ROUTE_EXHAUSTED`
+である。比較監査そのものは合格し、技術結果
+`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`を正式記録した。
+候補採用を意味するものではない。
 
 Stage 0のcaster attributionは完了し、低opacity時の中央矩形境界と
 斜め帯を再現する主要caster群を`dial-exterior`へ絞り込んだ。
 `customDepthMaterial`と`alphaTest`は0件で、opacity 100%と16%の
 shadow depth対象数も同一だった。この結果は
 `OPAQUE_SHADOW_DEPTH_FOR_TRANSPARENT_STRUCTURAL_MESHES_SUSPECTED`
-を最有力仮説として支持するが、Three.js内部実装の断定には用いない。
+を最有力仮説として支持するが、証明済み原因ではなく
+`SUSPECTED_NOT_PROVEN`として扱い、Three.js内部実装の断定には用いない。
 
 opacity連動attenuationは中央矩形境界と広い斜め帯を視認不能な水準へ
 低減し、性能差分にも合格した。しかし前後面輝度バランスの
@@ -180,6 +183,7 @@ Nodeは253/253、console error／warningは0、試験閾値や製品コードに
 ## 判定
 
 - baseline：`RETAINED_DIAGNOSTIC_ONLY`
+- baseline人間判断：`HUMAN_REJECTED_RENDERING_BASELINE`
 - Shadow-off：`HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL`
 - attenuation：`REJECTED_FRONT_BACK_BALANCE`
 - attenuation＋bias：
@@ -187,7 +191,7 @@ Nodeは253/253、console error／warningは0、試験閾値や製品コードに
 - Stage 2：未実施
 - 技術finalist：0
 - 最終状態：
-  `ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`
+  `ISSUE2_PHASE3B1C_AUDIT_ACCEPTED_SHADOW_ROUTE_EXHAUSTED`
 
 Shadow-offは軽量対抗案として残すが、立体感とズームアウト時の暗さが
 未解決で、人間確認前に採用しない。D2c3は
@@ -197,7 +201,10 @@ PR #5はOpen／Draftのまま維持する。
 
 ## 次の判断
 
-追加のshadow camera、mapSize、bias sweep、depth Material方式は
-探索しない。製品判断として残すのはShadow-offとD2c3の2案であり、
+shadow camera fit、mapSize 2048、attenuation curve再調整、bias sweep、
+customDepthMaterial、alphaTest、alphaHash、dithered transparency、
+opacity閾値によるcastShadow／receiveShadow切替、shadow light追加、
+fog再調整は探索しない。shadow実験経路は終了し、次工程では既存の
+Shadow-offとD2c3を保持したまま透過連続性だけを評価する。
 どちらも自動採用しない。人間が妥協案を選ぶ場合はPC実操作、
 物理iPhone、15分温度確認と明示承認を別途必要とする。

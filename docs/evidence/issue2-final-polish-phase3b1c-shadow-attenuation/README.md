@@ -2,10 +2,12 @@
 
 ## 判定
 
-`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`
+`ISSUE2_PHASE3B1C_AUDIT_ACCEPTED_SHADOW_ROUTE_EXHAUSTED`
 
 このフォルダは、完成外装query限定のopacity-coupled shadow attenuation
-4候補を比較した証跡である。通常pathへ候補を採用していない。
+4候補を比較した合格済み監査証跡である。技術結果は
+`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`で、通常pathへ
+候補を採用していない。
 
 ## 生成元
 
@@ -37,6 +39,8 @@
 主要caster群は`dial-exterior`で、構造透過対象135件のうち106件が
 caster／receiverと重複する。`customDepthMaterial`と`alphaTest`は
 0件、opacity 100%／16%の対象数は同一、診断後の状態復元はtrueである。
+この結果によるshadow depth仮説は`SUSPECTED_NOT_PROVEN`であり、
+内部原因を証明したものとは扱わない。
 
 ## Stage 1
 
@@ -75,5 +79,8 @@ worst p95 +15.2msで不採用である。
 - Stage 2：未実施
 - PC候補人間比較：未実施
 - 物理iPhone：未実施
+- baseline：`HUMAN_REJECTED_RENDERING_BASELINE`
+- shadow実験経路：終了
+- 次工程：shadow経路を再開せず、保持候補の透過連続性を評価
 
 Issue #2はOpen、PR #5はOpen／Draftを維持する。
