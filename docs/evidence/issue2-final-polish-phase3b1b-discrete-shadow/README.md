@@ -6,6 +6,8 @@
 
 Phase 3B.1bはquery限定の離散状態別shadow-camera比較である。Stage 1は768/768、console error／warning 0件で完了した。state-tight 512／1024は中央矩形影を除去したが、透過面へ人間確認可能な斜め縞が生じたため`REJECTED_SHADOW_RESOLUTION`とした。Stage 2と物理iPhone確認は実施していない。
 
+正式判定は`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`である。監査結果と証跡は受入れるが、tight 512／1024は採用しない。mapSize 2048、追加margin調整、camera追従、per-frame／pointer／wheel連動shadow fitは行わない。最有力仮説は`OPAQUE_SHADOW_DEPTH_FOR_TRANSPARENT_STRUCTURAL_MESHES_SUSPECTED`であり、断定せず後続Phase 3B.1cのStage 0 attributionで検証する。
+
 ## 由来
 
 - source base: `27533b91100c5dddca6507414c6fe3b282ed07c2`
@@ -74,6 +76,7 @@ queryなし、Phase 3C.1-only、3C.2-only、3C.3-only、Phase 3A baseline／D2a�
 - state-tight-512: `REJECTED_SHADOW_RESOLUTION`
 - state-tight-1024: `REJECTED_SHADOW_RESOLUTION`
 - D2c3: `RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`
+- tight shadow route: `CLOSED_NO_ADOPTION`
 - Issue #2: Open
 - PR #5: Open／Draft
 - default adoption: false

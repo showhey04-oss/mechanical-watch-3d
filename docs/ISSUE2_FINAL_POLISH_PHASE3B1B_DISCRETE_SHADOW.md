@@ -4,6 +4,8 @@
 
 Phase 3B.1bでは、完成時計の4離散状態ごとにfrontKeyのshadow cameraをタイトフィットするquery限定候補を比較した。Stage 1の768条件は完了したが、技術候補は0件である。512／1024はいずれも中央矩形影を除去した一方、透過面へ広い斜め縞が生じたため`REJECTED_SHADOW_RESOLUTION`とした。Stage 2、PC候補選択、物理iPhone確認は実施しない。通常表示への採用はない。
 
+正式判定は`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`とする。比較監査と証跡は合格とする一方、tight 512／1024はともに不採用であり、shadow camera fit、margin、mapSize増加による追加探索を終了する。mapSize 2048、camera追従fit、per-frame／pointer／wheel連動fitは実施しない。
+
 Phase 3B.1の人間評価は次を正式状態として引き継ぐ。
 
 - baseline: `HUMAN_REJECTED_RENDERING_BASELINE`
@@ -64,6 +66,14 @@ caster／receiverは別集計し、全状態で各553 Meshだった。XYのmargi
 
 tight候補のidle／pointer／wheel中のshadow refreshは0、split／explode／組合せ遷移は各1回以下である。毎frame更新はない。
 
+## 最有力原因仮説
+
+Phase 3B.1bの結果から、次を断定ではなく最有力仮説として記録する。
+
+`OPAQUE_SHADOW_DEPTH_FOR_TRANSPARENT_STRUCTURAL_MESHES_SUSPECTED`
+
+構造Meshは通常描画で低opacityになるが、`castShadow`／`receiveShadow`は維持され、shadow depth passは通常Material opacityを連続的に反映しない。中央矩形境界をshadow camera fitで除去しても広い斜めbandが残り、mapSizeを512から1024へ増加しても人間目視上の改善がなかった。現行`bias`／`normalBias`は0である。このため、shadow camera解像度ではなく、透過構造Meshがshadow depth側で不透明casterとして寄与する可能性をPhase 3B.1cのStage 0で検証する。
+
 ## 回帰と保護path
 
 - Node: 238/238
@@ -80,4 +90,4 @@ Browser総合ではbaselineと1024に共通する既知3件があり、Desktop�
 
 100／99、55／54の透過不連続、shadow-offの立体感、D2c3性能、mobile全長framingは本工程で変更しない。時分針中央部の見かけ上の干渉とミニッツホイール軸表出は[POST_ISSUE2_GEOMETRY_CLEANUP_NOTES.md](./POST_ISSUE2_GEOMETRY_CLEANUP_NOTES.md)へ分離した。
 
-次の判断はIssue #2の描画方針について人間が再指定した後に行う。Phase 3B.1b候補を既定採用、Ready化、マージしてはならない。
+Phase 3B.1b候補を既定採用、Ready化、マージしてはならない。次工程は別ブランチ・別Draft PRのPhase 3B.1cであり、Phase 3B.1b HeadからStage 0 caster attributionを先に実施する。

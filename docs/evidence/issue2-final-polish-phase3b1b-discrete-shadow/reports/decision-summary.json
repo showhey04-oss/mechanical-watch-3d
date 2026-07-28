@@ -17,6 +17,30 @@
     ]
   },
   "status": "NO_TECHNICAL_FINALIST_NO_ADOPTION",
+  "formalAuditStatus": "ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED",
+  "auditAccepted": true,
+  "tightShadowRouteClosed": true,
+  "technicalHypothesis": {
+    "status": "OPAQUE_SHADOW_DEPTH_FOR_TRANSPARENT_STRUCTURAL_MESHES_SUSPECTED",
+    "qualification": "most-likely hypothesis, not a confirmed cause",
+    "basis": [
+      "transparent structural meshes retain castShadow and receiveShadow",
+      "shadow depth contribution does not continuously follow normal material opacity",
+      "state-tight fitting removes the projection boundary but not broad diagonal bands",
+      "increasing mapSize from 512 to 1024 does not remove the bands",
+      "baseline bias and normalBias are both zero"
+    ]
+  },
+  "closedExploration": [
+    "mapSize 2048",
+    "additional shadow-camera fit tuning",
+    "margin-only retesting",
+    "camera-follow shadow fit",
+    "per-frame shadow fit",
+    "pointer-or-wheel-coupled shadow fit",
+    "fog-only retesting",
+    "state-tight 512 or 1024 reconsideration"
+  ],
   "phase3B1HumanDiagnosticReview": {
     "baseline": "HUMAN_REJECTED_RENDERING_BASELINE",
     "shadowOff": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
