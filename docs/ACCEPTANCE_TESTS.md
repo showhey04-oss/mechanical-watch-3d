@@ -364,6 +364,20 @@
 - D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`、PR #5はOpen／Draft、Issue #2はOpenを維持する
 - `ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED`を維持し、Ready化・マージ・既定採用を行わない
 
+## Issue #2 Final Polish Phase 3B.1c opacity-coupled shadow attenuation
+
+- Phase 3B.1bを`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`とし、tight 512／1024、mapSize拡大、shadow camera追加調整を終了する
+- Stage 0はDesktop／390×844、front／dial mechanism、opacity 16%／8%、normal／split／explode、5 caster群を実WebGLで比較し、主要caster群、caster／receiver数、構造透過対象重複、customDepth、alphaTest、復元状態を保存する
+- query限定attenuationは`shadowWeight=smoothstep(0.08,0.80,r)`でfrontKey 1.96をshadow carrierと非shadow補償へ配分し、色・位置・target・方向を一致、総光量誤差1e-12以下とする
+- opacity変更ではLight intensityだけを更新し、castShadow／receiveShadow、Material、Geometry、shadow camera、mapSize、shadow refreshを変更しない
+- 固定normalBias候補はbaseline cameraと512² mapから`0.5*max(texelX,texelY)=0.009765625`を1回算定し、bias sweepを行わない
+- Stage 1は4候補×2 viewport×2 theme×52条件、計832枚を取得し、中央境界、斜め帯、前後面、隣接opacity、peter-panning、性能を比較する
+- 前後面はrelative 0.30以下かつbaseline比悪化+0.05以下、斜め帯はShadow-off比1.15以下、性能はFPS悪化5%以内かつp95悪化2ms以内を維持する
+- attenuationは前後面、attenuation＋biasは前後面とMobile性能を満たさないため技術finalist 0件、Stage 2未実施とする
+- PR #20の17 path×2 viewportをpixel exactにし、mismatch 0、console error／warning 0、opacity変更時shadow refresh 0を確認する
+- 状態を`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`とし、Shadow-offとD2c3を未採用の人間判断候補として保持する
+- Issue #2はOpen、PR #5はOpen／Draft、APP_VERSIONはv3.15.0を維持し、Ready化・マージ・既定採用を行わない
+
 ## M. v3.14 機構同期作動音 Phase 1
 
 - 初期表示で作動音はOFF、`AudioContext`は未生成、音源は未読込で、自動再生しない

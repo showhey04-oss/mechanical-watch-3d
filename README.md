@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.1はshadow／fogのbaseline-preserving候補6種を比較し、技術ゲート合格0件。Stage 2・物理iPhone・既定採用へ進めず、D2c3は未採用の最終手段fallbackとして保持する
+- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.1cは最後のshadow系比較としてopacity-coupled attenuationを監査し、技術finalist 0件でshadow routeを終了した。Stage 2・物理iPhone・既定採用へ進めず、Shadow-offとD2c3を未採用の人間判断候補として保持する
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
@@ -31,6 +31,8 @@ Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTE
 Issue #2 Final Polish Phase 3Aは完成外装へ`rendering=issue2-baseline|issue2-d2a|issue2-d2c3`を追加したquery限定比較である。198枚の実WebGL PNG、Node 210/210、完成外装統合回帰6/6を取得し、正式判断を`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`とした。198枚は`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`で、候補棄却には十分だが最終候補採用には不足する。D2aは視覚参考として棄却し、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`として比較履歴とquery実装を残すが既定採用しない。
 
 Issue #2 Final Polish Phase 3B.1はPhase 3C.3 baselineのlight、Material、camera、DPR、透過処理を保護し、`frontKey.castShadow=false`、5状態unionによる固定shadow camera fit、fog 160／260を単独・単純合成した6候補をquery限定で比較した。1056枚の実WebGL PNGと性能・回帰を取得したが、shadow-offは前後面バランス、shadow-fitは512² mapの解像度、fog候補はMobile far visibilityを同時に満たせず、`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`とした。Stage 2、物理iPhone、採用は未実施である。
+
+Issue #2 Final Polish Phase 3B.1bではtight 512／1024が中央projection boundaryを除去しても広い斜めshadow bandを閉鎖できず、`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`とした。Phase 3B.1cではStage 0で589 Mesh、553 caster／receiverを監査し、主要caster群を`dial-exterior`へ特定した。smoothstep attenuationは中央矩形境界と斜め帯を低減し、性能差分に合格したが、前後面のbaseline比悪化最大0.072299が上限0.05を超えた。固定normalBias候補はMobile性能も不合格で、`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`とする。Stage 1は832枚、PR #20比較の34 protected pathはpixel exact、候補はすべてquery限定・未採用である。
 
 ## 実装済み
 

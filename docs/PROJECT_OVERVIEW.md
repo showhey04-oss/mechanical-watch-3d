@@ -33,7 +33,7 @@ Refactor Aで輪列・高さ面・回転状態をパラメータ化し、PR #3�
 
 作動音は教育・演出用の合成音であり、実物のETA 6498-1の録音ではない。初期状態はOFFとし、ユーザーがONにした後にだけWeb Audioと音源を初期化する。音イベント系は機構状態へ値を書き戻さず、初期化・診断・状態復元も発音契機にしない。
 
-現在の改修フェーズは「Issue #2 Final Polish Phase 3B.1比較完了、技術ゲート合格0件、未採用」とする。Phase 3C.1 Head `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`は`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`、Phase 3C.2 Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`、Phase 3C.3 Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`は`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`である。Phase 3C.3はPhase 3C.2へ積み上げる別Draftで、完成時計の統合監査と小秒選択のquery限定局所改善だけを行う。v3.15.0、S86、内部機構、通常レンダリング、照明、影、構造透過、DPR、カメラを維持する。
+現在の改修フェーズは「Issue #2 Final Polish Phase 3B.1c比較完了、shadow route技術finalist 0件、未採用」とする。Phase 3C.1 Head `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`は`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`、Phase 3C.2 Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`、Phase 3C.3 Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`は`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`である。Phase 3C.3はPhase 3C.2へ積み上げる別Draftで、完成時計の統合監査と小秒選択のquery限定局所改善だけを行う。v3.15.0、S86、内部機構、通常レンダリング、構造透過、DPR、カメラを維持する。
 
 人間確認で選定したS86をv3.15.0の通常文字板表示寸法として採用する。対象は文字板表示系だけで、dial ring径27.692、index円径25.456、分針長12.040、時針長8.600、小秒表示円径7.740、小秒針長3.268である。内部機構、小秒中心、四番車軸、Y方向配置、針と軸／管の1:1回転拘束は維持する。試験状態は`ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION`であり、実施済みA/BでPR固有回帰は0件、全ブラウザ試験行列は環境制約により未完了である。
 
@@ -50,6 +50,8 @@ Phase 3C.3では、`integration=phase3c3`追加時だけ小秒凹面へ非描画
 Issue #2 Phase 3Aでは完成外装にbaseline／D2a／D2c3をquery限定で重ね、198枚の実WebGL PNGと性能・回帰を保存した。正式判断は`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`で、coverageは`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`とする。D2a／D2c3は矩形影を除去するが、前後輝度差、A.5ライト契約、性能差分を満たさない。D2aは視覚参考として棄却し、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`としてquery実装と証跡だけを維持する。通常pathとPhase 3C.1／3C.2／3C.3-onlyは変更せず、採用候補なしとする。
 
 Issue #2 Phase 3B.1では、Phase 3A判断記録Headから別Draftを作り、既存DirectionalLightのshadow carrier OFF、5状態unionの固定shadow camera fit、fog 160／260を単独・単純合成した6候補を比較した。1056枚の実WebGL PNG、性能、protected path、回帰を取得したが、矩形影、前後面バランス、Mobile far visibilityを同時に満たす候補はない。状態は`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`、Stage 2は`SKIPPED_ZERO_TECHNICAL_GATE_CANDIDATES`で、物理iPhoneと既定採用を実施しない。
+
+Issue #2 Phase 3B.1bでは5状態tight shadow cameraを512／1024で再監査し、projection boundary intersection 0でも広い斜め帯が残るためtight routeを終了した。Phase 3B.1cは`dial-exterior`を主要caster群として特定し、opacity連動smoothstep attenuationと固定normalBias候補をquery限定比較した。attenuationは境界・斜め帯・性能を改善したが前後面のbaseline比悪化上限を満たさず、normalBias候補はMobile性能も満たさない。状態は`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`、Stage 2未実施、34 protected pathはPR #20固定Headとpixel exactである。Shadow-offとD2c3は未採用の人間判断候補として保持し、追加shadow実験は推奨しない。
 
 ケース胴はY=-2.860～4.635の単一閉合Meshとし、外径38.900→39.600→38.900の前後テーパー、内径37.800不変、実りゅうず包絡に対する局所逃げを持つ。局所逃げは必要最小0.249174から生成後gapを再計測して0.304118を採用し、上限0.330、位置1gap 0.030063、最小壁厚0.550000を満たす。CSGは使用せず、りゅうず―チューブの0.056857シート関係は`PHASE3B1_IMPLEMENTATION_ASSUMPTION`のまま禁止干渉から分離する。
 

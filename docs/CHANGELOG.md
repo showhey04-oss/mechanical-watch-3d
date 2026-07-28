@@ -2,6 +2,16 @@
 
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
 
+### Issue #2 Final Polish Phase 3B.1c
+
+- Phase 3B.1bを`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`として記録し、tight 512／1024、mapSize拡大、shadow camera追加調整を終了
+- Stage 0で2 viewport、5 caster群、120枚を取得し、589 Mesh、553 caster／receiver、主要caster群`dial-exterior`、customDepth／alphaTest 0、状態復元trueを確認
+- frontKey 1.96をsmoothstepでshadow carrierと同方向・同色・同targetの非shadow DirectionalLightへ連続配分し、全opacityの総光量誤差1e-12以下、opacity変更時shadow refresh 0
+- 4候補×2 viewport×2 theme×52条件、計832枚のStage 1、性能、回帰、34 protected pathを実WebGLで保存
+- attenuationは中央矩形境界と斜め帯、性能を改善したが前後面baseline比悪化0.072299で不合格。固定normalBias 0.009765625候補は前後面に加えMobile性能も不合格
+- 技術finalist 0件のため`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`、Stage 2未実施、Shadow-offは`HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL`、D2c3は未採用fallbackを維持
+- Geometry、Material、fog、shadow camera／mapSize、透過処理、DPR、UI、audio、APP_VERSION、試験閾値を変更せず、Issue #2 Open、PR #5 Open／Draftを維持
+
 ### Issue #2 Final Polish Phase 3B.1
 
 - Phase 3A判断記録Headから別ブランチを作り、既存DirectionalLightのshadow carrier OFF、5状態固定shadow fit、fog 160／260を単独・単純合成した6候補を完成外装query限定で比較

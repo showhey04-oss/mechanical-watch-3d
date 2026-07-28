@@ -122,6 +122,11 @@
 - shadow-offは前後面バランス、shadow-fitは512² mapの広域fit解像度、fog候補はMobile far visibilityを満たさず、技術ゲート合格0件
 - 状態を`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`、Stage 2を`SKIPPED_ZERO_TECHNICAL_GATE_CANDIDATES`とし、PC候補選択・物理iPhone・採用へ進めない
 - 100／99と55／54の透過連続性は変更せずPhase 3B.2へ分離し、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`を維持
+- Phase 3B.1bでtight 512／1024を比較し、projection境界除去後も広い斜め帯が残るため`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`として終了
+- Phase 3B.1cのStage 0で主要caster群を`dial-exterior`へ特定し、opacity連動attenuationと固定normalBiasをquery限定比較
+- attenuationは中央矩形境界・斜め帯・性能を改善したが前後面baseline比悪化、normalBias候補はMobile性能も不合格で、技術finalist 0件
+- `ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`としてStage 2を実施せず、追加shadow実験を終了する
+- Shadow-offは`HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL`、D2c3は未採用fallbackを維持し、採用にはPC／物理iPhone／15分温度確認と明示承認を必要とする
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする
 - Phase 3Aで承認されたE-BALANCEDを`?exterior=balanced`限定で実装し、Phase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`を人間承認済み依存基準とする
