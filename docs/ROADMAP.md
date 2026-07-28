@@ -104,6 +104,13 @@
 
 ## 現在の改修フェーズ
 
+### Issue #2 Final Polish Phase 3B.3 — final retained-candidate human review
+
+- Phase 3B.2監査を人間承認し、100／99と55／54を既知のリアルタイム描画制約として受容、OITを完成後の独立実験へ延期する
+- 現行透過方式のShadow-offとD2c3を、256枚の固定比較、操作GIF、132性能runで最終PC／物理iPhone比較する
+- PC確認後、候補ごとに物理iPhoneで15分連続操作し、候補間でcooldownを挟む
+- 人間判断前は`AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`、候補選定・採用・Ready化・マージ・Issue #2クローズを行わない
+
 ### Issue #2 Final Polish Phase 3B.2 — dual-baseline transparency continuity
 
 - Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として固定する

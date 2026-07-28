@@ -391,6 +391,16 @@
 - 技術finalist 0件のためStage 2、PC候補比較、物理iPhone、採用を行わず、状態を`TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`とする
 - OITは本工程へ実装せず、Issue #2 Open、PR #5 Open／Draft、D2c3未採用、APP_VERSION v3.15.0、Ready化・マージ禁止を維持する
 
+## Issue #2 Final Polish Phase 3B.3 final retained-candidate review
+
+- Shadow-offとD2c3の正確な完成外装queryを用い、`continuity=issue2-current`以外の透過方式を追加しない
+- 明示currentと省略時を、候補2種×Desktop／390×844×通常状態12条件で比較する。DesktopはPNG byte／SHA一致、Mobileは16 pixel以下・8-bit channel差3以下の再読込間量子化差を許容するが、world transform、Material replacement 0、Material UUID change 0、source contract一致を必須とする
+- 2候補×2 viewport×4 theme×16 scenarioの実WebGL PNGを256枚保存する
+- 候補×viewportごとに回転、zoom、wheel、opacity、外装、split／explode、選択解除、full-lengthの9操作GIFを保存する
+- 11性能scenarioを各3反復し、合計132 run、平均fps悪化5%以内、p95悪化2ms以内、reversal 0、stop-then-jump 0、wheel monotonic、transform invariantを確認する
+- `index.html`と`js/*.js`がPhase 3B.2人間判断Headとbyte exactであることを確認する
+- PC確認と物理iPhone候補別15分確認が未完了の間、候補選定、既定採用、Ready化、マージ、Issue #2クローズを行わない
+
 ## M. v3.14 機構同期作動音 Phase 1
 
 - 初期表示で作動音はOFF、`AudioContext`は未生成、音源は未読込で、自動再生しない

@@ -98,6 +98,36 @@ const sha256 = async bytes =>
     byte => byte.toString(16).padStart(2, "0"),
   ).join("");
 
+function stableMaterialInventory(inventory) {
+  return (inventory.materials || [])
+    .map(material => ({
+      objectName: material.objectName,
+      partName: material.partName,
+      group: material.group,
+      materialIndex: material.materialIndex,
+      materialType: material.materialType,
+      baseOpacity: material.baseOpacity,
+      baseTransparent: material.baseTransparent,
+      baseDepthWrite: material.baseDepthWrite,
+      currentOpacity: material.currentOpacity,
+      currentTransparent: material.currentTransparent,
+      currentDepthWrite: material.currentDepthWrite,
+      renderOrder: material.renderOrder,
+      side: material.side,
+      depthTest: material.depthTest,
+      blending: material.blending,
+      alphaTest: material.alphaTest,
+      colorWrite: material.colorWrite,
+      castShadow: material.castShadow,
+      receiveShadow: material.receiveShadow,
+      selectable: material.selectable,
+      visible: material.visible,
+    }))
+    .sort((left, right) =>
+      JSON.stringify(left).localeCompare(JSON.stringify(right))
+    );
+}
+
 async function readPng(blob) {
   const bitmap = await createImageBitmap(blob);
   const canvas = document.createElement("canvas");
@@ -183,7 +213,7 @@ async function resetState(diagnostics) {
   diagnostics.applyCameraPreset("front");
   setControl("sideSplit", 0);
   setControl("explode", 0);
-  await diagnostics.waitForFrames(8);
+  await diagnostics.waitForFrames(4);
 }
 
 async function applyState(diagnostics, scenario) {
@@ -199,7 +229,7 @@ async function applyState(diagnostics, scenario) {
   if (scenario.state === "exterior-off") {
     diagnostics.setPhase3C1ExteriorGroupVisible(false);
   }
-  await diagnostics.waitForFrames(8);
+  await diagnostics.waitForFrames(4);
 }
 
 const scenariosFor = themeName => [
@@ -236,7 +266,10 @@ async function captureBlob(path, blob) {
 }
 
 async function captureMatrix(diagnostics, report) {
-  for (const scenario of scenariosFor(theme)) {
+  const scenarios = mode === "equivalence"
+    ? scenariosFor(theme).filter(scenario => scenario.state === "normal")
+    : scenariosFor(theme);
+  for (const scenario of scenarios) {
     status.textContent = `${candidate} ${viewportId} ${scenario.id}`;
     await applyState(diagnostics, scenario);
     const selectionBeforeCapture = diagnostics.getSelection();
@@ -246,7 +279,9 @@ async function captureMatrix(diagnostics, report) {
       cameraPreset: scenario.cameraPreset,
       distanceMultiplier: scenario.distanceMultiplier,
     });
-    const queryKind = omitContinuity ? "omitted" : "current";
+    const queryKind = omitContinuity
+      ? "omitted"
+      : (mode === "equivalence" ? "current-equivalence" : "current");
     const path = evidencePath(
       "raw",
       candidate,
@@ -338,7 +373,7 @@ function dispatchWheel(deltaY) {
 }
 
 async function saveMotionFrame(diagnostics, report, motionId, index) {
-  await diagnostics.waitForFrames(3);
+  await diagnostics.waitForFrames(2);
   const live = await captureLiveCanvasBlob();
   const path = evidencePath(
     "motion",
@@ -447,7 +482,9 @@ async function runMotion(diagnostics, report) {
 
   await resetState(diagnostics);
   for (let index = 0; index < frameCount; index += 1) {
-    if (index > 0) dispatchWheel(18);
+    if (index > 0) {
+      for (let step = 0; step < 3; step += 1) dispatchWheel(18);
+    }
     await saveMotionFrame(diagnostics, report, "full-length", index);
   }
 
@@ -646,9 +683,10 @@ async function runPerformance(diagnostics, report) {
   const transformBefore = diagnostics.getModelWorldSignature();
   const materialInventory =
     diagnostics.getIssue2Phase3B2MaterialInventory();
-  const inventoryBytes = new TextEncoder().encode(
-    JSON.stringify(materialInventory),
-  );
+  const stableInventory = stableMaterialInventory(materialInventory);
+  const inventoryBytes = stableInventory.length > 0
+    ? new TextEncoder().encode(JSON.stringify(stableInventory))
+    : null;
   const report = {
     schemaVersion: 1,
     status: "AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION",
@@ -672,14 +710,26 @@ async function runPerformance(diagnostics, report) {
     },
     webgl: diagnostics.getWebGLContextReport(),
     phase3b2State,
-    materialInventorySha256:
-      await sha256(inventoryBytes.buffer),
+    stableMaterialInventorySha256: inventoryBytes
+      ? await sha256(inventoryBytes.buffer)
+      : null,
     materialInventoryCounts: {
       meshes: materialInventory.meshes?.length || 0,
       materials: materialInventory.materials?.length || 0,
     },
-    propertyContinuity:
-      diagnostics.getIssue2Phase3B2PropertyContinuity(),
+    propertyContinuity: null,
+    materialPolicyContract: {
+      currentRoute:
+        "resolveIssue2Phase3B2Transparent/DepthWrite with issue2-current",
+      omittedRoute:
+        "legacy applyStructuralOpacity transparent/depthWrite formulas",
+      comparison:
+        "source-contract assertion plus pixel-exact fixed-state captures",
+      statefulScenariosExcludedFromEquivalence:
+        mode === "equivalence"
+          ? ["selected", "split", "explode", "exterior-off"]
+          : [],
+    },
     captures: [],
     motionFrames: [],
     performanceRuns: [],
@@ -694,6 +744,8 @@ async function runPerformance(diagnostics, report) {
   } else {
     throw new Error(`unknown Phase 3B.3 mode: ${mode}`);
   }
+  report.propertyContinuity =
+    diagnostics.getIssue2Phase3B2PropertyContinuity();
   await resetState(diagnostics);
   report.transformInvariant =
     JSON.stringify(transformBefore) === JSON.stringify(

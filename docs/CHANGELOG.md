@@ -2,6 +2,14 @@
 
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
 
+### Issue #2 Final Polish Phase 3B.3
+
+- Phase 3B.2の人間判断を記録し、現行100／99・55／54不連続を既知制約として受容、OITを完成後へ延期
+- 製品コードを変更せず、現行透過方式のShadow-offとD2c3を最終PC／物理iPhone比較用に整理
+- 2候補×2 viewport×4 theme×16 scenarioの256実WebGL PNG、36操作GIF、132性能run、明示current／省略時同値性、protected product pathsを証跡化。DesktopはPNG byte exact、Mobileは最大12 pixel・3階調のGPU量子化差のみでMaterial／transform／source contract一致
+- D2c3はShadow-off比22性能比較中9比較で差分基準を満たさず、既知の性能tradeoffとして人間確認へ引き継ぐ
+- 状態は`AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`。候補選定、既定採用、Ready化、マージ、Issue #2クローズは未実施
+
 ### Issue #2 Final Polish Phase 3B.2
 
 - Shadow-off／D2c3をdual baselineとし、13 opacity、Desktop 1280×720／Mobile 390×844で現行と固定深度3候補をquery限定比較

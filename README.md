@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.2はShadow-off／D2c3の2 baselineで透過連続性を監査したが、固定深度の軽量3候補は内部視認性または性能ゲートを満たさず、`TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`とした。Stage 2・物理iPhone・既定採用へ進めず、OITは未実装のまま別の明示判断を待つ
+- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.2の技術監査と製品判断を完了し、現行の100／99・55／54不連続を既知のリアルタイム描画制約として受容、OITを完成後へ延期した。Phase 3B.3では現行透過方式のShadow-offとD2c3だけを最終PC／物理iPhone比較へ残し、状態を`AWAITING_HUMAN_PC_AND_PHYSICAL_IPHONE_FINAL_CANDIDATE_DECISION`とする
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
@@ -35,6 +35,8 @@ Issue #2 Final Polish Phase 3B.1はPhase 3C.3 baselineのlight、Material、came
 Issue #2 Final Polish Phase 3B.1bではtight 512／1024が中央projection boundaryを除去しても広い斜めshadow bandを閉鎖できず、`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`とした。Phase 3B.1cではStage 0で589 Mesh、553 caster／receiverを監査し、主要caster群を`dial-exterior`へ特定した。smoothstep attenuationは中央矩形境界と斜め帯を低減し、性能差分に合格したが、前後面のbaseline比悪化最大0.072299が上限0.05を超えた。固定normalBias候補はMobile性能も不合格で、`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`とする。Stage 1は832枚、PR #20比較の34 protected pathはpixel exact、候補はすべてquery限定・未採用である。
 
 Issue #2 Final Polish Phase 3B.2では、100%→99%の`transparent`と55%→54%の`depthWrite`切替を実ランタイムで再現し、Shadow-off／D2c3、Desktop／390×844、13 opacityで固定深度3候補を比較した。3候補はproperty toggle 0を達成したが、`stable-depth-base`は内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能に不合格となった。候補固有browser failure 0、UI 22/22、HUD 57/57、audio 23/23、protected path 42/42を維持したが技術finalistは0件であり、Stage 2、物理iPhone、OIT実装、採用は行っていない。
+
+Issue #2 Final Polish Phase 3B.3は製品コードを変更せず、`continuity=issue2-current`を共有するShadow-offとD2c3を、2 viewport×4 theme×16 scenarioの実WebGL PNG 256枚、36操作GIF、11 scenario×3反復×2候補×2 viewportの性能測定で最終人間比較用に整理する。Shadow-offは`RETAINED_FINAL_HUMAN_REVIEW_CANDIDATE_NOT_ADOPTED`、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`で、候補選定、既定採用、Ready化、マージ、Issue #2クローズは人間判断前に行わない。
 
 ## 実装済み
 
