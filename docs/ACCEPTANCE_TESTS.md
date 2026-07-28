@@ -378,6 +378,19 @@
 - 状態を`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`とし、Shadow-offとD2c3を未採用の人間判断候補として保持する
 - Issue #2はOpen、PR #5はOpen／Draft、APP_VERSIONはv3.15.0を維持し、Ready化・マージ・既定採用を行わない
 
+## Issue #2 Final Polish Phase 3B.2 dual-baseline transparency continuity
+
+- `rendering=issue2-phase3b1c-shadow-off|issue2-d2c3`かつ`continuity=issue2-current|issue2-stable-depth-off|issue2-stable-depth-base|issue2-group-stable-depth`の明示queryだけで有効とする
+- 13 opacityで対象Mesh／Materialの`transparent`、`depthWrite`、renderOrder、blending、castShadow、receiveShadow、Material UUID、選択性、world boundsを保存する
+- 現行方式で100%→99%のtransparentと55%→54%のdepthWrite切替を再現し、固定方式3候補ではproperty toggle 0、Material replacement／UUID change 0を必須とする
+- 100／99、55／54の画面差分は1/255量子化を許容した隣接差分score 2以下とし、screen合格だけで候補採用しない
+- opacity 16%のdial mechanism／movement back内部視認、設定車2の選択・HUD・学習同期・空白解除、split／explode／restore、実pointer回転を確認する
+- 性能差分は平均fps悪化5%以内、p95悪化2ms以内、reversal 0、stop-then-jump 0、wheel monotonic、transform invariantを維持し、絶対閾値を変更しない
+- `stable-depth-base`は内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能により棄却する
+- candidate-specific browser failure 0、UI 22/22、HUD 57/57、trusted audio 23/23、A.7 9/9、禁止干渉0/0、console 0/0、protected path 42/42を維持する
+- 技術finalist 0件のためStage 2、PC候補比較、物理iPhone、採用を行わず、状態を`TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`とする
+- OITは本工程へ実装せず、Issue #2 Open、PR #5 Open／Draft、D2c3未採用、APP_VERSION v3.15.0、Ready化・マージ禁止を維持する
+
 ## M. v3.14 機構同期作動音 Phase 1
 
 - 初期表示で作動音はOFF、`AudioContext`は未生成、音源は未読込で、自動再生しない

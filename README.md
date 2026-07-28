@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.1cは最後のshadow系比較としてopacity-coupled attenuationを監査し、技術finalist 0件でshadow routeを終了した。Stage 2・物理iPhone・既定採用へ進めず、Shadow-offとD2c3を未採用の人間判断候補として保持する
+- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.2はShadow-off／D2c3の2 baselineで透過連続性を監査したが、固定深度の軽量3候補は内部視認性または性能ゲートを満たさず、`TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`とした。Stage 2・物理iPhone・既定採用へ進めず、OITは未実装のまま別の明示判断を待つ
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
@@ -33,6 +33,8 @@ Issue #2 Final Polish Phase 3Aは完成外装へ`rendering=issue2-baseline|issue
 Issue #2 Final Polish Phase 3B.1はPhase 3C.3 baselineのlight、Material、camera、DPR、透過処理を保護し、`frontKey.castShadow=false`、5状態unionによる固定shadow camera fit、fog 160／260を単独・単純合成した6候補をquery限定で比較した。1056枚の実WebGL PNGと性能・回帰を取得したが、shadow-offは前後面バランス、shadow-fitは512² mapの解像度、fog候補はMobile far visibilityを同時に満たせず、`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`とした。Stage 2、物理iPhone、採用は未実施である。
 
 Issue #2 Final Polish Phase 3B.1bではtight 512／1024が中央projection boundaryを除去しても広い斜めshadow bandを閉鎖できず、`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`とした。Phase 3B.1cではStage 0で589 Mesh、553 caster／receiverを監査し、主要caster群を`dial-exterior`へ特定した。smoothstep attenuationは中央矩形境界と斜め帯を低減し、性能差分に合格したが、前後面のbaseline比悪化最大0.072299が上限0.05を超えた。固定normalBias候補はMobile性能も不合格で、`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`とする。Stage 1は832枚、PR #20比較の34 protected pathはpixel exact、候補はすべてquery限定・未採用である。
+
+Issue #2 Final Polish Phase 3B.2では、100%→99%の`transparent`と55%→54%の`depthWrite`切替を実ランタイムで再現し、Shadow-off／D2c3、Desktop／390×844、13 opacityで固定深度3候補を比較した。3候補はproperty toggle 0を達成したが、`stable-depth-base`は内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能に不合格となった。候補固有browser failure 0、UI 22/22、HUD 57/57、audio 23/23、protected path 42/42を維持したが技術finalistは0件であり、Stage 2、物理iPhone、OIT実装、採用は行っていない。
 
 ## 実装済み
 

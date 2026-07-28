@@ -2,6 +2,15 @@
 
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
 
+### Issue #2 Final Polish Phase 3B.2
+
+- Shadow-off／D2c3をdual baselineとし、13 opacity、Desktop 1280×720／Mobile 390×844で現行と固定深度3候補をquery限定比較
+- 実ランタイム146 Mesh／150 Materialを監査し、現行のtransparent change 286・depthWrite change 300を再現。固定3候補はproperty toggle 0、Material replacement／UUID change 0
+- `stable-depth-base`はopacity 16%内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能（fps約10.1%、p95約33ms悪化）で棄却
+- candidate-specific browser failure 0、UI 22/22、HUD 57/57、trusted audio 23/23、A.7 9/9、禁止干渉0/0、protected path 42/42、console error／warning 0
+- 技術finalist 0件のためStage 2・PC候補比較・物理iPhoneを実施せず、`TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`とする
+- OITを実装せず、通常path、Light、Geometry、renderOrder、shadow対象、DPR、UI、audio、APP_VERSION、試験閾値を変更しない。Issue #2 Open、PR #5 Open／Draft、D2c3未採用を維持
+
 ### Issue #2 Final Polish Phase 3B.1c
 
 - Phase 3B.1bを`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`として記録し、tight 512／1024、mapSize拡大、shadow camera追加調整を終了

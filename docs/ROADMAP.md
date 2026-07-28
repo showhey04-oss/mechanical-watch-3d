@@ -104,7 +104,7 @@
 
 ## 現在の改修フェーズ
 
-### Issue #2 Final Polish Phase 3B.1 — baseline-preserving shadow / fog
+### Issue #2 Final Polish Phase 3B.2 — dual-baseline transparency continuity
 
 - Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として固定する
 - `integration=phase3c3`限定で完成時計を統合監査し、小秒凹面の非描画selection proxyだけを局所追加する
@@ -127,6 +127,10 @@
 - attenuationは中央矩形境界・斜め帯・性能を改善したが前後面baseline比悪化、normalBias候補はMobile性能も不合格で、技術finalist 0件
 - `ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`としてStage 2を実施せず、追加shadow実験を終了する
 - Shadow-offは`HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL`、D2c3は未採用fallbackを維持し、採用にはPC／物理iPhone／15分温度確認と明示承認を必要とする
+- Phase 3B.2でShadow-off／D2c3をdual baselineとし、100／99・55／54を含む13 opacity、Desktop／390×844で現行と固定深度3方式をquery限定比較する
+- 固定深度3方式はproperty toggle 0を達成したが、内部視認性またはD2c3性能差分ゲートに失敗し、技術finalist 0件とする
+- `TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`としてStage 2・物理iPhone・採用を実施せず、OITの対象範囲・性能予算・fallbackを別途明示判断するまで実装しない
+- protected path 42/42、candidate-specific browser failure 0、UI 22/22、HUD 57/57、audio 23/23、A.7 9/9、禁止干渉0/0を維持し、試験閾値を変更しない
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする
 - Phase 3Aで承認されたE-BALANCEDを`?exterior=balanced`限定で実装し、Phase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`を人間承認済み依存基準とする
