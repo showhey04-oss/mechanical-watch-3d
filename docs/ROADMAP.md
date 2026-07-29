@@ -114,6 +114,8 @@
 - 390×844の最小余白4.0265%、clipping 0、初期表示32/32とDesktop固定画像48/48 pixel exact、Desktop selected 8/8 state exact、操作・性能差分合格を確認する
 - iPhone 16／iOS 26.5.2の15分確認で全長構図、fog許容、preset、最大距離回転、選択、HUD同期、解除、split／explode／restore、軽微な発熱を合格とし、`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
 - 一般tap異常と自動reloadは報告されていない。2～3分後の二本指pan／pinch／rotation劣化と手動reloadによる復旧をPhase 3B.4bへ分離し、active pointerとgesture lifecycleを診断する
+- query限定のevent-driven cleanup候補はDesktop 24 cycle／390×844 60 cycle、pointercancel、lost capture、ID再利用、visibility／page lifecycle、selection、差分性能の自動ゲートに合格
+- 物理iPhone A／B／C各5分と候補C 15分が未実施のため、判定は`STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE`。framing固有性、物理root cause、technical finalistを確定しない
 - iOS音響ペーシング低下は再現済みだがPhase 3B.4bでは修正しない
 - D2c3、framing、入力修正候補はquery限定・未採用とし、Ready化、マージ、Issue #2クローズを行わない
 

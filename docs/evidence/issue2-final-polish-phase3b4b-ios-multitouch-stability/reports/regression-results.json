@@ -1,0 +1,193 @@
+{
+  "sourceBaseCommit": "ece9d99c4e0ff95afd155475ef963e2984c5d05f",
+  "sourceAuditCommit": "fac59b714d66215ee0c60b688c0201fea1d9fde4",
+  "sourceBranch": "feature/issue2-final-polish-phase3b4b-ios-multitouch-stability",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and in-app Browser",
+  "schemaVersion": 1,
+  "status": "PASSED_AUTOMATED_WITH_KNOWN_BASELINE_AND_ENVIRONMENT_EXCEPTIONS",
+  "node": {
+    "passed": 294,
+    "failed": 0
+  },
+  "desktop": {
+    "passed": 81,
+    "total": 86,
+    "knownFailures": [
+      "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+      "a5-both-faces-retain-key-light-and-camera-follow-fill",
+      "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+      "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+      "a6-wheel-path-produces-monotonic-continuous-zoom"
+    ]
+  },
+  "mobile390x844": {
+    "passed": 83,
+    "total": 88,
+    "knownFailures": [
+      "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+      "a5-both-faces-retain-key-light-and-camera-follow-fill",
+      "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+      "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+      "a6-wheel-path-produces-monotonic-continuous-zoom"
+    ]
+  },
+  "ui": {
+    "ok": true
+  },
+  "hud": {
+    "ok": true
+  },
+  "audio": {
+    "ok": true
+  },
+  "s86RuntimeToSaved": {
+    "ok": true,
+    "checks": 5
+  },
+  "a7": {
+    "passed": 9,
+    "total": 9
+  },
+  "forbiddenInterference": {
+    "position1": 0,
+    "position2": 0
+  },
+  "mechanismAndSelectionChecks": [
+    {
+      "name": "a7-position2-600-frame-hold-has-zero-coordinate-drift",
+      "ok": true
+    },
+    {
+      "name": "a7-position2-snaps-to-exact-absolute-keyless-coordinates",
+      "ok": true
+    },
+    {
+      "name": "a7-position2-hold-keeps-forbidden-interference-zero",
+      "ok": true
+    },
+    {
+      "name": "a7-position1-return-restores-all-bases-within-one-micromodel-unit",
+      "ok": true
+    },
+    {
+      "name": "a7-position1-return-keeps-forbidden-interference-zero",
+      "ok": true
+    },
+    {
+      "name": "a7-one-hundred-position-cycles-have-zero-cumulative-error",
+      "ok": true
+    },
+    {
+      "name": "a7-30-60-120fps-final-keyless-coordinates-are-identical",
+      "ok": true
+    },
+    {
+      "name": "a7-3600-frame-accelerated-hold-stays-finite-stable-and-clear",
+      "ok": true
+    },
+    {
+      "name": "a7-diagnostic-api-retains-real-hold-and-cycle-reports",
+      "ok": true
+    },
+    {
+      "name": "position1-display-backdrive-stops-at-setting-input",
+      "ok": true
+    },
+    {
+      "name": "normal-run-does-not-backdrive-winding-arbor-chain",
+      "ok": true
+    },
+    {
+      "name": "position1-winding-branch-rotates",
+      "ok": true
+    },
+    {
+      "name": "position1-forward-rotates-complete-object3d-winding-path",
+      "ok": true
+    },
+    {
+      "name": "position1-forward-winding-ratios-follow-winding-graph",
+      "ok": true
+    },
+    {
+      "name": "position1-setting-input-remains-disconnected-during-winding",
+      "ok": true
+    },
+    {
+      "name": "position1-going-train-setting-train-and-hands-keep-speed-during-winding",
+      "ok": true
+    },
+    {
+      "name": "winding-does-not-inject-motion-across-setting-boundary",
+      "ok": true
+    },
+    {
+      "name": "wind-clutch-state-selects-only-winding-branch",
+      "ok": true
+    },
+    {
+      "name": "wind-forbidden-interference-zero",
+      "ok": true
+    },
+    {
+      "name": "winding-actual-envelopes-contact-through-gears-hubs-and-arbor",
+      "ok": true
+    },
+    {
+      "name": "winding-pitch-contact-module-centre-band-phase-and-square-fit",
+      "ok": true
+    },
+    {
+      "name": "position2-moves-crown-through-display-and-hands",
+      "ok": true
+    },
+    {
+      "name": "position2-does-not-backdrive-main-train-seconds-or-winding-path",
+      "ok": true
+    },
+    {
+      "name": "setting-hand-deltas-stay-rigid-to-tubes",
+      "ok": true
+    },
+    {
+      "name": "setting-object3d-mesh-phases-remain-engaged",
+      "ok": true
+    },
+    {
+      "name": "reverse-setting-reverses-complete-path",
+      "ok": true
+    },
+    {
+      "name": "set-forbidden-interference-zero",
+      "ok": true
+    },
+    {
+      "name": "set-clutch-state-selects-only-setting-boundary",
+      "ok": true
+    },
+    {
+      "name": "browser-winding-topology-binds-crown-through-mainspring",
+      "ok": true
+    },
+    {
+      "name": "transparent-structure-allows-internal-raycast-selection",
+      "ok": true
+    },
+    {
+      "name": "a5-internal-part-selection-still-works-after-camera-rotation",
+      "ok": true
+    }
+  ],
+  "console": {
+    "applicationErrors": 0,
+    "applicationWarnings": 0,
+    "browserAutomationObserverErrorsExcluded": 1
+  },
+  "knownExceptions": [
+    "D2c3 disables the A.5 baseline lighting rig by design",
+    "A.6 absolute frame pacing is not met in the in-app Browser environment"
+  ],
+  "candidateSpecificRegressionDetected": false,
+  "testThresholdsChanged": false
+}

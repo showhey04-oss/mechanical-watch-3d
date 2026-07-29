@@ -2,6 +2,15 @@
 
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
 
+### Issue #2 Final Polish Phase 3B.4b
+
+- 完成外装＋D2c3の`input=issue2-ios-multitouch-stability`時だけ、Arcballとアプリのpointer lifecycleをevent-driven cleanupする候補を追加
+- pointercancel、真のlostpointercapture、pointer ID再利用、blur、visibility、pagehide／pageshowをcleanupし、二本指から一本指への遷移でgesture基準を再初期化
+- Desktop 24 cycle／390×844 60 cycleでidle復帰100%、active pointer／capture残留0、camera finite、selection／解除、transform invariantを確認
+- Desktop／Mobileのidle／pointer／wheel差分6/6、UI、HUD、audio、S86 5/5、A.7 9/9、禁止干渉0/0、application console error／warning 0/0に合格
+- 物理iPhoneのA／B／C各5分および候補C 15分は未実施のため、`STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE`とし、root causeとframing固有性を確定しない
+- D2c3、framing、入力候補はquery限定・未採用。感度、damping、FOV、maxDistance、audio、Geometry、Light、fog、Material、透過、APP_VERSION、閾値を変更しない
+
 ### Issue #2 Final Polish Phase 3B.4a
 
 - Phase 3B.3で選定されたD2c3のモバイル全長構図をquery限定で安定化

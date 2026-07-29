@@ -1,5 +1,17 @@
 # 受入試験
 
+## Issue #2 Phase 3B.4b — iOS multi-touch stability候補
+
+- 完成外装、D2c3、continuity currentと、任意のPhase 3B.4a framingに限定してinput候補が有効になる
+- `input` queryなしでは既存input path、Object3D、Light、Material、DOMが変化しない
+- pointerup／cancel／真のlost capture／ID再利用／blur／visibility／page lifecycle後にactive pointer 0、capture 0、idleへ戻る
+- one-to-twoとtwo-to-one遷移で旧centroid／pinch／angleを持ち越さず再初期化する
+- desired／actual camera stateがfiniteで、unexpected jump、reversal、stop-then-jump、target drift、camera rollを発生させない
+- Desktop 1280×720と390×844のsynthetic lifecycle、selection、UI、HUD、audio、S86、A.7、禁止干渉、差分性能に合格する
+- camera sensitivity、damping、FOV、target、maxDistance、Geometry、Light、fog、Material、透過、audio、APP_VERSION、試験閾値を変更しない
+- 物理iPhoneでA／B／Cを各5分、候補Cを連続15分確認するまで、framing固有性、物理root cause、technical finalist、人間合格を確定しない
+- 現状態は`STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE`であり、既定採用、Ready化、マージ、Issue #2クローズを行わない
+
 ## A. 起動
 
 - Three.js初期化エラーがない
