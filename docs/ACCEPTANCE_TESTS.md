@@ -415,7 +415,10 @@
 - pinch／wheelを単調、reversal 0、stop-then-jump 0、target drift 0、transform invariant trueとする
 - 最大距離で部品選択・解除・初期距離復帰を確認する
 - current／fitを3反復し、平均fps悪化5%以内、p95悪化2ms以内、per-frame bounds計算0、閾値変更0を確認する
-- 判定を`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`とし、物理iPhone確認前に既定採用、Ready化、マージ、Issue #2クローズを行わない
+- iPhone 16／iOS 26.5.2、Safari／ホーム画面、輝度50%、低電力OFF、ケースあり、室温25℃で15分確認し、初期構図、全長、余白、fog許容、preset、最大距離回転、設定車2選択、HUD同期、解除、split／explode／restore、軽微な発熱を合格とする
+- 判定を`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
+- 一般tap異常なし、2～3分後の二本指pan／pinch／rotation劣化、手動reload復旧、自動reload未報告、iOS音響ペーシング低下を区別して記録する
+- D2c3とframingはquery限定・未採用とし、Ready化、マージ、Issue #2クローズを行わない
 
 ## M. v3.14 機構同期作動音 Phase 1
 

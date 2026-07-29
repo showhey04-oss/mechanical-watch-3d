@@ -8,7 +8,10 @@
 - 390×844の完成時計407,428頂点からraw fit 199.068109、安全余裕込み204.044811を算定し、幅420以下だけ`maxDistance=204.1`を適用
 - 初期／復帰32/32とDesktop固定画像48/48をPNG byte exact、Desktop selected 8/8をstate exact、最小余白4.0265%、near／far clipping 0、pinch／wheel reversal 0、selection／restore合格
 - 224 actual WebGL PNG、26 motion frame、6 board、3 GIF、Desktop／Mobile各3反復の差分性能を保存
-- 判定は`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`。物理iPhone確認待ち、query限定、未採用、Issue #2 Open、PR #5 Open／Draftを維持
+- iPhone 16／iOS 26.5.2、Safari／ホーム画面、輝度50%、低電力OFF、ケースあり、室温25℃で15分確認し、初期構図・明るさ・全長・余白・clippingなし・preset・最大距離回転・設定車2選択・HUD同期・解除・split／explode／restoreを合格
+- 判定は`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`。fogの全長時暗化は`MOBILE_FULL_LENGTH_FOG_DARKENING_ACCEPTED_AS_IS`
+- 一般tap異常と自動reloadは報告されていない。2～3分後の二本指pan／pinch／rotation劣化は`DEGRADATION_REPORTED`、手動reloadで復旧するためPhase 3B.4bへ分離
+- `IOS_BALANCE_AUDIO_PACING_SLOWDOWN_REPRODUCED`は別保留とし、D2c3／framingのquery限定・未採用、Issue #2 Open、PR #5 Open／Draftを維持
 
 ### Issue #2 Final Polish Phase 3B.3
 

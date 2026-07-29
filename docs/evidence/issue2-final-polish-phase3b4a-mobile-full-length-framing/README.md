@@ -2,9 +2,9 @@
 
 ## 状態
 
-`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`
+`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`
 
-選定D2c3のモバイル全長構図を、実Geometryから算定した静的`maxDistance=204.1`で検証した証跡である。候補はquery限定・未採用で、物理iPhoneの人間確認待ちである。
+選定D2c3のモバイル全長構図を、実Geometryから算定した静的`maxDistance=204.1`で検証した証跡である。iPhone 16／iOS 26.5.2の15分人間確認で`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`とした。候補はquery限定・未採用である。
 
 ## 由来
 
@@ -48,6 +48,8 @@
 
 comprehensive suiteに残るA.5照明契約とA.6絶対性能の未達は、選定D2c3の既知tradeoffとして分離する。Phase 3B.4aの試験閾値は変更していない。
 
-## 人間確認待ち
+## 人間確認
 
-`reports/physical-iphone-review.json`は`NOT_PERFORMED_PENDING_HUMAN`である。技術証跡だけで既定採用、Ready化、マージ、Issue #2クローズを行わない。
+`reports/physical-iphone-review.json`へ、Safari／ホーム画面、輝度50%、低電力OFF、ケースあり、室温25℃、15分の結果を保存した。初期構図、全長、余白、preset、最大距離回転、設定車2選択、HUD同期、解除、split／explode／restoreは合格し、fog暗化は許容した。軽微な発熱は許容、progressive frame dropと自動reloadは報告なしである。
+
+2～3分後の二本指pan／pinch／rotation劣化と手動reloadによる復旧はPhase 3B.4bへ、iOS音響ペーシング低下は別工程へ分離する。既定採用、Ready化、マージ、Issue #2クローズを行わない。

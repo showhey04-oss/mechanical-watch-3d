@@ -169,14 +169,38 @@ test("Phase 3B.4a decision, regression, and manifest remain closed and unadopted
   const iPhone = await readJson(join(REPORTS, "physical-iphone-review.json"));
   assert.equal(
     decision.decision,
-    "TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW",
+    "HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX",
+  );
+  assert.equal(
+    decision.phaseStatus,
+    "PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION",
+  );
+  assert.equal(
+    decision.fogDecision,
+    "MOBILE_FULL_LENGTH_FOG_DARKENING_ACCEPTED_AS_IS",
   );
   assert.equal(decision.selectedRendering, "D2c3");
   assert.equal(decision.defaultAdopted, false);
   assert.equal(decision.issue2Closed, false);
   assert.equal(decision.readyAllowed, false);
   assert.equal(decision.mergeAllowed, false);
-  assert.equal(iPhone.status, "NOT_PERFORMED_PENDING_HUMAN");
+  assert.equal(iPhone.status, "HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX");
+  assert.equal(iPhone.environment.device, "iPhone 16");
+  assert.equal(iPhone.environment.os, "iOS 26.5.2");
+  assert.equal(iPhone.environment.durationMinutes, 15);
+  assert.equal(iPhone.fullLength.clipping, false);
+  assert.equal(
+    iPhone.touch.multiTouchGesture,
+    "DEGRADATION_REPORTED",
+  );
+  assert.equal(
+    iPhone.touch.manualReload,
+    "MANUAL_RELOAD_RECOVERS_MULTITOUCH_STATE",
+  );
+  assert.equal(
+    iPhone.audioPacing,
+    "IOS_BALANCE_AUDIO_PACING_SLOWDOWN_REPRODUCED",
+  );
   assert.equal(regression.framingSpecificRegressionDetected, false);
   assert.equal(regression.console.applicationErrorCount, 0);
   assert.equal(regression.console.applicationWarningCount, 0);

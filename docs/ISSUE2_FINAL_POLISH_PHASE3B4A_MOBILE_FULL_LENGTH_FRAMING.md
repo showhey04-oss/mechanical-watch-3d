@@ -6,9 +6,9 @@ Phase 3B.4aでは、Phase 3B.3で人間選定されたD2c3のモバイル全長�
 
 判定は次とする。
 
-`TECHNICAL_MOBILE_FRAMING_FINALIST_FOR_PHYSICAL_IPHONE_REVIEW`
+`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`
 
-この候補はquery限定・未採用である。初期表示、camera target、FOV、near／far、Desktop、Geometry、Light、fog、Material、透過処理、UI、audio、APP_VERSION、試験閾値は変更していない。物理iPhoneの人間確認前にReady化、マージ、既定採用、Issue #2のクローズは行わない。
+Phase状態は`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`とする。この候補はquery限定・未採用である。初期表示、camera target、FOV、near／far、Desktop、Geometry、Light、fog、Material、透過処理、UI、audio、APP_VERSION、試験閾値は変更していない。Ready化、マージ、既定採用、Issue #2のクローズは行わない。
 
 ## 候補query
 
@@ -118,9 +118,21 @@ Desktop／Mobile comprehensiveで残るA.5照明契約とA.6絶対性能の未�
 
 ## 人間確認
 
-物理iPhone確認は未実施であり、状態は`NOT_PERFORMED_PENDING_HUMAN`である。iPhone 16／iOS 26.5.2／ホーム画面起動で5分以上、初期表示、全長、上下ストラップ、尾錠、pinch方向、初期距離復帰、preset、選択、D2c3明度、Safari reload、WebGL context loss、progressive frame dropを確認する。
+iPhone 16／iOS 26.5.2、Safari／ホーム画面、輝度50%、低電力モードOFF、ケースあり、室温25℃で15分確認した。
 
-テンプ音ペーシングは記録対象だが、本工程では修正しない。
+- 従来D2c3との初期構図・明るさ・初期操作感: 合格
+- ケース、上下ストラップ端、尾錠、上下左右余白、過剰縮小なし、clippingなし: 合格
+- 全長時のfog暗化: `MOBILE_FULL_LENGTH_FOG_DARKENING_ACCEPTED_AS_IS`
+- 初期距離復帰、front／back／side、最大距離回転、設定車2選択、HUD／学習同期、空白タップ解除、split／explode／restore: 合格
+- progressive frame drop: 報告上なし
+- WebGL表示消失: なし
+- 発熱: 軽微・許容
+
+正式判断は`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`である。
+
+一般tap異常は明確に報告されていない。一方、2～3分後に二本指pan、pinch in／out、二本指を含むrotationが不自然になり、手動reloadで復旧した。これは`HUMAN_REPORTED_IOS_MULTITOUCH_GESTURE_DEGRADATION_AFTER_2_TO_3_MINUTES`としてPhase 3B.4bへ分離する。自動reloadは`NOT_REPORTED`である。
+
+`IOS_BALANCE_AUDIO_PACING_SLOWDOWN_REPRODUCED`も記録するが、本工程では修正しない。
 
 ## 未変更・保留
 
