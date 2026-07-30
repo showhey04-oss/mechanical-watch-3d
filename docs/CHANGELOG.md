@@ -8,7 +8,8 @@
 - pointercancel、真のlostpointercapture、pointer ID再利用、blur、visibility、pagehide／pageshowをcleanupし、二本指から一本指への遷移でgesture基準を再初期化
 - Desktop 24 cycle／390×844 60 cycleでidle復帰100%、active pointer／capture残留0、camera finite、selection／解除、transform invariantを確認
 - Desktop／Mobileのidle／pointer／wheel差分6/6、UI、HUD、audio、S86 5/5、A.7 9/9、禁止干渉0/0、application console error／warning 0/0に合格
-- 物理iPhoneのA／B／C各5分および候補C 15分は未実施のため、`STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE`とし、root causeとframing固有性を確定しない
+- iPhone 16／iOS 26.5.2でframingなしAを49秒、framingありBを55秒で再現し、候補Cは15分以上再現なし。`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`を記録
+- 候補Cはmanual reload、progressive frame drop、Safari自動reload、WebGL lossなし。preset／selectionの手動結果は`NOT_REPORTED`として最終統合へ残し、状態を`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
 - D2c3、framing、入力候補はquery限定・未採用。感度、damping、FOV、maxDistance、audio、Geometry、Light、fog、Material、透過、APP_VERSION、閾値を変更しない
 
 ### Issue #2 Final Polish Phase 3B.4a

@@ -2,9 +2,9 @@
 
 ## 状態
 
-`STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE`
+`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`
 
-query限定のevent-driven multi-touch cleanup候補は自動技術ゲートに合格した。物理iPhoneのA／B／C各5分と候補Cの連続15分確認は未実施であり、候補は未採用である。
+query限定のevent-driven multi-touch cleanup候補は自動技術ゲートに合格した。物理iPhoneではAが49秒、Bが55秒で劣化を再現し、候補Cは15分以上再現しなかったため、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`かつ`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`とした。候補はquery限定・未採用のままである。
 
 ## 由来
 
@@ -27,8 +27,9 @@ query限定のevent-driven multi-touch cleanup候補は自動技術ゲートに�
 - `reports/performance.json`: current／candidate各3反復の差分
 - `reports/regression-results.json`: Node、browser、UI、HUD、audio、S86、A.7、干渉
 - `reports/protected-paths.json`: Baseとのpixel／state保護
-- `reports/physical-iphone-review.json`: 必須15分確認の未実施記録
-- `reports/decision-summary.json`: 未採用判断
+- `reports/physical-iphone-review.json`: A／B再現とC 15分合格の物理iPhone記録
+- `reports/human-review-status.json`: 人間受入と未報告項目の境界
+- `reports/decision-summary.json`: 技術finalist／人間受入／未採用判断
 - `raw/`: 実ブラウザDesktop／MobileとA／B／C raw capture
 - `boards/`: A／B／C、Desktop／Mobile、入力状態遷移
 - `motion/`: 実ブラウザ操作frameとGIF
@@ -53,6 +54,6 @@ selected captureはBase自身に時間位相のあるhighlight差があるため
 
 ## 物理確認
 
-物理iPhoneは未実施である。A、B、C各5分および候補C 15分を完了するまで、framing固有性、物理root cause、manual reload不要、技術finalist、人間合格を確定しない。
+iPhone 16／iOS 26.5.2でA／Bの再現と候補Cの15分以上の無再現を確認した。framingなし／ありの両方で症状が出たため`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、候補Cは`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`とする。presetとselectionの手動結果は`NOT_REPORTED`であり、自動回帰結果で代替しない。
 
 Ready化、マージ、D2c3／framing／input候補の既定採用、Issue #2のクローズは行わない。

@@ -4,11 +4,15 @@
 
 Phase 3B.4bでは、完成外装、D2c3、Phase 3B.4a framingを維持したまま、iOS相当のPointer Events lifecycleだけをquery限定で監査・補強した。
 
-自動技術ゲートは合格したが、物理iPhoneで必要なA／B／C各5分および候補Cの連続15分確認は未実施である。したがって正式判定は次とする。
+自動技術ゲートに加え、iPhone 16／iOS 26.5.2の物理確認を完了した。framingなしのAは49秒、framingありのBは55秒で同じgesture state劣化を再現し、framingありの修正候補Cは15分以上の連続操作で再現しなかった。
 
-`STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE`
+`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`
 
-候補を既定採用せず、Ready化、マージ、Issue #2のクローズは行わない。
+`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`
+
+`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`
+
+現在状態は`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`とする。候補はquery限定・未採用のまま保持し、Ready化、マージ、Issue #2のクローズは行わない。
 
 ## Query
 
@@ -37,7 +41,7 @@ Phase 3B.4bでは、完成外装、D2c3、Phase 3B.4a framingを維持したま�
 
 `LIKELY_STALE_ARCBALL_AND_APPLICATION_POINTER_LIFECYCLE_STATE`
 
-`rootCauseConfirmedOnPhysicalDevice=false`
+`rootCauseConfirmedOnPhysicalDevice=true`
 
 ## 実装
 
@@ -120,18 +124,15 @@ Part A完了commit `ece9d99c4e0ff95afd155475ef963e2984c5d05f`と比較した。
 
 ## 物理iPhone確認
 
-Codex実行環境には物理iPhoneがないため未実施である。自動試験を代替としない。
+環境はiPhone 16、iOS 26.5.2、Safari／ホーム画面、輝度50%、低電力モードOFF、ケースあり、室温24.5℃である。
 
-必要な確認:
+- A（framingなし／diagnostics）: 2分、49秒でpinch out直後に再現。二本指panが回転またはzoomとして誤認され、pinch方向が反転する場合があった
+- B（framingあり／diagnostics）: 1分、55秒でpinch out直後にAと同じ症状を再現
+- C（framingあり／修正候補）: 15分以上、症状再現なし。二本指pan、pinch in/out、一／二本指遷移、素早いrelease、画面端gesture、最大距離回転、初期距離復帰、split／explode／restoreに合格
+- Cではprogressive frame drop、Safari自動reload、WebGL表示消失、manual reloadを認めず、発熱はほぼなかった
+- テンプ音の遅れは残り、Phase 3B.4cへ分離する
 
-1. A、B、Cを各5分以上
-2. Cを連続15分
-3. 一／二本指遷移、pinch、pan、rotation、画面端、素早いrelease
-4. 最大／最小距離、preset、split／explode／restore
-5. 選択、HUD／学習同期、空白解除
-6. active pointer leak、unexpected jump、manual reload、WebGL loss、console
-
-物理確認完了まで`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`または人間合格とはしない。
+presetとselectionの手動結果は`NOT_REPORTED`であり、合格へ変換しない。自動preset／selection回帰の合格は別記録として維持し、最終統合で物理iPhone確認を行う。
 
 ## 未変更・保留
 

@@ -33,7 +33,7 @@ Refactor Aで輪列・高さ面・回転状態をパラメータ化し、PR #3�
 
 作動音は教育・演出用の合成音であり、実物のETA 6498-1の録音ではない。初期状態はOFFとし、ユーザーがONにした後にだけWeb Audioと音源を初期化する。音イベント系は機構状態へ値を書き戻さず、初期化・診断・状態復元も発音契機にしない。
 
-現在の改修フェーズは「Issue #2 Final Polish Phase 3B.4b、iOSマルチタッチ状態安定化、未採用」とする。Phase 3B.4aのモバイル全長構図はiPhone 16／iOS 26.5.2の15分確認で`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`として合格した。Phase 3B.4bのquery限定event-driven cleanup候補はDesktop／390×844のsynthetic lifecycle・選択・差分性能に合格したが、物理iPhone A／B／Cと15分確認が未実施のため`STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE`である。D2c3、framing、input候補はquery限定・未採用を維持する。Phase 3B.2の透過不連続受容とOIT完成後延期、Phase 3C.1～3C.3の人間承認済み基準、v3.15.0、S86、内部機構、通常レンダリング、DPRを変更しない。
+現在の改修フェーズは「Final Stabilization Phase 3B.4c、iOS balance audio pacing、未採用」とする。Phase 3B.4aのモバイル全長構図はiPhone 16／iOS 26.5.2の15分確認で`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`として合格した。Phase 3B.4bのquery限定event-driven cleanup候補は自動ゲートに加え、framingなしAが49秒、framingありBが55秒で劣化を再現し、候補Cが15分以上再現しないことを物理iPhoneで確認した。`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`、`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`とするが、preset／selectionの手動結果は`NOT_REPORTED`であり最終統合で再確認する。D2c3、framing、input候補はquery限定・未採用を維持する。Phase 3B.2の透過不連続受容とOIT完成後延期、Phase 3C.1～3C.3の人間承認済み基準、v3.15.0、S86、内部機構、通常レンダリング、DPRを変更しない。
 
 人間確認で選定したS86をv3.15.0の通常文字板表示寸法として採用する。対象は文字板表示系だけで、dial ring径27.692、index円径25.456、分針長12.040、時針長8.600、小秒表示円径7.740、小秒針長3.268である。内部機構、小秒中心、四番車軸、Y方向配置、針と軸／管の1:1回転拘束は維持する。試験状態は`ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION`であり、実施済みA/BでPR固有回帰は0件、全ブラウザ試験行列は環境制約により未完了である。
 

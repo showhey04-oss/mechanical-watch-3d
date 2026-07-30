@@ -147,7 +147,7 @@ test("Phase 3B.4b camera, selection, regression, and differential performance pa
   assert.equal(regression.console.applicationWarnings, 0);
 });
 
-test("Phase 3B.4b keeps protected captures exact and physical acceptance pending", async () => {
+test("Phase 3B.4b keeps protected captures exact and records physical acceptance boundaries", async () => {
   const protectedPaths = await readJson(join(REPORTS, "protected-paths.json"));
   const physical = await readJson(join(REPORTS, "physical-iphone-review.json"));
   const decision = await readJson(join(REPORTS, "decision-summary.json"));
@@ -157,21 +157,40 @@ test("Phase 3B.4b keeps protected captures exact and physical acceptance pending
   assert.equal(protectedPaths.selectionCapture.baselineItselfNonDeterministic, true);
   assert.equal(protectedPaths.selectionCapture.functionalSelectionPassed, true);
   assert.equal(protectedPaths.productObjectsAddedWithoutInputQuery, 0);
-  assert.equal(physical.status, "PENDING_REQUIRED_HUMAN_REVIEW");
+  const human = await readJson(join(REPORTS, "human-review-status.json"));
+  assert.equal(physical.status, "HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX");
   assert.equal(physical.requiredDurationMinutes, 15);
-  assert.equal(physical.A_minutes, 0);
-  assert.equal(physical.B_minutes, 0);
-  assert.equal(physical.C_minutes, 0);
-  assert.equal(physical.technicalGateCompleted, false);
+  assert.equal(physical.A.minutes, 2);
+  assert.equal(physical.A.onsetSeconds, 49);
+  assert.equal(physical.B.minutes, 1);
+  assert.equal(physical.B.onsetSeconds, 55);
+  assert.equal(physical.C.minutes, 15);
+  assert.equal(physical.C.symptomReproduced, false);
+  assert.equal(physical.C.manualReloadRequired, false);
+  assert.equal(physical.manualNotReported.preset, "NOT_REPORTED");
+  assert.equal(physical.manualNotReported.selection, "NOT_REPORTED");
+  assert.equal(physical.technicalGateCompleted, true);
   assert.equal(
     decision.decision,
-    "STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE",
+    "HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX",
   );
   assert.equal(
     decision.automatedCandidateStatus,
-    "AUTOMATED_TECHNICAL_GATES_PASSED_PENDING_PHYSICAL_IPHONE",
+    "AUTOMATED_TECHNICAL_GATES_PASSED",
   );
-  assert.equal(decision.rootCauseConfirmedOnPhysicalDevice, false);
+  assert.equal(
+    decision.framingSpecificity,
+    "CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE",
+  );
+  assert.equal(
+    decision.technicalFinalist,
+    "IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST",
+  );
+  assert.equal(
+    human.status,
+    "PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION",
+  );
+  assert.deepEqual(human.manualNotReported, ["preset", "selection"]);
   assert.equal(decision.candidateDefaultAdopted, false);
   assert.equal(decision.d2c3DefaultAdopted, false);
   assert.equal(decision.framingDefaultAdopted, false);

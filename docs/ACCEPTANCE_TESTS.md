@@ -1,6 +1,6 @@
 # 受入試験
 
-## Issue #2 Phase 3B.4b — iOS multi-touch stability候補
+## Issue #2 Phase 3B.4b — iOS multi-touch stability受入
 
 - 完成外装、D2c3、continuity currentと、任意のPhase 3B.4a framingに限定してinput候補が有効になる
 - `input` queryなしでは既存input path、Object3D、Light、Material、DOMが変化しない
@@ -9,8 +9,11 @@
 - desired／actual camera stateがfiniteで、unexpected jump、reversal、stop-then-jump、target drift、camera rollを発生させない
 - Desktop 1280×720と390×844のsynthetic lifecycle、selection、UI、HUD、audio、S86、A.7、禁止干渉、差分性能に合格する
 - camera sensitivity、damping、FOV、target、maxDistance、Geometry、Light、fog、Material、透過、audio、APP_VERSION、試験閾値を変更しない
-- 物理iPhoneでA／B／Cを各5分、候補Cを連続15分確認するまで、framing固有性、物理root cause、technical finalist、人間合格を確定しない
-- 現状態は`STOPPED_PHYSICAL_IPHONE_REPRODUCTION_INCONCLUSIVE`であり、既定採用、Ready化、マージ、Issue #2クローズを行わない
+- 物理iPhoneでA 49秒／B 55秒の症状再現と、候補C 15分以上の無再現を確認し、`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`と分類する
+- 候補Cの二本指pan、pinch in/out、一／二本指遷移、素早いrelease、画面端gesture、最大距離回転、初期距離復帰、split／explode／restoreに合格する
+- progressive frame drop、Safari自動reload、WebGL表示消失、manual reloadがなく、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`とする
+- preset／selectionの物理確認は`NOT_REPORTED`として最終統合へ残し、自動回帰の合格を人間確認へ変換しない
+- 現状態は`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`であり、query限定・未採用、Ready化禁止、マージ禁止、Issue #2 Openを維持する
 
 ## A. 起動
 
