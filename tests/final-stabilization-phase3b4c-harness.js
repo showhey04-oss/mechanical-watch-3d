@@ -62,7 +62,11 @@ async function waitForApi() {
     if (
       frame.contentDocument?.readyState === "complete"
       && frame.contentWindow?.watchModelDiagnostics?.getFinalStabilizationPhase3B4cReport
-    ) return frame.contentWindow.watchModelDiagnostics;
+    ) {
+      const audioToggle = frame.contentDocument.getElementById("audioToggle");
+      if (audioToggle) audioToggle.style.top = "80px";
+      return frame.contentWindow.watchModelDiagnostics;
+    }
     await waitFrame();
   }
   throw new Error("same-origin watchModelDiagnostics unavailable after 60s");
