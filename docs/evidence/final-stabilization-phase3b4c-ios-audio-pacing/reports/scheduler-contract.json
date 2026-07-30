@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
+  "assembledAt": "2026-07-30T18:07:25.432Z",
+  "status": "PASSED",
+  "queryOnly": true,
+  "defaultAdopted": false,
+  "normalBeatIntervalSeconds": 0.2,
+  "derivedPolicy": {
+    "minimumLeadSeconds": 0.018,
+    "minimumLeadBeatRatio": 0.09,
+    "maximumLookaheadSeconds": 0.6,
+    "maximumLookaheadBeats": 3,
+    "lateToleranceSeconds": 0.05,
+    "lateToleranceBeatRatio": 0.25,
+    "pendingSourceCap": 4
+  },
+  "contracts": {
+    "mechanismAuthoritative": true,
+    "absoluteScheduling": true,
+    "uniqueBeatSequence": true,
+    "noIndependentTimer": true,
+    "noIndependentOscillator": true,
+    "noCatchUpBurst": true,
+    "lifecycleReanchor": true,
+    "currentTimeReanchor": true,
+    "audioOffFastPath": true
+  }
+}

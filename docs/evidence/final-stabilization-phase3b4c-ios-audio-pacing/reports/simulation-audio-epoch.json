@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
+  "assembledAt": "2026-07-30T18:07:25.432Z",
+  "status": "PASSED",
+  "nodes": [
+    "authoritative mechanism beat sequence",
+    "simulation beat time",
+    "simulation-to-audio epoch",
+    "absolute AudioContext start time",
+    "tick/tock buffer source"
+  ],
+  "edges": [
+    {
+      "from": "authoritative mechanism beat sequence",
+      "to": "simulation beat time"
+    },
+    {
+      "from": "simulation beat time",
+      "to": "simulation-to-audio epoch"
+    },
+    {
+      "from": "simulation-to-audio epoch",
+      "to": "absolute AudioContext start time"
+    },
+    {
+      "from": "absolute AudioContext start time",
+      "to": "tick/tock buffer source"
+    }
+  ],
+  "reanchorTriggers": [
+    "audio enable",
+    "audio disable",
+    "pause/resume",
+    "stop seconds",
+    "manual time setting",
+    "current-time setting",
+    "visibility/page lifecycle",
+    "AudioContext suspended/interrupted",
+    "AudioContext clock stall",
+    "continuous-grid drift beyond 0.25s after 5s minimum interval"
+  ]
+}
