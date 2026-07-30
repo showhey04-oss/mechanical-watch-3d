@@ -15,14 +15,15 @@ class FakeNode {
   disconnect(node) { this.connections = this.connections.filter((item) => item !== node); }
 }
 class FakeSource extends EventTarget {
+  constructor() { super(); this.startTimes = []; }
   connect() {}
-  start() {}
+  start(time) { this.startTimes.push(time); }
   stop() { this.dispatchEvent(new Event("ended")); }
 }
 class FakeContext {
-  constructor() { this.currentTime = 0; this.state = "suspended"; this.destination = new FakeNode(); this.decodeCount = 0; }
+  constructor() { this.currentTime = 0; this.state = "suspended"; this.destination = new FakeNode(); this.decodeCount = 0; this.sources = []; }
   createGain() { return new FakeNode(); }
-  createBufferSource() { return new FakeSource(); }
+  createBufferSource() { const source = new FakeSource(); this.sources.push(source); return source; }
   async decodeAudioData() { this.decodeCount += 1; return { duration: 0.05 }; }
   async resume() { this.state = "running"; }
   async suspend() { this.state = "suspended"; }
@@ -180,4 +181,31 @@ test("disable lets the gain ramp finish before stopping sources and suspending t
   await disabling;
   assert.equal(engine.getDiagnostics().activeSources, 0);
   assert.equal(context.state, "suspended");
+});
+
+test("absolute escapement scheduling exposes clock metadata and can be cancelled without stopping other buses", async () => {
+  const context = new FakeContext();
+  context.currentTime = 12;
+  context.baseLatency = 0.01;
+  context.outputLatency = 0.02;
+  context.getOutputTimestamp = () => ({ contextTime: 11.98, performanceTime: 1234 });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  await engine.enableFromUserGesture();
+  assert.equal(engine.play("escapementTick", { startTime: 12.1, metadata: { eventSequence: 1 } }), true);
+  assert.equal(engine.play("winding"), true);
+  assert.deepEqual(context.sources[0].startTimes, [12.1]);
+  const clock = engine.getClockSnapshot();
+  assert.equal(clock.pendingEscapementSources, 1);
+  assert.deepEqual(clock.outputTimestamp, { contextTime: 11.98, performanceTime: 1234 });
+  assert.equal(engine.getDiagnostics().eventCounts.escapementTick, 0);
+  assert.equal(engine.getDiagnostics().eventCounts.winding, 1);
+  assert.equal(engine.cancelScheduledEscapement(), 1);
+  assert.equal(engine.getDiagnostics().activeSources, 1);
+  assert.equal(engine.getDiagnostics().eventLog.length, 1);
+  assert.equal(engine.getDiagnostics().eventLog[0].type, "winding");
+
+  assert.equal(engine.play("escapementTock", { startTime: 12.1, metadata: { eventSequence: 2 } }), true);
+  context.currentTime = 12.11;
+  assert.equal(engine.getDiagnostics().eventCounts.escapementTock, 1);
+  assert.equal(engine.getDiagnostics().eventLog.at(-1).requestedStartTime, 12.1);
 });

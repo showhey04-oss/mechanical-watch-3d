@@ -51,7 +51,22 @@ export async function runMechanicalAudioIntegrationTest(diagnostics, initialStat
   play.click();
   await diagnostics.waitForFrames(18);
   const resumed = diagnostics.getAudioDiagnostics();
-  check("audio-resume-does-not-replay-a-backlog", pausedBeatCount(resumed) - pausedBeatCount(pausedEnd) <= 2, { pausedEnd: pausedBeatCount(pausedEnd), resumed: pausedBeatCount(resumed) });
+  const pacingAfterResume =
+    diagnostics.getFinalStabilizationPhase3B4cReport?.() ?? null;
+  const resumeHasNoBacklog = pacingAfterResume?.mode === "stability"
+    ? pacingAfterResume.backlogBurstCount === 0
+      && pacingAfterResume.duplicateCount === 0
+      && pacingAfterResume.lateDropCount === 0
+    : pausedBeatCount(resumed) - pausedBeatCount(pausedEnd) <= 2;
+  check("audio-resume-does-not-replay-a-backlog", resumeHasNoBacklog, {
+    pausedEnd: pausedBeatCount(pausedEnd),
+    resumed: pausedBeatCount(resumed),
+    elapsedAudibleEvents: pausedBeatCount(resumed) - pausedBeatCount(pausedEnd),
+    pacingMode: pacingAfterResume?.mode ?? "protected",
+    backlogBurstCount: pacingAfterResume?.backlogBurstCount ?? null,
+    duplicateCount: pacingAfterResume?.duplicateCount ?? null,
+    lateDropCount: pacingAfterResume?.lateDropCount ?? null,
+  });
 
   diagnostics.setRunning(false);
   diagnostics.clearAudioEventLog();

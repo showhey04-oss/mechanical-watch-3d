@@ -51,8 +51,10 @@ export class MechanicalAudioEngine {
     this.buffers = new Map();
     this.failedAssets = [];
     this.activeSources = new Set();
+    this.sourceRecords = new Map();
     this.eventCounts = emptyCounts();
     this.eventLog = [];
+    this.playSequence = 0;
     this.lastEventType = null;
     this.lastEventTime = null;
     this.droppedEvents = 0;
@@ -223,7 +225,7 @@ export class MechanicalAudioEngine {
     this.suppressedEvents += Math.max(0, Math.trunc(count) || 0);
   }
 
-  play(type, { timestamp = performance.now(), metadata = {} } = {}) {
+  play(type, { timestamp = performance.now(), startTime = null, metadata = {} } = {}) {
     const asset = this.manifest?.runtime?.[type];
     const buffer = this.buffers.get(type);
     if (!this.enabled || !this.visible || this.context?.state !== "running" || !asset || !buffer) {
@@ -233,13 +235,33 @@ export class MechanicalAudioEngine {
     const source = this.context.createBufferSource();
     source.buffer = buffer;
     source.connect(this.busNodes.get(asset.bus) || this.masterNode);
-    source.addEventListener("ended", () => this.activeSources.delete(source), { once: true });
+    const requestedStartTime = Number.isFinite(Number(startTime))
+      ? Math.max(this.context.currentTime, Number(startTime))
+      : null;
+    const audioPlaySequence = ++this.playSequence;
+    source.addEventListener("ended", () => {
+      this.activeSources.delete(source);
+      this.sourceRecords.delete(source);
+    }, { once: true });
     this.activeSources.add(source);
-    source.start();
+    this.sourceRecords.set(source, {
+      type,
+      requestedStartTime,
+      audioPlaySequence,
+      metadata: { ...metadata },
+    });
+    if (requestedStartTime === null) source.start();
+    else source.start(requestedStartTime);
     this.eventCounts[type] += 1;
     this.lastEventType = type;
     this.lastEventTime = timestamp;
-    this.eventLog.push({ type, time: timestamp, ...metadata });
+    this.eventLog.push({
+      type,
+      time: timestamp,
+      requestedStartTime,
+      audioPlaySequence,
+      ...metadata,
+    });
     if (this.eventLog.length > 500) this.eventLog.splice(0, this.eventLog.length - 500);
     return true;
   }
@@ -249,6 +271,52 @@ export class MechanicalAudioEngine {
       try { source.stop(); } catch {}
     }
     this.activeSources.clear();
+    this.sourceRecords.clear();
+  }
+
+  cancelScheduledEscapement() {
+    let cancelled = 0;
+    const cancelledSequences = new Set();
+    for (const [source, record] of this.sourceRecords) {
+      if (record.type !== "escapementTick" && record.type !== "escapementTock") continue;
+      try { source.stop(); } catch {}
+      this.activeSources.delete(source);
+      this.sourceRecords.delete(source);
+      cancelledSequences.add(record.audioPlaySequence);
+      cancelled += 1;
+    }
+    if (cancelledSequences.size) {
+      this.eventLog = this.eventLog.filter(
+        (event) => !cancelledSequences.has(event.audioPlaySequence),
+      );
+    }
+    return cancelled;
+  }
+
+  getClockSnapshot() {
+    const currentTime = Number.isFinite(this.context?.currentTime) ? this.context.currentTime : null;
+    let outputTimestamp = null;
+    if (this.context && typeof this.context.getOutputTimestamp === "function") {
+      try {
+        const value = this.context.getOutputTimestamp();
+        if (value && Number.isFinite(value.contextTime) && Number.isFinite(value.performanceTime)) {
+          outputTimestamp = { contextTime: value.contextTime, performanceTime: value.performanceTime };
+        }
+      } catch {}
+    }
+    const pendingEscapementSources = currentTime === null ? 0 : [...this.sourceRecords.values()]
+      .filter((record) => (record.type === "escapementTick" || record.type === "escapementTock")
+        && record.requestedStartTime !== null
+        && record.requestedStartTime > currentTime + 0.001).length;
+    return {
+      state: this.context?.state ?? "not-created",
+      currentTime,
+      baseLatency: Number.isFinite(this.context?.baseLatency) ? this.context.baseLatency : null,
+      outputLatency: Number.isFinite(this.context?.outputLatency) ? this.context.outputLatency : null,
+      outputTimestamp,
+      activeSources: this.activeSources.size,
+      pendingEscapementSources,
+    };
   }
 
   createMediaStreamDestination() {
@@ -273,6 +341,18 @@ export class MechanicalAudioEngine {
   }
 
   getDiagnostics() {
+    const currentTime = Number.isFinite(this.context?.currentTime)
+      ? this.context.currentTime
+      : null;
+    const audibleEventLog = this.eventLog.filter((event) =>
+      event.requestedStartTime === null
+      || currentTime === null
+      || event.requestedStartTime <= currentTime + 0.001);
+    const audibleEventCounts = emptyCounts();
+    for (const event of audibleEventLog) {
+      if (Object.hasOwn(audibleEventCounts, event.type)) audibleEventCounts[event.type] += 1;
+    }
+    const lastAudibleEvent = audibleEventLog.at(-1) ?? null;
     return {
       audioSupported: this.supported,
       audioEnabled: this.enabled,
@@ -283,13 +363,14 @@ export class MechanicalAudioEngine {
       failedAssets: [...this.failedAssets],
       masterGain: this.masterGainValue,
       busGains: { ...DEFAULT_BUS_GAINS },
-      lastEventType: this.lastEventType,
-      lastEventTime: this.lastEventTime,
-      eventCounts: { ...this.eventCounts },
+      lastEventType: lastAudibleEvent?.type ?? null,
+      lastEventTime: lastAudibleEvent?.time ?? null,
+      eventCounts: audibleEventCounts,
       droppedEvents: this.droppedEvents,
       suppressedEvents: this.suppressedEvents,
       activeSources: this.activeSources.size,
-      eventLog: this.eventLog.map((event) => ({ ...event })),
+      audioClock: this.getClockSnapshot(),
+      eventLog: audibleEventLog.map((event) => ({ ...event })),
       highRatePolicy: { maxEscapementEventsPerSecond: 8, maxPhaseEventsPerFrame: 1 },
     };
   }
