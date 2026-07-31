@@ -20,9 +20,10 @@ const emptyCounts = () => Object.fromEntries(REQUIRED_AUDIO_EVENT_TYPES.map((typ
 const defaultWait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const DISABLE_RAMP_SECONDS = 0.025;
 const DISABLE_STOP_DELAY_MS = 30;
-const stateName = (enabled, loading, supported, failures) => {
+const stateName = (enabled, loading, supported, failures, resumeRequired = false) => {
   if (!supported || failures.length) return "unavailable";
   if (loading) return "loading";
+  if (enabled && resumeRequired) return "resume-required";
   return enabled ? "on" : "off";
 };
 
@@ -70,6 +71,11 @@ export class MechanicalAudioEngine {
     this.suppressedEvents = 0;
     this.loadPromise = null;
     this.lifecycleSequence = 0;
+    this.resumeAttemptSequence = 0;
+    this.resumeRequired = false;
+    this.resumeInFlight = null;
+    this.lastResumeResult = null;
+    this.resumeHistory = [];
   }
 
   emitState() {
@@ -115,6 +121,14 @@ export class MechanicalAudioEngine {
       this.createGraph();
       await this.context.resume();
       if (lifecycleSequence !== this.lifecycleSequence) return false;
+      if (this.context.state !== "running") {
+        this.enabled = false;
+        this.loading = false;
+        this.resumeRequired = false;
+        this.rampMaster(0);
+        this.emitState();
+        return false;
+      }
       this.enabled = false;
       this.loading = !this.getBufferCompleteness().complete;
       this.failedAssets = [];
@@ -130,6 +144,7 @@ export class MechanicalAudioEngine {
         return false;
       }
       this.enabled = true;
+      this.resumeRequired = false;
       this.rampMaster(this.masterGainValue);
       this.emitState();
       return true;
@@ -137,6 +152,7 @@ export class MechanicalAudioEngine {
       this.failedAssets = [error?.message || String(error)];
       this.enabled = false;
       this.loading = false;
+      this.resumeRequired = false;
       this.stopAll();
       this.emitState();
       return false;
@@ -196,6 +212,7 @@ export class MechanicalAudioEngine {
   async disable() {
     const lifecycleSequence = ++this.lifecycleSequence;
     this.enabled = false;
+    this.resumeRequired = false;
     this.rampMaster(0, DISABLE_RAMP_SECONDS);
     this.emitState();
     await this.waitFn(DISABLE_STOP_DELAY_MS);
@@ -207,6 +224,7 @@ export class MechanicalAudioEngine {
 
   async setVisible(visible) {
     this.visible = Boolean(visible);
+    if (!this.visible) this.resumeRequired = false;
     if (!this.context) return;
     if (!this.visible) {
       this.rampMaster(0, 0.015);
@@ -217,6 +235,122 @@ export class MechanicalAudioEngine {
       this.rampMaster(this.masterGainValue);
     }
     this.emitState();
+  }
+
+  async performResumeAttempt({ trustedGesture = false, reason = "visible" } = {}) {
+    const stateBefore = this.context?.state ?? "not-created";
+    const resumeAttempted =
+      Boolean(this.context)
+      && stateBefore !== "running"
+      && typeof this.context.resume === "function";
+    const attemptSequence = resumeAttempted
+      ? ++this.resumeAttemptSequence
+      : this.resumeAttemptSequence;
+    let resumeResolved = false;
+    let resumeRejected = false;
+    let error = null;
+    if (resumeAttempted) {
+      try {
+        await this.context.resume();
+        resumeResolved = true;
+      } catch (caught) {
+        resumeRejected = true;
+        error = caught?.message || String(caught);
+      }
+    }
+    const stateAfter = this.context?.state ?? "not-created";
+    const running = stateAfter === "running";
+    const result = {
+      stateBefore,
+      stateAfter,
+      resumeAttempted,
+      resumeResolved,
+      resumeRejected,
+      running,
+      requiresTrustedGesture:
+        this.enabled && this.visible && !running,
+      enabled: this.enabled,
+      visible: this.visible,
+      trustedGesture: Boolean(trustedGesture),
+      reason,
+      attemptSequence,
+      error,
+    };
+    this.lastResumeResult = result;
+    this.resumeHistory.push({ ...result });
+    if (this.resumeHistory.length > 80) {
+      this.resumeHistory.splice(0, this.resumeHistory.length - 80);
+    }
+    return result;
+  }
+
+  async resumeVisibleAudio({
+    trustedGesture = false,
+    reason = "visible",
+  } = {}) {
+    this.visible = true;
+    if (this.resumeInFlight) {
+      const inFlightResult = await this.resumeInFlight;
+      if (trustedGesture && !inFlightResult.running) {
+        return this.resumeVisibleAudio({ trustedGesture, reason });
+      }
+      return inFlightResult;
+    }
+    this.resumeInFlight = (async () => {
+      if (!this.context || !this.enabled) {
+        this.resumeRequired = false;
+        const result = await this.performResumeAttempt({
+          trustedGesture,
+          reason,
+        });
+        this.emitState();
+        return result;
+      }
+      this.rampMaster(0, 0);
+      const result = await this.performResumeAttempt({
+        trustedGesture,
+        reason,
+      });
+      this.resumeRequired = !result.running;
+      if (result.running) this.rampMaster(this.masterGainValue);
+      else this.rampMaster(0, 0);
+      this.emitState();
+      return {
+        ...result,
+        requiresTrustedGesture: this.resumeRequired,
+      };
+    })().finally(() => {
+      this.resumeInFlight = null;
+    });
+    return this.resumeInFlight;
+  }
+
+  prepareTrustedGestureRecoveryForTest(reason = "diagnostic") {
+    this.visible = true;
+    if (!this.context || !this.enabled || this.context.state === "running") {
+      this.resumeRequired = false;
+      this.emitState();
+      return this.getDiagnostics();
+    }
+    this.rampMaster(0, 0);
+    this.resumeRequired = true;
+    this.lastResumeResult = {
+      stateBefore: this.context.state,
+      stateAfter: this.context.state,
+      resumeAttempted: false,
+      resumeResolved: false,
+      resumeRejected: false,
+      running: false,
+      requiresTrustedGesture: true,
+      enabled: this.enabled,
+      visible: this.visible,
+      trustedGesture: false,
+      reason,
+      attemptSequence: this.resumeAttemptSequence,
+      error: null,
+    };
+    this.emitState();
+    return this.getDiagnostics();
   }
 
   setMasterGain(value) {
@@ -422,7 +556,13 @@ export class MechanicalAudioEngine {
       audioSupported: this.supported,
       audioEnabled: this.enabled,
       audioContextState: this.context?.state ?? "not-created",
-      status: stateName(this.enabled, this.loading, this.supported, this.failedAssets),
+      status: stateName(
+        this.enabled,
+        this.loading,
+        this.supported,
+        this.failedAssets,
+        this.resumeRequired,
+      ),
       buffersLoaded: [...this.buffers.keys()].sort(),
       bufferCompleteness: this.getBufferCompleteness(),
       failedAssets: [...this.failedAssets],
@@ -436,6 +576,13 @@ export class MechanicalAudioEngine {
       activeSources: this.activeSources.size,
       sourceRecordCount: this.sourceRecords.size,
       sourceLifecycleCounts: { ...this.sourceLifecycleCounts },
+      visible: this.visible,
+      resumeRequired: this.resumeRequired,
+      resumeAttemptSequence: this.resumeAttemptSequence,
+      lastResumeResult: this.lastResumeResult
+        ? { ...this.lastResumeResult }
+        : null,
+      resumeHistory: this.resumeHistory.map((entry) => ({ ...entry })),
       escapementSourceInventory: this.getEscapementSourceInventory(),
       audioClock: this.getClockSnapshot(),
       eventLog: audibleEventLog.map((event) => ({ ...event })),

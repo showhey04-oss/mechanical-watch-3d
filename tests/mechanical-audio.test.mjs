@@ -21,11 +21,17 @@ class FakeSource extends EventTarget {
   stop() { this.dispatchEvent(new Event("ended")); }
 }
 class FakeContext {
-  constructor() { this.currentTime = 0; this.state = "suspended"; this.destination = new FakeNode(); this.decodeCount = 0; this.sources = []; }
+  constructor({ resumePlan = [] } = {}) { this.currentTime = 0; this.state = "suspended"; this.destination = new FakeNode(); this.decodeCount = 0; this.sources = []; this.resumePlan = [...resumePlan]; this.resumeCalls = 0; }
   createGain() { return new FakeNode(); }
   createBufferSource() { const source = new FakeSource(); this.sources.push(source); return source; }
   async decodeAudioData() { this.decodeCount += 1; return { duration: 0.05 }; }
-  async resume() { this.state = "running"; }
+  async resume() {
+    this.resumeCalls += 1;
+    const behavior = this.resumePlan.length ? this.resumePlan.shift() : "running";
+    if (behavior instanceof Error) throw behavior;
+    if (typeof behavior === "function") return behavior(this);
+    this.state = behavior;
+  }
   async suspend() { this.state = "suspended"; }
 }
 
@@ -159,6 +165,109 @@ test("play diagnostics count real sources and visibility stops active playback",
   await engine.setVisible(false);
   assert.equal(engine.getDiagnostics().audioContextState, "suspended");
   assert.equal(engine.getDiagnostics().activeSources, 0);
+});
+
+test("visible auto-resume rejection keeps gain muted and exposes resume-required", async () => {
+  const context = new FakeContext({ resumePlan: ["running", new Error("NotAllowedError")] });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const result = await engine.resumeVisibleAudio({ trustedGesture: false, reason: "pageshow" });
+  const report = engine.getDiagnostics();
+  assert.equal(result.resumeRejected, true);
+  assert.equal(result.running, false);
+  assert.equal(result.requiresTrustedGesture, true);
+  assert.equal(report.status, "resume-required");
+  assert.equal(report.audioEnabled, true);
+  assert.equal(report.resumeRequired, true);
+  assert.equal(engine.masterNode.gain.value, 0);
+});
+
+test("resolved resume is not treated as recovery until AudioContext is running", async () => {
+  const context = new FakeContext({ resumePlan: ["running", "suspended"] });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const result = await engine.resumeVisibleAudio({ trustedGesture: false, reason: "visibility:visible" });
+  assert.equal(result.resumeResolved, true);
+  assert.equal(result.stateAfter, "suspended");
+  assert.equal(result.running, false);
+  assert.equal(engine.getDiagnostics().status, "resume-required");
+  assert.equal(engine.masterNode.gain.value, 0);
+});
+
+test("trusted gesture recovers a failed automatic resume exactly once", async () => {
+  const context = new FakeContext({
+    resumePlan: ["running", new Error("NotAllowedError"), "running"],
+  });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const automatic = await engine.resumeVisibleAudio({ trustedGesture: false, reason: "pageshow" });
+  assert.equal(automatic.running, false);
+  const trusted = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "trusted-pointerdown" });
+  const report = engine.getDiagnostics();
+  assert.equal(trusted.running, true);
+  assert.equal(trusted.trustedGesture, true);
+  assert.equal(report.status, "on");
+  assert.equal(report.resumeRequired, false);
+  assert.equal(report.resumeAttemptSequence, 2);
+  assert.equal(report.resumeHistory.length, 2);
+  assert.equal(engine.masterNode.gain.value, 0.36);
+});
+
+test("trusted gesture queued behind in-flight auto-resume gets its own verified retry", async () => {
+  let releaseAuto;
+  const autoGate = new Promise((resolve) => { releaseAuto = resolve; });
+  const context = new FakeContext({
+    resumePlan: [
+      "running",
+      async (self) => { await autoGate; self.state = "suspended"; },
+      "running",
+    ],
+  });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const automatic = engine.resumeVisibleAudio({ trustedGesture: false, reason: "pageshow" });
+  const trusted = engine.resumeVisibleAudio({ trustedGesture: true, reason: "trusted-pointerdown" });
+  releaseAuto();
+  assert.equal((await automatic).running, false);
+  const recovered = await trusted;
+  assert.equal(recovered.running, true);
+  assert.equal(recovered.trustedGesture, true);
+  assert.equal(context.resumeCalls, 3);
+  assert.equal(engine.getDiagnostics().resumeAttemptSequence, 2);
+  assert.equal(engine.getDiagnostics().status, "on");
+});
+
+test("interrupted context can recover through the same verified resume contract", async () => {
+  const context = new FakeContext({ resumePlan: ["running", "running"] });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  context.state = "interrupted";
+  const result = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "trusted-keydown" });
+  assert.equal(result.stateBefore, "interrupted");
+  assert.equal(result.stateAfter, "running");
+  assert.equal(result.running, true);
+  assert.equal(engine.getDiagnostics().status, "on");
+});
+
+test("diagnostic trusted-gesture gate never resumes or reloads audio by itself", async () => {
+  const context = new FakeContext();
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const resumeCallsBefore = context.resumeCalls;
+  const decodeCountBefore = context.decodeCount;
+  const report = engine.prepareTrustedGestureRecoveryForTest("browser-test");
+  assert.equal(report.visible, true);
+  assert.equal(report.resumeRequired, true);
+  assert.equal(report.status, "resume-required");
+  assert.equal(context.state, "suspended");
+  assert.equal(context.resumeCalls, resumeCallsBefore);
+  assert.equal(context.decodeCount, decodeCountBefore);
+  assert.equal(engine.masterNode.gain.value, 0);
 });
 
 test("disable lets the gain ramp finish before stopping sources and suspending the context", async () => {

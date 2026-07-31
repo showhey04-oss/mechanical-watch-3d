@@ -84,6 +84,9 @@ export class Phase3B4cAudioPacingRuntime {
     this.starvationActive = false;
     this.schedulerNoOpReason = null;
     this.audibleScanIndex = 0;
+    this.timelineGeneration = 0;
+    this.timelineDiscontinuityResetCount = 0;
+    this.timelineResets = [];
     this.scheduled = [];
     this.legacyEvents = [];
     this.reasons = [];
@@ -174,6 +177,70 @@ export class Phase3B4cAudioPacingRuntime {
       simulationTime: finite(frame?.simulationTime),
       displayedTime: finite(frame?.displayedTime),
     });
+    return true;
+  }
+
+  resetForMechanismTimelineDiscontinuity(reason, frame = null) {
+    if (!this.enabled) return false;
+    const previous = {
+      timelineGeneration: this.timelineGeneration,
+      generation: this.generation,
+      lastTargetBeat: this.lastTargetBeat,
+      lastScheduledStartTime: this.lastScheduledStartTime,
+      lastActuallyAudibleBeat: this.lastActuallyAudibleBeat,
+      lastAudibleAudioTime: this.lastAudibleAudioTime,
+      lastAudibleEventSequence: this.lastAudibleEventSequence,
+      activeAudioStartedAt: this.activeAudioStartedAt,
+      activeAudioStartedBeat: this.activeAudioStartedBeat,
+      audibleScanIndex: this.audibleScanIndex,
+      scheduledLength: this.scheduled.length,
+      schedulerNoOpReason: this.schedulerNoOpReason,
+    };
+    this.cancelPending(reason);
+    this.generation += 1;
+    this.timelineGeneration += 1;
+    this.timelineDiscontinuityResetCount += 1;
+    this.reanchorCount += 1;
+    this.lastTargetBeat = null;
+    this.lastScheduledStartTime = null;
+    this.lastActuallyAudibleBeat = null;
+    this.lastAudibleAudioTime = null;
+    this.lastAudibleEventSequence = null;
+    this.activeAudioStartedAt = null;
+    this.activeAudioStartedBeat = null;
+    this.lastStarvationBeat = null;
+    this.starvationActive = false;
+    this.schedulerNoOpReason = null;
+    this.lastEpochReanchorAt = -Infinity;
+    this.lastRawBeat = finite(frame?.studyBeat);
+    this.lastFrame = frame ? {
+      ...frame,
+      studyBeat: finite(frame.studyBeat),
+    } : null;
+    this.epoch = null;
+    this.lastClockSample = null;
+    this.clockProgressSample = null;
+    this.lastClockLogAt = -Infinity;
+    this.audibleScanIndex = this.scheduled.length;
+    const reset = {
+      kind: "mechanism-timeline-discontinuity-reset",
+      reason,
+      timelineGeneration: this.timelineGeneration,
+      generation: this.generation,
+      performanceTime:
+        finite(frame?.performanceTime) ?? this.performanceNow(),
+      simulationTime: finite(frame?.simulationTime),
+      displayedTime: finite(frame?.displayedTime),
+      studyBeat: finite(frame?.studyBeat),
+      expectedNextTargetBeat: finite(frame?.studyBeat) === null
+        ? null
+        : Math.floor(Number(frame.studyBeat)) + 1,
+      previous,
+      audibleScanIndex: this.audibleScanIndex,
+    };
+    this.reasons.push(reason);
+    this.timelineResets.push(reset);
+    this.append(reset);
     return true;
   }
 
@@ -682,7 +749,16 @@ export class Phase3B4cAudioPacingRuntime {
     const rateChanged = this.epoch
       && Math.abs(frame.escapementBeatRate - this.epoch.beatRate) > Math.max(0.0001, this.epoch.beatRate * 0.01);
     if (stalled || discontinuity || rateChanged) {
-      this.reanchor(stalled ? "audio-context-clock-stall" : discontinuity ? "simulation-beat-discontinuity" : "beat-rate-change", frame);
+      const reason = stalled
+        ? "audio-context-clock-stall"
+        : discontinuity
+          ? "simulation-beat-discontinuity"
+          : "beat-rate-change";
+      if (discontinuity && this.foregroundMechanismTimebaseStable) {
+        this.resetForMechanismTimelineDiscontinuity(reason, frame);
+      } else {
+        this.reanchor(reason, frame);
+      }
     }
     this.lastRawBeat = frame.studyBeat;
     this.lastFrame = frame;
@@ -852,6 +928,9 @@ export class Phase3B4cAudioPacingRuntime {
     this.lastStarvationBeat = null;
     this.schedulerNoOpReason = null;
     this.audibleScanIndex = 0;
+    this.timelineGeneration = 0;
+    this.timelineDiscontinuityResetCount = 0;
+    this.timelineResets.length = 0;
     this.lastClockSample = null;
     this.clockProgressSample = null;
     this.lastClockLogAt = -Infinity;
@@ -907,7 +986,9 @@ export class Phase3B4cAudioPacingRuntime {
     const clock = this.clockSnapshot();
     return {
       schemaVersion: 2,
-      phase: "Final Stabilization Phase 3B.4c-R1.1",
+      phase: this.foregroundMechanismTimebaseStable
+        ? "Final Stabilization Phase 3B.4c-R2.1"
+        : "Final Stabilization Phase 3B.4c-R1.1",
       status: this.profile.status,
       mode: this.mode,
       enabled: this.enabled,
@@ -935,6 +1016,9 @@ export class Phase3B4cAudioPacingRuntime {
       clockStallCount: this.clockStallCount,
       epochDriftReanchorCount: this.epochDriftReanchorCount,
       reanchorCount: this.reanchorCount,
+      timelineGeneration: this.timelineGeneration,
+      timelineDiscontinuityResetCount:
+        this.timelineDiscontinuityResetCount,
       maximumPendingEscapementSources: this.maximumPending,
       maximumSourceRecordCount: this.maximumSourceRecordCount,
       maximumRequestedLeadSeconds: this.maximumRequestedLeadSeconds,
@@ -1012,6 +1096,10 @@ export class Phase3B4cAudioPacingRuntime {
       sourceLifecycleCounts: clock.sourceLifecycleCounts,
       epoch: this.epoch ? { ...this.epoch } : null,
       lifecycleReasons: [...this.reasons],
+      timelineResets: this.timelineResets.map((entry) => ({
+        ...entry,
+        previous: { ...entry.previous },
+      })),
       scheduledEvents: this.scheduled.map((event) => ({ ...event })),
       audibleEvents: audibleEvents.map((event) => ({ ...event })),
       legacyEvents: this.legacyEvents.map((event) => ({ ...event })),
