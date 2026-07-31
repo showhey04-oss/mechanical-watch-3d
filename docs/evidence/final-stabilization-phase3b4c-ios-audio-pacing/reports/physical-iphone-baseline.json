@@ -1,21 +1,36 @@
 {
-  "schemaVersion": 1,
-  "phase": "Final Stabilization Phase 3B.4c",
-  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
-  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "schemaVersion": 2,
+  "phase": "Final Stabilization Phase 3B.4c-R1",
+  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
+  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
-  "assembledAt": "2026-07-30T18:07:25.432Z",
-  "status": "IOS_BALANCE_AUDIO_PACING_SLOWDOWN_REPRODUCED",
-  "source": "human observation supplied in the Phase 3B.4c work order",
-  "observations": {
-    "shadowOff": "slowdown reproduced after about one minute",
-    "d2c3": "slowdown reproduced after about one minute",
-    "d2c3FramingMultitouchCandidate": "slowdown reproduced after about one minute",
-    "currentTimeSettingOnce": "did not prevent recurrence",
-    "progressiveFrameDropRequired": false,
-    "cameraGestureInstabilityRequired": false
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T01:20:37.008Z",
+  "status": "PHASE3B4C_PHYSICAL_IPHONE_REVIEW_FAILED",
+  "source": "Human report and ChatGPT-side analysis; media was not available to Codex",
+  "codexReviewedPhysicalMedia": false,
+  "freeRunning": {
+    "videoDurationSeconds": 21.1,
+    "initialAudibleRangeSeconds": [
+      1.36,
+      10.37
+    ],
+    "approximateEvents": 46,
+    "medianIntervalSeconds": 0.1996,
+    "completeSilenceSeconds": 5.7,
+    "audioToggleRecoverySeconds": 1.2,
+    "result": "AUDIO_TOGGLE_TEMPORARILY_RECOVERS_THEN_DROPS_OUT_AGAIN"
   },
-  "classification": "RENDERING_CANDIDATE_INDEPENDENT_AUDIO_ISSUE"
+  "liveSync": {
+    "videoDurationSeconds": 54.6,
+    "audibleRangeSeconds": [
+      3.61,
+      54.42
+    ],
+    "approximateEvents": 255,
+    "medianIntervalSeconds": 0.1996,
+    "silenceOverPointThreeSeconds": 0,
+    "result": "IOS_LIVE_SYNC_AUDIO_CONTINUITY_SHORT_RUN_PASS"
+  }
 }

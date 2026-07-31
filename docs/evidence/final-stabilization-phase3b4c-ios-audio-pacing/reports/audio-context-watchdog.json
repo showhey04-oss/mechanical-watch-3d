@@ -1,65 +1,23 @@
 {
-  "schemaVersion": 1,
-  "phase": "Final Stabilization Phase 3B.4c",
-  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
-  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "schemaVersion": 2,
+  "phase": "Final Stabilization Phase 3B.4c-R1",
+  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
+  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
-  "assembledAt": "2026-07-30T18:07:25.432Z",
-  "status": "PASSED",
-  "foregroundCandidate": {
-    "clockStallCount": 0,
-    "clock": {
-      "state": "running",
-      "currentTime": 180.15201814058958,
-      "outputTimestamp": {
-        "contextTime": 180.12683915192744,
-        "performanceTime": 183369.60000002384
-      },
-      "baseLatency": 0.005804988662131519,
-      "outputLatency": 0.016,
-      "pendingEscapementSources": 0
-    }
-  },
-  "currentTimeCandidate": {
-    "clockStallCount": 0,
-    "clock": {
-      "state": "running",
-      "currentTime": 180.10557823129253,
-      "outputTimestamp": {
-        "contextTime": 180.0803872426304,
-        "performanceTime": 183214.60000002384
-      },
-      "baseLatency": 0.005804988662131519,
-      "outputLatency": 0.016,
-      "pendingEscapementSources": 0
-    }
-  },
-  "lifecycleCandidate": {
-    "clockStallCount": 0,
-    "clock": {
-      "state": "running",
-      "currentTime": 29.930521541950114,
-      "outputTimestamp": {
-        "contextTime": 29.90534355328798,
-        "performanceTime": 33187.799999952316
-      },
-      "baseLatency": 0.005804988662131519,
-      "outputLatency": 0.016,
-      "pendingEscapementSources": 0
-    }
-  },
-  "policy": {
-    "runningStateAloneTrusted": false,
-    "wallAndContextDeltaCompared": true,
-    "onStall": [
-      "stop new beat scheduling",
-      "cancel pending sources",
-      "discard backlog",
-      "keep UI and mechanism running",
-      "require safe re-anchor"
-    ],
-    "infiniteResumeLoop": false
-  }
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T01:20:37.008Z",
+  "stateSource": "AudioContext.state and currentTime sampled from rAF",
+  "outputTimestampRecordedWhenAvailable": true,
+  "independentTimerUsed": false,
+  "starvationThresholdBeats": 3,
+  "activeConditions": [
+    "activeOscillation",
+    "sound ON",
+    "visible",
+    "AudioContext running"
+  ],
+  "matrixStarvationCount": 0,
+  "matrixUnexpectedClockStallCount": 0,
+  "browserForegroundStarvationCount": 0
 }

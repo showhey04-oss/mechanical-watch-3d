@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R1",
+  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
+  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T01:20:37.008Z",
+  "environment": {
+    "browser": "Codex in-app Browser",
+    "source": "same-origin unsandboxed iframe harness",
+    "appVersion": "v3.15.0",
+    "applicationConsoleErrors": 0,
+    "applicationConsoleWarnings": 0,
+    "excludedHarnessInstrumentation": [
+      "MutationObserver observe parameter warning emitted by Browser instrumentation"
+    ]
+  },
+  "comprehensive": {
+    "desktopCandidate": {
+      "pass": 81,
+      "total": 86,
+      "failures": [
+        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+        "a5-both-faces-retain-key-light-and-camera-follow-fill",
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ]
+    },
+    "desktopProtected": {
+      "pass": 81,
+      "total": 86,
+      "failures": [
+        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+        "a5-both-faces-retain-key-light-and-camera-follow-fill",
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ]
+    },
+    "mobileCandidate": {
+      "pass": 83,
+      "total": 88,
+      "failures": [
+        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+        "a5-both-faces-retain-key-light-and-camera-follow-fill",
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ]
+    },
+    "mobileProtected": {
+      "pass": 83,
+      "total": 88,
+      "failures": [
+        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+        "a5-both-faces-retain-key-light-and-camera-follow-fill",
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ]
+    }
+  },
+  "suites": {
+    "desktop": {
+      "ui": "20/20",
+      "hud": "45/45",
+      "trustedAudio": "23/23"
+    },
+    "mobile390x844": {
+      "ui": "22/22",
+      "hud": "57/57",
+      "trustedAudio": "23/23"
+    }
+  },
+  "actualWebAudio": {
+    "evidence": {
+      "path": "motion/ios-audio-pacing-listening-r1.webm",
+      "source": "actual Web Audio plus Three.js canvas MediaRecorder capture",
+      "mode": "free-running escapement",
+      "durationMs": 10505.700000047684,
+      "mimeType": "video/webm;codecs=vp9,opus",
+      "bytes": 764891,
+      "sha256": "74c7f87e290c1be758f621a29282841643a51fe13d38cb88837f0aca8066bccd",
+      "ebmlSignature": [
+        26,
+        69,
+        223,
+        163
+      ]
+    },
+    "foregroundDesktop": {
+      "durationMs": 30164.7,
+      "audibleEvents": 151,
+      "maximumAudibleGapSeconds": 0.1999999914726196,
+      "missingBeats": 0,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "starvationCount": 0,
+      "forbiddenInterference": 0
+    },
+    "foregroundMobile390x844": {
+      "durationMs": 30166.1,
+      "audibleEvents": 150,
+      "maximumAudibleGapSeconds": 0.20593187423083137,
+      "missingBeats": 1,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "starvationCount": 0,
+      "forbiddenInterference": 0
+    },
+    "lifecycleDesktop": {
+      "durationMs": 20000,
+      "applied": true,
+      "audibleEvents": 98,
+      "maximumAudibleGapSeconds": 0.3132490378996948,
+      "missingBeats": 1,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "starvationCount": 0,
+      "forbiddenInterference": 0
+    },
+    "currentTimeDesktop": {
+      "durationMs": 65000,
+      "applied": true,
+      "audibleEvents": 326,
+      "maximumAudibleGapSeconds": 0.1999999903983536,
+      "missingBeats": 0,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "starvationCount": 0,
+      "forbiddenInterference": 0
+    }
+  },
+  "candidateSpecificFailures": [],
+  "result": "PASSED_WITH_SHARED_BASELINE_ENVIRONMENT_FAILURES"
+}

@@ -1,20 +1,23 @@
 {
-  "schemaVersion": 1,
-  "phase": "Final Stabilization Phase 3B.4c",
-  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
-  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "schemaVersion": 2,
+  "phase": "Final Stabilization Phase 3B.4c-R1",
+  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
+  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
-  "assembledAt": "2026-07-30T18:07:25.432Z",
-  "manifestVersion": 1,
-  "closedWorld": true,
-  "selfIncluded": false,
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T01:20:37.008Z",
+  "manifestExcludesSelf": true,
   "files": [
     {
       "path": "README.md",
-      "bytes": 2707,
-      "sha256": "b76d103ce953815a6675fa149c66452e3867f1eed7aacd0d5911cd0d471e8d46"
+      "bytes": 4492,
+      "sha256": "4d3a79b9777bd22a9d92d1d3fd127ecdec705515459258ef33d32c72921687fa"
+    },
+    {
+      "path": "motion/ios-audio-pacing-listening-r1.webm",
+      "bytes": 764891,
+      "sha256": "74c7f87e290c1be758f621a29282841643a51fe13d38cb88837f0aca8066bccd"
     },
     {
       "path": "motion/ios-audio-pacing-listening.webm",
@@ -48,13 +51,18 @@
     },
     {
       "path": "reports/audio-context-watchdog.json",
-      "bytes": 1917,
-      "sha256": "19a124ab632fbe95a35156a8de4f7886491f410e00d1aeb8e36b093b2edeb8d8"
+      "bytes": 838,
+      "sha256": "043920b89a04ca8002a16de91c6b10c5d5dd91027b0016945b156925cf70712a"
     },
     {
       "path": "reports/beat-sequence-integrity.json",
-      "bytes": 1906,
-      "sha256": "6eaa63e1f91d13709c8ab43f9cb754aa6d56f00663c2672d2ae3ad041915a6b0"
+      "bytes": 691,
+      "sha256": "d6599687064781ea60c468fc93171b11dd992684c63032c4a39bf48737edee35"
+    },
+    {
+      "path": "reports/browser-r1.json",
+      "bytes": 4644,
+      "sha256": "42e9074377bf46b99312f7afbd1e020c1766e93d608d00f34b152a740772d2a5"
     },
     {
       "path": "reports/code-audit.json",
@@ -68,8 +76,18 @@
     },
     {
       "path": "reports/decision-summary.json",
-      "bytes": 1277,
-      "sha256": "ac9efa4dac0a38e61c568da3c66ffaab32d683771ab5a48a564a67748edc0b1b"
+      "bytes": 1354,
+      "sha256": "555d9fd948057a60ba866069dfefae8ebf14284ca709bccd650a98272689aa3f"
+    },
+    {
+      "path": "reports/free-running-live-sync-r1.json",
+      "bytes": 3723,
+      "sha256": "9371eba49efa6599b0d8ac637c7573b8b97924d41a5491097d7f3a4115335aad"
+    },
+    {
+      "path": "reports/free-running-starvation-reproduction.json",
+      "bytes": 787880,
+      "sha256": "439255a7e00b6c353c086799bdaf56c4842c40af77f56a675ef70735f41273d9"
     },
     {
       "path": "reports/lifecycle.json",
@@ -83,23 +101,23 @@
     },
     {
       "path": "reports/pending-source-inventory.json",
-      "bytes": 1273,
-      "sha256": "0971f57446d414bb83a579d7f123e2badf14f31df9068d02a64806f849fc0cd4"
+      "bytes": 5030,
+      "sha256": "2ebca43812c1e5c23530ec656a71806dd40ec7da6b37de2a2942bb6d10c8e94c"
     },
     {
       "path": "reports/performance.json",
-      "bytes": 113392,
-      "sha256": "17cc5703d3de11116b5515d8456ff60599e0aa7511d0fd799bc05114ed12a55f"
+      "bytes": 4016,
+      "sha256": "3b521311c947d26ab044a2799990483a5d0e367a866ecb9bbb2867c14d7ae4fa"
     },
     {
       "path": "reports/physical-iphone-baseline.json",
-      "bytes": 1019,
-      "sha256": "9b41bf8c4863ec48a5c722a72718ab08271dd40ac5b5cd7cd34a6a0f236e58c4"
+      "bytes": 1230,
+      "sha256": "379b9966876a521eb710cab3a5ff1e731bc51f39245a3bc6651247992ae5cac0"
     },
     {
       "path": "reports/physical-iphone-candidate.json",
-      "bytes": 914,
-      "sha256": "39fe27781351a3442ed4f11d800547cccab16f1b79d8f260a0b206fac9c0edaa"
+      "bytes": 864,
+      "sha256": "38b9828a3fd1db43df5fe9aee29eecdb6439a6a67596d6ceef405efb8236f3e8"
     },
     {
       "path": "reports/protected-paths.json",
@@ -108,18 +126,28 @@
     },
     {
       "path": "reports/regression-results.json",
-      "bytes": 3338,
-      "sha256": "ba93f97117b5839a8f446f6ff8292bc7f87962af1be1e2f42ea9b089c4c121b6"
+      "bytes": 5183,
+      "sha256": "54b16ce59086ad1add95777be5c9873bf9d74353956ef958909e5e58f359b845"
     },
     {
       "path": "reports/scheduler-contract.json",
-      "bytes": 1116,
-      "sha256": "ce6f9c1b8a8dfed2a9fc7f682664e4a75f36a9322e11adac7dcf33f03e40523c"
+      "bytes": 1190,
+      "sha256": "787dda66ca0d2736bef599714d6ef8c38cb753099a31a7d81444dda5cb21037a"
+    },
+    {
+      "path": "reports/scheduler-starvation-r1.json",
+      "bytes": 1836,
+      "sha256": "6c13f9381f30570ed1c1d44551ba7ba369893949310b63adac8860427a6cef24"
+    },
+    {
+      "path": "reports/scheduler-timeline-r1.json",
+      "bytes": 1715778,
+      "sha256": "923f969a9e2f8d8198436f69459d23a5fb3f8879ea3ea90897938167dfd7cd52"
     },
     {
       "path": "reports/simulation-audio-epoch.json",
-      "bytes": 1411,
-      "sha256": "0ff0e78b1e09a8ee644664e1222a60154aa877f1e60ed14a218ef6d1f740d388"
+      "bytes": 1150,
+      "sha256": "1ae2943b2fb075f864e34993d5d18b88f825af6871e13fce7b54bd4efbf86c70"
     },
     {
       "path": "reports/three-minute-baseline.json",
@@ -130,6 +158,11 @@
       "path": "reports/three-minute-candidate.json",
       "bytes": 2064345,
       "sha256": "c40d415c093601cf107298e2d99eb41efcca7e8502432a1ed2c95bdd3a1eadc8"
+    },
+    {
+      "path": "reports/virtual-fifteen-minute-r1.json",
+      "bytes": 24824,
+      "sha256": "ded51fb141f5674fe929e974f5352f8d5539475c4c264f2127f30cd4a4aacacf"
     }
   ],
   "validation": {

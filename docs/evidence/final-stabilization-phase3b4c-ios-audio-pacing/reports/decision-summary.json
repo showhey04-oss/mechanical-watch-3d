@@ -1,32 +1,34 @@
 {
-  "schemaVersion": 1,
-  "phase": "Final Stabilization Phase 3B.4c",
-  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
-  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "schemaVersion": 2,
+  "phase": "Final Stabilization Phase 3B.4c-R1",
+  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
+  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
-  "assembledAt": "2026-07-30T18:07:25.432Z",
-  "status": "STOPPED_PHYSICAL_IPHONE_AUDIO_REPRODUCTION_INCONCLUSIVE",
-  "initialStates": [
-    "IOS_BALANCE_AUDIO_PACING_SLOWDOWN_REPRODUCED",
-    "RENDERING_CANDIDATE_INDEPENDENT_AUDIO_ISSUE"
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T01:20:37.008Z",
+  "status": "PHASE3B4C_R1_TECHNICAL_FIX_PENDING_PHYSICAL_IPHONE_REVIEW",
+  "previousStatus": [
+    "PHASE3B4C_PHYSICAL_IPHONE_REVIEW_FAILED",
+    "HUMAN_REJECT_PHASE3B4C_STABILITY_CANDIDATE_AS_INCOMPLETE",
+    "IOS_INITIAL_FREE_RUNNING_ESCAPEMENT_AUDIO_DROPOUT_REPRODUCED",
+    "IOS_LIVE_SYNC_AUDIO_CONTINUITY_SHORT_RUN_PASS",
+    "AUDIO_TOGGLE_TEMPORARILY_RECOVERS_THEN_DROPS_OUT_AGAIN",
+    "PHASE3B4C_REOPENED_FOR_IOS_SCHEDULER_STARVATION_DIAGNOSIS"
   ],
-  "causeClassifications": [
-    "FRAME_CROSSING_AUDIO_EVENT_DELAY"
-  ],
+  "deterministicReproduction": "PASSED",
   "automatedTechnicalGates": "PASSED",
-  "physicalIPhoneCandidate": "NOT_RUN_REQUIRES_PHYSICAL_IPHONE",
+  "physicalIPhoneRetest": "NOT_RUN",
+  "humanAcceptance": false,
   "candidateDefaultAdopted": false,
-  "readyForReview": false,
-  "mergeApproved": false,
   "issue2State": "OPEN",
   "pr5State": "OPEN_DRAFT",
   "d2c3DefaultAdopted": false,
   "framingDefaultAdopted": false,
-  "multitouchDefaultAdopted": false,
+  "multiTouchDefaultAdopted": false,
+  "readyForReview": false,
+  "mergeAllowed": false,
   "deferred": [
     "DEFERRED_SUSPENDED_TIME_STATE_RESTORATION_PHASE3B4D"
-  ],
-  "nextAction": "Run the fixed-commit stability query on the physical iPhone for 15 minutes, then record human acceptance or rejection."
+  ]
 }

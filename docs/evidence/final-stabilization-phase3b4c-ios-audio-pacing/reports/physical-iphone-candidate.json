@@ -1,25 +1,27 @@
 {
-  "schemaVersion": 1,
-  "phase": "Final Stabilization Phase 3B.4c",
-  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
-  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "schemaVersion": 2,
+  "phase": "Final Stabilization Phase 3B.4c-R1",
+  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
+  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
-  "assembledAt": "2026-07-30T18:07:25.432Z",
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T01:20:37.008Z",
   "status": "NOT_RUN_REQUIRES_PHYSICAL_IPHONE",
-  "requiredEnvironment": {
-    "device": "iPhone 16",
-    "os": "iOS 26.5.2",
-    "launch": "home-screen app",
-    "brightness": "50%",
-    "lowPowerMode": "OFF",
-    "case": "installed",
-    "chargingCable": "disconnected"
-  },
-  "requiredDurationMinutes": 15,
   "automatedSubstitute": false,
   "humanAcceptance": false,
-  "technicalFinalist": false,
-  "decision": "STOPPED_PHYSICAL_IPHONE_AUDIO_REPRODUCTION_INCONCLUSIVE"
+  "candidateReadyForHumanRetest": true,
+  "requiredRuns": {
+    "freeRunningMinutes": 15,
+    "liveSyncMinutes": 15,
+    "transitions": [
+      "current time once",
+      "pause/resume",
+      "stop seconds/release",
+      "sound OFF/ON",
+      "hidden/visible",
+      "crown positions 1/2",
+      "winding/reverse"
+    ]
+  }
 }

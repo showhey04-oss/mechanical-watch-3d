@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R1",
+  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
+  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T01:20:37.008Z",
+  "before": {
+    "source": "deterministic reproduction committed before the fix",
+    "freeRunning": {
+      "audibleEvents": 56,
+      "lastAudibleTime": 11.221700000000077,
+      "trailingSilenceSeconds": 48.77829999999992,
+      "lateDropCount": 122
+    },
+    "liveSync": {
+      "audibleEvents": 303,
+      "lastAudibleTime": 60.599999999999994,
+      "trailingSilenceSeconds": 0,
+      "lateDropCount": 0
+    }
+  },
+  "after": {
+    "freeRunning15Minutes": {
+      "pattern": "ios-irregular-pacing",
+      "mode": "free-running",
+      "durationSeconds": 900,
+      "liveSync": false,
+      "framePattern": "stable-10s-then-ios-irregular-16.7-16.7-100-16.7-150ms",
+      "clockModel": {
+        "audioContext": "raw wall elapsed",
+        "freeRunningSimulation": "min(raw frame delta, 50ms)",
+        "liveSyncSimulation": "raw wall elapsed"
+      },
+      "rawFrameDeltaRangeMs": [
+        16.7,
+        150
+      ],
+      "cappedSimulationDeltaRangeMs": [
+        16.7,
+        50
+      ],
+      "expectedBeatIntervalSeconds": 0.2,
+      "expectedEvents": 4500,
+      "scheduledEvents": 4501,
+      "audibleEvents": 4501,
+      "lastAudibleTime": 900.4655000000754,
+      "trailingSilenceSeconds": 0,
+      "maximumAudibleGapSeconds": 0.20480000000008047,
+      "maximumConsecutiveMissingBeats": 1,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "lateDropCount": 0,
+      "starvationCount": 0,
+      "starvationRecoveryCount": 0,
+      "projectionReanchorCount": 175,
+      "epochDriftReanchorCount": 175,
+      "maximumPendingEscapementSources": 4,
+      "maximumSourceRecordCount": 4,
+      "maximumRequestedLeadSeconds": 0.6019000000009669,
+      "sourceInventoryCleanupCount": 0,
+      "sourceCancelCount": 438,
+      "pendingSourceInventory": [],
+      "pass": true
+    },
+    "liveSync15Minutes": {
+      "pattern": "ios-irregular-pacing",
+      "mode": "live-sync",
+      "durationSeconds": 900,
+      "liveSync": true,
+      "framePattern": "stable-10s-then-ios-irregular-16.7-16.7-100-16.7-150ms",
+      "clockModel": {
+        "audioContext": "raw wall elapsed",
+        "freeRunningSimulation": "min(raw frame delta, 50ms)",
+        "liveSyncSimulation": "raw wall elapsed"
+      },
+      "rawFrameDeltaRangeMs": [
+        16.7,
+        150
+      ],
+      "cappedSimulationDeltaRangeMs": [
+        16.7,
+        50
+      ],
+      "expectedBeatIntervalSeconds": 0.2,
+      "expectedEvents": 4500,
+      "scheduledEvents": 4503,
+      "audibleEvents": 4503,
+      "lastAudibleTime": 900.6000000000678,
+      "trailingSilenceSeconds": 0,
+      "maximumAudibleGapSeconds": 0.20000000000004547,
+      "maximumConsecutiveMissingBeats": 0,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "lateDropCount": 0,
+      "starvationCount": 0,
+      "starvationRecoveryCount": 0,
+      "projectionReanchorCount": 0,
+      "epochDriftReanchorCount": 0,
+      "maximumPendingEscapementSources": 4,
+      "maximumSourceRecordCount": 4,
+      "maximumRequestedLeadSeconds": 0.6019999999999683,
+      "sourceInventoryCleanupCount": 0,
+      "sourceCancelCount": 0,
+      "pendingSourceInventory": [],
+      "pass": true
+    }
+  },
+  "conclusion": "CAPPED_SIMULATION_TO_AUDIO_EPOCH_DIVERGENCE_WITH_CONTINUOUS_GRID_STARVATION_FIXED_BY_BOUNDED_ROLLING_PROJECTION"
+}

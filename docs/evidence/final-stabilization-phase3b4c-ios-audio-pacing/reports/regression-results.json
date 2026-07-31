@@ -1,121 +1,154 @@
 {
-  "schemaVersion": 1,
-  "phase": "Final Stabilization Phase 3B.4c",
-  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
-  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "schemaVersion": 2,
+  "phase": "Final Stabilization Phase 3B.4c-R1",
+  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
+  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
-  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
-  "assembledAt": "2026-07-30T18:07:25.432Z",
-  "status": "PASSED_WITH_KNOWN_BASELINE_ENVIRONMENT_FAILURES",
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T01:20:37.008Z",
+  "status": "PASSED_WITH_SHARED_BASELINE_ENVIRONMENT_FAILURES",
   "node": {
-    "passed": 309,
-    "total": 309
+    "final": "317/317",
+    "result": "PASSED"
   },
   "browser": {
-    "desktop": {
-      "ok": false,
-      "pass": 81,
-      "total": 86,
-      "failures": [
-        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-        "a5-both-faces-retain-key-light-and-camera-follow-fill",
-        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
-        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-        "a6-wheel-path-produces-monotonic-continuous-zoom"
+    "environment": {
+      "browser": "Codex in-app Browser",
+      "source": "same-origin unsandboxed iframe harness",
+      "appVersion": "v3.15.0",
+      "applicationConsoleErrors": 0,
+      "applicationConsoleWarnings": 0,
+      "excludedHarnessInstrumentation": [
+        "MutationObserver observe parameter warning emitted by Browser instrumentation"
       ]
     },
-    "desktopProtected": {
-      "ok": false,
-      "pass": 81,
-      "total": 86,
-      "failures": [
-        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-        "a5-both-faces-retain-key-light-and-camera-follow-fill",
-        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
-        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-        "a6-wheel-path-produces-monotonic-continuous-zoom"
-      ]
+    "comprehensive": {
+      "desktopCandidate": {
+        "pass": 81,
+        "total": 86,
+        "failures": [
+          "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+          "a5-both-faces-retain-key-light-and-camera-follow-fill",
+          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+          "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+          "a6-wheel-path-produces-monotonic-continuous-zoom"
+        ]
+      },
+      "desktopProtected": {
+        "pass": 81,
+        "total": 86,
+        "failures": [
+          "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+          "a5-both-faces-retain-key-light-and-camera-follow-fill",
+          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+          "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+          "a6-wheel-path-produces-monotonic-continuous-zoom"
+        ]
+      },
+      "mobileCandidate": {
+        "pass": 83,
+        "total": 88,
+        "failures": [
+          "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+          "a5-both-faces-retain-key-light-and-camera-follow-fill",
+          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+          "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+          "a6-wheel-path-produces-monotonic-continuous-zoom"
+        ]
+      },
+      "mobileProtected": {
+        "pass": 83,
+        "total": 88,
+        "failures": [
+          "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+          "a5-both-faces-retain-key-light-and-camera-follow-fill",
+          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+          "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+          "a6-wheel-path-produces-monotonic-continuous-zoom"
+        ]
+      }
     },
-    "mobile": {
-      "ok": false,
-      "pass": 85,
-      "total": 88,
-      "failures": [
-        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-        "a5-both-faces-retain-key-light-and-camera-follow-fill",
-        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent"
-      ]
+    "suites": {
+      "desktop": {
+        "ui": "20/20",
+        "hud": "45/45",
+        "trustedAudio": "23/23"
+      },
+      "mobile390x844": {
+        "ui": "22/22",
+        "hud": "57/57",
+        "trustedAudio": "23/23"
+      }
     },
-    "mobileProtected": {
-      "ok": false,
-      "pass": 85,
-      "total": 88,
-      "failures": [
-        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-        "a5-both-faces-retain-key-light-and-camera-follow-fill",
-        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent"
-      ]
-    },
-    "uiDesktop": {
-      "pass": 20,
-      "total": 20
-    },
-    "hudDesktop": {
-      "pass": 45,
-      "total": 45
-    },
-    "audioDesktop": {
-      "pass": 23,
-      "total": 23
-    },
-    "uiMobile": {
-      "pass": 22,
-      "total": 22
-    },
-    "hudMobile": {
-      "pass": 57,
-      "total": 57
-    },
-    "audioMobile": {
-      "pass": 23,
-      "total": 23
+    "actualWebAudio": {
+      "evidence": {
+        "path": "motion/ios-audio-pacing-listening-r1.webm",
+        "source": "actual Web Audio plus Three.js canvas MediaRecorder capture",
+        "mode": "free-running escapement",
+        "durationMs": 10505.700000047684,
+        "mimeType": "video/webm;codecs=vp9,opus",
+        "bytes": 764891,
+        "sha256": "74c7f87e290c1be758f621a29282841643a51fe13d38cb88837f0aca8066bccd",
+        "ebmlSignature": [
+          26,
+          69,
+          223,
+          163
+        ]
+      },
+      "foregroundDesktop": {
+        "durationMs": 30164.7,
+        "audibleEvents": 151,
+        "maximumAudibleGapSeconds": 0.1999999914726196,
+        "missingBeats": 0,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "starvationCount": 0,
+        "forbiddenInterference": 0
+      },
+      "foregroundMobile390x844": {
+        "durationMs": 30166.1,
+        "audibleEvents": 150,
+        "maximumAudibleGapSeconds": 0.20593187423083137,
+        "missingBeats": 1,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "starvationCount": 0,
+        "forbiddenInterference": 0
+      },
+      "lifecycleDesktop": {
+        "durationMs": 20000,
+        "applied": true,
+        "audibleEvents": 98,
+        "maximumAudibleGapSeconds": 0.3132490378996948,
+        "missingBeats": 1,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "starvationCount": 0,
+        "forbiddenInterference": 0
+      },
+      "currentTimeDesktop": {
+        "durationMs": 65000,
+        "applied": true,
+        "audibleEvents": 326,
+        "maximumAudibleGapSeconds": 0.1999999903983536,
+        "missingBeats": 0,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "starvationCount": 0,
+        "forbiddenInterference": 0
+      }
     }
   },
-  "candidateSpecificBrowserFailures": [],
-  "knownBaselineFailures": {
-    "desktop": [
-      "three D2c3 A.5 lighting contract checks",
-      "two in-app Browser A.6 absolute performance checks"
-    ],
-    "mobile": [
-      "three D2c3 A.5 lighting contract checks"
-    ]
+  "a7": "9/9",
+  "forbiddenInterference": {
+    "position1": 0,
+    "position2": 0
   },
-  "contracts": {
-    "s86": "PASSED",
-    "phase2c": "PASSED",
-    "a7": "PASSED_9_OF_9",
-    "forbiddenInterference": {
-      "position1": 0,
-      "position2": 0
-    },
-    "console": {
-      "errors": 0,
-      "warnings": 0
-    },
-    "trustedAudio": {
-      "desktop": "23/23",
-      "mobile390x844": "23/23"
-    },
-    "ui": {
-      "desktop": "20/20",
-      "mobile390x844": "22/22"
-    },
-    "hud": {
-      "desktop": "45/45",
-      "mobile390x844": "57/57"
-    }
-  },
-  "thresholdsChanged": false
+  "s86": "unchanged",
+  "phase2c": "unchanged",
+  "threeHandCoupling": "unchanged",
+  "thresholdsChanged": false,
+  "candidateSpecificFailures": []
 }
