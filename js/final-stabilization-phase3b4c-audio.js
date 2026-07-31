@@ -9,6 +9,8 @@ const percentile = (values, ratio) => {
 export const PHASE3B4C_AUDIO_LIMITS = Object.freeze({
   minimumLeadBeatRatio: 0.09,
   maximumLookaheadBeats: 3,
+  maximumProjectionBeats: 3,
+  acceptedPhaseErrorBeats: 0.25,
   maximumLateBeatRatio: 0.25,
   maximumEpochDriftSeconds: 0.25,
   minimumEpochReanchorIntervalMs: 5000,
@@ -63,6 +65,10 @@ export class Phase3B4cAudioPacingRuntime {
     this.maximumPending = 0;
     this.maximumSourceRecordCount = 0;
     this.maximumRequestedLeadSeconds = 0;
+    this.maximumTargetBeatMinusStudyBeat = -Infinity;
+    this.maximumPositiveAudiblePhaseErrorBeats = 0;
+    this.maximumNegativeAudiblePhaseErrorBeats = 0;
+    this.cumulativeAudiblePhaseErrorBeats = 0;
     this.lastActuallyAudibleBeat = null;
     this.lastAudibleAudioTime = null;
     this.lastAudibleEventSequence = null;
@@ -208,6 +214,20 @@ export class Phase3B4cAudioPacingRuntime {
       record.status = "audible";
       record.audibleAtAudioTime = record.requestedStartTime;
       record.audibleObservedAtPerformanceTime = frame.performanceTime;
+      record.audibleObservedStudyBeat = frame.studyBeat;
+      record.audibleObservedTargetBeat = record.targetBeat;
+      record.audibleMechanismPhaseErrorBeats =
+        record.targetBeat - frame.studyBeat;
+      this.maximumPositiveAudiblePhaseErrorBeats = Math.max(
+        this.maximumPositiveAudiblePhaseErrorBeats,
+        record.audibleMechanismPhaseErrorBeats,
+      );
+      this.maximumNegativeAudiblePhaseErrorBeats = Math.min(
+        this.maximumNegativeAudiblePhaseErrorBeats,
+        record.audibleMechanismPhaseErrorBeats,
+      );
+      this.cumulativeAudiblePhaseErrorBeats +=
+        record.audibleMechanismPhaseErrorBeats;
       this.lastActuallyAudibleBeat = record.targetBeat;
       this.lastAudibleAudioTime = record.requestedStartTime;
       this.lastAudibleEventSequence = record.eventSequence;
@@ -494,6 +514,8 @@ export class Phase3B4cAudioPacingRuntime {
       );
     }
     const requestedLeadSeconds = requestedStartTime - clock.currentTime;
+    const predictedMechanismBeatAtRequestedStartTime =
+      frame.studyBeat + requestedLeadSeconds * frame.escapementBeatRate;
     if (
       requestedLeadSeconds
       > maximumLookaheadSeconds + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
@@ -531,6 +553,10 @@ export class Phase3B4cAudioPacingRuntime {
         audioLeadSeconds: requestedStartTime - clock.currentTime,
         latenessSeconds: 0,
         projectionBeatLead: targetBeat - frame.studyBeat,
+        schedulingStudyBeat: frame.studyBeat,
+        schedulingBeatRate: frame.escapementBeatRate,
+        targetBeatMinusStudyBeat: targetBeat - frame.studyBeat,
+        predictedMechanismBeatAtRequestedStartTime,
       },
     });
     if (!played) {
@@ -547,6 +573,10 @@ export class Phase3B4cAudioPacingRuntime {
     this.maximumRequestedLeadSeconds = Math.max(
       this.maximumRequestedLeadSeconds,
       requestedStartTime - clock.currentTime,
+    );
+    this.maximumTargetBeatMinusStudyBeat = Math.max(
+      this.maximumTargetBeatMinusStudyBeat,
+      targetBeat - frame.studyBeat,
     );
     const afterClock = this.audioEngine.getClockSnapshot?.();
     const pendingAfter = afterClock?.pendingEscapementSources
@@ -577,6 +607,10 @@ export class Phase3B4cAudioPacingRuntime {
       leadSeconds: requestedStartTime - clock.currentTime,
       latenessSeconds: 0,
       projectionBeatLead: targetBeat - frame.studyBeat,
+      schedulingStudyBeat: frame.studyBeat,
+      schedulingBeatRate: frame.escapementBeatRate,
+      targetBeatMinusStudyBeat: targetBeat - frame.studyBeat,
+      predictedMechanismBeatAtRequestedStartTime,
       pendingAfter,
       sourceRecordCountAfter: Number(afterClock?.sourceRecordCount) || null,
       reason: "mechanism-bounded-rolling-projection",
@@ -631,6 +665,10 @@ export class Phase3B4cAudioPacingRuntime {
     this.maximumPending = 0;
     this.maximumSourceRecordCount = 0;
     this.maximumRequestedLeadSeconds = 0;
+    this.maximumTargetBeatMinusStudyBeat = -Infinity;
+    this.maximumPositiveAudiblePhaseErrorBeats = 0;
+    this.maximumNegativeAudiblePhaseErrorBeats = 0;
+    this.cumulativeAudiblePhaseErrorBeats = 0;
     this.eventSequence = 0;
     this.generation = 0;
     this.lastTargetBeat = null;
@@ -676,6 +714,21 @@ export class Phase3B4cAudioPacingRuntime {
     const maximumConsecutiveMissingBeats = expectedInterval
       ? Math.max(0, Math.ceil(maximumAudibleGapSeconds / expectedInterval - 1 - 1e-9))
       : 0;
+    const projectionContractPassed = successfulEvents.every(
+      (event) =>
+        event.targetBeatMinusStudyBeat > 0
+        && event.targetBeatMinusStudyBeat
+          <= PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats
+            + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+              * (event.schedulingBeatRate ?? 0)
+            + 1e-9,
+    );
+    const audiblePhaseContractPassed = audibleEvents.every(
+      (event) =>
+        Math.abs(event.audibleMechanismPhaseErrorBeats)
+        <= PHASE3B4C_AUDIO_LIMITS.acceptedPhaseErrorBeats
+          + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds,
+    );
     const clock = this.clockSnapshot();
     return {
       schemaVersion: 2,
@@ -685,7 +738,8 @@ export class Phase3B4cAudioPacingRuntime {
       enabled: this.enabled,
       queryOnly: true,
       defaultAdopted: false,
-      mechanismAuthoritative: true,
+      mechanismAuthoritative:
+        projectionContractPassed && audiblePhaseContractPassed,
       independentTimerUsed: false,
       independentOscillatorUsed: false,
       eventSequenceCount: successfulEvents.length,
@@ -707,6 +761,16 @@ export class Phase3B4cAudioPacingRuntime {
       maximumPendingEscapementSources: this.maximumPending,
       maximumSourceRecordCount: this.maximumSourceRecordCount,
       maximumRequestedLeadSeconds: this.maximumRequestedLeadSeconds,
+      maximumTargetBeatMinusStudyBeat:
+        Number.isFinite(this.maximumTargetBeatMinusStudyBeat)
+          ? this.maximumTargetBeatMinusStudyBeat
+          : null,
+      maximumPositiveAudiblePhaseErrorBeats:
+        this.maximumPositiveAudiblePhaseErrorBeats,
+      maximumNegativeAudiblePhaseErrorBeats:
+        this.maximumNegativeAudiblePhaseErrorBeats,
+      cumulativeAudiblePhaseErrorBeats:
+        this.cumulativeAudiblePhaseErrorBeats,
       lastScheduledBeat: this.lastTargetBeat,
       lastScheduledAudioTime: this.lastScheduledStartTime,
       lastActuallyAudibleBeat: this.lastActuallyAudibleBeat,
@@ -725,6 +789,9 @@ export class Phase3B4cAudioPacingRuntime {
       schedulePolicy: {
         minimumLeadBeatRatio: PHASE3B4C_AUDIO_LIMITS.minimumLeadBeatRatio,
         maximumLookaheadBeats: PHASE3B4C_AUDIO_LIMITS.maximumLookaheadBeats,
+        maximumProjectionBeats: PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats,
+        acceptedPhaseErrorBeats:
+          PHASE3B4C_AUDIO_LIMITS.acceptedPhaseErrorBeats,
         maximumLateBeatRatio: PHASE3B4C_AUDIO_LIMITS.maximumLateBeatRatio,
         starvationBeatCount: PHASE3B4C_AUDIO_LIMITS.starvationBeatCount,
         horizonEpsilonSeconds: PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds,
@@ -738,6 +805,15 @@ export class Phase3B4cAudioPacingRuntime {
         derivedMaximumLateSeconds: expectedInterval === null
           ? null
           : expectedInterval * PHASE3B4C_AUDIO_LIMITS.maximumLateBeatRatio,
+      },
+      phaseContract: {
+        targetBeatCoupledToStudyBeat: projectionContractPassed,
+        audibleMechanismPhase: audiblePhaseContractPassed,
+        maximumProjectionBeats:
+          PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats,
+        acceptedPhaseErrorBeats:
+          PHASE3B4C_AUDIO_LIMITS.acceptedPhaseErrorBeats,
+        passed: projectionContractPassed && audiblePhaseContractPassed,
       },
       clock,
       pendingSourceInventory: clock.escapementSourceInventory,

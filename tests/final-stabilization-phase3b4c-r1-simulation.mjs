@@ -165,6 +165,8 @@ export function runPhase3B4cVirtualScenario({
   let wallTime = 0;
   let simulationTime = 0;
   let frameIndex = 0;
+  let previousMechanismBeat = 0;
+  let mechanismIntegerCrossingCount = 0;
   const rawFrameDeltas = [];
   const cappedSimulationDeltas = [];
   while (wallTime < durationSeconds) {
@@ -180,7 +182,7 @@ export function runPhase3B4cVirtualScenario({
       engine,
       runtime,
     });
-    runtime.processFrame({
+    const frameInput = {
       performanceTime: wallTime * 1000,
       wallTime: wallTime * 1000,
       rawFrameDeltaMs: rawDelta * 1000,
@@ -198,7 +200,18 @@ export function runPhase3B4cVirtualScenario({
       powered: true,
       crownPosition: "wind",
       ...state,
-    });
+    };
+    const currentMechanismBeat = Number(frameInput.studyBeat);
+    if (Number.isFinite(currentMechanismBeat)) {
+      if (currentMechanismBeat >= previousMechanismBeat) {
+        mechanismIntegerCrossingCount += Math.max(
+          0,
+          Math.floor(currentMechanismBeat) - Math.floor(previousMechanismBeat),
+        );
+      }
+      previousMechanismBeat = currentMechanismBeat;
+    }
+    runtime.processFrame(frameInput);
     rawFrameDeltas.push(rawDelta);
     cappedSimulationDeltas.push(cappedSimulationDelta);
     frameIndex += 1;
@@ -238,6 +251,10 @@ export function runPhase3B4cVirtualScenario({
     durationSeconds / PHASE3B4C_R1_EXPECTED_INTERVAL_SECONDS,
   );
   const report = runtime.getReport();
+  const finalStudyBeat = simulationTime * PHASE3B4C_R1_BEAT_RATE;
+  const pendingBeatCount = report.pendingSourceInventory.length;
+  const audibleMechanismCountDivergence =
+    audibleTimes.length - mechanismIntegerCrossingCount - pendingBeatCount;
   return {
     schemaVersion: 1,
     phase: "Final Stabilization Phase 3B.4c-R1",
@@ -259,9 +276,16 @@ export function runPhase3B4cVirtualScenario({
     ],
     expectedBeatIntervalSeconds: PHASE3B4C_R1_EXPECTED_INTERVAL_SECONDS,
     frameCount: frameIndex,
+    finalSimulationTime: simulationTime,
+    finalStudyBeat,
+    mechanismIntegerCrossingCount,
     expectedEvents,
     scheduledEvents: report.eventSequenceCount,
     audibleEvents: audibleTimes.length,
+    lastAudibleTargetBeat: report.lastActuallyAudibleBeat,
+    pendingBeatCount,
+    audibleMechanismCountDivergence,
+    finalCumulativeBeatDivergence: audibleMechanismCountDivergence,
     lastAudibleTime,
     trailingSilenceSeconds,
     maximumAudibleGapSeconds,

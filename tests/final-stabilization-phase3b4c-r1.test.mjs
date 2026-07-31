@@ -54,6 +54,23 @@ const assertContinuous = (report, label) => {
   }
 };
 
+test("Phase 3B.4c-R1 exposes the accepted continuity test's mechanism/audio phase divergence", () => {
+  const report = runPhase3B4cVirtualScenario({
+    durationSeconds: 15 * 60,
+    liveSync: false,
+  });
+
+  assert.ok(Math.abs(report.finalSimulationTime - 455.1832) < 1e-6);
+  assert.ok(Math.abs(report.finalStudyBeat - 2275.916) < 1e-6);
+  assert.equal(report.mechanismIntegerCrossingCount, 2275);
+  assert.equal(report.audibleEvents, 4501);
+  assert.equal(report.audibleMechanismCountDivergence, 2226);
+  assert.ok(report.schedulerReport.maximumTargetBeatMinusStudyBeat > 2000);
+  assert.equal(report.schedulerReport.phaseContract.targetBeatCoupledToStudyBeat, false);
+  assert.equal(report.schedulerReport.phaseContract.audibleMechanismPhase, false);
+  assert.equal(report.schedulerReport.mechanismAuthoritative, false);
+});
+
 test("Phase 3B.4c-R1 preserves the committed free-running failure reproduction and fixes it", async () => {
   const reproduction = JSON.parse(await readFile(
     new URL(
