@@ -489,8 +489,7 @@ export class Phase3B4cAudioPacingRuntime {
       : PHASE3B4C_AUDIO_LIMITS.maximumFreeRunningProjectionBeats;
     if (
       targetBeatMinusStudyBeat
-      > maximumProjectionBeats
-        + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+      > maximumProjectionBeats + 1e-9
     ) {
       return this.setNoOp("await-mechanism-projection-window", frame, clock, {
         targetBeat,
@@ -873,19 +872,19 @@ export class Phase3B4cAudioPacingRuntime {
       ? Math.max(0, ...targetBeatIntervals.map((value) => value - 1))
       : 0;
     const projectionContractPassed = successfulEvents.every(
-      (event) =>
-        event.targetBeatMinusStudyBeat > 0
-        && event.targetBeatMinusStudyBeat
-          <= PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats
-            + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
-              * (event.schedulingBeatRate ?? 0)
-            + 1e-9,
+      (event) => {
+        const maximumProjectionBeats = event.liveSyncAtScheduling
+          ? PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats
+          : PHASE3B4C_AUDIO_LIMITS.maximumFreeRunningProjectionBeats;
+        return event.targetBeatMinusStudyBeat > 0
+          && event.targetBeatMinusStudyBeat
+            <= maximumProjectionBeats + 1e-9;
+      },
     );
     const audiblePhaseContractPassed = audibleEvents.every(
       (event) =>
         Math.abs(event.audibleMechanismPhaseErrorBeats)
-        <= PHASE3B4C_AUDIO_LIMITS.acceptedPhaseErrorBeats
-          + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds,
+        <= PHASE3B4C_AUDIO_LIMITS.acceptedPhaseErrorBeats + 1e-9,
     );
     const clock = this.clockSnapshot();
     return {

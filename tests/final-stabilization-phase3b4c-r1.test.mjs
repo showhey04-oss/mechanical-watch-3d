@@ -39,6 +39,16 @@ const assertContinuous = (report, label) => {
     `${label}: count divergence ${report.audibleMechanismCountDivergence}`,
   );
   const audibleEvents = report.schedulerReport.audibleEvents;
+  for (const event of report.schedulerReport.scheduledEvents.filter(
+    (record) => record.status !== "cancelled",
+  )) {
+    const maximumProjectionBeats = event.liveSyncAtScheduling ? 3 : 0.25;
+    assert.ok(
+      event.targetBeatMinusStudyBeat > 0
+        && event.targetBeatMinusStudyBeat <= maximumProjectionBeats + 1e-9,
+      `${label}: projection contract at ${event.eventSequence}`,
+    );
+  }
   for (let index = 0; index < audibleEvents.length; index += 1) {
     const event = audibleEvents[index];
     assert.ok(
