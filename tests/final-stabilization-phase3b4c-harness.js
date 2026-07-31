@@ -46,6 +46,7 @@ const summarize = (report) => ({
   status: report.status,
   mode: report.mode,
   events: report.eventSequenceCount,
+  audibleEvents: report.audibleEventCount,
   cadenceErrorRatio: report.averageCadenceErrorRatio,
   p95IntervalDeviationSeconds: report.p95IntervalDeviationSeconds,
   duplicates: report.duplicateCount,
@@ -54,6 +55,13 @@ const summarize = (report) => ({
   clockStalls: report.clockStallCount,
   epochDriftReanchors: report.epochDriftReanchorCount,
   pendingMax: report.maximumPendingEscapementSources,
+  maximumTargetBeatMinusStudyBeat:
+    report.maximumTargetBeatMinusStudyBeat,
+  maximumPositiveAudiblePhaseErrorBeats:
+    report.maximumPositiveAudiblePhaseErrorBeats,
+  maximumNegativeAudiblePhaseErrorBeats:
+    report.maximumNegativeAudiblePhaseErrorBeats,
+  phaseContractPassed: report.phaseContract?.passed === true,
 });
 
 async function waitForApi() {
@@ -132,8 +140,8 @@ async function run() {
   const audio = diagnostics.getAudioDiagnostics();
   const interference = diagnostics.getInterferenceReport();
   const result = {
-    schemaVersion: 1,
-    phase: "Final Stabilization Phase 3B.4c",
+    schemaVersion: 2,
+    phase: "Final Stabilization Phase 3B.4c-R1.1",
     scenario,
     audioTiming,
     appVersion: document.querySelector("iframe").contentDocument.title.match(/v\d+\.\d+\.\d+/)?.[0] ?? null,
@@ -167,6 +175,8 @@ async function run() {
     && pacing.noTwoConsecutiveMissing
     && pacing.backlogBurstCount === 0
     && pacing.maximumPendingEscapementSources <= pacing.pendingCap
+    && pacing.phaseContract?.passed === true
+    && pacing.mechanismAuthoritative === true
     && result.interference.forbiddenCount === 0;
   result.ok = cadencePass && integrityPass;
   output.value = JSON.stringify(result);

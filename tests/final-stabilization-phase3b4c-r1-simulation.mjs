@@ -220,6 +220,11 @@ export function runPhase3B4cVirtualScenario({
   const audibleEventsAtDuration = engine.audibleEvents.length;
   const pendingBeatCountAtDuration =
     reportAtDuration.pendingSourceInventory.length;
+  // Ending a scenario is a lifecycle boundary, not one second of stopped
+  // mechanism time. Cancel the bounded look-ahead before advancing the fake
+  // audio clock so the flush cannot misclassify future targets as audible
+  // against a frozen studyBeat.
+  runtime.reanchor("simulation-end");
   engine.advanceTo(wallTime + 1);
   runtime.processFrame({
     performanceTime: (wallTime + 1) * 1000,

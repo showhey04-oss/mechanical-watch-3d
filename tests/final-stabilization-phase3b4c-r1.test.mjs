@@ -41,6 +41,22 @@ const assertContinuous = (report, label) => {
   const audibleEvents = report.schedulerReport.audibleEvents;
   for (let index = 0; index < audibleEvents.length; index += 1) {
     const event = audibleEvents[index];
+    assert.ok(
+      [
+        "interpolated-authoritative-mechanism-frames",
+        "live-sync-wall-clock-projection",
+        "scheduling-projection-fallback",
+      ].includes(event.authoritativeMechanismBeatSource),
+      `${label}: authoritative beat source at ${index}`,
+    );
+    assert.ok(
+      Number.isFinite(event.authoritativeMechanismBeatAtAudioTime),
+      `${label}: authoritative beat at ${index}`,
+    );
+    assert.ok(
+      Number.isFinite(event.audibleMechanismPhaseErrorBeats),
+      `${label}: audible phase error at ${index}`,
+    );
     assert.equal(
       event.type,
       event.targetBeat % 2 === 0 ? "escapementTick" : "escapementTock",

@@ -174,6 +174,66 @@ export class Phase3B4cAudioPacingRuntime {
     return true;
   }
 
+  mechanismBeatAtAudioTime(record, frame, clock) {
+    if (record.liveSyncAtScheduling) {
+      return {
+        beat: record.predictedMechanismBeatAtRequestedStartTime,
+        source: "live-sync-wall-clock-projection",
+        previousAudioTime: finite(this.lastClockSample?.audioTime),
+        currentAudioTime: finite(clock.currentTime),
+        previousStudyBeat: finite(this.lastFrame?.studyBeat),
+        currentStudyBeat: finite(frame.studyBeat),
+        interpolationRatio: null,
+      };
+    }
+    const previousFrame = this.lastFrame;
+    const previousAudioTime = finite(this.lastClockSample?.audioTime);
+    const currentAudioTime = finite(clock.currentTime);
+    const audibleAudioTime = finite(record.requestedStartTime);
+    const previousStudyBeat = finite(previousFrame?.studyBeat);
+    const currentStudyBeat = finite(frame.studyBeat);
+    if (
+      previousAudioTime !== null
+      && currentAudioTime !== null
+      && audibleAudioTime !== null
+      && previousStudyBeat !== null
+      && currentStudyBeat !== null
+      && currentAudioTime > previousAudioTime
+      && audibleAudioTime >= previousAudioTime
+        - PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+      && audibleAudioTime <= currentAudioTime
+        + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+    ) {
+      const ratio = Math.max(
+        0,
+        Math.min(
+          1,
+          (audibleAudioTime - previousAudioTime)
+            / (currentAudioTime - previousAudioTime),
+        ),
+      );
+      return {
+        beat: previousStudyBeat
+          + (currentStudyBeat - previousStudyBeat) * ratio,
+        source: "interpolated-authoritative-mechanism-frames",
+        previousAudioTime,
+        currentAudioTime,
+        previousStudyBeat,
+        currentStudyBeat,
+        interpolationRatio: ratio,
+      };
+    }
+    return {
+      beat: record.predictedMechanismBeatAtRequestedStartTime,
+      source: "scheduling-projection-fallback",
+      previousAudioTime,
+      currentAudioTime,
+      previousStudyBeat,
+      currentStudyBeat,
+      interpolationRatio: null,
+    };
+  }
+
   boundedProjectionReanchor(reason, frame, clock) {
     if (!this.enabled || clock.currentTime === null || clock.state !== "running") return false;
     this.cancelPending(reason, clock);
@@ -223,10 +283,19 @@ export class Phase3B4cAudioPacingRuntime {
       record.audibleObservedAtPerformanceTime = frame.performanceTime;
       record.audibleObservedStudyBeat = frame.studyBeat;
       record.audibleObservedTargetBeat = record.targetBeat;
+      const phaseObservation =
+        this.mechanismBeatAtAudioTime(record, frame, clock);
       record.authoritativeMechanismBeatAtAudioTime =
-        record.liveSyncAtScheduling
-          ? record.predictedMechanismBeatAtRequestedStartTime
-          : frame.studyBeat;
+        phaseObservation.beat;
+      record.authoritativeMechanismBeatSource =
+        phaseObservation.source;
+      record.authoritativeMechanismBeatObservation = {
+        previousAudioTime: phaseObservation.previousAudioTime,
+        currentAudioTime: phaseObservation.currentAudioTime,
+        previousStudyBeat: phaseObservation.previousStudyBeat,
+        currentStudyBeat: phaseObservation.currentStudyBeat,
+        interpolationRatio: phaseObservation.interpolationRatio,
+      };
       record.audibleMechanismPhaseErrorBeats =
         record.targetBeat - record.authoritativeMechanismBeatAtAudioTime;
       this.maximumPositiveAudiblePhaseErrorBeats = Math.max(
@@ -821,7 +890,7 @@ export class Phase3B4cAudioPacingRuntime {
     const clock = this.clockSnapshot();
     return {
       schemaVersion: 2,
-      phase: "Final Stabilization Phase 3B.4c-R1",
+      phase: "Final Stabilization Phase 3B.4c-R1.1",
       status: this.profile.status,
       mode: this.mode,
       enabled: this.enabled,
