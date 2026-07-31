@@ -68,6 +68,47 @@ const checkpoint = (diagnostics, name) => ({
   audio: boundedAudio(diagnostics),
   soundUi: diagnostics.getSoundUiReport(),
 });
+const formatTimeValue = (seconds) => {
+  const normalized = ((Math.floor(seconds) % 86_400) + 86_400) % 86_400;
+  const hours = String(Math.floor(normalized / 3_600)).padStart(2, "0");
+  const minutes = String(Math.floor(normalized % 3_600 / 60)).padStart(2, "0");
+  const secs = String(normalized % 60).padStart(2, "0");
+  return `${hours}:${minutes}:${secs}`;
+};
+const applyTimeInput = async (seconds) => {
+  const input = frame.contentDocument.getElementById("timeInput");
+  input.value = formatTimeValue(seconds);
+  input.dispatchEvent(new frame.contentWindow.Event("input", { bubbles: true }));
+  input.dispatchEvent(new frame.contentWindow.Event("change", { bubbles: true }));
+  input.dispatchEvent(new frame.contentWindow.FocusEvent("blur"));
+  frame.contentDocument.getElementById("applyTime").click();
+};
+const installApplicationConsoleCapture = () => {
+  const captured = { errors: [], warnings: [], runtimeErrors: [], unhandledRejections: [] };
+  const stringify = (value) => {
+    if (value instanceof Error) return value.stack || value.message;
+    if (typeof value === "string") return value;
+    try {
+      return JSON.stringify(value);
+    } catch {
+      return String(value);
+    }
+  };
+  for (const level of ["error", "warn"]) {
+    const original = frame.contentWindow.console[level].bind(frame.contentWindow.console);
+    frame.contentWindow.console[level] = (...args) => {
+      captured[level === "error" ? "errors" : "warnings"].push(args.map(stringify).join(" "));
+      original(...args);
+    };
+  }
+  frame.contentWindow.addEventListener("error", (event) => {
+    captured.runtimeErrors.push(event.error?.stack || event.message || "unknown window error");
+  });
+  frame.contentWindow.addEventListener("unhandledrejection", (event) => {
+    captured.unhandledRejections.push(stringify(event.reason));
+  });
+  return captured;
+};
 
 async function run() {
   const diagnostics = await waitFor(
@@ -76,6 +117,7 @@ async function run() {
     "same-origin watchModelDiagnostics",
     60_000,
   );
+  const applicationConsole = installApplicationConsoleCapture();
   document.body.dataset.auditReady = "true";
   setStage("waiting-for-audio-enable", "Click the speaker button inside the watch frame once.");
   await waitFor(() => diagnostics.getAudioDiagnostics().audioEnabled, "trusted audio enable", 60_000);
@@ -85,8 +127,8 @@ async function run() {
   await diagnostics.waitForFrames(8);
   const checkpoints = [checkpoint(diagnostics, "baseline-running")];
   const transitions = [
-    ["one-hour-backward", () => diagnostics.setWatchTime(diagnostics.getWatchTime() - 3600)],
-    ["one-hour-forward", () => diagnostics.setWatchTime(diagnostics.getWatchTime() + 3600)],
+    ["one-hour-backward", () => applyTimeInput(diagnostics.getWatchTime() - 3600)],
+    ["one-hour-forward", () => applyTimeInput(diagnostics.getWatchTime() + 3600)],
     ["day-wrap-backward", () => diagnostics.setWatchTime(12)],
     ["day-wrap-forward", () => diagnostics.setWatchTime(86388)],
     ["same-time", () => diagnostics.setWatchTime(diagnostics.getWatchTime())],
@@ -98,7 +140,7 @@ async function run() {
   ];
   setStage("running-time-discontinuities", "Testing time and crown discontinuities.");
   for (const [name, action] of transitions) {
-    action();
+    await action();
     await diagnostics.waitForFrames(12);
     await wait(260);
     checkpoints.push(checkpoint(diagnostics, name));
@@ -111,6 +153,25 @@ async function run() {
   await wait(450);
   diagnostics.setCrownTurnRate(0);
   checkpoints.push(checkpoint(diagnostics, "winding-and-reverse"));
+
+  setStage("running-ui-audio-toggle", "Testing pause/resume and sound OFF/ON UI paths.");
+  const playButton = frame.contentDocument.getElementById("play");
+  playButton.click();
+  await diagnostics.waitForFrames(4);
+  playButton.click();
+  await diagnostics.waitForFrames(8);
+  const audioButton = frame.contentDocument.getElementById("audioToggle");
+  audioButton.click();
+  await waitFor(() => diagnostics.getAudioDiagnostics().audioEnabled === false, "sound OFF", 10_000);
+  audioButton.click();
+  await waitFor(
+    () => diagnostics.getAudioDiagnostics().audioContextState === "running"
+      && diagnostics.getAudioDiagnostics().audioEnabled,
+    "sound ON",
+    30_000,
+  );
+  await diagnostics.waitForFrames(8);
+  checkpoints.push(checkpoint(diagnostics, "pause-resume-sound-off-on"));
 
   setStage("running-auto-resume", "Testing suspended → automatic visible resume.");
   await diagnostics.setAudioVisibilityForTest(false);
@@ -139,6 +200,13 @@ async function run() {
   );
   await diagnostics.waitForFrames(8);
   checkpoints.push(checkpoint(diagnostics, "trusted-recovery-running"));
+
+  setStage("running-performance", "Measuring 10 seconds of actual Web Audio idle frame pacing.");
+  const performanceResult = await diagnostics.runPerformanceScenario({
+    type: "audio-on-idle",
+    durationMs: 10_000,
+  });
+  checkpoints.push(checkpoint(diagnostics, "post-performance"));
 
   const finalScheduler = diagnostics.getFinalStabilizationPhase3B4cReport();
   const finalAudio = boundedAudio(diagnostics);
@@ -170,8 +238,12 @@ async function run() {
       },
     },
     checkpoints,
+    performance: performanceResult,
     finalScheduler,
     finalAudio,
+    soundUi: diagnostics.getSoundUiReport(),
+    mobileHud: diagnostics.getMobileOverlayHudReport(),
+    applicationConsole,
     contracts: {
       resetTargetsPass,
       requiredTimelineReasonsPresent: requiredReasons.every((reason) => transitionReasons.has(reason)),
@@ -182,6 +254,20 @@ async function run() {
       resumeRequiredCleared: finalAudio.resumeRequired === false,
       buffersComplete: finalAudio.bufferCompleteness.complete === true,
       interferenceZero: diagnostics.getInterferenceReport().forbiddenCount === 0,
+      performanceSampled: Number.isFinite(performanceResult?.pacing?.averageFps),
+      performanceTransformInvariant: performanceResult?.modelInvariant === true,
+      soundUiRunning:
+        diagnostics.getSoundUiReport().toggle.pressed === true
+        && diagnostics.getSoundUiReport().toggle.state === "on",
+      soundControlAccessible:
+        diagnostics.getSoundUiReport().toggle.rect.width >= 44
+        && diagnostics.getSoundUiReport().toggle.rect.height >= 44
+        && diagnostics.getSoundUiReport().toggle.ariaLabel === "作動音をオフにする",
+      applicationConsoleClean:
+        applicationConsole.errors.length === 0
+        && applicationConsole.warnings.length === 0
+        && applicationConsole.runtimeErrors.length === 0
+        && applicationConsole.unhandledRejections.length === 0,
     },
     humanPhysicalIPhoneRetest: "PENDING",
   };
