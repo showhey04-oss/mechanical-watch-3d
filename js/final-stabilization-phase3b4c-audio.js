@@ -31,6 +31,7 @@ export class Phase3B4cAudioPacingRuntime {
   constructor({
     profile,
     audioEngine,
+    foregroundMechanismTimebaseStable = false,
     performanceNow = () => performance.now(),
     wallNow = () => Date.now(),
   } = {}) {
@@ -40,6 +41,8 @@ export class Phase3B4cAudioPacingRuntime {
     this.wallNow = wallNow;
     this.enabled = this.profile.enabled === true;
     this.mode = this.enabled ? this.profile.mode : "disabled";
+    this.foregroundMechanismTimebaseStable =
+      foregroundMechanismTimebaseStable === true;
     this.log = [];
     this.eventSequence = 0;
     this.generation = 0;
@@ -471,8 +474,10 @@ export class Phase3B4cAudioPacingRuntime {
       Math.floor(frame.studyBeat) + 1,
       (this.lastActuallyAudibleBeat ?? -1) + 1,
     );
+    const projectionCanFillPending =
+      frame.liveSync || this.foregroundMechanismTimebaseStable;
     const targetBeat =
-      frame.liveSync
+      projectionCanFillPending
       && this.lastTargetBeat !== null
       && this.lastTargetBeat >= minimumTargetBeat
         ? this.lastTargetBeat + 1
@@ -484,7 +489,9 @@ export class Phase3B4cAudioPacingRuntime {
       });
     }
     const targetBeatMinusStudyBeat = targetBeat - frame.studyBeat;
-    const maximumProjectionBeats = frame.liveSync
+    const maximumProjectionBeats = this.foregroundMechanismTimebaseStable
+      ? PHASE3B4C_AUDIO_LIMITS.maximumPendingEscapementSources
+      : frame.liveSync
       ? PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats
       : PHASE3B4C_AUDIO_LIMITS.maximumFreeRunningProjectionBeats;
     if (
@@ -553,6 +560,9 @@ export class Phase3B4cAudioPacingRuntime {
       targetBeatMinusStudyBeat,
       predictedMechanismBeatAtRequestedStartTime,
       liveSyncAtScheduling: frame.liveSync,
+      maximumProjectionBeatsAtScheduling: maximumProjectionBeats,
+      foregroundMechanismTimebaseStable:
+        this.foregroundMechanismTimebaseStable,
     };
     const played = this.audioEngine.play(type, {
       timestamp: frame.performanceTime,
@@ -614,6 +624,9 @@ export class Phase3B4cAudioPacingRuntime {
       targetBeatMinusStudyBeat,
       predictedMechanismBeatAtRequestedStartTime,
       liveSyncAtScheduling: frame.liveSync,
+      maximumProjectionBeatsAtScheduling: maximumProjectionBeats,
+      foregroundMechanismTimebaseStable:
+        this.foregroundMechanismTimebaseStable,
       pendingAfter,
       sourceRecordCountAfter: Number(afterClock?.sourceRecordCount) || null,
       reason: frame.liveSync
@@ -694,8 +707,11 @@ export class Phase3B4cAudioPacingRuntime {
     const beatIntervalSeconds = 1 / frame.escapementBeatRate;
     const minimumLeadSeconds =
       beatIntervalSeconds * PHASE3B4C_AUDIO_LIMITS.minimumLeadBeatRatio;
+    const maximumLookaheadBeats = this.foregroundMechanismTimebaseStable
+      ? PHASE3B4C_AUDIO_LIMITS.maximumPendingEscapementSources
+      : PHASE3B4C_AUDIO_LIMITS.maximumLookaheadBeats;
     const maximumLookaheadSeconds =
-      beatIntervalSeconds * PHASE3B4C_AUDIO_LIMITS.maximumLookaheadBeats;
+      beatIntervalSeconds * maximumLookaheadBeats;
     const maximumLateSeconds =
       beatIntervalSeconds * PHASE3B4C_AUDIO_LIMITS.maximumLateBeatRatio;
     const farFutureInventory = clock.escapementSourceInventory.filter(
@@ -759,7 +775,7 @@ export class Phase3B4cAudioPacingRuntime {
       if (!result.scheduled) break;
       events.push(result.event);
       pendingEscapementSources = result.pendingAfter;
-      if (!frame.liveSync) break;
+      if (!frame.liveSync && !this.foregroundMechanismTimebaseStable) break;
     }
     return {
       handledEscapement: true,
@@ -873,9 +889,11 @@ export class Phase3B4cAudioPacingRuntime {
       : 0;
     const projectionContractPassed = successfulEvents.every(
       (event) => {
-        const maximumProjectionBeats = event.liveSyncAtScheduling
-          ? PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats
-          : PHASE3B4C_AUDIO_LIMITS.maximumFreeRunningProjectionBeats;
+        const maximumProjectionBeats =
+          finite(event.maximumProjectionBeatsAtScheduling)
+          ?? (event.liveSyncAtScheduling
+            ? PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats
+            : PHASE3B4C_AUDIO_LIMITS.maximumFreeRunningProjectionBeats);
         return event.targetBeatMinusStudyBeat > 0
           && event.targetBeatMinusStudyBeat
             <= maximumProjectionBeats + 1e-9;
@@ -895,6 +913,8 @@ export class Phase3B4cAudioPacingRuntime {
       enabled: this.enabled,
       queryOnly: true,
       defaultAdopted: false,
+      foregroundMechanismTimebaseStable:
+        this.foregroundMechanismTimebaseStable,
       mechanismAuthoritative:
         projectionContractPassed && audiblePhaseContractPassed,
       independentTimerUsed: false,
@@ -950,6 +970,12 @@ export class Phase3B4cAudioPacingRuntime {
         maximumProjectionBeats: PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats,
         maximumFreeRunningProjectionBeats:
           PHASE3B4C_AUDIO_LIMITS.maximumFreeRunningProjectionBeats,
+        ...(this.foregroundMechanismTimebaseStable
+          ? {
+            maximumForegroundStableProjectionBeats:
+              PHASE3B4C_AUDIO_LIMITS.maximumPendingEscapementSources,
+          }
+          : {}),
         acceptedPhaseErrorBeats:
           PHASE3B4C_AUDIO_LIMITS.acceptedPhaseErrorBeats,
         maximumLateBeatRatio: PHASE3B4C_AUDIO_LIMITS.maximumLateBeatRatio,
@@ -961,7 +987,11 @@ export class Phase3B4cAudioPacingRuntime {
           : expectedInterval * PHASE3B4C_AUDIO_LIMITS.minimumLeadBeatRatio,
         derivedMaximumLookaheadSeconds: expectedInterval === null
           ? null
-          : expectedInterval * PHASE3B4C_AUDIO_LIMITS.maximumLookaheadBeats,
+          : expectedInterval * (
+            this.foregroundMechanismTimebaseStable
+              ? PHASE3B4C_AUDIO_LIMITS.maximumPendingEscapementSources
+              : PHASE3B4C_AUDIO_LIMITS.maximumLookaheadBeats
+          ),
         derivedMaximumLateSeconds: expectedInterval === null
           ? null
           : expectedInterval * PHASE3B4C_AUDIO_LIMITS.maximumLateBeatRatio,
@@ -970,7 +1000,9 @@ export class Phase3B4cAudioPacingRuntime {
         targetBeatCoupledToStudyBeat: projectionContractPassed,
         audibleMechanismPhase: audiblePhaseContractPassed,
         maximumProjectionBeats:
-          PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats,
+          this.foregroundMechanismTimebaseStable
+            ? PHASE3B4C_AUDIO_LIMITS.maximumPendingEscapementSources
+            : PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats,
         acceptedPhaseErrorBeats:
           PHASE3B4C_AUDIO_LIMITS.acceptedPhaseErrorBeats,
         passed: projectionContractPassed && audiblePhaseContractPassed,
