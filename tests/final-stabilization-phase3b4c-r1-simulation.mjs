@@ -28,6 +28,13 @@ export class DeterministicAudioEngine {
     this.audibleEvents = [];
     this.cancelled = 0;
     this.playAttempts = 0;
+    this.lifecycleCounts = {
+      created: 0,
+      startScheduled: 0,
+      ended: 0,
+      cancelled: 0,
+      cleaned: 0,
+    };
   }
 
   advanceTo(currentTime) {
@@ -39,10 +46,29 @@ export class DeterministicAudioEngine {
       this.audibleEvents.push(record);
     }
     if (!this.retainEndedRecords) {
+      const expired = this.records.filter(
+        (record) => !record.cancelled && record.audible && record.startTime <= currentTime - 0.08,
+      ).length;
+      this.lifecycleCounts.ended += expired;
       this.records = this.records.filter(
         (record) => !record.cancelled && (!record.audible || record.startTime > currentTime - 0.08),
       );
     }
+  }
+
+  getEscapementSourceInventory() {
+    return this.records
+      .filter((record) => !record.cancelled)
+      .map((record) => ({
+        type: record.type,
+        requestedStartTime: record.startTime,
+        actualStartTime: record.startTime,
+        expectedEndTime: record.startTime + 0.05,
+        remainingSeconds: record.startTime - this.currentTime,
+        audioPlaySequence: record.metadata.eventSequence,
+        metadata: { ...record.metadata },
+      }))
+      .sort((left, right) => left.requestedStartTime - right.requestedStartTime);
   }
 
   getClockSnapshot() {
@@ -59,6 +85,9 @@ export class DeterministicAudioEngine {
       pendingEscapementSources: this.records.filter(
         (record) => !record.cancelled && record.startTime > this.currentTime + 0.001,
       ).length,
+      sourceRecordCount: this.records.filter((record) => !record.cancelled).length,
+      escapementSourceInventory: this.getEscapementSourceInventory(),
+      sourceLifecycleCounts: { ...this.lifecycleCounts },
     };
   }
 
@@ -72,19 +101,50 @@ export class DeterministicAudioEngine {
       audible: false,
       cancelled: false,
     });
+    this.lifecycleCounts.created += 1;
+    this.lifecycleCounts.startScheduled += 1;
     return true;
   }
 
-  cancelScheduledEscapement() {
+  cancelScheduledEscapement({ afterTime = null } = {}) {
     let count = 0;
     for (const record of this.records) {
       if (record.cancelled || record.audible) continue;
+      if (Number.isFinite(afterTime) && !(record.startTime > afterTime)) continue;
       record.cancelled = true;
       count += 1;
     }
     this.records = this.records.filter((record) => !record.cancelled);
     this.cancelled += count;
+    this.lifecycleCounts.cancelled += count;
     return count;
+  }
+
+  cleanupExpiredEscapementSources({ graceSeconds = 0.25 } = {}) {
+    const before = this.records.length;
+    this.records = this.records.filter(
+      (record) => record.startTime + 0.05 + Math.max(0, graceSeconds) >= this.currentTime,
+    );
+    const cleaned = before - this.records.length;
+    this.lifecycleCounts.cleaned += cleaned;
+    return cleaned;
+  }
+
+  injectScheduledSource({
+    type = "escapementTick",
+    startTime,
+    targetBeat = -1,
+    eventSequence = -1,
+  }) {
+    this.records.push({
+      type,
+      startTime,
+      metadata: { targetBeat, eventSequence, injected: true },
+      audible: false,
+      cancelled: false,
+    });
+    this.lifecycleCounts.created += 1;
+    this.lifecycleCounts.startScheduled += 1;
   }
 }
 

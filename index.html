@@ -1168,8 +1168,8 @@ function audioMechanismSnapshot(){return {watchTimeSec,trainTimeSec,crownPositio
 function audioFrameSnapshot({activeOscillation,studyBeat,escapementBeatRate,crownDetentEvent=null}){
  return {audioEnabled:mechanicalAudio.enabled,visible:document.visibilityState!=='hidden',activeOscillation,studyBeat,escapementBeatIndex:Math.floor(studyBeat),escapementBeatRate,crownPosition,ratchetMode:currentWindingState.ratchetState.mode,windingToothIndex:Math.floor((currentWindingState.angles.ratchetWheel-WINDING_NODES.ratchetWheel.phaseOffset)/ratchetAudioToothPitch),reverseToothIndex:Math.floor((currentWindingState.angles.windingPinion-WINDING_NODES.windingPinion.phaseOffset)/reverseAudioToothPitch),crownDetentEvent};
 }
-function processMechanicalAudio(now,{activeOscillation,studyBeat,escapementBeatRate,frameDeltaMs=null}){
- const pacingFrame={performanceTime:now,wallTime:Date.now(),frameDeltaMs,simulationTime:trainTimeSec,displayedTime:visibleWatchTime(),studyBeat,escapementBeatRate,activeOscillation,audioEnabled:mechanicalAudio.enabled,visible:document.visibilityState!=='hidden'};
+function processMechanicalAudio(now,{activeOscillation,studyBeat,escapementBeatRate,frameDeltaMs=null,rawFrameDeltaMs=frameDeltaMs}){
+ const pacingFrame={performanceTime:now,wallTime:Date.now(),rawFrameDeltaMs,frameDeltaMs,wallClockDeltaMs:rawFrameDeltaMs,simulationTime:trainTimeSec,displayedTime:visibleWatchTime(),studyBeat,escapementBeatRate,activeOscillation,audioEnabled:mechanicalAudio.enabled,visible:document.visibilityState!=='hidden',liveSync,running,powered:mechanismPowered(),crownPosition};
  const pacingResult=phase3B4cAudioRuntime.processFrame(pacingFrame);
  if(!mechanicalAudio.enabled){audioEventResetPending=true;pendingCrownAudioDetent=null;return}
  let crownDetentEvent=null;
@@ -1714,7 +1714,7 @@ function animate(now){requestAnimationFrame(animate);const rawFrameTime=now-last
  issue2Phase3B1bRuntime?.applyDiscreteState({explodeAmount,sideSplitAmount});
  const activeOscillation=!setting&&powered&&(running||liveSync);const freq=2.5;const animT=liveSync?(performance.now()/1000):simPhase;
  const rateFactor=1+currentRate()/86400;
- const studyBeat=trainTimeSec*freq*2*rateFactor;const escState=escapementState(studyBeat);processMechanicalAudio(now,{activeOscillation,studyBeat,escapementBeatRate:Math.abs((liveSync?1:runtimeScale)*freq*2*rateFactor),frameDeltaMs:dt*1000});
+ const studyBeat=trainTimeSec*freq*2*rateFactor;const escState=escapementState(studyBeat);processMechanicalAudio(now,{activeOscillation,studyBeat,escapementBeatRate:Math.abs((liveSync?1:runtimeScale)*freq*2*rateFactor),frameDeltaMs:dt*1000,rawFrameDeltaMs:rawFrameTime});
  const ampRad=THREE.MathUtils.degToRad(currentAmplitude());const balAngle=activeOscillation?ampRad*oscillatorSin(animT*rateFactor,freq,beatErrorMs):0;
  balanceG.rotation.y=balAngle;collet.rotation.y=balAngle;regulator.rotation.y=.06+rateAdjustSecDay*.0022;curbAssembly.rotation.y=regulator.rotation.y;profileCost('updateHairSpring',()=>updateHairSpring(balAngle,now));
  const escAngle=TRAIN.escape.rotationDirection*(escState.advance/15)*Math.PI*2;escape.rotation.y=escAngle;pallet.rotation.y=activeOscillation?escState.palletAngle:0;

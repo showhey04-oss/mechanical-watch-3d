@@ -4,6 +4,8 @@ const DEFAULT_BUS_GAINS = Object.freeze({
   reverse: 0.24,
   crown: 0.38,
 });
+const ESCAPEMENT_EVENT_TYPES = new Set(["escapementTick", "escapementTock"]);
+const SOURCE_RECORD_CLEANUP_GRACE_SECONDS = 0.25;
 
 export const REQUIRED_AUDIO_EVENT_TYPES = Object.freeze([
   "escapementTick",
@@ -55,6 +57,13 @@ export class MechanicalAudioEngine {
     this.eventCounts = emptyCounts();
     this.eventLog = [];
     this.playSequence = 0;
+    this.sourceLifecycleCounts = {
+      created: 0,
+      startScheduled: 0,
+      ended: 0,
+      cancelled: 0,
+      cleaned: 0,
+    };
     this.lastEventType = null;
     this.lastEventTime = null;
     this.droppedEvents = 0;
@@ -238,18 +247,26 @@ export class MechanicalAudioEngine {
     const requestedStartTime = Number.isFinite(Number(startTime))
       ? Math.max(this.context.currentTime, Number(startTime))
       : null;
+    const actualStartTime = requestedStartTime ?? this.context.currentTime;
+    const expectedEndTime = actualStartTime
+      + (Number.isFinite(buffer.duration) ? buffer.duration : 0);
     const audioPlaySequence = ++this.playSequence;
     source.addEventListener("ended", () => {
       this.activeSources.delete(source);
       this.sourceRecords.delete(source);
+      this.sourceLifecycleCounts.ended += 1;
     }, { once: true });
     this.activeSources.add(source);
     this.sourceRecords.set(source, {
       type,
       requestedStartTime,
+      actualStartTime,
+      expectedEndTime,
       audioPlaySequence,
       metadata: { ...metadata },
     });
+    this.sourceLifecycleCounts.created += 1;
+    this.sourceLifecycleCounts.startScheduled += 1;
     if (requestedStartTime === null) source.start();
     else source.start(requestedStartTime);
     this.eventCounts[type] += 1;
@@ -274,11 +291,12 @@ export class MechanicalAudioEngine {
     this.sourceRecords.clear();
   }
 
-  cancelScheduledEscapement() {
+  cancelScheduledEscapement({ afterTime = null } = {}) {
     let cancelled = 0;
     const cancelledSequences = new Set();
     for (const [source, record] of this.sourceRecords) {
-      if (record.type !== "escapementTick" && record.type !== "escapementTock") continue;
+      if (!ESCAPEMENT_EVENT_TYPES.has(record.type)) continue;
+      if (Number.isFinite(afterTime) && !(record.requestedStartTime > afterTime)) continue;
       try { source.stop(); } catch {}
       this.activeSources.delete(source);
       this.sourceRecords.delete(source);
@@ -290,7 +308,51 @@ export class MechanicalAudioEngine {
         (event) => !cancelledSequences.has(event.audioPlaySequence),
       );
     }
+    this.sourceLifecycleCounts.cancelled += cancelled;
     return cancelled;
+  }
+
+  cleanupExpiredEscapementSources({
+    graceSeconds = SOURCE_RECORD_CLEANUP_GRACE_SECONDS,
+  } = {}) {
+    const currentTime = Number.isFinite(this.context?.currentTime)
+      ? this.context.currentTime
+      : null;
+    if (currentTime === null) return 0;
+    let cleaned = 0;
+    for (const [source, record] of this.sourceRecords) {
+      if (!ESCAPEMENT_EVENT_TYPES.has(record.type)) continue;
+      if (!Number.isFinite(record.expectedEndTime)) continue;
+      if (currentTime <= record.expectedEndTime + Math.max(0, graceSeconds)) continue;
+      try { source.stop(); } catch {}
+      try { source.disconnect(); } catch {}
+      this.activeSources.delete(source);
+      this.sourceRecords.delete(source);
+      cleaned += 1;
+    }
+    this.sourceLifecycleCounts.cleaned += cleaned;
+    return cleaned;
+  }
+
+  getEscapementSourceInventory() {
+    const currentTime = Number.isFinite(this.context?.currentTime)
+      ? this.context.currentTime
+      : null;
+    return [...this.sourceRecords.values()]
+      .filter((record) => ESCAPEMENT_EVENT_TYPES.has(record.type))
+      .map((record) => ({
+        type: record.type,
+        requestedStartTime: record.requestedStartTime,
+        actualStartTime: record.actualStartTime,
+        expectedEndTime: record.expectedEndTime,
+        remainingSeconds: currentTime === null || record.requestedStartTime === null
+          ? null
+          : record.requestedStartTime - currentTime,
+        audioPlaySequence: record.audioPlaySequence,
+        metadata: { ...record.metadata },
+      }))
+      .sort((left, right) =>
+        (left.requestedStartTime ?? -Infinity) - (right.requestedStartTime ?? -Infinity));
   }
 
   getClockSnapshot() {
@@ -316,6 +378,9 @@ export class MechanicalAudioEngine {
       outputTimestamp,
       activeSources: this.activeSources.size,
       pendingEscapementSources,
+      sourceRecordCount: this.sourceRecords.size,
+      escapementSourceInventory: this.getEscapementSourceInventory(),
+      sourceLifecycleCounts: { ...this.sourceLifecycleCounts },
     };
   }
 
@@ -369,6 +434,9 @@ export class MechanicalAudioEngine {
       droppedEvents: this.droppedEvents,
       suppressedEvents: this.suppressedEvents,
       activeSources: this.activeSources.size,
+      sourceRecordCount: this.sourceRecords.size,
+      sourceLifecycleCounts: { ...this.sourceLifecycleCounts },
+      escapementSourceInventory: this.getEscapementSourceInventory(),
       audioClock: this.getClockSnapshot(),
       eventLog: audibleEventLog.map((event) => ({ ...event })),
       highRatePolicy: { maxEscapementEventsPerSecond: 8, maxPhaseEventsPerFrame: 1 },

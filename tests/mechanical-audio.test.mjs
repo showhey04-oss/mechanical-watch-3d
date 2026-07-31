@@ -209,3 +209,38 @@ test("absolute escapement scheduling exposes clock metadata and can be cancelled
   assert.equal(engine.getDiagnostics().eventCounts.escapementTock, 1);
   assert.equal(engine.getDiagnostics().eventLog.at(-1).requestedStartTime, 12.1);
 });
+
+test("escapement source inventory supports bounded cancellation and stale-record cleanup", async () => {
+  const context = new FakeContext();
+  context.currentTime = 20;
+  const engine = new MechanicalAudioEngine({
+    audioContextFactory: () => context,
+    fetchFn: fakeFetch(),
+  });
+  await engine.enableFromUserGesture();
+
+  assert.equal(engine.play("escapementTick", {
+    startTime: 20.2,
+    metadata: { targetBeat: 1, eventSequence: 1 },
+  }), true);
+  assert.equal(engine.play("escapementTock", {
+    startTime: 21,
+    metadata: { targetBeat: 2, eventSequence: 2 },
+  }), true);
+  assert.equal(engine.play("winding"), true);
+
+  assert.equal(engine.cancelScheduledEscapement({ afterTime: 20.6 }), 1);
+  let clock = engine.getClockSnapshot();
+  assert.equal(clock.pendingEscapementSources, 1);
+  assert.equal(clock.escapementSourceInventory.length, 1);
+  assert.equal(clock.escapementSourceInventory[0].metadata.targetBeat, 1);
+  assert.equal(clock.sourceLifecycleCounts.cancelled, 1);
+
+  context.currentTime = 21;
+  assert.equal(engine.cleanupExpiredEscapementSources({ graceSeconds: 0.25 }), 1);
+  clock = engine.getClockSnapshot();
+  assert.equal(clock.pendingEscapementSources, 0);
+  assert.equal(clock.escapementSourceInventory.length, 0);
+  assert.equal(clock.sourceLifecycleCounts.cleaned, 1);
+  assert.equal(engine.getDiagnostics().eventCounts.winding, 1);
+});
