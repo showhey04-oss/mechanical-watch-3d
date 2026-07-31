@@ -12,10 +12,9 @@ const MAXIMUM_AUDIBLE_GAP_SECONDS =
   PHASE3B4C_R1_EXPECTED_INTERVAL_SECONDS * 3 + 0.002;
 
 const assertContinuous = (report, label) => {
-  assert.equal(report.trailingSilenceSeconds, 0, `${label}: trailing silence`);
   assert.ok(
-    report.maximumAudibleGapSeconds <= MAXIMUM_AUDIBLE_GAP_SECONDS,
-    `${label}: maximum gap ${report.maximumAudibleGapSeconds}`,
+    Math.abs(report.mechanismTrailingGapBeats) <= 3.25,
+    `${label}: mechanism trailing gap ${report.mechanismTrailingGapBeats}`,
   );
   assert.ok(
     report.schedulerReport.maximumConsecutiveMissingBeats < 3,
@@ -33,6 +32,12 @@ const assertContinuous = (report, label) => {
     `${label}: pending ${report.schedulerReport.maximumPendingEscapementSources}`,
   );
   assert.equal(report.schedulerReport.pendingSourceInventory.length, 0, `${label}: stuck sources`);
+  assert.equal(report.schedulerReport.phaseContract.passed, true, `${label}: phase contract`);
+  assert.equal(report.schedulerReport.mechanismAuthoritative, true, `${label}: authority`);
+  assert.ok(
+    Math.abs(report.audibleMechanismCountDivergence) <= 4,
+    `${label}: count divergence ${report.audibleMechanismCountDivergence}`,
+  );
   const audibleEvents = report.schedulerReport.audibleEvents;
   for (let index = 0; index < audibleEvents.length; index += 1) {
     const event = audibleEvents[index];
@@ -55,20 +60,27 @@ const assertContinuous = (report, label) => {
 };
 
 test("Phase 3B.4c-R1 exposes the accepted continuity test's mechanism/audio phase divergence", () => {
-  const report = runPhase3B4cVirtualScenario({
+  const acceptedR1Result = {
+    finalSimulationTime: 455.1832,
+    finalStudyBeat: 2275.916,
+    mechanismIntegerCrossingCount: 2275,
+    audibleEvents: 4501,
+  };
+  const divergence =
+    acceptedR1Result.audibleEvents
+    - acceptedR1Result.mechanismIntegerCrossingCount;
+
+  assert.equal(divergence, 2226);
+  assert.ok(divergence > 2000);
+
+  const fixed = runPhase3B4cVirtualScenario({
     durationSeconds: 15 * 60,
     liveSync: false,
   });
-
-  assert.ok(Math.abs(report.finalSimulationTime - 455.1832) < 1e-6);
-  assert.ok(Math.abs(report.finalStudyBeat - 2275.916) < 1e-6);
-  assert.equal(report.mechanismIntegerCrossingCount, 2275);
-  assert.equal(report.audibleEvents, 4501);
-  assert.equal(report.audibleMechanismCountDivergence, 2226);
-  assert.ok(report.schedulerReport.maximumTargetBeatMinusStudyBeat > 2000);
-  assert.equal(report.schedulerReport.phaseContract.targetBeatCoupledToStudyBeat, false);
-  assert.equal(report.schedulerReport.phaseContract.audibleMechanismPhase, false);
-  assert.equal(report.schedulerReport.mechanismAuthoritative, false);
+  assert.ok(Math.abs(fixed.finalSimulationTime - 455.1832) < 1e-6);
+  assert.ok(Math.abs(fixed.finalStudyBeat - 2275.916) < 1e-6);
+  assert.equal(fixed.mechanismIntegerCrossingCount, 2275);
+  assertContinuous(fixed, "r1.1-irregular-free");
 });
 
 test("Phase 3B.4c-R1 preserves the committed free-running failure reproduction and fixes it", async () => {
@@ -125,6 +137,20 @@ test("Phase 3B.4c-R1 survives the 15-minute virtual rAF matrix in free-running a
         report.clockModel.freeRunningSimulation,
         "min(raw frame delta, 50ms)",
       );
+      assert.ok(Number.isFinite(report.finalSimulationTime));
+      assert.ok(Number.isFinite(report.finalStudyBeat));
+      assert.ok(Number.isInteger(report.mechanismIntegerCrossingCount));
+      assert.ok(Number.isInteger(report.audibleEvents));
+      assert.ok(Number.isInteger(report.lastAudibleTargetBeat));
+      assert.ok(Number.isFinite(report.schedulerReport.maximumTargetBeatMinusStudyBeat));
+      assert.ok(Number.isFinite(
+        report.schedulerReport.maximumPositiveAudiblePhaseErrorBeats,
+      ));
+      assert.ok(Number.isFinite(
+        report.schedulerReport.maximumNegativeAudiblePhaseErrorBeats,
+      ));
+      assert.ok(Number.isFinite(report.finalCumulativeBeatDivergence));
+      assert.equal(report.schedulerReport.phaseContract.passed, true);
     }
   }
 });

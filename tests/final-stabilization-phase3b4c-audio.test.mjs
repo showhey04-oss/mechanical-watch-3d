@@ -126,6 +126,7 @@ test("three-minute mechanism cadence uses unique absolute AudioContext times wit
     minimumLeadBeatRatio: 0.09,
     maximumLookaheadBeats: 3,
     maximumProjectionBeats: 3,
+    maximumFreeRunningProjectionBeats: 0.25,
     acceptedPhaseErrorBeats: 0.25,
     maximumLateBeatRatio: 0.25,
     starvationBeatCount: 3,

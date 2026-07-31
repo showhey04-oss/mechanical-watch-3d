@@ -10,6 +10,10 @@ export const PHASE3B4C_AUDIO_LIMITS = Object.freeze({
   minimumLeadBeatRatio: 0.09,
   maximumLookaheadBeats: 3,
   maximumProjectionBeats: 3,
+  maximumFreeRunningProjectionBeats: 0.25,
+  // animate() caps free-running mechanism advancement at 50ms. At 5Hz this
+  // is one quarter beat, so the audible observation gate is not widened
+  // beyond one authoritative simulation step.
   acceptedPhaseErrorBeats: 0.25,
   maximumLateBeatRatio: 0.25,
   maximumEpochDriftSeconds: 0.25,
@@ -73,6 +77,7 @@ export class Phase3B4cAudioPacingRuntime {
     this.lastAudibleAudioTime = null;
     this.lastAudibleEventSequence = null;
     this.activeAudioStartedAt = null;
+    this.activeAudioStartedBeat = null;
     this.starvationActive = false;
     this.schedulerNoOpReason = null;
     this.audibleScanIndex = 0;
@@ -150,6 +155,7 @@ export class Phase3B4cAudioPacingRuntime {
     this.lastRawBeat = finite(frame?.studyBeat);
     this.epoch = null;
     this.activeAudioStartedAt = null;
+    this.activeAudioStartedBeat = null;
     this.starvationActive = false;
     this.schedulerNoOpReason = null;
     if (reason !== "simulation-audio-epoch-drift") {
@@ -175,6 +181,7 @@ export class Phase3B4cAudioPacingRuntime {
     this.reanchorCount += 1;
     this.projectionReanchorCount += 1;
     this.lastScheduledStartTime = null;
+    this.lastTargetBeat = this.lastActuallyAudibleBeat;
     this.lastEpochReanchorAt = frame.performanceTime;
     this.epoch = {
       generation: this.generation,
@@ -216,8 +223,12 @@ export class Phase3B4cAudioPacingRuntime {
       record.audibleObservedAtPerformanceTime = frame.performanceTime;
       record.audibleObservedStudyBeat = frame.studyBeat;
       record.audibleObservedTargetBeat = record.targetBeat;
+      record.authoritativeMechanismBeatAtAudioTime =
+        record.liveSyncAtScheduling
+          ? record.predictedMechanismBeatAtRequestedStartTime
+          : frame.studyBeat;
       record.audibleMechanismPhaseErrorBeats =
-        record.targetBeat - frame.studyBeat;
+        record.targetBeat - record.authoritativeMechanismBeatAtAudioTime;
       this.maximumPositiveAudiblePhaseErrorBeats = Math.max(
         this.maximumPositiveAudiblePhaseErrorBeats,
         record.audibleMechanismPhaseErrorBeats,
@@ -250,12 +261,21 @@ export class Phase3B4cAudioPacingRuntime {
   }
 
   detectStarvation(frame, clock, beatIntervalSeconds) {
+    const referenceBeat =
+      this.lastActuallyAudibleBeat ?? this.activeAudioStartedBeat;
     const referenceTime = this.lastAudibleAudioTime ?? this.activeAudioStartedAt;
-    if (referenceTime === null || clock.currentTime === null) return false;
+    if (
+      referenceBeat === null
+      || referenceTime === null
+      || clock.currentTime === null
+    ) return false;
+    const silentMechanismBeats = frame.studyBeat - referenceBeat;
     const silentSeconds = clock.currentTime - referenceTime;
-    const thresholdSeconds =
-      beatIntervalSeconds * PHASE3B4C_AUDIO_LIMITS.starvationBeatCount;
-    if (silentSeconds <= thresholdSeconds + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds) {
+    if (
+      silentMechanismBeats
+      <= PHASE3B4C_AUDIO_LIMITS.starvationBeatCount
+        + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+    ) {
       return false;
     }
     if (this.starvationActive) return false;
@@ -264,8 +284,9 @@ export class Phase3B4cAudioPacingRuntime {
     this.lastStarvationBeat = this.lastTargetBeat;
     this.append({
       kind: "scheduler-starvation",
+      silentMechanismBeats,
       silentSeconds,
-      thresholdSeconds,
+      thresholdBeats: PHASE3B4C_AUDIO_LIMITS.starvationBeatCount,
       performanceTime: frame.performanceTime,
       audioTime: clock.currentTime,
       studyBeat: frame.studyBeat,
@@ -368,6 +389,179 @@ export class Phase3B4cAudioPacingRuntime {
     return true;
   }
 
+  scheduleAuthoritativeBeat(
+    frame,
+    clock,
+    {
+      beatIntervalSeconds,
+      minimumLeadSeconds,
+      maximumLookaheadSeconds,
+    },
+  ) {
+    const minimumTargetBeat = Math.max(
+      Math.floor(frame.studyBeat) + 1,
+      (this.lastActuallyAudibleBeat ?? -1) + 1,
+    );
+    const targetBeat =
+      frame.liveSync
+      && this.lastTargetBeat !== null
+      && this.lastTargetBeat >= minimumTargetBeat
+        ? this.lastTargetBeat + 1
+        : minimumTargetBeat;
+    if (this.lastTargetBeat !== null && targetBeat <= this.lastTargetBeat) {
+      return this.setNoOp("await-authoritative-mechanism-beat", frame, clock, {
+        targetBeat,
+        lastTargetBeat: this.lastTargetBeat,
+      });
+    }
+    const targetBeatMinusStudyBeat = targetBeat - frame.studyBeat;
+    const maximumProjectionBeats = frame.liveSync
+      ? PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats
+      : PHASE3B4C_AUDIO_LIMITS.maximumFreeRunningProjectionBeats;
+    if (
+      targetBeatMinusStudyBeat
+      > maximumProjectionBeats
+        + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+    ) {
+      return this.setNoOp("await-mechanism-projection-window", frame, clock, {
+        targetBeat,
+        targetBeatMinusStudyBeat,
+        maximumProjectionBeats,
+      });
+    }
+    if (
+      clock.pendingEscapementSources
+      >= PHASE3B4C_AUDIO_LIMITS.maximumPendingEscapementSources
+    ) {
+      this.pendingCapPreventionCount += 1;
+      return this.setNoOp("pending-cap", frame, clock, {
+        targetBeat,
+        pending: clock.pendingEscapementSources,
+      });
+    }
+
+    const secondsUntilBeat =
+      targetBeatMinusStudyBeat / frame.escapementBeatRate;
+    const requestedStartTime = clock.currentTime + Math.max(
+      minimumLeadSeconds,
+      Math.min(maximumLookaheadSeconds, Math.max(0, secondsUntilBeat)),
+    );
+    const requestedLeadSeconds = requestedStartTime - clock.currentTime;
+    const predictedMechanismBeatAtRequestedStartTime =
+      frame.studyBeat + requestedLeadSeconds * frame.escapementBeatRate;
+    if (
+      requestedLeadSeconds
+      > maximumLookaheadSeconds
+        + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+    ) {
+      return this.setNoOp("lookahead-window-full", frame, clock, {
+        targetBeat,
+        requestedStartTime,
+        requestedLeadSeconds,
+        maximumLookaheadSeconds,
+      });
+    }
+
+    const type = targetBeat % 2 === 0
+      ? "escapementTick"
+      : "escapementTock";
+    const eventSequence = this.eventSequence + 1;
+    const eventMetadata = {
+      phase3b4c: true,
+      eventSequence,
+      targetBeat,
+      generation: this.generation,
+      simulationTime: frame.simulationTime,
+      displayedTime: frame.displayedTime,
+      expectedSimulationBeatTime: frame.simulationTime === null
+        ? null
+        : frame.simulationTime + secondsUntilBeat,
+      requestedStartTime,
+      audioLeadSeconds: requestedLeadSeconds,
+      latenessSeconds: 0,
+      projectionBeatLead: targetBeatMinusStudyBeat,
+      schedulingStudyBeat: frame.studyBeat,
+      schedulingBeatRate: frame.escapementBeatRate,
+      targetBeatMinusStudyBeat,
+      predictedMechanismBeatAtRequestedStartTime,
+      liveSyncAtScheduling: frame.liveSync,
+    };
+    const played = this.audioEngine.play(type, {
+      timestamp: frame.performanceTime,
+      startTime: requestedStartTime,
+      metadata: eventMetadata,
+    });
+    if (!played) {
+      this.bookingFailureCount += 1;
+      return this.setNoOp("play-failed", frame, clock, {
+        targetBeat,
+        requestedStartTime,
+      });
+    }
+
+    this.eventSequence = eventSequence;
+    this.lastTargetBeat = targetBeat;
+    this.lastScheduledStartTime = requestedStartTime;
+    this.schedulerNoOpReason = null;
+    this.maximumRequestedLeadSeconds = Math.max(
+      this.maximumRequestedLeadSeconds,
+      requestedLeadSeconds,
+    );
+    this.maximumTargetBeatMinusStudyBeat = Math.max(
+      this.maximumTargetBeatMinusStudyBeat,
+      targetBeatMinusStudyBeat,
+    );
+    const afterClock = this.audioEngine.getClockSnapshot?.();
+    const pendingAfter =
+      afterClock?.pendingEscapementSources
+      ?? clock.pendingEscapementSources + 1;
+    this.maximumPending = Math.max(this.maximumPending, pendingAfter);
+    this.maximumSourceRecordCount = Math.max(
+      this.maximumSourceRecordCount,
+      Number(afterClock?.sourceRecordCount) || 0,
+    );
+    const record = {
+      kind: "scheduled",
+      status: "scheduled",
+      type,
+      eventSequence,
+      targetBeat,
+      generation: this.generation,
+      performanceTime: frame.performanceTime,
+      wallTime: frame.wallTime,
+      frameDeltaMs: frame.frameDeltaMs,
+      simulationTime: frame.simulationTime,
+      displayedTime: frame.displayedTime,
+      expectedSimulationBeatTime: eventMetadata.expectedSimulationBeatTime,
+      audioContextState: clock.state,
+      audioCurrentTime: clock.currentTime,
+      previousAudioCurrentTime: this.lastClockSample?.audioTime ?? null,
+      outputTimestamp: clock.outputTimestamp,
+      requestedStartTime,
+      leadSeconds: requestedLeadSeconds,
+      latenessSeconds: 0,
+      projectionBeatLead: targetBeatMinusStudyBeat,
+      schedulingStudyBeat: frame.studyBeat,
+      schedulingBeatRate: frame.escapementBeatRate,
+      targetBeatMinusStudyBeat,
+      predictedMechanismBeatAtRequestedStartTime,
+      liveSyncAtScheduling: frame.liveSync,
+      pendingAfter,
+      sourceRecordCountAfter: Number(afterClock?.sourceRecordCount) || null,
+      reason: frame.liveSync
+        ? "mechanism-live-sync-bounded-projection"
+        : "mechanism-free-running-crossing-window",
+    };
+    this.scheduled.push(record);
+    this.append(record);
+    return {
+      handledEscapement: true,
+      scheduled: 1,
+      event: record,
+      pendingAfter,
+    };
+  }
+
   processFrame(input = {}) {
     if (!this.enabled) return { handledEscapement: false, scheduled: 0 };
     const frame = {
@@ -423,7 +617,10 @@ export class Phase3B4cAudioPacingRuntime {
       if (this.epoch || clock.pendingEscapementSources) this.reanchor(`inactive:${clock.state}`, frame);
       return { handledEscapement: this.mode === "stability", scheduled: 0 };
     }
-    if (this.activeAudioStartedAt === null) this.activeAudioStartedAt = clock.currentTime;
+    if (this.activeAudioStartedAt === null) {
+      this.activeAudioStartedAt = clock.currentTime;
+      this.activeAudioStartedBeat = frame.studyBeat;
+    }
     if (!this.epoch) this.establishEpoch(frame, clock, "active");
     if (this.mode !== "stability") return { handledEscapement: false, scheduled: 0 };
     const beatIntervalSeconds = 1 / frame.escapementBeatRate;
@@ -469,155 +666,40 @@ export class Phase3B4cAudioPacingRuntime {
         audioTime: clock.currentTime,
         simulationBeat: frame.studyBeat,
       });
-      this.boundedProjectionReanchor("simulation-audio-epoch-drift-bounded", frame, clock);
+      this.establishEpoch(frame, clock, "simulation-audio-epoch-drift-observed");
     }
 
     if (this.detectStarvation(frame, clock, beatIntervalSeconds)) {
       this.boundedProjectionReanchor("scheduler-starvation-recovery", frame, clock);
     }
-    const targetBeat = this.lastTargetBeat === null
-      ? Math.floor(frame.studyBeat) + 1
-      : this.lastTargetBeat + 1;
-    const secondsUntilBeat = (targetBeat - frame.studyBeat) / frame.escapementBeatRate;
-    const sequenceAlreadyCommitted = this.lastTargetBeat !== null;
-    const cadenceRestartTime = this.lastAudibleAudioTime === null
-      ? clock.currentTime + minimumLeadSeconds
-      : Math.max(
-        clock.currentTime + minimumLeadSeconds,
-        this.lastAudibleAudioTime + beatIntervalSeconds,
-      );
-    let requestedStartTime = this.lastScheduledStartTime === null
-      ? clock.currentTime + (
-        sequenceAlreadyCommitted
-          ? cadenceRestartTime - clock.currentTime
-          : Math.max(
-            minimumLeadSeconds,
-            Math.min(maximumLookaheadSeconds, Math.max(0, secondsUntilBeat)),
-          )
-      )
-      : this.lastScheduledStartTime + beatIntervalSeconds;
-    if (requestedStartTime < clock.currentTime - maximumLateSeconds) {
-      this.append({
-        kind: "projection-late",
-        targetBeat,
-        requestedStartTime,
-        latenessSeconds: clock.currentTime - requestedStartTime,
-        performanceTime: frame.performanceTime,
-        audioTime: clock.currentTime,
-      });
-      this.boundedProjectionReanchor("projection-late-bounded", frame, clock);
-      requestedStartTime = clock.currentTime + minimumLeadSeconds;
-    } else {
-      requestedStartTime = Math.max(
-        requestedStartTime,
-        clock.currentTime + minimumLeadSeconds,
-      );
-    }
-    const requestedLeadSeconds = requestedStartTime - clock.currentTime;
-    const predictedMechanismBeatAtRequestedStartTime =
-      frame.studyBeat + requestedLeadSeconds * frame.escapementBeatRate;
-    if (
-      requestedLeadSeconds
-      > maximumLookaheadSeconds + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+    const events = [];
+    let pendingEscapementSources = clock.pendingEscapementSources;
+    while (
+      pendingEscapementSources
+      < PHASE3B4C_AUDIO_LIMITS.maximumPendingEscapementSources
     ) {
-      return this.setNoOp("lookahead-window-full", frame, clock, {
-        targetBeat,
-        requestedStartTime,
-        requestedLeadSeconds,
-        maximumLookaheadSeconds,
-      });
+      const result = this.scheduleAuthoritativeBeat(
+        frame,
+        { ...clock, pendingEscapementSources },
+        {
+          beatIntervalSeconds,
+          minimumLeadSeconds,
+          maximumLookaheadSeconds,
+          maximumLateSeconds,
+        },
+      );
+      if (!result.scheduled) break;
+      events.push(result.event);
+      pendingEscapementSources = result.pendingAfter;
+      if (!frame.liveSync) break;
     }
-    if (clock.pendingEscapementSources >= PHASE3B4C_AUDIO_LIMITS.maximumPendingEscapementSources) {
-      this.pendingCapPreventionCount += 1;
-      return this.setNoOp("pending-cap", frame, clock, {
-        targetBeat,
-        pending: clock.pendingEscapementSources,
-      });
-    }
-    const type = targetBeat % 2 === 0 ? "escapementTick" : "escapementTock";
-    const eventSequence = this.eventSequence + 1;
-    const played = this.audioEngine.play(type, {
-      timestamp: frame.performanceTime,
-      startTime: requestedStartTime,
-      metadata: {
-        phase3b4c: true,
-        eventSequence,
-        targetBeat,
-        generation: this.generation,
-        simulationTime: frame.simulationTime,
-        displayedTime: frame.displayedTime,
-        expectedSimulationBeatTime: frame.simulationTime === null
-          ? null
-          : frame.simulationTime + secondsUntilBeat,
-        requestedStartTime,
-        audioLeadSeconds: requestedStartTime - clock.currentTime,
-        latenessSeconds: 0,
-        projectionBeatLead: targetBeat - frame.studyBeat,
-        schedulingStudyBeat: frame.studyBeat,
-        schedulingBeatRate: frame.escapementBeatRate,
-        targetBeatMinusStudyBeat: targetBeat - frame.studyBeat,
-        predictedMechanismBeatAtRequestedStartTime,
-      },
-    });
-    if (!played) {
-      this.bookingFailureCount += 1;
-      return this.setNoOp("play-failed", frame, clock, {
-        targetBeat,
-        requestedStartTime,
-      });
-    }
-    this.eventSequence = eventSequence;
-    this.lastTargetBeat = targetBeat;
-    this.lastScheduledStartTime = requestedStartTime;
-    this.schedulerNoOpReason = null;
-    this.maximumRequestedLeadSeconds = Math.max(
-      this.maximumRequestedLeadSeconds,
-      requestedStartTime - clock.currentTime,
-    );
-    this.maximumTargetBeatMinusStudyBeat = Math.max(
-      this.maximumTargetBeatMinusStudyBeat,
-      targetBeat - frame.studyBeat,
-    );
-    const afterClock = this.audioEngine.getClockSnapshot?.();
-    const pendingAfter = afterClock?.pendingEscapementSources
-      ?? clock.pendingEscapementSources + 1;
-    this.maximumPending = Math.max(this.maximumPending, pendingAfter);
-    this.maximumSourceRecordCount = Math.max(
-      this.maximumSourceRecordCount,
-      Number(afterClock?.sourceRecordCount) || 0,
-    );
-    const record = {
-      kind: "scheduled",
-      status: "scheduled",
-      type,
-      eventSequence,
-      targetBeat,
-      generation: this.generation,
-      performanceTime: frame.performanceTime,
-      wallTime: frame.wallTime,
-      frameDeltaMs: frame.frameDeltaMs,
-      simulationTime: frame.simulationTime,
-      displayedTime: frame.displayedTime,
-      expectedSimulationBeatTime: frame.simulationTime === null ? null : frame.simulationTime + secondsUntilBeat,
-      audioContextState: clock.state,
-      audioCurrentTime: clock.currentTime,
-      previousAudioCurrentTime: this.lastClockSample?.audioTime ?? null,
-      outputTimestamp: clock.outputTimestamp,
-      requestedStartTime,
-      leadSeconds: requestedStartTime - clock.currentTime,
-      latenessSeconds: 0,
-      projectionBeatLead: targetBeat - frame.studyBeat,
-      schedulingStudyBeat: frame.studyBeat,
-      schedulingBeatRate: frame.escapementBeatRate,
-      targetBeatMinusStudyBeat: targetBeat - frame.studyBeat,
-      predictedMechanismBeatAtRequestedStartTime,
-      pendingAfter,
-      sourceRecordCountAfter: Number(afterClock?.sourceRecordCount) || null,
-      reason: "mechanism-bounded-rolling-projection",
+    return {
+      handledEscapement: true,
+      scheduled: events.length,
+      event: events.at(-1) ?? null,
+      events,
+      reason: events.length ? null : this.schedulerNoOpReason,
     };
-    this.scheduled.push(record);
-    this.append(record);
-    return { handledEscapement: true, scheduled: 1, event: record };
   }
 
   observeLegacyEvent(type, frame = {}) {
@@ -681,6 +763,7 @@ export class Phase3B4cAudioPacingRuntime {
     this.lastAudibleAudioTime = null;
     this.lastAudibleEventSequence = null;
     this.activeAudioStartedAt = null;
+    this.activeAudioStartedBeat = null;
     this.starvationActive = false;
     this.lastStarvationBeat = null;
     this.schedulerNoOpReason = null;
@@ -711,8 +794,14 @@ export class Phase3B4cAudioPacingRuntime {
     const expectedElapsed = expectedInterval && audioTimes.length > 1 ? expectedInterval * (audioTimes.length - 1) : 0;
     const averageCadenceErrorRatio = expectedElapsed > 0 ? Math.abs(elapsed - expectedElapsed) / expectedElapsed : 0;
     const maximumAudibleGapSeconds = intervals.length ? Math.max(...intervals) : 0;
-    const maximumConsecutiveMissingBeats = expectedInterval
+    const maximumWallGapDerivedMissingBeats = expectedInterval
       ? Math.max(0, Math.ceil(maximumAudibleGapSeconds / expectedInterval - 1 - 1e-9))
+      : 0;
+    const targetBeatIntervals = audibleEvents.slice(1).map(
+      (event, index) => event.targetBeat - audibleEvents[index].targetBeat,
+    );
+    const maximumConsecutiveMissingBeats = targetBeatIntervals.length
+      ? Math.max(0, ...targetBeatIntervals.map((value) => value - 1))
       : 0;
     const projectionContractPassed = successfulEvents.every(
       (event) =>
@@ -782,6 +871,7 @@ export class Phase3B4cAudioPacingRuntime {
       averageCadenceErrorRatio,
       p95IntervalDeviationSeconds: percentile(deviations, 0.95),
       maximumAudibleGapSeconds,
+      maximumWallGapDerivedMissingBeats,
       maximumConsecutiveMissingBeats,
       noTwoConsecutiveMissing: maximumConsecutiveMissingBeats < 2,
       noThreeConsecutiveMissing: maximumConsecutiveMissingBeats < 3,
@@ -790,6 +880,8 @@ export class Phase3B4cAudioPacingRuntime {
         minimumLeadBeatRatio: PHASE3B4C_AUDIO_LIMITS.minimumLeadBeatRatio,
         maximumLookaheadBeats: PHASE3B4C_AUDIO_LIMITS.maximumLookaheadBeats,
         maximumProjectionBeats: PHASE3B4C_AUDIO_LIMITS.maximumProjectionBeats,
+        maximumFreeRunningProjectionBeats:
+          PHASE3B4C_AUDIO_LIMITS.maximumFreeRunningProjectionBeats,
         acceptedPhaseErrorBeats:
           PHASE3B4C_AUDIO_LIMITS.acceptedPhaseErrorBeats,
         maximumLateBeatRatio: PHASE3B4C_AUDIO_LIMITS.maximumLateBeatRatio,

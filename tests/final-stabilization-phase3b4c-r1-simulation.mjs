@@ -216,6 +216,10 @@ export function runPhase3B4cVirtualScenario({
     cappedSimulationDeltas.push(cappedSimulationDelta);
     frameIndex += 1;
   }
+  const reportAtDuration = runtime.getReport();
+  const audibleEventsAtDuration = engine.audibleEvents.length;
+  const pendingBeatCountAtDuration =
+    reportAtDuration.pendingSourceInventory.length;
   engine.advanceTo(wallTime + 1);
   runtime.processFrame({
     performanceTime: (wallTime + 1) * 1000,
@@ -252,9 +256,16 @@ export function runPhase3B4cVirtualScenario({
   );
   const report = runtime.getReport();
   const finalStudyBeat = simulationTime * PHASE3B4C_R1_BEAT_RATE;
-  const pendingBeatCount = report.pendingSourceInventory.length;
+  const pendingBeatCount = pendingBeatCountAtDuration;
   const audibleMechanismCountDivergence =
-    audibleTimes.length - mechanismIntegerCrossingCount - pendingBeatCount;
+    audibleEventsAtDuration
+    + pendingBeatCount
+    - mechanismIntegerCrossingCount;
+  const lastAudibleTargetBeat =
+    reportAtDuration.lastActuallyAudibleBeat;
+  const mechanismTrailingGapBeats = lastAudibleTargetBeat === null
+    ? finalStudyBeat
+    : finalStudyBeat - lastAudibleTargetBeat;
   return {
     schemaVersion: 1,
     phase: "Final Stabilization Phase 3B.4c-R1",
@@ -281,11 +292,15 @@ export function runPhase3B4cVirtualScenario({
     mechanismIntegerCrossingCount,
     expectedEvents,
     scheduledEvents: report.eventSequenceCount,
-    audibleEvents: audibleTimes.length,
-    lastAudibleTargetBeat: report.lastActuallyAudibleBeat,
+    audibleEvents: audibleEventsAtDuration,
+    postFlushAudibleEvents: audibleTimes.length,
+    lastAudibleTargetBeat,
     pendingBeatCount,
+    countDivergenceDefinition:
+      "audibleEventsAtDuration + pendingLookaheadBeats - mechanismIntegerCrossingCount",
     audibleMechanismCountDivergence,
     finalCumulativeBeatDivergence: audibleMechanismCountDivergence,
+    mechanismTrailingGapBeats,
     lastAudibleTime,
     trailingSilenceSeconds,
     maximumAudibleGapSeconds,
