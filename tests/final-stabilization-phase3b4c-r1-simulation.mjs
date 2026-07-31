@@ -258,6 +258,7 @@ export function runPhase3B4cVirtualScenario({
       Math.max(...cappedSimulationDeltas) * 1000,
     ],
     expectedBeatIntervalSeconds: PHASE3B4C_R1_EXPECTED_INTERVAL_SECONDS,
+    frameCount: frameIndex,
     expectedEvents,
     scheduledEvents: report.eventSequenceCount,
     audibleEvents: audibleTimes.length,

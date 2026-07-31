@@ -6,7 +6,7 @@
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
   "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
-  "capturedAt": "2026-07-31T01:20:37.008Z",
+  "capturedAt": "2026-07-31T01:32:24.765Z",
   "status": "PASSED_DIFFERENTIAL_GATE",
   "thresholds": {
     "maximumFpsRegressionRatio": -0.05,
@@ -156,6 +156,160 @@
   "schedulerProcessing": {
     "previousAlgorithm": "full scheduled-history scan on every frame",
     "finalAlgorithm": "monotonic unread-audible-record cursor",
-    "independentTimerUsed": false
+    "independentTimerUsed": false,
+    "measurementScope": "deterministic scheduler plus fake AudioContext source lifecycle harness",
+    "fifteenMinuteRuns": [
+      {
+        "pattern": "stable-16.7ms",
+        "mode": "free-running",
+        "frameCount": 53893,
+        "elapsedMs": 502.41774999999996,
+        "averageMsPerFrame": 0.009322504777986008,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-16.7ms",
+        "mode": "live-sync",
+        "frameCount": 53893,
+        "elapsedMs": 538.926417,
+        "averageMsPerFrame": 0.00999993351641215,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-33.3ms",
+        "mode": "free-running",
+        "frameCount": 27028,
+        "elapsedMs": 239.3900000000001,
+        "averageMsPerFrame": 0.008857111143998819,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-33.3ms",
+        "mode": "live-sync",
+        "frameCount": 27028,
+        "elapsedMs": 184.27800000000002,
+        "averageMsPerFrame": 0.006818040550540181,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-50ms",
+        "mode": "free-running",
+        "frameCount": 18001,
+        "elapsedMs": 95.82754099999988,
+        "averageMsPerFrame": 0.00532345653019276,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-50ms",
+        "mode": "live-sync",
+        "frameCount": 18001,
+        "elapsedMs": 61.68962499999998,
+        "averageMsPerFrame": 0.0034270109993889217,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "intermittent-80-150ms",
+        "mode": "free-running",
+        "frameCount": 14208,
+        "elapsedMs": 89.54825000000005,
+        "averageMsPerFrame": 0.006302663992117121,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "intermittent-80-150ms",
+        "mode": "live-sync",
+        "frameCount": 14208,
+        "elapsedMs": 26.626250000000027,
+        "averageMsPerFrame": 0.0018740322353603624,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "single-500ms",
+        "mode": "free-running",
+        "frameCount": 53864,
+        "elapsedMs": 385.7125000000001,
+        "averageMsPerFrame": 0.007160858829645033,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "single-500ms",
+        "mode": "live-sync",
+        "frameCount": 53864,
+        "elapsedMs": 364.7687499999997,
+        "averageMsPerFrame": 0.0067720323407099315,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "single-1000ms",
+        "mode": "free-running",
+        "frameCount": 53834,
+        "elapsedMs": 382.7545,
+        "averageMsPerFrame": 0.007109902663744103,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "single-1000ms",
+        "mode": "live-sync",
+        "frameCount": 53834,
+        "elapsedMs": 391.00158299999975,
+        "averageMsPerFrame": 0.0072630973548315145,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "repeated-500ms",
+        "mode": "free-running",
+        "frameCount": 3484,
+        "elapsedMs": 18.919166000000132,
+        "averageMsPerFrame": 0.005430300229621163,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "repeated-500ms",
+        "mode": "live-sync",
+        "frameCount": 3484,
+        "elapsedMs": 15.108541999999943,
+        "averageMsPerFrame": 0.004336550516647515,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "foreground-degradation",
+        "mode": "free-running",
+        "frameCount": 23965,
+        "elapsedMs": 80.37987500000008,
+        "averageMsPerFrame": 0.003354052785311917,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "foreground-degradation",
+        "mode": "live-sync",
+        "frameCount": 23965,
+        "elapsedMs": 73.43670799999973,
+        "averageMsPerFrame": 0.0030643316503233767,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "ios-irregular-pacing",
+        "mode": "free-running",
+        "frameCount": 15428,
+        "elapsedMs": 81.79383300000018,
+        "averageMsPerFrame": 0.005301648496240613,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "ios-irregular-pacing",
+        "mode": "live-sync",
+        "frameCount": 15428,
+        "elapsedMs": 23.490124999999807,
+        "averageMsPerFrame": 0.0015225644931293628,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      }
+    ],
+    "maximumAverageMsPerFrame": 0.00999993351641215,
+    "browserTotalFrameDifferential": {
+      "desktopFpsRatio": -0.00037893371406794396,
+      "desktopP95Ms": 0.2000000000007276,
+      "mobileFpsRatio": -0.02374017060305544,
+      "mobileP95Ms": 0.3000000000010914
+    }
   }
 }

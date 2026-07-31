@@ -193,6 +193,18 @@ test("Phase 3B.4c evidence records differential performance and protected pixels
   assert.ok(performance.desktop.median.delta.p95Ms <= 2);
   assert.ok(performance.mobile390x844.median.delta.fpsRatio >= -0.05);
   assert.ok(performance.mobile390x844.median.delta.p95Ms <= 2);
+  assert.equal(
+    performance.schedulerProcessing.fifteenMinuteRuns.length,
+    18,
+  );
+  assert.ok(
+    performance.schedulerProcessing.fifteenMinuteRuns.every(
+      (run) =>
+        run.frameCount > 0
+        && Number.isFinite(run.averageMsPerFrame)
+        && run.averageMsPerFrame >= 0,
+    ),
+  );
   assert.equal(protectedPaths.desktop1280x720.pixelExact, true);
   assert.equal(protectedPaths.mobile390x844.pixelExact, true);
 });

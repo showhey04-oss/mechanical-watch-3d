@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { performance as nodePerformance } from "node:perf_hooks";
 
 import {
   runPhase3B4cVirtualScenario,
@@ -41,6 +42,7 @@ const summarizeScenario = (report) => ({
   rawFrameDeltaRangeMs: report.rawFrameDeltaRangeMs,
   cappedSimulationDeltaRangeMs: report.cappedSimulationDeltaRangeMs,
   expectedBeatIntervalSeconds: report.expectedBeatIntervalSeconds,
+  frameCount: report.frameCount,
   expectedEvents: report.expectedEvents,
   scheduledEvents: report.scheduledEvents,
   audibleEvents: report.audibleEvents,
@@ -103,14 +105,23 @@ const reproduction = JSON.parse(await readFile(
 const matrix = [];
 for (const [pattern, frameDelta] of Object.entries(patterns)) {
   for (const liveSync of [false, true]) {
+    const processingStartedAt = nodePerformance.now();
+    const report = runPhase3B4cVirtualScenario({
+      durationSeconds: 15 * 60,
+      frameDelta,
+      liveSync,
+    });
+    const processingElapsedMs = nodePerformance.now() - processingStartedAt;
     matrix.push({
       pattern,
       mode: liveSync ? "live-sync" : "free-running",
-      ...summarizeScenario(runPhase3B4cVirtualScenario({
-        durationSeconds: 15 * 60,
-        frameDelta,
-        liveSync,
-      })),
+      ...summarizeScenario(report),
+      isolatedSchedulerHarnessProcessing: {
+        elapsedMs: processingElapsedMs,
+        averageMsPerFrame: processingElapsedMs / report.frameCount,
+        scope:
+          "deterministic scheduler plus fake AudioContext source lifecycle harness",
+      },
     });
   }
 }
@@ -376,7 +387,7 @@ await writeJson("browser-r1.json", {
   result: "PASSED_WITH_SHARED_BASELINE_ENVIRONMENT_FAILURES",
 });
 
-const performance = {
+const performanceReport = {
   schemaVersion: 2,
   phase: "Final Stabilization Phase 3B.4c-R1",
   ...metadata,
@@ -430,9 +441,30 @@ const performance = {
     previousAlgorithm: "full scheduled-history scan on every frame",
     finalAlgorithm: "monotonic unread-audible-record cursor",
     independentTimerUsed: false,
+    measurementScope:
+      "deterministic scheduler plus fake AudioContext source lifecycle harness",
+    fifteenMinuteRuns: matrix.map((entry) => ({
+      pattern: entry.pattern,
+      mode: entry.mode,
+      frameCount: entry.frameCount,
+      ...entry.isolatedSchedulerHarnessProcessing,
+    })),
+    maximumAverageMsPerFrame: Math.max(
+      ...matrix.map(
+        (entry) => entry.isolatedSchedulerHarnessProcessing.averageMsPerFrame,
+      ),
+    ),
+    browserTotalFrameDifferential: {
+      desktopFpsRatio:
+        (20.944048073587798 - 20.95198748802374) / 20.95198748802374,
+      desktopP95Ms: 51 - 50.79999999999927,
+      mobileFpsRatio:
+        (42.67411235886205 - 43.711838871033656) / 43.711838871033656,
+      mobileP95Ms: 34.20000000000073 - 33.899999999999636,
+    },
   },
 };
-await writeJson("performance.json", performance);
+await writeJson("performance.json", performanceReport);
 
 await writeJson("scheduler-contract.json", {
   schemaVersion: 2,
