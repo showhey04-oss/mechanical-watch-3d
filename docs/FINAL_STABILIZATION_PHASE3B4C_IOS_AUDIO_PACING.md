@@ -18,10 +18,24 @@ R1.1はglobal timebaseを変更せず、scheduler内のOption Aだけで
 free-running／live-syncの18本、実Web Audioのdesktop／390×844、
 性能差分、Node 318/318で機構同期契約に合格した。
 
-現在の自動判定は
-`PHASE3B4C_R1_1_AUTOMATED_MECHANISM_SYNC_CLOSURE_PASSED` である。
-これはTechnical Finalist、Human Accepted、既定採用、Ready化、マージを意味しない。
-物理iPhone再試験は本作業では実施せず、別途Human承認を要する。
+R1.1の自動判定は
+`PHASE3B4C_R1_1_AUTOMATED_MECHANISM_SYNC_CLOSURE_PASSED` だったが、その後の
+物理iPhone free-running再試験は不合格となった。約15秒後から音響と視覚機構が
+同時に遅くなり、schedulerが`studyBeat`へ同期していることは確認できた一方、
+foreground機構timebase自体の遅延が再現した。
+
+```text
+PHASE3B4C_R1_1_PHYSICAL_IPHONE_FREE_RUNNING_RETEST_FAILED
+R1_1_MECHANISM_AUDIO_SYNCHRONIZATION_CONFIRMED_DURING_SLOWDOWN
+FOREGROUND_FREE_RUNNING_MECHANISM_TIMEBASE_SLOWDOWN_REPRODUCED
+AUDIO_SCHEDULER_NOT_PRIMARY_CAUSE
+PHASE3B4C_R1_1_NOT_ACCEPTED
+PHASE3B4C_R2_REQUIRED_FOREGROUND_MECHANISM_TIMEBASE_STABILITY
+```
+
+R1.1はTechnical Finalist、Human Accepted、既定採用、Ready化、マージを
+意味しない。後続のquery限定R2は
+`FINAL_STABILIZATION_PHASE3B4C_R2_FOREGROUND_TIMEBASE.md`で扱う。
 
 ## 対象query
 
@@ -171,9 +185,10 @@ reversal 0、stop-then-jump 0、zoom monotonic、transform invariant trueであ�
 - Issue #2はOpen、PR #5はOpen／Draft、D2c3は未採用
 - Phase 3B.4dは未開始
 
-## 次のHuman gate
+## 後続工程
 
-物理iPhoneでfree-running 15分、live-sync 15分、current-time一回設定、
-pause／resume、秒停止／解除、sound OFF／ON、hidden／visible、位置1／2、
-巻上げ、逆転空転を確認する。今回の作業はその再試験を承認・実施しない。
+R1.1物理iPhone free-runningは不合格である。foreground機構timebaseを分離する
+R2の自動gate完了後、Humanの明示承認を得てfree-running 15分、
+live-sync 15分、current-time一回設定、pause／resume、秒停止／解除、
+sound OFF／ON、hidden／visible、位置1／2、巻上げ、逆転空転を再確認する。
 PR #26はOpen／Draftのまま維持する。
