@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 import {
@@ -160,5 +161,20 @@ test("R2 excludes hidden and page lifecycle intervals but counts visible 1000ms 
     lifecycle.timebaseReport.lifecycle.some(
       ({ reason }) => reason === "visibility:visible",
     ),
+  );
+});
+
+test("R2 exposes a bounded query-only browser audit result", async () => {
+  const source = await readFile(
+    new URL("../index.html", import.meta.url),
+    "utf8",
+  );
+  assert.match(source, /phase3B4cR2Audit/);
+  assert.match(source, /phase3B4cR2AuditResult/);
+  assert.match(source, /phase3B4cR2AuditStatus/);
+  assert.match(source, /Math\.min\(15000/);
+  assert.match(
+    source,
+    /report\.elapsedContractPassed&&report\.visualPhase\.sharedAuthoritativeTime&&report\.audio\.phaseContract\.passed/,
   );
 });
