@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "phase": "Final Stabilization Phase 3B.4c-R1",
-  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
-  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
+  "phase": "Final Stabilization Phase 3B.4c-R1.1",
+  "sourceCandidateCommit": "0d0dd4cadce3f5929563360c15c6f31ea16e2a48",
+  "sourceImplementationCommit": "3de2886011dafaea540f2ea2650d2ab326cf3216",
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
   "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
-  "capturedAt": "2026-07-31T01:32:24.765Z",
+  "capturedAt": "2026-07-31T02:53:27.898Z",
   "reproduced": true,
   "reproductionClassification": "IOS_INITIAL_FREE_RUNNING_ESCAPEMENT_AUDIO_DROPOUT_REPRODUCED",
   "rootCause": {
@@ -25,15 +25,18 @@
   "fix": [
     "maximum absolute audio-time horizon guard",
     "escapement-only far-future cancellation",
-    "bounded rolling projection near AudioContext.currentTime",
+    "free-running next-beat booking only inside the 0.25-beat mechanism crossing window",
+    "live-sync bounded future booking derived from current studyBeat",
+    "no unbounded lastTargetBeat plus one audio-clock progression",
+    "audible phase reconstructed between adjacent authoritative mechanism frames",
     "state commit only after play succeeds",
-    "rAF starvation watchdog without an independent beat clock",
+    "mechanism-beat starvation watchdog without an independent beat clock",
     "expected-end source inventory cleanup",
     "monotonic unread-audible-record cursor"
   ],
   "after": {
-    "maximumAudibleGapSeconds": 0.20480000000008047,
-    "maximumConsecutiveMissingBeats": 1,
+    "maximumAudibleGapSeconds": 0.46680000000003474,
+    "maximumConsecutiveMissingBeats": 0,
     "starvationCount": 0,
     "duplicateCount": 0,
     "backlogBurstCount": 0

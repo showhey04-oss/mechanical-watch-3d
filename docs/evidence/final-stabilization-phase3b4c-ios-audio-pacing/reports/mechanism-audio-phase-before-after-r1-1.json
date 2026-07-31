@@ -7,23 +7,19 @@
   "appVersion": "v3.15.0",
   "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
   "capturedAt": "2026-07-31T02:53:27.898Z",
-  "before": {
-    "source": "deterministic reproduction committed before the fix",
-    "freeRunning": {
-      "audibleEvents": 56,
-      "lastAudibleTime": 11.221700000000077,
-      "trailingSilenceSeconds": 48.77829999999992,
-      "lateDropCount": 122
-    },
-    "liveSync": {
-      "audibleEvents": 303,
-      "lastAudibleTime": 60.599999999999994,
-      "trailingSilenceSeconds": 0,
-      "lateDropCount": 0
-    }
+  "acceptedR1Before": {
+    "source": "accepted R1 irregular-frame free-running calculation",
+    "wallTimeSeconds": 900,
+    "finalSimulationTime": 455.1832,
+    "finalStudyBeat": 2275.916,
+    "mechanismIntegerCrossingCount": 2275,
+    "audibleEventCount": 4501,
+    "finalCumulativeBeatDivergence": 2226,
+    "mechanismAuthoritativeSelfClaimWasTested": false,
+    "result": "PHASE_DIVERGENCE_DETECTED"
   },
-  "after": {
-    "freeRunning15Minutes": {
+  "r11After": {
+    "irregularFreeRunning": {
       "pattern": "ios-irregular-pacing",
       "mode": "free-running",
       "durationSeconds": 900,
@@ -93,7 +89,7 @@
         "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
       }
     },
-    "liveSync15Minutes": {
+    "irregularLiveSync": {
       "pattern": "ios-irregular-pacing",
       "mode": "live-sync",
       "durationSeconds": 900,
@@ -162,7 +158,7 @@
         "averageMsPerFrame": 0.014851441599688873,
         "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
       }
-    }
-  },
-  "conclusion": "OPTION_A_COUPLES_AUDIO_TO_AUTHORITATIVE_STUDYBEAT_WITHOUT_CATCH_UP"
+    },
+    "result": "MECHANISM_AUDIO_PHASE_CONTRACT_PASSED"
+  }
 }

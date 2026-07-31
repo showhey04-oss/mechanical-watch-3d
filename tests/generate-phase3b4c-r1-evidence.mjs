@@ -13,8 +13,8 @@ const EVIDENCE = path.join(
   "docs/evidence/final-stabilization-phase3b4c-ios-audio-pacing",
 );
 const REPORTS = path.join(EVIDENCE, "reports");
-const IMPLEMENTATION_COMMIT = "02b127be8591f25a066e76f33df9b0a9b7ad42e9";
-const SOURCE_CANDIDATE_COMMIT = "82d55516a2bd6ebd2791c872f96569a741e88b02";
+const IMPLEMENTATION_COMMIT = "3de2886011dafaea540f2ea2650d2ab326cf3216";
+const SOURCE_CANDIDATE_COMMIT = "0d0dd4cadce3f5929563360c15c6f31ea16e2a48";
 const CAPTURED_AT = new Date().toISOString();
 const MAXIMUM_AUDIBLE_GAP_SECONDS = 0.602;
 
@@ -43,9 +43,20 @@ const summarizeScenario = (report) => ({
   cappedSimulationDeltaRangeMs: report.cappedSimulationDeltaRangeMs,
   expectedBeatIntervalSeconds: report.expectedBeatIntervalSeconds,
   frameCount: report.frameCount,
+  finalSimulationTime: report.finalSimulationTime,
+  finalStudyBeat: report.finalStudyBeat,
+  mechanismIntegerCrossingCount: report.mechanismIntegerCrossingCount,
   expectedEvents: report.expectedEvents,
   scheduledEvents: report.scheduledEvents,
   audibleEvents: report.audibleEvents,
+  postFlushAudibleEvents: report.postFlushAudibleEvents,
+  lastAudibleTargetBeat: report.lastAudibleTargetBeat,
+  pendingBeatCount: report.pendingBeatCount,
+  audibleMechanismCountDivergence:
+    report.audibleMechanismCountDivergence,
+  finalCumulativeBeatDivergence:
+    report.finalCumulativeBeatDivergence,
+  mechanismTrailingGapBeats: report.mechanismTrailingGapBeats,
   lastAudibleTime: report.lastAudibleTime,
   trailingSilenceSeconds: report.trailingSilenceSeconds,
   maximumAudibleGapSeconds: report.maximumAudibleGapSeconds,
@@ -63,18 +74,34 @@ const summarizeScenario = (report) => ({
   maximumSourceRecordCount: report.schedulerReport.maximumSourceRecordCount,
   maximumRequestedLeadSeconds:
     report.schedulerReport.maximumRequestedLeadSeconds,
+  maximumTargetBeatMinusStudyBeat:
+    report.schedulerReport.maximumTargetBeatMinusStudyBeat,
+  maximumPositiveAudiblePhaseErrorBeats:
+    report.schedulerReport.maximumPositiveAudiblePhaseErrorBeats,
+  maximumNegativeAudiblePhaseErrorBeats:
+    report.schedulerReport.maximumNegativeAudiblePhaseErrorBeats,
+  cumulativeAudiblePhaseErrorBeats:
+    report.schedulerReport.cumulativeAudiblePhaseErrorBeats,
+  acceptedPhaseErrorBeats:
+    report.schedulerReport.phaseContract.acceptedPhaseErrorBeats,
+  phaseContract: report.schedulerReport.phaseContract,
+  mechanismAuthoritative: report.schedulerReport.mechanismAuthoritative,
   sourceInventoryCleanupCount:
     report.schedulerReport.sourceInventoryCleanupCount,
   sourceCancelCount: report.schedulerReport.sourceCancelCount,
   pendingSourceInventory: report.schedulerReport.pendingSourceInventory,
   pass:
-    report.trailingSilenceSeconds === 0
-    && report.maximumAudibleGapSeconds <= MAXIMUM_AUDIBLE_GAP_SECONDS
-    && report.schedulerReport.maximumConsecutiveMissingBeats < 3
+    report.schedulerReport.maximumConsecutiveMissingBeats < 3
     && report.schedulerReport.duplicateCount === 0
     && report.schedulerReport.backlogBurstCount === 0
     && report.schedulerReport.maximumPendingEscapementSources <= 4
-    && report.schedulerReport.pendingSourceInventory.length === 0,
+    && report.schedulerReport.pendingSourceInventory.length === 0
+    && report.schedulerReport.phaseContract.passed
+    && report.schedulerReport.mechanismAuthoritative
+    && Math.abs(report.audibleMechanismCountDivergence) <= 4
+    && (report.liveSync
+      ? report.maximumAudibleGapSeconds <= MAXIMUM_AUDIBLE_GAP_SECONDS
+      : true),
 });
 
 const patterns = {
@@ -142,6 +169,34 @@ const timelineLiveSync = runPhase3B4cVirtualScenario({
   frameDelta: patterns["ios-irregular-pacing"],
   liveSync: true,
 });
+const buildPhaseSeries = (report) => {
+  let cumulativePhaseErrorBeats = 0;
+  return report.schedulerReport.audibleEvents.map((event, index) => {
+    cumulativePhaseErrorBeats += event.audibleMechanismPhaseErrorBeats;
+    return {
+      audibleIndex: index + 1,
+      eventSequence: event.eventSequence,
+      type: event.type,
+      schedulingStudyBeat: event.schedulingStudyBeat,
+      targetBeat: event.targetBeat,
+      targetBeatMinusStudyBeat: event.targetBeatMinusStudyBeat,
+      requestedStartTime: event.requestedStartTime,
+      predictedMechanismBeatAtRequestedStartTime:
+        event.predictedMechanismBeatAtRequestedStartTime,
+      audibleObservedStudyBeat: event.audibleObservedStudyBeat,
+      audibleObservedTargetBeat: event.audibleObservedTargetBeat,
+      authoritativeMechanismBeatAtAudioTime:
+        event.authoritativeMechanismBeatAtAudioTime,
+      authoritativeMechanismBeatSource:
+        event.authoritativeMechanismBeatSource,
+      audibleMechanismPhaseErrorBeats:
+        event.audibleMechanismPhaseErrorBeats,
+      cumulativePhaseErrorBeats,
+      cumulativeCountDivergence:
+        index + 1 - Math.floor(event.authoritativeMechanismBeatAtAudioTime),
+    };
+  });
+};
 const actualWebAudioEvidencePath = path.join(
   EVIDENCE,
   "motion/ios-audio-pacing-listening-r1.webm",
@@ -162,14 +217,22 @@ const actualWebAudioEvidence = {
 
 await writeJson("virtual-fifteen-minute-r1.json", {
   schemaVersion: 1,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   contract: {
     durationSecondsPerRun: 900,
-    maximumAudibleGapSeconds: MAXIMUM_AUDIBLE_GAP_SECONDS,
+    liveSyncMaximumAudibleGapSeconds: MAXIMUM_AUDIBLE_GAP_SECONDS,
+    freeRunningWallCadence:
+      "diagnostic only; Option A follows capped authoritative studyBeat",
     maximumConsecutiveMissingBeatsExclusive: 3,
     pendingCap: 4,
-    mechanismAuthoritative: true,
+    maximumProjectionBeats: 3,
+    maximumFreeRunningProjectionBeats: 0.25,
+    acceptedPhaseErrorBeats: 0.25,
+    mechanismAuthoritative:
+      "targetBeat projection and audible phase contracts must both pass",
+    countDivergence:
+      "abs(audible at duration + pending look-ahead - mechanism integer crossings) <= 4",
     independentTimerUsed: false,
     independentOscillatorUsed: false,
   },
@@ -179,7 +242,7 @@ await writeJson("virtual-fifteen-minute-r1.json", {
 
 await writeJson("free-running-live-sync-r1.json", {
   schemaVersion: 1,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   before: {
     source: "deterministic reproduction committed before the fix",
@@ -203,12 +266,12 @@ await writeJson("free-running-live-sync-r1.json", {
     liveSync15Minutes: irregularLive,
   },
   conclusion:
-    "CAPPED_SIMULATION_TO_AUDIO_EPOCH_DIVERGENCE_WITH_CONTINUOUS_GRID_STARVATION_FIXED_BY_BOUNDED_ROLLING_PROJECTION",
+    "OPTION_A_COUPLES_AUDIO_TO_AUTHORITATIVE_STUDYBEAT_WITHOUT_CATCH_UP",
 });
 
 await writeJson("scheduler-starvation-r1.json", {
   schemaVersion: 1,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   reproduced: true,
   reproductionClassification:
@@ -233,9 +296,12 @@ await writeJson("scheduler-starvation-r1.json", {
   fix: [
     "maximum absolute audio-time horizon guard",
     "escapement-only far-future cancellation",
-    "bounded rolling projection near AudioContext.currentTime",
+    "free-running next-beat booking only inside the 0.25-beat mechanism crossing window",
+    "live-sync bounded future booking derived from current studyBeat",
+    "no unbounded lastTargetBeat plus one audio-clock progression",
+    "audible phase reconstructed between adjacent authoritative mechanism frames",
     "state commit only after play succeeds",
-    "rAF starvation watchdog without an independent beat clock",
+    "mechanism-beat starvation watchdog without an independent beat clock",
     "expected-end source inventory cleanup",
     "monotonic unread-audible-record cursor",
   ],
@@ -249,9 +315,48 @@ await writeJson("scheduler-starvation-r1.json", {
   },
 });
 
+await writeJson("mechanism-audio-phase-before-after-r1-1.json", {
+  schemaVersion: 1,
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
+  ...metadata,
+  acceptedR1Before: {
+    source: "accepted R1 irregular-frame free-running calculation",
+    wallTimeSeconds: 900,
+    finalSimulationTime: 455.1832,
+    finalStudyBeat: 2275.916,
+    mechanismIntegerCrossingCount: 2275,
+    audibleEventCount: 4501,
+    finalCumulativeBeatDivergence: 2226,
+    mechanismAuthoritativeSelfClaimWasTested: false,
+    result: "PHASE_DIVERGENCE_DETECTED",
+  },
+  r11After: {
+    irregularFreeRunning: irregularFree,
+    irregularLiveSync: irregularLive,
+    result: "MECHANISM_AUDIO_PHASE_CONTRACT_PASSED",
+  },
+});
+
+await writeJson("mechanism-audio-phase-timeline-r1-1.json", {
+  schemaVersion: 1,
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
+  ...metadata,
+  acceptedPhaseErrorBeats: 0.25,
+  rationale:
+    "animate free-running advancement is capped at 50ms; 5Hz times 50ms equals one authoritative 0.25-beat simulation step",
+  freeRunning: {
+    summary: summarizeScenario(timelineFreeRunning),
+    series: buildPhaseSeries(timelineFreeRunning),
+  },
+  liveSync: {
+    summary: summarizeScenario(timelineLiveSync),
+    series: buildPhaseSeries(timelineLiveSync),
+  },
+});
+
 await writeJson("scheduler-timeline-r1.json", {
   schemaVersion: 1,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   sampling: {
     durationSeconds: 60,
@@ -334,6 +439,42 @@ const browser = {
   },
   actualWebAudio: {
     evidence: actualWebAudioEvidence,
+    r11MechanismPhaseDesktop: {
+      durationMs: 10103.399999976158,
+      viewport: { width: 1280, height: 720 },
+      audibleEvents: 50,
+      duplicateCount: 0,
+      lateDropCount: 0,
+      backlogBurstCount: 0,
+      starvationCount: 0,
+      maximumPendingEscapementSources: 1,
+      maximumRequestedLeadSeconds: 0.04973847509165985,
+      maximumTargetBeatMinusStudyBeat: 0.24869238809333183,
+      maximumPositiveAudiblePhaseErrorBeats: 0.060551648784894496,
+      maximumNegativeAudiblePhaseErrorBeats: -0.08954882566467859,
+      acceptedPhaseErrorBeats: 0.25,
+      mechanismAuthoritative: true,
+      phaseContractPassed: true,
+      forbiddenInterference: 0,
+    },
+    r11MechanismPhaseMobile390x844: {
+      durationMs: 10075,
+      viewport: { width: 390, height: 844 },
+      audibleEvents: 50,
+      duplicateCount: 0,
+      lateDropCount: 0,
+      backlogBurstCount: 0,
+      starvationCount: 0,
+      maximumPendingEscapementSources: 1,
+      maximumRequestedLeadSeconds: 0.04133958120610437,
+      maximumTargetBeatMinusStudyBeat: 0.20669791652471758,
+      maximumPositiveAudiblePhaseErrorBeats: 0.060658041504211724,
+      maximumNegativeAudiblePhaseErrorBeats: -0.0493100571911782,
+      acceptedPhaseErrorBeats: 0.25,
+      mechanismAuthoritative: true,
+      phaseContractPassed: true,
+      forbiddenInterference: 0,
+    },
     foregroundDesktop: {
       durationMs: 30164.7,
       audibleEvents: 151,
@@ -380,7 +521,7 @@ const browser = {
 };
 await writeJson("browser-r1.json", {
   schemaVersion: 1,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   ...browser,
   candidateSpecificFailures: [],
@@ -389,7 +530,7 @@ await writeJson("browser-r1.json", {
 
 const performanceReport = {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   status: "PASSED_DIFFERENTIAL_GATE",
   thresholds: {
@@ -399,41 +540,41 @@ const performanceReport = {
   },
   desktop: {
     candidate: [
-      { averageFps: 19.7905338545956, p50: 50, p95: 51, p99: 66.69999999999709, over33: 200, over50: 59 },
-      { averageFps: 20.944048073587798, p50: 50, p95: 66.70000000000073, p99: 83.30000000000291, over33: 189, over50: 43 },
-      { averageFps: 21.56785503249951, p50: 50, p95: 50.599999999998545, p99: 50.900000000001455, over33: 191, over50: 43 },
+      { averageFps: 26.93131036121912, p50: 33.399999999999636, p95: 50.10000000000218, p99: 51, over33: 170, over50: 19 },
+      { averageFps: 26.86578957771725, p50: 33.400000000001455, p95: 50.400000000001455, p99: 50.900000000001455, over33: 171, over50: 23 },
+      { averageFps: 23.543318721371225, p50: 49, p95: 50.60000000000218, p99: 51, over33: 181, over50: 35 },
     ],
     protected: [
-      { averageFps: 19.750417608332516, p50: 50, p95: 66.09999999999854, p99: 66.79999999999927, over33: 198, over50: 57 },
-      { averageFps: 21.12191767364181, p50: 50, p95: 50.69999999999709, p99: 50.899999999999636, over33: 192, over50: 53 },
-      { averageFps: 20.95198748802374, p50: 50, p95: 50.79999999999927, p99: 51, over33: 199, over50: 43 },
+      { averageFps: 26.941941596250068, p50: 33.39999999999782, p95: 50, p99: 51, over33: 168, over50: 12 },
+      { averageFps: 26.937422295833855, p50: 33.39999999999782, p95: 50.099999999998545, p99: 50.900000000001455, over33: 171, over50: 16 },
+      { averageFps: 26.736912725003222, p50: 33.400000000001455, p95: 50.5, p99: 51, over33: 170, over50: 18 },
     ],
     median: {
-      candidate: { averageFps: 20.944048073587798, p50: 50, p95: 51 },
-      protected: { averageFps: 20.95198748802374, p50: 50, p95: 50.79999999999927 },
+      candidate: { averageFps: 26.86578957771725, p50: 33.400000000001455, p95: 50.400000000001455 },
+      protected: { averageFps: 26.937422295833855, p50: 33.39999999999782, p95: 50.099999999998545 },
       delta: {
-        fpsRatio: (20.944048073587798 - 20.95198748802374) / 20.95198748802374,
-        p95Ms: 51 - 50.79999999999927,
+        fpsRatio: (26.86578957771725 - 26.937422295833855) / 26.937422295833855,
+        p95Ms: 50.400000000001455 - 50.099999999998545,
       },
     },
   },
   mobile390x844: {
     candidate: [
-      { averageFps: 43.45496755718156, p50: 16.899999999997817, p95: 34.099999999998545, p99: 34.39999999999782, over33: 80, over50: 0 },
-      { averageFps: 42.67411235886205, p50: 17.099999999998545, p95: 34.29999999999927, p99: 34.400000000001455, over33: 96, over50: 0 },
-      { averageFps: 41.464211140811216, p50: 17.200000000000728, p95: 34.20000000000073, p99: 34.29999999999927, over33: 103, over50: 0 },
+      { averageFps: 35.78843302026693, p50: 33.29999999999927, p95: 34.29999999999927, p99: 34.39999999999782, over33: 129, over50: 1 },
+      { averageFps: 35.92316598886248, p50: 32.89999999999782, p95: 34.20000000000073, p99: 34.29999999999927, over33: 122, over50: 1 },
+      { averageFps: 36.103939780436455, p50: 33.20000000000073, p95: 34.19999999999709, p99: 34.30000000000291, over33: 124, over50: 0 },
     ],
     protected: [
-      { averageFps: 44.01007077284764, p50: 16.799999999999272, p95: 33.899999999999636, p99: 34.39999999999782, over33: 83, over50: 0 },
-      { averageFps: 42.91250012357716, p50: 16.799999999999272, p95: 34, p99: 34.39999999999782, over33: 84, over50: 0 },
-      { averageFps: 43.711838871033656, p50: 16.799999999999272, p95: 33.400000000001455, p99: 34.29999999999927, over33: 82, over50: 0 },
+      { averageFps: 35.93703593703594, p50: 33.099999999998545, p95: 34.29999999999927, p99: 34.30000000000291, over33: 126, over50: 1 },
+      { averageFps: 36.04816986206034, p50: 33.20000000000073, p95: 34.29999999999927, p99: 34.400000000001455, over33: 133, over50: 0 },
+      { averageFps: 36.46857673694114, p50: 32.70000000000073, p95: 34.80000000000291, p99: 35.29999999999927, over33: 128, over50: 0 },
     ],
     median: {
-      candidate: { averageFps: 42.67411235886205, p50: 17.099999999998545, p95: 34.20000000000073 },
-      protected: { averageFps: 43.711838871033656, p50: 16.799999999999272, p95: 33.899999999999636 },
+      candidate: { averageFps: 35.92316598886248, p50: 33.20000000000073, p95: 34.20000000000073 },
+      protected: { averageFps: 36.04816986206034, p50: 33.099999999998545, p95: 34.29999999999927 },
       delta: {
-        fpsRatio: (42.67411235886205 - 43.711838871033656) / 43.711838871033656,
-        p95Ms: 34.20000000000073 - 33.899999999999636,
+        fpsRatio: (35.92316598886248 - 36.04816986206034) / 36.04816986206034,
+        p95Ms: 34.20000000000073 - 34.29999999999927,
       },
     },
   },
@@ -456,11 +597,11 @@ const performanceReport = {
     ),
     browserTotalFrameDifferential: {
       desktopFpsRatio:
-        (20.944048073587798 - 20.95198748802374) / 20.95198748802374,
-      desktopP95Ms: 51 - 50.79999999999927,
+        (26.86578957771725 - 26.937422295833855) / 26.937422295833855,
+      desktopP95Ms: 50.400000000001455 - 50.099999999998545,
       mobileFpsRatio:
-        (42.67411235886205 - 43.711838871033656) / 43.711838871033656,
-      mobileP95Ms: 34.20000000000073 - 33.899999999999636,
+        (35.92316598886248 - 36.04816986206034) / 36.04816986206034,
+      mobileP95Ms: 34.20000000000073 - 34.29999999999927,
     },
   },
 };
@@ -468,22 +609,41 @@ await writeJson("performance.json", performanceReport);
 
 await writeJson("scheduler-contract.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   queryOnly: true,
   defaultAdopted: false,
   contracts: {
     mechanismAuthoritative: true,
+    mechanismAuthorityDefinition:
+      "derived from target projection and audible phase invariants",
+    targetBeatCoupledToStudyBeat:
+      "0 < targetBeat - studyBeat <= mode-specific maximum projection",
+    audibleMechanismPhase:
+      "abs(audible targetBeat - authoritative mechanism beat at audio time) <= 0.25 beat",
+    acceptedPhaseErrorBeats: 0.25,
+    acceptedPhaseErrorRationale:
+      "free-running animate advancement is capped at 50ms; at 5Hz one authoritative simulation step is 0.25 beat",
     noIndependentTimer: true,
     noIndependentOscillator: true,
     noAudioOnlyClock: true,
     maximumPendingEscapementSources: 4,
-    requestedLeadMaximumSeconds: 0.602,
+    liveSyncMaximumProjectionBeats: 3,
+    freeRunningMaximumProjectionBeats: 0.25,
+    liveSyncRequestedLeadMaximumSeconds: 0.602,
     requestedLeadFormula:
       "requestedStartTime - AudioContext.currentTime <= derivedMaximumLookaheadSeconds + epsilon",
+    freeRunningPolicy:
+      "schedule only the next authoritative integer beat inside the 0.25-beat crossing window",
+    liveSyncPolicy:
+      "fill at most three future target beats, each derived from current studyBeat",
+    audiblePhaseObservation:
+      "free-running interpolates adjacent authoritative mechanism frames; live-sync uses its wall-clock mechanism projection",
+    countDivergence:
+      "audible at duration + pending look-ahead - mechanism integer crossings remains within the pending cap",
     bookingStateCommit: "only after audioEngine.play succeeds",
     starvationThresholdBeats: 3,
-    recovery: "bounded re-anchor without catch-up burst",
+    recovery: "resume from current studyBeat without catch-up burst",
     parity: "even targetBeat=tick; odd targetBeat=tock",
     cancellationScope: "escapementTick and escapementTock only",
     sourceCleanup: "expected end time plus 0.25 second grace",
@@ -492,7 +652,7 @@ await writeJson("scheduler-contract.json", {
 
 await writeJson("simulation-audio-epoch.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   before: {
     freeRunningSimulationDelta: "min(raw frame delta, 50ms)",
@@ -502,18 +662,25 @@ await writeJson("simulation-audio-epoch.json", {
   },
   after: {
     mechanismBeatIdentity: "unchanged authoritative studyBeat sequence",
-    projection: "bounded rolling projection of the next one to three beats",
-    epochDriftHandling: "cancel escapement-only pending sources and re-anchor near current audio time",
+    freeRunningProjection:
+      "next authoritative integer beat only inside the 0.25-beat crossing window",
+    liveSyncProjection:
+      "one to three bounded future beats derived from current studyBeat",
+    epochDriftHandling:
+      "observe and re-anchor the epoch without advancing beat identity from the audio clock",
+    audiblePhaseMeasurement:
+      "requested audio time mapped to adjacent authoritative mechanism frames",
     stateCommit: "after successful buffer-source booking",
     maximumRequestedLeadSeconds:
       Math.max(...matrix.map((entry) => entry.maximumRequestedLeadSeconds)),
-    contractMaximumSeconds: MAXIMUM_AUDIBLE_GAP_SECONDS,
+    liveSyncContractMaximumSeconds: MAXIMUM_AUDIBLE_GAP_SECONDS,
+    acceptedPhaseErrorBeats: 0.25,
   },
 });
 
 await writeJson("pending-source-inventory.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   pendingCap: 4,
   leakDetected: false,
@@ -534,7 +701,7 @@ await writeJson("pending-source-inventory.json", {
 
 await writeJson("audio-context-watchdog.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   stateSource: "AudioContext.state and currentTime sampled from rAF",
   outputTimestampRecordedWhenAvailable: true,
@@ -556,7 +723,7 @@ await writeJson("audio-context-watchdog.json", {
 
 await writeJson("beat-sequence-integrity.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   duplicateBeatSequence: 0,
   backlogBurst: 0,
@@ -576,7 +743,7 @@ await writeJson("beat-sequence-integrity.json", {
 
 await writeJson("physical-iphone-baseline.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
   status: "PHASE3B4C_PHYSICAL_IPHONE_REVIEW_FAILED",
   source: "Human report and ChatGPT-side analysis; media was not available to Codex",
@@ -602,12 +769,14 @@ await writeJson("physical-iphone-baseline.json", {
 
 await writeJson("physical-iphone-candidate.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
-  status: "NOT_RUN_REQUIRES_PHYSICAL_IPHONE",
+  status: "NOT_RUN_AWAITING_SEPARATE_HUMAN_AUTHORIZATION",
   automatedSubstitute: false,
   humanAcceptance: false,
+  mechanismSyncClosurePassed: true,
   candidateReadyForHumanRetest: true,
+  retestAuthorizedByThisWorkOrder: false,
   requiredRuns: {
     freeRunningMinutes: 15,
     liveSyncMinutes: 15,
@@ -625,11 +794,12 @@ await writeJson("physical-iphone-candidate.json", {
 
 await writeJson("regression-results.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
-  status: "PASSED_WITH_SHARED_BASELINE_ENVIRONMENT_FAILURES",
+  status:
+    "PASSED_AUTOMATED_R1_1_WITH_SHARED_BASELINE_ENVIRONMENT_FAILURES_AND_PHYSICAL_RETEST_NOT_RUN",
   node: {
-    final: "317/317",
+    final: "318/318",
     result: "PASSED",
   },
   browser,
@@ -644,10 +814,14 @@ await writeJson("regression-results.json", {
 
 await writeJson("decision-summary.json", {
   schemaVersion: 2,
-  phase: "Final Stabilization Phase 3B.4c-R1",
+  phase: "Final Stabilization Phase 3B.4c-R1.1",
   ...metadata,
-  status: "PHASE3B4C_R1_TECHNICAL_FIX_PENDING_PHYSICAL_IPHONE_REVIEW",
+  status: "PHASE3B4C_R1_1_AUTOMATED_MECHANISM_SYNC_CLOSURE_PASSED",
   previousStatus: [
+    "PHASE3B4C_R1_AUDIO_CONTINUITY_GATE_PASSED",
+    "PHASE3B4C_R1_MECHANISM_AUDIO_PHASE_DIVERGENCE_DETECTED",
+    "PHASE3B4C_R1_TECHNICAL_ACCEPTANCE_BLOCKED",
+    "PHYSICAL_IPHONE_RETEST_DEFERRED_PENDING_MECHANISM_SYNC_CLOSURE",
     "PHASE3B4C_PHYSICAL_IPHONE_REVIEW_FAILED",
     "HUMAN_REJECT_PHASE3B4C_STABILITY_CANDIDATE_AS_INCOMPLETE",
     "IOS_INITIAL_FREE_RUNNING_ESCAPEMENT_AUDIO_DROPOUT_REPRODUCED",
@@ -656,8 +830,11 @@ await writeJson("decision-summary.json", {
     "PHASE3B4C_REOPENED_FOR_IOS_SCHEDULER_STARVATION_DIAGNOSIS",
   ],
   deterministicReproduction: "PASSED",
-  automatedTechnicalGates: "PASSED",
-  physicalIPhoneRetest: "NOT_RUN",
+  mechanismAudioPhaseContract: "PASSED",
+  cumulativeBeatDivergenceBound: "PASSED",
+  automatedTechnicalGates: "PASSED_R1_1_SCOPE_ONLY",
+  technicalFinalist: false,
+  physicalIPhoneRetest: "NOT_RUN_REQUIRES_SEPARATE_HUMAN_AUTHORIZATION",
   humanAcceptance: false,
   candidateDefaultAdopted: false,
   issue2State: "OPEN",
@@ -668,6 +845,7 @@ await writeJson("decision-summary.json", {
   readyForReview: false,
   mergeAllowed: false,
   deferred: [
+    "PHYSICAL_IPHONE_RETEST_REQUIRES_SEPARATE_HUMAN_AUTHORIZATION",
     "DEFERRED_SUSPENDED_TIME_STATE_RESTORATION_PHASE3B4D",
   ],
 });
@@ -701,7 +879,7 @@ await writeFile(
   path.join(EVIDENCE, "evidence-manifest.json"),
   `${JSON.stringify({
     schemaVersion: 2,
-    phase: "Final Stabilization Phase 3B.4c-R1",
+    phase: "Final Stabilization Phase 3B.4c-R1.1",
     ...metadata,
     manifestExcludesSelf: true,
     files: manifestFiles,

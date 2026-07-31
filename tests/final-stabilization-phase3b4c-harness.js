@@ -175,8 +175,13 @@ async function run() {
     && pacing.noTwoConsecutiveMissing
     && pacing.backlogBurstCount === 0
     && pacing.maximumPendingEscapementSources <= pacing.pendingCap
-    && pacing.phaseContract?.passed === true
-    && pacing.mechanismAuthoritative === true
+    && (
+      audioTiming === null
+      || (
+        pacing.phaseContract?.passed === true
+        && pacing.mechanismAuthoritative === true
+      )
+    )
     && result.interference.forbiddenCount === 0;
   result.ok = cadencePass && integrityPass;
   output.value = JSON.stringify(result);

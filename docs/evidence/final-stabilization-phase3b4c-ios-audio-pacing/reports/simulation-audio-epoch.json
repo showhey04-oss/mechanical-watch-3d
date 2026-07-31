@@ -1,12 +1,12 @@
 {
   "schemaVersion": 2,
-  "phase": "Final Stabilization Phase 3B.4c-R1",
-  "sourceCandidateCommit": "82d55516a2bd6ebd2791c872f96569a741e88b02",
-  "sourceImplementationCommit": "02b127be8591f25a066e76f33df9b0a9b7ad42e9",
+  "phase": "Final Stabilization Phase 3B.4c-R1.1",
+  "sourceCandidateCommit": "0d0dd4cadce3f5929563360c15c6f31ea16e2a48",
+  "sourceImplementationCommit": "3de2886011dafaea540f2ea2650d2ab326cf3216",
   "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
   "appVersion": "v3.15.0",
   "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
-  "capturedAt": "2026-07-31T01:32:24.765Z",
+  "capturedAt": "2026-07-31T02:53:27.898Z",
   "before": {
     "freeRunningSimulationDelta": "min(raw frame delta, 50ms)",
     "audioContextDelta": "raw wall elapsed",
@@ -15,10 +15,13 @@
   },
   "after": {
     "mechanismBeatIdentity": "unchanged authoritative studyBeat sequence",
-    "projection": "bounded rolling projection of the next one to three beats",
-    "epochDriftHandling": "cancel escapement-only pending sources and re-anchor near current audio time",
+    "freeRunningProjection": "next authoritative integer beat only inside the 0.25-beat crossing window",
+    "liveSyncProjection": "one to three bounded future beats derived from current studyBeat",
+    "epochDriftHandling": "observe and re-anchor the epoch without advancing beat identity from the audio clock",
+    "audiblePhaseMeasurement": "requested audio time mapped to adjacent authoritative mechanism frames",
     "stateCommit": "after successful buffer-source booking",
-    "maximumRequestedLeadSeconds": 0.601999999999997,
-    "contractMaximumSeconds": 0.602
+    "maximumRequestedLeadSeconds": 0.6000000000000227,
+    "liveSyncContractMaximumSeconds": 0.602,
+    "acceptedPhaseErrorBeats": 0.25
   }
 }

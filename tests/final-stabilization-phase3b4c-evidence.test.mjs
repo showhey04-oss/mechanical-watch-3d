@@ -52,6 +52,9 @@ test("Phase 3B.4c evidence preserves mechanism authority and event integrity", a
   assert.equal(scheduler.contracts.mechanismAuthoritative, true);
   assert.equal(scheduler.contracts.noIndependentTimer, true);
   assert.equal(scheduler.contracts.noIndependentOscillator, true);
+  assert.equal(scheduler.contracts.acceptedPhaseErrorBeats, 0.25);
+  assert.equal(scheduler.contracts.liveSyncMaximumProjectionBeats, 3);
+  assert.equal(scheduler.contracts.freeRunningMaximumProjectionBeats, 0.25);
   assert.equal(scheduler.defaultAdopted, false);
   assert.equal(integrity.duplicateBeatSequence, 0);
   assert.equal(integrity.backlogBurst, 0);
@@ -83,13 +86,15 @@ test("Phase 3B.4c-R1 records the physical iPhone failure and keeps retest pendin
   );
   assert.equal(
     physicalCandidate.status,
-    "NOT_RUN_REQUIRES_PHYSICAL_IPHONE",
+    "NOT_RUN_AWAITING_SEPARATE_HUMAN_AUTHORIZATION",
   );
   assert.equal(physicalCandidate.automatedSubstitute, false);
   assert.equal(physicalCandidate.humanAcceptance, false);
+  assert.equal(physicalCandidate.mechanismSyncClosurePassed, true);
+  assert.equal(physicalCandidate.retestAuthorizedByThisWorkOrder, false);
   assert.equal(
     decision.status,
-    "PHASE3B4C_R1_TECHNICAL_FIX_PENDING_PHYSICAL_IPHONE_REVIEW",
+    "PHASE3B4C_R1_1_AUTOMATED_MECHANISM_SYNC_CLOSURE_PASSED",
   );
   assert.ok(
     decision.previousStatus.includes(
@@ -97,6 +102,7 @@ test("Phase 3B.4c-R1 records the physical iPhone failure and keeps retest pendin
     ),
   );
   assert.equal(decision.candidateDefaultAdopted, false);
+  assert.equal(decision.technicalFinalist, false);
   assert.equal(decision.issue2State, "OPEN");
   assert.ok(
     decision.deferred.includes(
@@ -105,23 +111,32 @@ test("Phase 3B.4c-R1 records the physical iPhone failure and keeps retest pendin
   );
 });
 
-test("Phase 3B.4c-R1 virtual fifteen-minute matrix closes scheduler starvation", async () => {
+test("Phase 3B.4c-R1.1 virtual matrix closes starvation and mechanism/audio divergence", async () => {
   const matrix = await json("virtual-fifteen-minute-r1.json");
   const comparison = await json("free-running-live-sync-r1.json");
   const starvation = await json("scheduler-starvation-r1.json");
   const timeline = await json("scheduler-timeline-r1.json");
+  const beforeAfter = await json("mechanism-audio-phase-before-after-r1-1.json");
+  const phaseTimeline = await json("mechanism-audio-phase-timeline-r1-1.json");
   assert.equal(matrix.result, "PASSED");
   assert.equal(matrix.runs.length, 18);
   assert.ok(matrix.runs.every((run) => run.durationSeconds === 900));
   assert.ok(matrix.runs.every((run) => run.pass));
-  assert.ok(
-    matrix.runs.every((run) => run.maximumAudibleGapSeconds <= 0.602),
-  );
+  assert.ok(matrix.runs
+    .filter((run) => run.mode === "live-sync")
+    .every((run) => run.maximumAudibleGapSeconds <= 0.602));
   assert.ok(
     matrix.runs.every((run) => run.maximumConsecutiveMissingBeats < 3),
   );
   assert.ok(matrix.runs.every((run) => run.duplicateCount === 0));
   assert.ok(matrix.runs.every((run) => run.backlogBurstCount === 0));
+  assert.ok(matrix.runs.every((run) => run.phaseContract.passed));
+  assert.ok(matrix.runs.every((run) => run.mechanismAuthoritative));
+  assert.ok(
+    matrix.runs.every(
+      (run) => Math.abs(run.finalCumulativeBeatDivergence) <= 4,
+    ),
+  );
   assert.ok(
     matrix.runs.every(
       (run) =>
@@ -136,6 +151,33 @@ test("Phase 3B.4c-R1 virtual fifteen-minute matrix closes scheduler starvation",
     starvation.rootCause.primary,
     "FREE_RUNNING_CAPPED_SIMULATION_CLOCK_DIVERGED_FROM_AUDIOCONTEXT_WALL_CLOCK",
   );
+  assert.equal(
+    beforeAfter.acceptedR1Before.finalCumulativeBeatDivergence,
+    2226,
+  );
+  assert.equal(
+    beforeAfter.r11After.result,
+    "MECHANISM_AUDIO_PHASE_CONTRACT_PASSED",
+  );
+  assert.ok(phaseTimeline.freeRunning.series.length > 0);
+  assert.ok(phaseTimeline.liveSync.series.length > 0);
+  for (const series of [
+    phaseTimeline.freeRunning.series,
+    phaseTimeline.liveSync.series,
+  ]) {
+    assert.ok(series.every((event) =>
+      Number.isFinite(event.schedulingStudyBeat)
+      && Number.isFinite(event.targetBeat)
+      && Number.isFinite(event.targetBeatMinusStudyBeat)
+      && Number.isFinite(event.requestedStartTime)
+      && Number.isFinite(event.predictedMechanismBeatAtRequestedStartTime)
+      && Number.isFinite(event.audibleObservedStudyBeat)
+      && Number.isFinite(event.audibleObservedTargetBeat)
+      && Number.isFinite(event.authoritativeMechanismBeatAtAudioTime)
+      && Number.isFinite(event.audibleMechanismPhaseErrorBeats)
+      && Number.isFinite(event.cumulativePhaseErrorBeats)
+      && Number.isFinite(event.cumulativeCountDivergence)));
+  }
   for (const mode of [timeline.freeRunning, timeline.liveSync]) {
     assert.ok(mode.timeline.some((entry) => entry.kind === "clock"));
     assert.ok(mode.timeline.some((entry) => entry.kind === "scheduled"));
@@ -171,6 +213,23 @@ test("Phase 3B.4c-R1 browser evidence has no candidate-specific failures", async
     browser.actualWebAudio.evidence.source,
     "actual Web Audio plus Three.js canvas MediaRecorder capture",
   );
+  for (const report of [
+    browser.actualWebAudio.r11MechanismPhaseDesktop,
+    browser.actualWebAudio.r11MechanismPhaseMobile390x844,
+  ]) {
+    assert.equal(report.mechanismAuthoritative, true);
+    assert.equal(report.phaseContractPassed, true);
+    assert.equal(report.duplicateCount, 0);
+    assert.equal(report.backlogBurstCount, 0);
+    assert.ok(
+      Math.abs(report.maximumPositiveAudiblePhaseErrorBeats)
+        <= report.acceptedPhaseErrorBeats,
+    );
+    assert.ok(
+      Math.abs(report.maximumNegativeAudiblePhaseErrorBeats)
+        <= report.acceptedPhaseErrorBeats,
+    );
+  }
   assert.deepEqual(
     browser.actualWebAudio.evidence.ebmlSignature,
     [0x1a, 0x45, 0xdf, 0xa3],
