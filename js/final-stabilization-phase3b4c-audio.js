@@ -69,6 +69,7 @@ export class Phase3B4cAudioPacingRuntime {
     this.activeAudioStartedAt = null;
     this.starvationActive = false;
     this.schedulerNoOpReason = null;
+    this.audibleScanIndex = 0;
     this.scheduled = [];
     this.legacyEvents = [];
     this.reasons = [];
@@ -194,13 +195,16 @@ export class Phase3B4cAudioPacingRuntime {
   refreshAudibleState(frame, clock) {
     if (clock.currentTime === null) return 0;
     let newlyAudible = 0;
-    for (const record of this.scheduled) {
-      if (
-        record.status !== "scheduled"
-        || record.requestedStartTime > clock.currentTime + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
-      ) {
+    while (this.audibleScanIndex < this.scheduled.length) {
+      const record = this.scheduled[this.audibleScanIndex];
+      if (record.status !== "scheduled") {
+        this.audibleScanIndex += 1;
         continue;
       }
+      if (
+        record.requestedStartTime
+        > clock.currentTime + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
+      ) break;
       record.status = "audible";
       record.audibleAtAudioTime = record.requestedStartTime;
       record.audibleObservedAtPerformanceTime = frame.performanceTime;
@@ -208,6 +212,7 @@ export class Phase3B4cAudioPacingRuntime {
       this.lastAudibleAudioTime = record.requestedStartTime;
       this.lastAudibleEventSequence = record.eventSequence;
       newlyAudible += 1;
+      this.audibleScanIndex += 1;
     }
     if (newlyAudible && this.starvationActive) {
       this.starvationActive = false;
@@ -455,10 +460,16 @@ export class Phase3B4cAudioPacingRuntime {
       : this.lastTargetBeat + 1;
     const secondsUntilBeat = (targetBeat - frame.studyBeat) / frame.escapementBeatRate;
     const sequenceAlreadyCommitted = this.lastTargetBeat !== null;
+    const cadenceRestartTime = this.lastAudibleAudioTime === null
+      ? clock.currentTime + minimumLeadSeconds
+      : Math.max(
+        clock.currentTime + minimumLeadSeconds,
+        this.lastAudibleAudioTime + beatIntervalSeconds,
+      );
     let requestedStartTime = this.lastScheduledStartTime === null
       ? clock.currentTime + (
         sequenceAlreadyCommitted
-          ? minimumLeadSeconds
+          ? cadenceRestartTime - clock.currentTime
           : Math.max(
             minimumLeadSeconds,
             Math.min(maximumLookaheadSeconds, Math.max(0, secondsUntilBeat)),
@@ -487,7 +498,6 @@ export class Phase3B4cAudioPacingRuntime {
       requestedLeadSeconds
       > maximumLookaheadSeconds + PHASE3B4C_AUDIO_LIMITS.horizonEpsilonSeconds
     ) {
-      this.horizonGuardCount += 1;
       return this.setNoOp("lookahead-window-full", frame, clock, {
         targetBeat,
         requestedStartTime,
@@ -636,6 +646,7 @@ export class Phase3B4cAudioPacingRuntime {
     this.starvationActive = false;
     this.lastStarvationBeat = null;
     this.schedulerNoOpReason = null;
+    this.audibleScanIndex = 0;
     this.lastClockSample = null;
     this.clockProgressSample = null;
     this.lastClockLogAt = -Infinity;
