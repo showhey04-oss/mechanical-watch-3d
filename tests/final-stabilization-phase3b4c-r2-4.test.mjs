@@ -266,8 +266,9 @@ test("old Context close failure is contained after the fresh graph is atomically
   await engine.enableFromUserGesture();
   engine.setRecoveryFaultInjection("old-context-close-failure");
   const result = await engine.replaceWithFreshContext({ trustedGesture: true, timeoutMs: 5 });
+  await new Promise((resolve) => setTimeout(resolve, 0));
   assert.equal(result.recovered, true);
-  assert.match(result.oldContextCloseError, /old AudioContext close failure/);
+  assert.match(result.oldContextCloseError, /old AudioContext close (failure|rejection)/);
   assert.equal(engine.context, freshContext);
   assert.equal(engine.contextGeneration, 2);
   assert.equal(engine.getDiagnostics().bufferCompleteness.complete, true);

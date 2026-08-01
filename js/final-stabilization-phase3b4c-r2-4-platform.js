@@ -78,6 +78,9 @@ export class WebKitPlatformAudioRecovery {
     trace = () => {},
     resumeTimeoutMs = 450,
     clockProbeMs = 80,
+    decodeTimeoutMs = 1_200,
+    closeTimeoutMs = 250,
+    transactionTimeoutMs = 5_500,
   } = {}) {
     this.profile = profile;
     this.audioEngine = audioEngine;
@@ -85,6 +88,9 @@ export class WebKitPlatformAudioRecovery {
     this.trace = trace;
     this.resumeTimeoutMs = resumeTimeoutMs;
     this.clockProbeMs = clockProbeMs;
+    this.decodeTimeoutMs = decodeTimeoutMs;
+    this.closeTimeoutMs = closeTimeoutMs;
+    this.transactionTimeoutMs = transactionTimeoutMs;
     this.transitionSequence = 0;
     this.activeTransition = null;
     this.audioSession = {
@@ -122,6 +128,28 @@ export class WebKitPlatformAudioRecovery {
     if (this.history.length > 160) this.history.splice(0, this.history.length - 160);
     this.trace(entry);
     return entry;
+  }
+
+  setDiagnosticTimeouts({
+    resumeTimeoutMs = this.resumeTimeoutMs,
+    clockProbeMs = this.clockProbeMs,
+    decodeTimeoutMs = this.decodeTimeoutMs,
+    closeTimeoutMs = this.closeTimeoutMs,
+    transactionTimeoutMs = this.transactionTimeoutMs,
+  } = {}) {
+    this.resumeTimeoutMs = Math.max(1, Math.min(2_000, Number(resumeTimeoutMs) || this.resumeTimeoutMs));
+    this.clockProbeMs = Math.max(1, Math.min(500, Number(clockProbeMs) || this.clockProbeMs));
+    this.decodeTimeoutMs = Math.max(1, Math.min(2_000, Number(decodeTimeoutMs) || this.decodeTimeoutMs));
+    this.closeTimeoutMs = Math.max(1, Math.min(2_000, Number(closeTimeoutMs) || this.closeTimeoutMs));
+    this.transactionTimeoutMs = Math.max(10, Math.min(15_000,
+      Number(transactionTimeoutMs) || this.transactionTimeoutMs));
+    return {
+      resumeTimeoutMs: this.resumeTimeoutMs,
+      clockProbeMs: this.clockProbeMs,
+      decodeTimeoutMs: this.decodeTimeoutMs,
+      closeTimeoutMs: this.closeTimeoutMs,
+      transactionTimeoutMs: this.transactionTimeoutMs,
+    };
   }
 
   configureAudioSession() {
@@ -258,7 +286,10 @@ export class WebKitPlatformAudioRecovery {
   async handleTrustedSpeaker({
     trustedGesture = false,
     reason = "trusted-speaker-recovery",
-    beforeFreshContext = () => {},
+    afterFreshContextCommit = () => ({
+      schedulerReanchor: "NOT_REQUESTED",
+      legacyReset: "NOT_REQUESTED",
+    }),
   } = {}) {
     const transition = this.activeTransition;
     if (!this.profile.freshContextFallback
@@ -271,7 +302,6 @@ export class WebKitPlatformAudioRecovery {
     }
     transition.freshContextFallbackUsed = true;
     this.counts.freshContextFallback += 1;
-    beforeFreshContext();
     // A synthetic running-stalled marker applies only to the old Context.
     if ([
       "running-current-time-stalled",
@@ -287,6 +317,10 @@ export class WebKitPlatformAudioRecovery {
       reason,
       timeoutMs: this.resumeTimeoutMs,
       probeMs: this.clockProbeMs,
+      decodeTimeoutMs: this.decodeTimeoutMs,
+      closeTimeoutMs: this.closeTimeoutMs,
+      transactionTimeoutMs: this.transactionTimeoutMs,
+      afterCommit: afterFreshContextCommit,
     });
     if (transition !== this.activeTransition || result.stale) {
       this.counts.staleCompletion += 1;

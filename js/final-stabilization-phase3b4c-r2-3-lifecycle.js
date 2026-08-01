@@ -246,9 +246,15 @@ export class VisibilityOwnedAudioLifecycle {
       const platformResult = await this.platformRecovery.handleTrustedSpeaker({
         trustedGesture,
         reason,
-        beforeFreshContext: () => {
-          this.reanchorOnce(transition, `fresh-context:${reason}`);
-          this.resetLegacyOnce(transition, `fresh-context:${reason}`);
+        afterFreshContextCommit: () => {
+          if (this.audioEngine?.recoveryFaultMatches?.("legacy-reset-exception")) {
+            throw new Error("Injected legacy reset exception");
+          }
+          const schedulerReanchor = transition.reanchored
+            || this.reanchorOnce(transition, `fresh-context:${reason}`);
+          const legacyReset = transition.legacyReset
+            || this.resetLegacyOnce(transition, `fresh-context:${reason}`);
+          return { schedulerReanchor, legacyReset };
         },
       });
       if (platformResult.claimed) {

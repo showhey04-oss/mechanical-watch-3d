@@ -23,6 +23,9 @@ const DISABLE_STOP_DELAY_MS = 30;
 const DEFAULT_RESUME_TIMEOUT_MS = 450;
 const DEFAULT_CLOCK_PROBE_MS = 80;
 const DEFAULT_CLOCK_PROGRESS_SECONDS = 0.001;
+const DEFAULT_DECODE_TIMEOUT_MS = 1_200;
+const DEFAULT_CONTEXT_CLOSE_TIMEOUT_MS = 250;
+const DEFAULT_FRESH_CONTEXT_TRANSACTION_TIMEOUT_MS = 5_500;
 const stateName = (
   enabled,
   loading,
@@ -94,6 +97,7 @@ export class MechanicalAudioEngine {
     this.resumeOperationSequence = 0;
     this.freshContextAttemptSequence = 0;
     this.freshContextHistory = [];
+    this.activeFreshContextTransaction = null;
     this.contextProgressHistory = [];
     this.recoveryFaultInjection = null;
   }
@@ -338,6 +342,7 @@ export class MechanicalAudioEngine {
     timeoutMs = DEFAULT_RESUME_TIMEOUT_MS,
     trustedGesture = false,
     reason = "visible",
+    allowDetachedContext = false,
   } = {}) {
     const operationSequence = ++this.resumeOperationSequence;
     const boundedTimeoutMs = Math.max(1, Math.min(2_000, Number(timeoutMs) || DEFAULT_RESUME_TIMEOUT_MS));
@@ -354,13 +359,16 @@ export class MechanicalAudioEngine {
     let timedOut = false;
     const resumePromise = Promise.resolve()
       .then(() => {
-        if (this.recoveryFaultInjection === "resume-promise-timeout") {
+        if (this.recoveryFaultInjection === "resume-promise-timeout"
+          || (allowDetachedContext && this.recoveryFaultInjection === "fresh-resume-hang")) {
           return new Promise(() => {});
         }
-        if (this.recoveryFaultInjection === "resume-rejected") {
+        if (this.recoveryFaultInjection === "resume-rejected"
+          || (allowDetachedContext && this.recoveryFaultInjection === "fresh-resume-reject")) {
           throw new Error("Injected resume rejection");
         }
-        if (this.recoveryFaultInjection === "resume-resolves-suspended") {
+        if (this.recoveryFaultInjection === "resume-resolves-suspended"
+          || (allowDetachedContext && this.recoveryFaultInjection === "fresh-resume-suspended")) {
           return undefined;
         }
         return context.resume();
@@ -377,7 +385,8 @@ export class MechanicalAudioEngine {
     });
     const settled = await Promise.race([resumePromise, timeoutPromise]);
     if (timeoutId !== null) clearTimeout(timeoutId);
-    const stale = context !== this.context || operationSequence !== this.resumeOperationSequence;
+    const stale = (!allowDetachedContext && context !== this.context)
+      || operationSequence !== this.resumeOperationSequence;
     const stateAfter = context?.state ?? "not-created";
     const result = {
       outcome: settled.kind === "timeout"
@@ -591,7 +600,8 @@ export class MechanicalAudioEngine {
     await this.waitFn(Math.max(1, Number(probeMs) || DEFAULT_CLOCK_PROBE_MS));
     const stateAfter = context?.state ?? "not-created";
     const currentTimeAfter = Number.isFinite(context?.currentTime) ? context.currentTime : null;
-    const injectedStall = this.recoveryFaultInjection === "running-current-time-stalled";
+    const injectedStall = this.recoveryFaultInjection === "running-current-time-stalled"
+      || (context !== this.context && this.recoveryFaultInjection === "fresh-current-time-stalled");
     const currentTimeDelta = injectedStall || currentTimeAfter === null
       ? 0
       : currentTimeAfter - currentTimeBefore;
@@ -675,19 +685,158 @@ export class MechanicalAudioEngine {
     };
   }
 
-  async decodeRawAssetsForContext(context) {
+  recoveryFaultMatches(...expected) {
+    const faults = Array.isArray(this.recoveryFaultInjection)
+      ? this.recoveryFaultInjection
+      : [this.recoveryFaultInjection];
+    return expected.some((value) => faults.includes(value));
+  }
+
+  remainingTransactionMs(deadlineAt, fallbackMs) {
+    if (!Number.isFinite(deadlineAt)) return Math.max(1, Number(fallbackMs) || 1);
+    return Math.max(1, Math.floor(deadlineAt - performance.now()));
+  }
+
+  async decodeAudioDataWithTimeout({
+    context,
+    type,
+    arrayBuffer,
+    timeoutMs = DEFAULT_DECODE_TIMEOUT_MS,
+    deadlineAt = Infinity,
+    transactionId = null,
+  }) {
+    const boundedTimeoutMs = Math.max(1, Math.min(
+      Number(timeoutMs) || DEFAULT_DECODE_TIMEOUT_MS,
+      this.remainingTransactionMs(deadlineAt, timeoutMs),
+    ));
+    const rejectFault = this.recoveryFaultMatches(
+      `fresh-decode-failure:${type}`,
+      `fresh-decode-reject:${type}`,
+    );
+    const hangFault = this.recoveryFaultMatches(`fresh-decode-hang:${type}`);
+    const lateFault = this.recoveryFaultMatches(`fresh-decode-late:${type}`);
+    const delayFault = this.recoveryFaultMatches(`fresh-decode-delay:${type}`);
+    let timeoutId = null;
+    const decodePromise = Promise.resolve().then(() => {
+      if (rejectFault) throw new Error(`Injected fresh decode rejection: ${type}`);
+      if (hangFault) return new Promise(() => {});
+      if (lateFault) {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve({ duration: 0.05, lateInjected: true }), boundedTimeoutMs + 20);
+        });
+      }
+      if (delayFault) {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve({ duration: 0.05, delayInjected: true }), Math.max(1, boundedTimeoutMs / 2));
+        });
+      }
+      return context.decodeAudioData(arrayBuffer);
+    }).then(
+      (buffer) => ({ outcome: "DECODE_RESOLVED", buffer }),
+      (error) => ({
+        outcome: "DECODE_REJECTED",
+        error: error?.message || String(error),
+      }),
+    );
+    const timeoutPromise = new Promise((resolve) => {
+      timeoutId = setTimeout(() => resolve({ outcome: "DECODE_TIMEOUT" }), boundedTimeoutMs);
+    });
+    const settled = await Promise.race([decodePromise, timeoutPromise]);
+    if (timeoutId !== null) clearTimeout(timeoutId);
+    const report = {
+      type,
+      transactionId,
+      timeoutMs: boundedTimeoutMs,
+      outcome: settled.outcome,
+      error: settled.error ?? null,
+    };
+    if (settled.outcome !== "DECODE_RESOLVED") {
+      const error = new Error(
+        settled.outcome === "DECODE_TIMEOUT"
+          ? `fresh decode timed out: ${type}`
+          : `fresh decode rejected: ${type}: ${settled.error}`,
+      );
+      error.code = settled.outcome;
+      error.report = report;
+      throw error;
+    }
+    return { ...report, buffer: settled.buffer };
+  }
+
+  async decodeRawAssetsForContext(context, {
+    timeoutMs = DEFAULT_DECODE_TIMEOUT_MS,
+    deadlineAt = Infinity,
+    transactionId = null,
+  } = {}) {
     const completeness = this.getRawAssetCompleteness();
     if (!completeness.complete) {
       throw new Error(`raw audio assets incomplete: ${completeness.missing.join(", ")}`);
     }
-    const decoded = new Map();
-    for (const type of REQUIRED_AUDIO_EVENT_TYPES) {
-      if (this.recoveryFaultInjection === `fresh-decode-failure:${type}`) {
-        throw new Error(`Injected fresh decode failure: ${type}`);
-      }
-      decoded.set(type, await context.decodeAudioData(this.rawAssets.get(type).slice(0)));
+    const reports = await Promise.all(REQUIRED_AUDIO_EVENT_TYPES.map((type) =>
+      this.decodeAudioDataWithTimeout({
+        context,
+        type,
+        arrayBuffer: this.rawAssets.get(type).slice(0),
+        timeoutMs,
+        deadlineAt,
+        transactionId,
+      })));
+    return {
+      buffers: new Map(reports.map(({ type, buffer }) => [type, buffer])),
+      reports: reports.map(({ buffer, ...report }) => report),
+    };
+  }
+
+  async closeContextWithTimeout({
+    context,
+    timeoutMs = DEFAULT_CONTEXT_CLOSE_TIMEOUT_MS,
+    reason = "context-cleanup",
+    transactionId = null,
+  } = {}) {
+    const boundedTimeoutMs = Math.max(1, Math.min(2_000,
+      Number(timeoutMs) || DEFAULT_CONTEXT_CLOSE_TIMEOUT_MS));
+    if (!context || typeof context.close !== "function") {
+      return {
+        transactionId,
+        reason,
+        timeoutMs: boundedTimeoutMs,
+        outcome: "CLOSE_API_UNAVAILABLE",
+        error: null,
+      };
     }
-    return decoded;
+    const role = reason.includes("candidate") ? "candidate" : "old";
+    let timeoutId = null;
+    const closePromise = Promise.resolve().then(() => {
+      if (this.recoveryFaultMatches(`${role}-context-close-reject`, `${role}-context-close-failure`)) {
+        throw new Error(`Injected ${role} AudioContext close rejection`);
+      }
+      if (this.recoveryFaultMatches(`${role}-context-close-hang`)) return new Promise(() => {});
+      if (this.recoveryFaultMatches(`${role}-context-close-late`)) {
+        return new Promise((resolve) => setTimeout(resolve, boundedTimeoutMs + 20));
+      }
+      return context.close();
+    }).then(
+      () => ({ outcome: "CLOSE_RESOLVED", error: null }),
+      (error) => ({ outcome: "CLOSE_REJECTED", error: error?.message || String(error) }),
+    );
+    const timeoutPromise = new Promise((resolve) => {
+      timeoutId = setTimeout(() => resolve({ outcome: "CLOSE_TIMEOUT", error: null }), boundedTimeoutMs);
+    });
+    const settled = await Promise.race([closePromise, timeoutPromise]);
+    if (timeoutId !== null) clearTimeout(timeoutId);
+    return {
+      transactionId,
+      reason,
+      timeoutMs: boundedTimeoutMs,
+      ...settled,
+    };
+  }
+
+  isFreshContextTransactionCurrent(transaction) {
+    return transaction.transactionId === this.freshContextAttemptSequence
+      && transaction.visibilityRequestSequence === this.visibilityRequestSequence
+      && this.visible
+      && this.enabled;
   }
 
   async replaceWithFreshContext({
@@ -695,9 +844,15 @@ export class MechanicalAudioEngine {
     reason = "fresh-context-fallback",
     timeoutMs = DEFAULT_RESUME_TIMEOUT_MS,
     probeMs = DEFAULT_CLOCK_PROBE_MS,
+    decodeTimeoutMs = DEFAULT_DECODE_TIMEOUT_MS,
+    closeTimeoutMs = DEFAULT_CONTEXT_CLOSE_TIMEOUT_MS,
+    transactionTimeoutMs = DEFAULT_FRESH_CONTEXT_TRANSACTION_TIMEOUT_MS,
+    afterCommit = () => ({ schedulerReanchor: "NOT_REQUESTED", legacyReset: "NOT_REQUESTED" }),
   } = {}) {
     const attemptSequence = ++this.freshContextAttemptSequence;
-    const visibilitySequence = this.visibilityRequestSequence;
+    const startedAt = performance.now();
+    const boundedTransactionTimeoutMs = Math.max(10, Math.min(15_000,
+      Number(transactionTimeoutMs) || DEFAULT_FRESH_CONTEXT_TRANSACTION_TIMEOUT_MS));
     const old = {
       context: this.context,
       masterNode: this.masterNode,
@@ -705,88 +860,254 @@ export class MechanicalAudioEngine {
       buffers: this.buffers,
       generation: this.contextGeneration,
     };
+    const transaction = {
+      transactionId: attemptSequence,
+      visibilityRequestSequence: this.visibilityRequestSequence,
+      sourceGeneration: old.generation,
+      sourceContextGeneration: old.generation,
+      candidateGeneration: old.generation + 1,
+      candidateContextGeneration: old.generation + 1,
+      startedAt,
+      deadlineAt: startedAt + boundedTransactionTimeoutMs,
+      deadline: startedAt + boundedTransactionTimeoutMs,
+      transactionTimeoutMs: boundedTransactionTimeoutMs,
+      stage: "CREATED",
+      stageHistory: ["CREATED"],
+      decodedAssetCount: 0,
+      stale: false,
+      committed: false,
+      cleanupState: "NOT_STARTED",
+      failure: null,
+    };
+    this.activeFreshContextTransaction = transaction;
+    const setStage = (stage) => {
+      transaction.stage = stage;
+      transaction.stageHistory.push(stage);
+    };
     const result = {
       attemptSequence,
+      transaction,
       trustedGesture: Boolean(trustedGesture),
       reason,
       oldGeneration: old.generation,
       newGeneration: old.generation,
       rawAssetCompleteness: this.getRawAssetCompleteness(),
       decodedBufferCount: 0,
+      decodeReports: [],
       recovered: false,
       stale: false,
+      committed: false,
       error: null,
+      errorCode: null,
+      candidateContextClose: null,
+      oldContextClose: null,
       oldContextCloseError: null,
+      postCommit: null,
     };
     if (!trustedGesture || !this.visible || !this.enabled) {
       result.error = "trusted visible enabled recovery required";
+      result.errorCode = "RECOVERY_PRECONDITION_FAILED";
+      transaction.failure = result.errorCode;
+      setStage("FAILED_PRECONDITION");
+      if (this.activeFreshContextTransaction?.transactionId === transaction.transactionId) {
+        this.activeFreshContextTransaction = null;
+      }
       return result;
     }
     let candidateContext = null;
     try {
-      if (this.recoveryFaultInjection === "fresh-context-create-failure") {
-        throw new Error("Injected fresh AudioContext creation failure");
+      setStage("CANDIDATE_CREATE");
+      if (this.recoveryFaultMatches("fresh-context-create-failure", "fresh-context-create-reject")) {
+        throw Object.assign(new Error("Injected fresh AudioContext creation failure"), {
+          code: "CANDIDATE_CREATE_REJECTED",
+        });
       }
       candidateContext = this.audioContextFactory();
+      setStage("CANDIDATE_GRAPH");
       const candidateGraph = this.buildGraph(candidateContext);
+      setStage("CANDIDATE_RESUME");
       const resume = await this.resumeWithTimeout({
         context: candidateContext,
-        timeoutMs,
+        timeoutMs: Math.min(timeoutMs, this.remainingTransactionMs(transaction.deadlineAt, timeoutMs)),
         trustedGesture: true,
         reason: `${reason}:candidate`,
+        allowDetachedContext: true,
       });
       result.resume = resume;
       if (resume.outcome !== "RESUME_RESOLVED") {
-        throw new Error(`fresh AudioContext resume failed: ${resume.outcome}`);
+        throw Object.assign(new Error(`fresh AudioContext resume failed: ${resume.outcome}`), {
+          code: resume.outcome,
+        });
       }
-      const decodedBuffers = await this.decodeRawAssetsForContext(candidateContext);
-      result.decodedBufferCount = decodedBuffers.size;
-      if (visibilitySequence !== this.visibilityRequestSequence || !this.visible) {
+      if (resume.stale || !this.isFreshContextTransactionCurrent(transaction)) {
+        transaction.stale = true;
         result.stale = true;
-        throw new Error("fresh AudioContext completion became stale");
+        throw Object.assign(new Error("fresh AudioContext resume completion became stale"), {
+          code: "STALE_TRANSACTION",
+        });
       }
-      this.stopAll();
+      setStage("CANDIDATE_DECODE");
+      const decoded = await this.decodeRawAssetsForContext(candidateContext, {
+        timeoutMs: decodeTimeoutMs,
+        deadlineAt: transaction.deadlineAt,
+        transactionId: transaction.transactionId,
+      });
+      result.decodeReports = decoded.reports;
+      result.decodedBufferCount = decoded.buffers.size;
+      transaction.decodedAssetCount = decoded.buffers.size;
+      setStage("CANDIDATE_CLOCK_PROBE");
+      let livenessTimeoutId = null;
+      const livenessTimeoutMs = this.remainingTransactionMs(transaction.deadlineAt, probeMs);
+      const liveness = await Promise.race([
+        this.classifyContextProgress({
+          context: candidateContext,
+          probeMs,
+          reason: `${reason}:candidate-verify`,
+        }).then((value) => ({ outcome: "LIVENESS_RESOLVED", value })),
+        new Promise((resolve) => {
+          livenessTimeoutId = setTimeout(
+            () => resolve({ outcome: "LIVENESS_TIMEOUT", value: null }),
+            livenessTimeoutMs,
+          );
+        }),
+      ]);
+      if (livenessTimeoutId !== null) clearTimeout(livenessTimeoutId);
+      if (liveness.outcome !== "LIVENESS_RESOLVED") {
+        throw Object.assign(new Error("fresh AudioContext liveness timed out"), {
+          code: liveness.outcome,
+        });
+      }
+      const progress = liveness.value;
+      result.progress = progress;
+      if (progress.classification !== "RUNNING_AND_ADVANCING") {
+        throw Object.assign(new Error(`fresh AudioContext liveness failed: ${progress.classification}`), {
+          code: progress.classification,
+        });
+      }
+      if (performance.now() > transaction.deadlineAt) {
+        throw Object.assign(new Error("fresh AudioContext transaction deadline exceeded"), {
+          code: "TRANSACTION_TIMEOUT",
+        });
+      }
+      setStage("STALE_GATE");
+      if (!this.isFreshContextTransactionCurrent(transaction)) {
+        transaction.stale = true;
+        result.stale = true;
+        throw Object.assign(new Error("fresh AudioContext completion became stale"), {
+          code: "STALE_TRANSACTION",
+        });
+      }
+
+      // Unique atomic commit point. The candidate graph remains muted until
+      // scheduler identity and legacy state have been reconciled post-commit.
+      setStage("ATOMIC_COMMIT");
       this.context = candidateContext;
       this.masterNode = candidateGraph.masterNode;
       this.busNodes = candidateGraph.busNodes;
-      this.buffers = decodedBuffers;
-      this.contextGeneration = old.generation + 1;
+      this.buffers = decoded.buffers;
+      this.contextGeneration = transaction.candidateGeneration;
+      transaction.committed = true;
+      result.committed = true;
       result.newGeneration = this.contextGeneration;
+      this.stopAll();
+
+      setStage("POST_COMMIT_RECONCILE");
+      let postCommitOutcome;
+      try {
+        if (this.recoveryFaultMatches("scheduler-reanchor-reject")) {
+          throw new Error("Injected scheduler reanchor rejection");
+        }
+        // Internal contract: lifecycle reconciliation is synchronous and
+        // side-effect-complete before it returns. Thenables are rejected so a
+        // timed-out or stale callback cannot continue mutating scheduler state.
+        const value = afterCommit({ transaction: { ...transaction }, reason });
+        if (value && typeof value.then === "function") {
+          throw Object.assign(new Error("post-commit reconciliation must be synchronous"), {
+            code: "POST_COMMIT_ASYNC_UNSUPPORTED",
+          });
+        }
+        postCommitOutcome = { outcome: "POST_COMMIT_RESOLVED", value };
+      } catch (error) {
+        postCommitOutcome = {
+          outcome: "POST_COMMIT_REJECTED",
+          error: error?.message || String(error),
+          errorCode: error?.code || "POST_COMMIT_REJECTED",
+        };
+      }
+      result.postCommit = postCommitOutcome;
+      if (postCommitOutcome.outcome !== "POST_COMMIT_RESOLVED") {
+        throw Object.assign(new Error(postCommitOutcome.error), {
+          code: postCommitOutcome.errorCode || postCommitOutcome.outcome,
+        });
+      }
+      if (postCommitOutcome.value?.schedulerReanchor === false) {
+        throw Object.assign(new Error("scheduler reanchor returned false"), { code: "SCHEDULER_REANCHOR_FALSE" });
+      }
+      if (postCommitOutcome.value?.legacyReset === false) {
+        throw Object.assign(new Error("legacy audio reset returned false"), { code: "LEGACY_RESET_FALSE" });
+      }
+      if (performance.now() > transaction.deadlineAt) {
+        throw Object.assign(new Error("fresh AudioContext post-commit deadline exceeded"), {
+          code: "TRANSACTION_TIMEOUT",
+        });
+      }
+      if (!this.isFreshContextTransactionCurrent(transaction)) {
+        transaction.stale = true;
+        result.stale = true;
+        throw Object.assign(new Error("fresh AudioContext post-commit became stale"), {
+          code: "STALE_TRANSACTION_POST_COMMIT",
+        });
+      }
+      setStage("GAIN_RESTORE");
       this.resumeRequired = false;
       this.rampMaster(this.masterGainValue);
-      try {
-        if (this.recoveryFaultInjection === "old-context-close-failure") {
-          throw new Error("Injected old AudioContext close failure");
-        }
-        await old.context?.close?.();
-      } catch (error) {
-        result.oldContextCloseError = error?.message || String(error);
-      }
-      const progress = await this.classifyContextProgress({
-        context: candidateContext,
-        probeMs,
-        reason: `${reason}:verify`,
-      });
-      result.progress = progress;
-      result.recovered = progress.classification === "RUNNING_AND_ADVANCING";
-      if (!result.recovered) {
-        this.resumeRequired = true;
-        this.rampMaster(0, 0);
-      }
+      result.recovered = true;
+      setStage("UI_RECOVERED");
     } catch (error) {
       result.error = error?.message || String(error);
-      if (candidateContext && candidateContext !== this.context) {
-        try { await candidateContext.close?.(); } catch {}
-      }
-      this.context = old.context;
-      this.masterNode = old.masterNode;
-      this.busNodes = old.busNodes;
-      this.buffers = old.buffers;
-      this.contextGeneration = old.generation;
+      result.errorCode = error?.code || error?.report?.outcome || "FRESH_CONTEXT_TRANSACTION_FAILED";
+      transaction.failure = result.errorCode;
+      result.stale = result.stale || transaction.stale;
       this.resumeRequired = true;
-      this.rampMaster(0, 0);
+      if (transaction.committed) {
+        this.rampMaster(0, 0);
+        setStage("COMMITTED_RECOVERY_FAILED_EXPLICIT");
+      } else {
+        setStage("CANDIDATE_CLEANUP");
+        result.candidateContextClose = await this.closeContextWithTimeout({
+          context: candidateContext,
+          timeoutMs: Math.min(closeTimeoutMs,
+            this.remainingTransactionMs(transaction.deadlineAt, closeTimeoutMs)),
+          reason: "candidate-context-cleanup",
+          transactionId: transaction.transactionId,
+        });
+        transaction.cleanupState = result.candidateContextClose.outcome;
+        setStage("OLD_GRAPH_RETAINED");
+      }
     }
-    this.freshContextHistory.push({ ...result });
+
+    if (transaction.committed) {
+      setStage("OLD_CONTEXT_CLEANUP_QUEUED");
+      transaction.cleanupState = "PENDING";
+      void this.closeContextWithTimeout({
+        context: old.context,
+        timeoutMs: closeTimeoutMs,
+        reason: "old-context-postcommit-cleanup",
+        transactionId: transaction.transactionId,
+      }).then((cleanup) => {
+        result.oldContextClose = cleanup;
+        result.oldContextCloseError = cleanup.error;
+        transaction.cleanupState = cleanup.outcome;
+        transaction.stageHistory.push("OLD_CONTEXT_CLEANUP_SETTLED");
+      });
+    }
+    transaction.completedAt = performance.now();
+    transaction.elapsedMs = transaction.completedAt - transaction.startedAt;
+    if (!transaction.committed) result.newGeneration = old.generation;
+    if (this.activeFreshContextTransaction?.transactionId === transaction.transactionId) {
+      this.activeFreshContextTransaction = null;
+    }
+    this.freshContextHistory.push(result);
     if (this.freshContextHistory.length > 20) {
       this.freshContextHistory.splice(0, this.freshContextHistory.length - 20);
     }
@@ -1069,7 +1390,10 @@ export class MechanicalAudioEngine {
       resumeOperationSequence: this.resumeOperationSequence,
       contextProgressHistory: this.contextProgressHistory.map((entry) => ({ ...entry })),
       freshContextAttemptSequence: this.freshContextAttemptSequence,
-      freshContextHistory: this.freshContextHistory.map((entry) => ({ ...entry })),
+      activeFreshContextTransaction: this.activeFreshContextTransaction
+        ? structuredClone(this.activeFreshContextTransaction)
+        : null,
+      freshContextHistory: this.freshContextHistory.map((entry) => structuredClone(entry)),
       recoveryFaultInjection: this.recoveryFaultInjection,
       escapementSourceInventory: this.getEscapementSourceInventory(),
       audioClock: this.getClockSnapshot(),
