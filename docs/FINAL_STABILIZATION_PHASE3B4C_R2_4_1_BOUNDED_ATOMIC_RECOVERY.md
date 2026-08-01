@@ -15,10 +15,14 @@ P3のfresh Context fallbackを、候補生成から旧Context cleanupまで一�
 
 R2.4ではresume待ちはboundedだった一方、`decodeAudioData()`と`close()`がnever-settling Promiseになった場合の終端がなく、候補の時間進行確認より前にactive graphを置き換え得た。さらにpostcommit中のstale化、scheduler false、legacy reset例外を一つのtransaction失敗として扱う契約が不足していた。
 
+## R2.4.2による証跡profile分類の訂正
+
+この節はR2.4.1のtransaction実装を変更しない追補である。下記300／50／1,500 msは、hang／timeout faultを短時間で反復するためにbrowser harnessが上書きした`TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE`であり、production URLの無変更既定値ではない。通常アプリの既定値はresume 450、clock probe 80、decode 1,200、close 250、transaction 5,500 msである。production既定値のactual Web Audio検証は[Phase 3B.4c-R2.4.2](./FINAL_STABILIZATION_PHASE3B4C_R2_4_2_PRODUCTION_CONFIGURATION_PARITY.md)を正本とする。
+
 ## 実装
 
-- 6 assetの各decodeを300 ms、transaction全体を1,500 msへ制限した。reject、timeout、late completionを区別し、1件でも未完了ならcommitしない。
-- candidate／old Context closeを50 msへ制限した。candidate cleanup失敗は旧graphを保持し、old close失敗はcommit後のnon-blocking cleanupとした。
+- R2.4.1 browser証跡では、6 assetの各decodeを300 ms、transaction全体を1,500 msへ制限するtight diagnostic overrideを使用した。reject、timeout、late completionを区別し、1件でも未完了ならcommitしない。
+- 同証跡ではcandidate／old Context closeを50 msへ制限するtight diagnostic overrideを使用した。candidate cleanup失敗は旧graphを保持し、old close失敗はcommit後のnon-blocking cleanupとした。
 - candidate graphはresume、6 decode、currentTime進行、stale gateを通過後に一度だけcommitする。
 - scheduler re-anchor、legacy reset、gain、UIはcommit後にだけ実行し、postcommitでもvisibility／transaction identityを再確認する。
 - transaction ID、visibility sequence、source/candidate generation、deadline、stage履歴、decode数、stale、commit、cleanup、failureを診断へ記録する。
