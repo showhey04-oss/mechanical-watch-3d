@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — Final Stabilization Phase 3B.4c-R2.4 WebKit platform recovery
+
+- R2.3の単一visibility lifecycle ownerを維持し、`running`かつ`currentTime`停止、`resume()` hang／reject、解決後suspended、`interrupted`をboundedに分類・回復するquery限定P0～P3候補を追加
+- P3は既存スピーカーボタンの1 trusted gestureでfresh Contextを最大1回だけ構築し、保持済みraw asset 6件を全decodeしてからgraphをatomic swap。create／decode／stale／old-close失敗をboundedに封じ込める
+- Chromium in-app BrowserとPlaywright WebKit actual Web Audioで、P0～P3×2 viewport各100 cycleを8/8、P3の5 fault×2 viewportを10/10合格。duplicate／backlog burst／application console error・warningは0
+- Node 411/411、audio Desktop／Mobile各23/23、R2.4固有browser failure 0。作業開始Headと共通する総合／UI未達は隠さず保持し、全回帰completeや絶対PASSとはしない
+- 通常pathとPhase 3C.1-only pathは作業開始Headとactual WebGL PNG byte／SHA exact。4 pointer／wheel差分条件は不変閾値で合格し、A.6絶対性能は主張しない
+- P3は`PHASE3B4C_R2_4_SINGLE_FINAL_CANDIDATE_READY_FOR_CHATGPT_REVIEW`でquery限定・未採用。native Safari自動化は環境block、物理iPhone再試験は`FROZEN`。Ready化、マージ、Issue #2クローズ、Phase 3B.4d開始は未実施
+
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
 
 ### Issue #2 Final Polish Phase 3B.4b

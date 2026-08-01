@@ -1,5 +1,18 @@
 # 受入試験
 
+## Final Stabilization Phase 3B.4c-R2.4 — WebKit platform recovery
+
+- R2.3の`visibilitychange`を単一ownerとして維持し、回復用listener、毎frame監視、無制限retryを追加しない
+- `running`だけを出力正常とせず、`currentTime`進行、suspended、interrupted、resume reject／timeout、Context unusableを明示分類する
+- fresh Contextは既存スピーカーボタンの1回のtrusted gestureで最大1回だけ開始し、raw asset 6件を全decodeしてからatomic swapする
+- create／decode／stale completion失敗時は旧graphをmutedのまま保持し、old Context close失敗はcommit済み新graphを巻き戻さない
+- Chromium in-app Browser／WebKitでP0～P3×Desktop／390×844を各100 hidden／visible cycle、P3の5 fault×両viewportを実Web Audioで合格する
+- duplicate 0、backlog burst 0、catch-up burstなし、6 buffer完全性、application console error／warning 0を維持する
+- 通常path／Phase 3C.1-only pathを作業開始Headとpixel exactにし、timebase、input、S86、Phase 2C、A.7、Geometry、Light、Material、opacity、camera、DPR、UI、sample、gain、APP_VERSIONを変更しない
+- Node 411/411、Desktop／Mobile audio各23/23、R2.4固有browser failure 0を確認する。共通既存未達をR2.4 PASSへ変換しない
+- pointer／wheel差分は平均FPS悪化5%以内、p95悪化2ms以内、reversal 0、stop-then-jump 0、zoom monotonic、transform invariantを閾値変更なしで満たす
+- native Safari自動化blockをHuman／native Safari PASSへ変換しない。P3はquery限定のChatGPT review候補であり、物理iPhone再試験は`FROZEN`、既定採用／Ready化／マージを行わない
+
 ## Issue #2 Phase 3B.4b — iOS multi-touch stability受入
 
 - 完成外装、D2c3、continuity currentと、任意のPhase 3B.4a framingに限定してinput候補が有効になる
