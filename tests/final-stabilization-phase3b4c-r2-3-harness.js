@@ -19,6 +19,7 @@ const appQuery = new URLSearchParams({
   audioTiming: "phase3b4c-stability",
   mechanismTiming: "phase3b4c-r2-foreground-stability",
   audioLifecycle: parameters.get("profile") || "r2-3-l4",
+  audioPlatform: "p0",
   audioLifecycleTrace: "1",
   panel: "collapsed",
   time: "10:10:30",

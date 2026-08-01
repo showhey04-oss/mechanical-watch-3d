@@ -103,12 +103,14 @@ export class VisibilityOwnedAudioLifecycle {
     profile = PHASE3B4C_R2_3_PROFILES["r2-3-l4"],
     audioEngine,
     scheduler,
+    platformRecovery = null,
     resetLegacyAudioState = () => {},
     trace = () => {},
   } = {}) {
     this.profile = profile;
     this.audioEngine = audioEngine;
     this.scheduler = scheduler;
+    this.platformRecovery = platformRecovery;
     this.resetLegacyAudioState = resetLegacyAudioState;
     this.trace = trace;
     this.visible = true;
@@ -187,12 +189,22 @@ export class VisibilityOwnedAudioLifecycle {
     if (!nextVisible) {
       this.reanchorOnce(transition, reason);
       this.resetLegacyOnce(transition, reason);
-      const result = await this.audioEngine.setVisible(false, { reason });
+      const result = this.platformRecovery
+        ? await this.platformRecovery.handleHidden({ reason })
+        : await this.audioEngine.setVisible(false, { reason });
       this.record("visibility-hidden-complete", { reason, result });
       return { result, ...this.getReport() };
     }
     const before = this.audioEngine.getDiagnostics?.();
-    const result = await this.audioEngine.setVisible(true, { reason });
+    const result = this.platformRecovery
+      ? await this.platformRecovery.handleVisible({
+        reason,
+        beforeStallRecovery: () => {
+          this.reanchorOnce(transition, `stalled-recovery:${reason}`);
+          this.resetLegacyOnce(transition, `stalled-recovery:${reason}`);
+        },
+      })
+      : await this.audioEngine.setVisible(true, { reason });
     if (transition !== this.activeTransition || !this.visible || result?.stale) {
       this.staleCompletionCount += 1;
       this.record("visible-resume-stale", { reason, result });
@@ -230,6 +242,24 @@ export class VisibilityOwnedAudioLifecycle {
   async handleSpeakerFallback({ trustedGesture = false, reason = "speaker-fallback" } = {}) {
     const transition = this.activeTransition;
     const diagnostics = this.audioEngine.getDiagnostics?.() ?? {};
+    if (this.platformRecovery) {
+      const platformResult = await this.platformRecovery.handleTrustedSpeaker({
+        trustedGesture,
+        reason,
+        beforeFreshContext: () => {
+          this.reanchorOnce(transition, `fresh-context:${reason}`);
+          this.resetLegacyOnce(transition, `fresh-context:${reason}`);
+        },
+      });
+      if (platformResult.claimed) {
+        this.fallbackAttemptCount += 1;
+        if (platformResult.recovered) this.resumeCount += 1;
+        this.record(platformResult.recovered
+          ? "speaker-fresh-context-complete"
+          : "speaker-fresh-context-failed", { reason, platformResult });
+      }
+      return { ...platformResult, ...this.getReport() };
+    }
     if (!this.profile.oneClickFallback
       || !trustedGesture
       || !transition?.visible
@@ -279,6 +309,7 @@ export class VisibilityOwnedAudioLifecycle {
       staleCompletionCount: this.staleCompletionCount,
       scheduler: snapshotScheduler(this.scheduler),
       audio: this.audioEngine?.getDiagnostics?.() ?? null,
+      platformRecovery: this.platformRecovery?.getReport?.() ?? null,
     };
   }
 }

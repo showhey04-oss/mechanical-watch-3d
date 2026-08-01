@@ -20,6 +20,9 @@ const emptyCounts = () => Object.fromEntries(REQUIRED_AUDIO_EVENT_TYPES.map((typ
 const defaultWait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const DISABLE_RAMP_SECONDS = 0.025;
 const DISABLE_STOP_DELAY_MS = 30;
+const DEFAULT_RESUME_TIMEOUT_MS = 450;
+const DEFAULT_CLOCK_PROBE_MS = 80;
+const DEFAULT_CLOCK_PROGRESS_SECONDS = 0.001;
 const stateName = (
   enabled,
   loading,
@@ -61,6 +64,7 @@ export class MechanicalAudioEngine {
     this.busNodes = new Map();
     this.manifest = null;
     this.buffers = new Map();
+    this.rawAssets = new Map();
     this.failedAssets = [];
     this.activeSources = new Set();
     this.sourceRecords = new Map();
@@ -87,6 +91,11 @@ export class MechanicalAudioEngine {
     this.resumeHistory = [];
     this.contextGeneration = 0;
     this.visibilityRequestSequence = 0;
+    this.resumeOperationSequence = 0;
+    this.freshContextAttemptSequence = 0;
+    this.freshContextHistory = [];
+    this.contextProgressHistory = [];
+    this.recoveryFaultInjection = null;
   }
 
   emitState() {
@@ -107,19 +116,27 @@ export class MechanicalAudioEngine {
     });
   }
 
+  buildGraph(context) {
+    const masterNode = context.createGain();
+    masterNode.gain.value = 0;
+    masterNode.connect(context.destination);
+    const busNodes = new Map();
+    for (const [name, gain] of Object.entries(DEFAULT_BUS_GAINS)) {
+      const node = context.createGain();
+      node.gain.value = gain;
+      node.connect(masterNode);
+      busNodes.set(name, node);
+    }
+    return { masterNode, busNodes };
+  }
+
   createGraph() {
     if (this.context) return;
     this.context = this.audioContextFactory();
     this.contextGeneration += 1;
-    this.masterNode = this.context.createGain();
-    this.masterNode.gain.value = 0;
-    this.masterNode.connect(this.context.destination);
-    for (const [name, gain] of Object.entries(DEFAULT_BUS_GAINS)) {
-      const node = this.context.createGain();
-      node.gain.value = gain;
-      node.connect(this.masterNode);
-      this.busNodes.set(name, node);
-    }
+    const graph = this.buildGraph(this.context);
+    this.masterNode = graph.masterNode;
+    this.busNodes = graph.busNodes;
     this.trace("context-created");
   }
 
@@ -137,6 +154,12 @@ export class MechanicalAudioEngine {
   getBufferCompleteness() {
     const loaded = REQUIRED_AUDIO_EVENT_TYPES.filter((type) => this.buffers.has(type));
     const missing = REQUIRED_AUDIO_EVENT_TYPES.filter((type) => !this.buffers.has(type));
+    return { complete: missing.length === 0, required: [...REQUIRED_AUDIO_EVENT_TYPES], loaded, missing };
+  }
+
+  getRawAssetCompleteness() {
+    const loaded = REQUIRED_AUDIO_EVENT_TYPES.filter((type) => this.rawAssets.has(type));
+    const missing = REQUIRED_AUDIO_EVENT_TYPES.filter((type) => !this.rawAssets.has(type));
     return { complete: missing.length === 0, required: [...REQUIRED_AUDIO_EVENT_TYPES], loaded, missing };
   }
 
@@ -213,7 +236,10 @@ export class MechanicalAudioEngine {
           assetUrl.searchParams.set("audio", revision);
           const assetResponse = await this.fetchFn(assetUrl);
           if (!assetResponse.ok) throw new Error(`HTTP ${assetResponse.status}`);
-          const buffer = await this.context.decodeAudioData(await assetResponse.arrayBuffer());
+          const raw = await assetResponse.arrayBuffer();
+          const retained = raw.slice(0);
+          const buffer = await this.context.decodeAudioData(raw.slice(0));
+          this.rawAssets.set(type, retained);
           this.buffers.set(type, buffer);
         } catch (error) {
           failures.push(`${asset.file}: ${error?.message || String(error)}`);
@@ -253,7 +279,11 @@ export class MechanicalAudioEngine {
     this.emitState();
   }
 
-  async setVisible(visible, { reason = visible ? "visible" : "hidden" } = {}) {
+  async setVisible(visible, {
+    reason = visible ? "visible" : "hidden",
+    suspendContext = true,
+    resumeTimeoutMs = DEFAULT_RESUME_TIMEOUT_MS,
+  } = {}) {
     this.visible = Boolean(visible);
     const requestSequence = ++this.visibilityRequestSequence;
     this.trace("visibility-owned-set", { reason, requestedVisible: this.visible, requestSequence });
@@ -271,19 +301,27 @@ export class MechanicalAudioEngine {
     if (!this.visible) {
       this.rampMaster(0, 0.015);
       this.stopAll();
-      if (this.context.state === "running") await this.context.suspend().catch(() => {});
+      if (suspendContext && this.context.state === "running") {
+        await this.context.suspend().catch(() => {});
+      }
       const result = {
         running: false,
         stateAfter: this.context.state,
         enabled: this.enabled,
         visible: false,
         reason,
+        voluntarySuspend: Boolean(suspendContext),
       };
       this.trace("visibility-hidden-complete", result);
       this.emitState();
       return result;
     } else if (this.enabled) {
-      return this.resumeVisibleAudio({ trustedGesture: false, reason, requestSequence });
+      return this.resumeVisibleAudio({
+        trustedGesture: false,
+        reason,
+        requestSequence,
+        timeoutMs: resumeTimeoutMs,
+      });
     }
     this.emitState();
     return {
@@ -295,7 +333,83 @@ export class MechanicalAudioEngine {
     };
   }
 
-  async performResumeAttempt({ trustedGesture = false, reason = "visible" } = {}) {
+  async resumeWithTimeout({
+    context = this.context,
+    timeoutMs = DEFAULT_RESUME_TIMEOUT_MS,
+    trustedGesture = false,
+    reason = "visible",
+  } = {}) {
+    const operationSequence = ++this.resumeOperationSequence;
+    const boundedTimeoutMs = Math.max(1, Math.min(2_000, Number(timeoutMs) || DEFAULT_RESUME_TIMEOUT_MS));
+    if (!context || typeof context.resume !== "function") {
+      return {
+        outcome: "CONTEXT_UNUSABLE",
+        operationSequence,
+        timeoutMs: boundedTimeoutMs,
+        stale: context !== this.context,
+        error: "AudioContext.resume unavailable",
+      };
+    }
+    let timeoutId = null;
+    let timedOut = false;
+    const resumePromise = Promise.resolve()
+      .then(() => {
+        if (this.recoveryFaultInjection === "resume-promise-timeout") {
+          return new Promise(() => {});
+        }
+        if (this.recoveryFaultInjection === "resume-rejected") {
+          throw new Error("Injected resume rejection");
+        }
+        if (this.recoveryFaultInjection === "resume-resolves-suspended") {
+          return undefined;
+        }
+        return context.resume();
+      })
+      .then(() => ({ kind: "resolved" }), (error) => ({
+        kind: "rejected",
+        error: error?.message || String(error),
+      }));
+    const timeoutPromise = new Promise((resolve) => {
+      timeoutId = setTimeout(() => {
+        timedOut = true;
+        resolve({ kind: "timeout" });
+      }, boundedTimeoutMs);
+    });
+    const settled = await Promise.race([resumePromise, timeoutPromise]);
+    if (timeoutId !== null) clearTimeout(timeoutId);
+    const stale = context !== this.context || operationSequence !== this.resumeOperationSequence;
+    const stateAfter = context?.state ?? "not-created";
+    const result = {
+      outcome: settled.kind === "timeout"
+        ? "RESUME_PROMISE_TIMEOUT"
+        : settled.kind === "rejected"
+          ? "RESUME_REJECTED"
+          : stateAfter === "running"
+            ? "RESUME_RESOLVED"
+            : stateAfter === "interrupted"
+              ? "INTERRUPTED"
+              : stateAfter === "closed"
+                ? "CONTEXT_UNUSABLE"
+                : "SUSPENDED",
+      operationSequence,
+      timeoutMs: boundedTimeoutMs,
+      timedOut,
+      stale,
+      trustedGesture: Boolean(trustedGesture),
+      reason,
+      stateAfter,
+      error: settled.error ?? null,
+      promiseResolved: settled.kind === "resolved",
+    };
+    this.trace("resume-with-timeout", result);
+    return result;
+  }
+
+  async performResumeAttempt({
+    trustedGesture = false,
+    reason = "visible",
+    timeoutMs = DEFAULT_RESUME_TIMEOUT_MS,
+  } = {}) {
     const stateBefore = this.context?.state ?? "not-created";
     const resumeAttempted =
       Boolean(this.context)
@@ -310,8 +424,16 @@ export class MechanicalAudioEngine {
     if (resumeAttempted) {
       this.trace("resume-attempt-start", { reason, trustedGesture, attemptSequence, stateBefore });
       try {
-        await this.context.resume();
-        resumeResolved = true;
+        const bounded = await this.resumeWithTimeout({
+          context: this.context,
+          timeoutMs,
+          trustedGesture,
+          reason,
+        });
+        resumeResolved = bounded.promiseResolved;
+        resumeRejected = bounded.outcome === "RESUME_REJECTED";
+        error = bounded.error;
+        if (bounded.outcome === "RESUME_PROMISE_TIMEOUT") error = "AudioContext.resume timed out";
       } catch (caught) {
         resumeRejected = true;
         error = caught?.message || String(caught);
@@ -325,6 +447,7 @@ export class MechanicalAudioEngine {
       resumeAttempted,
       resumeResolved,
       resumeRejected,
+      resumeTimedOut: resumeAttempted && !resumeResolved && !resumeRejected && error === "AudioContext.resume timed out",
       running,
       requiresTrustedGesture:
         this.enabled && this.visible && !running,
@@ -348,6 +471,7 @@ export class MechanicalAudioEngine {
     trustedGesture = false,
     reason = "visible",
     requestSequence = null,
+    timeoutMs = DEFAULT_RESUME_TIMEOUT_MS,
   } = {}) {
     const activeRequestSequence = requestSequence === null
       ? ++this.visibilityRequestSequence
@@ -357,7 +481,7 @@ export class MechanicalAudioEngine {
       if (!trustedGesture) return this.resumeInFlight;
       // The fallback remains inside the trusted control handler. It reuses the
       // existing Context and performs one fresh, bounded resume attempt.
-      const result = await this.performResumeAttempt({ trustedGesture: true, reason });
+      const result = await this.performResumeAttempt({ trustedGesture: true, reason, timeoutMs });
       const stale = activeRequestSequence !== this.visibilityRequestSequence || !this.visible;
       if (stale) {
         this.rampMaster(0, 0);
@@ -376,14 +500,14 @@ export class MechanicalAudioEngine {
     this.resumeInFlight = (async () => {
       if (!this.context || !this.enabled) {
         this.resumeRequired = false;
-        const result = await this.performResumeAttempt({ trustedGesture, reason });
+        const result = await this.performResumeAttempt({ trustedGesture, reason, timeoutMs });
         this.emitState();
         return result;
       }
       this.rampMaster(0, 0);
       this.resumeRequired = this.context.state !== "running";
       this.emitState();
-      const result = await this.performResumeAttempt({ trustedGesture, reason });
+      const result = await this.performResumeAttempt({ trustedGesture, reason, timeoutMs });
       const stale = activeRequestSequence !== this.visibilityRequestSequence || !this.visible;
       if (stale) {
         this.resumeRequired = false;
@@ -406,6 +530,269 @@ export class MechanicalAudioEngine {
       this.resumeInFlight = null;
     });
     return this.resumeInFlight;
+  }
+
+  setRecoveryFaultInjection(value = null) {
+    this.recoveryFaultInjection = value || null;
+    this.trace("recovery-fault-injection", { value: this.recoveryFaultInjection });
+    return this.recoveryFaultInjection;
+  }
+
+  markRecoveryRequired(reason = "platform-recovery-required") {
+    if (!this.enabled || !this.visible) return false;
+    this.resumeRequired = true;
+    this.rampMaster(0, 0);
+    this.trace("platform-recovery-required", { reason });
+    this.emitState();
+    return true;
+  }
+
+  async classifyContextProgress({
+    context = this.context,
+    probeMs = DEFAULT_CLOCK_PROBE_MS,
+    minimumProgressSeconds = DEFAULT_CLOCK_PROGRESS_SECONDS,
+    reason = "context-progress",
+  } = {}) {
+    const stateBefore = context?.state ?? "not-created";
+    const currentTimeBefore = Number.isFinite(context?.currentTime) ? context.currentTime : null;
+    if (!context || stateBefore === "closed" || currentTimeBefore === null) {
+      return {
+        classification: "CONTEXT_UNUSABLE",
+        stateBefore,
+        stateAfter: context?.state ?? "not-created",
+        currentTimeBefore,
+        currentTimeAfter: Number.isFinite(context?.currentTime) ? context.currentTime : null,
+        currentTimeDelta: null,
+        reason,
+      };
+    }
+    if (stateBefore === "interrupted" || this.recoveryFaultInjection === "state-interrupted") {
+      return {
+        classification: "INTERRUPTED",
+        stateBefore,
+        stateAfter: "interrupted",
+        currentTimeBefore,
+        currentTimeAfter: currentTimeBefore,
+        currentTimeDelta: 0,
+        reason,
+      };
+    }
+    if (stateBefore !== "running") {
+      return {
+        classification: "SUSPENDED",
+        stateBefore,
+        stateAfter: stateBefore,
+        currentTimeBefore,
+        currentTimeAfter: currentTimeBefore,
+        currentTimeDelta: 0,
+        reason,
+      };
+    }
+    await this.waitFn(Math.max(1, Number(probeMs) || DEFAULT_CLOCK_PROBE_MS));
+    const stateAfter = context?.state ?? "not-created";
+    const currentTimeAfter = Number.isFinite(context?.currentTime) ? context.currentTime : null;
+    const injectedStall = this.recoveryFaultInjection === "running-current-time-stalled";
+    const currentTimeDelta = injectedStall || currentTimeAfter === null
+      ? 0
+      : currentTimeAfter - currentTimeBefore;
+    const classification = stateAfter === "interrupted"
+      ? "INTERRUPTED"
+      : stateAfter !== "running"
+        ? "SUSPENDED"
+        : currentTimeDelta >= Math.max(0.0001, Number(minimumProgressSeconds) || DEFAULT_CLOCK_PROGRESS_SECONDS)
+          ? "RUNNING_AND_ADVANCING"
+          : "RUNNING_BUT_CURRENT_TIME_STALLED";
+    const result = {
+      classification,
+      stateBefore,
+      stateAfter,
+      currentTimeBefore,
+      currentTimeAfter,
+      currentTimeDelta,
+      probeMs,
+      minimumProgressSeconds,
+      reason,
+      contextGeneration: this.contextGeneration,
+    };
+    this.contextProgressHistory.push({ ...result });
+    if (this.contextProgressHistory.length > 80) {
+      this.contextProgressHistory.splice(0, this.contextProgressHistory.length - 80);
+    }
+    this.trace("context-progress-classified", result);
+    return result;
+  }
+
+  async recoverStalledContext({
+    reason = "running-stalled",
+    timeoutMs = DEFAULT_RESUME_TIMEOUT_MS,
+    settleMs = 24,
+    probeMs = DEFAULT_CLOCK_PROBE_MS,
+  } = {}) {
+    const context = this.context;
+    const generation = this.contextGeneration;
+    this.rampMaster(0, 0);
+    const cancelledSources = this.cancelScheduledEscapement();
+    let suspendOutcome = "NOT_ATTEMPTED";
+    let suspendError = null;
+    if (context && typeof context.suspend === "function") {
+      try {
+        await context.suspend();
+        suspendOutcome = context.state === "suspended" ? "SUSPENDED" : String(context.state).toUpperCase();
+      } catch (error) {
+        suspendOutcome = "SUSPEND_REJECTED";
+        suspendError = error?.message || String(error);
+      }
+    }
+    await this.waitFn(Math.max(1, Number(settleMs) || 24));
+    if (context !== this.context || generation !== this.contextGeneration || !this.visible) {
+      return {
+        recovered: false,
+        stale: true,
+        suspendOutcome,
+        suspendError,
+        cancelledSources,
+        classification: "CONTEXT_UNUSABLE",
+      };
+    }
+    const resume = await this.resumeWithTimeout({ context, timeoutMs, reason });
+    if (this.recoveryFaultInjection === "running-current-time-stalled") {
+      this.recoveryFaultInjection = null;
+    }
+    const progress = await this.classifyContextProgress({ context, probeMs, reason: `${reason}:verify` });
+    const recovered = !resume.stale && progress.classification === "RUNNING_AND_ADVANCING";
+    this.resumeRequired = !recovered;
+    if (recovered) this.rampMaster(this.masterGainValue);
+    else this.rampMaster(0, 0);
+    this.emitState();
+    return {
+      recovered,
+      stale: Boolean(resume.stale),
+      suspendOutcome,
+      suspendError,
+      cancelledSources,
+      resume,
+      ...progress,
+    };
+  }
+
+  async decodeRawAssetsForContext(context) {
+    const completeness = this.getRawAssetCompleteness();
+    if (!completeness.complete) {
+      throw new Error(`raw audio assets incomplete: ${completeness.missing.join(", ")}`);
+    }
+    const decoded = new Map();
+    for (const type of REQUIRED_AUDIO_EVENT_TYPES) {
+      if (this.recoveryFaultInjection === `fresh-decode-failure:${type}`) {
+        throw new Error(`Injected fresh decode failure: ${type}`);
+      }
+      decoded.set(type, await context.decodeAudioData(this.rawAssets.get(type).slice(0)));
+    }
+    return decoded;
+  }
+
+  async replaceWithFreshContext({
+    trustedGesture = false,
+    reason = "fresh-context-fallback",
+    timeoutMs = DEFAULT_RESUME_TIMEOUT_MS,
+    probeMs = DEFAULT_CLOCK_PROBE_MS,
+  } = {}) {
+    const attemptSequence = ++this.freshContextAttemptSequence;
+    const visibilitySequence = this.visibilityRequestSequence;
+    const old = {
+      context: this.context,
+      masterNode: this.masterNode,
+      busNodes: this.busNodes,
+      buffers: this.buffers,
+      generation: this.contextGeneration,
+    };
+    const result = {
+      attemptSequence,
+      trustedGesture: Boolean(trustedGesture),
+      reason,
+      oldGeneration: old.generation,
+      newGeneration: old.generation,
+      rawAssetCompleteness: this.getRawAssetCompleteness(),
+      decodedBufferCount: 0,
+      recovered: false,
+      stale: false,
+      error: null,
+      oldContextCloseError: null,
+    };
+    if (!trustedGesture || !this.visible || !this.enabled) {
+      result.error = "trusted visible enabled recovery required";
+      return result;
+    }
+    let candidateContext = null;
+    try {
+      if (this.recoveryFaultInjection === "fresh-context-create-failure") {
+        throw new Error("Injected fresh AudioContext creation failure");
+      }
+      candidateContext = this.audioContextFactory();
+      const candidateGraph = this.buildGraph(candidateContext);
+      const resume = await this.resumeWithTimeout({
+        context: candidateContext,
+        timeoutMs,
+        trustedGesture: true,
+        reason: `${reason}:candidate`,
+      });
+      result.resume = resume;
+      if (resume.outcome !== "RESUME_RESOLVED") {
+        throw new Error(`fresh AudioContext resume failed: ${resume.outcome}`);
+      }
+      const decodedBuffers = await this.decodeRawAssetsForContext(candidateContext);
+      result.decodedBufferCount = decodedBuffers.size;
+      if (visibilitySequence !== this.visibilityRequestSequence || !this.visible) {
+        result.stale = true;
+        throw new Error("fresh AudioContext completion became stale");
+      }
+      this.stopAll();
+      this.context = candidateContext;
+      this.masterNode = candidateGraph.masterNode;
+      this.busNodes = candidateGraph.busNodes;
+      this.buffers = decodedBuffers;
+      this.contextGeneration = old.generation + 1;
+      result.newGeneration = this.contextGeneration;
+      this.resumeRequired = false;
+      this.rampMaster(this.masterGainValue);
+      try {
+        if (this.recoveryFaultInjection === "old-context-close-failure") {
+          throw new Error("Injected old AudioContext close failure");
+        }
+        await old.context?.close?.();
+      } catch (error) {
+        result.oldContextCloseError = error?.message || String(error);
+      }
+      const progress = await this.classifyContextProgress({
+        context: candidateContext,
+        probeMs,
+        reason: `${reason}:verify`,
+      });
+      result.progress = progress;
+      result.recovered = progress.classification === "RUNNING_AND_ADVANCING";
+      if (!result.recovered) {
+        this.resumeRequired = true;
+        this.rampMaster(0, 0);
+      }
+    } catch (error) {
+      result.error = error?.message || String(error);
+      if (candidateContext && candidateContext !== this.context) {
+        try { await candidateContext.close?.(); } catch {}
+      }
+      this.context = old.context;
+      this.masterNode = old.masterNode;
+      this.busNodes = old.busNodes;
+      this.buffers = old.buffers;
+      this.contextGeneration = old.generation;
+      this.resumeRequired = true;
+      this.rampMaster(0, 0);
+    }
+    this.freshContextHistory.push({ ...result });
+    if (this.freshContextHistory.length > 20) {
+      this.freshContextHistory.splice(0, this.freshContextHistory.length - 20);
+    }
+    this.trace(result.recovered ? "fresh-context-recovered" : "fresh-context-failed", result);
+    this.emitState();
+    return result;
   }
 
   prepareTrustedGestureRecoveryForTest(reason = "diagnostic") {
@@ -658,6 +1045,7 @@ export class MechanicalAudioEngine {
       ),
       buffersLoaded: [...this.buffers.keys()].sort(),
       bufferCompleteness: this.getBufferCompleteness(),
+      rawAssetCompleteness: this.getRawAssetCompleteness(),
       failedAssets: [...this.failedAssets],
       masterGain: this.masterGainValue,
       masterGainCommandedValue: this.masterGainCommandedValue,
@@ -678,6 +1066,11 @@ export class MechanicalAudioEngine {
         : null,
       resumeHistory: this.resumeHistory.map((entry) => ({ ...entry })),
       contextGeneration: this.contextGeneration,
+      resumeOperationSequence: this.resumeOperationSequence,
+      contextProgressHistory: this.contextProgressHistory.map((entry) => ({ ...entry })),
+      freshContextAttemptSequence: this.freshContextAttemptSequence,
+      freshContextHistory: this.freshContextHistory.map((entry) => ({ ...entry })),
+      recoveryFaultInjection: this.recoveryFaultInjection,
       escapementSourceInventory: this.getEscapementSourceInventory(),
       audioClock: this.getClockSnapshot(),
       eventLog: audibleEventLog.map((event) => ({ ...event })),
