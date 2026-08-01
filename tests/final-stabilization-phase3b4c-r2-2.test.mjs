@@ -6,34 +6,41 @@ import test from "node:test";
 const sourceHead = "8fa4d6e9dd70cbaf32fd26b75ec17b0cabe73484";
 const root = new URL("../", import.meta.url);
 
-test("R2.2 integrates recovery by lifecycle cycle and does not use context running as UI success", async () => {
+test("R2.2 recovery machinery remains historical evidence but is removed from current runtime", async () => {
   const [index, engine] = await Promise.all([
     readFile(new URL("../index.html", import.meta.url), "utf8"),
     readFile(new URL("../js/mechanical-audio.js", import.meta.url), "utf8"),
   ]);
-  for (const state of [
-    "foreground-entered",
-    "automatic-resume-in-flight",
-    "trusted-gesture-pending",
-    "context-running",
-    "pipeline-verifying",
-    "resume-required",
-    "recovered",
-    "failed",
-  ]) assert.match(engine, new RegExp(state));
-  assert.match(index, /foregroundRecoveryNotConfirmed/);
-  assert.match(engine, /pipelineLiveness/);
-  assert.match(index, /getRecoveryVerificationTarget\(\)/);
-  assert.doesNotMatch(index, /function sampleForegroundAudioRecovery\(\)\{[^}]*getForegroundRecoveryDiagnostics/);
-  assert.match(index, /report\.status==='recovery-failed'/);
-  assert.doesNotMatch(index, /audioContextState\s*!==\s*['"]running['"]\)return/);
+  for (const legacyRuntimeSymbol of [
+    "beginForegroundRecoveryCycle",
+    "getRecoveryVerificationTarget",
+    "verifyRecoveryPipeline",
+    "primeRecoveryPipeline",
+    "rebuildGraphForRecovery",
+    "foregroundRecoveryNotConfirmed",
+    "pipelineLiveness",
+    "recovery-failed",
+  ]) {
+    assert.doesNotMatch(engine, new RegExp(legacyRuntimeSymbol));
+    assert.doesNotMatch(index, new RegExp(legacyRuntimeSymbol));
+  }
+  const historicalHarness = await readFile(
+    new URL("./final-stabilization-phase3b4c-r2-2-harness.js", import.meta.url),
+    "utf8",
+  );
+  assert.match(historicalHarness, /runningFalsePositiveRejected/);
+  assert.match(historicalHarness, /contextRebuildCount <= 1/);
 });
 
-test("R2.2 speaker recovery is bounded and retains decoded buffers", async () => {
-  const engine = await readFile(new URL("../js/mechanical-audio.js", import.meta.url), "utf8");
-  assert.match(engine, /cycle\.contextRebuildCount\s*>=\s*1/);
-  assert.match(engine, /cycle\.contextRebuildCount\s*\+=\s*1/);
-  assert.match(engine, /this\.buffers\.values\(\)\.next\(\)\.value/);
+test("current speaker recovery reuses one context and has no rebuild or priming route", async () => {
+  const [index, engine] = await Promise.all([
+    readFile(new URL("../index.html", import.meta.url), "utf8"),
+    readFile(new URL("../js/mechanical-audio.js", import.meta.url), "utf8"),
+  ]);
+  assert.match(engine, /contextGeneration/);
+  assert.match(index, /handleSpeakerFallback/);
+  assert.doesNotMatch(engine, /contextRebuildCount/);
+  assert.doesNotMatch(engine, /silentBuffer|silentSource|primeRecovery/);
   assert.doesNotMatch(engine, /setInterval\([^)]*resume/);
   assert.doesNotMatch(engine, /setTimeout\([^)]*createGraph/);
 });

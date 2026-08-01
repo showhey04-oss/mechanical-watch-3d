@@ -70,28 +70,6 @@ function fakeFetch({ fail = null, manifestValue = manifest, onAssetRequest = () 
   };
 }
 
-function completeRecoveryPipeline(engine, context, result, {
-  schedulerGeneration = 1,
-  duplicateCount = 0,
-  backlogBurstCount = 0,
-} = {}) {
-  const cycleId = result.recoveryCycleId;
-  assert.ok(Number.isInteger(cycleId));
-  assert.equal(engine.claimRecoverySchedulerReanchor(cycleId), true);
-  engine.noteRecoverySchedulerGeneration({ cycleId, schedulerGeneration, firstScheduledBeat: 1 });
-  engine.armRecoveryOutput(cycleId);
-  context.currentTime += 0.02;
-  if (typeof context.getOutputTimestamp === "function") context.outputContextTime += 0.02;
-  assert.equal(engine.play("escapementTick", { startTime: context.currentTime, metadata: { targetBeat: 1 } }), true);
-  return engine.verifyRecoveryPipeline({
-    cycleId,
-    schedulerGeneration,
-    firstScheduledBeat: 1,
-    duplicateCount,
-    backlogBurstCount,
-  });
-}
-
 test("Web Audio fallback remains OFF when AudioContext is unavailable", async () => {
   const engine = new MechanicalAudioEngine({ audioContextFactory: null, fetchFn: fakeFetch() });
   assert.equal(engine.getDiagnostics().audioSupported, false);
@@ -202,6 +180,19 @@ test("play diagnostics count real sources and visibility stops active playback",
   assert.equal(engine.getDiagnostics().activeSources, 0);
 });
 
+test("visibility hide clears source inventory even when a source stop throws", async () => {
+  const context = new FakeContext();
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  await engine.enableFromUserGesture();
+  assert.equal(engine.play("winding"), true);
+  context.sources[0].stop = () => { throw new Error("injected source stop failure"); };
+  const result = await engine.setVisible(false, { reason: "fault-injection:source-stop" });
+  assert.equal(result.stateAfter, "suspended");
+  assert.equal(engine.getDiagnostics().activeSources, 0);
+  assert.equal(engine.getDiagnostics().sourceRecordCount, 0);
+  assert.equal(engine.getDiagnostics().masterGainCommandedValue, 0);
+});
+
 test("visible auto-resume rejection keeps gain muted and exposes resume-required", async () => {
   const context = new FakeContext({ resumePlan: ["running", new Error("NotAllowedError")] });
   const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
@@ -231,30 +222,33 @@ test("resolved resume is not treated as recovery until AudioContext is running",
   assert.equal(engine.masterNode.gain.value, 0);
 });
 
-test("trusted gesture recovers a failed automatic resume exactly once", async () => {
+test("one trusted resume reuses the known-good context and loaded buffers", async () => {
   const context = new FakeContext({
     resumePlan: ["running", new Error("NotAllowedError"), "running"],
   });
-  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  let contextCount = 0;
+  let assetRequests = 0;
+  const engine = new MechanicalAudioEngine({
+    audioContextFactory: () => { contextCount += 1; return context; },
+    fetchFn: fakeFetch({ onAssetRequest: () => { assetRequests += 1; } }),
+  });
   assert.equal(await engine.enableFromUserGesture(), true);
   await engine.setVisible(false);
-  const automatic = await engine.resumeVisibleAudio({ trustedGesture: false, reason: "pageshow" });
+  const automatic = await engine.setVisible(true, { reason: "visibility:visible" });
   assert.equal(automatic.running, false);
-  const trusted = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "trusted-pointerdown" });
-  const recovery = completeRecoveryPipeline(engine, context, trusted);
-  const report = engine.getDiagnostics();
-  assert.equal(trusted.running, true);
-  assert.equal(trusted.trustedGesture, true);
-  assert.equal(report.status, "on");
-  assert.equal(report.resumeRequired, false);
-  assert.equal(report.resumeAttemptSequence, 2);
-  assert.equal(report.resumeHistory.length, 2);
+  assert.equal(engine.getDiagnostics().status, "resume-required");
+  const fallback = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "speaker" });
+  assert.equal(fallback.running, true);
+  assert.equal(engine.getDiagnostics().status, "on");
+  assert.equal(engine.getDiagnostics().resumeAttemptSequence, 2);
   assert.equal(engine.masterNode.gain.value, 0.36);
-  assert.equal(recovery.cycle.pipelineLiveness, true);
-  assert.equal(recovery.cycle.hardRecoveryRoute, "B");
+  assert.equal(contextCount, 1);
+  assert.equal(engine.getDiagnostics().contextGeneration, 1);
+  assert.equal(assetRequests, 6);
+  assert.equal(context.decodeCount, 6);
 });
 
-test("trusted gesture queued behind in-flight auto-resume gets its own verified retry", async () => {
+test("trusted fallback during automatic resume gets one fresh attempt in the gesture", async () => {
   let releaseAuto;
   const autoGate = new Promise((resolve) => { releaseAuto = resolve; });
   const context = new FakeContext({
@@ -267,156 +261,34 @@ test("trusted gesture queued behind in-flight auto-resume gets its own verified 
   const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
   assert.equal(await engine.enableFromUserGesture(), true);
   await engine.setVisible(false);
-  const automatic = engine.resumeVisibleAudio({ trustedGesture: false, reason: "pageshow" });
-  const trusted = engine.resumeVisibleAudio({ trustedGesture: true, reason: "trusted-pointerdown" });
+  const automatic = engine.setVisible(true, { reason: "visibility:visible" });
+  assert.equal(engine.getDiagnostics().status, "resume-required");
+  assert.equal(engine.masterNode.gain.value, 0);
+  const fallback = engine.resumeVisibleAudio({ trustedGesture: true, reason: "speaker" });
   releaseAuto();
-  const automaticResult = await automatic;
-  assert.equal(automaticResult.resumeRejected, true);
-  assert.equal(automaticResult.running, true);
-  const recovered = await trusted;
-  assert.equal(recovered.running, true);
-  assert.equal(recovered.trustedGesture, true);
+  const [automaticResult, fallbackResult] = await Promise.all([automatic, fallback]);
+  assert.equal(automaticResult.stale, true);
+  assert.equal(fallbackResult.running, true);
+  assert.equal(fallbackResult.fallbackAttempt, true);
   assert.equal(context.resumeCalls, 3);
-  const recovery = completeRecoveryPipeline(engine, context, recovered);
   assert.equal(engine.getDiagnostics().resumeAttemptSequence, 2);
   assert.equal(engine.getDiagnostics().status, "on");
-  assert.equal(recovery.cycle.trustedGestures.length, 1);
-  assert.equal(recovery.cycle.trustedGestures[0].resumeInFlight, true);
 });
 
-test("interrupted context can recover through the same verified resume contract", async () => {
+test("interrupted context recovers through the reused context contract", async () => {
   const context = new FakeContext({ resumePlan: ["running", "running"] });
   const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
   assert.equal(await engine.enableFromUserGesture(), true);
   context.state = "interrupted";
-  const result = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "trusted-keydown" });
+  const result = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "speaker" });
   assert.equal(result.stateBefore, "interrupted");
   assert.equal(result.stateAfter, "running");
   assert.equal(result.running, true);
-  completeRecoveryPipeline(engine, context, result);
   assert.equal(engine.getDiagnostics().status, "on");
+  assert.equal(engine.getDiagnostics().contextGeneration, 1);
 });
 
-test("running context without a new scheduler source is rejected as a UI false positive", async () => {
-  const context = new FakeContext({ resumePlan: ["running"] });
-  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
-  assert.equal(await engine.enableFromUserGesture(), true);
-  engine.markForegroundInactive("window-blur");
-  const cycle = engine.beginForegroundRecoveryCycle({ reason: "window-focus", schedulerGeneration: 7 });
-  const result = await engine.resumeVisibleAudio({ reason: "window-focus" });
-  assert.equal(result.running, true);
-  assert.equal(engine.claimRecoverySchedulerReanchor(cycle.cycleId), true);
-  engine.noteRecoverySchedulerGeneration({ cycleId: cycle.cycleId, schedulerGeneration: 8 });
-  engine.armRecoveryOutput(cycle.cycleId);
-  context.currentTime = 0.02;
-  const recovery = engine.verifyRecoveryPipeline({ cycleId: cycle.cycleId, schedulerGeneration: 8 });
-  assert.equal(recovery.cycle.contextTimeProgressed, true);
-  assert.equal(recovery.cycle.sourcePipelineStarted, false);
-  assert.equal(recovery.cycle.pipelineLiveness, false);
-  assert.equal(engine.getDiagnostics().status, "resume-required");
-  assert.equal(engine.getDiagnostics().resumeRequired, true);
-});
-
-test("running context with zero gain cannot confirm output liveness", async () => {
-  const context = new FakeContext({ resumePlan: ["running"] });
-  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
-  assert.equal(await engine.enableFromUserGesture(), true);
-  engine.markForegroundInactive("hidden");
-  const cycle = engine.beginForegroundRecoveryCycle({ reason: "visible", schedulerGeneration: 1 });
-  const result = await engine.resumeVisibleAudio({ reason: "visible" });
-  assert.equal(result.running, true);
-  engine.claimRecoverySchedulerReanchor(cycle.cycleId);
-  engine.noteRecoverySchedulerGeneration({ cycleId: cycle.cycleId, schedulerGeneration: 2 });
-  context.currentTime = 0.02;
-  assert.equal(engine.play("escapementTick", { startTime: 0.02 }), true);
-  const recovery = engine.verifyRecoveryPipeline({ cycleId: cycle.cycleId, schedulerGeneration: 2 });
-  assert.equal(recovery.cycle.gainRestored, false);
-  assert.equal(recovery.cycle.pipelineLiveness, false);
-  assert.equal(engine.getDiagnostics().status, "resume-required");
-});
-
-test("stalled output timestamp blocks recovery even when context time and sources progress", async () => {
-  const context = new FakeContext({ resumePlan: ["running"], outputTimestamp: true });
-  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
-  assert.equal(await engine.enableFromUserGesture(), true);
-  engine.markForegroundInactive("hidden");
-  const cycle = engine.beginForegroundRecoveryCycle({ reason: "visible", schedulerGeneration: 3 });
-  const result = await engine.resumeVisibleAudio({ reason: "visible" });
-  assert.equal(result.running, true);
-  engine.claimRecoverySchedulerReanchor(cycle.cycleId);
-  engine.noteRecoverySchedulerGeneration({ cycleId: cycle.cycleId, schedulerGeneration: 4 });
-  engine.armRecoveryOutput(cycle.cycleId);
-  context.currentTime = 0.02;
-  assert.equal(engine.play("escapementTick", { startTime: 0.02 }), true);
-  const recovery = engine.verifyRecoveryPipeline({ cycleId: cycle.cycleId, schedulerGeneration: 4 });
-  assert.equal(recovery.cycle.contextTimeProgressed, true);
-  assert.equal(recovery.cycle.outputTimestampProgressed, false);
-  assert.equal(recovery.cycle.pipelineLiveness, false);
-});
-
-test("speaker hard recovery rebuilds a running false-positive graph at most once", async () => {
-  const first = new FakeContext({ resumePlan: ["running"] });
-  const rebuilt = new FakeContext({ resumePlan: ["running"] });
-  const contexts = [first, rebuilt];
-  let factoryCalls = 0;
-  let assetRequests = 0;
-  const engine = new MechanicalAudioEngine({
-    audioContextFactory: () => contexts[factoryCalls++],
-    fetchFn: fakeFetch({ onAssetRequest: () => { assetRequests += 1; } }),
-  });
-  assert.equal(await engine.enableFromUserGesture(), true);
-  assert.equal(assetRequests, 6);
-  engine.markForegroundInactive("window-blur");
-  const cycle = engine.beginForegroundRecoveryCycle({ reason: "window-focus", schedulerGeneration: 10 });
-  first.state = "running";
-  const result = await engine.resumeVisibleAudio({
-    trustedGesture: true,
-    reason: "trusted-audio-toggle-click",
-    requestedRecoveryLevel: "hard",
-    eventType: "speaker",
-  });
-  assert.equal(result.running, true);
-  assert.equal(factoryCalls, 2);
-  assert.equal(first.closeCalls, 1);
-  assert.equal(rebuilt.decodeCount, 0);
-  assert.equal(assetRequests, 6);
-  assert.equal(engine.rebuildGraphForRecovery(cycle.cycleId), false);
-  const recovery = completeRecoveryPipeline(engine, rebuilt, result, { schedulerGeneration: 11 });
-  assert.equal(recovery.cycle.hardRecoveryRoute, "C");
-  assert.equal(recovery.cycle.contextRebuildCount, 1);
-  assert.equal(recovery.cycle.pipelineLiveness, true);
-});
-
-test("failed hard graph rebuild restores the previous context graph atomically", async () => {
-  const first = new FakeContext({ resumePlan: ["running"] });
-  const broken = new FakeContext();
-  broken.createGain = () => { throw new Error("graph construction failed"); };
-  const contexts = [first, broken];
-  let factoryCalls = 0;
-  const engine = new MechanicalAudioEngine({
-    audioContextFactory: () => contexts[factoryCalls++],
-    fetchFn: fakeFetch(),
-  });
-  assert.equal(await engine.enableFromUserGesture(), true);
-  const originalMaster = engine.masterNode;
-  const originalBuses = engine.busNodes;
-  const originalGeneration = engine.contextGeneration;
-  engine.markForegroundInactive("window-blur");
-  const cycle = engine.beginForegroundRecoveryCycle({ reason: "window-focus", schedulerGeneration: 4 });
-  first.state = "running";
-  assert.equal(engine.rebuildGraphForRecovery(cycle.cycleId), false);
-  assert.equal(engine.context, first);
-  assert.equal(engine.masterNode, originalMaster);
-  assert.equal(engine.busNodes, originalBuses);
-  assert.equal(engine.contextGeneration, originalGeneration);
-  assert.equal(broken.closeCalls, 1);
-  assert.match(
-    engine.getForegroundRecoveryDiagnostics().cycle.lifecycle.at(-1).event,
-    /graph-rebuild-failed/,
-  );
-});
-
-test("old async recovery result cannot overwrite a newer foreground cycle", async () => {
+test("stale visible completion cannot restore gain or context after a newer hidden request", async () => {
   let release;
   const gate = new Promise((resolve) => { release = resolve; });
   const context = new FakeContext({
@@ -425,51 +297,28 @@ test("old async recovery result cannot overwrite a newer foreground cycle", asyn
   const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
   assert.equal(await engine.enableFromUserGesture(), true);
   await engine.setVisible(false, { reason: "hidden:first" });
-  const first = engine.beginForegroundRecoveryCycle({ reason: "visible:first", schedulerGeneration: 1 });
-  const oldAttempt = engine.resumeVisibleAudio({ reason: "visible:first" });
-  engine.markForegroundInactive("hidden:second");
-  const second = engine.beginForegroundRecoveryCycle({ reason: "visible:second", schedulerGeneration: 2 });
+  const oldAttempt = engine.setVisible(true, { reason: "visible:first" });
+  const hidden = engine.setVisible(false, { reason: "hidden:second" });
   release();
-  const result = await oldAttempt;
-  assert.equal(result.stale, true);
-  assert.notEqual(first.cycleId, second.cycleId);
-  assert.equal(engine.getForegroundRecoveryDiagnostics().cycle.cycleId, second.cycleId);
-  assert.equal(engine.getForegroundRecoveryDiagnostics().cycle.state, "foreground-entered");
+  const [oldResult] = await Promise.all([oldAttempt, hidden]);
+  assert.equal(oldResult.stale, true);
+  assert.equal(engine.getDiagnostics().visible, false);
+  assert.equal(engine.getDiagnostics().audioContextState, "suspended");
+  assert.equal(engine.getDiagnostics().masterGainCommandedValue, 0);
 });
 
-test("duplicate lifecycle events claim one scheduler reanchor per recovery cycle", async () => {
-  const context = new FakeContext({ resumePlan: ["running"] });
-  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
-  assert.equal(await engine.enableFromUserGesture(), true);
-  engine.markForegroundInactive("hidden");
-  const visible = engine.beginForegroundRecoveryCycle({ reason: "visibility:visible", schedulerGeneration: 4 });
-  const pageshow = engine.beginForegroundRecoveryCycle({ reason: "pageshow", schedulerGeneration: 4 });
-  const focus = engine.beginForegroundRecoveryCycle({ reason: "window-focus", schedulerGeneration: 4 });
-  assert.equal(visible.cycleId, pageshow.cycleId);
-  assert.equal(visible.cycleId, focus.cycleId);
-  assert.equal(engine.claimRecoverySchedulerReanchor(visible.cycleId), true);
-  assert.equal(engine.claimRecoverySchedulerReanchor(visible.cycleId), false);
-  assert.equal(engine.getForegroundRecoveryDiagnostics().cycle.schedulerReanchorCount, 1);
-});
-
-test("failed one-gesture recovery is explicit and never reports UI on", async () => {
+test("failed one-click resume remains muted and never reports UI on", async () => {
   const context = new FakeContext({ resumePlan: ["running", new Error("NotAllowedError")] });
   const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
   assert.equal(await engine.enableFromUserGesture(), true);
   await engine.setVisible(false, { reason: "hidden" });
-  const cycle = engine.beginForegroundRecoveryCycle({ reason: "visible", schedulerGeneration: 1 });
-  const result = await engine.resumeVisibleAudio({
-    trustedGesture: true,
-    reason: "trusted-pointerdown",
-    requestedRecoveryLevel: "soft",
-  });
+  const result = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "speaker" });
   assert.equal(result.running, false);
-  assert.equal(engine.failForegroundRecovery(cycle.cycleId, "context-suspended", { explicit: true }), true);
   const report = engine.getDiagnostics();
-  assert.equal(report.status, "recovery-failed");
+  assert.equal(report.status, "resume-required");
   assert.equal(report.resumeRequired, true);
-  assert.equal(report.foregroundRecovery.cycle.state, "failed");
   assert.equal(engine.masterNode.gain.value, 0);
+  assert.equal(report.contextGeneration, 1);
 });
 
 test("diagnostic trusted-gesture gate never resumes or reloads audio by itself", async () => {

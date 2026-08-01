@@ -207,7 +207,7 @@ test("timeline reset clears stale audible identity and isolates the new scan gen
   assert.equal(runtime.audibleScanIndex, runtime.scheduled.length);
 });
 
-test("R2.1 integration routes discontinuities and verified context recovery without changing protected paths", async () => {
+test("R2.1 integration routes discontinuities while R2.3 owns foreground audio recovery", async () => {
   const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
   assert.match(source, /resetAudioMechanismTimeline\('watch-time-setting'\)/);
   assert.match(source, /resetAudioMechanismTimeline\('simulation-jump'\)/);
@@ -215,6 +215,8 @@ test("R2.1 integration routes discontinuities and verified context recovery with
   assert.match(source, /resetAudioMechanismTimeline\(`crown-position:\$\{previous\}->\$\{position\}`\)/);
   assert.match(source, /setAudioVisibilityForLifecycle\(visible,reason\)/);
   assert.match(source, /resumeAudioFromTrustedGestureForTest/);
-  assert.match(source, /listenerInstallCount:trustedAudioRecoveryListenersInstalled\?1:0/);
+  assert.match(source, /lifecycle:phase3B4cR23Lifecycle\?\.getReport/);
+  assert.match(source, /observeNonOwningEvent\('pagehide'/);
+  assert.doesNotMatch(source, /trustedAudioRecoveryListenersInstalled/);
   assert.match(source, /if\(!requestedPhase3B4cR2MechanismTiming\.enabled\)phase3B4cAudioRuntime\.reanchor\('watch-time-setting'\)/);
 });
