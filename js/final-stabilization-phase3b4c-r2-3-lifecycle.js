@@ -151,6 +151,10 @@ export class VisibilityOwnedAudioLifecycle {
 
   reanchorOnce(transition, reason) {
     if (!this.profile.schedulerReanchor || transition.reanchored) return false;
+    if (this.audioEngine?.recoveryFaultMatches?.("scheduler-reanchor-false")) {
+      this.record("scheduler-reanchor", { reason, reanchored: false, injectedFalse: true });
+      return false;
+    }
     transition.reanchored = Boolean(this.scheduler?.reanchor?.(reason));
     if (transition.reanchored) this.reanchorCount += 1;
     this.record("scheduler-reanchor", { reason, reanchored: transition.reanchored });

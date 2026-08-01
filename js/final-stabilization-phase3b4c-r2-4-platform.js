@@ -1,5 +1,23 @@
 export const PHASE3B4C_R2_4_STATUS = "PHASE3B4C_R2_4_WEBKIT_PLATFORM_AWARE_RECOVERY";
 
+export const PHASE3B4C_R2_4_PRODUCTION_TIMEOUT_PROFILE = Object.freeze({
+  id: "PRODUCTION_TIMEOUT_PROFILE",
+  resumeTimeoutMs: 450,
+  clockProbeMs: 80,
+  decodeTimeoutMs: 1_200,
+  closeTimeoutMs: 250,
+  transactionTimeoutMs: 5_500,
+});
+
+export const PHASE3B4C_R2_4_TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE = Object.freeze({
+  id: "TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE",
+  resumeTimeoutMs: 450,
+  clockProbeMs: 80,
+  decodeTimeoutMs: 300,
+  closeTimeoutMs: 50,
+  transactionTimeoutMs: 1_500,
+});
+
 const DEFINITIONS = {
   p0: {
     id: "p0",
@@ -76,11 +94,11 @@ export class WebKitPlatformAudioRecovery {
     audioEngine,
     navigatorObject = globalThis.navigator,
     trace = () => {},
-    resumeTimeoutMs = 450,
-    clockProbeMs = 80,
-    decodeTimeoutMs = 1_200,
-    closeTimeoutMs = 250,
-    transactionTimeoutMs = 5_500,
+    resumeTimeoutMs = PHASE3B4C_R2_4_PRODUCTION_TIMEOUT_PROFILE.resumeTimeoutMs,
+    clockProbeMs = PHASE3B4C_R2_4_PRODUCTION_TIMEOUT_PROFILE.clockProbeMs,
+    decodeTimeoutMs = PHASE3B4C_R2_4_PRODUCTION_TIMEOUT_PROFILE.decodeTimeoutMs,
+    closeTimeoutMs = PHASE3B4C_R2_4_PRODUCTION_TIMEOUT_PROFILE.closeTimeoutMs,
+    transactionTimeoutMs = PHASE3B4C_R2_4_PRODUCTION_TIMEOUT_PROFILE.transactionTimeoutMs,
   } = {}) {
     this.profile = profile;
     this.audioEngine = audioEngine;
@@ -91,6 +109,8 @@ export class WebKitPlatformAudioRecovery {
     this.decodeTimeoutMs = decodeTimeoutMs;
     this.closeTimeoutMs = closeTimeoutMs;
     this.transactionTimeoutMs = transactionTimeoutMs;
+    this.timeoutProfileId = "PRODUCTION_TIMEOUT_PROFILE";
+    this.diagnosticTimeoutOverrideApplied = false;
     this.transitionSequence = 0;
     this.activeTransition = null;
     this.audioSession = {
@@ -143,12 +163,30 @@ export class WebKitPlatformAudioRecovery {
     this.closeTimeoutMs = Math.max(1, Math.min(2_000, Number(closeTimeoutMs) || this.closeTimeoutMs));
     this.transactionTimeoutMs = Math.max(10, Math.min(15_000,
       Number(transactionTimeoutMs) || this.transactionTimeoutMs));
-    return {
+    this.diagnosticTimeoutOverrideApplied = true;
+    const values = {
       resumeTimeoutMs: this.resumeTimeoutMs,
       clockProbeMs: this.clockProbeMs,
       decodeTimeoutMs: this.decodeTimeoutMs,
       closeTimeoutMs: this.closeTimeoutMs,
       transactionTimeoutMs: this.transactionTimeoutMs,
+    };
+    const tight = PHASE3B4C_R2_4_TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE;
+    this.timeoutProfileId = Object.entries(values).every(([key, value]) => value === tight[key])
+      ? tight.id
+      : "CUSTOM_DIAGNOSTIC_TIMEOUT_PROFILE";
+    return this.getTimeoutProfileReport();
+  }
+
+  getTimeoutProfileReport() {
+    return {
+      id: this.timeoutProfileId,
+      resumeTimeoutMs: this.resumeTimeoutMs,
+      clockProbeMs: this.clockProbeMs,
+      decodeTimeoutMs: this.decodeTimeoutMs,
+      closeTimeoutMs: this.closeTimeoutMs,
+      transactionTimeoutMs: this.transactionTimeoutMs,
+      diagnosticOverrideApplied: this.diagnosticTimeoutOverrideApplied,
     };
   }
 
@@ -352,6 +390,7 @@ export class WebKitPlatformAudioRecovery {
       transitionSequence: this.transitionSequence,
       activeTransition: this.activeTransition ? { ...this.activeTransition } : null,
       counts: { ...this.counts },
+      timeoutProfile: this.getTimeoutProfileReport(),
       history: this.history.map((entry) => structuredClone(entry)),
       audio: this.audioEngine?.getDiagnostics?.() ?? null,
     };
