@@ -1,0 +1,4153 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.2",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "8fa4d6e9dd70cbaf32fd26b75ec17b0cabe73484",
+  "sourceImplementationCommit": "2010a862a7db7730154be28affee94c9419f7905",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T05:43:07.611Z",
+  "captureMode": "same-origin unsandboxed iframe harness with actual Web Audio",
+  "status": "PASSED_AUTOMATED_PHYSICAL_AUDIBILITY_PENDING",
+  "desktop": {
+    "appVersion": "v3.15.0",
+    "documentUrl": "http://127.0.0.1:8000/index.html?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3&rendering=issue2-d2c3&continuity=issue2-current&framing=issue2-mobile-full-length-fit&input=issue2-ios-multitouch-stability&audioTiming=phase3b4c-stability&mechanismTiming=phase3b4c-r2-foreground-stability&panel=collapsed&time=10%3A10%3A30",
+    "parentOrigin": "http://127.0.0.1:8000",
+    "frameOrigin": "http://127.0.0.1:8000",
+    "browserAutomationTrustedEventLimitation": "Automation does not replace physical iPhone audible-output confirmation.",
+    "viewport": {
+      "requested": {
+        "width": 1280,
+        "height": 720
+      },
+      "actual": {
+        "width": 1280,
+        "height": 720
+      }
+    },
+    "automaticResult": {
+      "stateBefore": "suspended",
+      "stateAfter": "running",
+      "resumeAttempted": true,
+      "resumeResolved": true,
+      "resumeRejected": false,
+      "running": true,
+      "requiresTrustedGesture": false,
+      "enabled": true,
+      "visible": true,
+      "trustedGesture": false,
+      "reason": "diagnostic-visibility:true",
+      "attemptSequence": 1,
+      "error": null,
+      "recoveryCycleId": 1
+    },
+    "falsePositiveResult": {
+      "stateBefore": "suspended",
+      "stateAfter": "running",
+      "resumeAttempted": true,
+      "resumeResolved": true,
+      "resumeRejected": false,
+      "running": true,
+      "requiresTrustedGesture": false,
+      "enabled": true,
+      "visible": true,
+      "trustedGesture": false,
+      "reason": "diagnostic-visibility:true",
+      "attemptSequence": 2,
+      "error": null,
+      "recoveryCycleId": 2
+    },
+    "speakerActivationEvents": [
+      {
+        "capturedAt": "2026-08-01T05:32:43.927Z",
+        "isTrusted": false,
+        "stateBeforeHostMicrotask": "off"
+      },
+      {
+        "capturedAt": "2026-08-01T05:33:03.677Z",
+        "isTrusted": false,
+        "stateBeforeHostMicrotask": "resume-required"
+      }
+    ],
+    "automationTrustedGestureObserved": false,
+    "checkpoints": [
+      {
+        "name": "baseline-running",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 2,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 4,
+          "sourceRecordCount": 4,
+          "sourceLifecycleCounts": {
+            "created": 7,
+            "startScheduled": 7,
+            "ended": 3,
+            "cancelled": 0,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 0,
+          "lastResumeResult": {
+            "stateBefore": "not-created",
+            "stateAfter": "not-created",
+            "resumeAttempted": false,
+            "resumeResolved": false,
+            "resumeRejected": false,
+            "running": false,
+            "requiresTrustedGesture": false,
+            "enabled": false,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "window-focus",
+            "attemptSequence": 0,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 2,
+          "timelineGeneration": 0,
+          "reanchorCount": 2,
+          "lastScheduledBeat": 183235,
+          "eventSequenceCount": 7,
+          "audibleEventCount": 3,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 7,
+            "startScheduled": 7,
+            "ended": 3,
+            "cancelled": 0,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": null
+      },
+      {
+        "name": "automatic-hidden",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "suspended",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 2,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 0,
+          "sourceRecordCount": 0,
+          "sourceLifecycleCounts": {
+            "created": 7,
+            "startScheduled": 7,
+            "ended": 3,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 0,
+          "lastResumeResult": {
+            "stateBefore": "not-created",
+            "stateAfter": "not-created",
+            "resumeAttempted": false,
+            "resumeResolved": false,
+            "resumeRejected": false,
+            "running": false,
+            "requiresTrustedGesture": false,
+            "enabled": false,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "window-focus",
+            "attemptSequence": 0,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 3,
+          "timelineGeneration": 0,
+          "reanchorCount": 3,
+          "lastScheduledBeat": null,
+          "eventSequenceCount": 3,
+          "audibleEventCount": 3,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 7,
+            "startScheduled": 7,
+            "ended": 3,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": null
+      },
+      {
+        "name": "automatic-context-result-before-liveness",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "resume-required",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 2,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 0,
+          "sourceRecordCount": 0,
+          "sourceLifecycleCounts": {
+            "created": 7,
+            "startScheduled": 7,
+            "ended": 3,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "resumeRequired": true,
+          "resumeAttemptSequence": 1,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 1,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 5,
+          "timelineGeneration": 0,
+          "reanchorCount": 5,
+          "lastScheduledBeat": null,
+          "eventSequenceCount": 3,
+          "audibleEventCount": 3,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 7,
+            "startScheduled": 7,
+            "ended": 3,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 1,
+          "state": "pipeline-verifying",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 4,
+          "schedulerGeneration": 5,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 0,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 0,
+          "contextTimeProgressed": false,
+          "outputTimestampProgressed": false,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": false,
+          "sourceLifecycleProgressed": false,
+          "gainRestored": true,
+          "duplicateCount": null,
+          "backlogBurstCount": null,
+          "pipelineLiveness": false,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 16644.700000000186,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 16644.800000000745,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 16648.400000000373,
+              "contextState": "running",
+              "attemptSequence": 1,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 16648.5,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 16648.60000000056,
+              "contextState": "running",
+              "schedulerGeneration": 5,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 16648.700000000186,
+              "contextState": "running",
+              "masterGain": 0.36
+            }
+          ]
+        }
+      },
+      {
+        "name": "automatic-recovered",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 2,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 4,
+          "sourceRecordCount": 4,
+          "sourceLifecycleCounts": {
+            "created": 11,
+            "startScheduled": 11,
+            "ended": 7,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 1,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 1,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 5,
+          "timelineGeneration": 0,
+          "reanchorCount": 5,
+          "lastScheduledBeat": 183235,
+          "eventSequenceCount": 7,
+          "audibleEventCount": 3,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 11,
+            "startScheduled": 11,
+            "ended": 7,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 1,
+          "state": "recovered",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 4,
+          "schedulerGeneration": 5,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183235,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": false,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 16644.700000000186,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 16644.800000000745,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 16648.400000000373,
+              "contextState": "running",
+              "attemptSequence": 1,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 16648.5,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 16648.60000000056,
+              "contextState": "running",
+              "schedulerGeneration": 5,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 16648.700000000186,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 16681,
+              "contextState": "running"
+            }
+          ]
+        }
+      },
+      {
+        "name": "running-before-pipeline-confirmation",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "resume-required",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 2,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 0,
+          "sourceRecordCount": 0,
+          "sourceLifecycleCounts": {
+            "created": 11,
+            "startScheduled": 11,
+            "ended": 7,
+            "cancelled": 8,
+            "cleaned": 0
+          },
+          "resumeRequired": true,
+          "resumeAttemptSequence": 2,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 2,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 8,
+          "timelineGeneration": 0,
+          "reanchorCount": 8,
+          "lastScheduledBeat": null,
+          "eventSequenceCount": 3,
+          "audibleEventCount": 3,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 11,
+            "startScheduled": 11,
+            "ended": 7,
+            "cancelled": 8,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 2,
+          "state": "pipeline-verifying",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 7,
+          "schedulerGeneration": 8,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 0,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 0,
+          "contextTimeProgressed": false,
+          "outputTimestampProgressed": false,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": false,
+          "sourceLifecycleProgressed": false,
+          "gainRestored": true,
+          "duplicateCount": null,
+          "backlogBurstCount": null,
+          "pipelineLiveness": false,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 16731.10000000056,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 16731.10000000056,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 16743,
+              "contextState": "running",
+              "attemptSequence": 2,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 16743.200000000186,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 16743.300000000745,
+              "contextState": "running",
+              "schedulerGeneration": 8,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 16743.300000000745,
+              "contextState": "running",
+              "masterGain": 0.36
+            }
+          ]
+        }
+      },
+      {
+        "name": "running-after-pipeline-confirmation",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 2,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 4,
+          "sourceRecordCount": 4,
+          "sourceLifecycleCounts": {
+            "created": 15,
+            "startScheduled": 15,
+            "ended": 11,
+            "cancelled": 8,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 2,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 2,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 8,
+          "timelineGeneration": 0,
+          "reanchorCount": 8,
+          "lastScheduledBeat": 183236,
+          "eventSequenceCount": 7,
+          "audibleEventCount": 3,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 15,
+            "startScheduled": 15,
+            "ended": 11,
+            "cancelled": 8,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 2,
+          "state": "recovered",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 7,
+          "schedulerGeneration": 8,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183236,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": false,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 16731.10000000056,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 16731.10000000056,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 16743,
+              "contextState": "running",
+              "attemptSequence": 2,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 16743.200000000186,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 16743.300000000745,
+              "contextState": "running",
+              "schedulerGeneration": 8,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 16743.300000000745,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 16780,
+              "contextState": "running"
+            }
+          ]
+        }
+      },
+      {
+        "name": "speaker-recovery-required",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "suspended",
+          "status": "resume-required",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 2,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 0,
+          "sourceRecordCount": 0,
+          "sourceLifecycleCounts": {
+            "created": 15,
+            "startScheduled": 15,
+            "ended": 11,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "resumeRequired": true,
+          "resumeAttemptSequence": 2,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "suspended",
+            "resumeAttempted": false,
+            "resumeResolved": false,
+            "resumeRejected": false,
+            "running": false,
+            "requiresTrustedGesture": true,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-browser-trusted-gesture",
+            "attemptSequence": 2,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 9,
+          "timelineGeneration": 0,
+          "reanchorCount": 9,
+          "lastScheduledBeat": null,
+          "eventSequenceCount": 3,
+          "audibleEventCount": 3,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 15,
+            "startScheduled": 15,
+            "ended": 11,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 2,
+          "state": "hidden",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 7,
+          "schedulerGeneration": 8,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183236,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 16731.10000000056,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 16731.10000000056,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 16743,
+              "contextState": "running",
+              "attemptSequence": 2,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 16743.200000000186,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 16743.300000000745,
+              "contextState": "running",
+              "schedulerGeneration": 8,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 16743.300000000745,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 16780,
+              "contextState": "running"
+            },
+            {
+              "sequence": 8,
+              "event": "diagnostic-visibility:false",
+              "capturedAt": 16830.900000000373,
+              "contextState": "running"
+            }
+          ]
+        }
+      },
+      {
+        "name": "speaker-one-gesture-recovered",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 2,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 4,
+          "sourceRecordCount": 4,
+          "sourceLifecycleCounts": {
+            "created": 19,
+            "startScheduled": 19,
+            "ended": 15,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 3,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "trusted-audio-toggle-click",
+            "attemptSequence": 3,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 11,
+          "timelineGeneration": 0,
+          "reanchorCount": 11,
+          "lastScheduledBeat": 183331,
+          "eventSequenceCount": 7,
+          "audibleEventCount": 3,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 19,
+            "startScheduled": 19,
+            "ended": 15,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 3,
+          "state": "recovered",
+          "reason": "trusted-audio-toggle-click",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 9,
+          "schedulerGeneration": 11,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183331,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": false,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "trusted-audio-toggle-click",
+              "capturedAt": 35845.40000000037,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 35845.5,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 35847.700000000186,
+              "contextState": "running",
+              "attemptSequence": 3,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 35847.90000000037,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 35848,
+              "contextState": "running",
+              "schedulerGeneration": 10,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 35848,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 35880.60000000056,
+              "contextState": "running"
+            }
+          ]
+        }
+      }
+    ],
+    "finalAudio": {
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "masterGain": 0.36,
+      "eventCounts": {
+        "escapementTick": 28,
+        "escapementTock": 28,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      },
+      "activeSources": 4,
+      "sourceRecordCount": 4,
+      "sourceLifecycleCounts": {
+        "created": 72,
+        "startScheduled": 72,
+        "ended": 68,
+        "cancelled": 12,
+        "cleaned": 0
+      },
+      "resumeRequired": false,
+      "resumeAttemptSequence": 3,
+      "lastResumeResult": {
+        "stateBefore": "suspended",
+        "stateAfter": "running",
+        "resumeAttempted": true,
+        "resumeResolved": true,
+        "resumeRejected": false,
+        "running": true,
+        "requiresTrustedGesture": false,
+        "enabled": true,
+        "visible": true,
+        "trustedGesture": false,
+        "reason": "trusted-audio-toggle-click",
+        "attemptSequence": 3,
+        "error": null
+      }
+    },
+    "finalScheduler": {
+      "schedulerGeneration": 11,
+      "timelineGeneration": 0,
+      "reanchorCount": 11,
+      "lastScheduledBeat": 183384,
+      "eventSequenceCount": 60,
+      "audibleEventCount": 56,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "lateDropCount": 0,
+      "maximumPendingEscapementSources": 4,
+      "sourceLifecycleCounts": {
+        "created": 72,
+        "startScheduled": 72,
+        "ended": 68,
+        "cancelled": 12,
+        "cleaned": 0
+      },
+      "phaseContract": {
+        "targetBeatCoupledToStudyBeat": true,
+        "audibleMechanismPhase": true,
+        "maximumProjectionBeats": 4,
+        "acceptedPhaseErrorBeats": 0.25,
+        "passed": true
+      },
+      "mechanismAuthoritative": true
+    },
+    "finalRecovery": {
+      "cycle": {
+        "cycleId": 3,
+        "state": "recovered",
+        "reason": "trusted-audio-toggle-click",
+        "contextGeneration": 1,
+        "schedulerGenerationBefore": 9,
+        "schedulerGeneration": 11,
+        "schedulerReanchorClaimed": true,
+        "schedulerReanchorCount": 1,
+        "firstScheduledBeat": 183331,
+        "hardRecoveryRoute": "A",
+        "primingSourceStarted": false,
+        "contextRebuildCount": 0,
+        "verificationFrames": 1,
+        "contextTimeProgressed": true,
+        "outputTimestampProgressed": true,
+        "schedulerEstablished": true,
+        "sourcePipelineStarted": true,
+        "sourceLifecycleProgressed": true,
+        "gainRestored": true,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "pipelineLiveness": true,
+        "foregroundRecoveryNotConfirmed": false,
+        "failureReason": null,
+        "lifecycle": [
+          {
+            "sequence": 1,
+            "event": "trusted-audio-toggle-click",
+            "capturedAt": 35845.40000000037,
+            "contextState": "suspended"
+          },
+          {
+            "sequence": 2,
+            "event": "resume-attempt-started",
+            "capturedAt": 35845.5,
+            "contextState": "suspended",
+            "trustedGesture": false
+          },
+          {
+            "sequence": 3,
+            "event": "context-running",
+            "capturedAt": 35847.700000000186,
+            "contextState": "running",
+            "attemptSequence": 3,
+            "trustedGesture": false
+          },
+          {
+            "sequence": 4,
+            "event": "scheduler-reanchor-claimed",
+            "capturedAt": 35847.90000000037,
+            "contextState": "running"
+          },
+          {
+            "sequence": 5,
+            "event": "scheduler-generation-established",
+            "capturedAt": 35848,
+            "contextState": "running",
+            "schedulerGeneration": 10,
+            "firstScheduledBeat": 0
+          },
+          {
+            "sequence": 6,
+            "event": "master-gain-restored",
+            "capturedAt": 35848,
+            "contextState": "running",
+            "masterGain": 0.36
+          },
+          {
+            "sequence": 7,
+            "event": "pipeline-liveness-confirmed",
+            "capturedAt": 35880.60000000056,
+            "contextState": "running"
+          }
+        ]
+      },
+      "history": [
+        {
+          "cycleId": 1,
+          "state": "hidden",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 4,
+          "schedulerGeneration": 5,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183235,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 16644.700000000186,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 16644.800000000745,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 16648.400000000373,
+              "contextState": "running",
+              "attemptSequence": 1,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 16648.5,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 16648.60000000056,
+              "contextState": "running",
+              "schedulerGeneration": 5,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 16648.700000000186,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 16681,
+              "contextState": "running"
+            },
+            {
+              "sequence": 8,
+              "event": "diagnostic-visibility:false",
+              "capturedAt": 16730.300000000745,
+              "contextState": "running"
+            }
+          ]
+        },
+        {
+          "cycleId": 2,
+          "state": "hidden",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 7,
+          "schedulerGeneration": 8,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183236,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 16731.10000000056,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 16731.10000000056,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 16743,
+              "contextState": "running",
+              "attemptSequence": 2,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 16743.200000000186,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 16743.300000000745,
+              "contextState": "running",
+              "schedulerGeneration": 8,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 16743.300000000745,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 16780,
+              "contextState": "running"
+            },
+            {
+              "sequence": 8,
+              "event": "diagnostic-visibility:false",
+              "capturedAt": 16830.900000000373,
+              "contextState": "running"
+            }
+          ]
+        }
+      ],
+      "foregroundRecoveryNotConfirmed": false,
+      "verificationFrameLimit": 45,
+      "contextGeneration": 1,
+      "recoveryFailed": false,
+      "primingSourceCount": 0
+    },
+    "finalUi": {
+      "toggle": {
+        "pressed": true,
+        "disabled": false,
+        "ariaLabel": "作動音をオフにする",
+        "rect": {
+          "left": 1226,
+          "top": 10,
+          "right": 1270,
+          "bottom": 54,
+          "width": 44,
+          "height": 44
+        },
+        "tagName": "BUTTON",
+        "state": "on",
+        "visibleText": ""
+      },
+      "status": {
+        "text": "作動音 ON",
+        "state": "on",
+        "role": "status"
+      },
+      "recovery": {
+        "contextState": "running",
+        "resumeRequired": false,
+        "resumeAttemptSequence": 3,
+        "lastResumeResult": {
+          "stateBefore": "suspended",
+          "stateAfter": "running",
+          "resumeAttempted": true,
+          "resumeResolved": true,
+          "resumeRejected": false,
+          "running": true,
+          "requiresTrustedGesture": false,
+          "enabled": true,
+          "visible": true,
+          "trustedGesture": false,
+          "reason": "trusted-audio-toggle-click",
+          "attemptSequence": 3,
+          "error": null
+        },
+        "resumeHistory": [
+          {
+            "stateBefore": "not-created",
+            "stateAfter": "not-created",
+            "resumeAttempted": false,
+            "resumeResolved": false,
+            "resumeRejected": false,
+            "running": false,
+            "requiresTrustedGesture": false,
+            "enabled": false,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "window-focus",
+            "attemptSequence": 0,
+            "error": null
+          },
+          {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 1,
+            "error": null
+          },
+          {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 2,
+            "error": null
+          },
+          {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "trusted-audio-toggle-click",
+            "attemptSequence": 3,
+            "error": null
+          }
+        ],
+        "trustedGestureCount": 0,
+        "listenerInstallCount": 1,
+        "cycle": {
+          "cycleId": 3,
+          "state": "recovered",
+          "reason": "trusted-audio-toggle-click",
+          "startedAt": 35845.40000000037,
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 9,
+          "schedulerGeneration": 11,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183331,
+          "sourceLifecycleBaseline": {
+            "created": 15,
+            "startScheduled": 15,
+            "ended": 11,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "clockBaseline": {
+            "currentTime": 0.6907936507936508,
+            "outputTimestamp": {
+              "contextTime": 0.6656316621315194,
+              "performanceTime": 16825.60000000056
+            }
+          },
+          "outputTimestampSample": {
+            "contextTime": 0.6946786054421769,
+            "performanceTime": 35878
+          },
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "trusted-audio-toggle-click",
+              "capturedAt": 35845.40000000037,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 35845.5,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 35847.700000000186,
+              "contextState": "running",
+              "attemptSequence": 3,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 35847.90000000037,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 35848,
+              "contextState": "running",
+              "schedulerGeneration": 10,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 35848,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 35880.60000000056,
+              "contextState": "running"
+            }
+          ],
+          "trustedGestures": [],
+          "automaticResume": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "trusted-audio-toggle-click",
+            "attemptSequence": 3,
+            "error": null
+          },
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": false,
+          "failureReason": null,
+          "stale": false,
+          "recoveredAt": 35880.60000000056
+        },
+        "history": [
+          {
+            "cycleId": 1,
+            "state": "hidden",
+            "reason": "diagnostic-visibility:true",
+            "startedAt": 16644.60000000056,
+            "contextGeneration": 1,
+            "schedulerGenerationBefore": 4,
+            "schedulerGeneration": 5,
+            "schedulerReanchorClaimed": true,
+            "schedulerReanchorCount": 1,
+            "firstScheduledBeat": 183235,
+            "sourceLifecycleBaseline": {
+              "created": 7,
+              "startScheduled": 7,
+              "ended": 3,
+              "cancelled": 4,
+              "cleaned": 0
+            },
+            "clockBaseline": {
+              "currentTime": 0.5340589569160997,
+              "outputTimestamp": {
+                "contextTime": 0.5089019682539683,
+                "performanceTime": 16639.800000000745
+              }
+            },
+            "outputTimestampSample": {
+              "contextTime": 0.5378899115646258,
+              "performanceTime": 16680.400000000373
+            },
+            "lifecycle": [
+              {
+                "sequence": 1,
+                "event": "diagnostic-visibility:true",
+                "capturedAt": 16644.700000000186,
+                "contextState": "suspended"
+              },
+              {
+                "sequence": 2,
+                "event": "resume-attempt-started",
+                "capturedAt": 16644.800000000745,
+                "contextState": "suspended",
+                "trustedGesture": false
+              },
+              {
+                "sequence": 3,
+                "event": "context-running",
+                "capturedAt": 16648.400000000373,
+                "contextState": "running",
+                "attemptSequence": 1,
+                "trustedGesture": false
+              },
+              {
+                "sequence": 4,
+                "event": "scheduler-reanchor-claimed",
+                "capturedAt": 16648.5,
+                "contextState": "running"
+              },
+              {
+                "sequence": 5,
+                "event": "scheduler-generation-established",
+                "capturedAt": 16648.60000000056,
+                "contextState": "running",
+                "schedulerGeneration": 5,
+                "firstScheduledBeat": 0
+              },
+              {
+                "sequence": 6,
+                "event": "master-gain-restored",
+                "capturedAt": 16648.700000000186,
+                "contextState": "running",
+                "masterGain": 0.36
+              },
+              {
+                "sequence": 7,
+                "event": "pipeline-liveness-confirmed",
+                "capturedAt": 16681,
+                "contextState": "running"
+              },
+              {
+                "sequence": 8,
+                "event": "diagnostic-visibility:false",
+                "capturedAt": 16730.300000000745,
+                "contextState": "running"
+              }
+            ],
+            "trustedGestures": [],
+            "automaticResume": {
+              "stateBefore": "suspended",
+              "stateAfter": "running",
+              "resumeAttempted": true,
+              "resumeResolved": true,
+              "resumeRejected": false,
+              "running": true,
+              "requiresTrustedGesture": false,
+              "enabled": true,
+              "visible": true,
+              "trustedGesture": false,
+              "reason": "diagnostic-visibility:true",
+              "attemptSequence": 1,
+              "error": null
+            },
+            "hardRecoveryRoute": "A",
+            "primingSourceStarted": false,
+            "contextRebuildCount": 0,
+            "verificationFrames": 1,
+            "contextTimeProgressed": true,
+            "outputTimestampProgressed": true,
+            "schedulerEstablished": true,
+            "sourcePipelineStarted": true,
+            "sourceLifecycleProgressed": true,
+            "gainRestored": true,
+            "duplicateCount": 0,
+            "backlogBurstCount": 0,
+            "pipelineLiveness": true,
+            "foregroundRecoveryNotConfirmed": true,
+            "failureReason": null,
+            "stale": false,
+            "recoveredAt": 16681
+          },
+          {
+            "cycleId": 2,
+            "state": "hidden",
+            "reason": "diagnostic-visibility:true",
+            "startedAt": 16731,
+            "contextGeneration": 1,
+            "schedulerGenerationBefore": 7,
+            "schedulerGeneration": 8,
+            "schedulerReanchorClaimed": true,
+            "schedulerReanchorCount": 1,
+            "firstScheduledBeat": 183236,
+            "sourceLifecycleBaseline": {
+              "created": 11,
+              "startScheduled": 11,
+              "ended": 7,
+              "cancelled": 8,
+              "cleaned": 0
+            },
+            "clockBaseline": {
+              "currentTime": 0.6095238095238096,
+              "outputTimestamp": {
+                "contextTime": 0.5843968208616781,
+                "performanceTime": 16726.900000000373
+              }
+            },
+            "outputTimestampSample": {
+              "contextTime": 0.6191947528344671,
+              "performanceTime": 16779.10000000056
+            },
+            "lifecycle": [
+              {
+                "sequence": 1,
+                "event": "diagnostic-visibility:true",
+                "capturedAt": 16731.10000000056,
+                "contextState": "suspended"
+              },
+              {
+                "sequence": 2,
+                "event": "resume-attempt-started",
+                "capturedAt": 16731.10000000056,
+                "contextState": "suspended",
+                "trustedGesture": false
+              },
+              {
+                "sequence": 3,
+                "event": "context-running",
+                "capturedAt": 16743,
+                "contextState": "running",
+                "attemptSequence": 2,
+                "trustedGesture": false
+              },
+              {
+                "sequence": 4,
+                "event": "scheduler-reanchor-claimed",
+                "capturedAt": 16743.200000000186,
+                "contextState": "running"
+              },
+              {
+                "sequence": 5,
+                "event": "scheduler-generation-established",
+                "capturedAt": 16743.300000000745,
+                "contextState": "running",
+                "schedulerGeneration": 8,
+                "firstScheduledBeat": 0
+              },
+              {
+                "sequence": 6,
+                "event": "master-gain-restored",
+                "capturedAt": 16743.300000000745,
+                "contextState": "running",
+                "masterGain": 0.36
+              },
+              {
+                "sequence": 7,
+                "event": "pipeline-liveness-confirmed",
+                "capturedAt": 16780,
+                "contextState": "running"
+              },
+              {
+                "sequence": 8,
+                "event": "diagnostic-visibility:false",
+                "capturedAt": 16830.900000000373,
+                "contextState": "running"
+              }
+            ],
+            "trustedGestures": [],
+            "automaticResume": {
+              "stateBefore": "suspended",
+              "stateAfter": "running",
+              "resumeAttempted": true,
+              "resumeResolved": true,
+              "resumeRejected": false,
+              "running": true,
+              "requiresTrustedGesture": false,
+              "enabled": true,
+              "visible": true,
+              "trustedGesture": false,
+              "reason": "diagnostic-visibility:true",
+              "attemptSequence": 2,
+              "error": null
+            },
+            "hardRecoveryRoute": "A",
+            "primingSourceStarted": false,
+            "contextRebuildCount": 0,
+            "verificationFrames": 1,
+            "contextTimeProgressed": true,
+            "outputTimestampProgressed": true,
+            "schedulerEstablished": true,
+            "sourcePipelineStarted": true,
+            "sourceLifecycleProgressed": true,
+            "gainRestored": true,
+            "duplicateCount": 0,
+            "backlogBurstCount": 0,
+            "pipelineLiveness": true,
+            "foregroundRecoveryNotConfirmed": true,
+            "failureReason": null,
+            "stale": false,
+            "recoveredAt": 16780
+          }
+        ],
+        "foregroundRecoveryNotConfirmed": false,
+        "verificationFrameLimit": 45,
+        "contextGeneration": 1,
+        "recoveryFailed": false,
+        "primingSourceCount": 0
+      },
+      "fixedGains": {
+        "master": 0.36,
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      }
+    },
+    "applicationConsole": {
+      "errors": [],
+      "warnings": [],
+      "runtimeErrors": [],
+      "unhandledRejections": []
+    },
+    "contracts": {
+      "appVersionPreserved": true,
+      "sameOrigin": true,
+      "viewportExact": true,
+      "automaticResumeRunning": true,
+      "automaticPipelineLiveness": true,
+      "runningFalsePositiveRejected": true,
+      "oneControlActivationRecorded": true,
+      "oneGesturePipelineLiveness": true,
+      "boundedContextRebuild": true,
+      "schedulerReanchorOnce": true,
+      "duplicateZero": true,
+      "backlogZero": true,
+      "buffersComplete": true,
+      "sourcePipelineProgressed": true,
+      "finalUiOnOnlyAfterLiveness": true,
+      "interferenceZero": true,
+      "performanceTransformInvariant": true,
+      "consoleClean": true
+    }
+  },
+  "mobile390x844": {
+    "appVersion": "v3.15.0",
+    "documentUrl": "http://127.0.0.1:8000/index.html?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3&rendering=issue2-d2c3&continuity=issue2-current&framing=issue2-mobile-full-length-fit&input=issue2-ios-multitouch-stability&audioTiming=phase3b4c-stability&mechanismTiming=phase3b4c-r2-foreground-stability&panel=collapsed&time=10%3A10%3A30",
+    "parentOrigin": "http://127.0.0.1:8000",
+    "frameOrigin": "http://127.0.0.1:8000",
+    "browserAutomationTrustedEventLimitation": "Automation does not replace physical iPhone audible-output confirmation.",
+    "viewport": {
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "actual": {
+        "width": 390,
+        "height": 844
+      }
+    },
+    "automaticResult": {
+      "stateBefore": "suspended",
+      "stateAfter": "running",
+      "resumeAttempted": true,
+      "resumeResolved": true,
+      "resumeRejected": false,
+      "running": true,
+      "requiresTrustedGesture": false,
+      "enabled": true,
+      "visible": true,
+      "trustedGesture": false,
+      "reason": "diagnostic-visibility:true",
+      "attemptSequence": 1,
+      "error": null,
+      "recoveryCycleId": 1
+    },
+    "falsePositiveResult": {
+      "stateBefore": "suspended",
+      "stateAfter": "running",
+      "resumeAttempted": true,
+      "resumeResolved": true,
+      "resumeRejected": false,
+      "running": true,
+      "requiresTrustedGesture": false,
+      "enabled": true,
+      "visible": true,
+      "trustedGesture": false,
+      "reason": "diagnostic-visibility:true",
+      "attemptSequence": 2,
+      "error": null,
+      "recoveryCycleId": 2
+    },
+    "speakerActivationEvents": [
+      {
+        "capturedAt": "2026-08-01T05:30:20.528Z",
+        "isTrusted": false,
+        "stateBeforeHostMicrotask": "off"
+      },
+      {
+        "capturedAt": "2026-08-01T05:30:30.314Z",
+        "isTrusted": false,
+        "stateBeforeHostMicrotask": "resume-required"
+      }
+    ],
+    "automationTrustedGestureObserved": false,
+    "checkpoints": [
+      {
+        "name": "baseline-running",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 4,
+          "sourceRecordCount": 4,
+          "sourceLifecycleCounts": {
+            "created": 5,
+            "startScheduled": 5,
+            "ended": 1,
+            "cancelled": 0,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 0,
+          "lastResumeResult": {
+            "stateBefore": "not-created",
+            "stateAfter": "not-created",
+            "resumeAttempted": false,
+            "resumeResolved": false,
+            "resumeRejected": false,
+            "running": false,
+            "requiresTrustedGesture": false,
+            "enabled": false,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "window-focus",
+            "attemptSequence": 0,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 2,
+          "timelineGeneration": 0,
+          "reanchorCount": 2,
+          "lastScheduledBeat": 183198,
+          "eventSequenceCount": 5,
+          "audibleEventCount": 1,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 5,
+            "startScheduled": 5,
+            "ended": 1,
+            "cancelled": 0,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": null
+      },
+      {
+        "name": "automatic-hidden",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "suspended",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 0,
+          "sourceRecordCount": 0,
+          "sourceLifecycleCounts": {
+            "created": 5,
+            "startScheduled": 5,
+            "ended": 1,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 0,
+          "lastResumeResult": {
+            "stateBefore": "not-created",
+            "stateAfter": "not-created",
+            "resumeAttempted": false,
+            "resumeResolved": false,
+            "resumeRejected": false,
+            "running": false,
+            "requiresTrustedGesture": false,
+            "enabled": false,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "window-focus",
+            "attemptSequence": 0,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 3,
+          "timelineGeneration": 0,
+          "reanchorCount": 3,
+          "lastScheduledBeat": null,
+          "eventSequenceCount": 1,
+          "audibleEventCount": 1,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 5,
+            "startScheduled": 5,
+            "ended": 1,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": null
+      },
+      {
+        "name": "automatic-context-result-before-liveness",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "resume-required",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 0,
+          "sourceRecordCount": 0,
+          "sourceLifecycleCounts": {
+            "created": 5,
+            "startScheduled": 5,
+            "ended": 1,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "resumeRequired": true,
+          "resumeAttemptSequence": 1,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 1,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 5,
+          "timelineGeneration": 0,
+          "reanchorCount": 5,
+          "lastScheduledBeat": null,
+          "eventSequenceCount": 1,
+          "audibleEventCount": 1,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 5,
+            "startScheduled": 5,
+            "ended": 1,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 1,
+          "state": "pipeline-verifying",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 4,
+          "schedulerGeneration": 5,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 0,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 0,
+          "contextTimeProgressed": false,
+          "outputTimestampProgressed": false,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": false,
+          "sourceLifecycleProgressed": false,
+          "gainRestored": true,
+          "duplicateCount": null,
+          "backlogBurstCount": null,
+          "pipelineLiveness": false,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 11929.900000000373,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 11930,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 11933.700000000186,
+              "contextState": "running",
+              "attemptSequence": 1,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 11933.900000000373,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 11934.100000000559,
+              "contextState": "running",
+              "schedulerGeneration": 5,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 11934.100000000559,
+              "contextState": "running",
+              "masterGain": 0.36
+            }
+          ]
+        }
+      },
+      {
+        "name": "automatic-recovered",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 4,
+          "sourceRecordCount": 4,
+          "sourceLifecycleCounts": {
+            "created": 9,
+            "startScheduled": 9,
+            "ended": 5,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 1,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 1,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 5,
+          "timelineGeneration": 0,
+          "reanchorCount": 5,
+          "lastScheduledBeat": 183198,
+          "eventSequenceCount": 5,
+          "audibleEventCount": 1,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 9,
+            "startScheduled": 9,
+            "ended": 5,
+            "cancelled": 4,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 1,
+          "state": "recovered",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 4,
+          "schedulerGeneration": 5,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183198,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": false,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 11929.900000000373,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 11930,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 11933.700000000186,
+              "contextState": "running",
+              "attemptSequence": 1,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 11933.900000000373,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 11934.100000000559,
+              "contextState": "running",
+              "schedulerGeneration": 5,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 11934.100000000559,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 11942.400000000373,
+              "contextState": "running"
+            }
+          ]
+        }
+      },
+      {
+        "name": "running-before-pipeline-confirmation",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "resume-required",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 0,
+          "sourceRecordCount": 0,
+          "sourceLifecycleCounts": {
+            "created": 9,
+            "startScheduled": 9,
+            "ended": 5,
+            "cancelled": 8,
+            "cleaned": 0
+          },
+          "resumeRequired": true,
+          "resumeAttemptSequence": 2,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 2,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 8,
+          "timelineGeneration": 0,
+          "reanchorCount": 8,
+          "lastScheduledBeat": null,
+          "eventSequenceCount": 1,
+          "audibleEventCount": 1,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 9,
+            "startScheduled": 9,
+            "ended": 5,
+            "cancelled": 8,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 2,
+          "state": "pipeline-verifying",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 7,
+          "schedulerGeneration": 8,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 0,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 0,
+          "contextTimeProgressed": false,
+          "outputTimestampProgressed": false,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": false,
+          "sourceLifecycleProgressed": false,
+          "gainRestored": true,
+          "duplicateCount": null,
+          "backlogBurstCount": null,
+          "pipelineLiveness": false,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 11964,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 11964.200000000186,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 11973,
+              "contextState": "running",
+              "attemptSequence": 2,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running",
+              "schedulerGeneration": 8,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running",
+              "masterGain": 0.36
+            }
+          ]
+        }
+      },
+      {
+        "name": "running-after-pipeline-confirmation",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 4,
+          "sourceRecordCount": 4,
+          "sourceLifecycleCounts": {
+            "created": 13,
+            "startScheduled": 13,
+            "ended": 9,
+            "cancelled": 8,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 2,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 2,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 8,
+          "timelineGeneration": 0,
+          "reanchorCount": 8,
+          "lastScheduledBeat": 183198,
+          "eventSequenceCount": 5,
+          "audibleEventCount": 1,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 13,
+            "startScheduled": 13,
+            "ended": 9,
+            "cancelled": 8,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 2,
+          "state": "recovered",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 7,
+          "schedulerGeneration": 8,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183198,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": false,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 11964,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 11964.200000000186,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 11973,
+              "contextState": "running",
+              "attemptSequence": 2,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running",
+              "schedulerGeneration": 8,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 11985.799999999814,
+              "contextState": "running"
+            }
+          ]
+        }
+      },
+      {
+        "name": "speaker-recovery-required",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "suspended",
+          "status": "resume-required",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 0,
+          "sourceRecordCount": 0,
+          "sourceLifecycleCounts": {
+            "created": 13,
+            "startScheduled": 13,
+            "ended": 9,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "resumeRequired": true,
+          "resumeAttemptSequence": 2,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "suspended",
+            "resumeAttempted": false,
+            "resumeResolved": false,
+            "resumeRejected": false,
+            "running": false,
+            "requiresTrustedGesture": true,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-browser-trusted-gesture",
+            "attemptSequence": 2,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 9,
+          "timelineGeneration": 0,
+          "reanchorCount": 9,
+          "lastScheduledBeat": null,
+          "eventSequenceCount": 1,
+          "audibleEventCount": 1,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 13,
+            "startScheduled": 13,
+            "ended": 9,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 2,
+          "state": "hidden",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 7,
+          "schedulerGeneration": 8,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183198,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 11964,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 11964.200000000186,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 11973,
+              "contextState": "running",
+              "attemptSequence": 2,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running",
+              "schedulerGeneration": 8,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 11985.799999999814,
+              "contextState": "running"
+            },
+            {
+              "sequence": 8,
+              "event": "diagnostic-visibility:false",
+              "capturedAt": 12007.200000000186,
+              "contextState": "running"
+            }
+          ]
+        }
+      },
+      {
+        "name": "speaker-one-gesture-recovered",
+        "audio": {
+          "audioEnabled": true,
+          "audioContextState": "running",
+          "status": "on",
+          "bufferCompleteness": {
+            "complete": true,
+            "required": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "loaded": [
+              "escapementTick",
+              "escapementTock",
+              "winding",
+              "reverse",
+              "crownPull",
+              "crownPush"
+            ],
+            "missing": []
+          },
+          "masterGain": 0.36,
+          "eventCounts": {
+            "escapementTick": 1,
+            "escapementTock": 0,
+            "winding": 0,
+            "reverse": 0,
+            "crownPull": 0,
+            "crownPush": 0
+          },
+          "activeSources": 4,
+          "sourceRecordCount": 4,
+          "sourceLifecycleCounts": {
+            "created": 17,
+            "startScheduled": 17,
+            "ended": 13,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "resumeRequired": false,
+          "resumeAttemptSequence": 3,
+          "lastResumeResult": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "trusted-audio-toggle-click",
+            "attemptSequence": 3,
+            "error": null
+          }
+        },
+        "scheduler": {
+          "schedulerGeneration": 11,
+          "timelineGeneration": 0,
+          "reanchorCount": 11,
+          "lastScheduledBeat": 183246,
+          "eventSequenceCount": 5,
+          "audibleEventCount": 1,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "lateDropCount": 0,
+          "maximumPendingEscapementSources": 4,
+          "sourceLifecycleCounts": {
+            "created": 17,
+            "startScheduled": 17,
+            "ended": 13,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "phaseContract": {
+            "targetBeatCoupledToStudyBeat": true,
+            "audibleMechanismPhase": true,
+            "maximumProjectionBeats": 4,
+            "acceptedPhaseErrorBeats": 0.25,
+            "passed": true
+          },
+          "mechanismAuthoritative": true
+        },
+        "recovery": {
+          "cycleId": 3,
+          "state": "recovered",
+          "reason": "trusted-audio-toggle-click",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 9,
+          "schedulerGeneration": 11,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183246,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": false,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "trusted-audio-toggle-click",
+              "capturedAt": 21444.299999999814,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 21444.400000000373,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 21453.10000000056,
+              "contextState": "running",
+              "attemptSequence": 3,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 21453.299999999814,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 21453.400000000373,
+              "contextState": "running",
+              "schedulerGeneration": 10,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 21453.400000000373,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 21466.10000000056,
+              "contextState": "running"
+            }
+          ]
+        }
+      }
+    ],
+    "finalAudio": {
+      "audioEnabled": true,
+      "audioContextState": "running",
+      "status": "on",
+      "bufferCompleteness": {
+        "complete": true,
+        "required": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "loaded": [
+          "escapementTick",
+          "escapementTock",
+          "winding",
+          "reverse",
+          "crownPull",
+          "crownPush"
+        ],
+        "missing": []
+      },
+      "masterGain": 0.36,
+      "eventCounts": {
+        "escapementTick": 26,
+        "escapementTock": 26,
+        "winding": 0,
+        "reverse": 0,
+        "crownPull": 0,
+        "crownPush": 0
+      },
+      "activeSources": 4,
+      "sourceRecordCount": 4,
+      "sourceLifecycleCounts": {
+        "created": 68,
+        "startScheduled": 68,
+        "ended": 64,
+        "cancelled": 12,
+        "cleaned": 0
+      },
+      "resumeRequired": false,
+      "resumeAttemptSequence": 3,
+      "lastResumeResult": {
+        "stateBefore": "suspended",
+        "stateAfter": "running",
+        "resumeAttempted": true,
+        "resumeResolved": true,
+        "resumeRejected": false,
+        "running": true,
+        "requiresTrustedGesture": false,
+        "enabled": true,
+        "visible": true,
+        "trustedGesture": false,
+        "reason": "trusted-audio-toggle-click",
+        "attemptSequence": 3,
+        "error": null
+      }
+    },
+    "finalScheduler": {
+      "schedulerGeneration": 11,
+      "timelineGeneration": 0,
+      "reanchorCount": 11,
+      "lastScheduledBeat": 183297,
+      "eventSequenceCount": 56,
+      "audibleEventCount": 52,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "lateDropCount": 0,
+      "maximumPendingEscapementSources": 4,
+      "sourceLifecycleCounts": {
+        "created": 68,
+        "startScheduled": 68,
+        "ended": 64,
+        "cancelled": 12,
+        "cleaned": 0
+      },
+      "phaseContract": {
+        "targetBeatCoupledToStudyBeat": true,
+        "audibleMechanismPhase": true,
+        "maximumProjectionBeats": 4,
+        "acceptedPhaseErrorBeats": 0.25,
+        "passed": true
+      },
+      "mechanismAuthoritative": true
+    },
+    "finalRecovery": {
+      "cycle": {
+        "cycleId": 3,
+        "state": "recovered",
+        "reason": "trusted-audio-toggle-click",
+        "contextGeneration": 1,
+        "schedulerGenerationBefore": 9,
+        "schedulerGeneration": 11,
+        "schedulerReanchorClaimed": true,
+        "schedulerReanchorCount": 1,
+        "firstScheduledBeat": 183246,
+        "hardRecoveryRoute": "A",
+        "primingSourceStarted": false,
+        "contextRebuildCount": 0,
+        "verificationFrames": 1,
+        "contextTimeProgressed": true,
+        "outputTimestampProgressed": true,
+        "schedulerEstablished": true,
+        "sourcePipelineStarted": true,
+        "sourceLifecycleProgressed": true,
+        "gainRestored": true,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "pipelineLiveness": true,
+        "foregroundRecoveryNotConfirmed": false,
+        "failureReason": null,
+        "lifecycle": [
+          {
+            "sequence": 1,
+            "event": "trusted-audio-toggle-click",
+            "capturedAt": 21444.299999999814,
+            "contextState": "suspended"
+          },
+          {
+            "sequence": 2,
+            "event": "resume-attempt-started",
+            "capturedAt": 21444.400000000373,
+            "contextState": "suspended",
+            "trustedGesture": false
+          },
+          {
+            "sequence": 3,
+            "event": "context-running",
+            "capturedAt": 21453.10000000056,
+            "contextState": "running",
+            "attemptSequence": 3,
+            "trustedGesture": false
+          },
+          {
+            "sequence": 4,
+            "event": "scheduler-reanchor-claimed",
+            "capturedAt": 21453.299999999814,
+            "contextState": "running"
+          },
+          {
+            "sequence": 5,
+            "event": "scheduler-generation-established",
+            "capturedAt": 21453.400000000373,
+            "contextState": "running",
+            "schedulerGeneration": 10,
+            "firstScheduledBeat": 0
+          },
+          {
+            "sequence": 6,
+            "event": "master-gain-restored",
+            "capturedAt": 21453.400000000373,
+            "contextState": "running",
+            "masterGain": 0.36
+          },
+          {
+            "sequence": 7,
+            "event": "pipeline-liveness-confirmed",
+            "capturedAt": 21466.10000000056,
+            "contextState": "running"
+          }
+        ]
+      },
+      "history": [
+        {
+          "cycleId": 1,
+          "state": "hidden",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 4,
+          "schedulerGeneration": 5,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183198,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 11929.900000000373,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 11930,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 11933.700000000186,
+              "contextState": "running",
+              "attemptSequence": 1,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 11933.900000000373,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 11934.100000000559,
+              "contextState": "running",
+              "schedulerGeneration": 5,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 11934.100000000559,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 11942.400000000373,
+              "contextState": "running"
+            },
+            {
+              "sequence": 8,
+              "event": "diagnostic-visibility:false",
+              "capturedAt": 11963.700000000186,
+              "contextState": "running"
+            }
+          ]
+        },
+        {
+          "cycleId": 2,
+          "state": "hidden",
+          "reason": "diagnostic-visibility:true",
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 7,
+          "schedulerGeneration": 8,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183198,
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": true,
+          "failureReason": null,
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "diagnostic-visibility:true",
+              "capturedAt": 11964,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 11964.200000000186,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 11973,
+              "contextState": "running",
+              "attemptSequence": 2,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running",
+              "schedulerGeneration": 8,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 11973.200000000186,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 11985.799999999814,
+              "contextState": "running"
+            },
+            {
+              "sequence": 8,
+              "event": "diagnostic-visibility:false",
+              "capturedAt": 12007.200000000186,
+              "contextState": "running"
+            }
+          ]
+        }
+      ],
+      "foregroundRecoveryNotConfirmed": false,
+      "verificationFrameLimit": 45,
+      "contextGeneration": 1,
+      "recoveryFailed": false,
+      "primingSourceCount": 0
+    },
+    "finalUi": {
+      "toggle": {
+        "pressed": true,
+        "disabled": false,
+        "ariaLabel": "作動音をオフにする",
+        "rect": {
+          "left": 336,
+          "top": 10,
+          "right": 380,
+          "bottom": 54,
+          "width": 44,
+          "height": 44
+        },
+        "tagName": "BUTTON",
+        "state": "on",
+        "visibleText": ""
+      },
+      "status": {
+        "text": "作動音 ON",
+        "state": "on",
+        "role": "status"
+      },
+      "recovery": {
+        "contextState": "running",
+        "resumeRequired": false,
+        "resumeAttemptSequence": 3,
+        "lastResumeResult": {
+          "stateBefore": "suspended",
+          "stateAfter": "running",
+          "resumeAttempted": true,
+          "resumeResolved": true,
+          "resumeRejected": false,
+          "running": true,
+          "requiresTrustedGesture": false,
+          "enabled": true,
+          "visible": true,
+          "trustedGesture": false,
+          "reason": "trusted-audio-toggle-click",
+          "attemptSequence": 3,
+          "error": null
+        },
+        "resumeHistory": [
+          {
+            "stateBefore": "not-created",
+            "stateAfter": "not-created",
+            "resumeAttempted": false,
+            "resumeResolved": false,
+            "resumeRejected": false,
+            "running": false,
+            "requiresTrustedGesture": false,
+            "enabled": false,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "window-focus",
+            "attemptSequence": 0,
+            "error": null
+          },
+          {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 1,
+            "error": null
+          },
+          {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "diagnostic-visibility:true",
+            "attemptSequence": 2,
+            "error": null
+          },
+          {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "trusted-audio-toggle-click",
+            "attemptSequence": 3,
+            "error": null
+          }
+        ],
+        "trustedGestureCount": 0,
+        "listenerInstallCount": 1,
+        "cycle": {
+          "cycleId": 3,
+          "state": "recovered",
+          "reason": "trusted-audio-toggle-click",
+          "startedAt": 21444.299999999814,
+          "contextGeneration": 1,
+          "schedulerGenerationBefore": 9,
+          "schedulerGeneration": 11,
+          "schedulerReanchorClaimed": true,
+          "schedulerReanchorCount": 1,
+          "firstScheduledBeat": 183246,
+          "sourceLifecycleBaseline": {
+            "created": 13,
+            "startScheduled": 13,
+            "ended": 9,
+            "cancelled": 12,
+            "cleaned": 0
+          },
+          "clockBaseline": {
+            "currentTime": 0.28444444444444444,
+            "outputTimestamp": {
+              "contextTime": 0.2592774557823129,
+              "performanceTime": 12001.600000000559
+            }
+          },
+          "outputTimestampSample": {
+            "contextTime": 0.28444444444444444,
+            "performanceTime": 0
+          },
+          "lifecycle": [
+            {
+              "sequence": 1,
+              "event": "trusted-audio-toggle-click",
+              "capturedAt": 21444.299999999814,
+              "contextState": "suspended"
+            },
+            {
+              "sequence": 2,
+              "event": "resume-attempt-started",
+              "capturedAt": 21444.400000000373,
+              "contextState": "suspended",
+              "trustedGesture": false
+            },
+            {
+              "sequence": 3,
+              "event": "context-running",
+              "capturedAt": 21453.10000000056,
+              "contextState": "running",
+              "attemptSequence": 3,
+              "trustedGesture": false
+            },
+            {
+              "sequence": 4,
+              "event": "scheduler-reanchor-claimed",
+              "capturedAt": 21453.299999999814,
+              "contextState": "running"
+            },
+            {
+              "sequence": 5,
+              "event": "scheduler-generation-established",
+              "capturedAt": 21453.400000000373,
+              "contextState": "running",
+              "schedulerGeneration": 10,
+              "firstScheduledBeat": 0
+            },
+            {
+              "sequence": 6,
+              "event": "master-gain-restored",
+              "capturedAt": 21453.400000000373,
+              "contextState": "running",
+              "masterGain": 0.36
+            },
+            {
+              "sequence": 7,
+              "event": "pipeline-liveness-confirmed",
+              "capturedAt": 21466.10000000056,
+              "contextState": "running"
+            }
+          ],
+          "trustedGestures": [],
+          "automaticResume": {
+            "stateBefore": "suspended",
+            "stateAfter": "running",
+            "resumeAttempted": true,
+            "resumeResolved": true,
+            "resumeRejected": false,
+            "running": true,
+            "requiresTrustedGesture": false,
+            "enabled": true,
+            "visible": true,
+            "trustedGesture": false,
+            "reason": "trusted-audio-toggle-click",
+            "attemptSequence": 3,
+            "error": null
+          },
+          "hardRecoveryRoute": "A",
+          "primingSourceStarted": false,
+          "contextRebuildCount": 0,
+          "verificationFrames": 1,
+          "contextTimeProgressed": true,
+          "outputTimestampProgressed": true,
+          "schedulerEstablished": true,
+          "sourcePipelineStarted": true,
+          "sourceLifecycleProgressed": true,
+          "gainRestored": true,
+          "duplicateCount": 0,
+          "backlogBurstCount": 0,
+          "pipelineLiveness": true,
+          "foregroundRecoveryNotConfirmed": false,
+          "failureReason": null,
+          "stale": false,
+          "recoveredAt": 21466.10000000056
+        },
+        "history": [
+          {
+            "cycleId": 1,
+            "state": "hidden",
+            "reason": "diagnostic-visibility:true",
+            "startedAt": 11929.900000000373,
+            "contextGeneration": 1,
+            "schedulerGenerationBefore": 4,
+            "schedulerGeneration": 5,
+            "schedulerReanchorClaimed": true,
+            "schedulerReanchorCount": 1,
+            "firstScheduledBeat": 183198,
+            "sourceLifecycleBaseline": {
+              "created": 5,
+              "startScheduled": 5,
+              "ended": 1,
+              "cancelled": 4,
+              "cleaned": 0
+            },
+            "clockBaseline": {
+              "currentTime": 0.2438095238095238,
+              "outputTimestamp": {
+                "contextTime": 0.2186385351473923,
+                "performanceTime": 11925.400000000373
+              }
+            },
+            "outputTimestampSample": {
+              "contextTime": 0.2438095238095238,
+              "performanceTime": 0
+            },
+            "lifecycle": [
+              {
+                "sequence": 1,
+                "event": "diagnostic-visibility:true",
+                "capturedAt": 11929.900000000373,
+                "contextState": "suspended"
+              },
+              {
+                "sequence": 2,
+                "event": "resume-attempt-started",
+                "capturedAt": 11930,
+                "contextState": "suspended",
+                "trustedGesture": false
+              },
+              {
+                "sequence": 3,
+                "event": "context-running",
+                "capturedAt": 11933.700000000186,
+                "contextState": "running",
+                "attemptSequence": 1,
+                "trustedGesture": false
+              },
+              {
+                "sequence": 4,
+                "event": "scheduler-reanchor-claimed",
+                "capturedAt": 11933.900000000373,
+                "contextState": "running"
+              },
+              {
+                "sequence": 5,
+                "event": "scheduler-generation-established",
+                "capturedAt": 11934.100000000559,
+                "contextState": "running",
+                "schedulerGeneration": 5,
+                "firstScheduledBeat": 0
+              },
+              {
+                "sequence": 6,
+                "event": "master-gain-restored",
+                "capturedAt": 11934.100000000559,
+                "contextState": "running",
+                "masterGain": 0.36
+              },
+              {
+                "sequence": 7,
+                "event": "pipeline-liveness-confirmed",
+                "capturedAt": 11942.400000000373,
+                "contextState": "running"
+              },
+              {
+                "sequence": 8,
+                "event": "diagnostic-visibility:false",
+                "capturedAt": 11963.700000000186,
+                "contextState": "running"
+              }
+            ],
+            "trustedGestures": [],
+            "automaticResume": {
+              "stateBefore": "suspended",
+              "stateAfter": "running",
+              "resumeAttempted": true,
+              "resumeResolved": true,
+              "resumeRejected": false,
+              "running": true,
+              "requiresTrustedGesture": false,
+              "enabled": true,
+              "visible": true,
+              "trustedGesture": false,
+              "reason": "diagnostic-visibility:true",
+              "attemptSequence": 1,
+              "error": null
+            },
+            "hardRecoveryRoute": "A",
+            "primingSourceStarted": false,
+            "contextRebuildCount": 0,
+            "verificationFrames": 1,
+            "contextTimeProgressed": true,
+            "outputTimestampProgressed": true,
+            "schedulerEstablished": true,
+            "sourcePipelineStarted": true,
+            "sourceLifecycleProgressed": true,
+            "gainRestored": true,
+            "duplicateCount": 0,
+            "backlogBurstCount": 0,
+            "pipelineLiveness": true,
+            "foregroundRecoveryNotConfirmed": true,
+            "failureReason": null,
+            "stale": false,
+            "recoveredAt": 11942.400000000373
+          },
+          {
+            "cycleId": 2,
+            "state": "hidden",
+            "reason": "diagnostic-visibility:true",
+            "startedAt": 11964,
+            "contextGeneration": 1,
+            "schedulerGenerationBefore": 7,
+            "schedulerGeneration": 8,
+            "schedulerReanchorClaimed": true,
+            "schedulerReanchorCount": 1,
+            "firstScheduledBeat": 183198,
+            "sourceLifecycleBaseline": {
+              "created": 9,
+              "startScheduled": 9,
+              "ended": 5,
+              "cancelled": 8,
+              "cleaned": 0
+            },
+            "clockBaseline": {
+              "currentTime": 0.2612244897959184,
+              "outputTimestamp": {
+                "contextTime": 0.23604550113378686,
+                "performanceTime": 11961
+              }
+            },
+            "outputTimestampSample": {
+              "contextTime": 0.2612244897959184,
+              "performanceTime": 0
+            },
+            "lifecycle": [
+              {
+                "sequence": 1,
+                "event": "diagnostic-visibility:true",
+                "capturedAt": 11964,
+                "contextState": "suspended"
+              },
+              {
+                "sequence": 2,
+                "event": "resume-attempt-started",
+                "capturedAt": 11964.200000000186,
+                "contextState": "suspended",
+                "trustedGesture": false
+              },
+              {
+                "sequence": 3,
+                "event": "context-running",
+                "capturedAt": 11973,
+                "contextState": "running",
+                "attemptSequence": 2,
+                "trustedGesture": false
+              },
+              {
+                "sequence": 4,
+                "event": "scheduler-reanchor-claimed",
+                "capturedAt": 11973.200000000186,
+                "contextState": "running"
+              },
+              {
+                "sequence": 5,
+                "event": "scheduler-generation-established",
+                "capturedAt": 11973.200000000186,
+                "contextState": "running",
+                "schedulerGeneration": 8,
+                "firstScheduledBeat": 0
+              },
+              {
+                "sequence": 6,
+                "event": "master-gain-restored",
+                "capturedAt": 11973.200000000186,
+                "contextState": "running",
+                "masterGain": 0.36
+              },
+              {
+                "sequence": 7,
+                "event": "pipeline-liveness-confirmed",
+                "capturedAt": 11985.799999999814,
+                "contextState": "running"
+              },
+              {
+                "sequence": 8,
+                "event": "diagnostic-visibility:false",
+                "capturedAt": 12007.200000000186,
+                "contextState": "running"
+              }
+            ],
+            "trustedGestures": [],
+            "automaticResume": {
+              "stateBefore": "suspended",
+              "stateAfter": "running",
+              "resumeAttempted": true,
+              "resumeResolved": true,
+              "resumeRejected": false,
+              "running": true,
+              "requiresTrustedGesture": false,
+              "enabled": true,
+              "visible": true,
+              "trustedGesture": false,
+              "reason": "diagnostic-visibility:true",
+              "attemptSequence": 2,
+              "error": null
+            },
+            "hardRecoveryRoute": "A",
+            "primingSourceStarted": false,
+            "contextRebuildCount": 0,
+            "verificationFrames": 1,
+            "contextTimeProgressed": true,
+            "outputTimestampProgressed": true,
+            "schedulerEstablished": true,
+            "sourcePipelineStarted": true,
+            "sourceLifecycleProgressed": true,
+            "gainRestored": true,
+            "duplicateCount": 0,
+            "backlogBurstCount": 0,
+            "pipelineLiveness": true,
+            "foregroundRecoveryNotConfirmed": true,
+            "failureReason": null,
+            "stale": false,
+            "recoveredAt": 11985.799999999814
+          }
+        ],
+        "foregroundRecoveryNotConfirmed": false,
+        "verificationFrameLimit": 45,
+        "contextGeneration": 1,
+        "recoveryFailed": false,
+        "primingSourceCount": 0
+      },
+      "fixedGains": {
+        "master": 0.36,
+        "escapement": 0.24,
+        "winding": 0.32,
+        "reverse": 0.24,
+        "crown": 0.38
+      }
+    },
+    "applicationConsole": {
+      "errors": [],
+      "warnings": [],
+      "runtimeErrors": [],
+      "unhandledRejections": []
+    },
+    "contracts": {
+      "appVersionPreserved": true,
+      "sameOrigin": true,
+      "viewportExact": true,
+      "automaticResumeRunning": true,
+      "automaticPipelineLiveness": true,
+      "runningFalsePositiveRejected": true,
+      "oneControlActivationRecorded": true,
+      "oneGesturePipelineLiveness": true,
+      "boundedContextRebuild": true,
+      "schedulerReanchorOnce": true,
+      "duplicateZero": true,
+      "backlogZero": true,
+      "buffersComplete": true,
+      "sourcePipelineProgressed": true,
+      "finalUiOnOnlyAfterLiveness": true,
+      "interferenceZero": true,
+      "performanceTransformInvariant": true,
+      "consoleClean": true
+    }
+  },
+  "javascriptBoundary": "JavaScript proves graph/source/timestamp/gain progression; it cannot prove that a physical iPhone speaker emitted audible sound."
+}
