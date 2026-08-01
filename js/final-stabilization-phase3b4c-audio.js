@@ -1016,6 +1016,7 @@ export class Phase3B4cAudioPacingRuntime {
       clockStallCount: this.clockStallCount,
       epochDriftReanchorCount: this.epochDriftReanchorCount,
       reanchorCount: this.reanchorCount,
+      schedulerGeneration: this.generation,
       timelineGeneration: this.timelineGeneration,
       timelineDiscontinuityResetCount:
         this.timelineDiscontinuityResetCount,

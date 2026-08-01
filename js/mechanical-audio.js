@@ -20,12 +20,25 @@ const emptyCounts = () => Object.fromEntries(REQUIRED_AUDIO_EVENT_TYPES.map((typ
 const defaultWait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 const DISABLE_RAMP_SECONDS = 0.025;
 const DISABLE_STOP_DELAY_MS = 30;
-const stateName = (enabled, loading, supported, failures, resumeRequired = false) => {
+const RECOVERY_VERIFICATION_FRAME_LIMIT = 45;
+const stateName = (
+  enabled,
+  loading,
+  supported,
+  failures,
+  resumeRequired = false,
+  recoveryFailed = false,
+) => {
   if (!supported || failures.length) return "unavailable";
   if (loading) return "loading";
+  if (enabled && recoveryFailed) return "recovery-failed";
   if (enabled && resumeRequired) return "resume-required";
   return enabled ? "on" : "off";
 };
+
+const cloneRecoveryValue = (value) => value == null
+  ? value
+  : JSON.parse(JSON.stringify(value));
 
 export class MechanicalAudioEngine {
   constructor({
@@ -49,6 +62,7 @@ export class MechanicalAudioEngine {
     this.visible = true;
     this.context = null;
     this.masterNode = null;
+    this.masterGainCommandedValue = 0;
     this.busNodes = new Map();
     this.manifest = null;
     this.buffers = new Map();
@@ -76,6 +90,13 @@ export class MechanicalAudioEngine {
     this.resumeInFlight = null;
     this.lastResumeResult = null;
     this.resumeHistory = [];
+    this.contextGeneration = 0;
+    this.foregroundRecoveryNeedsNewCycle = false;
+    this.recoveryCycleSequence = 0;
+    this.recoveryCycle = null;
+    this.recoveryHistory = [];
+    this.recoveryFailed = false;
+    this.recoveryPrimingSources = new Set();
   }
 
   emitState() {
@@ -85,6 +106,7 @@ export class MechanicalAudioEngine {
   createGraph() {
     if (this.context) return;
     this.context = this.audioContextFactory();
+    this.contextGeneration += 1;
     this.masterNode = this.context.createGain();
     this.masterNode.gain.value = 0;
     this.masterNode.connect(this.context.destination);
@@ -96,8 +118,342 @@ export class MechanicalAudioEngine {
     }
   }
 
+  recordRecoveryLifecycle(event, details = {}) {
+    if (!this.recoveryCycle) return;
+    this.recoveryCycle.lifecycle.push({
+      sequence: this.recoveryCycle.lifecycle.length + 1,
+      event,
+      capturedAt: performance.now(),
+      contextState: this.context?.state ?? "not-created",
+      ...details,
+    });
+    if (this.recoveryCycle.lifecycle.length > 80) {
+      this.recoveryCycle.lifecycle.splice(0, this.recoveryCycle.lifecycle.length - 80);
+    }
+  }
+
+  archiveRecoveryCycle() {
+    if (!this.recoveryCycle) return;
+    this.recoveryHistory.push(cloneRecoveryValue(this.recoveryCycle));
+    if (this.recoveryHistory.length > 20) {
+      this.recoveryHistory.splice(0, this.recoveryHistory.length - 20);
+    }
+  }
+
+  beginForegroundRecoveryCycle({ reason = "visible", schedulerGeneration = null } = {}) {
+    this.visible = true;
+    if (!this.context || !this.enabled) return null;
+    if (this.recoveryCycle && !this.foregroundRecoveryNeedsNewCycle
+      && !["hidden", "recovered", "failed"].includes(this.recoveryCycle.state)) {
+      this.recordRecoveryLifecycle(reason, { duplicateForegroundEvent: true });
+      return cloneRecoveryValue(this.recoveryCycle);
+    }
+    this.archiveRecoveryCycle();
+    const clock = this.getClockSnapshot();
+    this.recoveryCycle = {
+      cycleId: ++this.recoveryCycleSequence,
+      state: "foreground-entered",
+      reason,
+      startedAt: performance.now(),
+      contextGeneration: this.contextGeneration,
+      schedulerGenerationBefore: Number.isFinite(Number(schedulerGeneration))
+        ? Number(schedulerGeneration)
+        : null,
+      schedulerGeneration: null,
+      schedulerReanchorClaimed: false,
+      schedulerReanchorCount: 0,
+      firstScheduledBeat: null,
+      sourceLifecycleBaseline: { ...this.sourceLifecycleCounts },
+      clockBaseline: {
+        currentTime: clock.currentTime,
+        outputTimestamp: clock.outputTimestamp ? { ...clock.outputTimestamp } : null,
+      },
+      outputTimestampSample: clock.outputTimestamp ? { ...clock.outputTimestamp } : null,
+      lifecycle: [],
+      trustedGestures: [],
+      automaticResume: null,
+      hardRecoveryRoute: "A",
+      primingSourceStarted: false,
+      contextRebuildCount: 0,
+      verificationFrames: 0,
+      contextTimeProgressed: false,
+      outputTimestampProgressed: typeof this.context?.getOutputTimestamp !== "function",
+      schedulerEstablished: false,
+      sourcePipelineStarted: false,
+      sourceLifecycleProgressed: false,
+      gainRestored: false,
+      duplicateCount: null,
+      backlogBurstCount: null,
+      pipelineLiveness: false,
+      foregroundRecoveryNotConfirmed: true,
+      failureReason: null,
+      stale: false,
+    };
+    this.foregroundRecoveryNeedsNewCycle = false;
+    this.recoveryFailed = false;
+    this.resumeRequired = true;
+    this.rampMaster(0, 0);
+    this.recordRecoveryLifecycle(reason);
+    this.emitState();
+    return cloneRecoveryValue(this.recoveryCycle);
+  }
+
+  markForegroundInactive(reason = "hidden") {
+    this.foregroundRecoveryNeedsNewCycle = true;
+    if (this.recoveryCycle) {
+      this.recoveryCycle.state = "hidden";
+      this.recoveryCycle.foregroundRecoveryNotConfirmed = true;
+      this.recordRecoveryLifecycle(reason);
+    }
+    return this.getForegroundRecoveryDiagnostics();
+  }
+
+  captureTrustedRecoveryGesture({ eventType = "gesture", reason = eventType, requestedRecoveryLevel = "soft" } = {}) {
+    if (!this.recoveryCycle || !this.enabled || !this.visible) return null;
+    const gesture = {
+      cycleId: this.recoveryCycle.cycleId,
+      sequence: this.recoveryCycle.trustedGestures.length + 1,
+      eventType,
+      reason,
+      capturedAt: performance.now(),
+      resumeInFlight: Boolean(this.resumeInFlight),
+      contextState: this.context?.state ?? "not-created",
+      requestedRecoveryLevel,
+    };
+    this.recoveryCycle.trustedGestures.push(gesture);
+    this.recoveryCycle.state = "trusted-gesture-pending";
+    this.recordRecoveryLifecycle(`trusted:${eventType}`, {
+      gestureSequence: gesture.sequence,
+      requestedRecoveryLevel,
+    });
+    return { ...gesture };
+  }
+
+  primeRecoveryPipeline(cycleId) {
+    const cycle = this.recoveryCycle;
+    if (!cycle || cycle.cycleId !== cycleId || cycle.primingSourceStarted || !this.context) return false;
+    const buffer = this.buffers.values().next().value;
+    if (!buffer) return false;
+    try {
+      const source = this.context.createBufferSource();
+      const silentGain = this.context.createGain();
+      silentGain.gain.value = 0;
+      source.buffer = buffer;
+      source.connect(silentGain);
+      silentGain.connect(this.context.destination);
+      this.recoveryPrimingSources.add(source);
+      source.addEventListener("ended", () => {
+        this.recoveryPrimingSources.delete(source);
+        try { source.disconnect(); } catch {}
+        try { silentGain.disconnect(); } catch {}
+      }, { once: true });
+      source.start(this.context.currentTime);
+      cycle.primingSourceStarted = true;
+      cycle.hardRecoveryRoute = "B";
+      this.recordRecoveryLifecycle("silent-priming-source-started");
+      return true;
+    } catch (error) {
+      this.recordRecoveryLifecycle("silent-priming-source-failed", {
+        error: error?.message || String(error),
+      });
+      return false;
+    }
+  }
+
+  rebuildGraphForRecovery(cycleId) {
+    const cycle = this.recoveryCycle;
+    if (!cycle || cycle.cycleId !== cycleId || cycle.contextRebuildCount >= 1) return false;
+    const oldContext = this.context;
+    const oldMasterNode = this.masterNode;
+    const oldBusNodes = this.busNodes;
+    const oldContextGeneration = this.contextGeneration;
+    this.stopAll();
+    for (const source of this.recoveryPrimingSources) {
+      try { source.stop(); } catch {}
+    }
+    this.recoveryPrimingSources.clear();
+    this.context = null;
+    this.masterNode = null;
+    this.busNodes = new Map();
+    try {
+      this.createGraph();
+      cycle.contextRebuildCount += 1;
+      cycle.contextGeneration = this.contextGeneration;
+      cycle.hardRecoveryRoute = "C";
+      cycle.sourceLifecycleBaseline = { ...this.sourceLifecycleCounts };
+      const clock = this.getClockSnapshot();
+      cycle.clockBaseline = {
+        currentTime: clock.currentTime,
+        outputTimestamp: clock.outputTimestamp ? { ...clock.outputTimestamp } : null,
+      };
+      cycle.outputTimestampSample = clock.outputTimestamp ? { ...clock.outputTimestamp } : null;
+      this.recordRecoveryLifecycle("audio-context-graph-rebuilt", {
+        contextGeneration: this.contextGeneration,
+      });
+      if (oldContext && typeof oldContext.close === "function") {
+        void oldContext.close().catch(() => {});
+      }
+      return true;
+    } catch (error) {
+      const failedContext = this.context;
+      this.context = oldContext;
+      this.masterNode = oldMasterNode;
+      this.busNodes = oldBusNodes;
+      this.contextGeneration = oldContextGeneration;
+      if (failedContext && failedContext !== oldContext && typeof failedContext.close === "function") {
+        void failedContext.close().catch(() => {});
+      }
+      this.recordRecoveryLifecycle("audio-context-graph-rebuild-failed", {
+        error: error?.message || String(error),
+      });
+      return false;
+    }
+  }
+
+  claimRecoverySchedulerReanchor(cycleId) {
+    const cycle = this.recoveryCycle;
+    if (!cycle || cycle.cycleId !== cycleId || cycle.schedulerReanchorClaimed) return false;
+    cycle.schedulerReanchorClaimed = true;
+    cycle.schedulerReanchorCount += 1;
+    this.recordRecoveryLifecycle("scheduler-reanchor-claimed");
+    return true;
+  }
+
+  noteRecoverySchedulerGeneration({ cycleId, schedulerGeneration, firstScheduledBeat = null } = {}) {
+    const cycle = this.recoveryCycle;
+    if (!cycle || cycle.cycleId !== cycleId) return false;
+    cycle.schedulerGeneration = Number.isFinite(Number(schedulerGeneration))
+      ? Number(schedulerGeneration)
+      : null;
+    cycle.firstScheduledBeat = Number.isFinite(Number(firstScheduledBeat))
+      ? Number(firstScheduledBeat)
+      : null;
+    cycle.schedulerEstablished = cycle.schedulerReanchorClaimed
+      && cycle.schedulerGeneration !== null
+      && (cycle.schedulerGenerationBefore === null
+        || cycle.schedulerGeneration > cycle.schedulerGenerationBefore);
+    cycle.state = "pipeline-verifying";
+    this.recordRecoveryLifecycle("scheduler-generation-established", {
+      schedulerGeneration: cycle.schedulerGeneration,
+      firstScheduledBeat: cycle.firstScheduledBeat,
+    });
+    return cycle.schedulerEstablished;
+  }
+
+  armRecoveryOutput(cycleId) {
+    const cycle = this.recoveryCycle;
+    if (!cycle || cycle.cycleId !== cycleId || this.context?.state !== "running") return false;
+    this.rampMaster(this.masterGainValue);
+    cycle.gainRestored = this.masterGainValue > 0;
+    cycle.state = "pipeline-verifying";
+    this.recordRecoveryLifecycle("master-gain-restored", { masterGain: this.masterGainValue });
+    return true;
+  }
+
+  verifyRecoveryPipeline({
+    cycleId,
+    schedulerGeneration = null,
+    firstScheduledBeat = null,
+    duplicateCount = 0,
+    backlogBurstCount = 0,
+  } = {}) {
+    const cycle = this.recoveryCycle;
+    if (!cycle || cycle.cycleId !== cycleId || !cycle.foregroundRecoveryNotConfirmed) {
+      return this.getForegroundRecoveryDiagnostics();
+    }
+    cycle.verificationFrames += 1;
+    const clock = this.getClockSnapshot();
+    if (Number.isFinite(clock.currentTime) && Number.isFinite(cycle.clockBaseline.currentTime)) {
+      cycle.contextTimeProgressed = clock.currentTime > cycle.clockBaseline.currentTime + 0.001;
+    }
+    if (clock.outputTimestamp) {
+      if (cycle.outputTimestampSample
+        && clock.outputTimestamp.contextTime > cycle.outputTimestampSample.contextTime + 0.0001) {
+        cycle.outputTimestampProgressed = true;
+      }
+      cycle.outputTimestampSample = { ...clock.outputTimestamp };
+    }
+    if (Number.isFinite(Number(schedulerGeneration))) {
+      cycle.schedulerGeneration = Number(schedulerGeneration);
+    }
+    if (Number.isFinite(Number(firstScheduledBeat))) {
+      cycle.firstScheduledBeat = Number(firstScheduledBeat);
+    }
+    cycle.schedulerEstablished = cycle.schedulerReanchorClaimed
+      && cycle.schedulerGeneration !== null
+      && (cycle.schedulerGenerationBefore === null
+        || cycle.schedulerGeneration > cycle.schedulerGenerationBefore);
+    cycle.sourcePipelineStarted = this.sourceLifecycleCounts.startScheduled
+      > cycle.sourceLifecycleBaseline.startScheduled;
+    cycle.sourceLifecycleProgressed = cycle.sourcePipelineStarted
+      || this.sourceLifecycleCounts.ended > cycle.sourceLifecycleBaseline.ended;
+    cycle.duplicateCount = Number(duplicateCount) || 0;
+    cycle.backlogBurstCount = Number(backlogBurstCount) || 0;
+    cycle.gainRestored = cycle.gainRestored
+      && this.masterGainCommandedValue > 0;
+    cycle.pipelineLiveness = this.context?.state === "running"
+      && cycle.contextTimeProgressed
+      && cycle.outputTimestampProgressed
+      && cycle.schedulerEstablished
+      && cycle.sourcePipelineStarted
+      && cycle.sourceLifecycleProgressed
+      && cycle.gainRestored
+      && cycle.duplicateCount === 0
+      && cycle.backlogBurstCount === 0;
+    if (cycle.pipelineLiveness) {
+      cycle.state = "recovered";
+      cycle.foregroundRecoveryNotConfirmed = false;
+      cycle.recoveredAt = performance.now();
+      this.resumeRequired = false;
+      this.recoveryFailed = false;
+      this.recordRecoveryLifecycle("pipeline-liveness-confirmed");
+      this.emitState();
+    }
+    return this.getForegroundRecoveryDiagnostics();
+  }
+
+  failForegroundRecovery(cycleId, reason = "pipeline-liveness-timeout", { explicit = false } = {}) {
+    const cycle = this.recoveryCycle;
+    if (!cycle || cycle.cycleId !== cycleId || !cycle.foregroundRecoveryNotConfirmed) return false;
+    cycle.state = explicit ? "failed" : "resume-required";
+    cycle.failureReason = reason;
+    cycle.failedAt = performance.now();
+    this.resumeRequired = true;
+    this.recoveryFailed = Boolean(explicit);
+    this.rampMaster(0, 0);
+    this.recordRecoveryLifecycle(explicit ? "recovery-failed" : "resume-required", { reason });
+    this.emitState();
+    return true;
+  }
+
+  getForegroundRecoveryDiagnostics() {
+    return {
+      cycle: cloneRecoveryValue(this.recoveryCycle),
+      history: this.recoveryHistory.map(cloneRecoveryValue),
+      foregroundRecoveryNotConfirmed: Boolean(
+        this.recoveryCycle?.foregroundRecoveryNotConfirmed,
+      ),
+      verificationFrameLimit: RECOVERY_VERIFICATION_FRAME_LIMIT,
+      contextGeneration: this.contextGeneration,
+      recoveryFailed: this.recoveryFailed,
+      primingSourceCount: this.recoveryPrimingSources.size,
+    };
+  }
+
+  getRecoveryVerificationTarget() {
+    const cycle = this.recoveryCycle;
+    if (!cycle?.foregroundRecoveryNotConfirmed || cycle.state !== "pipeline-verifying") {
+      return null;
+    }
+    return {
+      cycleId: cycle.cycleId,
+      verificationFrames: cycle.verificationFrames,
+    };
+  }
+
   rampMaster(value, duration = 0.025) {
     if (!this.context || !this.masterNode) return;
+    this.masterGainCommandedValue = Math.max(0, value);
     const now = this.context.currentTime;
     const gain = this.masterNode.gain;
     gain.cancelScheduledValues(now);
@@ -213,6 +569,9 @@ export class MechanicalAudioEngine {
     const lifecycleSequence = ++this.lifecycleSequence;
     this.enabled = false;
     this.resumeRequired = false;
+    this.recoveryFailed = false;
+    this.recoveryCycle = null;
+    this.foregroundRecoveryNeedsNewCycle = false;
     this.rampMaster(0, DISABLE_RAMP_SECONDS);
     this.emitState();
     await this.waitFn(DISABLE_STOP_DELAY_MS);
@@ -222,9 +581,13 @@ export class MechanicalAudioEngine {
     this.emitState();
   }
 
-  async setVisible(visible) {
+  async setVisible(visible, { reason = visible ? "visible" : "hidden" } = {}) {
     this.visible = Boolean(visible);
-    if (!this.visible) this.resumeRequired = false;
+    if (!this.visible) {
+      this.resumeRequired = false;
+      this.recoveryFailed = false;
+      this.markForegroundInactive(reason);
+    }
     if (!this.context) return;
     if (!this.visible) {
       this.rampMaster(0, 0.015);
@@ -287,16 +650,58 @@ export class MechanicalAudioEngine {
   async resumeVisibleAudio({
     trustedGesture = false,
     reason = "visible",
+    requestedRecoveryLevel = "soft",
+    eventType = reason,
   } = {}) {
     this.visible = true;
-    if (this.resumeInFlight) {
-      const inFlightResult = await this.resumeInFlight;
-      if (trustedGesture && !inFlightResult.running) {
-        return this.resumeVisibleAudio({ trustedGesture, reason });
+    const cycle = this.recoveryCycle ?? this.beginForegroundRecoveryCycle({ reason });
+    const cycleId = cycle?.cycleId ?? null;
+    if (trustedGesture && cycleId !== null) {
+      this.captureTrustedRecoveryGesture({ eventType, reason, requestedRecoveryLevel });
+      if (requestedRecoveryLevel === "hard" && this.context?.state === "running") {
+        this.rebuildGraphForRecovery(cycleId);
+      } else {
+        this.primeRecoveryPipeline(cycleId);
       }
-      return inFlightResult;
     }
-    this.resumeInFlight = (async () => {
+    if (this.resumeInFlight?.cycleId === cycleId) {
+      // Invoke resume synchronously from the trusted handler before its transient
+      // user activation can be consumed by awaiting the automatic attempt.
+      const trustedRetryPromise = trustedGesture
+        ? this.performResumeAttempt({ trustedGesture: true, reason })
+        : null;
+      const [inFlightResult, trustedRetry] = await Promise.all([
+        this.resumeInFlight.promise,
+        trustedRetryPromise,
+      ]);
+      if (trustedRetry && this.recoveryCycle?.cycleId === cycleId) {
+        const retry = trustedRetry;
+        this.resumeRequired = true;
+        this.recoveryFailed = false;
+        this.recoveryCycle.automaticResume = { ...retry };
+        this.recoveryCycle.state = retry.running ? "context-running" : "resume-required";
+        this.recordRecoveryLifecycle(retry.running ? "context-running" : "resume-required", {
+          attemptSequence: retry.attemptSequence,
+          trustedGesture: true,
+          invokedDuringAutomaticResume: true,
+        });
+        this.emitState();
+        return {
+          ...retry,
+          trustedGesture: true,
+          trustedGestureQueued: true,
+          automaticResumeResult: { ...inFlightResult },
+          recoveryCycleId: cycleId,
+        };
+      }
+      return {
+        ...inFlightResult,
+        trustedGesture: Boolean(trustedGesture || inFlightResult.trustedGesture),
+        trustedGestureQueued: Boolean(trustedGesture),
+        recoveryCycleId: cycleId,
+      };
+    }
+    const promise = (async () => {
       if (!this.context || !this.enabled) {
         this.resumeRequired = false;
         const result = await this.performResumeAttempt({
@@ -304,31 +709,51 @@ export class MechanicalAudioEngine {
           reason,
         });
         this.emitState();
-        return result;
+        return { ...result, recoveryCycleId: cycleId };
       }
       this.rampMaster(0, 0);
+      if (this.recoveryCycle?.cycleId === cycleId) {
+        this.recoveryCycle.state = "automatic-resume-in-flight";
+        this.recordRecoveryLifecycle("resume-attempt-started", {
+          trustedGesture: Boolean(trustedGesture),
+        });
+      }
       const result = await this.performResumeAttempt({
         trustedGesture,
         reason,
       });
-      this.resumeRequired = !result.running;
-      if (result.running) this.rampMaster(this.masterGainValue);
-      else this.rampMaster(0, 0);
+      if (this.recoveryCycle?.cycleId !== cycleId) {
+        return { ...result, stale: true, recoveryCycleId: cycleId };
+      }
+      this.resumeRequired = true;
+      this.recoveryFailed = false;
+      this.recoveryCycle.automaticResume = { ...result };
+      this.recoveryCycle.state = result.running ? "context-running" : "resume-required";
+      this.recordRecoveryLifecycle(result.running ? "context-running" : "resume-required", {
+        attemptSequence: result.attemptSequence,
+        trustedGesture: Boolean(trustedGesture),
+      });
+      this.rampMaster(0, 0);
       this.emitState();
       return {
         ...result,
-        requiresTrustedGesture: this.resumeRequired,
+        requiresTrustedGesture: !result.running,
+        recoveryCycleId: cycleId,
       };
-    })().finally(() => {
-      this.resumeInFlight = null;
-    });
-    return this.resumeInFlight;
+    })();
+    this.resumeInFlight = { cycleId, promise };
+    try {
+      return await promise;
+    } finally {
+      if (this.resumeInFlight?.promise === promise) this.resumeInFlight = null;
+    }
   }
 
   prepareTrustedGestureRecoveryForTest(reason = "diagnostic") {
     this.visible = true;
     if (!this.context || !this.enabled || this.context.state === "running") {
       this.resumeRequired = false;
+      this.recoveryFailed = false;
       this.emitState();
       return this.getDiagnostics();
     }
@@ -562,11 +987,13 @@ export class MechanicalAudioEngine {
         this.supported,
         this.failedAssets,
         this.resumeRequired,
+        this.recoveryFailed,
       ),
       buffersLoaded: [...this.buffers.keys()].sort(),
       bufferCompleteness: this.getBufferCompleteness(),
       failedAssets: [...this.failedAssets],
       masterGain: this.masterGainValue,
+      masterGainCommandedValue: this.masterGainCommandedValue,
       busGains: { ...DEFAULT_BUS_GAINS },
       lastEventType: lastAudibleEvent?.type ?? null,
       lastEventTime: lastAudibleEvent?.time ?? null,
@@ -583,6 +1010,7 @@ export class MechanicalAudioEngine {
         ? { ...this.lastResumeResult }
         : null,
       resumeHistory: this.resumeHistory.map((entry) => ({ ...entry })),
+      foregroundRecovery: this.getForegroundRecoveryDiagnostics(),
       escapementSourceInventory: this.getEscapementSourceInventory(),
       audioClock: this.getClockSnapshot(),
       eventLog: audibleEventLog.map((event) => ({ ...event })),
