@@ -136,7 +136,23 @@ export async function runMechanicalAudioIntegrationTest(diagnostics, initialStat
   await diagnostics.setAudioVisibilityForTest(true);
   await diagnostics.waitForFrames(12);
   const visible = diagnostics.getAudioDiagnostics();
-  check("audio-hidden-suspends-and-visible-resumes-without-backlog", hidden.audioContextState === "suspended" && visible.audioContextState === "running" && pausedBeatCount(visible) - pausedBeatCount(beforeHidden) <= 2, { beforeHidden, hidden, visible });
+  const platform = diagnostics.getAudioPlatformRecoveryReport?.() ?? null;
+  const hiddenPolicySatisfied = platform?.profile && platform.profile !== "p0"
+    ? hidden.audioContextState === "running"
+      && hidden.masterGainCommandedValue === 0
+      && hidden.activeSources === 0
+    : hidden.audioContextState === "suspended";
+  const visiblePolicySatisfied = visible.audioContextState === "running"
+    && visible.status === "on"
+    && (!platform || platform.activeTransition?.classification === "RUNNING_AND_ADVANCING");
+  check("audio-hidden-policy-and-visible-resume-advance-without-backlog", hiddenPolicySatisfied
+    && visiblePolicySatisfied
+    && pausedBeatCount(visible) - pausedBeatCount(beforeHidden) <= 2, {
+    beforeHidden,
+    hidden,
+    visible,
+    platform,
+  });
 
   document.getElementById("reset").click();
   await diagnostics.waitForFrames(2);
