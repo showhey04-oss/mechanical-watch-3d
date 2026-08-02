@@ -1,5 +1,28 @@
 # 受入試験
 
+## Final Stabilization Phase 3B.4c-R2.4.2 — Native Safari／物理iPhone受入閉鎖
+
+- 固定Head `0e260fdfc7495293319682ae7b998858641cdd26`、APP_VERSION v3.15.0、`audioLifecycle=r2-3-l4&audioPlatform=p3`を対象とする
+- `PRODUCTION_TIMEOUT_PROFILE`（450／80／1200／250／5500 ms）を使用し、diagnostic overrideを適用せず、diagnostic setter呼出しを0とする
+- Safari／SafariDriver 26.5.2でDesktop 1280×720／Mobile 390×844、18条件・400 cycleのactual Web Audioを完了し、trusted gesture、6 buffer／6 raw asset、duplicate／backlog／catch-up 0、console／runtime／unhandled rejection 0を満たす
+- iPhone 16／iOS 26.5.2／Safariで初期動作、sleep復帰3/3、Home／app復帰3/3、時刻合わせ、巻上げ・りゅうず音、最終60秒連続動作に合格する
+- foreground復帰6/6を自動復帰し、1タップfallback 0、2タップ以上0、緑ONのまま無音となるfalse positive 0、duplicate／burst／視覚的slowdown 0とする
+- fresh Contextの1 trusted gesture fallbackは維持するが、全6回自動復帰した今回の物理試験では未使用である
+- 判定を`PHASE3B4C_R2_4_2_HUMAN_ACCEPTED`および`PHASE3B4C_R2_4_2_READY_FOR_FINAL_PR_REVIEW`とする。Ready化、マージ、Issue #2クローズ、既定採用、Phase 3B.4d開始は別途明示承認を必要とする
+
+## Final Stabilization Phase 3B.4c-R2.4 — WebKit platform recovery
+
+- R2.3の`visibilitychange`を単一ownerとして維持し、回復用listener、毎frame監視、無制限retryを追加しない
+- `running`だけを出力正常とせず、`currentTime`進行、suspended、interrupted、resume reject／timeout、Context unusableを明示分類する
+- fresh Contextは既存スピーカーボタンの1回のtrusted gestureで最大1回だけ開始し、raw asset 6件を全decodeしてからatomic swapする
+- create／decode／stale completion失敗時は旧graphをmutedのまま保持し、old Context close失敗はcommit済み新graphを巻き戻さない
+- Chromium in-app Browser／WebKitでP0～P3×Desktop／390×844を各100 hidden／visible cycle、P3の5 fault×両viewportを実Web Audioで合格する
+- duplicate 0、backlog burst 0、catch-up burstなし、6 buffer完全性、application console error／warning 0を維持する
+- 通常path／Phase 3C.1-only pathを作業開始Headとpixel exactにし、timebase、input、S86、Phase 2C、A.7、Geometry、Light、Material、opacity、camera、DPR、UI、sample、gain、APP_VERSIONを変更しない
+- Node 411/411、Desktop／Mobile audio各23/23、R2.4固有browser failure 0を確認する。共通既存未達をR2.4 PASSへ変換しない
+- pointer／wheel差分は平均FPS悪化5%以内、p95悪化2ms以内、reversal 0、stop-then-jump 0、zoom monotonic、transform invariantを閾値変更なしで満たす
+- R2.4初期ゲートではnative Safari自動化blockをHuman／native Safari PASSへ変換せず、物理iPhone再試験を`FROZEN`とした。この履歴状態は後続R2.4.2のNative Safari／物理iPhone受入閉鎖によって解除されたが、query限定、既定未採用、Ready化／マージ未承認は維持する
+
 ## Issue #2 Phase 3B.4b — iOS multi-touch stability受入
 
 - 完成外装、D2c3、continuity currentと、任意のPhase 3B.4a framingに限定してinput候補が有効になる
