@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "sourceHead": "d16037a75d85d705434d8b73ef5293511052f65e",
+  "status": "DIAGNOSIS_COMPLETE_NO_PRODUCT_CHANGE",
+  "classifications": [
+    "PHASE3B4_STACK_PERFORMANCE_MEASUREMENT_CONTRACT_MISMATCH",
+    "PHASE3B4_STACK_PERFORMANCE_ENVIRONMENT_CONTAMINATION",
+    "PHASE3B4_STACK_PERFORMANCE_FAILURE_NOT_REPRODUCED_UNDER_ISOLATED_RUN",
+    "PHASE3B4_STACK_MOBILE_POINTER_PRODUCT_REGRESSION_NOT_REPRODUCED"
+  ],
+  "initialFailureCauses": [
+    {
+      "cause": "runner contract mismatch",
+      "detail": "Earlier runner conditions differed in DPR, timing, event counts, browser lifecycle and paused state."
+    },
+    {
+      "cause": "wrong canvas selector",
+      "detail": "document.querySelector('canvas') resolved the hidden 640x300 history canvas with 0x0 client size instead of canvas#app at 390x844."
+    },
+    {
+      "cause": "invalid audio diagnostic field",
+      "detail": "An invalid diagnostic assertion was excluded rather than changing the product contract."
+    },
+    {
+      "cause": "background process contamination",
+      "detail": "Persistent browser processes and later endpoint security CPU load violated the clean-process precondition."
+    }
+  ],
+  "isolatedContract": {
+    "runtime": "Playwright WebKit 26.5",
+    "viewport": "390x844",
+    "devicePixelRatio": 1,
+    "renderPixelRatio": 1,
+    "warmupMs": 1000,
+    "warmupExcluded": true,
+    "measurementMs": 3000,
+    "freshBrowserProcessPerRun": true,
+    "repetitionsPerSide": 5,
+    "inputTarget": "canvas#app",
+    "trustedPointerAndWheel": true
+  },
+  "productTreeParity": {
+    "pair": "C_D",
+    "status": "BYTE_AND_GIT_OBJECT_IDENTICAL",
+    "productScopedDiffFileCount": 0,
+    "onlyChanges": [
+      "documentation",
+      "physical iPhone acceptance evidence"
+    ]
+  },
+  "resolvedIncidents": [
+    {
+      "id": "INVALID_DESKTOP_STARTUP_CONTRACT",
+      "status": "WITHDRAWN",
+      "productRegression": false
+    },
+    {
+      "id": "NATIVE_SAFARI_ENVIRONMENT_FAILURE",
+      "status": "RESOLVED_AFTER_CLEAN_SESSION_RESET",
+      "productRegression": false
+    }
+  ],
+  "decision": "PHASE3B4_STACK_PRODUCT_FIX_NOT_REQUIRED"
+}

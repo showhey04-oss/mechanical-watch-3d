@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — Final Stabilization Phase 3B.4 stack integration evidence closure
+
+- Head `d16037a75d85d705434d8b73ef5293511052f65e`へPhase 3B.4a／3B.4b／3B.4c R2.4.2の既存結果を統合。Node 442/442、Chrome／WebKit／Native Safari Desktop・Mobile、preset・9部品選択、multi-touch・production audio、12/12 protected pathを合格として記録
+- 物理iPhoneのforeground自動復帰6/6、fallback tap 0、duplicate／burstなし、Native Safari 26.5.2の18条件・400 cycleを現行統合状態へ反映
+- commit段階12性能セルは既存閾値内でMobile pointer製品回帰は再現せず、製品修正不要と判断。M3→M5 wheel aggregate p95 +4msは順序別結果とFPS改善を踏まえ`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`と分類
+- clean-process最終測定はStatefulFirewall／VShieldScannerの高CPU負荷で`NOT TESTED`。`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`とし、clean環境のabsolute PASS、McAfee停止環境PASS、Issue #2完了は主張しない
+- 製品コード、test runtime、audio file、performance threshold、APP_VERSIONは変更せず、PR #25 Open／Draft、PR #24 Open／Draft、Issue #2 Open、D2c3未採用、Phase 3B.4d未開始を維持
+
 ## Unreleased — Final Stabilization Phase 3B.4c-R2.4.2 Native Safari／物理iPhone受入閉鎖
 
 - 固定Head `0e260fdfc7495293319682ae7b998858641cdd26`を、Safari／SafariDriver 26.5.2のproduction profile actual Web AudioでDesktop／Mobile計18条件・400 cycle検証。trusted gesture、6 buffer／6 raw asset、duplicate／backlog／catch-up 0、console／runtime／unhandled rejection 0を確認

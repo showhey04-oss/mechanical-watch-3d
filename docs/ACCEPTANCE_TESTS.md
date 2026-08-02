@@ -1,5 +1,18 @@
 # 受入試験
 
+## Final Stabilization Phase 3B.4 — Stack integration evidence closure
+
+- Head `d16037a75d85d705434d8b73ef5293511052f65e`でPhase 3B.4a／3B.4b／3B.4c R2.4.2を統合し、C `0e260fdfc7495293319682ae7b998858641cdd26`との製品・test-runtime tree一致を確認する
+- Node 442/442、Chrome Desktop／Mobile、Playwright WebKit Desktop／Mobile、Native Safari Desktop／Mobileを合格とする
+- preset、9部品選択、選択強調、HUD／learning同期、blank clear、opacity 100／50／16、外装OFF／ON、split／explode／restoreを合格とする
+- multi-touch 100 cycle、production audio、visibility 30 cycle、10分相当stress、foreground自動復帰6/6、buffer／raw asset 6/6、duplicate／backlog／catch-up 0を維持する
+- protected path 12/12をpixel／SHA exact、console／runtime／unhandled rejection 0、禁止干渉0とする
+- commit段階A→B／B→C／C→D／A→Dのidle／pointer／wheel全12セルが既存のFPS 5%・p95 2ms差分閾値内であり、閾値を変更しない
+- M3→M5 wheelの全体p95 +4msは、順序別+1.5ms／+1msとaudio ON側FPS改善を併記し、`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`とする
+- clean-process最終性能測定はendpoint security高CPU負荷により`NOT TESTED`とし、製品FAILやabsolute PASSへ変換しない。McAfee停止・無効化も行わない
+- 正式判断を`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`、`PHASE3B4_STACK_PRODUCT_FIX_NOT_REQUIRED`、`PHASE3B4_STACK_INTEGRATION_READY_FOR_CHATGPT_REVIEW`とする
+- PR #25はOpen／Draft、D2c3は未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
+
 ## Final Stabilization Phase 3B.4c-R2.4.2 — Native Safari／物理iPhone受入閉鎖
 
 - 固定Head `0e260fdfc7495293319682ae7b998858641cdd26`、APP_VERSION v3.15.0、`audioLifecycle=r2-3-l4&audioPlatform=p3`を対象とする
