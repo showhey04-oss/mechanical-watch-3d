@@ -33,7 +33,7 @@ Refactor Aで輪列・高さ面・回転状態をパラメータ化し、PR #3�
 
 作動音は教育・演出用の合成音であり、実物のETA 6498-1の録音ではない。初期状態はOFFとし、ユーザーがONにした後にだけWeb Audioと音源を初期化する。音イベント系は機構状態へ値を書き戻さず、初期化・診断・状態復元も発音契機にしない。
 
-現在の改修フェーズは「Issue #2 Final Polish Phase 3B.4b、iOSマルチタッチ状態安定化、未採用」とする。Phase 3B.4aのモバイル全長構図はiPhone 16／iOS 26.5.2の15分確認で`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`として合格した。D2c3とframingはquery限定・未採用を維持し、2～3分後の二本指pan／pinch／rotation劣化を別候補で診断する。Phase 3B.2の透過不連続受容とOIT完成後延期、Phase 3C.1～3C.3の人間承認済み基準、v3.15.0、S86、内部機構、通常レンダリング、DPRを変更しない。
+現在の改修フェーズは「Final Stabilization Phase 3B.4 stack integration、ChatGPTレビュー待ち」とする。Head `d16037a75d85d705434d8b73ef5293511052f65e`でPhase 3B.4aのモバイル全長構図、Phase 3B.4bのiOSマルチタッチ、Phase 3B.4c R2.4.2のproduction audio／foreground復帰を統合した。Node 442/442、Chrome／Playwright WebKit／Native Safari Desktop・Mobile、preset、9部品選択、HUD／learning同期、blank clear、multi-touch 100 cycle、production audio、visibility 30 cycle、10分相当stress、12/12 protected pathは合格した。性能は既存の隔離実行で製品回帰を再現せず`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`とするが、endpoint security高負荷のためclean-process最終測定は`NOT TESTED`である。clean環境の絶対性能PASSやMcAfee停止環境PASSとはせず、製品修正も行わない。PR #25はDraft、D2c3、framing、input、audio候補はquery限定・未採用、Issue #2はOpenを維持する。Phase 3B.2の透過不連続受容とOIT完成後延期、Phase 3C.1～3C.3の人間承認済み基準、v3.15.0、S86、内部機構、通常レンダリング、DPRを変更しない。
 
 人間確認で選定したS86をv3.15.0の通常文字板表示寸法として採用する。対象は文字板表示系だけで、dial ring径27.692、index円径25.456、分針長12.040、時針長8.600、小秒表示円径7.740、小秒針長3.268である。内部機構、小秒中心、四番車軸、Y方向配置、針と軸／管の1:1回転拘束は維持する。試験状態は`ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION`であり、実施済みA/BでPR固有回帰は0件、全ブラウザ試験行列は環境制約により未完了である。
 

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.2",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "8fa4d6e9dd70cbaf32fd26b75ec17b0cabe73484",
+  "sourceImplementationCommit": "2010a862a7db7730154be28affee94c9419f7905",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T05:43:07.611Z",
+  "captureMode": "same-origin unsandboxed iframe harness with actual Web Audio",
+  "decision": "PHASE3B4C_R2_2_AUTOMATED_OUTPUT_LIVENESS_GATE_PASSED",
+  "physicalIPhoneDecision": "PHASE3B4C_R2_2_PHYSICAL_IPHONE_RETEST_REQUIRED",
+  "productCodeStatus": "IMPLEMENTED_AND_AUTOMATED_VERIFIED",
+  "physicalIPhoneStatus": "PENDING",
+  "defaultAdopted": false,
+  "readyForReview": false,
+  "mergeAllowed": false,
+  "issue2Closed": false,
+  "humanRetestProtocol": {
+    "cycles": 3,
+    "lifecycleCases": [
+      "screen sleep",
+      "home return",
+      "app switch return"
+    ],
+    "expectedRecovery": "automatic recovery or one speaker tap",
+    "prohibitedWorkaround": "a second tap or OFF/ON cycle",
+    "failureCondition": "green ON UI while the physical output remains silent",
+    "sanity": [
+      "free-running 1 minute",
+      "live-sync 1 minute",
+      "time-setting recovery"
+    ]
+  }
+}

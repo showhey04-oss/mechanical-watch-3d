@@ -104,7 +104,14 @@
 
 ## 現在の改修フェーズ
 
-### Issue #2 Final Polish Phase 3B.4b — iOS multi-touch stability
+### Final Stabilization Phase 3B.4 stack integration — evidence recorded／ChatGPT review pending
+
+- Head `d16037a75d85d705434d8b73ef5293511052f65e`でPhase 3B.4a／3B.4b／3B.4c R2.4.2を統合し、起動契約、Desktop基準同等性、Mobile全長構図、Node 442/442、Chrome／WebKit／Native Safari、preset・9部品選択、multi-touch・production audio、12/12 protected pathを合格とする
+- 物理iPhoneのforeground自動復帰6/6、fallback tap 0、音のduplicate／burstなしを統合受入へ反映する
+- commit段階の12性能セルは既存閾値内で、Mobile pointer製品回帰は再現しなかった。製品修正と閾値変更は不要とする
+- clean-process最終性能測定はendpoint security高CPU負荷で`NOT TESTED`とし、`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を正式判断とする。clean環境の絶対PASSやMcAfee停止環境PASSは主張しない
+- PR #25はOpen／DraftのままChatGPTレビューへ送り、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
+- 以下はPhase 3B.4a～3B.4cの段階履歴として維持する
 
 - Phase 3B.3のPC／物理iPhone比較でD2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として選定した
 - Shadow-offはiPhoneの暗いfull-length表示により`HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY`とし、比較履歴を維持する
@@ -114,7 +121,11 @@
 - 390×844の最小余白4.0265%、clipping 0、初期表示32/32とDesktop固定画像48/48 pixel exact、Desktop selected 8/8 state exact、操作・性能差分合格を確認する
 - iPhone 16／iOS 26.5.2の15分確認で全長構図、fog許容、preset、最大距離回転、選択、HUD同期、解除、split／explode／restore、軽微な発熱を合格とし、`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
 - 一般tap異常と自動reloadは報告されていない。2～3分後の二本指pan／pinch／rotation劣化と手動reloadによる復旧をPhase 3B.4bへ分離し、active pointerとgesture lifecycleを診断する
-- iOS音響ペーシング低下は再現済みだがPhase 3B.4bでは修正しない
+- query限定のevent-driven cleanup候補はDesktop 24 cycle／390×844 60 cycle、pointercancel、lost capture、ID再利用、visibility／page lifecycle、selection、差分性能の自動ゲートに合格
+- 物理iPhoneでframingなしAが49秒、framingありBが55秒で劣化を再現し、候補Cは15分以上無再現、manual reload不要、progressive frame drop／WebGL lossなしを確認
+- `CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`としてPhase 3B.4bを受入れ、状態を`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
+- preset／selectionの物理確認は`NOT_REPORTED`のまま最終統合へ引き継ぎ、自動回帰の合格で代替しない
+- iOS音響ペーシング低下はPhase 3B.4cへ分離し、機構を正本とする発音時系列をquery限定で診断・安定化する
 - D2c3、framing、入力修正候補はquery限定・未採用とし、Ready化、マージ、Issue #2クローズを行わない
 
 ### Issue #2 Final Polish Phase 3B.2 — dual-baseline transparency continuity
