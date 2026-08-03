@@ -451,7 +451,8 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
     const bodyRect = panelBody.getBoundingClientRect();
     check("hud-mobile-time-input-scrolls-into-visible-panel-body", inputRect.top >= bodyRect.top - 1 && inputRect.bottom <= bodyRect.bottom + 1, { inputRect: inputRect.toJSON(), bodyRect: bodyRect.toJSON(), visualViewport: window.visualViewport ? { offsetTop: window.visualViewport.offsetTop, height: window.visualViewport.height } : null });
     const timeLayout = diagnostics.getTimeInputReport().layout;
-    check("hud-mobile-time-input-and-grid-stay-within-panel-body", timeLayout.inputInsideBody && timeLayout.documentOverflow === 0 && timeLayout.gridOverflow === 0 && timeLayout.input.right <= timeLayout.body.right + 1, timeLayout);
+    check("hud-mobile-time-input-and-grid-stay-within-panel-body", timeLayout.inputInsideBody && timeLayout.inputInsideViewport && timeLayout.panelInsideViewport && timeLayout.documentOverflow === 0 && timeLayout.bodyOverflow === 0 && timeLayout.gridOverflow === 0 && timeLayout.panelBodyOverflow === 0 && Math.abs(timeLayout.horizontalScrollX) <= 0.5 && timeLayout.input.right <= timeLayout.body.right + 1, timeLayout);
+    check("hud-mobile-native-time-input-keeps-ios-safe-control-metrics", timeLayout.input.height >= 44 && parseFloat(timeLayout.computed.input.minHeight) >= 44 && parseFloat(timeLayout.computed.input.fontSize) >= 16 && timeLayout.computed.input.boxSizing === "border-box" && timeLayout.computed.input.appearance === "auto" && timeLayout.input.width <= timeLayout.grid.width + 1, timeLayout);
     const mobileToggleCardsByTab = [];
     for (const view of ["operation", "learning", "technical"]) {
       panelTabs.activate(view);
