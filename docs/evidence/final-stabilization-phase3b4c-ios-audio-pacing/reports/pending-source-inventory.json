@@ -1,0 +1,183 @@
+{
+  "schemaVersion": 2,
+  "phase": "Final Stabilization Phase 3B.4c-R1.1",
+  "sourceCandidateCommit": "0d0dd4cadce3f5929563360c15c6f31ea16e2a48",
+  "sourceImplementationCommit": "3de2886011dafaea540f2ea2650d2ab326cf3216",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T02:53:27.898Z",
+  "pendingCap": 4,
+  "leakDetected": false,
+  "staleRecordRetentionDetected": false,
+  "farFutureSourceGuard": true,
+  "cancellationScope": [
+    "escapementTick",
+    "escapementTock"
+  ],
+  "nonEscapementCancelled": false,
+  "scenarios": [
+    {
+      "pattern": "stable-16.7ms",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "stable-16.7ms",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "stable-33.3ms",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "stable-33.3ms",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "stable-50ms",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "stable-50ms",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "intermittent-80-150ms",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "intermittent-80-150ms",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "single-500ms",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "single-500ms",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "single-1000ms",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "single-1000ms",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "repeated-500ms",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "repeated-500ms",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "foreground-degradation",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "foreground-degradation",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "ios-irregular-pacing",
+      "mode": "free-running",
+      "maximumPendingEscapementSources": 1,
+      "maximumSourceRecordCount": 1,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    },
+    {
+      "pattern": "ios-irregular-pacing",
+      "mode": "live-sync",
+      "maximumPendingEscapementSources": 3,
+      "maximumSourceRecordCount": 4,
+      "endingInventoryCount": 0,
+      "withinCap": true,
+      "cleanAtEnd": true
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.2",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "8fa4d6e9dd70cbaf32fd26b75ec17b0cabe73484",
+  "sourceImplementationCommit": "2010a862a7db7730154be28affee94c9419f7905",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T05:43:07.611Z",
+  "captureMode": "same-origin unsandboxed iframe harness with actual Web Audio",
+  "status": "PASSED",
+  "states": [
+    "hidden",
+    "recovering",
+    "resume-required",
+    "recovery-failed",
+    "recovered"
+  ],
+  "successContract": [
+    "AudioContext state is running",
+    "scheduler generation is re-anchored exactly once per recovery cycle",
+    "new escapement source lifecycle is observed",
+    "AudioContext/output timestamp progresses",
+    "commanded master gain is restored to 0.36",
+    "duplicate and backlog burst counts remain zero"
+  ],
+  "desktop": [
+    {
+      "cycleId": 1,
+      "state": "hidden",
+      "reason": "diagnostic-visibility:true",
+      "contextGeneration": 1,
+      "schedulerGenerationBefore": 4,
+      "schedulerGeneration": 5,
+      "schedulerReanchorClaimed": true,
+      "schedulerReanchorCount": 1,
+      "firstScheduledBeat": 183235,
+      "hardRecoveryRoute": "A",
+      "primingSourceStarted": false,
+      "contextRebuildCount": 0,
+      "verificationFrames": 1,
+      "contextTimeProgressed": true,
+      "outputTimestampProgressed": true,
+      "schedulerEstablished": true,
+      "sourcePipelineStarted": true,
+      "sourceLifecycleProgressed": true,
+      "gainRestored": true,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "pipelineLiveness": true,
+      "foregroundRecoveryNotConfirmed": true,
+      "failureReason": null,
+      "lifecycle": [
+        {
+          "sequence": 1,
+          "event": "diagnostic-visibility:true",
+          "capturedAt": 16644.700000000186,
+          "contextState": "suspended"
+        },
+        {
+          "sequence": 2,
+          "event": "resume-attempt-started",
+          "capturedAt": 16644.800000000745,
+          "contextState": "suspended",
+          "trustedGesture": false
+        },
+        {
+          "sequence": 3,
+          "event": "context-running",
+          "capturedAt": 16648.400000000373,
+          "contextState": "running",
+          "attemptSequence": 1,
+          "trustedGesture": false
+        },
+        {
+          "sequence": 4,
+          "event": "scheduler-reanchor-claimed",
+          "capturedAt": 16648.5,
+          "contextState": "running"
+        },
+        {
+          "sequence": 5,
+          "event": "scheduler-generation-established",
+          "capturedAt": 16648.60000000056,
+          "contextState": "running",
+          "schedulerGeneration": 5,
+          "firstScheduledBeat": 0
+        },
+        {
+          "sequence": 6,
+          "event": "master-gain-restored",
+          "capturedAt": 16648.700000000186,
+          "contextState": "running",
+          "masterGain": 0.36
+        },
+        {
+          "sequence": 7,
+          "event": "pipeline-liveness-confirmed",
+          "capturedAt": 16681,
+          "contextState": "running"
+        },
+        {
+          "sequence": 8,
+          "event": "diagnostic-visibility:false",
+          "capturedAt": 16730.300000000745,
+          "contextState": "running"
+        }
+      ]
+    },
+    {
+      "cycleId": 2,
+      "state": "hidden",
+      "reason": "diagnostic-visibility:true",
+      "contextGeneration": 1,
+      "schedulerGenerationBefore": 7,
+      "schedulerGeneration": 8,
+      "schedulerReanchorClaimed": true,
+      "schedulerReanchorCount": 1,
+      "firstScheduledBeat": 183236,
+      "hardRecoveryRoute": "A",
+      "primingSourceStarted": false,
+      "contextRebuildCount": 0,
+      "verificationFrames": 1,
+      "contextTimeProgressed": true,
+      "outputTimestampProgressed": true,
+      "schedulerEstablished": true,
+      "sourcePipelineStarted": true,
+      "sourceLifecycleProgressed": true,
+      "gainRestored": true,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "pipelineLiveness": true,
+      "foregroundRecoveryNotConfirmed": true,
+      "failureReason": null,
+      "lifecycle": [
+        {
+          "sequence": 1,
+          "event": "diagnostic-visibility:true",
+          "capturedAt": 16731.10000000056,
+          "contextState": "suspended"
+        },
+        {
+          "sequence": 2,
+          "event": "resume-attempt-started",
+          "capturedAt": 16731.10000000056,
+          "contextState": "suspended",
+          "trustedGesture": false
+        },
+        {
+          "sequence": 3,
+          "event": "context-running",
+          "capturedAt": 16743,
+          "contextState": "running",
+          "attemptSequence": 2,
+          "trustedGesture": false
+        },
+        {
+          "sequence": 4,
+          "event": "scheduler-reanchor-claimed",
+          "capturedAt": 16743.200000000186,
+          "contextState": "running"
+        },
+        {
+          "sequence": 5,
+          "event": "scheduler-generation-established",
+          "capturedAt": 16743.300000000745,
+          "contextState": "running",
+          "schedulerGeneration": 8,
+          "firstScheduledBeat": 0
+        },
+        {
+          "sequence": 6,
+          "event": "master-gain-restored",
+          "capturedAt": 16743.300000000745,
+          "contextState": "running",
+          "masterGain": 0.36
+        },
+        {
+          "sequence": 7,
+          "event": "pipeline-liveness-confirmed",
+          "capturedAt": 16780,
+          "contextState": "running"
+        },
+        {
+          "sequence": 8,
+          "event": "diagnostic-visibility:false",
+          "capturedAt": 16830.900000000373,
+          "contextState": "running"
+        }
+      ]
+    }
+  ],
+  "mobile390x844": [
+    {
+      "cycleId": 1,
+      "state": "hidden",
+      "reason": "diagnostic-visibility:true",
+      "contextGeneration": 1,
+      "schedulerGenerationBefore": 4,
+      "schedulerGeneration": 5,
+      "schedulerReanchorClaimed": true,
+      "schedulerReanchorCount": 1,
+      "firstScheduledBeat": 183198,
+      "hardRecoveryRoute": "A",
+      "primingSourceStarted": false,
+      "contextRebuildCount": 0,
+      "verificationFrames": 1,
+      "contextTimeProgressed": true,
+      "outputTimestampProgressed": true,
+      "schedulerEstablished": true,
+      "sourcePipelineStarted": true,
+      "sourceLifecycleProgressed": true,
+      "gainRestored": true,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "pipelineLiveness": true,
+      "foregroundRecoveryNotConfirmed": true,
+      "failureReason": null,
+      "lifecycle": [
+        {
+          "sequence": 1,
+          "event": "diagnostic-visibility:true",
+          "capturedAt": 11929.900000000373,
+          "contextState": "suspended"
+        },
+        {
+          "sequence": 2,
+          "event": "resume-attempt-started",
+          "capturedAt": 11930,
+          "contextState": "suspended",
+          "trustedGesture": false
+        },
+        {
+          "sequence": 3,
+          "event": "context-running",
+          "capturedAt": 11933.700000000186,
+          "contextState": "running",
+          "attemptSequence": 1,
+          "trustedGesture": false
+        },
+        {
+          "sequence": 4,
+          "event": "scheduler-reanchor-claimed",
+          "capturedAt": 11933.900000000373,
+          "contextState": "running"
+        },
+        {
+          "sequence": 5,
+          "event": "scheduler-generation-established",
+          "capturedAt": 11934.100000000559,
+          "contextState": "running",
+          "schedulerGeneration": 5,
+          "firstScheduledBeat": 0
+        },
+        {
+          "sequence": 6,
+          "event": "master-gain-restored",
+          "capturedAt": 11934.100000000559,
+          "contextState": "running",
+          "masterGain": 0.36
+        },
+        {
+          "sequence": 7,
+          "event": "pipeline-liveness-confirmed",
+          "capturedAt": 11942.400000000373,
+          "contextState": "running"
+        },
+        {
+          "sequence": 8,
+          "event": "diagnostic-visibility:false",
+          "capturedAt": 11963.700000000186,
+          "contextState": "running"
+        }
+      ]
+    },
+    {
+      "cycleId": 2,
+      "state": "hidden",
+      "reason": "diagnostic-visibility:true",
+      "contextGeneration": 1,
+      "schedulerGenerationBefore": 7,
+      "schedulerGeneration": 8,
+      "schedulerReanchorClaimed": true,
+      "schedulerReanchorCount": 1,
+      "firstScheduledBeat": 183198,
+      "hardRecoveryRoute": "A",
+      "primingSourceStarted": false,
+      "contextRebuildCount": 0,
+      "verificationFrames": 1,
+      "contextTimeProgressed": true,
+      "outputTimestampProgressed": true,
+      "schedulerEstablished": true,
+      "sourcePipelineStarted": true,
+      "sourceLifecycleProgressed": true,
+      "gainRestored": true,
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "pipelineLiveness": true,
+      "foregroundRecoveryNotConfirmed": true,
+      "failureReason": null,
+      "lifecycle": [
+        {
+          "sequence": 1,
+          "event": "diagnostic-visibility:true",
+          "capturedAt": 11964,
+          "contextState": "suspended"
+        },
+        {
+          "sequence": 2,
+          "event": "resume-attempt-started",
+          "capturedAt": 11964.200000000186,
+          "contextState": "suspended",
+          "trustedGesture": false
+        },
+        {
+          "sequence": 3,
+          "event": "context-running",
+          "capturedAt": 11973,
+          "contextState": "running",
+          "attemptSequence": 2,
+          "trustedGesture": false
+        },
+        {
+          "sequence": 4,
+          "event": "scheduler-reanchor-claimed",
+          "capturedAt": 11973.200000000186,
+          "contextState": "running"
+        },
+        {
+          "sequence": 5,
+          "event": "scheduler-generation-established",
+          "capturedAt": 11973.200000000186,
+          "contextState": "running",
+          "schedulerGeneration": 8,
+          "firstScheduledBeat": 0
+        },
+        {
+          "sequence": 6,
+          "event": "master-gain-restored",
+          "capturedAt": 11973.200000000186,
+          "contextState": "running",
+          "masterGain": 0.36
+        },
+        {
+          "sequence": 7,
+          "event": "pipeline-liveness-confirmed",
+          "capturedAt": 11985.799999999814,
+          "contextState": "running"
+        },
+        {
+          "sequence": 8,
+          "event": "diagnostic-visibility:false",
+          "capturedAt": 12007.200000000186,
+          "contextState": "running"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": 1,
+  "sourceMainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBaseCommit": "961fb16ec8c0b55b4d940861659e22733537d813",
+  "sourceImplementationCommit": "8a0fac5149708a906d02df103403f6e0706db9f7",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1c-shadow-attenuation",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
+  "defaultAdopted": false,
+  "status": "COMPLETED_WITH_BASELINE_ENVIRONMENT_LIMITATIONS",
+  "node": {
+    "status": "PASSED",
+    "passed": 253,
+    "failed": 0,
+    "command": "/Users/tsuchidashohei/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin/node --test tests/*.test.mjs"
+  },
+  "browserSuites": {
+    "browser-1280x720": {
+      "ok": false,
+      "error": null,
+      "actualBrowserRun": true,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "devicePixelRatio": 2,
+        "renderPixelRatio": 1.15,
+        "coarsePointer": false,
+        "panelOpen": false,
+        "panelCollapsed": true
+      },
+      "failedChecks": [
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent"
+      ]
+    },
+    "browser-390x844": {
+      "ok": true,
+      "error": null,
+      "actualBrowserRun": true,
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 2,
+        "renderPixelRatio": 1,
+        "coarsePointer": false,
+        "panelOpen": false,
+        "panelCollapsed": false
+      },
+      "failedChecks": []
+    },
+    "ui-1280x720": {
+      "ok": true,
+      "error": null,
+      "actualBrowserRun": true,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "devicePixelRatio": 2,
+        "renderPixelRatio": 1.15,
+        "coarsePointer": false,
+        "panelOpen": false,
+        "panelCollapsed": false
+      },
+      "failedChecks": []
+    },
+    "ui-390x844": {
+      "ok": true,
+      "error": null,
+      "actualBrowserRun": true,
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 2,
+        "renderPixelRatio": 1,
+        "coarsePointer": false,
+        "panelOpen": false,
+        "panelCollapsed": false
+      },
+      "failedChecks": []
+    },
+    "hud-1280x720": {
+      "ok": true,
+      "error": null,
+      "actualBrowserRun": true,
+      "viewport": {
+        "width": 1280,
+        "height": 720,
+        "devicePixelRatio": 2,
+        "renderPixelRatio": 1.4,
+        "coarsePointer": false,
+        "panelOpen": false,
+        "panelCollapsed": false
+      },
+      "failedChecks": []
+    },
+    "hud-390x844": {
+      "ok": true,
+      "error": null,
+      "actualBrowserRun": true,
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 2,
+        "renderPixelRatio": 1.05,
+        "coarsePointer": false,
+        "panelOpen": true,
+        "panelCollapsed": false
+      },
+      "failedChecks": []
+    },
+    "audio-1280x720": {
+      "ok": false,
+      "error": "audio suite timed out",
+      "actualBrowserRun": false,
+      "viewport": null,
+      "failedChecks": []
+    },
+    "audio-390x844": {
+      "ok": true,
+      "error": null,
+      "actualBrowserRun": true,
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "devicePixelRatio": 2,
+        "renderPixelRatio": 1.25,
+        "coarsePointer": false,
+        "panelOpen": false,
+        "panelCollapsed": false
+      },
+      "failedChecks": []
+    }
+  },
+  "desktopBrowserKnownBaselineFailure": {
+    "id": "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+    "candidateSpecific": false,
+    "reason": "The failure occurs at opacity 100 where the attenuation candidate has the baseline frontKey contribution; protected paths are byte-identical."
+  },
+  "desktopTrustedAudio": {
+    "status": "ENVIRONMENT_BLOCKED",
+    "reason": "The 1280 iframe speaker control could not complete a trusted click inside the narrower in-app Browser viewport; the 390x844 trusted gesture suite passed and Node audio tests remain part of the final run."
+  },
+  "consoleErrorWarning": {
+    "stage0": 0,
+    "stage1": 0,
+    "performance": 0,
+    "motion": 0
+  },
+  "performancePassed": true,
+  "protectedPathsPassed": true,
+  "thresholdsChanged": false
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.1",
+  "sourceBaseCommit": "36cccd8f135e257f20da84d1d60957ae22472e72",
+  "sourceImplementationCommit": "42516a8b5c98507b11a1ae40679f99cf8abb0e0a",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-07-31T07:14:15.166Z",
+  "captureMode": "same-origin unsandboxed iframe harness with actual Web Audio",
+  "status": "PHYSICAL_IPHONE_R2_1_RETEST_PENDING",
+  "retainedPasses": [
+    "PHASE3B4C_R2_PHYSICAL_IPHONE_FREE_RUNNING_PASS",
+    "PHASE3B4C_R2_PHYSICAL_IPHONE_LIVE_SYNC_PASS",
+    "PHASE3B4C_R2_WINDING_AND_REVERSE_AUDIO_PASS"
+  ],
+  "supersededFailures": [
+    "PHASE3B4C_R2_TIME_SETTING_AUDIO_RECOVERY_FAILED",
+    "PHASE3B4C_R2_FOREGROUND_RETURN_AUDIO_RECOVERY_FAILED"
+  ],
+  "currentTechnicalState": "R2_1_TECHNICAL_BROWSER_AND_DETERMINISTIC_PASS",
+  "humanRetest": {
+    "required": true,
+    "scope": [
+      "free-running 5 minute sanity",
+      "live-sync 5 minute sanity",
+      "time changes 3 cycles",
+      "crown position 2/1 3 cycles",
+      "screen sleep return 3 cycles",
+      "home screen return 3 cycles",
+      "app switch return 3 cycles",
+      "single trusted gesture recovery when resume-required is shown"
+    ]
+  }
+}
