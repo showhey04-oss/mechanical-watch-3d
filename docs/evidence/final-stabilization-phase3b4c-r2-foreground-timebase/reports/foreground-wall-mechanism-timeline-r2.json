@@ -1,0 +1,4159 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseCommit": "b6b89f68020d399bb8dc5cbf8fd01f64401454f3",
+  "sourceImplementationCommit": "a50cb5006a5f221485d5a042b836eabde00e1293",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "queryOnly": true,
+  "defaultAdopted": false,
+  "scenario": "ios-irregular-pacing/free-running/900s",
+  "beforeR2": {
+    "contract": "min(raw frame elapsed, 50ms) drives mechanism time",
+    "finalWallElapsedSeconds": 900,
+    "finalMechanismElapsedSeconds": 455.15,
+    "finalElapsedDivergenceSeconds": -444.85,
+    "samples": [
+      {
+        "wallElapsedSeconds": 0.0167,
+        "cappedMechanismElapsedSeconds": 0.0167,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 1.0187,
+        "cappedMechanismElapsedSeconds": 1.0187,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 2.0207,
+        "cappedMechanismElapsedSeconds": 2.0207,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 3.0227,
+        "cappedMechanismElapsedSeconds": 3.0227,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 4.0247,
+        "cappedMechanismElapsedSeconds": 4.0247,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 5.0267,
+        "cappedMechanismElapsedSeconds": 5.0267,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 6.0287,
+        "cappedMechanismElapsedSeconds": 6.0287,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 7.0307,
+        "cappedMechanismElapsedSeconds": 7.0307,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 8.0327,
+        "cappedMechanismElapsedSeconds": 8.0327,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 9.0347,
+        "cappedMechanismElapsedSeconds": 9.0347,
+        "elapsedDivergenceSeconds": 0
+      },
+      {
+        "wallElapsedSeconds": 10.17,
+        "cappedMechanismElapsedSeconds": 10.07,
+        "elapsedDivergenceSeconds": -0.1
+      },
+      {
+        "wallElapsedSeconds": 13.7712,
+        "cappedMechanismElapsedSeconds": 11.8712,
+        "elapsedDivergenceSeconds": -1.9
+      },
+      {
+        "wallElapsedSeconds": 17.3724,
+        "cappedMechanismElapsedSeconds": 13.6724,
+        "elapsedDivergenceSeconds": -3.7
+      },
+      {
+        "wallElapsedSeconds": 20.9736,
+        "cappedMechanismElapsedSeconds": 15.4736,
+        "elapsedDivergenceSeconds": -5.5
+      },
+      {
+        "wallElapsedSeconds": 24.5748,
+        "cappedMechanismElapsedSeconds": 17.2748,
+        "elapsedDivergenceSeconds": -7.3
+      },
+      {
+        "wallElapsedSeconds": 28.176,
+        "cappedMechanismElapsedSeconds": 19.076,
+        "elapsedDivergenceSeconds": -9.1
+      },
+      {
+        "wallElapsedSeconds": 31.7772,
+        "cappedMechanismElapsedSeconds": 20.8772,
+        "elapsedDivergenceSeconds": -10.9
+      },
+      {
+        "wallElapsedSeconds": 35.3784,
+        "cappedMechanismElapsedSeconds": 22.6784,
+        "elapsedDivergenceSeconds": -12.7
+      },
+      {
+        "wallElapsedSeconds": 38.9796,
+        "cappedMechanismElapsedSeconds": 24.4796,
+        "elapsedDivergenceSeconds": -14.5
+      },
+      {
+        "wallElapsedSeconds": 42.5808,
+        "cappedMechanismElapsedSeconds": 26.2808,
+        "elapsedDivergenceSeconds": -16.3
+      },
+      {
+        "wallElapsedSeconds": 46.182,
+        "cappedMechanismElapsedSeconds": 28.082,
+        "elapsedDivergenceSeconds": -18.1
+      },
+      {
+        "wallElapsedSeconds": 49.7832,
+        "cappedMechanismElapsedSeconds": 29.8832,
+        "elapsedDivergenceSeconds": -19.9
+      },
+      {
+        "wallElapsedSeconds": 53.3844,
+        "cappedMechanismElapsedSeconds": 31.6844,
+        "elapsedDivergenceSeconds": -21.7
+      },
+      {
+        "wallElapsedSeconds": 56.9856,
+        "cappedMechanismElapsedSeconds": 33.4856,
+        "elapsedDivergenceSeconds": -23.5
+      },
+      {
+        "wallElapsedSeconds": 60.5868,
+        "cappedMechanismElapsedSeconds": 35.2868,
+        "elapsedDivergenceSeconds": -25.3
+      },
+      {
+        "wallElapsedSeconds": 64.188,
+        "cappedMechanismElapsedSeconds": 37.088,
+        "elapsedDivergenceSeconds": -27.1
+      },
+      {
+        "wallElapsedSeconds": 67.7892,
+        "cappedMechanismElapsedSeconds": 38.8892,
+        "elapsedDivergenceSeconds": -28.9
+      },
+      {
+        "wallElapsedSeconds": 71.3904,
+        "cappedMechanismElapsedSeconds": 40.6904,
+        "elapsedDivergenceSeconds": -30.7
+      },
+      {
+        "wallElapsedSeconds": 74.9916,
+        "cappedMechanismElapsedSeconds": 42.4916,
+        "elapsedDivergenceSeconds": -32.5
+      },
+      {
+        "wallElapsedSeconds": 78.5928,
+        "cappedMechanismElapsedSeconds": 44.2928,
+        "elapsedDivergenceSeconds": -34.3
+      },
+      {
+        "wallElapsedSeconds": 82.194,
+        "cappedMechanismElapsedSeconds": 46.094,
+        "elapsedDivergenceSeconds": -36.1
+      },
+      {
+        "wallElapsedSeconds": 85.7952,
+        "cappedMechanismElapsedSeconds": 47.8952,
+        "elapsedDivergenceSeconds": -37.9
+      },
+      {
+        "wallElapsedSeconds": 89.3964,
+        "cappedMechanismElapsedSeconds": 49.6964,
+        "elapsedDivergenceSeconds": -39.7
+      },
+      {
+        "wallElapsedSeconds": 92.9976,
+        "cappedMechanismElapsedSeconds": 51.4976,
+        "elapsedDivergenceSeconds": -41.5
+      },
+      {
+        "wallElapsedSeconds": 96.5988,
+        "cappedMechanismElapsedSeconds": 53.2988,
+        "elapsedDivergenceSeconds": -43.3
+      },
+      {
+        "wallElapsedSeconds": 100.2,
+        "cappedMechanismElapsedSeconds": 55.1,
+        "elapsedDivergenceSeconds": -45.1
+      },
+      {
+        "wallElapsedSeconds": 103.8012,
+        "cappedMechanismElapsedSeconds": 56.9012,
+        "elapsedDivergenceSeconds": -46.9
+      },
+      {
+        "wallElapsedSeconds": 107.4024,
+        "cappedMechanismElapsedSeconds": 58.7024,
+        "elapsedDivergenceSeconds": -48.7
+      },
+      {
+        "wallElapsedSeconds": 111.0036,
+        "cappedMechanismElapsedSeconds": 60.5036,
+        "elapsedDivergenceSeconds": -50.5
+      },
+      {
+        "wallElapsedSeconds": 114.6048,
+        "cappedMechanismElapsedSeconds": 62.3048,
+        "elapsedDivergenceSeconds": -52.3
+      },
+      {
+        "wallElapsedSeconds": 118.206,
+        "cappedMechanismElapsedSeconds": 64.106,
+        "elapsedDivergenceSeconds": -54.1
+      },
+      {
+        "wallElapsedSeconds": 121.8072,
+        "cappedMechanismElapsedSeconds": 65.9072,
+        "elapsedDivergenceSeconds": -55.9
+      },
+      {
+        "wallElapsedSeconds": 125.4084,
+        "cappedMechanismElapsedSeconds": 67.7084,
+        "elapsedDivergenceSeconds": -57.7
+      },
+      {
+        "wallElapsedSeconds": 129.0096,
+        "cappedMechanismElapsedSeconds": 69.5096,
+        "elapsedDivergenceSeconds": -59.5
+      },
+      {
+        "wallElapsedSeconds": 132.6108,
+        "cappedMechanismElapsedSeconds": 71.3108,
+        "elapsedDivergenceSeconds": -61.3
+      },
+      {
+        "wallElapsedSeconds": 136.212,
+        "cappedMechanismElapsedSeconds": 73.112,
+        "elapsedDivergenceSeconds": -63.1
+      },
+      {
+        "wallElapsedSeconds": 139.8132,
+        "cappedMechanismElapsedSeconds": 74.9132,
+        "elapsedDivergenceSeconds": -64.9
+      },
+      {
+        "wallElapsedSeconds": 143.4144,
+        "cappedMechanismElapsedSeconds": 76.7144,
+        "elapsedDivergenceSeconds": -66.7
+      },
+      {
+        "wallElapsedSeconds": 147.0156,
+        "cappedMechanismElapsedSeconds": 78.5156,
+        "elapsedDivergenceSeconds": -68.5
+      },
+      {
+        "wallElapsedSeconds": 150.6168,
+        "cappedMechanismElapsedSeconds": 80.3168,
+        "elapsedDivergenceSeconds": -70.3
+      },
+      {
+        "wallElapsedSeconds": 154.218,
+        "cappedMechanismElapsedSeconds": 82.118,
+        "elapsedDivergenceSeconds": -72.1
+      },
+      {
+        "wallElapsedSeconds": 157.8192,
+        "cappedMechanismElapsedSeconds": 83.9192,
+        "elapsedDivergenceSeconds": -73.9
+      },
+      {
+        "wallElapsedSeconds": 161.4204,
+        "cappedMechanismElapsedSeconds": 85.7204,
+        "elapsedDivergenceSeconds": -75.7
+      },
+      {
+        "wallElapsedSeconds": 165.0216,
+        "cappedMechanismElapsedSeconds": 87.5216,
+        "elapsedDivergenceSeconds": -77.5
+      },
+      {
+        "wallElapsedSeconds": 168.6228,
+        "cappedMechanismElapsedSeconds": 89.3228,
+        "elapsedDivergenceSeconds": -79.3
+      },
+      {
+        "wallElapsedSeconds": 172.224,
+        "cappedMechanismElapsedSeconds": 91.124,
+        "elapsedDivergenceSeconds": -81.1
+      },
+      {
+        "wallElapsedSeconds": 175.8252,
+        "cappedMechanismElapsedSeconds": 92.9252,
+        "elapsedDivergenceSeconds": -82.9
+      },
+      {
+        "wallElapsedSeconds": 179.4264,
+        "cappedMechanismElapsedSeconds": 94.7264,
+        "elapsedDivergenceSeconds": -84.7
+      },
+      {
+        "wallElapsedSeconds": 183.0276,
+        "cappedMechanismElapsedSeconds": 96.5276,
+        "elapsedDivergenceSeconds": -86.5
+      },
+      {
+        "wallElapsedSeconds": 186.6288,
+        "cappedMechanismElapsedSeconds": 98.3288,
+        "elapsedDivergenceSeconds": -88.3
+      },
+      {
+        "wallElapsedSeconds": 190.23,
+        "cappedMechanismElapsedSeconds": 100.13,
+        "elapsedDivergenceSeconds": -90.1
+      },
+      {
+        "wallElapsedSeconds": 193.8312,
+        "cappedMechanismElapsedSeconds": 101.9312,
+        "elapsedDivergenceSeconds": -91.9
+      },
+      {
+        "wallElapsedSeconds": 197.4324,
+        "cappedMechanismElapsedSeconds": 103.7324,
+        "elapsedDivergenceSeconds": -93.7
+      },
+      {
+        "wallElapsedSeconds": 201.0336,
+        "cappedMechanismElapsedSeconds": 105.5336,
+        "elapsedDivergenceSeconds": -95.5
+      },
+      {
+        "wallElapsedSeconds": 204.6348,
+        "cappedMechanismElapsedSeconds": 107.3348,
+        "elapsedDivergenceSeconds": -97.3
+      },
+      {
+        "wallElapsedSeconds": 208.236,
+        "cappedMechanismElapsedSeconds": 109.136,
+        "elapsedDivergenceSeconds": -99.1
+      },
+      {
+        "wallElapsedSeconds": 211.8372,
+        "cappedMechanismElapsedSeconds": 110.9372,
+        "elapsedDivergenceSeconds": -100.9
+      },
+      {
+        "wallElapsedSeconds": 215.4384,
+        "cappedMechanismElapsedSeconds": 112.7384,
+        "elapsedDivergenceSeconds": -102.7
+      },
+      {
+        "wallElapsedSeconds": 219.0396,
+        "cappedMechanismElapsedSeconds": 114.5396,
+        "elapsedDivergenceSeconds": -104.5
+      },
+      {
+        "wallElapsedSeconds": 222.6408,
+        "cappedMechanismElapsedSeconds": 116.3408,
+        "elapsedDivergenceSeconds": -106.3
+      },
+      {
+        "wallElapsedSeconds": 226.242,
+        "cappedMechanismElapsedSeconds": 118.142,
+        "elapsedDivergenceSeconds": -108.1
+      },
+      {
+        "wallElapsedSeconds": 229.8432,
+        "cappedMechanismElapsedSeconds": 119.9432,
+        "elapsedDivergenceSeconds": -109.9
+      },
+      {
+        "wallElapsedSeconds": 233.4444,
+        "cappedMechanismElapsedSeconds": 121.7444,
+        "elapsedDivergenceSeconds": -111.7
+      },
+      {
+        "wallElapsedSeconds": 237.0456,
+        "cappedMechanismElapsedSeconds": 123.5456,
+        "elapsedDivergenceSeconds": -113.5
+      },
+      {
+        "wallElapsedSeconds": 240.6468,
+        "cappedMechanismElapsedSeconds": 125.3468,
+        "elapsedDivergenceSeconds": -115.3
+      },
+      {
+        "wallElapsedSeconds": 244.248,
+        "cappedMechanismElapsedSeconds": 127.148,
+        "elapsedDivergenceSeconds": -117.1
+      },
+      {
+        "wallElapsedSeconds": 247.8492,
+        "cappedMechanismElapsedSeconds": 128.9492,
+        "elapsedDivergenceSeconds": -118.9
+      },
+      {
+        "wallElapsedSeconds": 251.4504,
+        "cappedMechanismElapsedSeconds": 130.7504,
+        "elapsedDivergenceSeconds": -120.7
+      },
+      {
+        "wallElapsedSeconds": 255.0516,
+        "cappedMechanismElapsedSeconds": 132.5516,
+        "elapsedDivergenceSeconds": -122.5
+      },
+      {
+        "wallElapsedSeconds": 258.6528,
+        "cappedMechanismElapsedSeconds": 134.3528,
+        "elapsedDivergenceSeconds": -124.3
+      },
+      {
+        "wallElapsedSeconds": 262.254,
+        "cappedMechanismElapsedSeconds": 136.154,
+        "elapsedDivergenceSeconds": -126.1
+      },
+      {
+        "wallElapsedSeconds": 265.8552,
+        "cappedMechanismElapsedSeconds": 137.9552,
+        "elapsedDivergenceSeconds": -127.9
+      },
+      {
+        "wallElapsedSeconds": 269.4564,
+        "cappedMechanismElapsedSeconds": 139.7564,
+        "elapsedDivergenceSeconds": -129.7
+      },
+      {
+        "wallElapsedSeconds": 273.0576,
+        "cappedMechanismElapsedSeconds": 141.5576,
+        "elapsedDivergenceSeconds": -131.5
+      },
+      {
+        "wallElapsedSeconds": 276.6588,
+        "cappedMechanismElapsedSeconds": 143.3588,
+        "elapsedDivergenceSeconds": -133.3
+      },
+      {
+        "wallElapsedSeconds": 280.26,
+        "cappedMechanismElapsedSeconds": 145.16,
+        "elapsedDivergenceSeconds": -135.1
+      },
+      {
+        "wallElapsedSeconds": 283.8612,
+        "cappedMechanismElapsedSeconds": 146.9612,
+        "elapsedDivergenceSeconds": -136.9
+      },
+      {
+        "wallElapsedSeconds": 287.4624,
+        "cappedMechanismElapsedSeconds": 148.7624,
+        "elapsedDivergenceSeconds": -138.7
+      },
+      {
+        "wallElapsedSeconds": 291.0636,
+        "cappedMechanismElapsedSeconds": 150.5636,
+        "elapsedDivergenceSeconds": -140.5
+      },
+      {
+        "wallElapsedSeconds": 294.6648,
+        "cappedMechanismElapsedSeconds": 152.3648,
+        "elapsedDivergenceSeconds": -142.3
+      },
+      {
+        "wallElapsedSeconds": 298.266,
+        "cappedMechanismElapsedSeconds": 154.166,
+        "elapsedDivergenceSeconds": -144.1
+      },
+      {
+        "wallElapsedSeconds": 301.8672,
+        "cappedMechanismElapsedSeconds": 155.9672,
+        "elapsedDivergenceSeconds": -145.9
+      },
+      {
+        "wallElapsedSeconds": 305.4684,
+        "cappedMechanismElapsedSeconds": 157.7684,
+        "elapsedDivergenceSeconds": -147.7
+      },
+      {
+        "wallElapsedSeconds": 309.0696,
+        "cappedMechanismElapsedSeconds": 159.5696,
+        "elapsedDivergenceSeconds": -149.5
+      },
+      {
+        "wallElapsedSeconds": 312.6708,
+        "cappedMechanismElapsedSeconds": 161.3708,
+        "elapsedDivergenceSeconds": -151.3
+      },
+      {
+        "wallElapsedSeconds": 316.272,
+        "cappedMechanismElapsedSeconds": 163.172,
+        "elapsedDivergenceSeconds": -153.1
+      },
+      {
+        "wallElapsedSeconds": 319.8732,
+        "cappedMechanismElapsedSeconds": 164.9732,
+        "elapsedDivergenceSeconds": -154.9
+      },
+      {
+        "wallElapsedSeconds": 323.4744,
+        "cappedMechanismElapsedSeconds": 166.7744,
+        "elapsedDivergenceSeconds": -156.7
+      },
+      {
+        "wallElapsedSeconds": 327.0756,
+        "cappedMechanismElapsedSeconds": 168.5756,
+        "elapsedDivergenceSeconds": -158.5
+      },
+      {
+        "wallElapsedSeconds": 330.6768,
+        "cappedMechanismElapsedSeconds": 170.3768,
+        "elapsedDivergenceSeconds": -160.3
+      },
+      {
+        "wallElapsedSeconds": 334.278,
+        "cappedMechanismElapsedSeconds": 172.178,
+        "elapsedDivergenceSeconds": -162.1
+      },
+      {
+        "wallElapsedSeconds": 337.8792,
+        "cappedMechanismElapsedSeconds": 173.9792,
+        "elapsedDivergenceSeconds": -163.9
+      },
+      {
+        "wallElapsedSeconds": 341.4804,
+        "cappedMechanismElapsedSeconds": 175.7804,
+        "elapsedDivergenceSeconds": -165.7
+      },
+      {
+        "wallElapsedSeconds": 345.0816,
+        "cappedMechanismElapsedSeconds": 177.5816,
+        "elapsedDivergenceSeconds": -167.5
+      },
+      {
+        "wallElapsedSeconds": 348.6828,
+        "cappedMechanismElapsedSeconds": 179.3828,
+        "elapsedDivergenceSeconds": -169.3
+      },
+      {
+        "wallElapsedSeconds": 352.284,
+        "cappedMechanismElapsedSeconds": 181.184,
+        "elapsedDivergenceSeconds": -171.1
+      },
+      {
+        "wallElapsedSeconds": 355.8852,
+        "cappedMechanismElapsedSeconds": 182.9852,
+        "elapsedDivergenceSeconds": -172.9
+      },
+      {
+        "wallElapsedSeconds": 359.4864,
+        "cappedMechanismElapsedSeconds": 184.7864,
+        "elapsedDivergenceSeconds": -174.7
+      },
+      {
+        "wallElapsedSeconds": 363.0876,
+        "cappedMechanismElapsedSeconds": 186.5876,
+        "elapsedDivergenceSeconds": -176.5
+      },
+      {
+        "wallElapsedSeconds": 366.6888,
+        "cappedMechanismElapsedSeconds": 188.3888,
+        "elapsedDivergenceSeconds": -178.3
+      },
+      {
+        "wallElapsedSeconds": 370.29,
+        "cappedMechanismElapsedSeconds": 190.19,
+        "elapsedDivergenceSeconds": -180.1
+      },
+      {
+        "wallElapsedSeconds": 373.8912,
+        "cappedMechanismElapsedSeconds": 191.9912,
+        "elapsedDivergenceSeconds": -181.9
+      },
+      {
+        "wallElapsedSeconds": 377.4924,
+        "cappedMechanismElapsedSeconds": 193.7924,
+        "elapsedDivergenceSeconds": -183.7
+      },
+      {
+        "wallElapsedSeconds": 381.0936,
+        "cappedMechanismElapsedSeconds": 195.5936,
+        "elapsedDivergenceSeconds": -185.5
+      },
+      {
+        "wallElapsedSeconds": 384.6948,
+        "cappedMechanismElapsedSeconds": 197.3948,
+        "elapsedDivergenceSeconds": -187.3
+      },
+      {
+        "wallElapsedSeconds": 388.296,
+        "cappedMechanismElapsedSeconds": 199.196,
+        "elapsedDivergenceSeconds": -189.1
+      },
+      {
+        "wallElapsedSeconds": 391.8972,
+        "cappedMechanismElapsedSeconds": 200.9972,
+        "elapsedDivergenceSeconds": -190.9
+      },
+      {
+        "wallElapsedSeconds": 395.4984,
+        "cappedMechanismElapsedSeconds": 202.7984,
+        "elapsedDivergenceSeconds": -192.7
+      },
+      {
+        "wallElapsedSeconds": 399.0996,
+        "cappedMechanismElapsedSeconds": 204.5996,
+        "elapsedDivergenceSeconds": -194.5
+      },
+      {
+        "wallElapsedSeconds": 402.7008,
+        "cappedMechanismElapsedSeconds": 206.4008,
+        "elapsedDivergenceSeconds": -196.3
+      },
+      {
+        "wallElapsedSeconds": 406.302,
+        "cappedMechanismElapsedSeconds": 208.202,
+        "elapsedDivergenceSeconds": -198.1
+      },
+      {
+        "wallElapsedSeconds": 409.9032,
+        "cappedMechanismElapsedSeconds": 210.0032,
+        "elapsedDivergenceSeconds": -199.9
+      },
+      {
+        "wallElapsedSeconds": 413.5044,
+        "cappedMechanismElapsedSeconds": 211.8044,
+        "elapsedDivergenceSeconds": -201.7
+      },
+      {
+        "wallElapsedSeconds": 417.1056,
+        "cappedMechanismElapsedSeconds": 213.6056,
+        "elapsedDivergenceSeconds": -203.5
+      },
+      {
+        "wallElapsedSeconds": 420.7068,
+        "cappedMechanismElapsedSeconds": 215.4068,
+        "elapsedDivergenceSeconds": -205.3
+      },
+      {
+        "wallElapsedSeconds": 424.308,
+        "cappedMechanismElapsedSeconds": 217.208,
+        "elapsedDivergenceSeconds": -207.1
+      },
+      {
+        "wallElapsedSeconds": 427.9092,
+        "cappedMechanismElapsedSeconds": 219.0092,
+        "elapsedDivergenceSeconds": -208.9
+      },
+      {
+        "wallElapsedSeconds": 431.5104,
+        "cappedMechanismElapsedSeconds": 220.8104,
+        "elapsedDivergenceSeconds": -210.7
+      },
+      {
+        "wallElapsedSeconds": 435.1116,
+        "cappedMechanismElapsedSeconds": 222.6116,
+        "elapsedDivergenceSeconds": -212.5
+      },
+      {
+        "wallElapsedSeconds": 438.7128,
+        "cappedMechanismElapsedSeconds": 224.4128,
+        "elapsedDivergenceSeconds": -214.3
+      },
+      {
+        "wallElapsedSeconds": 442.314,
+        "cappedMechanismElapsedSeconds": 226.214,
+        "elapsedDivergenceSeconds": -216.1
+      },
+      {
+        "wallElapsedSeconds": 445.9152,
+        "cappedMechanismElapsedSeconds": 228.0152,
+        "elapsedDivergenceSeconds": -217.9
+      },
+      {
+        "wallElapsedSeconds": 449.5164,
+        "cappedMechanismElapsedSeconds": 229.8164,
+        "elapsedDivergenceSeconds": -219.7
+      },
+      {
+        "wallElapsedSeconds": 453.1176,
+        "cappedMechanismElapsedSeconds": 231.6176,
+        "elapsedDivergenceSeconds": -221.5
+      },
+      {
+        "wallElapsedSeconds": 456.7188,
+        "cappedMechanismElapsedSeconds": 233.4188,
+        "elapsedDivergenceSeconds": -223.3
+      },
+      {
+        "wallElapsedSeconds": 460.32,
+        "cappedMechanismElapsedSeconds": 235.22,
+        "elapsedDivergenceSeconds": -225.1
+      },
+      {
+        "wallElapsedSeconds": 463.9212,
+        "cappedMechanismElapsedSeconds": 237.0212,
+        "elapsedDivergenceSeconds": -226.9
+      },
+      {
+        "wallElapsedSeconds": 467.5224,
+        "cappedMechanismElapsedSeconds": 238.8224,
+        "elapsedDivergenceSeconds": -228.7
+      },
+      {
+        "wallElapsedSeconds": 471.1236,
+        "cappedMechanismElapsedSeconds": 240.6236,
+        "elapsedDivergenceSeconds": -230.5
+      },
+      {
+        "wallElapsedSeconds": 474.7248,
+        "cappedMechanismElapsedSeconds": 242.4248,
+        "elapsedDivergenceSeconds": -232.3
+      },
+      {
+        "wallElapsedSeconds": 478.326,
+        "cappedMechanismElapsedSeconds": 244.226,
+        "elapsedDivergenceSeconds": -234.1
+      },
+      {
+        "wallElapsedSeconds": 481.9272,
+        "cappedMechanismElapsedSeconds": 246.0272,
+        "elapsedDivergenceSeconds": -235.9
+      },
+      {
+        "wallElapsedSeconds": 485.5284,
+        "cappedMechanismElapsedSeconds": 247.8284,
+        "elapsedDivergenceSeconds": -237.7
+      },
+      {
+        "wallElapsedSeconds": 489.1296,
+        "cappedMechanismElapsedSeconds": 249.6296,
+        "elapsedDivergenceSeconds": -239.5
+      },
+      {
+        "wallElapsedSeconds": 492.7308,
+        "cappedMechanismElapsedSeconds": 251.4308,
+        "elapsedDivergenceSeconds": -241.3
+      },
+      {
+        "wallElapsedSeconds": 496.332,
+        "cappedMechanismElapsedSeconds": 253.232,
+        "elapsedDivergenceSeconds": -243.1
+      },
+      {
+        "wallElapsedSeconds": 499.9332,
+        "cappedMechanismElapsedSeconds": 255.0332,
+        "elapsedDivergenceSeconds": -244.9
+      },
+      {
+        "wallElapsedSeconds": 503.5344,
+        "cappedMechanismElapsedSeconds": 256.8344,
+        "elapsedDivergenceSeconds": -246.7
+      },
+      {
+        "wallElapsedSeconds": 507.1356,
+        "cappedMechanismElapsedSeconds": 258.6356,
+        "elapsedDivergenceSeconds": -248.5
+      },
+      {
+        "wallElapsedSeconds": 510.7368,
+        "cappedMechanismElapsedSeconds": 260.4368,
+        "elapsedDivergenceSeconds": -250.3
+      },
+      {
+        "wallElapsedSeconds": 514.338,
+        "cappedMechanismElapsedSeconds": 262.238,
+        "elapsedDivergenceSeconds": -252.1
+      },
+      {
+        "wallElapsedSeconds": 517.9392,
+        "cappedMechanismElapsedSeconds": 264.0392,
+        "elapsedDivergenceSeconds": -253.9
+      },
+      {
+        "wallElapsedSeconds": 521.5404,
+        "cappedMechanismElapsedSeconds": 265.8404,
+        "elapsedDivergenceSeconds": -255.7
+      },
+      {
+        "wallElapsedSeconds": 525.1416,
+        "cappedMechanismElapsedSeconds": 267.6416,
+        "elapsedDivergenceSeconds": -257.5
+      },
+      {
+        "wallElapsedSeconds": 528.7428,
+        "cappedMechanismElapsedSeconds": 269.4428,
+        "elapsedDivergenceSeconds": -259.3
+      },
+      {
+        "wallElapsedSeconds": 532.344,
+        "cappedMechanismElapsedSeconds": 271.244,
+        "elapsedDivergenceSeconds": -261.1
+      },
+      {
+        "wallElapsedSeconds": 535.9452,
+        "cappedMechanismElapsedSeconds": 273.0452,
+        "elapsedDivergenceSeconds": -262.9
+      },
+      {
+        "wallElapsedSeconds": 539.5464,
+        "cappedMechanismElapsedSeconds": 274.8464,
+        "elapsedDivergenceSeconds": -264.7
+      },
+      {
+        "wallElapsedSeconds": 543.1476,
+        "cappedMechanismElapsedSeconds": 276.6476,
+        "elapsedDivergenceSeconds": -266.5
+      },
+      {
+        "wallElapsedSeconds": 546.7488,
+        "cappedMechanismElapsedSeconds": 278.4488,
+        "elapsedDivergenceSeconds": -268.3
+      },
+      {
+        "wallElapsedSeconds": 550.35,
+        "cappedMechanismElapsedSeconds": 280.25,
+        "elapsedDivergenceSeconds": -270.1
+      },
+      {
+        "wallElapsedSeconds": 553.9512,
+        "cappedMechanismElapsedSeconds": 282.0512,
+        "elapsedDivergenceSeconds": -271.9
+      },
+      {
+        "wallElapsedSeconds": 557.5524,
+        "cappedMechanismElapsedSeconds": 283.8524,
+        "elapsedDivergenceSeconds": -273.7
+      },
+      {
+        "wallElapsedSeconds": 561.1536,
+        "cappedMechanismElapsedSeconds": 285.6536,
+        "elapsedDivergenceSeconds": -275.5
+      },
+      {
+        "wallElapsedSeconds": 564.7548,
+        "cappedMechanismElapsedSeconds": 287.4548,
+        "elapsedDivergenceSeconds": -277.3
+      },
+      {
+        "wallElapsedSeconds": 568.356,
+        "cappedMechanismElapsedSeconds": 289.256,
+        "elapsedDivergenceSeconds": -279.1
+      },
+      {
+        "wallElapsedSeconds": 571.9572,
+        "cappedMechanismElapsedSeconds": 291.0572,
+        "elapsedDivergenceSeconds": -280.9
+      },
+      {
+        "wallElapsedSeconds": 575.5584,
+        "cappedMechanismElapsedSeconds": 292.8584,
+        "elapsedDivergenceSeconds": -282.7
+      },
+      {
+        "wallElapsedSeconds": 579.1596,
+        "cappedMechanismElapsedSeconds": 294.6596,
+        "elapsedDivergenceSeconds": -284.5
+      },
+      {
+        "wallElapsedSeconds": 582.7608,
+        "cappedMechanismElapsedSeconds": 296.4608,
+        "elapsedDivergenceSeconds": -286.3
+      },
+      {
+        "wallElapsedSeconds": 586.362,
+        "cappedMechanismElapsedSeconds": 298.262,
+        "elapsedDivergenceSeconds": -288.1
+      },
+      {
+        "wallElapsedSeconds": 589.9632,
+        "cappedMechanismElapsedSeconds": 300.0632,
+        "elapsedDivergenceSeconds": -289.9
+      },
+      {
+        "wallElapsedSeconds": 593.5644,
+        "cappedMechanismElapsedSeconds": 301.8644,
+        "elapsedDivergenceSeconds": -291.7
+      },
+      {
+        "wallElapsedSeconds": 597.1656,
+        "cappedMechanismElapsedSeconds": 303.6656,
+        "elapsedDivergenceSeconds": -293.5
+      },
+      {
+        "wallElapsedSeconds": 600.7668,
+        "cappedMechanismElapsedSeconds": 305.4668,
+        "elapsedDivergenceSeconds": -295.3
+      },
+      {
+        "wallElapsedSeconds": 604.368,
+        "cappedMechanismElapsedSeconds": 307.268,
+        "elapsedDivergenceSeconds": -297.1
+      },
+      {
+        "wallElapsedSeconds": 607.9692,
+        "cappedMechanismElapsedSeconds": 309.0692,
+        "elapsedDivergenceSeconds": -298.9
+      },
+      {
+        "wallElapsedSeconds": 611.5704,
+        "cappedMechanismElapsedSeconds": 310.8704,
+        "elapsedDivergenceSeconds": -300.7
+      },
+      {
+        "wallElapsedSeconds": 615.1716,
+        "cappedMechanismElapsedSeconds": 312.6716,
+        "elapsedDivergenceSeconds": -302.5
+      },
+      {
+        "wallElapsedSeconds": 618.7728,
+        "cappedMechanismElapsedSeconds": 314.4728,
+        "elapsedDivergenceSeconds": -304.3
+      },
+      {
+        "wallElapsedSeconds": 622.374,
+        "cappedMechanismElapsedSeconds": 316.274,
+        "elapsedDivergenceSeconds": -306.1
+      },
+      {
+        "wallElapsedSeconds": 625.9752,
+        "cappedMechanismElapsedSeconds": 318.0752,
+        "elapsedDivergenceSeconds": -307.9
+      },
+      {
+        "wallElapsedSeconds": 629.5764,
+        "cappedMechanismElapsedSeconds": 319.8764,
+        "elapsedDivergenceSeconds": -309.7
+      },
+      {
+        "wallElapsedSeconds": 633.1776,
+        "cappedMechanismElapsedSeconds": 321.6776,
+        "elapsedDivergenceSeconds": -311.5
+      },
+      {
+        "wallElapsedSeconds": 636.7788,
+        "cappedMechanismElapsedSeconds": 323.4788,
+        "elapsedDivergenceSeconds": -313.3
+      },
+      {
+        "wallElapsedSeconds": 640.38,
+        "cappedMechanismElapsedSeconds": 325.28,
+        "elapsedDivergenceSeconds": -315.1
+      },
+      {
+        "wallElapsedSeconds": 643.9812,
+        "cappedMechanismElapsedSeconds": 327.0812,
+        "elapsedDivergenceSeconds": -316.9
+      },
+      {
+        "wallElapsedSeconds": 647.5824,
+        "cappedMechanismElapsedSeconds": 328.8824,
+        "elapsedDivergenceSeconds": -318.7
+      },
+      {
+        "wallElapsedSeconds": 651.1836,
+        "cappedMechanismElapsedSeconds": 330.6836,
+        "elapsedDivergenceSeconds": -320.5
+      },
+      {
+        "wallElapsedSeconds": 654.7848,
+        "cappedMechanismElapsedSeconds": 332.4848,
+        "elapsedDivergenceSeconds": -322.3
+      },
+      {
+        "wallElapsedSeconds": 658.386,
+        "cappedMechanismElapsedSeconds": 334.286,
+        "elapsedDivergenceSeconds": -324.1
+      },
+      {
+        "wallElapsedSeconds": 661.9872,
+        "cappedMechanismElapsedSeconds": 336.0872,
+        "elapsedDivergenceSeconds": -325.9
+      },
+      {
+        "wallElapsedSeconds": 665.5884,
+        "cappedMechanismElapsedSeconds": 337.8884,
+        "elapsedDivergenceSeconds": -327.7
+      },
+      {
+        "wallElapsedSeconds": 669.1896,
+        "cappedMechanismElapsedSeconds": 339.6896,
+        "elapsedDivergenceSeconds": -329.5
+      },
+      {
+        "wallElapsedSeconds": 672.7908,
+        "cappedMechanismElapsedSeconds": 341.4908,
+        "elapsedDivergenceSeconds": -331.3
+      },
+      {
+        "wallElapsedSeconds": 676.392,
+        "cappedMechanismElapsedSeconds": 343.292,
+        "elapsedDivergenceSeconds": -333.1
+      },
+      {
+        "wallElapsedSeconds": 679.9932,
+        "cappedMechanismElapsedSeconds": 345.0932,
+        "elapsedDivergenceSeconds": -334.9
+      },
+      {
+        "wallElapsedSeconds": 683.5944,
+        "cappedMechanismElapsedSeconds": 346.8944,
+        "elapsedDivergenceSeconds": -336.7
+      },
+      {
+        "wallElapsedSeconds": 687.1956,
+        "cappedMechanismElapsedSeconds": 348.6956,
+        "elapsedDivergenceSeconds": -338.5
+      },
+      {
+        "wallElapsedSeconds": 690.7968,
+        "cappedMechanismElapsedSeconds": 350.4968,
+        "elapsedDivergenceSeconds": -340.3
+      },
+      {
+        "wallElapsedSeconds": 694.398,
+        "cappedMechanismElapsedSeconds": 352.298,
+        "elapsedDivergenceSeconds": -342.1
+      },
+      {
+        "wallElapsedSeconds": 697.9992,
+        "cappedMechanismElapsedSeconds": 354.0992,
+        "elapsedDivergenceSeconds": -343.9
+      },
+      {
+        "wallElapsedSeconds": 701.6004,
+        "cappedMechanismElapsedSeconds": 355.9004,
+        "elapsedDivergenceSeconds": -345.7
+      },
+      {
+        "wallElapsedSeconds": 705.2016,
+        "cappedMechanismElapsedSeconds": 357.7016,
+        "elapsedDivergenceSeconds": -347.5
+      },
+      {
+        "wallElapsedSeconds": 708.8028,
+        "cappedMechanismElapsedSeconds": 359.5028,
+        "elapsedDivergenceSeconds": -349.3
+      },
+      {
+        "wallElapsedSeconds": 712.404,
+        "cappedMechanismElapsedSeconds": 361.304,
+        "elapsedDivergenceSeconds": -351.1
+      },
+      {
+        "wallElapsedSeconds": 716.0052,
+        "cappedMechanismElapsedSeconds": 363.1052,
+        "elapsedDivergenceSeconds": -352.9
+      },
+      {
+        "wallElapsedSeconds": 719.6064,
+        "cappedMechanismElapsedSeconds": 364.9064,
+        "elapsedDivergenceSeconds": -354.7
+      },
+      {
+        "wallElapsedSeconds": 723.2076,
+        "cappedMechanismElapsedSeconds": 366.7076,
+        "elapsedDivergenceSeconds": -356.5
+      },
+      {
+        "wallElapsedSeconds": 726.8088,
+        "cappedMechanismElapsedSeconds": 368.5088,
+        "elapsedDivergenceSeconds": -358.3
+      },
+      {
+        "wallElapsedSeconds": 730.41,
+        "cappedMechanismElapsedSeconds": 370.31,
+        "elapsedDivergenceSeconds": -360.1
+      },
+      {
+        "wallElapsedSeconds": 734.0112,
+        "cappedMechanismElapsedSeconds": 372.1112,
+        "elapsedDivergenceSeconds": -361.9
+      },
+      {
+        "wallElapsedSeconds": 737.6124,
+        "cappedMechanismElapsedSeconds": 373.9124,
+        "elapsedDivergenceSeconds": -363.7
+      },
+      {
+        "wallElapsedSeconds": 741.2136,
+        "cappedMechanismElapsedSeconds": 375.7136,
+        "elapsedDivergenceSeconds": -365.5
+      },
+      {
+        "wallElapsedSeconds": 744.8148,
+        "cappedMechanismElapsedSeconds": 377.5148,
+        "elapsedDivergenceSeconds": -367.3
+      },
+      {
+        "wallElapsedSeconds": 748.416,
+        "cappedMechanismElapsedSeconds": 379.316,
+        "elapsedDivergenceSeconds": -369.1
+      },
+      {
+        "wallElapsedSeconds": 752.0172,
+        "cappedMechanismElapsedSeconds": 381.1172,
+        "elapsedDivergenceSeconds": -370.9
+      },
+      {
+        "wallElapsedSeconds": 755.6184,
+        "cappedMechanismElapsedSeconds": 382.9184,
+        "elapsedDivergenceSeconds": -372.7
+      },
+      {
+        "wallElapsedSeconds": 759.2196,
+        "cappedMechanismElapsedSeconds": 384.7196,
+        "elapsedDivergenceSeconds": -374.5
+      },
+      {
+        "wallElapsedSeconds": 762.8208,
+        "cappedMechanismElapsedSeconds": 386.5208,
+        "elapsedDivergenceSeconds": -376.3
+      },
+      {
+        "wallElapsedSeconds": 766.422,
+        "cappedMechanismElapsedSeconds": 388.322,
+        "elapsedDivergenceSeconds": -378.1
+      },
+      {
+        "wallElapsedSeconds": 770.0232,
+        "cappedMechanismElapsedSeconds": 390.1232,
+        "elapsedDivergenceSeconds": -379.9
+      },
+      {
+        "wallElapsedSeconds": 773.6244,
+        "cappedMechanismElapsedSeconds": 391.9244,
+        "elapsedDivergenceSeconds": -381.7
+      },
+      {
+        "wallElapsedSeconds": 777.2256,
+        "cappedMechanismElapsedSeconds": 393.7256,
+        "elapsedDivergenceSeconds": -383.5
+      },
+      {
+        "wallElapsedSeconds": 780.8268,
+        "cappedMechanismElapsedSeconds": 395.5268,
+        "elapsedDivergenceSeconds": -385.3
+      },
+      {
+        "wallElapsedSeconds": 784.428,
+        "cappedMechanismElapsedSeconds": 397.328,
+        "elapsedDivergenceSeconds": -387.1
+      },
+      {
+        "wallElapsedSeconds": 788.0292,
+        "cappedMechanismElapsedSeconds": 399.1292,
+        "elapsedDivergenceSeconds": -388.9
+      },
+      {
+        "wallElapsedSeconds": 791.6304,
+        "cappedMechanismElapsedSeconds": 400.9304,
+        "elapsedDivergenceSeconds": -390.7
+      },
+      {
+        "wallElapsedSeconds": 795.2316,
+        "cappedMechanismElapsedSeconds": 402.7316,
+        "elapsedDivergenceSeconds": -392.5
+      },
+      {
+        "wallElapsedSeconds": 798.8328,
+        "cappedMechanismElapsedSeconds": 404.5328,
+        "elapsedDivergenceSeconds": -394.3
+      },
+      {
+        "wallElapsedSeconds": 802.434,
+        "cappedMechanismElapsedSeconds": 406.334,
+        "elapsedDivergenceSeconds": -396.1
+      },
+      {
+        "wallElapsedSeconds": 806.0352,
+        "cappedMechanismElapsedSeconds": 408.1352,
+        "elapsedDivergenceSeconds": -397.9
+      },
+      {
+        "wallElapsedSeconds": 809.6364,
+        "cappedMechanismElapsedSeconds": 409.9364,
+        "elapsedDivergenceSeconds": -399.7
+      },
+      {
+        "wallElapsedSeconds": 813.2376,
+        "cappedMechanismElapsedSeconds": 411.7376,
+        "elapsedDivergenceSeconds": -401.5
+      },
+      {
+        "wallElapsedSeconds": 816.8388,
+        "cappedMechanismElapsedSeconds": 413.5388,
+        "elapsedDivergenceSeconds": -403.3
+      },
+      {
+        "wallElapsedSeconds": 820.44,
+        "cappedMechanismElapsedSeconds": 415.34,
+        "elapsedDivergenceSeconds": -405.1
+      },
+      {
+        "wallElapsedSeconds": 824.0412,
+        "cappedMechanismElapsedSeconds": 417.1412,
+        "elapsedDivergenceSeconds": -406.9
+      },
+      {
+        "wallElapsedSeconds": 827.6424,
+        "cappedMechanismElapsedSeconds": 418.9424,
+        "elapsedDivergenceSeconds": -408.7
+      },
+      {
+        "wallElapsedSeconds": 831.2436,
+        "cappedMechanismElapsedSeconds": 420.7436,
+        "elapsedDivergenceSeconds": -410.5
+      },
+      {
+        "wallElapsedSeconds": 834.8448,
+        "cappedMechanismElapsedSeconds": 422.5448,
+        "elapsedDivergenceSeconds": -412.3
+      },
+      {
+        "wallElapsedSeconds": 838.446,
+        "cappedMechanismElapsedSeconds": 424.346,
+        "elapsedDivergenceSeconds": -414.1
+      },
+      {
+        "wallElapsedSeconds": 842.0472,
+        "cappedMechanismElapsedSeconds": 426.1472,
+        "elapsedDivergenceSeconds": -415.9
+      },
+      {
+        "wallElapsedSeconds": 845.6484,
+        "cappedMechanismElapsedSeconds": 427.9484,
+        "elapsedDivergenceSeconds": -417.7
+      },
+      {
+        "wallElapsedSeconds": 849.2496,
+        "cappedMechanismElapsedSeconds": 429.7496,
+        "elapsedDivergenceSeconds": -419.5
+      },
+      {
+        "wallElapsedSeconds": 852.8508,
+        "cappedMechanismElapsedSeconds": 431.5508,
+        "elapsedDivergenceSeconds": -421.3
+      },
+      {
+        "wallElapsedSeconds": 856.452,
+        "cappedMechanismElapsedSeconds": 433.352,
+        "elapsedDivergenceSeconds": -423.1
+      },
+      {
+        "wallElapsedSeconds": 860.0532,
+        "cappedMechanismElapsedSeconds": 435.1532,
+        "elapsedDivergenceSeconds": -424.9
+      },
+      {
+        "wallElapsedSeconds": 863.6544,
+        "cappedMechanismElapsedSeconds": 436.9544,
+        "elapsedDivergenceSeconds": -426.7
+      },
+      {
+        "wallElapsedSeconds": 867.2556,
+        "cappedMechanismElapsedSeconds": 438.7556,
+        "elapsedDivergenceSeconds": -428.5
+      },
+      {
+        "wallElapsedSeconds": 870.8568,
+        "cappedMechanismElapsedSeconds": 440.5568,
+        "elapsedDivergenceSeconds": -430.3
+      },
+      {
+        "wallElapsedSeconds": 874.458,
+        "cappedMechanismElapsedSeconds": 442.358,
+        "elapsedDivergenceSeconds": -432.1
+      },
+      {
+        "wallElapsedSeconds": 878.0592,
+        "cappedMechanismElapsedSeconds": 444.1592,
+        "elapsedDivergenceSeconds": -433.9
+      },
+      {
+        "wallElapsedSeconds": 881.6604,
+        "cappedMechanismElapsedSeconds": 445.9604,
+        "elapsedDivergenceSeconds": -435.7
+      },
+      {
+        "wallElapsedSeconds": 885.2616,
+        "cappedMechanismElapsedSeconds": 447.7616,
+        "elapsedDivergenceSeconds": -437.5
+      },
+      {
+        "wallElapsedSeconds": 888.8628,
+        "cappedMechanismElapsedSeconds": 449.5628,
+        "elapsedDivergenceSeconds": -439.3
+      },
+      {
+        "wallElapsedSeconds": 892.464,
+        "cappedMechanismElapsedSeconds": 451.364,
+        "elapsedDivergenceSeconds": -441.1
+      },
+      {
+        "wallElapsedSeconds": 896.0652,
+        "cappedMechanismElapsedSeconds": 453.1652,
+        "elapsedDivergenceSeconds": -442.9
+      },
+      {
+        "wallElapsedSeconds": 899.6664,
+        "cappedMechanismElapsedSeconds": 454.9664,
+        "elapsedDivergenceSeconds": -444.7
+      },
+      {
+        "wallElapsedSeconds": 900,
+        "cappedMechanismElapsedSeconds": 455.15,
+        "elapsedDivergenceSeconds": -444.85
+      }
+    ]
+  },
+  "afterR2": {
+    "contract": "visible foreground monotonic raw elapsed drives mechanism time",
+    "finalWallElapsedSeconds": 900,
+    "finalMechanismElapsedSeconds": 900,
+    "finalElapsedDivergenceSeconds": 0,
+    "samples": [
+      {
+        "wallElapsedSeconds": 0.0167,
+        "authoritativeMechanismElapsedSeconds": 0.0167,
+        "watchTimeProgressionSeconds": 0.0167,
+        "trainTimeProgressionSeconds": 0.0167,
+        "studyBeat": 180000.0835,
+        "powerReserveConsumptionHours": 0.000004638889,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 1.0187,
+        "authoritativeMechanismElapsedSeconds": 1.0187,
+        "watchTimeProgressionSeconds": 1.0187,
+        "trainTimeProgressionSeconds": 1.0187,
+        "studyBeat": 180005.0935,
+        "powerReserveConsumptionHours": 0.000282972222,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 2.0207,
+        "authoritativeMechanismElapsedSeconds": 2.0207,
+        "watchTimeProgressionSeconds": 2.0207,
+        "trainTimeProgressionSeconds": 2.0207,
+        "studyBeat": 180010.1035,
+        "powerReserveConsumptionHours": 0.000561305556,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 3.0227,
+        "authoritativeMechanismElapsedSeconds": 3.0227,
+        "watchTimeProgressionSeconds": 3.0227,
+        "trainTimeProgressionSeconds": 3.0227,
+        "studyBeat": 180015.1135,
+        "powerReserveConsumptionHours": 0.000839638889,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 4.0247,
+        "authoritativeMechanismElapsedSeconds": 4.0247,
+        "watchTimeProgressionSeconds": 4.0247,
+        "trainTimeProgressionSeconds": 4.0247,
+        "studyBeat": 180020.1235,
+        "powerReserveConsumptionHours": 0.001117972222,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 5.0267,
+        "authoritativeMechanismElapsedSeconds": 5.0267,
+        "watchTimeProgressionSeconds": 5.0267,
+        "trainTimeProgressionSeconds": 5.0267,
+        "studyBeat": 180025.1335,
+        "powerReserveConsumptionHours": 0.001396305556,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 6.0287,
+        "authoritativeMechanismElapsedSeconds": 6.0287,
+        "watchTimeProgressionSeconds": 6.0287,
+        "trainTimeProgressionSeconds": 6.0287,
+        "studyBeat": 180030.1435,
+        "powerReserveConsumptionHours": 0.001674638889,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 7.0307,
+        "authoritativeMechanismElapsedSeconds": 7.0307,
+        "watchTimeProgressionSeconds": 7.0307,
+        "trainTimeProgressionSeconds": 7.0307,
+        "studyBeat": 180035.1535,
+        "powerReserveConsumptionHours": 0.001952972222,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 8.0327,
+        "authoritativeMechanismElapsedSeconds": 8.0327,
+        "watchTimeProgressionSeconds": 8.0327,
+        "trainTimeProgressionSeconds": 8.0327,
+        "studyBeat": 180040.1635,
+        "powerReserveConsumptionHours": 0.002231305556,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 9.0347,
+        "authoritativeMechanismElapsedSeconds": 9.0347,
+        "watchTimeProgressionSeconds": 9.0347,
+        "trainTimeProgressionSeconds": 9.0347,
+        "studyBeat": 180045.1735,
+        "powerReserveConsumptionHours": 0.002509638889,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 10.17,
+        "authoritativeMechanismElapsedSeconds": 10.17,
+        "watchTimeProgressionSeconds": 10.17,
+        "trainTimeProgressionSeconds": 10.17,
+        "studyBeat": 180050.85,
+        "powerReserveConsumptionHours": 0.002825,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 13.7712,
+        "authoritativeMechanismElapsedSeconds": 13.7712,
+        "watchTimeProgressionSeconds": 13.7712,
+        "trainTimeProgressionSeconds": 13.7712,
+        "studyBeat": 180068.856,
+        "powerReserveConsumptionHours": 0.003825333333,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 17.3724,
+        "authoritativeMechanismElapsedSeconds": 17.3724,
+        "watchTimeProgressionSeconds": 17.3724,
+        "trainTimeProgressionSeconds": 17.3724,
+        "studyBeat": 180086.862,
+        "powerReserveConsumptionHours": 0.004825666667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 20.9736,
+        "authoritativeMechanismElapsedSeconds": 20.9736,
+        "watchTimeProgressionSeconds": 20.9736,
+        "trainTimeProgressionSeconds": 20.9736,
+        "studyBeat": 180104.868,
+        "powerReserveConsumptionHours": 0.005826,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 24.5748,
+        "authoritativeMechanismElapsedSeconds": 24.5748,
+        "watchTimeProgressionSeconds": 24.5748,
+        "trainTimeProgressionSeconds": 24.5748,
+        "studyBeat": 180122.874,
+        "powerReserveConsumptionHours": 0.006826333334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 28.176,
+        "authoritativeMechanismElapsedSeconds": 28.176,
+        "watchTimeProgressionSeconds": 28.176,
+        "trainTimeProgressionSeconds": 28.176,
+        "studyBeat": 180140.880000001,
+        "powerReserveConsumptionHours": 0.007826666667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 31.7772,
+        "authoritativeMechanismElapsedSeconds": 31.7772,
+        "watchTimeProgressionSeconds": 31.7772,
+        "trainTimeProgressionSeconds": 31.7772,
+        "studyBeat": 180158.886000001,
+        "powerReserveConsumptionHours": 0.008827,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 35.3784,
+        "authoritativeMechanismElapsedSeconds": 35.3784,
+        "watchTimeProgressionSeconds": 35.3784,
+        "trainTimeProgressionSeconds": 35.3784,
+        "studyBeat": 180176.892000001,
+        "powerReserveConsumptionHours": 0.009827333334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 38.9796,
+        "authoritativeMechanismElapsedSeconds": 38.9796,
+        "watchTimeProgressionSeconds": 38.9796,
+        "trainTimeProgressionSeconds": 38.9796,
+        "studyBeat": 180194.898000001,
+        "powerReserveConsumptionHours": 0.010827666667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 42.5808,
+        "authoritativeMechanismElapsedSeconds": 42.5808,
+        "watchTimeProgressionSeconds": 42.5808,
+        "trainTimeProgressionSeconds": 42.5808,
+        "studyBeat": 180212.904000001,
+        "powerReserveConsumptionHours": 0.011828000001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 46.182,
+        "authoritativeMechanismElapsedSeconds": 46.182,
+        "watchTimeProgressionSeconds": 46.182,
+        "trainTimeProgressionSeconds": 46.182,
+        "studyBeat": 180230.910000001,
+        "powerReserveConsumptionHours": 0.012828333334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 49.7832,
+        "authoritativeMechanismElapsedSeconds": 49.7832,
+        "watchTimeProgressionSeconds": 49.7832,
+        "trainTimeProgressionSeconds": 49.7832,
+        "studyBeat": 180248.916000001,
+        "powerReserveConsumptionHours": 0.013828666667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 53.3844,
+        "authoritativeMechanismElapsedSeconds": 53.3844,
+        "watchTimeProgressionSeconds": 53.3844,
+        "trainTimeProgressionSeconds": 53.3844,
+        "studyBeat": 180266.922000001,
+        "powerReserveConsumptionHours": 0.014829000001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 56.9856,
+        "authoritativeMechanismElapsedSeconds": 56.9856,
+        "watchTimeProgressionSeconds": 56.9856,
+        "trainTimeProgressionSeconds": 56.9856,
+        "studyBeat": 180284.928000001,
+        "powerReserveConsumptionHours": 0.015829333334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 60.5868,
+        "authoritativeMechanismElapsedSeconds": 60.5868,
+        "watchTimeProgressionSeconds": 60.5868,
+        "trainTimeProgressionSeconds": 60.5868,
+        "studyBeat": 180302.934000001,
+        "powerReserveConsumptionHours": 0.016829666668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 64.188,
+        "authoritativeMechanismElapsedSeconds": 64.188,
+        "watchTimeProgressionSeconds": 64.188,
+        "trainTimeProgressionSeconds": 64.188,
+        "studyBeat": 180320.940000001,
+        "powerReserveConsumptionHours": 0.017830000001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 67.7892,
+        "authoritativeMechanismElapsedSeconds": 67.7892,
+        "watchTimeProgressionSeconds": 67.7892,
+        "trainTimeProgressionSeconds": 67.7892,
+        "studyBeat": 180338.946000001,
+        "powerReserveConsumptionHours": 0.018830333334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 71.3904,
+        "authoritativeMechanismElapsedSeconds": 71.3904,
+        "watchTimeProgressionSeconds": 71.3904,
+        "trainTimeProgressionSeconds": 71.3904,
+        "studyBeat": 180356.952000001,
+        "powerReserveConsumptionHours": 0.019830666668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 74.9916,
+        "authoritativeMechanismElapsedSeconds": 74.9916,
+        "watchTimeProgressionSeconds": 74.9916,
+        "trainTimeProgressionSeconds": 74.9916,
+        "studyBeat": 180374.958000001,
+        "powerReserveConsumptionHours": 0.020831000001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 78.5928,
+        "authoritativeMechanismElapsedSeconds": 78.5928,
+        "watchTimeProgressionSeconds": 78.5928,
+        "trainTimeProgressionSeconds": 78.5928,
+        "studyBeat": 180392.964000001,
+        "powerReserveConsumptionHours": 0.021831333335,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 82.194,
+        "authoritativeMechanismElapsedSeconds": 82.194,
+        "watchTimeProgressionSeconds": 82.194,
+        "trainTimeProgressionSeconds": 82.194,
+        "studyBeat": 180410.970000001,
+        "powerReserveConsumptionHours": 0.022831666668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 85.7952,
+        "authoritativeMechanismElapsedSeconds": 85.7952,
+        "watchTimeProgressionSeconds": 85.7952,
+        "trainTimeProgressionSeconds": 85.7952,
+        "studyBeat": 180428.976000001,
+        "powerReserveConsumptionHours": 0.023832000001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 89.3964,
+        "authoritativeMechanismElapsedSeconds": 89.3964,
+        "watchTimeProgressionSeconds": 89.3964,
+        "trainTimeProgressionSeconds": 89.3964,
+        "studyBeat": 180446.982000001,
+        "powerReserveConsumptionHours": 0.024832333335,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 92.9976,
+        "authoritativeMechanismElapsedSeconds": 92.9976,
+        "watchTimeProgressionSeconds": 92.9976,
+        "trainTimeProgressionSeconds": 92.9976,
+        "studyBeat": 180464.988000001,
+        "powerReserveConsumptionHours": 0.025832666668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 96.5988,
+        "authoritativeMechanismElapsedSeconds": 96.5988,
+        "watchTimeProgressionSeconds": 96.5988,
+        "trainTimeProgressionSeconds": 96.5988,
+        "studyBeat": 180482.994000001,
+        "powerReserveConsumptionHours": 0.026833000002,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 100.2,
+        "authoritativeMechanismElapsedSeconds": 100.2,
+        "watchTimeProgressionSeconds": 100.2,
+        "trainTimeProgressionSeconds": 100.2,
+        "studyBeat": 180501.000000001,
+        "powerReserveConsumptionHours": 0.027833333335,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 103.8012,
+        "authoritativeMechanismElapsedSeconds": 103.8012,
+        "watchTimeProgressionSeconds": 103.8012,
+        "trainTimeProgressionSeconds": 103.8012,
+        "studyBeat": 180519.006000001,
+        "powerReserveConsumptionHours": 0.028833666668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 107.4024,
+        "authoritativeMechanismElapsedSeconds": 107.4024,
+        "watchTimeProgressionSeconds": 107.4024,
+        "trainTimeProgressionSeconds": 107.4024,
+        "studyBeat": 180537.012000001,
+        "powerReserveConsumptionHours": 0.029834000002,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 111.0036,
+        "authoritativeMechanismElapsedSeconds": 111.0036,
+        "watchTimeProgressionSeconds": 111.0036,
+        "trainTimeProgressionSeconds": 111.0036,
+        "studyBeat": 180555.018000001,
+        "powerReserveConsumptionHours": 0.030834333335,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 114.6048,
+        "authoritativeMechanismElapsedSeconds": 114.6048,
+        "watchTimeProgressionSeconds": 114.6048,
+        "trainTimeProgressionSeconds": 114.6048,
+        "studyBeat": 180573.024000001,
+        "powerReserveConsumptionHours": 0.031834666669,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 118.206,
+        "authoritativeMechanismElapsedSeconds": 118.206,
+        "watchTimeProgressionSeconds": 118.206,
+        "trainTimeProgressionSeconds": 118.206,
+        "studyBeat": 180591.030000001,
+        "powerReserveConsumptionHours": 0.032835000002,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 121.8072,
+        "authoritativeMechanismElapsedSeconds": 121.8072,
+        "watchTimeProgressionSeconds": 121.8072,
+        "trainTimeProgressionSeconds": 121.8072,
+        "studyBeat": 180609.036000001,
+        "powerReserveConsumptionHours": 0.033835333335,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 125.4084,
+        "authoritativeMechanismElapsedSeconds": 125.4084,
+        "watchTimeProgressionSeconds": 125.4084,
+        "trainTimeProgressionSeconds": 125.4084,
+        "studyBeat": 180627.042000001,
+        "powerReserveConsumptionHours": 0.034835666669,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 129.0096,
+        "authoritativeMechanismElapsedSeconds": 129.0096,
+        "watchTimeProgressionSeconds": 129.0096,
+        "trainTimeProgressionSeconds": 129.0096,
+        "studyBeat": 180645.048000001,
+        "powerReserveConsumptionHours": 0.035836000002,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 132.6108,
+        "authoritativeMechanismElapsedSeconds": 132.6108,
+        "watchTimeProgressionSeconds": 132.6108,
+        "trainTimeProgressionSeconds": 132.6108,
+        "studyBeat": 180663.054000001,
+        "powerReserveConsumptionHours": 0.036836333335,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 136.212,
+        "authoritativeMechanismElapsedSeconds": 136.212,
+        "watchTimeProgressionSeconds": 136.212,
+        "trainTimeProgressionSeconds": 136.212,
+        "studyBeat": 180681.060000001,
+        "powerReserveConsumptionHours": 0.037836666669,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 139.8132,
+        "authoritativeMechanismElapsedSeconds": 139.8132,
+        "watchTimeProgressionSeconds": 139.8132,
+        "trainTimeProgressionSeconds": 139.8132,
+        "studyBeat": 180699.066000001,
+        "powerReserveConsumptionHours": 0.038837000002,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 143.4144,
+        "authoritativeMechanismElapsedSeconds": 143.4144,
+        "watchTimeProgressionSeconds": 143.4144,
+        "trainTimeProgressionSeconds": 143.4144,
+        "studyBeat": 180717.072000001,
+        "powerReserveConsumptionHours": 0.039837333336,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 147.0156,
+        "authoritativeMechanismElapsedSeconds": 147.0156,
+        "watchTimeProgressionSeconds": 147.0156,
+        "trainTimeProgressionSeconds": 147.0156,
+        "studyBeat": 180735.078000001,
+        "powerReserveConsumptionHours": 0.040837666669,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 150.6168,
+        "authoritativeMechanismElapsedSeconds": 150.6168,
+        "watchTimeProgressionSeconds": 150.6168,
+        "trainTimeProgressionSeconds": 150.6168,
+        "studyBeat": 180753.084000001,
+        "powerReserveConsumptionHours": 0.041838000002,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 154.218,
+        "authoritativeMechanismElapsedSeconds": 154.218,
+        "watchTimeProgressionSeconds": 154.218,
+        "trainTimeProgressionSeconds": 154.218,
+        "studyBeat": 180771.090000001,
+        "powerReserveConsumptionHours": 0.042838333336,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 157.8192,
+        "authoritativeMechanismElapsedSeconds": 157.8192,
+        "watchTimeProgressionSeconds": 157.8192,
+        "trainTimeProgressionSeconds": 157.8192,
+        "studyBeat": 180789.096000001,
+        "powerReserveConsumptionHours": 0.043838666669,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 161.4204,
+        "authoritativeMechanismElapsedSeconds": 161.4204,
+        "watchTimeProgressionSeconds": 161.4204,
+        "trainTimeProgressionSeconds": 161.4204,
+        "studyBeat": 180807.102000001,
+        "powerReserveConsumptionHours": 0.044839000003,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 165.0216,
+        "authoritativeMechanismElapsedSeconds": 165.0216,
+        "watchTimeProgressionSeconds": 165.0216,
+        "trainTimeProgressionSeconds": 165.0216,
+        "studyBeat": 180825.108000001,
+        "powerReserveConsumptionHours": 0.045839333336,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 168.6228,
+        "authoritativeMechanismElapsedSeconds": 168.6228,
+        "watchTimeProgressionSeconds": 168.6228,
+        "trainTimeProgressionSeconds": 168.6228,
+        "studyBeat": 180843.114000001,
+        "powerReserveConsumptionHours": 0.046839666669,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 172.224,
+        "authoritativeMechanismElapsedSeconds": 172.224,
+        "watchTimeProgressionSeconds": 172.224,
+        "trainTimeProgressionSeconds": 172.224,
+        "studyBeat": 180861.120000001,
+        "powerReserveConsumptionHours": 0.047840000003,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 175.8252,
+        "authoritativeMechanismElapsedSeconds": 175.8252,
+        "watchTimeProgressionSeconds": 175.8252,
+        "trainTimeProgressionSeconds": 175.8252,
+        "studyBeat": 180879.126000001,
+        "powerReserveConsumptionHours": 0.048840333336,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 179.4264,
+        "authoritativeMechanismElapsedSeconds": 179.4264,
+        "watchTimeProgressionSeconds": 179.4264,
+        "trainTimeProgressionSeconds": 179.4264,
+        "studyBeat": 180897.132000001,
+        "powerReserveConsumptionHours": 0.04984066667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 183.0276,
+        "authoritativeMechanismElapsedSeconds": 183.0276,
+        "watchTimeProgressionSeconds": 183.0276,
+        "trainTimeProgressionSeconds": 183.0276,
+        "studyBeat": 180915.138000002,
+        "powerReserveConsumptionHours": 0.050841000003,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 186.6288,
+        "authoritativeMechanismElapsedSeconds": 186.6288,
+        "watchTimeProgressionSeconds": 186.6288,
+        "trainTimeProgressionSeconds": 186.6288,
+        "studyBeat": 180933.144000002,
+        "powerReserveConsumptionHours": 0.051841333336,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 190.23,
+        "authoritativeMechanismElapsedSeconds": 190.23,
+        "watchTimeProgressionSeconds": 190.23,
+        "trainTimeProgressionSeconds": 190.23,
+        "studyBeat": 180951.150000002,
+        "powerReserveConsumptionHours": 0.05284166667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 193.8312,
+        "authoritativeMechanismElapsedSeconds": 193.8312,
+        "watchTimeProgressionSeconds": 193.8312,
+        "trainTimeProgressionSeconds": 193.8312,
+        "studyBeat": 180969.156000002,
+        "powerReserveConsumptionHours": 0.053842000003,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 197.4324,
+        "authoritativeMechanismElapsedSeconds": 197.4324,
+        "watchTimeProgressionSeconds": 197.4324,
+        "trainTimeProgressionSeconds": 197.4324,
+        "studyBeat": 180987.162000002,
+        "powerReserveConsumptionHours": 0.054842333337,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 201.0336,
+        "authoritativeMechanismElapsedSeconds": 201.0336,
+        "watchTimeProgressionSeconds": 201.0336,
+        "trainTimeProgressionSeconds": 201.0336,
+        "studyBeat": 181005.168000002,
+        "powerReserveConsumptionHours": 0.05584266667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 204.6348,
+        "authoritativeMechanismElapsedSeconds": 204.6348,
+        "watchTimeProgressionSeconds": 204.6348,
+        "trainTimeProgressionSeconds": 204.6348,
+        "studyBeat": 181023.174000002,
+        "powerReserveConsumptionHours": 0.056843000003,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 208.236,
+        "authoritativeMechanismElapsedSeconds": 208.236,
+        "watchTimeProgressionSeconds": 208.236,
+        "trainTimeProgressionSeconds": 208.236,
+        "studyBeat": 181041.180000002,
+        "powerReserveConsumptionHours": 0.057843333337,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 211.8372,
+        "authoritativeMechanismElapsedSeconds": 211.8372,
+        "watchTimeProgressionSeconds": 211.8372,
+        "trainTimeProgressionSeconds": 211.8372,
+        "studyBeat": 181059.186000002,
+        "powerReserveConsumptionHours": 0.05884366667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 215.4384,
+        "authoritativeMechanismElapsedSeconds": 215.4384,
+        "watchTimeProgressionSeconds": 215.4384,
+        "trainTimeProgressionSeconds": 215.4384,
+        "studyBeat": 181077.192000002,
+        "powerReserveConsumptionHours": 0.059844000004,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 219.0396,
+        "authoritativeMechanismElapsedSeconds": 219.0396,
+        "watchTimeProgressionSeconds": 219.0396,
+        "trainTimeProgressionSeconds": 219.0396,
+        "studyBeat": 181095.198000002,
+        "powerReserveConsumptionHours": 0.060844333337,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 222.6408,
+        "authoritativeMechanismElapsedSeconds": 222.6408,
+        "watchTimeProgressionSeconds": 222.6408,
+        "trainTimeProgressionSeconds": 222.6408,
+        "studyBeat": 181113.204000002,
+        "powerReserveConsumptionHours": 0.06184466667,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 226.242,
+        "authoritativeMechanismElapsedSeconds": 226.242,
+        "watchTimeProgressionSeconds": 226.242,
+        "trainTimeProgressionSeconds": 226.242,
+        "studyBeat": 181131.210000002,
+        "powerReserveConsumptionHours": 0.062845000004,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 229.8432,
+        "authoritativeMechanismElapsedSeconds": 229.8432,
+        "watchTimeProgressionSeconds": 229.8432,
+        "trainTimeProgressionSeconds": 229.8432,
+        "studyBeat": 181149.216000002,
+        "powerReserveConsumptionHours": 0.063845333337,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 233.4444,
+        "authoritativeMechanismElapsedSeconds": 233.4444,
+        "watchTimeProgressionSeconds": 233.4444,
+        "trainTimeProgressionSeconds": 233.4444,
+        "studyBeat": 181167.222000002,
+        "powerReserveConsumptionHours": 0.064845666671,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 237.0456,
+        "authoritativeMechanismElapsedSeconds": 237.0456,
+        "watchTimeProgressionSeconds": 237.0456,
+        "trainTimeProgressionSeconds": 237.0456,
+        "studyBeat": 181185.228000002,
+        "powerReserveConsumptionHours": 0.065846000004,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 240.6468,
+        "authoritativeMechanismElapsedSeconds": 240.6468,
+        "watchTimeProgressionSeconds": 240.6468,
+        "trainTimeProgressionSeconds": 240.6468,
+        "studyBeat": 181203.234000002,
+        "powerReserveConsumptionHours": 0.066846333337,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 244.248,
+        "authoritativeMechanismElapsedSeconds": 244.248,
+        "watchTimeProgressionSeconds": 244.248,
+        "trainTimeProgressionSeconds": 244.248,
+        "studyBeat": 181221.240000002,
+        "powerReserveConsumptionHours": 0.067846666671,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 247.8492,
+        "authoritativeMechanismElapsedSeconds": 247.8492,
+        "watchTimeProgressionSeconds": 247.8492,
+        "trainTimeProgressionSeconds": 247.8492,
+        "studyBeat": 181239.246000002,
+        "powerReserveConsumptionHours": 0.068847000004,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 251.4504,
+        "authoritativeMechanismElapsedSeconds": 251.4504,
+        "watchTimeProgressionSeconds": 251.4504,
+        "trainTimeProgressionSeconds": 251.4504,
+        "studyBeat": 181257.252000002,
+        "powerReserveConsumptionHours": 0.069847333337,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 255.0516,
+        "authoritativeMechanismElapsedSeconds": 255.0516,
+        "watchTimeProgressionSeconds": 255.0516,
+        "trainTimeProgressionSeconds": 255.0516,
+        "studyBeat": 181275.258000002,
+        "powerReserveConsumptionHours": 0.070847666671,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 258.6528,
+        "authoritativeMechanismElapsedSeconds": 258.6528,
+        "watchTimeProgressionSeconds": 258.6528,
+        "trainTimeProgressionSeconds": 258.6528,
+        "studyBeat": 181293.264000002,
+        "powerReserveConsumptionHours": 0.071848000004,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 262.254,
+        "authoritativeMechanismElapsedSeconds": 262.254,
+        "watchTimeProgressionSeconds": 262.254,
+        "trainTimeProgressionSeconds": 262.254,
+        "studyBeat": 181311.270000002,
+        "powerReserveConsumptionHours": 0.072848333338,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 265.8552,
+        "authoritativeMechanismElapsedSeconds": 265.8552,
+        "watchTimeProgressionSeconds": 265.8552,
+        "trainTimeProgressionSeconds": 265.8552,
+        "studyBeat": 181329.276000002,
+        "powerReserveConsumptionHours": 0.073848666671,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 269.4564,
+        "authoritativeMechanismElapsedSeconds": 269.4564,
+        "watchTimeProgressionSeconds": 269.4564,
+        "trainTimeProgressionSeconds": 269.4564,
+        "studyBeat": 181347.282000002,
+        "powerReserveConsumptionHours": 0.074849000004,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 273.0576,
+        "authoritativeMechanismElapsedSeconds": 273.0576,
+        "watchTimeProgressionSeconds": 273.0576,
+        "trainTimeProgressionSeconds": 273.0576,
+        "studyBeat": 181365.288000002,
+        "powerReserveConsumptionHours": 0.075849333338,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 276.6588,
+        "authoritativeMechanismElapsedSeconds": 276.6588,
+        "watchTimeProgressionSeconds": 276.6588,
+        "trainTimeProgressionSeconds": 276.6588,
+        "studyBeat": 181383.294000002,
+        "powerReserveConsumptionHours": 0.076849666671,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 280.26,
+        "authoritativeMechanismElapsedSeconds": 280.26,
+        "watchTimeProgressionSeconds": 280.26,
+        "trainTimeProgressionSeconds": 280.26,
+        "studyBeat": 181401.300000002,
+        "powerReserveConsumptionHours": 0.077850000005,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 283.8612,
+        "authoritativeMechanismElapsedSeconds": 283.8612,
+        "watchTimeProgressionSeconds": 283.8612,
+        "trainTimeProgressionSeconds": 283.8612,
+        "studyBeat": 181419.306000002,
+        "powerReserveConsumptionHours": 0.078850333338,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 287.4624,
+        "authoritativeMechanismElapsedSeconds": 287.4624,
+        "watchTimeProgressionSeconds": 287.4624,
+        "trainTimeProgressionSeconds": 287.4624,
+        "studyBeat": 181437.312000002,
+        "powerReserveConsumptionHours": 0.079850666671,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 291.0636,
+        "authoritativeMechanismElapsedSeconds": 291.0636,
+        "watchTimeProgressionSeconds": 291.0636,
+        "trainTimeProgressionSeconds": 291.0636,
+        "studyBeat": 181455.318000002,
+        "powerReserveConsumptionHours": 0.080851000005,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 294.6648,
+        "authoritativeMechanismElapsedSeconds": 294.6648,
+        "watchTimeProgressionSeconds": 294.6648,
+        "trainTimeProgressionSeconds": 294.6648,
+        "studyBeat": 181473.324000002,
+        "powerReserveConsumptionHours": 0.081851333338,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 298.266,
+        "authoritativeMechanismElapsedSeconds": 298.266,
+        "watchTimeProgressionSeconds": 298.266,
+        "trainTimeProgressionSeconds": 298.266,
+        "studyBeat": 181491.330000002,
+        "powerReserveConsumptionHours": 0.082851666672,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 301.8672,
+        "authoritativeMechanismElapsedSeconds": 301.8672,
+        "watchTimeProgressionSeconds": 301.8672,
+        "trainTimeProgressionSeconds": 301.8672,
+        "studyBeat": 181509.336000002,
+        "powerReserveConsumptionHours": 0.083852000005,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 305.4684,
+        "authoritativeMechanismElapsedSeconds": 305.4684,
+        "watchTimeProgressionSeconds": 305.4684,
+        "trainTimeProgressionSeconds": 305.4684,
+        "studyBeat": 181527.342000002,
+        "powerReserveConsumptionHours": 0.084852333338,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 309.0696,
+        "authoritativeMechanismElapsedSeconds": 309.0696,
+        "watchTimeProgressionSeconds": 309.0696,
+        "trainTimeProgressionSeconds": 309.0696,
+        "studyBeat": 181545.348000002,
+        "powerReserveConsumptionHours": 0.085852666672,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 312.6708,
+        "authoritativeMechanismElapsedSeconds": 312.6708,
+        "watchTimeProgressionSeconds": 312.6708,
+        "trainTimeProgressionSeconds": 312.6708,
+        "studyBeat": 181563.354000002,
+        "powerReserveConsumptionHours": 0.086853000005,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 316.272,
+        "authoritativeMechanismElapsedSeconds": 316.272,
+        "watchTimeProgressionSeconds": 316.272,
+        "trainTimeProgressionSeconds": 316.272,
+        "studyBeat": 181581.360000002,
+        "powerReserveConsumptionHours": 0.087853333339,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 319.8732,
+        "authoritativeMechanismElapsedSeconds": 319.8732,
+        "watchTimeProgressionSeconds": 319.8732,
+        "trainTimeProgressionSeconds": 319.8732,
+        "studyBeat": 181599.366000002,
+        "powerReserveConsumptionHours": 0.088853666672,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 323.4744,
+        "authoritativeMechanismElapsedSeconds": 323.4744,
+        "watchTimeProgressionSeconds": 323.4744,
+        "trainTimeProgressionSeconds": 323.4744,
+        "studyBeat": 181617.372000002,
+        "powerReserveConsumptionHours": 0.089854000005,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 327.0756,
+        "authoritativeMechanismElapsedSeconds": 327.0756,
+        "watchTimeProgressionSeconds": 327.0756,
+        "trainTimeProgressionSeconds": 327.0756,
+        "studyBeat": 181635.378000002,
+        "powerReserveConsumptionHours": 0.090854333339,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 330.6768,
+        "authoritativeMechanismElapsedSeconds": 330.6768,
+        "watchTimeProgressionSeconds": 330.6768,
+        "trainTimeProgressionSeconds": 330.6768,
+        "studyBeat": 181653.384000002,
+        "powerReserveConsumptionHours": 0.091854666672,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 334.278,
+        "authoritativeMechanismElapsedSeconds": 334.278,
+        "watchTimeProgressionSeconds": 334.278,
+        "trainTimeProgressionSeconds": 334.278,
+        "studyBeat": 181671.390000002,
+        "powerReserveConsumptionHours": 0.092855000006,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 337.8792,
+        "authoritativeMechanismElapsedSeconds": 337.8792,
+        "watchTimeProgressionSeconds": 337.8792,
+        "trainTimeProgressionSeconds": 337.8792,
+        "studyBeat": 181689.396000002,
+        "powerReserveConsumptionHours": 0.093855333339,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 341.4804,
+        "authoritativeMechanismElapsedSeconds": 341.4804,
+        "watchTimeProgressionSeconds": 341.480400001,
+        "trainTimeProgressionSeconds": 341.480400001,
+        "studyBeat": 181707.402000003,
+        "powerReserveConsumptionHours": 0.094855666672,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 345.0816,
+        "authoritativeMechanismElapsedSeconds": 345.0816,
+        "watchTimeProgressionSeconds": 345.081600001,
+        "trainTimeProgressionSeconds": 345.081600001,
+        "studyBeat": 181725.408000003,
+        "powerReserveConsumptionHours": 0.095856000006,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 348.6828,
+        "authoritativeMechanismElapsedSeconds": 348.6828,
+        "watchTimeProgressionSeconds": 348.682800001,
+        "trainTimeProgressionSeconds": 348.682800001,
+        "studyBeat": 181743.414000003,
+        "powerReserveConsumptionHours": 0.096856333339,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 352.284,
+        "authoritativeMechanismElapsedSeconds": 352.284,
+        "watchTimeProgressionSeconds": 352.284000001,
+        "trainTimeProgressionSeconds": 352.284000001,
+        "studyBeat": 181761.420000003,
+        "powerReserveConsumptionHours": 0.097856666673,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 355.8852,
+        "authoritativeMechanismElapsedSeconds": 355.8852,
+        "watchTimeProgressionSeconds": 355.885200001,
+        "trainTimeProgressionSeconds": 355.885200001,
+        "studyBeat": 181779.426000003,
+        "powerReserveConsumptionHours": 0.098857000006,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 359.4864,
+        "authoritativeMechanismElapsedSeconds": 359.4864,
+        "watchTimeProgressionSeconds": 359.486400001,
+        "trainTimeProgressionSeconds": 359.486400001,
+        "studyBeat": 181797.432000003,
+        "powerReserveConsumptionHours": 0.099857333339,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 363.0876,
+        "authoritativeMechanismElapsedSeconds": 363.0876,
+        "watchTimeProgressionSeconds": 363.087600001,
+        "trainTimeProgressionSeconds": 363.087600001,
+        "studyBeat": 181815.438000003,
+        "powerReserveConsumptionHours": 0.100857666673,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 366.6888,
+        "authoritativeMechanismElapsedSeconds": 366.6888,
+        "watchTimeProgressionSeconds": 366.688800001,
+        "trainTimeProgressionSeconds": 366.688800001,
+        "studyBeat": 181833.444000003,
+        "powerReserveConsumptionHours": 0.101858000006,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 370.29,
+        "authoritativeMechanismElapsedSeconds": 370.29,
+        "watchTimeProgressionSeconds": 370.290000001,
+        "trainTimeProgressionSeconds": 370.290000001,
+        "studyBeat": 181851.450000003,
+        "powerReserveConsumptionHours": 0.102858333339,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 373.8912,
+        "authoritativeMechanismElapsedSeconds": 373.8912,
+        "watchTimeProgressionSeconds": 373.891200001,
+        "trainTimeProgressionSeconds": 373.891200001,
+        "studyBeat": 181869.456000003,
+        "powerReserveConsumptionHours": 0.103858666673,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 377.4924,
+        "authoritativeMechanismElapsedSeconds": 377.4924,
+        "watchTimeProgressionSeconds": 377.492400001,
+        "trainTimeProgressionSeconds": 377.492400001,
+        "studyBeat": 181887.462000003,
+        "powerReserveConsumptionHours": 0.104859000006,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 381.0936,
+        "authoritativeMechanismElapsedSeconds": 381.0936,
+        "watchTimeProgressionSeconds": 381.093600001,
+        "trainTimeProgressionSeconds": 381.093600001,
+        "studyBeat": 181905.468000003,
+        "powerReserveConsumptionHours": 0.10585933334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 384.6948,
+        "authoritativeMechanismElapsedSeconds": 384.6948,
+        "watchTimeProgressionSeconds": 384.694800001,
+        "trainTimeProgressionSeconds": 384.694800001,
+        "studyBeat": 181923.474000003,
+        "powerReserveConsumptionHours": 0.106859666673,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 388.296,
+        "authoritativeMechanismElapsedSeconds": 388.296,
+        "watchTimeProgressionSeconds": 388.296000001,
+        "trainTimeProgressionSeconds": 388.296000001,
+        "studyBeat": 181941.480000003,
+        "powerReserveConsumptionHours": 0.107860000006,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 391.8972,
+        "authoritativeMechanismElapsedSeconds": 391.8972,
+        "watchTimeProgressionSeconds": 391.897200001,
+        "trainTimeProgressionSeconds": 391.897200001,
+        "studyBeat": 181959.486000003,
+        "powerReserveConsumptionHours": 0.10886033334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 395.4984,
+        "authoritativeMechanismElapsedSeconds": 395.4984,
+        "watchTimeProgressionSeconds": 395.498400001,
+        "trainTimeProgressionSeconds": 395.498400001,
+        "studyBeat": 181977.492000003,
+        "powerReserveConsumptionHours": 0.109860666673,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 399.0996,
+        "authoritativeMechanismElapsedSeconds": 399.0996,
+        "watchTimeProgressionSeconds": 399.099600001,
+        "trainTimeProgressionSeconds": 399.099600001,
+        "studyBeat": 181995.498000003,
+        "powerReserveConsumptionHours": 0.110861000007,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 402.7008,
+        "authoritativeMechanismElapsedSeconds": 402.7008,
+        "watchTimeProgressionSeconds": 402.700800001,
+        "trainTimeProgressionSeconds": 402.700800001,
+        "studyBeat": 182013.504000003,
+        "powerReserveConsumptionHours": 0.11186133334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 406.302,
+        "authoritativeMechanismElapsedSeconds": 406.302,
+        "watchTimeProgressionSeconds": 406.302000001,
+        "trainTimeProgressionSeconds": 406.302000001,
+        "studyBeat": 182031.510000003,
+        "powerReserveConsumptionHours": 0.112861666673,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 409.9032,
+        "authoritativeMechanismElapsedSeconds": 409.9032,
+        "watchTimeProgressionSeconds": 409.903200001,
+        "trainTimeProgressionSeconds": 409.903200001,
+        "studyBeat": 182049.516000003,
+        "powerReserveConsumptionHours": 0.113862000007,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 413.5044,
+        "authoritativeMechanismElapsedSeconds": 413.5044,
+        "watchTimeProgressionSeconds": 413.504400001,
+        "trainTimeProgressionSeconds": 413.504400001,
+        "studyBeat": 182067.522000003,
+        "powerReserveConsumptionHours": 0.11486233334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 417.1056,
+        "authoritativeMechanismElapsedSeconds": 417.1056,
+        "watchTimeProgressionSeconds": 417.105600001,
+        "trainTimeProgressionSeconds": 417.105600001,
+        "studyBeat": 182085.528000003,
+        "powerReserveConsumptionHours": 0.115862666674,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 420.7068,
+        "authoritativeMechanismElapsedSeconds": 420.7068,
+        "watchTimeProgressionSeconds": 420.706800001,
+        "trainTimeProgressionSeconds": 420.706800001,
+        "studyBeat": 182103.534000003,
+        "powerReserveConsumptionHours": 0.116863000007,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 424.308,
+        "authoritativeMechanismElapsedSeconds": 424.308,
+        "watchTimeProgressionSeconds": 424.308000001,
+        "trainTimeProgressionSeconds": 424.308000001,
+        "studyBeat": 182121.540000003,
+        "powerReserveConsumptionHours": 0.11786333334,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 427.9092,
+        "authoritativeMechanismElapsedSeconds": 427.9092,
+        "watchTimeProgressionSeconds": 427.909200001,
+        "trainTimeProgressionSeconds": 427.909200001,
+        "studyBeat": 182139.546000003,
+        "powerReserveConsumptionHours": 0.118863666674,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 431.5104,
+        "authoritativeMechanismElapsedSeconds": 431.5104,
+        "watchTimeProgressionSeconds": 431.510400001,
+        "trainTimeProgressionSeconds": 431.510400001,
+        "studyBeat": 182157.552000003,
+        "powerReserveConsumptionHours": 0.119864000007,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 435.1116,
+        "authoritativeMechanismElapsedSeconds": 435.1116,
+        "watchTimeProgressionSeconds": 435.111600001,
+        "trainTimeProgressionSeconds": 435.111600001,
+        "studyBeat": 182175.558000003,
+        "powerReserveConsumptionHours": 0.120864333341,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 438.7128,
+        "authoritativeMechanismElapsedSeconds": 438.7128,
+        "watchTimeProgressionSeconds": 438.712800001,
+        "trainTimeProgressionSeconds": 438.712800001,
+        "studyBeat": 182193.564000003,
+        "powerReserveConsumptionHours": 0.121864666674,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 442.314,
+        "authoritativeMechanismElapsedSeconds": 442.314,
+        "watchTimeProgressionSeconds": 442.314000001,
+        "trainTimeProgressionSeconds": 442.314000001,
+        "studyBeat": 182211.570000003,
+        "powerReserveConsumptionHours": 0.122865000007,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 445.9152,
+        "authoritativeMechanismElapsedSeconds": 445.9152,
+        "watchTimeProgressionSeconds": 445.915200001,
+        "trainTimeProgressionSeconds": 445.915200001,
+        "studyBeat": 182229.576000003,
+        "powerReserveConsumptionHours": 0.123865333341,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 449.5164,
+        "authoritativeMechanismElapsedSeconds": 449.5164,
+        "watchTimeProgressionSeconds": 449.516400001,
+        "trainTimeProgressionSeconds": 449.516400001,
+        "studyBeat": 182247.582000003,
+        "powerReserveConsumptionHours": 0.124865666674,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 453.1176,
+        "authoritativeMechanismElapsedSeconds": 453.1176,
+        "watchTimeProgressionSeconds": 453.117600001,
+        "trainTimeProgressionSeconds": 453.117600001,
+        "studyBeat": 182265.588000003,
+        "powerReserveConsumptionHours": 0.125866000008,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 456.7188,
+        "authoritativeMechanismElapsedSeconds": 456.7188,
+        "watchTimeProgressionSeconds": 456.718800001,
+        "trainTimeProgressionSeconds": 456.718800001,
+        "studyBeat": 182283.594000003,
+        "powerReserveConsumptionHours": 0.126866333341,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 460.32,
+        "authoritativeMechanismElapsedSeconds": 460.32,
+        "watchTimeProgressionSeconds": 460.320000001,
+        "trainTimeProgressionSeconds": 460.320000001,
+        "studyBeat": 182301.600000003,
+        "powerReserveConsumptionHours": 0.127866666674,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 463.9212,
+        "authoritativeMechanismElapsedSeconds": 463.9212,
+        "watchTimeProgressionSeconds": 463.921200001,
+        "trainTimeProgressionSeconds": 463.921200001,
+        "studyBeat": 182319.606000003,
+        "powerReserveConsumptionHours": 0.128867000008,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 467.5224,
+        "authoritativeMechanismElapsedSeconds": 467.5224,
+        "watchTimeProgressionSeconds": 467.522400001,
+        "trainTimeProgressionSeconds": 467.522400001,
+        "studyBeat": 182337.612000003,
+        "powerReserveConsumptionHours": 0.129867333341,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 471.1236,
+        "authoritativeMechanismElapsedSeconds": 471.1236,
+        "watchTimeProgressionSeconds": 471.123600001,
+        "trainTimeProgressionSeconds": 471.123600001,
+        "studyBeat": 182355.618000003,
+        "powerReserveConsumptionHours": 0.130867666675,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 474.7248,
+        "authoritativeMechanismElapsedSeconds": 474.7248,
+        "watchTimeProgressionSeconds": 474.724800001,
+        "trainTimeProgressionSeconds": 474.724800001,
+        "studyBeat": 182373.624000003,
+        "powerReserveConsumptionHours": 0.131868000008,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 478.326,
+        "authoritativeMechanismElapsedSeconds": 478.326,
+        "watchTimeProgressionSeconds": 478.326000001,
+        "trainTimeProgressionSeconds": 478.326000001,
+        "studyBeat": 182391.630000003,
+        "powerReserveConsumptionHours": 0.132868333341,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 481.9272,
+        "authoritativeMechanismElapsedSeconds": 481.9272,
+        "watchTimeProgressionSeconds": 481.927200001,
+        "trainTimeProgressionSeconds": 481.927200001,
+        "studyBeat": 182409.636000003,
+        "powerReserveConsumptionHours": 0.133868666675,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 485.5284,
+        "authoritativeMechanismElapsedSeconds": 485.5284,
+        "watchTimeProgressionSeconds": 485.528400001,
+        "trainTimeProgressionSeconds": 485.528400001,
+        "studyBeat": 182427.642000003,
+        "powerReserveConsumptionHours": 0.134869000008,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 489.1296,
+        "authoritativeMechanismElapsedSeconds": 489.1296,
+        "watchTimeProgressionSeconds": 489.129600001,
+        "trainTimeProgressionSeconds": 489.129600001,
+        "studyBeat": 182445.648000003,
+        "powerReserveConsumptionHours": 0.135869333341,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 492.7308,
+        "authoritativeMechanismElapsedSeconds": 492.7308,
+        "watchTimeProgressionSeconds": 492.730800001,
+        "trainTimeProgressionSeconds": 492.730800001,
+        "studyBeat": 182463.654000003,
+        "powerReserveConsumptionHours": 0.136869666675,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 496.332,
+        "authoritativeMechanismElapsedSeconds": 496.332,
+        "watchTimeProgressionSeconds": 496.332000001,
+        "trainTimeProgressionSeconds": 496.332000001,
+        "studyBeat": 182481.660000004,
+        "powerReserveConsumptionHours": 0.137870000008,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 499.9332,
+        "authoritativeMechanismElapsedSeconds": 499.9332,
+        "watchTimeProgressionSeconds": 499.933200001,
+        "trainTimeProgressionSeconds": 499.933200001,
+        "studyBeat": 182499.666000004,
+        "powerReserveConsumptionHours": 0.138870333342,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 503.5344,
+        "authoritativeMechanismElapsedSeconds": 503.5344,
+        "watchTimeProgressionSeconds": 503.534400001,
+        "trainTimeProgressionSeconds": 503.534400001,
+        "studyBeat": 182517.672000004,
+        "powerReserveConsumptionHours": 0.139870666675,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 507.1356,
+        "authoritativeMechanismElapsedSeconds": 507.1356,
+        "watchTimeProgressionSeconds": 507.135600001,
+        "trainTimeProgressionSeconds": 507.135600001,
+        "studyBeat": 182535.678000004,
+        "powerReserveConsumptionHours": 0.140871000008,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 510.7368,
+        "authoritativeMechanismElapsedSeconds": 510.7368,
+        "watchTimeProgressionSeconds": 510.736800001,
+        "trainTimeProgressionSeconds": 510.736800001,
+        "studyBeat": 182553.684000004,
+        "powerReserveConsumptionHours": 0.141871333342,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 514.338,
+        "authoritativeMechanismElapsedSeconds": 514.338,
+        "watchTimeProgressionSeconds": 514.338000001,
+        "trainTimeProgressionSeconds": 514.338000001,
+        "studyBeat": 182571.690000004,
+        "powerReserveConsumptionHours": 0.142871666675,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 517.9392,
+        "authoritativeMechanismElapsedSeconds": 517.9392,
+        "watchTimeProgressionSeconds": 517.939200001,
+        "trainTimeProgressionSeconds": 517.939200001,
+        "studyBeat": 182589.696000004,
+        "powerReserveConsumptionHours": 0.143872000009,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 521.5404,
+        "authoritativeMechanismElapsedSeconds": 521.5404,
+        "watchTimeProgressionSeconds": 521.540400001,
+        "trainTimeProgressionSeconds": 521.540400001,
+        "studyBeat": 182607.702000004,
+        "powerReserveConsumptionHours": 0.144872333342,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 525.1416,
+        "authoritativeMechanismElapsedSeconds": 525.1416,
+        "watchTimeProgressionSeconds": 525.141600001,
+        "trainTimeProgressionSeconds": 525.141600001,
+        "studyBeat": 182625.708000004,
+        "powerReserveConsumptionHours": 0.145872666675,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 528.7428,
+        "authoritativeMechanismElapsedSeconds": 528.7428,
+        "watchTimeProgressionSeconds": 528.742800001,
+        "trainTimeProgressionSeconds": 528.742800001,
+        "studyBeat": 182643.714000004,
+        "powerReserveConsumptionHours": 0.146873000009,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 532.344,
+        "authoritativeMechanismElapsedSeconds": 532.344,
+        "watchTimeProgressionSeconds": 532.344000001,
+        "trainTimeProgressionSeconds": 532.344000001,
+        "studyBeat": 182661.720000004,
+        "powerReserveConsumptionHours": 0.147873333342,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 535.9452,
+        "authoritativeMechanismElapsedSeconds": 535.9452,
+        "watchTimeProgressionSeconds": 535.945200001,
+        "trainTimeProgressionSeconds": 535.945200001,
+        "studyBeat": 182679.726000004,
+        "powerReserveConsumptionHours": 0.148873666676,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 539.5464,
+        "authoritativeMechanismElapsedSeconds": 539.5464,
+        "watchTimeProgressionSeconds": 539.546400001,
+        "trainTimeProgressionSeconds": 539.546400001,
+        "studyBeat": 182697.732000004,
+        "powerReserveConsumptionHours": 0.149874000009,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 543.1476,
+        "authoritativeMechanismElapsedSeconds": 543.1476,
+        "watchTimeProgressionSeconds": 543.147600001,
+        "trainTimeProgressionSeconds": 543.147600001,
+        "studyBeat": 182715.738000004,
+        "powerReserveConsumptionHours": 0.150874333342,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 546.7488,
+        "authoritativeMechanismElapsedSeconds": 546.7488,
+        "watchTimeProgressionSeconds": 546.748800001,
+        "trainTimeProgressionSeconds": 546.748800001,
+        "studyBeat": 182733.744000004,
+        "powerReserveConsumptionHours": 0.151874666676,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 550.35,
+        "authoritativeMechanismElapsedSeconds": 550.35,
+        "watchTimeProgressionSeconds": 550.350000001,
+        "trainTimeProgressionSeconds": 550.350000001,
+        "studyBeat": 182751.750000004,
+        "powerReserveConsumptionHours": 0.152875000009,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 553.9512,
+        "authoritativeMechanismElapsedSeconds": 553.9512,
+        "watchTimeProgressionSeconds": 553.951200001,
+        "trainTimeProgressionSeconds": 553.951200001,
+        "studyBeat": 182769.756000004,
+        "powerReserveConsumptionHours": 0.153875333343,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 557.5524,
+        "authoritativeMechanismElapsedSeconds": 557.5524,
+        "watchTimeProgressionSeconds": 557.552400001,
+        "trainTimeProgressionSeconds": 557.552400001,
+        "studyBeat": 182787.762000004,
+        "powerReserveConsumptionHours": 0.154875666676,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 561.1536,
+        "authoritativeMechanismElapsedSeconds": 561.1536,
+        "watchTimeProgressionSeconds": 561.153600001,
+        "trainTimeProgressionSeconds": 561.153600001,
+        "studyBeat": 182805.768000004,
+        "powerReserveConsumptionHours": 0.155876000009,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 564.7548,
+        "authoritativeMechanismElapsedSeconds": 564.7548,
+        "watchTimeProgressionSeconds": 564.754800001,
+        "trainTimeProgressionSeconds": 564.754800001,
+        "studyBeat": 182823.774000004,
+        "powerReserveConsumptionHours": 0.156876333343,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 568.356,
+        "authoritativeMechanismElapsedSeconds": 568.356,
+        "watchTimeProgressionSeconds": 568.356000001,
+        "trainTimeProgressionSeconds": 568.356000001,
+        "studyBeat": 182841.780000004,
+        "powerReserveConsumptionHours": 0.157876666676,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 571.9572,
+        "authoritativeMechanismElapsedSeconds": 571.9572,
+        "watchTimeProgressionSeconds": 571.957200001,
+        "trainTimeProgressionSeconds": 571.957200001,
+        "studyBeat": 182859.786000004,
+        "powerReserveConsumptionHours": 0.15887700001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 575.5584,
+        "authoritativeMechanismElapsedSeconds": 575.5584,
+        "watchTimeProgressionSeconds": 575.558400001,
+        "trainTimeProgressionSeconds": 575.558400001,
+        "studyBeat": 182877.792000004,
+        "powerReserveConsumptionHours": 0.159877333343,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 579.1596,
+        "authoritativeMechanismElapsedSeconds": 579.1596,
+        "watchTimeProgressionSeconds": 579.159600001,
+        "trainTimeProgressionSeconds": 579.159600001,
+        "studyBeat": 182895.798000004,
+        "powerReserveConsumptionHours": 0.160877666676,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 582.7608,
+        "authoritativeMechanismElapsedSeconds": 582.7608,
+        "watchTimeProgressionSeconds": 582.760800001,
+        "trainTimeProgressionSeconds": 582.760800001,
+        "studyBeat": 182913.804000004,
+        "powerReserveConsumptionHours": 0.16187800001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 586.362,
+        "authoritativeMechanismElapsedSeconds": 586.362,
+        "watchTimeProgressionSeconds": 586.362000001,
+        "trainTimeProgressionSeconds": 586.362000001,
+        "studyBeat": 182931.810000004,
+        "powerReserveConsumptionHours": 0.162878333343,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 589.9632,
+        "authoritativeMechanismElapsedSeconds": 589.9632,
+        "watchTimeProgressionSeconds": 589.963200001,
+        "trainTimeProgressionSeconds": 589.963200001,
+        "studyBeat": 182949.816000004,
+        "powerReserveConsumptionHours": 0.163878666677,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 593.5644,
+        "authoritativeMechanismElapsedSeconds": 593.5644,
+        "watchTimeProgressionSeconds": 593.564400001,
+        "trainTimeProgressionSeconds": 593.564400001,
+        "studyBeat": 182967.822000004,
+        "powerReserveConsumptionHours": 0.16487900001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 597.1656,
+        "authoritativeMechanismElapsedSeconds": 597.1656,
+        "watchTimeProgressionSeconds": 597.165600001,
+        "trainTimeProgressionSeconds": 597.165600001,
+        "studyBeat": 182985.828000004,
+        "powerReserveConsumptionHours": 0.165879333343,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 600.7668,
+        "authoritativeMechanismElapsedSeconds": 600.7668,
+        "watchTimeProgressionSeconds": 600.766800001,
+        "trainTimeProgressionSeconds": 600.766800001,
+        "studyBeat": 183003.834000004,
+        "powerReserveConsumptionHours": 0.166879666677,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 604.368,
+        "authoritativeMechanismElapsedSeconds": 604.368,
+        "watchTimeProgressionSeconds": 604.368000001,
+        "trainTimeProgressionSeconds": 604.368000001,
+        "studyBeat": 183021.840000004,
+        "powerReserveConsumptionHours": 0.16788000001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 607.9692,
+        "authoritativeMechanismElapsedSeconds": 607.9692,
+        "watchTimeProgressionSeconds": 607.969200001,
+        "trainTimeProgressionSeconds": 607.969200001,
+        "studyBeat": 183039.846000004,
+        "powerReserveConsumptionHours": 0.168880333344,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 611.5704,
+        "authoritativeMechanismElapsedSeconds": 611.5704,
+        "watchTimeProgressionSeconds": 611.570400001,
+        "trainTimeProgressionSeconds": 611.570400001,
+        "studyBeat": 183057.852000004,
+        "powerReserveConsumptionHours": 0.169880666677,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 615.1716,
+        "authoritativeMechanismElapsedSeconds": 615.1716,
+        "watchTimeProgressionSeconds": 615.171600001,
+        "trainTimeProgressionSeconds": 615.171600001,
+        "studyBeat": 183075.858000004,
+        "powerReserveConsumptionHours": 0.17088100001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 618.7728,
+        "authoritativeMechanismElapsedSeconds": 618.7728,
+        "watchTimeProgressionSeconds": 618.772800001,
+        "trainTimeProgressionSeconds": 618.772800001,
+        "studyBeat": 183093.864000004,
+        "powerReserveConsumptionHours": 0.171881333344,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 622.374,
+        "authoritativeMechanismElapsedSeconds": 622.374,
+        "watchTimeProgressionSeconds": 622.374000001,
+        "trainTimeProgressionSeconds": 622.374000001,
+        "studyBeat": 183111.870000004,
+        "powerReserveConsumptionHours": 0.172881666677,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 625.9752,
+        "authoritativeMechanismElapsedSeconds": 625.9752,
+        "watchTimeProgressionSeconds": 625.975200001,
+        "trainTimeProgressionSeconds": 625.975200001,
+        "studyBeat": 183129.876000004,
+        "powerReserveConsumptionHours": 0.17388200001,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 629.5764,
+        "authoritativeMechanismElapsedSeconds": 629.5764,
+        "watchTimeProgressionSeconds": 629.576400001,
+        "trainTimeProgressionSeconds": 629.576400001,
+        "studyBeat": 183147.882000004,
+        "powerReserveConsumptionHours": 0.174882333344,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 633.1776,
+        "authoritativeMechanismElapsedSeconds": 633.1776,
+        "watchTimeProgressionSeconds": 633.177600001,
+        "trainTimeProgressionSeconds": 633.177600001,
+        "studyBeat": 183165.888000004,
+        "powerReserveConsumptionHours": 0.175882666677,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 636.7788,
+        "authoritativeMechanismElapsedSeconds": 636.7788,
+        "watchTimeProgressionSeconds": 636.778800001,
+        "trainTimeProgressionSeconds": 636.778800001,
+        "studyBeat": 183183.894000004,
+        "powerReserveConsumptionHours": 0.176883000011,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 640.38,
+        "authoritativeMechanismElapsedSeconds": 640.38,
+        "watchTimeProgressionSeconds": 640.380000001,
+        "trainTimeProgressionSeconds": 640.380000001,
+        "studyBeat": 183201.900000004,
+        "powerReserveConsumptionHours": 0.177883333344,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 643.9812,
+        "authoritativeMechanismElapsedSeconds": 643.9812,
+        "watchTimeProgressionSeconds": 643.981200001,
+        "trainTimeProgressionSeconds": 643.981200001,
+        "studyBeat": 183219.906000004,
+        "powerReserveConsumptionHours": 0.178883666677,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 647.5824,
+        "authoritativeMechanismElapsedSeconds": 647.5824,
+        "watchTimeProgressionSeconds": 647.582400001,
+        "trainTimeProgressionSeconds": 647.582400001,
+        "studyBeat": 183237.912000004,
+        "powerReserveConsumptionHours": 0.179884000011,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 651.1836,
+        "authoritativeMechanismElapsedSeconds": 651.1836,
+        "watchTimeProgressionSeconds": 651.183600001,
+        "trainTimeProgressionSeconds": 651.183600001,
+        "studyBeat": 183255.918000005,
+        "powerReserveConsumptionHours": 0.180884333344,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 654.7848,
+        "authoritativeMechanismElapsedSeconds": 654.7848,
+        "watchTimeProgressionSeconds": 654.784800001,
+        "trainTimeProgressionSeconds": 654.784800001,
+        "studyBeat": 183273.924000005,
+        "powerReserveConsumptionHours": 0.181884666678,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 658.386,
+        "authoritativeMechanismElapsedSeconds": 658.386,
+        "watchTimeProgressionSeconds": 658.386000001,
+        "trainTimeProgressionSeconds": 658.386000001,
+        "studyBeat": 183291.930000005,
+        "powerReserveConsumptionHours": 0.182885000011,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 661.9872,
+        "authoritativeMechanismElapsedSeconds": 661.9872,
+        "watchTimeProgressionSeconds": 661.987200001,
+        "trainTimeProgressionSeconds": 661.987200001,
+        "studyBeat": 183309.936000005,
+        "powerReserveConsumptionHours": 0.183885333344,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 665.5884,
+        "authoritativeMechanismElapsedSeconds": 665.5884,
+        "watchTimeProgressionSeconds": 665.588400001,
+        "trainTimeProgressionSeconds": 665.588400001,
+        "studyBeat": 183327.942000005,
+        "powerReserveConsumptionHours": 0.184885666678,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 669.1896,
+        "authoritativeMechanismElapsedSeconds": 669.1896,
+        "watchTimeProgressionSeconds": 669.189600001,
+        "trainTimeProgressionSeconds": 669.189600001,
+        "studyBeat": 183345.948000005,
+        "powerReserveConsumptionHours": 0.185886000011,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 672.7908,
+        "authoritativeMechanismElapsedSeconds": 672.7908,
+        "watchTimeProgressionSeconds": 672.790800001,
+        "trainTimeProgressionSeconds": 672.790800001,
+        "studyBeat": 183363.954000005,
+        "powerReserveConsumptionHours": 0.186886333345,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 676.392,
+        "authoritativeMechanismElapsedSeconds": 676.392,
+        "watchTimeProgressionSeconds": 676.392000001,
+        "trainTimeProgressionSeconds": 676.392000001,
+        "studyBeat": 183381.960000005,
+        "powerReserveConsumptionHours": 0.187886666678,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 679.9932,
+        "authoritativeMechanismElapsedSeconds": 679.9932,
+        "watchTimeProgressionSeconds": 679.993200001,
+        "trainTimeProgressionSeconds": 679.993200001,
+        "studyBeat": 183399.966000005,
+        "powerReserveConsumptionHours": 0.188887000011,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 683.5944,
+        "authoritativeMechanismElapsedSeconds": 683.5944,
+        "watchTimeProgressionSeconds": 683.594400001,
+        "trainTimeProgressionSeconds": 683.594400001,
+        "studyBeat": 183417.972000005,
+        "powerReserveConsumptionHours": 0.189887333345,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 687.1956,
+        "authoritativeMechanismElapsedSeconds": 687.1956,
+        "watchTimeProgressionSeconds": 687.195600001,
+        "trainTimeProgressionSeconds": 687.195600001,
+        "studyBeat": 183435.978000005,
+        "powerReserveConsumptionHours": 0.190887666678,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 690.7968,
+        "authoritativeMechanismElapsedSeconds": 690.7968,
+        "watchTimeProgressionSeconds": 690.796800001,
+        "trainTimeProgressionSeconds": 690.796800001,
+        "studyBeat": 183453.984000005,
+        "powerReserveConsumptionHours": 0.191888000012,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 694.398,
+        "authoritativeMechanismElapsedSeconds": 694.398,
+        "watchTimeProgressionSeconds": 694.398000001,
+        "trainTimeProgressionSeconds": 694.398000001,
+        "studyBeat": 183471.990000005,
+        "powerReserveConsumptionHours": 0.192888333345,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 697.9992,
+        "authoritativeMechanismElapsedSeconds": 697.9992,
+        "watchTimeProgressionSeconds": 697.999200001,
+        "trainTimeProgressionSeconds": 697.999200001,
+        "studyBeat": 183489.996000005,
+        "powerReserveConsumptionHours": 0.193888666678,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 701.6004,
+        "authoritativeMechanismElapsedSeconds": 701.6004,
+        "watchTimeProgressionSeconds": 701.600400001,
+        "trainTimeProgressionSeconds": 701.600400001,
+        "studyBeat": 183508.002000005,
+        "powerReserveConsumptionHours": 0.194889000012,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 705.2016,
+        "authoritativeMechanismElapsedSeconds": 705.2016,
+        "watchTimeProgressionSeconds": 705.201600001,
+        "trainTimeProgressionSeconds": 705.201600001,
+        "studyBeat": 183526.008000005,
+        "powerReserveConsumptionHours": 0.195889333345,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 708.8028,
+        "authoritativeMechanismElapsedSeconds": 708.8028,
+        "watchTimeProgressionSeconds": 708.802800001,
+        "trainTimeProgressionSeconds": 708.802800001,
+        "studyBeat": 183544.014000005,
+        "powerReserveConsumptionHours": 0.196889666679,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 712.404,
+        "authoritativeMechanismElapsedSeconds": 712.404,
+        "watchTimeProgressionSeconds": 712.404000001,
+        "trainTimeProgressionSeconds": 712.404000001,
+        "studyBeat": 183562.020000005,
+        "powerReserveConsumptionHours": 0.197890000012,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 716.0052,
+        "authoritativeMechanismElapsedSeconds": 716.0052,
+        "watchTimeProgressionSeconds": 716.005200001,
+        "trainTimeProgressionSeconds": 716.005200001,
+        "studyBeat": 183580.026000005,
+        "powerReserveConsumptionHours": 0.198890333345,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 719.6064,
+        "authoritativeMechanismElapsedSeconds": 719.6064,
+        "watchTimeProgressionSeconds": 719.606400001,
+        "trainTimeProgressionSeconds": 719.606400001,
+        "studyBeat": 183598.032000005,
+        "powerReserveConsumptionHours": 0.199890666679,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 723.2076,
+        "authoritativeMechanismElapsedSeconds": 723.2076,
+        "watchTimeProgressionSeconds": 723.207600001,
+        "trainTimeProgressionSeconds": 723.207600001,
+        "studyBeat": 183616.038000005,
+        "powerReserveConsumptionHours": 0.200891000012,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 726.8088,
+        "authoritativeMechanismElapsedSeconds": 726.8088,
+        "watchTimeProgressionSeconds": 726.808800001,
+        "trainTimeProgressionSeconds": 726.808800001,
+        "studyBeat": 183634.044000005,
+        "powerReserveConsumptionHours": 0.201891333346,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 730.41,
+        "authoritativeMechanismElapsedSeconds": 730.41,
+        "watchTimeProgressionSeconds": 730.410000001,
+        "trainTimeProgressionSeconds": 730.410000001,
+        "studyBeat": 183652.050000005,
+        "powerReserveConsumptionHours": 0.202891666679,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 734.0112,
+        "authoritativeMechanismElapsedSeconds": 734.0112,
+        "watchTimeProgressionSeconds": 734.011200001,
+        "trainTimeProgressionSeconds": 734.011200001,
+        "studyBeat": 183670.056000005,
+        "powerReserveConsumptionHours": 0.203892000012,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 737.6124,
+        "authoritativeMechanismElapsedSeconds": 737.6124,
+        "watchTimeProgressionSeconds": 737.612400001,
+        "trainTimeProgressionSeconds": 737.612400001,
+        "studyBeat": 183688.062000005,
+        "powerReserveConsumptionHours": 0.204892333346,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 741.2136,
+        "authoritativeMechanismElapsedSeconds": 741.2136,
+        "watchTimeProgressionSeconds": 741.213600001,
+        "trainTimeProgressionSeconds": 741.213600001,
+        "studyBeat": 183706.068000005,
+        "powerReserveConsumptionHours": 0.205892666679,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 744.8148,
+        "authoritativeMechanismElapsedSeconds": 744.8148,
+        "watchTimeProgressionSeconds": 744.814800001,
+        "trainTimeProgressionSeconds": 744.814800001,
+        "studyBeat": 183724.074000005,
+        "powerReserveConsumptionHours": 0.206893000012,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 748.416,
+        "authoritativeMechanismElapsedSeconds": 748.416,
+        "watchTimeProgressionSeconds": 748.416000001,
+        "trainTimeProgressionSeconds": 748.416000001,
+        "studyBeat": 183742.080000005,
+        "powerReserveConsumptionHours": 0.207893333346,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 752.0172,
+        "authoritativeMechanismElapsedSeconds": 752.0172,
+        "watchTimeProgressionSeconds": 752.017200001,
+        "trainTimeProgressionSeconds": 752.017200001,
+        "studyBeat": 183760.086000005,
+        "powerReserveConsumptionHours": 0.208893666679,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 755.6184,
+        "authoritativeMechanismElapsedSeconds": 755.6184,
+        "watchTimeProgressionSeconds": 755.618400001,
+        "trainTimeProgressionSeconds": 755.618400001,
+        "studyBeat": 183778.092000005,
+        "powerReserveConsumptionHours": 0.209894000013,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 759.2196,
+        "authoritativeMechanismElapsedSeconds": 759.2196,
+        "watchTimeProgressionSeconds": 759.219600001,
+        "trainTimeProgressionSeconds": 759.219600001,
+        "studyBeat": 183796.098000005,
+        "powerReserveConsumptionHours": 0.210894333346,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 762.8208,
+        "authoritativeMechanismElapsedSeconds": 762.8208,
+        "watchTimeProgressionSeconds": 762.820800001,
+        "trainTimeProgressionSeconds": 762.820800001,
+        "studyBeat": 183814.104000005,
+        "powerReserveConsumptionHours": 0.211894666679,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 766.422,
+        "authoritativeMechanismElapsedSeconds": 766.422,
+        "watchTimeProgressionSeconds": 766.422000001,
+        "trainTimeProgressionSeconds": 766.422000001,
+        "studyBeat": 183832.110000005,
+        "powerReserveConsumptionHours": 0.212895000013,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 770.0232,
+        "authoritativeMechanismElapsedSeconds": 770.0232,
+        "watchTimeProgressionSeconds": 770.023200001,
+        "trainTimeProgressionSeconds": 770.023200001,
+        "studyBeat": 183850.116000005,
+        "powerReserveConsumptionHours": 0.213895333346,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 773.6244,
+        "authoritativeMechanismElapsedSeconds": 773.6244,
+        "watchTimeProgressionSeconds": 773.624400001,
+        "trainTimeProgressionSeconds": 773.624400001,
+        "studyBeat": 183868.122000005,
+        "powerReserveConsumptionHours": 0.21489566668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 777.2256,
+        "authoritativeMechanismElapsedSeconds": 777.2256,
+        "watchTimeProgressionSeconds": 777.225600001,
+        "trainTimeProgressionSeconds": 777.225600001,
+        "studyBeat": 183886.128000005,
+        "powerReserveConsumptionHours": 0.215896000013,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 780.8268,
+        "authoritativeMechanismElapsedSeconds": 780.8268,
+        "watchTimeProgressionSeconds": 780.826800001,
+        "trainTimeProgressionSeconds": 780.826800001,
+        "studyBeat": 183904.134000005,
+        "powerReserveConsumptionHours": 0.216896333346,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 784.428,
+        "authoritativeMechanismElapsedSeconds": 784.428,
+        "watchTimeProgressionSeconds": 784.428000001,
+        "trainTimeProgressionSeconds": 784.428000001,
+        "studyBeat": 183922.140000005,
+        "powerReserveConsumptionHours": 0.21789666668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 788.0292,
+        "authoritativeMechanismElapsedSeconds": 788.0292,
+        "watchTimeProgressionSeconds": 788.029200001,
+        "trainTimeProgressionSeconds": 788.029200001,
+        "studyBeat": 183940.146000005,
+        "powerReserveConsumptionHours": 0.218897000013,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 791.6304,
+        "authoritativeMechanismElapsedSeconds": 791.6304,
+        "watchTimeProgressionSeconds": 791.630400001,
+        "trainTimeProgressionSeconds": 791.630400001,
+        "studyBeat": 183958.152000005,
+        "powerReserveConsumptionHours": 0.219897333347,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 795.2316,
+        "authoritativeMechanismElapsedSeconds": 795.2316,
+        "watchTimeProgressionSeconds": 795.231600001,
+        "trainTimeProgressionSeconds": 795.231600001,
+        "studyBeat": 183976.158000005,
+        "powerReserveConsumptionHours": 0.22089766668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 798.8328,
+        "authoritativeMechanismElapsedSeconds": 798.8328,
+        "watchTimeProgressionSeconds": 798.832800001,
+        "trainTimeProgressionSeconds": 798.832800001,
+        "studyBeat": 183994.164000005,
+        "powerReserveConsumptionHours": 0.221898000013,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 802.434,
+        "authoritativeMechanismElapsedSeconds": 802.434,
+        "watchTimeProgressionSeconds": 802.434000001,
+        "trainTimeProgressionSeconds": 802.434000001,
+        "studyBeat": 184012.170000005,
+        "powerReserveConsumptionHours": 0.222898333347,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 806.0352,
+        "authoritativeMechanismElapsedSeconds": 806.0352,
+        "watchTimeProgressionSeconds": 806.035200001,
+        "trainTimeProgressionSeconds": 806.035200001,
+        "studyBeat": 184030.176000005,
+        "powerReserveConsumptionHours": 0.22389866668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 809.6364,
+        "authoritativeMechanismElapsedSeconds": 809.6364,
+        "watchTimeProgressionSeconds": 809.636400001,
+        "trainTimeProgressionSeconds": 809.636400001,
+        "studyBeat": 184048.182000006,
+        "powerReserveConsumptionHours": 0.224899000014,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 813.2376,
+        "authoritativeMechanismElapsedSeconds": 813.2376,
+        "watchTimeProgressionSeconds": 813.237600001,
+        "trainTimeProgressionSeconds": 813.237600001,
+        "studyBeat": 184066.188000006,
+        "powerReserveConsumptionHours": 0.225899333347,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 816.8388,
+        "authoritativeMechanismElapsedSeconds": 816.8388,
+        "watchTimeProgressionSeconds": 816.838800001,
+        "trainTimeProgressionSeconds": 816.838800001,
+        "studyBeat": 184084.194000006,
+        "powerReserveConsumptionHours": 0.22689966668,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 820.44,
+        "authoritativeMechanismElapsedSeconds": 820.44,
+        "watchTimeProgressionSeconds": 820.440000001,
+        "trainTimeProgressionSeconds": 820.440000001,
+        "studyBeat": 184102.200000006,
+        "powerReserveConsumptionHours": 0.227900000014,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 824.0412,
+        "authoritativeMechanismElapsedSeconds": 824.0412,
+        "watchTimeProgressionSeconds": 824.041200001,
+        "trainTimeProgressionSeconds": 824.041200001,
+        "studyBeat": 184120.206000006,
+        "powerReserveConsumptionHours": 0.228900333347,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 827.6424,
+        "authoritativeMechanismElapsedSeconds": 827.6424,
+        "watchTimeProgressionSeconds": 827.642400001,
+        "trainTimeProgressionSeconds": 827.642400001,
+        "studyBeat": 184138.212000006,
+        "powerReserveConsumptionHours": 0.229900666681,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 831.2436,
+        "authoritativeMechanismElapsedSeconds": 831.2436,
+        "watchTimeProgressionSeconds": 831.243600001,
+        "trainTimeProgressionSeconds": 831.243600001,
+        "studyBeat": 184156.218000006,
+        "powerReserveConsumptionHours": 0.230901000014,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 834.8448,
+        "authoritativeMechanismElapsedSeconds": 834.8448,
+        "watchTimeProgressionSeconds": 834.844800001,
+        "trainTimeProgressionSeconds": 834.844800001,
+        "studyBeat": 184174.224000006,
+        "powerReserveConsumptionHours": 0.231901333347,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 838.446,
+        "authoritativeMechanismElapsedSeconds": 838.446,
+        "watchTimeProgressionSeconds": 838.446000001,
+        "trainTimeProgressionSeconds": 838.446000001,
+        "studyBeat": 184192.230000006,
+        "powerReserveConsumptionHours": 0.232901666681,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 842.0472,
+        "authoritativeMechanismElapsedSeconds": 842.0472,
+        "watchTimeProgressionSeconds": 842.047200001,
+        "trainTimeProgressionSeconds": 842.047200001,
+        "studyBeat": 184210.236000006,
+        "powerReserveConsumptionHours": 0.233902000014,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 845.6484,
+        "authoritativeMechanismElapsedSeconds": 845.6484,
+        "watchTimeProgressionSeconds": 845.648400001,
+        "trainTimeProgressionSeconds": 845.648400001,
+        "studyBeat": 184228.242000006,
+        "powerReserveConsumptionHours": 0.234902333348,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 849.2496,
+        "authoritativeMechanismElapsedSeconds": 849.2496,
+        "watchTimeProgressionSeconds": 849.249600001,
+        "trainTimeProgressionSeconds": 849.249600001,
+        "studyBeat": 184246.248000006,
+        "powerReserveConsumptionHours": 0.235902666681,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 852.8508,
+        "authoritativeMechanismElapsedSeconds": 852.8508,
+        "watchTimeProgressionSeconds": 852.850800001,
+        "trainTimeProgressionSeconds": 852.850800001,
+        "studyBeat": 184264.254000006,
+        "powerReserveConsumptionHours": 0.236903000014,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 856.452,
+        "authoritativeMechanismElapsedSeconds": 856.452,
+        "watchTimeProgressionSeconds": 856.452000001,
+        "trainTimeProgressionSeconds": 856.452000001,
+        "studyBeat": 184282.260000006,
+        "powerReserveConsumptionHours": 0.237903333348,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 860.0532,
+        "authoritativeMechanismElapsedSeconds": 860.0532,
+        "watchTimeProgressionSeconds": 860.053200001,
+        "trainTimeProgressionSeconds": 860.053200001,
+        "studyBeat": 184300.266000006,
+        "powerReserveConsumptionHours": 0.238903666681,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 863.6544,
+        "authoritativeMechanismElapsedSeconds": 863.6544,
+        "watchTimeProgressionSeconds": 863.654400001,
+        "trainTimeProgressionSeconds": 863.654400001,
+        "studyBeat": 184318.272000006,
+        "powerReserveConsumptionHours": 0.239904000014,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 867.2556,
+        "authoritativeMechanismElapsedSeconds": 867.2556,
+        "watchTimeProgressionSeconds": 867.255600001,
+        "trainTimeProgressionSeconds": 867.255600001,
+        "studyBeat": 184336.278000006,
+        "powerReserveConsumptionHours": 0.240904333348,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 870.8568,
+        "authoritativeMechanismElapsedSeconds": 870.8568,
+        "watchTimeProgressionSeconds": 870.856800001,
+        "trainTimeProgressionSeconds": 870.856800001,
+        "studyBeat": 184354.284000006,
+        "powerReserveConsumptionHours": 0.241904666681,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 874.458,
+        "authoritativeMechanismElapsedSeconds": 874.458,
+        "watchTimeProgressionSeconds": 874.458000001,
+        "trainTimeProgressionSeconds": 874.458000001,
+        "studyBeat": 184372.290000006,
+        "powerReserveConsumptionHours": 0.242905000015,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 878.0592,
+        "authoritativeMechanismElapsedSeconds": 878.0592,
+        "watchTimeProgressionSeconds": 878.059200001,
+        "trainTimeProgressionSeconds": 878.059200001,
+        "studyBeat": 184390.296000006,
+        "powerReserveConsumptionHours": 0.243905333348,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 881.6604,
+        "authoritativeMechanismElapsedSeconds": 881.6604,
+        "watchTimeProgressionSeconds": 881.660400001,
+        "trainTimeProgressionSeconds": 881.660400001,
+        "studyBeat": 184408.302000006,
+        "powerReserveConsumptionHours": 0.244905666681,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 885.2616,
+        "authoritativeMechanismElapsedSeconds": 885.2616,
+        "watchTimeProgressionSeconds": 885.261600001,
+        "trainTimeProgressionSeconds": 885.261600001,
+        "studyBeat": 184426.308000006,
+        "powerReserveConsumptionHours": 0.245906000015,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 888.8628,
+        "authoritativeMechanismElapsedSeconds": 888.8628,
+        "watchTimeProgressionSeconds": 888.862800001,
+        "trainTimeProgressionSeconds": 888.862800001,
+        "studyBeat": 184444.314000006,
+        "powerReserveConsumptionHours": 0.246906333348,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 892.464,
+        "authoritativeMechanismElapsedSeconds": 892.464,
+        "watchTimeProgressionSeconds": 892.464000001,
+        "trainTimeProgressionSeconds": 892.464000001,
+        "studyBeat": 184462.320000006,
+        "powerReserveConsumptionHours": 0.247906666682,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 896.0652,
+        "authoritativeMechanismElapsedSeconds": 896.0652,
+        "watchTimeProgressionSeconds": 896.065200001,
+        "trainTimeProgressionSeconds": 896.065200001,
+        "studyBeat": 184480.326000006,
+        "powerReserveConsumptionHours": 0.248907000015,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      },
+      {
+        "wallElapsedSeconds": 899.6664,
+        "authoritativeMechanismElapsedSeconds": 899.6664,
+        "watchTimeProgressionSeconds": 899.666400001,
+        "trainTimeProgressionSeconds": 899.666400001,
+        "studyBeat": 184498.332000006,
+        "powerReserveConsumptionHours": 0.249907333348,
+        "rawFrameDeltaSeconds": 0.0167,
+        "renderIntegrationDeltaSeconds": 0.0167,
+        "authoritativeMechanismDeltaSeconds": 0.0167
+      }
+    ]
+  }
+}
