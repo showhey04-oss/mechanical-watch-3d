@@ -84,7 +84,7 @@ test("time-input screenshots are decodable PNGs with the recorded dimensions", a
 });
 
 test("time-input evidence manifest is closed-world and hash-exact", async () => {
-  const manifestPath = join(evidenceRoot, "reports/evidence-manifest.json");
+  const manifestPath = join(evidenceRoot, "evidence-manifest.json");
   const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   const actualPaths = (await walk(evidenceRoot))
     .filter((path) => path !== manifestPath)

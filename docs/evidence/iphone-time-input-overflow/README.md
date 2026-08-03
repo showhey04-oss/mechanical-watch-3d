@@ -18,7 +18,7 @@ This directory contains the before/after layout measurements, cross-browser matr
 - `reports/browser-matrix.json`: Installed Chrome, Playwright WebKit, Native Safari, UI/HUD/time-function, baseline A/B, Node, and console results.
 - `reports/decision-summary.json`: bounded cause classification and merge/Human-review decision.
 - `reports/image-inventory.json`: PNG byte size, SHA-256, pixel size, and CSS viewport.
-- `reports/evidence-manifest.json`: closed-world file inventory and SHA-256 values.
+- `evidence-manifest.json`: closed-world file inventory and SHA-256 values.
 
 ## Images
 
