@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-03T02:09:05+09:00",
+  "sourceHead": "d16037a75d85d705434d8b73ef5293511052f65e",
+  "appVersion": "v3.15.0",
+  "status": "PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION",
+  "newPerformanceRunForEvidenceClosure": false,
+  "thresholds": {
+    "maximumAverageFpsRegressionPercent": 5,
+    "maximumP95RegressionMs": 2,
+    "changed": false
+  },
+  "commitComparisons": [
+    {
+      "pair": "A_TO_B",
+      "base": "ece9d99c4e0ff95afd155475ef963e2984c5d05f",
+      "candidate": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+      "scenarios": {
+        "idle": { "averageFpsPercent": 0.015296, "p95DeltaMs": -1, "passed": true },
+        "pointer": { "averageFpsPercent": -1.007404, "p95DeltaMs": -2, "passed": true },
+        "wheel": { "averageFpsPercent": 0.30954, "p95DeltaMs": -1, "passed": true }
+      }
+    },
+    {
+      "pair": "B_TO_C",
+      "base": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+      "candidate": "0e260fdfc7495293319682ae7b998858641cdd26",
+      "scenarios": {
+        "idle": { "averageFpsPercent": -1.474276, "p95DeltaMs": 1, "passed": true },
+        "pointer": { "averageFpsPercent": 1.05293, "p95DeltaMs": 1, "passed": true },
+        "wheel": { "averageFpsPercent": -0.060651, "p95DeltaMs": 1, "passed": true }
+      }
+    },
+    {
+      "pair": "C_TO_D",
+      "base": "0e260fdfc7495293319682ae7b998858641cdd26",
+      "candidate": "d16037a75d85d705434d8b73ef5293511052f65e",
+      "productTreeIdentical": true,
+      "scenarios": {
+        "idle": { "averageFpsPercent": 1.961712, "p95DeltaMs": -1, "passed": true },
+        "pointer": { "averageFpsPercent": -0.383345, "p95DeltaMs": 2, "passed": true },
+        "wheel": { "averageFpsPercent": 1.032329, "p95DeltaMs": 1, "passed": true }
+      }
+    },
+    {
+      "pair": "A_TO_D",
+      "base": "ece9d99c4e0ff95afd155475ef963e2984c5d05f",
+      "candidate": "d16037a75d85d705434d8b73ef5293511052f65e",
+      "scenarios": {
+        "idle": { "averageFpsPercent": -1.101807, "p95DeltaMs": -3, "passed": true },
+        "pointer": { "averageFpsPercent": 1.941779, "p95DeltaMs": 0, "passed": true },
+        "wheel": { "averageFpsPercent": -1.903301, "p95DeltaMs": 0, "passed": true }
+      }
+    }
+  ],
+  "allTwelveCommitStageCellsWithinThreshold": true,
+  "activeAudioComparison": {
+    "pair": "M3_TO_M5",
+    "idle": { "averageFpsPercent": -0.620896, "p95DeltaMs": 0 },
+    "pointer": { "averageFpsPercent": -0.873838, "p95DeltaMs": -2 },
+    "wheel": {
+      "averageFpsPercent": 4.071185,
+      "aggregateP95DeltaMs": 4,
+      "firstHalfP95DeltaMs": 1.5,
+      "secondHalfP95DeltaMs": 1,
+      "classification": "ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION"
+    },
+    "stableActiveAudioOverheadProven": false,
+    "productRejection": false
+  },
+  "M4": {
+    "status": "NOT_APPLICABLE_PRODUCT_CONTRACT",
+    "reason": "DISABLED_PROTECTED_CONTEXT_MISMATCH",
+    "syntheticProductStateCreated": false
+  },
+  "interactionQualification": {
+    "stopThenJumpZero": true,
+    "wheelZoomMonotonic": true,
+    "transformInvariant": true,
+    "pointerReversal": "NOT_ASSESSABLE_FOR_FIXED_TEMP_POINTER_WORKLOAD_BECAUSE_DIRECTION_ALTERNATES_BETWEEN_DRAGS"
+  },
+  "cleanProcessFinalRun": {
+    "status": "NOT_TESTED",
+    "classification": "ENDPOINT_SECURITY_LOAD_BLOCKED_CLEAN_PERFORMANCE_MEASUREMENT"
+  },
+  "finalDecision": {
+    "productRegressionReproduced": false,
+    "mobilePointerProductRegressionReproduced": false,
+    "productFixRequired": false,
+    "absolutePerformancePassClaimed": false,
+    "cleanEnvironmentPerformancePassClaimed": false
+  }
+}

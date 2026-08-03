@@ -1,0 +1,45 @@
+{
+  "sourceBaseCommit": "ece9d99c4e0ff95afd155475ef963e2984c5d05f",
+  "sourceAuditCommit": "fac59b714d66215ee0c60b688c0201fea1d9fde4",
+  "sourceBranch": "feature/issue2-final-polish-phase3b4b-ios-multitouch-stability",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and in-app Browser",
+  "schemaVersion": 1,
+  "status": "PASSED_WITH_PHYSICAL_ROOT_CAUSE_UNCONFIRMED",
+  "inputApi": {
+    "pointerEvents": true,
+    "touchEvents": false,
+    "mouseEvents": false
+  },
+  "canvasTouchAction": "none",
+  "arcballVersion": "three@0.160.0",
+  "currentAppInventory": "Set activePointers; pointerdown capture; pointerup/cancel/leave/lostcapture delete only; no blur, visibility, pagehide, or pageshow reset before candidate",
+  "arcballInventory": "private touchStart/touchCurrent/downEvents/input; dynamic window pointermove/pointerup listeners; native pointercancel clears only touch arrays/input",
+  "observedGaps": [
+    "lost pointer capture lacks delayed stale-state verification",
+    "pointercancel does not remove dynamic window listeners or click history",
+    "application inventory has no lifecycle cleanup",
+    "two-to-one keeps Arcball ONE_FINGER_SWITCHED baseline until movement threshold",
+    "pointer ID reuse has no stale-state guard"
+  ],
+  "candidateChanges": [
+    "event-driven cleanup only",
+    "actual capture checked before release",
+    "normal release distinguished from lost capture in a microtask",
+    "Arcball touch, click, and listener state cleared",
+    "remaining one-finger gesture reinitialized after two-to-one",
+    "blur/visibility/pagehide/pageshow reset",
+    "pointer ID reuse drops stale state"
+  ],
+  "perFrameReset": false,
+  "timerReset": false,
+  "cameraSensitivityChanged": false,
+  "dampingChanged": false,
+  "zoomSpeedChanged": false,
+  "rotationSpeedChanged": false,
+  "targetChanged": false,
+  "maxDistanceChanged": false,
+  "fovChanged": false,
+  "rootCause": "LIKELY_STALE_ARCBALL_AND_APPLICATION_POINTER_LIFECYCLE_STATE",
+  "rootCausePhysicalConfirmation": "PENDING"
+}

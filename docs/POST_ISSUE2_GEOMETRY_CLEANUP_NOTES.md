@@ -62,12 +62,25 @@
 - Phase 2C
 - A.7
 
+## 3. 緩急目盛とテンプ受の干渉観察
+
+- 状態: `REGULATOR_SCALE_BALANCE_BRIDGE_INTERFERENCE_HUMAN_OBSERVED`
+- 工程分類: `DEFERRED_POST_ISSUE2_GEOMETRY_CLEANUP`
+- 観察元: R1.1物理iPhone試験中のHuman観察
+- 現工程の判断: 原因Object、実Geometry交差量、screen-space overlapを未診断
+
+Phase 3B.4c-R2はtimebase安定化だけを扱うため、Geometry、位置、寸法、
+意匠を変更しない。Issue #2の描画候補が確定した後の独立監査で、
+緩急目盛、テンプ受、周辺部品のworld bounds、最小clearance、view／opacity別の
+見え方を計測する。
+
 ## 想定順序
 
 1. Issue #2最終候補決定
 2. PC／物理iPhone描画確認
 3. 時分針中央干渉診断
 4. ミニッツホイール軸表出診断
-5. 局所Geometry修正
-6. 時計機能、選択、表示、性能回帰
-7. 本体完成前の最終統合確認
+5. 緩急目盛／テンプ受干渉診断
+6. 局所Geometry修正
+7. 時計機能、選択、表示、性能回帰
+8. 本体完成前の最終統合確認
