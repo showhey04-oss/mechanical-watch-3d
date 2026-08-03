@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Final Stabilization Phase 3B.4c-R2.4 harness</title>
+  <style>
+    html,body{margin:0;background:#0b0e13;color:#eef2f6;font:12px/1.45 ui-monospace,monospace}
+    #controls{position:fixed;z-index:3;top:8px;left:8px;display:flex;gap:8px}
+    button{min-width:120px;min-height:44px;border:1px solid #738095;border-radius:8px;background:#202733;color:#fff}
+    iframe{display:block;border:0;background:#0d1015}
+    output{display:none}
+  </style>
+</head>
+<body data-audit-status="queued" data-audit-stage="loading">
+  <div id="controls">
+    <button id="phase3b4cR24Start" type="button">Start R2.4</button>
+    <button id="phase3b4cR24Recover" type="button" hidden>Recover once</button>
+  </div>
+  <iframe id="auditApp" title="R2.4 application"></iframe>
+  <p id="phase3b4cR24Status">queued</p>
+  <pre id="phase3b4cR24Summary"></pre>
+  <output id="phase3b4cR24AuditResult"></output>
+  <script type="module" src="./final-stabilization-phase3b4c-r2-4-harness.js"></script>
+</body>
+</html>

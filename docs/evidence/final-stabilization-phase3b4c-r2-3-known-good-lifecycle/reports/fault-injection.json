@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.3",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "48ec7b73c207bf5a784663f70199ec8f4f1465d8",
+  "sourceImplementationCommit": "ebf69a258ad93bb3d4f326c07aea9ee4cca2d515",
+  "knownGoodCommit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T09:27:15.328Z",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "PASSED",
+  "tests": [
+    {
+      "fault": "resume Promise reject",
+      "result": "resume-required, gain 0, one bounded fallback"
+    },
+    {
+      "fault": "resume resolves while Context remains suspended",
+      "result": "not reported running; UI resume-required"
+    },
+    {
+      "fault": "Context already running",
+      "result": "no redundant resume attempt"
+    },
+    {
+      "fault": "Context interrupted",
+      "result": "same Context resumes; generation remains 1"
+    },
+    {
+      "fault": "source reservation 0",
+      "result": "regular scheduler re-anchor derives a fresh future beat"
+    },
+    {
+      "fault": "scheduler pending remains",
+      "result": "hidden re-anchor cancels pending before suspend"
+    },
+    {
+      "fault": "gain 0",
+      "result": "gain returns to 0.36 only after running"
+    },
+    {
+      "fault": "duplicate visibility",
+      "result": "ignored without extra resume/re-anchor/reset"
+    },
+    {
+      "fault": "stale asynchronous completion",
+      "result": "cannot restore gain or re-anchor after newer hidden"
+    },
+    {
+      "fault": "Context close failure",
+      "result": "not reachable; R2.3 never closes or rebuilds Context"
+    },
+    {
+      "fault": "source stop exception",
+      "result": "caught; source and record inventories cleared; Context suspended"
+    }
+  ],
+  "contracts": {
+    "infiniteRetry": false,
+    "multipleContexts": false,
+    "secondTapRequiredByFallback": false,
+    "greenUiWhileKnownSuspended": false,
+    "unnecessaryRecoveryMachineStarted": false
+  }
+}

@@ -1,0 +1,1373 @@
+{
+  "sourceBaseCommit": "191ff2682398356da59e747e608c82120dacebd9",
+  "sourceAuditCommit": "67959f5fc0d16babbec0520812e936f3d6010196",
+  "sourcePr5Head": "79feee0f81bc719de0118042b356a2b63007090c",
+  "sourceBranch": "feature/issue2-final-polish-phase3a-final-exterior",
+  "captureMode": "same-origin unsandboxed iframe harness; actual Three.js offscreen WebGL PNG",
+  "capturedAt": "2026-07-27T17:15:11.014293Z",
+  "appVersion": "v3.15.0",
+  "status": "ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED",
+  "pairs": [
+    [
+      100,
+      99
+    ],
+    [
+      56,
+      55
+    ],
+    [
+      55,
+      54
+    ],
+    [
+      54,
+      53
+    ]
+  ],
+  "materialSwitchesObservedInCurrentV315": {
+    "100to99": "transparent false-to-true transition remains in current structural-opacity implementation",
+    "55to54": "depthWrite true-to-false transition remains in current structural-opacity implementation",
+    "candidateModifiedTransparencyTechnique": false
+  },
+  "candidates": {
+    "issue2-baseline": {
+      "1280x720": [
+        {
+          "from": 100,
+          "to": 99,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122052,
+              "meanAbsoluteLuminanceDifference": 0.0015485111071269172,
+              "p50AbsoluteLuminanceDifference": 0.00028313725490192176,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.02745098039215682
+            },
+            "metal": {
+              "sampleCount": 121957,
+              "meanAbsoluteLuminanceDifference": 0.0015481620185320507,
+              "p50AbsoluteLuminanceDifference": 0.00028313725490192176,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.02745098039215682
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.002049550042239053,
+              "p50AbsoluteLuminanceDifference": 0.001116862745097924,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.02745098039215682
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.0016064472397391122,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019495,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.02745098039215682
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.0017162594240224293,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901961133,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.02745098039215682
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.001447006971917961,
+              "p50AbsoluteLuminanceDifference": 0.00028313725490192176,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.022428235294117693
+            },
+            "selectedHighlight": {
+              "sampleCount": 497,
+              "meanAbsoluteLuminanceDifference": 0.001742442103602009,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901961133,
+              "p90AbsoluteLuminanceDifference": 0.0036384313725491,
+              "maxAbsoluteLuminanceDifference": 0.022428235294117693
+            }
+          }
+        },
+        {
+          "from": 56,
+          "to": 55,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122038,
+              "meanAbsoluteLuminanceDifference": 0.0021443949730861524,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.01064784313725492
+            },
+            "metal": {
+              "sampleCount": 121871,
+              "meanAbsoluteLuminanceDifference": 0.002144800836500034,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.01064784313725492
+            },
+            "dial": {
+              "sampleCount": 52906,
+              "meanAbsoluteLuminanceDifference": 0.0023925547715778163,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.01064784313725492
+            },
+            "openHeart": {
+              "sampleCount": 26431,
+              "meanAbsoluteLuminanceDifference": 0.0019952965509157455,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.01064784313725492
+            },
+            "mechanism": {
+              "sampleCount": 85406,
+              "meanAbsoluteLuminanceDifference": 0.00222138776124924,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.01064784313725492
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.002150474850966678,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902155
+            },
+            "selectedHighlight": {
+              "sampleCount": 205,
+              "meanAbsoluteLuminanceDifference": 0.0023402314681970496,
+              "p50AbsoluteLuminanceDifference": 0.0030878431372549087,
+              "p90AbsoluteLuminanceDifference": 0.004204705882352944,
+              "maxAbsoluteLuminanceDifference": 0.007009411764705931
+            }
+          }
+        },
+        {
+          "from": 55,
+          "to": 54,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122038,
+              "meanAbsoluteLuminanceDifference": 0.003600144339484114,
+              "p50AbsoluteLuminanceDifference": 0.002804705882352987,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.2899443137254901
+            },
+            "metal": {
+              "sampleCount": 121871,
+              "meanAbsoluteLuminanceDifference": 0.0036025015200096787,
+              "p50AbsoluteLuminanceDifference": 0.002804705882352987,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.2899443137254901
+            },
+            "dial": {
+              "sampleCount": 52906,
+              "meanAbsoluteLuminanceDifference": 0.00302071314050892,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.09641882352941178
+            },
+            "openHeart": {
+              "sampleCount": 26431,
+              "meanAbsoluteLuminanceDifference": 0.0019500768037531738,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529036,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.08437098039215696
+            },
+            "mechanism": {
+              "sampleCount": 85406,
+              "meanAbsoluteLuminanceDifference": 0.0033666578414613007,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.2899443137254901
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.004224740896215454,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.133632156862745
+            },
+            "selectedHighlight": {
+              "sampleCount": 203,
+              "meanAbsoluteLuminanceDifference": 0.002279010914710712,
+              "p50AbsoluteLuminanceDifference": 0.0030878431372549087,
+              "p90AbsoluteLuminanceDifference": 0.003921568627450994,
+              "maxAbsoluteLuminanceDifference": 0.006726274509803898
+            }
+          }
+        },
+        {
+          "from": 54,
+          "to": 53,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122038,
+              "meanAbsoluteLuminanceDifference": 0.001911965864698525,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.003921568627450911,
+              "maxAbsoluteLuminanceDifference": 0.008110588235294092
+            },
+            "metal": {
+              "sampleCount": 121870,
+              "meanAbsoluteLuminanceDifference": 0.0019120264762998837,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.003921568627450911,
+              "maxAbsoluteLuminanceDifference": 0.008110588235294092
+            },
+            "dial": {
+              "sampleCount": 52906,
+              "meanAbsoluteLuminanceDifference": 0.001850216966384324,
+              "p50AbsoluteLuminanceDifference": 0.0011168627450980073,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.008110588235294092
+            },
+            "openHeart": {
+              "sampleCount": 26431,
+              "meanAbsoluteLuminanceDifference": 0.0013269899798290857,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960023,
+              "p90AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "maxAbsoluteLuminanceDifference": 0.008110588235294092
+            },
+            "mechanism": {
+              "sampleCount": 85406,
+              "meanAbsoluteLuminanceDifference": 0.001864472395519807,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.008110588235294092
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.0021071867375278687,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902155
+            },
+            "selectedHighlight": {
+              "sampleCount": 205,
+              "meanAbsoluteLuminanceDifference": 0.0019814825442372058,
+              "p50AbsoluteLuminanceDifference": 0.0011168627450980628,
+              "p90AbsoluteLuminanceDifference": 0.003921568627450994,
+              "maxAbsoluteLuminanceDifference": 0.004204705882352999
+            }
+          }
+        }
+      ],
+      "390x844": [
+        {
+          "from": 100,
+          "to": 99,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 42651,
+              "meanAbsoluteLuminanceDifference": 0.0006330140892726796,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "maxAbsoluteLuminanceDifference": 0.053800784313725536
+            },
+            "metal": {
+              "sampleCount": 42455,
+              "meanAbsoluteLuminanceDifference": 0.000630075064485821,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "maxAbsoluteLuminanceDifference": 0.053800784313725536
+            },
+            "dial": {
+              "sampleCount": 18080,
+              "meanAbsoluteLuminanceDifference": 0.0005862976748221575,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "maxAbsoluteLuminanceDifference": 0.008126274509803924
+            },
+            "openHeart": {
+              "sampleCount": 9422,
+              "meanAbsoluteLuminanceDifference": 0.0005022366509754187,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0011168627450980906,
+              "maxAbsoluteLuminanceDifference": 0.005589019607843165
+            },
+            "mechanism": {
+              "sampleCount": 26726,
+              "meanAbsoluteLuminanceDifference": 0.000662663778974148,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "maxAbsoluteLuminanceDifference": 0.053800784313725536
+            },
+            "strap": {
+              "sampleCount": 7039,
+              "meanAbsoluteLuminanceDifference": 0.00031196309636228654,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0008337254901960856,
+              "maxAbsoluteLuminanceDifference": 0.003638431372549017
+            },
+            "selectedHighlight": {
+              "sampleCount": 358,
+              "meanAbsoluteLuminanceDifference": 0.0013430079964946923,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019773,
+              "p90AbsoluteLuminanceDifference": 0.003087843137254964,
+              "maxAbsoluteLuminanceDifference": 0.02690039215686274
+            }
+          }
+        },
+        {
+          "from": 56,
+          "to": 55,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 35493,
+              "meanAbsoluteLuminanceDifference": 0.0010839492570476437,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529453,
+              "maxAbsoluteLuminanceDifference": 0.020158431372549024
+            },
+            "metal": {
+              "sampleCount": 35297,
+              "meanAbsoluteLuminanceDifference": 0.0010813879977579568,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529453,
+              "maxAbsoluteLuminanceDifference": 0.020158431372549024
+            },
+            "dial": {
+              "sampleCount": 17988,
+              "meanAbsoluteLuminanceDifference": 0.0011855360218359047,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.002804705882352987,
+              "maxAbsoluteLuminanceDifference": 0.005609411764705918
+            },
+            "openHeart": {
+              "sampleCount": 9422,
+              "meanAbsoluteLuminanceDifference": 0.0012935331993124092,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.002804705882352987,
+              "maxAbsoluteLuminanceDifference": 0.003921568627451022
+            },
+            "mechanism": {
+              "sampleCount": 24022,
+              "meanAbsoluteLuminanceDifference": 0.0011382450400858003,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.002804705882352987,
+              "maxAbsoluteLuminanceDifference": 0.020158431372549024
+            },
+            "strap": {
+              "sampleCount": 547,
+              "meanAbsoluteLuminanceDifference": 0.0007366426497472858,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529453,
+              "maxAbsoluteLuminanceDifference": 0.003638431372549017
+            },
+            "selectedHighlight": {
+              "sampleCount": 357,
+              "meanAbsoluteLuminanceDifference": 0.0014193837535014023,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960856,
+              "p90AbsoluteLuminanceDifference": 0.003921568627450911,
+              "maxAbsoluteLuminanceDifference": 0.005038431372549029
+            }
+          }
+        },
+        {
+          "from": 55,
+          "to": 54,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 35365,
+              "meanAbsoluteLuminanceDifference": 0.0016045488865417562,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.002804705882352959,
+              "maxAbsoluteLuminanceDifference": 0.15547843137254902
+            },
+            "metal": {
+              "sampleCount": 35170,
+              "meanAbsoluteLuminanceDifference": 0.0016048208867851998,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529453,
+              "maxAbsoluteLuminanceDifference": 0.15547843137254902
+            },
+            "dial": {
+              "sampleCount": 17988,
+              "meanAbsoluteLuminanceDifference": 0.0012799284926334389,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "maxAbsoluteLuminanceDifference": 0.07758196078431367
+            },
+            "openHeart": {
+              "sampleCount": 9422,
+              "meanAbsoluteLuminanceDifference": 0.0006543991742313586,
+              "p50AbsoluteLuminanceDifference": 1.3877787807814457e-17,
+              "p90AbsoluteLuminanceDifference": 0.0008337254901961133,
+              "maxAbsoluteLuminanceDifference": 0.06613176470588239
+            },
+            "mechanism": {
+              "sampleCount": 24018,
+              "meanAbsoluteLuminanceDifference": 0.0013955850105884695,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "maxAbsoluteLuminanceDifference": 0.15547843137254902
+            },
+            "strap": {
+              "sampleCount": 425,
+              "meanAbsoluteLuminanceDifference": 0.0008795737024221474,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529453,
+              "maxAbsoluteLuminanceDifference": 0.0030878431372549087
+            },
+            "selectedHighlight": {
+              "sampleCount": 357,
+              "meanAbsoluteLuminanceDifference": 0.0014678618113912287,
+              "p50AbsoluteLuminanceDifference": 0.0011168627450980073,
+              "p90AbsoluteLuminanceDifference": 0.003638431372549017,
+              "maxAbsoluteLuminanceDifference": 0.0039215686274510775
+            }
+          }
+        },
+        {
+          "from": 54,
+          "to": 53,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 36768,
+              "meanAbsoluteLuminanceDifference": 0.0009439603704841451,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.003087843137254853,
+              "maxAbsoluteLuminanceDifference": 0.007843137254901933
+            },
+            "metal": {
+              "sampleCount": 36471,
+              "meanAbsoluteLuminanceDifference": 0.000943257844938317,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.003087843137254853,
+              "maxAbsoluteLuminanceDifference": 0.007843137254901933
+            },
+            "dial": {
+              "sampleCount": 17988,
+              "meanAbsoluteLuminanceDifference": 0.0007726451621342418,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.003087843137254853,
+              "maxAbsoluteLuminanceDifference": 0.0058925490196078956
+            },
+            "openHeart": {
+              "sampleCount": 9422,
+              "meanAbsoluteLuminanceDifference": 0.0005704602078572952,
+              "p50AbsoluteLuminanceDifference": 1.3877787807814457e-17,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529453,
+              "maxAbsoluteLuminanceDifference": 0.0058925490196078956
+            },
+            "mechanism": {
+              "sampleCount": 25549,
+              "meanAbsoluteLuminanceDifference": 0.0009085445499190795,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.003087843137254853,
+              "maxAbsoluteLuminanceDifference": 0.007009411764705875
+            },
+            "strap": {
+              "sampleCount": 1267,
+              "meanAbsoluteLuminanceDifference": 0.001464845474101249,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960856,
+              "p90AbsoluteLuminanceDifference": 0.003638431372549017,
+              "maxAbsoluteLuminanceDifference": 0.003921568627451022
+            },
+            "selectedHighlight": {
+              "sampleCount": 476,
+              "meanAbsoluteLuminanceDifference": 0.0011915076618882925,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019773,
+              "p90AbsoluteLuminanceDifference": 0.003638431372548989,
+              "maxAbsoluteLuminanceDifference": 0.007009411764705875
+            }
+          }
+        }
+      ]
+    },
+    "issue2-d2a": {
+      "1280x720": [
+        {
+          "from": 100,
+          "to": 99,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122034,
+              "meanAbsoluteLuminanceDifference": 0.0015237567929477776,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.055185098039215674
+            },
+            "metal": {
+              "sampleCount": 122000,
+              "meanAbsoluteLuminanceDifference": 0.0015241356348441085,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.055185098039215674
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.0022056705793428552,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823530424,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.015686274509803894
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.0022535035719714316,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.007292549019607797
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.0017506242373324969,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.01932470588235294
+            },
+            "strap": {
+              "sampleCount": 48915,
+              "meanAbsoluteLuminanceDifference": 0.0011683853343034084,
+              "p50AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.055185098039215674
+            },
+            "selectedHighlight": {
+              "sampleCount": 30,
+              "meanAbsoluteLuminanceDifference": 7.401486830834377e-18,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "maxAbsoluteLuminanceDifference": 5.551115123125783e-17
+            }
+          }
+        },
+        {
+          "from": 56,
+          "to": 55,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122052,
+              "meanAbsoluteLuminanceDifference": 0.0024447737479942676,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.009814117647058862
+            },
+            "metal": {
+              "sampleCount": 122006,
+              "meanAbsoluteLuminanceDifference": 0.002445371976241608,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.009814117647058862
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.0029297537088909674,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007560000000000011
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.0030289132531817874,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007560000000000011
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.0026145542991722597,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.008676862745097935
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.002225899214732592,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "selectedHighlight": {
+              "sampleCount": 112,
+              "meanAbsoluteLuminanceDifference": 0.0012386064425770422,
+              "p50AbsoluteLuminanceDifference": 0.00028313725490192176,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.0039215686274510775
+            }
+          }
+        },
+        {
+          "from": 55,
+          "to": 54,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122052,
+              "meanAbsoluteLuminanceDifference": 0.003392507873532534,
+              "p50AbsoluteLuminanceDifference": 0.003370980392156775,
+              "p90AbsoluteLuminanceDifference": 0.004755294117646969,
+              "maxAbsoluteLuminanceDifference": 0.3490196078431373
+            },
+            "metal": {
+              "sampleCount": 122006,
+              "meanAbsoluteLuminanceDifference": 0.0033935302378250176,
+              "p50AbsoluteLuminanceDifference": 0.003370980392156886,
+              "p90AbsoluteLuminanceDifference": 0.004755294117646969,
+              "maxAbsoluteLuminanceDifference": 0.3490196078431373
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.0034227451128599653,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.004755294117646969,
+              "maxAbsoluteLuminanceDifference": 0.11370980392156865
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.003262338304805764,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.00475529411764708,
+              "maxAbsoluteLuminanceDifference": 0.11370980392156865
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.0033841327512039764,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745158,
+              "maxAbsoluteLuminanceDifference": 0.3490196078431373
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.00348792129133754,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.00475529411764708,
+              "maxAbsoluteLuminanceDifference": 0.08991294117647064
+            },
+            "selectedHighlight": {
+              "sampleCount": 112,
+              "meanAbsoluteLuminanceDifference": 0.0013685504201680864,
+              "p50AbsoluteLuminanceDifference": 0.00028313725490192176,
+              "p90AbsoluteLuminanceDifference": 0.002804705882352987,
+              "maxAbsoluteLuminanceDifference": 0.06783529411764705
+            }
+          }
+        },
+        {
+          "from": 54,
+          "to": 53,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122052,
+              "meanAbsoluteLuminanceDifference": 0.0025489583224893664,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.010647843137254975
+            },
+            "metal": {
+              "sampleCount": 122005,
+              "meanAbsoluteLuminanceDifference": 0.0025496470138237793,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.010647843137254975
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.003001658381871286,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.004204705882352888,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.0029746493313907384,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.004204705882352999,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.0026741704243392677,
+              "p50AbsoluteLuminanceDifference": 0.003087843137255075,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.010647843137254975
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.0023938148160169473,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902155
+            },
+            "selectedHighlight": {
+              "sampleCount": 112,
+              "meanAbsoluteLuminanceDifference": 0.0010941876750700484,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "maxAbsoluteLuminanceDifference": 0.0039215686274510775
+            }
+          }
+        }
+      ],
+      "390x844": [
+        {
+          "from": 100,
+          "to": 99,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 55859,
+              "meanAbsoluteLuminanceDifference": 0.0012253750111011381,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019495,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.14201019607843135
+            },
+            "metal": {
+              "sampleCount": 55630,
+              "meanAbsoluteLuminanceDifference": 0.0012289005438594713,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019495,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.14201019607843135
+            },
+            "dial": {
+              "sampleCount": 18475,
+              "meanAbsoluteLuminanceDifference": 0.0018775813844888508,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.024363137254901968
+            },
+            "openHeart": {
+              "sampleCount": 9424,
+              "meanAbsoluteLuminanceDifference": 0.0025317425679949484,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725488227,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.023529411764705896
+            },
+            "mechanism": {
+              "sampleCount": 29943,
+              "meanAbsoluteLuminanceDifference": 0.00159904270401345,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901961688,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.05406823529411764
+            },
+            "strap": {
+              "sampleCount": 19305,
+              "meanAbsoluteLuminanceDifference": 0.0006337787122100915,
+              "p50AbsoluteLuminanceDifference": 2.7755575615628914e-17,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "maxAbsoluteLuminanceDifference": 0.003921568627451022
+            },
+            "selectedHighlight": {
+              "sampleCount": 0,
+              "meanAbsoluteLuminanceDifference": 0.0,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0,
+              "maxAbsoluteLuminanceDifference": 0
+            }
+          }
+        },
+        {
+          "from": 56,
+          "to": 55,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 53632,
+              "meanAbsoluteLuminanceDifference": 0.0018793967751181636,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098049,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.02633411764705884
+            },
+            "metal": {
+              "sampleCount": 53627,
+              "meanAbsoluteLuminanceDifference": 0.0018795564569647222,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098049,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.02633411764705884
+            },
+            "dial": {
+              "sampleCount": 18298,
+              "meanAbsoluteLuminanceDifference": 0.0026458460048135535,
+              "p50AbsoluteLuminanceDifference": 0.003087843137255075,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254901933
+            },
+            "openHeart": {
+              "sampleCount": 9424,
+              "meanAbsoluteLuminanceDifference": 0.0030982625919637728,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.004204705882352999,
+              "maxAbsoluteLuminanceDifference": 0.007560000000000011
+            },
+            "mechanism": {
+              "sampleCount": 29158,
+              "meanAbsoluteLuminanceDifference": 0.0023283204017597162,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.0117647058823529
+            },
+            "strap": {
+              "sampleCount": 17249,
+              "meanAbsoluteLuminanceDifference": 0.0008609633067674318,
+              "p50AbsoluteLuminanceDifference": 2.7755575615628914e-17,
+              "p90AbsoluteLuminanceDifference": 0.0030878431372549087,
+              "maxAbsoluteLuminanceDifference": 0.003921568627451022
+            },
+            "selectedHighlight": {
+              "sampleCount": 48,
+              "meanAbsoluteLuminanceDifference": 0.0037658986928104272,
+              "p50AbsoluteLuminanceDifference": 0.003921568627450911,
+              "p90AbsoluteLuminanceDifference": 0.003921568627451022,
+              "maxAbsoluteLuminanceDifference": 0.006175686274509762
+            }
+          }
+        },
+        {
+          "from": 55,
+          "to": 54,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 53551,
+              "meanAbsoluteLuminanceDifference": 0.0069065356279390646,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098146,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.504230588235294
+            },
+            "metal": {
+              "sampleCount": 53546,
+              "meanAbsoluteLuminanceDifference": 0.0069071125944121375,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098146,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.504230588235294
+            },
+            "dial": {
+              "sampleCount": 18297,
+              "meanAbsoluteLuminanceDifference": 0.0031542976187031637,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.004204705882352944,
+              "maxAbsoluteLuminanceDifference": 0.07731450980392163
+            },
+            "openHeart": {
+              "sampleCount": 9424,
+              "meanAbsoluteLuminanceDifference": 0.003277197559838873,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725491557,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745047,
+              "maxAbsoluteLuminanceDifference": 0.07731450980392163
+            },
+            "mechanism": {
+              "sampleCount": 29138,
+              "meanAbsoluteLuminanceDifference": 0.011155383482791154,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0058925490196078956,
+              "maxAbsoluteLuminanceDifference": 0.504230588235294
+            },
+            "strap": {
+              "sampleCount": 17172,
+              "meanAbsoluteLuminanceDifference": 0.009917966594045029,
+              "p50AbsoluteLuminanceDifference": 0.00028313725490192176,
+              "p90AbsoluteLuminanceDifference": 0.003638431372549017,
+              "maxAbsoluteLuminanceDifference": 0.4061913725490196
+            },
+            "selectedHighlight": {
+              "sampleCount": 48,
+              "meanAbsoluteLuminanceDifference": 0.0030836928104575217,
+              "p50AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "p90AbsoluteLuminanceDifference": 0.004204705882352944,
+              "maxAbsoluteLuminanceDifference": 0.006726274509803953
+            }
+          }
+        },
+        {
+          "from": 54,
+          "to": 53,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 53529,
+              "meanAbsoluteLuminanceDifference": 0.002011759152726093,
+              "p50AbsoluteLuminanceDifference": 0.0016674509803922266,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.03417725490196072
+            },
+            "metal": {
+              "sampleCount": 53524,
+              "meanAbsoluteLuminanceDifference": 0.00201191592996216,
+              "p50AbsoluteLuminanceDifference": 0.0016674509803922266,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.03417725490196072
+            },
+            "dial": {
+              "sampleCount": 18297,
+              "meanAbsoluteLuminanceDifference": 0.0028251569366884457,
+              "p50AbsoluteLuminanceDifference": 0.003638431372548989,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "openHeart": {
+              "sampleCount": 9424,
+              "meanAbsoluteLuminanceDifference": 0.00334036427644064,
+              "p50AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745158,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "mechanism": {
+              "sampleCount": 29178,
+              "meanAbsoluteLuminanceDifference": 0.002522383826654261,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "strap": {
+              "sampleCount": 17142,
+              "meanAbsoluteLuminanceDifference": 0.000954101084139177,
+              "p50AbsoluteLuminanceDifference": 2.7755575615628914e-17,
+              "p90AbsoluteLuminanceDifference": 0.003638431372548989,
+              "maxAbsoluteLuminanceDifference": 0.006726274509803898
+            },
+            "selectedHighlight": {
+              "sampleCount": 48,
+              "meanAbsoluteLuminanceDifference": 0.00242279411764706,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.004204705882352888
+            }
+          }
+        }
+      ]
+    },
+    "issue2-d2c3": {
+      "1280x720": [
+        {
+          "from": 100,
+          "to": 99,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122052,
+              "meanAbsoluteLuminanceDifference": 0.0015853412528122194,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901961133,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.050980392156862675
+            },
+            "metal": {
+              "sampleCount": 122020,
+              "meanAbsoluteLuminanceDifference": 0.0015857043750462135,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901961133,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.050980392156862675
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.0022586979384346464,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.011764705882352955
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.002200063053544363,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.008126274509803855
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.0018382788711832339,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098146,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.01568627450980395
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.0012252222106017058,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019773,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.050980392156862675
+            },
+            "selectedHighlight": {
+              "sampleCount": 30,
+              "meanAbsoluteLuminanceDifference": 7.401486830834377e-18,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 5.551115123125783e-17,
+              "maxAbsoluteLuminanceDifference": 5.551115123125783e-17
+            }
+          }
+        },
+        {
+          "from": 56,
+          "to": 55,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122052,
+              "meanAbsoluteLuminanceDifference": 0.0024390579328772122,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.008393725490196013
+            },
+            "metal": {
+              "sampleCount": 122008,
+              "meanAbsoluteLuminanceDifference": 0.0024396829780367994,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.008393725490196013
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.0028792112548723233,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274511885,
+              "maxAbsoluteLuminanceDifference": 0.007560000000000011
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.003017187725912823,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.004204705882352777,
+              "maxAbsoluteLuminanceDifference": 0.007560000000000011
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.002562455502453852,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902155
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.0022763740096001612,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902155
+            },
+            "selectedHighlight": {
+              "sampleCount": 112,
+              "meanAbsoluteLuminanceDifference": 0.0012017016806722645,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901960578,
+              "p90AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "maxAbsoluteLuminanceDifference": 0.003921568627451022
+            }
+          }
+        },
+        {
+          "from": 55,
+          "to": 54,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122052,
+              "meanAbsoluteLuminanceDifference": 0.00336604464956435,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745047,
+              "maxAbsoluteLuminanceDifference": 0.3439811764705883
+            },
+            "metal": {
+              "sampleCount": 122008,
+              "meanAbsoluteLuminanceDifference": 0.0033669511867431435,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745047,
+              "maxAbsoluteLuminanceDifference": 0.3439811764705883
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.0035012107213255764,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745047,
+              "maxAbsoluteLuminanceDifference": 0.1151098039215685
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.0032033830925450282,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745047,
+              "maxAbsoluteLuminanceDifference": 0.1151098039215685
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.0034434267678506722,
+              "p50AbsoluteLuminanceDifference": 0.003638431372548989,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745047,
+              "maxAbsoluteLuminanceDifference": 0.3439811764705883
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.0033398345637071602,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.004204705882352999,
+              "maxAbsoluteLuminanceDifference": 0.08123607843137254
+            },
+            "selectedHighlight": {
+              "sampleCount": 112,
+              "meanAbsoluteLuminanceDifference": 0.0023598879551820777,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "maxAbsoluteLuminanceDifference": 0.058304313725490164
+            }
+          }
+        },
+        {
+          "from": 54,
+          "to": 53,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 122052,
+              "meanAbsoluteLuminanceDifference": 0.0025944219789315235,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.010647843137254864
+            },
+            "metal": {
+              "sampleCount": 122008,
+              "meanAbsoluteLuminanceDifference": 0.0025951538375497186,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.010647843137254864
+            },
+            "dial": {
+              "sampleCount": 52920,
+              "meanAbsoluteLuminanceDifference": 0.003165304432884281,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745047,
+              "maxAbsoluteLuminanceDifference": 0.007843137254901933
+            },
+            "openHeart": {
+              "sampleCount": 26445,
+              "meanAbsoluteLuminanceDifference": 0.0032466705667330486,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.00475529411764708,
+              "maxAbsoluteLuminanceDifference": 0.007843137254901933
+            },
+            "mechanism": {
+              "sampleCount": 85420,
+              "meanAbsoluteLuminanceDifference": 0.0028028300944353502,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274511885,
+              "maxAbsoluteLuminanceDifference": 0.010647843137254864
+            },
+            "strap": {
+              "sampleCount": 48933,
+              "meanAbsoluteLuminanceDifference": 0.0023354274171606478,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823530424,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "selectedHighlight": {
+              "sampleCount": 110,
+              "meanAbsoluteLuminanceDifference": 0.002577468805704102,
+              "p50AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "p90AbsoluteLuminanceDifference": 0.003921568627451022,
+              "maxAbsoluteLuminanceDifference": 0.006726274509803953
+            }
+          }
+        }
+      ],
+      "390x844": [
+        {
+          "from": 100,
+          "to": 99,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 56154,
+              "meanAbsoluteLuminanceDifference": 0.0012053646729197902,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019495,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.14229333333333338
+            },
+            "metal": {
+              "sampleCount": 56008,
+              "meanAbsoluteLuminanceDifference": 0.001208100719505068,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019634,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274508554,
+              "maxAbsoluteLuminanceDifference": 0.14229333333333338
+            },
+            "dial": {
+              "sampleCount": 18411,
+              "meanAbsoluteLuminanceDifference": 0.0017742885167754774,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.01568627450980392
+            },
+            "openHeart": {
+              "sampleCount": 9424,
+              "meanAbsoluteLuminanceDifference": 0.002439618995306123,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.01568627450980392
+            },
+            "mechanism": {
+              "sampleCount": 30234,
+              "meanAbsoluteLuminanceDifference": 0.0015261022067092514,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901961133,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.058823529411764774
+            },
+            "strap": {
+              "sampleCount": 19666,
+              "meanAbsoluteLuminanceDifference": 0.000620427492058561,
+              "p50AbsoluteLuminanceDifference": 2.7755575615628914e-17,
+              "p90AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "maxAbsoluteLuminanceDifference": 0.003921568627450994
+            },
+            "selectedHighlight": {
+              "sampleCount": 0,
+              "meanAbsoluteLuminanceDifference": 0.0,
+              "p50AbsoluteLuminanceDifference": 0.0,
+              "p90AbsoluteLuminanceDifference": 0.0,
+              "maxAbsoluteLuminanceDifference": 0
+            }
+          }
+        },
+        {
+          "from": 56,
+          "to": 55,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 54167,
+              "meanAbsoluteLuminanceDifference": 0.0018281475480512884,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "metal": {
+              "sampleCount": 54162,
+              "meanAbsoluteLuminanceDifference": 0.001828300921491155,
+              "p50AbsoluteLuminanceDifference": 0.001116862745098035,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "dial": {
+              "sampleCount": 18299,
+              "meanAbsoluteLuminanceDifference": 0.0026916203928426335,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254964,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007560000000000011
+            },
+            "openHeart": {
+              "sampleCount": 9424,
+              "meanAbsoluteLuminanceDifference": 0.0033016373714171397,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725491557,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007560000000000011
+            },
+            "mechanism": {
+              "sampleCount": 29313,
+              "meanAbsoluteLuminanceDifference": 0.002303136412071735,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254742,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.007843137254902044
+            },
+            "strap": {
+              "sampleCount": 17767,
+              "meanAbsoluteLuminanceDifference": 0.0008531716765053553,
+              "p50AbsoluteLuminanceDifference": 2.7755575615628914e-17,
+              "p90AbsoluteLuminanceDifference": 0.002804705882352959,
+              "maxAbsoluteLuminanceDifference": 0.003921568627451022
+            },
+            "selectedHighlight": {
+              "sampleCount": 48,
+              "meanAbsoluteLuminanceDifference": 0.00311220588235293,
+              "p50AbsoluteLuminanceDifference": 0.003921568627450911,
+              "p90AbsoluteLuminanceDifference": 0.003921568627451022,
+              "maxAbsoluteLuminanceDifference": 0.004204705882352888
+            }
+          }
+        },
+        {
+          "from": 55,
+          "to": 54,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 54080,
+              "meanAbsoluteLuminanceDifference": 0.007174555342847203,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.4913490196078432
+            },
+            "metal": {
+              "sampleCount": 54075,
+              "meanAbsoluteLuminanceDifference": 0.007175151447245569,
+              "p50AbsoluteLuminanceDifference": 0.0028047058823529314,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.4913490196078432
+            },
+            "dial": {
+              "sampleCount": 18299,
+              "meanAbsoluteLuminanceDifference": 0.003241253941874042,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745047,
+              "maxAbsoluteLuminanceDifference": 0.0778650980392156
+            },
+            "openHeart": {
+              "sampleCount": 9424,
+              "meanAbsoluteLuminanceDifference": 0.0034418368620793022,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725491557,
+              "p90AbsoluteLuminanceDifference": 0.004472156862745158,
+              "maxAbsoluteLuminanceDifference": 0.0778650980392156
+            },
+            "mechanism": {
+              "sampleCount": 29293,
+              "meanAbsoluteLuminanceDifference": 0.011659713201909318,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725489337,
+              "p90AbsoluteLuminanceDifference": 0.006443137254901865,
+              "maxAbsoluteLuminanceDifference": 0.4913490196078432
+            },
+            "strap": {
+              "sampleCount": 17683,
+              "meanAbsoluteLuminanceDifference": 0.010201535894117871,
+              "p50AbsoluteLuminanceDifference": 0.0002831372549019495,
+              "p90AbsoluteLuminanceDifference": 0.003638431372549017,
+              "maxAbsoluteLuminanceDifference": 0.40619137254901966
+            },
+            "selectedHighlight": {
+              "sampleCount": 48,
+              "meanAbsoluteLuminanceDifference": 0.002515964052287576,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.003921568627451022,
+              "maxAbsoluteLuminanceDifference": 0.004204705882352944
+            }
+          }
+        },
+        {
+          "from": 54,
+          "to": 53,
+          "regions": {
+            "silhouette": {
+              "sampleCount": 54008,
+              "meanAbsoluteLuminanceDifference": 0.0019412807688621368,
+              "p50AbsoluteLuminanceDifference": 0.0011168627450980628,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.02352941176470591
+            },
+            "metal": {
+              "sampleCount": 54003,
+              "meanAbsoluteLuminanceDifference": 0.0019414398256015627,
+              "p50AbsoluteLuminanceDifference": 0.0011168627450980628,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274509665,
+              "maxAbsoluteLuminanceDifference": 0.02352941176470591
+            },
+            "dial": {
+              "sampleCount": 18299,
+              "meanAbsoluteLuminanceDifference": 0.002722089260208165,
+              "p50AbsoluteLuminanceDifference": 0.003370980392156997,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.007843137254901933
+            },
+            "openHeart": {
+              "sampleCount": 9424,
+              "meanAbsoluteLuminanceDifference": 0.0032059134791437892,
+              "p50AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "p90AbsoluteLuminanceDifference": 0.00420470588235311,
+              "maxAbsoluteLuminanceDifference": 0.007560000000000122
+            },
+            "mechanism": {
+              "sampleCount": 29288,
+              "meanAbsoluteLuminanceDifference": 0.002442376132097208,
+              "p50AbsoluteLuminanceDifference": 0.003087843137254853,
+              "p90AbsoluteLuminanceDifference": 0.0039215686274510775,
+              "maxAbsoluteLuminanceDifference": 0.01877411764705883
+            },
+            "strap": {
+              "sampleCount": 17606,
+              "meanAbsoluteLuminanceDifference": 0.0009543070210022014,
+              "p50AbsoluteLuminanceDifference": 0.00028313725490192176,
+              "p90AbsoluteLuminanceDifference": 0.003638431372548989,
+              "maxAbsoluteLuminanceDifference": 0.006726274509804009
+            },
+            "selectedHighlight": {
+              "sampleCount": 48,
+              "meanAbsoluteLuminanceDifference": 0.0015097222222222179,
+              "p50AbsoluteLuminanceDifference": 0.0008337254901961133,
+              "p90AbsoluteLuminanceDifference": 0.0036384313725490447,
+              "maxAbsoluteLuminanceDifference": 0.0039215686274509665
+            }
+          }
+        }
+      ]
+    }
+  }
+}
