@@ -2,9 +2,9 @@
 
 ## 結論
 
-main `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`に統合済みの完成時計スタックを、通常アクセスの内部effective profileとして有効にするDraft実装である。過去工程configの`queryOnly`、`enabledByDefault: false`、`defaultAdopted: false`、各時点のstatusは履歴として変更していない。
+main `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`に統合済みの完成時計スタックを、通常アクセスの内部effective profileとして有効にする実装である。過去工程configの`queryOnly`、`enabledByDefault: false`、`defaultAdopted: false`、各時点のstatusは履歴として変更していない。
 
-状態は`FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_TECHNICAL_CANDIDATE`であり、Human受入、Ready化、マージ、Issue #2クローズは行っていない。APP_VERSIONはv3.15.0、作動音は初期OFFのままである。
+技術ゲートおよび最終Human確認は合格し、状態を`FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_HUMAN_ACCEPTED`とする。HumanはPR #27のReady化とmainへのマージを明示承認した。APP_VERSIONはv3.15.0、作動音は初期OFFのままである。Issue #2はOpen、PR #5はOpen／Draftを維持する。
 
 ## 中央profile
 
@@ -48,10 +48,44 @@ Installed Chrome 151.0.7922.72、1280×720で、I（暗黙default）、A（明�
 
 正式分類は`FINAL_COMPLETED_WATCH_CHROME_DESKTOP_WHEEL_FAILURE_NOT_REPRODUCED`、`FINAL_COMPLETED_WATCH_PERFORMANCE_MEASUREMENT_VARIABILITY_ISOLATED`、`FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED`である。default profile resolver、`URLSearchParams`、diagnostics、body datasetは初期化時だけで、wheel handler／animation loopに暗黙route固有の反復処理はない。閾値、DPR、描画設定、製品コードは変更しておらず、clean-process absolute性能PASSは主張しない。
 
+## 最終Human確認
+
+2026-08-03、固定Head `a7f0057db57de168c2af0bd01847fcfed9a606dc`について、Humanが次を確認した。
+
+### PC
+
+- 端末：MacBook Pro（Apple M1）
+- ブラウザ：Safari
+- default root起動・外観：OK
+- 回転・ズーム・preset：OK
+- 選択・HUD・学習・透過・分解：OK
+- 巻上げ・時刻合わせ・秒停止：OK
+- 作動音OFF→ON：OK
+- Legacy route復帰：OK
+
+### 物理iPhone
+
+- 端末：iPhone 16
+- OS：iOS 26.5.2
+- ブラウザ：Safari
+- default root起動・全長表示：OK
+- マルチタッチ：OK
+- 選択・パネル・透過：OK
+- 巻上げ・時刻合わせ・秒停止：OK
+- 作動音OFF→ON：OK
+
+提出テンプレートでは「ホーム／別アプリ復帰後の音響」および3件の異常有無欄がslash形式のまま単独選択されていなかったため、その個別値は推測で補完しない。一方、Humanは総合`PASS`を明示し、PR #27のReady化とmainへのマージを明示承認した。この総合判断と承認を最終リリース判断として記録する。構造化記録は`docs/evidence/final-completed-watch-default-adoption/reports/human-acceptance.json`に保存する。
+
+正式状態：
+
+- `FINAL_COMPLETED_WATCH_DEFAULT_ROUTE_HUMAN_REVIEW_PASSED`
+- `FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_HUMAN_ACCEPTED`
+- `PR27_READY_AND_MAIN_MERGE_AUTHORIZED`
+
 ## 変更していない範囲
 
 Geometry、機構、歯車比、位相、S86、Phase 2C、D2c3値、PMREM、fog、Material、透過、camera定数、multi-touch実装、audio scheduler、production timeout、audio asset、gain、UI構造、APP_VERSION、試験閾値は変更していない。Phase 3B.4d、OIT、post-Issue-2 Geometry cleanupも開始していない。
 
-## 次の判断
+## 最終判断
 
-Draft PRは技術候補として保持する。Chrome Desktop wheel差分ゲート、manifest、既存independent review 0/0/0が揃ったため、固定commitの通常rootとlegacy routeをHuman最終確認へ提示できる。ただしHuman受入は行っていないため、`PHYSICAL_IPHONE_FINAL_DEFAULT_ROUTE_REVIEW_REQUIRED`を実施済みにせず、Ready化・マージもしない。Issue #2はOpen、PR #5はOpen／Draftを維持する。
+技術ゲートおよびHuman最終確認は合格した。PR #27はReady化およびmainへのマージが承認済みである。Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始、OITは完成後実験のまま維持する。
