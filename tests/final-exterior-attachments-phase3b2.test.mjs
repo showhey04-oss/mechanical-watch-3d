@@ -144,7 +144,7 @@ test("production integration keeps Phase 3B.2 behind the existing exterior query
     readFile(new URL("../js/final-exterior-attachments.js", import.meta.url), "utf8")
       .catch(() => ""),
   ]);
-  assert.match(indexSource, /resolveFinalExteriorCandidate\(initialPageParameters\)/);
+  assert.match(indexSource, /resolveFinalExteriorCandidate\(effectivePageParameters\)/);
   assert.match(indexSource, /exteriorAttachments/);
   assert.match(indexSource, /\['lugs','spring-bars','straps','buckle'\]/);
   assert.match(indexSource, /exteriorAttachmentDisplay/);

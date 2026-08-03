@@ -274,7 +274,7 @@ test("production integration cannot hide failures with forbidden rendering short
       /\b(?:import|new)\s+CSG\b|\bCSG\s*\.\s*(?:fromMesh|toMesh|subtract)\b/,
     );
   }
-  assert.match(indexSource, /resolvePhase3C1WatchHead\(initialPageParameters\)/);
+  assert.match(indexSource, /resolvePhase3C1WatchHead\(effectivePageParameters\)/);
   assert.match(indexSource, /if\(requestedWatchHeadConfig\)/);
   assert.match(indexSource, /getPhase3C1OpenHeartReport/);
   assert.match(indexSource, /getPhase3C1DisplayGroupReport/);

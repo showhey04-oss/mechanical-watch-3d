@@ -1,0 +1,3761 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseCommit": "0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff",
+  "sourceImplementationCommit": "1b1e2c22d09389e27489797f666ed2358b1ca35a",
+  "sourceBranch": "feature/final-completed-watch-default-adoption",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-03T08:19:58.029Z",
+  "captureTimestamps": {
+    "chromium": "2026-08-03T06:46:57.076Z",
+    "webkit": "2026-08-03T06:49:19.814Z",
+    "nativeSafari": "2026-08-03T06:10:21.585Z"
+  },
+  "sourcePerformanceClosureCommit": "b0a1c7748f96f44694c3a5eb3921973ad1dc234b",
+  "status": "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED",
+  "formalDifferentialGatePassed": true,
+  "productSpecificRuntimeDifferenceDetected": false,
+  "comparisonProtocol": {
+    "excludedWarmups": [
+      {
+        "round": 1,
+        "routeKey": "I"
+      },
+      {
+        "round": 2,
+        "routeKey": "E"
+      }
+    ],
+    "settleBeforeMeasurementMs": 10000,
+    "wheelEventCount": 60,
+    "deltaY": -1.4,
+    "deltaMode": 0,
+    "eventIntervalMs": 50,
+    "fixedPostInputSettleMs": 1000,
+    "freshPagePerRun": true,
+    "sequences": [
+      {
+        "round": 1,
+        "sequence": [
+          "I",
+          "E",
+          "A",
+          "E",
+          "I",
+          "A",
+          "A",
+          "I",
+          "E",
+          "I",
+          "E",
+          "A",
+          "I",
+          "E",
+          "A",
+          "E",
+          "I",
+          "A",
+          "A",
+          "E",
+          "I"
+        ]
+      },
+      {
+        "round": 2,
+        "sequence": [
+          "E",
+          "I",
+          "A",
+          "I",
+          "E",
+          "A",
+          "A",
+          "E",
+          "I",
+          "E",
+          "I",
+          "A",
+          "E",
+          "I",
+          "A",
+          "I",
+          "E",
+          "A",
+          "A",
+          "I",
+          "E"
+        ]
+      }
+    ],
+    "thresholdsUnchanged": true
+  },
+  "previousComparisonProtocol": {
+    "sequence": [
+      "default",
+      "explicit",
+      "explicit",
+      "default",
+      "default",
+      "explicit"
+    ],
+    "repetitionsPerRoute": 3,
+    "settleBeforeMeasurementMs": 10000,
+    "scenarios": [
+      "front-idle",
+      "pointer-rotate",
+      "wheel-zoom"
+    ],
+    "thresholds": {
+      "averageFpsDegradationMax": 0.05,
+      "p95DegradationMaxMs": 2
+    }
+  },
+  "exactRuntimeParityEvidence": {
+    "canvas": true,
+    "inventory": true,
+    "camera": true,
+    "lighting": true,
+    "transforms": true
+  },
+  "comparisons": [
+    {
+      "browser": "chromium",
+      "kind": "comparison",
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 720
+      },
+      "type": "front-idle",
+      "explicit": {
+        "averageFps": 23.399862353750862,
+        "p50": 49,
+        "p95": 50.900000000001455,
+        "p99": 66.59999999999854,
+        "over33": 188,
+        "over50": 51,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 24.18272267845151,
+        "p50": 34.100000000000364,
+        "p95": 50.900000000001455,
+        "p99": 65.70000000000073,
+        "over33": 178,
+        "over50": 48,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": -0.03345576622911879,
+      "p95DegradationMs": 0,
+      "passed": true
+    },
+    {
+      "browser": "chromium",
+      "kind": "comparison",
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 720
+      },
+      "type": "pointer-rotate",
+      "explicit": {
+        "averageFps": 30.080485623622955,
+        "p50": 33.30000000000291,
+        "p95": 50.099999999998545,
+        "p99": 50.599999999998545,
+        "over33": 59,
+        "over50": 8,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 30.250648228127616,
+        "p50": 33.39999999999782,
+        "p95": 50,
+        "p99": 50.599999999998545,
+        "over33": 58,
+        "over50": 4,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": -0.0056569101521096446,
+      "p95DegradationMs": -0.09999999999854481,
+      "passed": true
+    },
+    {
+      "browser": "chromium",
+      "kind": "comparison",
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 720
+      },
+      "type": "wheel-zoom",
+      "explicit": {
+        "averageFps": 24.172449095727483,
+        "p50": 34,
+        "p95": 50.80000000000291,
+        "p99": 51,
+        "over33": 63,
+        "over50": 18,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 22.689413521761047,
+        "p50": 49.29999999999927,
+        "p95": 50.79999999999927,
+        "p99": 51,
+        "over33": 63,
+        "over50": 17,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": 0.06135230932096843,
+      "p95DegradationMs": -3.637978807091713e-12,
+      "passed": false
+    },
+    {
+      "browser": "chromium",
+      "kind": "comparison",
+      "viewport": {
+        "name": "mobile-390",
+        "width": 390,
+        "height": 844
+      },
+      "type": "front-idle",
+      "explicit": {
+        "averageFps": 40.71282107157294,
+        "p50": 17.69999999999709,
+        "p95": 34.099999999998545,
+        "p99": 34.29999999999927,
+        "over33": 89,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 39.465094656927704,
+        "p50": 32.30000000000109,
+        "p95": 34.20000000000073,
+        "p99": 34.30000000000291,
+        "over33": 101,
+        "over50": 1,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": 0.030647014424565144,
+      "p95DegradationMs": 0.10000000000218279,
+      "passed": true
+    },
+    {
+      "browser": "chromium",
+      "kind": "comparison",
+      "viewport": {
+        "name": "mobile-390",
+        "width": 390,
+        "height": 844
+      },
+      "type": "pointer-rotate",
+      "explicit": {
+        "averageFps": 46.188150350356324,
+        "p50": 16.899999999997817,
+        "p95": 33.70000000000073,
+        "p99": 34.29999999999927,
+        "over33": 24,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 45.293475075303064,
+        "p50": 17,
+        "p95": 33.79999999999927,
+        "p99": 34.29999999999927,
+        "over33": 27,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": 0.019370233886110956,
+      "p95DegradationMs": 0.09999999999854481,
+      "passed": true
+    },
+    {
+      "browser": "chromium",
+      "kind": "comparison",
+      "viewport": {
+        "name": "mobile-390",
+        "width": 390,
+        "height": 844
+      },
+      "type": "wheel-zoom",
+      "explicit": {
+        "averageFps": 39.58077823604809,
+        "p50": 32.29999999999927,
+        "p95": 34.099999999998545,
+        "p99": 34.29999999999927,
+        "over33": 35,
+        "over50": 1,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 39.63491221701004,
+        "p50": 17.700000000000728,
+        "p95": 34.20000000000073,
+        "p99": 34.400000000001455,
+        "over33": 35,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": -0.0013676835922505363,
+      "p95DegradationMs": 0.10000000000218279,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "kind": "comparison",
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 720
+      },
+      "type": "front-idle",
+      "explicit": {
+        "averageFps": 23.198663127887546,
+        "p50": 41,
+        "p95": 52,
+        "p99": 58,
+        "over33": 230,
+        "over50": 25,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 22.863900660293684,
+        "p50": 42,
+        "p95": 53,
+        "p99": 57,
+        "over33": 229,
+        "over50": 26,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": 0.014430248232340494,
+      "p95DegradationMs": 1,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "kind": "comparison",
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 720
+      },
+      "type": "pointer-rotate",
+      "explicit": {
+        "averageFps": 28.449880350970485,
+        "p50": 34,
+        "p95": 49,
+        "p99": 52,
+        "over33": 60,
+        "over50": 4,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 27.54747258625301,
+        "p50": 35,
+        "p95": 51,
+        "p99": 54,
+        "over33": 59,
+        "over50": 7,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": 0.03171921124394783,
+      "p95DegradationMs": 2,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "kind": "comparison",
+      "viewport": {
+        "name": "desktop",
+        "width": 1280,
+        "height": 720
+      },
+      "type": "wheel-zoom",
+      "explicit": {
+        "averageFps": 22.044088176352705,
+        "p50": 43,
+        "p95": 53,
+        "p99": 56,
+        "over33": 77,
+        "over50": 14,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 22.234891676168758,
+        "p50": 42,
+        "p95": 53,
+        "p99": 57,
+        "over33": 76,
+        "over50": 16,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": -0.008655540582564559,
+      "p95DegradationMs": 0,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "kind": "comparison",
+      "viewport": {
+        "name": "mobile-390",
+        "width": 390,
+        "height": 844
+      },
+      "type": "front-idle",
+      "explicit": {
+        "averageFps": 39.02535657686212,
+        "p50": 25,
+        "p95": 35,
+        "p99": 39,
+        "over33": 27,
+        "over50": 1,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 38.85419764099514,
+        "p50": 25,
+        "p95": 35,
+        "p99": 38,
+        "over33": 29,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": 0.004385839128205764,
+      "p95DegradationMs": 0,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "kind": "comparison",
+      "viewport": {
+        "name": "mobile-390",
+        "width": 390,
+        "height": 844
+      },
+      "type": "pointer-rotate",
+      "explicit": {
+        "averageFps": 44.72843450479233,
+        "p50": 22,
+        "p95": 34,
+        "p99": 36,
+        "over33": 10,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 43.84799362211002,
+        "p50": 22,
+        "p95": 32,
+        "p99": 39,
+        "over33": 8,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": 0.019684142591397467,
+      "p95DegradationMs": -2,
+      "passed": true
+    },
+    {
+      "browser": "webkit",
+      "kind": "comparison",
+      "viewport": {
+        "name": "mobile-390",
+        "width": 390,
+        "height": 844
+      },
+      "type": "wheel-zoom",
+      "explicit": {
+        "averageFps": 38.47233923055322,
+        "p50": 25,
+        "p95": 34,
+        "p99": 37,
+        "over33": 10,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "default": {
+        "averageFps": 38.19347644270978,
+        "p50": 25,
+        "p95": 34,
+        "p99": 38,
+        "over33": 10,
+        "over50": 0,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "zoomMonotonic": true,
+        "modelInvariant": true
+      },
+      "fpsDegradationRatio": 0.007248396989127582,
+      "p95DegradationMs": 0,
+      "passed": true
+    }
+  ],
+  "previousNoisyComparisonPassed": false,
+  "chromeDesktopWheelClosure": {
+    "report": "chrome-desktop-wheel-closure.json",
+    "decision": {
+      "status": "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED",
+      "classifications": [
+        "FINAL_COMPLETED_WATCH_CHROME_DESKTOP_WHEEL_FAILURE_NOT_REPRODUCED",
+        "FINAL_COMPLETED_WATCH_PERFORMANCE_MEASUREMENT_VARIABILITY_ISOLATED",
+        "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED"
+      ],
+      "productCodeChangeRequired": false,
+      "harnessTrackedChangeRequired": false,
+      "thresholdsChanged": false
+    },
+    "validity": {
+      "expectedRuns": 42,
+      "capturedRuns": 42,
+      "validRuns": 42,
+      "invalidRuns": [],
+      "routeCounts": {
+        "I": 14,
+        "A": 14,
+        "E": 14
+      },
+      "dispatchedWheelCountAll": [
+        60
+      ],
+      "receivedWheelCountAll": [
+        60
+      ],
+      "pacingWheelCountAll": [
+        60
+      ]
+    },
+    "runtimeParity": {
+      "inventoryHashUniqueCount": 1,
+      "cameraHashUniqueCount": 1,
+      "transformHashUniqueCount": 1,
+      "effectiveIntegratedProfiles": [
+        {
+          "exterior": "balanced",
+          "watchHead": "phase3c1",
+          "strapStyle": "phase3c2",
+          "integration": "phase3c3",
+          "rendering": "issue2-d2c3",
+          "continuity": "issue2-current",
+          "framing": "issue2-mobile-full-length-fit",
+          "input": "issue2-ios-multitouch-stability",
+          "audioTiming": "phase3b4c-stability",
+          "mechanismTiming": "phase3b4c-r2-foreground-stability",
+          "audioLifecycle": "r2-3-l4",
+          "audioPlatform": "p3"
+        }
+      ],
+      "expectedProfileSourceDifferencesOnly": true
+    },
+    "overall": {
+      "routes": {
+        "I": {
+          "routeKey": "I",
+          "routeLabel": "implicit-default",
+          "validRunCount": 14,
+          "averageFps": {
+            "count": 14,
+            "median": 34.70108944621359,
+            "minimum": 32.66796377703988,
+            "maximum": 34.842401587545304,
+            "medianAbsoluteDeviation": 0.12623830423536475
+          },
+          "frameCount": {
+            "count": 14,
+            "median": 148,
+            "minimum": 136,
+            "maximum": 151,
+            "medianAbsoluteDeviation": 1
+          },
+          "meanFrameTime": {
+            "count": 14,
+            "median": 28.679931525485223,
+            "minimum": 28.47615894039736,
+            "maximum": 30.386029411764707,
+            "medianAbsoluteDeviation": 0.14050070393518865
+          },
+          "p50": {
+            "count": 14,
+            "median": 33.29999999999927,
+            "minimum": 33.19999999999891,
+            "maximum": 33.29999999999927,
+            "medianAbsoluteDeviation": 0
+          },
+          "p90": {
+            "count": 14,
+            "median": 33.70000000000073,
+            "minimum": 33.400000000001455,
+            "maximum": 34.600000000000364,
+            "medianAbsoluteDeviation": 0.1999999999998181
+          },
+          "p95": {
+            "count": 14,
+            "median": 34.04999999999927,
+            "minimum": 33.60000000000218,
+            "maximum": 34.899999999999636,
+            "medianAbsoluteDeviation": 0.1500000000014552
+          },
+          "p99": {
+            "count": 14,
+            "median": 34.30000000000109,
+            "minimum": 34.100000000000364,
+            "maximum": 35.29999999999927,
+            "medianAbsoluteDeviation": 1.8189894035458565e-12
+          },
+          "longest": {
+            "count": 14,
+            "median": 34.399999999999636,
+            "minimum": 34.29999999999927,
+            "maximum": 50,
+            "medianAbsoluteDeviation": 0.09999999999854481
+          },
+          "over33": {
+            "count": 14,
+            "median": 59,
+            "minimum": 51,
+            "maximum": 67,
+            "medianAbsoluteDeviation": 4.5
+          },
+          "over50": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "renderCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 137,
+            "maximum": 152,
+            "medianAbsoluteDeviation": 1
+          },
+          "controlsUpdateCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 137,
+            "maximum": 152,
+            "medianAbsoluteDeviation": 1
+          },
+          "mechanismUpdateCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 137,
+            "maximum": 152,
+            "medianAbsoluteDeviation": 1
+          },
+          "domUpdateCalls": {
+            "count": 14,
+            "median": 74,
+            "minimum": 72,
+            "maximum": 78,
+            "medianAbsoluteDeviation": 2
+          },
+          "audioSchedulerCalls": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "longtaskCount": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "longtaskDurationMs": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "controlsChangeCount": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "wheelEventCount": {
+            "count": 14,
+            "median": 60,
+            "minimum": 60,
+            "maximum": 60,
+            "medianAbsoluteDeviation": 0
+          },
+          "cameraStartDistance": {
+            "count": 14,
+            "median": 48.97567441624348,
+            "minimum": 48.97567441624348,
+            "maximum": 48.97567441624348,
+            "medianAbsoluteDeviation": 0
+          },
+          "cameraEndDistance": {
+            "count": 14,
+            "median": 44.27959178889188,
+            "minimum": 44.279590966931615,
+            "maximum": 44.279594868093874,
+            "medianAbsoluteDeviation": 7.15564095088439e-7
+          },
+          "cameraTravel": {
+            "count": 14,
+            "median": -4.696082627351597,
+            "minimum": -4.696083449311864,
+            "maximum": -4.696079548149605,
+            "medianAbsoluteDeviation": 7.155640986411527e-7
+          },
+          "externalElapsedMs": {
+            "count": 14,
+            "median": 4283,
+            "minimum": 4164.5,
+            "maximum": 4391.79999999702,
+            "medianAbsoluteDeviation": 12.900000005960464
+          },
+          "eventIntervalMeanMs": {
+            "count": 14,
+            "median": 54.68983050839881,
+            "minimum": 52.728813559322035,
+            "maximum": 56.4796610171512,
+            "medianAbsoluteDeviation": 0.24661016944101277
+          },
+          "costs": {
+            "rendererRender": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 137,
+                "maximum": 152,
+                "medianAbsoluteDeviation": 1
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 1155.7000000104308,
+                "minimum": 978.2999999970198,
+                "maximum": 1278.699999973178,
+                "medianAbsoluteDeviation": 76.64999999850988
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 7.847839415946798,
+                "minimum": 6.700684931486437,
+                "maximum": 8.941958041770475,
+                "medianAbsoluteDeviation": 0.4609801324803966
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 10.649999998509884,
+                "minimum": 8.5,
+                "maximum": 17.899999991059303,
+                "medianAbsoluteDeviation": 2.0499999970197678
+              }
+            },
+            "controlsUpdate": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 137,
+                "maximum": 152,
+                "medianAbsoluteDeviation": 1
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 2.0500000193715096,
+                "minimum": 1.0999999940395355,
+                "maximum": 3.0999999791383743,
+                "medianAbsoluteDeviation": 0.3500000536441803
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.013574561532913592,
+                "minimum": 0.008029197036784931,
+                "maximum": 0.021678321532436186,
+                "medianAbsoluteDeviation": 0.0022803535577214052
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0.10000000894069672,
+                "maximum": 0.19999998807907104,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "mechanismState": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 137,
+                "maximum": 152,
+                "medianAbsoluteDeviation": 1
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 9.94999998062849,
+                "minimum": 8.100000023841858,
+                "maximum": 12.400000005960464,
+                "medianAbsoluteDeviation": 0.8499999269843102
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.0681261263687063,
+                "minimum": 0.05436241626739502,
+                "maximum": 0.08671328675496828,
+                "medianAbsoluteDeviation": 0.005493150452092359
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.20000000298023224,
+                "minimum": 0.20000000298023224,
+                "maximum": 0.20000000298023224,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "updateBalanceReadout": {
+              "calls": {
+                "count": 14,
+                "median": 37,
+                "minimum": 36,
+                "maximum": 39,
+                "medianAbsoluteDeviation": 1
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 0.30000002682209015,
+                "minimum": 0.10000000894069672,
+                "maximum": 0.7000000029802322,
+                "medianAbsoluteDeviation": 0.09999999403953552
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.00810810863166242,
+                "minimum": 0.0027777780261304644,
+                "maximum": 0.019444444527228672,
+                "medianAbsoluteDeviation": 0.002627627258454715
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0.10000000894069672,
+                "maximum": 0.10000000894069672,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "updateTimeUI": {
+              "calls": {
+                "count": 14,
+                "median": 37,
+                "minimum": 36,
+                "maximum": 39,
+                "medianAbsoluteDeviation": 1
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 0.09999999403953552,
+                "minimum": 0,
+                "maximum": 0.20000001788139343,
+                "medianAbsoluteDeviation": 0.09999999403953552
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.0025978407969600276,
+                "minimum": 0,
+                "maximum": 0.005555556052260929,
+                "medianAbsoluteDeviation": 0.0025978407969600276
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.09999999403953552,
+                "minimum": 0,
+                "maximum": 0.10000000894069672,
+                "medianAbsoluteDeviation": 1.4901161193847656e-8
+              }
+            }
+          },
+          "contracts": {
+            "eventParity": true,
+            "reversalZero": true,
+            "stopThenJumpZero": true,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "consoleErrorsWarningsZero": true
+          }
+        },
+        "A": {
+          "routeKey": "A",
+          "routeLabel": "explicit-default-alias",
+          "validRunCount": 14,
+          "averageFps": {
+            "count": 14,
+            "median": 34.53704553158714,
+            "minimum": 31.6455696202756,
+            "maximum": 34.89951749667682,
+            "medianAbsoluteDeviation": 0.11154442523299934
+          },
+          "frameCount": {
+            "count": 14,
+            "median": 148,
+            "minimum": 133,
+            "maximum": 151,
+            "medianAbsoluteDeviation": 1
+          },
+          "meanFrameTime": {
+            "count": 14,
+            "median": 28.786639455782307,
+            "minimum": 28.522818791946307,
+            "maximum": 31.325563909774445,
+            "medianAbsoluteDeviation": 0.1528206058407413
+          },
+          "p50": {
+            "count": 14,
+            "median": 33.29999999999927,
+            "minimum": 32.70000000000073,
+            "maximum": 33.29999999999927,
+            "medianAbsoluteDeviation": 0
+          },
+          "p90": {
+            "count": 14,
+            "median": 33.80000000000018,
+            "minimum": 33.5,
+            "maximum": 34.399999999999636,
+            "medianAbsoluteDeviation": 0.10000000000127329
+          },
+          "p95": {
+            "count": 14,
+            "median": 34.100000000000364,
+            "minimum": 33.70000000000073,
+            "maximum": 34.900000000001455,
+            "medianAbsoluteDeviation": 0.1000000000003638
+          },
+          "p99": {
+            "count": 14,
+            "median": 34.29999999999927,
+            "minimum": 34.19999999999891,
+            "maximum": 49.600000000000364,
+            "medianAbsoluteDeviation": 1.8189894035458565e-12
+          },
+          "longest": {
+            "count": 14,
+            "median": 34.400000000000546,
+            "minimum": 34.20000000000073,
+            "maximum": 50.100000000000364,
+            "medianAbsoluteDeviation": 0.0999999999994543
+          },
+          "over33": {
+            "count": 14,
+            "median": 59,
+            "minimum": 47,
+            "maximum": 65,
+            "medianAbsoluteDeviation": 2.5
+          },
+          "over50": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 1,
+            "medianAbsoluteDeviation": 0
+          },
+          "renderCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 134,
+            "maximum": 152,
+            "medianAbsoluteDeviation": 1
+          },
+          "controlsUpdateCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 134,
+            "maximum": 152,
+            "medianAbsoluteDeviation": 1
+          },
+          "mechanismUpdateCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 134,
+            "maximum": 152,
+            "medianAbsoluteDeviation": 1
+          },
+          "domUpdateCalls": {
+            "count": 14,
+            "median": 76,
+            "minimum": 74,
+            "maximum": 78,
+            "medianAbsoluteDeviation": 1
+          },
+          "audioSchedulerCalls": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "longtaskCount": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "longtaskDurationMs": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "controlsChangeCount": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "wheelEventCount": {
+            "count": 14,
+            "median": 60,
+            "minimum": 60,
+            "maximum": 60,
+            "medianAbsoluteDeviation": 0
+          },
+          "cameraStartDistance": {
+            "count": 14,
+            "median": 48.97567441624348,
+            "minimum": 48.97567441624348,
+            "maximum": 48.97567441624348,
+            "medianAbsoluteDeviation": 0
+          },
+          "cameraEndDistance": {
+            "count": 14,
+            "median": 44.279594662887575,
+            "minimum": 44.27959174882413,
+            "maximum": 44.27959492894129,
+            "medianAbsoluteDeviation": 2.6310553380426427e-7
+          },
+          "cameraTravel": {
+            "count": 14,
+            "median": -4.696079753355903,
+            "minimum": -4.696082667419347,
+            "maximum": -4.696079487302185,
+            "medianAbsoluteDeviation": 2.6310553380426427e-7
+          },
+          "externalElapsedMs": {
+            "count": 14,
+            "median": 4292.20000000298,
+            "minimum": 4204.600000008941,
+            "maximum": 4354.100000008941,
+            "medianAbsoluteDeviation": 21.74999999254942
+          },
+          "eventIntervalMeanMs": {
+            "count": 14,
+            "median": 54.83813559314457,
+            "minimum": 53.23559322018745,
+            "maximum": 55.78474576266135,
+            "medianAbsoluteDeviation": 0.4330508475333943
+          },
+          "costs": {
+            "rendererRender": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 134,
+                "maximum": 152,
+                "medianAbsoluteDeviation": 1
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 1189.75,
+                "minimum": 1033.2999999672174,
+                "maximum": 1391.7999999374151,
+                "medianAbsoluteDeviation": 44.39999993890524
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 7.860855263167698,
+                "minimum": 6.888666666448116,
+                "maximum": 9.865671642124653,
+                "medianAbsoluteDeviation": 0.2775878929596187
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 11.400000005960464,
+                "minimum": 7.4000000059604645,
+                "maximum": 20.600000008940697,
+                "medianAbsoluteDeviation": 1.5500000044703484
+              }
+            },
+            "controlsUpdate": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 134,
+                "maximum": 152,
+                "medianAbsoluteDeviation": 1
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 2.1499999836087227,
+                "minimum": 1.3999999910593033,
+                "maximum": 2.800000011920929,
+                "medianAbsoluteDeviation": 0.2999999597668648
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.01433143658751614,
+                "minimum": 0.009271523119598035,
+                "maximum": 0.020895522365819163,
+                "medianAbsoluteDeviation": 0.0020536910067468677
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0.10000000894069672,
+                "maximum": 0.20000000298023224,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "mechanismState": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 134,
+                "maximum": 152,
+                "medianAbsoluteDeviation": 1
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 9.99999999254942,
+                "minimum": 8.899999961256981,
+                "maximum": 13.400000020861626,
+                "medianAbsoluteDeviation": 0.5499999821186066
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.06677852350993445,
+                "minimum": 0.05933333307504654,
+                "maximum": 0.09115646272694984,
+                "medianAbsoluteDeviation": 0.004027782626820811
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.20000000298023224,
+                "minimum": 0.20000000298023224,
+                "maximum": 0.20000000298023224,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "updateBalanceReadout": {
+              "calls": {
+                "count": 14,
+                "median": 38,
+                "minimum": 37,
+                "maximum": 39,
+                "medianAbsoluteDeviation": 0.5
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 0.3500000014901161,
+                "minimum": 0.20000000298023224,
+                "maximum": 0.7000000178813934,
+                "medianAbsoluteDeviation": 0.14999999850988388
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.009210526355003055,
+                "minimum": 0.005128205204621339,
+                "maximum": 0.01891891940219982,
+                "medianAbsoluteDeviation": 0.00394736838183905
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0.10000000894069672,
+                "maximum": 0.10000000894069672,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "updateTimeUI": {
+              "calls": {
+                "count": 14,
+                "median": 38,
+                "minimum": 37,
+                "maximum": 39,
+                "medianAbsoluteDeviation": 0.5
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0,
+                "maximum": 0.29999999701976776,
+                "medianAbsoluteDeviation": 0.10000000149011612
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.0026315789865820035,
+                "minimum": 0,
+                "maximum": 0.008108108027561291,
+                "medianAbsoluteDeviation": 0.0026315789865820035
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.10000000149011612,
+                "minimum": 0,
+                "maximum": 0.10000000894069672,
+                "medianAbsoluteDeviation": 7.450580596923828e-9
+              }
+            }
+          },
+          "contracts": {
+            "eventParity": true,
+            "reversalZero": true,
+            "stopThenJumpZero": true,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "consoleErrorsWarningsZero": true
+          }
+        },
+        "E": {
+          "routeKey": "E",
+          "routeLabel": "full-explicit-integrated",
+          "validRunCount": 14,
+          "averageFps": {
+            "count": 14,
+            "median": 34.53024370482214,
+            "minimum": 32.474458956527656,
+            "maximum": 34.80997568067719,
+            "medianAbsoluteDeviation": 0.25338719224236783
+          },
+          "frameCount": {
+            "count": 14,
+            "median": 148,
+            "minimum": 137,
+            "maximum": 152,
+            "medianAbsoluteDeviation": 2
+          },
+          "meanFrameTime": {
+            "count": 14,
+            "median": 28.82173231090973,
+            "minimum": 28.55533333333333,
+            "maximum": 30.64890510948906,
+            "medianAbsoluteDeviation": 0.2219594594594554
+          },
+          "p50": {
+            "count": 14,
+            "median": 33.29999999999927,
+            "minimum": 32.899999999999636,
+            "maximum": 33.29999999999927,
+            "medianAbsoluteDeviation": 0
+          },
+          "p90": {
+            "count": 14,
+            "median": 33.850000000000364,
+            "minimum": 33.400000000001455,
+            "maximum": 34.80000000000291,
+            "medianAbsoluteDeviation": 0.1500000000005457
+          },
+          "p95": {
+            "count": 14,
+            "median": 34.100000000000364,
+            "minimum": 33.899999999999636,
+            "maximum": 35.20000000000073,
+            "medianAbsoluteDeviation": 0.1000000000003638
+          },
+          "p99": {
+            "count": 14,
+            "median": 34.29999999999927,
+            "minimum": 34,
+            "maximum": 49.60000000000218,
+            "medianAbsoluteDeviation": 0.09999999999854481
+          },
+          "longest": {
+            "count": 14,
+            "median": 34.350000000000364,
+            "minimum": 34.20000000000073,
+            "maximum": 50.79999999999927,
+            "medianAbsoluteDeviation": 0.050000000001091394
+          },
+          "over33": {
+            "count": 14,
+            "median": 58.5,
+            "minimum": 52,
+            "maximum": 63,
+            "medianAbsoluteDeviation": 3.5
+          },
+          "over50": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 1,
+            "medianAbsoluteDeviation": 0
+          },
+          "renderCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 138,
+            "maximum": 153,
+            "medianAbsoluteDeviation": 2
+          },
+          "controlsUpdateCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 138,
+            "maximum": 153,
+            "medianAbsoluteDeviation": 2
+          },
+          "mechanismUpdateCalls": {
+            "count": 14,
+            "median": 149,
+            "minimum": 138,
+            "maximum": 153,
+            "medianAbsoluteDeviation": 2
+          },
+          "domUpdateCalls": {
+            "count": 14,
+            "median": 74,
+            "minimum": 72,
+            "maximum": 78,
+            "medianAbsoluteDeviation": 1
+          },
+          "audioSchedulerCalls": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "longtaskCount": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "longtaskDurationMs": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "controlsChangeCount": {
+            "count": 14,
+            "median": 0,
+            "minimum": 0,
+            "maximum": 0,
+            "medianAbsoluteDeviation": 0
+          },
+          "wheelEventCount": {
+            "count": 14,
+            "median": 60,
+            "minimum": 60,
+            "maximum": 60,
+            "medianAbsoluteDeviation": 0
+          },
+          "cameraStartDistance": {
+            "count": 14,
+            "median": 48.97567441624348,
+            "minimum": 48.97567441624348,
+            "maximum": 48.97567441624348,
+            "medianAbsoluteDeviation": 0
+          },
+          "cameraEndDistance": {
+            "count": 14,
+            "median": 44.27959362582219,
+            "minimum": 44.279590917919705,
+            "maximum": 44.279594868769394,
+            "medianAbsoluteDeviation": 0.0000011843488110230282
+          },
+          "cameraTravel": {
+            "count": 14,
+            "median": -4.696080790421295,
+            "minimum": -4.696083498323773,
+            "maximum": -4.696079547474085,
+            "medianAbsoluteDeviation": 0.000001184348814575742
+          },
+          "externalElapsedMs": {
+            "count": 14,
+            "median": 4269.04999999702,
+            "minimum": 4195.5,
+            "maximum": 4411.5,
+            "medianAbsoluteDeviation": 52.00000000745058
+          },
+          "eventIntervalMeanMs": {
+            "count": 14,
+            "median": 54.46525423721236,
+            "minimum": 53.14745762716915,
+            "maximum": 56.76779661011898,
+            "medianAbsoluteDeviation": 0.8940677967364508
+          },
+          "costs": {
+            "rendererRender": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 138,
+                "maximum": 153,
+                "medianAbsoluteDeviation": 2
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 1181.8999999463558,
+                "minimum": 983.900000050664,
+                "maximum": 1286.0000000149012,
+                "medianAbsoluteDeviation": 79.54999991506338
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 7.879559091157667,
+                "minimum": 6.693197279256218,
+                "maximum": 8.796376811853353,
+                "medianAbsoluteDeviation": 0.5993719274539124
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 11.549999997019768,
+                "minimum": 8.400000005960464,
+                "maximum": 19.100000008940697,
+                "medianAbsoluteDeviation": 2.5499999970197678
+              }
+            },
+            "controlsUpdate": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 138,
+                "maximum": 153,
+                "medianAbsoluteDeviation": 2
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 2.0999999716877937,
+                "minimum": 1.2000000178813934,
+                "maximum": 2.80000002682209,
+                "medianAbsoluteDeviation": 0.15000000596046448
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.013991424391958739,
+                "minimum": 0.008163265427764582,
+                "maximum": 0.01854304653524563,
+                "medianAbsoluteDeviation": 0.001133610887495265
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0.10000000894069672,
+                "maximum": 0.20000000298023224,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "mechanismState": {
+              "calls": {
+                "count": 14,
+                "median": 149,
+                "minimum": 138,
+                "maximum": 153,
+                "medianAbsoluteDeviation": 2
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 9.949999950826168,
+                "minimum": 7.399999961256981,
+                "maximum": 11.899999976158142,
+                "medianAbsoluteDeviation": 0.6499999463558197
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.06777041896902206,
+                "minimum": 0.04966442927018108,
+                "maximum": 0.07777777762194864,
+                "medianAbsoluteDeviation": 0.005577660690589466
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.20000000298023224,
+                "minimum": 0.20000000298023224,
+                "maximum": 0.20000000298023224,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "updateBalanceReadout": {
+              "calls": {
+                "count": 14,
+                "median": 37,
+                "minimum": 36,
+                "maximum": 39,
+                "medianAbsoluteDeviation": 0.5
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 0.29999999701976776,
+                "minimum": 0.10000000894069672,
+                "maximum": 0.7999999672174454,
+                "medianAbsoluteDeviation": 0.09999999403953552
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.008220720639055198,
+                "minimum": 0.0027027029443431544,
+                "maximum": 0.021621620735606632,
+                "medianAbsoluteDeviation": 0.002665164793754842
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0.09999999403953552,
+                "maximum": 0.20000000298023224,
+                "medianAbsoluteDeviation": 0
+              }
+            },
+            "updateTimeUI": {
+              "calls": {
+                "count": 14,
+                "median": 37,
+                "minimum": 36,
+                "maximum": 39,
+                "medianAbsoluteDeviation": 0.5
+              },
+              "totalMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0,
+                "maximum": 0.20000001788139343,
+                "medianAbsoluteDeviation": 1.4901161193847656e-8
+              },
+              "averageMs": {
+                "count": 14,
+                "median": 0.0027402402782762372,
+                "minimum": 0,
+                "maximum": 0.005555556052260929,
+                "medianAbsoluteDeviation": 0.0001423992902756814
+              },
+              "maxMs": {
+                "count": 14,
+                "median": 0.10000000894069672,
+                "minimum": 0,
+                "maximum": 0.10000000894069672,
+                "medianAbsoluteDeviation": 0
+              }
+            }
+          },
+          "contracts": {
+            "eventParity": true,
+            "reversalZero": true,
+            "stopThenJumpZero": true,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "consoleErrorsWarningsZero": true
+          }
+        }
+      },
+      "comparisons": {
+        "implicitVsExplicit": {
+          "candidate": "I",
+          "reference": "E",
+          "fpsDegradationRatio": -0.004947713165649838,
+          "p95DegradationMs": -0.050000000001091394,
+          "thresholds": {
+            "fpsDegradationRatioMax": 0.05,
+            "p95DegradationMsMax": 2
+          },
+          "passed": true
+        },
+        "implicitVsAlias": {
+          "candidate": "I",
+          "reference": "A",
+          "fpsDegradationRatio": -0.004749795823629862,
+          "p95DegradationMs": -0.050000000001091394,
+          "thresholds": {
+            "fpsDegradationRatioMax": 0.05,
+            "p95DegradationMsMax": 2
+          },
+          "passed": true
+        }
+      }
+    },
+    "rounds": [
+      {
+        "round": 1,
+        "browserVersion": "151.0.7922.72",
+        "startedAt": "2026-08-03T08:00:36.768Z",
+        "finishedAt": "2026-08-03T08:07:03.214Z",
+        "routes": {
+          "I": {
+            "routeKey": "I",
+            "routeLabel": "implicit-default",
+            "validRunCount": 7,
+            "averageFps": {
+              "count": 7,
+              "median": 34.68885503339975,
+              "minimum": 32.66796377703988,
+              "maximum": 34.8122539133526,
+              "medianAbsoluteDeviation": 0.12339887995285181
+            },
+            "frameCount": {
+              "count": 7,
+              "median": 145,
+              "minimum": 136,
+              "maximum": 149,
+              "medianAbsoluteDeviation": 3
+            },
+            "meanFrameTime": {
+              "count": 7,
+              "median": 28.719594594594593,
+              "minimum": 28.617241379310343,
+              "maximum": 30.386029411764707,
+              "medianAbsoluteDeviation": 0.1023532152842499
+            },
+            "p50": {
+              "count": 7,
+              "median": 33.29999999999927,
+              "minimum": 33.19999999999891,
+              "maximum": 33.29999999999927,
+              "medianAbsoluteDeviation": 0
+            },
+            "p90": {
+              "count": 7,
+              "median": 33.70000000000073,
+              "minimum": 33.400000000001455,
+              "maximum": 34.600000000000364,
+              "medianAbsoluteDeviation": 0.2000000000007276
+            },
+            "p95": {
+              "count": 7,
+              "median": 34.20000000000073,
+              "minimum": 33.60000000000218,
+              "maximum": 34.899999999999636,
+              "medianAbsoluteDeviation": 0.2000000000007276
+            },
+            "p99": {
+              "count": 7,
+              "median": 34.30000000000109,
+              "minimum": 34.100000000000364,
+              "maximum": 35.29999999999927,
+              "medianAbsoluteDeviation": 0.09999999999854481
+            },
+            "longest": {
+              "count": 7,
+              "median": 34.399999999999636,
+              "minimum": 34.29999999999927,
+              "maximum": 50,
+              "medianAbsoluteDeviation": 0.1000000000003638
+            },
+            "over33": {
+              "count": 7,
+              "median": 54,
+              "minimum": 53,
+              "maximum": 65,
+              "medianAbsoluteDeviation": 1
+            },
+            "over50": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "renderCalls": {
+              "count": 7,
+              "median": 146,
+              "minimum": 137,
+              "maximum": 150,
+              "medianAbsoluteDeviation": 3
+            },
+            "controlsUpdateCalls": {
+              "count": 7,
+              "median": 146,
+              "minimum": 137,
+              "maximum": 150,
+              "medianAbsoluteDeviation": 3
+            },
+            "mechanismUpdateCalls": {
+              "count": 7,
+              "median": 146,
+              "minimum": 137,
+              "maximum": 150,
+              "medianAbsoluteDeviation": 3
+            },
+            "domUpdateCalls": {
+              "count": 7,
+              "median": 74,
+              "minimum": 72,
+              "maximum": 76,
+              "medianAbsoluteDeviation": 2
+            },
+            "audioSchedulerCalls": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskDurationMs": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "controlsChangeCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "wheelEventCount": {
+              "count": 7,
+              "median": 60,
+              "minimum": 60,
+              "maximum": 60,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraStartDistance": {
+              "count": 7,
+              "median": 48.97567441624348,
+              "minimum": 48.97567441624348,
+              "maximum": 48.97567441624348,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraEndDistance": {
+              "count": 7,
+              "median": 44.279591997160075,
+              "minimum": 44.27959107759703,
+              "maximum": 44.279594868093874,
+              "medianAbsoluteDeviation": 9.180914517514793e-7
+            },
+            "cameraTravel": {
+              "count": 7,
+              "median": -4.696082419083403,
+              "minimum": -4.696083338646446,
+              "maximum": -4.696079548149605,
+              "medianAbsoluteDeviation": 9.180914517514793e-7
+            },
+            "externalElapsedMs": {
+              "count": 7,
+              "median": 4267.899999991059,
+              "minimum": 4164.5,
+              "maximum": 4293.70000000298,
+              "medianAbsoluteDeviation": 25.80000001192093
+            },
+            "eventIntervalMeanMs": {
+              "count": 7,
+              "median": 54.379661017050175,
+              "minimum": 52.728813559322035,
+              "maximum": 54.8084745763217,
+              "medianAbsoluteDeviation": 0.428813559271525
+            },
+            "costs": {
+              "rendererRender": {
+                "calls": {
+                  "count": 7,
+                  "median": 146,
+                  "minimum": 137,
+                  "maximum": 150,
+                  "medianAbsoluteDeviation": 3
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 1121.2999999523163,
+                  "minimum": 978.2999999970198,
+                  "maximum": 1278.699999973178,
+                  "medianAbsoluteDeviation": 37.3999999910593
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 7.733103447947009,
+                  "minimum": 6.700684931486437,
+                  "maximum": 8.941958041770475,
+                  "medianAbsoluteDeviation": 0.17857538388698302
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 10.799999997019768,
+                  "minimum": 8.5,
+                  "maximum": 17.899999991059303,
+                  "medianAbsoluteDeviation": 2.2000000029802322
+                }
+              },
+              "controlsUpdate": {
+                "calls": {
+                  "count": 7,
+                  "median": 146,
+                  "minimum": 137,
+                  "maximum": 150,
+                  "medianAbsoluteDeviation": 3
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 1.7999999970197678,
+                  "minimum": 1.0999999940395355,
+                  "maximum": 3.0999999791383743,
+                  "medianAbsoluteDeviation": 0.10000006854534149
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.012328767102875123,
+                  "minimum": 0.008029197036784931,
+                  "maximum": 0.021678321532436186,
+                  "medianAbsoluteDeviation": 0.0009954342463789467
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.19999998807907104,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "mechanismState": {
+                "calls": {
+                  "count": 7,
+                  "median": 146,
+                  "minimum": 137,
+                  "maximum": 150,
+                  "medianAbsoluteDeviation": 3
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 9.799999982118607,
+                  "minimum": 9.200000047683716,
+                  "maximum": 12.400000005960464,
+                  "medianAbsoluteDeviation": 0.29999999701976776
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.06733333319425583,
+                  "minimum": 0.06301369895673778,
+                  "maximum": 0.08671328675496828,
+                  "medianAbsoluteDeviation": 0.004199513390551524
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.20000000298023224,
+                  "minimum": 0.20000000298023224,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateBalanceReadout": {
+                "calls": {
+                  "count": 7,
+                  "median": 37,
+                  "minimum": 36,
+                  "maximum": 38,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.29999999701976776,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.7000000029802322,
+                  "medianAbsoluteDeviation": 0.09999999403953552
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.00789473754794974,
+                  "minimum": 0.0027777780261304644,
+                  "maximum": 0.019444444527228672,
+                  "medianAbsoluteDeviation": 0.0024893320619975177
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateTimeUI": {
+                "calls": {
+                  "count": 7,
+                  "median": 37,
+                  "minimum": 36,
+                  "maximum": 38,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.09999999403953552,
+                  "minimum": 0,
+                  "maximum": 0.20000001788139343,
+                  "medianAbsoluteDeviation": 0.09999999403953552
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.0027027025416090683,
+                  "minimum": 0,
+                  "maximum": 0.005555556052260929,
+                  "medianAbsoluteDeviation": 0.0027027025416090683
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.09999999403953552,
+                  "minimum": 0,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 1.4901161193847656e-8
+                }
+              }
+            },
+            "contracts": {
+              "eventParity": true,
+              "reversalZero": true,
+              "stopThenJumpZero": true,
+              "zoomMonotonic": true,
+              "transformInvariant": true,
+              "consoleErrorsWarningsZero": true
+            }
+          },
+          "A": {
+            "routeKey": "A",
+            "routeLabel": "explicit-default-alias",
+            "validRunCount": 7,
+            "averageFps": {
+              "count": 7,
+              "median": 34.54752022995991,
+              "minimum": 31.6455696202756,
+              "maximum": 34.73180605384338,
+              "medianAbsoluteDeviation": 0.1786946126460549
+            },
+            "frameCount": {
+              "count": 7,
+              "median": 148,
+              "minimum": 133,
+              "maximum": 151,
+              "medianAbsoluteDeviation": 2
+            },
+            "meanFrameTime": {
+              "count": 7,
+              "median": 28.73355704697986,
+              "minimum": 28.58675496688741,
+              "maximum": 31.325563909774445,
+              "medianAbsoluteDeviation": 0.14547757678118955
+            },
+            "p50": {
+              "count": 7,
+              "median": 33.29999999999927,
+              "minimum": 32.70000000000073,
+              "maximum": 33.29999999999927,
+              "medianAbsoluteDeviation": 0
+            },
+            "p90": {
+              "count": 7,
+              "median": 33.79999999999927,
+              "minimum": 33.60000000000218,
+              "maximum": 34.399999999999636,
+              "medianAbsoluteDeviation": 0.10000000000218279
+            },
+            "p95": {
+              "count": 7,
+              "median": 34.100000000000364,
+              "minimum": 33.80000000000109,
+              "maximum": 34.900000000001455,
+              "medianAbsoluteDeviation": 0.2000000000007276
+            },
+            "p99": {
+              "count": 7,
+              "median": 34.30000000000109,
+              "minimum": 34.19999999999891,
+              "maximum": 49.600000000000364,
+              "medianAbsoluteDeviation": 1.8189894035458565e-12
+            },
+            "longest": {
+              "count": 7,
+              "median": 34.400000000001455,
+              "minimum": 34.30000000000109,
+              "maximum": 50.100000000000364,
+              "medianAbsoluteDeviation": 0.1000000000003638
+            },
+            "over33": {
+              "count": 7,
+              "median": 61,
+              "minimum": 47,
+              "maximum": 65,
+              "medianAbsoluteDeviation": 3
+            },
+            "over50": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 1,
+              "medianAbsoluteDeviation": 0
+            },
+            "renderCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 134,
+              "maximum": 152,
+              "medianAbsoluteDeviation": 2
+            },
+            "controlsUpdateCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 134,
+              "maximum": 152,
+              "medianAbsoluteDeviation": 2
+            },
+            "mechanismUpdateCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 134,
+              "maximum": 152,
+              "medianAbsoluteDeviation": 2
+            },
+            "domUpdateCalls": {
+              "count": 7,
+              "median": 76,
+              "minimum": 74,
+              "maximum": 76,
+              "medianAbsoluteDeviation": 0
+            },
+            "audioSchedulerCalls": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskDurationMs": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "controlsChangeCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "wheelEventCount": {
+              "count": 7,
+              "median": 60,
+              "minimum": 60,
+              "maximum": 60,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraStartDistance": {
+              "count": 7,
+              "median": 48.97567441624348,
+              "minimum": 48.97567441624348,
+              "maximum": 48.97567441624348,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraEndDistance": {
+              "count": 7,
+              "median": 44.279594917588085,
+              "minimum": 44.279594680473934,
+              "maximum": 44.27959492894129,
+              "medianAbsoluteDeviation": 1.1353208151376748e-8
+            },
+            "cameraTravel": {
+              "count": 7,
+              "median": -4.6960794986553935,
+              "minimum": -4.696079735769544,
+              "maximum": -4.696079487302185,
+              "medianAbsoluteDeviation": 1.1353208151376748e-8
+            },
+            "externalElapsedMs": {
+              "count": 7,
+              "median": 4314.199999988079,
+              "minimum": 4204.600000008941,
+              "maximum": 4354.100000008941,
+              "medianAbsoluteDeviation": 35.50000001490116
+            },
+            "eventIntervalMeanMs": {
+              "count": 7,
+              "median": 55.294915254338314,
+              "minimum": 53.23559322018745,
+              "maximum": 55.78474576266135,
+              "medianAbsoluteDeviation": 0.4898305083230383
+            },
+            "costs": {
+              "rendererRender": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 134,
+                  "maximum": 152,
+                  "medianAbsoluteDeviation": 2
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 1196.7000000476837,
+                  "minimum": 1041.400000050664,
+                  "maximum": 1391.7999999374151,
+                  "medianAbsoluteDeviation": 125.29999999701977
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 7.873026316103182,
+                  "minimum": 7.03648648682881,
+                  "maximum": 9.865671642124653,
+                  "medianAbsoluteDeviation": 0.7343596490590194
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 10.899999991059303,
+                  "minimum": 8.600000008940697,
+                  "maximum": 20.600000008940697,
+                  "medianAbsoluteDeviation": 2.2999999821186066
+                }
+              },
+              "controlsUpdate": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 134,
+                  "maximum": 152,
+                  "medianAbsoluteDeviation": 2
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 2.2000000178813934,
+                  "minimum": 2.000000014901161,
+                  "maximum": 2.7999999970197678,
+                  "medianAbsoluteDeviation": 0.20000000298023224
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.014965986414831512,
+                  "minimum": 0.01315789483487606,
+                  "maximum": 0.020895522365819163,
+                  "medianAbsoluteDeviation": 0.0018080915799554512
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "mechanismState": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 134,
+                  "maximum": 152,
+                  "medianAbsoluteDeviation": 2
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 10.499999970197678,
+                  "minimum": 9.199999928474426,
+                  "maximum": 13.400000020861626,
+                  "medianAbsoluteDeviation": 0.5000000894069672
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.06907894717235315,
+                  "minimum": 0.06216216167888126,
+                  "maximum": 0.09115646272694984,
+                  "medianAbsoluteDeviation": 0.003947367989703229
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.20000000298023224,
+                  "minimum": 0.20000000298023224,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateBalanceReadout": {
+                "calls": {
+                  "count": 7,
+                  "median": 38,
+                  "minimum": 37,
+                  "maximum": 38,
+                  "medianAbsoluteDeviation": 0
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.4000000059604645,
+                  "minimum": 0.20000000298023224,
+                  "maximum": 0.5999999940395355,
+                  "medianAbsoluteDeviation": 0.10000000894069672
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.010526315946328012,
+                  "minimum": 0.005263157973164006,
+                  "maximum": 0.0157894735273562,
+                  "medianAbsoluteDeviation": 0.002987197567185502
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateTimeUI": {
+                "calls": {
+                  "count": 7,
+                  "median": 38,
+                  "minimum": 37,
+                  "maximum": 38,
+                  "medianAbsoluteDeviation": 0
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.19999998807907104,
+                  "minimum": 0,
+                  "maximum": 0.29999999701976776,
+                  "medianAbsoluteDeviation": 0.09999997913837433
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.005263157581028186,
+                  "minimum": 0,
+                  "maximum": 0.008108108027561291,
+                  "medianAbsoluteDeviation": 0.002631578398378272
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              }
+            },
+            "contracts": {
+              "eventParity": true,
+              "reversalZero": true,
+              "stopThenJumpZero": true,
+              "zoomMonotonic": true,
+              "transformInvariant": true,
+              "consoleErrorsWarningsZero": true
+            }
+          },
+          "E": {
+            "routeKey": "E",
+            "routeLabel": "full-explicit-integrated",
+            "validRunCount": 7,
+            "averageFps": {
+              "count": 7,
+              "median": 34.67005662775916,
+              "minimum": 32.474458956527656,
+              "maximum": 34.80997568067719,
+              "medianAbsoluteDeviation": 0.13991905291803164
+            },
+            "frameCount": {
+              "count": 7,
+              "median": 146,
+              "minimum": 137,
+              "maximum": 150,
+              "medianAbsoluteDeviation": 4
+            },
+            "meanFrameTime": {
+              "count": 7,
+              "median": 28.77733333333335,
+              "minimum": 28.55533333333333,
+              "maximum": 30.64890510948906,
+              "medianAbsoluteDeviation": 0.22200000000001907
+            },
+            "p50": {
+              "count": 7,
+              "median": 33.29999999999927,
+              "minimum": 33.29999999999927,
+              "maximum": 33.29999999999927,
+              "medianAbsoluteDeviation": 0
+            },
+            "p90": {
+              "count": 7,
+              "median": 33.899999999999636,
+              "minimum": 33.69999999999891,
+              "maximum": 34.80000000000291,
+              "medianAbsoluteDeviation": 0.1999999999989086
+            },
+            "p95": {
+              "count": 7,
+              "median": 34.10000000000218,
+              "minimum": 33.900000000001455,
+              "maximum": 35.20000000000073,
+              "medianAbsoluteDeviation": 0.09999999999854481
+            },
+            "p99": {
+              "count": 7,
+              "median": 34.29999999999927,
+              "minimum": 34.20000000000073,
+              "maximum": 35.399999999999636,
+              "medianAbsoluteDeviation": 0.09999999999854481
+            },
+            "longest": {
+              "count": 7,
+              "median": 34.399999999999636,
+              "minimum": 34.29999999999927,
+              "maximum": 50.79999999999927,
+              "medianAbsoluteDeviation": 0.09999999999854481
+            },
+            "over33": {
+              "count": 7,
+              "median": 62,
+              "minimum": 54,
+              "maximum": 63,
+              "medianAbsoluteDeviation": 1
+            },
+            "over50": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 1,
+              "medianAbsoluteDeviation": 0
+            },
+            "renderCalls": {
+              "count": 7,
+              "median": 147,
+              "minimum": 138,
+              "maximum": 151,
+              "medianAbsoluteDeviation": 4
+            },
+            "controlsUpdateCalls": {
+              "count": 7,
+              "median": 147,
+              "minimum": 138,
+              "maximum": 151,
+              "medianAbsoluteDeviation": 4
+            },
+            "mechanismUpdateCalls": {
+              "count": 7,
+              "median": 147,
+              "minimum": 138,
+              "maximum": 151,
+              "medianAbsoluteDeviation": 4
+            },
+            "domUpdateCalls": {
+              "count": 7,
+              "median": 74,
+              "minimum": 72,
+              "maximum": 76,
+              "medianAbsoluteDeviation": 2
+            },
+            "audioSchedulerCalls": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskDurationMs": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "controlsChangeCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "wheelEventCount": {
+              "count": 7,
+              "median": 60,
+              "minimum": 60,
+              "maximum": 60,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraStartDistance": {
+              "count": 7,
+              "median": 48.97567441624348,
+              "minimum": 48.97567441624348,
+              "maximum": 48.97567441624348,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraEndDistance": {
+              "count": 7,
+              "median": 44.279594164695986,
+              "minimum": 44.27959099348182,
+              "maximum": 44.279594868769394,
+              "medianAbsoluteDeviation": 7.040734075758337e-7
+            },
+            "cameraTravel": {
+              "count": 7,
+              "median": -4.696080251547492,
+              "minimum": -4.69608342276166,
+              "maximum": -4.696079547474085,
+              "medianAbsoluteDeviation": 7.040734075758337e-7
+            },
+            "externalElapsedMs": {
+              "count": 7,
+              "median": 4243.600000008941,
+              "minimum": 4195.5,
+              "maximum": 4328,
+              "medianAbsoluteDeviation": 25.400000020861626
+            },
+            "eventIntervalMeanMs": {
+              "count": 7,
+              "median": 54.067796610169495,
+              "minimum": 53.14745762716915,
+              "maximum": 55.369491525625776,
+              "medianAbsoluteDeviation": 0.5627118642047364
+            },
+            "costs": {
+              "rendererRender": {
+                "calls": {
+                  "count": 7,
+                  "median": 147,
+                  "minimum": 138,
+                  "maximum": 151,
+                  "medianAbsoluteDeviation": 4
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 1179.099999949336,
+                  "minimum": 983.900000050664,
+                  "maximum": 1213.9000000357628,
+                  "medianAbsoluteDeviation": 34.800000086426735
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 7.845695363863414,
+                  "minimum": 6.693197279256218,
+                  "maximum": 8.796376811853353,
+                  "medianAbsoluteDeviation": 0.8050189212761127
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 9.799999997019768,
+                  "minimum": 8.400000005960464,
+                  "maximum": 19.100000008940697,
+                  "medianAbsoluteDeviation": 1.3999999910593033
+                }
+              },
+              "controlsUpdate": {
+                "calls": {
+                  "count": 7,
+                  "median": 147,
+                  "minimum": 138,
+                  "maximum": 151,
+                  "medianAbsoluteDeviation": 4
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 2.099999949336052,
+                  "minimum": 1.2000000178813934,
+                  "maximum": 2.80000002682209,
+                  "medianAbsoluteDeviation": 0.09999994933605194
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.0140939597915483,
+                  "minimum": 0.008163265427764582,
+                  "maximum": 0.01854304653524563,
+                  "medianAbsoluteDeviation": 0.0011234311456694672
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "mechanismState": {
+                "calls": {
+                  "count": 7,
+                  "median": 147,
+                  "minimum": 138,
+                  "maximum": 151,
+                  "medianAbsoluteDeviation": 4
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 10.299999982118607,
+                  "minimum": 9.199999988079071,
+                  "maximum": 10.499999940395355,
+                  "medianAbsoluteDeviation": 0.19999995827674866
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.06887417183017099,
+                  "minimum": 0.060927152238934246,
+                  "maximum": 0.07608695608982141,
+                  "medianAbsoluteDeviation": 0.004697256613533346
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.20000000298023224,
+                  "minimum": 0.20000000298023224,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateBalanceReadout": {
+                "calls": {
+                  "count": 7,
+                  "median": 37,
+                  "minimum": 36,
+                  "maximum": 38,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.29999999701976776,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.6000000089406967,
+                  "medianAbsoluteDeviation": 0.09999999403953552
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.008108108027561291,
+                  "minimum": 0.0027027029443431544,
+                  "maximum": 0.016216216457856668,
+                  "medianAbsoluteDeviation": 0.0025525519753003623
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateTimeUI": {
+                "calls": {
+                  "count": 7,
+                  "median": 37,
+                  "minimum": 36,
+                  "maximum": 38,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0,
+                  "maximum": 0.20000001788139343,
+                  "medianAbsoluteDeviation": 0
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.0027027029443431544,
+                  "minimum": 0,
+                  "maximum": 0.005555556052260929,
+                  "medianAbsoluteDeviation": 0.00007507508178730997
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              }
+            },
+            "contracts": {
+              "eventParity": true,
+              "reversalZero": true,
+              "stopThenJumpZero": true,
+              "zoomMonotonic": true,
+              "transformInvariant": true,
+              "consoleErrorsWarningsZero": true
+            }
+          }
+        },
+        "comparisons": {
+          "implicitVsExplicit": {
+            "candidate": "I",
+            "reference": "E",
+            "fpsDegradationRatio": -0.0005422086800266961,
+            "p95DegradationMs": 0.09999999999854481,
+            "thresholds": {
+              "fpsDegradationRatioMax": 0.05,
+              "p95DegradationMsMax": 2
+            },
+            "passed": true
+          },
+          "implicitVsAlias": {
+            "candidate": "I",
+            "reference": "A",
+            "fpsDegradationRatio": -0.0040910259983659505,
+            "p95DegradationMs": 0.1000000000003638,
+            "thresholds": {
+              "fpsDegradationRatioMax": 0.05,
+              "p95DegradationMsMax": 2
+            },
+            "passed": true
+          }
+        }
+      },
+      {
+        "round": 2,
+        "browserVersion": "151.0.7922.72",
+        "startedAt": "2026-08-03T08:07:29.876Z",
+        "finishedAt": "2026-08-03T08:13:57.754Z",
+        "routes": {
+          "I": {
+            "routeKey": "I",
+            "routeLabel": "implicit-default",
+            "validRunCount": 7,
+            "averageFps": {
+              "count": 7,
+              "median": 34.750565571261156,
+              "minimum": 34.165451894997354,
+              "maximum": 34.842401587545304,
+              "medianAbsoluteDeviation": 0.09183601628414806
+            },
+            "frameCount": {
+              "count": 7,
+              "median": 149,
+              "minimum": 147,
+              "maximum": 151,
+              "medianAbsoluteDeviation": 1
+            },
+            "meanFrameTime": {
+              "count": 7,
+              "median": 28.63422818791946,
+              "minimum": 28.47615894039736,
+              "maximum": 29.023809523809536,
+              "medianAbsoluteDeviation": 0.15806924752209994
+            },
+            "p50": {
+              "count": 7,
+              "median": 33.29999999999927,
+              "minimum": 33.19999999999891,
+              "maximum": 33.29999999999927,
+              "medianAbsoluteDeviation": 0
+            },
+            "p90": {
+              "count": 7,
+              "median": 33.70000000000073,
+              "minimum": 33.400000000001455,
+              "maximum": 34.5,
+              "medianAbsoluteDeviation": 0.1000000000003638
+            },
+            "p95": {
+              "count": 7,
+              "median": 34,
+              "minimum": 33.900000000001455,
+              "maximum": 34.899999999999636,
+              "medianAbsoluteDeviation": 0.09999999999854481
+            },
+            "p99": {
+              "count": 7,
+              "median": 34.30000000000109,
+              "minimum": 34.29999999999927,
+              "maximum": 35.20000000000073,
+              "medianAbsoluteDeviation": 1.8189894035458565e-12
+            },
+            "longest": {
+              "count": 7,
+              "median": 34.399999999999636,
+              "minimum": 34.30000000000109,
+              "maximum": 35.30000000000109,
+              "medianAbsoluteDeviation": 0.09999999999854481
+            },
+            "over33": {
+              "count": 7,
+              "median": 61,
+              "minimum": 51,
+              "maximum": 67,
+              "medianAbsoluteDeviation": 2
+            },
+            "over50": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "renderCalls": {
+              "count": 7,
+              "median": 150,
+              "minimum": 148,
+              "maximum": 152,
+              "medianAbsoluteDeviation": 1
+            },
+            "controlsUpdateCalls": {
+              "count": 7,
+              "median": 150,
+              "minimum": 148,
+              "maximum": 152,
+              "medianAbsoluteDeviation": 1
+            },
+            "mechanismUpdateCalls": {
+              "count": 7,
+              "median": 150,
+              "minimum": 148,
+              "maximum": 152,
+              "medianAbsoluteDeviation": 1
+            },
+            "domUpdateCalls": {
+              "count": 7,
+              "median": 76,
+              "minimum": 74,
+              "maximum": 78,
+              "medianAbsoluteDeviation": 2
+            },
+            "audioSchedulerCalls": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskDurationMs": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "controlsChangeCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "wheelEventCount": {
+              "count": 7,
+              "median": 60,
+              "minimum": 60,
+              "maximum": 60,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraStartDistance": {
+              "count": 7,
+              "median": 48.97567441624348,
+              "minimum": 48.97567441624348,
+              "maximum": 48.97567441624348,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraEndDistance": {
+              "count": 7,
+              "median": 44.27959158062369,
+              "minimum": 44.279590966931615,
+              "maximum": 44.279594313642725,
+              "medianAbsoluteDeviation": 6.136920731591999e-7
+            },
+            "cameraTravel": {
+              "count": 7,
+              "median": -4.696082835619791,
+              "minimum": -4.696083449311864,
+              "maximum": -4.696080102600753,
+              "medianAbsoluteDeviation": 6.136920731591999e-7
+            },
+            "externalElapsedMs": {
+              "count": 7,
+              "median": 4289.20000000298,
+              "minimum": 4257.4000000059605,
+              "maximum": 4391.79999999702,
+              "medianAbsoluteDeviation": 7
+            },
+            "eventIntervalMeanMs": {
+              "count": 7,
+              "median": 54.79830508464474,
+              "minimum": 54.17796610169491,
+              "maximum": 56.4796610171512,
+              "medianAbsoluteDeviation": 0.21355932193287686
+            },
+            "costs": {
+              "rendererRender": {
+                "calls": {
+                  "count": 7,
+                  "median": 150,
+                  "minimum": 148,
+                  "maximum": 152,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 1203.1999999135733,
+                  "minimum": 1017.4999999403954,
+                  "maximum": 1254.199999988079,
+                  "medianAbsoluteDeviation": 36.90000011026859
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 8.021333332757155,
+                  "minimum": 6.828859060002653,
+                  "maximum": 8.379054054215148,
+                  "medianAbsoluteDeviation": 0.33812612642038964
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 10.5,
+                  "minimum": 8.700000002980232,
+                  "maximum": 14.400000005960464,
+                  "medianAbsoluteDeviation": 1.7999999970197678
+                }
+              },
+              "controlsUpdate": {
+                "calls": {
+                  "count": 7,
+                  "median": 150,
+                  "minimum": 148,
+                  "maximum": 152,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 2.400000035762787,
+                  "minimum": 1.399999976158142,
+                  "maximum": 3,
+                  "medianAbsoluteDeviation": 0.30000004172325134
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.015894039971938986,
+                  "minimum": 0.009333333174387615,
+                  "maximum": 0.02,
+                  "medianAbsoluteDeviation": 0.0020782505374683582
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "mechanismState": {
+                "calls": {
+                  "count": 7,
+                  "median": 150,
+                  "minimum": 148,
+                  "maximum": 152,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 10.2000000923872,
+                  "minimum": 8.100000023841858,
+                  "maximum": 12.100000008940697,
+                  "medianAbsoluteDeviation": 1.2000000327825546
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.06891891954315675,
+                  "minimum": 0.05436241626739502,
+                  "maximum": 0.08040540514362825,
+                  "medianAbsoluteDeviation": 0.009708392835231457
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.20000000298023224,
+                  "minimum": 0.20000000298023224,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateBalanceReadout": {
+                "calls": {
+                  "count": 7,
+                  "median": 38,
+                  "minimum": 37,
+                  "maximum": 39,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.4000000059604645,
+                  "minimum": 0.29999999701976776,
+                  "maximum": 0.699999988079071,
+                  "medianAbsoluteDeviation": 0.09999999403953552
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.010256410409242678,
+                  "minimum": 0.0078947367636781,
+                  "maximum": 0.01842105231787029,
+                  "medianAbsoluteDeviation": 0.002361673645564579
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateTimeUI": {
+                "calls": {
+                  "count": 7,
+                  "median": 38,
+                  "minimum": 37,
+                  "maximum": 39,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.09999999403953552,
+                  "minimum": 0,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0.09999999403953552
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.0025641024112701416,
+                  "minimum": 0,
+                  "maximum": 0.005263157973164006,
+                  "medianAbsoluteDeviation": 0.0025641024112701416
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.09999999403953552,
+                  "minimum": 0,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 1.4901161193847656e-8
+                }
+              }
+            },
+            "contracts": {
+              "eventParity": true,
+              "reversalZero": true,
+              "stopThenJumpZero": true,
+              "zoomMonotonic": true,
+              "transformInvariant": true,
+              "consoleErrorsWarningsZero": true
+            }
+          },
+          "A": {
+            "routeKey": "A",
+            "routeLabel": "explicit-default-alias",
+            "validRunCount": 7,
+            "averageFps": {
+              "count": 7,
+              "median": 34.51009653492782,
+              "minimum": 34.42139277858033,
+              "maximum": 34.89951749667682,
+              "medianAbsoluteDeviation": 0.047411705494823764
+            },
+            "frameCount": {
+              "count": 7,
+              "median": 148,
+              "minimum": 147,
+              "maximum": 150,
+              "medianAbsoluteDeviation": 1
+            },
+            "meanFrameTime": {
+              "count": 7,
+              "median": 28.797278911564618,
+              "minimum": 28.522818791946307,
+              "maximum": 28.946621621621624,
+              "medianAbsoluteDeviation": 0.14326162897591388
+            },
+            "p50": {
+              "count": 7,
+              "median": 33.29999999999927,
+              "minimum": 33.20000000000073,
+              "maximum": 33.29999999999927,
+              "medianAbsoluteDeviation": 0
+            },
+            "p90": {
+              "count": 7,
+              "median": 33.80000000000109,
+              "minimum": 33.5,
+              "maximum": 34,
+              "medianAbsoluteDeviation": 0.1000000000003638
+            },
+            "p95": {
+              "count": 7,
+              "median": 34.099999999998545,
+              "minimum": 33.70000000000073,
+              "maximum": 34.399999999999636,
+              "medianAbsoluteDeviation": 0.10000000000218279
+            },
+            "p99": {
+              "count": 7,
+              "median": 34.29999999999927,
+              "minimum": 34.20000000000073,
+              "maximum": 35,
+              "medianAbsoluteDeviation": 0
+            },
+            "longest": {
+              "count": 7,
+              "median": 34.399999999999636,
+              "minimum": 34.20000000000073,
+              "maximum": 35.30000000000109,
+              "medianAbsoluteDeviation": 0.09999999999854481
+            },
+            "over33": {
+              "count": 7,
+              "median": 59,
+              "minimum": 52,
+              "maximum": 60,
+              "medianAbsoluteDeviation": 1
+            },
+            "over50": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "renderCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 148,
+              "maximum": 151,
+              "medianAbsoluteDeviation": 1
+            },
+            "controlsUpdateCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 148,
+              "maximum": 151,
+              "medianAbsoluteDeviation": 1
+            },
+            "mechanismUpdateCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 148,
+              "maximum": 151,
+              "medianAbsoluteDeviation": 1
+            },
+            "domUpdateCalls": {
+              "count": 7,
+              "median": 76,
+              "minimum": 74,
+              "maximum": 78,
+              "medianAbsoluteDeviation": 2
+            },
+            "audioSchedulerCalls": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskDurationMs": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "controlsChangeCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "wheelEventCount": {
+              "count": 7,
+              "median": 60,
+              "minimum": 60,
+              "maximum": 60,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraStartDistance": {
+              "count": 7,
+              "median": 48.97567441624348,
+              "minimum": 48.97567441624348,
+              "maximum": 48.97567441624348,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraEndDistance": {
+              "count": 7,
+              "median": 44.279594013234814,
+              "minimum": 44.27959174882413,
+              "maximum": 44.279594645301216,
+              "medianAbsoluteDeviation": 6.320664027725797e-7
+            },
+            "cameraTravel": {
+              "count": 7,
+              "median": -4.696080403008665,
+              "minimum": -4.696082667419347,
+              "maximum": -4.696079770942262,
+              "medianAbsoluteDeviation": 6.320664027725797e-7
+            },
+            "externalElapsedMs": {
+              "count": 7,
+              "median": 4290.0999999940395,
+              "minimum": 4270.70000000298,
+              "maximum": 4343.699999988079,
+              "medianAbsoluteDeviation": 17.799999982118607
+            },
+            "eventIntervalMeanMs": {
+              "count": 7,
+              "median": 54.83050847457627,
+              "minimum": 54.428813559271525,
+              "maximum": 55.65762711859355,
+              "medianAbsoluteDeviation": 0.33050847457626986
+            },
+            "costs": {
+              "rendererRender": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 148,
+                  "maximum": 151,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 1156.6000000238419,
+                  "minimum": 1033.2999999672174,
+                  "maximum": 1200.8999999314547,
+                  "medianAbsoluteDeviation": 35.79999999701977
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 7.8148648650259585,
+                  "minimum": 6.888666666448116,
+                  "maximum": 8.059731543164125,
+                  "medianAbsoluteDeviation": 0.2448666781381661
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 11.600000008940697,
+                  "minimum": 7.4000000059604645,
+                  "maximum": 13.600000008940697,
+                  "medianAbsoluteDeviation": 0.4000000059604645
+                }
+              },
+              "controlsUpdate": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 148,
+                  "maximum": 151,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 2.099999949336052,
+                  "minimum": 1.3999999910593033,
+                  "maximum": 2.800000011920929,
+                  "medianAbsoluteDeviation": 0.2999999523162842
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.014093959491524921,
+                  "minimum": 0.009271523119598035,
+                  "maximum": 0.01879194638873107,
+                  "medianAbsoluteDeviation": 0.0020939590146877626
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "mechanismState": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 148,
+                  "maximum": 151,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 9.500000104308128,
+                  "minimum": 8.899999961256981,
+                  "maximum": 10.499999985098839,
+                  "medianAbsoluteDeviation": 0.4000002145767212
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.06375838996179951,
+                  "minimum": 0.05933333307504654,
+                  "maximum": 0.07094594584526243,
+                  "medianAbsoluteDeviation": 0.003091724030256801
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.20000000298023224,
+                  "minimum": 0.20000000298023224,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateBalanceReadout": {
+                "calls": {
+                  "count": 7,
+                  "median": 38,
+                  "minimum": 37,
+                  "maximum": 39,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.29999999701976776,
+                  "minimum": 0.20000000298023224,
+                  "maximum": 0.7000000178813934,
+                  "medianAbsoluteDeviation": 0.09999999403953552
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.0078947367636781,
+                  "minimum": 0.005128205204621339,
+                  "maximum": 0.01891891940219982,
+                  "medianAbsoluteDeviation": 0.00276653155905676
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateTimeUI": {
+                "calls": {
+                  "count": 7,
+                  "median": 38,
+                  "minimum": 37,
+                  "maximum": 39,
+                  "medianAbsoluteDeviation": 1
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.09999999403953552,
+                  "minimum": 0,
+                  "maximum": 0.29999999701976776,
+                  "medianAbsoluteDeviation": 0.09999999403953552
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.002564102793351198,
+                  "minimum": 0,
+                  "maximum": 0.0078947367636781,
+                  "medianAbsoluteDeviation": 0.002564102793351198
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.09999999403953552,
+                  "minimum": 0,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 1.4901161193847656e-8
+                }
+              }
+            },
+            "contracts": {
+              "eventParity": true,
+              "reversalZero": true,
+              "stopThenJumpZero": true,
+              "zoomMonotonic": true,
+              "transformInvariant": true,
+              "consoleErrorsWarningsZero": true
+            }
+          },
+          "E": {
+            "routeKey": "E",
+            "routeLabel": "full-explicit-integrated",
+            "validRunCount": 7,
+            "averageFps": {
+              "count": 7,
+              "median": 34.46633863182364,
+              "minimum": 33.26648578506547,
+              "maximum": 34.757286113451826,
+              "medianAbsoluteDeviation": 0.2909474816281872
+            },
+            "frameCount": {
+              "count": 7,
+              "median": 148,
+              "minimum": 141,
+              "maximum": 152,
+              "medianAbsoluteDeviation": 0
+            },
+            "meanFrameTime": {
+              "count": 7,
+              "median": 28.836842105263162,
+              "minimum": 28.602702702702697,
+              "maximum": 29.904255319148938,
+              "medianAbsoluteDeviation": 0.23413940256045507
+            },
+            "p50": {
+              "count": 7,
+              "median": 33.29999999999927,
+              "minimum": 32.899999999999636,
+              "maximum": 33.29999999999927,
+              "medianAbsoluteDeviation": 0
+            },
+            "p90": {
+              "count": 7,
+              "median": 33.80000000000109,
+              "minimum": 33.400000000001455,
+              "maximum": 34.29999999999927,
+              "medianAbsoluteDeviation": 0.10000000000218279
+            },
+            "p95": {
+              "count": 7,
+              "median": 34.100000000000364,
+              "minimum": 33.899999999999636,
+              "maximum": 34.79999999999927,
+              "medianAbsoluteDeviation": 0.1999999999989086
+            },
+            "p99": {
+              "count": 7,
+              "median": 34.29999999999927,
+              "minimum": 34,
+              "maximum": 49.60000000000218,
+              "medianAbsoluteDeviation": 0.1000000000003638
+            },
+            "longest": {
+              "count": 7,
+              "median": 34.30000000000109,
+              "minimum": 34.20000000000073,
+              "maximum": 50.19999999999709,
+              "medianAbsoluteDeviation": 0.1000000000003638
+            },
+            "over33": {
+              "count": 7,
+              "median": 55,
+              "minimum": 52,
+              "maximum": 61,
+              "medianAbsoluteDeviation": 2
+            },
+            "over50": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 1,
+              "medianAbsoluteDeviation": 0
+            },
+            "renderCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 142,
+              "maximum": 153,
+              "medianAbsoluteDeviation": 0
+            },
+            "controlsUpdateCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 142,
+              "maximum": 153,
+              "medianAbsoluteDeviation": 0
+            },
+            "mechanismUpdateCalls": {
+              "count": 7,
+              "median": 149,
+              "minimum": 142,
+              "maximum": 153,
+              "medianAbsoluteDeviation": 0
+            },
+            "domUpdateCalls": {
+              "count": 7,
+              "median": 74,
+              "minimum": 72,
+              "maximum": 78,
+              "medianAbsoluteDeviation": 0
+            },
+            "audioSchedulerCalls": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "longtaskDurationMs": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "controlsChangeCount": {
+              "count": 7,
+              "median": 0,
+              "minimum": 0,
+              "maximum": 0,
+              "medianAbsoluteDeviation": 0
+            },
+            "wheelEventCount": {
+              "count": 7,
+              "median": 60,
+              "minimum": 60,
+              "maximum": 60,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraStartDistance": {
+              "count": 7,
+              "median": 48.97567441624348,
+              "minimum": 48.97567441624348,
+              "maximum": 48.97567441624348,
+              "medianAbsoluteDeviation": 0
+            },
+            "cameraEndDistance": {
+              "count": 7,
+              "median": 44.279593620560476,
+              "minimum": 44.279590917919705,
+              "maximum": 44.27959484207106,
+              "medianAbsoluteDeviation": 0.0000012215105869017862
+            },
+            "cameraTravel": {
+              "count": 7,
+              "median": -4.696080795683002,
+              "minimum": -4.696083498323773,
+              "maximum": -4.6960795741724155,
+              "medianAbsoluteDeviation": 0.0000012215105869017862
+            },
+            "externalElapsedMs": {
+              "count": 7,
+              "median": 4332.20000000298,
+              "minimum": 4239.9000000059605,
+              "maximum": 4411.5,
+              "medianAbsoluteDeviation": 62.900000005960464
+            },
+            "eventIntervalMeanMs": {
+              "count": 7,
+              "median": 55.55254237278033,
+              "minimum": 53.98813559316983,
+              "maximum": 56.76779661011898,
+              "medianAbsoluteDeviation": 1.040677966202722
+            },
+            "costs": {
+              "rendererRender": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 142,
+                  "maximum": 153,
+                  "medianAbsoluteDeviation": 0
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 1205.3999999165535,
+                  "minimum": 1028.4000000953674,
+                  "maximum": 1286.0000000149012,
+                  "medianAbsoluteDeviation": 80.60000009834766
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 7.978947368891616,
+                  "minimum": 7.155033556506938,
+                  "maximum": 8.405228758267327,
+                  "medianAbsoluteDeviation": 0.4262813893757116
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 13.099999994039536,
+                  "minimum": 9,
+                  "maximum": 15.200000002980232,
+                  "medianAbsoluteDeviation": 1.3999999910593033
+                }
+              },
+              "controlsUpdate": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 142,
+                  "maximum": 153,
+                  "medianAbsoluteDeviation": 0
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 2.0999999940395355,
+                  "minimum": 1.9000000059604645,
+                  "maximum": 2.4000000208616257,
+                  "medianAbsoluteDeviation": 0.19999995827674866
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.013815789434470628,
+                  "minimum": 0.01275167789235211,
+                  "maximum": 0.01690140859761708,
+                  "medianAbsoluteDeviation": 0.0010641113421029306
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.10000000894069672,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "mechanismState": {
+                "calls": {
+                  "count": 7,
+                  "median": 149,
+                  "minimum": 142,
+                  "maximum": 153,
+                  "medianAbsoluteDeviation": 0
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 9.400000035762787,
+                  "minimum": 7.399999961256981,
+                  "maximum": 11.899999976158142,
+                  "medianAbsoluteDeviation": 1.3999999463558197
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.06549295814524234,
+                  "minimum": 0.04966442927018108,
+                  "maximum": 0.07777777762194864,
+                  "medianAbsoluteDeviation": 0.007598221322743862
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.20000000298023224,
+                  "minimum": 0.20000000298023224,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateBalanceReadout": {
+                "calls": {
+                  "count": 7,
+                  "median": 37,
+                  "minimum": 36,
+                  "maximum": 39,
+                  "medianAbsoluteDeviation": 0
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.4000000059604645,
+                  "minimum": 0.29999998211860657,
+                  "maximum": 0.7999999672174454,
+                  "medianAbsoluteDeviation": 0.10000000894069672
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.011111111276679568,
+                  "minimum": 0.007692307233810425,
+                  "maximum": 0.021621620735606632,
+                  "medianAbsoluteDeviation": 0.003418803660788087
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0.09999999403953552,
+                  "maximum": 0.20000000298023224,
+                  "medianAbsoluteDeviation": 0
+                }
+              },
+              "updateTimeUI": {
+                "calls": {
+                  "count": 7,
+                  "median": 37,
+                  "minimum": 36,
+                  "maximum": 39,
+                  "medianAbsoluteDeviation": 0
+                },
+                "totalMs": {
+                  "count": 7,
+                  "median": 0.10000000894069672,
+                  "minimum": 0,
+                  "maximum": 0.20000001788139343,
+                  "medianAbsoluteDeviation": 0.09999997913837433
+                },
+                "averageMs": {
+                  "count": 7,
+                  "median": 0.00277777761220932,
+                  "minimum": 0,
+                  "maximum": 0.005405405888686309,
+                  "medianAbsoluteDeviation": 0.002350427210330963
+                },
+                "maxMs": {
+                  "count": 7,
+                  "median": 0.09999999403953552,
+                  "minimum": 0,
+                  "maximum": 0.10000000894069672,
+                  "medianAbsoluteDeviation": 1.4901161193847656e-8
+                }
+              }
+            },
+            "contracts": {
+              "eventParity": true,
+              "reversalZero": true,
+              "stopThenJumpZero": true,
+              "zoomMonotonic": true,
+              "transformInvariant": true,
+              "consoleErrorsWarningsZero": true
+            }
+          }
+        },
+        "comparisons": {
+          "implicitVsExplicit": {
+            "candidate": "I",
+            "reference": "E",
+            "fpsDegradationRatio": -0.008246508063234853,
+            "p95DegradationMs": -0.1000000000003638,
+            "thresholds": {
+              "fpsDegradationRatioMax": 0.05,
+              "p95DegradationMsMax": 2
+            },
+            "passed": true
+          },
+          "implicitVsAlias": {
+            "candidate": "I",
+            "reference": "A",
+            "fpsDegradationRatio": -0.006968077765008786,
+            "p95DegradationMs": -0.09999999999854481,
+            "thresholds": {
+              "fpsDegradationRatioMax": 0.05,
+              "p95DegradationMsMax": 2
+            },
+            "passed": true
+          }
+        }
+      }
+    ],
+    "environment": {
+      "backgroundSecurityNotDisabled": true,
+      "loadAverage1m": {
+        "count": 84,
+        "median": 7.464111328125,
+        "minimum": 4.87109375,
+        "maximum": 10.9345703125,
+        "medianAbsoluteDeviation": 1.0390625
+      },
+      "chromeProcessCount": {
+        "count": 84,
+        "median": 21,
+        "minimum": 21,
+        "maximum": 23,
+        "medianAbsoluteDeviation": 0
+      },
+      "chromeCpuPercentSum": {
+        "count": 84,
+        "median": 52.150000000000006,
+        "minimum": 43.5,
+        "maximum": 210.6,
+        "medianAbsoluteDeviation": 4.799999999999994
+      },
+      "securityProcessCount": {
+        "count": 84,
+        "median": 17,
+        "minimum": 17,
+        "maximum": 17,
+        "medianAbsoluteDeviation": 0
+      },
+      "securityCpuPercentSum": {
+        "count": 84,
+        "median": 207.95,
+        "minimum": 114.8,
+        "maximum": 480.9,
+        "medianAbsoluteDeviation": 10.699999999999989
+      },
+      "notes": [
+        "McAfee and endpoint-security processes remained enabled; their load was recorded for every run."
+      ]
+    }
+  },
+  "motionInvariants": {
+    "reversalZero": true,
+    "stopThenJumpZero": true,
+    "wheelMonotonic": true,
+    "modelTransformInvariant": true
+  },
+  "interpretation": "The earlier three-repetition Chrome Desktop wheel result was not reproduced under two fresh-process rounds with fixed 60-event workloads. All 42 runs were valid; implicit default was 0.49% faster than full explicit and 0.47% faster than the explicit alias at the all-run median, with p95 better by 0.05 ms in both comparisons. The unchanged gate passed and no product-specific runtime regression was detected."
+}

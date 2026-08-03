@@ -264,7 +264,7 @@ test("Phase 3A remains recommendation history while Phase 3B.1 stays query-only"
   assert.equal(CANDIDATE_COMPARISON.criteria["E-EDUCATIONAL"].crownInterfaceRisk, "HIGH_RISK");
   const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
   assert.doesNotMatch(indexSource, /final-exterior-audit/);
-  assert.match(indexSource, /resolveFinalExteriorCandidate\(initialPageParameters\)/);
+  assert.match(indexSource, /resolveFinalExteriorCandidate\(effectivePageParameters\)/);
   assert.match(indexSource, /if\(requestedExteriorConfig\)\{/);
   assert.match(indexSource, /DISABLED_NORMAL_PATH/);
   assert.doesNotMatch(indexSource, /caseGeometry|bezelGeometry|casebackGeometry|lugGeometry|strapGeometry/);

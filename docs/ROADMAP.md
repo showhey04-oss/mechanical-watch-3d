@@ -6,6 +6,15 @@
 - v3.15.0：S86文字板表示比率を通常寸法として採用し、v3.14.0の機構・描画基準を維持
 - 直前基準：v3.14.0（v3.13.0の機構・描画基準を維持した音響追加版）
 
+## 現在工程 — Completed Watch Default Adoption Draft
+
+- main `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`の承認済み完成時計12-key stackを通常rootの中央profileへ昇格する
+- 明示profile queryを優先し、旧通常表示を`defaultProfile=legacy`で保護する
+- D2c3はdefault adoption candidate。過去工程のquery限定・未採用記録はhistorical stateとして保持する
+- 性能状態は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`。全差分セル合格やclean-process absolute PASSは未主張
+- Issue #2 Open、PR #5 Open／Draft、Phase 3B.4d未開始、OITは完成後実験を維持する
+- Human受入、Ready化、マージは別途判断とし、このDraftでは実施しない
+
 ## 完了
 
 ### Stage 1 / v3.0

@@ -1,5 +1,19 @@
 # 受入試験
 
+## Completed Watch Default Adoption Draft
+
+- 対象baseをmain `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`、APP_VERSIONをv3.15.0とする
+- queryなしrootと非profile queryだけのrootで12-key completed-watch profileを有効にし、URL／historyを変更しない
+- 明示profile keyが一つでもある場合は暗黙profileを注入せず、`defaultProfile=legacy`で開始mainの通常pathをpixel／DOM／camera exactに保護する
+- Installed Chrome／Playwright WebKitで13 route×Desktop／390×844を各26/26、default rootと明示統合queryをcanvas、Object3D／Mesh／Material inventory、part registry、camera、lighting、transform exactとする
+- queryなしrootのNative Safari 26.5.2でpreset、選択・HUD・blank clear、opacity 100／50／16／100、split／explode／restore、位置1／2禁止干渉0/0を確認する
+- 作動音は初期OFF、trusted gesture後`RUNNING_AND_ADVANCING`、buffer／raw asset 6/6、visibility各30 cycle、duplicate／backlog／catch-up 0、console／runtime／unhandled rejection 0とする
+- Mobile multi-touchをChrome／WebKit各100 cycle実行し、active pointer／capture／stale state 0、camera finite、model transform invariantを確認する
+- 既存A.5のD2c3非互換3 assertionと環境依存A.6絶対性能2 assertionをPASSへ変換しない。その他の新規browser failureを0とする
+- default／explicit性能差分はFPS悪化5%以内、p95悪化2ms以内を変更せず評価する。未達セルが残る間は`FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED`および全技術ゲート合格を主張しない
+- Geometry、機構、D2c3値、透過、camera定数、audio asset／gain、APP_VERSION、試験閾値の変更を0とする
+- Issue #2 Open、PR #5 Open／Draft、Phase 3B.4d未開始、OIT完成後実験を維持し、Human受入、Ready化、マージを行わない
+
 ## PR #13 final stack main-promotion audit
 
 - 対象をPR #13 Head `86d7bdc041a5f43ddbbeb92d09a01b4a95dc701b`、baseをmain `293626f13a50224924f8e3ac229a1fc4077ad7a7`、APP_VERSIONをv3.15.0とする
