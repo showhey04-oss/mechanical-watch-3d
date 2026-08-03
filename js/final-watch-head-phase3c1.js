@@ -551,6 +551,7 @@ export function createPhase3C1WatchHead({
   materials,
   exteriorRuntime,
   exteriorAttachmentRuntime,
+  strapBuckleRuntime = null,
   plate,
   machiningDetails,
   display,
@@ -607,13 +608,22 @@ export function createPhase3C1WatchHead({
     "sixRightLug",
     "twelveSpringBar",
     "sixSpringBar",
-    "buckle",
+    ...(strapBuckleRuntime ? [] : ["buckle"]),
   ]) {
     applyObjectMaterialFamily(
       exteriorAttachmentRuntime.objects[key],
       stableExteriorSilver,
       { partId: key, candidateLocalClone: true },
     );
+  }
+  if (strapBuckleRuntime) {
+    for (const key of ["buckleFrame", "buckleTang", "buckleBar"]) {
+      applyObjectMaterialFamily(
+        strapBuckleRuntime.objects[key],
+        stableExteriorSilver,
+        { partId: `phase3c2-${key}`, candidateLocalClone: true },
+      );
+    }
   }
   applyObjectMaterialFamily(mechanism.crown, stableExteriorSilver, {
     partId: "crown",
@@ -1072,9 +1082,15 @@ export function createPhase3C1WatchHead({
         exteriorAttachmentRuntime.objects.sixRightLug,
         exteriorAttachmentRuntime.objects.twelveSpringBar,
         exteriorAttachmentRuntime.objects.sixSpringBar,
-        exteriorAttachmentRuntime.objects.twelveStrap,
-        exteriorAttachmentRuntime.objects.sixStrap,
-        exteriorAttachmentRuntime.objects.buckle,
+        ...(
+          strapBuckleRuntime
+            ? strapBuckleRuntime.displayParts
+            : [
+              exteriorAttachmentRuntime.objects.twelveStrap,
+              exteriorAttachmentRuntime.objects.sixStrap,
+              exteriorAttachmentRuntime.objects.buckle,
+            ]
+        ),
       ].filter(Boolean),
     },
     BACK: {
@@ -1284,6 +1300,10 @@ export function createPhase3C1WatchHead({
       .copy(baseDisplayTransforms.backExteriorRoot.position);
     baseDisplayTransforms.backExteriorRoot.object.position.y += backOffset;
     exteriorAttachmentRuntime.applyDisplayState({
+      explodeAmount: explode,
+      sideSplitAmount: 0,
+    });
+    strapBuckleRuntime?.applyDisplayState({
       explodeAmount: explode,
       sideSplitAmount: 0,
     });
@@ -1579,6 +1599,11 @@ export function createPhase3C1WatchHead({
       : [],
     plateCutoutMode: config.openHeart.plateCutout.mode,
     phase3c2MandatoryBacklog: config.phase3c2MandatoryBacklog,
+    phase3c2StrapBuckle:
+      strapBuckleRuntime?.getState() || {
+        enabled: false,
+        status: "PHASE3C2_NOT_REQUESTED",
+      },
     uiSimplificationBacklog: config.uiSimplificationBacklog,
     exteriorDisplayGroup: {
       label: config.exteriorDisplayGroup.label,
@@ -1655,7 +1680,14 @@ export function createPhase3C1WatchHead({
     crownConnection: exteriorRuntime.objects.crownConnection,
     twelveSpringBar: exteriorAttachmentRuntime.objects.twelveSpringBar,
     sixSpringBar: exteriorAttachmentRuntime.objects.sixSpringBar,
-    buckle: exteriorAttachmentRuntime.objects.buckle,
+    buckle: strapBuckleRuntime?.objects.buckleFrame
+      || exteriorAttachmentRuntime.objects.buckle,
+    ...(strapBuckleRuntime
+      ? {
+        buckleTang: strapBuckleRuntime.objects.buckleTang,
+        buckleBar: strapBuckleRuntime.objects.buckleBar,
+      }
+      : {}),
   };
 
   const getMaterialReport = () => {
@@ -1738,7 +1770,9 @@ export function createPhase3C1WatchHead({
         hourAndMinuteHands: config.hands.material,
         movementHolder: config.materials.subduedPolishedSteel,
       },
-      strapPhase3c2StyleApplied: false,
+      strapPhase3c2StyleApplied: Boolean(strapBuckleRuntime),
+      strapPhase3c2Material:
+        strapBuckleRuntime?.getMaterialReport() || null,
     };
   };
 

@@ -5,7 +5,12 @@ const log = document.getElementById("phase3c1SuiteLog");
 const width = Math.max(320, Number(params.get("width")) || 1280);
 const height = Math.max(480, Number(params.get("height")) || 720);
 const suite = params.get("suite") || "browser";
-const mode = params.get("mode") === "base" ? "base" : "candidate";
+const requestedMode = params.get("mode");
+const mode = requestedMode === "base"
+  ? "base"
+  : requestedMode === "phase3c2"
+    ? "phase3c2"
+    : "candidate";
 const suiteMap = {
   browser: ["browserTest", "browserTestResult"],
   ui: ["uiTest", "uiTestResult"],
@@ -51,7 +56,10 @@ if (!selectedSuite) {
     [queryName]: "1",
     cache: params.get("cache") || String(Date.now()),
   });
-  if (mode === "candidate") query.set("watchHead", "phase3c1");
+  if (mode === "candidate" || mode === "phase3c2") {
+    query.set("watchHead", "phase3c1");
+  }
+  if (mode === "phase3c2") query.set("strapStyle", "phase3c2");
   frame.src = `../index.html?${query}`;
 
   (async () => {

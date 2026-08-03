@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.4.1",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "b3393972f3f25f2c4aef75eb2274eabddc17b575",
+  "sourceImplementationCommit": "0ba6348e9b8bf6ec333ae0f4979a4e8a86d4239c",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T18:05:41.895Z",
+  "nativeSafariAutomation": "BLOCKED_BY_ENVIRONMENT",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "PASSED",
+  "browser": {
+    "decodeTimeout": 120,
+    "oldContextCloseTimeout": 120,
+    "staleTransaction": 120,
+    "successfulFreshContext": 120
+  },
+  "node": [
+    "candidate Context create reject",
+    "candidate resume hang",
+    "candidate resume reject",
+    "candidate resume resolves suspended",
+    "candidate running currentTime stall",
+    "decode assets 1, 3, and 6 reject",
+    "decode assets 1, 3, and 6 hang",
+    "multiple decode hangs",
+    "decode late resolve after timeout",
+    "transaction deadline with multiple hangs",
+    "visibility hidden during decode",
+    "new visible transition during decode",
+    "candidate close reject and hang",
+    "old Context close reject and hang",
+    "scheduler reanchor reject and false",
+    "legacy reset exception"
+  ],
+  "invariants": {
+    "oldOrNewGraphOnly": true,
+    "mixedGraph": false,
+    "duplicate": 0,
+    "backlog": 0,
+    "catchUp": 0,
+    "uiFalsePositive": 0,
+    "unhandledRejection": 0
+  }
+}

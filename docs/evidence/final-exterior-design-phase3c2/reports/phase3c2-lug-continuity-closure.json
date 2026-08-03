@@ -1,0 +1,104 @@
+{
+  "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+  "sourceAuditCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+  "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
+  "baseBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
+  "phase3c1Acceptance": {
+    "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+    "head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+    "deferred": [
+      "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
+      "A5_FRONT_BACK_LUMINANCE_DIFFERENCE",
+      "ISSUE_2_RECTANGULAR_SHADOW_AND_TRANSPARENCY_CONTINUITY",
+      "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
+    ]
+  },
+  "schemaVersion": 1,
+  "sourceStartCommit": "752418e72d3bb7b1dd86952638a3bb85fdf6d582",
+  "classification": "PHASE3C2_REFINED_LUG_CASE_CONTINUITY_FINAL",
+  "status": "TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+  "items": [
+    {
+      "id": "lug-case-continuity-review-angle",
+      "requirement": "lug-case continuity at attached review angle",
+      "previousStatus": "HUMAN_REVIEW_FAILED_PHASE3C2_LUG_CASE_CONTINUITY_NOT_CLOSED",
+      "rootCause": "the former 2.400-wide constant-Z root cap remained visibly detached from the circular case silhouette",
+      "codeChange": "case-radius-matched 0.260 embedded root chord, 3.600 x 5.800 root section and 4.297 monotonic transition",
+      "quantitativeResult": {
+        "oldRootWidth": 2.4,
+        "newRootWidth": 3.6,
+        "widthIncreasePercent": 50,
+        "rootEmbed": 0.26,
+        "rootTransitionLength": 4.297
+      },
+      "evidence": [
+        "images/lug-continuity-final/comparison-review-angle.png",
+        "images/lug-continuity-final/lug-case-connection-annotation.png",
+        "videos/lug-continuity-final/review-angle-closeup-rotation.gif"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "lug-case-continuity-front",
+      "requirement": "lug-case continuity front view",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "root width and thickness changed too little from the tip",
+      "codeChange": "broadened the root section while preserving the 20.000 inner gap, 46.600 lug-to-lug and spring-bar anchors",
+      "quantitativeResult": {
+        "fourRefinedLugs": 4,
+        "rootWidth": 3.6,
+        "tipWidth": 2,
+        "rootThickness": 5.8,
+        "tipThickness": 2
+      },
+      "evidence": [
+        "images/lug-continuity-final/comparison-front.png",
+        "images/lug-continuity-final/lug-12-left-closeup.png",
+        "images/lug-continuity-final/lug-12-right-closeup.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "lug-case-continuity-oblique",
+      "requirement": "lug-case continuity oblique view",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "the planar root cap produced a hard attached-block shoulder under oblique light",
+      "codeChange": "matched the hidden root chord to the case radius and retained a 0.055 visible edge break without coplanar overlap",
+      "quantitativeResult": {
+        "edgeBreak": 0.055,
+        "coplanarOverlapCount": 0,
+        "zFightingCount": 0
+      },
+      "evidence": [
+        "images/lug-continuity-final/comparison-oblique.png",
+        "videos/lug-continuity-final/front-oblique-side-continuous.gif"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "lug-case-continuity-side",
+      "requirement": "lug-case continuity side view",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "short narrow root transition preserved excessive visual separation",
+      "codeChange": "redistributed root thickness into the case belly and tapered it monotonically to the protected spring-bar tip",
+      "quantitativeResult": {
+        "rootThickness": 5.8,
+        "tipThickness": 2,
+        "rootTransitionLength": 4.297,
+        "forbiddenInterferenceCount": 0
+      },
+      "evidence": [
+        "images/lug-continuity-final/comparison-side.png",
+        "images/lug-continuity-final/root-profile-comparison.png"
+      ],
+      "finalStatus": "RESOLVED"
+    }
+  ],
+  "allTechnicalItemsResolved": true,
+  "humanConfirmationRequired": true,
+  "readyOrMergeAllowed": false
+}

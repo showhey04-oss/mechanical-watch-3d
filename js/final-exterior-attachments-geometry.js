@@ -152,10 +152,22 @@ export function createSweptPrismGeometryData(stations) {
       [1, 1],
       [-1, 1],
     ]) {
+      const x = station.x + xSign * halfWidth;
+      const radialRootRadius = Number(station.radialRootRadius);
+      const radialRootEmbed = Number(station.radialRootEmbed);
+      const radialRootZ = (
+        Number.isFinite(radialRootRadius)
+        && Number.isFinite(radialRootEmbed)
+      )
+        ? Math.sign(station.z || 1) * (
+          Math.sqrt(Math.max(0, radialRootRadius ** 2 - x ** 2))
+          - radialRootEmbed
+        )
+        : station.z;
       positions.push(
-        station.x + xSign * halfWidth,
+        x,
         station.y + normalSign * normalY * halfThickness,
-        station.z + normalSign * normalZ * halfThickness,
+        radialRootZ + normalSign * normalZ * halfThickness,
       );
     }
   }
@@ -185,6 +197,156 @@ export function createSweptPrismGeometryData(stations) {
     positions: typedPositions,
     indices: typedIndices,
     audit: auditIndexedGeometry(typedPositions, typedIndices),
+  };
+}
+
+const signedPow = (value, exponent) =>
+  Math.sign(value) * Math.abs(value) ** exponent;
+
+export function createRoundedSweptLugGeometryData(
+  stations,
+  {
+    crossSectionSegments = 24,
+    crossSectionExponent = 2.4,
+  } = {},
+) {
+  if (!Array.isArray(stations) || stations.length < 12) {
+    throw new Error("rounded swept lug requires at least twelve stations");
+  }
+  if (!Number.isInteger(crossSectionSegments) || crossSectionSegments < 12) {
+    throw new Error("rounded swept lug requires at least twelve section segments");
+  }
+  if (
+    !Number.isFinite(crossSectionExponent)
+    || crossSectionExponent < 2
+    || crossSectionExponent > 4
+  ) {
+    throw new Error("rounded swept lug section exponent must be between 2 and 4");
+  }
+
+  const positions = [];
+  const sectionPower = 2 / crossSectionExponent;
+  for (let index = 0; index < stations.length; index++) {
+    const station = stations[index];
+    const [normalY, normalZ] = stationNormal(stations, index);
+    const halfWidth = station.width / 2;
+    const halfThickness = station.thickness / 2;
+    const frontExtent = Number.isFinite(station.frontExtent)
+      ? station.frontExtent
+      : halfThickness;
+    const undersideExtent = Number.isFinite(station.undersideExtent)
+      ? station.undersideExtent
+      : halfThickness;
+    for (let segment = 0; segment < crossSectionSegments; segment++) {
+      const angle = segment / crossSectionSegments * Math.PI * 2;
+      const xOffset =
+        halfWidth * signedPow(Math.cos(angle), sectionPower);
+      const signedSectionOffset =
+        signedPow(Math.sin(angle), sectionPower);
+      const pointsTowardFront = signedSectionOffset * normalY < 0;
+      const normalOffset = signedSectionOffset * (
+        pointsTowardFront ? frontExtent : undersideExtent
+      );
+      const x = station.x + xOffset;
+      const radialRootRadius = Number(station.radialRootRadius);
+      const radialRootEmbed = Number(station.radialRootEmbed);
+      const radialRootZ = (
+        Number.isFinite(radialRootRadius)
+        && Number.isFinite(radialRootEmbed)
+      )
+        ? Math.sign(station.z || 1) * (
+          Math.sqrt(Math.max(0, radialRootRadius ** 2 - x ** 2))
+          - radialRootEmbed
+        )
+        : station.z;
+      positions.push(
+        x,
+        station.y + normalOffset * normalY,
+        radialRootZ + normalOffset * normalZ,
+      );
+    }
+  }
+
+  const rawIndices = [];
+  for (let station = 0; station < stations.length - 1; station++) {
+    const current = station * crossSectionSegments;
+    const next = (station + 1) * crossSectionSegments;
+    for (let segment = 0; segment < crossSectionSegments; segment++) {
+      const following = (segment + 1) % crossSectionSegments;
+      rawIndices.push(
+        current + segment,
+        current + following,
+        next + following,
+        current + segment,
+        next + following,
+        next + segment,
+      );
+    }
+  }
+
+  const startCenter = positions.length / 3;
+  positions.push(stations[0].x, stations[0].y, stations[0].z);
+  const endCenter = positions.length / 3;
+  positions.push(stations.at(-1).x, stations.at(-1).y, stations.at(-1).z);
+  const end = (stations.length - 1) * crossSectionSegments;
+  for (let segment = 0; segment < crossSectionSegments; segment++) {
+    const following = (segment + 1) % crossSectionSegments;
+    rawIndices.push(startCenter, following, segment);
+    rawIndices.push(
+      endCenter,
+      end + segment,
+      end + following,
+    );
+  }
+
+  const oriented = orientOutward(positions, rawIndices);
+  const typedPositions = new Float32Array(positions);
+  const typedIndices = new Uint32Array(oriented.indices);
+  const audit = auditIndexedGeometry(typedPositions, typedIndices);
+  return {
+    positions: typedPositions,
+    indices: typedIndices,
+    audit: {
+      ...audit,
+      surfacing: {
+        stationCount: stations.length,
+        crossSectionSegments,
+        crossSectionExponent,
+        longitudinalSegmentCount: stations.length - 1,
+        angularStepDegrees: 360 / crossSectionSegments,
+        asymmetricSection: stations.some(station =>
+          Number.isFinite(station.frontExtent)
+          && Number.isFinite(station.undersideExtent)
+          && Math.abs(
+            station.frontExtent - station.undersideExtent
+          ) > 1e-9
+        ),
+        frontExtentRange: [
+          Math.min(...stations.map(station =>
+            Number.isFinite(station.frontExtent)
+              ? station.frontExtent
+              : station.thickness / 2
+          )),
+          Math.max(...stations.map(station =>
+            Number.isFinite(station.frontExtent)
+              ? station.frontExtent
+              : station.thickness / 2
+          )),
+        ],
+        undersideExtentRange: [
+          Math.min(...stations.map(station =>
+            Number.isFinite(station.undersideExtent)
+              ? station.undersideExtent
+              : station.thickness / 2
+          )),
+          Math.max(...stations.map(station =>
+            Number.isFinite(station.undersideExtent)
+              ? station.undersideExtent
+              : station.thickness / 2
+          )),
+        ],
+      },
+    },
   };
 }
 

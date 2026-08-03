@@ -104,7 +104,57 @@
 
 ## 現在の改修フェーズ
 
-### 最終外装統合 — Phase 3C.1 正式時計本体意匠候補
+### Final Stabilization Phase 3B.2～3B.4 promotion audit — PR #23 integrated into PR #22／ChatGPT review pending
+
+- Head `d16037a75d85d705434d8b73ef5293511052f65e`でPhase 3B.4a／3B.4b／3B.4c R2.4.2を統合し、起動契約、Desktop基準同等性、Mobile全長構図、Node 442/442、Chrome／WebKit／Native Safari、preset・9部品選択、multi-touch・production audio、12/12 protected pathを合格とする
+- 物理iPhoneのforeground自動復帰6/6、fallback tap 0、音のduplicate／burstなしを統合受入へ反映する
+- commit段階の12性能セルは既存閾値内で、Mobile pointer製品回帰は再現しなかった。製品修正と閾値変更は不要とする
+- clean-process最終性能測定はendpoint security高CPU負荷で`NOT TESTED`とし、`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を正式判断とする。clean環境の絶対PASSやMcAfee停止環境PASSは主張しない
+- PR #23はmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合済みとし、PR #23／#24／#25／#26はMerged／Closed、PR #22／#21はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
+- 以下はPhase 3B.4a～3B.4cの段階履歴として維持する
+
+- Phase 3B.3のPC／物理iPhone比較でD2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として選定した
+- Shadow-offはiPhoneの暗いfull-length表示により`HUMAN_REJECT_SHADOW_OFF_FOR_FINAL_POLISH_MOBILE_VISIBILITY`とし、比較履歴を維持する
+- D2c3は`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`でquery限定・未採用を維持する
+- モバイルmaxDistanceのquery限定候補を実測fit距離から検証し、初期表示、Desktop、D2c3描画、選択、操作、性能を保護する
+- 407,428頂点からraw fit 199.068109、安全余裕込み204.044811を導出し、静的`maxDistance=204.1`を技術候補とする
+- 390×844の最小余白4.0265%、clipping 0、初期表示32/32とDesktop固定画像48/48 pixel exact、Desktop selected 8/8 state exact、操作・性能差分合格を確認する
+- iPhone 16／iOS 26.5.2の15分確認で全長構図、fog許容、preset、最大距離回転、選択、HUD同期、解除、split／explode／restore、軽微な発熱を合格とし、`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
+- 一般tap異常と自動reloadは報告されていない。2～3分後の二本指pan／pinch／rotation劣化と手動reloadによる復旧をPhase 3B.4bへ分離し、active pointerとgesture lifecycleを診断する
+- query限定のevent-driven cleanup候補はDesktop 24 cycle／390×844 60 cycle、pointercancel、lost capture、ID再利用、visibility／page lifecycle、selection、差分性能の自動ゲートに合格
+- 物理iPhoneでframingなしAが49秒、framingありBが55秒で劣化を再現し、候補Cは15分以上無再現、manual reload不要、progressive frame drop／WebGL lossなしを確認
+- `CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`としてPhase 3B.4bを受入れ、状態を`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
+- preset／selectionの物理確認は`NOT_REPORTED`のまま最終統合へ引き継ぎ、自動回帰の合格で代替しない
+- iOS音響ペーシング低下はPhase 3B.4cへ分離し、機構を正本とする発音時系列をquery限定で診断・安定化する
+- D2c3、framing、入力修正候補はquery限定・未採用とし、Ready化、マージ、Issue #2クローズを行わない
+
+### Issue #2 Final Polish Phase 3B.2 — dual-baseline transparency continuity
+
+- Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として固定する
+- `integration=phase3c3`限定で完成時計を統合監査し、小秒凹面の非描画selection proxyだけを局所追加する
+- Desktop／390×844で小秒空白4/4、opacity 16%内部選択、外装ON/OFF、split、explode、復元、位置1／2禁止干渉0を確認する
+- queryなし／Phase 3C.1-only／Phase 3C.2-onlyをpixel exactに保護する
+- Phase 3C.3承認Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`はPC／物理iPhoneで合格し、`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`とする
+- 15分後の軽微な発熱は現工程のブロッカーにせず、Issue #2最終候補で15分再試験する
+- Issue #2の描画品質を完成外装基準でquery限定比較し、表裏分離／断面クリップのUI判断は方式確定後まで保留する
+- baseline／D2a／D2c3の3候補、2 viewport、計198枚の実WebGL PNG比較を完了
+- Phase 3A比較監査は`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`として合格。198枚は`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`で候補棄却には十分、最終採用には不足
+- D2aは矩形影と暗部を改善するが、前後輝度差、既存A.5ライト契約、性能差分を満たさないため視覚参考として棄却
+- D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`としてquery実装と証跡を維持し、baseline-preserving候補が成立しない場合の最終対抗案に限定
+- Phase 3Aは`RETAIN_COMPARISON_HISTORY_NO_ADOPTION`とし、Issue #2の次候補は完成外装baselineの前後均衡と性能を維持する別設計とする
+- Phase 3B.1でshadow carrier OFF、5状態固定shadow fit、fog 160／260の6候補をquery限定比較し、1056枚の実WebGL PNGと性能・回帰を保存
+- shadow-offは前後面バランス、shadow-fitは512² mapの広域fit解像度、fog候補はMobile far visibilityを満たさず、技術ゲート合格0件
+- 状態を`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`、Stage 2を`SKIPPED_ZERO_TECHNICAL_GATE_CANDIDATES`とし、PC候補選択・物理iPhone・採用へ進めない
+- 100／99と55／54の透過連続性は変更せずPhase 3B.2へ分離し、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`を維持
+- Phase 3B.1bでtight 512／1024を比較し、projection境界除去後も広い斜め帯が残るため`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`として終了
+- Phase 3B.1cのStage 0で主要caster群を`dial-exterior`へ特定し、opacity連動attenuationと固定normalBiasをquery限定比較
+- attenuationは中央矩形境界・斜め帯・性能を改善したが前後面baseline比悪化、normalBias候補はMobile性能も不合格で、技術finalist 0件
+- `ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`としてStage 2を実施せず、追加shadow実験を終了する
+- Shadow-offは`HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL`、D2c3は未採用fallbackを維持し、採用にはPC／物理iPhone／15分温度確認と明示承認を必要とする
+- Phase 3B.2でShadow-off／D2c3をdual baselineとし、100／99・55／54を含む13 opacity、Desktop／390×844で現行と固定深度3方式をquery限定比較する
+- 固定深度3方式はproperty toggle 0を達成したが、内部視認性またはD2c3性能差分ゲートに失敗し、技術finalist 0件とする
+- `TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`としてStage 2・物理iPhone・採用を実施せず、OITの対象範囲・性能予算・fallbackを別途明示判断するまで実装しない
+- protected path 42/42、candidate-specific browser failure 0、UI 22/22、HUD 57/57、audio 23/23、A.7 9/9、禁止干渉0/0を維持し、試験閾値を変更しない
 
 - ムーブメント外径36.6、S86表示寸法、Phase 2Cの3包絡を変更禁止の保護アンカーとする
 - Phase 3Aで承認されたE-BALANCEDを`?exterior=balanced`限定で実装し、Phase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`を人間承認済み依存基準とする
@@ -128,11 +178,14 @@
 - 文字板priorityを1へ局所変更し、文字板空白4点4／4、opacity 50%、index、針、小秒、open-heart、風防側面、opacity 16%内部選択を回帰する。グローバルRaycasterは変更しない
 - Phase 3C.1外装を既存FRONT／CORE／BACK／PLATEの表裏分離・分解transformへ統合し、100% split／explodeと誤差1e-7以内の復元をDesktop／390×844で検証する
 - 通常pathはPhase 3B.2とpixel exact、A.6性能の絶対・差分基準は合格。Desktop総合は白系文字板によるA.5前後面明度差だけ未達、音声integrationはBaseと候補の双方で同一timeoutとして記録する
-- 状態は`PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION`とし、最終微修正のPC／物理iPhone確認前に既定採用、Ready化、マージを行わない
+- Phase 3C.1 Head `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`を`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承する
 - 表裏分離／断面クリップは維持し、`UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2`としてPhase 3C.2とIssue #2完了後にUXを人間判断する
 - 矩形影、100%→99% transparent、55%→54% depthWrite、透過時の暗部・深度順、PC／iPhone照明差はIssue #2へ分離し、本工程でlighting／shadow／D2c3を変更しない
 - `PHYSICAL_IPHONE_MILD_WARMING_AFTER_15_MIN`は非ブロッキング観察事項。最終統合レビューで15分連続確認を行う
-- Phase 3C.2で黒革、実用長、巻込み部、穴列、定革・遊革、尾錠枠・つく棒・取付バー、シボ、ステッチ、コバを必須実装する。Phase 3C.1へ先行混在させない
+- Phase 3C.2は承認済みPhase 3C.1へ積み上げ、query時だけ75.000／115.000の黒革ストラップ、20→16相当taper、実巻込み、7貫通穴、定革・遊革、尾錠枠・つく棒・取付バー、procedural calf grain、ステッチ、コバを実装する
+- Phase 3B.2プレースホルダはPhase 3C.2有効時だけ非表示とし、通常pathとPhase 3C.1-only pathをpixel exactに維持する
+- 位置1／2禁止干渉0、10部品の選択、opacity 16%内部選択、外装ON／OFF、split／explode、復元、Desktop／390×844性能基準を自動確認する
+- Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`。Ready化・マージ・既定採用は未実施
 - v3.15.0の機構、描画、UI、作動音、カメラ、性能基準を維持する
 - Issue #2、PR #5、D2c3、照明最終調整は本工程へ混在させず、保留中の独立課題として扱う
 - ETA 4.50 mmの基準面対応は未解決のままとし、差分を外装厚さの調整量に使わない
@@ -141,8 +194,7 @@
 
 ### 1. 最終外装
 
-- Phase 3C.1最終微修正の6時index、外装OFF時の針・りゅうず維持、helperなし「外装」UI、文字板4点／風防側面／opacity別選択をPC／物理iPhoneで人間確認し、Draftの次判断を行う
-- Phase 3C.1承認後だけ、Phase 3C.2で黒革ストラップと尾錠の必須意匠を実装する
+- Phase 3C.2の全長、巻込み、穴列、自由端、定革・遊革、尾錠、シボ、ステッチ、コバはPC／物理iPhoneで人間承認済み。Phase 3C.3で完成時計全体を再確認する
 - 実装時に表示開口と全体比率を再確認する
 
 ### 2. 全体品質・Issue #2最終調整

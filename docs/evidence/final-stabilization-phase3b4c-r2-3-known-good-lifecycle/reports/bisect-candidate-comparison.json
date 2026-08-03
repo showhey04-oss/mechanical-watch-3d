@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.3",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "48ec7b73c207bf5a784663f70199ec8f4f1465d8",
+  "sourceImplementationCommit": "ebf69a258ad93bb3d4f326c07aea9ee4cca2d515",
+  "knownGoodCommit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T09:27:15.328Z",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "PHASE3B4C_R2_3_REGRESSION_CAUSE_ISOLATED",
+  "profiles": [
+    {
+      "id": "r2-3-l0",
+      "change": "R2.2 source snapshot",
+      "runtime": "ARCHIVED_COMPARISON_ONLY",
+      "decision": "REJECTED_COMPLEXITY"
+    },
+    {
+      "id": "r2-3-l1",
+      "change": "remove R2.2 recovery machine",
+      "visibilityOnly": false,
+      "schedulerReanchor": false,
+      "fallback": false,
+      "decision": "BISECT_ONLY"
+    },
+    {
+      "id": "r2-3-l2",
+      "change": "L1 plus v3.14 visibility ownership",
+      "visibilityOnly": true,
+      "schedulerReanchor": false,
+      "fallback": false,
+      "decision": "INSUFFICIENT_CURRENT_SCHEDULER_INTEGRATION"
+    },
+    {
+      "id": "r2-3-l3",
+      "change": "L2 plus regular scheduler re-anchor",
+      "visibilityOnly": true,
+      "schedulerReanchor": true,
+      "fallback": false,
+      "decision": "MINIMUM_AUTOMATIC_PATH"
+    },
+    {
+      "id": "r2-3-l4",
+      "change": "L3 plus bounded one-click fallback",
+      "visibilityOnly": true,
+      "schedulerReanchor": true,
+      "fallback": true,
+      "decision": "SINGLE_FINAL_CANDIDATE"
+    }
+  ],
+  "rootCause": "R2.2 replaced the known-good visibility-owned lifecycle with a multi-owner recovery state machine whose synthetic pipeline liveness did not prove physical iPhone output recovery.",
+  "finalCandidate": "r2-3-l4",
+  "defaultProductPathAdopted": false
+}

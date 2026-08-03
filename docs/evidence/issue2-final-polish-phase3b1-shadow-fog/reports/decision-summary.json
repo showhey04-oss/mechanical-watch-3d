@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "sourcePhase3C3Commit": "191ff2682398356da59e747e608c82120dacebd9",
+  "sourcePhase3ACommit": "3d7f84ea3f122fbc1df715b4eff3c8cebf64f46d",
+  "sourceImplementationCommit": "5df265176ededfc7cd8da22de8bb83fde6fe3546",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1-shadow-fog",
+  "capturedAt": "2026-07-28T01:07:09.704303Z",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness; actual Three.js offscreen WebGL PNG",
+  "defaultAdopted": false,
+  "status": "ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST",
+  "candidateGates": {
+    "issue2-phase3b1-baseline": {
+      "shadow": false,
+      "frontBackBalance": true,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "RETAINED_DIAGNOSTIC_ONLY"
+    },
+    "issue2-shadow-off": {
+      "shadow": true,
+      "frontBackBalance": false,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_FRONT_BACK_BALANCE"
+    },
+    "issue2-shadow-fit": {
+      "shadow": false,
+      "frontBackBalance": false,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_SHADOW_ARTIFACT"
+    },
+    "issue2-fog-only": {
+      "shadow": false,
+      "frontBackBalance": true,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_FOG_VISIBILITY"
+    },
+    "issue2-shadow-off-fog": {
+      "shadow": true,
+      "frontBackBalance": false,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_FRONT_BACK_BALANCE"
+    },
+    "issue2-shadow-fit-fog": {
+      "shadow": false,
+      "frontBackBalance": false,
+      "fogVisibility": false,
+      "performance": true,
+      "allTechnicalGates": false,
+      "decision": "REJECTED_SHADOW_ARTIFACT"
+    }
+  },
+  "candidateDecisions": {
+    "issue2-phase3b1-baseline": "RETAINED_DIAGNOSTIC_ONLY",
+    "issue2-shadow-off": "REJECTED_FRONT_BACK_BALANCE",
+    "issue2-shadow-fit": "REJECTED_SHADOW_ARTIFACT",
+    "issue2-fog-only": "REJECTED_FOG_VISIBILITY",
+    "issue2-shadow-off-fog": "REJECTED_FRONT_BACK_BALANCE",
+    "issue2-shadow-fit-fog": "REJECTED_SHADOW_ARTIFACT"
+  },
+  "technicalFinalistsForHumanPcReview": [],
+  "stage2": "SKIPPED_ZERO_TECHNICAL_GATE_CANDIDATES",
+  "physicalIPhone": "NOT_PERFORMED",
+  "adoptedCandidate": null,
+  "defaultAdoptionAllowed": false,
+  "knownTransparencyContinuity": {
+    "opacity100to99": "KNOWN_UNRESOLVED_PROTECTED_FOR_PHASE3B2",
+    "opacity55to54": "KNOWN_UNRESOLVED_PROTECTED_FOR_PHASE3B2",
+    "phase3b1ChangedTransparency": false
+  },
+  "humanDiagnosticReview": {
+    "status": "PHASE3B1_HUMAN_DIAGNOSTIC_RECORDED_NO_ADOPTION",
+    "priority": [
+      "SHADOW_OFF_OR_D2C3_UNDECIDED",
+      "HUMAN_REJECTED_RENDERING_BASELINE"
+    ],
+    "baseline": {
+      "decision": "HUMAN_REJECTED_RENDERING_BASELINE",
+      "findings": [
+        "strong central rectangular shadow",
+        "movement back slightly dark",
+        "weak depth impression",
+        "retain only as comparison and reproduction baseline"
+      ]
+    },
+    "shadowOff": {
+      "decision": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
+      "technicalGateRelaxed": false,
+      "findings": [
+        "no central rectangular shadow",
+        "human front-back balance acceptable",
+        "weaker depth impression than D2c3",
+        "darkens at maximum zoom-out",
+        "retain as lightweight counterproposal"
+      ]
+    },
+    "d2c3": {
+      "decision": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+      "findings": [
+        "good completed-exterior visibility",
+        "stronger depth impression",
+        "less darkening at maximum zoom-out",
+        "angle-dependent brightness without exterior",
+        "sluggish PC close-zoom rotation",
+        "acceptable smartphone interaction"
+      ]
+    },
+    "nextComparison": "DISCRETE_STATE_TIGHT_SHADOW_CAMERA"
+  },
+  "mobileFullLengthFraming": {
+    "status": "DEFERRED_MOBILE_FULL_LENGTH_FRAMING_AND_ZOOM_LIMIT",
+    "phase3b1bChangesAllowed": false,
+    "comparePaths": [
+      "baseline",
+      "shadow-off",
+      "D2c3",
+      "Phase 3C.3-only"
+    ],
+    "measurements": [
+      "camera distance",
+      "controls.maxDistance",
+      "watch world bounds",
+      "projected occupancy",
+      "strap screen margin",
+      "camera preset",
+      "viewport",
+      "DPR"
+    ]
+  },
+  "d2c3": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+  "postIssue2GeometryCleanup": [
+    "DEFERRED_CENTER_HAND_RING_GEOMETRY_INTERFERENCE",
+    "DEFERRED_MINUTE_WHEEL_ARBOR_DIAL_PROTRUSION"
+  ]
+}

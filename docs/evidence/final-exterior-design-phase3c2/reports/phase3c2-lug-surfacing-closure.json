@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "classification": "PHASE3C2_REFINED_LUG_SURFACING_FINAL",
+  "sourceStartCommit": "9b55d5d3971ef456de5474b3bff6d3f26d6879f8",
+  "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+  "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "appVersion": "v3.15.0",
+  "status": "TECHNICALLY_RESOLVED_PENDING_HUMAN_CONFIRMATION",
+  "previousHumanReview": "HUMAN_REVIEW_FAILED_PHASE3C2_LUG_SURFACING_NOT_CLOSED",
+  "items": [
+    {
+      "id": "natural-case-to-tip-volume-flow",
+      "requirement": "case rootからtipまで自然な量感減衰に見える",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "7 stationの矩形swept prismで、幅と厚さの離散変化が中腹の面折れとして見えていた",
+      "codeChange": "16 longitudinal stations、24分割rounded superellipse断面、eased width/thickness distributionへ局所置換",
+      "quantitativeResult": {
+        "stationCount": 16,
+        "crossSectionSegments": 24,
+        "crossSectionExponent": 2.4,
+        "rootWidth": 3.4,
+        "tipWidth": 2,
+        "rootThickness": 5.4,
+        "tipThickness": 2,
+        "midWaistCount": 0
+      },
+      "evidence": [
+        "images/lug-surfacing-final/comparison-review-angle.png",
+        "images/lug-surfacing-final/comparison-oblique.png",
+        "images/lug-surfacing-final/surfacing-continuity-annotation.png",
+        "videos/lug-surfacing-final/front-oblique-side-continuous.gif"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "no-bump-waist-or-s-curve",
+      "requirement": "中腹のくびれ、ボコつき、S字状の崩れがない",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "粗いstation間隔と角張った断面により、局所断面変化がシルエットとハイライトへ直接現れていた",
+      "codeChange": "widthを70%進行までsmoothstep収束させ、thicknessをlinear/smoothstep blendで単調減衰し、全stationで局所最小を禁止",
+      "quantitativeResult": {
+        "midWaistCount": 0,
+        "widthMonotonic": true,
+        "thicknessMonotonic": true,
+        "unintendedDirectionReversal": 0
+      },
+      "evidence": [
+        "images/lug-surfacing-final/surfacing-profile.png",
+        "images/lug-surfacing-final/lug-12-left-closeup.png",
+        "images/lug-surfacing-final/lug-12-right-closeup.png",
+        "images/lug-surfacing-final/lug-6-left-closeup.png",
+        "images/lug-surfacing-final/lug-6-right-closeup.png"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "continuous-highlight-flow",
+      "requirement": "上面、側面、下面のハイライトが途中で折れない",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "4辺prism断面と少数stationが長手・周方向の法線連続性を制限していた",
+      "codeChange": "24分割共有頂点ringを16 station間で接続し、Three.jsの共有頂点normal計算へ渡す閉合Meshへ変更",
+      "quantitativeResult": {
+        "sectionStyle": "ROUNDED_SUPERELLIPSE",
+        "longitudinalSegmentCount": 15,
+        "angularStepDegrees": 15,
+        "geometryAuditFailures": 0
+      },
+      "evidence": [
+        "images/lug-surfacing-final/comparison-front.png",
+        "images/lug-surfacing-final/comparison-oblique.png",
+        "images/lug-surfacing-final/comparison-side.png",
+        "videos/lug-surfacing-final/front-oblique-side-continuous.gif"
+      ],
+      "finalStatus": "RESOLVED"
+    },
+    {
+      "id": "root-and-protected-anchor-balance",
+      "requirement": "根元が太すぎず埋まりすぎず、保護tipまで自然に絞られる",
+      "previousStatus": "UNRESOLVED",
+      "rootCause": "接続性優先の旧root断面3.6 x 5.8がprism面と組み合わさり、角度によって局所的に膨らんで見えた",
+      "codeChange": "root断面を3.4 x 5.4へ再配分し、case-matched embed 0.260と保護tip 2.0 x 2.0を維持",
+      "quantitativeResult": {
+        "lugToLug": 46.6,
+        "innerGap": 20,
+        "outerEndZ": 23.3,
+        "springBarCentersChanged": false,
+        "caseGeometryChanged": false,
+        "minimumLugToStrapClearance": 0.060889,
+        "forbiddenInterferencePosition1": 0,
+        "forbiddenInterferencePosition2": 0
+      },
+      "evidence": [
+        "reports/lug-surfacing-desktop-runtime.json",
+        "reports/lug-surfacing-mobile-runtime.json",
+        "reports/lug-surfacing-protected-paths.json"
+      ],
+      "finalStatus": "RESOLVED"
+    }
+  ],
+  "allTechnicalItemsResolved": true,
+  "humanConfirmationRequired": true,
+  "readyOrMergeAllowed": false,
+  "sourceAuditCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+  "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
+  "baseBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
+  "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
+  "phase3c1Acceptance": {
+    "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+    "head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+    "deferred": [
+      "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
+      "A5_FRONT_BACK_LUMINANCE_DIFFERENCE",
+      "ISSUE_2_RECTANGULAR_SHADOW_AND_TRANSPARENCY_CONTINUITY",
+      "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
+    ]
+  }
+}
