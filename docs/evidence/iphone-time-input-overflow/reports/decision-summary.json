@@ -1,26 +1,67 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "sourceBaseCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
-  "sourceImplementationCommit": "aca123f9dc3fd2d5bf0f9365beb56347cb1042cb",
+  "sourceImplementationCommit": "e6f65ecdd67bde5b66d95587b2f195268e0171d8",
   "appVersion": "v3.15.0",
-  "generatedAt": "2026-08-03T14:59:07.690Z",
-  "classification": "IOS_TIME_INPUT_INTRINSIC_MIN_WIDTH",
-  "detailedClassification": "IOS_NATIVE_TIME_INPUT_FOCUS_PRESENTATION",
-  "rootCause": "The mobile native time control had a 13.333px computed font, 39px height, and no explicit WebKit value-subcontrol shrink guard. Physical-iPhone review observed right-edge clipping even though desktop automation did not reproduce an outer-box overflow.",
-  "change": [
-    "Bound the time grid and native input to the available logical inline size.",
-    "Allow the WebKit date/time value subcontrol to shrink.",
-    "Use a 16px font and 44px minimum control height below 900px.",
-    "Preserve native picker appearance, time semantics, and event behavior."
+  "generatedAt": "2026-08-03T16:10:20.087Z",
+  "r1HumanReview": {
+    "device": "iPhone 16",
+    "os": "iOS 26.5.2",
+    "browser": "Safari",
+    "orientation": "portrait",
+    "outerFrameInsideViewport": "NG",
+    "valueTextVisible": "OK",
+    "nativePicker": "OK",
+    "afterPickerValueText": "OK",
+    "afterPickerOuterFrame": "NG",
+    "timeApplication": "OK",
+    "currentTimeAndNoHorizontalScroll": "OK",
+    "overall": "FAIL"
+  },
+  "r1Decision": "PR29_R1_PHYSICAL_IPHONE_REVIEW_FAILED",
+  "r1Classifications": [
+    "PR29_R1_TEXT_CLIPPING_RESOLVED",
+    "PR29_R1_NATIVE_VISUAL_FRAME_OVERFLOW_REMAINS",
+    "PR29_R1_DOM_RECT_GATE_FALSE_NEGATIVE",
+    "BODY_COMPLETION_BLOCKER_REMAINS",
+    "PR29_R2_REQUIRED"
   ],
-  "automatedDecision": "LAYOUT_AND_TIME_INPUT_AUTOMATION_PASSED_WITH_INHERITED_MAIN_NODE_BLOCKER",
+  "classification": "IOS_NATIVE_TIME_INPUT_VISUAL_FRAME_OVERFLOW",
+  "detailedClassification": "NATIVE_CONTROL_PAINT_EXTENT_NOT_CAPTURED_BY_DOM_RECT",
+  "rootCause": "R1 bounded the DOM rectangle and native value text, but physical iPhone Safari painted the native control frame through the expected right inset. DOM-rect automation therefore produced a false negative for the visual frame.",
+  "change": [
+    "Move the full-width grid item role from the native input to a bounded timeInputShell.",
+    "Let timeInputShell own the visible border, rounded background, focus outline, and paint containment.",
+    "Keep the native input transparent and borderless while preserving appearance:auto and the native picker.",
+    "Extend diagnostics and browser tests to treat the shell, not the input DOM rect, as the visual-frame contract."
+  ],
+  "automatedDecision": "PR29_R2_AUTOMATED_GATES_PASSED_PENDING_PHYSICAL_IPHONE_REVIEW",
   "productDefectDetected": true,
   "physicalIPhoneRecheckRequired": true,
-  "physicalIPhoneFixedCommitUrlAllowed": false,
-  "physicalIPhoneUrlBlockReason": "The requested all-automated-gates condition is not met because two unrelated Node assertions already failing on the exact main base remain unresolved in this independent fix branch.",
+  "physicalIPhoneR2Status": "PENDING",
+  "physicalIPhoneFixedCommitUrlAllowed": true,
+  "fullCompletionClaimed": false,
   "thresholdsChanged": false,
   "appVersionChanged": false,
   "defaultPickerReplaced": false,
+  "candidateSpecificBrowserFailures": [],
+  "independentReview": {
+    "critical": 0,
+    "major": 0,
+    "minor": 0,
+    "checks": {
+      "visualFrameMovedToWrapper": true,
+      "nativePickerPreserved": true,
+      "valueTextVisibleInAllRequiredCaptures": true,
+      "viewportMagicNumberAdded": false,
+      "hardCodedRightSubtractionAdded": false,
+      "desktopLayoutContractPreserved": true,
+      "timeFunctionalityPreserved": true,
+      "accessibleNameAndNativeSemanticsPreserved": true,
+      "r1HumanFailurePreserved": true,
+      "r2HumanAcceptanceClaimed": false
+    }
+  },
   "readyOrMergeAuthorized": false,
-  "mergeRecommendation": "BLOCKED_PENDING_BASELINE_ACCEPTANCE_TEST_ALIGNMENT_AND_PHYSICAL_IPHONE_RECHECK"
+  "mergeRecommendation": "BLOCKED_PENDING_PHYSICAL_IPHONE_R2_REVIEW"
 }
