@@ -173,7 +173,7 @@ test("production runtime does not import Phase 3A test audit logic or add UI", a
 test("normal path is guarded before exterior Geometry and Material construction", async () => {
   const indexSource = await readFile(indexSourceUrl, "utf8");
   const resolveIndex = indexSource.indexOf(
-    "const requestedExteriorConfig=resolveFinalExteriorCandidate(initialPageParameters)",
+    "const requestedExteriorConfig=resolveFinalExteriorCandidate(effectivePageParameters)",
   );
   const gateIndex = indexSource.indexOf("if(requestedExteriorConfig){", resolveIndex);
   const createIndex = indexSource.indexOf("exteriorRuntime=createBalancedExterior", gateIndex);
