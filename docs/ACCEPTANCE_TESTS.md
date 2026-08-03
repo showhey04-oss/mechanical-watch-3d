@@ -1,5 +1,56 @@
 # 受入試験
 
+## Final Stabilization Phase 3B.4 — Stack integration evidence closure
+
+- Head `d16037a75d85d705434d8b73ef5293511052f65e`でPhase 3B.4a／3B.4b／3B.4c R2.4.2を統合し、C `0e260fdfc7495293319682ae7b998858641cdd26`との製品・test-runtime tree一致を確認する
+- Node 442/442、Chrome Desktop／Mobile、Playwright WebKit Desktop／Mobile、Native Safari Desktop／Mobileを合格とする
+- preset、9部品選択、選択強調、HUD／learning同期、blank clear、opacity 100／50／16、外装OFF／ON、split／explode／restoreを合格とする
+- multi-touch 100 cycle、production audio、visibility 30 cycle、10分相当stress、foreground自動復帰6/6、buffer／raw asset 6/6、duplicate／backlog／catch-up 0を維持する
+- protected path 12/12をpixel／SHA exact、console／runtime／unhandled rejection 0、禁止干渉0とする
+- commit段階A→B／B→C／C→D／A→Dのidle／pointer／wheel全12セルが既存のFPS 5%・p95 2ms差分閾値内であり、閾値を変更しない
+- M3→M5 wheelの全体p95 +4msは、順序別+1.5ms／+1msとaudio ON側FPS改善を併記し、`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`とする
+- clean-process最終性能測定はendpoint security高CPU負荷により`NOT TESTED`とし、製品FAILやabsolute PASSへ変換しない。McAfee停止・無効化も行わない
+- 正式判断を`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`、`PHASE3B4_STACK_PRODUCT_FIX_NOT_REQUIRED`、`PHASE3B4_STACK_INTEGRATION_READY_FOR_CHATGPT_REVIEW`とする
+- PR #25はmerge commit `d4fa76182d4955e0a78f31120ea2705a19f67220`としてPR #24へ統合済み、PR #24はOpen／Draft、D2c3は未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
+
+## Final Stabilization Phase 3B.4c-R2.4.2 — Native Safari／物理iPhone受入閉鎖
+
+- 固定Head `0e260fdfc7495293319682ae7b998858641cdd26`、APP_VERSION v3.15.0、`audioLifecycle=r2-3-l4&audioPlatform=p3`を対象とする
+- `PRODUCTION_TIMEOUT_PROFILE`（450／80／1200／250／5500 ms）を使用し、diagnostic overrideを適用せず、diagnostic setter呼出しを0とする
+- Safari／SafariDriver 26.5.2でDesktop 1280×720／Mobile 390×844、18条件・400 cycleのactual Web Audioを完了し、trusted gesture、6 buffer／6 raw asset、duplicate／backlog／catch-up 0、console／runtime／unhandled rejection 0を満たす
+- iPhone 16／iOS 26.5.2／Safariで初期動作、sleep復帰3/3、Home／app復帰3/3、時刻合わせ、巻上げ・りゅうず音、最終60秒連続動作に合格する
+- foreground復帰6/6を自動復帰し、1タップfallback 0、2タップ以上0、緑ONのまま無音となるfalse positive 0、duplicate／burst／視覚的slowdown 0とする
+- fresh Contextの1 trusted gesture fallbackは維持するが、全6回自動復帰した今回の物理試験では未使用である
+- 判定を`PHASE3B4C_R2_4_2_HUMAN_ACCEPTED`および`PHASE3B4C_R2_4_2_READY_FOR_FINAL_PR_REVIEW`とする。Ready化、マージ、Issue #2クローズ、既定採用、Phase 3B.4d開始は別途明示承認を必要とする
+
+## Final Stabilization Phase 3B.4c-R2.4 — WebKit platform recovery
+
+- R2.3の`visibilitychange`を単一ownerとして維持し、回復用listener、毎frame監視、無制限retryを追加しない
+- `running`だけを出力正常とせず、`currentTime`進行、suspended、interrupted、resume reject／timeout、Context unusableを明示分類する
+- fresh Contextは既存スピーカーボタンの1回のtrusted gestureで最大1回だけ開始し、raw asset 6件を全decodeしてからatomic swapする
+- create／decode／stale completion失敗時は旧graphをmutedのまま保持し、old Context close失敗はcommit済み新graphを巻き戻さない
+- Chromium in-app Browser／WebKitでP0～P3×Desktop／390×844を各100 hidden／visible cycle、P3の5 fault×両viewportを実Web Audioで合格する
+- duplicate 0、backlog burst 0、catch-up burstなし、6 buffer完全性、application console error／warning 0を維持する
+- 通常path／Phase 3C.1-only pathを作業開始Headとpixel exactにし、timebase、input、S86、Phase 2C、A.7、Geometry、Light、Material、opacity、camera、DPR、UI、sample、gain、APP_VERSIONを変更しない
+- Node 411/411、Desktop／Mobile audio各23/23、R2.4固有browser failure 0を確認する。共通既存未達をR2.4 PASSへ変換しない
+- pointer／wheel差分は平均FPS悪化5%以内、p95悪化2ms以内、reversal 0、stop-then-jump 0、zoom monotonic、transform invariantを閾値変更なしで満たす
+- R2.4初期ゲートではnative Safari自動化blockをHuman／native Safari PASSへ変換せず、物理iPhone再試験を`FROZEN`とした。この履歴状態は後続R2.4.2のNative Safari／物理iPhone受入閉鎖によって解除されたが、query限定、既定未採用、Ready化／マージ未承認は維持する
+
+## Issue #2 Phase 3B.4b — iOS multi-touch stability受入
+
+- 完成外装、D2c3、continuity currentと、任意のPhase 3B.4a framingに限定してinput候補が有効になる
+- `input` queryなしでは既存input path、Object3D、Light、Material、DOMが変化しない
+- pointerup／cancel／真のlost capture／ID再利用／blur／visibility／page lifecycle後にactive pointer 0、capture 0、idleへ戻る
+- one-to-twoとtwo-to-one遷移で旧centroid／pinch／angleを持ち越さず再初期化する
+- desired／actual camera stateがfiniteで、unexpected jump、reversal、stop-then-jump、target drift、camera rollを発生させない
+- Desktop 1280×720と390×844のsynthetic lifecycle、selection、UI、HUD、audio、S86、A.7、禁止干渉、差分性能に合格する
+- camera sensitivity、damping、FOV、target、maxDistance、Geometry、Light、fog、Material、透過、audio、APP_VERSION、試験閾値を変更しない
+- 物理iPhoneでA 49秒／B 55秒の症状再現と、候補C 15分以上の無再現を確認し、`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`と分類する
+- 候補Cの二本指pan、pinch in/out、一／二本指遷移、素早いrelease、画面端gesture、最大距離回転、初期距離復帰、split／explode／restoreに合格する
+- progressive frame drop、Safari自動reload、WebGL表示消失、manual reloadがなく、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`とする
+- preset／selectionの物理確認は`NOT_REPORTED`として最終統合へ残し、自動回帰の合格を人間確認へ変換しない
+- 現状態は`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`であり、query限定・未採用、Ready化禁止、マージ禁止、Issue #2 Openを維持する
+
 ## A. 起動
 
 - Three.js初期化エラーがない
@@ -403,6 +454,22 @@
 - 物理iPhone 16／iOS 26.5.2／ホーム画面起動で各15分確認し、Shadow-offは暗いfull-length表示で不合格、D2c3は合格・安定化待ちとする
 - 冷却5分を`COOLDOWN_PROTOCOL_DEVIATION_5MIN`、progressive frame drop／Safari reloadを`NOT_REPORTED`として保存し、異常なしへ補完しない
 - D2c3を`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`とし、既定採用、Ready化、マージ、Issue #2クローズを行わない
+
+## Issue #2 Final Polish Phase 3B.4a — Mobile full-length framing
+
+- 完成時計の実Geometry全頂点から390×844、FOV 42、target不変のfit距離を算定し、必要距離240超では実装を停止する
+- raw fit 199.068109、安全余裕込み204.044811、静的候補`maxDistance=204.1`を記録する
+- 候補は完成外装＋D2c3／Shadow-off＋`framing=issue2-mobile-full-length-fit`＋幅420以下だけに適用する
+- 初期camera、target、FOV、near／far、Desktop `maxDistance=120`、Geometry、Light、fog、Material、透過、UI、audioを不変にする
+- D2c3／Shadow-off、2 viewport、4 theme、7 captureの224 actual WebGL PNGを保存する
+- Mobile最大距離で上下ストラップ、尾錠、ケースを含み、各辺3%以上、clipping 0、fog完全消失0とする
+- pinch／wheelを単調、reversal 0、stop-then-jump 0、target drift 0、transform invariant trueとする
+- 最大距離で部品選択・解除・初期距離復帰を確認する
+- current／fitを3反復し、平均fps悪化5%以内、p95悪化2ms以内、per-frame bounds計算0、閾値変更0を確認する
+- iPhone 16／iOS 26.5.2、Safari／ホーム画面、輝度50%、低電力OFF、ケースあり、室温25℃で15分確認し、初期構図、全長、余白、fog許容、preset、最大距離回転、設定車2選択、HUD同期、解除、split／explode／restore、軽微な発熱を合格とする
+- 判定を`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
+- 一般tap異常なし、2～3分後の二本指pan／pinch／rotation劣化、手動reload復旧、自動reload未報告、iOS音響ペーシング低下を区別して記録する
+- D2c3とframingはquery限定・未採用とし、Ready化、マージ、Issue #2クローズを行わない
 
 ## M. v3.14 機構同期作動音 Phase 1
 

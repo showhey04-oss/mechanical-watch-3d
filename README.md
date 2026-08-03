@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：Phase 3C.3人間承認済み。Issue #2 Final Polish Phase 3B.3のPC／物理iPhone比較でD2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として最終候補に選定した。状態は`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`であり、モバイル全長構図、iOS音響ペーシング、温度再試験の完了までquery限定・未採用を維持する
+- 現在の改修フェーズ：Final Stabilization Phase 3B.4 stack promotion audit。Phase 3B.4aのモバイル全長構図、Phase 3B.4bのiOSマルチタッチ、Phase 3B.4c R2.4.2のproduction audio／foreground復帰を統合し、Node、Chrome、WebKit、Native Safari、preset・selection、multi-touch・audio、protected pathを合格とした。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`で、clean-process最終測定はendpoint security負荷により`NOT TESTED`、製品回帰は再現せず製品修正不要とする。PR #25はmerge commit `d4fa76182d4955e0a78f31120ea2705a19f67220`としてPR #24へ統合済みで、PR #24はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpenを維持する
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
@@ -37,6 +37,10 @@ Issue #2 Final Polish Phase 3B.1bではtight 512／1024が中央projection bound
 Issue #2 Final Polish Phase 3B.2では、100%→99%の`transparent`と55%→54%の`depthWrite`切替を実ランタイムで再現し、Shadow-off／D2c3、Desktop／390×844、13 opacityで固定深度3候補を比較した。3候補はproperty toggle 0を達成したが、`stable-depth-base`は内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能に不合格となった。候補固有browser failure 0、UI 22/22、HUD 57/57、audio 23/23、protected path 42/42を維持したが技術finalistは0件であり、Stage 2、物理iPhone、OIT実装、採用は行っていない。
 
 Issue #2 Final Polish Phase 3B.3は製品コードを変更せず、`continuity=issue2-current`を共有するShadow-offとD2c3を、2 viewport×4 theme×16 scenarioの実WebGL PNG 256枚、36操作GIF、11 scenario×3反復×2候補×2 viewportの性能測定で最終人間比較用に整理した。PCでは両候補合格、物理iPhoneではShadow-offを暗いfull-length表示のため不合格、D2c3を性能tradeoff込みで合格・選定した。D2c3はまだ既定採用せず、Shadow-offは比較履歴として保持する。冷却5分は手順差、progressive frame dropとSafari reloadは`NOT_REPORTED`、テンプ音遅れは候補独立性未確定として後続安定化へ分離する。
+
+Issue #2 Final Polish Phase 3B.4aは、選定D2c3のモバイル全長構図をquery限定で安定化する。390×844の完成時計407,428頂点からraw fit距離199.068109、2.5%安全余裕込み204.044811を算定し、`framing=issue2-mobile-full-length-fit`時だけモバイル`maxDistance=204.1`を適用する。初期表示32/32とDesktop固定画像48/48はPNG byte exact、Desktop selected 8/8は選択・camera・transform exact、最小余白4.0265%、clipping 0、pinch／wheel reversal 0、性能差分6/6合格である。iPhone 16／iOS 26.5.2の15分確認で初期表示、全長、余白、preset、最大距離回転、設定車2選択、HUD同期、解除、split／explode／restore、軽微な発熱を合格とし、fogの遠景暗化は`MOBILE_FULL_LENGTH_FOG_DARKENING_ACCEPTED_AS_IS`とした。Phase 3B.4bではframingなしAが49秒、framingありBが55秒で同じgesture state劣化を再現し、修正候補Cは15分以上再現しなかった。`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`として受入済みだが、preset／selectionの手動結果は`NOT_REPORTED`のため最終統合で再確認する。音響ペーシング低下はPhase 3B.4cへ分離する。D2c3、framing、input候補はquery限定・未採用で、Ready化、マージ、Issue #2クローズを行わない。
+
+Phase 3B.4 stack integration Head `d16037a75d85d705434d8b73ef5293511052f65e`では、Phase 3B.4c R2.4.2が統合済みで、Native Safari Desktop／Mobile、物理iPhone foreground自動復帰6/6、preset、9部品選択、HUD／学習同期、blank clear、multi-touch 100 cycle、production audio、visibility 30 cycle、10分相当stress、12/12 protected pathを合格とした。Nodeは442/442である。commit段階12性能セルは既存閾値内でMobile pointer製品回帰を再現しなかったが、最終clean-process測定はStatefulFirewall／VShieldScannerの高CPU負荷により未実施である。clean環境の絶対性能PASSやMcAfee停止環境PASSは主張せず、製品コード・閾値・APP_VERSIONは変更していない。
 
 ## 実装済み
 

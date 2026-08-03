@@ -1,6 +1,52 @@
 # Changelog
 
+## Unreleased — Final Stabilization Phase 3B.4 stack integration evidence closure
+
+- Head `d16037a75d85d705434d8b73ef5293511052f65e`へPhase 3B.4a／3B.4b／3B.4c R2.4.2の既存結果を統合。Node 442/442、Chrome／WebKit／Native Safari Desktop・Mobile、preset・9部品選択、multi-touch・production audio、12/12 protected pathを合格として記録
+- 物理iPhoneのforeground自動復帰6/6、fallback tap 0、duplicate／burstなし、Native Safari 26.5.2の18条件・400 cycleを現行統合状態へ反映
+- commit段階12性能セルは既存閾値内でMobile pointer製品回帰は再現せず、製品修正不要と判断。M3→M5 wheel aggregate p95 +4msは順序別結果とFPS改善を踏まえ`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`と分類
+- clean-process最終測定はStatefulFirewall／VShieldScannerの高CPU負荷で`NOT TESTED`。`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`とし、clean環境のabsolute PASS、McAfee停止環境PASS、Issue #2完了は主張しない
+- 製品コード、test runtime、audio file、performance threshold、APP_VERSIONは変更せず、PR #25をmerge commit `d4fa76182d4955e0a78f31120ea2705a19f67220`としてPR #24へ統合。PR #24 Open／Draft、Issue #2 Open、D2c3未採用、Phase 3B.4d未開始を維持
+
+## Unreleased — Final Stabilization Phase 3B.4c-R2.4.2 Native Safari／物理iPhone受入閉鎖
+
+- 固定Head `0e260fdfc7495293319682ae7b998858641cdd26`を、Safari／SafariDriver 26.5.2のproduction profile actual Web AudioでDesktop／Mobile計18条件・400 cycle検証。trusted gesture、6 buffer／6 raw asset、duplicate／backlog／catch-up 0、console／runtime／unhandled rejection 0を確認
+- iPhone 16／iOS 26.5.2／Safariで、初期動作、sleep復帰3/3、Home／app復帰3/3、時刻合わせ、巻上げ・りゅうず音、最終60秒連続動作に合格。foreground自動復帰6/6、fallback tap 0、緑ONのまま無音、duplicate／burst、視覚的slowdownはいずれも再現なし
+- production timeout（450／80／1200／250／5500 ms）を維持し、diagnostic override／setter呼出し0。R2.4.1 transaction、R2 timebase、製品コード、音源、gain、APP_VERSION、試験閾値は変更していない
+- 4本の画面収録はリポジトリ外のHuman証跡としてduration／bytes／SHA-256を記録。動画は補助証跡とし、音響合格はHumanの直接聴取結果を正式根拠とする
+- 状態を`PHASE3B4C_R2_4_2_HUMAN_ACCEPTED`、`PHASE3B4C_R2_4_2_READY_FOR_FINAL_PR_REVIEW`とする。PR #26はOpen／Draftを維持し、Ready化、マージ、Issue #2クローズ、既定採用、Phase 3B.4d開始は未承認
+
+## Unreleased — Final Stabilization Phase 3B.4c-R2.4 WebKit platform recovery
+
+- R2.3の単一visibility lifecycle ownerを維持し、`running`かつ`currentTime`停止、`resume()` hang／reject、解決後suspended、`interrupted`をboundedに分類・回復するquery限定P0～P3候補を追加
+- P3は既存スピーカーボタンの1 trusted gestureでfresh Contextを最大1回だけ構築し、保持済みraw asset 6件を全decodeしてからgraphをatomic swap。create／decode／stale／old-close失敗をboundedに封じ込める
+- Chromium in-app BrowserとPlaywright WebKit actual Web Audioで、P0～P3×2 viewport各100 cycleを8/8、P3の5 fault×2 viewportを10/10合格。duplicate／backlog burst／application console error・warningは0
+- Node 411/411、audio Desktop／Mobile各23/23、R2.4固有browser failure 0。作業開始Headと共通する総合／UI未達は隠さず保持し、全回帰completeや絶対PASSとはしない
+- 通常pathとPhase 3C.1-only pathは作業開始Headとactual WebGL PNG byte／SHA exact。4 pointer／wheel差分条件は不変閾値で合格し、A.6絶対性能は主張しない
+- P3は`PHASE3B4C_R2_4_SINGLE_FINAL_CANDIDATE_READY_FOR_CHATGPT_REVIEW`でquery限定・未採用。R2.4時点のnative Safari環境blockと物理iPhone再試験`FROZEN`は後続R2.4.2で解除されたが、Ready化、マージ、Issue #2クローズ、Phase 3B.4d開始は未実施
+
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
+
+### Issue #2 Final Polish Phase 3B.4b
+
+- 完成外装＋D2c3の`input=issue2-ios-multitouch-stability`時だけ、Arcballとアプリのpointer lifecycleをevent-driven cleanupする候補を追加
+- pointercancel、真のlostpointercapture、pointer ID再利用、blur、visibility、pagehide／pageshowをcleanupし、二本指から一本指への遷移でgesture基準を再初期化
+- Desktop 24 cycle／390×844 60 cycleでidle復帰100%、active pointer／capture残留0、camera finite、selection／解除、transform invariantを確認
+- Desktop／Mobileのidle／pointer／wheel差分6/6、UI、HUD、audio、S86 5/5、A.7 9/9、禁止干渉0/0、application console error／warning 0/0に合格
+- iPhone 16／iOS 26.5.2でframingなしAを49秒、framingありBを55秒で再現し、候補Cは15分以上再現なし。`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`を記録
+- 候補Cはmanual reload、progressive frame drop、Safari自動reload、WebGL lossなし。preset／selectionの手動結果は`NOT_REPORTED`として最終統合へ残し、状態を`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
+- D2c3、framing、入力候補はquery限定・未採用。感度、damping、FOV、maxDistance、audio、Geometry、Light、fog、Material、透過、APP_VERSION、閾値を変更しない
+
+### Issue #2 Final Polish Phase 3B.4a
+
+- Phase 3B.3で選定されたD2c3のモバイル全長構図をquery限定で安定化
+- 390×844の完成時計407,428頂点からraw fit 199.068109、安全余裕込み204.044811を算定し、幅420以下だけ`maxDistance=204.1`を適用
+- 初期／復帰32/32とDesktop固定画像48/48をPNG byte exact、Desktop selected 8/8をstate exact、最小余白4.0265%、near／far clipping 0、pinch／wheel reversal 0、selection／restore合格
+- 224 actual WebGL PNG、26 motion frame、6 board、3 GIF、Desktop／Mobile各3反復の差分性能を保存
+- iPhone 16／iOS 26.5.2、Safari／ホーム画面、輝度50%、低電力OFF、ケースあり、室温25℃で15分確認し、初期構図・明るさ・全長・余白・clippingなし・preset・最大距離回転・設定車2選択・HUD同期・解除・split／explode／restoreを合格
+- 判定は`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`。fogの全長時暗化は`MOBILE_FULL_LENGTH_FOG_DARKENING_ACCEPTED_AS_IS`
+- 一般tap異常と自動reloadは報告されていない。2～3分後の二本指pan／pinch／rotation劣化は`DEGRADATION_REPORTED`、手動reloadで復旧するためPhase 3B.4bへ分離
+- `IOS_BALANCE_AUDIO_PACING_SLOWDOWN_REPRODUCED`は別保留とし、D2c3／framingのquery限定・未採用、Issue #2 Open、PR #5 Open／Draftを維持
 
 ### Issue #2 Final Polish Phase 3B.3
 
