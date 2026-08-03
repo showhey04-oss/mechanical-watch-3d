@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
+  "sourceImplementationCommit": "aca123f9dc3fd2d5bf0f9365beb56347cb1042cb",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-03T14:59:07.690Z",
+  "classification": "IOS_TIME_INPUT_INTRINSIC_MIN_WIDTH",
+  "detailedClassification": "IOS_NATIVE_TIME_INPUT_FOCUS_PRESENTATION",
+  "rootCause": "The mobile native time control had a 13.333px computed font, 39px height, and no explicit WebKit value-subcontrol shrink guard. Physical-iPhone review observed right-edge clipping even though desktop automation did not reproduce an outer-box overflow.",
+  "change": [
+    "Bound the time grid and native input to the available logical inline size.",
+    "Allow the WebKit date/time value subcontrol to shrink.",
+    "Use a 16px font and 44px minimum control height below 900px.",
+    "Preserve native picker appearance, time semantics, and event behavior."
+  ],
+  "automatedDecision": "LAYOUT_AND_TIME_INPUT_AUTOMATION_PASSED_WITH_INHERITED_MAIN_NODE_BLOCKER",
+  "productDefectDetected": true,
+  "physicalIPhoneRecheckRequired": true,
+  "physicalIPhoneFixedCommitUrlAllowed": false,
+  "physicalIPhoneUrlBlockReason": "The requested all-automated-gates condition is not met because two unrelated Node assertions already failing on the exact main base remain unresolved in this independent fix branch.",
+  "thresholdsChanged": false,
+  "appVersionChanged": false,
+  "defaultPickerReplaced": false,
+  "readyOrMergeAuthorized": false,
+  "mergeRecommendation": "BLOCKED_PENDING_BASELINE_ACCEPTANCE_TEST_ALIGNMENT_AND_PHYSICAL_IPHONE_RECHECK"
+}

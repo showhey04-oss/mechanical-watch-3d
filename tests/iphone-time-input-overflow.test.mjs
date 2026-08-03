@@ -1,6 +1,9 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { readFile, readdir } from "node:fs/promises";
+import { join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const source = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
@@ -36,5 +39,61 @@ test("runtime diagnostics expose the complete horizontal layout contract", () =>
     "safeArea",
   ]) {
     assert.match(source, new RegExp(`\\b${field}\\b`));
+  }
+});
+
+const evidenceRoot = fileURLToPath(new URL("../docs/evidence/iphone-time-input-overflow/", import.meta.url));
+
+async function walk(directory) {
+  const paths = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) paths.push(...(await walk(path)));
+    else paths.push(path);
+  }
+  return paths;
+}
+
+test("time-input evidence reports remain parseable and preserve the bounded decision", async () => {
+  for (const name of [
+    "before-layout.json",
+    "after-layout.json",
+    "browser-matrix.json",
+    "decision-summary.json",
+    "image-inventory.json",
+  ]) {
+    JSON.parse(await readFile(join(evidenceRoot, "reports", name), "utf8"));
+  }
+  const decision = JSON.parse(await readFile(join(evidenceRoot, "reports/decision-summary.json"), "utf8"));
+  assert.equal(decision.physicalIPhoneRecheckRequired, true);
+  assert.equal(decision.physicalIPhoneFixedCommitUrlAllowed, false);
+  assert.equal(decision.thresholdsChanged, false);
+  assert.notEqual(decision.automatedDecision, "COMPLETE");
+});
+
+test("time-input screenshots are decodable PNGs with the recorded dimensions", async () => {
+  const inventory = JSON.parse(await readFile(join(evidenceRoot, "reports/image-inventory.json"), "utf8"));
+  assert.equal(inventory.images.length, 6);
+  for (const image of inventory.images) {
+    const bytes = await readFile(join(evidenceRoot, image.path));
+    assert.deepEqual([...bytes.subarray(0, 8)], [0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+    assert.equal(bytes.readUInt32BE(16), image.pixelSize.width);
+    assert.equal(bytes.readUInt32BE(20), image.pixelSize.height);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), image.sha256);
+  }
+});
+
+test("time-input evidence manifest is closed-world and hash-exact", async () => {
+  const manifestPath = join(evidenceRoot, "reports/evidence-manifest.json");
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+  const actualPaths = (await walk(evidenceRoot))
+    .filter((path) => path !== manifestPath)
+    .map((path) => relative(evidenceRoot, path))
+    .sort();
+  assert.deepEqual(manifest.files.map((entry) => entry.path), actualPaths);
+  for (const entry of manifest.files) {
+    const bytes = await readFile(join(evidenceRoot, entry.path));
+    assert.equal(bytes.length, entry.bytes);
+    assert.equal(createHash("sha256").update(bytes).digest("hex"), entry.sha256);
   }
 });
