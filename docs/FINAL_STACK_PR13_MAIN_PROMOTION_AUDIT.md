@@ -108,3 +108,9 @@ DEFAULT_ADOPTION_FALSE
 ```
 
 次はChatGPTによる本監査と積み上げ範囲のレビューである。PR #13のReady化、mainへのSquash merge、D2c3既定採用、Issue #2 closeには別途Human承認が必要である。
+
+## Post-promotion status
+
+この節より前はPR #13 main-promotion前の固定監査記録である。後続でPR #13～#27は段階的に統合され、現在のmainは`155275d0aaeb968fd83d6dfe15313e259f2bb064`、通常rootはcompleted-watch profile、D2c3は既定採用済みである。PR #5はOpen／Draft、Issue #2はOpenのままで、本監査では変更しない。
+
+PR #27 Human-reviewed Headとmainの製品・試験treeはexactである。現在の本体完成ゲートは、受入状態を検証するNode 2件が旧Draft期待値を保持しているためブロック中であり、PR #13当時の製品回帰ではない。

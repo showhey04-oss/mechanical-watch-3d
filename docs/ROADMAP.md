@@ -6,14 +6,21 @@
 - v3.15.0：S86文字板表示比率を通常寸法として採用し、v3.14.0の機構・描画基準を維持
 - 直前基準：v3.14.0（v3.13.0の機構・描画基準を維持した音響追加版）
 
-## 現在工程 — Completed Watch Default Adoption Draft
+## 現在工程 — Post-Default-Adoption Main Reconciliation／Final Body Completion Gate
 
-- main `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`の承認済み完成時計12-key stackを通常rootの中央profileへ昇格する
-- 明示profile queryを優先し、旧通常表示を`defaultProfile=legacy`で保護する
-- D2c3はdefault adoption candidate。過去工程のquery限定・未採用記録はhistorical stateとして保持する
-- 性能状態は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`。全差分セル合格やclean-process absolute PASSは未主張
-- Issue #2 Open、PR #5 Open／Draft、Phase 3B.4d未開始、OITは完成後実験を維持する
-- Human受入、Ready化、マージは別途判断とし、このDraftでは実施しない
+- PR #27 Human-reviewed Head `a7f0057db57de168c2af0bd01847fcfed9a606dc`の製品treeをmain `155275d0aaeb968fd83d6dfe15313e259f2bb064`へ採用済みとする
+- 通常rootをcompleted-watch profile、明示profile queryを優先、`defaultProfile=legacy`を旧通常表示として公開する
+- GitHub Pagesのmain buildと公開rootを検証し、APP_VERSION v3.15.0を維持する
+- Issue #2は`CLOSE_AS_NOT_PLANNED_ACCEPTED_LIMITATION`、PR #5は`CLOSE_AS_SUPERSEDED_WITHOUT_MERGE`をHuman判断への推奨とするが、本PRでは変更しない
+- Phase 3B.4dは`DEFER_POST_COMPLETION_IMPROVEMENT`、OITとpost-Issue-2 Geometry cleanupも完成後の任意改善とする
+- 現mainのNode 2件が旧Draft期待値を保持して463/465となるため、試験整合を別修正で閉じるまで本体完成宣言はブロックする。試験閾値は変更しない
+
+### PR #27 / v3.15.0 — Completed Watch Default Adoption
+
+- Human確認済み完成時計profileを通常rootへ採用し、PR #27をmainへマージ
+- 完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、foreground audio recoveryを統合
+- legacy route、明示profile query、作動音初期OFF、機構・選択・HUD・学習表示を維持
+- 既存の性能環境制約と透過不連続は隠さず、Human受容済み制約または完成後改善として継承
 
 ## 完了
 

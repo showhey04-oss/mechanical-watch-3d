@@ -1,13 +1,14 @@
 # Changelog
 
-## Unreleased — Completed Watch Default Adoption Draft
+## v3.15.0 — PR #27 Completed Watch Default Adoption
 
 - 通常rootへ、完成外装、Phase 3C.1 watch head、Phase 3C.2 strap／buckle、Phase 3C.3 integration、D2c3、current transparency、mobile full-length framing、iOS multi-touch stability、R2.4.2 production audioをまとめる中央12-key profileを追加
-- raw URL queryとeffective profile queryを分離し、URL／historyを変更せず、明示profile queryを優先。`defaultProfile=legacy`でmain `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`の旧通常表示へ戻れる
+- raw URL queryとeffective profile queryを分離し、URL／historyを変更せず、明示profile queryを優先。`defaultProfile=legacy`で採用前の旧通常表示へ戻れる
 - Node 465/465、Chrome／WebKit route matrix各26/26、default／explicitのcanvas・inventory・camera・lighting・transform exact、legacy／mainのpixel・DOM・camera exact、multi-touch各100 cycleを確認
 - Native Safari／SafariDriver 26.5.2の1280×720／390×844でqueryなしroot、trusted Web Audio、buffer／raw asset 6/6、visibility各30 cycle、禁止干渉0/0、console／runtime／unhandled rejection 0を確認
-- 性能反復の再測定は12セル中11セルが合格し、Chrome Desktop wheelの1セルがFPS悪化6.14%で未達のため、`FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED`は主張せず、`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を維持する
-- Geometry、機構、D2c3値、透過、camera定数、UI、audio asset／gain、APP_VERSION、試験閾値は変更しない。Issue #2 Open、PR #5 Open／Draft、Phase 3B.4d未開始、OIT完成後実験、Draft／未マージを維持する
+- 正式wheel閉鎖測定でdefault／explicit差分ゲートを合格し、HumanがPC／物理iPhoneを確認した。PR #27をmain `155275d0aaeb968fd83d6dfe15313e259f2bb064`へマージし、GitHub Pagesへ公開した
+- Geometry、機構、D2c3値、透過、camera定数、UI、audio asset／gain、APP_VERSION、試験閾値は変更しない。Issue #2 Open、PR #5 Open／Draft、Phase 3B.4d未開始、OIT完成後改善を維持する
+- post-adoption監査では製品tree exact、Chrome／WebKit route smoke、Pages公開を確認した。一方、mainのNodeは旧Draft期待値2件により463/465であり、本体完成宣言前の単一ブロッカーとして別修正へ分離する
 
 ## Unreleased — PR #13 final stack main-promotion audit
 

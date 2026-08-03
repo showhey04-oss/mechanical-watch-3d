@@ -1,6 +1,17 @@
 # 受入試験
 
-## Completed Watch Default Adoption Draft
+## Post-Default-Adoption Main Reconciliation／Final Body Completion Gate
+
+- 対象mainを`155275d0aaeb968fd83d6dfe15313e259f2bb064`、PR #27 Human-reviewed製品Headを`a7f0057db57de168c2af0bd01847fcfed9a606dc`、APP_VERSIONをv3.15.0とする
+- `index.html`、`js/**`、`assets/audio/**`、`package.json`、`package-lock.json`、`tests/**`が両Head間でexactであることを確認する
+- GitHub Pagesのsourceがmain／root、deployment SHAが対象main、build statusが成功、公開root・主要JS・音源assetがHTTP 200であることを確認する
+- Installed Chrome／Playwright WebKitのDesktop 1280×720／Mobile 390×844でdefault、legacy、explicit routeの起動、v3.15.0、profile、camera、canvas、初期音OFF、console error／warning 0を確認する
+- PR #27のNative Safari／物理iPhone Human受入は製品tree exactを根拠に継承し、新しいHuman PASSへ読み替えない
+- Nodeは現mainで465件を実行する。旧Draft期待値を参照する2件の不一致をPASSへ変換せず、463/465を本体完成宣言のブロッカーとする
+- Issue #2／PR #5は監査と推奨だけを記録し、本PRでclose／変更しない。Phase 3B.4d、OIT、post-Issue-2 Geometry cleanupを開始しない
+- body completionのblocking countが0になるまで`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`を主張しない
+
+## Completed Watch Default Adoption Draft（PR #27マージ前の履歴）
 
 - 対象baseをmain `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`、APP_VERSIONをv3.15.0とする
 - queryなしrootと非profile queryだけのrootで12-key completed-watch profileを有効にし、URL／historyを変更しない
