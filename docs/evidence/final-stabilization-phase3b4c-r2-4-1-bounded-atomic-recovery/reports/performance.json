@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.4.1",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "b3393972f3f25f2c4aef75eb2274eabddc17b575",
+  "sourceImplementationCommit": "0ba6348e9b8bf6ec333ae0f4979a4e8a86d4239c",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T18:05:41.895Z",
+  "nativeSafariAutomation": "BLOCKED_BY_ENVIRONMENT",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "PASSED_TRANSACTION_BOUNDS_RENDER_DIFFERENTIAL_INHERITED",
+  "transactionElapsed": {
+    "webkit:visibility": {
+      "count": 200,
+      "minimumMs": 81,
+      "medianMs": 86,
+      "p95Ms": 91,
+      "maximumMs": 96
+    },
+    "webkit:fresh-success": {
+      "count": 60,
+      "minimumMs": 697,
+      "medianMs": 744,
+      "p95Ms": 800,
+      "maximumMs": 823
+    },
+    "webkit:decode-timeout": {
+      "count": 60,
+      "minimumMs": 473,
+      "medianMs": 527,
+      "p95Ms": 585,
+      "maximumMs": 617
+    },
+    "webkit:close-timeout": {
+      "count": 60,
+      "minimumMs": 686,
+      "medianMs": 752,
+      "p95Ms": 812,
+      "maximumMs": 825
+    },
+    "webkit:stale": {
+      "count": 60,
+      "minimumMs": 405,
+      "medianMs": 460,
+      "p95Ms": 501,
+      "maximumMs": 509
+    },
+    "chromium:visibility": {
+      "count": 200,
+      "minimumMs": 81.20000000298023,
+      "medianMs": 86.20000000298023,
+      "p95Ms": 93.29999999701977,
+      "maximumMs": 99.89999999850988
+    },
+    "chromium:fresh-success": {
+      "count": 60,
+      "minimumMs": 668.2999999970198,
+      "medianMs": 731.1000000014901,
+      "p95Ms": 776.7000000029802,
+      "maximumMs": 795.7999999970198
+    },
+    "chromium:decode-timeout": {
+      "count": 60,
+      "minimumMs": 440.90000000596046,
+      "medianMs": 501,
+      "p95Ms": 549.4000000059605,
+      "maximumMs": 553.5
+    },
+    "chromium:close-timeout": {
+      "count": 60,
+      "minimumMs": 660.2000000029802,
+      "medianMs": 721.1000000014901,
+      "p95Ms": 787.5,
+      "maximumMs": 807.5
+    },
+    "chromium:stale": {
+      "count": 60,
+      "minimumMs": 382.1000000014901,
+      "medianMs": 435.8999999985099,
+      "p95Ms": 488.30000000447035,
+      "maximumMs": 493.80000000447035
+    }
+  },
+  "maximumSpeakerTransactionMs": 825,
+  "transactionCompletionBoundMs": 2000,
+  "renderDifferential": {
+    "sourceEvidence": "../final-stabilization-phase3b4c-r2-4-webkit-platform-recovery/reports/performance.json",
+    "sourceEvidenceSha256": "242d70326337a111198662a18eb12fd4d78d0050e8ea9a3fc071e93e22a97e84",
+    "status": "PASSED_DIFFERENTIAL_ABSOLUTE_A6_ENVIRONMENT_FAILURE_RETAINED",
+    "scenarios": [
+      {
+        "viewportName": "desktop",
+        "type": "pointer-rotate",
+        "repetitionsPerSide": 3,
+        "baseline": {
+          "averageFps": 27.316550615961436,
+          "p50": 37,
+          "p95": 46,
+          "p99": 50,
+          "over33": 67,
+          "over50": 1
+        },
+        "candidate": {
+          "averageFps": 27.411986025262024,
+          "p50": 36,
+          "p95": 46,
+          "p99": 50,
+          "over33": 65,
+          "over50": 2
+        },
+        "fpsChangeRatio": 0.003493684493415652,
+        "p95ChangeMs": 0,
+        "contracts": {
+          "averageFpsWithinFivePercent": true,
+          "p95WithinTwoMs": true,
+          "reversalZero": true,
+          "stopThenJumpZero": true,
+          "wheelMonotonic": true,
+          "transformInvariant": true
+        },
+        "passed": true
+      },
+      {
+        "viewportName": "desktop",
+        "type": "wheel-zoom",
+        "repetitionsPerSide": 3,
+        "baseline": {
+          "averageFps": 20.982882385422418,
+          "p50": 45,
+          "p95": 62,
+          "p99": 66,
+          "over33": 76,
+          "over50": 20
+        },
+        "candidate": {
+          "averageFps": 21.48106274731487,
+          "p50": 45,
+          "p95": 56,
+          "p99": 61,
+          "over33": 73,
+          "over50": 17
+        },
+        "fpsChangeRatio": 0.023742227247032368,
+        "p95ChangeMs": -6,
+        "contracts": {
+          "averageFpsWithinFivePercent": true,
+          "p95WithinTwoMs": true,
+          "reversalZero": true,
+          "stopThenJumpZero": true,
+          "wheelMonotonic": true,
+          "transformInvariant": true
+        },
+        "passed": true
+      },
+      {
+        "viewportName": "mobile-390",
+        "type": "pointer-rotate",
+        "repetitionsPerSide": 3,
+        "baseline": {
+          "averageFps": 42.178323545114786,
+          "p50": 23,
+          "p95": 32,
+          "p99": 35,
+          "over33": 7,
+          "over50": 0
+        },
+        "candidate": {
+          "averageFps": 41.7331206804891,
+          "p50": 24,
+          "p95": 32,
+          "p99": 36,
+          "over33": 6,
+          "over50": 0
+        },
+        "fpsChangeRatio": -0.010555252727138075,
+        "p95ChangeMs": 0,
+        "contracts": {
+          "averageFpsWithinFivePercent": true,
+          "p95WithinTwoMs": true,
+          "reversalZero": true,
+          "stopThenJumpZero": true,
+          "wheelMonotonic": true,
+          "transformInvariant": true
+        },
+        "passed": true
+      },
+      {
+        "viewportName": "mobile-390",
+        "type": "wheel-zoom",
+        "repetitionsPerSide": 3,
+        "baseline": {
+          "averageFps": 36.58872077028886,
+          "p50": 26,
+          "p95": 35,
+          "p99": 37,
+          "over33": 13,
+          "over50": 0
+        },
+        "candidate": {
+          "averageFps": 35.614133482894,
+          "p50": 28,
+          "p95": 36,
+          "p99": 41,
+          "over33": 11,
+          "over50": 0
+        },
+        "fpsChangeRatio": -0.02663627661413775,
+        "p95ChangeMs": 1,
+        "contracts": {
+          "averageFpsWithinFivePercent": true,
+          "p95WithinTwoMs": true,
+          "reversalZero": true,
+          "stopThenJumpZero": true,
+          "wheelMonotonic": true,
+          "transformInvariant": true
+        },
+        "passed": true
+      }
+    ],
+    "currentR241RenderLoopChanged": false,
+    "rerunInR241": false
+  },
+  "thresholdChanged": false,
+  "absoluteA6Claimed": false
+}

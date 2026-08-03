@@ -1,0 +1,2453 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2",
+  "sourceCommit": "a50cb5006a5f221485d5a042b836eabde00e1293",
+  "captureTimestamp": "2026-07-31T05:38:17.079Z",
+  "thresholds": {
+    "maximumFpsRegressionPercent": 5,
+    "maximumP95RegressionMs": 2,
+    "changed": false
+  },
+  "desktop": {
+    "pointer": {
+      "protected": {
+        "runCount": 3,
+        "averageFpsMedian": 37.08557566261079,
+        "p50MedianMs": 33.19999999999982,
+        "p95MedianMs": 34.100000000000364,
+        "p99MedianMs": 35.19999999999982,
+        "over33Median": 150,
+        "over50Median": 0,
+        "reversalCountTotal": 0,
+        "stopThenJumpCountTotal": 0,
+        "zoomMonotonic": true,
+        "transformInvariant": true,
+        "raw": [
+          {
+            "status": "passed",
+            "type": "pointer-rotate",
+            "pacing": {
+              "captured": true,
+              "label": "pointer-rotate",
+              "durationMs": 10785.899999976158,
+              "averageFps": 37.36359506400864,
+              "meanFrameTime": 26.67444168734491,
+              "p50": 33.20000000000073,
+              "p90": 33.400000000000546,
+              "p95": 34,
+              "p99": 35,
+              "over33": 171,
+              "over50": 0,
+              "longest": 50,
+              "callbackCount": 403,
+              "events": {
+                "controlsChange": 515,
+                "pointerMove": 463,
+                "pointerDown": 26,
+                "pointerUp": 26,
+                "wheel": 0,
+                "mainSpringGeometry": 53,
+                "hairSpringGeometry": 242,
+                "balanceDom": 96,
+                "timeDom": 96,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 404,
+                  "totalMs": 36.70000219345093,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.09084158958774982
+                },
+                "updateHairSpring": {
+                  "calls": 404,
+                  "totalMs": 2.5999999046325684,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.006435643328298437
+                },
+                "updateMainSpring": {
+                  "calls": 404,
+                  "totalMs": 0.8999998569488525,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.002227722418190229
+                },
+                "updateBalanceReadout": {
+                  "calls": 96,
+                  "totalMs": 1.7999998331069946,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.018749998261531193
+                },
+                "updateTimeUI": {
+                  "calls": 96,
+                  "totalMs": 0.7000001668930054,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.007291668405135472
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 404,
+                  "totalMs": 7.900000214576721,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.01955445597667505
+                },
+                "rendererRender": {
+                  "calls": 404,
+                  "totalMs": 3318.6999989748,
+                  "maxMs": 19.299999952316284,
+                  "averageMs": 8.214603957858417
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 404,
+              "p50AngularStep": 0.1086601223168918,
+              "p95AngularStep": 0.18755419968606796,
+              "p99AngularStep": 0.22146006908750798,
+              "maxAngularStep": 0.2900151718337196,
+              "p95AngularVelocity": 9.873705851136954,
+              "p95JerkProxy": 8.106470624578899,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 404,
+              "startDistance": 48.97567441624348,
+              "endDistance": 48.975638624459286,
+              "totalChange": -0.000035791784192440446,
+              "maxFrameDistanceStep": 0.6575383787035278,
+              "maxStepShare": 18371.209861128016,
+              "p50FrameDistanceStep": 0.07822820010832032,
+              "p95FrameDistanceStep": 0.33625630613627777,
+              "monotonic": false,
+              "alternatingSignCount": 163,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 33.79999999999927,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          },
+          {
+            "status": "passed",
+            "type": "pointer-rotate",
+            "pacing": {
+              "captured": true,
+              "label": "pointer-rotate",
+              "durationMs": 10746.5,
+              "averageFps": 36.84920671846648,
+              "meanFrameTime": 27.05858585858586,
+              "p50": 33.19999999999982,
+              "p90": 33.5,
+              "p95": 34.29999999999927,
+              "p99": 35.19999999999982,
+              "over33": 150,
+              "over50": 0,
+              "longest": 50,
+              "callbackCount": 396,
+              "events": {
+                "controlsChange": 513,
+                "pointerMove": 461,
+                "pointerDown": 26,
+                "pointerUp": 26,
+                "wheel": 0,
+                "mainSpringGeometry": 52,
+                "hairSpringGeometry": 232,
+                "balanceDom": 98,
+                "timeDom": 98,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 397,
+                  "totalMs": 36.799999952316284,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.09269521398568334
+                },
+                "updateHairSpring": {
+                  "calls": 397,
+                  "totalMs": 2.8000000715255737,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.0070528969056059794
+                },
+                "updateMainSpring": {
+                  "calls": 397,
+                  "totalMs": 1.5000003576278687,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.0037783384323120117
+                },
+                "updateBalanceReadout": {
+                  "calls": 98,
+                  "totalMs": 1.5000001192092896,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.015306123665400915
+                },
+                "updateTimeUI": {
+                  "calls": 98,
+                  "totalMs": 0.6000001430511475,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.006122450439297423
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 397,
+                  "totalMs": 7.399999976158142,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.01863979842860993
+                },
+                "rendererRender": {
+                  "calls": 397,
+                  "totalMs": 3453.7000004053116,
+                  "maxMs": 14.099999904632568,
+                  "averageMs": 8.699496222683404
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 397,
+              "p50AngularStep": 0.10898621839116356,
+              "p95AngularStep": 0.19497136998001635,
+              "p99AngularStep": 0.22022679009186374,
+              "maxAngularStep": 0.23831515803890457,
+              "p95AngularVelocity": 9.571559235934801,
+              "p95JerkProxy": 8.07759905877909,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 397,
+              "startDistance": 48.97567441624348,
+              "endDistance": 48.975634499467965,
+              "totalChange": -0.000039916775513404446,
+              "maxFrameDistanceStep": 0.6394982957399336,
+              "maxStepShare": 16020.79044498932,
+              "p50FrameDistanceStep": 0.08553574523835294,
+              "p95FrameDistanceStep": 0.36794365378450067,
+              "monotonic": false,
+              "alternatingSignCount": 175,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 33.899999999999636,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          },
+          {
+            "status": "passed",
+            "type": "pointer-rotate",
+            "pacing": {
+              "captured": true,
+              "label": "pointer-rotate",
+              "durationMs": 10758.900000095367,
+              "averageFps": 37.08557566261079,
+              "meanFrameTime": 26.858395989974937,
+              "p50": 33.19999999999982,
+              "p90": 33.400000000001455,
+              "p95": 34.100000000000364,
+              "p99": 50,
+              "over33": 142,
+              "over50": 1,
+              "longest": 51.5,
+              "callbackCount": 399,
+              "events": {
+                "controlsChange": 519,
+                "pointerMove": 467,
+                "pointerDown": 26,
+                "pointerUp": 26,
+                "wheel": 0,
+                "mainSpringGeometry": 52,
+                "hairSpringGeometry": 236,
+                "balanceDom": 97,
+                "timeDom": 97,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 400,
+                  "totalMs": 37.499998807907104,
+                  "maxMs": 0.2999999523162842,
+                  "averageMs": 0.09374999701976776
+                },
+                "updateHairSpring": {
+                  "calls": 400,
+                  "totalMs": 3.5,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.00875
+                },
+                "updateMainSpring": {
+                  "calls": 400,
+                  "totalMs": 0.7999997138977051,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.0019999992847442626
+                },
+                "updateBalanceReadout": {
+                  "calls": 97,
+                  "totalMs": 1.299999713897705,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.013402058906161907
+                },
+                "updateTimeUI": {
+                  "calls": 97,
+                  "totalMs": 0.5,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.005154639175257732
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 400,
+                  "totalMs": 6.600000381469727,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.016500000953674317
+                },
+                "rendererRender": {
+                  "calls": 400,
+                  "totalMs": 3167.2999999523163,
+                  "maxMs": 10.399999976158142,
+                  "averageMs": 7.918249999880791
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 400,
+              "p50AngularStep": 0.10777859131755935,
+              "p95AngularStep": 0.20069107532804317,
+              "p99AngularStep": 0.22953612770455437,
+              "maxAngularStep": 0.258274447111548,
+              "p95AngularVelocity": 10.523547657188574,
+              "p95JerkProxy": 8.908360167657158,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 400,
+              "startDistance": 48.97567441624348,
+              "endDistance": 48.97562531771502,
+              "totalChange": -0.00004909852845713658,
+              "maxFrameDistanceStep": 0.6328550996290616,
+              "maxStepShare": 12889.492201004543,
+              "p50FrameDistanceStep": 0.08913090702521487,
+              "p95FrameDistanceStep": 0.42471497339089836,
+              "monotonic": false,
+              "alternatingSignCount": 167,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 33.70000000000073,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "runCount": 3,
+        "averageFpsMedian": 36.53478726874505,
+        "p50MedianMs": 33.19999999999982,
+        "p95MedianMs": 34.100000000000364,
+        "p99MedianMs": 50,
+        "over33Median": 154,
+        "over50Median": 3,
+        "reversalCountTotal": 0,
+        "stopThenJumpCountTotal": 0,
+        "zoomMonotonic": true,
+        "transformInvariant": true,
+        "raw": [
+          {
+            "status": "passed",
+            "type": "pointer-rotate",
+            "pacing": {
+              "captured": true,
+              "label": "pointer-rotate",
+              "durationMs": 10734.899999976158,
+              "averageFps": 36.609563200483734,
+              "meanFrameTime": 27.272010178117046,
+              "p50": 33.29999999999927,
+              "p90": 33.400000000000546,
+              "p95": 34.5,
+              "p99": 50,
+              "over33": 162,
+              "over50": 2,
+              "longest": 50.59999999999991,
+              "callbackCount": 393,
+              "events": {
+                "controlsChange": 494,
+                "pointerMove": 444,
+                "pointerDown": 25,
+                "pointerUp": 25,
+                "wheel": 0,
+                "mainSpringGeometry": 52,
+                "hairSpringGeometry": 246,
+                "balanceDom": 95,
+                "timeDom": 95,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 394,
+                  "totalMs": 44.799999952316284,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.11370558363532052
+                },
+                "updateHairSpring": {
+                  "calls": 394,
+                  "totalMs": 5.000000476837158,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.012690356540195832
+                },
+                "updateMainSpring": {
+                  "calls": 394,
+                  "totalMs": 1.399999976158142,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.003553299431873457
+                },
+                "updateBalanceReadout": {
+                  "calls": 95,
+                  "totalMs": 1.5000003576278687,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.015789477448714406
+                },
+                "updateTimeUI": {
+                  "calls": 95,
+                  "totalMs": 0.6000000238418579,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.006315789724651136
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 394,
+                  "totalMs": 11.09999966621399,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.028172587985314693
+                },
+                "rendererRender": {
+                  "calls": 394,
+                  "totalMs": 3721.500000357628,
+                  "maxMs": 15.700000047683716,
+                  "averageMs": 9.445431472988902
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 394,
+              "p50AngularStep": 0.10457511204904134,
+              "p95AngularStep": 0.19893600917265383,
+              "p99AngularStep": 0.22371799211206347,
+              "maxAngularStep": 0.26965354172256656,
+              "p95AngularVelocity": 9.98553937909461,
+              "p95JerkProxy": 8.982539904784804,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 394,
+              "startDistance": 48.97567441624348,
+              "endDistance": 48.97563981382754,
+              "totalChange": -0.00003460241593700175,
+              "maxFrameDistanceStep": 0.5410504777700567,
+              "maxStepShare": 15636.205250960227,
+              "p50FrameDistanceStep": 0.08645510968789694,
+              "p95FrameDistanceStep": 0.3872742349328391,
+              "monotonic": false,
+              "alternatingSignCount": 147,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 34.20000000000073,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          },
+          {
+            "status": "passed",
+            "type": "pointer-rotate",
+            "pacing": {
+              "captured": true,
+              "label": "pointer-rotate",
+              "durationMs": 10729.5,
+              "averageFps": 36.53478726874505,
+              "meanFrameTime": 27.295408163265304,
+              "p50": 33.19999999999982,
+              "p90": 33.400000000001455,
+              "p95": 34.100000000000364,
+              "p99": 49.899999999999636,
+              "over33": 154,
+              "over50": 3,
+              "longest": 51,
+              "callbackCount": 392,
+              "events": {
+                "controlsChange": 512,
+                "pointerMove": 460,
+                "pointerDown": 26,
+                "pointerUp": 26,
+                "wheel": 0,
+                "mainSpringGeometry": 52,
+                "hairSpringGeometry": 233,
+                "balanceDom": 96,
+                "timeDom": 96,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 393,
+                  "totalMs": 37.00000023841858,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.09414758330386407
+                },
+                "updateHairSpring": {
+                  "calls": 393,
+                  "totalMs": 3.1000001430511475,
+                  "maxMs": 0.19999992847442627,
+                  "averageMs": 0.007888041076466025
+                },
+                "updateMainSpring": {
+                  "calls": 393,
+                  "totalMs": 0.7999999523162842,
+                  "maxMs": 0.19999992847442627,
+                  "averageMs": 0.002035623288336601
+                },
+                "updateBalanceReadout": {
+                  "calls": 96,
+                  "totalMs": 1.6000001430511475,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.016666668156782787
+                },
+                "updateTimeUI": {
+                  "calls": 96,
+                  "totalMs": 0.899999737739563,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.009374997268120447
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 393,
+                  "totalMs": 8,
+                  "maxMs": 0.19999992847442627,
+                  "averageMs": 0.020356234096692113
+                },
+                "rendererRender": {
+                  "calls": 393,
+                  "totalMs": 3467.900001168251,
+                  "maxMs": 14.300000071525574,
+                  "averageMs": 8.82417303096247
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 393,
+              "p50AngularStep": 0.1112742806685627,
+              "p95AngularStep": 0.19929089139116185,
+              "p99AngularStep": 0.22378929590237917,
+              "maxAngularStep": 0.26127155247803807,
+              "p95AngularVelocity": 9.599572633362913,
+              "p95JerkProxy": 8.696948860939962,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 393,
+              "startDistance": 48.97567441624348,
+              "endDistance": 48.97563089016571,
+              "totalChange": -0.00004352607776780815,
+              "maxFrameDistanceStep": 0.6907918876239236,
+              "maxStepShare": 15870.758934654865,
+              "p50FrameDistanceStep": 0.09199447171224051,
+              "p95FrameDistanceStep": 0.41609359468725415,
+              "monotonic": false,
+              "alternatingSignCount": 163,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 34.900000000001455,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          },
+          {
+            "status": "passed",
+            "type": "pointer-rotate",
+            "pacing": {
+              "captured": true,
+              "label": "pointer-rotate",
+              "durationMs": 11108.400000095367,
+              "averageFps": 33.12808325202916,
+              "meanFrameTime": 30.072010869565222,
+              "p50": 33.19999999999891,
+              "p90": 33.400000000001455,
+              "p95": 34.100000000000364,
+              "p99": 150.79999999999927,
+              "over33": 151,
+              "over50": 8,
+              "longest": 300.10000000000036,
+              "callbackCount": 368,
+              "events": {
+                "controlsChange": 469,
+                "pointerMove": 421,
+                "pointerDown": 24,
+                "pointerUp": 24,
+                "wheel": 0,
+                "mainSpringGeometry": 50,
+                "hairSpringGeometry": 228,
+                "balanceDom": 90,
+                "timeDom": 90,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 8,
+              "longtasks": [
+                {
+                  "startTime": 11389.899999976158,
+                  "duration": 286
+                },
+                {
+                  "startTime": 11859.799999952316,
+                  "duration": 74
+                },
+                {
+                  "startTime": 12073.799999952316,
+                  "duration": 128
+                },
+                {
+                  "startTime": 12394.799999952316,
+                  "duration": 122
+                },
+                {
+                  "startTime": 12744.299999952316,
+                  "duration": 222
+                },
+                {
+                  "startTime": 13156.5,
+                  "duration": 239
+                },
+                {
+                  "startTime": 13548.100000023842,
+                  "duration": 228
+                },
+                {
+                  "startTime": 13936.100000023842,
+                  "duration": 53
+                }
+              ],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 369,
+                  "totalMs": 35.90000140666962,
+                  "maxMs": 0.2999999523162842,
+                  "averageMs": 0.09728997671184178
+                },
+                "updateHairSpring": {
+                  "calls": 369,
+                  "totalMs": 3.700000047683716,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.010027100400226871
+                },
+                "updateMainSpring": {
+                  "calls": 369,
+                  "totalMs": 1.200000286102295,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.003252033295670176
+                },
+                "updateBalanceReadout": {
+                  "calls": 90,
+                  "totalMs": 1.7999999523162842,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.019999999470180937
+                },
+                "updateTimeUI": {
+                  "calls": 90,
+                  "totalMs": 0.49999988079071045,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.005555554231007894
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 369,
+                  "totalMs": 6.200000286102295,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.016802168797025188
+                },
+                "rendererRender": {
+                  "calls": 369,
+                  "totalMs": 4255.899999260902,
+                  "maxMs": 285.3000000715256,
+                  "averageMs": 11.533604334040385
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 369,
+              "p50AngularStep": 0.10943300684278603,
+              "p95AngularStep": 0.20004266766077905,
+              "p99AngularStep": 0.22132431961084015,
+              "maxAngularStep": 0.2632971784283176,
+              "p95AngularVelocity": 9.801912090554,
+              "p95JerkProxy": 8.565112944630975,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 369,
+              "startDistance": 48.97567441624348,
+              "endDistance": 48.975639242587064,
+              "totalChange": -0.000035173656414144716,
+              "maxFrameDistanceStep": 0.663748004673316,
+              "maxStepShare": 18870.6001121452,
+              "p50FrameDistanceStep": 0.07978194732641697,
+              "p95FrameDistanceStep": 0.43212407518127804,
+              "monotonic": false,
+              "alternatingSignCount": 149,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 83.40000000000146,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          }
+        ]
+      },
+      "differential": {
+        "fpsPercent": -1.4851822683746072,
+        "p95DeltaMs": 0,
+        "pass": true
+      }
+    },
+    "wheel": {
+      "protected": {
+        "runCount": 3,
+        "averageFpsMedian": 26.664627794412038,
+        "p50MedianMs": 33.399999999999636,
+        "p95MedianMs": 50,
+        "p99MedianMs": 50.600000000000364,
+        "over33Median": 208,
+        "over50Median": 13,
+        "reversalCountTotal": 0,
+        "stopThenJumpCountTotal": 0,
+        "zoomMonotonic": true,
+        "transformInvariant": true,
+        "raw": [
+          {
+            "status": "passed",
+            "type": "wheel-zoom",
+            "pacing": {
+              "captured": true,
+              "label": "wheel-zoom",
+              "durationMs": 10463.299999952316,
+              "averageFps": 26.664627794412038,
+              "meanFrameTime": 37.398924731182795,
+              "p50": 33.399999999999636,
+              "p90": 50,
+              "p95": 50.100000000000364,
+              "p99": 51.29999999999927,
+              "over33": 208,
+              "over50": 21,
+              "longest": 51.70000000000073,
+              "callbackCount": 279,
+              "events": {
+                "controlsChange": 0,
+                "pointerMove": 0,
+                "pointerDown": 0,
+                "pointerUp": 0,
+                "wheel": 188,
+                "mainSpringGeometry": 50,
+                "hairSpringGeometry": 214,
+                "balanceDom": 91,
+                "timeDom": 91,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 280,
+                  "totalMs": 35.199999928474426,
+                  "maxMs": 0.3999999761581421,
+                  "averageMs": 0.12571428545883723
+                },
+                "updateHairSpring": {
+                  "calls": 280,
+                  "totalMs": 4.600000023841858,
+                  "maxMs": 0.19999992847442627,
+                  "averageMs": 0.01642857151372092
+                },
+                "updateMainSpring": {
+                  "calls": 280,
+                  "totalMs": 1.0999999046325684,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.003928571087973458
+                },
+                "updateBalanceReadout": {
+                  "calls": 91,
+                  "totalMs": 2.200000047683716,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.024175824699821054
+                },
+                "updateTimeUI": {
+                  "calls": 91,
+                  "totalMs": 1.1000001430511475,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.01208791365990272
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 280,
+                  "totalMs": 9.499999642372131,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.03392857015132904
+                },
+                "rendererRender": {
+                  "calls": 280,
+                  "totalMs": 2417.200000166893,
+                  "maxMs": 11.5,
+                  "averageMs": 8.632857143453188
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0.09999990463256836,
+                  "maxMs": 0.09999990463256836,
+                  "averageMs": 0.09999990463256836
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 280,
+              "p50AngularStep": 0,
+              "p95AngularStep": 0,
+              "p99AngularStep": 0,
+              "maxAngularStep": 0,
+              "p95AngularVelocity": 0,
+              "p95JerkProxy": 0,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 280,
+              "startDistance": 48.97567441624348,
+              "endDistance": 35.71220827724238,
+              "totalChange": -13.263466139001096,
+              "maxFrameDistanceStep": 0.08851446574808364,
+              "maxStepShare": 0.006673554621427931,
+              "p50FrameDistanceStep": 0.04609281729338477,
+              "p95FrameDistanceStep": 0.07350403609682132,
+              "monotonic": true,
+              "alternatingSignCount": 0,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 50.899999999999636,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          },
+          {
+            "status": "passed",
+            "type": "wheel-zoom",
+            "pacing": {
+              "captured": true,
+              "label": "wheel-zoom",
+              "durationMs": 10428.200000047684,
+              "averageFps": 26.65848372669577,
+              "meanFrameTime": 37.35539568345323,
+              "p50": 33.399999999999636,
+              "p90": 50,
+              "p95": 50,
+              "p99": 50.600000000000364,
+              "over33": 204,
+              "over50": 13,
+              "longest": 52,
+              "callbackCount": 278,
+              "events": {
+                "controlsChange": 0,
+                "pointerMove": 0,
+                "pointerDown": 0,
+                "pointerUp": 0,
+                "wheel": 188,
+                "mainSpringGeometry": 50,
+                "hairSpringGeometry": 210,
+                "balanceDom": 90,
+                "timeDom": 90,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 279,
+                  "totalMs": 33.09999883174896,
+                  "maxMs": 0.3999999761581421,
+                  "averageMs": 0.11863798864426152
+                },
+                "updateHairSpring": {
+                  "calls": 279,
+                  "totalMs": 5.999999761581421,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.021505375489539142
+                },
+                "updateMainSpring": {
+                  "calls": 279,
+                  "totalMs": 1.100000262260437,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.0039426532697506705
+                },
+                "updateBalanceReadout": {
+                  "calls": 90,
+                  "totalMs": 1.8000000715255737,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.020000000794728596
+                },
+                "updateTimeUI": {
+                  "calls": 90,
+                  "totalMs": 0.30000007152557373,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.0033333341280619303
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 279,
+                  "totalMs": 7.300000071525574,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.02616487480833539
+                },
+                "rendererRender": {
+                  "calls": 279,
+                  "totalMs": 2403.1000010967255,
+                  "maxMs": 10.5,
+                  "averageMs": 8.613261652676435
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 279,
+              "p50AngularStep": 0,
+              "p95AngularStep": 0,
+              "p99AngularStep": 0,
+              "maxAngularStep": 0,
+              "p95AngularVelocity": 0,
+              "p95JerkProxy": 0,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 279,
+              "startDistance": 48.97567441624348,
+              "endDistance": 35.71224262281461,
+              "totalChange": -13.263431793428872,
+              "maxFrameDistanceStep": 0.0886493144813656,
+              "maxStepShare": 0.006683738858994645,
+              "p50FrameDistanceStep": 0.04656650038379695,
+              "p95FrameDistanceStep": 0.07152303065646493,
+              "monotonic": true,
+              "alternatingSignCount": 0,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 50.100000000000364,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          },
+          {
+            "status": "passed",
+            "type": "wheel-zoom",
+            "pacing": {
+              "captured": true,
+              "label": "wheel-zoom",
+              "durationMs": 10452.300000071526,
+              "averageFps": 26.979707815320097,
+              "meanFrameTime": 36.937943262411345,
+              "p50": 33.399999999999636,
+              "p90": 50,
+              "p95": 50,
+              "p99": 50.5,
+              "over33": 220,
+              "over50": 13,
+              "longest": 51.70000000000073,
+              "callbackCount": 282,
+              "events": {
+                "controlsChange": 0,
+                "pointerMove": 0,
+                "pointerDown": 0,
+                "pointerUp": 0,
+                "wheel": 188,
+                "mainSpringGeometry": 50,
+                "hairSpringGeometry": 225,
+                "balanceDom": 91,
+                "timeDom": 91,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 283,
+                  "totalMs": 32.499998807907104,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.1148409851869509
+                },
+                "updateHairSpring": {
+                  "calls": 283,
+                  "totalMs": 7.0000001192092896,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.024734982753389714
+                },
+                "updateMainSpring": {
+                  "calls": 283,
+                  "totalMs": 2.5999999046325684,
+                  "maxMs": 0.19999992847442627,
+                  "averageMs": 0.009187278814956071
+                },
+                "updateBalanceReadout": {
+                  "calls": 91,
+                  "totalMs": 1.2999999523162842,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.014285713761717408
+                },
+                "updateTimeUI": {
+                  "calls": 91,
+                  "totalMs": 0.40000009536743164,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.00439560544359815
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 283,
+                  "totalMs": 8.399999856948853,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.029681978293105486
+                },
+                "rendererRender": {
+                  "calls": 283,
+                  "totalMs": 2442.4000004529953,
+                  "maxMs": 16.700000047683716,
+                  "averageMs": 8.630388694180196
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 283,
+              "p50AngularStep": 0,
+              "p95AngularStep": 0,
+              "p99AngularStep": 0,
+              "maxAngularStep": 0,
+              "p95AngularVelocity": 0,
+              "p95JerkProxy": 0,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 283,
+              "startDistance": 48.97567441624348,
+              "endDistance": 35.71220460130926,
+              "totalChange": -13.263469814934219,
+              "maxFrameDistanceStep": 0.09191296815979655,
+              "maxStepShare": 0.0069297830388474705,
+              "p50FrameDistanceStep": 0.04516882568659497,
+              "p95FrameDistanceStep": 0.07519248340878448,
+              "monotonic": true,
+              "alternatingSignCount": 0,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 50.100000000000364,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "runCount": 3,
+        "averageFpsMedian": 26.798104991147056,
+        "p50MedianMs": 33.399999999999636,
+        "p95MedianMs": 50.100000000000364,
+        "p99MedianMs": 51.100000000000364,
+        "over33Median": 205,
+        "over50Median": 19,
+        "reversalCountTotal": 0,
+        "stopThenJumpCountTotal": 0,
+        "zoomMonotonic": true,
+        "transformInvariant": true,
+        "raw": [
+          {
+            "status": "passed",
+            "type": "wheel-zoom",
+            "pacing": {
+              "captured": true,
+              "label": "wheel-zoom",
+              "durationMs": 10464.199999928474,
+              "averageFps": 26.566770512977598,
+              "meanFrameTime": 37.530575539568346,
+              "p50": 33.400000000000546,
+              "p90": 50,
+              "p95": 50.100000000000364,
+              "p99": 51.100000000000364,
+              "over33": 200,
+              "over50": 19,
+              "longest": 52,
+              "callbackCount": 278,
+              "events": {
+                "controlsChange": 0,
+                "pointerMove": 0,
+                "pointerDown": 0,
+                "pointerUp": 0,
+                "wheel": 188,
+                "mainSpringGeometry": 49,
+                "hairSpringGeometry": 206,
+                "balanceDom": 89,
+                "timeDom": 89,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 279,
+                  "totalMs": 35.000001072883606,
+                  "maxMs": 0.5,
+                  "averageMs": 0.12544803251929607
+                },
+                "updateHairSpring": {
+                  "calls": 279,
+                  "totalMs": 8,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.02867383512544803
+                },
+                "updateMainSpring": {
+                  "calls": 279,
+                  "totalMs": 0.8000001907348633,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.002867384196182306
+                },
+                "updateBalanceReadout": {
+                  "calls": 89,
+                  "totalMs": 1.200000286102295,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.013483149282048258
+                },
+                "updateTimeUI": {
+                  "calls": 89,
+                  "totalMs": 0.9999998807907104,
+                  "maxMs": 0.2999999523162842,
+                  "averageMs": 0.011235953716749555
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 279,
+                  "totalMs": 8.5999995470047,
+                  "maxMs": 0.19999992847442627,
+                  "averageMs": 0.03082437113621756
+                },
+                "rendererRender": {
+                  "calls": 279,
+                  "totalMs": 2602.8999984264374,
+                  "maxMs": 18.100000023841858,
+                  "averageMs": 9.329390675363575
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 279,
+              "p50AngularStep": 0,
+              "p95AngularStep": 0,
+              "p99AngularStep": 0,
+              "maxAngularStep": 0,
+              "p95AngularVelocity": 0,
+              "p95JerkProxy": 0,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 279,
+              "startDistance": 48.97567441624348,
+              "endDistance": 35.71220377041792,
+              "totalChange": -13.263470645825556,
+              "maxFrameDistanceStep": 0.09069994820740135,
+              "maxStepShare": 0.006838326907742474,
+              "p50FrameDistanceStep": 0.04651489526847996,
+              "p95FrameDistanceStep": 0.07476547561874725,
+              "monotonic": true,
+              "alternatingSignCount": 0,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 50.100000000000364,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          },
+          {
+            "status": "passed",
+            "type": "wheel-zoom",
+            "pacing": {
+              "captured": true,
+              "label": "wheel-zoom",
+              "durationMs": 10498.5,
+              "averageFps": 26.860980140020004,
+              "meanFrameTime": 37.11524822695036,
+              "p50": 33.399999999999636,
+              "p90": 50,
+              "p95": 50.100000000000364,
+              "p99": 50.70000000000073,
+              "over33": 205,
+              "over50": 19,
+              "longest": 51.5,
+              "callbackCount": 282,
+              "events": {
+                "controlsChange": 0,
+                "pointerMove": 0,
+                "pointerDown": 0,
+                "pointerUp": 0,
+                "wheel": 188,
+                "mainSpringGeometry": 49,
+                "hairSpringGeometry": 219,
+                "balanceDom": 91,
+                "timeDom": 91,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 283,
+                  "totalMs": 33.399999380111694,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.11802119922300952
+                },
+                "updateHairSpring": {
+                  "calls": 283,
+                  "totalMs": 4.100000500679016,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.014487634278017724
+                },
+                "updateMainSpring": {
+                  "calls": 283,
+                  "totalMs": 0.5999999046325684,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.002120141005768793
+                },
+                "updateBalanceReadout": {
+                  "calls": 91,
+                  "totalMs": 1.8000001907348633,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.019780221876207288
+                },
+                "updateTimeUI": {
+                  "calls": 91,
+                  "totalMs": 0.2999999523162842,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.0032967027727064196
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 283,
+                  "totalMs": 8.100000143051147,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.028621908632689565
+                },
+                "rendererRender": {
+                  "calls": 283,
+                  "totalMs": 2558.1999990940094,
+                  "maxMs": 14.200000047683716,
+                  "averageMs": 9.039575968530068
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 283,
+              "p50AngularStep": 0,
+              "p95AngularStep": 0,
+              "p99AngularStep": 0,
+              "maxAngularStep": 0,
+              "p95AngularVelocity": 0,
+              "p95JerkProxy": 0,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 283,
+              "startDistance": 48.97567441624348,
+              "endDistance": 35.71217709245874,
+              "totalChange": -13.26349732378474,
+              "maxFrameDistanceStep": 0.09189358093062339,
+              "maxStepShare": 0.006928306968165584,
+              "p50FrameDistanceStep": 0.045513423479569326,
+              "p95FrameDistanceStep": 0.06932968477094192,
+              "monotonic": true,
+              "alternatingSignCount": 0,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 50.100000000000364,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          },
+          {
+            "status": "passed",
+            "type": "wheel-zoom",
+            "pacing": {
+              "captured": true,
+              "label": "wheel-zoom",
+              "durationMs": 10448.5,
+              "averageFps": 26.798104991147056,
+              "meanFrameTime": 37.20142857142857,
+              "p50": 33.399999999999636,
+              "p90": 50,
+              "p95": 50.100000000000364,
+              "p99": 51.29999999999927,
+              "over33": 209,
+              "over50": 22,
+              "longest": 51.5,
+              "callbackCount": 280,
+              "events": {
+                "controlsChange": 0,
+                "pointerMove": 0,
+                "pointerDown": 0,
+                "pointerUp": 0,
+                "wheel": 186,
+                "mainSpringGeometry": 50,
+                "hairSpringGeometry": 213,
+                "balanceDom": 91,
+                "timeDom": 91,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 1280,
+                "height": 720,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 281,
+                  "totalMs": 34.09999978542328,
+                  "maxMs": 0.5,
+                  "averageMs": 0.12135231240364157
+                },
+                "updateHairSpring": {
+                  "calls": 281,
+                  "totalMs": 4.2000004053115845,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.01494662065947183
+                },
+                "updateMainSpring": {
+                  "calls": 281,
+                  "totalMs": 1.6000001430511475,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.00569395068701476
+                },
+                "updateBalanceReadout": {
+                  "calls": 91,
+                  "totalMs": 1.8999998569488525,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.020879119307130246
+                },
+                "updateTimeUI": {
+                  "calls": 91,
+                  "totalMs": 0.40000009536743164,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.00439560544359815
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 281,
+                  "totalMs": 10.100000262260437,
+                  "maxMs": 0.2999999523162842,
+                  "averageMs": 0.0359430614315318
+                },
+                "rendererRender": {
+                  "calls": 281,
+                  "totalMs": 2630.1999992132187,
+                  "maxMs": 11.100000023841858,
+                  "averageMs": 9.360142345954515
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 281,
+              "p50AngularStep": 0,
+              "p95AngularStep": 0,
+              "p99AngularStep": 0,
+              "maxAngularStep": 0,
+              "p95AngularVelocity": 0,
+              "p95JerkProxy": 0,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 281,
+              "startDistance": 48.97567441624348,
+              "endDistance": 35.83240929221276,
+              "totalChange": -13.14326512403072,
+              "maxFrameDistanceStep": 0.08430214775081168,
+              "maxStepShare": 0.006414094743982328,
+              "p50FrameDistanceStep": 0.045729561538053076,
+              "p95FrameDistanceStep": 0.07399567193090206,
+              "monotonic": true,
+              "alternatingSignCount": 0,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 50.100000000000364,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          }
+        ]
+      },
+      "differential": {
+        "fpsPercent": 0.5005777607853602,
+        "p95DeltaMs": 0.1000000000003638,
+        "pass": true
+      }
+    }
+  },
+  "mobile390x844": {
+    "pointer": {
+      "protected": {
+        "runCount": 1,
+        "averageFpsMedian": 52.97053165721456,
+        "p50MedianMs": 16.699999999999818,
+        "p95MedianMs": 33.30000000000109,
+        "p99MedianMs": 33.900000000000546,
+        "over33Median": 47,
+        "over50Median": 0,
+        "reversalCountTotal": 0,
+        "stopThenJumpCountTotal": 0,
+        "zoomMonotonic": true,
+        "transformInvariant": true,
+        "raw": [
+          {
+            "status": "passed",
+            "type": "pointer-rotate",
+            "pacing": {
+              "captured": true,
+              "label": "pointer-rotate",
+              "durationMs": 10760.699999928474,
+              "averageFps": 52.97053165721456,
+              "meanFrameTime": 18.83017543859649,
+              "p50": 16.699999999999818,
+              "p90": 33.19999999999891,
+              "p95": 33.30000000000109,
+              "p99": 33.900000000000546,
+              "over33": 47,
+              "over50": 0,
+              "longest": 34.69999999999982,
+              "callbackCount": 570,
+              "events": {
+                "controlsChange": 545,
+                "pointerMove": 489,
+                "pointerDown": 28,
+                "pointerUp": 28,
+                "wheel": 0,
+                "mainSpringGeometry": 54,
+                "hairSpringGeometry": 264,
+                "balanceDom": 99,
+                "timeDom": 99,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 390,
+                "height": 844,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 571,
+                  "totalMs": 64.90000009536743,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.11366024535090619
+                },
+                "updateHairSpring": {
+                  "calls": 571,
+                  "totalMs": 8.399999976158142,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.014711033233201649
+                },
+                "updateMainSpring": {
+                  "calls": 571,
+                  "totalMs": 2.1000001430511475,
+                  "maxMs": 0.19999992847442627,
+                  "averageMs": 0.003677758569266458
+                },
+                "updateBalanceReadout": {
+                  "calls": 99,
+                  "totalMs": 1.8000000715255737,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.018181818904298725
+                },
+                "updateTimeUI": {
+                  "calls": 99,
+                  "totalMs": 1.000000238418579,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.010101012509278577
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 571,
+                  "totalMs": 13.099999904632568,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.022942206487972974
+                },
+                "rendererRender": {
+                  "calls": 571,
+                  "totalMs": 4446.699999094009,
+                  "maxMs": 10,
+                  "averageMs": 7.787565672669018
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 571,
+              "p50AngularStep": 0.04566450444971372,
+              "p95AngularStep": 0.07791358195367776,
+              "p99AngularStep": 0.08435712841466819,
+              "maxAngularStep": 0.08863512650834643,
+              "p95AngularVelocity": 4.68824552445323,
+              "p95JerkProxy": 3.3814634507580017,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 571,
+              "startDistance": 105.98838258284488,
+              "endDistance": 105.98835776937713,
+              "totalChange": -0.000024813467746298556,
+              "maxFrameDistanceStep": 0.3466616821388442,
+              "maxStepShare": 13970.706782430923,
+              "p50FrameDistanceStep": 0.03638469273424505,
+              "p95FrameDistanceStep": 0.13040792092671438,
+              "monotonic": false,
+              "alternatingSignCount": 167,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 33.399999999999636,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "runCount": 1,
+        "averageFpsMedian": 52.205253966253366,
+        "p50MedianMs": 16.700000000000273,
+        "p95MedianMs": 33.400000000000546,
+        "p99MedianMs": 34.79999999999927,
+        "over33Median": 49,
+        "over50Median": 0,
+        "reversalCountTotal": 0,
+        "stopThenJumpCountTotal": 0,
+        "zoomMonotonic": true,
+        "transformInvariant": true,
+        "raw": [
+          {
+            "status": "passed",
+            "type": "pointer-rotate",
+            "pacing": {
+              "captured": true,
+              "label": "pointer-rotate",
+              "durationMs": 10765.200000047684,
+              "averageFps": 52.205253966253366,
+              "meanFrameTime": 19.098042704626334,
+              "p50": 16.700000000000273,
+              "p90": 33.29999999999927,
+              "p95": 33.400000000000546,
+              "p99": 34.79999999999927,
+              "over33": 49,
+              "over50": 0,
+              "longest": 35.20000000000073,
+              "callbackCount": 562,
+              "events": {
+                "controlsChange": 538,
+                "pointerMove": 484,
+                "pointerDown": 27,
+                "pointerUp": 27,
+                "wheel": 0,
+                "mainSpringGeometry": 53,
+                "hairSpringGeometry": 254,
+                "balanceDom": 98,
+                "timeDom": 98,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 390,
+                "height": 844,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 563,
+                  "totalMs": 64.79999959468842,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.11509769022147143
+                },
+                "updateHairSpring": {
+                  "calls": 563,
+                  "totalMs": 5.199999928474426,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.009236234331215678
+                },
+                "updateMainSpring": {
+                  "calls": 563,
+                  "totalMs": 1.8000001907348633,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.003197158420488212
+                },
+                "updateBalanceReadout": {
+                  "calls": 98,
+                  "totalMs": 1.700000286102295,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.017346941694921375
+                },
+                "updateTimeUI": {
+                  "calls": 98,
+                  "totalMs": 0.5,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.00510204081632653
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 563,
+                  "totalMs": 12.999999403953552,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.02309058508695125
+                },
+                "rendererRender": {
+                  "calls": 563,
+                  "totalMs": 4569.500000357628,
+                  "maxMs": 15.899999976158142,
+                  "averageMs": 8.1163410308306
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 563,
+              "p50AngularStep": 0.04573696606831431,
+              "p95AngularStep": 0.07773124534612981,
+              "p99AngularStep": 0.08346995697741622,
+              "maxAngularStep": 0.11610091006206207,
+              "p95AngularVelocity": 4.644841542432031,
+              "p95JerkProxy": 3.3034616005010022,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 563,
+              "startDistance": 105.98838258284488,
+              "endDistance": 105.98835756952657,
+              "totalChange": -0.00002501331830728759,
+              "maxFrameDistanceStep": 0.3007911684820499,
+              "maxStepShare": 12025.240505351698,
+              "p50FrameDistanceStep": 0.039342673108876625,
+              "p95FrameDistanceStep": 0.13927754876544896,
+              "monotonic": false,
+              "alternatingSignCount": 169,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 33.400000000001455,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          }
+        ]
+      },
+      "differential": {
+        "fpsPercent": -1.4447234472055015,
+        "p95DeltaMs": 0.0999999999994543,
+        "pass": true
+      }
+    },
+    "wheel": {
+      "protected": {
+        "runCount": 1,
+        "averageFpsMedian": 45.66253303933098,
+        "p50MedianMs": 16.700000000000728,
+        "p95MedianMs": 33.400000000000546,
+        "p99MedianMs": 34.80000000000109,
+        "over33Median": 87,
+        "over50Median": 0,
+        "reversalCountTotal": 0,
+        "stopThenJumpCountTotal": 0,
+        "zoomMonotonic": true,
+        "transformInvariant": true,
+        "raw": [
+          {
+            "status": "passed",
+            "type": "wheel-zoom",
+            "pacing": {
+              "captured": true,
+              "label": "wheel-zoom",
+              "durationMs": 10555.699999928474,
+              "averageFps": 45.66253303933098,
+              "meanFrameTime": 21.852904564315352,
+              "p50": 16.700000000000728,
+              "p90": 33.399999999999636,
+              "p95": 33.400000000000546,
+              "p99": 34.80000000000109,
+              "over33": 87,
+              "over50": 0,
+              "longest": 35.29999999999927,
+              "callbackCount": 482,
+              "events": {
+                "controlsChange": 0,
+                "pointerMove": 0,
+                "pointerDown": 0,
+                "pointerUp": 0,
+                "wheel": 186,
+                "mainSpringGeometry": 52,
+                "hairSpringGeometry": 237,
+                "balanceDom": 95,
+                "timeDom": 95,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 390,
+                "height": 844,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 483,
+                  "totalMs": 51.60000133514404,
+                  "maxMs": 0.2999999523162842,
+                  "averageMs": 0.10683230090091934
+                },
+                "updateHairSpring": {
+                  "calls": 483,
+                  "totalMs": 3.6999999284744263,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.007660455338456369
+                },
+                "updateMainSpring": {
+                  "calls": 483,
+                  "totalMs": 1.200000286102295,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.002484472642033737
+                },
+                "updateBalanceReadout": {
+                  "calls": 95,
+                  "totalMs": 1.5999995470046997,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.01684210049478631
+                },
+                "updateTimeUI": {
+                  "calls": 95,
+                  "totalMs": 0.6000000238418579,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.006315789724651136
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 483,
+                  "totalMs": 14.399999856948853,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.029813664300101145
+                },
+                "rendererRender": {
+                  "calls": 483,
+                  "totalMs": 3705.700000166893,
+                  "maxMs": 9.900000095367432,
+                  "averageMs": 7.672256729124002
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 483,
+              "p50AngularStep": 4.2146848510894035e-8,
+              "p95AngularStep": 4.2146848510894035e-8,
+              "p99AngularStep": 4.2146848510894035e-8,
+              "maxAngularStep": 4.2146848510894035e-8,
+              "p95AngularVelocity": 0.000002701721058390895,
+              "p95JerkProxy": 0.000001471137218410012,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 483,
+              "startDistance": 105.98838258284488,
+              "endDistance": 77.54454943386139,
+              "totalChange": -28.443833148983487,
+              "maxFrameDistanceStep": 0.14186142904219423,
+              "maxStepShare": 0.004987423048755438,
+              "p50FrameDistanceStep": 0.047532100896603424,
+              "p95FrameDistanceStep": 0.11416450345186036,
+              "monotonic": true,
+              "alternatingSignCount": 0,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 34,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          }
+        ]
+      },
+      "candidate": {
+        "runCount": 1,
+        "averageFpsMedian": 44.85829500713667,
+        "p50MedianMs": 16.899999999999636,
+        "p95MedianMs": 33.70000000000073,
+        "p99MedianMs": 34.899999999999636,
+        "over33Median": 83,
+        "over50Median": 0,
+        "reversalCountTotal": 0,
+        "stopThenJumpCountTotal": 0,
+        "zoomMonotonic": true,
+        "transformInvariant": true,
+        "raw": [
+          {
+            "status": "passed",
+            "type": "wheel-zoom",
+            "pacing": {
+              "captured": true,
+              "label": "wheel-zoom",
+              "durationMs": 10588.899999976158,
+              "averageFps": 44.85829500713667,
+              "meanFrameTime": 22.243578947368423,
+              "p50": 16.899999999999636,
+              "p90": 33.399999999999636,
+              "p95": 33.70000000000073,
+              "p99": 34.899999999999636,
+              "over33": 83,
+              "over50": 0,
+              "longest": 35.100000000000364,
+              "callbackCount": 475,
+              "events": {
+                "controlsChange": 0,
+                "pointerMove": 0,
+                "pointerDown": 0,
+                "pointerUp": 0,
+                "wheel": 187,
+                "mainSpringGeometry": 52,
+                "hairSpringGeometry": 231,
+                "balanceDom": 95,
+                "timeDom": 95,
+                "selectionBoxRefresh": 0,
+                "shadowRefresh": 1,
+                "pixelRatioChange": 0
+              },
+              "longtaskCount": 0,
+              "longtasks": [],
+              "viewport": {
+                "width": 390,
+                "height": 844,
+                "devicePixelRatio": 1
+              },
+              "renderPixelRatio": 1,
+              "costs": {
+                "mechanismState": {
+                  "calls": 476,
+                  "totalMs": 52.69999933242798,
+                  "maxMs": 0.30000007152557373,
+                  "averageMs": 0.11071428431182348
+                },
+                "updateHairSpring": {
+                  "calls": 476,
+                  "totalMs": 4.300000190734863,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.009033613846081645
+                },
+                "updateMainSpring": {
+                  "calls": 476,
+                  "totalMs": 1.9000002145767212,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.003991597089446893
+                },
+                "updateBalanceReadout": {
+                  "calls": 95,
+                  "totalMs": 1.9000002145767212,
+                  "maxMs": 0.20000004768371582,
+                  "averageMs": 0.02000000225870233
+                },
+                "updateTimeUI": {
+                  "calls": 95,
+                  "totalMs": 0.5,
+                  "maxMs": 0.10000002384185791,
+                  "averageMs": 0.005263157894736842
+                },
+                "selectionBox": {
+                  "calls": 0,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                },
+                "controlsUpdate": {
+                  "calls": 476,
+                  "totalMs": 14.100000381469727,
+                  "maxMs": 0.19999992847442627,
+                  "averageMs": 0.029621849540902787
+                },
+                "rendererRender": {
+                  "calls": 476,
+                  "totalMs": 3771.5999989509583,
+                  "maxMs": 15,
+                  "averageMs": 7.923529409560837
+                },
+                "shadowUpdate": {
+                  "calls": 1,
+                  "totalMs": 0,
+                  "maxMs": 0,
+                  "averageMs": 0
+                }
+              },
+              "motionAxis": [
+                0,
+                0,
+                1
+              ]
+            },
+            "motion": {
+              "captured": true,
+              "sampleCount": 476,
+              "p50AngularStep": 4.2146848510894035e-8,
+              "p95AngularStep": 4.2146848510894035e-8,
+              "p99AngularStep": 4.2146848510894035e-8,
+              "maxAngularStep": 4.2146848510894035e-8,
+              "p95AngularVelocity": 0.000002736808344863152,
+              "p95JerkProxy": 0.0000014890248546510833,
+              "reversalCount": 0,
+              "stopThenJumpCount": 0,
+              "finite": true
+            },
+            "zoom": {
+              "captured": true,
+              "sampleCount": 476,
+              "startDistance": 105.98838258284488,
+              "endDistance": 77.41439374124573,
+              "totalChange": -28.573988841599146,
+              "maxFrameDistanceStep": 0.13699036060815217,
+              "maxStepShare": 0.004794233012673266,
+              "p50FrameDistanceStep": 0.04757370855816134,
+              "p95FrameDistanceStep": 0.11392371440376792,
+              "monotonic": true,
+              "alternatingSignCount": 0,
+              "finite": true
+            },
+            "modelInvariant": true,
+            "adaptive": {
+              "current": 1,
+              "min": 1,
+              "max": 1,
+              "devicePixelRatio": 1,
+              "interactionQualityMode": false,
+              "lastChangeAt": null,
+              "recentP95": 34,
+              "shadowAutoUpdate": false,
+              "shadowRefreshPending": false
+            }
+          }
+        ]
+      },
+      "differential": {
+        "fpsPercent": -1.761264605057258,
+        "p95DeltaMs": 0.3000000000001819,
+        "pass": true
+      }
+    }
+  },
+  "decision": "PASSED_DIFFERENTIAL_NO_R2_REGRESSION"
+}

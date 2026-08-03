@@ -1,6 +1,101 @@
 # Changelog
 
+## Unreleased — Final Stabilization Phase 3B.4 stack integration evidence closure
+
+- Head `d16037a75d85d705434d8b73ef5293511052f65e`へPhase 3B.4a／3B.4b／3B.4c R2.4.2の既存結果を統合。Node 442/442、Chrome／WebKit／Native Safari Desktop・Mobile、preset・9部品選択、multi-touch・production audio、12/12 protected pathを合格として記録
+- 物理iPhoneのforeground自動復帰6/6、fallback tap 0、duplicate／burstなし、Native Safari 26.5.2の18条件・400 cycleを現行統合状態へ反映
+- commit段階12性能セルは既存閾値内でMobile pointer製品回帰は再現せず、製品修正不要と判断。M3→M5 wheel aggregate p95 +4msは順序別結果とFPS改善を踏まえ`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`と分類
+- clean-process最終測定はStatefulFirewall／VShieldScannerの高CPU負荷で`NOT TESTED`。`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`とし、clean環境のabsolute PASS、McAfee停止環境PASS、Issue #2完了は主張しない
+- 製品コード、test runtime、audio file、performance threshold、APP_VERSIONは変更せず、PR #23をmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合。PR #23／#24／#25／#26 Merged／Closed、PR #22／#21 Open／Draft、Issue #2 Open、D2c3 query限定・未採用、Phase 3B.4d未開始を維持
+
+## Unreleased — Final Stabilization Phase 3B.4c-R2.4.2 Native Safari／物理iPhone受入閉鎖
+
+- 固定Head `0e260fdfc7495293319682ae7b998858641cdd26`を、Safari／SafariDriver 26.5.2のproduction profile actual Web AudioでDesktop／Mobile計18条件・400 cycle検証。trusted gesture、6 buffer／6 raw asset、duplicate／backlog／catch-up 0、console／runtime／unhandled rejection 0を確認
+- iPhone 16／iOS 26.5.2／Safariで、初期動作、sleep復帰3/3、Home／app復帰3/3、時刻合わせ、巻上げ・りゅうず音、最終60秒連続動作に合格。foreground自動復帰6/6、fallback tap 0、緑ONのまま無音、duplicate／burst、視覚的slowdownはいずれも再現なし
+- production timeout（450／80／1200／250／5500 ms）を維持し、diagnostic override／setter呼出し0。R2.4.1 transaction、R2 timebase、製品コード、音源、gain、APP_VERSION、試験閾値は変更していない
+- 4本の画面収録はリポジトリ外のHuman証跡としてduration／bytes／SHA-256を記録。動画は補助証跡とし、音響合格はHumanの直接聴取結果を正式根拠とする
+- 状態を`PHASE3B4C_R2_4_2_HUMAN_ACCEPTED`、`PHASE3B4C_R2_4_2_READY_FOR_FINAL_PR_REVIEW`とする。PR #26はOpen／Draftを維持し、Ready化、マージ、Issue #2クローズ、既定採用、Phase 3B.4d開始は未承認
+
+## Unreleased — Final Stabilization Phase 3B.4c-R2.4 WebKit platform recovery
+
+- R2.3の単一visibility lifecycle ownerを維持し、`running`かつ`currentTime`停止、`resume()` hang／reject、解決後suspended、`interrupted`をboundedに分類・回復するquery限定P0～P3候補を追加
+- P3は既存スピーカーボタンの1 trusted gestureでfresh Contextを最大1回だけ構築し、保持済みraw asset 6件を全decodeしてからgraphをatomic swap。create／decode／stale／old-close失敗をboundedに封じ込める
+- Chromium in-app BrowserとPlaywright WebKit actual Web Audioで、P0～P3×2 viewport各100 cycleを8/8、P3の5 fault×2 viewportを10/10合格。duplicate／backlog burst／application console error・warningは0
+- Node 411/411、audio Desktop／Mobile各23/23、R2.4固有browser failure 0。作業開始Headと共通する総合／UI未達は隠さず保持し、全回帰completeや絶対PASSとはしない
+- 通常pathとPhase 3C.1-only pathは作業開始Headとactual WebGL PNG byte／SHA exact。4 pointer／wheel差分条件は不変閾値で合格し、A.6絶対性能は主張しない
+- P3は`PHASE3B4C_R2_4_SINGLE_FINAL_CANDIDATE_READY_FOR_CHATGPT_REVIEW`でquery限定・未採用。R2.4時点のnative Safari環境blockと物理iPhone再試験`FROZEN`は後続R2.4.2で解除されたが、Ready化、マージ、Issue #2クローズ、Phase 3B.4d開始は未実施
+
 ## Unreleased — Stacked Draft Phase 3C.3 completed exterior integration review
+
+### Issue #2 Final Polish Phase 3B.4b
+
+- 完成外装＋D2c3の`input=issue2-ios-multitouch-stability`時だけ、Arcballとアプリのpointer lifecycleをevent-driven cleanupする候補を追加
+- pointercancel、真のlostpointercapture、pointer ID再利用、blur、visibility、pagehide／pageshowをcleanupし、二本指から一本指への遷移でgesture基準を再初期化
+- Desktop 24 cycle／390×844 60 cycleでidle復帰100%、active pointer／capture残留0、camera finite、selection／解除、transform invariantを確認
+- Desktop／Mobileのidle／pointer／wheel差分6/6、UI、HUD、audio、S86 5/5、A.7 9/9、禁止干渉0/0、application console error／warning 0/0に合格
+- iPhone 16／iOS 26.5.2でframingなしAを49秒、framingありBを55秒で再現し、候補Cは15分以上再現なし。`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`を記録
+- 候補Cはmanual reload、progressive frame drop、Safari自動reload、WebGL lossなし。preset／selectionの手動結果は`NOT_REPORTED`として最終統合へ残し、状態を`PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION`とする
+- D2c3、framing、入力候補はquery限定・未採用。感度、damping、FOV、maxDistance、audio、Geometry、Light、fog、Material、透過、APP_VERSION、閾値を変更しない
+
+### Issue #2 Final Polish Phase 3B.4a
+
+- Phase 3B.3で選定されたD2c3のモバイル全長構図をquery限定で安定化
+- 390×844の完成時計407,428頂点からraw fit 199.068109、安全余裕込み204.044811を算定し、幅420以下だけ`maxDistance=204.1`を適用
+- 初期／復帰32/32とDesktop固定画像48/48をPNG byte exact、Desktop selected 8/8をstate exact、最小余白4.0265%、near／far clipping 0、pinch／wheel reversal 0、selection／restore合格
+- 224 actual WebGL PNG、26 motion frame、6 board、3 GIF、Desktop／Mobile各3反復の差分性能を保存
+- iPhone 16／iOS 26.5.2、Safari／ホーム画面、輝度50%、低電力OFF、ケースあり、室温25℃で15分確認し、初期構図・明るさ・全長・余白・clippingなし・preset・最大距離回転・設定車2選択・HUD同期・解除・split／explode／restoreを合格
+- 判定は`HUMAN_ACCEPT_MOBILE_FULL_LENGTH_FRAMING_FIX`、`PHASE3B4A_ACCEPTED_PENDING_FINAL_INTEGRATION`。fogの全長時暗化は`MOBILE_FULL_LENGTH_FOG_DARKENING_ACCEPTED_AS_IS`
+- 一般tap異常と自動reloadは報告されていない。2～3分後の二本指pan／pinch／rotation劣化は`DEGRADATION_REPORTED`、手動reloadで復旧するためPhase 3B.4bへ分離
+- `IOS_BALANCE_AUDIO_PACING_SLOWDOWN_REPRODUCED`は別保留とし、D2c3／framingのquery限定・未採用、Issue #2 Open、PR #5 Open／Draftを維持
+
+### Issue #2 Final Polish Phase 3B.3
+
+- Phase 3B.2の人間判断を記録し、現行100／99・55／54不連続を既知制約として受容、OITを完成後へ延期
+- 製品コードを変更せず、現行透過方式のShadow-offとD2c3を最終PC／物理iPhone比較用に整理
+- 2候補×2 viewport×4 theme×16 scenarioの256実WebGL PNG、36操作GIF、132性能run、明示current／省略時同値性、protected product pathsを証跡化。DesktopはPNG byte exact、Mobileは最大12 pixel・3階調のGPU量子化差のみでMaterial／transform／source contract一致
+- D2c3はShadow-off比22性能比較中9比較で差分基準を満たさず、既知の性能tradeoffとして人間確認へ引き継ぐ
+- PCでは両候補合格、物理iPhoneではShadow-offを暗いfull-length表示のため不合格、D2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として選定
+- D2c3は`D2C3_SELECTED_FOR_FINAL_POLISH_PENDING_POST_SELECTION_STABILIZATION`。モバイル全長構図、iOS音響ペーシング、温度再試験を保留し、既定採用、Ready化、マージ、Issue #2クローズは未実施
+- 冷却5分は`COOLDOWN_PROTOCOL_DEVIATION_5MIN`、progressive frame drop／Safari reloadは`NOT_REPORTED`として記録
+
+### Issue #2 Final Polish Phase 3B.2
+
+- Shadow-off／D2c3をdual baselineとし、13 opacity、Desktop 1280×720／Mobile 390×844で現行と固定深度3候補をquery限定比較
+- 実ランタイム146 Mesh／150 Materialを監査し、現行のtransparent change 286・depthWrite change 300を再現。固定3候補はproperty toggle 0、Material replacement／UUID change 0
+- `stable-depth-base`はopacity 16%内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能（fps約10.1%、p95約33ms悪化）で棄却
+- candidate-specific browser failure 0、UI 22/22、HUD 57/57、trusted audio 23/23、A.7 9/9、禁止干渉0/0、protected path 42/42、console error／warning 0
+- 技術finalist 0件のためStage 2・PC候補比較・物理iPhoneを実施せず、`TRANSPARENCY_CONTINUITY_LIGHTWEIGHT_ROUTE_EXHAUSTED_OIT_DECISION_REQUIRED`とする
+- OITを実装せず、通常path、Light、Geometry、renderOrder、shadow対象、DPR、UI、audio、APP_VERSION、試験閾値を変更しない。Issue #2 Open、PR #5 Open／Draft、D2c3未採用を維持
+
+### Issue #2 Final Polish Phase 3B.1c
+
+- Phase 3B.1bを`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`として記録し、tight 512／1024、mapSize拡大、shadow camera追加調整を終了
+- Stage 0で2 viewport、5 caster群、120枚を取得し、589 Mesh、553 caster／receiver、主要caster群`dial-exterior`、customDepth／alphaTest 0、状態復元trueを確認
+- frontKey 1.96をsmoothstepでshadow carrierと同方向・同色・同targetの非shadow DirectionalLightへ連続配分し、全opacityの総光量誤差1e-12以下、opacity変更時shadow refresh 0
+- 4候補×2 viewport×2 theme×52条件、計832枚のStage 1、性能、回帰、34 protected pathを実WebGLで保存
+- attenuationは中央矩形境界と斜め帯、性能を改善したが前後面baseline比悪化0.072299で不合格。固定normalBias 0.009765625候補は前後面に加えMobile性能も不合格
+- 技術finalist 0件のため`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`、Stage 2未実施、Shadow-offは`HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL`、D2c3は未採用fallbackを維持
+- Geometry、Material、fog、shadow camera／mapSize、透過処理、DPR、UI、audio、APP_VERSION、試験閾値を変更せず、Issue #2 Open、PR #5 Open／Draftを維持
+
+### Issue #2 Final Polish Phase 3B.1
+
+- Phase 3A判断記録Headから別ブランチを作り、既存DirectionalLightのshadow carrier OFF、5状態固定shadow fit、fog 160／260を単独・単純合成した6候補を完成外装query限定で比較
+- 6候補×2 viewport×88条件、計1056枚の実WebGL PNG、7条件×10秒性能、14 protected path、browser／UI／HUD／audio回帰を保存
+- shadow-offは矩形影を除去したが前後面バランス悪化、shadow-fitは512² mapの固定広域fitによる縞状解像度劣化、fog候補はMobile farのflat描画が残り、技術ゲート合格候補0件
+- 状態を`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`、Stage 2を`SKIPPED_ZERO_TECHNICAL_GATE_CANDIDATES`とし、PC候補選択・物理iPhone・既定採用へ進めない
+- 性能差分は全6候補で合格、console error／warning 0、禁止干渉0/0、UI／HUD全件合格、protected path 14/14 pixel exact、Node 225/225
+- RectAreaLight、light値、shadow map、bias、Material、透過処理、DPR、camera、Geometry、試験閾値を変更せず、100／99と55／54はPhase 3B.2へ分離
+- D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`、PR #5はOpen／Draft、Issue #2はOpenを維持
+
+### Issue #2 Final Polish Phase 3A
+
+- Phase 3C.3完成外装へbaseline／D2a／D2c3をquery限定で移植し、通常pathおよびPhase 3C.1／3C.2／3C.3-onlyを維持
+- 1280×720／390×844、3候補×33状態の実WebGL PNG 198枚と輝度・opacity・性能・回帰JSONを保存
+- Phase 3A比較監査を`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`として合格とし、198枚を`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`へ分類
+- D2aは視覚参考として棄却。D2c3は性能・前後輝度差・透過不連続が未解決のため既定採用せず、`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`として保持
+- Node 210/210、完成外装統合回帰6/6、UI／HUD合格、console error／warning 0、禁止干渉0/0を確認
+- 100→99%のtransparent切替、55→54%のdepthWrite切替は再現記録のみで、alphaHash、影閾値切替、試験閾値緩和を追加していない
+- 状態は`ISSUE2_FINAL_POLISH_PHASE3A_COMPARISON_ONLY_NOT_ADOPTED`。PR #5、Issue #2、D2c3の保留を維持
 
 - Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`を`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`として継承し、別Draftで完成時計を統合監査。
 - `integration=phase3c3`時だけ小秒凹面の空白4点へ非描画selection proxyを追加。Desktop／390×844の100%／50%で4/4、16%越しの設定車2選択を維持。

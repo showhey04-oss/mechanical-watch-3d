@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "sourceMainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBaseCommit": "961fb16ec8c0b55b4d940861659e22733537d813",
+  "sourceImplementationCommit": "8a0fac5149708a906d02df103403f6e0706db9f7",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1c-shadow-attenuation",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
+  "defaultAdopted": false,
+  "queryRequired": "exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3",
+  "candidates": {
+    "issue2-phase3b1c-baseline": {
+      "label": "Phase 3C.3 completed-watch baseline",
+      "status": "QUERY_ONLY_TECHNICAL_COMPARISON_NOT_ADOPTED",
+      "defaultAdopted": false,
+      "attenuation": {
+        "enabled": false,
+        "minimumOpacity": 0.08,
+        "baselineShadowOpacity": 0.8,
+        "curve": "smoothstep",
+        "opacityUpdateCount": 2,
+        "opacityShadowRefreshCount": 0,
+        "timeline": [
+          {
+            "sequence": 1,
+            "opacity": 1,
+            "shadowWeight": 1,
+            "carrierIntensity": 1.96,
+            "compensationIntensity": 0,
+            "intensitySum": 1.96,
+            "intensitySumError": 0,
+            "shadowRefreshRequested": false
+          },
+          {
+            "sequence": 2,
+            "opacity": 1,
+            "shadowWeight": 1,
+            "carrierIntensity": 1.96,
+            "compensationIntensity": 0,
+            "intensitySum": 1.96,
+            "intensitySumError": 0,
+            "shadowRefreshRequested": false
+          }
+        ]
+      },
+      "light": {
+        "carrier": {
+          "name": "frontKey",
+          "type": "DirectionalLight",
+          "intensity": 1.96,
+          "color": "#fff4df",
+          "position": [
+            18,
+            -34,
+            24
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "castShadow": true
+        },
+        "compensation": null,
+        "invariants": {
+          "colorDifference": 0,
+          "positionDistance": 0,
+          "targetDistance": 0,
+          "intensitySumError": 0,
+          "worldFixed": true
+        }
+      },
+      "shadow": {
+        "baselineCamera": {
+          "left": -5,
+          "right": 5,
+          "top": 5,
+          "bottom": -5,
+          "near": 0.5,
+          "far": 500
+        },
+        "camera": {
+          "left": -5,
+          "right": 5,
+          "top": 5,
+          "bottom": -5,
+          "near": 0.5,
+          "far": 500
+        },
+        "cameraChanged": false,
+        "baselineMapSize": [
+          512,
+          512
+        ],
+        "mapSize": [
+          512,
+          512
+        ],
+        "shadowMapType": 1,
+        "bias": 0,
+        "normalBias": 0,
+        "texelX": 0.01953125,
+        "texelY": 0.01953125,
+        "derivedNormalBias": 0.009765625,
+        "candidateInitializationShadowRefreshCount": 0,
+        "opacityShadowRefreshCount": 0
+      }
+    },
+    "issue2-phase3b1c-shadow-off": {
+      "label": "frontKey shadow carrier disabled reference",
+      "status": "QUERY_ONLY_TECHNICAL_COMPARISON_NOT_ADOPTED",
+      "defaultAdopted": false,
+      "attenuation": {
+        "enabled": false,
+        "minimumOpacity": 0.08,
+        "baselineShadowOpacity": 0.8,
+        "curve": "smoothstep",
+        "opacityUpdateCount": 2,
+        "opacityShadowRefreshCount": 0,
+        "timeline": [
+          {
+            "sequence": 1,
+            "opacity": 1,
+            "shadowWeight": 1,
+            "carrierIntensity": 1.96,
+            "compensationIntensity": 0,
+            "intensitySum": 1.96,
+            "intensitySumError": 0,
+            "shadowRefreshRequested": false
+          },
+          {
+            "sequence": 2,
+            "opacity": 1,
+            "shadowWeight": 1,
+            "carrierIntensity": 1.96,
+            "compensationIntensity": 0,
+            "intensitySum": 1.96,
+            "intensitySumError": 0,
+            "shadowRefreshRequested": false
+          }
+        ]
+      },
+      "light": {
+        "carrier": {
+          "name": "frontKey",
+          "type": "DirectionalLight",
+          "intensity": 1.96,
+          "color": "#fff4df",
+          "position": [
+            18,
+            -34,
+            24
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "castShadow": false
+        },
+        "compensation": null,
+        "invariants": {
+          "colorDifference": 0,
+          "positionDistance": 0,
+          "targetDistance": 0,
+          "intensitySumError": 0,
+          "worldFixed": true
+        }
+      },
+      "shadow": {
+        "baselineCamera": {
+          "left": -5,
+          "right": 5,
+          "top": 5,
+          "bottom": -5,
+          "near": 0.5,
+          "far": 500
+        },
+        "camera": {
+          "left": -5,
+          "right": 5,
+          "top": 5,
+          "bottom": -5,
+          "near": 0.5,
+          "far": 500
+        },
+        "cameraChanged": false,
+        "baselineMapSize": [
+          512,
+          512
+        ],
+        "mapSize": [
+          512,
+          512
+        ],
+        "shadowMapType": 1,
+        "bias": 0,
+        "normalBias": 0,
+        "texelX": 0.01953125,
+        "texelY": 0.01953125,
+        "derivedNormalBias": 0.009765625,
+        "candidateInitializationShadowRefreshCount": 1,
+        "opacityShadowRefreshCount": 0
+      }
+    },
+    "issue2-shadow-attenuation": {
+      "label": "opacity-coupled frontKey shadow attenuation",
+      "status": "QUERY_ONLY_TECHNICAL_COMPARISON_NOT_ADOPTED",
+      "defaultAdopted": false,
+      "attenuation": {
+        "enabled": true,
+        "minimumOpacity": 0.08,
+        "baselineShadowOpacity": 0.8,
+        "curve": "smoothstep",
+        "opacityUpdateCount": 2,
+        "opacityShadowRefreshCount": 0,
+        "timeline": [
+          {
+            "sequence": 1,
+            "opacity": 1,
+            "shadowWeight": 1,
+            "carrierIntensity": 1.96,
+            "compensationIntensity": 0,
+            "intensitySum": 1.96,
+            "intensitySumError": 0,
+            "shadowRefreshRequested": false
+          },
+          {
+            "sequence": 2,
+            "opacity": 1,
+            "shadowWeight": 1,
+            "carrierIntensity": 1.96,
+            "compensationIntensity": 0,
+            "intensitySum": 1.96,
+            "intensitySumError": 0,
+            "shadowRefreshRequested": false
+          }
+        ]
+      },
+      "light": {
+        "carrier": {
+          "name": "frontKey",
+          "type": "DirectionalLight",
+          "intensity": 1.96,
+          "color": "#fff4df",
+          "position": [
+            18,
+            -34,
+            24
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "castShadow": true
+        },
+        "compensation": {
+          "name": "frontKeyUnshadowedCompensation",
+          "type": "DirectionalLight",
+          "intensity": 0,
+          "color": "#fff4df",
+          "position": [
+            18,
+            -34,
+            24
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "castShadow": false,
+          "worldFixed": true
+        },
+        "invariants": {
+          "colorDifference": 0,
+          "positionDistance": 0,
+          "targetDistance": 0,
+          "intensitySumError": 0,
+          "worldFixed": true
+        }
+      },
+      "shadow": {
+        "baselineCamera": {
+          "left": -5,
+          "right": 5,
+          "top": 5,
+          "bottom": -5,
+          "near": 0.5,
+          "far": 500
+        },
+        "camera": {
+          "left": -5,
+          "right": 5,
+          "top": 5,
+          "bottom": -5,
+          "near": 0.5,
+          "far": 500
+        },
+        "cameraChanged": false,
+        "baselineMapSize": [
+          512,
+          512
+        ],
+        "mapSize": [
+          512,
+          512
+        ],
+        "shadowMapType": 1,
+        "bias": 0,
+        "normalBias": 0,
+        "texelX": 0.01953125,
+        "texelY": 0.01953125,
+        "derivedNormalBias": 0.009765625,
+        "candidateInitializationShadowRefreshCount": 0,
+        "opacityShadowRefreshCount": 0
+      }
+    },
+    "issue2-shadow-attenuation-bias": {
+      "label": "opacity-coupled attenuation with fixed half-texel normalBias",
+      "status": "QUERY_ONLY_TECHNICAL_COMPARISON_NOT_ADOPTED",
+      "defaultAdopted": false,
+      "attenuation": {
+        "enabled": true,
+        "minimumOpacity": 0.08,
+        "baselineShadowOpacity": 0.8,
+        "curve": "smoothstep",
+        "opacityUpdateCount": 2,
+        "opacityShadowRefreshCount": 0,
+        "timeline": [
+          {
+            "sequence": 1,
+            "opacity": 1,
+            "shadowWeight": 1,
+            "carrierIntensity": 1.96,
+            "compensationIntensity": 0,
+            "intensitySum": 1.96,
+            "intensitySumError": 0,
+            "shadowRefreshRequested": false
+          },
+          {
+            "sequence": 2,
+            "opacity": 1,
+            "shadowWeight": 1,
+            "carrierIntensity": 1.96,
+            "compensationIntensity": 0,
+            "intensitySum": 1.96,
+            "intensitySumError": 0,
+            "shadowRefreshRequested": false
+          }
+        ]
+      },
+      "light": {
+        "carrier": {
+          "name": "frontKey",
+          "type": "DirectionalLight",
+          "intensity": 1.96,
+          "color": "#fff4df",
+          "position": [
+            18,
+            -34,
+            24
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "castShadow": true
+        },
+        "compensation": {
+          "name": "frontKeyUnshadowedCompensation",
+          "type": "DirectionalLight",
+          "intensity": 0,
+          "color": "#fff4df",
+          "position": [
+            18,
+            -34,
+            24
+          ],
+          "target": [
+            0,
+            0.5,
+            0
+          ],
+          "castShadow": false,
+          "worldFixed": true
+        },
+        "invariants": {
+          "colorDifference": 0,
+          "positionDistance": 0,
+          "targetDistance": 0,
+          "intensitySumError": 0,
+          "worldFixed": true
+        }
+      },
+      "shadow": {
+        "baselineCamera": {
+          "left": -5,
+          "right": 5,
+          "top": 5,
+          "bottom": -5,
+          "near": 0.5,
+          "far": 500
+        },
+        "camera": {
+          "left": -5,
+          "right": 5,
+          "top": 5,
+          "bottom": -5,
+          "near": 0.5,
+          "far": 500
+        },
+        "cameraChanged": false,
+        "baselineMapSize": [
+          512,
+          512
+        ],
+        "mapSize": [
+          512,
+          512
+        ],
+        "shadowMapType": 1,
+        "bias": 0,
+        "normalBias": 0.009765625,
+        "texelX": 0.01953125,
+        "texelY": 0.01953125,
+        "derivedNormalBias": 0.009765625,
+        "candidateInitializationShadowRefreshCount": 1,
+        "opacityShadowRefreshCount": 0
+      }
+    }
+  },
+  "normalPathCandidate": null
+}

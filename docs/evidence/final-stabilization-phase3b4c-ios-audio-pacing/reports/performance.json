@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 2,
+  "phase": "Final Stabilization Phase 3B.4c-R1.1",
+  "sourceCandidateCommit": "0d0dd4cadce3f5929563360c15c6f31ea16e2a48",
+  "sourceImplementationCommit": "3de2886011dafaea540f2ea2650d2ab326cf3216",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T02:53:27.898Z",
+  "status": "PASSED_DIFFERENTIAL_GATE",
+  "thresholds": {
+    "maximumFpsRegressionRatio": -0.05,
+    "maximumP95RegressionMs": 2,
+    "changed": false
+  },
+  "desktop": {
+    "candidate": [
+      {
+        "averageFps": 26.93131036121912,
+        "p50": 33.399999999999636,
+        "p95": 50.10000000000218,
+        "p99": 51,
+        "over33": 170,
+        "over50": 19
+      },
+      {
+        "averageFps": 26.86578957771725,
+        "p50": 33.400000000001455,
+        "p95": 50.400000000001455,
+        "p99": 50.900000000001455,
+        "over33": 171,
+        "over50": 23
+      },
+      {
+        "averageFps": 23.543318721371225,
+        "p50": 49,
+        "p95": 50.60000000000218,
+        "p99": 51,
+        "over33": 181,
+        "over50": 35
+      }
+    ],
+    "protected": [
+      {
+        "averageFps": 26.941941596250068,
+        "p50": 33.39999999999782,
+        "p95": 50,
+        "p99": 51,
+        "over33": 168,
+        "over50": 12
+      },
+      {
+        "averageFps": 26.937422295833855,
+        "p50": 33.39999999999782,
+        "p95": 50.099999999998545,
+        "p99": 50.900000000001455,
+        "over33": 171,
+        "over50": 16
+      },
+      {
+        "averageFps": 26.736912725003222,
+        "p50": 33.400000000001455,
+        "p95": 50.5,
+        "p99": 51,
+        "over33": 170,
+        "over50": 18
+      }
+    ],
+    "median": {
+      "candidate": {
+        "averageFps": 26.86578957771725,
+        "p50": 33.400000000001455,
+        "p95": 50.400000000001455
+      },
+      "protected": {
+        "averageFps": 26.937422295833855,
+        "p50": 33.39999999999782,
+        "p95": 50.099999999998545
+      },
+      "delta": {
+        "fpsRatio": -0.002659226904858019,
+        "p95Ms": 0.3000000000029104
+      }
+    }
+  },
+  "mobile390x844": {
+    "candidate": [
+      {
+        "averageFps": 35.78843302026693,
+        "p50": 33.29999999999927,
+        "p95": 34.29999999999927,
+        "p99": 34.39999999999782,
+        "over33": 129,
+        "over50": 1
+      },
+      {
+        "averageFps": 35.92316598886248,
+        "p50": 32.89999999999782,
+        "p95": 34.20000000000073,
+        "p99": 34.29999999999927,
+        "over33": 122,
+        "over50": 1
+      },
+      {
+        "averageFps": 36.103939780436455,
+        "p50": 33.20000000000073,
+        "p95": 34.19999999999709,
+        "p99": 34.30000000000291,
+        "over33": 124,
+        "over50": 0
+      }
+    ],
+    "protected": [
+      {
+        "averageFps": 35.93703593703594,
+        "p50": 33.099999999998545,
+        "p95": 34.29999999999927,
+        "p99": 34.30000000000291,
+        "over33": 126,
+        "over50": 1
+      },
+      {
+        "averageFps": 36.04816986206034,
+        "p50": 33.20000000000073,
+        "p95": 34.29999999999927,
+        "p99": 34.400000000001455,
+        "over33": 133,
+        "over50": 0
+      },
+      {
+        "averageFps": 36.46857673694114,
+        "p50": 32.70000000000073,
+        "p95": 34.80000000000291,
+        "p99": 35.29999999999927,
+        "over33": 128,
+        "over50": 0
+      }
+    ],
+    "median": {
+      "candidate": {
+        "averageFps": 35.92316598886248,
+        "p50": 33.20000000000073,
+        "p95": 34.20000000000073
+      },
+      "protected": {
+        "averageFps": 36.04816986206034,
+        "p50": 33.099999999998545,
+        "p95": 34.29999999999927
+      },
+      "delta": {
+        "fpsRatio": -0.0034676898626530544,
+        "p95Ms": -0.09999999999854481
+      }
+    }
+  },
+  "schedulerProcessing": {
+    "previousAlgorithm": "full scheduled-history scan on every frame",
+    "finalAlgorithm": "monotonic unread-audible-record cursor",
+    "independentTimerUsed": false,
+    "measurementScope": "deterministic scheduler plus fake AudioContext source lifecycle harness",
+    "fifteenMinuteRuns": [
+      {
+        "pattern": "stable-16.7ms",
+        "mode": "free-running",
+        "frameCount": 53893,
+        "elapsedMs": 669.2294159999999,
+        "averageMsPerFrame": 0.012417742860853913,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-16.7ms",
+        "mode": "live-sync",
+        "frameCount": 53893,
+        "elapsedMs": 700.632791,
+        "averageMsPerFrame": 0.01300044144879669,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-33.3ms",
+        "mode": "free-running",
+        "frameCount": 27028,
+        "elapsedMs": 249.5659579999999,
+        "averageMsPerFrame": 0.009233608036110697,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-33.3ms",
+        "mode": "live-sync",
+        "frameCount": 27028,
+        "elapsedMs": 325.56395900000007,
+        "averageMsPerFrame": 0.012045432847417496,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-50ms",
+        "mode": "free-running",
+        "frameCount": 18001,
+        "elapsedMs": 96.05029099999956,
+        "averageMsPerFrame": 0.005335830842730935,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "stable-50ms",
+        "mode": "live-sync",
+        "frameCount": 18001,
+        "elapsedMs": 215.54304200000024,
+        "averageMsPerFrame": 0.011973948225098618,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "intermittent-80-150ms",
+        "mode": "free-running",
+        "frameCount": 14208,
+        "elapsedMs": 32.54991699999982,
+        "averageMsPerFrame": 0.002290956996058546,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "intermittent-80-150ms",
+        "mode": "live-sync",
+        "frameCount": 14208,
+        "elapsedMs": 169.32133399999975,
+        "averageMsPerFrame": 0.011917323620495478,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "single-500ms",
+        "mode": "free-running",
+        "frameCount": 53864,
+        "elapsedMs": 381.05562499999996,
+        "averageMsPerFrame": 0.007074402662260507,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "single-500ms",
+        "mode": "live-sync",
+        "frameCount": 53864,
+        "elapsedMs": 554.26125,
+        "averageMsPerFrame": 0.010290012810040102,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "single-1000ms",
+        "mode": "free-running",
+        "frameCount": 53834,
+        "elapsedMs": 397.801375,
+        "averageMsPerFrame": 0.007389407716313111,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "single-1000ms",
+        "mode": "live-sync",
+        "frameCount": 53834,
+        "elapsedMs": 543.6111670000005,
+        "averageMsPerFrame": 0.010097915202288525,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "repeated-500ms",
+        "mode": "free-running",
+        "frameCount": 3484,
+        "elapsedMs": 6.701625000000604,
+        "averageMsPerFrame": 0.0019235433409875442,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "repeated-500ms",
+        "mode": "live-sync",
+        "frameCount": 3484,
+        "elapsedMs": 24.03308299999935,
+        "averageMsPerFrame": 0.006898129448909113,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "foreground-degradation",
+        "mode": "free-running",
+        "frameCount": 23965,
+        "elapsedMs": 32.20733400000063,
+        "averageMsPerFrame": 0.001343932151053646,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "foreground-degradation",
+        "mode": "live-sync",
+        "frameCount": 23965,
+        "elapsedMs": 138.68487499999992,
+        "averageMsPerFrame": 0.005786975798038803,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "ios-irregular-pacing",
+        "mode": "free-running",
+        "frameCount": 15428,
+        "elapsedMs": 26.34900000000016,
+        "averageMsPerFrame": 0.0017078688099559348,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      },
+      {
+        "pattern": "ios-irregular-pacing",
+        "mode": "live-sync",
+        "frameCount": 15428,
+        "elapsedMs": 229.12804099999994,
+        "averageMsPerFrame": 0.014851441599688873,
+        "scope": "deterministic scheduler plus fake AudioContext source lifecycle harness"
+      }
+    ],
+    "maximumAverageMsPerFrame": 0.014851441599688873,
+    "browserTotalFrameDifferential": {
+      "desktopFpsRatio": -0.002659226904858019,
+      "desktopP95Ms": 0.3000000000029104,
+      "mobileFpsRatio": -0.0034676898626530544,
+      "mobileP95Ms": -0.09999999999854481
+    }
+  }
+}

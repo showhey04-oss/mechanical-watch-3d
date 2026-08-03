@@ -1,0 +1,2219 @@
+{
+  "schemaVersion": 1,
+  "sourcePhase3C3Commit": "191ff2682398356da59e747e608c82120dacebd9",
+  "sourcePhase3ACommit": "3d7f84ea3f122fbc1df715b4eff3c8cebf64f46d",
+  "sourceImplementationCommit": "5df265176ededfc7cd8da22de8bb83fde6fe3546",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1-shadow-fog",
+  "capturedAt": "2026-07-28T01:07:09.704303Z",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness; actual Three.js offscreen WebGL PNG",
+  "defaultAdopted": false,
+  "status": "PASSED_SAME_ENVIRONMENT_DIFFERENTIAL",
+  "gates": {
+    "maximumAverageFpsRegressionRatio": 0.05,
+    "maximumP95RegressionMs": 2,
+    "reversalCount": 0,
+    "stopThenJumpCount": 0,
+    "wheelZoomMonotonic": true,
+    "transformInvariant": true,
+    "thresholdsChanged": false
+  },
+  "candidateDifferentialPass": {
+    "issue2-phase3b1-baseline": true,
+    "issue2-shadow-off": true,
+    "issue2-shadow-fit": true,
+    "issue2-fog-only": true,
+    "issue2-shadow-off-fog": true,
+    "issue2-shadow-fit-fog": true
+  },
+  "comparisons": {
+    "1280x720": {
+      "issue2-phase3b1-baseline": {
+        "candidateInitializationDurationMs": 0.1,
+        "shadowRefreshCount": 0,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90581970626139,
+              "p50": 16.699999999999818,
+              "p95": 17.699999999999818,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.90581970626139,
+              "p50": 16.699999999999818,
+              "p95": 17.699999999999818,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.765208110992525,
+              "p50": 16.69999999999891,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.765208110992525,
+              "p50": 16.69999999999891,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.75982780086315,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.75982780086315,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.70246639720465,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.70246639720465,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.69857114941715,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.69857114941715,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.675210330195405,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.675210330195405,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.70636215334421,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.70636215334421,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-shadow-off": {
+        "candidateInitializationDurationMs": 0,
+        "shadowRefreshCount": 1,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90581970626139,
+              "p50": 16.699999999999818,
+              "p95": 17.699999999999818,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.90284414325878,
+              "p50": 16.69999999999891,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -4.9670683369251734e-05,
+            "p95DeltaMs": -9.094947017729282e-13,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.765208110992525,
+              "p50": 16.69999999999891,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.75619472533069,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00015081325652044342,
+            "p95DeltaMs": -0.09999999999672582,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.75982780086315,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.72206270796143,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0006319478199897643,
+            "p95DeltaMs": 0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.70246639720465,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.667427453537655,
+              "p50": 16.700000000000728,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0005868927329379936,
+            "p95DeltaMs": 0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.69857114941715,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.68883525159509,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00016308426876232573,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.675210330195405,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.65381230260818,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0003585748163906777,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.70636215334421,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.640203362621264,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0011080693637476324,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-shadow-fit": {
+        "candidateInitializationDurationMs": 0.2,
+        "shadowRefreshCount": 1,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90581970626139,
+              "p50": 16.699999999999818,
+              "p95": 17.699999999999818,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.90105894726838,
+              "p50": 16.69999999999891,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -7.947072615566153e-05,
+            "p95DeltaMs": -0.0999999999994543,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.765208110992525,
+              "p50": 16.69999999999891,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.75086025177069,
+              "p50": 16.69999999999891,
+              "p95": 17.400000000001455,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00024007043019391716,
+            "p95DeltaMs": -0.2999999999974534,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.75982780086315,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.71167789855373,
+              "p50": 16.69999999999709,
+              "p95": 17.5,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0008057235785529082,
+            "p95DeltaMs": -0.10000000000218279,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.70246639720465,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.68299523863788,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0003261365860035559,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.69857114941715,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.69078217733982,
+              "p50": 16.69999999999709,
+              "p95": 17.400000000001455,
+              "p99": 17.599999999998545,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0001304716666975514,
+            "p95DeltaMs": -0.2000000000007276,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.675210330195405,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.700000000000728,
+              "p95": 17.299999999999272,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 9.783778884009386e-05,
+            "p95DeltaMs": -0.3000000000029104,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.70636215334421,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.70831022265769,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 3.2627499703785645e-05,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-fog-only": {
+        "candidateInitializationDurationMs": 0.1,
+        "shadowRefreshCount": 0,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90581970626139,
+              "p50": 16.699999999999818,
+              "p95": 17.699999999999818,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.906414854477504,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 9.934731200367253e-06,
+            "p95DeltaMs": -0.0999999999994543,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.765208110992525,
+              "p50": 16.69999999999891,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.73618769558216,
+              "p50": 16.69999999999891,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00048557373641988644,
+            "p95DeltaMs": -0.09999999999672582,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.75982780086315,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.747354045546764,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00020873144678312805,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.70246639720465,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.682995237477684,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0003261366054364556,
+            "p95DeltaMs": 0.10000000000218279,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.69857114941715,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.69662371554396,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -3.262111363300235e-05,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.675210330195405,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.62465789153876,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0008471262753315667,
+            "p95DeltaMs": -3.637978807091713e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.70636215334421,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.69857114825635,
+              "p50": 16.69999999999709,
+              "p95": 17.60000000000582,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00013048869177212374,
+            "p95DeltaMs": -0.09999999999126885,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-shadow-off-fog": {
+        "candidateInitializationDurationMs": 0.1,
+        "shadowRefreshCount": 1,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90581970626139,
+              "p50": 16.699999999999818,
+              "p95": 17.699999999999818,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.90403433327131,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.69999999999891,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -2.9802997418837407e-05,
+            "p95DeltaMs": -0.0999999999994543,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.765208110992525,
+              "p50": 16.69999999999891,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.751882317884146,
+              "p50": 16.69999999999891,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0002229690739741219,
+            "p95DeltaMs": -0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.75982780086315,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.73476620637029,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.69999999999709,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0004193719328705603,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.70246639720465,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.66937298179466,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0005543056661984069,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.69857114941715,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.68688845401174,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00019569472401881338,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.675210330195405,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.70441421114369,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0004893804443535377,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.70636215334421,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.75705329083821,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0008490073028366574,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-shadow-fit-fog": {
+        "candidateInitializationDurationMs": 0.3,
+        "shadowRefreshCount": 1,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90581970626139,
+              "p50": 16.699999999999818,
+              "p95": 17.699999999999818,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.877266498378695,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00047663495838468073,
+            "p95DeltaMs": -0.0999999999994543,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.765208110992525,
+              "p50": 16.69999999999891,
+              "p95": 17.69999999999891,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.75404806923753,
+              "p50": 16.69999999999891,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00018673141293634732,
+            "p95DeltaMs": -0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.75982780086315,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.7108736645654,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0008191813480601384,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.70246639720465,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.69467640988219,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00013048015923888823,
+            "p95DeltaMs": 3.637978807091713e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.69857114941715,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.622715276867446,
+              "p50": 16.700000000000728,
+              "p95": 17.69999999999709,
+              "p99": 17.799999999999272,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.001270648042142386,
+            "p95DeltaMs": 0.09999999999490683,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.675210330195405,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.67715636719387,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 3.261047573510645e-05,
+            "p95DeltaMs": -3.637978807091713e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.70636215334421,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.65964660671004,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0007824215870695372,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      }
+    },
+    "390x844": {
+      "issue2-phase3b1-baseline": {
+        "candidateInitializationDurationMs": 0.1,
+        "shadowRefreshCount": 0,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90641485412276,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.90641485412276,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.74289219551487,
+              "p50": 16.69999999999891,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.74289219551487,
+              "p50": 16.69999999999891,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.721485781064395,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.721485781064395,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.684941782256615,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.684941782256615,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.67910253111886,
+              "p50": 16.69999999999709,
+              "p95": 17.399999999997817,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.67910253111886,
+              "p50": 16.69999999999709,
+              "p95": 17.399999999997817,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.7843841881738,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.7843841881738,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-shadow-off": {
+        "candidateInitializationDurationMs": 0,
+        "shadowRefreshCount": 1,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90641485412276,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.90105894726838,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -8.94045632244822e-05,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.74289219551487,
+              "p50": 16.69999999999891,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.724471106439104,
+              "p50": 16.69999999999891,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0003083394258095451,
+            "p95DeltaMs": 1.8189894035458565e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.721485781064395,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.71469645048984,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00011368321611160415,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.684941782256615,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.69662371554396,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.00019572664291045427,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.68494178341688,
+              "p50": 16.700000000000728,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 6.52294601237724e-05,
+            "p95DeltaMs": 0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.67910253111886,
+              "p50": 16.69999999999709,
+              "p95": 17.399999999997817,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.69999999999709,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 3.261258332099004e-05,
+            "p95DeltaMs": 0.2000000000007276,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.7843841881738,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.68299523863788,
+              "p50": 16.69999999999709,
+              "p95": 17.30000000000291,
+              "p99": 17.599999999998545,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0016959102433303785,
+            "p95DeltaMs": -0.2999999999956344,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-shadow-fit": {
+        "candidateInitializationDurationMs": 0.2,
+        "shadowRefreshCount": 1,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90641485412276,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.899273857677926,
+              "p50": 16.699999999999818,
+              "p95": 17.599999999999454,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00011920253385588886,
+            "p95DeltaMs": -9.094947017729282e-13,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.74289219551487,
+              "p50": 16.69999999999891,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.7197154683555,
+              "p50": 16.69999999999891,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00038794116434004433,
+            "p95DeltaMs": 1.8189894035458565e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.721485781064395,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.73315469172552,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.69999999999709,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.00019538882043046435,
+            "p95DeltaMs": -0.10000000000218279,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.684941782256615,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.65964660671004,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00042381168166094607,
+            "p95DeltaMs": -0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.70831022149652,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0004567848791614537,
+            "p95DeltaMs": 3.637978807091713e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.67910253111886,
+              "p50": 16.69999999999709,
+              "p95": 17.399999999997817,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.68299523863788,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 6.522731331282117e-05,
+            "p95DeltaMs": 0.2000000000007276,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.7843841881738,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.69662371554396,
+              "p50": 16.69999999999709,
+              "p95": 17.60000000000582,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0014679497634970673,
+            "p95DeltaMs": 7.275957614183426e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-fog-only": {
+        "candidateInitializationDurationMs": 0,
+        "shadowRefreshCount": 0,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90641485412276,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.90820036937008,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 2.9805075995037456e-05,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.74289219551487,
+              "p50": 16.69999999999891,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.712534347729914,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0005081415825267666,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.721485781064395,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.729115841433526,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0001277607257981206,
+            "p95DeltaMs": -0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.684941782256615,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.67326442127087,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00019565003562116434,
+            "p95DeltaMs": -3.637978807091713e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.67910253111886,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -3.261151977507204e-05,
+            "p95DeltaMs": 3.637978807091713e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.67910253111886,
+              "p50": 16.69999999999709,
+              "p95": 17.399999999997817,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.649923400835156,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0004889337983674524,
+            "p95DeltaMs": 0.3000000000029104,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.7843841881738,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.70441421114369,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0013376398890118102,
+            "p95DeltaMs": 0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-shadow-off-fog": {
+        "candidateInitializationDurationMs": 0,
+        "shadowRefreshCount": 1,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90641485412276,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.907010014519,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.699999999999818,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 9.934835821789889e-06,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.74289219551487,
+              "p50": 16.69999999999891,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.72042385627145,
+              "p50": 16.69999999999891,
+              "p95": 17.600000000000364,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00037608388910748136,
+            "p95DeltaMs": 1.8189894035458565e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.721485781064395,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.7593028081339,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0006332231453205495,
+            "p95DeltaMs": -0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.684941782256615,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.681048821982785,
+              "p50": 16.700000000000728,
+              "p95": 17.600000000002183,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -6.52251666430903e-05,
+            "p95DeltaMs": -0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.65575694307527,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0004237840696020845,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.67910253111886,
+              "p50": 16.69999999999709,
+              "p95": 17.399999999997817,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.628543499511245,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0008471815001113159,
+            "p95DeltaMs": 0.2000000000007276,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.7843841881738,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.68299523863788,
+              "p50": 16.69999999999709,
+              "p95": 17.69999999999709,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0016959102433303785,
+            "p95DeltaMs": 0.09999999999854481,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      },
+      "issue2-shadow-fit-fog": {
+        "candidateInitializationDurationMs": 0.2,
+        "shadowRefreshCount": 1,
+        "allScenariosDifferentialPass": true,
+        "scenarios": {
+          "idle": {
+            "baseline": {
+              "averageFps": 59.90641485412276,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.90343923235323,
+              "p50": 16.699999999999818,
+              "p95": 17.600000000000364,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -4.9671170888387906e-05,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "pointer": {
+            "baseline": {
+              "averageFps": 59.74289219551487,
+              "p50": 16.69999999999891,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.721300597213,
+              "p50": 16.69999999999891,
+              "p95": 17.700000000000728,
+              "p99": 17.799999999999272,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00036140865479372675,
+            "p95DeltaMs": 0.10000000000218279,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": false,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "wheel": {
+            "baseline": {
+              "averageFps": 59.721485781064395,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.71061182567606,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00018207777730439023,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "opacity-16": {
+            "baseline": {
+              "averageFps": 59.684941782256615,
+              "p50": 16.700000000000728,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.667427453537655,
+              "p50": 16.69999999999709,
+              "p95": 17.700000000000728,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0002934463567519918,
+            "p95DeltaMs": 0.0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "split": {
+            "baseline": {
+              "averageFps": 59.681048820822674,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.601354871635124,
+              "p50": 16.69999999999709,
+              "p95": 17.600000000002183,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.0013353309092608567,
+            "p95DeltaMs": 3.637978807091713e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "explode": {
+            "baseline": {
+              "averageFps": 59.67910253111886,
+              "p50": 16.69999999999709,
+              "p95": 17.399999999997817,
+              "p99": 17.700000000000728,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.70831022265769,
+              "p50": 16.700000000000728,
+              "p95": 17.599999999998545,
+              "p99": 17.600000000002183,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": 0.0004894123788741211,
+            "p95DeltaMs": 0.2000000000007276,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          },
+          "exterior-off": {
+            "baseline": {
+              "averageFps": 59.7843841881738,
+              "p50": 16.69999999999709,
+              "p95": 17.599999999998545,
+              "p99": 17.700000000004366,
+              "over33": 0,
+              "over50": 0
+            },
+            "candidate": {
+              "averageFps": 59.65381230260818,
+              "p50": 16.69999999999709,
+              "p95": 17.60000000000582,
+              "p99": 17.69999999999709,
+              "over33": 0,
+              "over50": 0
+            },
+            "averageFpsDeltaRatio": -0.00218404667604577,
+            "p95DeltaMs": 7.275957614183426e-12,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "zoomMonotonic": true,
+            "transformInvariant": true,
+            "differentialPass": true
+          }
+        }
+      }
+    }
+  }
+}
