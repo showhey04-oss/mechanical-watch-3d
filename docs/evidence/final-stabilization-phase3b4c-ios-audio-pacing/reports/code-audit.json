@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceAuditCommit": "025e2fd0f2d5d09a1183060c326177f8e74b94c4",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness in GPU-capable in-app Browser",
+  "assembledAt": "2026-07-30T18:07:25.432Z",
+  "status": "PASSED",
+  "causeClassifications": [
+    "FRAME_CROSSING_AUDIO_EVENT_DELAY"
+  ],
+  "notDetected": [
+    "AUDIO_CONTEXT_CLOCK_STALL",
+    "CUMULATIVE_AUDIO_SCHEDULE_DRIFT",
+    "DUPLICATE_OR_BACKLOG_SUPPRESSION_ERROR"
+  ],
+  "legacy": {
+    "authoritativeBeatSource": "mechanism studyBeat/escapementBeatRate",
+    "eventDetection": "requestAnimationFrame beat crossing",
+    "sourceStart": "immediate",
+    "absoluteFutureScheduling": false
+  },
+  "candidate": {
+    "authoritativeBeatSource": "mechanism studyBeat/escapementBeatRate",
+    "eventIdentity": "monotonic mechanism beat sequence",
+    "simulationAudioEpoch": "re-evaluated against AudioContext.currentTime",
+    "sourceStart": "absolute AudioContext time",
+    "independentTimerUsed": false,
+    "independentOscillatorUsed": false,
+    "latePolicy": "drop overdue beat, discard backlog, re-anchor, resume from future beat"
+  },
+  "protected": {
+    "soundSamplesChanged": false,
+    "gainsChanged": false,
+    "mechanismRateChanged": false,
+    "backgroundElapsedTimeRestorationImplemented": false
+  }
+}
