@@ -1,9 +1,9 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "sourceBaseCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
-  "sourceImplementationCommit": "e6f65ecdd67bde5b66d95587b2f195268e0171d8",
+  "sourceImplementationCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
   "appVersion": "v3.15.0",
-  "generatedAt": "2026-08-03T16:10:20.087Z",
+  "generatedAt": "2026-08-04T04:30:00.000Z",
   "r1HumanReview": {
     "device": "iPhone 16",
     "os": "iOS 26.5.2",
@@ -19,49 +19,69 @@
     "overall": "FAIL"
   },
   "r1Decision": "PR29_R1_PHYSICAL_IPHONE_REVIEW_FAILED",
-  "r1Classifications": [
-    "PR29_R1_TEXT_CLIPPING_RESOLVED",
-    "PR29_R1_NATIVE_VISUAL_FRAME_OVERFLOW_REMAINS",
-    "PR29_R1_DOM_RECT_GATE_FALSE_NEGATIVE",
-    "BODY_COMPLETION_BLOCKER_REMAINS",
-    "PR29_R2_REQUIRED"
-  ],
-  "classification": "IOS_NATIVE_TIME_INPUT_VISUAL_FRAME_OVERFLOW",
-  "detailedClassification": "NATIVE_CONTROL_PAINT_EXTENT_NOT_CAPTURED_BY_DOM_RECT",
-  "rootCause": "R1 bounded the DOM rectangle and native value text, but physical iPhone Safari painted the native control frame through the expected right inset. DOM-rect automation therefore produced a false negative for the visual frame.",
+  "r2HumanReview": {
+    "device": "iPhone 16",
+    "os": "iOS 26.5.2",
+    "browser": "Safari",
+    "orientation": "portrait",
+    "leftAndRightFrameVisible": "OK",
+    "allFourRadiiVisible": "OK",
+    "frameMarginsApproximatelySymmetric": "OK",
+    "valueRightEdgeVisible": "OK",
+    "nativePickerOpens": "OK",
+    "postPickerFrameAndValue": "OK",
+    "specifiedTimeApplication": "OK",
+    "currentTimeApplication": "OK",
+    "horizontalScroll": "NONE",
+    "coreOverflowDecision": "PASS",
+    "requestedPolish": [
+      "SHOW_NORMALIZED_HH_MM_SS",
+      "CENTER_VALUE_HORIZONTALLY_AND_VERTICALLY"
+    ]
+  },
+  "r2Decision": "PR29_R2_CORE_OVERFLOW_FIX_HUMAN_ACCEPTED",
+  "r3Decision": "PR29_R3_HHMMSS_CENTERED_VISUAL_POLISH_AUTHORIZED",
+  "r3Classification": "PR29_R3_NONBLOCKING_POLISH_BEFORE_MERGE",
   "change": [
-    "Move the full-width grid item role from the native input to a bounded timeInputShell.",
-    "Let timeInputShell own the visible border, rounded background, focus outline, and paint containment.",
-    "Keep the native input transparent and borderless while preserving appearance:auto and the native picker.",
-    "Extend diagnostics and browser tests to treat the shell, not the input DOM rect, as the visual-frame contract."
+    "Add an aria-hidden and pointer-inert centered HH:MM:SS visual layer.",
+    "Keep the native time input authoritative, accessible, focusable, clickable, and appearance:auto.",
+    "Normalize minute-precision values to :00 and preserve second-precision values.",
+    "Synchronize the visual layer through existing editor, native event, current-time, Live Sync, and diagnostics paths."
   ],
-  "automatedDecision": "PR29_R2_AUTOMATED_GATES_PASSED_PENDING_PHYSICAL_IPHONE_REVIEW",
-  "productDefectDetected": true,
+  "automatedDecision": "PR29_R3_AUTOMATED_GATES_PASSED_PENDING_PHYSICAL_IPHONE_REVIEW",
+  "productDefectDetected": false,
   "physicalIPhoneRecheckRequired": true,
-  "physicalIPhoneR2Status": "PENDING",
+  "physicalIPhoneR2Status": "PASS",
+  "physicalIPhoneR3Status": "PENDING",
   "physicalIPhoneFixedCommitUrlAllowed": true,
   "fullCompletionClaimed": false,
   "thresholdsChanged": false,
   "appVersionChanged": false,
   "defaultPickerReplaced": false,
   "candidateSpecificBrowserFailures": [],
+  "nativeSafariAutomationLimitation": "The macOS picker modal and SafariDriver PNG rendering cannot establish the R3 physical-iPhone visual result; R3 Human review remains required.",
+  "fallback": {
+    "candidate": "R2 bounded shell",
+    "r2CoreAcceptanceRetainedIfR3Rejected": true,
+    "r3MayBeWithdrawnWithoutReopeningCoreOverflow": true
+  },
   "independentReview": {
     "critical": 0,
     "major": 0,
     "minor": 0,
     "checks": {
-      "visualFrameMovedToWrapper": true,
+      "nativeValueRemainsAuthoritative": true,
       "nativePickerPreserved": true,
-      "valueTextVisibleInAllRequiredCaptures": true,
-      "viewportMagicNumberAdded": false,
-      "hardCodedRightSubtractionAdded": false,
-      "desktopLayoutContractPreserved": true,
+      "appearanceAutoPreserved": true,
+      "visualLayerExcludedFromAccessibilityTree": true,
+      "visualLayerPointerInert": true,
+      "centerErrorsWithinOnePixel": true,
       "timeFunctionalityPreserved": true,
-      "accessibleNameAndNativeSemanticsPreserved": true,
-      "r1HumanFailurePreserved": true,
-      "r2HumanAcceptanceClaimed": false
+      "r1FailurePreserved": true,
+      "r2HumanAcceptanceRecorded": true,
+      "r3HumanAcceptanceClaimed": false
     }
   },
   "readyOrMergeAuthorized": false,
-  "mergeRecommendation": "BLOCKED_PENDING_PHYSICAL_IPHONE_R2_REVIEW"
+  "mergeRecommendation": "DRAFT_PENDING_PHYSICAL_IPHONE_R3_REVIEW"
 }

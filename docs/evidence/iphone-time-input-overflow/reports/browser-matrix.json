@@ -1,355 +1,112 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "sourceBaseCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
-  "sourceImplementationCommit": "e6f65ecdd67bde5b66d95587b2f195268e0171d8",
+  "sourceImplementationCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
   "appVersion": "v3.15.0",
-  "generatedAt": "2026-08-03T16:10:20.087Z",
-  "routes": [
-    "default",
-    "?defaultProfile=legacy"
-  ],
-  "requestedViewports": [
-    {
-      "width": 320,
-      "height": 568
-    },
-    {
-      "width": 336,
-      "height": 667
-    },
-    {
-      "width": 375,
-      "height": 667
-    },
-    {
-      "width": 390,
-      "height": 844
-    },
-    {
-      "width": 393,
-      "height": 852
-    },
-    {
-      "width": 430,
-      "height": 932
-    },
-    {
-      "width": 1280,
-      "height": 720
-    }
-  ],
+  "generatedAt": "2026-08-04T04:30:00.000Z",
   "layout": {
-    "installedChrome": {
-      "passed": 14,
-      "failed": 0,
-      "total": 14
-    },
-    "playwrightWebKit": {
-      "passed": 14,
-      "failed": 0,
-      "total": 14
-    },
+    "installedChrome": { "passed": 14, "failed": 0, "total": 14 },
+    "playwrightWebKit": { "passed": 14, "failed": 0, "total": 14 },
     "nativeSafariMacOS": {
+      "version": "26.5.2 (21624.2.5.11.8)",
       "passed": 14,
       "failed": 0,
       "total": 14,
-      "environmentNote": "A requested 320px Safari window produced the platform minimum 336px inner width; the shell contract also passed in the explicit 336px scenario."
+      "environmentNote": "Safari enforces 336px as its minimum inner window width; both the requested-320/actual-336 and explicit-336 contracts passed."
     }
   },
-  "shellContract": {
+  "layoutContract": {
     "visualFrameOwner": "timeInputShell",
+    "visualTextFormat": "HH:MM:SS",
     "allStagesInsideBodyAndViewport": true,
+    "allStagesVisuallyCentered": true,
+    "maximumHorizontalCenterErrorPx": 0,
+    "maximumVerticalCenterErrorPx": 0,
     "maximumInsetDifferencePx": 0,
-    "shellOverflowFailures": 0,
-    "documentHorizontalOverflowFailures": 0
+    "documentHorizontalOverflowFailures": 0,
+    "nativeTypeTimePreserved": true,
+    "nativeAppearanceAutoPreserved": true,
+    "visualPointerEventsNone": true,
+    "visualAriaHidden": true
   },
-  "functionalAndRegression": {
-    "installedChrome": [
-      {
-        "id": "browser-desktop",
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "ok": false,
-        "status": "failed",
-        "failedIds": [
-          "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-          "a5-both-faces-retain-key-light-and-camera-follow-fill",
-          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
-          "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-          "a6-wheel-path-produces-monotonic-continuous-zoom"
-        ],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "browser-mobile",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": false,
-        "status": "failed",
-        "failedIds": [
-          "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-          "a5-both-faces-retain-key-light-and-camera-follow-fill",
-          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
-          "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-          "a6-wheel-path-produces-monotonic-continuous-zoom"
-        ],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "ui-desktop",
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "ok": true,
-        "status": "passed",
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "ui-mobile",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": true,
-        "status": "passed",
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "hud-mobile",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": true,
-        "status": "passed",
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "time-functional-default",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": true,
-        "status": null,
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "time-functional-legacy",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": true,
-        "status": null,
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      }
-    ],
-    "playwrightWebKit": [
-      {
-        "id": "browser-desktop",
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "ok": false,
-        "status": "failed",
-        "failedIds": [
-          "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-          "a5-both-faces-retain-key-light-and-camera-follow-fill",
-          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
-          "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-          "a6-wheel-path-produces-monotonic-continuous-zoom"
-        ],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "browser-mobile",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": false,
-        "status": "failed",
-        "failedIds": [
-          "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-          "a5-both-faces-retain-key-light-and-camera-follow-fill",
-          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
-          "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-          "a6-wheel-path-produces-monotonic-continuous-zoom"
-        ],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "ui-desktop",
-        "viewport": {
-          "width": 1280,
-          "height": 720
-        },
-        "ok": true,
-        "status": "passed",
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "ui-mobile",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": true,
-        "status": "passed",
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "hud-mobile",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": true,
-        "status": "passed",
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "time-functional-default",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": true,
-        "status": null,
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      },
-      {
-        "id": "time-functional-legacy",
-        "viewport": {
-          "width": 390,
-          "height": 844
-        },
-        "ok": true,
-        "status": null,
-        "failedIds": [],
-        "consoleErrors": [],
-        "consoleWarnings": [],
-        "runtimeErrors": []
-      }
-    ],
-    "nativeSafariMacOSTimeFlows": {
-      "passed": 2,
-      "failed": 0,
-      "total": 2,
-      "viewport": {
-        "outerHeight": 919,
-        "outerWidth": 390,
-        "devicePixelRatio": 2,
-        "width": 390,
-        "height": 844
-      },
-      "trustedPickerEquivalentClicks": [
-        {
-          "route": "default",
-          "clicks": [
-            {
-              "isTrusted": true,
-              "timeStamp": 807319248576
-            }
-          ]
-        },
-        {
-          "route": "legacy",
-          "clicks": [
-            {
-              "isTrusted": true,
-              "timeStamp": 807319245174
-            }
-          ]
-        }
+  "functional": {
+    "chromeAndWebKit": {
+      "uiHud": { "passed": 6, "failed": 0, "total": 6 },
+      "defaultAndLegacyTimeFlow": { "passed": 4, "failed": 0, "total": 4 },
+      "covered": [
+        "minute and second value synchronization",
+        "specified time",
+        "current time",
+        "Live Sync on and off",
+        "crown position 2",
+        "three-hand coupling",
+        "panel reopen",
+        "tab switching"
       ]
     },
-    "inheritedMainBrowserFailures": [
-      "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
-      "a5-both-faces-retain-key-light-and-camera-follow-fill",
-      "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-      "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-      "a6-wheel-path-produces-monotonic-continuous-zoom"
-    ],
-    "candidateBrowserFailures": [
-      "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
-      "a5-both-faces-retain-key-light-and-camera-follow-fill",
-      "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
-      "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
-      "a6-wheel-path-produces-monotonic-continuous-zoom"
-    ],
-    "candidateSpecificFailureIds": []
-  },
-  "node": {
-    "fullSuite": {
-      "total": 474,
-      "passed": 472,
-      "failed": 2,
-      "skipped": 0
-    },
-    "pr29Specific": {
-      "total": 9,
-      "passed": 9,
-      "failed": 0,
-      "skipped": 0
-    },
-    "inheritedMainFailures": [
-      "default-adoption reports preserve the exact implementation source and decision boundary",
-      "release documents keep the Draft state and closed wheel differential explicit"
-    ],
-    "pr28Head": {
-      "commit": "dbb4210361599427c60d5a44234b4c1eafd32f09",
-      "total": 465,
-      "passed": 465,
-      "failed": 0
+    "nativeSafari": {
+      "scopedDefaultAndLegacyTimeFlow": { "passed": 2, "failed": 0, "total": 2 },
+      "trustedNativeKeyboardInputEvents": true,
+      "nativeControlPreserved": true,
+      "pickerModalAutomation": "NOT_COMPLETED_MACOS_PICKER_MODAL",
+      "crownRegression": "INHERITED_FROM_R2_AND_CHROME_WEBKIT_R3"
     }
+  },
+  "comprehensiveRegression": {
+    "desktop1280x720": {
+      "candidateSpecificFailureIds": [],
+      "inheritedFailureIds": [
+        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+        "a5-both-faces-retain-key-light-and-camera-follow-fill",
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ]
+    },
+    "mobile390x844": {
+      "candidateSpecificFailureIds": [],
+      "inheritedFailureIds": [
+        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+        "a5-both-faces-retain-key-light-and-camera-follow-fill",
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ]
+    },
+    "thresholdsChanged": false
   },
   "console": {
     "errors": 0,
     "warnings": 0,
     "runtimeErrors": 0,
     "unhandledRejections": 0
-  }
+  },
+  "node": {
+    "pr29Specific": { "passed": 12, "failed": 0, "skipped": 0, "total": 12 },
+    "fullBranch": {
+      "passed": 475,
+      "failed": 2,
+      "skipped": 0,
+      "total": 477,
+      "inheritedFailureIds": [
+        "default-adoption reports preserve the exact implementation source and decision boundary",
+        "release documents keep the Draft state and closed wheel differential explicit"
+      ]
+    },
+    "pr28FixedHead": {
+      "head": "dbb4210361599427c60d5a44234b4c1eafd32f09",
+      "passed": 465,
+      "failed": 0,
+      "skipped": 0,
+      "total": 465,
+      "verification": "detached worktree with Git history"
+    }
+  },
+  "visualEvidence": {
+    "installedChromeR3Png": "AVAILABLE_AND_VALID",
+    "nativeSafariR3Png": "EXCLUDED_SINGLE_COLOR_WEBDRIVER_OUTPUT",
+    "nativeSafariEvidenceUsed": ["DOM layout metrics", "native event diagnostics", "functional report"],
+    "physicalIPhoneR3VisualReview": "PENDING"
+  },
+  "candidateSpecificBrowserFailureIds": []
 }

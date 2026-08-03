@@ -25,6 +25,8 @@ function timeReportMatches(report, seconds, expectedDisplay) {
   return Math.abs(report.watchTimeSec - seconds) <= 1e-7
     && Math.abs(report.visibleWatchTime - seconds) <= 1e-7
     && report.timeDisplay === expectedDisplay
+    && report.visualText === expectedDisplay
+    && report.visualTextFormat === "HH:MM:SS"
     && maxAbsolute(Object.values(report.handErrors)) <= 1e-7
     && maxAbsolute(report.handCoupling.map(({ error }) => error)) <= 1e-7;
 }
@@ -453,6 +455,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
     const timeLayout = diagnostics.getTimeInputReport().layout;
     check("hud-mobile-time-input-shell-stays-within-panel-body", timeLayout.visualFrameOwner === "timeInputShell" && timeLayout.shellInsideBody && timeLayout.shellInsideViewport && timeLayout.inputInsideShell && timeLayout.panelInsideViewport && timeLayout.documentOverflow === 0 && timeLayout.bodyOverflow === 0 && timeLayout.gridOverflow === 0 && timeLayout.shellOverflow === 0 && timeLayout.panelBodyOverflow === 0 && Math.abs(timeLayout.horizontalScrollX) <= 0.5 && timeLayout.shell.right <= timeLayout.body.right + .5 && timeLayout.shellInsetDifference <= 1, timeLayout);
     check("hud-mobile-native-time-input-keeps-ios-safe-control-metrics", timeLayout.input.height >= 44 && parseFloat(timeLayout.computed.input.minHeight) >= 44 && parseFloat(timeLayout.computed.input.fontSize) >= 16 && timeLayout.computed.input.boxSizing === "border-box" && timeLayout.computed.input.appearance === "auto" && parseFloat(timeLayout.computed.input.borderLeftWidth) === 0 && parseFloat(timeLayout.computed.input.borderRightWidth) === 0 && timeLayout.computed.input.backgroundColor === "rgba(0, 0, 0, 0)" && parseFloat(timeLayout.computed.shell.borderLeftWidth) > 0 && parseFloat(timeLayout.computed.shell.borderRightWidth) > 0 && parseFloat(timeLayout.computed.shell.borderRadius) > 0 && timeLayout.input.width <= timeLayout.shell.width + 1, timeLayout);
+    check("hud-mobile-time-input-visual-is-centered-hhmmss-and-inert", /^\d{2}:\d{2}:\d{2}$/.test(timeLayout.visualText) && timeLayout.visualTextFormat === "HH:MM:SS" && timeLayout.horizontalCenterError <= 1 && timeLayout.verticalCenterError <= 1 && timeLayout.visualInsideShell && timeLayout.visualPointerEvents === "none" && timeLayout.visualAriaHidden && timeLayout.nativeInputType === "time" && timeLayout.nativeAppearance === "auto" && timeLayout.visualLayerActive, timeLayout);
     const mobileToggleCardsByTab = [];
     for (const view of ["operation", "learning", "technical"]) {
       panelTabs.activate(view);

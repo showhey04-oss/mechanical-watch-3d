@@ -1,100 +1,92 @@
-# Physical-iPhone time input right-edge overflow fix
+# Physical-iPhone time input overflow fix
 
 ## Conclusion
 
-PR #29 R1 passed desktop layout automation but failed physical-iPhone review. R1 fixed the value-text clipping while the native Safari visual frame still painted through the right panel inset. The R2 candidate therefore makes a bounded ordinary HTML wrapper, `.timeInputShell`, the visible control frame and keeps the native `type="time"` element as the picker and focus target.
+PR #29 keeps the native `type="time"` control as the picker, focus target, and accessibility source. R1 fixed text clipping but failed the physical-iPhone outer-frame review. R2 moved the visible frame to `.timeInputShell` and passed the physical iPhone review. R3 is a nonblocking polish candidate that adds a centered, normalized `HH:MM:SS` visual layer while preserving the R2 shell and native picker.
 
-R2 automated layout, visual, functional, accessibility, and evidence gates pass. The status is `PR29_R2_AUTOMATED_GATES_PASSED_PENDING_PHYSICAL_IPHONE_REVIEW`; it is not a Human acceptance or completion decision. PR #29 remains Draft.
-
-## Baseline and implementation
-
-- Base main commit: `155275d0aaeb968fd83d6dfe15313e259f2bb064`
-- R1 start Head: `6e2be3b5714ae329309c581a07d351b6ebaaf621`
-- R2 implementation commit: `e6f65ecdd67bde5b66d95587b2f195268e0171d8`
-- Candidate branch: `fix/iphone-time-input-overflow`
-- APP_VERSION: `v3.15.0` (unchanged)
-- Confirmed visual classification: `IOS_NATIVE_TIME_INPUT_VISUAL_FRAME_OVERFLOW`
-- Diagnostic boundary: `NATIVE_CONTROL_PAINT_EXTENT_NOT_CAPTURED_BY_DOM_RECT`
-
-## R1 physical-iPhone result
-
-The Human result is preserved as a failure and is not overwritten by R2 automation.
-
-| Check | iPhone 16 / iOS 26.5.2 / Safari portrait |
-|---|---|
-| Outer frame inside viewport | NG |
-| Value text visible | OK |
-| Native picker | OK |
-| After-picker value text | OK |
-| After-picker outer frame | NG |
-| Specified time applied | OK |
-| Current time and no horizontal scroll | OK |
-| Overall | FAIL |
-
-Formal classifications:
+Formal state:
 
 - `PR29_R1_PHYSICAL_IPHONE_REVIEW_FAILED`
-- `PR29_R1_TEXT_CLIPPING_RESOLVED`
-- `PR29_R1_NATIVE_VISUAL_FRAME_OVERFLOW_REMAINS`
-- `PR29_R1_DOM_RECT_GATE_FALSE_NEGATIVE`
-- `BODY_COMPLETION_BLOCKER_REMAINS`
-- `PR29_R2_REQUIRED`
+- `PR29_R2_CORE_OVERFLOW_FIX_HUMAN_ACCEPTED`
+- `PR29_R3_HHMMSS_CENTERED_VISUAL_POLISH_AUTHORIZED`
+- `PR29_R3_NONBLOCKING_POLISH_BEFORE_MERGE`
+- `PR29_R3_AUTOMATED_GATES_PASSED_PENDING_PHYSICAL_IPHONE_REVIEW`
 
-## Cause
+PR #29 remains Open and Draft. R3 is not a Human acceptance, Ready, merge, body-completion, or release decision.
 
-R1 bounded the input DOM rectangle and WebKit value subcontrol. Installed Chrome, Playwright WebKit, and macOS Native Safari all reported the input rectangle inside the grid, panel body, and viewport. The physical iPhone nevertheless showed the native border/background extending to the right screen edge while the text remained readable. The DOM rectangle was therefore not a reliable proxy for the native control's painted frame.
+## Provenance
 
-The exact WebKit internals are not asserted. The confirmed product-facing cause is that the native control remained the visual-frame owner even though its DOM layout rectangle passed.
+- Base main commit: `155275d0aaeb968fd83d6dfe15313e259f2bb064`
+- R1 review Head: `6e2be3b5714ae329309c581a07d351b6ebaaf621`
+- R2 implementation commit: `e6f65ecdd67bde5b66d95587b2f195268e0171d8`
+- R3 start Head: `4a375c8818c1c73b50f47c34bb3cb47ec23e5776`
+- R3 implementation commit: `b08e9762ff1557ad88ebef966bf9ee006f5fd644`
+- Branch: `fix/iphone-time-input-overflow`
+- APP_VERSION: `v3.15.0` (unchanged)
 
-## R2 implementation
+## Human history
+
+R1 failed because the native Safari visual frame painted through the right inset even though its DOM rectangle passed. Its exact failure record remains in `reports/human-review-r1.json`.
+
+R2 passed on iPhone 16 / iOS 26.5.2 / Safari portrait: both side borders, all four radii, approximately symmetric margins, value right edge, native picker, post-picker frame/value, specified/current time application, and zero horizontal scrolling were accepted. The exact record is `reports/human-review-r2.json`.
+
+The remaining Human request was isolated from the core overflow fix:
+
+1. display normalized `HH:MM:SS`, including `:00` after a minute-precision picker result;
+2. center the visible time horizontally and vertically.
+
+## R3 implementation
 
 ```html
 <div class="timeInputShell full">
+  <span id="timeInputVisual" class="timeInputVisual" aria-hidden="true">10:08:30</span>
   <input id="timeInput" type="time" step="1" value="10:08:30" aria-label="表示時刻">
 </div>
 ```
 
-- Move `.full` from the native input to `.timeInputShell`.
-- Let the shell own the border, background, radius, focus outline, and `overflow: hidden` paint boundary.
-- Keep the native input at `inline-size: 100%`, with zero border, zero radius, and transparent background.
-- Preserve `appearance: auto`, `-webkit-appearance: auto`, `type="time"`, step seconds, pointer/focus/keyboard behavior, and the native picker.
-- Keep the mobile 16px font and 44px native input height.
-- Keep the value subcontrol shrink guard.
-- Extend `getTimeInputLayoutReport()` with the shell rectangle/styles, symmetric insets, shell overflow, input containment, and `visualFrameOwner: "timeInputShell"`.
+- `.timeInputShell` remains the border, background, corner, paint-containment, and `:focus-within` owner.
+- `.timeInputVisual` is centered with CSS Grid, uses tabular numerals, has `pointer-events:none`, and is excluded from the accessibility tree.
+- The native input remains `type="time"`, `step="1"`, `appearance:auto`, the full 44px mobile target, and the only authoritative value/focus/picker control.
+- Only the native painted text is transparent; the input itself is not `opacity:0`, is not `appearance:none`, and is not replaced by a custom picker.
+- `formatTimeInputVisual()` converts a valid value to normalized `HH:MM:SS`; `10:15` becomes `10:15:00`, seconds are retained, and invalid/empty values show `--:--:--`.
+- `syncTimeInputVisual()` runs through editor updates and the existing `input`, `change`, and `blur` path, including current-time, Live Sync, and diagnostic changes. The existing application logic remains authoritative and unchanged.
 
-No right-side subtraction, negative margin, transform scaling, viewport-specific width, JavaScript sizing, custom picker, panel padding change, or safe-area change is used.
-
-## Automated results
+## Automated verification
 
 | Area | Result |
 |---|---|
-| Installed Chrome shell layout, 7 viewports × 2 routes | 14/14 |
-| Playwright WebKit shell layout, 7 viewports × 2 routes | 14/14 |
-| Native Safari shell layout, 7 requested viewports × 2 routes | 14/14 |
-| Maximum measured shell inset difference | 0px (limit 1px) |
-| Shell/document horizontal overflow | 0 / 0 |
-| Chrome UI, HUD, specified time, current time, Live Sync, crown position 2 | Passed |
-| WebKit UI, HUD, specified time, current time, Live Sync, crown position 2 | Passed |
-| Native Safari default/legacy time flows and trusted `type="time"` click | 2/2 |
-| Native Safari/Chrome visual frame capture | Left/right border and radius visible; time text visible; action-button edges aligned |
+| Installed Chrome layout, 7 viewports × 2 routes | 14/14 |
+| Playwright WebKit layout, 7 viewports × 2 routes | 14/14 |
+| Native Safari 26.5.2 layout, 7 requested viewports × 2 routes | 14/14 |
+| Maximum horizontal / vertical center error | 0px / 0px (limit 1px) |
+| Maximum shell inset difference | 0px (limit 1px) |
+| Horizontal overflow stages | 0 |
+| Minute / second visual normalization | `10:15:00` / `13:37:42` |
+| Chrome + WebKit UI / HUD | 6/6 |
+| Chrome + WebKit default / legacy time flow | 4/4 |
+| Native Safari scoped default / legacy time flow | 2/2 |
 | Console error / warning / runtime error / unhandled rejection | 0 / 0 / 0 / 0 |
-| PR #29-specific Node tests | 9/9; failures/skips 0/0 |
-| Full branch Node suite | 472/474; 2 exact-main inherited documentation failures |
-| PR #28 Head Node suite | 465/465 |
-| Candidate-specific browser failure IDs | 0 |
-| Manifest | missing / unexpected / SHA mismatch = 0 / 0 / 0 |
-| Independent review | Critical / Major / Minor = 0 / 0 / 0 |
+| PR #29-specific Node tests | 12/12; fail 0; skip 0 |
+| Full branch Node suite | 475/477; 2 exact inherited documentation-state failures |
+| PR #28 fixed Head Node suite | 465/465 |
+| Candidate-specific comprehensive-browser failures | 0 |
 
-macOS Safari enforces an actual 336px inner width when 320px is requested. The R2 shell passed both that environment-limited 336px result and the explicit 336px scenario. macOS Native Safari captures are not treated as physical-iPhone acceptance.
+Native Safari kept `type="time"`, `appearance:auto`, the accessible name `表示時刻`, a 44px target, and the centered inert overlay. Its trusted keyboard input path produced native `input`/`change` events and preserved hand coupling, current-time, Live Sync, panel, and tab behavior. macOS Native Safari's modal picker is not fully operable through this WebDriver environment; R2 already established physical-iPhone picker operation and R3 physical verification remains pending. SafariDriver's full-page and element PNG endpoints returned single-color images in this run, so those invalid R3 PNGs are excluded rather than presented as visual evidence.
 
-The browser integration harness still reports the same inherited A.5 lighting-contract and A.6 absolute-performance IDs on both exact main and R2. Candidate-specific browser failures are zero. Thresholds were not changed.
+The comprehensive desktop and 390×844 harnesses retain the same five inherited A.5 lighting/A.6 absolute-performance IDs recorded at R2. No PR #29-specific browser failure was added and no threshold was changed.
 
-## Protected behavior
+## Accessibility and protected scope
 
-Time parsing, specified-time application, current-time application, Live Sync, crown position 2, stopped seconds, hand coupling, panel tabs, bottom-sheet behavior, HUD, keyboard semantics, Geometry, mechanism, rendering, camera, audio, APP_VERSION, and test thresholds are unchanged.
+The native input remains focusable and clickable, keeps the accessible name `表示時刻`, and continues to own picker semantics. The visual span is `aria-hidden` and pointer-inert. Focus remains visible on the shell. No custom picker, Geometry, mechanism, rendering, camera, audio, APP_VERSION, or test-threshold change is included.
 
-## Decision and Human gate
+## Human R3 gate and fallback
 
-R2 automation permits a fixed-commit physical-iPhone review URL after the evidence commit is pushed, but does not claim acceptance. The required Human checks are both borders, both radii, approximately symmetric side margins, readable value text, native picker, after-picker frame/text, specified-time application, current-time application, and no horizontal scroll.
+The fixed-commit review checks are limited to:
 
-Until that review passes, `BODY_COMPLETION_BLOCKER_REMAINS`; PR #29 must stay Draft and unmerged.
+1. visible value is `HH:MM:SS`;
+2. vertical centering;
+3. horizontal centering;
+4. native picker opens;
+5. picker result, specified-time application, and current-time application remain correct.
+
+If R3 loses picker, VoiceOver/focus semantics, trusted interaction, value synchronization, or time application, R3 may be withdrawn without retracting the accepted R2 core overflow fix. Until the five R3 checks pass, the R3 status stays pending and PR #29 stays Draft.
