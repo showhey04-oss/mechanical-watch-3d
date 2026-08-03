@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased — Completed Watch Default Adoption Draft
+
+- 通常rootへ、完成外装、Phase 3C.1 watch head、Phase 3C.2 strap／buckle、Phase 3C.3 integration、D2c3、current transparency、mobile full-length framing、iOS multi-touch stability、R2.4.2 production audioをまとめる中央12-key profileを追加
+- raw URL queryとeffective profile queryを分離し、URL／historyを変更せず、明示profile queryを優先。`defaultProfile=legacy`でmain `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`の旧通常表示へ戻れる
+- Node 465/465、Chrome／WebKit route matrix各26/26、default／explicitのcanvas・inventory・camera・lighting・transform exact、legacy／mainのpixel・DOM・camera exact、multi-touch各100 cycleを確認
+- Native Safari／SafariDriver 26.5.2の1280×720／390×844でqueryなしroot、trusted Web Audio、buffer／raw asset 6/6、visibility各30 cycle、禁止干渉0/0、console／runtime／unhandled rejection 0を確認
+- 性能反復の再測定は12セル中11セルが合格し、Chrome Desktop wheelの1セルがFPS悪化6.14%で未達のため、`FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED`は主張せず、`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を維持する
+- Geometry、機構、D2c3値、透過、camera定数、UI、audio asset／gain、APP_VERSION、試験閾値は変更しない。Issue #2 Open、PR #5 Open／Draft、Phase 3B.4d未開始、OIT完成後実験、Draft／未マージを維持する
+
 ## Unreleased — PR #13 final stack main-promotion audit
 
 - PR #14～#26で検証した完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰をPR #13 Head `86d7bdc041a5f43ddbbeb92d09a01b4a95dc701b`へ集約

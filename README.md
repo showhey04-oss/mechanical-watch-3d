@@ -8,11 +8,13 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：PR #13 final stack main-promotion audit。PR #14～#26で段階検証した完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰をPR #13 Head `86d7bdc041a5f43ddbbeb92d09a01b4a95dc701b`へ集約した。製品・試験treeは受入済みstack Head `dab5dc474071784b06db9fb2fb3f36d469f16389`とGit object exact、Node 442/442、統合queryのDesktop／390×844、production audio、通常path差分を合格とした。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`のまま、clean-process最終測定はendpoint security負荷により`NOT_TESTED`である。PR #13はOpen／Draft、PR #14～#26はMerged／Closed、D2c3はquery限定・未採用、Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始を維持する
+- 現在の改修フェーズ：Completed Watch Default Adoption Draft。main `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`に統合済みの完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰を、通常rootの中央profileとして有効化する技術候補である。過去のquery限定・未採用状態は各工程時点の履歴として維持し、D2c3はこのDraftでdefault adoption candidateとする。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`、Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始、OITは完成後実験、APP_VERSIONはv3.15.0を維持する
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
 - 既知事項：継承した既定照明は実機で暗く見える場合がある。文字板上の矩形影、100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順、PC／iPhone照明差はPR #5のD2c3を取り込まずIssue #2へ分離する
+
+通常rootのDraft実装は、URLを書き換えずに12個のprofile値を内部effective parametersへ注入する。既存のprofile queryは暗黙profileより優先し、旧通常表示は`?defaultProfile=legacy`で確認できる。作動音は初期OFFのままで、Human受入、Ready化、マージ、Issue #2クローズは未実施である。詳細は[Final Completed Watch Default Adoption](docs/FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION.md)を参照する。
 
 v3.15.0では、人間確認で選定されたS86を通常の文字板表示寸法として採用する。dial ring径27.692、index円径25.456、分針長12.040、時針長8.600、小秒表示円径7.740、小秒針長3.268とし、ムーブメント、四番車軸・小秒中心、Y方向配置、回転拘束、描画・UI・作動音はv3.14.0基準のまま維持する。試験状態は`ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION`であり、実施済みA/BではPR固有回帰0件、全ブラウザ試験行列は環境制約により未完了である。
 

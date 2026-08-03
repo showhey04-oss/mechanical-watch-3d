@@ -40,6 +40,13 @@ const routeQueries = {
     "integration=phase3c3",
     "rendering=issue2-phase3b1c-shadow-off",
   ].join("&"),
+  shadowAttenuation: [
+    "exterior=balanced",
+    "watchHead=phase3c1",
+    "strapStyle=phase3c2",
+    "integration=phase3c3",
+    "rendering=issue2-shadow-attenuation",
+  ].join("&"),
   stableDepth: [
     "exterior=balanced",
     "watchHead=phase3c1",
@@ -120,6 +127,8 @@ frame.addEventListener("load", async () => {
 
     const profile = diagnostics.getDefaultProfileReport();
     const runtime = diagnostics.getDefaultProfileRuntimeParityReport();
+    const issue2ProtectedPaths =
+      diagnostics.getIssue2FinalPolishReport().protectedPaths;
     const capture = await diagnostics.captureAuditViewportPng({
       width,
       height,
@@ -139,6 +148,8 @@ frame.addEventListener("load", async () => {
       : route === "legacy"
         ? "legacy"
         : "explicit-profile";
+    const expectedRenderingProfileActive =
+      typeof profile.effectiveIntegratedProfile.rendering === "string";
     const checks = {
       sameOrigin:
         frame.contentWindow.location.origin === location.origin,
@@ -177,6 +188,13 @@ frame.addEventListener("load", async () => {
           && runtime.profiles.audioTiming.enabled === false
           && runtime.profiles.mechanismTiming.enabled === false
         ),
+      issue2ProtectedPathReporting:
+        issue2ProtectedPaths.normalPathUnchanged
+          === !expectedRenderingProfileActive
+        && issue2ProtectedPaths.phase3c1OnlyUnchanged
+          === !expectedRenderingProfileActive
+        && issue2ProtectedPaths.phase3c2OnlyUnchanged
+          === !expectedRenderingProfileActive,
     };
     const result = {
       ok: Object.values(checks).every(Boolean),
@@ -190,6 +208,7 @@ frame.addEventListener("load", async () => {
       },
       profile,
       runtime,
+      issue2ProtectedPaths,
       canvas,
       checks,
     };
