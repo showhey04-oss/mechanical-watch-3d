@@ -1,0 +1,650 @@
+{
+  "metadata": {
+    "schemaVersion": 2,
+    "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+    "sourceApprovedStartCommit": "8d0946bcf4bb9afbeacf06f89c8ae1882cf8cef9",
+    "sourceImplementationCommit": "a4e12477525ec12d7fbb569e81f442b46d572fef",
+    "sourceCaptureCommit": "02952fc7ca5b44e762327fd4342401ed719e5777",
+    "sourceBranch": "feature/final-exterior-balanced-phase3b1",
+    "appVersion": "v3.15.0",
+    "captureMode": "same-origin unsandboxed iframe harness with actual Three.js WebGLRenderTarget PNG and GIF capture",
+    "candidateId": "E-BALANCED",
+    "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
+  },
+  "status": "PASSED",
+  "clearanceClassification": "EDUCATIONAL_RENDERING_CLEARANCE",
+  "permittedRange": {
+    "radial": [
+      0.015,
+      0.03
+    ],
+    "axial": [
+      0.015,
+      0.03
+    ]
+  },
+  "before": {
+    "classification": "READ_ONLY_ACTUAL_GEOMETRY_INTERFACE_AUDIT",
+    "records": [
+      {
+        "id": "bezel-back-to-case-body-front",
+        "pair": [
+          "bezel back closure",
+          "case body front face"
+        ],
+        "planes": {
+          "caseBodyY": -2.86,
+          "bezelClosureYRange": [
+            -2.86,
+            -2.86
+          ]
+        },
+        "cylinderRadii": null,
+        "yRange": null,
+        "radiusRange": {
+          "min": 18.9,
+          "max": 19.4,
+          "size": 0.5
+        },
+        "signedMinimumClearance": 0,
+        "coplanarRadialOverlap": 0.5,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 60.161499316,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+        "qualification": "axial reveal removes the former broad coplanar annular overlap",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "caseback-front-to-case-body-back",
+        "pair": [
+          "caseback ring front closure",
+          "case body back face"
+        ],
+        "planes": {
+          "caseBodyY": 4.635,
+          "casebackClosureYRange": [
+            4.635,
+            4.635
+          ]
+        },
+        "cylinderRadii": null,
+        "yRange": null,
+        "radiusRange": {
+          "min": 18.9,
+          "max": 19.45,
+          "size": 0.55
+        },
+        "signedMinimumClearance": 0,
+        "coplanarRadialOverlap": 0.55,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 66.264043046,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+        "qualification": "axial reveal removes the former broad coplanar annular overlap",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "caseback-inner-to-window-outer",
+        "pair": [
+          "caseback ring inner wall",
+          "transparent caseback window outer wall"
+        ],
+        "planes": null,
+        "cylinderRadii": {
+          "caseback": 14.274,
+          "window": 14.274
+        },
+        "yRange": {
+          "caseback": [
+            4.635,
+            5.235
+          ],
+          "window": [
+            4.855,
+            5.235
+          ],
+          "overlap": {
+            "min": 4.855,
+            "max": 5.235,
+            "size": 0.38
+          }
+        },
+        "radiusRange": null,
+        "signedMinimumClearance": 0,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0.38,
+        "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+        "qualification": "radial reveal preserves the visible window diameter",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "caseback-to-movement-holder",
+        "pair": [
+          "caseback ring inner face",
+          "movement holder back"
+        ],
+        "planes": {
+          "casebackY": 4.635,
+          "holderY": 4.485
+        },
+        "cylinderRadii": null,
+        "yRange": null,
+        "radiusRange": null,
+        "signedMinimumClearance": 0.15,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "PROTECTED_CLEARANCE",
+        "qualification": "no intended visual or physical overlap",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "bezel-to-crystal",
+        "pair": [
+          "bezel crystal retention boundary",
+          "crystal outer wall"
+        ],
+        "planes": null,
+        "cylinderRadii": {
+          "bezel": 15.3,
+          "crystal": 15.3
+        },
+        "yRange": {
+          "bezelContactY": -3.24,
+          "crystal": [
+            -3.46,
+            -2.86
+          ]
+        },
+        "radiusRange": null,
+        "signedMinimumClearance": 0,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "INTENDED_RETENTION_CONTACT",
+        "qualification": "single circular retention boundary; no area-equivalent overlap",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "caseback-to-window-back",
+        "pair": [
+          "caseback retention land",
+          "transparent window rear face"
+        ],
+        "planes": {
+          "casebackY": 5.235,
+          "windowY": 5.235
+        },
+        "cylinderRadii": null,
+        "yRange": null,
+        "radiusRange": {
+          "caseback": [
+            14.274,
+            14.474
+          ],
+          "window": [
+            0,
+            14.274
+          ]
+        },
+        "signedMinimumClearance": 0,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+        "qualification": "radial reveal separates coplanar rear faces without resizing the window",
+        "forbiddenInterferenceCount": 0
+      }
+    ],
+    "forbiddenInterferenceCount": 0,
+    "overlapTotals": {
+      "coplanarRadial": 1.05,
+      "coplanarAxial": 0,
+      "areaEquivalent": 126.425542362,
+      "sameCylinderAxial": 0.38
+    },
+    "educationalRenderingClearance": {
+      "bezelToCaseBodyAxial": 0.02,
+      "casebackToCaseBodyAxial": 0.02,
+      "casebackWindowRadial": 0.02
+    }
+  },
+  "after": {
+    "classification": "READ_ONLY_ACTUAL_GEOMETRY_INTERFACE_AUDIT",
+    "records": [
+      {
+        "id": "bezel-back-to-case-body-front",
+        "pair": [
+          "bezel back closure",
+          "case body front face"
+        ],
+        "planes": {
+          "caseBodyY": -2.86,
+          "bezelClosureYRange": [
+            -2.877777778,
+            -2.88
+          ]
+        },
+        "cylinderRadii": null,
+        "yRange": null,
+        "radiusRange": {
+          "min": 18.9,
+          "max": 19.4,
+          "size": 0.5
+        },
+        "signedMinimumClearance": 0.017777778,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+        "qualification": "axial reveal removes the former broad coplanar annular overlap",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "caseback-front-to-case-body-back",
+        "pair": [
+          "caseback ring front closure",
+          "case body back face"
+        ],
+        "planes": {
+          "caseBodyY": 4.635,
+          "casebackClosureYRange": [
+            4.652694967,
+            4.654807914
+          ]
+        },
+        "cylinderRadii": null,
+        "yRange": null,
+        "radiusRange": {
+          "min": 18.9,
+          "max": 19.45,
+          "size": 0.55
+        },
+        "signedMinimumClearance": 0.017694967,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+        "qualification": "axial reveal removes the former broad coplanar annular overlap",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "caseback-inner-to-window-outer",
+        "pair": [
+          "caseback ring inner wall",
+          "transparent caseback window outer wall"
+        ],
+        "planes": null,
+        "cylinderRadii": {
+          "caseback": 14.294,
+          "window": 14.274
+        },
+        "yRange": {
+          "caseback": [
+            4.635,
+            5.235
+          ],
+          "window": [
+            4.855,
+            5.235
+          ],
+          "overlap": {
+            "min": 4.855,
+            "max": 5.235,
+            "size": 0.38
+          }
+        },
+        "radiusRange": null,
+        "signedMinimumClearance": 0.02,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+        "qualification": "radial reveal preserves the visible window diameter",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "caseback-to-movement-holder",
+        "pair": [
+          "caseback ring inner face",
+          "movement holder back"
+        ],
+        "planes": {
+          "casebackY": 4.635,
+          "holderY": 4.485
+        },
+        "cylinderRadii": null,
+        "yRange": null,
+        "radiusRange": null,
+        "signedMinimumClearance": 0.15,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "PROTECTED_CLEARANCE",
+        "qualification": "no intended visual or physical overlap",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "bezel-to-crystal",
+        "pair": [
+          "bezel crystal retention boundary",
+          "crystal outer wall"
+        ],
+        "planes": null,
+        "cylinderRadii": {
+          "bezel": 15.3,
+          "crystal": 15.3
+        },
+        "yRange": {
+          "bezelContactY": -3.24,
+          "crystal": [
+            -3.46,
+            -2.86
+          ]
+        },
+        "radiusRange": null,
+        "signedMinimumClearance": 0,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "INTENDED_RETENTION_CONTACT",
+        "qualification": "single circular retention boundary; no area-equivalent overlap",
+        "forbiddenInterferenceCount": 0
+      },
+      {
+        "id": "caseback-to-window-back",
+        "pair": [
+          "caseback retention land",
+          "transparent window rear face"
+        ],
+        "planes": {
+          "casebackY": 5.235,
+          "windowY": 5.235
+        },
+        "cylinderRadii": null,
+        "yRange": null,
+        "radiusRange": {
+          "caseback": [
+            14.294,
+            14.474
+          ],
+          "window": [
+            0,
+            14.274
+          ]
+        },
+        "signedMinimumClearance": 0.02,
+        "coplanarRadialOverlap": 0,
+        "coplanarAxialOverlap": 0,
+        "coplanarAreaEquivalent": 0,
+        "sameCylinderAxialOverlap": 0,
+        "classification": "EDUCATIONAL_RENDERING_CLEARANCE",
+        "qualification": "radial reveal separates coplanar rear faces without resizing the window",
+        "forbiddenInterferenceCount": 0
+      }
+    ],
+    "forbiddenInterferenceCount": 0,
+    "overlapTotals": {
+      "coplanarRadial": 0,
+      "coplanarAxial": 0,
+      "areaEquivalent": 0,
+      "sameCylinderAxial": 0
+    },
+    "educationalRenderingClearance": {
+      "bezelToCaseBodyAxial": 0.02,
+      "casebackToCaseBodyAxial": 0.02,
+      "casebackWindowRadial": 0.02
+    }
+  },
+  "protectedDimensions": {
+    "totalCaseThickness": 8.695,
+    "caseOuterDiameter": 39.6,
+    "movementCavityDiameter": 37.8,
+    "dialApertureDiameter": 29.8,
+    "crystalClearDiameter": 30.6,
+    "casebackWindowDiameter": 28.548
+  },
+  "edgeBreaks": {
+    "bezelOuterAxial": 0.02,
+    "casebackOuterAxial": 0.04,
+    "casebackWindowRadialReveal": 0.02,
+    "phase3cDecorativeChamferAdded": false
+  },
+  "geometry": {
+    "bezel": {
+      "vertexCount": 1280,
+      "indexCount": 3840,
+      "triangleCount": 1280,
+      "finite": {
+        "positions": true,
+        "normals": true,
+        "indices": true
+      },
+      "topology": {
+        "edgeCount": 1920,
+        "nonManifoldEdgeCount": 0,
+        "nonManifoldEdges": [],
+        "windingMismatchCount": 0,
+        "closed": true
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "reversedDuplicateTriangleCount": 0,
+      "normalAudit": {
+        "finite": true,
+        "zeroLengthCount": 0,
+        "maximumUnitLengthError": 0,
+        "reversedTriangleCount": 0,
+        "periodicSeamMismatchCount": 0
+      },
+      "orientation": "OUTWARD_POSITIVE",
+      "creaseNormalMode": "SPLIT_AT_PROFILE_BOUNDARIES",
+      "taper": {
+        "definition": {
+          "numerator": "primaryTaperRadialWidth",
+          "denominator": "visibleMainRadialWidth = innerRetentionLandWidth + primaryTaperRadialWidth",
+          "outerClosureTreatment": "excluded from the visible main-face denominator and reported separately",
+          "structuralBackClosureTreatment": "intentional hidden contact surface; excluded from visible flat-interval rejection"
+        },
+        "totalRadialWidth": 4.5,
+        "visibleMainRadialWidth": 3.6,
+        "innerRetentionLandWidth": 0.4,
+        "primaryTaperRadialWidth": 3.2,
+        "outerClosureWidth": 0.9,
+        "primaryTaperCoverageRatio": 0.888888889,
+        "totalSectionCoverageRatio": 0.711111111,
+        "primarySlope": 0.10625,
+        "primarySlopeSign": 1,
+        "expectedPrimarySlopeSign": 1,
+        "outerClosureSlope": 0.022222222,
+        "outerEdgeAxialThickness": 0.02,
+        "maximumVisibleFlatIntervalWidth": 0.4,
+        "flatIntervals": [
+          {
+            "id": "innerRetentionLand",
+            "role": "INTENDED_RETENTION_LAND",
+            "radialWidth": 0.4,
+            "intended": true
+          },
+          {
+            "id": "structuralBackClosure",
+            "role": "STRUCTURAL_BACK_CONTACT",
+            "radialWidth": 4.5,
+            "intended": true
+          }
+        ],
+        "unintendedHorizontalIntervalCount": 0,
+        "visibleSegments": [
+          {
+            "id": "innerRetentionLand",
+            "role": "INTENDED_RETENTION_LAND",
+            "radialWidth": 0.4,
+            "deltaY": 0,
+            "horizontal": true
+          },
+          {
+            "id": "primaryTaper",
+            "role": "PRIMARY_TAPER",
+            "radialWidth": 3.2,
+            "deltaY": 0.34,
+            "horizontal": false
+          },
+          {
+            "id": "outerClosure",
+            "role": "OUTER_CLOSURE",
+            "radialWidth": 0.9,
+            "deltaY": 0.02,
+            "horizontal": false
+          }
+        ],
+        "criteria": {
+          "minimumPrimaryTaperCoverageRatio": 0.85,
+          "maximumInnerRetentionLandWidth": 0.4,
+          "maximumOuterClosureWidth": 1,
+          "minimumOuterEdgeAxialThickness": 0.02,
+          "maximumOuterEdgeAxialThickness": 0.05
+        },
+        "checks": {
+          "radialOrder": true,
+          "primaryTaperCoverage": true,
+          "innerRetentionLand": true,
+          "outerClosure": true,
+          "monotonicPrimarySlope": true,
+          "outerClosureContinuesSlope": true,
+          "outerEdgeAxialThickness": true,
+          "unintendedHorizontalIntervals": true
+        },
+        "passed": true
+      }
+    },
+    "casebackRing": {
+      "vertexCount": 1280,
+      "indexCount": 3840,
+      "triangleCount": 1280,
+      "finite": {
+        "positions": true,
+        "normals": true,
+        "indices": true
+      },
+      "topology": {
+        "edgeCount": 1920,
+        "nonManifoldEdgeCount": 0,
+        "nonManifoldEdges": [],
+        "windingMismatchCount": 0,
+        "closed": true
+      },
+      "degenerateTriangleCount": 0,
+      "duplicateTriangleCount": 0,
+      "reversedDuplicateTriangleCount": 0,
+      "normalAudit": {
+        "finite": true,
+        "zeroLengthCount": 0,
+        "maximumUnitLengthError": 0,
+        "reversedTriangleCount": 0,
+        "periodicSeamMismatchCount": 0
+      },
+      "orientation": "OUTWARD_POSITIVE",
+      "creaseNormalMode": "SPLIT_AT_PROFILE_BOUNDARIES",
+      "taper": {
+        "definition": {
+          "numerator": "primaryTaperRadialWidth",
+          "denominator": "visibleMainRadialWidth = innerRetentionLandWidth + primaryTaperRadialWidth",
+          "outerClosureTreatment": "excluded from the visible main-face denominator and reported separately",
+          "structuralBackClosureTreatment": "intentional hidden contact surface; excluded from visible flat-interval rejection"
+        },
+        "totalRadialWidth": 5.206,
+        "visibleMainRadialWidth": 4.606,
+        "innerRetentionLandWidth": 0.18,
+        "primaryTaperRadialWidth": 4.426,
+        "outerClosureWidth": 0.6,
+        "primaryTaperCoverageRatio": 0.960920538,
+        "totalSectionCoverageRatio": 0.850172877,
+        "primarySlope": -0.122006326,
+        "primarySlopeSign": -1,
+        "expectedPrimarySlopeSign": -1,
+        "outerClosureSlope": -0.066666667,
+        "outerEdgeAxialThickness": 0.04,
+        "maximumVisibleFlatIntervalWidth": 0.18,
+        "flatIntervals": [
+          {
+            "id": "innerRetentionLand",
+            "role": "INTENDED_RETENTION_LAND",
+            "radialWidth": 0.18,
+            "intended": true
+          },
+          {
+            "id": "structuralBackClosure",
+            "role": "STRUCTURAL_BACK_CONTACT",
+            "radialWidth": 5.206,
+            "intended": true
+          }
+        ],
+        "unintendedHorizontalIntervalCount": 0,
+        "visibleSegments": [
+          {
+            "id": "innerRetentionLand",
+            "role": "INTENDED_RETENTION_LAND",
+            "radialWidth": 0.18,
+            "deltaY": 0,
+            "horizontal": true
+          },
+          {
+            "id": "primaryTaper",
+            "role": "PRIMARY_TAPER",
+            "radialWidth": 4.426,
+            "deltaY": -0.54,
+            "horizontal": false
+          },
+          {
+            "id": "outerClosure",
+            "role": "OUTER_CLOSURE",
+            "radialWidth": 0.6,
+            "deltaY": -0.04,
+            "horizontal": false
+          }
+        ],
+        "criteria": {
+          "minimumPrimaryTaperCoverageRatio": 0.9,
+          "maximumInnerRetentionLandWidth": 0.3,
+          "maximumOuterClosureWidth": 0.7,
+          "minimumOuterEdgeAxialThickness": 0.04,
+          "maximumOuterEdgeAxialThickness": 0.08
+        },
+        "checks": {
+          "radialOrder": true,
+          "primaryTaperCoverage": true,
+          "innerRetentionLand": true,
+          "outerClosure": true,
+          "monotonicPrimarySlope": true,
+          "outerClosureContinuesSlope": true,
+          "outerEdgeAxialThickness": true,
+          "unintendedHorizontalIntervals": true
+        },
+        "passed": true
+      }
+    }
+  },
+  "checks": {
+    "areaBearingCoplanarOverlapZero": true,
+    "sameCylinderAxialOverlapZero": true,
+    "duplicateTrianglesZero": true,
+    "reversedDuplicateTrianglesZero": true,
+    "degenerateTrianglesZero": true,
+    "nonManifoldEdgesZero": true,
+    "finiteGeometry": true,
+    "reversedNormalsZero": true,
+    "periodicNormalMismatchZero": true,
+    "forbiddenInterferenceZero": true
+  }
+}

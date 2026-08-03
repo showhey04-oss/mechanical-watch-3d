@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Final Stabilization Phase 3B.4c-R2.3 lifecycle harness</title>
+  <style>
+    html,body{margin:0;background:#111827;color:#e5e7eb;font:13px/1.4 system-ui,sans-serif}
+    #phase3b4cR23Controls{position:fixed;z-index:4;left:8px;bottom:8px;max-width:min(680px,calc(100vw - 16px));padding:8px 10px;border-radius:8px;background:rgba(3,7,18,.9)}
+    #phase3b4cR23Status{font-weight:700}#phase3b4cR23Summary{margin-top:3px;color:#cbd5e1}
+    iframe{display:block;margin-top:64px;border:0;background:#0b1220}
+  </style>
+</head>
+<body data-audit-ready="false" data-audit-status="queued" data-audit-stage="queued">
+  <div id="phase3b4cR23Controls">
+    <div id="phase3b4cR23Status">queued</div>
+    <div id="phase3b4cR23Summary">Waiting for the same-origin application frame.</div>
+    <button id="phase3b4cR23Start" type="button" disabled style="min-width:44px;min-height:44px;margin-top:7px">Start audio stress</button>
+  </div>
+  <output id="phase3b4cR23AuditResult" hidden></output>
+  <iframe id="auditApp" title="Phase 3B.4c-R2.3 app"></iframe>
+  <script type="module" src="./final-stabilization-phase3b4c-r2-3-harness.js"></script>
+</body>
+</html>

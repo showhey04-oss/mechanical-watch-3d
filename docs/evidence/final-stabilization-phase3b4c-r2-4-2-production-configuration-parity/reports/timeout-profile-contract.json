@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.4.2",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "f1ea3870a9ea7bd00c8752bf2b750eea37769e4c",
+  "sourceImplementationCommit": "db24392dae14be49ac8cf83b308b3ab712b4da0d",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T23:46:25.381Z",
+  "productionTimeoutProfile": {
+    "id": "PRODUCTION_TIMEOUT_PROFILE",
+    "resumeTimeoutMs": 450,
+    "clockProbeMs": 80,
+    "decodeTimeoutMs": 1200,
+    "closeTimeoutMs": 250,
+    "transactionTimeoutMs": 5500
+  },
+  "tightDiagnosticTimeoutProfile": {
+    "id": "TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE",
+    "resumeTimeoutMs": 450,
+    "clockProbeMs": 80,
+    "decodeTimeoutMs": 300,
+    "closeTimeoutMs": 50,
+    "transactionTimeoutMs": 1500
+  },
+  "nativeSafariAutomation": "NATIVE_SAFARI_AUTOMATION_BLOCKED_BY_ENVIRONMENT",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "PHASE3B4C_R2_4_2_EVIDENCE_CONFIGURATION_PARITY_PASSED",
+  "productionConfiguration": {
+    "profile": {
+      "id": "PRODUCTION_TIMEOUT_PROFILE",
+      "resumeTimeoutMs": 450,
+      "clockProbeMs": 80,
+      "decodeTimeoutMs": 1200,
+      "closeTimeoutMs": 250,
+      "transactionTimeoutMs": 5500
+    },
+    "appDefault": true,
+    "setterCalls": 0,
+    "actualWebAudioConditions": 36,
+    "actualWebAudioCycles": 800,
+    "maximumObservedTransactionElapsedMs": 1354
+  },
+  "tightDiagnosticConfiguration": {
+    "profile": {
+      "id": "TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE",
+      "resumeTimeoutMs": 450,
+      "clockProbeMs": 80,
+      "decodeTimeoutMs": 300,
+      "closeTimeoutMs": 50,
+      "transactionTimeoutMs": 1500
+    },
+    "appDefault": false,
+    "setterCalls": 36,
+    "actualWebAudioConditions": 36,
+    "actualWebAudioCycles": 800,
+    "maximumObservedTransactionElapsedMs": 461,
+    "acceptanceClassification": "DIAGNOSTIC_ONLY_NOT_PRODUCTION_ACCEPTANCE"
+  },
+  "r241EvidenceClassificationCorrection": {
+    "formerEvidenceDirectory": "../final-stabilization-phase3b4c-r2-4-1-bounded-atomic-recovery",
+    "profileActuallyUsed": {
+      "id": "TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE",
+      "resumeTimeoutMs": 450,
+      "clockProbeMs": 80,
+      "decodeTimeoutMs": 300,
+      "closeTimeoutMs": 50,
+      "transactionTimeoutMs": 1500
+    },
+    "classification": "TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE",
+    "productionAcceptanceClaimWithdrawn": true,
+    "historicalEvidenceRetained": true
+  },
+  "contracts": {
+    "implementationDefaultsEqualProduction": true,
+    "productionHarnessNeverCallsDiagnosticSetter": true,
+    "tightHarnessAlwaysCallsDiagnosticSetter": true,
+    "profileRecordedPerCondition": true,
+    "allTransactionsWithinSelectedDeadline": true,
+    "allPromisesSettled": true
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+    "sourceImplementationCommit": "fc5cc0220004dbcfbff14d4bbca4165e797665ea",
+    "sourceCaptureCommit": "fc5cc0220004dbcfbff14d4bbca4165e797665ea",
+    "sourceBranch": "feature/final-exterior-balanced-phase3b1",
+    "appVersion": "v3.15.0",
+    "capturedAt": "2026-07-25T07:45:50.961Z",
+    "captureMode": "same-origin unsandboxed iframe harness with actual WebGL canvas PNG capture",
+    "candidateId": "E-BALANCED",
+    "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
+  },
+  "runtime": {
+    "registeredParts": [
+      {
+        "partName": "E-BALANCED ケース胴",
+        "group": "exterior",
+        "pickPriority": 1,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED ベゼル",
+        "group": "exterior",
+        "pickPriority": 1,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED 風防",
+        "group": "exterior",
+        "pickPriority": 0,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED リハウト",
+        "group": "exterior",
+        "pickPriority": 1,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED 物理文字板",
+        "group": "exterior",
+        "pickPriority": 0,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED 裏蓋リング",
+        "group": "exterior",
+        "pickPriority": 1,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED シースルー窓",
+        "group": "exterior",
+        "pickPriority": 0,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED ムーブメント保持リング",
+        "group": "exterior",
+        "pickPriority": -1,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED 中空りゅうずチューブ",
+        "group": "exterior",
+        "pickPriority": 1,
+        "selectableMeshCount": 1
+      },
+      {
+        "partName": "E-BALANCED りゅうず接続カラー",
+        "group": "exterior",
+        "pickPriority": 1,
+        "selectableMeshCount": 1
+      }
+    ],
+    "structuralOpacityParts": [
+      "caseBody",
+      "bezel",
+      "rehaut",
+      "dialBlank",
+      "casebackRing",
+      "movementHolder",
+      "crownTube",
+      "crownConnection"
+    ],
+    "fixedTransparentParts": [
+      "crystal",
+      "casebackWindow"
+    ],
+    "interiorPriorityPreserved": true
+  },
+  "browserInteraction": {
+    "manualExterior": {
+      "name": "E-BALANCED ケース胴",
+      "description": "プロファイル中空ケース胴。中央バンド、前後テーパー、実りゅうず包絡から導いた局所逃げを1つの閉じたMeshで構成する。",
+      "hudVisible": true,
+      "learningName": "E-BALANCED ケース胴"
+    },
+    "backgroundClear": {
+      "name": "なし",
+      "hudVisible": false
+    },
+    "transparentInterior": {
+      "opacity": 0.16,
+      "name": "設定車2",
+      "description": "ミニッツホイールと設定車1の間をピッチ半径和で配置し、時刻合わせ回転を日の裏輪列へ伝える。",
+      "hudVisible": true,
+      "learningName": "設定車2",
+      "method": "existing select diagnostic query"
+    }
+  },
+  "selectionPassed": true
+}

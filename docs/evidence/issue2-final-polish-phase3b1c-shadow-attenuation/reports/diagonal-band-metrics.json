@@ -1,0 +1,3872 @@
+{
+  "schemaVersion": 1,
+  "sourceMainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBaseCommit": "961fb16ec8c0b55b4d940861659e22733537d813",
+  "sourceImplementationCommit": "8a0fac5149708a906d02df103403f6e0706db9f7",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1c-shadow-attenuation",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
+  "defaultAdopted": false,
+  "reference": "issue2-phase3b1c-shadow-off",
+  "threshold": 1.15,
+  "summaries": {
+    "issue2-shadow-attenuation": {
+      "maximumDiagonalGradientRatio": 1.0046948356807512,
+      "maximumPeriodicBandRatio": 1.0014369083491987,
+      "humanSameScaleReview": "PASS_NO_BROAD_DIAGONAL_BAND",
+      "passed": true
+    },
+    "issue2-shadow-attenuation-bias": {
+      "maximumDiagonalGradientRatio": 1.0046948356807512,
+      "maximumPeriodicBandRatio": 1.0014367404991564,
+      "humanSameScaleReview": "PASS_NO_BROAD_DIAGONAL_BAND",
+      "passed": true
+    }
+  },
+  "rowsByCandidate": {
+    "issue2-shadow-attenuation": [
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--normal",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9958592132505176,
+        "periodicBandRatio": 0.9993482012159871,
+        "candidateDiagonal": 0.011881432688349115,
+        "shadowOffDiagonal": 0.011930835734870316,
+        "candidatePeriodic": 0.843883374791393,
+        "shadowOffPeriodic": 0.8444337756995733
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--split",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.996617050067659,
+        "periodicBandRatio": 0.9979425496154436,
+        "candidateDiagonal": 0.010273900943692326,
+        "shadowOffDiagonal": 0.010308775013426516,
+        "candidatePeriodic": 0.901702962336216,
+        "shadowOffPeriodic": 0.9035619963130008
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--explode",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.997414350355527,
+        "periodicBandRatio": 0.993997784458875,
+        "candidateDiagonal": 0.009237197830485747,
+        "shadowOffDiagonal": 0.009261143903928354,
+        "candidatePeriodic": 0.9143702092837781,
+        "shadowOffPeriodic": 0.9198915969229795
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--normal",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.011996706463565253,
+        "shadowOffDiagonal": 0.011996706463565253,
+        "candidatePeriodic": 0.9044633743539225,
+        "shadowOffPeriodic": 0.9044633743539225
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--split",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012812733220341347,
+        "shadowOffDiagonal": 0.012812733220341347,
+        "candidatePeriodic": 0.9149728330596756,
+        "shadowOffPeriodic": 0.9149728330596756
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--explode",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012847068401958789,
+        "shadowOffDiagonal": 0.012847068401958789,
+        "candidatePeriodic": 0.9174757267029313,
+        "shadowOffPeriodic": 0.9174757267029313
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--normal",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9994731296101159,
+        "periodicBandRatio": 0.9999860623275114,
+        "candidateDiagonal": 0.013913336853840287,
+        "shadowOffDiagonal": 0.013920671243325706,
+        "candidatePeriodic": 0.9951898783743215,
+        "shadowOffPeriodic": 0.9952037491982372
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--split",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9988285825849277,
+        "periodicBandRatio": 1.0000270759156575,
+        "candidateDiagonal": 0.015259434243649856,
+        "shadowOffDiagonal": 0.015277330374506366,
+        "candidatePeriodic": 0.9960405142409013,
+        "shadowOffPeriodic": 0.9960135462621289
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--explode",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0007094714437745,
+        "periodicBandRatio": 0.9999954438130115,
+        "candidateDiagonal": 0.015817479408120127,
+        "shadowOffDiagonal": 0.015806265314246944,
+        "candidatePeriodic": 0.9980830768985951,
+        "shadowOffPeriodic": 0.9980876243724426
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--normal",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.013614627705207875,
+        "shadowOffDiagonal": 0.013614627705207875,
+        "candidatePeriodic": 0.9930419344843764,
+        "shadowOffPeriodic": 0.9930419344843764
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--split",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01685023738623997,
+        "shadowOffDiagonal": 0.01685023738623997,
+        "candidatePeriodic": 0.9925745444388389,
+        "shadowOffPeriodic": 0.9925745444388389
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--explode",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999999470460083,
+        "candidateDiagonal": 0.02020021965510698,
+        "shadowOffDiagonal": 0.02020021965510698,
+        "candidatePeriodic": 0.9954853662661194,
+        "shadowOffPeriodic": 0.995485418981046
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--normal",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9935344827586207,
+        "periodicBandRatio": 1.000565132563623,
+        "candidateDiagonal": 0.03130304882189176,
+        "shadowOffDiagonal": 0.031506756297956136,
+        "candidatePeriodic": 0.9536953079858689,
+        "shadowOffPeriodic": 0.9531566481257794
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--split",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9919872553365928,
+        "periodicBandRatio": 1.0001206329769128,
+        "candidateDiagonal": 0.030552555795536358,
+        "shadowOffDiagonal": 0.0307993430673356,
+        "candidatePeriodic": 0.9796561628908753,
+        "shadowOffPeriodic": 0.9795379983061405
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--explode",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9953445065176908,
+        "periodicBandRatio": 1.0000413340814258,
+        "candidateDiagonal": 0.02630909702453711,
+        "shadowOffDiagonal": 0.026432151734661232,
+        "candidatePeriodic": 0.9682141001610405,
+        "shadowOffPeriodic": 0.9681740815747184
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--normal",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.038953396256309274,
+        "shadowOffDiagonal": 0.038953396256309274,
+        "candidatePeriodic": 0.9454184490618533,
+        "shadowOffPeriodic": 0.9454184490618533
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--split",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.03212674785746504,
+        "shadowOffDiagonal": 0.03212674785746504,
+        "candidatePeriodic": 0.9889320827352123,
+        "shadowOffPeriodic": 0.9889320827352123
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--explode",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999997776528359,
+        "candidateDiagonal": 0.027195206268725514,
+        "shadowOffDiagonal": 0.027195206268725514,
+        "candidatePeriodic": 0.9750942641611603,
+        "shadowOffPeriodic": 0.9750944809706529
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--normal",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.993527508090615,
+        "periodicBandRatio": 1.0000004729465592,
+        "candidateDiagonal": 0.007388569778262684,
+        "shadowOffDiagonal": 0.007436703783332798,
+        "candidatePeriodic": 0.9898634223002429,
+        "shadowOffPeriodic": 0.9898629541479645
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--split",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000051321175996,
+        "candidateDiagonal": 0.010590587345328795,
+        "shadowOffDiagonal": 0.010590587345328795,
+        "candidatePeriodic": 0.9911322495893058,
+        "shadowOffPeriodic": 0.9911271630081492
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--explode",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.999063670411985,
+        "periodicBandRatio": 1.0000909553464414,
+        "candidateDiagonal": 0.011885930711819093,
+        "shadowOffDiagonal": 0.01189707029074301,
+        "candidatePeriodic": 0.8844131231967567,
+        "shadowOffPeriodic": 0.8843326884107128
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--normal",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.009995828386227257,
+        "shadowOffDiagonal": 0.009995828386227257,
+        "candidatePeriodic": 0.9923594429585229,
+        "shadowOffPeriodic": 0.9923594429585229
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--split",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012171070405792402,
+        "shadowOffDiagonal": 0.012171070405792402,
+        "candidatePeriodic": 0.9938464379933555,
+        "shadowOffPeriodic": 0.9938464379933555
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--explode",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012995935522608656,
+        "shadowOffDiagonal": 0.012995935522608656,
+        "candidatePeriodic": 0.89989858832028,
+        "shadowOffPeriodic": 0.89989858832028
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--normal",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.98125,
+        "periodicBandRatio": 0.9998324585645799,
+        "candidateDiagonal": 0.004416066606660666,
+        "shadowOffDiagonal": 0.004500450045004501,
+        "candidatePeriodic": 0.9812863583606842,
+        "shadowOffPeriodic": 0.9814507920351759
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--split",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0046948356807512,
+        "periodicBandRatio": 0.999889665667144,
+        "candidateDiagonal": 0.005643459915611815,
+        "shadowOffDiagonal": 0.005617088607594936,
+        "candidatePeriodic": 0.9849131757346662,
+        "shadowOffPeriodic": 0.985021857464158
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--explode",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999972896265712,
+        "candidateDiagonal": 0.007495623443548586,
+        "shadowOffDiagonal": 0.007495623443548586,
+        "candidatePeriodic": 0.994368562167753,
+        "shadowOffPeriodic": 0.9943712572851872
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--normal",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.004307334109429569,
+        "shadowOffDiagonal": 0.004307334109429569,
+        "candidatePeriodic": 0.9902095712552857,
+        "shadowOffPeriodic": 0.9902095712552857
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--split",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.005481087534595973,
+        "shadowOffDiagonal": 0.005481087534595973,
+        "candidatePeriodic": 0.9920600253701559,
+        "shadowOffPeriodic": 0.9920600253701559
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--explode",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.007067318771925332,
+        "shadowOffDiagonal": 0.007067318771925332,
+        "candidatePeriodic": 0.9957213647315257,
+        "shadowOffPeriodic": 0.9957213647315257
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--normal",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.999986625028718,
+        "candidateDiagonal": 0.012376024678309389,
+        "shadowOffDiagonal": 0.012376024678309389,
+        "candidatePeriodic": 0.9977727657605767,
+        "shadowOffPeriodic": 0.9977861111211584
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--split",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9970066825026204,
+        "periodicBandRatio": 1.0000141255995956,
+        "candidateDiagonal": 0.012205225864691407,
+        "shadowOffDiagonal": 0.012241869667367379,
+        "candidatePeriodic": 0.9937781651154629,
+        "shadowOffPeriodic": 0.993764127601304
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--explode",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0028184770054407,
+        "periodicBandRatio": 0.9999802135005744,
+        "candidateDiagonal": 0.01137560564567095,
+        "shadowOffDiagonal": 0.011343633874437709,
+        "candidatePeriodic": 0.9966483100381214,
+        "shadowOffPeriodic": 0.9966680306095366
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--normal",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.014538716016217696,
+        "shadowOffDiagonal": 0.014538716016217696,
+        "candidatePeriodic": 0.9981165627932982,
+        "shadowOffPeriodic": 0.9981165627932982
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--split",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01846932321315623,
+        "shadowOffDiagonal": 0.01846932321315623,
+        "candidatePeriodic": 0.9583801698315825,
+        "shadowOffPeriodic": 0.9583801698315825
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--explode",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.014635556840677062,
+        "shadowOffDiagonal": 0.014635556840677062,
+        "candidatePeriodic": 0.9843130583282425,
+        "shadowOffPeriodic": 0.9843130583282425
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--normal",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9926276987888362,
+        "periodicBandRatio": 1.0004244954028954,
+        "candidateDiagonal": 0.030929019131690348,
+        "shadowOffDiagonal": 0.031158730679618024,
+        "candidatePeriodic": 0.9540698908953634,
+        "shadowOffPeriodic": 0.9536650644595984
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--split",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9893353987284259,
+        "periodicBandRatio": 1.0012040401380342,
+        "candidateDiagonal": 0.03594089463764154,
+        "shadowOffDiagonal": 0.03632832170347457,
+        "candidatePeriodic": 0.9466291161760114,
+        "shadowOffPeriodic": 0.9454907074141464
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--explode",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9940511600237953,
+        "periodicBandRatio": 1.0001003687502517,
+        "candidateDiagonal": 0.027292772560228665,
+        "shadowOffDiagonal": 0.02745610453246223,
+        "candidatePeriodic": 0.9884601790124135,
+        "shadowOffPeriodic": 0.9883609784562083
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--normal",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000007265714728,
+        "candidateDiagonal": 0.0370984149903193,
+        "shadowOffDiagonal": 0.0370984149903193,
+        "candidatePeriodic": 0.9466602338697339,
+        "shadowOffPeriodic": 0.9466595460539132
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--split",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.036368552693841684,
+        "shadowOffDiagonal": 0.036368552693841684,
+        "candidatePeriodic": 0.9592899810569593,
+        "shadowOffPeriodic": 0.9592899810569593
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--explode",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.021990230194905976,
+        "shadowOffDiagonal": 0.021990230194905976,
+        "candidatePeriodic": 0.9900094890121118,
+        "shadowOffPeriodic": 0.9900094890121118
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--normal",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999996537267316,
+        "candidateDiagonal": 0.001661536785334895,
+        "shadowOffDiagonal": 0.001661536785334895,
+        "candidatePeriodic": 0.9795854959150029,
+        "shadowOffPeriodic": 0.9795858351193917
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--split",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9952830188679246,
+        "periodicBandRatio": 0.9999984764440055,
+        "candidateDiagonal": 0.005371553677350373,
+        "shadowOffDiagonal": 0.0053970112777169624,
+        "candidatePeriodic": 0.9814874644239909,
+        "shadowOffPeriodic": 0.9814889597773792
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--explode",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000004929532,
+        "candidateDiagonal": 0.016292897607565898,
+        "shadowOffDiagonal": 0.016292897607565898,
+        "candidatePeriodic": 0.9792599120373656,
+        "shadowOffPeriodic": 0.9792599115546362
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--normal",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.005602318200634745,
+        "shadowOffDiagonal": 0.005602318200634745,
+        "candidatePeriodic": 0.9923662635339775,
+        "shadowOffPeriodic": 0.9923662635339775
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--split",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.0172835690183654,
+        "shadowOffDiagonal": 0.0172835690183654,
+        "candidatePeriodic": 0.9927781373813304,
+        "shadowOffPeriodic": 0.9927781373813304
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--explode",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01854571293225959,
+        "shadowOffDiagonal": 0.01854571293225959,
+        "candidatePeriodic": 0.9933527547114369,
+        "shadowOffPeriodic": 0.9933527547114369
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9958932238193019,
+        "periodicBandRatio": 0.9992977847534953,
+        "candidateDiagonal": 0.01198023878139152,
+        "shadowOffDiagonal": 0.012029641827912722,
+        "candidatePeriodic": 0.8486497692277202,
+        "shadowOffPeriodic": 0.8492461228031876
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--split",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9979757085020242,
+        "periodicBandRatio": 0.9979445632483066,
+        "candidateDiagonal": 0.010315749827373355,
+        "shadowOffDiagonal": 0.010336674269213869,
+        "candidatePeriodic": 0.9033768930170833,
+        "shadowOffPeriodic": 0.9052375515495512
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9974309569685292,
+        "periodicBandRatio": 0.9940246337290508,
+        "candidateDiagonal": 0.009296228233477196,
+        "shadowOffDiagonal": 0.009320172156808753,
+        "candidatePeriodic": 0.9136830857295389,
+        "shadowOffPeriodic": 0.9191754959853327
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000009223353197,
+        "candidateDiagonal": 0.012103746397694525,
+        "shadowOffDiagonal": 0.012103746397694525,
+        "candidatePeriodic": 0.9083404592297641,
+        "shadowOffPeriodic": 0.908339621436049
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--split",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.013461390917397278,
+        "shadowOffDiagonal": 0.013461390917397278,
+        "candidatePeriodic": 0.9184531943955254,
+        "shadowOffPeriodic": 0.9184531943955254
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.013767755915645559,
+        "shadowOffDiagonal": 0.013767755915645559,
+        "candidatePeriodic": 0.9188743003404871,
+        "shadowOffPeriodic": 0.9188743003404871
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9989974937343358,
+        "periodicBandRatio": 0.9999918065432065,
+        "candidateDiagonal": 0.01443042190701682,
+        "shadowOffDiagonal": 0.014444903012794058,
+        "candidatePeriodic": 0.9969441203659093,
+        "shadowOffPeriodic": 0.9969522888514132
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--split",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9988632057597575,
+        "periodicBandRatio": 1.0000174240020812,
+        "candidateDiagonal": 0.015715171459913198,
+        "shadowOffDiagonal": 0.015733056708160442,
+        "candidatePeriodic": 0.9960335366000658,
+        "shadowOffPeriodic": 0.9960161820120375
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.999996032618219,
+        "candidateDiagonal": 0.016527444964504066,
+        "shadowOffDiagonal": 0.016527444964504066,
+        "candidatePeriodic": 0.9979722410672888,
+        "shadowOffPeriodic": 0.9979762004198842
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.014352484677454914,
+        "shadowOffDiagonal": 0.014352484677454914,
+        "candidatePeriodic": 0.9959392060952803,
+        "shadowOffPeriodic": 0.9959392060952803
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--split",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000322974978,
+        "candidateDiagonal": 0.01751602803041598,
+        "shadowOffDiagonal": 0.01751602803041598,
+        "candidatePeriodic": 0.9929048691571163,
+        "shadowOffPeriodic": 0.9929048370887744
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000010621712,
+        "candidateDiagonal": 0.020684827953075566,
+        "shadowOffDiagonal": 0.020684827953075566,
+        "candidatePeriodic": 0.9962535043360434,
+        "shadowOffPeriodic": 0.9962535032778517
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9965083798882683,
+        "periodicBandRatio": 1.0005477241824898,
+        "candidateDiagonal": 0.03229895203820647,
+        "shadowOffDiagonal": 0.03241212285824223,
+        "candidatePeriodic": 0.9539454707406481,
+        "shadowOffPeriodic": 0.9534232577662213
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--split",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9914285714285713,
+        "periodicBandRatio": 1.000183010418069,
+        "candidateDiagonal": 0.03479937153872725,
+        "shadowOffDiagonal": 0.03510023065865862,
+        "candidatePeriodic": 0.9758729044086825,
+        "shadowOffPeriodic": 0.9756943421792127
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.996252676659529,
+        "periodicBandRatio": 1.0000205718793957,
+        "candidateDiagonal": 0.02934683192985776,
+        "shadowOffDiagonal": 0.029457217649099567,
+        "candidatePeriodic": 0.9842044909418355,
+        "shadowOffPeriodic": 0.9841842444222559
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.03942871370045947,
+        "shadowOffDiagonal": 0.03942871370045947,
+        "candidatePeriodic": 0.9480586569191718,
+        "shadowOffPeriodic": 0.9480586569191718
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--split",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000010480471706,
+        "candidateDiagonal": 0.034816290889550634,
+        "shadowOffDiagonal": 0.034816290889550634,
+        "candidatePeriodic": 0.987307060722159,
+        "shadowOffPeriodic": 0.987306025978872
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.03057149377322814,
+        "shadowOffDiagonal": 0.03057149377322814,
+        "candidatePeriodic": 0.9762731818936835,
+        "shadowOffPeriodic": 0.9762731818936835
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9948822927328558,
+        "periodicBandRatio": 1.0000003710814385,
+        "candidateDiagonal": 0.007797708821358663,
+        "shadowOffDiagonal": 0.007837820492250425,
+        "candidatePeriodic": 0.9900371170138733,
+        "shadowOffPeriodic": 0.9900367496296121
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--split",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.000620347394541,
+        "periodicBandRatio": 1.000004840913806,
+        "candidateDiagonal": 0.01089452639541795,
+        "shadowOffDiagonal": 0.010887772194304857,
+        "candidatePeriodic": 0.9913604535789399,
+        "shadowOffPeriodic": 0.9913556545116652
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9981990094552002,
+        "periodicBandRatio": 1.0000757024401912,
+        "candidateDiagonal": 0.012337160060322424,
+        "shadowOffDiagonal": 0.012359419257544477,
+        "candidatePeriodic": 0.8914066811625321,
+        "shadowOffPeriodic": 0.8913392046097051
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01016429740397266,
+        "shadowOffDiagonal": 0.01016429740397266,
+        "candidatePeriodic": 0.9925184968379933,
+        "shadowOffPeriodic": 0.9925184968379933
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--split",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012292646025828064,
+        "shadowOffDiagonal": 0.012292646025828064,
+        "candidatePeriodic": 0.9939387103569934,
+        "shadowOffPeriodic": 0.9939387103569934
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.013947918117253865,
+        "shadowOffDiagonal": 0.013947918117253865,
+        "candidatePeriodic": 0.9313142443983692,
+        "shadowOffPeriodic": 0.9313142443983692
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9998185884512975,
+        "candidateDiagonal": 0.005049377894325727,
+        "shadowOffDiagonal": 0.005049377894325727,
+        "candidatePeriodic": 0.9782162282461085,
+        "shadowOffPeriodic": 0.9783937201661247
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--split",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0043290043290043,
+        "periodicBandRatio": 0.9998852187449165,
+        "candidateDiagonal": 0.006082852648138438,
+        "shadowOffDiagonal": 0.006056633455689565,
+        "candidatePeriodic": 0.9848177665936367,
+        "shadowOffPeriodic": 0.9849308181891189
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999983249271396,
+        "candidateDiagonal": 0.007689491028927133,
+        "shadowOffDiagonal": 0.007689491028927133,
+        "candidatePeriodic": 0.9939151443254867,
+        "shadowOffPeriodic": 0.9939168092085593
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.004517094379040682,
+        "shadowOffDiagonal": 0.004517094379040682,
+        "candidatePeriodic": 0.9895011172599246,
+        "shadowOffPeriodic": 0.9895011172599246
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--split",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.005422563153022087,
+        "shadowOffDiagonal": 0.005422563153022087,
+        "candidatePeriodic": 0.9906022105636478,
+        "shadowOffPeriodic": 0.9906022105636478
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.007013109310336283,
+        "shadowOffDiagonal": 0.007013109310336283,
+        "candidatePeriodic": 0.9961884498112271,
+        "shadowOffPeriodic": 0.9961884498112271
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999864065879359,
+        "candidateDiagonal": 0.01239294215808977,
+        "shadowOffDiagonal": 0.01239294215808977,
+        "candidatePeriodic": 0.997785569165011,
+        "shadowOffPeriodic": 0.9977991326597785
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--split",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9980139026812312,
+        "periodicBandRatio": 0.9999861178257957,
+        "candidateDiagonal": 0.012390580692886203,
+        "shadowOffDiagonal": 0.012415238564911849,
+        "candidatePeriodic": 0.9932814012921081,
+        "shadowOffPeriodic": 0.9932951903889773
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9985199396307677,
+        "periodicBandRatio": 1.0000097480947783,
+        "candidateDiagonal": 0.010857698347416437,
+        "shadowOffDiagonal": 0.010873792216339107,
+        "candidatePeriodic": 0.9967254389904675,
+        "shadowOffPeriodic": 0.9967157229111336
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000145928312,
+        "candidateDiagonal": 0.014605140910498606,
+        "shadowOffDiagonal": 0.014605140910498606,
+        "candidatePeriodic": 0.9981635547953078,
+        "shadowOffPeriodic": 0.9981635402292758
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--split",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01854123717859537,
+        "shadowOffDiagonal": 0.01854123717859537,
+        "candidatePeriodic": 0.9601829118641622,
+        "shadowOffPeriodic": 0.9601829118641622
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.014394543360793693,
+        "shadowOffDiagonal": 0.014394543360793693,
+        "candidatePeriodic": 0.9837554276987163,
+        "shadowOffPeriodic": 0.9837554276987163
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9932816537467699,
+        "periodicBandRatio": 1.0004219151698177,
+        "candidateDiagonal": 0.03153611393692777,
+        "shadowOffDiagonal": 0.03174941751714633,
+        "candidatePeriodic": 0.9544264674118235,
+        "shadowOffPeriodic": 0.95402395023485
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--split",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9899553263076738,
+        "periodicBandRatio": 1.0014369083491987,
+        "candidateDiagonal": 0.0358619939050936,
+        "shadowOffDiagonal": 0.03622587095808791,
+        "candidatePeriodic": 0.9501924416229517,
+        "shadowOffPeriodic": 0.948829061222918
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9946808510638298,
+        "periodicBandRatio": 1.0000932385441639,
+        "candidateDiagonal": 0.0303961249004405,
+        "shadowOffDiagonal": 0.030558671022902748,
+        "candidatePeriodic": 0.9889111704947858,
+        "shadowOffPeriodic": 0.9888189744531662
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.037213270764283136,
+        "shadowOffDiagonal": 0.037213270764283136,
+        "candidatePeriodic": 0.949733544621802,
+        "shadowOffPeriodic": 0.949733544621802
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--split",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.038262476894639554,
+        "shadowOffDiagonal": 0.038262476894639554,
+        "candidatePeriodic": 0.9548870891885609,
+        "shadowOffPeriodic": 0.9548870891885609
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999999861519138,
+        "candidateDiagonal": 0.023890562657764024,
+        "shadowOffDiagonal": 0.023890562657764024,
+        "candidatePeriodic": 0.9903063037160341,
+        "shadowOffPeriodic": 0.9903063174298814
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999998312693721,
+        "candidateDiagonal": 0.0020081956091074385,
+        "shadowOffDiagonal": 0.0020081956091074385,
+        "candidatePeriodic": 0.973594278140903,
+        "shadowOffPeriodic": 0.9735944424161046
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--split",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999990965868901,
+        "candidateDiagonal": 0.006950962733707096,
+        "shadowOffDiagonal": 0.006950962733707096,
+        "candidatePeriodic": 0.9815263301405998,
+        "shadowOffPeriodic": 0.9815272168651552
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.00000051260091,
+        "candidateDiagonal": 0.016199448529411766,
+        "shadowOffDiagonal": 0.016199448529411766,
+        "candidatePeriodic": 0.980576496308428,
+        "shadowOffPeriodic": 0.9805759936642814
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.0068381191085926,
+        "shadowOffDiagonal": 0.0068381191085926,
+        "candidatePeriodic": 0.990622143119263,
+        "shadowOffPeriodic": 0.990622143119263
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--split",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.017440676239942967,
+        "shadowOffDiagonal": 0.017440676239942967,
+        "candidatePeriodic": 0.9905480868311485,
+        "shadowOffPeriodic": 0.9905480868311485
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.019037583421145064,
+        "shadowOffDiagonal": 0.019037583421145064,
+        "candidatePeriodic": 0.9912929125038873,
+        "shadowOffPeriodic": 0.9912929125038873
+      }
+    ],
+    "issue2-shadow-attenuation-bias": [
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--normal",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9965493443754313,
+        "periodicBandRatio": 0.9996298698294716,
+        "candidateDiagonal": 0.011889666529435981,
+        "shadowOffDiagonal": 0.011930835734870316,
+        "candidatePeriodic": 0.8441212252821737,
+        "shadowOffPeriodic": 0.8444337756995733
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--split",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.996617050067659,
+        "periodicBandRatio": 0.9985352369567458,
+        "candidateDiagonal": 0.010273900943692326,
+        "shadowOffDiagonal": 0.010308775013426516,
+        "candidatePeriodic": 0.9022384920935126,
+        "shadowOffPeriodic": 0.9035619963130008
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--explode",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9967679379444085,
+        "periodicBandRatio": 0.9951517769369819,
+        "candidateDiagonal": 0.009231211312125094,
+        "shadowOffDiagonal": 0.009261143903928354,
+        "candidatePeriodic": 0.915431757267301,
+        "shadowOffPeriodic": 0.9198915969229795
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--normal",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.011996706463565253,
+        "shadowOffDiagonal": 0.011996706463565253,
+        "candidatePeriodic": 0.9044633743539225,
+        "shadowOffPeriodic": 0.9044633743539225
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--split",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012812733220341347,
+        "shadowOffDiagonal": 0.012812733220341347,
+        "candidatePeriodic": 0.9149728330596756,
+        "shadowOffPeriodic": 0.9149728330596756
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--explode",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012847068401958789,
+        "shadowOffDiagonal": 0.012847068401958789,
+        "candidatePeriodic": 0.9174757267029313,
+        "shadowOffPeriodic": 0.9174757267029313
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--normal",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9978925184404636,
+        "periodicBandRatio": 0.9999878299620505,
+        "candidateDiagonal": 0.013891333685384028,
+        "shadowOffDiagonal": 0.013920671243325706,
+        "candidatePeriodic": 0.9951916375308419,
+        "shadowOffPeriodic": 0.9952037491982372
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--split",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.998438110113237,
+        "periodicBandRatio": 1.0000215706344646,
+        "candidateDiagonal": 0.015253468866697687,
+        "shadowOffDiagonal": 0.015277330374506366,
+        "candidatePeriodic": 0.9960350309062572,
+        "shadowOffPeriodic": 0.9960135462621289
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--explode",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0007094714437745,
+        "periodicBandRatio": 0.9999954236583509,
+        "candidateDiagonal": 0.015817479408120127,
+        "shadowOffDiagonal": 0.015806265314246944,
+        "candidatePeriodic": 0.9980830567824778,
+        "shadowOffPeriodic": 0.9980876243724426
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--normal",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.013614627705207875,
+        "shadowOffDiagonal": 0.013614627705207875,
+        "candidatePeriodic": 0.9930419344843764,
+        "shadowOffPeriodic": 0.9930419344843764
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--split",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01685023738623997,
+        "shadowOffDiagonal": 0.01685023738623997,
+        "candidatePeriodic": 0.9925745444388389,
+        "shadowOffPeriodic": 0.9925745444388389
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--explode",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999999470460083,
+        "candidateDiagonal": 0.02020021965510698,
+        "shadowOffDiagonal": 0.02020021965510698,
+        "candidatePeriodic": 0.9954853662661194,
+        "shadowOffPeriodic": 0.995485418981046
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--normal",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9935344827586207,
+        "periodicBandRatio": 1.0005644440757087,
+        "candidateDiagonal": 0.03130304882189176,
+        "shadowOffDiagonal": 0.031506756297956136,
+        "candidatePeriodic": 0.9536946517490363,
+        "shadowOffPeriodic": 0.9531566481257794
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--split",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9919872553365928,
+        "periodicBandRatio": 1.0001205978137748,
+        "candidateDiagonal": 0.030552555795536358,
+        "shadowOffDiagonal": 0.0307993430673356,
+        "candidatePeriodic": 0.9796561284472456,
+        "shadowOffPeriodic": 0.9795379983061405
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--explode",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9953445065176908,
+        "periodicBandRatio": 1.0000401639099805,
+        "candidateDiagonal": 0.02630909702453711,
+        "shadowOffDiagonal": 0.026432151734661232,
+        "candidatePeriodic": 0.9682129672313763,
+        "shadowOffPeriodic": 0.9681740815747184
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--normal",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999975982057612,
+        "candidateDiagonal": 0.038953396256309274,
+        "shadowOffDiagonal": 0.038953396256309274,
+        "candidatePeriodic": 0.9454161783612691,
+        "shadowOffPeriodic": 0.9454184490618533
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--split",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999998385229966,
+        "candidateDiagonal": 0.03212674785746504,
+        "shadowOffDiagonal": 0.03212674785746504,
+        "candidatePeriodic": 0.988931923045423,
+        "shadowOffPeriodic": 0.9889320827352123
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--explode",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999997776528359,
+        "candidateDiagonal": 0.027195206268725514,
+        "shadowOffDiagonal": 0.027195206268725514,
+        "candidatePeriodic": 0.9750942641611603,
+        "shadowOffPeriodic": 0.9750944809706529
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--normal",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.993527508090615,
+        "periodicBandRatio": 1.0000004729465592,
+        "candidateDiagonal": 0.007388569778262684,
+        "shadowOffDiagonal": 0.007436703783332798,
+        "candidatePeriodic": 0.9898634223002429,
+        "shadowOffPeriodic": 0.9898629541479645
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--split",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000051796861114,
+        "candidateDiagonal": 0.010590587345328795,
+        "shadowOffDiagonal": 0.010590587345328795,
+        "candidatePeriodic": 0.99113229673575,
+        "shadowOffPeriodic": 0.9911271630081492
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--explode",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.999063670411985,
+        "periodicBandRatio": 1.0000909553464414,
+        "candidateDiagonal": 0.011885930711819093,
+        "shadowOffDiagonal": 0.01189707029074301,
+        "candidatePeriodic": 0.8844131231967567,
+        "shadowOffPeriodic": 0.8843326884107128
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--normal",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.009995828386227257,
+        "shadowOffDiagonal": 0.009995828386227257,
+        "candidatePeriodic": 0.9923594429585229,
+        "shadowOffPeriodic": 0.9923594429585229
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--split",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012171070405792402,
+        "shadowOffDiagonal": 0.012171070405792402,
+        "candidatePeriodic": 0.9938464379933555,
+        "shadowOffPeriodic": 0.9938464379933555
+      },
+      {
+        "theme": "navy",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--explode",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.012995935522608656,
+        "shadowOffDiagonal": 0.012995935522608656,
+        "candidatePeriodic": 0.89989858832028,
+        "shadowOffPeriodic": 0.89989858832028
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--normal",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.98125,
+        "periodicBandRatio": 0.9998396815715989,
+        "candidateDiagonal": 0.004416066606660666,
+        "shadowOffDiagonal": 0.004500450045004501,
+        "candidatePeriodic": 0.9812934473866438,
+        "shadowOffPeriodic": 0.9814507920351759
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--split",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0046948356807512,
+        "periodicBandRatio": 0.9999068286894786,
+        "candidateDiagonal": 0.005643459915611815,
+        "shadowOffDiagonal": 0.005617088607594936,
+        "candidatePeriodic": 0.9849300816868058,
+        "shadowOffPeriodic": 0.985021857464158
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-16--explode",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999668942232445,
+        "candidateDiagonal": 0.007495623443548586,
+        "shadowOffDiagonal": 0.007495623443548586,
+        "candidatePeriodic": 0.9943383378523314,
+        "shadowOffPeriodic": 0.9943712572851872
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--normal",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.004307334109429569,
+        "shadowOffDiagonal": 0.004307334109429569,
+        "candidatePeriodic": 0.9902095712552857,
+        "shadowOffPeriodic": 0.9902095712552857
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--split",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.005481087534595973,
+        "shadowOffDiagonal": 0.005481087534595973,
+        "candidatePeriodic": 0.9920600253701559,
+        "shadowOffPeriodic": 0.9920600253701559
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--front--opacity-8--explode",
+          "theme": "navy",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.007067318771925332,
+        "shadowOffDiagonal": 0.007067318771925332,
+        "candidatePeriodic": 0.9957213647315257,
+        "shadowOffPeriodic": 0.9957213647315257
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--normal",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9990069513406156,
+        "periodicBandRatio": 0.9999877218483544,
+        "candidateDiagonal": 0.012363734683594085,
+        "shadowOffDiagonal": 0.012376024678309389,
+        "candidatePeriodic": 0.9977738601519762,
+        "shadowOffPeriodic": 0.9977861111211584
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--split",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9970066825026204,
+        "periodicBandRatio": 1.0000080344715367,
+        "candidateDiagonal": 0.012205225864691407,
+        "shadowOffDiagonal": 0.012241869667367379,
+        "candidatePeriodic": 0.9937721119709014,
+        "shadowOffPeriodic": 0.993764127601304
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-16--explode",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0028335667398103,
+        "periodicBandRatio": 0.9999808725502152,
+        "candidateDiagonal": 0.011375776818092901,
+        "shadowOffDiagonal": 0.011343633874437709,
+        "candidatePeriodic": 0.9966489668918289,
+        "shadowOffPeriodic": 0.9966680306095366
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--normal",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.014538716016217696,
+        "shadowOffDiagonal": 0.014538716016217696,
+        "candidatePeriodic": 0.9981165627932982,
+        "shadowOffPeriodic": 0.9981165627932982
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--split",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01846932321315623,
+        "shadowOffDiagonal": 0.01846932321315623,
+        "candidatePeriodic": 0.9583801698315825,
+        "shadowOffPeriodic": 0.9583801698315825
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--dialMechanism--opacity-8--explode",
+          "theme": "navy",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.014635556840677062,
+        "shadowOffDiagonal": 0.014635556840677062,
+        "candidatePeriodic": 0.9843130583282425,
+        "shadowOffPeriodic": 0.9843130583282425
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--normal",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9926276987888362,
+        "periodicBandRatio": 1.0004235889965492,
+        "candidateDiagonal": 0.030929019131690348,
+        "shadowOffDiagonal": 0.031158730679618024,
+        "candidatePeriodic": 0.9540690264872969,
+        "shadowOffPeriodic": 0.9536650644595984
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--split",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9893353987284259,
+        "periodicBandRatio": 1.0012038013500442,
+        "candidateDiagonal": 0.03594089463764154,
+        "shadowOffDiagonal": 0.03632832170347457,
+        "candidatePeriodic": 0.9466288904041857,
+        "shadowOffPeriodic": 0.9454907074141464
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-16--explode",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9940511600237953,
+        "periodicBandRatio": 1.0001003818740886,
+        "candidateDiagonal": 0.027292772560228665,
+        "shadowOffDiagonal": 0.02745610453246223,
+        "candidatePeriodic": 0.9884601919835017,
+        "shadowOffPeriodic": 0.9883609784562083
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--normal",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.0370984149903193,
+        "shadowOffDiagonal": 0.0370984149903193,
+        "candidatePeriodic": 0.9466595460539132,
+        "shadowOffPeriodic": 0.9466595460539132
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--split",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.036368552693841684,
+        "shadowOffDiagonal": 0.036368552693841684,
+        "candidatePeriodic": 0.9592899810569593,
+        "shadowOffPeriodic": 0.9592899810569593
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--side--opacity-8--explode",
+          "theme": "navy",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.021990230194905976,
+        "shadowOffDiagonal": 0.021990230194905976,
+        "candidatePeriodic": 0.9900094890121118,
+        "shadowOffPeriodic": 0.9900094890121118
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--normal",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999996537267316,
+        "candidateDiagonal": 0.001661536785334895,
+        "shadowOffDiagonal": 0.001661536785334895,
+        "candidatePeriodic": 0.9795854959150029,
+        "shadowOffPeriodic": 0.9795858351193917
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--split",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9952830188679246,
+        "periodicBandRatio": 0.9999984764440055,
+        "candidateDiagonal": 0.005371553677350373,
+        "shadowOffDiagonal": 0.0053970112777169624,
+        "candidatePeriodic": 0.9814874644239909,
+        "shadowOffPeriodic": 0.9814889597773792
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-16--explode",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000004929532,
+        "candidateDiagonal": 0.016292897607565898,
+        "shadowOffDiagonal": 0.016292897607565898,
+        "candidatePeriodic": 0.9792599120373656,
+        "shadowOffPeriodic": 0.9792599115546362
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--normal",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.005602318200634745,
+        "shadowOffDiagonal": 0.005602318200634745,
+        "candidatePeriodic": 0.9923662635339775,
+        "shadowOffPeriodic": 0.9923662635339775
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--split",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.0172835690183654,
+        "shadowOffDiagonal": 0.0172835690183654,
+        "candidatePeriodic": 0.9927781373813304,
+        "shadowOffPeriodic": 0.9927781373813304
+      },
+      {
+        "theme": "navy",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "navy--movementBack--opacity-8--explode",
+          "theme": "navy",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01854571293225959,
+        "shadowOffDiagonal": 0.01854571293225959,
+        "candidatePeriodic": 0.9933527547114369,
+        "shadowOffPeriodic": 0.9933527547114369
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9958932238193019,
+        "periodicBandRatio": 0.9995705463537938,
+        "candidateDiagonal": 0.01198023878139152,
+        "shadowOffDiagonal": 0.012029641827912722,
+        "candidatePeriodic": 0.8488814109592233,
+        "shadowOffPeriodic": 0.8492461228031876
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--split",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9973009446693656,
+        "periodicBandRatio": 0.9985556900742416,
+        "candidateDiagonal": 0.010308775013426516,
+        "shadowOffDiagonal": 0.010336674269213869,
+        "candidatePeriodic": 0.903930107968679,
+        "shadowOffPeriodic": 0.9052375515495512
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9980732177263969,
+        "periodicBandRatio": 0.9949864156907398,
+        "candidateDiagonal": 0.009302214214310085,
+        "shadowOffDiagonal": 0.009320172156808753,
+        "candidatePeriodic": 0.9145671321412041,
+        "shadowOffPeriodic": 0.9191754959853327
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000306617474,
+        "candidateDiagonal": 0.012103746397694525,
+        "shadowOffDiagonal": 0.012103746397694525,
+        "candidatePeriodic": 0.9083396492873289,
+        "shadowOffPeriodic": 0.908339621436049
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--split",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.013461390917397278,
+        "shadowOffDiagonal": 0.013461390917397278,
+        "candidatePeriodic": 0.9184531943955254,
+        "shadowOffPeriodic": 0.9184531943955254
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.013767755915645559,
+        "shadowOffDiagonal": 0.013767755915645559,
+        "candidatePeriodic": 0.9188743003404871,
+        "shadowOffPeriodic": 0.9188743003404871
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9984962406015037,
+        "periodicBandRatio": 0.9999928300609351,
+        "candidateDiagonal": 0.014423181354128201,
+        "shadowOffDiagonal": 0.014444903012794058,
+        "candidatePeriodic": 0.9969451407642514,
+        "shadowOffPeriodic": 0.9969522888514132
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--split",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9988632057597575,
+        "periodicBandRatio": 1.0000068644898326,
+        "candidateDiagonal": 0.015715171459913198,
+        "shadowOffDiagonal": 0.015733056708160442,
+        "candidatePeriodic": 0.9960230191549919,
+        "shadowOffPeriodic": 0.9960161820120375
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999960165927427,
+        "candidateDiagonal": 0.016527444964504066,
+        "shadowOffDiagonal": 0.016527444964504066,
+        "candidatePeriodic": 0.9979722250742449,
+        "shadowOffPeriodic": 0.9979762004198842
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999999832632296,
+        "candidateDiagonal": 0.014352484677454914,
+        "shadowOffDiagonal": 0.014352484677454914,
+        "candidatePeriodic": 0.9959391894264744,
+        "shadowOffPeriodic": 0.9959392060952803
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--split",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000322974978,
+        "candidateDiagonal": 0.01751602803041598,
+        "shadowOffDiagonal": 0.01751602803041598,
+        "candidatePeriodic": 0.9929048691571163,
+        "shadowOffPeriodic": 0.9929048370887744
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000010621712,
+        "candidateDiagonal": 0.020684827953075566,
+        "shadowOffDiagonal": 0.020684827953075566,
+        "candidatePeriodic": 0.9962535043360434,
+        "shadowOffPeriodic": 0.9962535032778517
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9965083798882683,
+        "periodicBandRatio": 1.0005470165846728,
+        "candidateDiagonal": 0.03229895203820647,
+        "shadowOffDiagonal": 0.03241212285824223,
+        "candidatePeriodic": 0.9539447961004323,
+        "shadowOffPeriodic": 0.9534232577662213
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--split",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9914285714285713,
+        "periodicBandRatio": 1.00018274835196,
+        "candidateDiagonal": 0.03479937153872725,
+        "shadowOffDiagonal": 0.03510023065865862,
+        "candidatePeriodic": 0.9758726487122626,
+        "shadowOffPeriodic": 0.9756943421792127
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.996252676659529,
+        "periodicBandRatio": 1.0000207065587496,
+        "candidateDiagonal": 0.02934683192985776,
+        "shadowOffDiagonal": 0.029457217649099567,
+        "candidatePeriodic": 0.9842046234911335,
+        "shadowOffPeriodic": 0.9841842444222559
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.03942871370045947,
+        "shadowOffDiagonal": 0.03942871370045947,
+        "candidatePeriodic": 0.9480586569191718,
+        "shadowOffPeriodic": 0.9480586569191718
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--split",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000010480471706,
+        "candidateDiagonal": 0.034816290889550634,
+        "shadowOffDiagonal": 0.034816290889550634,
+        "candidatePeriodic": 0.987307060722159,
+        "shadowOffPeriodic": 0.987306025978872
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.03057149377322814,
+        "shadowOffDiagonal": 0.03057149377322814,
+        "candidatePeriodic": 0.9762731818936835,
+        "shadowOffPeriodic": 0.9762731818936835
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9948822927328558,
+        "periodicBandRatio": 1.00000067131115,
+        "candidateDiagonal": 0.007797708821358663,
+        "shadowOffDiagonal": 0.007837820492250425,
+        "candidatePeriodic": 0.9900374142523211,
+        "shadowOffPeriodic": 0.9900367496296121
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--split",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.000620347394541,
+        "periodicBandRatio": 1.000004840913806,
+        "candidateDiagonal": 0.01089452639541795,
+        "shadowOffDiagonal": 0.010887772194304857,
+        "candidatePeriodic": 0.9913604535789399,
+        "shadowOffPeriodic": 0.9913556545116652
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9981990094552002,
+        "periodicBandRatio": 1.0000757024401912,
+        "candidateDiagonal": 0.012337160060322424,
+        "shadowOffDiagonal": 0.012359419257544477,
+        "candidatePeriodic": 0.8914066811625321,
+        "shadowOffPeriodic": 0.8913392046097051
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01016429740397266,
+        "shadowOffDiagonal": 0.01016429740397266,
+        "candidatePeriodic": 0.9925184968379933,
+        "shadowOffPeriodic": 0.9925184968379933
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--split",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999999980393798,
+        "candidateDiagonal": 0.012292646025828064,
+        "shadowOffDiagonal": 0.012292646025828064,
+        "candidatePeriodic": 0.9939387084082572,
+        "shadowOffPeriodic": 0.9939387103569934
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "1280x720",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0000000079215041,
+        "candidateDiagonal": 0.013947918117253865,
+        "shadowOffDiagonal": 0.013947918117253865,
+        "candidatePeriodic": 0.9313142517757788,
+        "shadowOffPeriodic": 0.9313142443983692
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9889502762430938,
+        "periodicBandRatio": 0.9998288281758262,
+        "candidateDiagonal": 0.0049935836634491994,
+        "shadowOffDiagonal": 0.005049377894325727,
+        "candidatePeriodic": 0.9782262467282836,
+        "shadowOffPeriodic": 0.9783937201661247
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--split",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0043290043290043,
+        "periodicBandRatio": 0.9999023575432007,
+        "candidateDiagonal": 0.006082852648138438,
+        "shadowOffDiagonal": 0.006056633455689565,
+        "candidatePeriodic": 0.9848346471242535,
+        "shadowOffPeriodic": 0.9849308181891189
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999983249271396,
+        "candidateDiagonal": 0.007689491028927133,
+        "shadowOffDiagonal": 0.007689491028927133,
+        "candidatePeriodic": 0.9939151443254867,
+        "shadowOffPeriodic": 0.9939168092085593
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.004517094379040682,
+        "shadowOffDiagonal": 0.004517094379040682,
+        "candidatePeriodic": 0.9895011172599246,
+        "shadowOffPeriodic": 0.9895011172599246
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--split",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.005422563153022087,
+        "shadowOffDiagonal": 0.005422563153022087,
+        "candidatePeriodic": 0.9906022105636478,
+        "shadowOffPeriodic": 0.9906022105636478
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--front--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "front",
+          "cameraPreset": "front",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.007013109310336283,
+        "shadowOffDiagonal": 0.007013109310336283,
+        "candidatePeriodic": 0.9961884498112271,
+        "shadowOffPeriodic": 0.9961884498112271
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999869618108984,
+        "candidateDiagonal": 0.01239294215808977,
+        "shadowOffDiagonal": 0.01239294215808977,
+        "candidatePeriodic": 0.9977861231660015,
+        "shadowOffPeriodic": 0.9977991326597785
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--split",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9980139026812312,
+        "periodicBandRatio": 0.9999669768631758,
+        "candidateDiagonal": 0.012390580692886203,
+        "shadowOffDiagonal": 0.012415238564911849,
+        "candidatePeriodic": 0.9932623886659983,
+        "shadowOffPeriodic": 0.9932951903889773
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9985199396307677,
+        "periodicBandRatio": 1.000009889409491,
+        "candidateDiagonal": 0.010857698347416437,
+        "shadowOffDiagonal": 0.010873792216339107,
+        "candidatePeriodic": 0.9967255798410637,
+        "shadowOffPeriodic": 0.9967157229111336
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.014605140910498606,
+        "shadowOffDiagonal": 0.014605140910498606,
+        "candidatePeriodic": 0.9981635402292758,
+        "shadowOffPeriodic": 0.9981635402292758
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--split",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.01854123717859537,
+        "shadowOffDiagonal": 0.01854123717859537,
+        "candidatePeriodic": 0.9601829118641622,
+        "shadowOffPeriodic": 0.9601829118641622
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--dialMechanism--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "dialMechanism",
+          "cameraPreset": "dialMechanism",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999999906552485,
+        "candidateDiagonal": 0.014394543360793693,
+        "shadowOffDiagonal": 0.014394543360793693,
+        "candidatePeriodic": 0.9837554185057662,
+        "shadowOffPeriodic": 0.9837554276987163
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 0.9932816537467699,
+        "periodicBandRatio": 1.000420910863326,
+        "candidateDiagonal": 0.03153611393692777,
+        "shadowOffDiagonal": 0.03174941751714633,
+        "candidatePeriodic": 0.9544255092793771,
+        "shadowOffPeriodic": 0.95402395023485
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--split",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 0.9899553263076738,
+        "periodicBandRatio": 1.0014367404991564,
+        "candidateDiagonal": 0.0358619939050936,
+        "shadowOffDiagonal": 0.03622587095808791,
+        "candidatePeriodic": 0.9501922823619535,
+        "shadowOffPeriodic": 0.948829061222918
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 0.9946808510638298,
+        "periodicBandRatio": 1.0000932542956569,
+        "candidateDiagonal": 0.0303961249004405,
+        "shadowOffDiagonal": 0.030558671022902748,
+        "candidatePeriodic": 0.9889111860701609,
+        "shadowOffPeriodic": 0.9888189744531662
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.037213270764283136,
+        "shadowOffDiagonal": 0.037213270764283136,
+        "candidatePeriodic": 0.949733544621802,
+        "shadowOffPeriodic": 0.949733544621802
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--split",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.038262476894639554,
+        "shadowOffDiagonal": 0.038262476894639554,
+        "candidatePeriodic": 0.9548870891885609,
+        "shadowOffPeriodic": 0.9548870891885609
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--side--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "side",
+          "cameraPreset": "side",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999999861519138,
+        "candidateDiagonal": 0.023890562657764024,
+        "shadowOffDiagonal": 0.023890562657764024,
+        "candidatePeriodic": 0.9903063037160341,
+        "shadowOffPeriodic": 0.9903063174298814
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--normal",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999998312693721,
+        "candidateDiagonal": 0.0020081956091074385,
+        "shadowOffDiagonal": 0.0020081956091074385,
+        "candidatePeriodic": 0.973594278140903,
+        "shadowOffPeriodic": 0.9735944424161046
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--split",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 0.9999990965868901,
+        "candidateDiagonal": 0.006950962733707096,
+        "shadowOffDiagonal": 0.006950962733707096,
+        "candidatePeriodic": 0.9815263301405998,
+        "shadowOffPeriodic": 0.9815272168651552
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-16--explode",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.16,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.00000051260091,
+        "candidateDiagonal": 0.016199448529411766,
+        "shadowOffDiagonal": 0.016199448529411766,
+        "candidatePeriodic": 0.980576496308428,
+        "shadowOffPeriodic": 0.9805759936642814
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--normal",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "normal"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.0068381191085926,
+        "shadowOffDiagonal": 0.0068381191085926,
+        "candidatePeriodic": 0.990622143119263,
+        "shadowOffPeriodic": 0.990622143119263
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--split",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "split"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.017440676239942967,
+        "shadowOffDiagonal": 0.017440676239942967,
+        "candidatePeriodic": 0.9905480868311485,
+        "shadowOffPeriodic": 0.9905480868311485
+      },
+      {
+        "theme": "obsidian",
+        "viewport": "390x844",
+        "scenario": {
+          "category": "shadow",
+          "id": "obsidian--movementBack--opacity-8--explode",
+          "theme": "obsidian",
+          "view": "movementBack",
+          "cameraPreset": "movementBack",
+          "distanceMultiplier": 1,
+          "opacity": 0.08,
+          "state": "explode"
+        },
+        "diagonalRatio": 1.0,
+        "periodicBandRatio": 1.0,
+        "candidateDiagonal": 0.019037583421145064,
+        "shadowOffDiagonal": 0.019037583421145064,
+        "candidatePeriodic": 0.9912929125038873,
+        "shadowOffPeriodic": 0.9912929125038873
+      }
+    ]
+  }
+}

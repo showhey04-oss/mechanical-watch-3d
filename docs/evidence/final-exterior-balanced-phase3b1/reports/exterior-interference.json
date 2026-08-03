@@ -1,0 +1,273 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+    "sourceImplementationCommit": "fc5cc0220004dbcfbff14d4bbca4165e797665ea",
+    "sourceCaptureCommit": "fc5cc0220004dbcfbff14d4bbca4165e797665ea",
+    "sourceBranch": "feature/final-exterior-balanced-phase3b1",
+    "appVersion": "v3.15.0",
+    "capturedAt": "2026-07-25T07:45:50.961Z",
+    "captureMode": "same-origin unsandboxed iframe harness with actual WebGL canvas PNG capture",
+    "candidateId": "E-BALANCED",
+    "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
+  },
+  "intendedContacts": [
+    "case body ↔ bezel",
+    "bezel ↔ crystal retention candidate",
+    "case body ↔ caseback ring",
+    "case inner wall ↔ movement holder ring",
+    "movement outer reference ↔ movement holder ring",
+    "case body ↔ crown tube",
+    "dial blank ↔ dial support candidate",
+    "crown tube ↔ crown position-1 local seating candidate"
+  ],
+  "forbidden": [
+    {
+      "a": "crystal",
+      "b": "minute hand",
+      "clearance": 0.35,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "crystal",
+      "b": "hour hand",
+      "clearance": 0.5,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "crystal",
+      "b": "small-second hand",
+      "clearance": 0.47,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "dial blank",
+      "b": "three hands",
+      "clearance": 0.18,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "dial blank",
+      "b": "cannon/hour/fourth interfaces",
+      "clearance": 0.1,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "caseback ring",
+      "b": "bridges",
+      "clearance": 0.4,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "caseback window",
+      "b": "bridges",
+      "clearance": 0.4,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "case",
+      "b": "movement outer",
+      "clearance": 0.6,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "case inner wall",
+      "b": "movement holder ring",
+      "clearance": 0.075,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "movement holder ring",
+      "b": "movement outer",
+      "clearance": 0.075,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "movement holder ring",
+      "b": "caseback inner face",
+      "clearance": 0.15,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "crown tube",
+      "b": "stem",
+      "clearance": 0.1,
+      "forbiddenInterference": false
+    },
+    {
+      "a": "case body",
+      "b": "crown core / outer teeth",
+      "clearance": 0.030063,
+      "position1MinimumGap": 0.030063402,
+      "position1MinimumGapPoint": [
+        19.19493661,
+        -0.197727273,
+        -3.885423437
+      ],
+      "position2MinimumGap": 1.380063402,
+      "position2MinimumGapPoint": [
+        19.19493661,
+        -0.197727273,
+        -3.885423437
+      ],
+      "qualification": "forbidden crown-body to case-body interference",
+      "classification": "FORBIDDEN_INTERFERENCE",
+      "forbiddenInterference": false
+    },
+    {
+      "a": "crown tube",
+      "b": "crown moving body",
+      "clearance": 0,
+      "rawPosition1AxialGap": -0.056857,
+      "position2AxialGap": 1.293143,
+      "qualification": "position 1 local seating candidate; operability remains UNVERIFIED",
+      "classification": "PHASE3B1_IMPLEMENTATION_ASSUMPTION",
+      "forbiddenInterference": false
+    }
+  ],
+  "forbiddenCount": 0,
+  "annularInterfaces": {
+    "bezelCrystalRetention": {
+      "clearance": 0,
+      "classification": "INTENDED_RETENTION_CONTACT",
+      "sharedBoundaryOnly": true,
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    },
+    "bezelCaseBodySeat": {
+      "clearance": 0.05,
+      "classification": "INTENDED_CASE_INTERFACE",
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    },
+    "casebackWindowRetention": {
+      "clearance": 0,
+      "classification": "INTENDED_RETENTION_CONTACT",
+      "sharedBoundaryOnly": true,
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    },
+    "casebackMovementHolder": {
+      "clearance": 0.15,
+      "classification": "PROTECTED_CLEARANCE",
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    },
+    "casebackCaseBodySeat": {
+      "clearance": 0,
+      "classification": "INTENDED_CASE_INTERFACE",
+      "visibleCoplanarOverlap": false,
+      "forbiddenInterferenceCount": 0
+    }
+  },
+  "clearances": {
+    "movementToCaseRadial": 0.6,
+    "minuteHandToCrystal": 0.35,
+    "hourHandToCrystal": 0.5,
+    "smallSecondHandToCrystal": 0.47,
+    "dialBlankToHands": 0.18,
+    "bridgeToCaseback": 0.4,
+    "stemToTubeRadial": 0.1,
+    "centerInterfaceToDialHole": 0.12,
+    "smallSecondInterfaceToDialHole": 0.1,
+    "dialRingToAperture": 1.054,
+    "minuteTipToAperture": 2.86,
+    "crownPosition1AxialGap": -0.056857,
+    "crownPosition2AxialGap": 1.293143,
+    "crownBodyToCasePosition1": 0.030063,
+    "crownBodyToCasePosition2": 1.380063,
+    "movementHolderToCase": 0.075,
+    "movementHolderToMovement": 0.075,
+    "movementHolderToCaseback": 0.15,
+    "bezelToCaseBodyRadialSeat": 0.05,
+    "bezelToCrystalRetentionRadial": 0,
+    "casebackToWindowRetentionRadial": 0,
+    "casebackToMovementHolderAxial": 0.15
+  },
+  "tubeAxisError": 0,
+  "position1": {
+    "crownPosition": "wind",
+    "transition": 0,
+    "maxDrift": 0,
+    "exteriorForbiddenCount": 0,
+    "mechanismForbiddenCount": 0
+  },
+  "position2": {
+    "crownPosition": "set",
+    "transition": 1,
+    "maxDrift": 0,
+    "exteriorForbiddenCount": 0,
+    "mechanismForbiddenCount": 0
+  },
+  "movementHolder": {
+    "outerDiameter": 37.65,
+    "innerDiameter": 36.75,
+    "yMin": 4.035,
+    "yMax": 4.485,
+    "axialThickness": 0.45,
+    "caseRadialClearance": 0.075,
+    "movementRadialClearance": 0.075,
+    "casebackAxialClearance": 0.15,
+    "forbiddenInterferenceCount": 0,
+    "profileGeometry": {
+      "profile": [
+        {
+          "radius": 18.375,
+          "y": 4.485
+        },
+        {
+          "radius": 18.375,
+          "y": 4.035
+        },
+        {
+          "radius": 18.825,
+          "y": 4.035
+        },
+        {
+          "radius": 18.825,
+          "y": 4.485
+        }
+      ],
+      "circumferentialSegments": 128,
+      "vertexCount": 512,
+      "indexCount": 3072,
+      "triangleCount": 1024,
+      "finite": {
+        "positions": true,
+        "normals": true,
+        "indices": true
+      },
+      "degenerateTriangleCount": 0,
+      "topology": {
+        "edgeCount": 1536,
+        "nonManifoldEdgeCount": 0,
+        "nonManifoldEdges": [],
+        "closed": true
+      },
+      "bounds": {
+        "min": [
+          -18.825,
+          4.035,
+          -18.825
+        ],
+        "max": [
+          18.825,
+          4.485,
+          18.825
+        ],
+        "size": [
+          37.65,
+          0.45,
+          37.65
+        ]
+      },
+      "taper": null
+    },
+    "manufacturingTolerance": "UNVERIFIED",
+    "waterResistance": "UNVERIFIED",
+    "fixingMethod": "UNVERIFIED"
+  },
+  "crownFingerAccess": "HUMAN_ACCEPTED_PHASE3B1",
+  "crownPullPushOperability": "HUMAN_ACCEPTED_PHASE3B1",
+  "structuralOpacity50": "HUMAN_REVIEW_PENDING"
+}

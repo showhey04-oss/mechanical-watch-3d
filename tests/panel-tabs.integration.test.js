@@ -92,9 +92,15 @@ export async function runPanelTabsIntegrationTest(diagnostics, panelTabs) {
     && [...view("operation").querySelectorAll(".viewGroupLabel")].map((item) => item.textContent.trim()).join("|") === "再生|主要視点|機構視点|確認視点", { operationIds });
 
   const groupControls = [...document.querySelectorAll("[data-group]")];
+  const candidateExteriorGroupPresent = groupControls.some(
+    item => item.dataset.group === "exterior",
+  );
+  const expectedGroupControlCount =
+    candidateExteriorGroupPresent ? 10 : 9;
   const learningIds = ["learningPartName", "learningPartDesc", "machiningToggle", "supportToggle", "datumToggle"];
   check("ui-learning-panel-owns-selection-structure-groups-and-legend", learningIds.every((id) => view("learning").contains(document.getElementById(id)))
-    && groupControls.length === 9 && groupControls.every((item) => view("learning").contains(item))
+    && groupControls.length === expectedGroupControlCount
+    && groupControls.every((item) => view("learning").contains(item))
     && Boolean(view("learning").querySelector(".legend")), { learningIds, groups: groupControls.map((item) => item.dataset.group) });
 
   const technicalIds = ["meshGuide", "pivotGuide", "endshake", "autoAmplitude", "amplitude", "rateAdjust", "beatError", "positionMode", "trainEfficiency", "runtimeScale", "fullWind", "advance24", "nearStop", "clearHistory", "historyCanvas"];

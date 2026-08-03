@@ -1,0 +1,1062 @@
+{
+  "sourceImplementationCommit": "51ab089e898cc3d2216d97fece83e334d9cd49c3",
+  "sourceBaseCommit": "d51e4f8790596f7bc894e8c716edb0d54968d260",
+  "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBranch": "feature/final-exterior-balanced-phase3b2",
+  "baseBranch": "feature/final-exterior-balanced-phase3b1",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin browser harness and actual WebGL canvas capture",
+  "status": "AUTOMATED_PASS_PENDING_PHYSICAL_IPHONE_AND_HUMAN_VISUAL_REVIEW",
+  "implementationCandidate": "E-BALANCED Phase 3B.2 attachments",
+  "defaultAdoption": false,
+  "node": {
+    "passed": 134,
+    "total": 134,
+    "minimumExpected": 128
+  },
+  "phase3b2Harness": {
+    "desktop1280x720": {
+      "passed": true,
+      "checks": {
+        "sameOrigin": true,
+        "iframeUnsandboxed": true,
+        "viewport": true,
+        "enabled": true,
+        "partCount": true,
+        "lugToLug": true,
+        "lugSymmetry": true,
+        "geometryFiniteClosed": true,
+        "strapLengths": true,
+        "strapWidthTaper": true,
+        "strapCurve": true,
+        "springBarDimensions": true,
+        "buckleOpening": true,
+        "forbiddenInterference": true,
+        "mechanismInterference": true,
+        "opacityCycle": true,
+        "materialPlaceholder": true,
+        "springBarVisibility": true,
+        "visibilityRestore": true,
+        "springBarSelection": true,
+        "selectionHud": true,
+        "interiorPriority": true,
+        "internalSelectionAtOpacity16": true,
+        "displayExpanded": true,
+        "displayRestore": true,
+        "phase2c": true,
+        "handCoupling": true,
+        "coreCameraUnchanged": true,
+        "cameraOccupancy": true,
+        "modelTransformInvariant": true
+      },
+      "failures": [],
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "canvasCount": 2,
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "webglVendor": "Google Inc. (Apple)",
+        "webglRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1, Unspecified Version)",
+        "drawingBuffer": {
+          "width": 1280,
+          "height": 720
+        }
+      }
+    },
+    "mobile390x844": {
+      "passed": true,
+      "checks": {
+        "sameOrigin": true,
+        "iframeUnsandboxed": true,
+        "viewport": true,
+        "enabled": true,
+        "partCount": true,
+        "lugToLug": true,
+        "lugSymmetry": true,
+        "geometryFiniteClosed": true,
+        "strapLengths": true,
+        "strapWidthTaper": true,
+        "strapCurve": true,
+        "springBarDimensions": true,
+        "buckleOpening": true,
+        "forbiddenInterference": true,
+        "mechanismInterference": true,
+        "opacityCycle": true,
+        "materialPlaceholder": true,
+        "springBarVisibility": true,
+        "visibilityRestore": true,
+        "springBarSelection": true,
+        "selectionHud": true,
+        "interiorPriority": true,
+        "internalSelectionAtOpacity16": true,
+        "displayExpanded": true,
+        "displayRestore": true,
+        "phase2c": true,
+        "handCoupling": true,
+        "coreCameraUnchanged": true,
+        "cameraOccupancy": true,
+        "modelTransformInvariant": true
+      },
+      "failures": [],
+      "environment": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "canvasCount": 2,
+        "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+        "webglVendor": "Google Inc. (Apple)",
+        "webglRenderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M1, Unspecified Version)",
+        "drawingBuffer": {
+          "width": 390,
+          "height": 844
+        }
+      }
+    }
+  },
+  "browserSuites": [
+    {
+      "label": "desktop-browser",
+      "url": "http://127.0.0.1:8000/tests/final-exterior-phase3b1-harness.html?width=1280&height=720&integrationResultId=browserTestResult&appQuery=exterior%3Dbalanced%26theme%3Dnavy%26camera%3Dfront%26time%3D10%253A10%253A30%26paused%3D1%26opacity%3D1%26panel%3Dcollapsed%26browserTest%3D1",
+      "status": "passed",
+      "ok": true,
+      "passed": 86,
+      "total": 86,
+      "failed": []
+    },
+    {
+      "label": "mobile-390-browser",
+      "url": "http://127.0.0.1:8000/tests/final-exterior-phase3b1-harness.html?width=390&height=844&integrationResultId=browserTestResult&appQuery=exterior%3Dbalanced%26theme%3Dnavy%26camera%3Dfront%26time%3D10%253A10%253A30%26paused%3D1%26opacity%3D1%26panel%3Dcollapsed%26browserTest%3D1",
+      "status": "passed",
+      "ok": true,
+      "passed": 88,
+      "total": 88,
+      "failed": []
+    },
+    {
+      "label": "pr3-ui-375",
+      "url": "http://127.0.0.1:8000/tests/final-exterior-phase3b1-harness.html?width=375&height=667&integrationResultId=uiTestResult&appQuery=exterior%3Dbalanced%26theme%3Dnavy%26camera%3Dfront%26time%3D10%253A10%253A30%26paused%3D1%26opacity%3D1%26panel%3Dcollapsed%26uiTest%3D1",
+      "status": "passed",
+      "ok": true,
+      "passed": 22,
+      "total": 22,
+      "failed": []
+    },
+    {
+      "label": "pr4-hud-393",
+      "url": "http://127.0.0.1:8000/tests/final-exterior-phase3b1-harness.html?width=393&height=852&integrationResultId=hudTestResult&appQuery=exterior%3Dbalanced%26theme%3Dnavy%26camera%3Dfront%26time%3D10%253A10%253A30%26paused%3D1%26opacity%3D1%26panel%3Dcollapsed%26hudTest%3D1",
+      "status": "passed",
+      "ok": true,
+      "passed": 57,
+      "total": 57,
+      "failed": []
+    },
+    {
+      "label": "v3.14-audio-390",
+      "url": "http://127.0.0.1:8000/tests/final-exterior-phase3b1-harness.html?width=390&height=844&integrationResultId=audioTestResult&appQuery=exterior%3Dbalanced%26theme%3Dnavy%26camera%3Dfront%26time%3D10%253A10%253A30%26paused%3D1%26opacity%3D1%26panel%3Dcollapsed%26audioTest%3D1&triggerAudio=1",
+      "status": "passed",
+      "ok": true,
+      "passed": 23,
+      "total": 23,
+      "failed": []
+    }
+  ],
+  "audio": {
+    "label": "v3.14-audio-390",
+    "url": "http://127.0.0.1:8000/tests/final-exterior-phase3b1-harness.html?width=390&height=844&integrationResultId=audioTestResult&appQuery=exterior%3Dbalanced%26theme%3Dnavy%26camera%3Dfront%26time%3D10%253A10%253A30%26paused%3D1%26opacity%3D1%26panel%3Dcollapsed%26audioTest%3D1&triggerAudio=1",
+    "status": "passed",
+    "ok": true,
+    "passed": 23,
+    "total": 23,
+    "failed": []
+  },
+  "worldValuesEqual": true,
+  "transformInvariant": true,
+  "phase2c": {
+    "passed": true,
+    "expected": [
+      6.645,
+      3.19,
+      6.745
+    ],
+    "actual": [
+      6.645,
+      3.19,
+      6.745
+    ]
+  },
+  "handCoupling": {
+    "passed": true,
+    "desktop": [
+      {
+        "id": "minute",
+        "driver": "cannon",
+        "hand": "minuteHand",
+        "driverObject": "06582f8d-2a09-4152-b29c-63c9a66d68fc",
+        "handObject": "98a2dd97-6d20-4f64-a4d5-dd18b20abade",
+        "driverGeometry": "31fc1d92-7bcb-47e4-b767-2777f0ab4cd3",
+        "handGeometry": "a13d4a48-0764-4e7b-b0f7-10620dfeb2e2",
+        "driverAngle": 63.931410500552296,
+        "handAngle": 62.3606141737574,
+        "fixedOffset": -1.5707963267948966,
+        "actualOffset": -1.5707963267948983,
+        "error": -1.7763568394002505e-15,
+        "mountDistance": 0,
+        "driverMount": [
+          0,
+          -2.41,
+          0
+        ],
+        "handMount": [
+          0,
+          -2.41,
+          0
+        ]
+      },
+      {
+        "id": "hour",
+        "driver": "hour",
+        "hand": "hourHand",
+        "driverObject": "25185bbb-10bc-4366-86ad-e89bf8884a2d",
+        "handObject": "3737f994-c8fe-4776-8649-5335f3e9b2db",
+        "driverGeometry": "796f12c7-e40c-4db0-beca-3c26bf8dd8f0",
+        "handGeometry": "ff1006b2-21ca-491b-b2a1-8ee99e8694bc",
+        "driverAngle": 5.3843407424025065,
+        "handAngle": 3.756821214917794,
+        "fixedOffset": -1.6275195274847123,
+        "actualOffset": -1.6275195274847123,
+        "error": 0,
+        "mountDistance": 0,
+        "driverMount": [
+          0,
+          -2.26,
+          0
+        ],
+        "handMount": [
+          0,
+          -2.26,
+          0
+        ]
+      },
+      {
+        "id": "seconds",
+        "driver": "fourthArbor",
+        "hand": "secondsHand",
+        "driverObject": "2e74dc11-dfbb-400d-8315-1e13366cc3f5",
+        "handObject": "e362b431-8f70-4e52-b09b-c6526846c138",
+        "driverGeometry": "185ad5f6-9e81-4ac5-8b6c-1cda780784d9",
+        "handGeometry": "d0fcd8b7-8bad-4ef7-82d2-3fe8ddf8e639",
+        "driverAngle": 3835.884630033138,
+        "handAngle": 3834.313833706343,
+        "fixedOffset": -1.5707963267948966,
+        "actualOffset": -1.5707963267950618,
+        "error": -1.652011860642233e-13,
+        "mountDistance": 0,
+        "driverMount": [
+          -0.0005079311678025666,
+          -2.39,
+          -5.601265750892841
+        ],
+        "handMount": [
+          -0.0005079311678025666,
+          -2.39,
+          -5.601265750892841
+        ]
+      }
+    ],
+    "mobile390": [
+      {
+        "id": "minute",
+        "driver": "cannon",
+        "hand": "minuteHand",
+        "driverObject": "1e3ebc6f-986b-490f-a1fc-0cb2f510a9ee",
+        "handObject": "1f023e74-ad3b-43f6-8973-9f729f63d0b0",
+        "driverGeometry": "d0e6d2c6-6050-4f68-887d-d7393e6d4521",
+        "handGeometry": "6e0cdeea-c8f9-45f9-acae-a606ff4a263a",
+        "driverAngle": 63.931410500552296,
+        "handAngle": 62.3606141737574,
+        "fixedOffset": -1.5707963267948966,
+        "actualOffset": -1.5707963267948983,
+        "error": -1.7763568394002505e-15,
+        "mountDistance": 0,
+        "driverMount": [
+          0,
+          -2.41,
+          0
+        ],
+        "handMount": [
+          0,
+          -2.41,
+          0
+        ]
+      },
+      {
+        "id": "hour",
+        "driver": "hour",
+        "hand": "hourHand",
+        "driverObject": "a2e21b48-43f7-4657-b722-aedde36fffa7",
+        "handObject": "cbd106ce-10ab-4cd6-a278-50b1c8606e70",
+        "driverGeometry": "b581e6cf-1df8-4c91-8138-06deebf37479",
+        "handGeometry": "105c1865-46a2-4e77-8bb6-9bf73788b64b",
+        "driverAngle": 5.3843407424025065,
+        "handAngle": 3.756821214917794,
+        "fixedOffset": -1.6275195274847123,
+        "actualOffset": -1.6275195274847123,
+        "error": 0,
+        "mountDistance": 0,
+        "driverMount": [
+          0,
+          -2.26,
+          0
+        ],
+        "handMount": [
+          0,
+          -2.26,
+          0
+        ]
+      },
+      {
+        "id": "seconds",
+        "driver": "fourthArbor",
+        "hand": "secondsHand",
+        "driverObject": "af5cced9-77e1-459a-b8b1-fb9814a8377a",
+        "handObject": "db970efd-994c-42ec-9bad-1b20ebdf75e6",
+        "driverGeometry": "46ba941f-b958-4467-9cac-32348f8e76ed",
+        "handGeometry": "ab5ab174-518d-4e11-a7ce-45e9f64e3041",
+        "driverAngle": 3835.884630033138,
+        "handAngle": 3834.313833706343,
+        "fixedOffset": -1.5707963267948966,
+        "actualOffset": -1.5707963267950618,
+        "error": -1.652011860642233e-13,
+        "mountDistance": 0,
+        "driverMount": [
+          -0.0005079311678025666,
+          -2.39,
+          -5.601265750892841
+        ],
+        "handMount": [
+          -0.0005079311678025666,
+          -2.39,
+          -5.601265750892841
+        ]
+      }
+    ]
+  },
+  "mechanismInterference": {
+    "state": "wind",
+    "intendedContacts": [
+      {
+        "pair": [
+          "windingClutch",
+          "windingPinion"
+        ],
+        "intersects": true,
+        "penetration": 0.3600000000000002,
+        "overlaps": [
+          0.3600000000000002,
+          0.81405
+        ]
+      },
+      {
+        "pair": [
+          "windingPinion",
+          "crownWheelLower"
+        ],
+        "intersects": true,
+        "penetration": 0.17405000000000004,
+        "overlaps": [
+          1.8440499999999997,
+          0.17405000000000004,
+          0.5781000000000001
+        ]
+      },
+      {
+        "pair": [
+          "crownWheelLower",
+          "crownLowerHub"
+        ],
+        "intersects": true,
+        "penetration": 0.2,
+        "overlaps": [
+          0.2,
+          2.04405
+        ]
+      },
+      {
+        "pair": [
+          "crownLowerHub",
+          "crownArbor"
+        ],
+        "intersects": true,
+        "penetration": 0.11000000000000032,
+        "overlaps": [
+          0.11000000000000032,
+          0.48
+        ]
+      },
+      {
+        "pair": [
+          "crownArbor",
+          "crownUpperHub"
+        ],
+        "intersects": true,
+        "penetration": 0.1449999999999998,
+        "overlaps": [
+          0.1449999999999998,
+          0.48
+        ]
+      },
+      {
+        "pair": [
+          "crownUpperHub",
+          "crownWheelUpper"
+        ],
+        "intersects": true,
+        "penetration": 0.27,
+        "overlaps": [
+          0.27,
+          2.04405
+        ]
+      },
+      {
+        "pair": [
+          "crownWheelUpper",
+          "ratchetWheel"
+        ],
+        "intersects": true,
+        "penetration": 0.1681000000000008,
+        "overlaps": [
+          0.2549999999999998,
+          0.1681000000000008
+        ]
+      },
+      {
+        "pair": [
+          "ratchetWheel",
+          "barrelArbor"
+        ],
+        "intersects": true,
+        "penetration": 0.1499999999999999,
+        "overlaps": [
+          0.1499999999999999,
+          2.88405
+        ]
+      },
+      {
+        "pair": [
+          "stem",
+          "slidingClutch"
+        ],
+        "intersects": true,
+        "penetration": 0.45999999999999996,
+        "overlaps": [
+          1.379999999999999,
+          0.45999999999999996
+        ]
+      },
+      {
+        "pair": [
+          "stem",
+          "windingClutch"
+        ],
+        "intersects": true,
+        "penetration": 0.48,
+        "overlaps": [
+          1.8599999999999994,
+          0.48
+        ]
+      },
+      {
+        "pair": [
+          "stem",
+          "settingInput"
+        ],
+        "intersects": true,
+        "penetration": 0.62,
+        "overlaps": [
+          7.875317309992708,
+          0.62
+        ]
+      },
+      {
+        "pair": [
+          "slidingClutch",
+          "windingClutch"
+        ],
+        "intersects": true,
+        "penetration": 0,
+        "overlaps": [
+          0,
+          0.62
+        ]
+      },
+      {
+        "pair": [
+          "slidingClutch",
+          "settingInput"
+        ],
+        "intersects": false,
+        "penetration": -6.055317309992707,
+        "overlaps": [
+          -6.055317309992707,
+          0.76
+        ]
+      },
+      {
+        "pair": [
+          "settingInput",
+          "settingTransfer"
+        ],
+        "intersects": true,
+        "penetration": 0.07511443942311602,
+        "overlaps": [
+          0.507407405241362,
+          0.56,
+          0.07511443942311602
+        ]
+      },
+      {
+        "pair": [
+          "settingTransfer",
+          "setting1"
+        ],
+        "intersects": true,
+        "penetration": 0.1665624999999995,
+        "overlaps": [
+          0.19,
+          0.1665624999999995
+        ]
+      },
+      {
+        "pair": [
+          "setting1",
+          "setting2"
+        ],
+        "intersects": true,
+        "penetration": 0.16656249999999995,
+        "overlaps": [
+          0.18,
+          0.16656249999999995
+        ]
+      },
+      {
+        "pair": [
+          "setting2",
+          "minuteWheel"
+        ],
+        "intersects": true,
+        "penetration": 0.16399999999999998,
+        "overlaps": [
+          0.16399999999999998,
+          0.1665625000000004
+        ]
+      },
+      {
+        "pair": [
+          "minuteWheel",
+          "cannonPinion"
+        ],
+        "intersects": true,
+        "penetration": 0.16656249999999995,
+        "overlaps": [
+          0.174,
+          0.16656249999999995
+        ]
+      },
+      {
+        "pair": [
+          "minutePinion",
+          "hourWheel"
+        ],
+        "intersects": true,
+        "penetration": 0.15500000000000003,
+        "overlaps": [
+          0.15500000000000003,
+          0.15989999999999993
+        ]
+      },
+      {
+        "pair": [
+          "centerShaft",
+          "cannonTube"
+        ],
+        "intersects": true,
+        "penetration": 0.5597664185488279,
+        "overlaps": [
+          0.6699999999999999,
+          0.5597664185488279
+        ]
+      },
+      {
+        "pair": [
+          "cannonTube",
+          "hourPipe"
+        ],
+        "intersects": true,
+        "penetration": 0.9400000000000002,
+        "overlaps": [
+          0.9400000000000002,
+          1.08
+        ]
+      },
+      {
+        "pair": [
+          "cannonTube",
+          "minuteHandBoss"
+        ],
+        "intersects": true,
+        "penetration": 0.05999999999999983,
+        "overlaps": [
+          0.05999999999999983,
+          0.96
+        ]
+      },
+      {
+        "pair": [
+          "hourPipe",
+          "hourHandBoss"
+        ],
+        "intersects": true,
+        "penetration": 0.06000000000000022,
+        "overlaps": [
+          0.06000000000000022,
+          1.46
+        ]
+      },
+      {
+        "pair": [
+          "fourthArborExtension",
+          "secondsHandBoss"
+        ],
+        "intersects": true,
+        "penetration": 0.07000000000000006,
+        "overlaps": [
+          0.07000000000000006,
+          0.255
+        ]
+      }
+    ],
+    "forbiddenIntersections": [],
+    "forbiddenCount": 0,
+    "envelopes": [
+      {
+        "id": "stem",
+        "axis": "x",
+        "center": [
+          7.942341345003646,
+          -1.05,
+          -4.5
+        ],
+        "extents": [
+          11.777658654996353,
+          0.16,
+          0.16
+        ]
+      },
+      {
+        "id": "windingClutch",
+        "axis": "x",
+        "center": [
+          -2.2153173099927073,
+          -1.05,
+          -4.5
+        ],
+        "extents": [
+          0.24,
+          0.32,
+          0.32
+        ]
+      },
+      {
+        "id": "slidingClutch",
+        "axis": "x",
+        "center": [
+          -2.6953173099927072,
+          -1.05,
+          -4.5
+        ],
+        "extents": [
+          0.24,
+          0.3,
+          0.3
+        ]
+      },
+      {
+        "id": "settingInput",
+        "axis": "x",
+        "center": [
+          3.82,
+          -1.05,
+          -4.5
+        ],
+        "extents": [
+          0.22000000000000003,
+          0.46,
+          0.46
+        ]
+      },
+      {
+        "id": "windingPinion",
+        "axis": "x",
+        "center": [
+          -2.665317309992707,
+          -1.05,
+          -4.5
+        ],
+        "extents": [
+          0.57,
+          0.49405000000000004,
+          0.49405000000000004
+        ]
+      },
+      {
+        "id": "crownWheelLower",
+        "axis": "y",
+        "center": [
+          -3.115317309992707,
+          -0.64,
+          -2.86
+        ],
+        "extents": [
+          1.72405,
+          0.09,
+          1.72405
+        ]
+      },
+      {
+        "id": "crownLowerHub",
+        "axis": "y",
+        "center": [
+          -3.115317309992707,
+          -0.64,
+          -2.86
+        ],
+        "extents": [
+          0.32,
+          0.11,
+          0.32
+        ]
+      },
+      {
+        "id": "crownArbor",
+        "axis": "y",
+        "center": [
+          -3.115317309992707,
+          1.22,
+          -2.86
+        ],
+        "extents": [
+          0.16,
+          1.86,
+          0.16
+        ]
+      },
+      {
+        "id": "crownUpperHub",
+        "axis": "y",
+        "center": [
+          -3.115317309992707,
+          3.08,
+          -2.86
+        ],
+        "extents": [
+          0.32,
+          0.145,
+          0.32
+        ]
+      },
+      {
+        "id": "crownWheelUpper",
+        "axis": "y",
+        "center": [
+          -3.115317309992707,
+          3.08,
+          -2.86
+        ],
+        "extents": [
+          1.72405,
+          0.125,
+          1.72405
+        ]
+      },
+      {
+        "id": "crownWheelSeat",
+        "axis": "y",
+        "center": [
+          -3.115317309992707,
+          2.89,
+          -2.86
+        ],
+        "extents": [
+          0.52,
+          0.04,
+          0.52
+        ]
+      },
+      {
+        "id": "ratchetWheel",
+        "axis": "y",
+        "center": [
+          -4.1,
+          2.63,
+          1.12
+        ],
+        "extents": [
+          2.54405,
+          0.58,
+          2.54405
+        ]
+      },
+      {
+        "id": "barrelArbor",
+        "axis": "y",
+        "center": [
+          -4.1,
+          1.38,
+          1.12
+        ],
+        "extents": [
+          0.34,
+          0.82,
+          0.34
+        ]
+      },
+      {
+        "id": "settingTransfer",
+        "axis": "y",
+        "center": [
+          4.347123844758638,
+          -1.05,
+          -3.300583189423116
+        ],
+        "extents": [
+          0.81453125,
+          0.1,
+          0.81453125
+        ]
+      },
+      {
+        "id": "setting1",
+        "axis": "y",
+        "center": [
+          6.289617880308554,
+          -1.05,
+          -2.7067031642050563
+        ],
+        "extents": [
+          1.38328125,
+          0.09,
+          1.38328125
+        ]
+      },
+      {
+        "id": "setting2",
+        "axis": "y",
+        "center": [
+          4.618370095123551,
+          -1.05,
+          -0.7149876120957136
+        ],
+        "extents": [
+          1.38328125,
+          0.09,
+          1.38328125
+        ]
+      },
+      {
+        "id": "minuteWheel",
+        "axis": "y",
+        "center": [
+          1.9500000000000002,
+          -1.05,
+          0
+        ],
+        "extents": [
+          1.54578125,
+          0.074,
+          1.54578125
+        ]
+      },
+      {
+        "id": "minutePinion",
+        "axis": "y",
+        "center": [
+          1.9500000000000002,
+          -1.47,
+          0
+        ],
+        "extents": [
+          0.46995,
+          0.07,
+          0.46995
+        ]
+      },
+      {
+        "id": "cannonPinion",
+        "axis": "y",
+        "center": [
+          0,
+          -1.05,
+          0
+        ],
+        "extents": [
+          0.57078125,
+          0.1,
+          0.57078125
+        ]
+      },
+      {
+        "id": "cannonTube",
+        "axis": "y",
+        "center": [
+          0,
+          -1.73,
+          0
+        ],
+        "extents": [
+          0.42,
+          0.68,
+          0.42
+        ]
+      },
+      {
+        "id": "minuteHandBoss",
+        "axis": "y",
+        "center": [
+          0,
+          -2.41,
+          0
+        ],
+        "extents": [
+          0.54,
+          0.06,
+          0.54
+        ]
+      },
+      {
+        "id": "hourWheel",
+        "axis": "y",
+        "center": [
+          0,
+          -1.47,
+          0
+        ],
+        "extents": [
+          1.63995,
+          0.085,
+          1.63995
+        ]
+      },
+      {
+        "id": "hourPipe",
+        "axis": "y",
+        "center": [
+          0,
+          -1.865,
+          0
+        ],
+        "extents": [
+          0.66,
+          0.395,
+          0.66
+        ]
+      },
+      {
+        "id": "hourHandBoss",
+        "axis": "y",
+        "center": [
+          0,
+          -2.26,
+          0
+        ],
+        "extents": [
+          0.8,
+          0.06,
+          0.8
+        ]
+      },
+      {
+        "id": "fourthArborExtension",
+        "axis": "y",
+        "center": [
+          -0.0005079311678025666,
+          -0.8350000000000001,
+          -5.601265750892841
+        ],
+        "extents": [
+          0.075,
+          1.5550000000000002,
+          0.075
+        ]
+      },
+      {
+        "id": "secondsHandBoss",
+        "axis": "y",
+        "center": [
+          -0.0005079311678025666,
+          -2.39,
+          -5.601265750892841
+        ],
+        "extents": [
+          0.18,
+          0.07,
+          0.18
+        ]
+      },
+      {
+        "id": "centerShaft",
+        "axis": "y",
+        "center": [
+          -0.00017021427775906636,
+          0.43000000000000005,
+          -0.0001599606013324986
+        ],
+        "extents": [
+          0.14,
+          2.15,
+          0.14
+        ]
+      }
+    ]
+  },
+  "exteriorAttachmentInterference": {
+    "position1": 0,
+    "position2": 0
+  },
+  "selection": {
+    "registeredParts": 9,
+    "passed": true
+  },
+  "opacityVisibilityDisplay": {
+    "passed": true
+  },
+  "normalPathPixelExact": true,
+  "performance": {
+    "absolutePassed": true,
+    "differentialPassed": true,
+    "thresholdsChanged": false
+  },
+  "console": {
+    "browserSuites": "error/warning 0 in harness results",
+    "freshApplicationTab": "recorded after final smoke run"
+  },
+  "images": {
+    "report": "image-evidence-report.json",
+    "actualRuntimeCaptureCount": 6
+  },
+  "reviewAnimations": {
+    "format": "GIF assembled from actual runtime capture frames",
+    "continuousVideoCapture": false,
+    "files": [
+      "video-01-full-rotation.gif",
+      "video-02-lug-close-rotation.gif",
+      "video-03-strap-close-rotation.gif",
+      "video-04-crown-position-relation.gif",
+      "video-05-opacity-cycle.gif",
+      "video-06-selection-cycle.gif",
+      "video-07-mobile-rotation-zoom.gif",
+      "video-08-mechanism-operation.gif"
+    ]
+  },
+  "physicalIPhone": {
+    "status": "PENDING_HUMAN_REVIEW",
+    "fixedCommitUrl": "https://raw.githack.com/showhey04-oss/mechanical-watch-3d/51ab089e898cc3d2216d97fece83e334d9cd49c3/?exterior=balanced"
+  },
+  "nextPhaseRecommendation": "HUMAN_REVIEW_PHASE3B2_BEFORE_READY_OR_PHASE3C"
+}

@@ -15,17 +15,37 @@ class FakeNode {
   disconnect(node) { this.connections = this.connections.filter((item) => item !== node); }
 }
 class FakeSource extends EventTarget {
+  constructor() { super(); this.startTimes = []; }
   connect() {}
-  start() {}
+  disconnect() {}
+  start(time) { this.startTimes.push(time); }
   stop() { this.dispatchEvent(new Event("ended")); }
 }
 class FakeContext {
-  constructor() { this.currentTime = 0; this.state = "suspended"; this.destination = new FakeNode(); this.decodeCount = 0; }
+  constructor({ resumePlan = [], outputTimestamp = false } = {}) {
+    this.currentTime = 0;
+    this.state = "suspended";
+    this.destination = new FakeNode();
+    this.decodeCount = 0;
+    this.sources = [];
+    this.resumePlan = [...resumePlan];
+    this.resumeCalls = 0;
+    this.closeCalls = 0;
+    this.outputContextTime = 0;
+    if (outputTimestamp) this.getOutputTimestamp = () => ({ contextTime: this.outputContextTime, performanceTime: 1000 + this.outputContextTime * 1000 });
+  }
   createGain() { return new FakeNode(); }
-  createBufferSource() { return new FakeSource(); }
+  createBufferSource() { const source = new FakeSource(); this.sources.push(source); return source; }
   async decodeAudioData() { this.decodeCount += 1; return { duration: 0.05 }; }
-  async resume() { this.state = "running"; }
+  async resume() {
+    this.resumeCalls += 1;
+    const behavior = this.resumePlan.length ? this.resumePlan.shift() : "running";
+    if (behavior instanceof Error) throw behavior;
+    if (typeof behavior === "function") return behavior(this);
+    this.state = behavior;
+  }
   async suspend() { this.state = "suspended"; }
+  async close() { this.closeCalls += 1; this.state = "closed"; }
 }
 
 const manifest = {
@@ -160,6 +180,164 @@ test("play diagnostics count real sources and visibility stops active playback",
   assert.equal(engine.getDiagnostics().activeSources, 0);
 });
 
+test("visibility hide clears source inventory even when a source stop throws", async () => {
+  const context = new FakeContext();
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  await engine.enableFromUserGesture();
+  assert.equal(engine.play("winding"), true);
+  context.sources[0].stop = () => { throw new Error("injected source stop failure"); };
+  const result = await engine.setVisible(false, { reason: "fault-injection:source-stop" });
+  assert.equal(result.stateAfter, "suspended");
+  assert.equal(engine.getDiagnostics().activeSources, 0);
+  assert.equal(engine.getDiagnostics().sourceRecordCount, 0);
+  assert.equal(engine.getDiagnostics().masterGainCommandedValue, 0);
+});
+
+test("visible auto-resume rejection keeps gain muted and exposes resume-required", async () => {
+  const context = new FakeContext({ resumePlan: ["running", new Error("NotAllowedError")] });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const result = await engine.resumeVisibleAudio({ trustedGesture: false, reason: "pageshow" });
+  const report = engine.getDiagnostics();
+  assert.equal(result.resumeRejected, true);
+  assert.equal(result.running, false);
+  assert.equal(result.requiresTrustedGesture, true);
+  assert.equal(report.status, "resume-required");
+  assert.equal(report.audioEnabled, true);
+  assert.equal(report.resumeRequired, true);
+  assert.equal(engine.masterNode.gain.value, 0);
+});
+
+test("resolved resume is not treated as recovery until AudioContext is running", async () => {
+  const context = new FakeContext({ resumePlan: ["running", "suspended"] });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const result = await engine.resumeVisibleAudio({ trustedGesture: false, reason: "visibility:visible" });
+  assert.equal(result.resumeResolved, true);
+  assert.equal(result.stateAfter, "suspended");
+  assert.equal(result.running, false);
+  assert.equal(engine.getDiagnostics().status, "resume-required");
+  assert.equal(engine.masterNode.gain.value, 0);
+});
+
+test("one trusted resume reuses the known-good context and loaded buffers", async () => {
+  const context = new FakeContext({
+    resumePlan: ["running", new Error("NotAllowedError"), "running"],
+  });
+  let contextCount = 0;
+  let assetRequests = 0;
+  const engine = new MechanicalAudioEngine({
+    audioContextFactory: () => { contextCount += 1; return context; },
+    fetchFn: fakeFetch({ onAssetRequest: () => { assetRequests += 1; } }),
+  });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const automatic = await engine.setVisible(true, { reason: "visibility:visible" });
+  assert.equal(automatic.running, false);
+  assert.equal(engine.getDiagnostics().status, "resume-required");
+  const fallback = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "speaker" });
+  assert.equal(fallback.running, true);
+  assert.equal(engine.getDiagnostics().status, "on");
+  assert.equal(engine.getDiagnostics().resumeAttemptSequence, 2);
+  assert.equal(engine.masterNode.gain.value, 0.36);
+  assert.equal(contextCount, 1);
+  assert.equal(engine.getDiagnostics().contextGeneration, 1);
+  assert.equal(assetRequests, 6);
+  assert.equal(context.decodeCount, 6);
+});
+
+test("trusted fallback during automatic resume gets one fresh attempt in the gesture", async () => {
+  let releaseAuto;
+  const autoGate = new Promise((resolve) => { releaseAuto = resolve; });
+  const context = new FakeContext({
+    resumePlan: [
+      "running",
+      async () => { await autoGate; throw new Error("NotAllowedError"); },
+      "running",
+    ],
+  });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const automatic = engine.setVisible(true, { reason: "visibility:visible" });
+  assert.equal(engine.getDiagnostics().status, "resume-required");
+  assert.equal(engine.masterNode.gain.value, 0);
+  const fallback = engine.resumeVisibleAudio({ trustedGesture: true, reason: "speaker" });
+  releaseAuto();
+  const [automaticResult, fallbackResult] = await Promise.all([automatic, fallback]);
+  assert.equal(automaticResult.stale, true);
+  assert.equal(fallbackResult.running, true);
+  assert.equal(fallbackResult.fallbackAttempt, true);
+  assert.equal(context.resumeCalls, 3);
+  assert.equal(engine.getDiagnostics().resumeAttemptSequence, 2);
+  assert.equal(engine.getDiagnostics().status, "on");
+});
+
+test("interrupted context recovers through the reused context contract", async () => {
+  const context = new FakeContext({ resumePlan: ["running", "running"] });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  context.state = "interrupted";
+  const result = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "speaker" });
+  assert.equal(result.stateBefore, "interrupted");
+  assert.equal(result.stateAfter, "running");
+  assert.equal(result.running, true);
+  assert.equal(engine.getDiagnostics().status, "on");
+  assert.equal(engine.getDiagnostics().contextGeneration, 1);
+});
+
+test("stale visible completion cannot restore gain or context after a newer hidden request", async () => {
+  let release;
+  const gate = new Promise((resolve) => { release = resolve; });
+  const context = new FakeContext({
+    resumePlan: ["running", async (self) => { await gate; self.state = "running"; }],
+  });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false, { reason: "hidden:first" });
+  const oldAttempt = engine.setVisible(true, { reason: "visible:first" });
+  const hidden = engine.setVisible(false, { reason: "hidden:second" });
+  release();
+  const [oldResult] = await Promise.all([oldAttempt, hidden]);
+  assert.equal(oldResult.stale, true);
+  assert.equal(engine.getDiagnostics().visible, false);
+  assert.equal(engine.getDiagnostics().audioContextState, "suspended");
+  assert.equal(engine.getDiagnostics().masterGainCommandedValue, 0);
+});
+
+test("failed one-click resume remains muted and never reports UI on", async () => {
+  const context = new FakeContext({ resumePlan: ["running", new Error("NotAllowedError")] });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false, { reason: "hidden" });
+  const result = await engine.resumeVisibleAudio({ trustedGesture: true, reason: "speaker" });
+  assert.equal(result.running, false);
+  const report = engine.getDiagnostics();
+  assert.equal(report.status, "resume-required");
+  assert.equal(report.resumeRequired, true);
+  assert.equal(engine.masterNode.gain.value, 0);
+  assert.equal(report.contextGeneration, 1);
+});
+
+test("diagnostic trusted-gesture gate never resumes or reloads audio by itself", async () => {
+  const context = new FakeContext();
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  assert.equal(await engine.enableFromUserGesture(), true);
+  await engine.setVisible(false);
+  const resumeCallsBefore = context.resumeCalls;
+  const decodeCountBefore = context.decodeCount;
+  const report = engine.prepareTrustedGestureRecoveryForTest("browser-test");
+  assert.equal(report.visible, true);
+  assert.equal(report.resumeRequired, true);
+  assert.equal(report.status, "resume-required");
+  assert.equal(context.state, "suspended");
+  assert.equal(context.resumeCalls, resumeCallsBefore);
+  assert.equal(context.decodeCount, decodeCountBefore);
+  assert.equal(engine.masterNode.gain.value, 0);
+});
+
 test("disable lets the gain ramp finish before stopping sources and suspending the context", async () => {
   const pendingWaits = [];
   const context = new FakeContext();
@@ -180,4 +358,66 @@ test("disable lets the gain ramp finish before stopping sources and suspending t
   await disabling;
   assert.equal(engine.getDiagnostics().activeSources, 0);
   assert.equal(context.state, "suspended");
+});
+
+test("absolute escapement scheduling exposes clock metadata and can be cancelled without stopping other buses", async () => {
+  const context = new FakeContext();
+  context.currentTime = 12;
+  context.baseLatency = 0.01;
+  context.outputLatency = 0.02;
+  context.getOutputTimestamp = () => ({ contextTime: 11.98, performanceTime: 1234 });
+  const engine = new MechanicalAudioEngine({ audioContextFactory: () => context, fetchFn: fakeFetch() });
+  await engine.enableFromUserGesture();
+  assert.equal(engine.play("escapementTick", { startTime: 12.1, metadata: { eventSequence: 1 } }), true);
+  assert.equal(engine.play("winding"), true);
+  assert.deepEqual(context.sources[0].startTimes, [12.1]);
+  const clock = engine.getClockSnapshot();
+  assert.equal(clock.pendingEscapementSources, 1);
+  assert.deepEqual(clock.outputTimestamp, { contextTime: 11.98, performanceTime: 1234 });
+  assert.equal(engine.getDiagnostics().eventCounts.escapementTick, 0);
+  assert.equal(engine.getDiagnostics().eventCounts.winding, 1);
+  assert.equal(engine.cancelScheduledEscapement(), 1);
+  assert.equal(engine.getDiagnostics().activeSources, 1);
+  assert.equal(engine.getDiagnostics().eventLog.length, 1);
+  assert.equal(engine.getDiagnostics().eventLog[0].type, "winding");
+
+  assert.equal(engine.play("escapementTock", { startTime: 12.1, metadata: { eventSequence: 2 } }), true);
+  context.currentTime = 12.11;
+  assert.equal(engine.getDiagnostics().eventCounts.escapementTock, 1);
+  assert.equal(engine.getDiagnostics().eventLog.at(-1).requestedStartTime, 12.1);
+});
+
+test("escapement source inventory supports bounded cancellation and stale-record cleanup", async () => {
+  const context = new FakeContext();
+  context.currentTime = 20;
+  const engine = new MechanicalAudioEngine({
+    audioContextFactory: () => context,
+    fetchFn: fakeFetch(),
+  });
+  await engine.enableFromUserGesture();
+
+  assert.equal(engine.play("escapementTick", {
+    startTime: 20.2,
+    metadata: { targetBeat: 1, eventSequence: 1 },
+  }), true);
+  assert.equal(engine.play("escapementTock", {
+    startTime: 21,
+    metadata: { targetBeat: 2, eventSequence: 2 },
+  }), true);
+  assert.equal(engine.play("winding"), true);
+
+  assert.equal(engine.cancelScheduledEscapement({ afterTime: 20.6 }), 1);
+  let clock = engine.getClockSnapshot();
+  assert.equal(clock.pendingEscapementSources, 1);
+  assert.equal(clock.escapementSourceInventory.length, 1);
+  assert.equal(clock.escapementSourceInventory[0].metadata.targetBeat, 1);
+  assert.equal(clock.sourceLifecycleCounts.cancelled, 1);
+
+  context.currentTime = 21;
+  assert.equal(engine.cleanupExpiredEscapementSources({ graceSeconds: 0.25 }), 1);
+  clock = engine.getClockSnapshot();
+  assert.equal(clock.pendingEscapementSources, 0);
+  assert.equal(clock.escapementSourceInventory.length, 0);
+  assert.equal(clock.sourceLifecycleCounts.cleaned, 1);
+  assert.equal(engine.getDiagnostics().eventCounts.winding, 1);
 });

@@ -250,7 +250,7 @@ test("saved Phase 3A reports reproduce local crown and tube records from audit l
   }
 });
 
-test("E-BALANCED is recommendation-only and does not alter the normal application path", async () => {
+test("Phase 3A remains recommendation history while Phase 3B.1 stays query-only", async () => {
   assert.deepEqual(CANDIDATE_COMPARISON.recommendation, {
     candidate: "E-BALANCED",
     status: "RECOMMENDED_NOT_ADOPTED",
@@ -263,7 +263,10 @@ test("E-BALANCED is recommendation-only and does not alter the normal applicatio
   assert.equal(CANDIDATE_COMPARISON.criteria["E-BALANCED"].crownInterfaceRisk, "MODERATE_RISK");
   assert.equal(CANDIDATE_COMPARISON.criteria["E-EDUCATIONAL"].crownInterfaceRisk, "HIGH_RISK");
   const indexSource = await readFile(new URL("../index.html", import.meta.url), "utf8");
-  assert.doesNotMatch(indexSource, /final-exterior-audit|E-COMPACT|E-BALANCED|E-EDUCATIONAL/);
+  assert.doesNotMatch(indexSource, /final-exterior-audit/);
+  assert.match(indexSource, /resolveFinalExteriorCandidate\(initialPageParameters\)/);
+  assert.match(indexSource, /if\(requestedExteriorConfig\)\{/);
+  assert.match(indexSource, /DISABLED_NORMAL_PATH/);
   assert.doesNotMatch(indexSource, /caseGeometry|bezelGeometry|casebackGeometry|lugGeometry|strapGeometry/);
 });
 

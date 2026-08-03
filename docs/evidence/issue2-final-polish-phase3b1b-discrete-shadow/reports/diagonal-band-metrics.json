@@ -1,0 +1,118 @@
+{
+  "sourceBaseCommit": "27533b91100c5dddca6507414c6fe3b282ed07c2",
+  "sourceImplementationCommit": "e79a26ce4e18d30a81cbf840e45dfa1c4f063d51",
+  "sourceQueryCompatibilityCommit": "3e6917ec8cc0781f04af84254dbe317f0fc6a0b9",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1b-discrete-shadow",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness",
+  "captureTimestamp": "2026-07-28T04:19:39.090930+00:00",
+  "viewports": {
+    "desktop": [
+      1280,
+      720
+    ],
+    "mobile": [
+      390,
+      844
+    ]
+  },
+  "thresholds": {
+    "maximumDiagonalGradientRatioToBaseline": 1.15,
+    "maximumPeriodicBandScoreToBaseline": 1.15,
+    "humanSameScaleReviewRequired": true
+  },
+  "metrics": {
+    "issue2-phase3b1b-baseline": {
+      "1280x720": {
+        "diagonalStaircaseRatio": {
+          "maximum": 0.052027101034283124,
+          "mean": 0.021063783213471923
+        },
+        "periodicBandScore": {
+          "maximum": 0.9991938937534075,
+          "mean": 0.9795357799763734
+        }
+      },
+      "390x844": {
+        "diagonalStaircaseRatio": {
+          "maximum": 0.041569790748015714,
+          "mean": 0.019306300237745603
+        },
+        "periodicBandScore": {
+          "maximum": 0.9993765144737834,
+          "mean": 0.9860340376555693
+        }
+      }
+    },
+    "issue2-phase3b1b-shadow-off": {
+      "1280x720": {
+        "diagonalStaircaseRatio": {
+          "maximum": 0.05064292558999844,
+          "mean": 0.020908097661961614
+        },
+        "periodicBandScore": {
+          "maximum": 0.9991938937534075,
+          "mean": 0.9706480433493639
+        }
+      },
+      "390x844": {
+        "diagonalStaircaseRatio": {
+          "maximum": 0.04606230779515978,
+          "mean": 0.018980153644433943
+        },
+        "periodicBandScore": {
+          "maximum": 0.9993765144737834,
+          "mean": 0.985144140294973
+        }
+      }
+    },
+    "issue2-phase3b1b-state-tight-512": {
+      "1280x720": {
+        "diagonalStaircaseRatio": {
+          "maximum": 0.06071615720524017,
+          "mean": 0.021135505969106436
+        },
+        "periodicBandScore": {
+          "maximum": 0.9991621650067799,
+          "mean": 0.9826765636091035
+        }
+      },
+      "390x844": {
+        "diagonalStaircaseRatio": {
+          "maximum": 0.04237413016782644,
+          "mean": 0.018609191519522828
+        },
+        "periodicBandScore": {
+          "maximum": 0.9993472509886848,
+          "mean": 0.9781233290836054
+        }
+      }
+    },
+    "issue2-phase3b1b-state-tight-1024": {
+      "1280x720": {
+        "diagonalStaircaseRatio": {
+          "maximum": 0.06477539869114937,
+          "mean": 0.021482855592106675
+        },
+        "periodicBandScore": {
+          "maximum": 0.9991652296640193,
+          "mean": 0.9831781670245401
+        }
+      },
+      "390x844": {
+        "diagonalStaircaseRatio": {
+          "maximum": 0.042782608695652175,
+          "mean": 0.01894419652360938
+        },
+        "periodicBandScore": {
+          "maximum": 0.9993518766261377,
+          "mean": 0.9775050173218115
+        }
+      }
+    }
+  },
+  "humanSameScaleReview": {
+    "issue2-phase3b1b-state-tight-512": "FAIL: broad diagonal shadow bands remain visible",
+    "issue2-phase3b1b-state-tight-1024": "FAIL: finer sampling does not eliminate diagonal shadow bands"
+  }
+}

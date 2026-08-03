@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-03T03:24:25Z",
+  "status": "FINAL_STACK_PR13_MAIN_AUDIT_PASSED",
+  "repository": "showhey04-oss/mechanical-watch-3d",
+  "appVersion": "v3.15.0",
+  "base": {
+    "branch": "main",
+    "head": "293626f13a50224924f8e3ac229a1fc4077ad7a7"
+  },
+  "pullRequest": {
+    "number": 13,
+    "branch": "feature/final-exterior-balanced-phase3b1",
+    "sourceAuditHead": "86d7bdc041a5f43ddbbeb92d09a01b4a95dc701b",
+    "state": "OPEN",
+    "isDraft": true,
+    "base": "main"
+  },
+  "acceptedStackParityHead": "dab5dc474071784b06db9fb2fb3f36d469f16389",
+  "githubState": {
+    "promotionPullRequests14Through26": "MERGED_OR_CLOSED",
+    "pullRequest5": "OPEN_DRAFT",
+    "issue2": "OPEN",
+    "pullRequest13ReviewThreadCount": 0,
+    "pullRequest13ReviewCount": 0
+  },
+  "diff": {
+    "files": 6247,
+    "insertions": 13455501,
+    "deletions": 117,
+    "classification": [
+      { "id": "A", "label": "Phase 3B.1 core exterior", "files": 3 },
+      { "id": "B", "label": "Phase 3B.2 attachment", "files": 3 },
+      { "id": "C", "label": "Phase 3C.1 watch head", "files": 2 },
+      { "id": "D", "label": "Phase 3C.2 strap and buckle", "files": 3 },
+      { "id": "E", "label": "Phase 3C.3 integration", "files": 2 },
+      { "id": "F", "label": "Issue 2 Phase 3A through 3B.2", "files": 11 },
+      { "id": "G", "label": "Issue 2 Phase 3B.3 through 3B.4 and stabilization", "files": 10 },
+      { "id": "H", "label": "documentation tests and evidence", "files": 6213 }
+    ],
+    "classifiedFiles": 6247,
+    "unclassifiedFiles": 0,
+    "duplicateClassifications": 0
+  },
+  "productTestTreeParity": {
+    "status": "PASSED",
+    "diffEmpty": true,
+    "objects": {
+      "index.html": "1992aaa83f4d1b0abd50dc8301464096673598a8",
+      "js": "a1d17cb902d041c985f6bb43efdf9aa39926871b",
+      "assets/audio": "800540a4001624157e78ec64e22a9321f18e8a1d",
+      "package.json": "719bde698f7646bd75b389f2cd2b031243bb8db4",
+      "package-lock.json": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "tests": "a31119617c10132c1ad4e161d5742fb9a27e23ef"
+    }
+  },
+  "node": {
+    "command": "node --test tests/*.test.mjs",
+    "tests": 442,
+    "passed": 442,
+    "failed": 0,
+    "status": "PASSED"
+  },
+  "browser": {
+    "normalPath": {
+      "status": "DIFFERENTIAL_PASSED_WITH_COMMON_BASELINE_FAILURE",
+      "desktop1280x720": {
+        "main": { "passed": 86, "total": 86 },
+        "pullRequest": { "passed": 86, "total": 86 },
+        "prSpecificFailureCount": 0
+      },
+      "mobile390x844": {
+        "main": { "passed": 87, "total": 88 },
+        "pullRequest": { "passed": 87, "total": 88 },
+        "commonFailureIds": [
+          "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent"
+        ],
+        "prSpecificFailureCount": 0
+      }
+    },
+    "integratedQuery": {
+      "query": "?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3&rendering=issue2-d2c3&continuity=issue2-current&framing=issue2-mobile-full-length-fit&input=issue2-ios-multitouch-stability&audioTiming=phase3b4c-stability&mechanismTiming=phase3b4c-r2-foreground-stability&audioLifecycle=r2-3-l4&audioPlatform=p3",
+      "desktop1280x720": { "passed": 21, "total": 21, "status": "PASSED" },
+      "mobile390x844": { "passed": 21, "total": 21, "status": "PASSED" },
+      "forbiddenInterference": { "position1": 0, "position2": 0 },
+      "transformInvariant": true,
+      "handCoupling": true
+    },
+    "productionAudio": {
+      "profile": "PRODUCTION_TIMEOUT_PROFILE",
+      "timeoutsMs": {
+        "resume": 450,
+        "clockProbe": 80,
+        "decode": 1200,
+        "close": 250,
+        "transaction": 5500
+      },
+      "diagnosticSetterCalled": false,
+      "desktop1280x720": {
+        "status": "PASSED",
+        "bufferCount": 6,
+        "rawAssetCount": 6,
+        "maximumTransactionElapsedMs": 85
+      },
+      "mobile390x844": {
+        "status": "PASSED",
+        "bufferCount": 6,
+        "rawAssetCount": 6,
+        "maximumTransactionElapsedMs": 82
+      },
+      "duplicateCount": 0,
+      "backlogBurstCount": 0,
+      "catchUpCount": 0,
+      "applicationConsoleErrors": 0,
+      "applicationConsoleWarnings": 0,
+      "outerHarnessEnvironmentEvents": [
+        {
+          "classification": "BROWSER_CONTROL_OUTER_PAGE_ENVIRONMENT_EVENT",
+          "message": "Uncaught TypeError: Failed to execute 'observe' on 'MutationObserver': parameter 1 is not of type 'Node'.",
+          "productIframeAffected": false
+        }
+      ]
+    }
+  },
+  "performance": {
+    "status": "PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION",
+    "productRegressionReproduced": false,
+    "cleanProcessFinalMeasurement": "NOT_TESTED",
+    "blockReason": "endpoint security high CPU load",
+    "absolutePerformancePassClaimed": false,
+    "thresholdsChanged": false
+  },
+  "protectedState": {
+    "normalPathProtected": true,
+    "issue2Open": true,
+    "pullRequest5OpenDraft": true,
+    "d2c3QueryOnly": true,
+    "d2c3DefaultAdopted": false,
+    "phase3B4dStarted": false,
+    "oitStarted": false,
+    "postIssue2GeometryCleanupStarted": false
+  },
+  "authorization": {
+    "readyForReviewAuthorized": false,
+    "mainMergeAuthorized": false,
+    "defaultAdoptionAuthorized": false,
+    "issue2CloseAuthorized": false
+  }
+}

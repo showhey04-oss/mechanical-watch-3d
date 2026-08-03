@@ -47,7 +47,7 @@ test("sound UI is accessible and integration does not introduce an independent t
   assert.match(source, /id="audioToggle" type="button" aria-label="作動音をオンにする" aria-pressed="false"/);
   assert.match(source, /#audioToggle\{[^}]*width:44px;height:44px/);
   assert.match(source, /#audioToggle:focus-visible\{/);
-  assert.match(source, /audioToggle\.addEventListener\('keydown'.*event\.key==='Enter'.*event\.key===' '.*event\.preventDefault\(\);audioToggle\.click\(\)/);
+  assert.match(source, /audioToggle\.addEventListener\('keydown'.*event\.key==='Enter'.*event\.key===' '.*event\.preventDefault\(\);void activateAudioToggle\(\{trustedGesture:event\.isTrusted/);
   assert.match(source, /id="soundStatus"[^>]+role="status"[^>]+aria-live="polite"/);
   assert.equal(source.includes('id="soundEnabled"'), false);
   assert.equal(source.includes('id="soundVolume"'), false);

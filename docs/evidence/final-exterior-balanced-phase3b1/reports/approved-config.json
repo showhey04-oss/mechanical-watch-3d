@@ -1,0 +1,257 @@
+{
+  "metadata": {
+    "schemaVersion": 1,
+    "sourceBaseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+    "sourceImplementationCommit": "fc5cc0220004dbcfbff14d4bbca4165e797665ea",
+    "sourceCaptureCommit": "fc5cc0220004dbcfbff14d4bbca4165e797665ea",
+    "sourceBranch": "feature/final-exterior-balanced-phase3b1",
+    "appVersion": "v3.15.0",
+    "capturedAt": "2026-07-25T07:45:50.961Z",
+    "captureMode": "same-origin unsandboxed iframe harness with actual WebGL canvas PNG capture",
+    "candidateId": "E-BALANCED",
+    "candidateStatus": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT"
+  },
+  "config": {
+    "schemaVersion": 1,
+    "id": "E-BALANCED",
+    "queryValue": "balanced",
+    "status": "IMPLEMENTATION_CANDIDATE_NOT_DEFAULT",
+    "phase3AApproval": "APPROVED_FOR_PHASE_3B_IMPLEMENTATION",
+    "defaultAdoption": "NOT_APPROVED_FOR_DEFAULT_ADOPTION",
+    "enabledByDefault": false,
+    "appVersion": "v3.15.0",
+    "source": {
+      "baseCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+      "phase3APullRequest": 12,
+      "phase3ACommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7"
+    },
+    "dimensions": {
+      "caseOuterDiameter": 39.6,
+      "movementCavityDiameter": 37.8,
+      "radialMovementClearance": 0.6,
+      "bezelBackOuterDiameter": 38.8,
+      "bezelFrontOuterDiameter": 37,
+      "dialApertureDiameter": 29.8,
+      "crystalClearDiameter": 30.6,
+      "crystalInnerY": -2.86,
+      "crystalOuterY": -3.46,
+      "frontHandClearance": 0.35,
+      "casebackInnerY": 4.635,
+      "casebackOuterY": 5.235,
+      "rearBridgeClearance": 0.4,
+      "casebackRingAxialThickness": 0.6,
+      "totalCaseThickness": 8.695,
+      "caseBodyAxialThickness": 7.495,
+      "frontExteriorProjection": 0.6,
+      "rearExteriorProjection": 0.6,
+      "crownTubeAxisY": -1.05,
+      "crownTubeAxisZ": -4.5,
+      "crownTubeOuterDiameter": 1,
+      "crownTubeInnerDiameter": 0.52,
+      "crownTubeAnnularWall": 0.24,
+      "crownTubeAxialLength": 0.925387,
+      "caseIntersectionX": 19.281857,
+      "movementCavityIntersectionX": 18.35647,
+      "crownCenterXPosition1": 19.8,
+      "crownCenterXPosition2": 21.15,
+      "crownTravel": 1.35
+    },
+    "assumptions": {
+      "caseBodyFrontY": -2.86,
+      "caseBodyBackY": 4.635,
+      "bezelBackY": -2.86,
+      "bezelInnerFrontY": -3.24,
+      "bezelOuterFrontY": -2.89,
+      "rehautBackY": -2.72,
+      "rehautFrontY": -2.86,
+      "dialBlankDiameter": 35,
+      "dialBlankBackY": -1.82,
+      "dialBlankFrontY": -2.02,
+      "dialCenterHoleClearance": 0.12,
+      "dialSmallSecondHoleClearance": 0.1,
+      "casebackWindowDiameter": 28.548,
+      "casebackWindowThickness": 0.38,
+      "casebackFrontOuterDiameter": 39,
+      "casebackRearOuterDiameter": 37.8,
+      "movementHolderOuterDiameter": 37.65,
+      "movementHolderInnerDiameter": 36.75,
+      "movementHolderCaseRadialClearance": 0.075,
+      "movementHolderMovementRadialClearance": 0.075,
+      "movementHolderCasebackClearance": 0.15,
+      "movementHolderEnvelopeOverlap": 0.2,
+      "movementHolderFrontY": 4.035,
+      "movementHolderBackY": 4.485,
+      "movementHolderAxialThickness": 0.45,
+      "crownConnectionOuterDiameter": 1.12,
+      "crownConnectionInnerDiameter": 0.52,
+      "crownConnectionAxialLength": 0.18,
+      "crownConnectionOuterX": 19.2
+    },
+    "annularProfiles": {
+      "bezel": {
+        "points": [
+          {
+            "role": "innerBack",
+            "radius": 14.9,
+            "y": -2.86
+          },
+          {
+            "role": "innerFront",
+            "radius": 14.9,
+            "y": -3.24
+          },
+          {
+            "role": "innerRetentionLandOuter",
+            "radius": 15.3,
+            "y": -3.24
+          },
+          {
+            "role": "primaryTaperOuter",
+            "radius": 18.5,
+            "y": -2.89
+          },
+          {
+            "role": "outerBack",
+            "radius": 19.4,
+            "y": -2.86
+          }
+        ],
+        "auditCriteria": {
+          "minimumPrimaryTaperCoverageRatio": 0.85,
+          "maximumInnerRetentionLandWidth": 0.4,
+          "maximumOuterClosureWidth": 1,
+          "expectedPrimarySlopeSign": 1,
+          "minimumOuterEdgeAxialThickness": 0.02,
+          "maximumOuterEdgeAxialThickness": 0.05
+        }
+      },
+      "casebackRing": {
+        "points": [
+          {
+            "role": "innerFront",
+            "radius": 14.274,
+            "y": 4.635
+          },
+          {
+            "role": "innerRear",
+            "radius": 14.274,
+            "y": 5.235
+          },
+          {
+            "role": "innerRetentionLandOuter",
+            "radius": 14.474,
+            "y": 5.235
+          },
+          {
+            "role": "primaryTaperOuter",
+            "radius": 18.9,
+            "y": 4.685
+          },
+          {
+            "role": "outerFront",
+            "radius": 19.5,
+            "y": 4.635
+          }
+        ],
+        "auditCriteria": {
+          "minimumPrimaryTaperCoverageRatio": 0.9,
+          "maximumInnerRetentionLandWidth": 0.3,
+          "maximumOuterClosureWidth": 0.7,
+          "expectedPrimarySlopeSign": -1,
+          "minimumOuterEdgeAxialThickness": 0.04,
+          "maximumOuterEdgeAxialThickness": 0.08
+        }
+      }
+    },
+    "caseBody": {
+      "innerRadius": 18.9,
+      "outerRadiusProfile": [
+        {
+          "y": -2.86,
+          "outerRadius": 19.45
+        },
+        {
+          "y": -2.18,
+          "outerRadius": 19.59
+        },
+        {
+          "y": -0.7,
+          "outerRadius": 19.8
+        },
+        {
+          "y": 1.25,
+          "outerRadius": 19.8
+        },
+        {
+          "y": 2.95,
+          "outerRadius": 19.59
+        },
+        {
+          "y": 4.635,
+          "outerRadius": 19.45
+        }
+      ],
+      "circumferentialSegments": 192,
+      "axialMaxStep": 0.06,
+      "crownRelief": {
+        "targetGap": 0.03,
+        "geometryMargin": 0.0005,
+        "legacyMaxDepth": 0.15,
+        "maximumDepth": 0.33,
+        "minimumWall": 0.55,
+        "transitionWidth": 0.16,
+        "smoothUnionWidth": 0.004
+      }
+    },
+    "protectedAnchors": {
+      "movementReferenceDiameter": 36.6,
+      "dialRingDiameter": 27.692,
+      "indexCircleDiameter": 25.456,
+      "minuteHandLength": 12.04,
+      "hourHandLength": 8.6,
+      "smallSecondRingDiameter": 7.74,
+      "smallSecondHandLength": 3.268,
+      "applicationYMin": -2.51,
+      "bridgeYMax": 4.235
+    },
+    "implementationAssumptionClassifications": {
+      "crownTubePosition1LocalSeat": "PHASE3B1_IMPLEMENTATION_ASSUMPTION"
+    },
+    "classifications": {
+      "crownFingerAccess": "HUMAN_ACCEPTED_PHASE3B1",
+      "crownPullPushOperability": "HUMAN_ACCEPTED_PHASE3B1",
+      "structuralOpacity50": "HUMAN_REVIEW_PENDING",
+      "gasket": "UNVERIFIED",
+      "thread": "UNVERIFIED",
+      "pressFit": "UNVERIFIED",
+      "waterResistance": "UNVERIFIED",
+      "manufacturingTolerance": "UNVERIFIED",
+      "movementHolderFixingMethod": "UNVERIFIED"
+    },
+    "scope": {
+      "included": [
+        "case body",
+        "bezel",
+        "crystal",
+        "rehaut",
+        "physical dial blank",
+        "caseback ring",
+        "transparent caseback window",
+        "movement holder ring",
+        "hollow crown tube",
+        "local crown connection candidate"
+      ],
+      "deferredToPhase3B2": [
+        "lugs",
+        "spring bars",
+        "strap",
+        "buckle",
+        "surface finish",
+        "water resistance",
+        "screw-down crown",
+        "manufacturing tolerances",
+        "luxury finish"
+      ]
+    }
+  }
+}

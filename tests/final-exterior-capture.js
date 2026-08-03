@@ -46,7 +46,11 @@ export async function runFinalExteriorCapture({
   width,
   height,
   cameraPreset,
+  distanceMultiplier = 1,
+  targetOffset = [0, 0, 0],
   readyKey,
+  appQuery = "dimensionAudit=1&theme=navy&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed",
+  prepare = null,
 }) {
   const frame = document.getElementById("auditApp");
   const output = document.getElementById("captureResult");
@@ -67,13 +71,20 @@ export async function runFinalExteriorCapture({
     document.body.dataset.captureStage = "waiting-for-iframe";
     document.body.dataset.captureError = "";
     document.body.dataset[readyKey] = "false";
-    frame.src = `../index.html?dimensionAudit=1&theme=navy&camera=${encodeURIComponent(
-      cameraPreset,
-    )}&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&capture=${encodeURIComponent(
-      captureId,
-    )}`;
+    output.dataset.captureId = captureId;
+    const query = new URLSearchParams(appQuery);
+    query.set("camera", cameraPreset);
+    query.set("capture", captureId);
+    frame.src = `../index.html?${query}`;
     const diagnostics = await waitForDiagnostics(frame);
-    await diagnostics.waitForFrames(8);
+    if (typeof prepare === "function") {
+      document.body.dataset.captureStage = "preparing-display-state";
+      await prepare({ frame, diagnostics });
+    }
+    // Let the smoothed render camera finish converging on the requested preset
+    // before taking the exact before/after state snapshot used by the capture
+    // invariant. This is especially important for the close keyless preset.
+    await diagnostics.waitForFrames(90);
     const before = {
       transformSignature: diagnostics.getDimensionDiagnostics({ includeScreenSpace: false })
         .transformInvariant,
@@ -88,7 +99,18 @@ export async function runFinalExteriorCapture({
       screenSpace: diagnostics.getDimensionDiagnostics({ includeScreenSpace: true }).screenSpace,
     };
     document.body.dataset.captureStage = "rendering-offscreen";
-    const capture = await diagnostics.captureAuditViewportPng({ width, height, cameraPreset });
+    const capture = (
+      distanceMultiplier !== 1
+      || targetOffset.some(value => Number(value) !== 0)
+    )
+      ? await diagnostics.capturePhase3C2AuditViewportPng({
+        width,
+        height,
+        cameraPreset,
+        distanceMultiplier,
+        targetOffset,
+      })
+      : await diagnostics.captureAuditViewportPng({ width, height, cameraPreset });
     if (!capture?.blob || capture.blob.type !== "image/png") {
       throw new Error("capture API did not return a PNG Blob");
     }
@@ -119,6 +141,8 @@ export async function runFinalExteriorCapture({
       captureMode:
         "same-origin unsandboxed iframe harness - actual Three.js scene rendered to offscreen WebGLRenderTarget",
       cameraPreset: capture.metadata.cameraPreset,
+      distanceMultiplier: capture.metadata.distanceMultiplier,
+      targetOffset: capture.metadata.targetOffset,
       width: capture.metadata.renderTargetWidth,
       height: capture.metadata.renderTargetHeight,
       mimeType: capture.blob.type,
@@ -138,6 +162,7 @@ export async function runFinalExteriorCapture({
     };
     output.textContent = JSON.stringify({ ok: true, metadata }, null, 2);
     output.dataset.status = "passed";
+    output.dataset.captureId = captureId;
     log.textContent = JSON.stringify(
       {
         captureId,

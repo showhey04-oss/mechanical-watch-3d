@@ -16,12 +16,13 @@ test('Phase 2C capture renders to an explicit offscreen WebGL target',()=>{
  assert.doesNotMatch(indexSource,/captureAuditCanvasPng/);
 });
 
-test('Phase 2C capture restores renderer, camera, controls, model, and mechanism state',()=>{
- for(const token of ['previousTarget','previousViewport','previousScissor','previousScissorTest','previousCamera','controlsTarget','renderTarget','desiredZoomDistance','transformSignature','modelWorldSignature','mechanismState'])assert.match(indexSource,new RegExp(token));
+test('Phase 2C capture restores renderer state and never mutates the live camera, controls, model, or mechanism',()=>{
+ for(const token of ['previousTarget','previousViewport','previousScissor','previousScissorTest','captureCamera','controlsTarget','renderTarget','desiredZoomDistance','transformSignature','modelWorldSignature','mechanismState'])assert.match(indexSource,new RegExp(token));
  assert.match(indexSource,/finally\{/);
  assert.match(indexSource,/renderer\.setRenderTarget\(previousTarget\)/);
- assert.match(indexSource,/camera\.projectionMatrix\.copy\(previousCamera\.projectionMatrix\)/);
- assert.match(indexSource,/camera\.projectionMatrixInverse\.copy\(previousCamera\.projectionMatrixInverse\)/);
+ assert.match(captureSource,/captureCamera=camera\.clone\(\)/);
+ assert.match(captureSource,/renderer\.render\(scene,captureCamera\)/);
+ assert.doesNotMatch(captureSource,/camera\.position\.copy\(position\)/);
  assert.match(indexSource,/stateInvariant=\{\.\.\.checks,all:Object\.values\(checks\)\.every\(Boolean\)\}/);
 });
 

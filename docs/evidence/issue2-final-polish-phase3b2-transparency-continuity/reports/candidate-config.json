@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "sourceMainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBaseCommit": "4f9e3f14f66317c4ce363a3393639b15ca3b05f1",
+  "sourceImplementationCommit": "da600b11552185129a9f3e16f2ab55002df8972a",
+  "sourceBranch": "feature/issue2-final-polish-phase3b2-transparency-continuity",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
+  "queryOnly": true,
+  "defaultAdopted": false,
+  "candidates": {
+    "issue2-current": {
+      "policy": "current",
+      "enabled": true,
+      "renderingBaselines": [
+        "issue2-phase3b1c-shadow-off",
+        "issue2-d2c3"
+      ],
+      "queryOnly": true,
+      "opacityThresholdPolicy": true,
+      "groupDepthWriteOff": [
+        "dial",
+        "exterior",
+        "plate",
+        "bridge"
+      ]
+    },
+    "issue2-stable-depth-off": {
+      "policy": "stable-depth-off",
+      "enabled": true,
+      "renderingBaselines": [
+        "issue2-phase3b1c-shadow-off",
+        "issue2-d2c3"
+      ],
+      "queryOnly": true,
+      "opacityThresholdPolicy": false,
+      "groupDepthWriteOff": [
+        "dial",
+        "exterior",
+        "plate",
+        "bridge"
+      ]
+    },
+    "issue2-stable-depth-base": {
+      "policy": "stable-depth-base",
+      "enabled": true,
+      "renderingBaselines": [
+        "issue2-phase3b1c-shadow-off",
+        "issue2-d2c3"
+      ],
+      "queryOnly": true,
+      "opacityThresholdPolicy": false,
+      "groupDepthWriteOff": [
+        "dial",
+        "exterior",
+        "plate",
+        "bridge"
+      ]
+    },
+    "issue2-group-stable-depth": {
+      "policy": "group-stable-depth",
+      "enabled": true,
+      "renderingBaselines": [
+        "issue2-phase3b1c-shadow-off",
+        "issue2-d2c3"
+      ],
+      "queryOnly": true,
+      "opacityThresholdPolicy": false,
+      "groupDepthWriteOff": [
+        "dial",
+        "exterior",
+        "plate",
+        "bridge"
+      ]
+    }
+  },
+  "forbiddenMethodsAbsent": [
+    "alphaHash",
+    "ordered dithering",
+    "custom shader transparency",
+    "weighted blended OIT",
+    "depth peeling",
+    "duplicate geometry pass",
+    "customDepthMaterial",
+    "alphaTest addition"
+  ]
+}

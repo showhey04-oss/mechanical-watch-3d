@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Phase 3B.1 candidate capture</title>
+  <style>
+    html,body{margin:0;background:#101820;color:#eef3f8;font:13px system-ui}
+    iframe{width:640px;height:480px;border:0;display:block}
+    output,pre{white-space:pre-wrap;word-break:break-word}
+  </style>
+</head>
+<body data-audit-status="queued" data-capture-stage="queued" data-phase3b1-capture-ready="false">
+  <iframe id="auditApp" title="Mechanical watch candidate capture"></iframe>
+  <output id="captureResult" data-status="queued"></output>
+  <pre id="captureLog"></pre>
+  <div id="phase3aCaptureChunks" hidden></div>
+  <script type="module">
+    import {runFinalExteriorCapture} from "./final-exterior-capture.js";
+    const params = new URLSearchParams(location.search);
+    const width = Math.max(320, Number(params.get("width")) || 1280);
+    const height = Math.max(480, Number(params.get("height")) || 720);
+    const cameraPreset = params.get("camera") || "reset";
+    const displayMode = params.get("display") || "normal";
+    const appQuery = params.get("appQuery") || [
+      "exterior=balanced",
+      "dimensionAudit=1",
+      "theme=navy",
+      "time=10%3A10%3A30",
+      "paused=1",
+      "opacity=1",
+      "panel=collapsed",
+    ].join("&");
+    runFinalExteriorCapture({
+      captureId: params.get("captureId") || "phase3b1-candidate",
+      width,
+      height,
+      cameraPreset,
+      readyKey: "phase3b1CaptureReady",
+      appQuery,
+      prepare: displayMode === "normal"
+        ? null
+        : async ({frame, diagnostics}) => {
+          const setRange = (id, value) => {
+            const control = frame.contentDocument.getElementById(id);
+            control.value = String(value);
+            control.dispatchEvent(
+              new frame.contentWindow.Event("input", { bubbles: true }),
+            );
+          };
+          if (displayMode === "split") {
+            setRange("sideSplit", 100);
+          } else if (displayMode === "explode") {
+            setRange("explode", 100);
+          } else if (displayMode === "restore") {
+            setRange("sideSplit", 100);
+            setRange("explode", 100);
+            await diagnostics.waitForFrames(4);
+            setRange("sideSplit", 0);
+            setRange("explode", 0);
+          } else {
+            throw new Error(`unknown display mode: ${displayMode}`);
+          }
+          await diagnostics.waitForFrames(4);
+        },
+    });
+  </script>
+</body>
+</html>

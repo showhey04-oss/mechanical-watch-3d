@@ -313,7 +313,12 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
   diagnostics.setFunctionalMode("all");
   panelTabs.activate("operation");
   const toggleCards = diagnostics.getToggleCardReport();
-  check("hud-toggle-card-covers-sixteen-existing-checkboxes", toggleCards.length === 16 && toggleCards.filter(({ id }) => id).length === 7 && toggleCards.filter(({ group }) => group).length === 9, toggleCards.map(({ id, group, text }) => ({ id, group, text })));
+  const candidateExteriorTogglePresent = toggleCards.some(
+    ({ group }) => group === "exterior",
+  );
+  const expectedToggleCardCount = candidateExteriorTogglePresent ? 17 : 16;
+  const expectedGroupToggleCount = candidateExteriorTogglePresent ? 10 : 9;
+  check("hud-toggle-card-covers-sixteen-existing-checkboxes", toggleCards.length === expectedToggleCardCount && toggleCards.filter(({ id }) => id).length === 7 && toggleCards.filter(({ group }) => group).length === expectedGroupToggleCount, toggleCards.map(({ id, group, text }) => ({ id, group, text })));
   const visibleToggleCards = toggleCards.filter(({ card }) => card.rect.width > 0 && card.rect.height > 0);
   check("hud-toggle-card-keeps-native-input-focusable-and-label-layout-compact", toggleCards.every((card) => card.input.display !== "none" && card.card.display === "flex" && card.card.justifyContent === "flex-start" && Math.abs(parseFloat(card.card.gap) - 9) <= 0.1) && visibleToggleCards.every((card) => card.layout.minHeightMet && card.text.rightInsideCard), toggleCards);
   check("hud-toggle-card-state-matches-existing-model-bindings", toggleCards.every(({ modelMatches }) => modelMatches), toggleCards);
@@ -392,7 +397,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
       keyboardModelMatches: restored.modelMatches,
     });
   }
-  check("hud-toggle-card-all-sixteen-support-touch-and-native-keyboard-activation", allToggleInteractions.length === 16 && allToggleInteractions.every((entry) => entry.touchPointerObserved && entry.touchChanged && entry.touchModelMatches && entry.keyboardEventObserved && entry.keyboardFocused && entry.keyboardRestored && entry.keyboardModelMatches), allToggleInteractions);
+  check("hud-toggle-card-all-sixteen-support-touch-and-native-keyboard-activation", allToggleInteractions.length === expectedToggleCardCount && allToggleInteractions.every((entry) => entry.touchPointerObserved && entry.touchChanged && entry.touchModelMatches && entry.keyboardEventObserved && entry.keyboardFocused && entry.keyboardRestored && entry.keyboardModelMatches), allToggleInteractions);
   panelTabs.activate("operation");
 
   if (layout.mobile) {
@@ -455,7 +460,7 @@ export async function runMobileOverlayHudIntegrationTest(diagnostics, panelTabs)
     }
     panelTabs.activate("operation");
     const visibleMobileCards = mobileToggleCardsByTab.flatMap(({ cards }) => cards);
-    check("hud-mobile-toggle-cards-stay-within-viewport", visibleMobileCards.length === 16 && visibleMobileCards.every(({ layout: cardLayout }) => cardLayout.insideViewport && cardLayout.minHeightMet), mobileToggleCardsByTab);
+    check("hud-mobile-toggle-cards-stay-within-viewport", visibleMobileCards.length === expectedToggleCardCount && visibleMobileCards.every(({ layout: cardLayout }) => cardLayout.insideViewport && cardLayout.minHeightMet), mobileToggleCardsByTab);
 
     diagnostics.setCrownPosition("wind");
     await diagnostics.waitForFrames(36);
