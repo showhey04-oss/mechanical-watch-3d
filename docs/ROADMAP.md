@@ -13,7 +13,7 @@
 - GitHub Pagesのmain buildと公開rootを検証し、APP_VERSION v3.15.0を維持する
 - Issue #2は`CLOSE_AS_NOT_PLANNED_ACCEPTED_LIMITATION`、PR #5は`CLOSE_AS_SUPERSEDED_WITHOUT_MERGE`をHuman判断への推奨とするが、本PRでは変更しない
 - Phase 3B.4dは`DEFER_POST_COMPLETION_IMPROVEMENT`、OITとpost-Issue-2 Geometry cleanupも完成後の任意改善とする
-- 旧Draft期待値2件による463/465はPR #28内の既存テスト整合で解消し、Node 465/465・skip 0、blocking count 0を確認した。試験閾値と製品コードは変更せず、状態を`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`とする。本体完成宣言はHumanの明示判断を待つ
+- 旧Draft期待値2件はNode 465/465・skip 0へ解消済みである。新たにHuman報告された物理iPhone時刻入力欄の右端overflowを`BODY_COMPLETION_BLOCKER`として局所修正し、native picker、時刻反映、横スクロールなしを物理iPhoneで再確認するまで`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`、blocking count 1を維持する
 
 ### PR #27 / v3.15.0 — Completed Watch Default Adoption
 

@@ -2,9 +2,9 @@
 
 ## 結論
 
-PR #27のcompleted-watch default adoptionはmainへ正しく統合され、製品treeとGitHub Pages公開は一致している。監査開始時に検出した、PR #27マージ前のDraft期待値を保持するNode 2件は、PR #28内で現在のHuman accepted／merged証跡へ整合した。Nodeは465/465・skip 0へ復旧したが、本体完成宣言はHumanの明示判断を待つ。
+PR #27のcompleted-watch default adoptionはmainへ正しく統合され、製品treeとGitHub Pages公開は一致している。PR #27マージ前のDraft期待値を保持していたNode 2件は、PR #28内でHuman accepted／merged証跡へ整合し、465/465・skip 0へ復旧した。その後、物理iPhoneで時刻入力欄の右端overflowがHuman報告されたため、局所UI修正と実機再確認まで本体完成宣言をブロックする。
 
-正式判定は`POST_DEFAULT_ADOPTION_PRODUCT_PAGES_AND_ACCEPTANCE_TESTS_RECONCILED`である。
+製品・Pages・受入テストのreconciliationは`POST_DEFAULT_ADOPTION_PRODUCT_PAGES_AND_ACCEPTANCE_TESTS_RECONCILED`を維持する。本体完成ゲートは`IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW_HUMAN_REPORTED`により`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`である。
 
 ## 固定点
 
@@ -50,4 +50,4 @@ GitHub Pagesはmain／rootをsourceとするlegacy buildで、main `155275d0aaeb
 
 ## 次の判断
 
-旧Draft期待値2件は同じPR #28内で閉鎖され、body completion blocking countは0になった。次の状態は`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`である。Humanはこの技術ゲートを根拠に本体完成を宣言するか、具体的な追加blockerを記録する。本監査自身は完成宣言、PR Ready化・マージ、Issue／PR closeを行わない。
+旧Draft期待値2件は同じPR #28内で閉鎖済みである。新しいblocking count 1はmobile time-setting UIに限定し、mainから独立した局所修正PRでnative time input layoutを直した後、物理iPhoneで時刻合わせを再確認する。修正PRのHuman受入とmainマージ後にPR #28を最新mainへ整合し、blocking count 0を再評価する。本監査自身は完成宣言、PR Ready化・マージ、Issue／PR closeを行わない。

@@ -6,7 +6,7 @@
   "modes": [
     {
       "id": "watch",
-      "status": "PASS",
+      "status": "BLOCKED",
       "requirements": [
         "completed watch default presentation",
         "time display",
@@ -19,6 +19,9 @@
       "humanEvidence": "PC and physical iPhone overall PASS recorded for PR #27",
       "acceptedLimitations": [
         "Ambiguous individual Human template subfields are preserved without inferred PASS values."
+      ],
+      "blockers": [
+        "Physical-iPhone time input right-edge overflow must be fixed and time setting reconfirmed."
       ]
     },
     {
@@ -57,7 +60,7 @@
       ]
     }
   ],
-  "blockingModeCount": 0,
+  "blockingModeCount": 1,
   "deferredPostCompletion": [
     "Phase 3B.4d",
     "OIT",

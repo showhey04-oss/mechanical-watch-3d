@@ -2,11 +2,11 @@
 
 ## 結論
 
-技術ゲート判定は`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`である。completed-watch製品、Human受入、main統合、GitHub Pages公開、3モードの要求範囲に加え、PR #28内の受入状態テスト整合を確認した。
+技術ゲート判定は`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`である。PR #28内の受入状態テスト整合はNode 465/465・skip 0で完了しているが、物理iPhoneで時計モードの時刻入力欄が画面右端からはみ出すHuman報告を受けた。
 
-blocking countは0である。Nodeは465/465、fail 0、skip 0である。
+blocking countは1である。blockerは`IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW`、scopeはmobile time-setting UI、`productDefect: true`である。native time-input layoutを修正し、物理iPhoneで時刻合わせを再確認するまで本体完成を宣言しない。
 
-これは本体完成の自動宣言ではない。Humanはこの技術ゲートを根拠に本体完成を宣言するか、具体的な追加blockerを記録する。PR #28はOpen／Draftを維持し、Ready化・マージ・Issue／PR closeは行わない。
+正式分類は`IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW_HUMAN_REPORTED`、`CORE_TIME_SETTING_UI_RESPONSIVE_DEFECT`、`BODY_COMPLETION_BLOCKER`、`POST_COMPLETION_DEFERRAL_NOT_APPROPRIATE`である。Geometry、機構、描画、音響の不具合ではない。PR #28はOpen／Draftを維持し、Ready化・マージ・Issue／PR closeは行わない。
 
 ## 解消済みの履歴上の不整合
 
@@ -18,7 +18,7 @@ PR #28内で既存テストの期待値だけを、保存済みのHuman accepted
 
 | モード | 判定 | 根拠 | 制約 |
 |---|---|---|---|
-| 時計モード | `PASS` | completed-watch default、時刻表示、巻上げ、時刻合わせ、秒停止、パワーリザーブ、初期OFF作動音をPC／物理iPhoneでHuman確認 | Human提出テンプレートの一部個別欄は単独選択されていないため推測で補完しない |
+| 時計モード | `BLOCKED` | completed-watch defaultと主要機能は受入済みだが、物理iPhoneの時刻入力欄に右端overflowがHuman報告された | native inputをviewport／panel内へ収め、時刻反映と現在時刻設定を物理iPhoneで再確認する |
 | 機構観察モード | `PASS_WITH_ACCEPTED_LIMITATION` | 全方向camera、表裏、透過、split、explode、選択、動力経路、脱進機、テンプを統合済み | 100/99・55/54透過不連続、clean-process absolute性能未測定を受容済み制約として保持 |
 | 学習モード | `PASS` | 部品名称、機能、動力経路、HUD／学習タブ同期を実装・確認 | 厳密な組立順序・組立／分解手順は完成条件外 |
 
@@ -46,9 +46,4 @@ PR #28内で既存テストの期待値だけを、保存済みのHuman accepted
 
 ## Human最終判断
 
-PR #28は、Issue #2／PR #5の推奨とblocking count 0の技術ゲートを提示する。Humanは次のいずれかを明示判断する。
-
-- 本体完成を宣言する
-- 具体的な追加blockerを記録して継続する
-
-本監査自身は本体完成を宣言しない。
+PR #28はblocking count 1を記録し、本体完成を宣言しない。局所修正PRのHuman受入とmainマージ後に最新mainへ整合し、時計モード`PASS`、blocking count 0、`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`を再評価する。

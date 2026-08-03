@@ -9,7 +9,7 @@
 - PR #27のNative Safari／物理iPhone Human受入は製品tree exactを根拠に継承し、新しいHuman PASSへ読み替えない
 - Node全465件を実行し、465/465、fail 0、skip 0を要求する。Human accepted状態、明示マージ承認、曖昧なHuman提出欄の原文保持を既存証跡値と完全一致で検証し、テスト削除・skip・閾値緩和を行わない
 - Issue #2／PR #5は監査と推奨だけを記録し、本PRでclose／変更しない。Phase 3B.4d、OIT、post-Issue-2 Geometry cleanupを開始しない
-- body completionのblocking count 0とNode 465/465を確認したため、`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`を技術ゲート状態とする。本体完成宣言、PR #28のReady化・マージ、Issue／PR closeはこの状態に含めない
+- Node 465/465は維持するが、物理iPhoneの時刻入力欄がviewport／panel内へ収まり、横スクロールなし、native picker、指定時刻反映、現在時刻設定をHumanが再確認するまでbody completion blocking count 1、`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`とする
 
 ## Completed Watch Default Adoption Draft（PR #27マージ前の履歴）
 

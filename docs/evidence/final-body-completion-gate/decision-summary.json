@@ -7,9 +7,23 @@
   "sourceAcceptanceCommit": "795223bfb2804fc8b7e058ac36245c1f4c650e36",
   "sourceBranch": "docs/post-default-adoption-completion-gate",
   "appVersion": "v3.15.0",
-  "status": "MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION",
-  "blockingCount": 0,
-  "blockers": [],
+  "status": "MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED",
+  "blockingCount": 1,
+  "blockers": [
+    {
+      "id": "IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW",
+      "classification": [
+        "IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW_HUMAN_REPORTED",
+        "CORE_TIME_SETTING_UI_RESPONSIVE_DEFECT",
+        "BODY_COMPLETION_BLOCKER",
+        "POST_COMPLETION_DEFERRAL_NOT_APPROPRIATE"
+      ],
+      "scope": "mobile time-setting UI",
+      "affectedMode": "watch",
+      "requiredClosure": "Fix native time-input layout on physical iPhone and reconfirm time setting.",
+      "productDefect": true
+    }
+  ],
   "resolvedHistoricalFinding": {
     "id": "POST_ADOPTION_NODE_ACCEPTANCE_STATE_EXPECTATION_MISMATCH",
     "scope": "tests/final-completed-watch-default-evidence.test.mjs",
@@ -61,7 +75,7 @@
     "defaultProfile": "completed-watch"
   },
   "modes": {
-    "watch": "PASS",
+    "watch": "BLOCKED",
     "mechanismObservation": "PASS_WITH_ACCEPTED_LIMITATION",
     "learning": "PASS"
   },
