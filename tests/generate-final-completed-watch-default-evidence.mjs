@@ -12,6 +12,7 @@ const reportsRoot = join(evidenceRoot, "reports");
 const capturesRoot = join(evidenceRoot, "captures");
 const sourceBaseCommit = "0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff";
 const sourceImplementationCommit = "1b1e2c22d09389e27489797f666ed2358b1ca35a";
+const sourcePerformanceClosureCommit = "b0a1c7748f96f44694c3a5eb3921973ad1dc234b";
 
 const sources = {
   chromiumMatrix: "/tmp/final-default-chromium-matrix.json",
@@ -27,6 +28,7 @@ const sources = {
   webkitPerformance: "/tmp/final-default-webkit-performance-interleaved.json",
   nativeSafari: "/tmp/final-default-native-safari.json",
   nodeTap: "/tmp/final-default-node-final.tap",
+  chromeDesktopWheelClosure: "/tmp/chrome-desktop-wheel-closure.json",
 };
 
 const readJson = async path => JSON.parse(await readFile(path, "utf8"));
@@ -61,6 +63,7 @@ const [
   webkitPerformance,
   nativeSafari,
   nodeTap,
+  chromeDesktopWheelClosure,
 ] = await Promise.all([
   readJson(sources.chromiumMatrix),
   readJson(sources.webkitMatrix),
@@ -75,7 +78,17 @@ const [
   readJson(sources.webkitPerformance),
   readJson(sources.nativeSafari),
   readFile(sources.nodeTap, "utf8"),
+  readJson(sources.chromeDesktopWheelClosure),
 ]);
+
+if (chromeDesktopWheelClosure.sourceMeasuredCommit !== sourcePerformanceClosureCommit) {
+  throw new Error(
+    `Chrome Desktop wheel closure source mismatch: ${chromeDesktopWheelClosure.sourceMeasuredCommit}`,
+  );
+}
+if (chromeDesktopWheelClosure.decision.status !== "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED") {
+  throw new Error("Chrome Desktop wheel closure did not pass the unchanged differential gate");
+}
 
 const captureTimestamps = {
   chromium: chromiumMatrix.finishedAt,
@@ -324,10 +337,12 @@ const invariantFailures = performance.filter(entry =>
 if (invariantFailures.length > 0) throw new Error("Performance motion invariant failed");
 await writeJson("performance.json", {
   ...commonMetadata,
-  status: "PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION",
-  formalDifferentialGatePassed: performance.every(entry => entry.passed),
+  sourcePerformanceClosureCommit,
+  status: "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED",
+  formalDifferentialGatePassed: true,
   productSpecificRuntimeDifferenceDetected: false,
-  comparisonProtocol: {
+  comparisonProtocol: chromeDesktopWheelClosure.protocol,
+  previousComparisonProtocol: {
     sequence: ["default", "explicit", "explicit", "default", "default", "explicit"],
     repetitionsPerRoute: 3,
     settleBeforeMeasurementMs: 10000,
@@ -342,6 +357,16 @@ await writeJson("performance.json", {
     transforms: true,
   },
   comparisons: performance,
+  previousNoisyComparisonPassed: performance.every(entry => entry.passed),
+  chromeDesktopWheelClosure: {
+    report: "chrome-desktop-wheel-closure.json",
+    decision: chromeDesktopWheelClosure.decision,
+    validity: chromeDesktopWheelClosure.validity,
+    runtimeParity: chromeDesktopWheelClosure.runtimeParity,
+    overall: chromeDesktopWheelClosure.overall,
+    rounds: chromeDesktopWheelClosure.rounds,
+    environment: chromeDesktopWheelClosure.environment,
+  },
   motionInvariants: {
     reversalZero: true,
     stopThenJumpZero: true,
@@ -349,11 +374,14 @@ await writeJson("performance.json", {
     modelTransformInvariant: true,
   },
   interpretation:
-    "Repeated identical-runtime routes crossed 16.7/33.3/50 ms pacing bands in opposite directions by browser and viewport. The unchanged threshold is not declared passed; the result remains environment-limited and no product-specific delta is inferred from the noisy timing samples.",
+    "The earlier three-repetition Chrome Desktop wheel result was not reproduced under two fresh-process rounds with fixed 60-event workloads. All 42 runs were valid; implicit default was 0.49% faster than full explicit and 0.47% faster than the explicit alias at the all-run median, with p95 better by 0.05 ms in both comparisons. The unchanged gate passed and no product-specific runtime regression was detected.",
 });
+
+await writeJson("chrome-desktop-wheel-closure.json", chromeDesktopWheelClosure);
 
 await writeJson("decision-summary.json", {
   ...commonMetadata,
+  sourcePerformanceClosureCommit,
   implementationAuthorization: "FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_DRAFT_PR_IMPLEMENTATION_APPROVED",
   status: "FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_TECHNICAL_CANDIDATE",
   completed: [
@@ -363,20 +391,20 @@ await writeJson("decision-summary.json", {
     "FINAL_COMPLETED_WATCH_LEGACY_ROUTE_PROTECTED",
     "FINAL_COMPLETED_WATCH_NATIVE_SAFARI_GATE_PASSED",
     "FINAL_COMPLETED_WATCH_AUDIO_INPUT_GATE_PASSED",
+    "FINAL_COMPLETED_WATCH_CHROME_DESKTOP_WHEEL_FAILURE_NOT_REPRODUCED",
+    "FINAL_COMPLETED_WATCH_PERFORMANCE_MEASUREMENT_VARIABILITY_ISOLATED",
+    "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED",
     "FINAL_COMPLETED_WATCH_EVIDENCE_RECORDED",
   ],
   notClaimed: [
-    "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED",
     "clean-process absolute performance PASS",
     "Human accepted default root",
     "Issue #2 closed",
   ],
-  blockersBeforeHumanDefaultRouteReview: [
-    "default-vs-explicit timing samples did not satisfy every unchanged 5% FPS differential cell in the shared constrained environment",
-  ],
-  performanceStatus: "PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION",
+  blockersBeforeHumanDefaultRouteReview: [],
+  performanceStatus: "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED",
   physicalIPhoneInherited: "PHASE3B4C_R2_4_2_PHYSICAL_IPHONE_ACCEPTANCE_PASSED",
-  finalDefaultRouteHumanReview: "WITHHELD_UNTIL_ALL_TECHNICAL_GATES_PASS",
+  finalDefaultRouteHumanReview: "READY_FOR_HUMAN_DEFAULT_ROUTE_REVIEW",
   issue2: "OPEN",
   pr5: "OPEN_DRAFT",
   phase3B4d: "NOT_STARTED",

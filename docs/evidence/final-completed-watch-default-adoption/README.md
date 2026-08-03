@@ -24,8 +24,12 @@
 
 ## 性能制約
 
-defaultとexplicitはcanvas、inventory、camera、lighting、transformがexactである。修正後Headの同一環境反復測定は12セル中11セルが合格し、Chrome Desktop wheelの1セルだけがFPS悪化6.14%で未達だった。`reports/performance.json`は未達をそのまま保存し、`FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED`やclean-process absolute PASSを主張しない。製品閾値の変更は0である。
+defaultとexplicitはcanvas、inventory、camera、lighting、transformがexactである。先行測定のChrome Desktop wheel 6.14%差は、時間駆動loopでwheel件数がrun間一致しない測定契約を含んでいたため、製品修正前に原因分離した。
+
+`reports/chrome-desktop-wheel-closure.json`はInstalled Chrome 151.0.7922.72、1280×720で、I（暗黙default）、A（`defaultProfile=completed-watch`）、E（明示12-key）を2つのfresh browser processで各7回、合計42有効runとして保存する。各runはfresh page、10秒settle、`canvas#app`への60 wheel event、50ms interval、固定1秒settleで、dispatch／receive／pacing countはすべて60、console／runtime／unhandled rejectionは0である。
+
+全14 run中央値はI 34.7011fps／p95 34.05ms、A 34.5370fps／34.10ms、E 34.5302fps／34.10msだった。IはE比0.49%、A比0.47%速く、p95も両比較で0.05ms良好だったため、変更していない5%／2ms差分閾値に合格した。正式分類は`FINAL_COMPLETED_WATCH_CHROME_DESKTOP_WHEEL_FAILURE_NOT_REPRODUCED`、`FINAL_COMPLETED_WATCH_PERFORMANCE_MEASUREMENT_VARIABILITY_ISOLATED`、`FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED`である。McAfee／endpoint securityは停止せず、各runのloadとprocess inventoryをraw reportへ保存した。clean-process absolute PASSやHuman受入は主張しない。
 
 ## Manifest
 
-`reports/evidence-manifest.json`は本ファイル、8 report、4 captureをclosed-worldで列挙する。manifest自身は自己参照を避けるため対象外とし、`missing`、`unexpected`、`shaMismatch`をすべて空配列とする。
+`reports/evidence-manifest.json`は本ファイル、9 report、4 captureをclosed-worldで列挙する。manifest自身は自己参照を避けるため対象外とし、`missing`、`unexpected`、`shaMismatch`をすべて空配列とする。

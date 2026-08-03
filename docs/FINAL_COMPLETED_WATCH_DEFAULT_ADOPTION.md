@@ -40,9 +40,13 @@ raw queryとeffective queryを分離し、実URL、`location.search`、history�
 
 ## 性能判断
 
-default rootと明示統合queryは、描画時のruntime・canvas・inventory・camera・lighting・transformがexactである。一方、同一browserで`default → explicit → explicit → default → default → explicit`を3反復した再測定は、12セル中11セルが既存のFPS 5%・p95 2ms差分閾値内だったが、Chrome Desktop wheelの1セルはFPS悪化6.14%で未達だった。
+default rootと明示統合queryは、描画時のruntime・canvas・inventory・camera・lighting・transformがexactである。先行する3反復測定ではChrome Desktop wheelの1セルにFPS悪化6.14%が出たが、正式閉鎖測定の最初の試行で時間駆動loopがI=57件、E=56件となり、wheel workloadが同数でないことを検出した。この試行は統計から除外し、製品コードを変更せず、公開済み性能計測APIを使うリポジトリ外runnerで60件×50msへ固定した。
 
-したがって`FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED`は主張しない。状態は既存の`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を維持し、reversal 0、stop-then-jump 0、wheel monotonic、model transform invariantだけを確認済みとする。閾値、DPR、描画設定、製品コードを測定環境へ合わせて変更していない。
+Installed Chrome 151.0.7922.72、1280×720で、I（暗黙default）、A（明示alias）、E（明示12-key）を指定順序の2ラウンド、各route 7回ずつ測定した。全42 runはwheel dispatch／receive／pacing 60/60、reversal 0、stop-then-jump 0、zoom monotonic、model transform invariant、console／runtime／unhandled rejection 0で有効だった。
+
+全14 run中央値はI 34.7011fps／p95 34.05ms、A 34.5370fps／34.10ms、E 34.5302fps／34.10msである。I対EのFPS悪化率は-0.49%、p95差は-0.05ms、I対Aは-0.47%／-0.05msで、両ラウンド単独も5%／2ms差分閾値に合格した。McAfee／endpoint securityを停止せず、1分load average中央値7.46、security process CPU合計中央値207.95%の背景変動を各runへ記録した。
+
+正式分類は`FINAL_COMPLETED_WATCH_CHROME_DESKTOP_WHEEL_FAILURE_NOT_REPRODUCED`、`FINAL_COMPLETED_WATCH_PERFORMANCE_MEASUREMENT_VARIABILITY_ISOLATED`、`FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED`である。default profile resolver、`URLSearchParams`、diagnostics、body datasetは初期化時だけで、wheel handler／animation loopに暗黙route固有の反復処理はない。閾値、DPR、描画設定、製品コードは変更しておらず、clean-process absolute性能PASSは主張しない。
 
 ## 変更していない範囲
 
@@ -50,4 +54,4 @@ Geometry、機構、歯車比、位相、S86、Phase 2C、D2c3値、PMREM、fog�
 
 ## 次の判断
 
-Draft PRは技術候補として保持する。性能差分の全セル合格が確認できるまでは、固定commitのHuman最終root URLを提示せず、`PHYSICAL_IPHONE_FINAL_DEFAULT_ROUTE_REVIEW_REQUIRED`を実施済みにしない。Issue #2はOpen、PR #5はOpen／Draftを維持する。
+Draft PRは技術候補として保持する。Chrome Desktop wheel差分ゲート、manifest、既存independent review 0/0/0が揃ったため、固定commitの通常rootとlegacy routeをHuman最終確認へ提示できる。ただしHuman受入は行っていないため、`PHYSICAL_IPHONE_FINAL_DEFAULT_ROUTE_REVIEW_REQUIRED`を実施済みにせず、Ready化・マージもしない。Issue #2はOpen、PR #5はOpen／Draftを維持する。

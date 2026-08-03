@@ -31,10 +31,12 @@ test("default-adoption reports preserve the exact implementation source and deci
   const decision = await readJson("decision-summary.json");
   assert.equal(decision.sourceBaseCommit, "0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff");
   assert.equal(decision.sourceImplementationCommit, "1b1e2c22d09389e27489797f666ed2358b1ca35a");
+  assert.equal(decision.sourcePerformanceClosureCommit, "b0a1c7748f96f44694c3a5eb3921973ad1dc234b");
   assert.equal(decision.appVersion, "v3.15.0");
   assert.equal(decision.status, "FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_TECHNICAL_CANDIDATE");
-  assert.ok(decision.notClaimed.includes("FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED"));
-  assert.equal(decision.finalDefaultRouteHumanReview, "WITHHELD_UNTIL_ALL_TECHNICAL_GATES_PASS");
+  assert.ok(decision.completed.includes("FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED"));
+  assert.equal(decision.blockersBeforeHumanDefaultRouteReview.length, 0);
+  assert.equal(decision.finalDefaultRouteHumanReview, "READY_FOR_HUMAN_DEFAULT_ROUTE_REVIEW");
   assert.equal(decision.geometryChanged, false);
   assert.equal(decision.mechanismChanged, false);
   assert.equal(decision.audioAssetsOrGainsChanged, false);
@@ -76,16 +78,23 @@ test("Native Safari default root passed actual Web Audio and trusted gesture gat
   }
 });
 
-test("performance report keeps unchanged thresholds and does not overclaim the noisy differential", async () => {
+test("performance report closes the noisy Chrome wheel differential with fixed paired workloads", async () => {
   const performance = await readJson("performance.json");
-  assert.equal(performance.status, "PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION");
-  assert.equal(performance.formalDifferentialGatePassed, false);
+  const closure = await readJson("chrome-desktop-wheel-closure.json");
+  assert.equal(performance.status, "FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED");
+  assert.equal(performance.formalDifferentialGatePassed, true);
   assert.equal(performance.productSpecificRuntimeDifferenceDetected, false);
-  assert.deepEqual(performance.comparisonProtocol.thresholds, {
-    averageFpsDegradationMax: 0.05,
-    p95DegradationMaxMs: 2,
-  });
+  assert.equal(performance.sourcePerformanceClosureCommit, "b0a1c7748f96f44694c3a5eb3921973ad1dc234b");
+  assert.equal(performance.comparisonProtocol.thresholdsUnchanged, true);
   assert.equal(performance.comparisons.length, 12);
+  assert.equal(closure.validity.validRuns, 42);
+  assert.deepEqual(closure.validity.routeCounts, { I: 14, A: 14, E: 14 });
+  assert.deepEqual(closure.validity.dispatchedWheelCountAll, [60]);
+  assert.deepEqual(closure.validity.receivedWheelCountAll, [60]);
+  assert.equal(closure.overall.comparisons.implicitVsExplicit.passed, true);
+  assert.equal(closure.overall.comparisons.implicitVsAlias.passed, true);
+  assert.equal(closure.decision.productCodeChangeRequired, false);
+  assert.equal(closure.decision.thresholdsChanged, false);
   assert.equal(performance.motionInvariants.reversalZero, true);
   assert.equal(performance.motionInvariants.stopThenJumpZero, true);
   assert.equal(performance.motionInvariants.wheelMonotonic, true);
@@ -125,7 +134,7 @@ test("evidence manifest is closed-world, self-excluded, and byte exact", async (
   }
 });
 
-test("release documents keep the Draft and performance limitation explicit", async () => {
+test("release documents keep the Draft state and closed wheel differential explicit", async () => {
   const paths = [
     "README.md",
     "docs/PROJECT_OVERVIEW.md",
@@ -140,6 +149,7 @@ test("release documents keep the Draft and performance limitation explicit", asy
     assert.match(content, /v3\.15\.0/);
   }
   const report = contents.at(-1);
-  assert.match(report, /PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION/);
-  assert.match(report, /FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED.*(?:\u4e3b\u5f35\u3057\u306a\u3044|not claimed)/s);
+  assert.match(report, /FINAL_COMPLETED_WATCH_CHROME_DESKTOP_WHEEL_FAILURE_NOT_REPRODUCED/);
+  assert.match(report, /FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED/);
+  assert.match(report, /Human\u53d7\u5165.*(?:\u884c\u3063\u3066\u3044\u306a\u3044|\u672a\u5b9f\u65bd)/);
 });
