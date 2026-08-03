@@ -1,0 +1,193 @@
+{
+  "sourceImplementationCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+  "sourceAuditCommit": "00983f49b4dea623247e211cca54f3aac3f559ec",
+  "sourceBaseCommit": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "mainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBranch": "feature/final-exterior-balanced-phase3c2-strap-buckle",
+  "baseBranch": "feature/final-exterior-balanced-phase3c1-watch-head",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and actual Three.js WebGLRenderTarget PNG capture",
+  "phase3c1Acceptance": {
+    "status": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+    "head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+    "deferred": [
+      "DEFERRED_SMALL_SECONDS_PICKING_REFINEMENT",
+      "A5_FRONT_BACK_LUMINANCE_DIFFERENCE",
+      "ISSUE_2_RECTANGULAR_SHADOW_AND_TRANSPARENCY_CONTINUITY",
+      "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2"
+    ]
+  },
+  "id": "E-BALANCED-PHASE3C2-STRAP-BUCKLE",
+  "status": "PHASE3C2_IMPLEMENTATION_CANDIDATE_PENDING_HUMAN_CONFIRMATION",
+  "query": {
+    "exterior": "balanced",
+    "watchHead": "phase3c1",
+    "strapStyle": "phase3c2"
+  },
+  "approvedPhase3C1Head": "4de3c018f52ea88d1cbe5f4ad0c44166f7f89914",
+  "dimensions": {
+    "lugWidthNominal": 20,
+    "buckleWidthNominal": 16,
+    "strapLugWidth": 19.7,
+    "strapEndWidth": 16,
+    "lugSideClearance": 0.15,
+    "strap12Length": 75,
+    "strap6Length": 115,
+    "strapInitialStraightLength": 12,
+    "strap12TerminalTangentAngleDeg": 95,
+    "strap6TerminalTangentAngleDeg": 120,
+    "strapLugThickness": 2.6,
+    "strapMidThickness": 2.3,
+    "strapEndThickness": 2.05,
+    "springBarCenterY": 2.8,
+    "springBarCenterZ": 21.8,
+    "springBarMainDiameter": 1.5,
+    "springBarPinDiameter": 0.8,
+    "springBarEffectiveLength": 20.8,
+    "springBarPocketInnerDiameter": 1.8,
+    "springBarPocketRadialClearance": 0.15,
+    "springBarPocketLeatherThickness": 1.05,
+    "springBarPocketWidth": 19.7,
+    "springBarWrapTransitionLength": 2.45,
+    "springBarWrapTransitionHalfAngleDeg": 58,
+    "springBarBodyJoinDistance": 3.5,
+    "holeCount": 7,
+    "holeDiameter": 2,
+    "holePitch": 7,
+    "firstHoleFromFreeEnd": 24,
+    "lastHoleFromFreeEnd": 66,
+    "buckleOuterWidth": 19,
+    "buckleInnerWidth": 16.6,
+    "buckleOuterLength": 15.5,
+    "buckleInnerLength": 12.8,
+    "buckleFrameThickness": 1.3,
+    "buckleBarDiameter": 1.2,
+    "buckleBarLength": 17,
+    "buckleWrapInnerDiameter": 1.6,
+    "buckleWrapLeatherThickness": 1,
+    "buckleWrapTransitionLength": 2.2,
+    "buckleWrapTransitionHalfAngleDeg": 58,
+    "buckleBodyJoinDistance": 3.2,
+    "tangLength": 13,
+    "tangRootWidth": 1.1,
+    "tangTipWidth": 0.6,
+    "tangThickness": 0.7,
+    "fixedKeeperDistanceFromBuckle": 10,
+    "floatingKeeperDistanceFromBuckle": 18,
+    "keeperInnerWidth": 16.55,
+    "keeperClearance": 0.15,
+    "keeperWallThickness": 0.8,
+    "keeperLength": 4,
+    "stitchInset": 1.2,
+    "stitchLength": 1.5,
+    "stitchPitch": 2.5,
+    "stitchWidth": 0.26,
+    "edgeWidth": 0.18
+  },
+  "centerlines": {
+    "twelve": {
+      "finite": true,
+      "armSideOnly": true,
+      "noCurvatureSignReversal": true,
+      "initialStraightLength": 11.718749999999996,
+      "finalBendAngle": 1.6580627893946158
+    },
+    "six": {
+      "finite": true,
+      "armSideOnly": true,
+      "noCurvatureSignReversal": true,
+      "initialStraightLength": 10.781249999999996,
+      "finalBendAngle": 2.094395102393194
+    }
+  },
+  "holeDistances": {
+    "fromSpringBar": [
+      49,
+      56,
+      63,
+      70,
+      77,
+      84,
+      91
+    ],
+    "fromFreeEnd": [
+      66,
+      59,
+      52,
+      45,
+      38,
+      31,
+      24
+    ]
+  },
+  "classifications": {
+    "springBarPocket": "INTENDED_STRAP_BAR_CONNECTION",
+    "strapPocket": "INTENDED_STRAP_BODY_WRAP_CONNECTION",
+    "buckleFrameBar": "INTENDED_BUCKLE_FRAME_BAR_CONNECTION",
+    "buckleTang": "INTENDED_BUCKLE_TANG_PIVOT",
+    "buckleStrapWrap": "INTENDED_BUCKLE_STRAP_WRAP",
+    "manufacturing": "UNVERIFIED_MANUFACTURING_INTERFACE"
+  },
+  "configAssertion": {
+    "ok": true,
+    "checks": {
+      "queryOnly": true,
+      "approvedBase": true,
+      "widths": true,
+      "lengths": true,
+      "lengthRanges": true,
+      "monotonicWidthAndThickness": true,
+      "centerlines": true,
+      "terminalTangents": true,
+      "holes": true,
+      "pocket": true,
+      "wrapTransitions": true,
+      "buckle": true,
+      "keepers": true,
+      "material": true,
+      "refinedLugs": true
+    },
+    "audit": {
+      "twelveCenterlineLength": 75,
+      "sixCenterlineLength": 115,
+      "holeDistancesFromSpringBar": [
+        49,
+        56,
+        63,
+        70,
+        77,
+        84,
+        91
+      ],
+      "holeDistancesFromFreeEnd": [
+        66,
+        59,
+        52,
+        45,
+        38,
+        31,
+        24
+      ],
+      "centerlines": {
+        "twelve": {
+          "finite": true,
+          "armSideOnly": true,
+          "noCurvatureSignReversal": true,
+          "initialStraightLength": 11.718749999999996,
+          "finalBendAngle": 1.6580627893946158
+        },
+        "six": {
+          "finite": true,
+          "armSideOnly": true,
+          "noCurvatureSignReversal": true,
+          "initialStraightLength": 10.781249999999996,
+          "finalBendAngle": 2.094395102393194
+        }
+      }
+    }
+  },
+  "humanAcceptance": {
+    "phase3c1": "HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS",
+    "phase3c2": "PENDING_PC_AND_PHYSICAL_IPHONE_HUMAN_CONFIRMATION"
+  }
+}

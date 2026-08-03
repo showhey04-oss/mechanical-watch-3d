@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2",
+  "status": "AUDITED",
+  "sourceHead": "b6b89f68020d399bb8dc5cbf8fd01f64401454f3",
+  "hypothesis": "CAPPED_RENDER_DELTA_INCORRECTLY_SERVES_AS_AUTHORITATIVE_FOREGROUND_MECHANISM_ELAPSED_TIME",
+  "conclusion": "CONFIRMED_IN_CURRENT_ANIMATE_IMPLEMENTATION",
+  "consumers": [
+    {
+      "category": "A_AUTHORITATIVE_MECHANISM_TIME",
+      "items": [
+        {
+          "consumer": "watchTimeSec",
+          "currentSource": "elapsedSec derived from min(raw frame delta, 50ms)",
+          "r2Source": "visible foreground monotonic raw elapsed multiplied by rateFactor"
+        },
+        {
+          "consumer": "trainTimeSec",
+          "currentSource": "elapsedSec derived from min(raw frame delta, 50ms)",
+          "r2Source": "visible foreground monotonic raw elapsed multiplied by rateFactor"
+        },
+        {
+          "consumer": "studyBeat and escapement beat identity",
+          "currentSource": "trainTimeSec",
+          "r2Source": "authoritative trainTimeSec"
+        },
+        {
+          "consumer": "train source angle and wheel angles",
+          "currentSource": "trainTimeSec",
+          "r2Source": "authoritative trainTimeSec"
+        },
+        {
+          "consumer": "powerReserveHours consumption",
+          "currentSource": "dt or elapsedSec",
+          "r2Source": "foreground authoritative mechanism elapsed exactly once"
+        },
+        {
+          "consumer": "simulatedElapsedHours and history",
+          "currentSource": "elapsedSec",
+          "r2Source": "foreground authoritative mechanism elapsed"
+        },
+        {
+          "consumer": "rate model application",
+          "currentSource": "elapsedSec multiplied by rateFactor",
+          "r2Source": "foreground authoritative mechanism elapsed multiplied by rateFactor"
+        }
+      ]
+    },
+    {
+      "category": "B_VISUAL_NUMERICAL_INTEGRATION_TIME",
+      "items": [
+        {
+          "consumer": "amplitudeState visual response",
+          "source": "renderIntegrationDelta capped at 50ms"
+        },
+        {
+          "consumer": "crownRotation input integration",
+          "source": "renderIntegrationDelta capped at 50ms"
+        },
+        {
+          "consumer": "crownTransition",
+          "source": "renderIntegrationDelta capped at 50ms"
+        },
+        {
+          "consumer": "camera and control smoothing",
+          "source": "renderIntegrationDelta capped at 50ms"
+        },
+        {
+          "consumer": "adaptive quality and frame pacing",
+          "source": "raw frame interval for measurement; existing behavior retained"
+        },
+        {
+          "consumer": "selection highlight and UI pacing",
+          "source": "requestAnimationFrame timestamp; existing behavior retained"
+        },
+        {
+          "consumer": "balance, hairspring, escapement and small-seconds visual phase",
+          "source": "authoritative mechanism phase; Geometry update frequency remains frame-bound"
+        }
+      ]
+    },
+    {
+      "category": "C_LIFECYCLE_SUSPENDED_TIME",
+      "items": [
+        {
+          "consumer": "visibilitychange hidden to visible",
+          "policy": "re-anchor; hidden elapsed is excluded"
+        },
+        {
+          "consumer": "pagehide and pageshow including bfcache",
+          "policy": "re-anchor; suspended elapsed is excluded"
+        },
+        {
+          "consumer": "window blur and focus",
+          "policy": "re-anchor candidate sequence to avoid ambiguous suspended intervals"
+        },
+        {
+          "consumer": "AudioContext lifecycle",
+          "policy": "audio runtime re-anchors independently; AudioContext time never defines mechanism elapsed"
+        }
+      ]
+    }
+  ],
+  "protected": {
+    "normalPathUsesExistingCappedDt": true,
+    "invalidOrIncompleteQueryUsesExistingCappedDt": true,
+    "backgroundElapsedRestorationImplemented": false,
+    "phase3B4dStarted": false
+  }
+}

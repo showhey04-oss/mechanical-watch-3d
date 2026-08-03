@@ -1,0 +1,3475 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.1",
+  "sourceBaseCommit": "36cccd8f135e257f20da84d1d60957ae22472e72",
+  "sourceImplementationCommit": "42516a8b5c98507b11a1ae40679f99cf8abb0e0a",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-07-31T07:14:15.166Z",
+  "captureMode": "same-origin unsandboxed iframe harness with actual Web Audio",
+  "status": "PASSED",
+  "desktop": [
+    {
+      "name": "one-hour-backward",
+      "at": "2026-07-31T07:10:03.828Z",
+      "watchTime": 33035.6826000347,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 2,
+        "timelineDiscontinuityResetCount": 2,
+        "eventSequenceCount": 9,
+        "audibleEventCount": 5,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 0,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.995110190444393,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.013175920001231134,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.04468494438333437,
+        "cumulativeAudiblePhaseErrorBeats": -0.04929472928051837,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 5,
+          "cleaned": 0,
+          "created": 13,
+          "ended": 9,
+          "startScheduled": 13
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "one-hour-forward",
+      "at": "2026-07-31T07:10:04.524Z",
+      "watchTime": 36635.70000003555,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 4,
+        "timelineDiscontinuityResetCount": 4,
+        "eventSequenceCount": 12,
+        "audibleEventCount": 8,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 17997,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.995110190444393,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.021315442369086668,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.04468494438333437,
+        "cumulativeAudiblePhaseErrorBeats": -0.06209980545099825,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 9,
+          "cleaned": 0,
+          "created": 20,
+          "ended": 16,
+          "startScheduled": 20
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "day-wrap-backward",
+      "at": "2026-07-31T07:10:05.223Z",
+      "watchTime": 12.700900035584745,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 5,
+        "timelineDiscontinuityResetCount": 5,
+        "eventSequenceCount": 15,
+        "audibleEventCount": 11,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 17997,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.9954967502850423,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.021315442369086668,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07004834665909954,
+        "cumulativeAudiblePhaseErrorBeats": -0.14238711599562492,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 13,
+          "cleaned": 0,
+          "created": 27,
+          "ended": 23,
+          "startScheduled": 27
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "day-wrap-forward",
+      "at": "2026-07-31T07:10:05.922Z",
+      "watchTime": 86388.70010003544,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 6,
+        "timelineDiscontinuityResetCount": 6,
+        "eventSequenceCount": 18,
+        "audibleEventCount": 14,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431877,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.9954967502850423,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.021315442369086668,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07004834665909954,
+        "cumulativeAudiblePhaseErrorBeats": -0.1279612802488188,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 17,
+          "cleaned": 0,
+          "created": 34,
+          "ended": 30,
+          "startScheduled": 34
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "same-time",
+      "at": "2026-07-31T07:10:06.628Z",
+      "watchTime": 86389.40000007086,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 7,
+        "timelineDiscontinuityResetCount": 7,
+        "eventSequenceCount": 22,
+        "audibleEventCount": 18,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431877,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.9954967502850423,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.03438872704282403,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07004834665909954,
+        "cumulativeAudiblePhaseErrorBeats": -0.05229321228642192,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 21,
+          "cleaned": 0,
+          "created": 42,
+          "ended": 37,
+          "startScheduled": 42
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 5,
+        "sourceRecordCount": 5,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "current-time-once",
+      "at": "2026-07-31T07:10:07.322Z",
+      "watchTime": 58207.32700003545,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 9,
+        "timelineDiscontinuityResetCount": 9,
+        "eventSequenceCount": 25,
+        "audibleEventCount": 21,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431877,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.9954967502850423,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.03438872704282403,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07004834665909954,
+        "cumulativeAudiblePhaseErrorBeats": -0.140690966468064,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 26,
+          "cleaned": 0,
+          "created": 49,
+          "ended": 45,
+          "startScheduled": 49
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "crown-position-2",
+      "at": "2026-07-31T07:10:08.017Z",
+      "watchTime": 58207.32700003545,
+      "crownPosition": "set",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 10,
+        "timelineDiscontinuityResetCount": 10,
+        "eventSequenceCount": 21,
+        "audibleEventCount": 21,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431877,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.9954967502850423,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.03438872704282403,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07004834665909954,
+        "cumulativeAudiblePhaseErrorBeats": -0.140690966468064,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 30,
+          "cleaned": 0,
+          "created": 49,
+          "ended": 49,
+          "startScheduled": 49
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 0,
+        "sourceRecordCount": 0,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "crown-position-1",
+      "at": "2026-07-31T07:10:08.717Z",
+      "watchTime": 58208.02800007101,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 11,
+        "timelineDiscontinuityResetCount": 11,
+        "eventSequenceCount": 29,
+        "audibleEventCount": 25,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431877,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.9954967502850423,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.03438872704282403,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07004834665909954,
+        "cumulativeAudiblePhaseErrorBeats": -0.063127966847496,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 30,
+          "cleaned": 0,
+          "created": 57,
+          "ended": 52,
+          "startScheduled": 57
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 5,
+        "sourceRecordCount": 5,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "live-sync-enable",
+      "at": "2026-07-31T07:10:09.425Z",
+      "watchTime": 58209.02145361543,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": true,
+        "offsetSec": -0.3855463845712072,
+        "progress": 0.4718000000317891,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 12,
+        "timelineDiscontinuityResetCount": 12,
+        "eventSequenceCount": 32,
+        "audibleEventCount": 28,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431877,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.9954967502850423,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.03438872704282403,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07004834665909954,
+        "cumulativeAudiblePhaseErrorBeats": -0.063127966847496,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 35,
+          "cleaned": 0,
+          "created": 64,
+          "ended": 60,
+          "startScheduled": 64
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "live-sync-disable",
+      "at": "2026-07-31T07:10:10.111Z",
+      "watchTime": 58209.70475365005,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 13,
+        "timelineDiscontinuityResetCount": 13,
+        "eventSequenceCount": 35,
+        "audibleEventCount": 31,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431877,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.9954967502850423,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.03438872704282403,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07004834665909954,
+        "cumulativeAudiblePhaseErrorBeats": -0.09013777740135964,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 39,
+          "cleaned": 0,
+          "created": 71,
+          "ended": 67,
+          "startScheduled": 71
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 1226,
+            "right": 1270,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    }
+  ],
+  "mobile390x844": [
+    {
+      "name": "one-hour-backward",
+      "at": "2026-07-31T07:09:22.648Z",
+      "watchTime": 33035.55000002795,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 2,
+        "timelineDiscontinuityResetCount": 2,
+        "eventSequenceCount": 7,
+        "audibleEventCount": 3,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 0,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.029882963688578457,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.024326647602720186,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 4,
+          "cleaned": 0,
+          "created": 11,
+          "ended": 7,
+          "startScheduled": 11
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "one-hour-forward",
+      "at": "2026-07-31T07:09:23.196Z",
+      "watchTime": 36635.56660002878,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 4,
+        "timelineDiscontinuityResetCount": 4,
+        "eventSequenceCount": 9,
+        "audibleEventCount": 5,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 17998,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.029882963688578457,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.004975481366273016,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 8,
+          "cleaned": 0,
+          "created": 17,
+          "ended": 13,
+          "startScheduled": 17
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "day-wrap-backward",
+      "at": "2026-07-31T07:09:23.747Z",
+      "watchTime": 12.532400027032459,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 5,
+        "timelineDiscontinuityResetCount": 5,
+        "eventSequenceCount": 11,
+        "audibleEventCount": 7,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 17998,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.029882963688578457,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.06529235960978497,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 12,
+          "cleaned": 0,
+          "created": 23,
+          "ended": 19,
+          "startScheduled": 23
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "day-wrap-forward",
+      "at": "2026-07-31T07:09:24.298Z",
+      "watchTime": 86388.55000002793,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 6,
+        "timelineDiscontinuityResetCount": 6,
+        "eventSequenceCount": 13,
+        "audibleEventCount": 9,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431878,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.029882963688578457,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.03992648124757636,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 16,
+          "cleaned": 0,
+          "created": 29,
+          "ended": 25,
+          "startScheduled": 29
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "same-time",
+      "at": "2026-07-31T07:09:24.850Z",
+      "watchTime": 86389.11760005678,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 7,
+        "timelineDiscontinuityResetCount": 7,
+        "eventSequenceCount": 16,
+        "audibleEventCount": 12,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431878,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.044880962755996734,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": 0.010024743631319666,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 20,
+          "cleaned": 0,
+          "created": 36,
+          "ended": 32,
+          "startScheduled": 36
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "current-time-once",
+      "at": "2026-07-31T07:09:25.401Z",
+      "watchTime": 58165.382300026984,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 9,
+        "timelineDiscontinuityResetCount": 9,
+        "eventSequenceCount": 18,
+        "audibleEventCount": 14,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431878,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.044880962755996734,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.08401859719369043,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 24,
+          "cleaned": 0,
+          "created": 42,
+          "ended": 38,
+          "startScheduled": 42
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "crown-position-2",
+      "at": "2026-07-31T07:09:25.946Z",
+      "watchTime": 58165.382300026984,
+      "crownPosition": "set",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 10,
+        "timelineDiscontinuityResetCount": 10,
+        "eventSequenceCount": 15,
+        "audibleEventCount": 14,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431878,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.044880962755996734,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.08401859719369043,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 28,
+          "cleaned": 0,
+          "created": 42,
+          "ended": 42,
+          "startScheduled": 42
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 0,
+        "sourceRecordCount": 0,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "crown-position-1",
+      "at": "2026-07-31T07:09:26.490Z",
+      "watchTime": 58165.91560005402,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 11,
+        "timelineDiscontinuityResetCount": 11,
+        "eventSequenceCount": 21,
+        "audibleEventCount": 16,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431878,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.044880962755996734,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.09426508388777677,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 28,
+          "cleaned": 0,
+          "created": 48,
+          "ended": 44,
+          "startScheduled": 48
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "live-sync-enable",
+      "at": "2026-07-31T07:09:27.051Z",
+      "watchTime": 58166.64360417545,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": true,
+        "offsetSec": -0.39839582455348355,
+        "progress": 0.3737333333492279,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 12,
+        "timelineDiscontinuityResetCount": 12,
+        "eventSequenceCount": 24,
+        "audibleEventCount": 19,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431878,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.044880962755996734,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.09426508388777677,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 32,
+          "cleaned": 0,
+          "created": 55,
+          "ended": 51,
+          "startScheduled": 55
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    },
+    {
+      "name": "live-sync-disable",
+      "at": "2026-07-31T07:09:27.602Z",
+      "watchTime": 58167.19370420333,
+      "crownPosition": "wind",
+      "liveSync": {
+        "enabled": false,
+        "offsetSec": 0,
+        "progress": 0,
+        "transitionMs": 1500
+      },
+      "scheduler": {
+        "timelineGeneration": 13,
+        "timelineDiscontinuityResetCount": 13,
+        "eventSequenceCount": 26,
+        "audibleEventCount": 21,
+        "duplicateCount": 0,
+        "backlogBurstCount": 0,
+        "lateDropCount": 0,
+        "maximumConsecutiveMissingBeats": 431878,
+        "maximumPendingEscapementSources": 4,
+        "maximumTargetBeatMinusStudyBeat": 3.996610498666996,
+        "maximumPositiveAudiblePhaseErrorBeats": 0.044880962755996734,
+        "maximumNegativeAudiblePhaseErrorBeats": -0.07086092367535457,
+        "cumulativeAudiblePhaseErrorBeats": -0.20786275719355274,
+        "schedulerNoOpReason": null,
+        "phaseContract": {
+          "acceptedPhaseErrorBeats": 0.25,
+          "audibleMechanismPhase": true,
+          "maximumProjectionBeats": 4,
+          "passed": true,
+          "targetBeatCoupledToStudyBeat": true
+        },
+        "mechanismAuthoritative": true,
+        "sourceLifecycleCounts": {
+          "cancelled": 36,
+          "cleaned": 0,
+          "created": 61,
+          "ended": 57,
+          "startScheduled": 61
+        }
+      },
+      "audio": {
+        "audioEnabled": true,
+        "audioContextState": "running",
+        "status": "on",
+        "bufferCompleteness": {
+          "complete": true,
+          "loaded": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ],
+          "missing": [],
+          "required": [
+            "escapementTick",
+            "escapementTock",
+            "winding",
+            "reverse",
+            "crownPull",
+            "crownPush"
+          ]
+        },
+        "activeSources": 4,
+        "sourceRecordCount": 4,
+        "resumeRequired": false,
+        "resumeAttemptSequence": 0,
+        "lastResumeResult": {
+          "attemptSequence": 0,
+          "enabled": false,
+          "error": null,
+          "reason": "window-focus",
+          "requiresTrustedGesture": false,
+          "resumeAttempted": false,
+          "resumeRejected": false,
+          "resumeResolved": false,
+          "running": false,
+          "stateAfter": "not-created",
+          "stateBefore": "not-created",
+          "trustedGesture": false,
+          "visible": true
+        },
+        "resumeHistory": [
+          {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          }
+        ]
+      },
+      "soundUi": {
+        "fixedGains": {
+          "crown": 0.38,
+          "escapement": 0.24,
+          "master": 0.36,
+          "reverse": 0.24,
+          "winding": 0.32
+        },
+        "recovery": {
+          "contextState": "running",
+          "lastResumeResult": {
+            "attemptSequence": 0,
+            "enabled": false,
+            "error": null,
+            "reason": "window-focus",
+            "requiresTrustedGesture": false,
+            "resumeAttempted": false,
+            "resumeRejected": false,
+            "resumeResolved": false,
+            "running": false,
+            "stateAfter": "not-created",
+            "stateBefore": "not-created",
+            "trustedGesture": false,
+            "visible": true
+          },
+          "listenerInstallCount": 1,
+          "resumeAttemptSequence": 0,
+          "resumeHistory": [
+            {
+              "attemptSequence": 0,
+              "enabled": false,
+              "error": null,
+              "reason": "window-focus",
+              "requiresTrustedGesture": false,
+              "resumeAttempted": false,
+              "resumeRejected": false,
+              "resumeResolved": false,
+              "running": false,
+              "stateAfter": "not-created",
+              "stateBefore": "not-created",
+              "trustedGesture": false,
+              "visible": true
+            }
+          ],
+          "resumeRequired": false,
+          "trustedGestureCount": 0
+        },
+        "status": {
+          "role": "status",
+          "state": "on",
+          "text": "作動音 ON"
+        },
+        "toggle": {
+          "ariaLabel": "作動音をオフにする",
+          "disabled": false,
+          "pressed": true,
+          "rect": {
+            "bottom": 54,
+            "height": 44,
+            "left": 336,
+            "right": 380,
+            "top": 10,
+            "width": 44
+          },
+          "state": "on",
+          "tagName": "BUTTON",
+          "visibleText": ""
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "sourceMainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBaseCommit": "961fb16ec8c0b55b4d940861659e22733537d813",
+  "sourceImplementationCommit": "8a0fac5149708a906d02df103403f6e0706db9f7",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1c-shadow-attenuation",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
+  "defaultAdopted": false,
+  "status": "ISSUE2_PHASE3B1C_AUDIT_ACCEPTED_SHADOW_ROUTE_EXHAUSTED",
+  "technicalResult": "ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST",
+  "auditAccepted": true,
+  "stage0": {
+    "status": "CONCLUSIVE",
+    "majorCasterGroup": "dial-exterior",
+    "hypothesis": "OPAQUE_SHADOW_DEPTH_FOR_TRANSPARENT_STRUCTURAL_MESHES_SUSPECTED",
+    "hypothesisQualification": "SUSPECTED_NOT_PROVEN",
+    "meshCount": 589,
+    "casterCount": 553,
+    "receiverCount": 553,
+    "dialExteriorCasterCount": 241,
+    "structuralOpacityTargetCount": 135,
+    "structuralCasterReceiverOverlapCount": 106,
+    "customDepthMaterialCount": 0,
+    "alphaTestMaterialCount": 0,
+    "shadowDepthTargetCountInvariantAtOpacity100And16": true
+  },
+  "baseline": {
+    "status": "HUMAN_REJECTED_RENDERING_BASELINE",
+    "adopted": false
+  },
+  "candidateDecisions": {
+    "issue2-phase3b1c-baseline": [
+      "RETAINED_DIAGNOSTIC_ONLY"
+    ],
+    "issue2-phase3b1c-shadow-off": [
+      "RETAINED_DIAGNOSTIC_ONLY"
+    ],
+    "issue2-shadow-attenuation": [
+      "REJECTED_FRONT_BACK_BALANCE"
+    ],
+    "issue2-shadow-attenuation-bias": [
+      "REJECTED_FRONT_BACK_BALANCE",
+      "REJECTED_PERFORMANCE"
+    ]
+  },
+  "shadowOff": {
+    "status": "HUMAN_DESIGN_HOLD_TECHNICALLY_NONFINAL",
+    "adopted": false,
+    "retained": true
+  },
+  "d2c3": {
+    "status": "RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED",
+    "adopted": false,
+    "retained": true
+  },
+  "issue2": "OPEN",
+  "pr5": "OPEN_DRAFT_UNCHANGED",
+  "stage2Performed": false,
+  "physicalIPhonePerformed": false,
+  "shadowExperimentRouteClosed": true,
+  "prohibitedFollowUpExperiments": [
+    "shadow-camera-fit",
+    "shadow-map-2048",
+    "attenuation-curve-retune",
+    "bias-sweep",
+    "custom-depth-material",
+    "alpha-test-shadow-material",
+    "alpha-hash",
+    "dithered-transparency",
+    "opacity-threshold-cast-shadow-toggle",
+    "opacity-threshold-receive-shadow-toggle",
+    "additional-shadow-light",
+    "fog-retune"
+  ],
+  "nextStep": "Evaluate transparency continuity without reopening the shadow route.",
+  "candidateAdopted": false
+}

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R1.1",
+  "sourceCandidateCommit": "0d0dd4cadce3f5929563360c15c6f31ea16e2a48",
+  "sourceImplementationCommit": "3de2886011dafaea540f2ea2650d2ab326cf3216",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedBy": "tests/generate-phase3b4c-r1-evidence.mjs",
+  "capturedAt": "2026-07-31T02:53:27.898Z",
+  "reproduced": true,
+  "reproductionClassification": "IOS_INITIAL_FREE_RUNNING_ESCAPEMENT_AUDIO_DROPOUT_REPRODUCED",
+  "rootCause": {
+    "primary": "FREE_RUNNING_CAPPED_SIMULATION_CLOCK_DIVERGED_FROM_AUDIOCONTEXT_WALL_CLOCK",
+    "failureMechanism": "EPOCH_DRIFT_REANCHOR_PRESERVED_A_CONTINUOUS_FUTURE_AUDIO_GRID_UNTIL_ALL_NEAR_TERM_BEATS_BECAME_LATE_DROPS",
+    "freeRunningSpecificReason": "simulation delta was capped at 50ms while AudioContext advanced by raw wall elapsed",
+    "liveSyncDifference": "live-sync advanced the mechanism reference by raw elapsed and did not accumulate the same epoch divergence"
+  },
+  "rejectedAsPrimary": [
+    "PERMANENT_AUDIO_ASSET_OR_SPEAKER_FAILURE",
+    "AUDIOCONTEXT_CLOCK_STALL",
+    "TICK_TOCK_PARITY_FAILURE",
+    "SOURCE_ENDED_EVENT_LOSS_AS_THE_SOLE_CAUSE",
+    "PENDING_CAP_SIZE_ALONE"
+  ],
+  "fix": [
+    "maximum absolute audio-time horizon guard",
+    "escapement-only far-future cancellation",
+    "free-running next-beat booking only inside the 0.25-beat mechanism crossing window",
+    "live-sync bounded future booking derived from current studyBeat",
+    "no unbounded lastTargetBeat plus one audio-clock progression",
+    "audible phase reconstructed between adjacent authoritative mechanism frames",
+    "state commit only after play succeeds",
+    "mechanism-beat starvation watchdog without an independent beat clock",
+    "expected-end source inventory cleanup",
+    "monotonic unread-audible-record cursor"
+  ],
+  "after": {
+    "maximumAudibleGapSeconds": 0.46680000000003474,
+    "maximumConsecutiveMissingBeats": 0,
+    "starvationCount": 0,
+    "duplicateCount": 0,
+    "backlogBurstCount": 0
+  }
+}

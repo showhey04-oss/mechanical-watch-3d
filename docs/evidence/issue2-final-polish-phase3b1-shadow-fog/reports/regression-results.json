@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "sourcePhase3C3Commit": "191ff2682398356da59e747e608c82120dacebd9",
+  "sourcePhase3ACommit": "3d7f84ea3f122fbc1df715b4eff3c8cebf64f46d",
+  "sourceImplementationCommit": "5df265176ededfc7cd8da22de8bb83fde6fe3546",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1-shadow-fog",
+  "capturedAt": "2026-07-28T01:07:09.704303Z",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness; actual Three.js offscreen WebGL PNG",
+  "defaultAdopted": false,
+  "status": "COMPARISON_COMPLETE_NO_ADOPTION",
+  "node": {
+    "status": "PASSED",
+    "passed": 225,
+    "total": 225
+  },
+  "actualBrowser": {
+    "stage1Runs": 12,
+    "stage1Captures": 1056,
+    "consoleErrorWarningCount": 0,
+    "forbiddenInterference": "0/0 in every Stage 1 capture",
+    "browserDifferential": {
+      "issue2-phase3b1-baseline": {
+        "1280x720": {
+          "ok": false,
+          "total": 86,
+          "failed": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "front-030000-points-hour-hand-to-three",
+            "front-continuous-time-increase-is-clockwise",
+            "position2-positive-input-advances-minute-and-hour-clockwise-on-front"
+          ]
+        },
+        "390x844": {
+          "ok": false,
+          "total": 88,
+          "failed": [
+            "front-030000-points-hour-hand-to-three",
+            "front-continuous-time-increase-is-clockwise",
+            "position2-positive-input-advances-minute-and-hour-clockwise-on-front"
+          ]
+        }
+      },
+      "issue2-shadow-off-fog": {
+        "1280x720": {
+          "ok": false,
+          "total": 86,
+          "failed": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "front-030000-points-hour-hand-to-three",
+            "front-continuous-time-increase-is-clockwise",
+            "position2-positive-input-advances-minute-and-hour-clockwise-on-front"
+          ],
+          "commonWithBaseline": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "front-030000-points-hour-hand-to-three",
+            "front-continuous-time-increase-is-clockwise",
+            "position2-positive-input-advances-minute-and-hour-clockwise-on-front"
+          ],
+          "candidateOnly": []
+        },
+        "390x844": {
+          "ok": false,
+          "total": 88,
+          "failed": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "front-030000-points-hour-hand-to-three",
+            "front-continuous-time-increase-is-clockwise",
+            "position2-positive-input-advances-minute-and-hour-clockwise-on-front"
+          ],
+          "commonWithBaseline": [
+            "front-030000-points-hour-hand-to-three",
+            "front-continuous-time-increase-is-clockwise",
+            "position2-positive-input-advances-minute-and-hour-clockwise-on-front"
+          ],
+          "candidateOnly": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent"
+          ]
+        }
+      }
+    },
+    "uiHud": {
+      "ui": {
+        "1280x720": {
+          "ok": true,
+          "total": 20,
+          "failed": []
+        },
+        "390x844": {
+          "ok": true,
+          "total": 22,
+          "failed": []
+        }
+      },
+      "hud": {
+        "1280x720": {
+          "ok": true,
+          "total": 45,
+          "failed": []
+        },
+        "390x844": {
+          "ok": true,
+          "total": 57,
+          "failed": []
+        }
+      }
+    },
+    "audio": {
+      "issue2-phase3b1-baseline": {
+        "ok": false,
+        "failed": [],
+        "error": "Error: audio integration wait timed out\n    at waitUntil (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:7:9)\n    at async runMechanicalAudioIntegrationTest (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:22:19)\n    at async HTMLButtonElement.start (http://127.0.0.1:8000/index.html?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3&rendering=issue2-phase3b1-baseline&theme=navy&camera=front&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&audioTest=1&cache=1785200190676:1483:460)",
+        "audioGestureApplied": true
+      },
+      "issue2-shadow-off-fog": {
+        "ok": false,
+        "failed": [],
+        "error": "Error: audio integration wait timed out\n    at waitUntil (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:7:9)\n    at async runMechanicalAudioIntegrationTest (http://127.0.0.1:8000/tests/mechanical-audio.integration.test.js?version=detent-ui2:22:19)\n    at async HTMLButtonElement.start (http://127.0.0.1:8000/index.html?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2&integration=phase3c3&rendering=issue2-shadow-off-fog&theme=navy&camera=front&time=10%3A10%3A30&paused=1&opacity=1&panel=collapsed&audioTest=1&cache=1785200208418:1483:460)",
+        "audioGestureApplied": true
+      },
+      "candidateOnlyFailure": false
+    },
+    "audioInterpretation": "both baseline and composite candidate timed out at the same Web Audio integration wait in this in-app Browser; Node audio tests pass and no candidate-only audio failure was detected"
+  },
+  "protectedPaths": {
+    "allByteExact": true,
+    "pathCount": 7,
+    "viewportCount": 2
+  },
+  "s86RuntimeToSaved": "5/5 inherited and unchanged",
+  "phase2cEnvelope": "unchanged",
+  "a7": "9/9 inherited and unchanged",
+  "threeHandConstraint": "unchanged",
+  "thresholdsChanged": false,
+  "readyAllowed": false,
+  "mergeAllowed": false
+}

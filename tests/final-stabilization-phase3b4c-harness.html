@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Final Stabilization Phase 3B.4c harness</title>
+  <style>
+    html,body{margin:0;background:#090d13;color:#eef3f8;font:14px/1.45 system-ui,sans-serif}
+    #statusPanel{position:fixed;z-index:4;top:8px;left:8px;max-width:min(540px,calc(100vw - 16px));padding:10px 12px;border:1px solid #526173;border-radius:8px;background:rgba(7,10,15,.92);pointer-events:none}
+    #auditApp{display:block;border:0;background:#0d1015}
+    output{display:block;white-space:pre-wrap;overflow-wrap:anywhere}
+    #phase3b4cAuditResult{display:none}
+  </style>
+</head>
+<body data-audit-ready="false" data-audit-status="loading">
+  <section id="statusPanel">
+    <strong id="phase3b4cStatus">loading</strong>
+    <output id="phase3b4cSummary">Waiting for the same-origin app frame.</output>
+    <output id="phase3b4cAuditResult" aria-hidden="true"></output>
+  </section>
+  <iframe id="auditApp" title="Phase 3B.4c app"></iframe>
+  <script type="module" src="./final-stabilization-phase3b4c-harness.js?v=phase3b4c-r1-1"></script>
+</body>
+</html>

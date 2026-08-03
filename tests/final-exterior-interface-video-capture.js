@@ -14,6 +14,10 @@ const videoId = params.get("videoId") || "phase3b1-interface-rotation";
 const camera = params.get("camera") || "movementBack";
 const opacity = params.get("opacity") || "1";
 const selected = params.get("selected") === "1";
+const interaction = params.get("interaction") || "rotate";
+const displaySequence = params.get("displaySequence") || "none";
+const requestedWatchHead = params.get("watchHead") || "";
+const requestedStrapStyle = params.get("strapStyle") || "";
 const CHUNK_BYTES = 24_000;
 const wait = milliseconds =>
   new Promise(resolve => setTimeout(resolve, milliseconds));
@@ -69,6 +73,56 @@ function writeFailure(error) {
   output.dataset.status = "failed";
 }
 
+async function applyDisplayFrame(diagnostics, frameIndex) {
+  if (displaySequence !== "split-explode-restore") return;
+  const split = frame.contentDocument.getElementById("sideSplit");
+  const explode = frame.contentDocument.getElementById("explode");
+  const progress = frameIndex / Math.max(1, frameCount - 1);
+  const splitAmount = progress < 1 / 3
+    ? progress * 3
+    : progress < 2 / 3
+      ? 1
+      : (1 - progress) * 3;
+  const explodeAmount = progress < 1 / 3
+    ? 0
+    : progress < 2 / 3
+      ? (progress - 1 / 3) * 3
+      : (1 - progress) * 3;
+  split.value = String(Math.round(splitAmount * 100));
+  split.dispatchEvent(new frame.contentWindow.Event("input", {
+    bubbles: true,
+  }));
+  explode.value = String(Math.round(explodeAmount * 100));
+  explode.dispatchEvent(new frame.contentWindow.Event("input", {
+    bubbles: true,
+  }));
+  await diagnostics.waitForFrames(3);
+}
+
+async function applyInteractionFrame(diagnostics, frameIndex) {
+  if (frameIndex === 0 || displaySequence !== "none") return;
+  if (interaction === "mobile-rotate-zoom" && frameIndex % 4 === 0) {
+    const canvas = frame.contentDocument.getElementById("app");
+    const rect = canvas.getBoundingClientRect();
+    canvas.dispatchEvent(new frame.contentWindow.WheelEvent("wheel", {
+      deltaY: frameIndex % 8 === 0 ? 5 : -5,
+      deltaMode: 0,
+      clientX: rect.left + rect.width / 2,
+      clientY: rect.top + rect.height / 2,
+      bubbles: true,
+      cancelable: true,
+      view: frame.contentWindow,
+    }));
+    await diagnostics.waitForFrames(4);
+    return;
+  }
+  await diagnostics.simulateArcballDrag({
+    direction: "horizontal",
+    turns: turnsPerFrame,
+    stepDelayFrames: 1,
+  });
+}
+
 frame.addEventListener("load", async () => {
   try {
     document.body.dataset.videoStatus = "running";
@@ -79,13 +133,8 @@ frame.addEventListener("load", async () => {
     const frames = [];
     chunks.replaceChildren();
     for (let frameIndex = 0; frameIndex < frameCount; frameIndex++) {
-      if (frameIndex > 0) {
-        await diagnostics.simulateArcballDrag({
-          direction: "horizontal",
-          turns: turnsPerFrame,
-          stepDelayFrames: 1,
-        });
-      }
+      await applyDisplayFrame(diagnostics, frameIndex);
+      await applyInteractionFrame(diagnostics, frameIndex);
       document.body.dataset.videoStage = `capture-${frameIndex}`;
       const capture = await diagnostics.captureAuditViewportPng({
         width,
@@ -128,6 +177,8 @@ frame.addEventListener("load", async () => {
       durationSeconds: frameCount / fps,
       turnsPerFrame,
       totalTurns: turnsPerFrame * (frameCount - 1),
+      interaction,
+      displaySequence,
       selected,
       opacity: Number(opacity),
       camera,
@@ -161,6 +212,8 @@ const appQuery = new URLSearchParams({
   opacity,
   panel: "collapsed",
 });
+if (requestedWatchHead) appQuery.set("watchHead", requestedWatchHead);
+if (requestedStrapStyle) appQuery.set("strapStyle", requestedStrapStyle);
 if (selected) {
   appQuery.set("exteriorAuditSelect", "E-BALANCED 裏蓋リング");
 }
