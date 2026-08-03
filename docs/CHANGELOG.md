@@ -8,7 +8,7 @@
 - Native Safari／SafariDriver 26.5.2の1280×720／390×844でqueryなしroot、trusted Web Audio、buffer／raw asset 6/6、visibility各30 cycle、禁止干渉0/0、console／runtime／unhandled rejection 0を確認
 - 正式wheel閉鎖測定でdefault／explicit差分ゲートを合格し、HumanがPC／物理iPhoneを確認した。PR #27をmain `155275d0aaeb968fd83d6dfe15313e259f2bb064`へマージし、GitHub Pagesへ公開した
 - Geometry、機構、D2c3値、透過、camera定数、UI、audio asset／gain、APP_VERSION、試験閾値は変更しない。Issue #2 Open、PR #5 Open／Draft、Phase 3B.4d未開始、OIT完成後改善を維持する
-- post-adoption監査では製品tree exact、Chrome／WebKit route smoke、Pages公開を確認した。一方、mainのNodeは旧Draft期待値2件により463/465であり、本体完成宣言前の単一ブロッカーとして別修正へ分離する
+- post-adoption監査開始時に旧Draft期待値2件によるNode 463/465を検出した。PR #28内で既存受入テストだけをHuman accepted／merged証跡へ整合し、Node 465/465・skip 0へ復旧した。製品tree exact、Chrome／WebKit route smoke、Pages公開を維持し、試験閾値を変更せず`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`へ移行する
 
 ## Unreleased — PR #13 final stack main-promotion audit
 

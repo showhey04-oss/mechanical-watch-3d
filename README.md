@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：Post-Default-Adoption Main Reconciliation／Final Body Completion Gate。PR #27で完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰を通常rootへ採用し、Human受入後にmainへマージした。公開rootはcompleted-watch profile、`?defaultProfile=legacy`は旧通常表示を維持する。Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始、OITは完成後の任意改善、APP_VERSIONはv3.15.0である
+- 現在の改修フェーズ：Post-Default-Adoption Main Reconciliation／Final Body Completion Gate。PR #27で完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰を通常rootへ採用し、Human受入後にmainへマージした。PR #28内で旧Draft期待値2件を現Human accepted証跡へ整合し、Node 465/465・skip 0、blocking count 0を確認したため、状態は`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`である。本体完成そのものはHumanが明示判断する。公開rootはcompleted-watch profile、`?defaultProfile=legacy`は旧通常表示を維持する。Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始、OITは完成後の任意改善、APP_VERSIONはv3.15.0である
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ

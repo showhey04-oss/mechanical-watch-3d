@@ -2,9 +2,9 @@
 
 ## 結論
 
-PR #27のcompleted-watch default adoptionはmainへ正しく統合され、製品treeとGitHub Pages公開は一致している。一方、受入状態を検証するNode 2件がPR #27マージ前のDraft期待値を保持しているため、最終本体完成宣言はまだ行わない。
+PR #27のcompleted-watch default adoptionはmainへ正しく統合され、製品treeとGitHub Pages公開は一致している。監査開始時に検出した、PR #27マージ前のDraft期待値を保持するNode 2件は、PR #28内で現在のHuman accepted／merged証跡へ整合した。Nodeは465/465・skip 0へ復旧したが、本体完成宣言はHumanの明示判断を待つ。
 
-正式判定は`POST_DEFAULT_ADOPTION_PRODUCT_AND_PAGES_RECONCILED_TEST_EXPECTATION_MISMATCH_BLOCKS_COMPLETION`である。
+正式判定は`POST_DEFAULT_ADOPTION_PRODUCT_PAGES_AND_ACCEPTANCE_TESTS_RECONCILED`である。
 
 ## 固定点
 
@@ -27,12 +27,12 @@ PR #13～#27はMerged、PR #5はOpen／Draft、Issue #2はOpenである。Phase 
 
 ### Node
 
-`npm test`は465件を実行し、463 pass／2 failとなった。失敗は`tests/final-completed-watch-default-evidence.test.mjs`の受入状態assertionである。
+監査開始時の`npm test`は465件を実行し、463 pass／2 failとなった。失敗は`tests/final-completed-watch-default-evidence.test.mjs`の受入状態assertionだった。
 
 1. 期待`FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_TECHNICAL_CANDIDATE`に対し、保存値は`FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_HUMAN_ACCEPTED`
 2. Human acceptance未完了を要求する旧文書期待値に対し、現在文書はHuman accepted／merge authorized
 
-製品機能の失敗ではないが、完了ゲートではFAILをPASSへ変換しない。本監査はdocs-onlyのためtestsを変更せず、別の試験整合修正を要求する。
+これは製品機能の失敗ではなく、保存証跡のHuman accepted化後に旧期待値が残った履歴上の不整合だった。PR #28内で同じ既存テストを更新し、Human accepted状態、Ready／main merge承認、曖昧なHuman提出欄の原文を厳密に検証するよう整合した。テスト総数465、skip 0、閾値は不変で、再実行結果は465 pass／0 failである。
 
 ### Browser
 
@@ -46,8 +46,8 @@ GitHub Pagesはmain／rootをsourceとするlegacy buildで、main `155275d0aaeb
 
 ## 変更範囲
 
-本監査は文書・JSONだけを変更する。`index.html`、`js/**`、`assets/audio/**`、`tests/**`、Geometry、mechanism、rendering、camera、input、audio、UI、APP_VERSION、閾値を変更しない。Issue #2とPR #5も操作しない。
+本監査は文書・JSONと、`tests/final-completed-watch-default-evidence.test.mjs`の受入状態期待値だけを変更する。`index.html`、`js/**`、`assets/audio/**`、Geometry、mechanism、rendering、camera、input、audio、UI、APP_VERSION、閾値を変更しない。Issue #2とPR #5も操作しない。
 
 ## 次の判断
 
-本体完成宣言前に、旧Draft期待値2件を現在のHuman accepted／merged状態へ合わせる独立した試験整合PRが必要である。閾値緩和や製品コード変更は不要である。
+旧Draft期待値2件は同じPR #28内で閉鎖され、body completion blocking countは0になった。次の状態は`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`である。Humanはこの技術ゲートを根拠に本体完成を宣言するか、具体的な追加blockerを記録する。本監査自身は完成宣言、PR Ready化・マージ、Issue／PR closeを行わない。

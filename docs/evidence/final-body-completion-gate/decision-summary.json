@@ -7,28 +7,28 @@
   "sourceAcceptanceCommit": "795223bfb2804fc8b7e058ac36245c1f4c650e36",
   "sourceBranch": "docs/post-default-adoption-completion-gate",
   "appVersion": "v3.15.0",
-  "status": "MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED",
-  "blockingCount": 1,
-  "blockers": [
-    {
-      "id": "POST_ADOPTION_NODE_ACCEPTANCE_STATE_EXPECTATION_MISMATCH",
-      "scope": "tests/final-completed-watch-default-evidence.test.mjs",
-      "actual": "463/465",
-      "cause": "Two assertions still require the pre-Human Draft/technical-candidate state while the merged documents record Human acceptance.",
-      "requiredClosure": "Update the stale acceptance-state expectations in a separate test-alignment PR and obtain 465/465 without skipping or relaxing tests.",
-      "productDefect": false
-    }
-  ],
+  "status": "MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION",
+  "blockingCount": 0,
+  "blockers": [],
+  "resolvedHistoricalFinding": {
+    "id": "POST_ADOPTION_NODE_ACCEPTANCE_STATE_EXPECTATION_MISMATCH",
+    "scope": "tests/final-completed-watch-default-evidence.test.mjs",
+    "previousActual": "463/465",
+    "cause": "Two assertions required the pre-Human Draft/technical-candidate state while the merged evidence recorded Human acceptance.",
+    "closure": "Aligned the existing acceptance-state expectations in PR #28 and obtained 465/465 without skipping, removing tests, or relaxing thresholds.",
+    "productDefect": false,
+    "status": "RESOLVED"
+  },
   "productTreeExact": true,
   "productCodeChangedByAudit": false,
-  "testsChangedByAudit": false,
+  "testsChangedByAudit": true,
   "testThresholdsChanged": false,
   "node": {
     "total": 465,
-    "passed": 463,
-    "failed": 2,
+    "passed": 465,
+    "failed": 0,
     "skipped": 0,
-    "status": "FAILED"
+    "status": "PASSED"
   },
   "browser": {
     "installedChrome": {

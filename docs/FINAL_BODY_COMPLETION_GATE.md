@@ -2,13 +2,17 @@
 
 ## 結論
 
-判定は`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`である。completed-watch製品、Human受入、main統合、GitHub Pages公開、3モードの要求範囲は本体完成判断へ進める状態にあるが、現mainのNode受入状態テストが463/465であるため、Humanによる本体完成宣言はまだ行わない。
+技術ゲート判定は`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`である。completed-watch製品、Human受入、main統合、GitHub Pages公開、3モードの要求範囲に加え、PR #28内の受入状態テスト整合を確認した。
 
-blocking countは1である。
+blocking countは0である。Nodeは465/465、fail 0、skip 0である。
 
-1. `tests/final-completed-watch-default-evidence.test.mjs`の2 assertionを、PR #27マージ後のHuman accepted／merged文書状態へ整合させ、Node 465/465を再確認する
+これは本体完成の自動宣言ではない。Humanはこの技術ゲートを根拠に本体完成を宣言するか、具体的な追加blockerを記録する。PR #28はOpen／Draftを維持し、Ready化・マージ・Issue／PR closeは行わない。
 
-これは製品機能、Geometry、機構、描画、音響の不具合ではない。試験を削除・skip・閾値緩和せず、独立した試験整合PRで閉じる。
+## 解消済みの履歴上の不整合
+
+監査開始時、`tests/final-completed-watch-default-evidence.test.mjs`の2 assertionがPR #27マージ前のDraft／technical-candidate状態を要求し、Nodeは463/465だった。
+
+PR #28内で既存テストの期待値だけを、保存済みのHuman accepted／merged証跡へ整合した。Human accepted status、Ready／main merge承認、PC／物理iPhone確認値、単独選択されていないHuman提出欄の原文を厳密に検証する。テスト削除、skip、総数変更、閾値緩和、製品コード変更は行っていない。
 
 ## モード別判定
 
@@ -30,19 +34,21 @@ blocking countは1である。
 
 ## 検証結果
 
-- product／test tree：PR #27 Human-reviewed Headとmainでexact
-- Node：463/465、FAIL 2
-- Installed Chrome：default／legacy／explicit × Desktop／390×844を6/6 harness pass。初回default Desktopだけローカルfavicon 404を1件記録し、製品runtime error／warningは0
-- Playwright WebKit：同6条件を6/6 pass、console error／warning／runtime error 0
+- product tree：PR #27 Human-reviewed Headとmain、およびPR #28でexact。`index.html`、`js/**`、`assets/audio/**`、`package.json`、`package-lock.json`に差分なし
+- acceptance test：既存`tests/final-completed-watch-default-evidence.test.mjs`の期待値だけをHuman accepted証跡へ整合
+- Node：465/465、fail 0、skip 0
+- Installed Chrome：既存監査のdefault／legacy／explicit × Desktop／390×844を6/6 harness pass。初回default Desktopだけローカルfavicon 404を1件記録し、製品runtime error／warningは0
+- Playwright WebKit：既存監査の同6条件を6/6 pass、console error／warning／runtime error 0
 - Native Safari：PR #27固定製品HeadのDesktop／Mobile証跡をtree exactにより継承。本監査で新規runは未実施
 - GitHub Pages：main build success、公開root v3.15.0、completed-watch default、主要asset HTTP 200、公開root console error／warning 0
-- `git diff --check`、JSON parse、文書リンク：最終commit前に再確認する
+- independent read-only diff audit：Critical 0、Major 0、Minor 0
+- `git diff --check`、JSON parse、文書リンク、製品tree exact、閾値不変：最終commit前に再確認する
 
 ## Human最終判断
 
-本監査のDraft PRは、Issue #2／PR #5の推奨と本体完成ゲートの材料を提示する。Node blockerを別PRで閉じて0件にした後、Humanは次のいずれかを明示判断する。
+PR #28は、Issue #2／PR #5の推奨とblocking count 0の技術ゲートを提示する。Humanは次のいずれかを明示判断する。
 
-- `MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`
-- 具体的な追加blockerを記録して継続
+- 本体完成を宣言する
+- 具体的な追加blockerを記録して継続する
 
-本監査自身は本体完成を宣言せず、Ready化・マージ・Issue closeを行わない。
+本監査自身は本体完成を宣言しない。
