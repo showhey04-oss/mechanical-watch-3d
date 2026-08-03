@@ -8,17 +8,39 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：最終外装統合 — Phase 3B.1 E-BALANCEDコア外装候補
+- 現在の改修フェーズ：Final Stabilization Phase 3B.2～3B.4 promotion audit。Phase 3B.2の現行透過制約受容、Phase 3B.3のD2c3人間選定、Phase 3B.4aのモバイル全長構図、Phase 3B.4bのiOSマルチタッチ、Phase 3B.4c R2.4.2のproduction audio／foreground復帰を統合し、Node、Chrome、WebKit、Native Safari、preset・selection、multi-touch・audio、protected pathを合格とした。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`で、clean-process最終測定はendpoint security負荷により`NOT_TESTED`、製品回帰は再現せず製品修正不要とする。PR #23はmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合済みで、PR #23／#24／#25／#26はMerged／Closed、PR #22／#21はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始を維持する
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
-- 既知事項：継承した既定照明は実機で暗く見える場合があり、PR #5のD2c3を取り込まずIssue #2の照明最終調整へ申し送る
+- 既知事項：継承した既定照明は実機で暗く見える場合がある。文字板上の矩形影、100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順、PC／iPhone照明差はPR #5のD2c3を取り込まずIssue #2へ分離する
 
 v3.15.0では、人間確認で選定されたS86を通常の文字板表示寸法として採用する。dial ring径27.692、index円径25.456、分針長12.040、時針長8.600、小秒表示円径7.740、小秒針長3.268とし、ムーブメント、四番車軸・小秒中心、Y方向配置、回転拘束、描画・UI・作動音はv3.14.0基準のまま維持する。試験状態は`ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION`であり、実施済みA/BではPR固有回帰0件、全ブラウザ試験行列は環境制約により未完了である。
 
 寸法・比率調整は、PR #10のS86採用とPR #11のPhase 2C Y基準面・厚さレイヤー監査をもって完了扱いとする。Phase 3Aで実装候補として承認されたE-BALANCEDを、Phase 3B.1では`?exterior=balanced`の明示query時だけThree.js Geometryとして生成する。状態は`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`であり、通常URLには外装Object3Dを追加せず、最終候補の人間確認前に既定採用しない。今回の対象はケース胴、ベゼル、風防、rehaut、物理文字板blank、裏蓋リング・観察窓、ムーブメント保持リング、ケースチューブ、局所接続候補である。ラグ／ストラップはPhase 3B.2へ分離する。外装総厚8.695の方向性、ケース胴テーパー、りゅうず位置1／2、指掛かり、pull／push、保持リング方針、透過16%、回転・ズーム、時計機能、作動音、物理iPhone操作性は人間確認合格済みで、最終候補の視覚的薄型化、ベゼル／裏蓋リングの全面テーパー維持、透過50%は判断保留である。ETA 4.50 mmの基準面対応も未解決であり、表示開口と全体比率は外装統合レビューで再確認する。
 
 Phase 3B.1最終候補は第4候補の全面テーパー断面を維持し、ケース胴の最大径ストレート帯だけを3.450から1.950へ短縮した。前側テーパーは1.510から2.160、後側は2.535から3.385へ延長し、総厚8.695、最大径39.600、端部径38.900、内径37.800は不変である。主テーパー被覆率はベゼル0.888889、裏蓋リング0.956766で、保持座幅0.400／0.200、外周閉合幅0.900／0.600、意図しない水平区間0、両Meshの退化三角形・非多様体edge・禁止干渉0を維持する。表示開口29.800、保持リング、S86、Phase 2C包絡、機構、描画、UI、作動音も変更していない。
+
+Phase 3B.2は、人間承認済みPhase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`へ積み上げるquery限定候補である。`?exterior=balanced`時だけ4本のラグ、2本の簡略スプリングバー、12時側／6時側の構造確認用ストラップ、簡略バックルを生成し、通常URLは固定mainとpixel exactを維持する。lug-to-lugは46.600、ストラップはラグ側幅20.000、厚さ2.400、中心線長42.000／58.000で、禁止干渉は位置1／位置2とも0件である。ストラップは`STRUCTURAL_PLACEHOLDER_NOT_PHASE3C_STYLE`であり、革色・シボ・ステッチ・穴列・コバ・最終バックル意匠はPhase 3Cへ残す。既存カメラ定数は変更せず、全ストラップ確認には可逆なwheel zoom-outを使用する。PC自動回帰と390×844実ブラウザ回帰は合格し、物理iPhoneは人間確認待ちである。
+
+Phase 3C.1はHead `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`を`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承する。白系アイボリー、安定silver、針・小秒・オープンハート、非屈折近似dome、6時index、外装表示グループ、分離／分解／透過、時計機能、作動音、PC／物理iPhone操作・性能は合格済みである。小秒文字板の選択性、A.5前後面明度差、矩形影、透過不連続、PC／iPhone照明差、表裏分離・断面クリップのUX判断は保留を維持する。
+
+Phase 3C.2は、承認済みPhase 3C.1へ積み上げるquery限定Draftである。`?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`時だけ、中心線長75.000／115.000、幅19.700→16.000、厚さ2.600→2.050の黒革ストラップ、実スプリングバーポケット、直径2.000・pitch 7.000の7貫通穴、定革・遊革、尾錠枠・つく棒・取付バー、尾錠側巻込み、procedural calf grain、同系色ステッチ、黒いコバを生成する。位置1／位置2の禁止干渉0、10部品の選択・HUD・学習同期、opacity 16%内部選択、外装ON／OFF・split・explode・復元、通常path／Phase 3C.1-only path pixel exact、Desktop／390×844性能基準を確認した。Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`で、Ready化・マージ・既定採用は未実施である。
+
+Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`である。Phase 3C.3は`integration=phase3c3`追加時だけ完成時計を統合監査し、小秒凹面の空白4点へ非描画selection proxyを追加する。Desktop／390×844の100%／50%で4/4、16%越しの設定車2選択、外装ON/OFF、split、explode、完全復元、位置1／2の禁止干渉0、保護3 pathのpixel exact、性能差分合格を確認した。承認Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`はPCと物理iPhoneの人間確認に合格し、状態は`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`である。物理iPhoneの15分確認では軽微な発熱を観察したが機能劣化は報告されず、Issue #2最終候補で再試験する。Geometry・照明・影・透過基盤・UI・音響・APP_VERSIONは変更しておらず、Ready化・マージ・既定採用も未実施である。
+
+Issue #2 Final Polish Phase 3Aは完成外装へ`rendering=issue2-baseline|issue2-d2a|issue2-d2c3`を追加したquery限定比較である。198枚の実WebGL PNG、Node 210/210、完成外装統合回帰6/6を取得し、正式判断を`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`とした。198枚は`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`で、候補棄却には十分だが最終候補採用には不足する。D2aは視覚参考として棄却し、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`として比較履歴とquery実装を残すが既定採用しない。
+
+Issue #2 Final Polish Phase 3B.1はPhase 3C.3 baselineのlight、Material、camera、DPR、透過処理を保護し、`frontKey.castShadow=false`、5状態unionによる固定shadow camera fit、fog 160／260を単独・単純合成した6候補をquery限定で比較した。1056枚の実WebGL PNGと性能・回帰を取得したが、shadow-offは前後面バランス、shadow-fitは512² mapの解像度、fog候補はMobile far visibilityを同時に満たせず、`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`とした。Stage 2、物理iPhone、採用は未実施である。
+
+Issue #2 Final Polish Phase 3B.1bではtight 512／1024が中央projection boundaryを除去しても広い斜めshadow bandを閉鎖できず、`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`とした。Phase 3B.1cではStage 0で589 Mesh、553 caster／receiverを監査し、主要caster群を`dial-exterior`へ特定した。smoothstep attenuationは中央矩形境界と斜め帯を低減し、性能差分に合格したが、前後面のbaseline比悪化最大0.072299が上限0.05を超えた。固定normalBias候補はMobile性能も不合格で、`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`とする。Stage 1は832枚、PR #20比較の34 protected pathはpixel exact、候補はすべてquery限定・未採用である。
+
+Issue #2 Final Polish Phase 3B.2では、100%→99%の`transparent`と55%→54%の`depthWrite`切替を実ランタイムで再現し、Shadow-off／D2c3、Desktop／390×844、13 opacityで固定深度3候補を比較した。3候補はproperty toggle 0を達成したが、`stable-depth-base`は内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能に不合格となった。候補固有browser failure 0、UI 22/22、HUD 57/57、audio 23/23、protected path 42/42を維持したが技術finalistは0件であり、Stage 2、物理iPhone、OIT実装、採用は行っていない。
+
+Issue #2 Final Polish Phase 3B.3は製品コードを変更せず、`continuity=issue2-current`を共有するShadow-offとD2c3を、2 viewport×4 theme×16 scenarioの実WebGL PNG 256枚、36操作GIF、11 scenario×3反復×2候補×2 viewportの性能測定で最終人間比較用に整理した。PCでは両候補合格、物理iPhoneではShadow-offを暗いfull-length表示のため不合格、D2c3を性能tradeoff込みで合格・選定した。D2c3はまだ既定採用せず、Shadow-offは比較履歴として保持する。冷却5分は手順差、progressive frame dropとSafari reloadは`NOT_REPORTED`、テンプ音遅れは候補独立性未確定として後続安定化へ分離する。
+
+Issue #2 Final Polish Phase 3B.4aは、選定D2c3のモバイル全長構図をquery限定で安定化する。390×844の完成時計407,428頂点からraw fit距離199.068109、2.5%安全余裕込み204.044811を算定し、`framing=issue2-mobile-full-length-fit`時だけモバイル`maxDistance=204.1`を適用する。初期表示32/32とDesktop固定画像48/48はPNG byte exact、Desktop selected 8/8は選択・camera・transform exact、最小余白4.0265%、clipping 0、pinch／wheel reversal 0、性能差分6/6合格である。iPhone 16／iOS 26.5.2の15分確認で初期表示、全長、余白、preset、最大距離回転、設定車2選択、HUD同期、解除、split／explode／restore、軽微な発熱を合格とし、fogの遠景暗化は`MOBILE_FULL_LENGTH_FOG_DARKENING_ACCEPTED_AS_IS`とした。Phase 3B.4bではframingなしAが49秒、framingありBが55秒で同じgesture state劣化を再現し、修正候補Cは15分以上再現しなかった。`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`として受入済みだが、preset／selectionの手動結果は`NOT_REPORTED`のため最終統合で再確認する。音響ペーシング低下はPhase 3B.4cへ分離する。D2c3、framing、input候補はquery限定・未採用で、Ready化、マージ、Issue #2クローズを行わない。
+
+Phase 3B.4 stack integration Head `d16037a75d85d705434d8b73ef5293511052f65e`では、Phase 3B.4c R2.4.2が統合済みで、Native Safari Desktop／Mobile、物理iPhone foreground自動復帰6/6、preset、9部品選択、HUD／学習同期、blank clear、multi-touch 100 cycle、production audio、visibility 30 cycle、10分相当stress、12/12 protected pathを合格とした。Nodeは442/442である。commit段階12性能セルは既存閾値内でMobile pointer製品回帰を再現しなかったが、最終clean-process測定はStatefulFirewall／VShieldScannerの高CPU負荷により未実施である。clean環境の絶対性能PASSやMcAfee停止環境PASSは主張せず、製品コード・閾値・APP_VERSIONは変更していない。
 
 ## 実装済み
 
@@ -176,6 +198,10 @@ Phase 3B.1最終候補は第4候補の全面テーパー断面を維持し、ケ
 - `docs/REFACTOR_A5_LIGHTING.md`
 - `docs/REFACTOR_A5_CAMERA_CONTROLS.md`
 - `docs/REFACTOR_A6_SUMMARY.md`
+- `docs/FINAL_EXTERIOR_DESIGN_PHASE3C1_WATCH_HEAD.md`
+- `docs/FINAL_EXTERIOR_DESIGN_PHASE3C2_STRAP_BUCKLE.md`
+- `docs/FINAL_EXTERIOR_INTEGRATION_PHASE3C3.md`
+- `docs/ISSUE2_PHASE3C3_INTEGRATION_HANDOFF.md`
 - `docs/REFACTOR_A6_FRAME_PACING.md`
 - `docs/REFACTOR_A6_CAMERA_SMOOTHING.md`
 - `docs/REFACTOR_A7_SUMMARY.md`
@@ -184,6 +210,7 @@ Phase 3B.1最終候補は第4候補の全面テーパー断面を維持し、ケ
 - `docs/PR4_MOBILE_OVERLAY_HUD.md`
 - `docs/MECHANICAL_SOUND_SYSTEM.md`
 - `docs/FINAL_EXTERIOR_INTEGRATION_PHASE3A_INTERFACE_AUDIT.md`
+- `docs/FINAL_EXTERIOR_INTEGRATION_PHASE3B2_LUG_STRAP.md`
 
 ## ローカル確認
 

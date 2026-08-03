@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Phase 3C.2 strap and buckle capture</title>
+  <style>
+    html,body{margin:0;background:#101820;color:#eef3f8;font:13px system-ui}
+    iframe{width:640px;height:480px;border:0;display:block}
+    output,pre{white-space:pre-wrap;word-break:break-word}
+  </style>
+</head>
+<body data-audit-status="queued" data-capture-stage="queued" data-phase3c2-capture-ready="false">
+  <iframe id="auditApp" title="Mechanical watch Phase 3C.2 capture"></iframe>
+  <output id="captureResult" data-status="queued"></output>
+  <pre id="captureLog"></pre>
+  <div id="phase3aCaptureChunks" hidden></div>
+  <script type="module">
+    import {runFinalExteriorCapture} from "./final-exterior-capture.js?phase3c2=4";
+
+    const params = new URLSearchParams(location.search);
+    const width = Math.max(320, Number(params.get("width")) || 1280);
+    const height = Math.max(480, Number(params.get("height")) || 720);
+    const cameraPreset = params.get("camera") || "front";
+    const distanceMultiplier = Math.max(
+      1,
+      Math.min(4, Number(params.get("zoomOut")) || 1),
+    );
+    const targetOffset = [
+      Number(params.get("offsetX")) || 0,
+      Number(params.get("offsetY")) || 0,
+      Number(params.get("offsetZ")) || 0,
+    ];
+    const displayMode = params.get("display") || "normal";
+    const prepareMode = params.get("prepare") || "none";
+    const diagnosticMode = params.get("diagnostic") || "product";
+    const opacity = params.get("opacity") || "1";
+    const pathMode = params.get("pathMode") || "phase3c2";
+    const candidateQuery = pathMode === "normal"
+      ? []
+      : pathMode === "phase3c1"
+        ? ["exterior=balanced", "watchHead=phase3c1"]
+        : [
+          "exterior=balanced",
+          "watchHead=phase3c1",
+          "strapStyle=phase3c2",
+        ];
+    const appQuery = [
+      ...candidateQuery,
+      "dimensionAudit=1",
+      "theme=navy",
+      "time=10%3A10%3A30",
+      "paused=1",
+      `opacity=${encodeURIComponent(opacity)}`,
+      "panel=collapsed",
+    ].join("&");
+
+    const setRange = (frame, id, value) => {
+      const control = frame.contentDocument.getElementById(id);
+      control.value = String(value);
+      control.dispatchEvent(
+        new frame.contentWindow.Event("input", { bubbles: true }),
+      );
+    };
+
+    runFinalExteriorCapture({
+      captureId: params.get("captureId") || "phase3c2-strap-buckle",
+      width,
+      height,
+      cameraPreset,
+      distanceMultiplier,
+      targetOffset,
+      readyKey: "phase3c2CaptureReady",
+      appQuery,
+      prepare:
+        displayMode === "normal"
+        && prepareMode === "none"
+        && diagnosticMode === "product"
+        ? null
+        : async ({frame, diagnostics}) => {
+          diagnostics.setPhase3C2DiagnosticMode(diagnosticMode);
+          if (displayMode === "split") {
+            setRange(frame, "sideSplit", 100);
+          } else if (displayMode === "explode") {
+            setRange(frame, "explode", 100);
+          } else if (displayMode === "restore") {
+            setRange(frame, "sideSplit", 100);
+            setRange(frame, "explode", 100);
+            await diagnostics.waitForFrames(4);
+            setRange(frame, "sideSplit", 0);
+            setRange(frame, "explode", 0);
+          } else if (displayMode !== "normal") {
+            throw new Error(`unknown display mode: ${displayMode}`);
+          }
+          if (prepareMode === "exterior-off") {
+            const control =
+              frame.contentDocument.querySelector('[data-group="exterior"]');
+            control.click();
+          } else if (prepareMode === "internal-selection") {
+            diagnostics.setStructuralOpacity(0.16);
+            await diagnostics.waitForFrames(4);
+            diagnostics.pickProjectedPart("設定車2");
+          } else if (prepareMode.startsWith("select:")) {
+            diagnostics.selectPartByNameForAudit(
+              decodeURIComponent(prepareMode.slice(7)),
+            );
+          } else if (prepareMode === "crown-set") {
+            diagnostics.setCrownPosition("set");
+          } else if (prepareMode !== "none") {
+            throw new Error(`unknown prepare mode: ${prepareMode}`);
+          }
+          await diagnostics.waitForFrames(6);
+        },
+    });
+  </script>
+</body>
+</html>

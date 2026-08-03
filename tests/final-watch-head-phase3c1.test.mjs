@@ -1,0 +1,369 @@
+import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
+import test from "node:test";
+
+import {
+  FINAL_WATCH_HEAD_PHASE3C1,
+  assertPhase3C1WatchHeadConfig,
+  derivePhase3C1MinuteTrackAudit,
+  derivePhase3C1OpenHeartAudit,
+  resolvePhase3C1WatchHead,
+} from "../js/final-watch-head-phase3c1-config.js";
+
+const config = FINAL_WATCH_HEAD_PHASE3C1;
+
+test("Phase 3C.1 configuration is immutable, stacked, and query-only", () => {
+  assert.equal(config.enabledByDefault, false);
+  assert.equal(
+    config.status,
+    "PHASE3C1_FINAL_MINOR_REVISION_PENDING_HUMAN_CONFIRMATION",
+  );
+  assert.equal(
+    config.source.baseBranch,
+    "feature/final-exterior-balanced-phase3b2",
+  );
+  assert.equal(
+    config.source.approvedPhase3B2Head,
+    "98d83781aa7aa001836a0d57f1ad6e3d058a15c4",
+  );
+  assert.equal(config.appVersion, "v3.15.0");
+  assert.equal(Object.isFrozen(config), true);
+  assert.equal(assertPhase3C1WatchHeadConfig().ok, true);
+  assert.equal(resolvePhase3C1WatchHead(""), null);
+  assert.equal(resolvePhase3C1WatchHead("?exterior=balanced"), null);
+  assert.equal(
+    resolvePhase3C1WatchHead(
+      "?exterior=balanced&watchHead=phase3c1",
+    )?.id,
+    config.id,
+  );
+});
+
+test("fourth candidate preserves ivory while isolating stable exterior silver", () => {
+  assert.equal(config.dial.color, 0xf2ede5);
+  assert.equal(config.dial.smallSecondColor, 0xf5f1ea);
+  assert.ok(config.dial.roughness >= 0.84);
+  assert.ok(config.dial.roughness <= 0.9);
+  assert.deepEqual(config.materials.polishedSteel, {
+    color: 0xe9edf0,
+    metalness: 0.8,
+    roughness: 0.2,
+    classification: "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
+  });
+  assert.equal(
+    config.materials.subduedPolishedSteel.classification,
+    "EDUCATIONAL_UNIFIED_SILVER_VISIBILITY_MATERIAL",
+  );
+  assert.deepEqual(config.materials.stableExteriorSilver, {
+    color: 0xe7eaed,
+    metalness: 0.52,
+    roughness: 0.2,
+    envMapIntensity: 0.35,
+    opacity: 1,
+    transparent: false,
+    depthWrite: true,
+    classification: "EDUCATIONAL_STABLE_SILVER_MATERIAL",
+  });
+  assert.equal(config.hands.material.color, 0xe9edf0);
+  assert.equal(config.hands.smallSecondMaterial.color, 0x2a5572);
+});
+
+test("reference-aligned dial dimensions preserve S86 while strengthening hierarchy", () => {
+  assert.ok(config.dial.indexRadialLength >= 1.75);
+  assert.ok(config.dial.indexRadialLength <= 1.9);
+  assert.ok(config.dial.indexTangentialWidth >= 0.4);
+  assert.ok(config.dial.indexTangentialWidth <= 0.48);
+  assert.ok(config.dial.indexThickness >= 0.2);
+  assert.ok(config.dial.indexThickness <= 0.26);
+  assert.equal(config.dial.twelveIndexGap, 0.26);
+  assert.deepEqual(config.dial.omittedIndices, []);
+  assert.ok(config.dial.minuteDotMinorDiameter >= 0.155);
+  assert.ok(config.dial.minuteDotMinorDiameter <= 0.18);
+  assert.ok(config.dial.minuteDotMajorDiameter >= 0.23);
+  assert.ok(config.dial.minuteDotMajorDiameter <= 0.27);
+  assert.ok(config.dial.smallSecondVisualRecessDiameter >= 8.3);
+  assert.ok(config.dial.smallSecondVisualRecessDiameter <= 8.6);
+  assert.equal(config.hands.minute.length, 12.04);
+  assert.equal(config.hands.hour.length, 8.6);
+  assert.equal(config.hands.smallSecond.length, 3.268);
+});
+
+test("open-heart rim is a bounded profiled metal section at the actual balance", () => {
+  const rim = config.openHeart.rimProfile;
+  assert.equal(rim.innerDiameter, 6.6);
+  assert.ok(rim.outerDiameter >= 7.08);
+  assert.ok(rim.outerDiameter <= 7.14);
+  assert.ok(rim.visibleTopLip >= 0.14);
+  assert.ok(rim.visibleTopLip <= 0.18);
+  assert.ok(rim.innerChamfer >= 0.05);
+  assert.ok(rim.innerChamfer <= 0.1);
+  assert.ok(rim.outerChamfer >= 0.05);
+  assert.ok(rim.outerChamfer <= 0.08);
+  assert.ok(rim.axialHeight >= 0.11);
+  assert.ok(rim.axialHeight <= 0.14);
+  assert.equal(config.openHeart.equivalentDiameter, 6.6);
+  assert.deepEqual(config.openHeart.projectedCenter, [7.7, 1.8]);
+});
+
+test("domed crystal preserves geometry with a non-refractive educational material", () => {
+  assert.deepEqual(config.crystal.profile, [
+    { radius: 0, y: -3.46 },
+    { radius: 3.825, y: -3.455 },
+    { radius: 7.65, y: -3.42 },
+    { radius: 11.475, y: -3.315 },
+    { radius: 13.8, y: -3.11 },
+    { radius: 15, y: -2.96 },
+    { radius: 15.3, y: -2.92 },
+    { radius: 15.3, y: -2.86 },
+    { radius: 0, y: -2.86 },
+  ]);
+  assert.equal(
+    config.crystal.classification,
+    "EDUCATIONAL_NON_REFRACTIVE_DOME_CRYSTAL",
+  );
+  assert.deepEqual(config.crystal.material, {
+    color: 0xfafcfd,
+    metalness: 0,
+    roughness: 0.025,
+    transmission: 0,
+    transparent: true,
+    opacity: 0.1,
+    ior: 1.45,
+    thickness: 0.05,
+    clearcoat: 1,
+    clearcoatRoughness: 0.03,
+    envMapIntensity: 0.35,
+    depthWrite: false,
+    depthTest: true,
+  });
+});
+
+test("fourth candidate places all 60 minute dots outside the indices", () => {
+  const audit = derivePhase3C1MinuteTrackAudit();
+  assert.equal(audit.radius, 14.2);
+  assert.equal(audit.configuredDotCount, 60);
+  assert.equal(audit.displayedDotCount, 60);
+  assert.equal(audit.omittedDotCount, 0);
+  assert.equal(audit.indexOuterRadius, 13.638);
+  assert.ok(Math.abs(audit.normalIndexRadialClearance - 0.437) < 1e-9);
+  assert.ok(audit.minimumTwelveDoubleBarClearance.clearance >= 0.3);
+  assert.ok(Math.abs(audit.openingClearance - 0.575) < 1e-9);
+  assert.equal(audit.indexOverlapCount, 0);
+  assert.equal(audit.twelveDoubleBarOverlapCount, 0);
+  assert.equal(audit.openingOverlapCount, 0);
+  assert.equal(audit.bezelRehautOverlapCount, 0);
+  assert.equal(audit.indexBarCount, 13);
+  assert.equal(audit.sixIndex.present, true);
+  assert.ok(
+    Math.abs(audit.sixIndex.smallSecondRecessClearance - 1.968) < 1e-9,
+  );
+  assert.ok(
+    Math.abs(audit.sixIndex.majorMinuteDotClearance - 0.437) < 1e-9,
+  );
+  assert.ok(audit.sixIndex.openingClearance >= 0.3);
+});
+
+test("display families reuse split and explode semantics without a new UI system", () => {
+  assert.equal(config.displayFamilies.splitDistance, 5.5);
+  assert.equal(config.displayFamilies.explodeDistance, 10);
+  assert.deepEqual(config.displayFamilies.families, {
+    FRONT: { splitDirection: -1 },
+    CORE: { splitDirection: 0 },
+    BACK: { splitDirection: 1 },
+    PLATE: { splitDirection: 0 },
+  });
+  assert.deepEqual(config.exteriorDisplayGroup, {
+    queryOnly: true,
+    label: "外装",
+    helper: null,
+    restoreTolerance: 1e-7,
+  });
+  assert.equal(
+    config.uiSimplificationBacklog,
+    "UI_SIMPLIFICATION_REVIEW_AFTER_PHASE3C2_AND_ISSUE2",
+  );
+});
+
+test("open-heart projection follows the real balance instead of reference imagery", () => {
+  const audit = derivePhase3C1OpenHeartAudit();
+  assert.deepEqual(audit.projection.dialPlaneCenter, [7.7, 1.8]);
+  assert.ok(Math.abs(audit.projection.clockAngleDeg - 76.842457) < 1e-5);
+  assert.equal(audit.projection.centerError, 0);
+  assert.equal(
+    audit.baselineLineOfSight.classification,
+    "B_PARTIAL_PLATE_OCCLUSION",
+  );
+  assert.equal(audit.baselineLineOfSight.mechanismRelocationRequired, false);
+  assert.equal(audit.visibleMechanismIntent.tourbillon, false);
+  assert.equal(audit.visibleMechanismIntent.mechanismMoved, false);
+});
+
+test("limited twin plate windows preserve the central balance bearing land", () => {
+  const audit = derivePhase3C1OpenHeartAudit();
+  assert.equal(
+    config.openHeart.plateCutout.mode,
+    "TWIN_WINDOWS_PRESERVE_CENTRAL_BEARING_LAND",
+  );
+  assert.equal(audit.cutout.protectedBearingRetained, true);
+  assert.ok(audit.cutout.retainedBearingLandClearance >= 0.08);
+  assert.ok(audit.cutout.plateWindowToDialOpeningRatio > 0.3);
+  assert.ok(audit.cutout.plateWindowToDialOpeningRatio < 0.4);
+});
+
+test("open-heart size and display clearances meet the work order", () => {
+  const audit = derivePhase3C1OpenHeartAudit();
+  assert.equal(config.openHeart.equivalentDiameter, 6.6);
+  assert.ok(config.openHeart.equivalentDiameter >= 5.8);
+  assert.ok(config.openHeart.equivalentDiameter <= 7.2);
+  assert.ok(audit.cutout.openingAreaRatio <= 0.1);
+  assert.ok(audit.clearances.smallSecond >= 0.2);
+  assert.ok(audit.clearances.nearestIndex >= 0.2);
+});
+
+test("S86, Phase 2C, hand mounting lengths, and exterior envelope stay protected", () => {
+  assert.deepEqual(config.protectedAnchors.phase2c, [6.645, 3.19, 6.745]);
+  assert.equal(config.hands.minute.length, 12.04);
+  assert.equal(config.hands.hour.length, 8.6);
+  assert.equal(config.hands.smallSecond.length, 3.268);
+  assert.equal(config.protectedAnchors.totalCaseThickness, 8.695);
+  assert.equal(config.protectedAnchors.dialApertureDiameter, 29.8);
+  assert.equal(config.protectedAnchors.crystalClearDiameter, 30.6);
+  assert.equal(Math.min(...config.crystal.profile.map(point => point.y)), -3.46);
+  assert.equal(Math.max(...config.crystal.profile.map(point => point.y)), -2.86);
+});
+
+test("Phase 3C.2 required strap and buckle refinements remain explicit backlog", () => {
+  const backlog = config.phase3c2MandatoryBacklog.join("\n");
+  for (const required of [
+    "spring-bar leather wrap",
+    "practical twelve-side and six-side lengths",
+    "six-side adjustment holes",
+    "fixed keeper",
+    "floating keeper",
+    "buckle frame",
+    "tang",
+    "attachment bar",
+    "black leather",
+    "leather grain",
+    "stitching",
+    "edge finishing",
+  ]) {
+    assert.match(backlog, new RegExp(required));
+  }
+});
+
+test("production integration cannot hide failures with forbidden rendering shortcuts", async () => {
+  const [configSource, runtimeSource, indexSource] = await Promise.all([
+    readFile(
+      new URL("../js/final-watch-head-phase3c1-config.js", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../js/final-watch-head-phase3c1.js", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../index.html", import.meta.url), "utf8"),
+  ]);
+  for (const source of [configSource, runtimeSource]) {
+    assert.doesNotMatch(source, /\.polygonOffset(?:Factor|Units)?\s*=/);
+    assert.doesNotMatch(source, /\.renderOrder\s*=/);
+    assert.doesNotMatch(source, /\.alphaHash\s*=/);
+    assert.doesNotMatch(source, /\brequestAnimationFrame\s*\(/);
+    assert.doesNotMatch(
+      source,
+      /\b(?:import|new)\s+CSG\b|\bCSG\s*\.\s*(?:fromMesh|toMesh|subtract)\b/,
+    );
+  }
+  assert.match(indexSource, /resolvePhase3C1WatchHead\(initialPageParameters\)/);
+  assert.match(indexSource, /if\(requestedWatchHeadConfig\)/);
+  assert.match(indexSource, /getPhase3C1OpenHeartReport/);
+  assert.match(indexSource, /getPhase3C1DisplayGroupReport/);
+  assert.match(indexSource, /getPhase3C1ExteriorGroupReport/);
+  assert.match(indexSource, /setPhase3C1ExteriorGroupVisible/);
+  assert.match(indexSource, /setPhase3C1CrystalDiagnosticVisible/);
+  assert.match(indexSource, /getPickHitStack/);
+  assert.match(indexSource, /inspectPickAtWorldPoint/);
+  assert.match(indexSource, /data-phase3c1-exterior-control/);
+  assert.match(
+    runtimeSource,
+    /physicalDial,[\s\S]*?\{ pickPriority: 1 \}/,
+  );
+  assert.match(
+    runtimeSource,
+    /crystal,[\s\S]*?\{ pickPriority: 0 \}/,
+  );
+  assert.doesNotMatch(
+    runtimeSource,
+    /crystal,[\s\S]{0,300}\{[^}]*pickable:\s*false/,
+  );
+  assert.match(runtimeSource, /applyDynamicCoreState/);
+  assert.match(runtimeSource, /applyDisplayState/);
+  assert.match(runtimeSource, /candidate-local-clone/);
+  assert.match(runtimeSource, /applyExteriorVisibilityComposition/);
+  assert.equal(
+    indexSource.indexOf("if(requestedWatchHeadConfig)")
+      > indexSource.indexOf("if(requestedExteriorConfig)"),
+    true,
+  );
+});
+
+test("same-origin unsandboxed Phase 3C.1 harness records actual runtime reports", async () => {
+  const [html, harness] = await Promise.all([
+    readFile(
+      new URL("./final-watch-head-phase3c1-harness.html", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("./final-watch-head-phase3c1-harness.js", import.meta.url),
+      "utf8",
+    ),
+  ]);
+  assert.doesNotMatch(html, /sandbox=/);
+  assert.match(harness, /frame\.contentWindow\.watchModelDiagnostics/);
+  assert.match(harness, /getPhase3C1GeometryReport/);
+  assert.match(harness, /getPhase3C1OpenHeartReport|lineOfSight/);
+  assert.match(harness, /getHandCouplingReport/);
+  assert.match(harness, /getYEnvelopeBreakdown/);
+  assert.match(harness, /getPhase3C1DisplayGroupReport/);
+  assert.match(harness, /getPhase3C1ExteriorGroupReport/);
+  assert.match(harness, /setExteriorGroupByUi/);
+  assert.match(harness, /setPhase3C1CrystalDiagnosticVisible/);
+  assert.match(harness, /displayExactRestore/);
+  assert.match(harness, /splitDirections/);
+  assert.match(harness, /explodeDirections/);
+  assert.match(harness, /document\.body\.dataset\.auditStatus/);
+  assert.match(harness, /Phase 3C\.1 分針/);
+  assert.match(harness, /Phase 3C\.1 時針/);
+  assert.match(harness, /Phase 3C\.1 小秒針/);
+});
+
+test("Phase 3C.1 suite and performance harnesses preserve fixed viewports and thresholds", async () => {
+  const [suiteHtml, suiteSource, performanceHtml, performanceSource] =
+    await Promise.all([
+      readFile(
+        new URL("./final-watch-head-phase3c1-suite-harness.html", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("./final-watch-head-phase3c1-suite-harness.js", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("./final-watch-head-phase3c1-performance-harness.html", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("./final-watch-head-phase3c1-performance-harness.js", import.meta.url),
+        "utf8",
+      ),
+    ]);
+  assert.doesNotMatch(suiteHtml, /sandbox=/);
+  assert.doesNotMatch(performanceHtml, /sandbox=/);
+  assert.match(suiteSource, /frame\.contentWindow\?\.watchModelDiagnostics/);
+  assert.match(suiteSource, /frame\.contentDocument\.getElementById\("audioToggle"\)\?\.click\(\)/);
+  assert.match(performanceSource, /\["front-idle", 10_000\]/);
+  assert.match(performanceSource, /\["pointer-rotate", 3_000\]/);
+  assert.match(performanceSource, /\["wheel-zoom", 3_000\]/);
+  assert.match(performanceSource, /thresholdsChanged: false/);
+  assert.doesNotMatch(performanceSource, /setPixelRatio|toneMapping|exposure|shadowMap/);
+});

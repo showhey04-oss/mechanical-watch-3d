@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.3",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "48ec7b73c207bf5a784663f70199ec8f4f1465d8",
+  "sourceImplementationCommit": "ebf69a258ad93bb3d4f326c07aea9ee4cca2d515",
+  "knownGoodCommit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T09:27:15.328Z",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "PHASE3B4C_R2_3_KNOWN_GOOD_LIFECYCLE_DIFF_CLOSED",
+  "files": [
+    {
+      "path": "index.html",
+      "knownGood": {
+        "commit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+        "path": "index.html",
+        "bytes": 253296,
+        "sha256": "b3c14a694676201211e333ce0a09ed6054798af3c72edfcadef648ad30f441fa"
+      },
+      "r22": {
+        "commit": "48ec7b73c207bf5a784663f70199ec8f4f1465d8",
+        "path": "index.html",
+        "bytes": 375544,
+        "sha256": "76e209d86dfe2fa94671070fd2a0a0510e2315898919efd42ed4a645a0a9fc70"
+      },
+      "r23": {
+        "commit": "ebf69a258ad93bb3d4f326c07aea9ee4cca2d515",
+        "path": "index.html",
+        "bytes": 376221,
+        "sha256": "5ad63aa2656692e47f780af1bd67626652344c82552d90c5cb15f6b39f7767af"
+      }
+    },
+    {
+      "path": "js/mechanical-audio.js",
+      "knownGood": {
+        "commit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+        "path": "js/mechanical-audio.js",
+        "bytes": 10589,
+        "sha256": "3499f07db54cecf4546bea8eecc84ce1b65cdef8f1139e8e9ef5aff28992dbfb"
+      },
+      "r22": {
+        "commit": "48ec7b73c207bf5a784663f70199ec8f4f1465d8",
+        "path": "js/mechanical-audio.js",
+        "bytes": 37748,
+        "sha256": "ee10272f2f282eb41d283e6500719972786586b5d8e4b8abb0af753803443c9f"
+      },
+      "r23": {
+        "commit": "ebf69a258ad93bb3d4f326c07aea9ee4cca2d515",
+        "path": "js/mechanical-audio.js",
+        "bytes": 24814,
+        "sha256": "5d786aa1b8cabb9e42b5dfc423e2158374d9cd4a467947c1b66861184496faf6"
+      }
+    },
+    {
+      "path": "js/final-stabilization-phase3b4c-audio.js",
+      "knownGood": {
+        "commit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+        "path": "js/final-stabilization-phase3b4c-audio.js",
+        "present": false
+      },
+      "r22": {
+        "commit": "48ec7b73c207bf5a784663f70199ec8f4f1465d8",
+        "path": "js/final-stabilization-phase3b4c-audio.js",
+        "bytes": 43978,
+        "sha256": "ca7e2722f04e1a3e01802de87cde7151bf993304415adbc681fdcefde1f2fb68"
+      },
+      "r23": {
+        "commit": "ebf69a258ad93bb3d4f326c07aea9ee4cca2d515",
+        "path": "js/final-stabilization-phase3b4c-audio.js",
+        "bytes": 43978,
+        "sha256": "ca7e2722f04e1a3e01802de87cde7151bf993304415adbc681fdcefde1f2fb68"
+      }
+    }
+  ],
+  "categories": {
+    "contextCreation": "lazy trusted-user-gesture creation; one retained Context generation",
+    "contextResumeSuspend": "visibilitychange owns resume/suspend",
+    "gainControl": "hidden gain 0; running visible gain 0.36",
+    "sourceStop": "hidden stops active and scheduled source inventory",
+    "sourceReservation": "current scheduler re-anchor cancels pending escapement before suspend",
+    "visibilityHandler": "single audio owner",
+    "pagehidePageshow": "diagnostic-only for audio",
+    "blurFocus": "diagnostic-only for audio",
+    "schedulerReanchor": "one regular re-anchor per hidden and successful-visible transition",
+    "legacyAudioReset": "one reset after each lifecycle-owned re-anchor",
+    "uiState": "resume-required until Context is running",
+    "contextRebuild": "removed",
+    "bufferOwnership": "six loaded buffers retained; no lifecycle reload"
+  },
+  "allowedCurrentDeltaFromV314": [
+    "current scheduler pending-source cancellation and regular re-anchor",
+    "bounded one-click speaker fallback only after automatic resume failure",
+    "query-only compact lifecycle trace"
+  ]
+}

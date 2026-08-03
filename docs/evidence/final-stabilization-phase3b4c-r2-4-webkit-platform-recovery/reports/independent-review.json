@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.4",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "cd14aece97d7cb8db66c9d5bb1646b263ce0720e",
+  "sourceAudioImplementationCommit": "1760e51c0268e6ec5a245011136fc623c13927ea",
+  "sourceTestContractCommit": "f309dd3c91cb55812a502c6e1ec92bb6e6797852",
+  "knownGoodCommit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T15:38:55.966Z",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "PHASE3B4C_R2_4_INDEPENDENT_REVIEW_PASSED",
+  "method": "Premise-reset read-only diff, race, ownership, atomic-swap, failure-path, and protected-path review after fixed commits",
+  "reviewedDiff": "cd14aece97d7cb8db66c9d5bb1646b263ce0720e..f309dd3c91cb55812a502c6e1ec92bb6e6797852",
+  "findings": {
+    "critical": [],
+    "major": [],
+    "minor": []
+  },
+  "verified": [
+    "visibilitychange remains the single lifecycle owner",
+    "running state is not accepted without currentTime advance",
+    "resume and stalled recovery are bounded",
+    "one trusted speaker gesture creates at most one fresh Context",
+    "six raw assets are decoded before atomic graph replacement",
+    "create/decode/stale failures retain the old graph muted",
+    "old Context close failure cannot roll back the committed graph",
+    "no per-frame recovery work, retry loop, catch-up burst, or threshold change"
+  ]
+}

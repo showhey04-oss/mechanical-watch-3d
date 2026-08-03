@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Phase 3C.1 fourth-candidate capture</title>
+  <style>
+    html,body{margin:0;background:#101820;color:#eef3f8;font:13px system-ui}
+    iframe{width:640px;height:480px;border:0;display:block}
+    output,pre{white-space:pre-wrap;word-break:break-word}
+  </style>
+</head>
+<body data-audit-status="queued" data-capture-stage="queued" data-phase3c1-capture-ready="false">
+  <iframe id="auditApp" title="Mechanical watch Phase 3C.1 capture"></iframe>
+  <output id="captureResult" data-status="queued"></output>
+  <pre id="captureLog"></pre>
+  <div id="phase3aCaptureChunks" hidden></div>
+  <script type="module">
+    import {runFinalExteriorCapture} from "./final-exterior-capture.js?phase3c1-fourth=1";
+
+    const params = new URLSearchParams(location.search);
+    const width = Math.max(320, Number(params.get("width")) || 1280);
+    const height = Math.max(480, Number(params.get("height")) || 720);
+    const cameraPreset = params.get("camera") || "front";
+    const displayMode = params.get("display") || "normal";
+    const prepareMode = params.get("prepare") || "none";
+    document.body.dataset.requestedPrepare = prepareMode;
+    const appQuery = params.get("appQuery") || [
+      "exterior=balanced",
+      "watchHead=phase3c1",
+      "dimensionAudit=1",
+      "theme=navy",
+      "time=10%3A10%3A30",
+      "paused=1",
+      "opacity=1",
+      "panel=collapsed",
+    ].join("&");
+
+    const setRange = (frame, id, value) => {
+      const control = frame.contentDocument.getElementById(id);
+      control.value = String(value);
+      control.dispatchEvent(
+        new frame.contentWindow.Event("input", { bubbles: true }),
+      );
+    };
+
+    runFinalExteriorCapture({
+      captureId: params.get("captureId") || "phase3c1-fourth-candidate",
+      width,
+      height,
+      cameraPreset,
+      readyKey: "phase3c1CaptureReady",
+      appQuery,
+      prepare: displayMode === "normal" && prepareMode === "none"
+        ? null
+        : async ({frame, diagnostics}) => {
+          if (displayMode === "split") {
+            setRange(frame, "sideSplit", 100);
+          } else if (displayMode === "explode") {
+            setRange(frame, "explode", 100);
+          } else if (displayMode === "restore") {
+            setRange(frame, "sideSplit", 100);
+            setRange(frame, "explode", 100);
+            await diagnostics.waitForFrames(4);
+            setRange(frame, "sideSplit", 0);
+            setRange(frame, "explode", 0);
+          } else if (displayMode !== "normal") {
+            throw new Error(`unknown display mode: ${displayMode}`);
+          }
+
+          if (prepareMode === "crystal-hidden") {
+            diagnostics.setPhase3C1CrystalDiagnosticVisible(false);
+            document.body.dataset.prepareApplied = "crystal-hidden";
+            document.body.dataset.prepareVisible = String(
+              diagnostics.getPhase3C1CrystalDiagnosticReport().visible,
+            );
+          } else if (prepareMode === "exterior-off") {
+            const control =
+              frame.contentDocument.querySelector('[data-group="exterior"]');
+            control.checked = false;
+            control.dispatchEvent(
+              new frame.contentWindow.Event("change", { bubbles: true }),
+            );
+            document.body.dataset.prepareApplied = "exterior-off";
+            document.body.dataset.prepareVisible = String(
+              diagnostics.getPhase3C1ExteriorGroupReport().enabled,
+            );
+          } else if (prepareMode === "exterior-internal-selection") {
+            const control =
+              frame.contentDocument.querySelector('[data-group="exterior"]');
+            control.checked = false;
+            control.dispatchEvent(
+              new frame.contentWindow.Event("change", { bubbles: true }),
+            );
+            await diagnostics.waitForFrames(4);
+            diagnostics.pickProjectedPart("設定車2");
+            document.body.dataset.prepareApplied =
+              "exterior-internal-selection";
+            document.body.dataset.prepareVisible = String(
+              diagnostics.getPhase3C1ExteriorGroupReport().enabled,
+            );
+          } else if (prepareMode !== "none") {
+            throw new Error(`unknown prepare mode: ${prepareMode}`);
+          }
+          await diagnostics.waitForFrames(4);
+        },
+    });
+  </script>
+</body>
+</html>

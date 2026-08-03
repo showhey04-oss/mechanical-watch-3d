@@ -1,0 +1,367 @@
+{
+  "sourceBaseCommit": "191ff2682398356da59e747e608c82120dacebd9",
+  "sourceAuditCommit": "67959f5fc0d16babbec0520812e936f3d6010196",
+  "sourcePr5Head": "79feee0f81bc719de0118042b356a2b63007090c",
+  "sourceBranch": "feature/issue2-final-polish-phase3a-final-exterior",
+  "captureMode": "same-origin unsandboxed iframe harness; actual Three.js offscreen WebGL PNG",
+  "capturedAt": "2026-07-27T17:15:11.014293Z",
+  "appVersion": "v3.15.0",
+  "status": "COMPARISON_COMPLETE_WITH_CANDIDATE_REGRESSIONS_NOT_ADOPTED",
+  "node": {
+    "status": "passed",
+    "passed": 210,
+    "total": 210
+  },
+  "browser": {
+    "coverageRuns": 6,
+    "captureCount": 198,
+    "consoleErrorWarningCount": 0,
+    "forbiddenInterference": "0/0 in every captured scenario",
+    "absoluteSuite": {
+      "1280x720": {
+        "issue2-baseline": {
+          "ok": false,
+          "total": 86,
+          "failed": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "error": null
+        },
+        "issue2-d2a": {
+          "ok": false,
+          "total": 86,
+          "failed": [
+            "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "error": null,
+          "commonWithBaseline": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "candidateOnly": [
+            "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill"
+          ]
+        },
+        "issue2-d2c3": {
+          "ok": false,
+          "total": 86,
+          "failed": [
+            "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "error": null,
+          "commonWithBaseline": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "candidateOnly": [
+            "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill"
+          ]
+        }
+      },
+      "390x844": {
+        "issue2-baseline": {
+          "ok": false,
+          "total": 88,
+          "failed": [
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "error": null
+        },
+        "issue2-d2a": {
+          "ok": false,
+          "total": 88,
+          "failed": [
+            "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "error": null,
+          "commonWithBaseline": [
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "candidateOnly": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill"
+          ]
+        },
+        "issue2-d2c3": {
+          "ok": false,
+          "total": 88,
+          "failed": [
+            "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+            "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "error": null,
+          "commonWithBaseline": [
+            "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+            "a6-wheel-path-produces-monotonic-continuous-zoom"
+          ],
+          "candidateOnly": [
+            "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+            "a5-both-faces-retain-key-light-and-camera-follow-fill",
+            "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill"
+          ]
+        }
+      }
+    },
+    "absoluteSuiteInterpretation": "baseline misses existing A.5 luminance and A.6 performance checks in this browser; D2A and D2c3 add A.5 lighting-contract failures, so neither candidate is adoption-ready",
+    "integration": {
+      "1280x720": {
+        "issue2-baseline": {
+          "ok": true,
+          "checks": {
+            "documentUrlContainsQuery": true,
+            "viewport": true,
+            "appVersion": true,
+            "integrationEnabled": true,
+            "queryOnlyProxy": true,
+            "objectAudit": true,
+            "desktopOrMobileSmallSecondBlank4of4": true,
+            "partPrioritySelection": true,
+            "opacityMatrix": true,
+            "opacity16InternalSelection": true,
+            "exteriorVisibility": true,
+            "splitExplode": true,
+            "exactRestore": true,
+            "modeIntegration": true,
+            "crownPositions": true,
+            "forbiddenInterference": true,
+            "handCoupling": true,
+            "protectedDimensions": true,
+            "deferredUiDecision": true,
+            "issue2Handoff": true,
+            "finalTransformInvariant": true
+          }
+        },
+        "issue2-d2a": {
+          "ok": true,
+          "checks": {
+            "documentUrlContainsQuery": true,
+            "viewport": true,
+            "appVersion": true,
+            "integrationEnabled": true,
+            "queryOnlyProxy": true,
+            "objectAudit": true,
+            "desktopOrMobileSmallSecondBlank4of4": true,
+            "partPrioritySelection": true,
+            "opacityMatrix": true,
+            "opacity16InternalSelection": true,
+            "exteriorVisibility": true,
+            "splitExplode": true,
+            "exactRestore": true,
+            "modeIntegration": true,
+            "crownPositions": true,
+            "forbiddenInterference": true,
+            "handCoupling": true,
+            "protectedDimensions": true,
+            "deferredUiDecision": true,
+            "issue2Handoff": true,
+            "finalTransformInvariant": true
+          }
+        },
+        "issue2-d2c3": {
+          "ok": true,
+          "checks": {
+            "documentUrlContainsQuery": true,
+            "viewport": true,
+            "appVersion": true,
+            "integrationEnabled": true,
+            "queryOnlyProxy": true,
+            "objectAudit": true,
+            "desktopOrMobileSmallSecondBlank4of4": true,
+            "partPrioritySelection": true,
+            "opacityMatrix": true,
+            "opacity16InternalSelection": true,
+            "exteriorVisibility": true,
+            "splitExplode": true,
+            "exactRestore": true,
+            "modeIntegration": true,
+            "crownPositions": true,
+            "forbiddenInterference": true,
+            "handCoupling": true,
+            "protectedDimensions": true,
+            "deferredUiDecision": true,
+            "issue2Handoff": true,
+            "finalTransformInvariant": true
+          }
+        }
+      },
+      "390x844": {
+        "issue2-baseline": {
+          "ok": true,
+          "checks": {
+            "documentUrlContainsQuery": true,
+            "viewport": true,
+            "appVersion": true,
+            "integrationEnabled": true,
+            "queryOnlyProxy": true,
+            "objectAudit": true,
+            "desktopOrMobileSmallSecondBlank4of4": true,
+            "partPrioritySelection": true,
+            "opacityMatrix": true,
+            "opacity16InternalSelection": true,
+            "exteriorVisibility": true,
+            "splitExplode": true,
+            "exactRestore": true,
+            "modeIntegration": true,
+            "crownPositions": true,
+            "forbiddenInterference": true,
+            "handCoupling": true,
+            "protectedDimensions": true,
+            "deferredUiDecision": true,
+            "issue2Handoff": true,
+            "finalTransformInvariant": true
+          }
+        },
+        "issue2-d2a": {
+          "ok": true,
+          "checks": {
+            "documentUrlContainsQuery": true,
+            "viewport": true,
+            "appVersion": true,
+            "integrationEnabled": true,
+            "queryOnlyProxy": true,
+            "objectAudit": true,
+            "desktopOrMobileSmallSecondBlank4of4": true,
+            "partPrioritySelection": true,
+            "opacityMatrix": true,
+            "opacity16InternalSelection": true,
+            "exteriorVisibility": true,
+            "splitExplode": true,
+            "exactRestore": true,
+            "modeIntegration": true,
+            "crownPositions": true,
+            "forbiddenInterference": true,
+            "handCoupling": true,
+            "protectedDimensions": true,
+            "deferredUiDecision": true,
+            "issue2Handoff": true,
+            "finalTransformInvariant": true
+          }
+        },
+        "issue2-d2c3": {
+          "ok": true,
+          "checks": {
+            "documentUrlContainsQuery": true,
+            "viewport": true,
+            "appVersion": true,
+            "integrationEnabled": true,
+            "queryOnlyProxy": true,
+            "objectAudit": true,
+            "desktopOrMobileSmallSecondBlank4of4": true,
+            "partPrioritySelection": true,
+            "opacityMatrix": true,
+            "opacity16InternalSelection": true,
+            "exteriorVisibility": true,
+            "splitExplode": true,
+            "exactRestore": true,
+            "modeIntegration": true,
+            "crownPositions": true,
+            "forbiddenInterference": true,
+            "handCoupling": true,
+            "protectedDimensions": true,
+            "deferredUiDecision": true,
+            "issue2Handoff": true,
+            "finalTransformInvariant": true
+          }
+        }
+      }
+    },
+    "uiHud": {
+      "ui": {
+        "1280x720": {
+          "ok": true,
+          "total": 20,
+          "failed": []
+        },
+        "390x844": {
+          "ok": true,
+          "total": 22,
+          "failed": []
+        }
+      },
+      "hud": {
+        "1280x720": {
+          "ok": true,
+          "total": 45,
+          "failed": []
+        },
+        "390x844": {
+          "ok": true,
+          "total": 57,
+          "failed": []
+        }
+      }
+    },
+    "audio": {
+      "issue2-baseline": {
+        "ok": false,
+        "failed": [
+          "audio-resume-does-not-replay-a-backlog"
+        ],
+        "actualBrowserPointerGesture": true,
+        "sixBuffersLoaded": true
+      },
+      "issue2-d2c3": {
+        "ok": false,
+        "failed": [
+          "audio-resume-does-not-replay-a-backlog"
+        ],
+        "actualBrowserPointerGesture": true,
+        "sixBuffersLoaded": true
+      },
+      "candidateOnly": []
+    }
+  },
+  "protectedPaths": {
+    "normal": {
+      "pixelExact": true,
+      "basis": "new resolver is disabled without rendering query; Phase 3C.3 protected-path evidence remains byte exact"
+    },
+    "phase3c1Only": {
+      "pixelExact": true,
+      "basis": "new resolver is disabled without completed exterior query; Phase 3C.3 protected-path evidence remains byte exact"
+    },
+    "phase3c2Only": {
+      "pixelExact": true,
+      "basis": "new resolver is disabled without integration=phase3c3; Phase 3C.3 protected-path evidence remains byte exact"
+    },
+    "phase3c3Only": {
+      "1280x720": {
+        "pixelExact": true,
+        "phase3c3OnlySha256": "6c6dddec4948eca74e46ba492a2d60d6238da133d3d859991c8fea090999d1aa",
+        "explicitBaselineSha256": "6c6dddec4948eca74e46ba492a2d60d6238da133d3d859991c8fea090999d1aa"
+      },
+      "390x844": {
+        "pixelExact": true,
+        "phase3c3OnlySha256": "ad740923982a79ce660a6c45dd0a9fdd51f6aaa6def0d02d12520589a095e7f7",
+        "explicitBaselineSha256": "ad740923982a79ce660a6c45dd0a9fdd51f6aaa6def0d02d12520589a095e7f7"
+      }
+    }
+  },
+  "thresholdsChanged": false,
+  "candidateAdopted": false,
+  "physicalIPhoneDecision": "NOT_PERFORMED"
+}

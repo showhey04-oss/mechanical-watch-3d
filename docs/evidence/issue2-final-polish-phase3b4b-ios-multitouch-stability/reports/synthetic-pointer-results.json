@@ -1,0 +1,3447 @@
+{
+  "sourceBaseCommit": "ece9d99c4e0ff95afd155475ef963e2984c5d05f",
+  "sourceAuditCommit": "fac59b714d66215ee0c60b688c0201fea1d9fde4",
+  "sourceBranch": "feature/issue2-final-polish-phase3b4b-ios-multitouch-stability",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and in-app Browser",
+  "schemaVersion": 1,
+  "status": "PASSED_AUTOMATED_NOT_PHYSICAL_SUBSTITUTE",
+  "desktop1280x720": {
+    "schemaVersion": 1,
+    "phase": "ISSUE2-PHASE3B4B-IOS-MULTITOUCH-STABILITY",
+    "candidate": "issue2-ios-multitouch-stability",
+    "cycles": 24,
+    "results": [
+      {
+        "id": "one-finger",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 1,
+          "resetReasons": {
+            "suite-start": 1
+          },
+          "lastResetReason": "suite-start",
+          "pointerIdReuseCollisions": 0,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 4,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 48.97567441624348,
+            "actualCameraDistance": 47.82270780607773,
+            "desiredTarget": [
+              0,
+              0.5,
+              0
+            ],
+            "actualTarget": [
+              0,
+              0.5,
+              0
+            ],
+            "desiredQuaternion": [
+              0.65945716,
+              -0.148466639,
+              -0.151787532,
+              0.721134146
+            ],
+            "actualQuaternion": [
+              0.680527372,
+              -0.091581061,
+              -0.093629541,
+              0.720922267
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "one-to-two-to-one-repeated",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 1,
+          "resetReasons": {
+            "suite-start": 1
+          },
+          "lastResetReason": "suite-start",
+          "pointerIdReuseCollisions": 0,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 196,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.994108829524322,
+            "actualCameraDistance": 16.316255666080327,
+            "desiredTarget": [
+              -3.649321353,
+              5.80114394,
+              10.494240884
+            ],
+            "actualTarget": [
+              -3.502058351,
+              5.464866158,
+              10.148970686
+            ],
+            "desiredQuaternion": [
+              -0.454409572,
+              0.767533019,
+              0.440304277,
+              -0.102650614
+            ],
+            "actualQuaternion": [
+              -0.504632912,
+              0.727083565,
+              0.425744955,
+              -0.188245444
+            ]
+          }
+        },
+        "extra": {
+          "cycles": 24
+        }
+      },
+      {
+        "id": "pointercancel",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 2,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1
+          },
+          "lastResetReason": "pointercancel",
+          "pointerIdReuseCollisions": 0,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 199,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.994108829524322,
+            "actualCameraDistance": 16.671183680373844,
+            "desiredTarget": [
+              -3.649321353,
+              5.80114394,
+              10.494240884
+            ],
+            "actualTarget": [
+              -3.545200377,
+              5.563381771,
+              10.250120709
+            ],
+            "desiredQuaternion": [
+              -0.454409572,
+              0.767533019,
+              0.440304277,
+              -0.102650614
+            ],
+            "actualQuaternion": [
+              -0.487221367,
+              0.74263672,
+              0.431564562,
+              -0.157664424
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "lostpointercapture",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 3,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1
+          },
+          "lastResetReason": "lostpointercapture",
+          "pointerIdReuseCollisions": 0,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 202,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.994108829524322,
+            "actualCameraDistance": 17.02162292527932,
+            "desiredTarget": [
+              -3.649321353,
+              5.80114394,
+              10.494240884
+            ],
+            "actualTarget": [
+              -3.578117036,
+              5.638547568,
+              10.327296517
+            ],
+            "desiredQuaternion": [
+              -0.454409572,
+              0.767533019,
+              0.440304277,
+              -0.102650614
+            ],
+            "actualQuaternion": [
+              -0.474808523,
+              0.752688579,
+              0.435190525,
+              -0.136477019
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "pointer-id-reuse",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 4,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1
+          },
+          "lastResetReason": "pointer-id-reuse",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 206,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.994108829524322,
+            "actualCameraDistance": 17.30142694360327,
+            "desiredTarget": [
+              -3.649321353,
+              5.80114394,
+              10.494240884
+            ],
+            "actualTarget": [
+              -3.600843405,
+              5.690443652,
+              10.380580356
+            ],
+            "desiredQuaternion": [
+              -0.454409572,
+              0.767533019,
+              0.440304277,
+              -0.102650614
+            ],
+            "actualQuaternion": [
+              -0.466953114,
+              0.758641119,
+              0.437278929,
+              -0.123310912
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "window-blur",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 5,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1,
+            "window-blur": 1
+          },
+          "lastResetReason": "window-blur",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 208,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.994108829524322,
+            "actualCameraDistance": 17.50263153926543,
+            "desiredTarget": [
+              -3.649321353,
+              5.80114394,
+              10.494240884
+            ],
+            "actualTarget": [
+              -3.615873156,
+              5.724764364,
+              10.415818839
+            ],
+            "desiredQuaternion": [
+              -0.454409572,
+              0.767533019,
+              0.440304277,
+              -0.102650614
+            ],
+            "actualQuaternion": [
+              -0.46223003,
+              0.762075505,
+              0.438461617,
+              -0.115480453
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "visibility-hidden",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 6,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1,
+            "window-blur": 1,
+            "visibility-hidden-audit": 1
+          },
+          "lastResetReason": "visibility-hidden-audit",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 210,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.994108829524322,
+            "actualCameraDistance": 17.635945891423628,
+            "desiredTarget": [
+              -3.649321353,
+              5.80114394,
+              10.494240884
+            ],
+            "actualTarget": [
+              -3.625354673,
+              5.746415583,
+              10.438049034
+            ],
+            "desiredQuaternion": [
+              -0.454409572,
+              0.767533019,
+              0.440304277,
+              -0.102650614
+            ],
+            "actualQuaternion": [
+              -0.45951761,
+              0.764000258,
+              0.439116811,
+              -0.111011698
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "pagehide-pageshow",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 8,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1,
+            "window-blur": 1,
+            "visibility-hidden-audit": 1,
+            "pagehide": 1,
+            "pageshow": 1
+          },
+          "lastResetReason": "pageshow",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 213,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.994108829524322,
+            "actualCameraDistance": 17.69384865871407,
+            "desiredTarget": [
+              -3.649321353,
+              5.80114394,
+              10.494240884
+            ],
+            "actualTarget": [
+              -3.629369317,
+              5.755583096,
+              10.447461696
+            ],
+            "desiredQuaternion": [
+              -0.454409572,
+              0.767533019,
+              0.440304277,
+              -0.102650614
+            ],
+            "actualQuaternion": [
+              -0.458620006,
+              0.764629686,
+              0.439329836,
+              -0.109537337
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "selection-cleanup",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 9,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1,
+            "window-blur": 1,
+            "visibility-hidden-audit": 1,
+            "pagehide": 1,
+            "pageshow": 1,
+            "post-selection-audit": 1
+          },
+          "lastResetReason": "post-selection-audit",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 216,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 48.97567441624348,
+            "actualCameraDistance": 48.97567441624348,
+            "desiredTarget": [
+              0,
+              0.5,
+              0
+            ],
+            "actualTarget": [
+              0,
+              0.5,
+              0
+            ],
+            "desiredQuaternion": [
+              0.704078584,
+              0,
+              0,
+              0.710122066
+            ],
+            "actualQuaternion": [
+              0.704078584,
+              0,
+              0,
+              0.710122066
+            ]
+          }
+        },
+        "extra": {}
+      }
+    ],
+    "allIdleCheckpointsPassed": true,
+    "finalState": {
+      "enabled": true,
+      "mode": "stability",
+      "queryOnly": true,
+      "mutatesInputLifecycle": true,
+      "inputApi": "Pointer Events",
+      "touchAction": "none",
+      "sourceArcballVersion": "three@0.160.0",
+      "activePointerCount": 0,
+      "activePointerIds": [],
+      "arcballTouchStartIds": [],
+      "arcballTouchCurrentIds": [],
+      "gestureMode": "idle",
+      "pointerCaptureIds": [],
+      "resetCount": 9,
+      "resetReasons": {
+        "suite-start": 1,
+        "pointercancel": 1,
+        "lostpointercapture": 1,
+        "pointer-id-reuse": 1,
+        "window-blur": 1,
+        "visibility-hidden-audit": 1,
+        "pagehide": 1,
+        "pageshow": 1,
+        "post-selection-audit": 1
+      },
+      "lastResetReason": "post-selection-audit",
+      "pointerIdReuseCollisions": 1,
+      "stalePointerAgeExceeded": 0,
+      "invariant": {
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "gestureMode": "idle",
+        "previousCentroid": null,
+        "previousPinchDistance": null,
+        "previousGestureAngle": null,
+        "pointerCaptureIds": [],
+        "desiredCameraFinite": true,
+        "actualCameraFinite": true
+      },
+      "idleInvariantPassed": true,
+      "invariantFailureCount": 0,
+      "eventLogCount": 216,
+      "perFrameDiagnostics": 0,
+      "camera": {
+        "desiredCameraDistance": 48.97567441624348,
+        "actualCameraDistance": 48.97567441624348,
+        "desiredTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "actualTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "desiredQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "actualQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ]
+      }
+    },
+    "cameraBefore": {
+      "role": "render",
+      "position": [
+        0,
+        -48.473885644555445,
+        0.41858021918423455
+      ],
+      "quaternion": [
+        0.704078583547734,
+        0,
+        0,
+        0.7101220656967482
+      ],
+      "cameraUp": [
+        0,
+        0,
+        1
+      ],
+      "direction": [
+        0,
+        0.9999634763235146,
+        -0.008546696378833095
+      ],
+      "target": [
+        0,
+        0.5,
+        0
+      ],
+      "distance": 48.97567441624348,
+      "preset": "reset",
+      "finite": true,
+      "control": {
+        "role": "control",
+        "position": [
+          0,
+          -48.473885644555445,
+          0.41858021918423455
+        ],
+        "quaternion": [
+          0.704078583547734,
+          0,
+          0,
+          0.7101220656967482
+        ],
+        "cameraUp": [
+          0,
+          0,
+          1
+        ],
+        "direction": [
+          0,
+          0.9999634763235146,
+          -0.008546696378833095
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "distance": 48.97567441624348,
+        "preset": "reset",
+        "finite": true
+      }
+    },
+    "cameraAfter": {
+      "role": "render",
+      "position": [
+        0,
+        -48.473885644555445,
+        0.41858021918423455
+      ],
+      "quaternion": [
+        0.704078583547734,
+        0,
+        0,
+        0.7101220656967482
+      ],
+      "cameraUp": [
+        0,
+        0,
+        1
+      ],
+      "direction": [
+        0,
+        0.9999634763235146,
+        -0.008546696378833095
+      ],
+      "target": [
+        0,
+        0.5,
+        0
+      ],
+      "distance": 48.97567441624348,
+      "preset": "free",
+      "finite": true,
+      "control": {
+        "role": "control",
+        "position": [
+          0,
+          -48.473885644555445,
+          0.41858021918423455
+        ],
+        "quaternion": [
+          0.704078583547734,
+          0,
+          0,
+          0.7101220656967482
+        ],
+        "cameraUp": [
+          0,
+          0,
+          1
+        ],
+        "direction": [
+          0,
+          0.9999634763235146,
+          -0.008546696378833095
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "distance": 48.97567441624348,
+        "preset": "free",
+        "finite": true
+      }
+    },
+    "cameraFinite": true,
+    "modelTransformInvariant": true,
+    "selection": {
+      "beforeBlank": "設定車2",
+      "blankCleared": true,
+      "afterBlank": null
+    },
+    "timelineCount": 216,
+    "timelineTail": [
+      {
+        "timestamp": 4260.9,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4260.699999988079,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 16.671183680373844,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.545200377,
+          5.563381771,
+          10.250120709
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.487221367,
+          0.74263672,
+          0.431564562,
+          -0.157664424
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 3,
+        "resetReason": "lostpointercapture",
+        "reason": "lostpointercapture"
+      },
+      {
+        "timestamp": 4260.9,
+        "eventType": "lostpointercapture",
+        "pointerId": 7050,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 0,
+        "pressure": 0,
+        "clientX": 601.5999999999999,
+        "clientY": 360,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4260.699999988079,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 16.671183680373844,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.545200377,
+          5.563381771,
+          10.250120709
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.487221367,
+          0.74263672,
+          0.431564562,
+          -0.157664424
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 3,
+        "resetReason": "lostpointercapture"
+      },
+      {
+        "timestamp": 4273,
+        "eventType": "pointerdown",
+        "pointerId": 7051,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 627.2,
+        "clientY": 360,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7051
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 4273,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.02162292527932,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.578117036,
+          5.638547568,
+          10.327296517
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.474808523,
+          0.752688579,
+          0.435190525,
+          -0.136477019
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 3,
+        "resetReason": "lostpointercapture"
+      },
+      {
+        "timestamp": 4273,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4273,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.02162292527932,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.578117036,
+          5.638547568,
+          10.327296517
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.474808523,
+          0.752688579,
+          0.435190525,
+          -0.136477019
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 4,
+        "resetReason": "pointer-id-reuse",
+        "reason": "pointer-id-reuse"
+      },
+      {
+        "timestamp": 4273,
+        "eventType": "pointerdown",
+        "pointerId": 7051,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 629.2,
+        "clientY": 362,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7051
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 4273,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.02162292527932,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.578117036,
+          5.638547568,
+          10.327296517
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.474808523,
+          0.752688579,
+          0.435190525,
+          -0.136477019
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 4,
+        "resetReason": "pointer-id-reuse"
+      },
+      {
+        "timestamp": 4273.2,
+        "eventType": "pointerup",
+        "pointerId": 7051,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 0,
+        "pressure": 0,
+        "clientX": 629.2,
+        "clientY": 362,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4273,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.02162292527932,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.578117036,
+          5.638547568,
+          10.327296517
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.474808523,
+          0.752688579,
+          0.435190525,
+          -0.136477019
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 4,
+        "resetReason": "pointer-id-reuse"
+      },
+      {
+        "timestamp": 4291.5,
+        "eventType": "pointerdown",
+        "pointerId": 7052,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 652.8,
+        "clientY": 360,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7052
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 4291.399999976158,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.30142694360327,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.600843405,
+          5.690443652,
+          10.380580356
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.466953114,
+          0.758641119,
+          0.437278929,
+          -0.123310912
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 4,
+        "resetReason": "pointer-id-reuse"
+      },
+      {
+        "timestamp": 4291.6,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4291.399999976158,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.30142694360327,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.600843405,
+          5.690443652,
+          10.380580356
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.466953114,
+          0.758641119,
+          0.437278929,
+          -0.123310912
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 5,
+        "resetReason": "window-blur",
+        "reason": "window-blur"
+      },
+      {
+        "timestamp": 4309,
+        "eventType": "pointerdown",
+        "pointerId": 7053,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 678.4000000000001,
+        "clientY": 360,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7053
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 4308.899999976158,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.50263153926543,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.615873156,
+          5.724764364,
+          10.415818839
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.46223003,
+          0.762075505,
+          0.438461617,
+          -0.115480453
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 5,
+        "resetReason": "window-blur"
+      },
+      {
+        "timestamp": 4309,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4308.899999976158,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.50263153926543,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.615873156,
+          5.724764364,
+          10.415818839
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.46223003,
+          0.762075505,
+          0.438461617,
+          -0.115480453
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 6,
+        "resetReason": "visibility-hidden-audit",
+        "reason": "visibility-hidden-audit"
+      },
+      {
+        "timestamp": 4324.1,
+        "eventType": "pointerdown",
+        "pointerId": 7054,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 704,
+        "clientY": 360,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7054
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 4324.100000023842,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.635945891423628,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.625354673,
+          5.746415583,
+          10.438049034
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.45951761,
+          0.764000258,
+          0.439116811,
+          -0.111011698
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 6,
+        "resetReason": "visibility-hidden-audit"
+      },
+      {
+        "timestamp": 4324.2,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4324.100000023842,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.635945891423628,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.625354673,
+          5.746415583,
+          10.438049034
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.45951761,
+          0.764000258,
+          0.439116811,
+          -0.111011698
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 7,
+        "resetReason": "pagehide",
+        "reason": "pagehide"
+      },
+      {
+        "timestamp": 4324.2,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4324.100000023842,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.994108829524322,
+        "actualCameraDistance": 17.635945891423628,
+        "desiredTarget": [
+          -3.649321353,
+          5.80114394,
+          10.494240884
+        ],
+        "actualTarget": [
+          -3.625354673,
+          5.746415583,
+          10.438049034
+        ],
+        "desiredQuaternion": [
+          -0.454409572,
+          0.767533019,
+          0.440304277,
+          -0.102650614
+        ],
+        "actualQuaternion": [
+          -0.45951761,
+          0.764000258,
+          0.439116811,
+          -0.111011698
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 8,
+        "resetReason": "pageshow",
+        "reason": "pageshow"
+      },
+      {
+        "timestamp": 5148.4,
+        "eventType": "pointerdown",
+        "pointerId": 7055,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 25.6,
+        "clientY": 14.4,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7055
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 5148.399999976158,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 48.97567441624348,
+        "actualCameraDistance": 48.97567441624348,
+        "desiredTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "actualTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "desiredQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "actualQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 8,
+        "resetReason": "pageshow"
+      },
+      {
+        "timestamp": 5148.6,
+        "eventType": "pointerup",
+        "pointerId": 7055,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 0,
+        "pressure": 0,
+        "clientX": 25.6,
+        "clientY": 14.4,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 5148.399999976158,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 48.97567441624348,
+        "actualCameraDistance": 48.97567441624348,
+        "desiredTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "actualTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "desiredQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "actualQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 8,
+        "resetReason": "pageshow"
+      },
+      {
+        "timestamp": 5197.4,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 5148.399999976158,
+        "gestureElapsedTime": 49,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 48.97567441624348,
+        "actualCameraDistance": 48.97567441624348,
+        "desiredTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "actualTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "desiredQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "actualQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 9,
+        "resetReason": "post-selection-audit",
+        "reason": "post-selection-audit"
+      }
+    ],
+    "resetReasons": {
+      "suite-start": 1,
+      "pointercancel": 1,
+      "lostpointercapture": 1,
+      "pointer-id-reuse": 1,
+      "window-blur": 1,
+      "visibility-hidden-audit": 1,
+      "pagehide": 1,
+      "pageshow": 1,
+      "post-selection-audit": 1
+    },
+    "pointerIdReuseCollisions": 1,
+    "stalePointerAgeExceeded": 0,
+    "testThresholdsChanged": false,
+    "defaultAdopted": false,
+    "physicalIPhoneReview": "PENDING",
+    "ok": true
+  },
+  "mobile390x844": {
+    "schemaVersion": 1,
+    "phase": "ISSUE2-PHASE3B4B-IOS-MULTITOUCH-STABILITY",
+    "candidate": "issue2-ios-multitouch-stability",
+    "cycles": 60,
+    "results": [
+      {
+        "id": "one-finger",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 1,
+          "resetReasons": {
+            "suite-start": 1
+          },
+          "lastResetReason": "suite-start",
+          "pointerIdReuseCollisions": 0,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 4,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 105.98838258284488,
+            "actualCameraDistance": 104.64049606859248,
+            "desiredTarget": [
+              0,
+              0.5,
+              0
+            ],
+            "actualTarget": [
+              0,
+              0.5,
+              0
+            ],
+            "desiredQuaternion": [
+              0.622221012,
+              -0.095414816,
+              -0.102223749,
+              0.770251472
+            ],
+            "actualQuaternion": [
+              0.675515991,
+              -0.036190068,
+              -0.038772641,
+              0.735435318
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "one-to-two-to-one-repeated",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 1,
+          "resetReasons": {
+            "suite-start": 1
+          },
+          "lastResetReason": "suite-start",
+          "pointerIdReuseCollisions": 0,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 484,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.997623757888295,
+            "actualCameraDistance": 12.640909515375343,
+            "desiredTarget": [
+              -14.231544932,
+              10.357710173,
+              7.642946463
+            ],
+            "actualTarget": [
+              -13.906641821,
+              9.590643775,
+              7.608263607
+            ],
+            "desiredQuaternion": [
+              0.283424475,
+              0.183487987,
+              -0.07975931,
+              0.93789188
+            ],
+            "actualQuaternion": [
+              -0.002913857,
+              0.361697168,
+              -0.052361333,
+              0.930819509
+            ]
+          }
+        },
+        "extra": {
+          "cycles": 60
+        }
+      },
+      {
+        "id": "pointercancel",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 2,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1
+          },
+          "lastResetReason": "pointercancel",
+          "pointerIdReuseCollisions": 0,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 487,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.997623757888295,
+            "actualCameraDistance": 13.684147846997872,
+            "desiredTarget": [
+              -14.231544932,
+              10.357710173,
+              7.642946463
+            ],
+            "actualTarget": [
+              -14.012785758,
+              9.84123986,
+              7.619594293
+            ],
+            "desiredQuaternion": [
+              0.283424475,
+              0.183487987,
+              -0.07975931,
+              0.93789188
+            ],
+            "actualQuaternion": [
+              0.113067121,
+              0.294563281,
+              -0.064197441,
+              0.946745472
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "lostpointercapture",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 3,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1
+          },
+          "lastResetReason": "lostpointercapture",
+          "pointerIdReuseCollisions": 0,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 490,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.997623757888295,
+            "actualCameraDistance": 14.71343247682374,
+            "desiredTarget": [
+              -14.231544932,
+              10.357710173,
+              7.642946463
+            ],
+            "actualTarget": [
+              -14.077559138,
+              9.99416386,
+              7.626508741
+            ],
+            "desiredQuaternion": [
+              0.283424475,
+              0.183487987,
+              -0.07975931,
+              0.93789188
+            ],
+            "actualQuaternion": [
+              0.175880403,
+              0.25539735,
+              -0.070197035,
+              0.948108988
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "pointer-id-reuse",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 4,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1
+          },
+          "lastResetReason": "pointer-id-reuse",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 494,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.997623757888295,
+            "actualCameraDistance": 15.660944553624415,
+            "desiredTarget": [
+              -14.231544932,
+              10.357710173,
+              7.642946463
+            ],
+            "actualTarget": [
+              -14.127171886,
+              10.111295,
+              7.631804818
+            ],
+            "desiredQuaternion": [
+              0.283424475,
+              0.183487987,
+              -0.07975931,
+              0.93789188
+            ],
+            "actualQuaternion": [
+              0.218653447,
+              0.227553175,
+              -0.074110782,
+              0.946000959
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "window-blur",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 5,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1,
+            "window-blur": 1
+          },
+          "lastResetReason": "window-blur",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 496,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.997623757888295,
+            "actualCameraDistance": 16.340876381905954,
+            "desiredTarget": [
+              -14.231544932,
+              10.357710173,
+              7.642946463
+            ],
+            "actualTarget": [
+              -14.159530946,
+              10.187691768,
+              7.635259092
+            ],
+            "desiredQuaternion": [
+              0.283424475,
+              0.183487987,
+              -0.07975931,
+              0.93789188
+            ],
+            "actualQuaternion": [
+              0.243413135,
+              0.210985145,
+              -0.076310466,
+              0.943616462
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "visibility-hidden",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 6,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1,
+            "window-blur": 1,
+            "visibility-hidden-audit": 1
+          },
+          "lastResetReason": "visibility-hidden-audit",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 498,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.997623757888295,
+            "actualCameraDistance": 16.834860424061763,
+            "desiredTarget": [
+              -14.231544932,
+              10.357710173,
+              7.642946463
+            ],
+            "actualTarget": [
+              -14.181857638,
+              10.240403037,
+              7.637642429
+            ],
+            "desiredQuaternion": [
+              0.283424475,
+              0.183487987,
+              -0.07975931,
+              0.93789188
+            ],
+            "actualQuaternion": [
+              0.258669345,
+              0.200607562,
+              -0.077641152,
+              0.94171048
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "pagehide-pageshow",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 8,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1,
+            "window-blur": 1,
+            "visibility-hidden-audit": 1,
+            "pagehide": 1,
+            "pageshow": 1
+          },
+          "lastResetReason": "pageshow",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 501,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 17.997623757888295,
+            "actualCameraDistance": 17.024832755741237,
+            "desiredTarget": [
+              -14.231544932,
+              10.357710173,
+              7.642946463
+            ],
+            "actualTarget": [
+              -14.190226661,
+              10.260161531,
+              7.638535808
+            ],
+            "desiredQuaternion": [
+              0.283424475,
+              0.183487987,
+              -0.07975931,
+              0.93789188
+            ],
+            "actualQuaternion": [
+              0.263079203,
+              0.197583513,
+              -0.078022225,
+              0.941096499
+            ]
+          }
+        },
+        "extra": {}
+      },
+      {
+        "id": "selection-cleanup",
+        "pass": true,
+        "state": {
+          "enabled": true,
+          "mode": "stability",
+          "queryOnly": true,
+          "mutatesInputLifecycle": true,
+          "inputApi": "Pointer Events",
+          "touchAction": "none",
+          "sourceArcballVersion": "three@0.160.0",
+          "activePointerCount": 0,
+          "activePointerIds": [],
+          "arcballTouchStartIds": [],
+          "arcballTouchCurrentIds": [],
+          "gestureMode": "idle",
+          "pointerCaptureIds": [],
+          "resetCount": 9,
+          "resetReasons": {
+            "suite-start": 1,
+            "pointercancel": 1,
+            "lostpointercapture": 1,
+            "pointer-id-reuse": 1,
+            "window-blur": 1,
+            "visibility-hidden-audit": 1,
+            "pagehide": 1,
+            "pageshow": 1,
+            "post-selection-audit": 1
+          },
+          "lastResetReason": "post-selection-audit",
+          "pointerIdReuseCollisions": 1,
+          "stalePointerAgeExceeded": 0,
+          "invariant": {
+            "activePointerCount": 0,
+            "activePointerIds": [],
+            "gestureMode": "idle",
+            "previousCentroid": null,
+            "previousPinchDistance": null,
+            "previousGestureAngle": null,
+            "pointerCaptureIds": [],
+            "desiredCameraFinite": true,
+            "actualCameraFinite": true
+          },
+          "idleInvariantPassed": true,
+          "invariantFailureCount": 0,
+          "eventLogCount": 504,
+          "perFrameDiagnostics": 0,
+          "camera": {
+            "desiredCameraDistance": 105.98838258284488,
+            "actualCameraDistance": 105.98838258284488,
+            "desiredTarget": [
+              0,
+              0.5,
+              0
+            ],
+            "actualTarget": [
+              0,
+              0.5,
+              0
+            ],
+            "desiredQuaternion": [
+              0.704078584,
+              0,
+              0,
+              0.710122066
+            ],
+            "actualQuaternion": [
+              0.704078584,
+              0,
+              0,
+              0.710122066
+            ]
+          }
+        },
+        "extra": {}
+      }
+    ],
+    "allIdleCheckpointsPassed": true,
+    "finalState": {
+      "enabled": true,
+      "mode": "stability",
+      "queryOnly": true,
+      "mutatesInputLifecycle": true,
+      "inputApi": "Pointer Events",
+      "touchAction": "none",
+      "sourceArcballVersion": "three@0.160.0",
+      "activePointerCount": 0,
+      "activePointerIds": [],
+      "arcballTouchStartIds": [],
+      "arcballTouchCurrentIds": [],
+      "gestureMode": "idle",
+      "pointerCaptureIds": [],
+      "resetCount": 9,
+      "resetReasons": {
+        "suite-start": 1,
+        "pointercancel": 1,
+        "lostpointercapture": 1,
+        "pointer-id-reuse": 1,
+        "window-blur": 1,
+        "visibility-hidden-audit": 1,
+        "pagehide": 1,
+        "pageshow": 1,
+        "post-selection-audit": 1
+      },
+      "lastResetReason": "post-selection-audit",
+      "pointerIdReuseCollisions": 1,
+      "stalePointerAgeExceeded": 0,
+      "invariant": {
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "gestureMode": "idle",
+        "previousCentroid": null,
+        "previousPinchDistance": null,
+        "previousGestureAngle": null,
+        "pointerCaptureIds": [],
+        "desiredCameraFinite": true,
+        "actualCameraFinite": true
+      },
+      "idleInvariantPassed": true,
+      "invariantFailureCount": 0,
+      "eventLogCount": 504,
+      "perFrameDiagnostics": 0,
+      "camera": {
+        "desiredCameraDistance": 105.98838258284488,
+        "actualCameraDistance": 105.98838258284488,
+        "desiredTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "actualTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "desiredQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "actualQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ]
+      }
+    },
+    "cameraBefore": {
+      "role": "render",
+      "position": [
+        0,
+        -105.4845114974482,
+        0.9058505256192153
+      ],
+      "quaternion": [
+        0.7040785835477338,
+        0,
+        0,
+        0.7101220656967482
+      ],
+      "cameraUp": [
+        0,
+        0,
+        1
+      ],
+      "direction": [
+        0,
+        0.9999634763235147,
+        -0.008546696378833764
+      ],
+      "target": [
+        0,
+        0.5,
+        0
+      ],
+      "distance": 105.98838258284488,
+      "preset": "reset",
+      "finite": true,
+      "control": {
+        "role": "control",
+        "position": [
+          0,
+          -105.4845114974482,
+          0.9058505256192153
+        ],
+        "quaternion": [
+          0.7040785835477338,
+          0,
+          0,
+          0.7101220656967482
+        ],
+        "cameraUp": [
+          0,
+          0,
+          1
+        ],
+        "direction": [
+          0,
+          0.9999634763235147,
+          -0.008546696378833764
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "distance": 105.98838258284488,
+        "preset": "reset",
+        "finite": true
+      }
+    },
+    "cameraAfter": {
+      "role": "render",
+      "position": [
+        0,
+        -105.4845114974482,
+        0.9058505256192153
+      ],
+      "quaternion": [
+        0.7040785835477338,
+        0,
+        0,
+        0.7101220656967482
+      ],
+      "cameraUp": [
+        0,
+        0,
+        1
+      ],
+      "direction": [
+        0,
+        0.9999634763235147,
+        -0.008546696378833764
+      ],
+      "target": [
+        0,
+        0.5,
+        0
+      ],
+      "distance": 105.98838258284488,
+      "preset": "free",
+      "finite": true,
+      "control": {
+        "role": "control",
+        "position": [
+          0,
+          -105.4845114974482,
+          0.9058505256192153
+        ],
+        "quaternion": [
+          0.7040785835477338,
+          0,
+          0,
+          0.7101220656967482
+        ],
+        "cameraUp": [
+          0,
+          0,
+          1
+        ],
+        "direction": [
+          0,
+          0.9999634763235147,
+          -0.008546696378833764
+        ],
+        "target": [
+          0,
+          0.5,
+          0
+        ],
+        "distance": 105.98838258284488,
+        "preset": "free",
+        "finite": true
+      }
+    },
+    "cameraFinite": true,
+    "modelTransformInvariant": true,
+    "selection": {
+      "beforeBlank": "設定車2",
+      "blankCleared": true,
+      "afterBlank": null
+    },
+    "timelineCount": 504,
+    "timelineTail": [
+      {
+        "timestamp": 3537.6,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 3537.399999976158,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 13.684147846997872,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.012785758,
+          9.84123986,
+          7.619594293
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.113067121,
+          0.294563281,
+          -0.064197441,
+          0.946745472
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 3,
+        "resetReason": "lostpointercapture",
+        "reason": "lostpointercapture"
+      },
+      {
+        "timestamp": 3537.6,
+        "eventType": "lostpointercapture",
+        "pointerId": 7122,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 0,
+        "pressure": 0,
+        "clientX": 183.29999999999998,
+        "clientY": 422,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 3537.399999976158,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 13.684147846997872,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.012785758,
+          9.84123986,
+          7.619594293
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.113067121,
+          0.294563281,
+          -0.064197441,
+          0.946745472
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 3,
+        "resetReason": "lostpointercapture"
+      },
+      {
+        "timestamp": 3552.9,
+        "eventType": "pointerdown",
+        "pointerId": 7123,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 191.1,
+        "clientY": 422,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7123
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 3552.7999999523163,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 14.71343247682374,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.077559138,
+          9.99416386,
+          7.626508741
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.175880403,
+          0.25539735,
+          -0.070197035,
+          0.948108988
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 3,
+        "resetReason": "lostpointercapture"
+      },
+      {
+        "timestamp": 3553,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 3552.7999999523163,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 14.71343247682374,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.077559138,
+          9.99416386,
+          7.626508741
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.175880403,
+          0.25539735,
+          -0.070197035,
+          0.948108988
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 4,
+        "resetReason": "pointer-id-reuse",
+        "reason": "pointer-id-reuse"
+      },
+      {
+        "timestamp": 3553,
+        "eventType": "pointerdown",
+        "pointerId": 7123,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 193.1,
+        "clientY": 424,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7123
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 3553,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 14.71343247682374,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.077559138,
+          9.99416386,
+          7.626508741
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.175880403,
+          0.25539735,
+          -0.070197035,
+          0.948108988
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 4,
+        "resetReason": "pointer-id-reuse"
+      },
+      {
+        "timestamp": 3553.1,
+        "eventType": "pointerup",
+        "pointerId": 7123,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 0,
+        "pressure": 0,
+        "clientX": 193.1,
+        "clientY": 424,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 3553,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 14.71343247682374,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.077559138,
+          9.99416386,
+          7.626508741
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.175880403,
+          0.25539735,
+          -0.070197035,
+          0.948108988
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 4,
+        "resetReason": "pointer-id-reuse"
+      },
+      {
+        "timestamp": 3571.9,
+        "eventType": "pointerdown",
+        "pointerId": 7124,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 198.9,
+        "clientY": 422,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7124
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 3571.7999999523163,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 15.660944553624415,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.127171886,
+          10.111295,
+          7.631804818
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.218653447,
+          0.227553175,
+          -0.074110782,
+          0.946000959
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 4,
+        "resetReason": "pointer-id-reuse"
+      },
+      {
+        "timestamp": 3571.9,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 3571.7999999523163,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 15.660944553624415,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.127171886,
+          10.111295,
+          7.631804818
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.218653447,
+          0.227553175,
+          -0.074110782,
+          0.946000959
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 5,
+        "resetReason": "window-blur",
+        "reason": "window-blur"
+      },
+      {
+        "timestamp": 3587.6,
+        "eventType": "pointerdown",
+        "pointerId": 7125,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 206.70000000000002,
+        "clientY": 422,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7125
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 3587.599999964237,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 16.340876381905954,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.159530946,
+          10.187691768,
+          7.635259092
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.243413135,
+          0.210985145,
+          -0.076310466,
+          0.943616462
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 5,
+        "resetReason": "window-blur"
+      },
+      {
+        "timestamp": 3587.8,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 3587.599999964237,
+        "gestureElapsedTime": 0.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 16.340876381905954,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.159530946,
+          10.187691768,
+          7.635259092
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.243413135,
+          0.210985145,
+          -0.076310466,
+          0.943616462
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 6,
+        "resetReason": "visibility-hidden-audit",
+        "reason": "visibility-hidden-audit"
+      },
+      {
+        "timestamp": 3603.2,
+        "eventType": "pointerdown",
+        "pointerId": 7126,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 214.50000000000003,
+        "clientY": 422,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7126
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 3603.199999988079,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 16.834860424061763,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.181857638,
+          10.240403037,
+          7.637642429
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.258669345,
+          0.200607562,
+          -0.077641152,
+          0.94171048
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 6,
+        "resetReason": "visibility-hidden-audit"
+      },
+      {
+        "timestamp": 3603.3,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 3603.199999988079,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 16.834860424061763,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.181857638,
+          10.240403037,
+          7.637642429
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.258669345,
+          0.200607562,
+          -0.077641152,
+          0.94171048
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 7,
+        "resetReason": "pagehide",
+        "reason": "pagehide"
+      },
+      {
+        "timestamp": 3603.3,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 3603.199999988079,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 17.997623757888295,
+        "actualCameraDistance": 16.834860424061763,
+        "desiredTarget": [
+          -14.231544932,
+          10.357710173,
+          7.642946463
+        ],
+        "actualTarget": [
+          -14.181857638,
+          10.240403037,
+          7.637642429
+        ],
+        "desiredQuaternion": [
+          0.283424475,
+          0.183487987,
+          -0.07975931,
+          0.93789188
+        ],
+        "actualQuaternion": [
+          0.258669345,
+          0.200607562,
+          -0.077641152,
+          0.94171048
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 8,
+        "resetReason": "pageshow",
+        "reason": "pageshow"
+      },
+      {
+        "timestamp": 4491.9,
+        "eventType": "pointerdown",
+        "pointerId": 7127,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 1,
+        "pressure": 0,
+        "clientX": 7.8,
+        "clientY": 16.88,
+        "activePointerCount": 1,
+        "activePointerIds": [
+          7127
+        ],
+        "pointerCaptureIds": [],
+        "gestureMode": "one-finger",
+        "gestureStartTime": 4491.899999976158,
+        "gestureElapsedTime": 0,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 105.98838258284488,
+        "actualCameraDistance": 105.98838258284488,
+        "desiredTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "actualTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "desiredQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "actualQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 8,
+        "resetReason": "pageshow"
+      },
+      {
+        "timestamp": 4492,
+        "eventType": "pointerup",
+        "pointerId": 7127,
+        "pointerType": "touch",
+        "isPrimary": true,
+        "buttons": 0,
+        "pressure": 0,
+        "clientX": 7.8,
+        "clientY": 16.88,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4491.899999976158,
+        "gestureElapsedTime": 0.1,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 105.98838258284488,
+        "actualCameraDistance": 105.98838258284488,
+        "desiredTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "actualTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "desiredQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "actualQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 8,
+        "resetReason": "pageshow"
+      },
+      {
+        "timestamp": 4540.1,
+        "eventType": "input-reset",
+        "pointerId": null,
+        "pointerType": null,
+        "isPrimary": null,
+        "buttons": null,
+        "pressure": null,
+        "clientX": null,
+        "clientY": null,
+        "activePointerCount": 0,
+        "activePointerIds": [],
+        "pointerCaptureIds": [],
+        "gestureMode": "idle",
+        "gestureStartTime": 4491.899999976158,
+        "gestureElapsedTime": 48.2,
+        "previousCentroid": null,
+        "currentCentroid": null,
+        "previousPinchDistance": null,
+        "currentPinchDistance": null,
+        "previousGestureAngle": null,
+        "currentGestureAngle": null,
+        "desiredCameraDistance": 105.98838258284488,
+        "actualCameraDistance": 105.98838258284488,
+        "desiredTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "actualTarget": [
+          0,
+          0.5,
+          0
+        ],
+        "desiredQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "actualQuaternion": [
+          0.704078584,
+          0,
+          0,
+          0.710122066
+        ],
+        "visibilityState": "visible",
+        "documentFocus": false,
+        "resetCount": 9,
+        "resetReason": "post-selection-audit",
+        "reason": "post-selection-audit"
+      }
+    ],
+    "resetReasons": {
+      "suite-start": 1,
+      "pointercancel": 1,
+      "lostpointercapture": 1,
+      "pointer-id-reuse": 1,
+      "window-blur": 1,
+      "visibility-hidden-audit": 1,
+      "pagehide": 1,
+      "pageshow": 1,
+      "post-selection-audit": 1
+    },
+    "pointerIdReuseCollisions": 1,
+    "stalePointerAgeExceeded": 0,
+    "testThresholdsChanged": false,
+    "defaultAdopted": false,
+    "physicalIPhoneReview": "PENDING",
+    "ok": true
+  },
+  "requirements": {
+    "activePointerLeak": 0,
+    "stalePointerAgeExceeded": 0,
+    "idleReturnPercent": 100,
+    "pointerCancelIdlePercent": 100,
+    "lostPointerCaptureIdlePercent": 100,
+    "cameraNonFinite": 0,
+    "modelTransformInvariant": true
+  },
+  "physicalIPhoneSubstitute": false
+}

@@ -1,0 +1,551 @@
+{
+  "schemaVersion": 1,
+  "sourceMainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBaseCommit": "961fb16ec8c0b55b4d940861659e22733537d813",
+  "sourceImplementationCommit": "8a0fac5149708a906d02df103403f6e0706db9f7",
+  "sourceBranch": "feature/issue2-final-polish-phase3b1c-shadow-attenuation",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
+  "defaultAdopted": false,
+  "status": "CONCLUSIVE",
+  "majorCasterGroup": "dial-exterior",
+  "receiverGroup": "dial-exterior structural surfaces with retained receiveShadow",
+  "interpretation": "The central boundary and diagonal band remain when only dial/exterior casters are active, while the other isolated caster groups do not reproduce the same artifact. This supports the transparent structural mesh opaque-depth hypothesis without treating it as proof of the renderer implementation.",
+  "hypothesis": "OPAQUE_SHADOW_DEPTH_FOR_TRANSPARENT_STRUCTURAL_MESHES_SUSPECTED",
+  "viewports": {
+    "1280x720": {
+      "inventory": {
+        "enabled": true,
+        "queryOnly": true,
+        "groups": [
+          "all",
+          "plate-bridge",
+          "dial-exterior",
+          "train-motion-wind",
+          "escapement-balance"
+        ],
+        "meshCount": 589,
+        "casterCount": 553,
+        "receiverCount": 553,
+        "casterGroups": {
+          "dial-exterior": 241,
+          "escapement-balance": 70,
+          "plate-bridge": 147,
+          "train-motion-wind": 95
+        },
+        "receiverGroups": {
+          "dial-exterior": 241,
+          "escapement-balance": 70,
+          "plate-bridge": 147,
+          "train-motion-wind": 95
+        },
+        "structuralOpacityTargetCount": 135,
+        "casterStructuralOverlapCount": 106,
+        "receiverStructuralOverlapCount": 106,
+        "customDepthMaterialCount": 0,
+        "alphaTestMaterialCount": 0,
+        "diagnosticRefreshCount": 120,
+        "activeGroup": null,
+        "originalStateRestored": true
+      },
+      "opacityInventories": {
+        "opacity100": {
+          "enabled": true,
+          "queryOnly": true,
+          "groups": [
+            "all",
+            "plate-bridge",
+            "dial-exterior",
+            "train-motion-wind",
+            "escapement-balance"
+          ],
+          "meshCount": 589,
+          "casterCount": 553,
+          "receiverCount": 553,
+          "casterGroups": {
+            "dial-exterior": 241,
+            "escapement-balance": 70,
+            "plate-bridge": 147,
+            "train-motion-wind": 95
+          },
+          "receiverGroups": {
+            "dial-exterior": 241,
+            "escapement-balance": 70,
+            "plate-bridge": 147,
+            "train-motion-wind": 95
+          },
+          "structuralOpacityTargetCount": 135,
+          "casterStructuralOverlapCount": 106,
+          "receiverStructuralOverlapCount": 106,
+          "customDepthMaterialCount": 0,
+          "alphaTestMaterialCount": 0,
+          "diagnosticRefreshCount": 0,
+          "activeGroup": null,
+          "originalStateRestored": true
+        },
+        "opacity16": {
+          "enabled": true,
+          "queryOnly": true,
+          "groups": [
+            "all",
+            "plate-bridge",
+            "dial-exterior",
+            "train-motion-wind",
+            "escapement-balance"
+          ],
+          "meshCount": 589,
+          "casterCount": 553,
+          "receiverCount": 553,
+          "casterGroups": {
+            "dial-exterior": 241,
+            "escapement-balance": 70,
+            "plate-bridge": 147,
+            "train-motion-wind": 95
+          },
+          "receiverGroups": {
+            "dial-exterior": 241,
+            "escapement-balance": 70,
+            "plate-bridge": 147,
+            "train-motion-wind": 95
+          },
+          "structuralOpacityTargetCount": 135,
+          "casterStructuralOverlapCount": 106,
+          "receiverStructuralOverlapCount": 106,
+          "customDepthMaterialCount": 0,
+          "alphaTestMaterialCount": 0,
+          "diagnosticRefreshCount": 0,
+          "activeGroup": null,
+          "originalStateRestored": true
+        }
+      },
+      "opacityTargetCountInvariant": true,
+      "groups": {
+        "all": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            553,
+            553
+          ],
+          "meanBandAreaRatio": 0.03143695883064071,
+          "meanDiagonalGradient": 0.01036913378129418,
+          "meanPeriodicBandScore": 0.9701172660466963,
+          "meanRectangularLineScore": 0.13164062499999998
+        },
+        "plate-bridge": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            147,
+            147
+          ],
+          "meanBandAreaRatio": 0.028155416828728772,
+          "meanDiagonalGradient": 0.008771981980222273,
+          "meanPeriodicBandScore": 0.9511463109691873,
+          "meanRectangularLineScore": 0.14401041666666667
+        },
+        "dial-exterior": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            241,
+            241
+          ],
+          "meanBandAreaRatio": 0.031348967892231204,
+          "meanDiagonalGradient": 0.010354830199025292,
+          "meanPeriodicBandScore": 0.97007569449793,
+          "meanRectangularLineScore": 0.13164062499999998
+        },
+        "train-motion-wind": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            95,
+            95
+          ],
+          "meanBandAreaRatio": 0.028453645066519328,
+          "meanDiagonalGradient": 0.00890161217939708,
+          "meanPeriodicBandScore": 0.9473735082965122,
+          "meanRectangularLineScore": 0.15859375
+        },
+        "escapement-balance": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            70,
+            70
+          ],
+          "meanBandAreaRatio": 0.028201042314554513,
+          "meanDiagonalGradient": 0.008733224023451202,
+          "meanPeriodicBandScore": 0.947473327396045,
+          "meanRectangularLineScore": 0.15885416666666666
+        }
+      },
+      "allVsDialExterior": {
+        "byteIdenticalCount": 5,
+        "total": 12,
+        "comparisons": [
+          {
+            "view": "front",
+            "state": "normal",
+            "opacity": 0.16,
+            "allSha256": "15b5a84cd25d5a16ec0f3bf947cbe6e9dd2bc396ebc929f9f51f16aaf08fc2fd",
+            "dialExteriorSha256": "15b5a84cd25d5a16ec0f3bf947cbe6e9dd2bc396ebc929f9f51f16aaf08fc2fd",
+            "byteIdentical": true
+          },
+          {
+            "view": "front",
+            "state": "split",
+            "opacity": 0.16,
+            "allSha256": "4bbd74d68064d0e83f75b0990cc1dd1f9e5a8ccdc15520dfeeba9b2d342b1e33",
+            "dialExteriorSha256": "429562797c29a2a65a9d409bb290b7b750a2b4d2aa0f4c8f1463100d435d5abf",
+            "byteIdentical": false
+          },
+          {
+            "view": "front",
+            "state": "explode",
+            "opacity": 0.16,
+            "allSha256": "bf37d089b75fc04d9d62bfc6b9d87ef32d5ad8dec816dbdc06f7e96791bf32a9",
+            "dialExteriorSha256": "bf37d089b75fc04d9d62bfc6b9d87ef32d5ad8dec816dbdc06f7e96791bf32a9",
+            "byteIdentical": true
+          },
+          {
+            "view": "dialMechanism",
+            "state": "normal",
+            "opacity": 0.16,
+            "allSha256": "910826abfe6b123e1e0a533519cab20159000730acc5dfa3cae9f43849754601",
+            "dialExteriorSha256": "910826abfe6b123e1e0a533519cab20159000730acc5dfa3cae9f43849754601",
+            "byteIdentical": true
+          },
+          {
+            "view": "dialMechanism",
+            "state": "split",
+            "opacity": 0.16,
+            "allSha256": "edd5f1ab03a29c2eba07e6021271764e064066430fe574091da474f5568d5f96",
+            "dialExteriorSha256": "9cf3486f9373e39d224c3506b36dab2d288495eaf62e9abc21e3a5cd404df298",
+            "byteIdentical": false
+          },
+          {
+            "view": "dialMechanism",
+            "state": "explode",
+            "opacity": 0.16,
+            "allSha256": "a8d803e8a2e0851cd6f36d9e8989f904c11448c0a87858fb88dd08ba7f9e206a",
+            "dialExteriorSha256": "037ea71070ca997a66df84ad247906104ce6baa8a7c215322d801dcee182d33d",
+            "byteIdentical": false
+          },
+          {
+            "view": "front",
+            "state": "normal",
+            "opacity": 0.08,
+            "allSha256": "95a2cd86c61cad0315fad89aaa53650a8d62645e9ed755dee021fa4de5c08606",
+            "dialExteriorSha256": "95a2cd86c61cad0315fad89aaa53650a8d62645e9ed755dee021fa4de5c08606",
+            "byteIdentical": true
+          },
+          {
+            "view": "front",
+            "state": "split",
+            "opacity": 0.08,
+            "allSha256": "7c9bbb93971041c8bba84afeaeb9f8577891cac4ca167517779596d2b3a3d5c1",
+            "dialExteriorSha256": "7726e87bc8517ff08f83888790272d713ae4ca8bd4484fd5f380e2f9365a8cc2",
+            "byteIdentical": false
+          },
+          {
+            "view": "front",
+            "state": "explode",
+            "opacity": 0.08,
+            "allSha256": "8c31d55c1de375c579bd9809ebd30e785573e7e2f0d06654746dfe2b8dd8d6b1",
+            "dialExteriorSha256": "8c31d55c1de375c579bd9809ebd30e785573e7e2f0d06654746dfe2b8dd8d6b1",
+            "byteIdentical": true
+          },
+          {
+            "view": "dialMechanism",
+            "state": "normal",
+            "opacity": 0.08,
+            "allSha256": "296efd37189a452a713aadbaebfd8146fdc1dc7344ff95a530717c011dd1700a",
+            "dialExteriorSha256": "b51407c2e161f62ba89dba9199e55b0ce3246c6a3cdad7411a5f5f08d01a5b34",
+            "byteIdentical": false
+          },
+          {
+            "view": "dialMechanism",
+            "state": "split",
+            "opacity": 0.08,
+            "allSha256": "daebcced85c92aa0f436f15d35d277c577dff07638bddc9e627f4457d8da747c",
+            "dialExteriorSha256": "a884a9e898a70fcc6980a7b4d0926592945e4588f24570eb9b9b3c2fff4bb56e",
+            "byteIdentical": false
+          },
+          {
+            "view": "dialMechanism",
+            "state": "explode",
+            "opacity": 0.08,
+            "allSha256": "7e3853a5ca22fb42ee96a3d7b263cd27c4658c4d3d4b6a33055cfc92f6e540b2",
+            "dialExteriorSha256": "fe607cfb23e774dd56362666a683b503f45798bef8402a43de71723edaa40c06",
+            "byteIdentical": false
+          }
+        ]
+      },
+      "originalStateRestored": true
+    },
+    "390x844": {
+      "inventory": {
+        "enabled": true,
+        "queryOnly": true,
+        "groups": [
+          "all",
+          "plate-bridge",
+          "dial-exterior",
+          "train-motion-wind",
+          "escapement-balance"
+        ],
+        "meshCount": 589,
+        "casterCount": 553,
+        "receiverCount": 553,
+        "casterGroups": {
+          "dial-exterior": 241,
+          "escapement-balance": 70,
+          "plate-bridge": 147,
+          "train-motion-wind": 95
+        },
+        "receiverGroups": {
+          "dial-exterior": 241,
+          "escapement-balance": 70,
+          "plate-bridge": 147,
+          "train-motion-wind": 95
+        },
+        "structuralOpacityTargetCount": 135,
+        "casterStructuralOverlapCount": 106,
+        "receiverStructuralOverlapCount": 106,
+        "customDepthMaterialCount": 0,
+        "alphaTestMaterialCount": 0,
+        "diagnosticRefreshCount": 120,
+        "activeGroup": null,
+        "originalStateRestored": true
+      },
+      "opacityInventories": {
+        "opacity100": {
+          "enabled": true,
+          "queryOnly": true,
+          "groups": [
+            "all",
+            "plate-bridge",
+            "dial-exterior",
+            "train-motion-wind",
+            "escapement-balance"
+          ],
+          "meshCount": 589,
+          "casterCount": 553,
+          "receiverCount": 553,
+          "casterGroups": {
+            "dial-exterior": 241,
+            "escapement-balance": 70,
+            "plate-bridge": 147,
+            "train-motion-wind": 95
+          },
+          "receiverGroups": {
+            "dial-exterior": 241,
+            "escapement-balance": 70,
+            "plate-bridge": 147,
+            "train-motion-wind": 95
+          },
+          "structuralOpacityTargetCount": 135,
+          "casterStructuralOverlapCount": 106,
+          "receiverStructuralOverlapCount": 106,
+          "customDepthMaterialCount": 0,
+          "alphaTestMaterialCount": 0,
+          "diagnosticRefreshCount": 0,
+          "activeGroup": null,
+          "originalStateRestored": true
+        },
+        "opacity16": {
+          "enabled": true,
+          "queryOnly": true,
+          "groups": [
+            "all",
+            "plate-bridge",
+            "dial-exterior",
+            "train-motion-wind",
+            "escapement-balance"
+          ],
+          "meshCount": 589,
+          "casterCount": 553,
+          "receiverCount": 553,
+          "casterGroups": {
+            "dial-exterior": 241,
+            "escapement-balance": 70,
+            "plate-bridge": 147,
+            "train-motion-wind": 95
+          },
+          "receiverGroups": {
+            "dial-exterior": 241,
+            "escapement-balance": 70,
+            "plate-bridge": 147,
+            "train-motion-wind": 95
+          },
+          "structuralOpacityTargetCount": 135,
+          "casterStructuralOverlapCount": 106,
+          "receiverStructuralOverlapCount": 106,
+          "customDepthMaterialCount": 0,
+          "alphaTestMaterialCount": 0,
+          "diagnosticRefreshCount": 0,
+          "activeGroup": null,
+          "originalStateRestored": true
+        }
+      },
+      "opacityTargetCountInvariant": true,
+      "groups": {
+        "all": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            553,
+            553
+          ],
+          "meanBandAreaRatio": 0.026993882165990978,
+          "meanDiagonalGradient": 0.009764258162421194,
+          "meanPeriodicBandScore": 0.988126414912114,
+          "meanRectangularLineScore": 0.09358974358974359
+        },
+        "plate-bridge": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            147,
+            147
+          ],
+          "meanBandAreaRatio": 0.02468373976154013,
+          "meanDiagonalGradient": 0.008199016571856035,
+          "meanPeriodicBandScore": 0.9893155661566858,
+          "meanRectangularLineScore": 0.08888888888888889
+        },
+        "dial-exterior": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            241,
+            241
+          ],
+          "meanBandAreaRatio": 0.026965526794780162,
+          "meanDiagonalGradient": 0.009766773598644354,
+          "meanPeriodicBandScore": 0.9878339588376629,
+          "meanRectangularLineScore": 0.09358974358974359
+        },
+        "train-motion-wind": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            95,
+            95
+          ],
+          "meanBandAreaRatio": 0.025137139513507895,
+          "meanDiagonalGradient": 0.008471529767692424,
+          "meanPeriodicBandScore": 0.9890169589266002,
+          "meanRectangularLineScore": 0.08675213675213676
+        },
+        "escapement-balance": {
+          "captureCount": 12,
+          "activeCasterCountRange": [
+            70,
+            70
+          ],
+          "meanBandAreaRatio": 0.02463700237198739,
+          "meanDiagonalGradient": 0.008167657412875071,
+          "meanPeriodicBandScore": 0.9889744929478179,
+          "meanRectangularLineScore": 0.08247863247863248
+        }
+      },
+      "allVsDialExterior": {
+        "byteIdenticalCount": 8,
+        "total": 12,
+        "comparisons": [
+          {
+            "view": "front",
+            "state": "normal",
+            "opacity": 0.16,
+            "allSha256": "a1a2970b4cf6c4c4fd9a0115f42a0f2b3c6116a379b86f3223ada64c2bad09e7",
+            "dialExteriorSha256": "a1a2970b4cf6c4c4fd9a0115f42a0f2b3c6116a379b86f3223ada64c2bad09e7",
+            "byteIdentical": true
+          },
+          {
+            "view": "front",
+            "state": "split",
+            "opacity": 0.16,
+            "allSha256": "d1171d5dec8ffa621e076481972a11ca5d0be1e30f13342f2cc24f90d1c8e0b0",
+            "dialExteriorSha256": "845ac3c43538ed7bba6466af1ea61f860af28b059134adb0d482b758be413032",
+            "byteIdentical": false
+          },
+          {
+            "view": "front",
+            "state": "explode",
+            "opacity": 0.16,
+            "allSha256": "81ca641fab6d27542a217980f8e05ba94380762b20c45081e93544ab472c41e1",
+            "dialExteriorSha256": "81ca641fab6d27542a217980f8e05ba94380762b20c45081e93544ab472c41e1",
+            "byteIdentical": true
+          },
+          {
+            "view": "dialMechanism",
+            "state": "normal",
+            "opacity": 0.16,
+            "allSha256": "64dfc7bf6862d88fa88071dcdc0c5e54281704b8eeffe93d5736761b4dcd1550",
+            "dialExteriorSha256": "64dfc7bf6862d88fa88071dcdc0c5e54281704b8eeffe93d5736761b4dcd1550",
+            "byteIdentical": true
+          },
+          {
+            "view": "dialMechanism",
+            "state": "split",
+            "opacity": 0.16,
+            "allSha256": "e13b8f28664ea22cba140aa5ecd502a123fc3bef93acc8ecf33cce58c4d95069",
+            "dialExteriorSha256": "22ec5b5eb702c3e66a5af69bb86375ea79393b44259fe5588944855d4cc561a1",
+            "byteIdentical": false
+          },
+          {
+            "view": "dialMechanism",
+            "state": "explode",
+            "opacity": 0.16,
+            "allSha256": "906c3ded14bdfa8dfb7df178711117276374cb00978dc25e8097da07cbeb9614",
+            "dialExteriorSha256": "906c3ded14bdfa8dfb7df178711117276374cb00978dc25e8097da07cbeb9614",
+            "byteIdentical": true
+          },
+          {
+            "view": "front",
+            "state": "normal",
+            "opacity": 0.08,
+            "allSha256": "26906fd87682a9fb202d4c2b0be345d2965852773734830360c02538fc8cd3bd",
+            "dialExteriorSha256": "26906fd87682a9fb202d4c2b0be345d2965852773734830360c02538fc8cd3bd",
+            "byteIdentical": true
+          },
+          {
+            "view": "front",
+            "state": "split",
+            "opacity": 0.08,
+            "allSha256": "d02f69b2bd0d5a197efd1cf8f2b4138865efda2e4d9afb79a627dec154308e17",
+            "dialExteriorSha256": "67ec26b86df975e23e1ed286aa937b5fe41444001277fa0e622209c094e0d3fa",
+            "byteIdentical": false
+          },
+          {
+            "view": "front",
+            "state": "explode",
+            "opacity": 0.08,
+            "allSha256": "6c0cbf67a20be42fbd28408864a8dab0bd76eaf17361649c82717be7c2aa03dd",
+            "dialExteriorSha256": "6c0cbf67a20be42fbd28408864a8dab0bd76eaf17361649c82717be7c2aa03dd",
+            "byteIdentical": true
+          },
+          {
+            "view": "dialMechanism",
+            "state": "normal",
+            "opacity": 0.08,
+            "allSha256": "0f986cea0c421773d30388766831e1818fea0805b459d8d74471d2526805353b",
+            "dialExteriorSha256": "0f986cea0c421773d30388766831e1818fea0805b459d8d74471d2526805353b",
+            "byteIdentical": true
+          },
+          {
+            "view": "dialMechanism",
+            "state": "split",
+            "opacity": 0.08,
+            "allSha256": "67843ec3ccd5cd7a9fe65b5f0bf8098a5bf4feb07af4aa1e6c1d5ad4a5d4863d",
+            "dialExteriorSha256": "d01598a1365b94191a90fc2d494978c817a99af431cb32eee9aac2da632cf308",
+            "byteIdentical": false
+          },
+          {
+            "view": "dialMechanism",
+            "state": "explode",
+            "opacity": 0.08,
+            "allSha256": "da58bd085ebae7dea0a1ff5e27ad7851c68919a32a5e9280ba9c6271ef1be011",
+            "dialExteriorSha256": "da58bd085ebae7dea0a1ff5e27ad7851c68919a32a5e9280ba9c6271ef1be011",
+            "byteIdentical": true
+          }
+        ]
+      },
+      "originalStateRestored": true
+    }
+  }
+}
