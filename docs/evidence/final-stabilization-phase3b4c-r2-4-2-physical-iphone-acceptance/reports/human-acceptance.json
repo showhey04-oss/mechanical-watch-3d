@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.4.2 Physical iPhone Acceptance",
+  "sourceHead": "0e260fdfc7495293319682ae7b998858641cdd26",
+  "appVersion": "v3.15.0",
+  "recordedAt": "2026-08-02T01:24:32Z",
+  "device": {
+    "model": "iPhone 16",
+    "os": "iOS 26.5.2",
+    "browser": "Safari"
+  },
+  "configuration": {
+    "query": "audioLifecycle=r2-3-l4&audioPlatform=p3",
+    "timeoutProfileId": "PRODUCTION_TIMEOUT_PROFILE",
+    "diagnosticOverrideApplied": false,
+    "diagnosticSetterCalls": 0
+  },
+  "results": {
+    "initialOperation": "PASS",
+    "sleepResume": {
+      "passes": 3,
+      "attempts": 3,
+      "status": "PASS"
+    },
+    "homeAppResume": {
+      "passes": 3,
+      "attempts": 3,
+      "status": "PASS"
+    },
+    "timeSetting": "PASS",
+    "windingAndCrownSounds": "PASS",
+    "finalContinuousRunSeconds": 60,
+    "finalContinuousRun": "PASS",
+    "automaticResumePasses": 6,
+    "oneTapRecoveryRequired": 0,
+    "twoOrMoreTapRecoveryRequired": 0,
+    "greenOnSilentReproduced": false,
+    "duplicateOrBurstObserved": false,
+    "visualSlowdownObserved": false,
+    "overall": "PASS"
+  },
+  "freshContextFallback": {
+    "available": true,
+    "usedDuringPhysicalTest": false,
+    "reason": "All six foreground returns resumed automatically."
+  },
+  "evidenceBasis": {
+    "formalAudioBasis": "Human direct listening",
+    "videosAreSupplementary": true,
+    "videoAudioLevelCaveat": "Screen-recording audio may be low and is not the sole acceptance basis."
+  },
+  "status": "PHASE3B4C_R2_4_2_HUMAN_ACCEPTED"
+}

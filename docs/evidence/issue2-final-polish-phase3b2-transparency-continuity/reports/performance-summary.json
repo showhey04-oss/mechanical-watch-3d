@@ -1,0 +1,2741 @@
+{
+  "schemaVersion": 1,
+  "sourceMainCommit": "293626f13a50224924f8e3ac229a1fc4077ad7a7",
+  "sourceBaseCommit": "4f9e3f14f66317c4ce363a3393639b15ca3b05f1",
+  "sourceImplementationCommit": "da600b11552185129a9f3e16f2ab55002df8972a",
+  "sourceBranch": "feature/issue2-final-polish-phase3b2-transparency-continuity",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe with actual Three.js offscreen WebGL capture",
+  "queryOnly": true,
+  "defaultAdopted": false,
+  "thresholds": {
+    "averageFpsWorseningPercentMaximum": 5,
+    "p95WorseningMsMaximum": 2,
+    "reversalCount": 0,
+    "stopThenJumpCount": 0,
+    "wheelMonotonic": true,
+    "transformInvariant": true
+  },
+  "primaryDifferentials": [
+    {
+      "rendering": "issue2-phase3b1c-shadow-off",
+      "candidate": "issue2-stable-depth-off",
+      "viewport": "1280x720",
+      "scenarios": {
+        "idle": {
+          "baseline": {
+            "averageFps": 59.71610376896721,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.675210331355295,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.06847974839437636,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "pointer": {
+          "baseline": {
+            "averageFps": 59.742277708016225,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.764693271205694,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "wheel": {
+          "baseline": {
+            "averageFps": 59.777479050095934,
+            "p95": 18.69999999999891,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.793286068773206,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "opacity-continuous": {
+          "baseline": {
+            "averageFps": 59.755102040816325,
+            "p95": 18.700000000000728,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.67326442127087,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.13695503270926274,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "opacity-16": {
+          "baseline": {
+            "averageFps": 59.69467640872155,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.66937298295433,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.04238807761343838,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "opacity-54": {
+          "baseline": {
+            "averageFps": 59.69078217733982,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.67326442127087,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.029347506314966455,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "selected": {
+          "baseline": {
+            "averageFps": 59.66353677644472,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.71025841793533,
+            "p95": 18.700000000000728,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.10000000000218279,
+          "passed": true
+        },
+        "split": {
+          "baseline": {
+            "averageFps": 59.66159162758412,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.667427453537655,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "explode": {
+          "baseline": {
+            "averageFps": 59.74534769833496,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.6888352527555,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.09458886383053453,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "exterior-off": {
+          "baseline": {
+            "averageFps": 59.667427453537655,
+            "p95": 18.60000000000582,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.63825973602738,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.048883819455747136,
+          "p95WorseningMs": 0.09999999999126885,
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "rendering": "issue2-phase3b1c-shadow-off",
+      "candidate": "issue2-stable-depth-off",
+      "viewport": "390x844",
+      "scenarios": {
+        "idle": {
+          "baseline": {
+            "averageFps": 59.684941782256615,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.68688845401174,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "pointer": {
+          "baseline": {
+            "averageFps": 59.70308377126881,
+            "p95": 18.69999999999891,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.711791088913635,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "wheel": {
+          "baseline": {
+            "averageFps": 59.6865063874109,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.67964417399672,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.011497093446279935,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "opacity-continuous": {
+          "baseline": {
+            "averageFps": 59.6518677877596,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.630486492836994,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.03584346260318223,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "opacity-16": {
+          "baseline": {
+            "averageFps": 59.682995237477684,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.75705329200128,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "opacity-54": {
+          "baseline": {
+            "averageFps": 59.75119992187034,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.67326442011105,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.13043336679630205,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "selected": {
+          "baseline": {
+            "averageFps": 59.72000130512289,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.69857114941715,
+            "p95": 18.700000000000728,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.03588438586304182,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "split": {
+          "baseline": {
+            "averageFps": 59.69272923009805,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.70441421114369,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": -0.09999999999490683,
+          "passed": true
+        },
+        "explode": {
+          "baseline": {
+            "averageFps": 59.66937298295433,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.66548205214495,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.0065208173219583375,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "exterior-off": {
+          "baseline": {
+            "averageFps": 59.63825973602738,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.66937298295433,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "rendering": "issue2-phase3b1c-shadow-off",
+      "candidate": "issue2-group-stable-depth",
+      "viewport": "1280x720",
+      "scenarios": {
+        "idle": {
+          "baseline": {
+            "averageFps": 59.71610376896721,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.66937298295433,
+            "p95": 18.699999999999818,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.07825491461009303,
+          "p95WorseningMs": 0.0999999999994543,
+          "passed": true
+        },
+        "pointer": {
+          "baseline": {
+            "averageFps": 59.742277708016225,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.74227770706226,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 1.596804822652668e-09,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "wheel": {
+          "baseline": {
+            "averageFps": 59.777479050095934,
+            "p95": 18.69999999999891,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.722817545363625,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.09144163588180115,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "opacity-continuous": {
+          "baseline": {
+            "averageFps": 59.755102040816325,
+            "p95": 18.700000000000728,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.73559653990534,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.032642402480819926,
+          "p95WorseningMs": -3.637978807091713e-12,
+          "passed": true
+        },
+        "opacity-16": {
+          "baseline": {
+            "averageFps": 59.69467640872155,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.67326442127087,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.03586917416901863,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "opacity-54": {
+          "baseline": {
+            "averageFps": 59.69078217733982,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.721950264575405,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.09999999999854481,
+          "passed": true
+        },
+        "selected": {
+          "baseline": {
+            "averageFps": 59.66353677644472,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.622715276867446,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.06841951011089416,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "split": {
+          "baseline": {
+            "averageFps": 59.66159162758412,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.65575694307527,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.009779632674361008,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "explode": {
+          "baseline": {
+            "averageFps": 59.74534769833496,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.6421471170645,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.17273408766743678,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "exterior-off": {
+          "baseline": {
+            "averageFps": 59.667427453537655,
+            "p95": 18.60000000000582,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.712206740350666,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.09999999999126885,
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "rendering": "issue2-phase3b1c-shadow-off",
+      "candidate": "issue2-group-stable-depth",
+      "viewport": "390x844",
+      "scenarios": {
+        "idle": {
+          "baseline": {
+            "averageFps": 59.684941782256615,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.665482050985446,
+            "p95": 18.699999999999818,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.03260408855245689,
+          "p95WorseningMs": 0.0999999999994543,
+          "passed": true
+        },
+        "pointer": {
+          "baseline": {
+            "averageFps": 59.70308377126881,
+            "p95": 18.69999999999891,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.71654546400767,
+            "p95": 18.700000000000728,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 1.8189894035458565e-12,
+          "passed": true
+        },
+        "wheel": {
+          "baseline": {
+            "averageFps": 59.6865063874109,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.744426618870214,
+            "p95": 18.69999999999891,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.09999999999854481,
+          "passed": true
+        },
+        "opacity-continuous": {
+          "baseline": {
+            "averageFps": 59.6518677877596,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.6518677877596,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.09999999999490683,
+          "passed": true
+        },
+        "opacity-16": {
+          "baseline": {
+            "averageFps": 59.682995237477684,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.68299523863788,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "opacity-54": {
+          "baseline": {
+            "averageFps": 59.75119992187034,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.72389935007868,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.04569041597048075,
+          "p95WorseningMs": 0.09999999999490683,
+          "passed": true
+        },
+        "selected": {
+          "baseline": {
+            "averageFps": 59.72000130512289,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.70441421230472,
+            "p95": 18.700000000000728,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.02610028881033469,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "split": {
+          "baseline": {
+            "averageFps": 59.69272923009805,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.68299523863788,
+            "p95": 18.700000000000728,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.016306829300184265,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "explode": {
+          "baseline": {
+            "averageFps": 59.66937298295433,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.65381230260818,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.02607816970121892,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "exterior-off": {
+          "baseline": {
+            "averageFps": 59.63825973602738,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.671318638088124,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "rendering": "issue2-d2c3",
+      "candidate": "issue2-stable-depth-off",
+      "viewport": "1280x720",
+      "scenarios": {
+        "idle": {
+          "baseline": {
+            "averageFps": 59.61106224889024,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 58.349903836977404,
+            "p95": 18.699999999999818,
+            "over33": 1,
+            "over50": 1,
+            "longtaskCount": 1,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 2.1156449228285923,
+          "p95WorseningMs": 0.0999999999994543,
+          "passed": false
+        },
+        "pointer": {
+          "baseline": {
+            "averageFps": 59.732676184418054,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.72947636266238,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.005356903390353394,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "wheel": {
+          "baseline": {
+            "averageFps": 11.897505195967934,
+            "p95": 18.69999999999891,
+            "over33": 6,
+            "over50": 6,
+            "longtaskCount": 3,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 5.176230206027584,
+            "p95": 150,
+            "over33": 7,
+            "over50": 7,
+            "longtaskCount": 6,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 56.49314607753389,
+          "p95WorseningMs": 131.3000000000011,
+          "passed": false
+        },
+        "opacity-continuous": {
+          "baseline": {
+            "averageFps": 59.721950264575405,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.68299523863788,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.06522731720071112,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "opacity-16": {
+          "baseline": {
+            "averageFps": 59.655756944234405,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.71025841909658,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "opacity-54": {
+          "baseline": {
+            "averageFps": 36.3613761383701,
+            "p95": 100,
+            "over33": 12,
+            "over50": 9,
+            "longtaskCount": 7,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 35.04599787207655,
+            "p95": 132.70000000000437,
+            "over33": 15,
+            "over50": 11,
+            "longtaskCount": 7,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 3.617515083279551,
+          "p95WorseningMs": 32.700000000004366,
+          "passed": false
+        },
+        "selected": {
+          "baseline": {
+            "averageFps": 24.969193851644835,
+            "p95": 135.40000000000146,
+            "over33": 22,
+            "over50": 18,
+            "longtaskCount": 16,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 24.274082040251958,
+            "p95": 149.90000000000146,
+            "over33": 19,
+            "over50": 15,
+            "longtaskCount": 14,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 2.7838776675086248,
+          "p95WorseningMs": 14.5,
+          "passed": false
+        },
+        "split": {
+          "baseline": {
+            "averageFps": 25.026590752488055,
+            "p95": 148.09999999999854,
+            "over33": 19,
+            "over50": 16,
+            "longtaskCount": 10,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 24.449877750881868,
+            "p95": 149.59999999999854,
+            "over33": 19,
+            "over50": 17,
+            "longtaskCount": 18,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 2.3044009761851094,
+          "p95WorseningMs": 1.5,
+          "passed": false
+        },
+        "explode": {
+          "baseline": {
+            "averageFps": 24.503644131783144,
+            "p95": 133.40000000000146,
+            "over33": 18,
+            "over50": 16,
+            "longtaskCount": 4,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 24.26496076630345,
+            "p95": 149.90000000000146,
+            "over33": 16,
+            "over50": 16,
+            "longtaskCount": 13,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.9740729346052798,
+          "p95WorseningMs": 16.5,
+          "passed": false
+        },
+        "exterior-off": {
+          "baseline": {
+            "averageFps": 28.541774779560278,
+            "p95": 116.59999999999854,
+            "over33": 16,
+            "over50": 16,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 25.530243519345493,
+            "p95": 149.89999999999418,
+            "over33": 16,
+            "over50": 14,
+            "longtaskCount": 6,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 10.551310433475367,
+          "p95WorseningMs": 33.299999999995634,
+          "passed": false
+        }
+      },
+      "passed": false
+    },
+    {
+      "rendering": "issue2-d2c3",
+      "candidate": "issue2-stable-depth-off",
+      "viewport": "390x844",
+      "scenarios": {
+        "idle": {
+          "baseline": {
+            "averageFps": 59.65770171149144,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.70246639604371,
+            "p95": 18.599999999999454,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": -9.094947017729282e-13,
+          "passed": true
+        },
+        "pointer": {
+          "baseline": {
+            "averageFps": 59.71726780288017,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.72447110738403,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "wheel": {
+          "baseline": {
+            "averageFps": 59.743796371109624,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.723881219318294,
+            "p95": 18.700000000000728,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.03333425895405793,
+          "p95WorseningMs": 0.1000000000003638,
+          "passed": true
+        },
+        "opacity-continuous": {
+          "baseline": {
+            "averageFps": 59.64992339967625,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.764859568909216,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.09999999999854481,
+          "passed": true
+        },
+        "opacity-16": {
+          "baseline": {
+            "averageFps": 59.62465789153876,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.723899351240455,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "opacity-54": {
+          "baseline": {
+            "averageFps": 59.671318638088124,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.68299523863788,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "selected": {
+          "baseline": {
+            "averageFps": 59.68688845401174,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.66159162758412,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.04238255181807901,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "split": {
+          "baseline": {
+            "averageFps": 59.7297473723115,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.66353677528528,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.11085028807088697,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "explode": {
+          "baseline": {
+            "averageFps": 59.62660063280193,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.63048649399515,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "exterior-off": {
+          "baseline": {
+            "averageFps": 59.69078217733982,
+            "p95": 18.60000000000582,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.67910252995882,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.019566919639788447,
+          "p95WorseningMs": -7.275957614183426e-12,
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "rendering": "issue2-d2c3",
+      "candidate": "issue2-group-stable-depth",
+      "viewport": "1280x720",
+      "scenarios": {
+        "idle": {
+          "baseline": {
+            "averageFps": 59.61106224889024,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.70051870919268,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "pointer": {
+          "baseline": {
+            "averageFps": 59.732676184418054,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.751882317884146,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "wheel": {
+          "baseline": {
+            "averageFps": 11.897505195967934,
+            "p95": 18.69999999999891,
+            "over33": 6,
+            "over50": 6,
+            "longtaskCount": 3,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 4.860113261774007,
+            "p95": 84.89999999999964,
+            "over33": 8,
+            "over50": 5,
+            "longtaskCount": 3,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 59.15014802077078,
+          "p95WorseningMs": 66.20000000000073,
+          "passed": false
+        },
+        "opacity-continuous": {
+          "baseline": {
+            "averageFps": 59.721950264575405,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.62660063280193,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.15965592441483056,
+          "p95WorseningMs": -3.637978807091713e-12,
+          "passed": true
+        },
+        "opacity-16": {
+          "baseline": {
+            "averageFps": 59.655756944234405,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.71805247403204,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 3.637978807091713e-12,
+          "passed": true
+        },
+        "opacity-54": {
+          "baseline": {
+            "averageFps": 36.3613761383701,
+            "p95": 100,
+            "over33": 12,
+            "over50": 9,
+            "longtaskCount": 7,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 33.90894819466248,
+            "p95": 131.40000000000146,
+            "over33": 13,
+            "over50": 12,
+            "longtaskCount": 9,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 6.744596063622881,
+          "p95WorseningMs": 31.400000000001455,
+          "passed": false
+        },
+        "selected": {
+          "baseline": {
+            "averageFps": 24.969193851644835,
+            "p95": 135.40000000000146,
+            "over33": 22,
+            "over50": 18,
+            "longtaskCount": 16,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 24.2251071494227,
+            "p95": 135.3000000000029,
+            "over33": 22,
+            "over50": 17,
+            "longtaskCount": 17,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 2.9800189250928404,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": false
+        },
+        "split": {
+          "baseline": {
+            "averageFps": 25.026590752488055,
+            "p95": 148.09999999999854,
+            "over33": 19,
+            "over50": 16,
+            "longtaskCount": 10,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 23.678698278569396,
+            "p95": 150.09999999999854,
+            "over33": 17,
+            "over50": 15,
+            "longtaskCount": 14,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 5.385841352700652,
+          "p95WorseningMs": 2.0,
+          "passed": false
+        },
+        "explode": {
+          "baseline": {
+            "averageFps": 24.503644131783144,
+            "p95": 133.40000000000146,
+            "over33": 18,
+            "over50": 16,
+            "longtaskCount": 4,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 24.507522878858385,
+            "p95": 151.90000000000146,
+            "over33": 17,
+            "over50": 14,
+            "longtaskCount": 13,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 18.5,
+          "passed": false
+        },
+        "exterior-off": {
+          "baseline": {
+            "averageFps": 28.541774779560278,
+            "p95": 116.59999999999854,
+            "over33": 16,
+            "over50": 16,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 24.27411072719965,
+            "p95": 150.20000000000437,
+            "over33": 19,
+            "over50": 16,
+            "longtaskCount": 11,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 14.952342961576612,
+          "p95WorseningMs": 33.60000000000582,
+          "passed": false
+        }
+      },
+      "passed": false
+    },
+    {
+      "rendering": "issue2-d2c3",
+      "candidate": "issue2-group-stable-depth",
+      "viewport": "390x844",
+      "scenarios": {
+        "idle": {
+          "baseline": {
+            "averageFps": 59.65770171149144,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.60135487279215,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.0944502337213524,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "pointer": {
+          "baseline": {
+            "averageFps": 59.71726780288017,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.745087626128516,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": false,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "wheel": {
+          "baseline": {
+            "averageFps": 59.743796371109624,
+            "p95": 18.600000000000364,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.73549677725942,
+            "p95": 18.69999999999891,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.013891975994711274,
+          "p95WorseningMs": 0.09999999999854481,
+          "passed": true
+        },
+        "opacity-continuous": {
+          "baseline": {
+            "averageFps": 59.64992339967625,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.6421471170645,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.013036534111937809,
+          "p95WorseningMs": 0.09999999999854481,
+          "passed": true
+        },
+        "opacity-16": {
+          "baseline": {
+            "averageFps": 59.62465789153876,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.70831022149652,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "opacity-54": {
+          "baseline": {
+            "averageFps": 59.671318638088124,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.70636215334421,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "selected": {
+          "baseline": {
+            "averageFps": 59.68688845401174,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.70831022265769,
+            "p95": 18.600000000002183,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        },
+        "split": {
+          "baseline": {
+            "averageFps": 59.7297473723115,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.65770171149144,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0.12061939651440239,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "explode": {
+          "baseline": {
+            "averageFps": 59.62660063280193,
+            "p95": 18.69999999999709,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.70051871035355,
+            "p95": 18.599999999998545,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": -0.09999999999854481,
+          "passed": true
+        },
+        "exterior-off": {
+          "baseline": {
+            "averageFps": 59.69078217733982,
+            "p95": 18.60000000000582,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "candidate": {
+            "averageFps": 59.71025841793533,
+            "p95": 18.60000000000582,
+            "over33": 0,
+            "over50": 0,
+            "longtaskCount": 0,
+            "reversalCount": 0,
+            "stopThenJumpCount": 0,
+            "wheelMonotonic": true,
+            "modelInvariant": true,
+            "materialReplacementCount": 0,
+            "materialUuidChangeCount": 0
+          },
+          "averageFpsWorseningPercent": 0,
+          "p95WorseningMs": 0.0,
+          "passed": true
+        }
+      },
+      "passed": true
+    }
+  ],
+  "d2c3RepeatedMedian": {
+    "stableDepthOffWheel": {
+      "baseline": {
+        "scenario": "wheel",
+        "suffixes": [
+          "wheel-c1",
+          "wheel-c2",
+          "wheel-c3"
+        ],
+        "averageFps": 59.690409550871976,
+        "p95": 18.600000000000364,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "candidate": {
+        "scenario": "wheel",
+        "suffixes": [
+          "wheel-s1",
+          "wheel-s2",
+          "wheel-s3"
+        ],
+        "averageFps": 48.58230581266574,
+        "p95": 18.600000000000364,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "averageFpsWorseningPercent": 18.609528434780138,
+      "p95WorseningMs": 0.0,
+      "passed": false
+    },
+    "groupStableDepthWheel": {
+      "baseline": {
+        "scenario": "wheel",
+        "suffixes": [
+          "wheel-gc1",
+          "wheel-gc2",
+          "wheel-gc3"
+        ],
+        "averageFps": 49.46413849975543,
+        "p95": 18.600000000000364,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "candidate": {
+        "scenario": "wheel",
+        "suffixes": [
+          "wheel-g1",
+          "wheel-g2",
+          "wheel-g3"
+        ],
+        "averageFps": 59.71167789754174,
+        "p95": 18.600000000000364,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "averageFpsWorseningPercent": 0,
+      "p95WorseningMs": 0.0,
+      "passed": true
+    },
+    "groupStableDepthExteriorOff": {
+      "baseline": {
+        "scenario": "exterior-off",
+        "suffixes": [
+          "exterior-ec1",
+          "exterior-ec2",
+          "exterior-ec3"
+        ],
+        "averageFps": 59.63631623611183,
+        "p95": 18.600000000000364,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "candidate": {
+        "scenario": "exterior-off",
+        "suffixes": [
+          "exterior-eg1",
+          "exterior-eg2",
+          "exterior-eg3"
+        ],
+        "averageFps": 59.6888352527555,
+        "p95": 18.600000000000364,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "averageFpsWorseningPercent": 0,
+      "p95WorseningMs": 0.0,
+      "passed": true
+    },
+    "groupStableDepthOpacity54": {
+      "baseline": {
+        "scenario": "opacity-54",
+        "suffixes": [
+          "opacity54-c1",
+          "opacity54-c2",
+          "opacity54-c3"
+        ],
+        "averageFps": 14.659685863874346,
+        "p95": 133.60000000000036,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "candidate": {
+        "scenario": "opacity-54",
+        "suffixes": [
+          "opacity54-g1",
+          "opacity54-g2",
+          "opacity54-g3"
+        ],
+        "averageFps": 14.365709930030933,
+        "p95": 133.29999999999927,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "averageFpsWorseningPercent": 2.005335834431852,
+      "p95WorseningMs": -0.3000000000010914,
+      "passed": true
+    },
+    "groupStableDepthSelected": {
+      "baseline": {
+        "scenario": "selected",
+        "suffixes": [
+          "selected-c1",
+          "selected-c2",
+          "selected-c3"
+        ],
+        "averageFps": 16.149181876176137,
+        "p95": 100.60000000000036,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "candidate": {
+        "scenario": "selected",
+        "suffixes": [
+          "selected-g1",
+          "selected-g2",
+          "selected-g3"
+        ],
+        "averageFps": 14.522391156057544,
+        "p95": 133.59999999999945,
+        "reversalCount": 0,
+        "stopThenJumpCount": 0,
+        "wheelMonotonic": true,
+        "modelInvariant": true
+      },
+      "averageFpsWorseningPercent": 10.07351785738752,
+      "p95WorseningMs": 32.99999999999909,
+      "passed": false
+    }
+  },
+  "stableDepthOffDecision": "REJECTED_PERFORMANCE",
+  "finalistDifferentialPassed": false,
+  "d2c3BaselineLimitationKeptSeparate": true,
+  "earlyStop": {
+    "applied": true,
+    "trigger": "D2c3 selected repeated-median differential failed",
+    "splitAndExplodeRepeatedMediansRun": false,
+    "reason": "The candidate already exceeded both the 5 percent FPS and 2 ms p95 differential gates under selected state."
+  }
+}

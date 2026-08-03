@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.3",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "48ec7b73c207bf5a784663f70199ec8f4f1465d8",
+  "sourceImplementationCommit": "ebf69a258ad93bb3d4f326c07aea9ee4cca2d515",
+  "knownGoodCommit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T09:27:15.328Z",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "R2_2_COMPLEXITY_IDENTIFIED_AND_REMOVED_FROM_CURRENT_RUNTIME",
+  "commits": {
+    "r21Commit": "8fa4d6e9dd70cbaf32fd26b75ec17b0cabe73484",
+    "r22ImplementationCommit": "2010a862a7db7730154be28affee94c9419f7905",
+    "r22FinalCommit": "48ec7b73c207bf5a784663f70199ec8f4f1465d8"
+  },
+  "changedFilesR21ToR22": [
+    "index.html",
+    "js/final-stabilization-phase3b4c-audio.js",
+    "js/mechanical-audio.js",
+    "tests/final-stabilization-phase3b4c-r2-2-harness.html",
+    "tests/final-stabilization-phase3b4c-r2-2-harness.js",
+    "tests/final-stabilization-phase3b4c-r2-2.test.mjs",
+    "tests/mechanical-audio.test.mjs"
+  ],
+  "removedRuntimeConcepts": [
+    "foreground recovery cycle and history",
+    "pipeline liveness verification",
+    "silent priming source",
+    "Context and graph rebuild route",
+    "hard recovery route selection",
+    "recovery verification timeout",
+    "output timestamp mandatory success gate",
+    "recovery-failed UI state",
+    "visibility/pageshow/focus multi-owner audio mutation"
+  ]
+}

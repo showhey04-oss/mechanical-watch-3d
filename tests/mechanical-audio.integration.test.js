@@ -51,7 +51,22 @@ export async function runMechanicalAudioIntegrationTest(diagnostics, initialStat
   play.click();
   await diagnostics.waitForFrames(18);
   const resumed = diagnostics.getAudioDiagnostics();
-  check("audio-resume-does-not-replay-a-backlog", pausedBeatCount(resumed) - pausedBeatCount(pausedEnd) <= 2, { pausedEnd: pausedBeatCount(pausedEnd), resumed: pausedBeatCount(resumed) });
+  const pacingAfterResume =
+    diagnostics.getFinalStabilizationPhase3B4cReport?.() ?? null;
+  const resumeHasNoBacklog = pacingAfterResume?.mode === "stability"
+    ? pacingAfterResume.backlogBurstCount === 0
+      && pacingAfterResume.duplicateCount === 0
+      && pacingAfterResume.lateDropCount === 0
+    : pausedBeatCount(resumed) - pausedBeatCount(pausedEnd) <= 2;
+  check("audio-resume-does-not-replay-a-backlog", resumeHasNoBacklog, {
+    pausedEnd: pausedBeatCount(pausedEnd),
+    resumed: pausedBeatCount(resumed),
+    elapsedAudibleEvents: pausedBeatCount(resumed) - pausedBeatCount(pausedEnd),
+    pacingMode: pacingAfterResume?.mode ?? "protected",
+    backlogBurstCount: pacingAfterResume?.backlogBurstCount ?? null,
+    duplicateCount: pacingAfterResume?.duplicateCount ?? null,
+    lateDropCount: pacingAfterResume?.lateDropCount ?? null,
+  });
 
   diagnostics.setRunning(false);
   diagnostics.clearAudioEventLog();
@@ -121,7 +136,23 @@ export async function runMechanicalAudioIntegrationTest(diagnostics, initialStat
   await diagnostics.setAudioVisibilityForTest(true);
   await diagnostics.waitForFrames(12);
   const visible = diagnostics.getAudioDiagnostics();
-  check("audio-hidden-suspends-and-visible-resumes-without-backlog", hidden.audioContextState === "suspended" && visible.audioContextState === "running" && pausedBeatCount(visible) - pausedBeatCount(beforeHidden) <= 2, { beforeHidden, hidden, visible });
+  const platform = diagnostics.getAudioPlatformRecoveryReport?.() ?? null;
+  const hiddenPolicySatisfied = platform?.profile && platform.profile !== "p0"
+    ? hidden.audioContextState === "running"
+      && hidden.masterGainCommandedValue === 0
+      && hidden.activeSources === 0
+    : hidden.audioContextState === "suspended";
+  const visiblePolicySatisfied = visible.audioContextState === "running"
+    && visible.status === "on"
+    && (!platform || platform.activeTransition?.classification === "RUNNING_AND_ADVANCING");
+  check("audio-hidden-policy-and-visible-resume-advance-without-backlog", hiddenPolicySatisfied
+    && visiblePolicySatisfied
+    && pausedBeatCount(visible) - pausedBeatCount(beforeHidden) <= 2, {
+    beforeHidden,
+    hidden,
+    visible,
+    platform,
+  });
 
   document.getElementById("reset").click();
   await diagnostics.waitForFrames(2);

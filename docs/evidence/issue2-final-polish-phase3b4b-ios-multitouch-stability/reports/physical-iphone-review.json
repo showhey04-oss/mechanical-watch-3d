@@ -1,0 +1,95 @@
+{
+  "sourceBaseCommit": "ece9d99c4e0ff95afd155475ef963e2984c5d05f",
+  "sourceAuditCommit": "fac59b714d66215ee0c60b688c0201fea1d9fde4",
+  "sourceBranch": "feature/issue2-final-polish-phase3b4b-ios-multitouch-stability",
+  "appVersion": "v3.15.0",
+  "captureMode": "same-origin unsandboxed iframe harness and in-app Browser",
+  "schemaVersion": 1,
+  "status": "HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX",
+  "requiredDevice": "physical iPhone",
+  "requiredDurationMinutes": 15,
+  "requiredSequences": [
+    "one-finger rotation",
+    "pinch out",
+    "two-finger pan",
+    "pinch in",
+    "two-to-one transition",
+    "one-to-two transition",
+    "fast release",
+    "edge gesture",
+    "maximum/minimum distance rotation",
+    "front/back/side",
+    "split/explode/restore",
+    "selection/blank clear"
+  ],
+  "environment": {
+    "device": "iPhone 16",
+    "os": "iOS 26.5.2",
+    "launchModes": [
+      "Safari",
+      "home screen"
+    ],
+    "brightnessPercent": 50,
+    "lowPowerMode": false,
+    "caseInstalled": true,
+    "roomTemperatureC": 24.5
+  },
+  "A": {
+    "framing": false,
+    "mode": "diagnostics",
+    "minutes": 2,
+    "symptomReproduced": true,
+    "onsetSeconds": 49,
+    "precedingOperation": "pinch out",
+    "twoFingerPan": "misrecognized as rotation or zoom",
+    "pinch": "zoom direction sometimes reversed",
+    "oneFingerRotation": "available",
+    "afterFingerRelease": "stopped",
+    "afterReload": "two-finger translation sometimes unavailable after rotation"
+  },
+  "B": {
+    "framing": true,
+    "mode": "diagnostics",
+    "minutes": 1,
+    "symptomReproduced": true,
+    "onsetSeconds": 55,
+    "precedingOperation": "pinch out",
+    "symptom": "same as A"
+  },
+  "C": {
+    "framing": true,
+    "mode": "stability",
+    "minutes": 15,
+    "minimumDurationSatisfied": true,
+    "symptomReproduced": false,
+    "twoFingerPan": "PASS",
+    "pinchInOut": "PASS",
+    "oneTwoFingerTransitions": "PASS",
+    "fastRelease": "PASS",
+    "edgeGesture": "PASS",
+    "maximumDistanceRotation": "PASS",
+    "initialDistanceRestore": "PASS",
+    "splitExplodeRestore": "PASS",
+    "progressiveFrameDrop": false,
+    "safariAutomaticReload": false,
+    "webglDisplayLoss": false,
+    "manualReloadRequired": false,
+    "heat": "almost none",
+    "balanceAudioDelay": true
+  },
+  "manualNotReported": {
+    "preset": "NOT_REPORTED",
+    "selection": "NOT_REPORTED"
+  },
+  "automatedCoverageRetained": {
+    "presetRegression": "PASS",
+    "selectionRegression": "PASS"
+  },
+  "technicalGateCompleted": true,
+  "framingSpecificity": "CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE",
+  "technicalFinalist": "IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST",
+  "humanDecision": "HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX",
+  "phaseStatus": "PHASE3B4B_ACCEPTED_PENDING_FINAL_INTEGRATION",
+  "physicalIPhoneSubstitute": false,
+  "nextHumanCheck": "Recheck physical-iPhone preset and selection during final integration."
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "phase": "Final Stabilization Phase 3B.4c-R2.4.2",
+  "sourceBaseCommit": "d6718e59a2438152a4a203fa579b66ce6e91ecd3",
+  "sourceStartCommit": "f1ea3870a9ea7bd00c8752bf2b750eea37769e4c",
+  "sourceImplementationCommit": "db24392dae14be49ac8cf83b308b3ab712b4da0d",
+  "sourceBranch": "feature/final-stabilization-phase3b4c-ios-audio-pacing",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-01T23:38:13.092Z",
+  "productionTimeoutProfile": {
+    "id": "PRODUCTION_TIMEOUT_PROFILE",
+    "resumeTimeoutMs": 450,
+    "clockProbeMs": 80,
+    "decodeTimeoutMs": 1200,
+    "closeTimeoutMs": 250,
+    "transactionTimeoutMs": 5500
+  },
+  "tightDiagnosticTimeoutProfile": {
+    "id": "TIGHT_DIAGNOSTIC_TIMEOUT_PROFILE",
+    "resumeTimeoutMs": 450,
+    "clockProbeMs": 80,
+    "decodeTimeoutMs": 300,
+    "closeTimeoutMs": 50,
+    "transactionTimeoutMs": 1500
+  },
+  "nativeSafariAutomation": "NATIVE_SAFARI_AUTOMATION_BLOCKED_BY_ENVIRONMENT",
+  "physicalIPhoneRetest": "FROZEN",
+  "status": "PHASE3B4C_R2_4_2_INDEPENDENT_REVIEW_PASSED",
+  "reviewer": "independent read-only GPT-5.6 Sol high subagent",
+  "reviewedHead": "db24392dae14be49ac8cf83b308b3ab712b4da0d plus the R2.4.2 evidence worktree",
+  "reviewedAt": "2026-08-01T23:45:43Z",
+  "reviewedScope": [
+    "production code defaults and app-start profile",
+    "diagnostic setter isolation",
+    "72 raw browser inputs and 1,600 cycles",
+    "generated matrix entry parity",
+    "R2.4.1 historical evidence manifest",
+    "protected paths and Human/Native Safari boundaries",
+    "documentation and generator parity"
+  ],
+  "remediatedDuringReview": [
+    "kept review status pending until the independent gate completed",
+    "restored the R2.4.1 evidence README so its historical manifest remains byte exact",
+    "replaced the hardcoded Node count with captured full-suite output and inventory hashes"
+  ],
+  "findings": {
+    "critical": [],
+    "major": [],
+    "minor": []
+  },
+  "substantiveFindings": 0,
+  "gitDiffCheck": "PASSED"
+}
