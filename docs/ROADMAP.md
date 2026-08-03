@@ -104,13 +104,13 @@
 
 ## 現在の改修フェーズ
 
-### Final Stabilization Phase 3B.4 stack promotion audit — PR #25 integrated／ChatGPT review pending
+### Final Stabilization Phase 3B.3～3B.4 promotion audit — PR #24 integrated into PR #23／ChatGPT review pending
 
 - Head `d16037a75d85d705434d8b73ef5293511052f65e`でPhase 3B.4a／3B.4b／3B.4c R2.4.2を統合し、起動契約、Desktop基準同等性、Mobile全長構図、Node 442/442、Chrome／WebKit／Native Safari、preset・9部品選択、multi-touch・production audio、12/12 protected pathを合格とする
 - 物理iPhoneのforeground自動復帰6/6、fallback tap 0、音のduplicate／burstなしを統合受入へ反映する
 - commit段階の12性能セルは既存閾値内で、Mobile pointer製品回帰は再現しなかった。製品修正と閾値変更は不要とする
 - clean-process最終性能測定はendpoint security高CPU負荷で`NOT TESTED`とし、`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を正式判断とする。clean環境の絶対PASSやMcAfee停止環境PASSは主張しない
-- PR #25はmerge commit `d4fa76182d4955e0a78f31120ea2705a19f67220`としてPR #24へ統合済みとし、PR #24はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
+- PR #24はmerge commit `b26755bfa562473ff88a0ca30168fc219673f5cf`としてPR #23へ統合済みとし、PR #24／#25／#26はMerged／Closed、PR #23はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
 - 以下はPhase 3B.4a～3B.4cの段階履歴として維持する
 
 - Phase 3B.3のPC／物理iPhone比較でD2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として選定した
