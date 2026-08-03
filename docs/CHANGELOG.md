@@ -1,12 +1,20 @@
 # Changelog
 
+## Unreleased — PR #13 final stack main-promotion audit
+
+- PR #14～#26で検証した完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰をPR #13 Head `86d7bdc041a5f43ddbbeb92d09a01b4a95dc701b`へ集約
+- 製品・試験treeを受入済みstack Head `dab5dc474071784b06db9fb2fb3f36d469f16389`とGit object exactで確認し、Node 442/442、統合query Desktop／390×844各21項目、production audioを合格
+- 通常path Desktopはmain／PR #13とも86/86、390×844は双方87/88。同じ前後輝度差1件を既知のIssue #2制約として保持し、PR #13固有browser failureは0件
+- 性能判断は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を維持し、clean-process最終測定はendpoint security負荷により`NOT_TESTED`。absolute performance PASSやMcAfee停止環境PASSは主張しない
+- 文書・監査証跡だけを更新し、製品コード、test runtime、audio、閾値、APP_VERSIONは変更しない。PR #13 Open／Draft、PR #14～#26 Merged／Closed、PR #5 Open／Draft、Issue #2 Open、D2c3 query限定・未採用、Phase 3B.4d未開始を維持
+
 ## Unreleased — Final Stabilization Phase 3B.4 stack integration evidence closure
 
 - Head `d16037a75d85d705434d8b73ef5293511052f65e`へPhase 3B.4a／3B.4b／3B.4c R2.4.2の既存結果を統合。Node 442/442、Chrome／WebKit／Native Safari Desktop・Mobile、preset・9部品選択、multi-touch・production audio、12/12 protected pathを合格として記録
 - 物理iPhoneのforeground自動復帰6/6、fallback tap 0、duplicate／burstなし、Native Safari 26.5.2の18条件・400 cycleを現行統合状態へ反映
 - commit段階12性能セルは既存閾値内でMobile pointer製品回帰は再現せず、製品修正不要と判断。M3→M5 wheel aggregate p95 +4msは順序別結果とFPS改善を踏まえ`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`と分類
 - clean-process最終測定はStatefulFirewall／VShieldScannerの高CPU負荷で`NOT TESTED`。`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`とし、clean環境のabsolute PASS、McAfee停止環境PASS、Issue #2完了は主張しない
-- 製品コード、test runtime、audio file、performance threshold、APP_VERSIONは変更せず、PR #23をmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合。PR #23／#24／#25／#26 Merged／Closed、PR #22／#21 Open／Draft、Issue #2 Open、D2c3 query限定・未採用、Phase 3B.4d未開始を維持
+- 製品コード、test runtime、audio file、performance threshold、APP_VERSIONは変更せず、PR #23をmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合。後続promotionでPR #14～#26はMerged／Closedとなり、現在はPR #13 Open／Draft、PR #5 Open／Draft、Issue #2 Open、D2c3 query限定・未採用、Phase 3B.4d未開始を維持
 
 ## Unreleased — Final Stabilization Phase 3B.4c-R2.4.2 Native Safari／物理iPhone受入閉鎖
 

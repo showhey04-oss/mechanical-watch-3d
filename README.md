@@ -8,7 +8,7 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：Final Stabilization Phase 3B.2～3B.4 promotion audit。Phase 3B.2の現行透過制約受容、Phase 3B.3のD2c3人間選定、Phase 3B.4aのモバイル全長構図、Phase 3B.4bのiOSマルチタッチ、Phase 3B.4c R2.4.2のproduction audio／foreground復帰を統合し、Node、Chrome、WebKit、Native Safari、preset・selection、multi-touch・audio、protected pathを合格とした。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`で、clean-process最終測定はendpoint security負荷により`NOT_TESTED`、製品回帰は再現せず製品修正不要とする。PR #23はmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合済みで、PR #23／#24／#25／#26はMerged／Closed、PR #22／#21はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始を維持する
+- 現在の改修フェーズ：PR #13 final stack main-promotion audit。PR #14～#26で段階検証した完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰をPR #13 Head `86d7bdc041a5f43ddbbeb92d09a01b4a95dc701b`へ集約した。製品・試験treeは受入済みstack Head `dab5dc474071784b06db9fb2fb3f36d469f16389`とGit object exact、Node 442/442、統合queryのDesktop／390×844、production audio、通常path差分を合格とした。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`のまま、clean-process最終測定はendpoint security負荷により`NOT_TESTED`である。PR #13はOpen／Draft、PR #14～#26はMerged／Closed、D2c3はquery限定・未採用、Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始を維持する
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ

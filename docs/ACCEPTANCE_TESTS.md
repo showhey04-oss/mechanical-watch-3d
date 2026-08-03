@@ -1,5 +1,16 @@
 # 受入試験
 
+## PR #13 final stack main-promotion audit
+
+- 対象をPR #13 Head `86d7bdc041a5f43ddbbeb92d09a01b4a95dc701b`、baseをmain `293626f13a50224924f8e3ac229a1fc4077ad7a7`、APP_VERSIONをv3.15.0とする
+- `index.html`、`js/**`、`assets/audio/**`、`package.json`、`package-lock.json`、`tests/**`は受入済みstack Head `dab5dc474071784b06db9fb2fb3f36d469f16389`とGit object exactである
+- Node 442/442、統合queryのDesktop／390×844各21項目、production audioのDesktop／390×844を合格とする
+- 通常pathはDesktopでmain／PR #13とも86/86、390×844で双方87/88とし、共通失敗`a5-all-background-themes-keep-front-back-luminance-within-thirty-percent`を既知のIssue #2制約としてPR固有回帰から分離する
+- integrated queryで位置1／位置2、選択・HUD・学習同期、opacity、外装ON/OFF、split／explode／restore、transform invariant、三針拘束、禁止干渉0を確認する
+- production audioは`PRODUCTION_TIMEOUT_PROFILE`、buffer／raw asset 6/6、duplicate／backlog／catch-up 0、application console error／warning 0を確認する。Mobileの外側browser-controlページで発生したsource不明のMutationObserver例外1件は製品iframe外の環境側事象として別記する
+- 性能は既存の`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を継承し、新しいabsolute PASSやclean-process PASSを主張しない
+- PR #13はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始とする
+
 ## Final Stabilization Phase 3B.4 — Stack integration evidence closure
 
 - Head `d16037a75d85d705434d8b73ef5293511052f65e`でPhase 3B.4a／3B.4b／3B.4c R2.4.2を統合し、C `0e260fdfc7495293319682ae7b998858641cdd26`との製品・test-runtime tree一致を確認する
@@ -11,7 +22,7 @@
 - M3→M5 wheelの全体p95 +4msは、順序別+1.5ms／+1msとaudio ON側FPS改善を併記し、`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`とする
 - clean-process最終性能測定はendpoint security高CPU負荷により`NOT TESTED`とし、製品FAILやabsolute PASSへ変換しない。McAfee停止・無効化も行わない
 - 正式判断を`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`、`PHASE3B4_STACK_PRODUCT_FIX_NOT_REQUIRED`、`PHASE3B4_STACK_INTEGRATION_READY_FOR_CHATGPT_REVIEW`とする
-- PR #23はmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合済み、PR #23／#24／#25／#26はMerged／Closed、PR #22／#21はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
+- 本証跡時点ではPR #23をmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合した。後続promotionでPR #14～#26はMerged／Closedとなり、現在はPR #13をOpen／Draft、D2c3をquery限定・未採用、Issue #2をOpen、PR #5をOpen／Draft、Phase 3B.4dを未開始とする
 
 ## Final Stabilization Phase 3B.4c-R2.4.2 — Native Safari／物理iPhone受入閉鎖
 

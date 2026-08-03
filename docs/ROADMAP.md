@@ -104,13 +104,14 @@
 
 ## 現在の改修フェーズ
 
-### Final Stabilization Phase 3B.2～3B.4 promotion audit — PR #23 integrated into PR #22／ChatGPT review pending
+### PR #13 final stack main-promotion audit — ChatGPT review pending
 
-- Head `d16037a75d85d705434d8b73ef5293511052f65e`でPhase 3B.4a／3B.4b／3B.4c R2.4.2を統合し、起動契約、Desktop基準同等性、Mobile全長構図、Node 442/442、Chrome／WebKit／Native Safari、preset・9部品選択、multi-touch・production audio、12/12 protected pathを合格とする
+- PR #13 Head `86d7bdc041a5f43ddbbeb92d09a01b4a95dc701b`へPR #14～#26の完成外装・Final Polish・安定化stackを集約し、受入済みHead `dab5dc474071784b06db9fb2fb3f36d469f16389`との製品・試験treeをGit object exactとする
+- Node 442/442、統合queryのDesktop／390×844各21ゲート、production audio、通常pathのmain／PR #13差分を合格とする。Mobile通常pathの前後輝度差1件は双方共通の既知制約で、PR固有回帰ではない
 - 物理iPhoneのforeground自動復帰6/6、fallback tap 0、音のduplicate／burstなしを統合受入へ反映する
 - commit段階の12性能セルは既存閾値内で、Mobile pointer製品回帰は再現しなかった。製品修正と閾値変更は不要とする
 - clean-process最終性能測定はendpoint security高CPU負荷で`NOT TESTED`とし、`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を正式判断とする。clean環境の絶対PASSやMcAfee停止環境PASSは主張しない
-- PR #23はmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合済みとし、PR #23／#24／#25／#26はMerged／Closed、PR #22／#21はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
+- PR #13はOpen／Draft、PR #14～#26はMerged／Closed、PR #5はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始とする。mainへの昇格、Ready化、既定採用、Issue closeには別途Human承認を必要とする
 - 以下はPhase 3B.4a～3B.4cの段階履歴として維持する
 
 - Phase 3B.3のPC／物理iPhone比較でD2c3を`HUMAN_SELECT_D2C3_WITH_EXPLICIT_PERFORMANCE_TRADEOFF`として選定した
