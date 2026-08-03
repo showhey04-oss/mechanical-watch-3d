@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-03",
+  "repository": "showhey04-oss/mechanical-watch-3d",
+  "sourceMainCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
+  "sourceProductCommit": "a7f0057db57de168c2af0bd01847fcfed9a606dc",
+  "sourceAcceptanceCommit": "795223bfb2804fc8b7e058ac36245c1f4c650e36",
+  "sourceBranch": "docs/post-default-adoption-completion-gate",
+  "appVersion": "v3.15.0",
+  "status": "MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED",
+  "blockingCount": 1,
+  "blockers": [
+    {
+      "id": "POST_ADOPTION_NODE_ACCEPTANCE_STATE_EXPECTATION_MISMATCH",
+      "scope": "tests/final-completed-watch-default-evidence.test.mjs",
+      "actual": "463/465",
+      "cause": "Two assertions still require the pre-Human Draft/technical-candidate state while the merged documents record Human acceptance.",
+      "requiredClosure": "Update the stale acceptance-state expectations in a separate test-alignment PR and obtain 465/465 without skipping or relaxing tests.",
+      "productDefect": false
+    }
+  ],
+  "productTreeExact": true,
+  "productCodeChangedByAudit": false,
+  "testsChangedByAudit": false,
+  "testThresholdsChanged": false,
+  "node": {
+    "total": 465,
+    "passed": 463,
+    "failed": 2,
+    "skipped": 0,
+    "status": "FAILED"
+  },
+  "browser": {
+    "installedChrome": {
+      "completed": 6,
+      "passed": 6,
+      "failed": 0,
+      "localHarnessFavicon404": 1,
+      "productRuntimeErrors": 0,
+      "warnings": 0
+    },
+    "playwrightWebKit": {
+      "completed": 6,
+      "passed": 6,
+      "failed": 0,
+      "consoleErrors": 0,
+      "warnings": 0,
+      "runtimeErrors": 0
+    },
+    "nativeSafari": {
+      "status": "INHERITED_FROM_EXACT_PRODUCT_TREE",
+      "newRunPerformed": false,
+      "evidence": "docs/evidence/final-completed-watch-default-adoption/reports/native-safari.json"
+    }
+  },
+  "pages": {
+    "status": "PUBLISHED",
+    "deploymentCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
+    "url": "https://showhey04-oss.github.io/mechanical-watch-3d/",
+    "appVersion": "v3.15.0",
+    "defaultProfile": "completed-watch"
+  },
+  "modes": {
+    "watch": "PASS",
+    "mechanismObservation": "PASS_WITH_ACCEPTED_LIMITATION",
+    "learning": "PASS"
+  },
+  "recommendations": {
+    "issue2": "CLOSE_AS_NOT_PLANNED_ACCEPTED_LIMITATION",
+    "pr5": "CLOSE_AS_SUPERSEDED_WITHOUT_MERGE",
+    "phase3B4d": "DEFER_POST_COMPLETION_IMPROVEMENT",
+    "oit": "DEFERRED_POST_COMPLETION",
+    "postIssue2GeometryCleanup": "DEFERRED_POST_COMPLETION"
+  },
+  "issue2Changed": false,
+  "pr5Changed": false,
+  "completionDeclared": false,
+  "readyOrMergeAuthorized": false
+}
