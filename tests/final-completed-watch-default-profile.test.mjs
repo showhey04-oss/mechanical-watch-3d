@@ -173,6 +173,14 @@ test("index separates raw flags from effective profile resolution without URL mu
   assert.match(index, /resolveFinalExteriorCandidate\(effectivePageParameters\)/);
   assert.match(index, /resolveFinalStabilizationPhase3B4c\(effectivePageParameters\)/);
   assert.match(index, /const audioLifecycleTraceEnabled=initialPageParameters\.get/);
+  assert.match(
+    index,
+    /const renderingProfileActive=effectivePageParameters\.has\('rendering'\)/,
+  );
+  assert.doesNotMatch(
+    index,
+    /protectedPaths:\{normalPathUnchanged:!initialPageParameters\.has\('rendering'\)/,
+  );
   assert.match(index, /locationSearchUnchanged:location\.search===initialLocationSearch/);
   assert.doesNotMatch(index, /history\.(?:pushState|replaceState)\(/);
 });
