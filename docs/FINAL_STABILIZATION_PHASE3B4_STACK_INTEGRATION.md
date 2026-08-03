@@ -4,7 +4,7 @@
 
 Phase 3B.4a、3B.4b、3B.4cをHead `d16037a75d85d705434d8b73ef5293511052f65e`で統合確認した。起動契約、Desktop基準同等性、Mobile全長構図、Node、Chrome／Playwright WebKit／Native Safari、preset・9部品選択、multi-touch・production audio、12 protected pathは合格した。
 
-性能は既存の隔離実行で製品回帰を再現しなかった。一方、最終clean-process測定はendpoint securityの高CPU負荷により実施できていない。このため結論は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`であり、clean環境の絶対性能PASSではない。製品コードや閾値の変更は不要と判断した。本証跡の記録時点ではPR #25をDraftのままChatGPTレビューへ送る状態だったが、後続のpromotion操作でPR #25はPR #24へ統合され、さらにPR #24はmerge commit `b26755bfa562473ff88a0ca30168fc219673f5cf`としてPR #23へ統合済みである。
+性能は既存の隔離実行で製品回帰を再現しなかった。一方、最終clean-process測定はendpoint securityの高CPU負荷により実施できていない。このため結論は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`であり、clean環境の絶対性能PASSではない。製品コードや閾値の変更は不要と判断した。本証跡の記録時点ではPR #25をDraftのままChatGPTレビューへ送る状態だったが、後続のpromotion操作でPR #25はPR #24へ、PR #24はPR #23へ、PR #23はmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ順次統合済みである。
 
 ## 比較点
 
@@ -90,6 +90,6 @@ M3→M5はidle -0.62%／0ms、pointer -0.87%／-2ms、wheel +4.07%／+4msだっ�
 
 ## 変更範囲と次の判断
 
-本工程は文書・証跡だけを追加した。製品コード、test runtime、performance threshold、camera、input、audio、APP_VERSIONは変更していない。証跡記録後、PR #25はPR #24へ、PR #24はPR #23へ順次統合済みである。現在はD2c3をquery限定・未採用、Issue #2をOpen、PR #23をOpen／Draftで維持し、Phase 3B.4dは開始しない。
+本工程は文書・証跡だけを追加した。製品コード、test runtime、performance threshold、camera、input、audio、APP_VERSIONは変更していない。証跡記録後、PR #25はPR #24へ、PR #24はPR #23へ、PR #23はPR #22へ順次統合済みである。現在はPR #23／#24／#25／#26をMerged／Closed、PR #22／#21をOpen／Draft、D2c3をquery限定・未採用、Issue #2をOpenで維持し、Phase 3B.4dは開始しない。
 
 次はChatGPTによる統合証跡レビューである。Ready化、merge、Issue #2 close、既定採用には別途Human承認が必要である。

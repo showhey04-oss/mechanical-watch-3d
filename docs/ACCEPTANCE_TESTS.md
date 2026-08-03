@@ -11,7 +11,7 @@
 - M3→M5 wheelの全体p95 +4msは、順序別+1.5ms／+1msとaudio ON側FPS改善を併記し、`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`とする
 - clean-process最終性能測定はendpoint security高CPU負荷により`NOT TESTED`とし、製品FAILやabsolute PASSへ変換しない。McAfee停止・無効化も行わない
 - 正式判断を`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`、`PHASE3B4_STACK_PRODUCT_FIX_NOT_REQUIRED`、`PHASE3B4_STACK_INTEGRATION_READY_FOR_CHATGPT_REVIEW`とする
-- PR #24はmerge commit `b26755bfa562473ff88a0ca30168fc219673f5cf`としてPR #23へ統合済み、PR #24／#25／#26はMerged／Closed、PR #23はOpen／Draft、D2c3は未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
+- PR #23はmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合済み、PR #23／#24／#25／#26はMerged／Closed、PR #22／#21はOpen／Draft、D2c3はquery限定・未採用、Issue #2はOpen、Phase 3B.4dは未開始とする
 
 ## Final Stabilization Phase 3B.4c-R2.4.2 — Native Safari／物理iPhone受入閉鎖
 

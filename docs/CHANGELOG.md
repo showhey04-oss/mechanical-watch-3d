@@ -6,7 +6,7 @@
 - 物理iPhoneのforeground自動復帰6/6、fallback tap 0、duplicate／burstなし、Native Safari 26.5.2の18条件・400 cycleを現行統合状態へ反映
 - commit段階12性能セルは既存閾値内でMobile pointer製品回帰は再現せず、製品修正不要と判断。M3→M5 wheel aggregate p95 +4msは順序別結果とFPS改善を踏まえ`ACTIVE_AUDIO_WHEEL_P95_VARIABILITY_INCONCLUSIVE_NOT_PRODUCT_REJECTION`と分類
 - clean-process最終測定はStatefulFirewall／VShieldScannerの高CPU負荷で`NOT TESTED`。`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`とし、clean環境のabsolute PASS、McAfee停止環境PASS、Issue #2完了は主張しない
-- 製品コード、test runtime、audio file、performance threshold、APP_VERSIONは変更せず、PR #24をmerge commit `b26755bfa562473ff88a0ca30168fc219673f5cf`としてPR #23へ統合。PR #24／#25／#26 Merged／Closed、PR #23 Open／Draft、Issue #2 Open、D2c3未採用、Phase 3B.4d未開始を維持
+- 製品コード、test runtime、audio file、performance threshold、APP_VERSIONは変更せず、PR #23をmerge commit `7597be62438acb12abbec8b884bd35560195db39`としてPR #22へ統合。PR #23／#24／#25／#26 Merged／Closed、PR #22／#21 Open／Draft、Issue #2 Open、D2c3 query限定・未採用、Phase 3B.4d未開始を維持
 
 ## Unreleased — Final Stabilization Phase 3B.4c-R2.4.2 Native Safari／物理iPhone受入閉鎖
 
