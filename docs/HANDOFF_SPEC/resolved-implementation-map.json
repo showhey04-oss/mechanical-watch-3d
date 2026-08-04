@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-04T17:08:03.960Z",
+  "sourceMainHead": "eb4595e040786e0e2115165d36a9cc39e08b2038",
+  "count": 9,
+  "entries": [
+    {
+      "id": "ios-multitouch",
+      "problem": "iOS multi-touch gesture state degradation",
+      "formalDecision": "HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX",
+      "implementationFiles": [
+        "js/issue2-final-polish-phase3b4b-input.js",
+        "index.html"
+      ],
+      "symbols": [
+        "createIssue2Phase3B4bInputRuntime",
+        "simulateTouchGesture"
+      ],
+      "lineRanges": [
+        {
+          "file": "js/issue2-final-polish-phase3b4b-input.js",
+          "symbol": "createIssue2Phase3B4bInputRuntime",
+          "start": 17,
+          "end": 17
+        },
+        {
+          "file": "index.html",
+          "symbol": "createIssue2Phase3B4bInputRuntime",
+          "start": 214,
+          "end": 214
+        },
+        {
+          "file": "index.html",
+          "symbol": "simulateTouchGesture",
+          "start": 1352,
+          "end": 1352
+        }
+      ],
+      "sourceCommit": "fac59b714d66215ee0c60b688c0201fea1d9fde4",
+      "tests": [
+        "tests/issue2-final-polish-phase3b4b-input.test.mjs"
+      ],
+      "evidence": [
+        "docs/evidence/issue2-final-polish-phase3b4b-ios-multitouch-stability"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    },
+    {
+      "id": "single-time-input",
+      "problem": "Duplicate/native iOS time input application paths",
+      "formalDecision": "R3 centered HH:MM:SS overlay with one native input",
+      "implementationFiles": [
+        "index.html"
+      ],
+      "symbols": [
+        "applyTimeInput",
+        "timeInputVisual"
+      ],
+      "lineRanges": [
+        {
+          "file": "index.html",
+          "symbol": "applyTimeInput",
+          "start": 1529,
+          "end": 1529
+        },
+        {
+          "file": "index.html",
+          "symbol": "timeInputVisual",
+          "start": 22,
+          "end": 22
+        }
+      ],
+      "sourceCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
+      "tests": [
+        "tests/iphone-time-input-overflow.test.mjs"
+      ],
+      "evidence": [
+        "docs/evidence/iphone-time-input-overflow"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    },
+    {
+      "id": "foreground-audio",
+      "problem": "Foreground/visibility audio recovery",
+      "formalDecision": "PHASE3B4C_R2_4_2_PHYSICAL_IPHONE_ACCEPTANCE_PASSED",
+      "implementationFiles": [
+        "js/final-stabilization-phase3b4c-r2-3-lifecycle.js",
+        "js/final-stabilization-phase3b4c-r2-4-platform.js"
+      ],
+      "symbols": [
+        "resolvePhase3B4cR23LifecycleProfile",
+        "PHASE3B4C_R2_4_PRODUCTION_TIMEOUT_PROFILE"
+      ],
+      "lineRanges": [
+        {
+          "file": "js/final-stabilization-phase3b4c-r2-3-lifecycle.js",
+          "symbol": "resolvePhase3B4cR23LifecycleProfile",
+          "start": 58,
+          "end": 58
+        },
+        {
+          "file": "js/final-stabilization-phase3b4c-r2-4-platform.js",
+          "symbol": "PHASE3B4C_R2_4_PRODUCTION_TIMEOUT_PROFILE",
+          "start": 3,
+          "end": 3
+        }
+      ],
+      "sourceCommit": "db24392dae14be49ac8cf83b308b3ab712b4da0d",
+      "tests": [
+        "tests/final-stabilization-phase3b4c-r2-4-2-evidence.test.mjs"
+      ],
+      "evidence": [
+        "docs/evidence/final-stabilization-phase3b4c-r2-4-2-production-configuration-parity"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    },
+    {
+      "id": "audio-rate-limit",
+      "problem": "Escapement audio event bursts and excessive rate",
+      "formalDecision": "MAX_ESCAPEMENT_AUDIO_RATE=8; MAX_PHASE_EVENTS_PER_FRAME=1",
+      "implementationFiles": [
+        "js/audio-events.js"
+      ],
+      "symbols": [
+        "resolveMechanicalAudioEvents",
+        "MAX_ESCAPEMENT_AUDIO_RATE"
+      ],
+      "lineRanges": [
+        {
+          "file": "js/audio-events.js",
+          "symbol": "resolveMechanicalAudioEvents",
+          "start": 31,
+          "end": 31
+        },
+        {
+          "file": "js/audio-events.js",
+          "symbol": "MAX_ESCAPEMENT_AUDIO_RATE",
+          "start": 1,
+          "end": 1
+        }
+      ],
+      "sourceCommit": "90e14647190156d040fbd4aee1e74bf38c3442b3",
+      "tests": [
+        "tests/audio-events.test.mjs"
+      ],
+      "evidence": [
+        "docs/MECHANICAL_SOUND_SYSTEM.md"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    },
+    {
+      "id": "camera-separation",
+      "problem": "Arcball input and render-camera stop/jump",
+      "formalDecision": "A.6 smoothed camera contract",
+      "implementationFiles": [
+        "index.html"
+      ],
+      "symbols": [
+        "controlCamera",
+        "camera",
+        "updateSmoothedCamera"
+      ],
+      "lineRanges": [
+        {
+          "file": "index.html",
+          "symbol": "controlCamera",
+          "start": 269,
+          "end": 269
+        },
+        {
+          "file": "index.html",
+          "symbol": "camera",
+          "start": 269,
+          "end": 269
+        }
+      ],
+      "sourceCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
+      "tests": [
+        "tests/browser-integration.test.js",
+        "tests/refactor-a6-performance.test.mjs"
+      ],
+      "evidence": [
+        "docs/evidence/refactor-a6"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    },
+    {
+      "id": "transparent-picking",
+      "problem": "Transparent structures stealing internal selection",
+      "formalDecision": "Raycaster Layer + priority + opacity threshold",
+      "implementationFiles": [
+        "js/mechanism-config.js",
+        "index.html"
+      ],
+      "symbols": [
+        "PICK_OPACITY_THRESHOLD",
+        "choosePickCandidateIndex",
+        "updatePickLayerMembership"
+      ],
+      "lineRanges": [
+        {
+          "file": "js/mechanism-config.js",
+          "symbol": "PICK_OPACITY_THRESHOLD",
+          "start": 929,
+          "end": 929
+        },
+        {
+          "file": "js/mechanism-config.js",
+          "symbol": "choosePickCandidateIndex",
+          "start": 940,
+          "end": 940
+        },
+        {
+          "file": "index.html",
+          "symbol": "PICK_OPACITY_THRESHOLD",
+          "start": 187,
+          "end": 187
+        },
+        {
+          "file": "index.html",
+          "symbol": "choosePickCandidateIndex",
+          "start": 187,
+          "end": 187
+        },
+        {
+          "file": "index.html",
+          "symbol": "updatePickLayerMembership",
+          "start": 312,
+          "end": 312
+        }
+      ],
+      "sourceCommit": "c11724a199e427c1c756fe834d6e75ffa2c35430",
+      "tests": [
+        "tests/mechanism-config.test.mjs",
+        "tests/browser-integration.test.js"
+      ],
+      "evidence": [
+        "docs/ACCEPTANCE_TESTS.md"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    },
+    {
+      "id": "adaptive-quality",
+      "problem": "Interaction-time frame pacing stalls",
+      "formalDecision": "dynamic DPR and bounded shadow refresh",
+      "implementationFiles": [
+        "index.html"
+      ],
+      "symbols": [
+        "updateAdaptiveQuality",
+        "requestShadowRefresh",
+        "interactionQualityMode"
+      ],
+      "lineRanges": [
+        {
+          "file": "index.html",
+          "symbol": "updateAdaptiveQuality",
+          "start": 1017,
+          "end": 1017
+        },
+        {
+          "file": "index.html",
+          "symbol": "requestShadowRefresh",
+          "start": 866,
+          "end": 866
+        },
+        {
+          "file": "index.html",
+          "symbol": "interactionQualityMode",
+          "start": 1012,
+          "end": 1012
+        }
+      ],
+      "sourceCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
+      "tests": [
+        "tests/refactor-a6-performance.test.mjs"
+      ],
+      "evidence": [
+        "docs/evidence/refactor-a6"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    },
+    {
+      "id": "completed-default",
+      "problem": "Completed watch remained query-only",
+      "formalDecision": "FINAL-COMPLETED-WATCH-DEFAULT-ADOPTION",
+      "implementationFiles": [
+        "js/final-completed-watch-default-profile.js",
+        "index.html"
+      ],
+      "symbols": [
+        "resolveFinalCompletedWatchDefaultProfile",
+        "FINAL_COMPLETED_WATCH_DEFAULT_PROFILE"
+      ],
+      "lineRanges": [
+        {
+          "file": "js/final-completed-watch-default-profile.js",
+          "symbol": "resolveFinalCompletedWatchDefaultProfile",
+          "start": 67,
+          "end": 67
+        },
+        {
+          "file": "js/final-completed-watch-default-profile.js",
+          "symbol": "FINAL_COMPLETED_WATCH_DEFAULT_PROFILE",
+          "start": 38,
+          "end": 38
+        },
+        {
+          "file": "index.html",
+          "symbol": "resolveFinalCompletedWatchDefaultProfile",
+          "start": 220,
+          "end": 220
+        },
+        {
+          "file": "index.html",
+          "symbol": "FINAL_COMPLETED_WATCH_DEFAULT_PROFILE",
+          "start": 220,
+          "end": 220
+        }
+      ],
+      "sourceCommit": "b22488b23aacf891caf112d3f2aff80a20216f13",
+      "tests": [
+        "tests/final-completed-watch-default-profile.test.mjs"
+      ],
+      "evidence": [
+        "docs/evidence/final-completed-watch-default-adoption"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    },
+    {
+      "id": "iphone-time-shell",
+      "problem": "Physical iPhone native time input right-edge overflow",
+      "formalDecision": "PR #29 R3 accepted",
+      "implementationFiles": [
+        "index.html"
+      ],
+      "symbols": [
+        "timeInputShell",
+        "timeInputVisual",
+        "applyTimeInput"
+      ],
+      "lineRanges": [
+        {
+          "file": "index.html",
+          "symbol": "timeInputShell",
+          "start": 22,
+          "end": 22
+        },
+        {
+          "file": "index.html",
+          "symbol": "timeInputVisual",
+          "start": 22,
+          "end": 22
+        },
+        {
+          "file": "index.html",
+          "symbol": "applyTimeInput",
+          "start": 1529,
+          "end": 1529
+        }
+      ],
+      "sourceCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
+      "tests": [
+        "tests/iphone-time-input-overflow.test.mjs"
+      ],
+      "evidence": [
+        "docs/evidence/iphone-time-input-overflow"
+      ],
+      "invariants": [
+        "APP_VERSION v3.15.0",
+        "mechanism and Geometry contracts preserved unless explicitly named"
+      ],
+      "successorReuseGuidance": "Port the contract and tests before redesigning the implementation",
+      "doNotRegress": true
+    }
+  ]
+}

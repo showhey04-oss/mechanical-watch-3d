@@ -1,0 +1,760 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-04T17:08:03.960Z",
+  "sourceMainHead": "eb4595e040786e0e2115165d36a9cc39e08b2038",
+  "sourceFile": "js/mechanism-config.js",
+  "formulae": {
+    "pitchDiameter": "module × teeth",
+    "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+    "phase": "calculateMeshOutputPhase / meshPhaseResidual preserve tooth-gap phase separately"
+  },
+  "definitionCount": 19,
+  "connectionCount": 11,
+  "definitions": [
+    {
+      "id": "train.barrel.wheel",
+      "group": "train",
+      "nodeId": "barrel",
+      "member": "wheel",
+      "module": 0.078125,
+      "teeth": 96,
+      "pitchDiameter": 7.5,
+      "tipDiameter": 7.66015625,
+      "rootDiameter": 7.30859375,
+      "effectiveToothThickness": 0.44,
+      "center": [
+        -4.1,
+        1.12
+      ],
+      "layerY": 0.86,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 0.125,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "train.center.wheel",
+      "group": "train",
+      "nodeId": "center",
+      "member": "wheel",
+      "module": 0.07125000000000001,
+      "teeth": 80,
+      "pitchDiameter": 5.7,
+      "tipDiameter": 5.8500000000000005,
+      "rootDiameter": 5.5200000000000005,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        -0.0002156231274588194,
+        0.000058901927501020523
+      ],
+      "layerY": 1.84,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 1,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "train.center.pinion",
+      "group": "train",
+      "nodeId": "center",
+      "member": "pinion",
+      "module": 0.08333333333333333,
+      "teeth": 12,
+      "pitchDiameter": 1,
+      "tipDiameter": 1.1708333333333334,
+      "rootDiameter": 0.7958333333333334,
+      "effectiveToothThickness": 0.5,
+      "center": [
+        -0.0002156231274588194,
+        0.000058901927501020523
+      ],
+      "layerY": 0.86,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 1,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "train.third.wheel",
+      "group": "train",
+      "nodeId": "third",
+      "member": "wheel",
+      "module": 0.06,
+      "teeth": 75,
+      "pitchDiameter": 4.5,
+      "tipDiameter": 4.65,
+      "rootDiameter": 4.32,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        0.9198740092439323,
+        -3.148247796665043
+      ],
+      "layerY": 1.32,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 8,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "train.third.pinion",
+      "group": "train",
+      "nodeId": "third",
+      "member": "pinion",
+      "module": 0.086,
+      "teeth": 10,
+      "pitchDiameter": 0.86,
+      "tipDiameter": 1.0363,
+      "rootDiameter": 0.6493,
+      "effectiveToothThickness": 0.5,
+      "center": [
+        0.9198740092439323,
+        -3.148247796665043
+      ],
+      "layerY": 1.84,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 8,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "train.fourth.wheel",
+      "group": "train",
+      "nodeId": "fourth",
+      "member": "wheel",
+      "module": 0.060000000000000005,
+      "teeth": 60,
+      "pitchDiameter": 3.6,
+      "tipDiameter": 3.75,
+      "rootDiameter": 3.42,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        -0.0005079311678030107,
+        -5.601265750892841
+      ],
+      "layerY": 1.84,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 60,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "train.fourth.pinion",
+      "group": "train",
+      "nodeId": "fourth",
+      "member": "pinion",
+      "module": 0.074,
+      "teeth": 10,
+      "pitchDiameter": 0.74,
+      "tipDiameter": 0.8916999999999999,
+      "rootDiameter": 0.5587,
+      "effectiveToothThickness": 0.5,
+      "center": [
+        -0.0005079311678030107,
+        -5.601265750892841
+      ],
+      "layerY": 1.32,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 60,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "train.escape.wheel",
+      "group": "train",
+      "nodeId": "escape",
+      "member": "wheel",
+      "module": 0.20666666666666667,
+      "teeth": 15,
+      "pitchDiameter": 3.1,
+      "tipDiameter": 3.5236666666666667,
+      "rootDiameter": 2.5936666666666666,
+      "effectiveToothThickness": 0.38,
+      "center": [
+        1.996663613167188,
+        -4.952184998983968
+      ],
+      "layerY": 2.18,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 600,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "train.escape.pinion",
+      "group": "train",
+      "nodeId": "escape",
+      "member": "pinion",
+      "module": 0.09999999999999999,
+      "teeth": 6,
+      "pitchDiameter": 0.6,
+      "tipDiameter": 0.8049999999999999,
+      "rootDiameter": 0.355,
+      "effectiveToothThickness": 0.52,
+      "center": [
+        1.996663613167188,
+        -4.952184998983968
+      ],
+      "layerY": 1.84,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 600,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.train"
+    },
+    {
+      "id": "motionWorks.cannon.pinion",
+      "group": "motionWorks",
+      "nodeId": "cannon",
+      "member": "pinion",
+      "module": 0.08125,
+      "teeth": 12,
+      "pitchDiameter": 0.9750000000000001,
+      "tipDiameter": 1.1415625,
+      "rootDiameter": 0.7759375000000001,
+      "effectiveToothThickness": 0.5,
+      "center": [
+        0,
+        0
+      ],
+      "layerY": -1.05,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 1,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.motionWorks"
+    },
+    {
+      "id": "motionWorks.minute.wheel",
+      "group": "motionWorks",
+      "nodeId": "minute",
+      "member": "wheel",
+      "module": 0.08125,
+      "teeth": 36,
+      "pitchDiameter": 2.9250000000000003,
+      "tipDiameter": 3.0915625,
+      "rootDiameter": 2.7259375,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        1.9500000000000002,
+        0
+      ],
+      "layerY": -1.05,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 0.3333333333333333,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.motionWorks"
+    },
+    {
+      "id": "motionWorks.minute.pinion",
+      "group": "motionWorks",
+      "nodeId": "minute",
+      "member": "pinion",
+      "module": 0.078,
+      "teeth": 10,
+      "pitchDiameter": 0.78,
+      "tipDiameter": 0.9399,
+      "rootDiameter": 0.5889,
+      "effectiveToothThickness": 0.5,
+      "center": [
+        1.9500000000000002,
+        0
+      ],
+      "layerY": -1.47,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 0.3333333333333333,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.motionWorks"
+    },
+    {
+      "id": "motionWorks.hour.wheel",
+      "group": "motionWorks",
+      "nodeId": "hour",
+      "member": "wheel",
+      "module": 0.078,
+      "teeth": 40,
+      "pitchDiameter": 3.12,
+      "tipDiameter": 3.2799,
+      "rootDiameter": 2.9289,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        0,
+        0
+      ],
+      "layerY": -1.47,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 0.08333333333333333,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.motionWorks"
+    },
+    {
+      "id": "motionWorks.setting1.wheel",
+      "group": "motionWorks",
+      "nodeId": "setting1",
+      "member": "wheel",
+      "module": 0.08125,
+      "teeth": 32,
+      "pitchDiameter": 2.6,
+      "tipDiameter": 2.7665625,
+      "rootDiameter": 2.4009375,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        6.289617880308554,
+        -2.7067031642050563
+      ],
+      "layerY": -1.05,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 0.5625,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.motionWorks"
+    },
+    {
+      "id": "motionWorks.setting2.wheel",
+      "group": "motionWorks",
+      "nodeId": "setting2",
+      "member": "wheel",
+      "module": 0.08125,
+      "teeth": 32,
+      "pitchDiameter": 2.6,
+      "tipDiameter": 2.7665625,
+      "rootDiameter": 2.4009375,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        4.618370095123551,
+        -0.7149876120957136
+      ],
+      "layerY": -1.05,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 0.5625,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.motionWorks"
+    },
+    {
+      "id": "motionWorks.settingTransfer.wheel",
+      "group": "motionWorks",
+      "nodeId": "settingTransfer",
+      "member": "wheel",
+      "module": 0.08125,
+      "teeth": 18,
+      "pitchDiameter": 1.4625000000000001,
+      "tipDiameter": 1.6290625,
+      "rootDiameter": 1.2634375000000002,
+      "effectiveToothThickness": 0.5,
+      "center": [
+        4.347123844758638,
+        -3.300583189423116
+      ],
+      "layerY": -1.05,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 1,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.motionWorks"
+    },
+    {
+      "id": "windingWorks.ratchet.wheel",
+      "group": "windingWorks",
+      "nodeId": "ratchet",
+      "member": "wheel",
+      "module": 0.082,
+      "teeth": 60,
+      "pitchDiameter": 4.92,
+      "tipDiameter": 5.0881,
+      "rootDiameter": 4.7191,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        -4.1,
+        1.12
+      ],
+      "layerY": 3.08,
+      "sign": -1,
+      "rotationDirection": -1,
+      "ratioFromCenter": 0.16666666666666666,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.windingWorks"
+    },
+    {
+      "id": "windingWorks.crownWheel.wheel",
+      "group": "windingWorks",
+      "nodeId": "crownWheel",
+      "member": "wheel",
+      "module": 0.082,
+      "teeth": 40,
+      "pitchDiameter": 3.2800000000000002,
+      "tipDiameter": 3.4481,
+      "rootDiameter": 3.0791000000000004,
+      "effectiveToothThickness": 0.46,
+      "center": [
+        -3.115317309992707,
+        -2.86
+      ],
+      "layerY": 3.08,
+      "sign": 1,
+      "rotationDirection": 1,
+      "ratioFromCenter": 0.25,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.windingWorks"
+    },
+    {
+      "id": "windingWorks.windingPinion.profile",
+      "group": "windingWorks",
+      "nodeId": "windingPinion",
+      "member": "profile",
+      "module": 0.082,
+      "teeth": 10,
+      "pitchDiameter": 0.8200000000000001,
+      "tipDiameter": 0.9881000000000001,
+      "rootDiameter": 0.6191,
+      "effectiveToothThickness": 0.5,
+      "center": [
+        -3.115317309992707,
+        -4.5
+      ],
+      "sign": null,
+      "rotationDirection": null,
+      "ratioFromCenter": null,
+      "formula": {
+        "pitchDiameter": "module × teeth",
+        "centerDistance": "(pitchDiameterA + pitchDiameterB) / 2",
+        "implementationNote": "addendum/root and phase compensation are recorded separately from pitch geometry"
+      },
+      "sourceFile": "js/mechanism-config.js",
+      "sourceSymbol": "WATCH_MECHANISM.windingWorks"
+    }
+  ],
+  "connections": [
+    {
+      "id": "barrel-center",
+      "sourceNode": "barrel",
+      "sourceMember": "wheel",
+      "drivenNode": "center",
+      "drivenMember": "pinion",
+      "modulePair": [
+        0.078125,
+        0.08333333333333333
+      ],
+      "centerDistance": 4.250000000000001,
+      "formula": "actual center distance; target = input pitchRadius + output pitchRadius",
+      "sign": -1,
+      "phaseOffset": null
+    },
+    {
+      "id": "center-third",
+      "sourceNode": "center",
+      "sourceMember": "wheel",
+      "drivenNode": "third",
+      "drivenMember": "pinion",
+      "modulePair": [
+        0.07125000000000001,
+        0.086
+      ],
+      "centerDistance": 3.2800000000000002,
+      "formula": "actual center distance; target = input pitchRadius + output pitchRadius",
+      "sign": -1,
+      "phaseOffset": null
+    },
+    {
+      "id": "third-fourth",
+      "sourceNode": "third",
+      "sourceMember": "wheel",
+      "drivenNode": "fourth",
+      "drivenMember": "pinion",
+      "modulePair": [
+        0.06,
+        0.074
+      ],
+      "centerDistance": 2.6200000000000006,
+      "formula": "actual center distance; target = input pitchRadius + output pitchRadius",
+      "sign": -1,
+      "phaseOffset": null
+    },
+    {
+      "id": "fourth-escape",
+      "sourceNode": "fourth",
+      "sourceMember": "wheel",
+      "drivenNode": "escape",
+      "drivenMember": "pinion",
+      "modulePair": [
+        0.060000000000000005,
+        0.09999999999999999
+      ],
+      "centerDistance": 2.1,
+      "formula": "actual center distance; target = input pitchRadius + output pitchRadius",
+      "sign": -1,
+      "phaseOffset": null
+    },
+    {
+      "id": "cannon-minute",
+      "input": "cannon",
+      "inputMember": "pinion",
+      "output": "minute",
+      "outputMember": "wheel",
+      "module": 0.08125,
+      "inputTeeth": 12,
+      "outputTeeth": 36,
+      "inputPitchRadius": 0.48750000000000004,
+      "outputPitchRadius": 1.4625000000000001,
+      "centerDistance": 1.9500000000000002,
+      "pressureAngle": 20,
+      "toothProfile": "educational-involute-like",
+      "phaseOffset": -3.0543261909900767,
+      "centerAngle": 0,
+      "axialMeshBand": {
+        "centerY": -1.05,
+        "thickness": 0.148
+      },
+      "sourceNode": "cannon",
+      "drivenNode": "minute",
+      "formula": "(inputPitchRadius + outputPitchRadius); phaseOffset stored independently"
+    },
+    {
+      "id": "minute-pinion-hour",
+      "input": "minute",
+      "inputMember": "pinion",
+      "output": "hour",
+      "outputMember": "wheel",
+      "module": 0.078,
+      "inputTeeth": 10,
+      "outputTeeth": 40,
+      "inputPitchRadius": 0.39,
+      "outputPitchRadius": 1.56,
+      "centerDistance": 1.9500000000000002,
+      "pressureAngle": 20,
+      "toothProfile": "educational-involute-like",
+      "phaseOffset": 0.056723200689815734,
+      "centerAngle": 3.141592653589793,
+      "axialMeshBand": {
+        "centerY": -1.47,
+        "thickness": 0.14
+      },
+      "sourceNode": "minute",
+      "drivenNode": "hour",
+      "formula": "(inputPitchRadius + outputPitchRadius); phaseOffset stored independently"
+    },
+    {
+      "id": "minute-setting2",
+      "input": "minute",
+      "inputMember": "wheel",
+      "output": "setting2",
+      "outputMember": "wheel",
+      "module": 0.08125,
+      "inputTeeth": 36,
+      "outputTeeth": 32,
+      "inputPitchRadius": 1.4625000000000001,
+      "outputPitchRadius": 1.3,
+      "centerDistance": 2.7625,
+      "pressureAngle": 20,
+      "toothProfile": "educational-involute-like",
+      "phaseOffset": 0.9490227807719172,
+      "centerAngle": -0.2617993877991494,
+      "axialMeshBand": {
+        "centerY": -1.05,
+        "thickness": 0.148
+      },
+      "sourceNode": "minute",
+      "drivenNode": "setting2",
+      "formula": "(inputPitchRadius + outputPitchRadius); phaseOffset stored independently"
+    },
+    {
+      "id": "setting2-setting1",
+      "input": "setting2",
+      "inputMember": "wheel",
+      "output": "setting1",
+      "outputMember": "wheel",
+      "module": 0.08125,
+      "inputTeeth": 32,
+      "outputTeeth": 32,
+      "inputPitchRadius": 1.3,
+      "outputPitchRadius": 1.3,
+      "centerDistance": 2.6,
+      "pressureAngle": 20,
+      "toothProfile": "educational-involute-like",
+      "phaseOffset": -2.2471114119427,
+      "centerAngle": -0.8726646259971647,
+      "axialMeshBand": {
+        "centerY": -1.05,
+        "thickness": 0.18
+      },
+      "sourceNode": "setting2",
+      "drivenNode": "setting1",
+      "formula": "(inputPitchRadius + outputPitchRadius); phaseOffset stored independently"
+    },
+    {
+      "id": "setting1-transfer",
+      "input": "setting1",
+      "inputMember": "wheel",
+      "output": "settingTransfer",
+      "outputMember": "wheel",
+      "module": 0.08125,
+      "inputTeeth": 32,
+      "outputTeeth": 18,
+      "inputPitchRadius": 1.3,
+      "outputPitchRadius": 0.7312500000000001,
+      "centerDistance": 2.03125,
+      "pressureAngle": 20,
+      "toothProfile": "educational-involute-like",
+      "phaseOffset": 2.6470826988580676,
+      "centerAngle": -2.844886680750757,
+      "axialMeshBand": {
+        "centerY": -1.05,
+        "thickness": 0.18
+      },
+      "sourceNode": "setting1",
+      "drivenNode": "settingTransfer",
+      "formula": "(inputPitchRadius + outputPitchRadius); phaseOffset stored independently"
+    },
+    {
+      "id": "winding-pinion-crown-wheel",
+      "input": "windingPinion",
+      "output": "crownWheel",
+      "inputAxis": "x",
+      "outputAxis": "y",
+      "meshType": "orthogonal-crown-gear",
+      "module": 0.082,
+      "inputTeeth": 10,
+      "outputTeeth": 40,
+      "inputPitchRadius": 0.41000000000000003,
+      "outputPitchRadius": 1.6400000000000001,
+      "ratio": 0.25,
+      "phaseOffset": 0.07853981633974483,
+      "contactPoint": [
+        -3.115317309992707,
+        -0.64,
+        -4.5
+      ],
+      "axialMeshBand": {
+        "centerY": -0.64,
+        "thickness": 0.24
+      },
+      "sourceNode": "windingPinion",
+      "drivenNode": "crownWheel",
+      "formula": "orthogonal crown-gear contact point"
+    },
+    {
+      "id": "crown-wheel-ratchet-wheel",
+      "input": "crownWheel",
+      "output": "ratchetWheel",
+      "inputAxis": "y",
+      "outputAxis": "y",
+      "meshType": "external-gear",
+      "module": 0.082,
+      "inputTeeth": 40,
+      "outputTeeth": 60,
+      "inputPitchRadius": 1.6400000000000001,
+      "outputPitchRadius": 2.46,
+      "centerDistance": 4.1,
+      "centerAngle": 1.8133337043477533,
+      "ratio": -0.6666666666666666,
+      "phaseOffset": 0.11936981301020388,
+      "axialMeshBand": {
+        "centerY": 3.08,
+        "thickness": 0.25
+      },
+      "sourceNode": "crownWheel",
+      "drivenNode": "ratchetWheel",
+      "formula": "(inputPitchRadius + outputPitchRadius)"
+    }
+  ]
+}
