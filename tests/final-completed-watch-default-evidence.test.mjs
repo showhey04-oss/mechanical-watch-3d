@@ -195,4 +195,29 @@ test("release documents keep the accepted adoption and closed wheel differential
   assert.match(report, /FINAL_COMPLETED_WATCH_DEFAULT_ROUTE_HUMAN_REVIEW_PASSED/);
   assert.match(report, /FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_HUMAN_ACCEPTED/);
   assert.match(report, /PR27_READY_AND_MAIN_MERGE_AUTHORIZED/);
+
+  const completionDecision = JSON.parse(await readFile(
+    new URL("docs/evidence/final-body-completion-gate/decision-summary.json", repositoryRoot),
+    "utf8",
+  ));
+  const modeMatrix = JSON.parse(await readFile(
+    new URL("docs/evidence/final-body-completion-gate/mode-completion-matrix.json", repositoryRoot),
+    "utf8",
+  ));
+  const completionGate = await readFile(new URL("docs/FINAL_BODY_COMPLETION_GATE.md", repositoryRoot), "utf8");
+  assert.equal(completionDecision.status, "MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0");
+  assert.equal(completionDecision.blockingCount, 0);
+  assert.deepEqual(completionDecision.blockers, []);
+  assert.equal(completionDecision.completionDeclared, true);
+  assert.equal(completionDecision.humanCompletionAuthorization, true);
+  assert.equal(completionDecision.productCodeChangedByAudit, false);
+  assert.equal(completionDecision.testThresholdsChanged, false);
+  assert.deepEqual(modeMatrix.modes.map(({ id, status }) => ({ id, status })), [
+    { id: "watch", status: "PASS" },
+    { id: "mechanism-observation", status: "PASS_WITH_ACCEPTED_LIMITATION" },
+    { id: "learning", status: "PASS" },
+  ]);
+  assert.equal(modeMatrix.blockingModeCount, 0);
+  assert.match(completionGate, /IPHONE_TIME_INPUT_COMPLETION_BLOCKER_RESOLVED/);
+  assert.match(completionGate, /DEFER_TO_SUCCESSOR_REBUILD/);
 });

@@ -1,15 +1,16 @@
 # 受入試験
 
-## Post-Default-Adoption Main Reconciliation／Final Body Completion Gate
+## v3.15.0 Final Body Completion Gate
 
-- 対象mainを`155275d0aaeb968fd83d6dfe15313e259f2bb064`、PR #27 Human-reviewed製品Headを`a7f0057db57de168c2af0bd01847fcfed9a606dc`、APP_VERSIONをv3.15.0とする
-- `index.html`、`js/**`、`assets/audio/**`、`package.json`、`package-lock.json`の製品treeが両Head間でexactであることを確認する。PR #28では`tests/final-completed-watch-default-evidence.test.mjs`の旧受入状態期待値だけを現在の保存証跡へ整合する
+- 対象mainをPR #29 merge commit `25f852a0218486f695a5e2b88c7fc9b665c8c362`、Human-reviewed製品Headを`cf1751265410a160715db2bd9566b1703d916bac`、APP_VERSIONをv3.15.0とする
+- `index.html`、`js/**`、`assets/audio/**`、`package.json`、`package-lock.json`の製品treeがPR #28統合Headと対象main間でGit object exactであることを確認する
 - GitHub Pagesのsourceがmain／root、deployment SHAが対象main、build statusが成功、公開root・主要JS・音源assetがHTTP 200であることを確認する
 - Installed Chrome／Playwright WebKitのDesktop 1280×720／Mobile 390×844でdefault、legacy、explicit routeの起動、v3.15.0、profile、camera、canvas、初期音OFF、console error／warning 0を確認する
 - PR #27のNative Safari／物理iPhone Human受入は製品tree exactを根拠に継承し、新しいHuman PASSへ読み替えない
-- Node全465件を実行し、465/465、fail 0、skip 0を要求する。Human accepted状態、明示マージ承認、曖昧なHuman提出欄の原文保持を既存証跡値と完全一致で検証し、テスト削除・skip・閾値緩和を行わない
-- Issue #2／PR #5は監査と推奨だけを記録し、本PRでclose／変更しない。Phase 3B.4d、OIT、post-Issue-2 Geometry cleanupを開始しない
-- Node 465/465は維持するが、物理iPhoneの時刻入力欄がviewport／panel内へ収まり、横スクロールなし、native picker、指定時刻反映、現在時刻設定をHumanが再確認するまでbody completion blocking count 1、`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`とする
+- Node全477件以上を実行し、fail 0、skip 0を要求する。Human R3証跡、completed-watch受入状態、manifest、current-time／Live Sync／りゅうず時刻合わせを検証し、テスト削除・skip・閾値緩和を行わない
+- iPhone 16／iOS 26.5.2／Safari縦向きで`HH:MM:SS`、上下・左右中央、二重表示なし、native picker、picker後表示、指定／現在時刻反映がHuman PASSであることを`human-review-r3.json`と一致確認する
+- blocking count 0、時計`PASS`、機構観察`PASS_WITH_ACCEPTED_LIMITATION`、学習`PASS`、`MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0`を要求する
+- final main gate合格後だけIssue #2をnot planned／accepted limitation、PR #5をsuperseded／without mergeとしてcloseする。Phase 3B.4d、OIT、Geometry／UI改善は`DEFER_TO_SUCCESSOR_REBUILD`とする
 
 ## Completed Watch Default Adoption Draft（PR #27マージ前の履歴）
 

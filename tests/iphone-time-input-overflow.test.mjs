@@ -117,17 +117,22 @@ test("time-input evidence reports remain parseable and preserve the bounded deci
     "decision-summary.json",
     "human-review-r1.json",
     "human-review-r2.json",
+    "human-review-r3.json",
     "image-inventory.json",
   ]) {
     JSON.parse(await readFile(join(evidenceRoot, "reports", name), "utf8"));
   }
   const decision = JSON.parse(await readFile(join(evidenceRoot, "reports/decision-summary.json"), "utf8"));
-  assert.equal(decision.physicalIPhoneRecheckRequired, true);
+  assert.equal(decision.physicalIPhoneRecheckRequired, false);
   assert.equal(decision.r1HumanReview.overall, "FAIL");
   assert.equal(decision.r2HumanReview.coreOverflowDecision, "PASS");
   assert.equal(decision.r2Decision, "PR29_R2_CORE_OVERFLOW_FIX_HUMAN_ACCEPTED");
-  assert.equal(decision.r3Decision, "PR29_R3_HHMMSS_CENTERED_VISUAL_POLISH_AUTHORIZED");
-  assert.equal(decision.physicalIPhoneR3Status, "PENDING");
+  assert.equal(decision.r3AuthorizationDecision, "PR29_R3_HHMMSS_CENTERED_VISUAL_POLISH_AUTHORIZED");
+  assert.equal(decision.r3Decision, "PR29_R3_PHYSICAL_IPHONE_HUMAN_ACCEPTED");
+  assert.equal(decision.physicalIPhoneR3Status, "PASS");
+  assert.equal(decision.timeInputFixCompleted, true);
+  assert.equal(decision.readyOrMergeAuthorized, true);
+  assert.equal(decision.pr29State, "MERGED");
   assert.equal(decision.thresholdsChanged, false);
   assert.notEqual(decision.automatedDecision, "COMPLETE");
   const human = JSON.parse(await readFile(join(evidenceRoot, "reports/human-review-r1.json"), "utf8"));
@@ -162,6 +167,26 @@ test("time-input evidence reports remain parseable and preserve the bounded deci
     horizontalScroll: "NONE",
     coreOverflowDecision: "PASS",
     requestedPolish: ["SHOW_NORMALIZED_HH_MM_SS", "CENTER_VALUE_HORIZONTALLY_AND_VERTICALLY"],
+  });
+  const humanR3 = JSON.parse(await readFile(join(evidenceRoot, "reports/human-review-r3.json"), "utf8"));
+  assert.deepEqual(humanR3, {
+    schemaVersion: 1,
+    reviewedProductHead: "cf1751265410a160715db2bd9566b1703d916bac",
+    device: "iPhone 16",
+    os: "iOS 26.5.2",
+    browser: "Safari",
+    orientation: "portrait",
+    hhMmSsVisible: "OK",
+    verticallyCentered: "OK",
+    horizontallyCentered: "OK",
+    duplicateText: "NONE",
+    nativePickerOpens: "OK",
+    postPickerDisplay: "OK",
+    specifiedTimeApplication: "OK",
+    currentTimeApplication: "OK",
+    overallDecision: "PASS",
+    readyAndMainMergeAuthorization: true,
+    productCodeChangedAfterReview: false,
   });
 });
 

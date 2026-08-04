@@ -4,17 +4,17 @@ Three.jsで構築する、教育用の機械式時計3Dシミュレーション�
 
 ## 現在の基準版
 
-- main公開基準：v3.15.0（PR #27 Completed Watch Default Adoption、main `155275d0aaeb968fd83d6dfe15313e259f2bb064`）
+- main公開基準：v3.15.0（PR #29 merge後製品基準 `25f852a0218486f695a5e2b88c7fc9b665c8c362`）
 - 直前基準：v3.14.0（機構同期作動音 Phase 1）
 - 基準形式：ETA 6498-1級の大型手巻きムーブメント
 - 公開方式：GitHub Pages
-- 現在の改修フェーズ：Post-Default-Adoption Main Reconciliation／Final Body Completion Gate。PR #27で完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰を通常rootへ採用し、Human受入後にmainへマージした。PR #28内の旧Draft期待値2件はNode 465/465・skip 0へ整合済みである。一方、物理iPhoneで時計モードの時刻入力欄が右端からはみ出す`IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW_HUMAN_REPORTED`が新たに報告されたため、状態は`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`、blocking count 1である。局所修正と物理iPhone再確認まで本体完成を宣言しない。公開rootはcompleted-watch profile、`?defaultProfile=legacy`は旧通常表示を維持する。Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始、OITは完成後の任意改善、APP_VERSIONはv3.15.0である
+- 現在の状態：`MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0`。PR #29の時刻入力R3をiPhone 16／iOS 26.5.2／SafariでHuman受入し、merge commit `25f852a0218486f695a5e2b88c7fc9b665c8c362`としてmainへ統合した。PR #28統合HeadのNodeは477/477・fail 0・skip 0、blocking count 0、製品treeはHuman-reviewed Head `cf1751265410a160715db2bd9566b1703d916bac`とexactである。公開rootはcompleted-watch profile、`?defaultProfile=legacy`は旧通常表示を維持する。現行prototypeの機能開発は凍結し、Phase 3B.4d、OIT、Geometry疑義、UI改善は`DEFER_TO_SUCCESSOR_REBUILD`とする。APP_VERSIONはv3.15.0を維持する
 - 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
 - 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
 - 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
-- 既知事項：D2c3はPR #27で通常rootへ採用済みである。100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順はHumanが既知制約として受容しており、Issue #2のクローズ方針は別途Human判断とする。clean-process absolute性能PASSは主張しない
+- 既知事項：D2c3はPR #27で通常rootへ採用済みである。中央シャドウ境界、100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順、PC／iPhone照明差、モバイル全長時のfog暗化はaccepted limitationとして記録し、Issue #2をnot plannedでcloseする。clean-process absolute性能PASSは主張しない
 
-通常rootは、URLを書き換えずに12個のprofile値を内部effective parametersへ注入する。既存のprofile queryは暗黙profileより優先し、旧通常表示は`?defaultProfile=legacy`で確認できる。作動音は初期OFFである。PR #27はHuman受入後にマージ済みだが、Issue #2とPR #5は本監査では変更していない。現行状態は[Final Completed Watch Default Adoption](docs/FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION.md)、[Post-Default-Adoption Main Reconciliation](docs/POST_DEFAULT_ADOPTION_MAIN_RECONCILIATION.md)、[Final Body Completion Gate](docs/FINAL_BODY_COMPLETION_GATE.md)を参照する。
+通常rootは、URLを書き換えずに12個のprofile値を内部effective parametersへ注入する。既存のprofile queryは暗黙profileより優先し、旧通常表示は`?defaultProfile=legacy`で確認できる。作動音は初期OFFである。時刻入力はnative pickerを維持し、中央`HH:MM:SS`表示を物理iPhoneで確認済みである。現行状態は[Final Completed Watch Default Adoption](docs/FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION.md)、[Post-Default-Adoption Main Reconciliation](docs/POST_DEFAULT_ADOPTION_MAIN_RECONCILIATION.md)、[Final Body Completion Gate](docs/FINAL_BODY_COMPLETION_GATE.md)を参照する。
 
 PR #27以前のPhase 3B／3C／Issue #2各節は、当時のquery限定候補、Draft状態、採否判断を保存する履歴記録である。現在の既定path・PR状態を表すものではない。
 

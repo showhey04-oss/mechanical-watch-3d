@@ -2,14 +2,19 @@
 
 ## v3.15.0 — PR #27 Completed Watch Default Adoption
 
+- PR #29でnative `type=time`を維持した境界内入力と中央`HH:MM:SS` visual layerを統合。R1物理iPhone FAIL、R2 core overflow PASSの履歴を保持し、R3をiPhone 16／iOS 26.5.2／Safari縦向きでHuman PASSとした
+- PR #29はmerge commit `25f852a0218486f695a5e2b88c7fc9b665c8c362`としてmainへ統合。PR #28でHuman R3証跡を補完し、統合Node 477/477・fail 0・skip 0、製品tree exact、blocking count 0を確認した
+- 正式状態を`MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0`とし、Issue #2をnot planned／accepted limitation、PR #5をsuperseded／without mergeとしてfinal main gate後に終結する
+- Phase 3B.4d、OIT、Geometry疑義、UI copy／りゅうずcontext／mobile blank tapは現行prototypeへ実装せず`DEFER_TO_SUCCESSOR_REBUILD`とする
+
 - 通常rootへ、完成外装、Phase 3C.1 watch head、Phase 3C.2 strap／buckle、Phase 3C.3 integration、D2c3、current transparency、mobile full-length framing、iOS multi-touch stability、R2.4.2 production audioをまとめる中央12-key profileを追加
 - raw URL queryとeffective profile queryを分離し、URL／historyを変更せず、明示profile queryを優先。`defaultProfile=legacy`で採用前の旧通常表示へ戻れる
 - Node 465/465、Chrome／WebKit route matrix各26/26、default／explicitのcanvas・inventory・camera・lighting・transform exact、legacy／mainのpixel・DOM・camera exact、multi-touch各100 cycleを確認
 - Native Safari／SafariDriver 26.5.2の1280×720／390×844でqueryなしroot、trusted Web Audio、buffer／raw asset 6/6、visibility各30 cycle、禁止干渉0/0、console／runtime／unhandled rejection 0を確認
 - 正式wheel閉鎖測定でdefault／explicit差分ゲートを合格し、HumanがPC／物理iPhoneを確認した。PR #27をmain `155275d0aaeb968fd83d6dfe15313e259f2bb064`へマージし、GitHub Pagesへ公開した
-- Geometry、機構、D2c3値、透過、camera定数、UI、audio asset／gain、APP_VERSION、試験閾値は変更しない。Issue #2 Open、PR #5 Open／Draft、Phase 3B.4d未開始、OIT完成後改善を維持する
+- Geometry、機構、D2c3値、透過、camera定数、audio asset／gain、APP_VERSION、試験閾値は変更していない
 - post-adoption監査開始時に旧Draft期待値2件によるNode 463/465を検出した。PR #28内で既存受入テストだけをHuman accepted／merged証跡へ整合し、Node 465/465・skip 0へ復旧した。製品tree exact、Chrome／WebKit route smoke、Pages公開を維持し、試験閾値を変更せず`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`へ移行する
-- その後、物理iPhoneで時計モードの時刻入力欄が右端からはみ出すHuman報告を受け、`IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW`を新しい本体完成blockerとして記録。Node 465/465は維持し、main起点の独立Draft PRで局所UI修正と物理iPhone再確認を行う
+- その後の`IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW`はPR #29 R1／R2／R3で局所修正・物理iPhone再確認し、`IPHONE_TIME_INPUT_COMPLETION_BLOCKER_RESOLVED`として閉鎖した
 
 ## Unreleased — PR #13 final stack main-promotion audit
 

@@ -6,14 +6,14 @@
 - v3.15.0：S86文字板表示比率を通常寸法として採用し、v3.14.0の機構・描画基準を維持
 - 直前基準：v3.14.0（v3.13.0の機構・描画基準を維持した音響追加版）
 
-## 現在工程 — Post-Default-Adoption Main Reconciliation／Final Body Completion Gate
+## 本体完成 — v3.15.0
 
-- PR #27 Human-reviewed Head `a7f0057db57de168c2af0bd01847fcfed9a606dc`の製品treeをmain `155275d0aaeb968fd83d6dfe15313e259f2bb064`へ採用済みとする
+- PR #27 completed-watch defaultとPR #29時刻入力R3をmain `25f852a0218486f695a5e2b88c7fc9b665c8c362`へ採用済みとする
 - 通常rootをcompleted-watch profile、明示profile queryを優先、`defaultProfile=legacy`を旧通常表示として公開する
 - GitHub Pagesのmain buildと公開rootを検証し、APP_VERSION v3.15.0を維持する
-- Issue #2は`CLOSE_AS_NOT_PLANNED_ACCEPTED_LIMITATION`、PR #5は`CLOSE_AS_SUPERSEDED_WITHOUT_MERGE`をHuman判断への推奨とするが、本PRでは変更しない
-- Phase 3B.4dは`DEFER_POST_COMPLETION_IMPROVEMENT`、OITとpost-Issue-2 Geometry cleanupも完成後の任意改善とする
-- 旧Draft期待値2件はNode 465/465・skip 0へ解消済みである。新たにHuman報告された物理iPhone時刻入力欄の右端overflowを`BODY_COMPLETION_BLOCKER`として局所修正し、native picker、時刻反映、横スクロールなしを物理iPhoneで再確認するまで`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`、blocking count 1を維持する
+- Issue #2は`CLOSE_AS_NOT_PLANNED_ACCEPTED_LIMITATION`、PR #5は`CLOSE_AS_SUPERSEDED_WITHOUT_MERGE`としてfinal main gate後に終結する
+- Phase 3B.4d、OIT、Geometry／UI改善は現行prototypeへ追加せず`DEFER_TO_SUCCESSOR_REBUILD`とする
+- 時刻入力はR1 FAIL、R2 core PASS、R3 Human PASSとして閉鎖し、Node 477/477・skip 0、`MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0`、blocking count 0とする
 
 ### PR #27 / v3.15.0 — Completed Watch Default Adoption
 
@@ -207,33 +207,23 @@
 - Issue #2、PR #5、D2c3、照明最終調整は本工程へ混在させず、保留中の独立課題として扱う
 - ETA 4.50 mmの基準面対応は未解決のままとし、差分を外装厚さの調整量に使わない
 
-## 今後
+## 後継版hand-off
 
-### 1. 最終外装
+### 1. Geometry診断
 
-- Phase 3C.2の全長、巻込み、穴列、自由端、定革・遊革、尾錠、シボ、ステッチ、コバはPC／物理iPhoneで人間承認済み。Phase 3C.3で完成時計全体を再確認する
-- 実装時に表示開口と全体比率を再確認する
+- 時針／分針と中央リング状部品、ミニッツホイール軸の文字板側表出、緩急目盛とテンプ受、浮遊する灰色板状Object 2枚を診断する
 
-### 2. 全体品質・Issue #2最終調整
+### 2. UI copy／context
 
-- 機構、描画、UI、作動音、カメラ、性能を総合確認する
-- PR #5のD2c3を現時点では取り込まず、Issue #2の照明最終調整として独立評価する
+- 開発文言、選択部品見出し、説明文、「位置1／位置2」を利用者向け表現へ整理する
+- `ADOPT_UNIFIED_TWO_OPTION_SEGMENTED_CONTROL`で「巻上げ／時刻合わせ」とりゅうずsliderを統合する
+- blank tapで選択・説明・bottom sheetを閉じ、drag／pan／pinch／UI操作を除外する
 
-### 3. 動画・PC・iPhone統合レビュー
+### 3. Lifecycle／rendering
 
-- 主要操作と表示を動画、PCブラウザ、物理iPhoneで通し確認する
+- Phase 3B.4dとOITを後継版の独立設計として扱う
 
-### 4. 指摘修正
-
-- 統合レビューで確認された本体完成上の指摘を修正し、対象回帰を再実行する
-
-### 5. 最終確認・本体完成
-
-- 時計モード、機構観察モード、学習モードを最終確認する
-- 学習モードで部品名称、機能、動力経路を確認できる状態を本体完成条件とする
-- 人間の最終確認を経て本体完成を判断する
-
-## 完成後の任意改善
+## 現行prototypeでは実施しない任意改善
 
 - 厳密な組立順序と組立／分解手順
 - オフライン対応とPWA化

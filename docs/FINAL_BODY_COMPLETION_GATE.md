@@ -2,48 +2,59 @@
 
 ## 結論
 
-技術ゲート判定は`MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED`である。PR #28内の受入状態テスト整合はNode 465/465・skip 0で完了しているが、物理iPhoneで時計モードの時刻入力欄が画面右端からはみ出すHuman報告を受けた。
+Humanが物理iPhoneでPR #29 R3を合格とし、時刻入力blockerは解消された。PR #29 merge後mainを統合したPR #28でNode 477/477・fail 0・skip 0、製品tree exact、APP_VERSION v3.15.0、閾値変更0を確認した。
 
-blocking countは1である。blockerは`IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW`、scopeはmobile time-setting UI、`productDefect: true`である。native time-input layoutを修正し、物理iPhoneで時刻合わせを再確認するまで本体完成を宣言しない。
+正式状態は次のとおりである。
 
-正式分類は`IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW_HUMAN_REPORTED`、`CORE_TIME_SETTING_UI_RESPONSIVE_DEFECT`、`BODY_COMPLETION_BLOCKER`、`POST_COMPLETION_DEFERRAL_NOT_APPROPRIATE`である。Geometry、機構、描画、音響の不具合ではない。PR #28はOpen／Draftを維持し、Ready化・マージ・Issue／PR closeは行わない。
+- `MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0`
+- `BODY_COMPLETION_BLOCKING_COUNT_ZERO`
+- `POST_ADOPTION_NODE_ACCEPTANCE_STATE_ALIGNED`
+- `POST_ADOPTION_NODE_GATE_PASSED`
+- `CURRENT_PROTOTYPE_FEATURE_DEVELOPMENT_FROZEN`
+- `SUCCESSOR_REBUILD_HANDOFF_PENDING`
 
-## 解消済みの履歴上の不整合
+blocking countは0、blockersは空である。本体完成宣言は製造用CAD、修理資料、完全デジタルツイン、OITまたは後継版の完成を意味しない。
 
-監査開始時、`tests/final-completed-watch-default-evidence.test.mjs`の2 assertionがPR #27マージ前のDraft／technical-candidate状態を要求し、Nodeは463/465だった。
+## 解消済み時刻入力blocker
 
-PR #28内で既存テストの期待値だけを、保存済みのHuman accepted／merged証跡へ整合した。Human accepted status、Ready／main merge承認、PC／物理iPhone確認値、単独選択されていないHuman提出欄の原文を厳密に検証する。テスト削除、skip、総数変更、閾値緩和、製品コード変更は行っていない。
+| Revision | Human結果 | 記録 |
+|---|---|---|
+| R1 | outer frame FAIL、overall FAIL | 履歴として保持 |
+| R2 | outer frame、radii、native picker、指定／現在時刻、core overflow PASS | core修正受入 |
+| R3 | `HH:MM:SS`、上下・左右中央、二重表示なし、native picker、picker後表示、指定／現在時刻、overall PASS | `human-review-r3.json` |
+
+Human reviewed product Headは`cf1751265410a160715db2bd9566b1703d916bac`、PR #29 merge commitは`25f852a0218486f695a5e2b88c7fc9b665c8c362`である。正式分類は`IPHONE_TIME_INPUT_COMPLETION_BLOCKER_RESOLVED`とする。
 
 ## モード別判定
 
 | モード | 判定 | 根拠 | 制約 |
 |---|---|---|---|
-| 時計モード | `BLOCKED` | completed-watch defaultと主要機能は受入済みだが、物理iPhoneの時刻入力欄に右端overflowがHuman報告された | native inputをviewport／panel内へ収め、時刻反映と現在時刻設定を物理iPhoneで再確認する |
-| 機構観察モード | `PASS_WITH_ACCEPTED_LIMITATION` | 全方向camera、表裏、透過、split、explode、選択、動力経路、脱進機、テンプを統合済み | 100/99・55/54透過不連続、clean-process absolute性能未測定を受容済み制約として保持 |
-| 学習モード | `PASS` | 部品名称、機能、動力経路、HUD／学習タブ同期を実装・確認 | 厳密な組立順序・組立／分解手順は完成条件外 |
+| 時計モード | `PASS` | completed-watch default、巻上げ、時刻合わせ、秒停止、作動音、PR #29時刻入力をPC／物理iPhoneで受入済み | なし |
+| 機構観察モード | `PASS_WITH_ACCEPTED_LIMITATION` | 全方向camera、表裏、透過、split、explode、選択、動力経路、脱進機、テンプを統合済み | 透明・影・端末差をaccepted limitationとして保持 |
+| 学習モード | `PASS` | 部品名称、機能、動力経路、HUD／学習タブ同期を実装・確認 | 厳密な組立順序と組立／分解手順は完成条件外 |
 
-## Issue／PR／後続工程
+## Accepted rendering limitations
 
-- Issue #2：`CLOSE_AS_NOT_PLANNED_ACCEPTED_LIMITATION`を推奨する。D2c3は既定採用済みでHumanが描画tradeoffを受容したが、100/99・55/54の字義上の連続性要件は未達であるため`completed`とはしない
-- PR #5：`CLOSE_AS_SUPERSEDED_WITHOUT_MERGE`を推奨する。現mainの採用実装・後続証跡に包含され、古いbaseと競合するため、mergeやcherry-pickを行わない
-- Phase 3B.4d：`DEFER_POST_COMPLETION_IMPROVEMENT`
-- OIT：`DEFERRED_POST_COMPLETION`
-- post-Issue-2 Geometry cleanup：`DEFERRED_POST_COMPLETION`
+Issue #2の中央シャドウ境界、100%／99%の`transparent`切替、55%／54%の`depthWrite`切替、透過時の暗部・深度順序、PC／iPhone照明差、モバイル全長時のfog暗化は存在を隠さずaccepted limitationとする。深度順序はOIT未実装に起因する。現行v3.15.0では追加改修せず、Issue #2を`not planned`でcloseする承認を得ている。
 
-本PRでは上記Issue／PRを変更・closeしない。
+## Successor rebuild handoff
 
-## 検証結果
+次は現行prototypeの完成blockerではなく`DEFER_TO_SUCCESSOR_REBUILD`とする。
 
-- product tree：PR #27 Human-reviewed Headとmain、およびPR #28でexact。`index.html`、`js/**`、`assets/audio/**`、`package.json`、`package-lock.json`に差分なし
-- acceptance test：既存`tests/final-completed-watch-default-evidence.test.mjs`の期待値だけをHuman accepted証跡へ整合
-- Node：465/465、fail 0、skip 0
-- Installed Chrome：既存監査のdefault／legacy／explicit × Desktop／390×844を6/6 harness pass。初回default Desktopだけローカルfavicon 404を1件記録し、製品runtime error／warningは0
-- Playwright WebKit：既存監査の同6条件を6/6 pass、console error／warning／runtime error 0
-- Native Safari：PR #27固定製品HeadのDesktop／Mobile証跡をtree exactにより継承。本監査で新規runは未実施
-- GitHub Pages：main build success、公開root v3.15.0、completed-watch default、主要asset HTTP 200、公開root console error／warning 0
-- independent read-only diff audit：Critical 0、Major 0、Minor 0
-- `git diff --check`、JSON parse、文書リンク、製品tree exact、閾値不変：最終commit前に再確認する
+- Geometry：時針／分針と中央リング状部品、ミニッツホイール軸の文字板側表出、緩急目盛とテンプ受、浮遊する灰色板状Object 2枚を診断する
+- UI copy：Phase／PR／候補等の開発文言、「選択部品情報」「選択部品：」を通常UIから除き、部品名を直接見出し、説明を1～2文へ簡潔化する
+- Crown UI：`ADOPT_UNIFIED_TWO_OPTION_SEGMENTED_CONTROL`として「巻上げ／時刻合わせ」とりゅうず回転sliderを説明欄下へ統合する
+- Mobile blank tap：drag／pan／pinch／UI操作を除く空白tapで、選択、説明、bottom sheetを閉じる
+- Lifecycle／rendering：Phase 3B.4dとOIT
+- 将来改善：厳密な組立／分解手順、PWA／offline、高級仕上げ、Blender／GLB、3時位置りゅうず起点の内部再配置
 
-## Human最終判断
+## 最終統合条件
 
-PR #28はblocking count 1を記録し、本体完成を宣言しない。局所修正PRのHuman受入とmainマージ後に最新mainへ整合し、時計モード`PASS`、blocking count 0、`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`を再評価する。
+- Node 477件以上、fail 0、skip 0
+- `index.html`、`js/**`、`assets/audio/**`、`package.json`、`package-lock.json`がPR #29 merge後mainとexact
+- changed JSON parse、Markdown link、manifest、`git diff --check`合格
+- APP_VERSION v3.15.0
+- Independent review Critical／Major／Minor 0／0／0
+- PR #28をmerge commit方式で統合したfinal mainでも同じNode gateを再実行
+
+final main gate合格後にのみIssue #2をaccepted limitation／not planned、PR #5をsuperseded／without mergeとしてcloseする。PR #30は別工程でfinal mainへ整合する。

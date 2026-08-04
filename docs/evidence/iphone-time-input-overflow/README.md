@@ -1,6 +1,6 @@
 # iPhone time input overflow evidence
 
-This closed-world evidence set preserves the R1 failure, the physical-iPhone R2 core acceptance, and the automated R3 centered `HH:MM:SS` polish result.
+This closed-world evidence set preserves the R1 failure, the physical-iPhone R2 core acceptance, the automated R3 centered `HH:MM:SS` result, and the final physical-iPhone R3 Human acceptance.
 
 ## Provenance
 
@@ -18,6 +18,7 @@ This closed-world evidence set preserves the R1 failure, the physical-iPhone R2 
 
 - `human-review-r1.json`: exact failed R1 physical-iPhone record.
 - `human-review-r2.json`: exact accepted R2 core-overflow record and requested R3 polish.
+- `human-review-r3.json`: exact accepted R3 physical-iPhone record for the reviewed product Head.
 - `before-layout.json`: retained R1 layout provenance.
 - `after-layout.json`: R3 42-scenario layout contract summary.
 - `browser-matrix.json`: R3 browser, UI/HUD, functional, Native Safari, inherited-failure, and evidence limitations.
@@ -39,6 +40,7 @@ PR #29-specific Node tests pass 12/12. The branch-wide suite is 475/477 with the
 
 - R1: `PR29_R1_PHYSICAL_IPHONE_REVIEW_FAILED`
 - R2: `PR29_R2_CORE_OVERFLOW_FIX_HUMAN_ACCEPTED`
-- R3: `PR29_R3_AUTOMATED_GATES_PASSED_PENDING_PHYSICAL_IPHONE_REVIEW`
+- R3: `PR29_R3_PHYSICAL_IPHONE_HUMAN_ACCEPTED`
+- final: `IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW_CLOSED` / `PR29_MERGED_TO_MAIN`
 
-R3 is a nonblocking polish candidate. No complete, Ready, merge, body-completion, or release claim is made. The accepted R2 core fix remains the fallback if R3 Human review rejects the visual overlay.
+R3 is Human accepted on iPhone 16／iOS 26.5.2／Safari portrait. PR #29 is Merged／Closed at `25f852a0218486f695a5e2b88c7fc9b665c8c362`; the reviewed product Head is `cf1751265410a160715db2bd9566b1703d916bac`. R1 FAIL and R2 core PASS remain historical evidence.

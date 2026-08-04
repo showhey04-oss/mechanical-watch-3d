@@ -1,45 +1,40 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-03",
+  "generatedAt": "2026-08-04",
   "repository": "showhey04-oss/mechanical-watch-3d",
-  "sourceMainCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
-  "sourceProductCommit": "a7f0057db57de168c2af0bd01847fcfed9a606dc",
+  "sourceMainCommit": "25f852a0218486f695a5e2b88c7fc9b665c8c362",
+  "sourceProductCommit": "cf1751265410a160715db2bd9566b1703d916bac",
   "sourceAcceptanceCommit": "795223bfb2804fc8b7e058ac36245c1f4c650e36",
   "sourceBranch": "docs/post-default-adoption-completion-gate",
   "appVersion": "v3.15.0",
-  "status": "MECHANICAL_WATCH_3D_BODY_COMPLETION_BLOCKED",
-  "blockingCount": 1,
-  "blockers": [
+  "humanReviewedProductCommit": "cf1751265410a160715db2bd9566b1703d916bac",
+  "pr29MergeCommit": "25f852a0218486f695a5e2b88c7fc9b665c8c362",
+  "status": "MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0",
+  "blockingCount": 0,
+  "blockers": [],
+  "resolvedHistoricalFindings": [
+    {
+      "id": "POST_ADOPTION_NODE_ACCEPTANCE_STATE_EXPECTATION_MISMATCH",
+      "previousActual": "463/465",
+      "closure": "Aligned the existing acceptance-state expectations and obtained 465/465 without skips or threshold changes.",
+      "status": "RESOLVED"
+    },
     {
       "id": "IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW",
-      "classification": [
-        "IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW_HUMAN_REPORTED",
-        "CORE_TIME_SETTING_UI_RESPONSIVE_DEFECT",
-        "BODY_COMPLETION_BLOCKER",
-        "POST_COMPLETION_DEFERRAL_NOT_APPROPRIATE"
-      ],
-      "scope": "mobile time-setting UI",
-      "affectedMode": "watch",
-      "requiredClosure": "Fix native time-input layout on physical iPhone and reconfirm time setting.",
-      "productDefect": true
+      "r1": "PHYSICAL_IPHONE_FAIL",
+      "r2": "CORE_OVERFLOW_PASS",
+      "r3": "PHYSICAL_IPHONE_PASS",
+      "humanEvidence": "docs/evidence/iphone-time-input-overflow/reports/human-review-r3.json",
+      "status": "RESOLVED"
     }
   ],
-  "resolvedHistoricalFinding": {
-    "id": "POST_ADOPTION_NODE_ACCEPTANCE_STATE_EXPECTATION_MISMATCH",
-    "scope": "tests/final-completed-watch-default-evidence.test.mjs",
-    "previousActual": "463/465",
-    "cause": "Two assertions required the pre-Human Draft/technical-candidate state while the merged evidence recorded Human acceptance.",
-    "closure": "Aligned the existing acceptance-state expectations in PR #28 and obtained 465/465 without skipping, removing tests, or relaxing thresholds.",
-    "productDefect": false,
-    "status": "RESOLVED"
-  },
   "productTreeExact": true,
   "productCodeChangedByAudit": false,
   "testsChangedByAudit": true,
   "testThresholdsChanged": false,
   "node": {
-    "total": 465,
-    "passed": 465,
+    "total": 477,
+    "passed": 477,
     "failed": 0,
     "skipped": 0,
     "status": "PASSED"
@@ -75,19 +70,24 @@
     "defaultProfile": "completed-watch"
   },
   "modes": {
-    "watch": "BLOCKED",
+    "watch": "PASS",
     "mechanismObservation": "PASS_WITH_ACCEPTED_LIMITATION",
     "learning": "PASS"
   },
   "recommendations": {
     "issue2": "CLOSE_AS_NOT_PLANNED_ACCEPTED_LIMITATION",
     "pr5": "CLOSE_AS_SUPERSEDED_WITHOUT_MERGE",
-    "phase3B4d": "DEFER_POST_COMPLETION_IMPROVEMENT",
-    "oit": "DEFERRED_POST_COMPLETION",
-    "postIssue2GeometryCleanup": "DEFERRED_POST_COMPLETION"
+    "phase3B4d": "DEFER_TO_SUCCESSOR_REBUILD",
+    "oit": "DEFER_TO_SUCCESSOR_REBUILD",
+    "postIssue2GeometryCleanup": "DEFER_TO_SUCCESSOR_REBUILD",
+    "uiCopyAndCrownContext": "DEFER_TO_SUCCESSOR_REBUILD",
+    "mobileBlankTap": "DEFER_TO_SUCCESSOR_REBUILD"
   },
   "issue2Changed": false,
   "pr5Changed": false,
-  "completionDeclared": false,
-  "readyOrMergeAuthorized": false
+  "completionDeclared": true,
+  "humanCompletionAuthorization": true,
+  "readyOrMergeAuthorized": true,
+  "currentPrototypeFeatureDevelopment": "FROZEN",
+  "successorRebuildHandoff": "PENDING"
 }
