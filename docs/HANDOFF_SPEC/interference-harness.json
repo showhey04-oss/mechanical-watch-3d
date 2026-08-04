@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-04T17:08:03.960Z",
+  "sourceMainHead": "eb4595e040786e0e2115165d36a9cc39e08b2038",
+  "coordinateUse": "world coordinates for runtime intersections; configuration centers use XZ with Y axial bands",
+  "boundingTypes": [
+    "Box3 broad phase",
+    "circle/capsule and axial-band analytic checks",
+    "triangle checks in exterior geometry audits"
+  ],
+  "triangleTestUse": true,
+  "tolerance": {
+    "mechanism": 0.000001,
+    "allowedContact": "rule-specific",
+    "exteriorCrownGap": 0.03
+  },
+  "forbiddenIntersection": [
+    [
+      "windingPinion",
+      "minuteWheel"
+    ],
+    [
+      "windingPinion",
+      "setting1"
+    ],
+    [
+      "windingPinion",
+      "setting2"
+    ],
+    [
+      "crownWheelLower",
+      "minuteWheel"
+    ],
+    [
+      "crownWheelLower",
+      "setting1"
+    ],
+    [
+      "crownWheelLower",
+      "setting2"
+    ],
+    [
+      "stem",
+      "minuteWheel"
+    ],
+    [
+      "stem",
+      "setting1"
+    ],
+    [
+      "stem",
+      "setting2"
+    ],
+    [
+      "slidingClutch",
+      "minuteWheel"
+    ],
+    [
+      "slidingClutch",
+      "setting1"
+    ],
+    [
+      "slidingClutch",
+      "setting2"
+    ],
+    [
+      "slidingClutch",
+      "settingTransfer"
+    ],
+    [
+      "windingClutch",
+      "minuteWheel"
+    ],
+    [
+      "windingClutch",
+      "setting1"
+    ],
+    [
+      "windingClutch",
+      "setting2"
+    ],
+    [
+      "windingClutch",
+      "settingTransfer"
+    ],
+    [
+      "settingInput",
+      "minuteWheel"
+    ],
+    [
+      "settingInput",
+      "setting1"
+    ],
+    [
+      "settingInput",
+      "setting2"
+    ],
+    [
+      "settingTransfer",
+      "setting2"
+    ],
+    [
+      "settingTransfer",
+      "minuteWheel"
+    ],
+    [
+      "setting1",
+      "minuteWheel"
+    ],
+    [
+      "setting1",
+      "cannonPinion"
+    ],
+    [
+      "setting2",
+      "cannonPinion"
+    ],
+    [
+      "setting2",
+      "hourWheel"
+    ],
+    [
+      "minuteWheel",
+      "hourWheel"
+    ],
+    [
+      "minutePinion",
+      "cannonTube"
+    ],
+    [
+      "crownWheelSeat",
+      "crownWheelUpper"
+    ]
+  ],
+  "operatingStates": [
+    "running",
+    "winding",
+    "time-setting",
+    "stopped",
+    "split",
+    "explode",
+    "restore"
+  ],
+  "crownStates": [
+    "position 1 / wind",
+    "position 2 / set"
+  ],
+  "splitExplodeExclusions": "Display-only offsets are excluded from normal mechanism contact acceptance",
+  "invisibleProxyExclusions": [
+    "diagnostic",
+    "selection proxy",
+    "invisible group",
+    "pick-only delegate"
+  ],
+  "reportingFields": [
+    "pair",
+    "state",
+    "clearance",
+    "intersection",
+    "allowed",
+    "source rule"
+  ],
+  "passCriteria": "position 1 and position 2 forbiddenCount both 0; protected contacts preserve declared clearance/contact",
+  "sourceImplementation": [
+    "js/mechanism-config.js:DIAL_INTERFERENCE_RULES",
+    "index.html:getInterferenceReport",
+    "index.html:getExteriorInterferenceReport"
+  ],
+  "currentKnownResults": {
+    "position1ForbiddenCount": 0,
+    "position2ForbiddenCount": 0
+  }
+}
