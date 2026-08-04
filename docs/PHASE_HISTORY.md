@@ -2,6 +2,14 @@
 
 > `main` body-completion commit `eb4595e040786e0e2115165d36a9cc39e08b2038` の`README.md`工程本文を、プロトタイプ凍結時の履歴として保存したものです。状態ラベル、承認Head、寸法、試験件数、候補の採否を省略していません。各工程当時のDraft・未採用・Open表記は履歴であり、現在の既定pathやGitHub状態を示すものではありません。
 
+## Prior Snapshot Addendum
+
+body-completion時点の`main` READMEでは、main公開基準をPR #29 merge後製品基準`25f852a0218486f695a5e2b88c7fc9b665c8c362`、Human-reviewed製品Headを`cf1751265410a160715db2bd9566b1703d916bac`と記録していた。PR #29の時刻入力R3はiPhone 16／iOS 26.5.2／SafariでHuman受入され、PR #28統合HeadのNodeは477/477・fail 0・skip 0、blocking count 0、製品treeはHuman-reviewed Headとexactであった。現行prototypeの機能開発は凍結し、Phase 3B.4d、OIT、Geometry疑義、UI改善は`DEFER_TO_SUCCESSOR_REBUILD`とされた。
+
+同snapshotでは、D2c3をPR #27で通常rootへ採用済みとし、中央シャドウ境界、100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順、PC／iPhone照明差、モバイル全長時のfog暗化をaccepted limitationとして記録してIssue #2をnot plannedでcloseした。通常rootはURLを書き換えずに12個のprofile値を内部effective parametersへ注入し、既存のprofile queryは暗黙profileより優先、`?defaultProfile=legacy`は旧通常表示を維持した。作動音は初期OFFで、native pickerと中央`HH:MM:SS`表示は物理iPhoneで確認済みであった。
+
+PR #27以前のPhase 3B／3C／Issue #2各節は、当時のquery限定候補、Draft状態、採否判断を保存する履歴記録であり、現在の既定path・PR状態を表すものではない。
+
 ---
 
 # Mechanical Watch 3D
