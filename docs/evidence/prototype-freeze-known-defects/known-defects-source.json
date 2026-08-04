@@ -1,0 +1,302 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-04T17:06:23.965Z",
+  "sourceMainHead": "eb4595e040786e0e2115165d36a9cc39e08b2038",
+  "appVersion": "v3.15.0",
+  "status": "RECORDED_FOR_SUCCESSOR_REBUILD",
+  "defectCount": 4,
+  "geometryFixesPerformed": 0,
+  "defects": [
+    {
+      "id": "center-hand-ring-geometry-interference",
+      "status": "DEFERRED_CENTER_HAND_RING_GEOMETRY_INTERFERENCE",
+      "observedSymptom": "The hour or minute hand appears to intersect a central ring-like component in some views.",
+      "currentEvidence": "Human visual observation recorded before body completion; screen-space overlap and Geometry intersection were not separated.",
+      "confirmedGeometryIntersection": "not measured",
+      "affectedMode": [
+        "completed watch",
+        "front / oblique / side",
+        "opacity 100 / 16",
+        "selected / unselected"
+      ],
+      "severity": "accepted successor investigation",
+      "currentPrototypeDecision": "No Geometry change after v3.15.0 body completion.",
+      "successorAction": "Measure triangle/world-position clearance at 10:10:30, 03:00:00, 06:30:00 and 12:00:00 before naming the interfering part.",
+      "exactObjectIds": [],
+      "sourceEvidence": [
+        "docs/POST_ISSUE2_GEOMETRY_CLEANUP_NOTES.md#1-時針分針と中央リング状部品の干渉疑い"
+      ]
+    },
+    {
+      "id": "minute-wheel-arbor-dial-protrusion",
+      "status": "DEFERRED_MINUTE_WHEEL_ARBOR_DIAL_PROTRUSION",
+      "observedSymptom": "The minute-wheel arbor appears exposed on the dial side.",
+      "currentEvidence": "Human visual observation; physical need, educational simplification and actual dial intersection remain unverified.",
+      "confirmedGeometryIntersection": "not measured",
+      "affectedMode": [
+        "completed watch",
+        "front / oblique",
+        "opacity 100 / 16"
+      ],
+      "severity": "accepted successor investigation",
+      "currentPrototypeDecision": "Preserve wheel center, diameter, tooth count, mesh and motion-work layout.",
+      "successorAction": "Measure arbor Y extent against dial datums, opening Geometry and screen exposure before any local shaft-length change.",
+      "exactObjectIds": [],
+      "sourceEvidence": [
+        "docs/POST_ISSUE2_GEOMETRY_CLEANUP_NOTES.md#2-ミニッツホイール軸の文字板表出"
+      ]
+    },
+    {
+      "id": "regulator-scale-balance-bridge-interference",
+      "status": "REGULATOR_SCALE_BALANCE_BRIDGE_INTERFERENCE_HUMAN_OBSERVED",
+      "observedSymptom": "The regulator scale and balance bridge appear to interfere.",
+      "currentEvidence": "Human observation during the R1.1 physical-iPhone run; causal Object, actual intersection and screen-space overlap were not diagnosed.",
+      "confirmedGeometryIntersection": "not measured",
+      "affectedMode": [
+        "mechanism observation",
+        "physical iPhone"
+      ],
+      "severity": "accepted successor investigation",
+      "currentPrototypeDecision": "Record only; do not mix Geometry changes into the frozen rendering/audio line.",
+      "successorAction": "Measure world bounds and minimum clearance for the regulator scale, balance bridge and adjacent parts.",
+      "exactObjectIds": [
+        "緩急目盛",
+        "テンプ受・緩急装置"
+      ],
+      "sourceEvidence": [
+        "docs/POST_ISSUE2_GEOMETRY_CLEANUP_NOTES.md#3-緩急目盛とテンプ受の干渉観察"
+      ]
+    },
+    {
+      "id": "remote-gray-plate-like-objects",
+      "status": "IDENTIFIED_PRODUCT_OBJECT",
+      "observedSymptom": "Two small gray plate-like objects appear separated from the movement in some full-length or zoomed views.",
+      "currentEvidence": "The two bright silver buckle components are legitimate exterior product objects at the remote end of the black six-o’clock strap. Name-independent scene filtering leaves exactly these two candidates on the default route and none on legacy; the preserved Phase 3C.2 runtime image/GIF evidence shows the same buckle assembly attached to the dark strap. At movement-focused framing the strap blends into the navy/fog background or falls outside the visible composition while higher-contrast hardware remains perceptible.",
+      "confirmedGeometryIntersection": false,
+      "affectedMode": [
+        "completed-watch default",
+        "full-length or movement-focused composition",
+        "exterior ON"
+      ],
+      "severity": "known visual interpretation limitation",
+      "currentPrototypeDecision": "Product fix not performed; feature development is frozen.",
+      "successorAction": "Preserve an explicit strap/buckle ownership hierarchy and re-evaluate full-length/far composition, fog and dark-strap contrast so attachment continuity remains legible.",
+      "identificationMethod": "Name-independent runtime candidate derivation from the full visible scene inventory; exact names are read only after the two candidates pass spatial, ownership, luminance, morphology and exclusion criteria.",
+      "candidateDerivation": {
+        "criteria": {
+          "source": "full visible scene inventory; no product Object name allowlist",
+          "displayGroup": "exterior",
+          "minimumDistanceFromMovementBounds": 50,
+          "minimumMaterialLuminance": 0.75,
+          "minimumLongitudinalExtentY": 8,
+          "excludedFlags": [
+            "selectionProxyFlag",
+            "diagnosticObjectFlag",
+            "helperFlag"
+          ],
+          "rationale": "Maps the reported pair of remote, bright, longitudinal plate-like silhouettes without using their names."
+        },
+        "candidateCount": 2,
+        "candidates": [
+          {
+            "uuid": "bea1432e-cbbd-4031-ae58-9c63e5bf7d48",
+            "name": "Phase 3C.2 尾錠枠",
+            "registeredPartId": "Phase 3C.2 尾錠枠",
+            "parentChain": [
+              "Scene",
+              "Group",
+              "exteriorRoot",
+              "exteriorAttachmentsPhase3B2",
+              "finalStrapBucklePhase3C2",
+              "phase3c2-buckle"
+            ],
+            "sourceFile": "js/final-strap-buckle-phase3c2.js",
+            "sourceLine": 856,
+            "sourceCreationSymbol": "buckleFrame",
+            "worldBoundingBox": {
+              "min": [
+                -9.5,
+                41.697933,
+                66.974953
+              ],
+              "max": [
+                9.5,
+                57.252251,
+                69.620918
+              ],
+              "size": [
+                19,
+                15.554317,
+                2.645966
+              ],
+              "center": [
+                0,
+                49.475092,
+                68.297935
+              ]
+            },
+            "distanceFromMovementBounds": 67.427439,
+            "maximumMaterialLuminance": 0.915995,
+            "material": [
+              {
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "color": "#e7eaed",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true
+              }
+            ],
+            "selectionProxyFlag": false,
+            "diagnosticObjectFlag": false,
+            "helperFlag": false
+          },
+          {
+            "uuid": "5f30f55b-6a92-4313-b43e-5667f7605a21",
+            "name": "Phase 3C.2 つく棒",
+            "registeredPartId": "Phase 3C.2 つく棒",
+            "parentChain": [
+              "Scene",
+              "Group",
+              "exteriorRoot",
+              "exteriorAttachmentsPhase3B2",
+              "finalStrapBucklePhase3C2",
+              "phase3c2-buckle"
+            ],
+            "sourceFile": "js/final-strap-buckle-phase3c2.js",
+            "sourceLine": 905,
+            "sourceCreationSymbol": "buckleTang",
+            "worldBoundingBox": {
+              "min": [
+                -0.55,
+                42.371605,
+                67.435051
+              ],
+              "max": [
+                0.55,
+                55.383144,
+                69.265411
+              ],
+              "size": [
+                1.1,
+                13.011539,
+                1.83036
+              ],
+              "center": [
+                0,
+                48.877375,
+                68.350231
+              ]
+            },
+            "distanceFromMovementBounds": 67.066887,
+            "maximumMaterialLuminance": 0.915995,
+            "material": [
+              {
+                "name": "Phase 3C.2 stable silver",
+                "type": "MeshStandardMaterial",
+                "color": "#e7eaed",
+                "opacity": 1,
+                "transparent": false,
+                "depthWrite": true
+              }
+            ],
+            "selectionProxyFlag": false,
+            "diagnosticObjectFlag": false,
+            "helperFlag": false
+          }
+        ],
+        "conclusionGate": "EXACT_TWO_NAME_INDEPENDENT_CANDIDATES"
+      },
+      "exactObjectIds": [
+        "Phase 3C.2 尾錠枠",
+        "Phase 3C.2 つく棒"
+      ],
+      "exactSource": [
+        {
+          "name": "Phase 3C.2 尾錠枠",
+          "registeredPartId": "Phase 3C.2 尾錠枠",
+          "sourceFile": "js/final-strap-buckle-phase3c2.js",
+          "sourceLine": 856,
+          "sourceSymbol": "buckleFrame",
+          "parentChain": [
+            "Scene",
+            "Group",
+            "exteriorRoot",
+            "exteriorAttachmentsPhase3B2",
+            "finalStrapBucklePhase3C2",
+            "phase3c2-buckle"
+          ],
+          "worldBoundingBox": {
+            "min": [
+              -9.5,
+              41.697933,
+              66.974953
+            ],
+            "max": [
+              9.5,
+              57.252251,
+              69.620918
+            ],
+            "size": [
+              19,
+              15.554317,
+              2.645966
+            ],
+            "center": [
+              0,
+              49.475092,
+              68.297935
+            ]
+          },
+          "distanceFromMovementBounds": 67.427439,
+          "maximumMaterialLuminance": 0.915995
+        },
+        {
+          "name": "Phase 3C.2 つく棒",
+          "registeredPartId": "Phase 3C.2 つく棒",
+          "sourceFile": "js/final-strap-buckle-phase3c2.js",
+          "sourceLine": 905,
+          "sourceSymbol": "buckleTang",
+          "parentChain": [
+            "Scene",
+            "Group",
+            "exteriorRoot",
+            "exteriorAttachmentsPhase3B2",
+            "finalStrapBucklePhase3C2",
+            "phase3c2-buckle"
+          ],
+          "worldBoundingBox": {
+            "min": [
+              -0.55,
+              42.371605,
+              67.435051
+            ],
+            "max": [
+              0.55,
+              55.383144,
+              69.265411
+            ],
+            "size": [
+              1.1,
+              13.011539,
+              1.83036
+            ],
+            "center": [
+              0,
+              48.877375,
+              68.350231
+            ]
+          },
+          "distanceFromMovementBounds": 67.066887,
+          "maximumMaterialLuminance": 0.915995
+        }
+      ],
+      "sourceEvidence": [
+        "docs/evidence/prototype-freeze-known-defects/scene-outlier-inventory.json",
+        "docs/evidence/final-exterior-design-phase3c2/images/buckle-detail.png",
+        "docs/evidence/final-exterior-design-phase3c2/images/hardware-silver-closeup.png",
+        "docs/evidence/final-exterior-design-phase3c2/videos/05-buckle-frame-tang-bar.gif"
+      ]
+    }
+  ]
+}
