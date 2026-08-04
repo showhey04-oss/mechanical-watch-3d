@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-04",
+  "repository": "showhey04-oss/mechanical-watch-3d",
+  "sourceMainCommit": "25f852a0218486f695a5e2b88c7fc9b665c8c362",
+  "sourceProductCommit": "cf1751265410a160715db2bd9566b1703d916bac",
+  "sourceAcceptanceCommit": "795223bfb2804fc8b7e058ac36245c1f4c650e36",
+  "sourceBranch": "docs/post-default-adoption-completion-gate",
+  "appVersion": "v3.15.0",
+  "humanReviewedProductCommit": "cf1751265410a160715db2bd9566b1703d916bac",
+  "pr29MergeCommit": "25f852a0218486f695a5e2b88c7fc9b665c8c362",
+  "status": "MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0",
+  "blockingCount": 0,
+  "blockers": [],
+  "resolvedHistoricalFindings": [
+    {
+      "id": "POST_ADOPTION_NODE_ACCEPTANCE_STATE_EXPECTATION_MISMATCH",
+      "previousActual": "463/465",
+      "closure": "Aligned the existing acceptance-state expectations and obtained 465/465 without skips or threshold changes.",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "IPHONE_TIME_INPUT_RIGHT_EDGE_OVERFLOW",
+      "r1": "PHYSICAL_IPHONE_FAIL",
+      "r2": "CORE_OVERFLOW_PASS",
+      "r3": "PHYSICAL_IPHONE_PASS",
+      "humanEvidence": "docs/evidence/iphone-time-input-overflow/reports/human-review-r3.json",
+      "status": "RESOLVED"
+    }
+  ],
+  "productTreeExact": true,
+  "productCodeChangedByAudit": false,
+  "testsChangedByAudit": true,
+  "testThresholdsChanged": false,
+  "node": {
+    "total": 477,
+    "passed": 477,
+    "failed": 0,
+    "skipped": 0,
+    "status": "PASSED"
+  },
+  "browser": {
+    "installedChrome": {
+      "completed": 6,
+      "passed": 6,
+      "failed": 0,
+      "localHarnessFavicon404": 1,
+      "productRuntimeErrors": 0,
+      "warnings": 0
+    },
+    "playwrightWebKit": {
+      "completed": 6,
+      "passed": 6,
+      "failed": 0,
+      "consoleErrors": 0,
+      "warnings": 0,
+      "runtimeErrors": 0
+    },
+    "nativeSafari": {
+      "status": "INHERITED_FROM_EXACT_PRODUCT_TREE",
+      "newRunPerformed": false,
+      "evidence": "docs/evidence/final-completed-watch-default-adoption/reports/native-safari.json"
+    }
+  },
+  "pages": {
+    "status": "PUBLISHED",
+    "deploymentCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
+    "url": "https://showhey04-oss.github.io/mechanical-watch-3d/",
+    "appVersion": "v3.15.0",
+    "defaultProfile": "completed-watch"
+  },
+  "modes": {
+    "watch": "PASS",
+    "mechanismObservation": "PASS_WITH_ACCEPTED_LIMITATION",
+    "learning": "PASS"
+  },
+  "recommendations": {
+    "issue2": "CLOSE_AS_NOT_PLANNED_ACCEPTED_LIMITATION",
+    "pr5": "CLOSE_AS_SUPERSEDED_WITHOUT_MERGE",
+    "phase3B4d": "DEFER_TO_SUCCESSOR_REBUILD",
+    "oit": "DEFER_TO_SUCCESSOR_REBUILD",
+    "postIssue2GeometryCleanup": "DEFER_TO_SUCCESSOR_REBUILD",
+    "uiCopyAndCrownContext": "DEFER_TO_SUCCESSOR_REBUILD",
+    "mobileBlankTap": "DEFER_TO_SUCCESSOR_REBUILD"
+  },
+  "issue2Changed": false,
+  "pr5Changed": false,
+  "completionDeclared": true,
+  "humanCompletionAuthorization": true,
+  "readyOrMergeAuthorized": true,
+  "currentPrototypeFeatureDevelopment": "FROZEN",
+  "successorRebuildHandoff": "PENDING"
+}

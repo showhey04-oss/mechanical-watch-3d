@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 3,
+  "phase": "r3-centered-hhmmss-visual-layer",
+  "sourceBaseCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
+  "sourceImplementationCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-04T04:30:00.000Z",
+  "visualFrameOwner": "timeInputShell",
+  "valueAuthority": "native input value",
+  "visualContract": {
+    "format": "HH:MM:SS",
+    "initialValue": "10:08:30",
+    "minutePrecisionExample": {
+      "nativeValue": "10:15",
+      "visualText": "10:15:00"
+    },
+    "secondPrecisionExample": {
+      "nativeValue": "13:37:42",
+      "visualText": "13:37:42"
+    },
+    "invalidValue": "--:--:--",
+    "horizontalCenterErrorMaximumPx": 1,
+    "verticalCenterErrorMaximumPx": 1,
+    "shellInsetDifferenceMaximumPx": 1,
+    "visualPointerEvents": "none",
+    "visualAriaHidden": true,
+    "nativeInputType": "time",
+    "nativeAppearance": "auto"
+  },
+  "requestedViewports": [
+    { "width": 320, "height": 568 },
+    { "width": 336, "height": 667 },
+    { "width": 375, "height": 667 },
+    { "width": 390, "height": 844 },
+    { "width": 393, "height": 852 },
+    { "width": 430, "height": 932 },
+    { "width": 1280, "height": 720 }
+  ],
+  "routes": ["default", "legacy"],
+  "stages": ["before-focus", "after-focus", "after-minute-value", "after-value-and-blur"],
+  "results": [
+    {
+      "browser": "installed-chrome",
+      "passed": 14,
+      "failed": 0,
+      "total": 14,
+      "maximumHorizontalCenterErrorPx": 0,
+      "maximumVerticalCenterErrorPx": 0,
+      "maximumShellInsetDifferencePx": 0,
+      "horizontalOverflowStageCount": 0,
+      "minutePrecisionVisualText": "10:15:00",
+      "secondPrecisionVisualText": "13:37:42"
+    },
+    {
+      "browser": "playwright-webkit",
+      "passed": 14,
+      "failed": 0,
+      "total": 14,
+      "maximumHorizontalCenterErrorPx": 0,
+      "maximumVerticalCenterErrorPx": 0,
+      "maximumShellInsetDifferencePx": 0,
+      "horizontalOverflowStageCount": 0,
+      "minutePrecisionVisualText": "10:15:00",
+      "secondPrecisionVisualText": "13:37:42"
+    },
+    {
+      "browser": "native-safari-26.5.2",
+      "passed": 14,
+      "failed": 0,
+      "total": 14,
+      "maximumHorizontalCenterErrorPx": 0,
+      "maximumVerticalCenterErrorPx": 0,
+      "maximumShellInsetDifferencePx": 0,
+      "horizontalOverflowStageCount": 0,
+      "minutePrecisionVisualText": "10:15:00",
+      "secondPrecisionVisualText": "13:37:42",
+      "environmentNote": "A requested 320px Safari window produced the platform minimum 336px inner width; an explicit 336px scenario also passed."
+    }
+  ],
+  "aggregate": {
+    "passed": 42,
+    "failed": 0,
+    "total": 42,
+    "maximumHorizontalCenterErrorPx": 0,
+    "maximumVerticalCenterErrorPx": 0,
+    "maximumShellInsetDifferencePx": 0,
+    "horizontalOverflowStageCount": 0
+  }
+}

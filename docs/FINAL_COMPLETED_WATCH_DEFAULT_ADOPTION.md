@@ -89,3 +89,9 @@ Geometry、機構、歯車比、位相、S86、Phase 2C、D2c3値、PMREM、fog�
 ## 最終判断
 
 技術ゲートおよびHuman最終確認は合格した。PR #27はReady化およびmainへのマージが承認済みである。Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始、OITは完成後実験のまま維持する。
+
+## Post-merge reconciliation
+
+PR #27はmain `155275d0aaeb968fd83d6dfe15313e259f2bb064`へマージされ、GitHub Pagesの通常rootへ公開された。mainの製品・試験treeはHuman-reviewed Head `a7f0057db57de168c2af0bd01847fcfed9a606dc`とexactであり、APP_VERSIONはv3.15.0、作動音は初期OFF、legacy routeは有効である。
+
+受入文書のHuman accepted化後に`tests/final-completed-watch-default-evidence.test.mjs`の2 assertionが旧Draft／technical-candidate期待値を保持し、監査開始時のNode結果が463/465となる履歴上の不整合を検出した。PR #28内で既存テストの期待値だけを保存済みHuman accepted／merged証跡へ整合し、465/465・skip 0へ復旧した。製品コード、試験閾値、Issue #2、PR #5は変更していない。技術状態は`MECHANICAL_WATCH_3D_BODY_COMPLETION_READY_FOR_HUMAN_DECLARATION`であり、本体完成宣言はHumanの明示判断を待つ。

@@ -29,18 +29,59 @@ async function collectFiles(root) {
 
 test("default-adoption reports preserve the exact implementation source and decision boundary", async () => {
   const decision = await readJson("decision-summary.json");
+  const humanAcceptance = await readJson("human-acceptance.json");
   assert.equal(decision.sourceBaseCommit, "0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff");
   assert.equal(decision.sourceImplementationCommit, "1b1e2c22d09389e27489797f666ed2358b1ca35a");
   assert.equal(decision.sourcePerformanceClosureCommit, "b0a1c7748f96f44694c3a5eb3921973ad1dc234b");
   assert.equal(decision.appVersion, "v3.15.0");
-  assert.equal(decision.status, "FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_TECHNICAL_CANDIDATE");
+  assert.equal(decision.status, "FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_HUMAN_ACCEPTED");
   assert.ok(decision.completed.includes("FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED"));
-  assert.equal(decision.blockersBeforeHumanDefaultRouteReview.length, 0);
-  assert.equal(decision.finalDefaultRouteHumanReview, "READY_FOR_HUMAN_DEFAULT_ROUTE_REVIEW");
+  assert.ok(decision.completed.includes("FINAL_COMPLETED_WATCH_DEFAULT_ROUTE_HUMAN_REVIEW_PASSED"));
+  assert.ok(decision.completed.includes("PR27_READY_AND_MAIN_MERGE_AUTHORIZED"));
+  assert.deepEqual(decision.blockersBeforeReadyAndMerge, []);
+  assert.equal(decision.finalDefaultRouteHumanReview, "PASSED");
+  assert.equal(decision.readyOrMergeAuthorized, true);
+  assert.equal(decision.humanAcceptanceEvidence, "reports/human-acceptance.json");
+  assert.deepEqual(decision.humanAcceptanceRecording, {
+    overallDecision: "PASS",
+    readyAndMainMergeAuthorization: true,
+    ambiguousTemplateSubfieldsPreserved: true,
+    noIndependentSubfieldAssertionAdded: true,
+  });
   assert.equal(decision.geometryChanged, false);
   assert.equal(decision.mechanismChanged, false);
   assert.equal(decision.audioAssetsOrGainsChanged, false);
   assert.equal(decision.testThresholdsChanged, false);
+
+  assert.equal(humanAcceptance.status, "FINAL_COMPLETED_WATCH_DEFAULT_ROUTE_HUMAN_REVIEW_PASSED");
+  assert.equal(humanAcceptance.overallDecision, "PASS");
+  assert.equal(humanAcceptance.readyAndMainMergeAuthorization, true);
+  assert.deepEqual(humanAcceptance.pc.checks, {
+    defaultRootStartupAndAppearance: "OK",
+    rotationZoomAndPresets: "OK",
+    selectionHudLearningTransparencyAndExplode: "OK",
+    windingTimeSettingAndStopSeconds: "OK",
+    operationSoundOffToOn: "OK",
+    legacyRouteRestoration: "OK",
+  });
+  assert.deepEqual(humanAcceptance.physicalIPhone.checks, {
+    defaultRootStartupAndFullLengthDisplay: "OK",
+    multiTouch: "OK",
+    selectionPanelAndTransparency: "OK",
+    windingTimeSettingAndStopSeconds: "OK",
+    operationSoundOffToOn: "OK",
+    homeOrAppReturnAudio: "SUBMITTED_AS_OK_OR_NG_WITHOUT_SINGLE_SELECTION",
+  });
+  assert.deepEqual(humanAcceptance.submittedAnomalyFields, {
+    duplicateOrBurst: "SUBMITTED_AS_NONE_OR_PRESENT_WITHOUT_SINGLE_SELECTION",
+    greenOnButSilent: "SUBMITTED_AS_NONE_OR_PRESENT_WITHOUT_SINGLE_SELECTION",
+    visualMechanismSlowdown: "SUBMITTED_AS_NONE_OR_PRESENT_WITHOUT_SINGLE_SELECTION",
+  });
+  assert.deepEqual(humanAcceptance.recordingPolicy, {
+    preserveSubmittedAmbiguity: true,
+    noIndependentSubfieldAssertionAdded: true,
+    authoritativeDecisionBasis: "The Human explicitly recorded overall PASS and explicitly authorized PR #27 Ready conversion and merge to main.",
+  });
 });
 
 test("route matrix and explicit/legacy parity are complete", async () => {
@@ -134,7 +175,7 @@ test("evidence manifest is closed-world, self-excluded, and byte exact", async (
   }
 });
 
-test("release documents keep the Draft state and closed wheel differential explicit", async () => {
+test("release documents keep the accepted adoption and closed wheel differential explicit", async () => {
   const paths = [
     "README.md",
     "docs/PROJECT_OVERVIEW.md",
@@ -151,5 +192,32 @@ test("release documents keep the Draft state and closed wheel differential expli
   const report = contents.at(-1);
   assert.match(report, /FINAL_COMPLETED_WATCH_CHROME_DESKTOP_WHEEL_FAILURE_NOT_REPRODUCED/);
   assert.match(report, /FINAL_COMPLETED_WATCH_PERFORMANCE_DIFFERENTIAL_GATE_PASSED/);
-  assert.match(report, /Human\u53d7\u5165.*(?:\u884c\u3063\u3066\u3044\u306a\u3044|\u672a\u5b9f\u65bd)/);
+  assert.match(report, /FINAL_COMPLETED_WATCH_DEFAULT_ROUTE_HUMAN_REVIEW_PASSED/);
+  assert.match(report, /FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION_HUMAN_ACCEPTED/);
+  assert.match(report, /PR27_READY_AND_MAIN_MERGE_AUTHORIZED/);
+
+  const completionDecision = JSON.parse(await readFile(
+    new URL("docs/evidence/final-body-completion-gate/decision-summary.json", repositoryRoot),
+    "utf8",
+  ));
+  const modeMatrix = JSON.parse(await readFile(
+    new URL("docs/evidence/final-body-completion-gate/mode-completion-matrix.json", repositoryRoot),
+    "utf8",
+  ));
+  const completionGate = await readFile(new URL("docs/FINAL_BODY_COMPLETION_GATE.md", repositoryRoot), "utf8");
+  assert.equal(completionDecision.status, "MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0");
+  assert.equal(completionDecision.blockingCount, 0);
+  assert.deepEqual(completionDecision.blockers, []);
+  assert.equal(completionDecision.completionDeclared, true);
+  assert.equal(completionDecision.humanCompletionAuthorization, true);
+  assert.equal(completionDecision.productCodeChangedByAudit, false);
+  assert.equal(completionDecision.testThresholdsChanged, false);
+  assert.deepEqual(modeMatrix.modes.map(({ id, status }) => ({ id, status })), [
+    { id: "watch", status: "PASS" },
+    { id: "mechanism-observation", status: "PASS_WITH_ACCEPTED_LIMITATION" },
+    { id: "learning", status: "PASS" },
+  ]);
+  assert.equal(modeMatrix.blockingModeCount, 0);
+  assert.match(completionGate, /IPHONE_TIME_INPUT_COMPLETION_BLOCKER_RESOLVED/);
+  assert.match(completionGate, /DEFER_TO_SUCCESSOR_REBUILD/);
 });

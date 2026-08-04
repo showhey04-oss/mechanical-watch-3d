@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-04",
+  "sourceMainCommit": "25f852a0218486f695a5e2b88c7fc9b665c8c362",
+  "appVersion": "v3.15.0",
+  "modes": [
+    {
+      "id": "watch",
+      "status": "PASS",
+      "requirements": [
+        "completed watch default presentation",
+        "time display",
+        "winding",
+        "time setting",
+        "stop seconds",
+        "power reserve",
+        "operation sound"
+      ],
+      "humanEvidence": "PR #27 completed-watch acceptance plus PR #29 R3 physical-iPhone acceptance",
+      "acceptedLimitations": [],
+      "blockers": []
+    },
+    {
+      "id": "mechanism-observation",
+      "status": "PASS_WITH_ACCEPTED_LIMITATION",
+      "requirements": [
+        "all-direction camera",
+        "front and back observation",
+        "structural opacity",
+        "split",
+        "explode",
+        "part selection",
+        "power path",
+        "escapement",
+        "balance"
+      ],
+      "acceptedLimitations": [
+        "central directional-shadow boundary",
+        "100/99 transparent discontinuity",
+        "55/54 depthWrite discontinuity",
+        "darkening and depth ordering during structural transparency; OIT is not implemented",
+        "PC/iPhone lighting difference",
+        "mobile full-length fog darkening",
+        "clean-process absolute performance not measured"
+      ]
+    },
+    {
+      "id": "learning",
+      "status": "PASS",
+      "requirements": [
+        "part names",
+        "part functions",
+        "power route",
+        "selection HUD and Learning tab synchronization"
+      ],
+      "notRequiredForBodyCompletion": [
+        "strict assembly order",
+        "assembly procedure",
+        "disassembly procedure"
+      ]
+    }
+  ],
+  "blockingModeCount": 0,
+  "deferredToSuccessorRebuild": [
+    "Phase 3B.4d",
+    "OIT",
+    "geometry diagnostics and local cleanup",
+    "UI copy cleanup and crown contextual control",
+    "mobile blank-tap sheet closure",
+    "strict assembly and disassembly guidance",
+    "PWA and offline support",
+    "high-end finishing"
+  ]
+}

@@ -7,7 +7,7 @@ ETA 6498-1級の大型手巻きムーブメントを参照し、機械式時計�
 **▶ [ブラウザで試す](https://showhey04-oss.github.io/mechanical-watch-3d/)** — インストール不要
 
 > **プロトタイプ版について**  
-> 本リポジトリは `v3.15.0` を最終版とするプロトタイプです。現行アーキテクチャでの機能追加と品質磨き込みは終了し、比較候補や検証コードを含めて凍結します。後継版は [mechanical-watch-3d-rebuild](https://github.com/showhey04-oss/mechanical-watch-3d-rebuild) で再構築予定です（準備中）。開発工程、承認Head、寸法、試験結果、候補の採否は [Phase History](docs/PHASE_HISTORY.md) に全量保存しています。
+> 本リポジトリは `v3.15.0` の本体完成済みプロトタイプです。main body-completion Headは `eb4595e040786e0e2115165d36a9cc39e08b2038`、Nodeは477/477・fail 0・skip 0です。現行アーキテクチャでの機能追加は凍結し、比較queryと診断経路は履歴資産として保持します。Issue #2はaccepted limitationとして`not planned`で終結し、PR #5はsuperseded／未マージで終結しました。追加実装は現行prototypeでは計画せず、後継版 **mechanical-watch-3d-rebuild（準備中）** へ引き継ぎます。開発工程、承認Head、寸法、試験結果、候補の採否は [Phase History](docs/PHASE_HISTORY.md) に全量保存しています。
 
 | 完成時計・デスクトップ | モバイル表示 |
 |:--:|:--:|
