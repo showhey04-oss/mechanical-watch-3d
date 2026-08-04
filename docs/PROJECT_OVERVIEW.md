@@ -33,7 +33,9 @@ Refactor Aで輪列・高さ面・回転状態をパラメータ化し、PR #3�
 
 作動音は教育・演出用の合成音であり、実物のETA 6498-1の録音ではない。初期状態はOFFとし、ユーザーがONにした後にだけWeb Audioと音源を初期化する。音イベント系は機構状態へ値を書き戻さず、初期化・診断・状態復元も発音契機にしない。
 
-現在の改修フェーズは「Completed Watch Default Adoption Draft」とする。main `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`に統合済みの完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰を、通常rootの中央effective profileへ昇格する技術候補である。raw queryとeffective queryを分離し、既存profile queryを優先、`defaultProfile=legacy`で開始mainの旧通常表示を保護する。各過去configのquery限定・未採用statusは履歴として変更せず、D2c3はこのDraftでdefault adoption candidateとする。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を維持し、clean-process absolute PASSや全差分セル合格は主張しない。Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始、OITは完成後実験、APP_VERSIONはv3.15.0である。Geometry、機構、S86、D2c3値、DPR、UI、音源・gainは変更しない。
+現在状態は`MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0`とする。PR #27のcompleted-watch defaultに、PR #29の物理iPhone受入済み時刻入力R3をmerge commit `25f852a0218486f695a5e2b88c7fc9b665c8c362`で統合した。Human-reviewed product Headは`cf1751265410a160715db2bd9566b1703d916bac`で、PR #28統合Headは製品tree exact、Node 477/477・fail 0・skip 0、blocking count 0である。既存profile queryは暗黙profileより優先し、`defaultProfile=legacy`は旧通常表示を保護する。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`を維持し、clean-process absolute PASSを主張しない。中央シャドウ境界、透過不連続、深度順、端末差はaccepted limitationとし、Phase 3B.4d、OIT、Geometry／UI改善を`DEFER_TO_SUCCESSOR_REBUILD`とする。APP_VERSIONはv3.15.0である。
+
+PR #27以前の「Completed Watch Default Adoption Draft」およびPhase 3A～3C／Issue #2節にあるquery限定、未採用、Draftの表現は各固定Head時点の履歴であり、現在の既定pathを表さない。Node受入状態の旧不整合は463/465から465/465へ解消し、PR #29追加後の統合suiteは477/477へ合格した。時刻入力のR1 FAIL、R2 core PASS、R3 Human PASSは履歴を保持し、テスト削除、skip、閾値緩和、Human確認後の製品コード変更は行っていない。
 
 人間確認で選定したS86をv3.15.0の通常文字板表示寸法として採用する。対象は文字板表示系だけで、dial ring径27.692、index円径25.456、分針長12.040、時針長8.600、小秒表示円径7.740、小秒針長3.268である。内部機構、小秒中心、四番車軸、Y方向配置、針と軸／管の1:1回転拘束は維持する。試験状態は`ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION`であり、実施済みA/BでPR固有回帰は0件、全ブラウザ試験行列は環境制約により未完了である。
 
@@ -63,7 +65,7 @@ Issue #2 Phase 3B.4aは、選定D2c3のモバイル全長構図だけをquery限
 
 ## 本体完成要件
 
-- 寸法・比率調整、最終外装、全体品質とIssue #2の最終調整を完了する
+- 寸法・比率調整、最終外装、全体品質調整を完了し、Issue #2を達成済み要件またはHuman受容済み制約として最終分類する
 - 動画、PC、iPhoneによる統合レビューを行い、指摘修正と最終確認を完了する
 - 時計モード、機構観察モード、学習モードを統合し、部品名称、機能、動力経路を確認できる
 

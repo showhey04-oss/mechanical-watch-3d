@@ -93,3 +93,9 @@ M3→M5はidle -0.62%／0ms、pointer -0.87%／-2ms、wheel +4.07%／+4msだっ�
 本工程は文書・証跡だけを追加した。製品コード、test runtime、performance threshold、camera、input、audio、APP_VERSIONは変更していない。後続のpromotionでPR #14～#26はMerged／Closedとなり、現在はPR #13をOpen／Draft、PR #5をOpen／Draft、D2c3をquery限定・未採用、Issue #2をOpenで維持し、Phase 3B.4dは開始しない。
 
 次はPR #13 final stack main-promotion監査のChatGPTレビューである。Ready化、merge、main昇格、Issue #2 close、既定採用には別途Human承認が必要である。
+
+## Post-default-adoption status
+
+この節より前はstack integrationおよびmain昇格前の履歴である。後続のHuman承認とPR #27により、D2c3、mobile full-length framing、iOS multi-touch stability、production audio／foreground recoveryはcompleted-watch profileとしてmain `155275d0aaeb968fd83d6dfe15313e259f2bb064`へ採用された。性能分類`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`は維持し、clean-process absolute PASSへ変更しない。
+
+Phase 3B.4dは開始せず、`DEFER_POST_COMPLETION_IMPROVEMENT`を推奨する。Issue #2とPR #5の最終処理はHuman判断へ分離し、本監査では変更しない。

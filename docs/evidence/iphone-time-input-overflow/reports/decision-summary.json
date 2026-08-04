@@ -1,9 +1,11 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "sourceBaseCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
   "sourceImplementationCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
   "appVersion": "v3.15.0",
-  "generatedAt": "2026-08-04T04:30:00.000Z",
+  "reviewedProductHead": "cf1751265410a160715db2bd9566b1703d916bac",
+  "pr29MergeCommit": "25f852a0218486f695a5e2b88c7fc9b665c8c362",
+  "generatedAt": "2026-08-04T15:00:00.000Z",
   "r1HumanReview": {
     "device": "iPhone 16",
     "os": "iOS 26.5.2",
@@ -40,27 +42,45 @@
     ]
   },
   "r2Decision": "PR29_R2_CORE_OVERFLOW_FIX_HUMAN_ACCEPTED",
-  "r3Decision": "PR29_R3_HHMMSS_CENTERED_VISUAL_POLISH_AUTHORIZED",
+  "r3AuthorizationDecision": "PR29_R3_HHMMSS_CENTERED_VISUAL_POLISH_AUTHORIZED",
   "r3Classification": "PR29_R3_NONBLOCKING_POLISH_BEFORE_MERGE",
+  "r3HumanReview": {
+    "device": "iPhone 16",
+    "os": "iOS 26.5.2",
+    "browser": "Safari",
+    "orientation": "portrait",
+    "hhMmSsVisible": "OK",
+    "verticallyCentered": "OK",
+    "horizontallyCentered": "OK",
+    "duplicateText": "NONE",
+    "nativePickerOpens": "OK",
+    "postPickerDisplay": "OK",
+    "specifiedTimeApplication": "OK",
+    "currentTimeApplication": "OK",
+    "overallDecision": "PASS"
+  },
+  "r3Decision": "PR29_R3_PHYSICAL_IPHONE_HUMAN_ACCEPTED",
   "change": [
     "Add an aria-hidden and pointer-inert centered HH:MM:SS visual layer.",
     "Keep the native time input authoritative, accessible, focusable, clickable, and appearance:auto.",
     "Normalize minute-precision values to :00 and preserve second-precision values.",
     "Synchronize the visual layer through existing editor, native event, current-time, Live Sync, and diagnostics paths."
   ],
-  "automatedDecision": "PR29_R3_AUTOMATED_GATES_PASSED_PENDING_PHYSICAL_IPHONE_REVIEW",
+  "automatedDecision": "PR29_R3_AUTOMATED_GATES_PASSED",
   "productDefectDetected": false,
-  "physicalIPhoneRecheckRequired": true,
+  "physicalIPhoneRecheckRequired": false,
   "physicalIPhoneR2Status": "PASS",
-  "physicalIPhoneR3Status": "PENDING",
-  "physicalIPhoneFixedCommitUrlAllowed": true,
-  "fullCompletionClaimed": false,
+  "physicalIPhoneR3Status": "PASS",
+  "physicalIPhoneFixedCommitUrlAllowed": false,
+  "timeInputFixCompleted": true,
+  "fullBodyCompletionClaimed": false,
   "thresholdsChanged": false,
   "appVersionChanged": false,
   "defaultPickerReplaced": false,
   "candidateSpecificBrowserFailures": [],
-  "nativeSafariAutomationLimitation": "The macOS picker modal and SafariDriver PNG rendering cannot establish the R3 physical-iPhone visual result; R3 Human review remains required.",
+  "nativeSafariAutomationLimitation": "The macOS picker modal and SafariDriver PNG rendering could not establish the R3 physical-iPhone visual result by automation alone; subsequent Human review on the physical iPhone established PASS.",
   "fallback": {
+    "status": "HISTORICAL_PRE_ACCEPTANCE_ONLY",
     "candidate": "R2 bounded shell",
     "r2CoreAcceptanceRetainedIfR3Rejected": true,
     "r3MayBeWithdrawnWithoutReopeningCoreOverflow": true
@@ -79,9 +99,10 @@
       "timeFunctionalityPreserved": true,
       "r1FailurePreserved": true,
       "r2HumanAcceptanceRecorded": true,
-      "r3HumanAcceptanceClaimed": false
+      "r3HumanAcceptanceClaimed": true
     }
   },
-  "readyOrMergeAuthorized": false,
-  "mergeRecommendation": "DRAFT_PENDING_PHYSICAL_IPHONE_R3_REVIEW"
+  "readyOrMergeAuthorized": true,
+  "pr29State": "MERGED",
+  "mergeRecommendation": "MERGED_TO_MAIN"
 }
