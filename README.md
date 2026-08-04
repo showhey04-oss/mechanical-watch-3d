@@ -1,225 +1,85 @@
-# Mechanical Watch 3D
+# 機械式時計 Study Model
 
-Three.jsで構築する、教育用の機械式時計3Dシミュレーションです。
+**Mechanical Watch Study Model**
 
-## 現在の基準版
+ETA 6498-1級の大型手巻きムーブメントを参照し、機械式時計の構成、動力伝達、巻上げ、時刻合わせ、脱進機、調速機をブラウザ上で観察できる教育用3Dシミュレーションです。Three.jsとWeb Audioで構築しています。
 
-- main公開基準：v3.15.0（PR #10 S86文字板表示比率）
-- 直前基準：v3.14.0（機構同期作動音 Phase 1）
-- 基準形式：ETA 6498-1級の大型手巻きムーブメント
-- 公開方式：GitHub Pages
-- 現在の改修フェーズ：Completed Watch Default Adoption Draft。main `0aa04a582ee7238b4ef3da81bf9f0eb4ccf2acff`に統合済みの完成外装、D2c3、モバイル全長構図、iOSマルチタッチ、production audio／foreground復帰を、通常rootの中央profileとして有効化する技術候補である。過去のquery限定・未採用状態は各工程時点の履歴として維持し、D2c3はこのDraftでdefault adoption candidateとする。性能は`PHASE3B4_STACK_PERFORMANCE_ACCEPTED_WITH_ENVIRONMENT_LIMITATION`、Issue #2はOpen、PR #5はOpen／Draft、Phase 3B.4dは未開始、OITは完成後実験、APP_VERSIONはv3.15.0を維持する
-- 版の位置付け：v3.15.0はv3.14.0の機構・描画基準を維持し、S86文字板表示比率を通常表示寸法として採用した版
-- 本体完成要件：時計モード、機構観察モード、部品名称・機能・動力経路を扱う学習モード、最終外装、全体品質調整、PC／iPhone統合レビューと指摘修正
-- 完成後の任意改善：厳密な組立順序・組立／分解手順、オフライン対応、PWA、高級仕上げ
-- 既知事項：継承した既定照明は実機で暗く見える場合がある。文字板上の矩形影、100%→99%のtransparent不連続、55%→54%のdepthWrite不連続、透過時の暗部・深度順、PC／iPhone照明差はPR #5のD2c3を取り込まずIssue #2へ分離する
+**▶ [ブラウザで試す](https://showhey04-oss.github.io/mechanical-watch-3d/)** — インストール不要
 
-通常rootのDraft実装は、URLを書き換えずに12個のprofile値を内部effective parametersへ注入する。既存のprofile queryは暗黙profileより優先し、旧通常表示は`?defaultProfile=legacy`で確認できる。作動音は初期OFFのままで、Human受入、Ready化、マージ、Issue #2クローズは未実施である。詳細は[Final Completed Watch Default Adoption](docs/FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION.md)を参照する。
+> **プロトタイプ版について**  
+> 本リポジトリは `v3.15.0` を最終版とするプロトタイプです。現行アーキテクチャでの機能追加と品質磨き込みは終了し、比較候補や検証コードを含めて凍結します。後継版は [mechanical-watch-3d-rebuild](https://github.com/showhey04-oss/mechanical-watch-3d-rebuild) で再構築予定です（準備中）。開発工程、承認Head、寸法、試験結果、候補の採否は [Phase History](docs/PHASE_HISTORY.md) に全量保存しています。
 
-v3.15.0では、人間確認で選定されたS86を通常の文字板表示寸法として採用する。dial ring径27.692、index円径25.456、分針長12.040、時針長8.600、小秒表示円径7.740、小秒針長3.268とし、ムーブメント、四番車軸・小秒中心、Y方向配置、回転拘束、描画・UI・作動音はv3.14.0基準のまま維持する。試験状態は`ACCEPTED_WITH_TEST_ENVIRONMENT_LIMITATION`であり、実施済みA/BではPR固有回帰0件、全ブラウザ試験行列は環境制約により未完了である。
+| 完成時計・デスクトップ | モバイル表示 |
+|:--:|:--:|
+| ![完成時計のデスクトップ表示](docs/evidence/final-completed-watch-default-adoption/captures/default-root-desktop.png) | ![完成時計のモバイル表示](docs/evidence/final-completed-watch-default-adoption/captures/default-root-mobile-390.png) |
 
-寸法・比率調整は、PR #10のS86採用とPR #11のPhase 2C Y基準面・厚さレイヤー監査をもって完了扱いとする。Phase 3Aで実装候補として承認されたE-BALANCEDを、Phase 3B.1では`?exterior=balanced`の明示query時だけThree.js Geometryとして生成する。状態は`IMPLEMENTATION_CANDIDATE_NOT_DEFAULT`であり、通常URLには外装Object3Dを追加せず、最終候補の人間確認前に既定採用しない。今回の対象はケース胴、ベゼル、風防、rehaut、物理文字板blank、裏蓋リング・観察窓、ムーブメント保持リング、ケースチューブ、局所接続候補である。ラグ／ストラップはPhase 3B.2へ分離する。外装総厚8.695の方向性、ケース胴テーパー、りゅうず位置1／2、指掛かり、pull／push、保持リング方針、透過16%、回転・ズーム、時計機能、作動音、物理iPhone操作性は人間確認合格済みで、最終候補の視覚的薄型化、ベゼル／裏蓋リングの全面テーパー維持、透過50%は判断保留である。ETA 4.50 mmの基準面対応も未解決であり、表示開口と全体比率は外装統合レビューで再確認する。
+## できること
 
-Phase 3B.1最終候補は第4候補の全面テーパー断面を維持し、ケース胴の最大径ストレート帯だけを3.450から1.950へ短縮した。前側テーパーは1.510から2.160、後側は2.535から3.385へ延長し、総厚8.695、最大径39.600、端部径38.900、内径37.800は不変である。主テーパー被覆率はベゼル0.888889、裏蓋リング0.956766で、保持座幅0.400／0.200、外周閉合幅0.900／0.600、意図しない水平区間0、両Meshの退化三角形・非多様体edge・禁止干渉0を維持する。表示開口29.800、保持リング、S86、Phase 2C包絡、機構、描画、UI、作動音も変更していない。
+- **時計を動かす** — 巻上げ、逆転空転、時刻合わせ、秒停止、現在時刻設定、パワーリザーブを操作できます。
+- **機構を全方向から観察する** — 10種のカメラプリセット、回転、ズーム、表裏分離、分解表示、断面クリップ、透過表示を利用できます。
+- **部品群を層別表示する** — 地板・受、輪列、脱進機、テンプ、巻上げ伝達、文字板側機構、表面表示、外装など10種の表示グループを個別に切り替えられます。
+- **動力経路を追う** — 全機構、香箱から輪列、脱進機・調速機、巻上げ伝達系、表面・文字板表示、文字板側機構・時刻合わせの6系統を表示できます。
+- **部品を学ぶ** — 部品選択、名称・機能の説明、材質凡例、噛合い・軸受ガイドを利用できます。
+- **時計の状態を確認する** — 主ゼンマイトルク、伝達効率、テンプ振幅、歩度、姿勢差、ビートエラー、履歴グラフを確認できます。
+- **時間を進めて挙動を見る** — 時間経過倍率とシミュレーション操作により、パワーリザーブと歩度の変化を観察できます。
+- **機構同期音を聴く** — テンプ、巻上げ、逆転空転、りゅうず操作に同期する合成音を再生できます。音は初期状態でOFFです。
 
-Phase 3B.2は、人間承認済みPhase 3B.1 Head `d51e4f8790596f7bc894e8c716edb0d54968d260`へ積み上げるquery限定候補である。`?exterior=balanced`時だけ4本のラグ、2本の簡略スプリングバー、12時側／6時側の構造確認用ストラップ、簡略バックルを生成し、通常URLは固定mainとpixel exactを維持する。lug-to-lugは46.600、ストラップはラグ側幅20.000、厚さ2.400、中心線長42.000／58.000で、禁止干渉は位置1／位置2とも0件である。ストラップは`STRUCTURAL_PLACEHOLDER_NOT_PHASE3C_STYLE`であり、革色・シボ・ステッチ・穴列・コバ・最終バックル意匠はPhase 3Cへ残す。既存カメラ定数は変更せず、全ストラップ確認には可逆なwheel zoom-outを使用する。PC自動回帰と390×844実ブラウザ回帰は合格し、物理iPhoneは人間確認待ちである。
+デスクトップとスマートフォンに対応し、iPhoneのマルチタッチ操作、画面復帰後の作動音再開、モバイル全長表示を確認しています。
 
-Phase 3C.1はHead `4de3c018f52ea88d1cbe5f4ad0c44166f7f89914`を`HUMAN_ACCEPTED_PHASE3C1_WITH_DEFERRED_QUALITY_ITEMS`として継承する。白系アイボリー、安定silver、針・小秒・オープンハート、非屈折近似dome、6時index、外装表示グループ、分離／分解／透過、時計機能、作動音、PC／物理iPhone操作・性能は合格済みである。小秒文字板の選択性、A.5前後面明度差、矩形影、透過不連続、PC／iPhone照明差、表裏分離・断面クリップのUX判断は保留を維持する。
+## 基本操作
 
-Phase 3C.2は、承認済みPhase 3C.1へ積み上げるquery限定Draftである。`?exterior=balanced&watchHead=phase3c1&strapStyle=phase3c2`時だけ、中心線長75.000／115.000、幅19.700→16.000、厚さ2.600→2.050の黒革ストラップ、実スプリングバーポケット、直径2.000・pitch 7.000の7貫通穴、定革・遊革、尾錠枠・つく棒・取付バー、尾錠側巻込み、procedural calf grain、同系色ステッチ、黒いコバを生成する。位置1／位置2の禁止干渉0、10部品の選択・HUD・学習同期、opacity 16%内部選択、外装ON／OFF・split・explode・復元、通常path／Phase 3C.1-only path pixel exact、Desktop／390×844性能基準を確認した。Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`で、Ready化・マージ・既定採用は未実施である。
+- ドラッグ／一本指：カメラ回転
+- ホイール／ピンチ：ズーム
+- 二本指：パン
+- 部品をタップ：部品選択と説明表示
+- 左上メニュー：操作、学習、技術の各パネル
+- 右上スピーカー：作動音のON／OFF
 
-Phase 3C.2承認Head `f245a5a9d68d5205e7609479ffefd711376e4930`は`HUMAN_ACCEPTED_PHASE3C2_WITH_DEFERRED_RENDERING_POLISH`である。Phase 3C.3は`integration=phase3c3`追加時だけ完成時計を統合監査し、小秒凹面の空白4点へ非描画selection proxyを追加する。Desktop／390×844の100%／50%で4/4、16%越しの設定車2選択、外装ON/OFF、split、explode、完全復元、位置1／2の禁止干渉0、保護3 pathのpixel exact、性能差分合格を確認した。承認Head `2b94f51acf71a62b8fdca59f64de39566d6e23ee`はPCと物理iPhoneの人間確認に合格し、状態は`HUMAN_ACCEPTED_PHASE3C3_WITH_THERMAL_OBSERVATION_AND_DEFERRED_ISSUE2_POLISH`である。物理iPhoneの15分確認では軽微な発熱を観察したが機能劣化は報告されず、Issue #2最終候補で再試験する。Geometry・照明・影・透過基盤・UI・音響・APP_VERSIONは変更しておらず、Ready化・マージ・既定採用も未実施である。
+旧通常表示は `?defaultProfile=legacy` を付けたURLで確認できます。比較・診断用のqueryフラグは、プロトタイプの検証履歴として削除せず残しています。
 
-Issue #2 Final Polish Phase 3Aは完成外装へ`rendering=issue2-baseline|issue2-d2a|issue2-d2c3`を追加したquery限定比較である。198枚の実WebGL PNG、Node 210/210、完成外装統合回帰6/6を取得し、正式判断を`ISSUE2_PHASE3A_AUDIT_ACCEPTED_CANDIDATES_REJECTED_NO_ADOPTION`とした。198枚は`DIMENSIONAL_COVERAGE_SET_NOT_FULL_CARTESIAN`で、候補棄却には十分だが最終候補採用には不足する。D2aは視覚参考として棄却し、D2c3は`RETAIN_AS_FALLBACK_LAST_RESORT_NOT_ADOPTED`として比較履歴とquery実装を残すが既定採用しない。
+## ローカル実行
 
-Issue #2 Final Polish Phase 3B.1はPhase 3C.3 baselineのlight、Material、camera、DPR、透過処理を保護し、`frontKey.castShadow=false`、5状態unionによる固定shadow camera fit、fog 160／260を単独・単純合成した6候補をquery限定で比較した。1056枚の実WebGL PNGと性能・回帰を取得したが、shadow-offは前後面バランス、shadow-fitは512² mapの解像度、fog候補はMobile far visibilityを同時に満たせず、`ISSUE2_PHASE3B1_NO_TECHNICAL_FINALIST`とした。Stage 2、物理iPhone、採用は未実施である。
+`index.html` はThree.jsをCDNから読み込むため、実行時にインターネット接続が必要です。
 
-Issue #2 Final Polish Phase 3B.1bではtight 512／1024が中央projection boundaryを除去しても広い斜めshadow bandを閉鎖できず、`ISSUE2_PHASE3B1B_AUDIT_ACCEPTED_TIGHT_SHADOW_ROUTE_CLOSED`とした。Phase 3B.1cではStage 0で589 Mesh、553 caster／receiverを監査し、主要caster群を`dial-exterior`へ特定した。smoothstep attenuationは中央矩形境界と斜め帯を低減し、性能差分に合格したが、前後面のbaseline比悪化最大0.072299が上限0.05を超えた。固定normalBias候補はMobile性能も不合格で、`ISSUE2_SHADOW_ROUTE_EXHAUSTED_NO_TECHNICAL_FINALIST`とする。Stage 1は832枚、PR #20比較の34 protected pathはpixel exact、候補はすべてquery限定・未採用である。
+```bash
+git clone https://github.com/showhey04-oss/mechanical-watch-3d.git
+cd mechanical-watch-3d
+python3 -m http.server 8000
+```
 
-Issue #2 Final Polish Phase 3B.2では、100%→99%の`transparent`と55%→54%の`depthWrite`切替を実ランタイムで再現し、Shadow-off／D2c3、Desktop／390×844、13 opacityで固定深度3候補を比較した。3候補はproperty toggle 0を達成したが、`stable-depth-base`は内部視認性、`stable-depth-off`はD2c3 wheel性能、`group-stable-depth`はD2c3 selected性能に不合格となった。候補固有browser failure 0、UI 22/22、HUD 57/57、audio 23/23、protected path 42/42を維持したが技術finalistは0件であり、Stage 2、物理iPhone、OIT実装、採用は行っていない。
+ブラウザで `http://localhost:8000/` を開きます。Windowsでは `py -m http.server 8000` も使用できます。
 
-Issue #2 Final Polish Phase 3B.3は製品コードを変更せず、`continuity=issue2-current`を共有するShadow-offとD2c3を、2 viewport×4 theme×16 scenarioの実WebGL PNG 256枚、36操作GIF、11 scenario×3反復×2候補×2 viewportの性能測定で最終人間比較用に整理した。PCでは両候補合格、物理iPhoneではShadow-offを暗いfull-length表示のため不合格、D2c3を性能tradeoff込みで合格・選定した。D2c3はまだ既定採用せず、Shadow-offは比較履歴として保持する。冷却5分は手順差、progressive frame dropとSafari reloadは`NOT_REPORTED`、テンプ音遅れは候補独立性未確定として後続安定化へ分離する。
+Node.jsによる自動試験は次で実行します。
 
-Issue #2 Final Polish Phase 3B.4aは、選定D2c3のモバイル全長構図をquery限定で安定化する。390×844の完成時計407,428頂点からraw fit距離199.068109、2.5%安全余裕込み204.044811を算定し、`framing=issue2-mobile-full-length-fit`時だけモバイル`maxDistance=204.1`を適用する。初期表示32/32とDesktop固定画像48/48はPNG byte exact、Desktop selected 8/8は選択・camera・transform exact、最小余白4.0265%、clipping 0、pinch／wheel reversal 0、性能差分6/6合格である。iPhone 16／iOS 26.5.2の15分確認で初期表示、全長、余白、preset、最大距離回転、設定車2選択、HUD同期、解除、split／explode／restore、軽微な発熱を合格とし、fogの遠景暗化は`MOBILE_FULL_LENGTH_FOG_DARKENING_ACCEPTED_AS_IS`とした。Phase 3B.4bではframingなしAが49秒、framingありBが55秒で同じgesture state劣化を再現し、修正候補Cは15分以上再現しなかった。`CANDIDATE_INDEPENDENT_CAMERA_GESTURE_STATE_ISSUE`、`IOS_MULTITOUCH_STABILITY_TECHNICAL_FINALIST`、`HUMAN_ACCEPT_IOS_MULTITOUCH_STABILITY_FIX`として受入済みだが、preset／selectionの手動結果は`NOT_REPORTED`のため最終統合で再確認する。音響ペーシング低下はPhase 3B.4cへ分離する。D2c3、framing、input候補はquery限定・未採用で、Ready化、マージ、Issue #2クローズを行わない。
+```bash
+npm test
+```
 
-Phase 3B.4 stack integration Head `d16037a75d85d705434d8b73ef5293511052f65e`では、Phase 3B.4c R2.4.2が統合済みで、Native Safari Desktop／Mobile、物理iPhone foreground自動復帰6/6、preset、9部品選択、HUD／学習同期、blank clear、multi-touch 100 cycle、production audio、visibility 30 cycle、10分相当stress、12/12 protected pathを合格とした。Nodeは442/442である。commit段階12性能セルは既存閾値内でMobile pointer製品回帰を再現しなかったが、最終clean-process測定はStatefulFirewall／VShieldScannerの高CPU負荷により未実施である。clean環境の絶対性能PASSやMcAfee停止環境PASSは主張せず、製品コード・閾値・APP_VERSIONは変更していない。
+## 既知の制約
 
-## 実装済み
+- 文字板上に矩形状の影が見える場合があります。
+- 透過率 `100% → 99%` では `transparent` フラグの切替により表示が不連続になります。
+- 透過率 `55% → 54%` では `depthWrite` の切替により表示が不連続になります。
+- 透過表示では暗部や深度順序が不自然になる場合があります。順不同半透明描画（OIT）を実装していないことが主因で、影、fog、DPRのパラメータ調整だけでは根本解決できません。
+- `100% → 99%` と `55% → 54%` の不連続は深度順序とは別問題で、透過率の閾値に応じて `transparent`／`depthWrite` を実行時に切り替える設計に起因します。
+- PCとiPhoneでは照明の見え方が異なり、既定照明が実機で暗く見える場合があります。
+- モバイルで時計全長までズームアウトすると、遠景fogにより暗く見える場合があります。
 
-- 輪列側／文字板側の分離
-- 巻上げ、時刻合わせ、秒停止
-- 主ゼンマイ残量とパワーリザーブ
-- 輪列、軸、かな、穴石、受
-- スイスレバー脱進機
-- テンプ・ヒゲゼンマイ
-- 歩度、姿勢差、ビートエラー
-- 動力・振幅・歩度の連成
-- 地板、支持柱、受形状
-- 部品選択、透過、分解、表裏分離
-- モバイル向けUI
-- ピッチ半径和から算出する主輪列・日の裏輪列・巻上げ輪列の軸位置
-- 歯先円・ピッチ円・歯底円・歯厚相当値を分離した歯車形状
-- 軸方向レイヤーと状態別回転部品の共通設定
-- りゅうずから地板内端まで連続する巻真軸系
-- 構造部品だけを対象とする復元可能な透過表示
-- 巻上げ／時刻合わせを分離する小径の二位置面クラッチ
-- 中心車軸、筒かな、中空時針車の連続同軸構造
-- Pointer EventsとArcballControlsを連携した全方向ドラッグ／選択判定
-- 通常運転・時刻合わせを共通解決する常時噛合いグラフと、独立した一方向巻上げグラフ
-- モジュールと歯数からピッチ径を導出する5組の常時噛合い列
-- 位置1でもミニッツホイールから従動する設定車2・設定車1・設定中間車
-- 設定入力―設定中間車クラッチ境界と中心車―筒かな摩擦スリップ境界
-- 筒かな管・時針管・四番車軸へ実Object3D角で1:1連結した3本の針
-- 実Object3Dへ追従する文字板側3D包絡と禁止干渉診断
-- Raycaster専用Layer、部品優先順位、透過時の内部部品選択
-- 位置1のりゅうずから香箱真・主ゼンマイまでを結ぶ実Object3D巻上げグラフ
-- 共通モジュール0.082の短い巻上げピニオン、複合丸穴車、角穴車
-- 香箱胴と香箱真を独立させた相対巻上げ・一方向空転モデル
-- 負Y文字板側を時計の表面とする既定カメラ・UI・座標規約
-- 軸・管との1:1拘束を維持した文字板正面時計回りの3針表示
-- 表裏を同等に照らす両面キーライトと低強度カメラ追従フィル
-- Arcball入力カメラと描画カメラを分離したQuaternion・位置・ズーム平滑化
-- 操作中DPR・影更新の動的制御とフレームペーシング診断
-- 位置1基準と遷移率から毎フレーム絶対配置するりゅうず・巻真・二位置移動クラッチ
-- 操作・学習・技術の3タブ、キーボード対応、タブ別スクロール保持を備えた操作パネル
-- 選択時だけ表示する部品情報HUD、パネル内モデル情報、44px以上のハンバーガーメニュー
-- 上部3D操作領域を残す56dvh以下のモバイルボトムシート
-- `change`／`blur`／ボタンを単一適用経路へ統合したiOS相当の時刻入力と、16個のキーボード対応トグルカード
-- 既存の機構角・ビート位相を読み取って発音する、初期OFF・遅延初期化・右上スピーカー切替の機構同期作動音
+外部レビューで動画24フレームを確認した範囲では、矩形影や明白な深度順序の誤りは観察されませんでした。文書化した症状は、通常の見え方では軽微な場合があります。
 
-## Refactor Aで対応した主要課題
+## モデルの位置付け
 
-1. 歯車の噛合いをパラメトリックに再構築
-2. 入石・出石周辺からアンクル受の支持脚を退避
-3. 通常、巻上げ、時刻合わせ、秒停止、ゼンマイ停止の動作を整理
-4. 巻真、巻上げピニオン、スライディングピニオンを一体の軸系として再構成
+本モデルはETA 6498-1級を参照した教育用・可視化用の模式モデルです。実機の複製、製造用CAD、時計修理用資料、完全なデジタルツインではありません。歯形、クリアランス、ばね特性、摩擦、潤滑、接触、弾性変形、干渉診断、作動音には教育表示上の近似を含みます。
 
-## Refactor A.1で追加対応した主要課題
+## ドキュメント
 
-1. 地板・受・加工層・支持部を明示登録し、ねじ・石・歯車を透過対象外にする
-2. 非表示・低透過・診断部品を除外する選択フィルターとMultiMaterial復元を追加
-3. 巻真を日の裏輪列から退避し、位置1／位置2の伝達経路を分離
-4. 中心車から文字板側へ貫通する中心軸と中空表示輪列を追加
-5. カメラ姿勢とポインター操作をデスクトップ／モバイル共通で安定化
+- [工程履歴・承認状態・試験記録](docs/PHASE_HISTORY.md)
+- [プロジェクト概要](docs/PROJECT_OVERVIEW.md)
+- [ロードマップ](docs/ROADMAP.md)
+- [受入試験](docs/ACCEPTANCE_TESTS.md)
+- [完成時計の既定採用](docs/FINAL_COMPLETED_WATCH_DEFAULT_ADOPTION.md)
+- [機構同期作動音](docs/MECHANICAL_SOUND_SYSTEM.md)
 
-## Refactor A.2で追加対応した主要課題
+## ライセンス
 
-1. 装飾レバーと模式的な長軸を削除し、文字板側を機能する最小部品へ再構成
-2. `applyKinematicState()`から10個の実Object3Dを連続駆動
-3. 5組の歯車に歯先対歯溝の初期位相を適用
-4. 14個の実Object3D包絡で位置1・位置2の禁止干渉0件を実ブラウザ検証
-5. Raycaster Layers、優先順位、操作後クールダウンで透過時の部品選択を安定化
-
-## Refactor A.3で追加対応した主要課題
-
-1. 筒かな12枚―ミニッツホイール36歯をモジュール0.08125、ミニッツかな10枚―時針車40歯を0.078としてピッチ径を導出
-2. ミニッツホイール―設定車2―設定車1―設定中間車を常時噛合いとし、位置1でも表示輪列から従動
-3. 位置2だけ設定入力―設定中間車境界を接続し、中心車―筒かな摩擦部で主輪列から切離し
-4. 通常運転と時刻合わせを`resolveMotionWorksState()`／`applyMotionWorksState()`へ統合
-5. 文字板側へ管・軸を延長し、分針・時針・小秒針の取付点と実回転を一致
-6. 17件の静的試験、39件の実ブラウザ試験、14枚のWebGL証跡を追加
-
-## Refactor A.4で追加対応した主要課題
-
-1. 位置1の巻上げクラッチから短い巻上げピニオン、複合丸穴車、角穴車、香箱真、主ゼンマイまでを専用resolverと実Object3Dで連結
-2. 丸穴車・角穴車のりゅうず直接駆動を廃止し、正転伝達／逆転空転／位置2切離しを一方向機構グラフで解決
-3. 香箱胴と香箱真を独立回転体に分離し、`香箱胴角 - 香箱真角`から主ゼンマイ蓄力を導出
-4. 内部Y配置を維持したまま負Y文字板側を時計の表面・既定起動画面、正Y側をムーブメント裏面として統一
-5. 主輪列から針までの符号を一元化し、針と軸・管の1:1拘束を保ったまま正面時計回りを実現
-6. 20件の静的試験、60件の実ブラウザ試験、19枚のWebGL証跡を追加
-
-## Refactor A.5で追加対応した主要課題
-
-1. 負Y文字板面と正Yムーブメント面を同程度に照らす両面ライトリグを構築
-2. 自由回転中の黒つぶれを抑える低強度カメラ追従フィルを追加
-3. モデルを回さず、`VIEW_UP=[0,0,1]`を維持して全方向回転できるArcballControlsへ移行
-4. Pointer／touch操作、部品選択、透過、巻上げ、時計回りの針を実ブラウザ回帰
-
-## Refactor A.6で追加対応した主要課題
-
-1. Arcball入力カメラと描画カメラを分離し、Quaternion・位置・ズーム距離をrAFで平滑化
-2. 段階ズームを連続距離目標へ置換し、pointer回転とwheelズームの停止・跳躍を除去
-3. 操作中のpixel ratioと影更新を動的制御し、Geometry・DOM・Box3更新を削減
-4. p50／p95／p99、33ms・50ms超過、long task、描画コストを診断APIへ追加
-
-## Refactor A.7で追加対応した主要課題
-
-1. りゅうず・巻真・二位置移動クラッチの位置1ローカル基準を生成時に固定
-2. `crownTransition`と分解量から3部品のXYZを単一関数で絶対配置し、累積更新を廃止
-3. 位置2の600実rAFフレーム、100往復、30／60／120fps、3,600高速フレームを検証
-4. 位置1・位置2の禁止干渉0件とA.6以前の機構・カメラ・選択回帰を維持
-
-## PR #3で追加対応したUIアーキテクチャ
-
-1. 一般操作を「操作」、構造・部品情報を「学習」、診断・簡易モデルを「技術」へ再配置
-2. 既存ID・イベント・履歴Canvasを維持し、選択部品情報を同じデータ源から2か所へ同期
-3. ARIA tabパターン、左右矢印・Home・End、フォーカスリング、hiddenパネルのフォーカス除外に対応
-4. デスクトップとモバイルでタブ別スクロール位置、パネル開閉後の選択タブを保持
-5. 内部機構、カメラ、レンダリング、照明、影、構造透過方式、Issue #2を変更せず既存回帰を維持
-
-## PR #4で追加対応したモバイルオーバーレイ・HUD
-
-1. 未選択時の右上部品情報を完全に非表示とし、選択・解除状態と`aria-hidden`を同期
-2. 3Dキャンバス上の常設バージョン表示を撤去し、v3.13.0とPR #3基準情報を学習タブ内へ移動
-3. 文字付きメニューピルを、44×44px以上の操作領域と開閉ARIA状態を備えた低コントラストのハンバーガーへ変更
-4. モバイルパネルを画面下部56dvh以下のボトムシートとし、本文スクロールとstickyタブを維持
-5. パネルを開いたまま上部3D領域の回転・ズーム・選択、位置1巻上げ、位置2時刻合わせを継続可能にした
-6. 実機レビュー対応としてハンバーガーの枠を撤去し、PC折りたたみ時は画面左端へ絶対配置で追従
-7. iOS相当の`HH:mm`／`HH:mm:ss`を`change`で確定し、`blur`とボタンをフォールバックにした単一時刻適用経路へ統合
-8. Live Sync、構造表示、表示グループ、診断、振幅設定の全16チェックボックスをON／OFF／disabledが明確なトグルカードへ変更
-9. ライト、影、露出、tone mapping、材質、構造透過、DPR、カメラ、内部機構を変更せず既存回帰を維持
-
-## v3.14.0で追加した機構同期作動音 Phase 1
-
-1. 脱進機の既存ビート番号、巻上げ時の角穴車歯通過、逆転時の巻上げピニオン歯通過を読み取り、tick／tock、巻上げ、逆転空転を発音
-2. りゅうず位置1／位置2のユーザー操作で、方向別の節度閾値を交差した時だけpull／push音を1回発音し、端点より約70〜100ms前倒しする。初期化・復元・診断では無音を維持
-3. Web Audioを初期OFF・ユーザー操作後の遅延初期化とし、右上44×44pxスピーカーボタン、固定gain、可視状態、読み込み失敗を独立管理
-4. 音イベントresolverを毎フレーム最大1件、高速脱進機音を最大8件/秒へ制限し、停止・再開時のバックログを破棄
-5. 48kHz／16-bit／mono PCMの合成音A3・W3・R2・S3を採用。実物のETA 6498-1録音ではないことをUIとメタデータへ明記
-6. 音OFF時は音処理を早期終了し、内部機構、レンダリング、照明、影、透過、DPR、カメラ、Issue #2を変更せず回帰
-
-設計と証跡は `docs/MECHANICAL_SOUND_SYSTEM.md` と `docs/evidence/mechanical-operation-sounds/README.md` を参照してください。物理iPhoneでの音量・識別性・遅延・二重発音・復帰動作の人手受入は完了しています。
-
-詳細は以下を参照してください。
-
-- `docs/PROJECT_OVERVIEW.md`
-- `docs/ROADMAP.md`
-- `docs/ACCEPTANCE_TESTS.md`
-- `docs/CODEX_HANDOFF.md`
-- `docs/CODEX_REQUEST.md`
-- `docs/REFACTOR_A_SUMMARY.md`
-- `docs/REFACTOR_A1_SUMMARY.md`
-- `docs/REFACTOR_A2_SUMMARY.md`
-- `docs/REFACTOR_A2_INTERFERENCE_REPORT.md`
-- `docs/REFACTOR_A3_SUMMARY.md`
-- `docs/REFACTOR_A3_TOPOLOGY.md`
-- `docs/REFACTOR_A4_SUMMARY.md`
-- `docs/REFACTOR_A4_WINDING_TOPOLOGY.md`
-- `docs/REFACTOR_A4_FRONT_CONVENTION.md`
-- `docs/REFACTOR_A5_SUMMARY.md`
-- `docs/REFACTOR_A5_LIGHTING.md`
-- `docs/REFACTOR_A5_CAMERA_CONTROLS.md`
-- `docs/REFACTOR_A6_SUMMARY.md`
-- `docs/FINAL_EXTERIOR_DESIGN_PHASE3C1_WATCH_HEAD.md`
-- `docs/FINAL_EXTERIOR_DESIGN_PHASE3C2_STRAP_BUCKLE.md`
-- `docs/FINAL_EXTERIOR_INTEGRATION_PHASE3C3.md`
-- `docs/ISSUE2_PHASE3C3_INTEGRATION_HANDOFF.md`
-- `docs/REFACTOR_A6_FRAME_PACING.md`
-- `docs/REFACTOR_A6_CAMERA_SMOOTHING.md`
-- `docs/REFACTOR_A7_SUMMARY.md`
-- `docs/REFACTOR_A7_KEYLESS_POSITION.md`
-- `docs/PR3_UI_ARCHITECTURE.md`
-- `docs/PR4_MOBILE_OVERLAY_HUD.md`
-- `docs/MECHANICAL_SOUND_SYSTEM.md`
-- `docs/FINAL_EXTERIOR_INTEGRATION_PHASE3A_INTERFACE_AUDIT.md`
-- `docs/FINAL_EXTERIOR_INTEGRATION_PHASE3B2_LUG_STRAP.md`
-
-## ローカル確認
-
-`index.html` はThree.jsをCDNから読み込みます。ブラウザで開く場合はインターネット接続が必要です。
-
-機構設定の自動検証は `npm test` または `node --test tests/*.test.mjs` で実行できます。
-
-## GitHub Pages
-
-リポジトリのPages設定で、`main` ブランチのルートを公開対象にしてください。
+本リポジトリのソフトウェアは [MIT License](LICENSE) で公開します。
