@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 3,
+  "sourceBaseCommit": "155275d0aaeb968fd83d6dfe15313e259f2bb064",
+  "sourceImplementationCommit": "b08e9762ff1557ad88ebef966bf9ee006f5fd644",
+  "appVersion": "v3.15.0",
+  "generatedAt": "2026-08-04T04:30:00.000Z",
+  "layout": {
+    "installedChrome": { "passed": 14, "failed": 0, "total": 14 },
+    "playwrightWebKit": { "passed": 14, "failed": 0, "total": 14 },
+    "nativeSafariMacOS": {
+      "version": "26.5.2 (21624.2.5.11.8)",
+      "passed": 14,
+      "failed": 0,
+      "total": 14,
+      "environmentNote": "Safari enforces 336px as its minimum inner window width; both the requested-320/actual-336 and explicit-336 contracts passed."
+    }
+  },
+  "layoutContract": {
+    "visualFrameOwner": "timeInputShell",
+    "visualTextFormat": "HH:MM:SS",
+    "allStagesInsideBodyAndViewport": true,
+    "allStagesVisuallyCentered": true,
+    "maximumHorizontalCenterErrorPx": 0,
+    "maximumVerticalCenterErrorPx": 0,
+    "maximumInsetDifferencePx": 0,
+    "documentHorizontalOverflowFailures": 0,
+    "nativeTypeTimePreserved": true,
+    "nativeAppearanceAutoPreserved": true,
+    "visualPointerEventsNone": true,
+    "visualAriaHidden": true
+  },
+  "functional": {
+    "chromeAndWebKit": {
+      "uiHud": { "passed": 6, "failed": 0, "total": 6 },
+      "defaultAndLegacyTimeFlow": { "passed": 4, "failed": 0, "total": 4 },
+      "covered": [
+        "minute and second value synchronization",
+        "specified time",
+        "current time",
+        "Live Sync on and off",
+        "crown position 2",
+        "three-hand coupling",
+        "panel reopen",
+        "tab switching"
+      ]
+    },
+    "nativeSafari": {
+      "scopedDefaultAndLegacyTimeFlow": { "passed": 2, "failed": 0, "total": 2 },
+      "trustedNativeKeyboardInputEvents": true,
+      "nativeControlPreserved": true,
+      "pickerModalAutomation": "NOT_COMPLETED_MACOS_PICKER_MODAL",
+      "crownRegression": "INHERITED_FROM_R2_AND_CHROME_WEBKIT_R3"
+    }
+  },
+  "comprehensiveRegression": {
+    "desktop1280x720": {
+      "candidateSpecificFailureIds": [],
+      "inheritedFailureIds": [
+        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+        "a5-both-faces-retain-key-light-and-camera-follow-fill",
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ]
+    },
+    "mobile390x844": {
+      "candidateSpecificFailureIds": [],
+      "inheritedFailureIds": [
+        "a5-lighting-rig-has-balanced-front-back-keys-and-camera-fill",
+        "a5-both-faces-retain-key-light-and-camera-follow-fill",
+        "a5-all-background-themes-keep-front-back-luminance-within-thirty-percent",
+        "a6-native-pointer-path-meets-frame-pacing-and-smoothness-targets",
+        "a6-wheel-path-produces-monotonic-continuous-zoom"
+      ]
+    },
+    "thresholdsChanged": false
+  },
+  "console": {
+    "errors": 0,
+    "warnings": 0,
+    "runtimeErrors": 0,
+    "unhandledRejections": 0
+  },
+  "node": {
+    "pr29Specific": { "passed": 12, "failed": 0, "skipped": 0, "total": 12 },
+    "fullBranch": {
+      "passed": 475,
+      "failed": 2,
+      "skipped": 0,
+      "total": 477,
+      "inheritedFailureIds": [
+        "default-adoption reports preserve the exact implementation source and decision boundary",
+        "release documents keep the Draft state and closed wheel differential explicit"
+      ]
+    },
+    "pr28FixedHead": {
+      "head": "dbb4210361599427c60d5a44234b4c1eafd32f09",
+      "passed": 465,
+      "failed": 0,
+      "skipped": 0,
+      "total": 465,
+      "verification": "detached worktree with Git history"
+    }
+  },
+  "visualEvidence": {
+    "installedChromeR3Png": "AVAILABLE_AND_VALID",
+    "nativeSafariR3Png": "EXCLUDED_SINGLE_COLOR_WEBDRIVER_OUTPUT",
+    "nativeSafariEvidenceUsed": ["DOM layout metrics", "native event diagnostics", "functional report"],
+    "physicalIPhoneR3VisualReview": "PENDING"
+  },
+  "candidateSpecificBrowserFailureIds": []
+}
