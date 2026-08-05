@@ -19,6 +19,8 @@ Mechanical Watch 3D v3.15.0の公開UIから開発工程向け文言を除去し
 - 利用者向けのりゅうず表記を「巻上げ」「時刻合わせ」へ統一し、ボタン、状態、ヘルプ、ARIAを同期した
 - `getPublicPartName()`と`getPublicPartDescription()`を表示境界に置き、内部`partName`、選択ID、機構状態を保持したまま公開名と説明だけを整える
 - 既に簡潔な説明は維持し、開発履歴・実装用語を含む説明だけを1～2文へ整理した
+- R2で`E-BALANCED 物理文字板`を「文字板」、`E-BALANCED 簡略バックル`を「尾錠」へ追加変換し、公開metricの`3 tabs`を「3タブ」へ統一した
+- 実ランタイム登録191部品の全公開出力inventoryを追加し、公開名／公開説明の禁止語0件、空説明0件、内部ID変更0件、挙動変更0件を確認した
 
 ## 保護範囲
 
@@ -37,8 +39,10 @@ Geometry、輪列中心、部品寸法、機構配置、外装寸法、Material�
 
 ## 検証結果
 
-- Node: 507／507合格、fail 0、skip 0、todo 0
+- Node: 509／509合格、fail 0、skip 0、todo 0
 - Installed Chrome: default／legacy、Desktop 1280×720／Mobile 390×844で合格
+- E-BALANCED明示routeで「文字板」「尾錠」のHUD／学習タブ同期をDesktop・Mobile双方で確認
+- 全登録部品inventory: 191／191、公開名禁止語0、公開説明禁止語0、空説明0
 - 公開画面の開発工程文言0、可視文言／ARIA不一致0、horizontal overflow 0
 - 未選択、りゅうず、歯車、テンプでHUD／学習タブ同期を確認
 - 操作／学習／技術タブ、panel開閉、巻上げ、時刻合わせ、時刻入力を確認

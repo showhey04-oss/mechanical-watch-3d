@@ -53,9 +53,16 @@ test("default public shell contains no development-management wording", () => {
 test("selected part heading uses a public display name without changing its internal ID", () => {
   assert.equal(getPublicPartName("Phase 3C.1 分針"), "分針");
   assert.equal(getPublicPartName("E-BALANCED ケース胴"), "ケース胴");
+  assert.equal(getPublicPartName("E-BALANCED 物理文字板"), "文字板");
+  assert.equal(getPublicPartName("E-BALANCED 簡略バックル"), "尾錠");
   assert.equal(getPublicPartName("設定車2"), "設定車2");
   assert.match(index, /obj\.userData\.partName=name/);
   assert.match(index, /getPublicPartName\(name\)/);
+});
+
+test("visible shell uses Japanese tab-count wording", () => {
+  assert.doesNotMatch(visibleShell, /3 tabs/);
+  assert.match(visibleShell, /3タブ/);
 });
 
 test("representative public descriptions are non-empty, concise and implementation-free", () => {
@@ -103,6 +110,36 @@ test("UI copy inventory preserves internal identifiers and behavior", async () =
   }
 });
 
+test("full public part inventory covers every runtime registration without forbidden wording", async () => {
+  const inventory = JSON.parse(await readFile(join(evidenceRoot, "public-part-copy-inventory.json"), "utf8"));
+  assert.equal(inventory.inventoryCount, inventory.items.length);
+  assert.equal(inventory.inventoryCount, inventory.registeredPartCount);
+  assert.ok(inventory.inventoryCount >= 111);
+  assert.equal(inventory.forbiddenPublicNameCount, 0);
+  assert.equal(inventory.forbiddenPublicDescriptionCount, 0);
+  assert.equal(inventory.emptyPublicDescriptionCount, 0);
+  assert.equal(inventory.internalIdentifierChangedCount, 0);
+  assert.equal(inventory.behaviorChangedCount, 0);
+  assert.equal(new Set(inventory.items.map((item) => item.internalName)).size, inventory.inventoryCount);
+  for (const item of inventory.items) {
+    for (const field of ["internalName", "publicName", "publicDescription", "group", "selectable", "nameOverrideApplied", "descriptionOverrideApplied", "sourceFile", "sourceLine", "sentenceCount", "forbiddenTermMatches", "duplicatePublicName", "duplicateReason"]) {
+      assert.equal(Object.hasOwn(item, field), true, `${item.internalName} ${field}`);
+    }
+    assert.ok(item.publicDescription.trim().length > 0, item.internalName);
+    assert.ok(item.sentenceCount >= 1 && item.sentenceCount <= 2, item.internalName);
+    assert.deepEqual(item.forbiddenTermMatches.publicName, [], item.internalName);
+    assert.deepEqual(item.forbiddenTermMatches.publicDescription, [], item.internalName);
+    assert.ok(Number.isInteger(item.sourceLine) && item.sourceLine > 0, item.internalName);
+    const source = await readFile(join(root, item.sourceFile), "utf8");
+    assert.ok(item.sourceLine <= source.split(/\r?\n/).length, item.internalName);
+    assert.equal(item.duplicatePublicName, item.duplicateReason !== null, item.internalName);
+  }
+  assert.equal(inventory.duplicatePublicNameCount, inventory.duplicatePublicNames.length);
+  assert.equal(inventory.duplicatePublicNameCount, 7);
+  assert.equal(inventory.duplicateItemCount, 14);
+  assert.equal(inventory.duplicatePublicNames.every((entry) => entry.reason && entry.internalNames.length > 1), true);
+});
+
 test("Installed Chrome verification covers desktop, mobile, default and legacy", async () => {
   const report = JSON.parse(await readFile(join(evidenceRoot, "browser-verification.json"), "utf8"));
   assert.equal(report.status, "PASSED");
@@ -134,9 +171,9 @@ function jpegDimensions(bytes) {
   throw new Error("JPEG dimensions unavailable");
 }
 
-test("ten Installed Chrome screenshots are authentic JPEGs at required viewports", async () => {
+test("Installed Chrome screenshots are authentic JPEGs at required viewports", async () => {
   const files = (await readdir(join(evidenceRoot, "screenshots"))).sort();
-  assert.equal(files.length, 10);
+  assert.equal(files.length, 14);
   assert.equal(files.every(file => file.endsWith(".jpg")), true);
   for (const file of files) {
     const bytes = await readFile(join(evidenceRoot, "screenshots", file));

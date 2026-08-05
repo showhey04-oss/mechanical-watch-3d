@@ -1,4 +1,6 @@
 const PUBLIC_PART_NAME_OVERRIDES = Object.freeze({
+  "E-BALANCED 物理文字板": "文字板",
+  "E-BALANCED 簡略バックル": "尾錠",
   "OPEN_HEART_PRESENTATION_CUTOUT 地板core": "オープンハート地板（本体）",
   "OPEN_HEART_PRESENTATION_CUTOUT 地板topStep": "オープンハート地板（上面）",
   "OPEN_HEART_PRESENTATION_CUTOUT 地板bottomStep": "オープンハート地板（文字板側）",
