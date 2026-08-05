@@ -30,3 +30,14 @@ test("Home Screen icon aliases contain identical approved artwork", async () => 
   );
   assert.deepEqual(defaultIcon, sizedIcon);
 });
+
+test("Home Screen icon is explicitly bound without PWA infrastructure", async () => {
+  const indexHtml = await readFile(join(root, "index.html"), "utf8");
+  assert.match(
+    indexHtml,
+    /<link rel="apple-touch-icon" sizes="180x180" href="\.\/apple-touch-icon\.png">/,
+  );
+  assert.doesNotMatch(indexHtml, /<link[^>]+rel=["']manifest["']/i);
+  assert.doesNotMatch(indexHtml, /serviceWorker\.register\s*\(/);
+  assert.match(indexHtml, /const APP_VERSION='v3\.15\.0';/);
+});
