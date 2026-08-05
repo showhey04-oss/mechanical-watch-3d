@@ -33,7 +33,7 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
 <div id="top"><button id="panelToggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="panel"><span class="panelToggleIcon" aria-hidden="true"><span></span><span></span><span></span></span></button></div>
 <button id="audioToggle" type="button" aria-label="作動音をオンにする" aria-pressed="false" title="作動音 OFF" data-state="off"><svg class="audioToggleIcon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"></path><path d="M16 9.5c1.3 1.4 1.3 3.6 0 5"></path><path d="M18.7 7c2.6 2.8 2.6 7.2 0 10"></path><path class="audioToggleSlash" d="M5 4l14 16"></path></svg></button>
 <output id="soundStatus" class="srOnly" data-state="off" role="status" aria-live="polite">作動音 OFF</output>
-<div id="info" hidden aria-hidden="true"><b>選択部品情報</b><br>選択部品：<span id="partName">なし</span><span id="partDesc">部品をタップ／クリックすると名称と機能を表示します。</span></div>
+<div id="info" hidden aria-hidden="true"><b id="partName"></b><span id="partDesc"></span></div>
 <div id="panel">
  <div id="handle"><div id="grab"></div></div>
  <div id="body">
@@ -45,17 +45,17 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
   <section id="panelViewOperation" class="panelView" role="tabpanel" aria-labelledby="panelTabOperation" data-panel-view="operation">
    <div class="panelIntro">
     <h1>機械式時計 Study Model <span data-app-version></span></h1>
-    <p class="sub">一般操作、学習情報、技術設定を3つのタブへ整理しました。時計機構と3D表示の動作はRefactor A.7を維持します。</p>
+    <p class="sub">時計の操作、部品学習、技術表示を3つのタブで切り替えられます。</p>
     <div class="metrics"><div class="metric"><b>3 tabs</b><span>操作・学習・技術</span></div><div class="metric"><b>2.5 Hz</b><span>18,000振動/時</span></div><div class="metric"><b id="ampMetric">270°</b><span>テンプ振幅</span></div></div>
    </div>
    <div class="section crownControl">
-    <label>りゅうず位置 <span id="crownModeLabel">位置1：巻上げ</span></label>
-    <div class="segmented"><button id="crownWind" class="active">位置1<br>巻上げ</button><button id="crownSet">位置2<br>時刻合わせ</button></div>
+    <label>りゅうず操作 <span id="crownModeLabel">巻上げ</span></label>
+    <div class="segmented"><button id="crownWind" class="active" aria-label="巻上げ">巻上げ</button><button id="crownSet" aria-label="時刻合わせ">時刻合わせ</button></div>
     <div class="row"><label>りゅうずを回す <span id="crownTurnV">中立</span></label><input id="crownTurn" aria-label="りゅうず回転" type="range" min="-100" max="100" value="0"></div>
     <div class="crownDirection" id="crownDirection">右へ回すと主ゼンマイを巻き上げます</div>
     <div class="reserveHead"><span>主ゼンマイ残量</span><b id="reserveV">26.0 / 52 h</b></div>
     <div class="reserveTrack"><div class="reserveFill" id="reserveFill"></div></div>
-    <div class="crownHint">位置1：正転で巻上げ、逆転はコハゼにより空転します。位置2：テンプを停止し、回転方向に応じて時刻を進め／戻します。</div>
+    <div class="crownHint">巻上げでは正転で主ゼンマイを巻き、逆転は空転します。時刻合わせではテンプを停止し、回転方向に応じて時刻を進め／戻します。</div>
    </div>
    <div class="section">
     <span class="tabSectionLabel">基本操作</span>
@@ -88,12 +88,11 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
   </section>
   <section id="panelViewLearning" class="panelView" role="tabpanel" aria-labelledby="panelTabLearning" data-panel-view="learning" hidden>
    <div class="selectedPartStudy">
-    <span class="tabSectionLabel">選択部品情報</span>
-    <b id="learningPartName">なし</b>
-    <p id="learningPartDesc">部品をタップ／クリックすると名称と機能を表示します。</p>
+    <b id="learningPartName" hidden></b>
+    <p id="learningPartDesc">部品を選択すると説明を表示します。</p>
    </div>
    <div class="section structureStudy">
-    <label>ムーブメント構造表示 <span>Refactor A.4</span></label>
+    <label>ムーブメント構造表示 <span>加工座と基準面</span></label>
     <label class="syncLine toggleCard"><input type="checkbox" id="machiningToggle" checked><span class="toggleIndicator" aria-hidden="true"></span><span class="toggleText">地板・受の加工座を表示</span></label>
     <label class="syncLine toggleCard"><input type="checkbox" id="supportToggle" checked><span class="toggleIndicator" aria-hidden="true"></span><span class="toggleText">受の支持脚・ねじ座を表示</span></label>
     <label class="syncLine toggleCard"><input type="checkbox" id="datumToggle"><span class="toggleIndicator" aria-hidden="true"></span><span class="toggleText">厚さ基準線を表示</span></label>
@@ -116,13 +115,13 @@ h1{font-size:17px;margin:0 0 5px}.sub{font-size:12px;line-height:1.55;color:var(
    <div class="section">
     <span class="tabSectionLabel">材質・機能凡例</span>
     <div class="legend"><span><i class="dot" style="background:#c9a65c"></i>黄銅歯車</span><span><i class="dot" style="background:#b7c1ce"></i>鋼部品</span><span><i class="dot" style="background:#a51e48"></i>ルビー</span><span><i class="dot" style="background:#565f6b"></i>地板・受</span><span><i class="dot" style="background:#4ed8e8"></i>噛合いガイド</span><span><i class="dot" style="background:#ff9f43"></i>軸受ガイド</span></div>
-    <div class="warn"><span data-app-version></span>ではRefactor A.7の内部機構、照明、カメラ、選択、透過表示を維持したまま、モバイルオーバーレイとHUDだけを整理します。</div>
+    <div class="warn">内部機構の動き、部品選択、透過表示を組み合わせて構造を観察できます。</div>
    </div>
    <div class="section modelInfo" id="modelInfo">
     <span class="tabSectionLabel">モデル情報</span>
     <b>Mechanical Watch Study Model</b>
     <span data-app-version></span>
-    <span>基準：PR #3 UIアーキテクチャ整理</span>
+    <span>完成プロトタイプ</span>
    </div>
   </section>
   <section id="panelViewTechnical" class="panelView" role="tabpanel" aria-labelledby="panelTabTechnical" data-panel-view="technical" hidden>
@@ -218,6 +217,7 @@ import {FINAL_STABILIZATION_PHASE3B4C_R2,createForegroundMechanismTimebase,resol
 import {VisibilityOwnedAudioLifecycle,resolvePhase3B4cR23LifecycleProfile} from "./js/final-stabilization-phase3b4c-r2-3-lifecycle.js";
 import {WebKitPlatformAudioRecovery,resolvePhase3B4cR24PlatformProfile} from "./js/final-stabilization-phase3b4c-r2-4-platform.js";
 import {FINAL_COMPLETED_WATCH_DEFAULT_PROFILE,assertFinalCompletedWatchDefaultProfile,resolveFinalCompletedWatchDefaultProfile} from "./js/final-completed-watch-default-profile.js";
+import {PUBLIC_UI_COPY_CONTRACT,getPublicPartDescription,getPublicPartName} from "./js/public-ui-copy.js";
 
 const APP_VERSION='v3.15.0';
 const initialLocationSearch=location.search;
@@ -307,12 +307,12 @@ const MAT={
 const root=new THREE.Group();scene.add(root);const groups={plate:new THREE.Group(),bridge:new THREE.Group(),train:new THREE.Group(),esc:new THREE.Group(),balance:new THREE.Group(),wind:new THREE.Group(),dial:new THREE.Group(),motion:new THREE.Group(),diagnostic:new THREE.Group()};Object.values(groups).forEach(g=>root.add(g));groups.diagnostic.visible=false;
 const PICK_LAYER=1;const selectable=[];const exploded=[];const partsInfo={};const partRoots=new WeakMap();const machiningDetails=[],supportDetails=[],datumGuides=[],structuralOpacityTargets=[];let structuralOpacityRatio=1;
 function defaultPickPriority(name,group){if(group==='diagnostic')return 0;if(group==='plate'||group==='bridge')return 1;if(/ねじ|座|軸受|支持|仕上げ|溝/.test(name))return 2;return 3}
-function register(obj,name,desc,group,options={}){const pickPriority=options.pickPriority??defaultPickPriority(name,group);partsInfo[name]=desc;obj.userData.partName=name;obj.userData.group=group;obj.userData.pickPriority=pickPriority;obj.userData.pickable=options.pickable!==false;partRoots.set(obj,obj);obj.traverse(c=>{if(c.isMesh||c.isLine){c.userData.partName=name;c.userData.group=group;c.userData.diagnostic=group==='diagnostic';c.userData.pickPriority=pickPriority;c.userData.pickable=options.pickable!==false;partRoots.set(c,obj);selectable.push(c);if(group!=='diagnostic'&&options.pickable!==false)c.layers.enable(PICK_LAYER);else c.layers.disable(PICK_LAYER);if(c.isMesh){c.castShadow=true;c.receiveShadow=true}}});return obj}
+function register(obj,name,desc,group,options={}){const pickPriority=options.pickPriority??defaultPickPriority(name,group);partsInfo[name]=getPublicPartDescription(name,desc);obj.userData.partName=name;obj.userData.group=group;obj.userData.pickPriority=pickPriority;obj.userData.pickable=options.pickable!==false;partRoots.set(obj,obj);obj.traverse(c=>{if(c.isMesh||c.isLine){c.userData.partName=name;c.userData.group=group;c.userData.diagnostic=group==='diagnostic';c.userData.pickPriority=pickPriority;c.userData.pickable=options.pickable!==false;partRoots.set(c,obj);selectable.push(c);if(group!=='diagnostic'&&options.pickable!==false)c.layers.enable(PICK_LAYER);else c.layers.disable(PICK_LAYER);if(c.isMesh){c.castShadow=true;c.receiveShadow=true}}});return obj}
 function registerSelectionDelegate(obj,{targetRoot,targetName,group='exterior',pickPriority=1,classification='LOCAL_SELECTION_DELEGATE'}={}){if(!targetRoot||!targetName||!partsInfo[targetName])throw new Error(`Selection delegate target is unavailable: ${targetName||'unknown'}`);obj.userData.phase3c3SelectionDelegate=classification;obj.userData.phase3c3StandalonePart=false;obj.traverse(c=>{if(!c.isMesh&&!c.isLine)return;c.userData.partName=targetName;c.userData.group=group;c.userData.diagnostic=false;c.userData.pickPriority=pickPriority;c.userData.pickable=true;c.userData.phase3c3SelectionDelegate=classification;c.userData.phase3c3StandalonePart=false;partRoots.set(c,targetRoot);selectable.push(c);c.layers.disable(0);c.layers.enable(PICK_LAYER);if(c.isMesh){c.castShadow=false;c.receiveShadow=false}});return obj}
 function updatePickLayerMembership(){for(const node of selectable){const materials=Array.isArray(node.material)?node.material:[node.material];const opacity=Math.max(...materials.filter(Boolean).map(material=>material.opacity??1),0);const enabled=visibleHierarchy(node)&&opacity>=PICK_OPACITY_THRESHOLD&&inheritedFlag(node,'pickable',true)!==false&&inheritedFlag(node,'diagnostic',false)!==true;if(enabled)node.layers.enable(PICK_LAYER);else node.layers.disable(PICK_LAYER)}}
 function registerStructuralOpacity(obj){obj.traverse(node=>{if(!node.isMesh||node.userData.structuralOpacityBase)return;const source=Array.isArray(node.material)?node.material:[node.material];const materials=source.map(material=>material.clone());node.material=Array.isArray(node.material)?materials:materials[0];node.userData.opacityGroup='structural';node.userData.structuralOpacityBase=materials.map(material=>({material,opacity:material.opacity,transparent:material.transparent,depthWrite:material.depthWrite}));structuralOpacityTargets.push(node)});return obj}
 function applyStructuralOpacity(ratio){structuralOpacityRatio=Math.max(.08,Math.min(1,ratio));if(issue2Phase3B2Runtime?.ownsOpacityApplication())issue2Phase3B2Runtime.applyOpacity(structuralOpacityRatio);else for(const node of structuralOpacityTargets){for(const base of node.userData.structuralOpacityBase){base.material.opacity=base.opacity*structuralOpacityRatio;base.material.transparent=base.transparent||structuralOpacityRatio<1;base.material.depthWrite=structuralOpacityRatio>=.55?base.depthWrite:false;base.material.needsUpdate=true}}const selectedStructural=selectedMaterials?.filter(selected=>inheritedFlag(selected.node,'opacityGroup',null)==='structural')||[];for(const selected of selectedStructural){const originals=Array.isArray(selected.original)?selected.original:[selected.original];selected.highlights.forEach((highlight,index)=>{const original=originals[index];highlight.opacity=original.opacity;highlight.transparent=original.transparent;highlight.depthWrite=original.depthWrite;highlight.needsUpdate=true})}if(selectedRoot&&selectedStructural.length&&structuralOpacityRatio<.20)clearSelectionInfo();updatePickLayerMembership();issue2Phase3B1cRuntime?.applyOpacity(structuralOpacityRatio)}
-function labelAssembly(obj,name,desc,group){partsInfo[name]=desc;obj.userData.partName=name;obj.userData.group=group;return obj}
+function labelAssembly(obj,name,desc,group){partsInfo[name]=getPublicPartDescription(name,desc);obj.userData.partName=name;obj.userData.group=group;return obj}
 function explode(obj,v){exploded.push({obj,base:obj.position.clone(),v:new THREE.Vector3(...v)});return obj}
 function cyl(r,h,mat,segments=48){return new THREE.Mesh(new THREE.CylinderGeometry(r,r,h,segments),mat)}
 function annularDisc(outerRadius,innerRadius,height,mat,segments=96){const shape=new THREE.Shape();shape.absarc(0,0,outerRadius,0,Math.PI*2,false);const hole=new THREE.Path();hole.absarc(0,0,innerRadius,0,Math.PI*2,true);shape.holes.push(hole);const geo=new THREE.ExtrudeGeometry(shape,{depth:height,bevelEnabled:false,curveSegments:segments});geo.rotateX(Math.PI/2);geo.translate(0,height/2,0);return new THREE.Mesh(geo,mat)}
@@ -994,9 +994,9 @@ function installDimensionAuditOverlay(mode){const existing=document.querySelecto
 // Interaction and highlighting
 const raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2();raycaster.layers.set(PICK_LAYER);let selectedRoot=null;let selectedMaterials=[],selectionBoundsDirty=false;const selectionLight=new THREE.PointLight(0xffc45e,0,7,2);scene.add(selectionLight);
 const infoOverlay=document.getElementById('info'),partNameOutputs=[document.getElementById('partName'),document.getElementById('learningPartName')],partDescOutputs=[document.getElementById('partDesc'),document.getElementById('learningPartDesc')];
-function setPartInfo(name,description){partNameOutputs.forEach(output=>{output.textContent=name});partDescOutputs.forEach(output=>{output.textContent=description});const hasSelection=Boolean(selectedRoot);infoOverlay.hidden=!hasSelection;infoOverlay.setAttribute('aria-hidden',String(!hasSelection))}
+function setPartInfo(name,description){const hasSelection=Boolean(selectedRoot),publicName=hasSelection?getPublicPartName(name):'',publicDescription=hasSelection?getPublicPartDescription(name,description):PUBLIC_UI_COPY_CONTRACT.unavailableSelectionText;partNameOutputs.forEach(output=>{output.textContent=publicName;output.hidden=!hasSelection});partDescOutputs.forEach(output=>{output.textContent=publicDescription});infoOverlay.hidden=!hasSelection;infoOverlay.setAttribute('aria-hidden',String(!hasSelection))}
 function clearSelection(){for(const selected of selectedMaterials){selected.node.material=selected.original;for(const highlight of selected.highlights){highlight.dispose?.()}}selectedMaterials=[];selectedRoot=null;selectionBoundsDirty=false;selectionLight.intensity=0}
-function clearSelectionInfo(){clearSelection();setPartInfo('なし','部品をタップ／クリックすると名称と機能を表示します。')}
+function clearSelectionInfo(){clearSelection();setPartInfo('',PUBLIC_UI_COPY_CONTRACT.unavailableSelectionText)}
 function highlightPart(root){clearSelection();selectedRoot=root;root.traverse(node=>{if(!node.isMesh||!node.material)return;const original=node.material;const source=Array.isArray(original)?original:[original];const highlights=source.map(material=>{const highlight=material.clone();if(highlight.color)highlight.color.lerp(new THREE.Color(0xffd071),.42);if(highlight.emissive){highlight.emissive.setHex(0x8a4b10);highlight.emissiveIntensity=.72}if(typeof highlight.roughness==='number')highlight.roughness=Math.max(.10,highlight.roughness*.78);highlight.needsUpdate=true;return highlight});selectedMaterials.push({node,original,highlights});node.material=Array.isArray(original)?highlights:highlights[0]});const box=new THREE.Box3().setFromObject(root);box.getCenter(selectionLight.position);selectionBoundsDirty=false;selectionLight.intensity=1.65}
 function invalidateSelectionBounds(){if(selectedRoot)selectionBoundsDirty=true}
 function visibleHierarchy(object){for(let node=object;node;node=node.parent){if(node.visible===false)return false;if(node===scene)break}return true}
@@ -1547,9 +1547,9 @@ function refreshControlState(){
  const setting=crownPosition==='set';playBtn.disabled=liveSync||setting;
  if(liveSync)playBtn.textContent='実時間同期中';else if(setting)playBtn.textContent='秒停止中';else playBtn.textContent=running?'一時停止':'再生';
  crownWindBtn.classList.toggle('active',!setting);crownSetBtn.classList.toggle('active',setting);
- crownModeLabel.textContent=setting?'位置2：時刻合わせ＋秒停止':'位置1：巻上げ';
+ crownModeLabel.textContent=setting?'時刻合わせ（秒停止）':'巻上げ';
  crownDirection.textContent=setting?'右へ回すと時刻を進め、左へ回すと戻します':'右へ回すと主ゼンマイを巻き上げます。左回しは空転します';
- if(setting)timeMode.textContent='りゅうず位置2：時刻合わせ（秒停止）';
+ if(setting)timeMode.textContent='時刻合わせ（秒停止）';
  syncToggleCardStates();
 }
 function setSyncUI(enabled){
@@ -1586,8 +1586,8 @@ function setCrownPosition(position,{preserveAudioDetent=false}={}){
   motionConnectionOffsets['center-cannon-friction']=heldCannon-MOTION_WORKS_NODES.cannon.phaseOffset-(trainSourceAngle()-MOTION_WORKS_NODES.center.phaseOffset);
   applyMotionWorksState('train');setEditorTime(watchTimeSec);
  }
- if(position==='set'){if(liveSync){liveSync=false;liveSyncOffsetSec=0;liveSyncStartOffsetSec=0;liveSyncTransitionStartedAt=0;liveSyncInput.checked=false;}timeMode.textContent='りゅうず位置2：時刻合わせ（秒停止）';}
- else if(!liveSync)timeMode.textContent='通常運転／巻上げ位置';
+ if(position==='set'){if(liveSync){liveSync=false;liveSyncOffsetSec=0;liveSyncStartOffsetSec=0;liveSyncTransitionStartedAt=0;liveSyncInput.checked=false;}timeMode.textContent='時刻合わせ（秒停止）';}
+ else if(!liveSync)timeMode.textContent='通常運転／巻上げ';
  if(requestedPhase3B4cR2MechanismTiming.enabled)resetAudioMechanismTimeline(`crown-position:${previous}->${position}`);
  refreshControlState();applyKeylessPositionGeometry();return recordStateTransition(`${previous}->${position}`,before);
 }
