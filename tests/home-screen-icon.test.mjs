@@ -41,3 +41,32 @@ test("Home Screen icon is explicitly bound without PWA infrastructure", async ()
   assert.doesNotMatch(indexHtml, /serviceWorker\.register\s*\(/);
   assert.match(indexHtml, /const APP_VERSION='v3\.15\.0';/);
 });
+
+test("Home Screen icon Human acceptance is complete and scoped", async () => {
+  const review = JSON.parse(
+    await readFile(
+      join(root, "docs/evidence/home-screen-icon/human-review.json"),
+      "utf8",
+    ),
+  );
+  assert.deepEqual(review, {
+    schemaVersion: 1,
+    reviewedHead: "ba4ff5d4c44405ded14a7301b0e96dad8e0d068e",
+    device: "iPhone 16",
+    os: "iOS 26.5.2",
+    browser: "Safari",
+    previewIcon: "PASS",
+    homeScreenIcon: "PASS",
+    whiteBorderAbsent: "PASS",
+    compositionClippingAbsent: "PASS",
+    smallSizeLegibility: "PASS",
+    launchFromIcon: "PASS",
+    applicationRegression: "PASS",
+    overallDecision: "PASS",
+    productCodeChangedAfterReview: false,
+    readyAuthorization: true,
+    mergeAuthorization: true,
+    tagAuthorization: false,
+    releaseAuthorization: false,
+  });
+});
