@@ -9,4 +9,6 @@
 
 `browser-verification.json`はInstalled Chrome 151でのDesktop 1280×720／Mobile 390×844のdefault／legacy shellと、E-BALANCED明示routeでの「文字板」「尾錠」選択を記録する。HUDと学習タブは同期し、horizontal overflow、bottom sheet overflow、console error／warningは0件だった。`screenshots/`のR2追加4枚は同じ残存部品名検証条件の表示証跡である。
 
+`human-review-r2.json`は固定製品Head `9b8369bf9643055de7decaf7df9556c428deff73`をiPhone 16／iOS 26.5.2／Safari／縦向きで確認したHuman受入結果を記録する。開発工程文言、固定見出し、部品名、説明、りゅうず表記、bottom sheet、選択同期、時刻入力、巻上げ／時刻合わせはすべてPASSであり、製品コードを変更せずReady化・mainへのmerge commit方式のマージ・`prototype/public-final`作成が承認された。GitHub Release作成は承認されていない。
+
 `evidence-manifest.json`は自身を除外するclosed-world manifestとする。

@@ -154,6 +154,35 @@ test("Installed Chrome verification covers desktop, mobile, default and legacy",
   assert.deepEqual(report.console, { error: 0, warning: 0, runtimeError: 0, unhandledRejection: 0 });
 });
 
+test("PR #31 R2 physical iPhone Human acceptance is recorded without product-code authorization", async () => {
+  const review = JSON.parse(await readFile(join(evidenceRoot, "human-review-r2.json"), "utf8"));
+  assert.equal(review.schemaVersion, 1);
+  assert.equal(review.reviewedProductHead, "9b8369bf9643055de7decaf7df9556c428deff73");
+  assert.deepEqual(
+    { device: review.device, os: review.os, browser: review.browser, orientation: review.orientation },
+    { device: "iPhone 16", os: "iOS 26.5.2", browser: "Safari", orientation: "portrait" },
+  );
+  for (const result of [
+    review.developmentWordingAbsent,
+    review.fixedHeadingAndPrefixAbsent,
+    review.dialHeading.result,
+    review.buckleHeading.result,
+    review.descriptionLengthAndDisplay.result,
+    review.crownLabels,
+    review.bottomSheet,
+    review.selectionDescriptionSynchronization,
+    review.timeInputAndCurrentTime,
+    review.windingAndTimeSetting,
+    review.overallDecision,
+  ]) assert.equal(result, "PASS");
+  assert.equal(review.dialHeading.displayedName, "文字板");
+  assert.equal(review.buckleHeading.displayedName, "尾錠");
+  assert.equal(review.productCodeChangedAfterReview, false);
+  assert.equal(review.readyAndMainMergeAuthorization, true);
+  assert.equal(review.publicFinalTagAuthorization, true);
+  assert.equal(review.githubReleaseAuthorization, false);
+});
+
 function jpegDimensions(bytes) {
   assert.equal(bytes[0], 0xff);
   assert.equal(bytes[1], 0xd8);

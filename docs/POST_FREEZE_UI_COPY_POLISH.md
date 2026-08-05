@@ -37,6 +37,14 @@ Geometry、輪列中心、部品寸法、機構配置、外装寸法、Material�
 - console error／warning、runtime error、unhandled rejection 0
 - evidence manifest missing／unexpected／SHA mismatch 0
 
+## 物理iPhone Human受入
+
+固定製品Head `9b8369bf9643055de7decaf7df9556c428deff73`をiPhone 16／iOS 26.5.2／Safari／縦向きで確認し、総合PASSとした。開発工程文言の非表示、固定見出し／接頭辞の非表示、「文字板」「尾錠」の公開名、説明表示、巻上げ／時刻合わせ表記、mobile bottom sheet、選択と説明の同期、時刻入力／現在時刻設定、りゅうず操作はすべて合格した。Human受入後の製品コード変更は0件とし、結果は`evidence/post-freeze-ui-copy-polish/human-review-r2.json`へ保存する。
+
+現行版ではinternal `E-BALANCED 物理文字板`をpublic「文字板」とする一般化をHumanが受け入れた。後継Rebuildでは部品構成に応じて「文字板」または「アイボリー文字板」をUI命名規約で決定する。
+
+現行版に残るです・ます調／である調の一部混在はHuman acceptedであり、completion blockerではない。後継Rebuildでは`UI_COPY_STYLE_GUIDE_REQUIRED`として、部品説明、操作説明、学習説明、技術説明、ARIA説明の文体を実装前に統一する。
+
 ## 検証結果
 
 - Node: 509／509合格、fail 0、skip 0、todo 0
@@ -49,4 +57,4 @@ Geometry、輪列中心、部品寸法、機構配置、外装寸法、Material�
 - console error／warning、runtime error、unhandled rejection 0
 - evidence manifest missing／unexpected／SHA mismatch 0
 
-物理iPhoneは自動検証後の固定commit URLで、表示文言、bottom sheet、選択同期、時刻入力、りゅうず操作だけを人間確認する。長時間、音響、Geometryの再試験は対象外とする。
+物理iPhoneの限定Human確認は完了し、総合PASSである。長時間、音響、Geometryの再試験は対象外とした。
