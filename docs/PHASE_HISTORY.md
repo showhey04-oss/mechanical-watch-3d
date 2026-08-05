@@ -237,3 +237,11 @@ Phase 3B.4 stack integration Head `d16037a75d85d705434d8b73ef5293511052f65e`で�
 ## GitHub Pages
 
 リポジトリのPages設定で、`main` ブランチのルートを公開対象にしてください。
+
+## Post-freeze public UI copy polish
+
+- `prototype/final`（`15567d8d9fa5c2f2af8254d12ec31e8a21c5d49f`）を変更前の正式freeze snapshotとして保持したまま、公開画面の文言だけを完成版向けに整理した
+- 選択部品表示は固定見出しと接頭辞を廃止し、内部IDを変えず部品の公開名を見出しとして表示する
+- りゅうずの利用者向け表記は「巻上げ」「時刻合わせ」へ統一し、内部状態、機構、Geometry、描画、音響、操作仕様、query route、`APP_VERSION v3.15.0`を維持する
+- 本記録は機能開発の再開ではなく、限定的なpost-freeze editorial correctionである
+- PR #31 R2の固定製品Head `9b8369bf9643055de7decaf7df9556c428deff73`はiPhone 16／iOS 26.5.2／Safari／縦向きでHuman受入され、公開名「文字板」の一般化と現行版の文体混在を許容した。後継Rebuildでは文字板の具体名をUI命名規約で決定し、`UI_COPY_STYLE_GUIDE_REQUIRED`として部品・操作・学習・技術・ARIA説明の文体を統一する

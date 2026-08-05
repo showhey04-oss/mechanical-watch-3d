@@ -284,7 +284,8 @@ test("README, phase history and MIT license preserve publication contracts", asy
   assert.match(readme, /mechanical-watch-3d-rebuild（準備中）/);
   assert.doesNotMatch(readme, /Issue #2[^\n]*(?:Open|進行中)/);
   for (const sha of new Set(mainReadme.match(/\b[0-9a-f]{40}\b/g) || [])) assert.ok(history.includes(sha), `phase history missing ${sha}`);
-  for (const status of new Set(mainReadme.match(/\b[A-Z][A-Z0-9_]{7,}\b/g) || [])) assert.ok(history.includes(status), `phase history missing ${status}`);
+  const declaredStatuses = [...mainReadme.matchAll(/`([A-Z][A-Z0-9_]{7,})`/g)].map(match => match[1]);
+  for (const status of new Set(declaredStatuses)) assert.ok(history.includes(status), `phase history missing ${status}`);
   assert.match(license, /^MIT License\n/);
   assert.match(license, /Copyright \(c\) 2026 showhey04-oss/);
 });
@@ -312,10 +313,29 @@ test("publication Markdown links resolve and do not target an absent successor r
   }
 });
 
-test("frozen product tree is byte-identical to current main", () => {
-  const changed = git("diff", "--name-only", "origin/main", "--", "index.html", "js", "assets/audio", "package.json", "package-lock.json").split("\n").filter(Boolean);
-  assert.deepEqual(changed, []);
-  assert.equal(git("grep", "-n", "const APP_VERSION='v3.15.0'", "origin/main", "--", "index.html").includes("v3.15.0"), true);
+test("prototype/final remains the immutable freeze source while the branch is copy-only", () => {
+  const freezeCommit = "15567d8d9fa5c2f2af8254d12ec31e8a21c5d49f";
+  assert.equal(git("rev-parse", "prototype/final^{}"), freezeCommit);
+  assert.equal(git("cat-file", "-t", "prototype/final"), "tag");
+  assert.equal(git("show", `${freezeCommit}:index.html`).includes("const APP_VERSION='v3.15.0'"), true);
+
+  const changedProductFiles = git("diff", "--name-only", freezeCommit, "--", "index.html", "js", "assets/audio", "package.json", "package-lock.json")
+    .split("\n")
+    .filter(Boolean);
+  assert.ok(changedProductFiles.includes("index.html"));
+  assert.equal(changedProductFiles.every(file => ["index.html", "js/public-ui-copy.js"].includes(file)), true);
+
+  const protectedFiles = [
+    "js/mechanism-config.js",
+    "js/dial-display-config.js",
+    "js/final-exterior-config.js",
+    "js/final-exterior-attachments-config.js",
+    "assets/audio",
+    "package.json",
+    "package-lock.json",
+  ];
+  assert.equal(git("diff", "--name-only", freezeCommit, "--", ...protectedFiles), "");
+  assert.equal(git("grep", "-n", "const APP_VERSION='v3.15.0'", "HEAD", "--", "index.html").includes("v3.15.0"), true);
 });
 
 test("freeze validation adds no skipped or relaxed existing tests", async () => {

@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased — Post-Freeze Public UI Copy Polish
+
+- 公開画面から開発工程向けの見出し・説明を除去し、選択した部品名そのものをHUDと学習タブの見出しとして表示する
+- りゅうずの利用者向け表記を「巻上げ」「時刻合わせ」へ統一し、可視文言とARIAを同期する。内部の`wind`／`set`およびposition contractは変更しない
+- 部品説明とメニュー説明を1～2文へ整理し、内部ID、Geometry、機構、描画、音響、操作、query route、APP_VERSIONは変更しない
+- `prototype/final`は変更前の正式freeze snapshotとして保持し、本修正は限定的なpost-freeze editorial correctionとして扱う
+
 ## v3.15.0 — PR #27 Completed Watch Default Adoption
 
 - PR #29でnative `type=time`を維持した境界内入力と中央`HH:MM:SS` visual layerを統合。R1物理iPhone FAIL、R2 core overflow PASSの履歴を保持し、R3をiPhone 16／iOS 26.5.2／Safari縦向きでHuman PASSとした
