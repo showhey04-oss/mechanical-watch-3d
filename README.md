@@ -8,6 +8,8 @@ ETA 6498-1級の大型手巻きムーブメントを参照し、機械式時計�
 
 > **プロトタイプ版について**  
 > 本リポジトリは `v3.15.0` の本体完成済みプロトタイプです。正式状態は`MECHANICAL_WATCH_3D_BODY_COMPLETED_V3_15_0`で、completed-watch default adoptionを通常rootへ統合済みです。main body-completion Headは `eb4595e040786e0e2115165d36a9cc39e08b2038`、Nodeは477/477・fail 0・skip 0です。現行アーキテクチャでの機能追加は凍結し、比較queryと診断経路は履歴資産として保持します。Issue #2はaccepted limitationとして`not planned`で終結し、PR #5はsuperseded／未マージで終結しました。追加実装は現行prototypeでは計画せず、後継版 **mechanical-watch-3d-rebuild（準備中）** へ引き継ぎます。開発工程、承認Head、寸法、試験結果、候補の採否は [Phase History](docs/PHASE_HISTORY.md) に全量保存しています。
+>
+> 機能開発の凍結後、公開画面の文言だけを完成版向けに整理しました。機構・描画・操作仕様と `APP_VERSION v3.15.0` は変更せず、元の凍結スナップショットは annotated tag `prototype/final` で保持しています。
 
 | 完成時計・デスクトップ | モバイル表示 |
 |:--:|:--:|
