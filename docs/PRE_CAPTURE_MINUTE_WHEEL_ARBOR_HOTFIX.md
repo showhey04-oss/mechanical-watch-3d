@@ -35,6 +35,8 @@ The broader historical browser harness run on the hotfix branch reported five li
 
 An independent read-only review found no critical, major, or minor implementation defect. It corrected the desktop changed-pixel count to 217 and required the broader-harness provenance wording above before approving Draft PR publication pending Human visual review.
 
-## Human review
+## Human acceptance
 
-Before Ready or merge, compare the fixed-commit default route at desktop and physical iPhone size, concentrating on the hand stack and minute-wheel position near the dial centre. Confirm that the former protrusion is absent and that the dial, hands, selection, HUD, and time display remain natural.
+Human reviewed product Head `07f47533920fcfb57ef8760c7bd6443a96eeaeb0` using an actual rendered screen and accepted the hotfix. The former protrusion and dial-surface artifact were absent; the hour and minute hands, small seconds, open-heart area, and initial-screen quality passed. The acceptance authorizes Ready and merge, but not tag creation, GitHub Release creation, or branch deletion.
+
+The acceptance record changes no product code. `index.html`, `js/**`, `assets/**`, `package.json`, and `package-lock.json` remain exact to the reviewed product Head.

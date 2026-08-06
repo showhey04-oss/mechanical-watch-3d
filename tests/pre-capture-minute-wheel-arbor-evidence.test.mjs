@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 
 const root = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -11,6 +13,8 @@ const root = path.resolve(
 );
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const execFileAsync = promisify(execFile);
+const reviewedProductHead = "07f47533920fcfb57ef8760c7bd6443a96eeaeb0";
 
 function pngDimensions(bytes) {
   assert.deepEqual([...bytes.subarray(0, 8)], [137, 80, 78, 71, 13, 10, 26, 10]);
@@ -56,6 +60,51 @@ test("hotfix report preserves the measured intersection and local clearance", as
   assert.equal(report.after.dialBackClearance, 0.03);
   assert.equal(report.broadGeometryCleanup, false);
   assert.ok(Object.values(report.protected).every((changed) => changed === false));
+});
+
+test("Human acceptance records PASS without tag, Release, or branch-deletion authority", async () => {
+  const review = JSON.parse(
+    await readFile(path.join(root, "human-review.json"), "utf8"),
+  );
+  assert.equal(review.reviewedHead, reviewedProductHead);
+  assert.equal(review.reviewMethod, "Human visual review of actual rendered screen");
+  for (const field of [
+    "visibleArborProtrusionRemoved",
+    "dialSurfaceArtifactAbsent",
+    "hourMinuteHandsRegression",
+    "smallSecondsRegression",
+    "openHeartRegression",
+    "initialScreenQuality",
+    "overallDecision",
+  ]) {
+    assert.equal(review[field], "PASS", field);
+  }
+  assert.equal(review.productCodeChangedAfterReview, false);
+  assert.equal(review.readyAuthorization, true);
+  assert.equal(review.mergeAuthorization, true);
+  assert.equal(review.tagAuthorization, false);
+  assert.equal(review.releaseAuthorization, false);
+  assert.equal(review.branchDeletionAuthorization, false);
+});
+
+test("Human acceptance record leaves the reviewed product tree exact", async () => {
+  const repositoryRoot = path.resolve(root, "../../..");
+  const { stdout } = await execFileAsync(
+    "git",
+    [
+      "diff",
+      "--name-only",
+      reviewedProductHead,
+      "--",
+      "index.html",
+      "js",
+      "assets",
+      "package.json",
+      "package-lock.json",
+    ],
+    { cwd: repositoryRoot },
+  );
+  assert.equal(stdout.trim(), "");
 });
 
 test("hotfix evidence manifest is closed-world and SHA-256 exact", async () => {

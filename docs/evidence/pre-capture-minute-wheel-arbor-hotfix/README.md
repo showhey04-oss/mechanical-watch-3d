@@ -27,4 +27,9 @@ The completed-watch difference is local to the central arbor: 16x16 pixels at de
 - `reports/hotfix-summary.json`: object identity, measured cause, and corrected clearance.
 - `reports/regression-summary.json`: Node, runtime, browser smoke, pixel locality, and legacy parity.
 - `reports/independent-review.json`: read-only independent review disposition.
+- `human-review.json`: Human acceptance of the rendered result at product Head `07f47533920fcfb57ef8760c7bd6443a96eeaeb0`.
 - `evidence-manifest.json`: closed-world byte and SHA-256 inventory; the manifest excludes itself.
+
+## Human acceptance
+
+Human confirmed that the minute-wheel arbor no longer protrudes through the dial and that the dial surface, hour and minute hands, small seconds, open-heart area, and overall initial screen have no visible regression. Overall decision: `PASS`. The record authorizes Ready and merge only; tag, Release, and branch deletion remain unauthorized.
