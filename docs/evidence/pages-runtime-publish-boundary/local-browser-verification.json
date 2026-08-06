@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "sourceBaseCommit": "f66cccede585356161e6d6069db06442a4a3637e",
+  "stageBoundary": ".pages-site only",
+  "server": "http://127.0.0.1:8000/",
+  "browser": "Codex in-app Browser",
+  "appVersion": "v3.15.0",
+  "http": {
+    "index": { "status": 200, "contentType": "text/html" },
+    "representativeJs": { "path": "js/mechanism-config.js", "status": 200, "contentType": "text/javascript" },
+    "audioManifest": { "status": 200, "contentType": "application/json" },
+    "runtimeAudio": { "path": "assets/audio/escapement_tick_A3.wav", "status": 200, "contentType": "audio/x-wav" },
+    "homeScreenIcon": { "status": 200, "contentType": "image/png" },
+    "notFoundCount": 0
+  },
+  "desktop": {
+    "viewport": { "width": 1280, "height": 720 },
+    "default": { "status": "PASS", "profile": "completed-watch", "renderDone": true },
+    "legacy": { "status": "PASS", "profile": "legacy", "renderDone": true },
+    "tabs": ["操作", "学習", "技術"],
+    "selection": { "status": "PASS", "part": "設定車2", "hudVisible": true, "learningTextSynchronized": true },
+    "timeSetting": { "status": "PASS", "result": "03:00:00" },
+    "windingControl": { "status": "PASS", "mode": "巻上げ", "directionText": "右へ回すと主ゼンマイを巻き上げます。左回しは空転します" },
+    "audio": { "status": "PASS", "sequence": ["off", "on", "off" ] }
+  },
+  "mobile": {
+    "viewport": { "width": 390, "height": 844 },
+    "default": { "status": "PASS", "profile": "completed-watch", "renderDone": true },
+    "legacy": { "status": "PASS", "profile": "legacy", "renderDone": true },
+    "tabsPresent": ["操作", "学習", "技術"],
+    "selection": { "status": "PASS", "part": "設定車2", "hudVisible": true },
+    "horizontalOverflow": false
+  },
+  "diagnosticRoute": {
+    "query": "dimensionAudit=1",
+    "status": "passed",
+    "schemaVersion": 2,
+    "renderDone": true
+  },
+  "minuteWheelArbor": {
+    "status": "PASS",
+    "selectedObject": "ミニッツホイール・軸・ほぞ",
+    "visibleDialProtrusion": false,
+    "evidence": "captures/minute-wheel-arbor-default-closeup.jpg"
+  },
+  "console": { "errors": 0, "warnings": 0, "runtimeErrors": 0 },
+  "captures": [
+    "captures/default-desktop-1280x720.jpg",
+    "captures/default-mobile-390x844.jpg",
+    "captures/legacy-desktop-1280x720.jpg",
+    "captures/legacy-mobile-390x844.jpg",
+    "captures/minute-wheel-arbor-default-closeup.jpg"
+  ]
+}
