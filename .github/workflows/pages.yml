@@ -1,22 +1,29 @@
-name: Pages runtime boundary R1
+name: Pages runtime publication
 
 on:
   pull_request:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
-  verify-runtime-package:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Set up Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: 22
       - name: Run full Node suite
@@ -27,11 +34,22 @@ jobs:
         run: node --test tests/pages-runtime-publish-boundary.test.mjs
       - name: Configure Pages metadata without deploying
         uses: actions/configure-pages@v6
-      - name: Upload runtime-only Pages artifact for R1 review
-        uses: actions/upload-pages-artifact@v4
+      - name: Upload runtime-only Pages artifact
+        uses: actions/upload-pages-artifact@v5
         with:
           path: .pages-site
 
-  # R1 intentionally has no deploy job and does not run on pushes to main.
-  # Human approval is required before an R2 may add pages/id-token permissions,
-  # a github-pages environment, deploy-pages, or a Pages Source change.
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy runtime-only Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v5
