@@ -1,10 +1,10 @@
-# GitHub Pages runtime publish boundary R1
+# GitHub Pages runtime publish boundary R1–R2
 
 ## Conclusion
 
 The branch-based GitHub Pages build for main commit `f66cccede585356161e6d6069db06442a4a3637e` attempted to package repository evidence and historical assets together with the browser runtime. Run `31110184546` uploaded 1,090,357,153 bytes and timed out at the Pages deployment boundary. R1 preserves every repository file and instead prepares a runtime-only allowlist package for Human review.
 
-R1 does not change GitHub Pages Settings, does not deploy production, and does not change the application. `APP_VERSION` remains `v3.15.0`.
+R1 does not change GitHub Pages Settings, does not deploy production, and does not change the application. Attempt 3 of run `31117611284` acquired a hosted runner and passed the complete R1 gate. R2 prepares, but does not execute, a production custom-workflow deployment. `APP_VERSION` remains `v3.15.0`.
 
 ## Source audit
 
@@ -44,13 +44,19 @@ Every source must be a regular non-symlink file. The builder rejects traversal, 
 - 512 MiB hard limit: passed
 - Source/stage SHA-256 parity: exact
 
-## Workflow design
+## R1 GitHub Actions result
 
-`.github/workflows/pages.yml` is build-only in R1. It runs for pull requests and manual dispatch, has only `contents: read`, executes the full Node suite, builds and verifies `.pages-site`, and uploads only `.pages-site` as a review artifact. There is no push-to-main trigger, deploy job, `pages: write`, `id-token: write`, `github-pages` environment, or `actions/deploy-pages` step.
+Attempt 3 of run `31117611284` completed successfully at the unchanged R1 Head `6b059d653c9e70256a2dfa08853a4be3bfd6d586`. Job `92767078269` ran on hosted runner `1000000179` (`GitHub Actions 1000000179`). The full Node suite passed 529/529 and the focused boundary suite passed 7/7. Artifact `8981696222`, named `github-pages`, is 292,751 transport bytes and contains 51 regular runtime files from `.pages-site` only. No deploy job or production deployment ran.
 
-The workflow uses the current official major lines verified from the official Action repositories on 2026-08-07: `actions/checkout@v6`, `actions/setup-node@v5`, `actions/configure-pages@v6`, and `actions/upload-pages-artifact@v4`. Checkout uses `fetch-depth: 0` because the audit and parity tests require the fixed base object.
+## R2 workflow design
 
-The official upload action intentionally excludes dotfiles while constructing its deployment tar, so `.nojekyll` is present and SHA-verified in `.pages-site` but is recorded as the single transport exclusion. A custom Actions Pages deployment does not run the branch/Jekyll build, so `.nojekyll` is not required by that transport. The manifest records both the 52-file stage and the 51-file transport set instead of claiming they are identical. A future Human-authorized R2 may add the official `actions/deploy-pages@v4` build/deploy structure described by [GitHub Pages custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages). R1 does not change the repository's current Pages Source.
+`.github/workflows/pages.yml` now validates pull requests, pushes to `main`, and manual dispatches. The build job has only repository read access, executes the full Node suite, rebuilds and verifies `.pages-site`, and uploads only `.pages-site`. The deploy job is guarded by both `github.event_name == 'push'` and `github.ref == 'refs/heads/main'`; only that job receives `pages: write` and `id-token: write`. It depends on the build job and uses the `github-pages` environment and the official deploy action. The `pages` concurrency group is scoped to the deploy job so pull-request validation cannot replace a pending production deployment.
+
+The workflow uses the current official major lines verified from the official Action repositories on 2026-08-07: `actions/checkout@v7`, `actions/setup-node@v7`, `actions/configure-pages@v6`, `actions/upload-pages-artifact@v5`, and `actions/deploy-pages@v5`. Checkout uses `fetch-depth: 0` because the audit and parity tests require the fixed base object.
+
+The official upload action intentionally excludes dotfiles while constructing its deployment tar, so `.nojekyll` is present and SHA-verified in `.pages-site` but is recorded as the single transport exclusion. A custom Actions Pages deployment does not run the branch/Jekyll build, so `.nojekyll` is not required by that transport. The manifest records both the 52-file stage and the 51-file transport set instead of claiming they are identical. The workflow follows [GitHub Pages custom workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages), but this Draft does not change the repository's current legacy Pages Source (`main` `/`).
+
+PR validation run `31153243244` passed at implementation commit `9d09f4e2c65bb46969d93cbd14c8427a76b417cc`: Node 529/529, focused 7/7, build and artifact upload passed, and the deploy job was skipped. Artifact `8984125070` contains 51 regular runtime files; repository-root-only content is absent. Production deployment and Pages Settings changes remain zero.
 
 ## Local runtime verification
 
@@ -62,6 +68,6 @@ The runtime index, representative JS, audio manifest, runtime WAV, and Home Scre
 
 `index.html`, `js/**`, `assets/**`, both icon PNGs, Geometry, mechanism, rendering, camera, lighting, transparency, audio logic, UI, thresholds, and `APP_VERSION` are byte-unchanged from the base commit.
 
-## R1 boundary
+## R2 boundary
 
-This Draft prepares a delivery recovery mechanism only. Human approval is required before Ready, merge, Pages Source changes, production deployment, or enabling a deploy job. Until a later production deployment succeeds, the capture baseline remains pending and video production remains blocked.
+This Draft prepares a delivery recovery mechanism only. Human approval is required before Ready, merge, Pages Source changes, or production deployment. Until a later Human-authorized merge and deployment succeeds, the capture baseline remains pending and video production remains blocked.

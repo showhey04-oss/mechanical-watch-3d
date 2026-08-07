@@ -3,7 +3,7 @@
   "reviewType": "independent-read-only",
   "sourceBaseCommit": "f66cccede585356161e6d6069db06442a4a3637e",
   "branch": "codex/pages-runtime-publish-boundary",
-  "decision": "R1_ACCEPTABLE_FOR_DRAFT_REVIEW",
+  "decision": "R2_ACCEPTABLE_FOR_FINAL_HUMAN_REVIEW",
   "findings": {
     "critical": 0,
     "major": 0,
@@ -15,7 +15,11 @@
     "secretExposure": 0,
     "productRuntimeChanges": 0,
     "sourceStageParity": "PASS",
+    "fullNodeTests": "529/529 PASS",
     "focusedBoundaryTests": "7/7 PASS",
+    "pullRequestDeployJob": "SKIPPED",
+    "productionDeployments": 0,
+    "pagesSettingsChanges": 0,
     "gitDiffCheck": "PASS"
   },
   "closedFindings": [
@@ -23,8 +27,27 @@
     "staging manifest is stored outside the upload root",
     "the official upload action dotfile transport behavior is explicitly modeled",
     "workflow Action major versions are current",
-    "generated staging outputs are ignored"
+    "generated staging outputs are ignored",
+    "pages write and OIDC permissions are scoped to the main-only deploy job",
+    "pull request validation cannot enter or replace the production deploy concurrency queue",
+    "the downloaded Actions artifact contains only the 51 transported runtime files from .pages-site"
   ],
+  "r1Attempt3": {
+    "runId": 31117611284,
+    "jobId": 92767078269,
+    "runnerId": 1000000179,
+    "runnerName": "GitHub Actions 1000000179",
+    "artifactId": 8981696222,
+    "conclusion": "success"
+  },
+  "r2PullRequestValidation": {
+    "runId": 31153243244,
+    "buildJobId": 92787134851,
+    "deployJobId": 92787310016,
+    "deployConclusion": "skipped",
+    "artifactId": 8984125070,
+    "conclusion": "success"
+  },
   "productionDeploymentAuthorized": false,
   "humanAuthorizationRequiredForReadyMergeSettingsAndDeploy": true
 }

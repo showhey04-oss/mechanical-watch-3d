@@ -129,9 +129,9 @@ test("R2 workflow validates pull requests and deploys the staged site only from 
   assert.match(workflow, /pull_request:/);
   assert.match(workflow, /push:\s*\n\s+branches:\s*\n\s+- main/);
   assert.match(workflow, /workflow_dispatch:/);
-  assert.match(workflow, /concurrency:\s*\n\s+group: pages\s*\n\s+cancel-in-progress: false/);
   assert.match(workflow, /deploy:\s*\n\s+if: github\.event_name == 'push' && github\.ref == 'refs\/heads\/main'/);
-  assert.match(workflow, /needs: build/);
+  assert.match(workflow, /deploy:[\s\S]*?needs: build[\s\S]*?concurrency:\s*\n\s+group: pages\s*\n\s+cancel-in-progress: false/);
+  assert.doesNotMatch(workflow.split(/^jobs:/m)[0], /concurrency:/);
   assert.match(workflow, /permissions:\s*\n\s+pages: write\s*\n\s+id-token: write/);
   assert.match(workflow, /environment:\s*\n\s+name: github-pages\s*\n\s+url: \$\{\{ steps\.deployment\.outputs\.page_url \}\}/);
   assert.doesNotMatch(workflow, /path:\s*\.(?:\s|$)/m);
