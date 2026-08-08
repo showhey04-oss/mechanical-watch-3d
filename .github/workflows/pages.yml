@@ -1,0 +1,54 @@
+name: Pages runtime publication
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+      - name: Run full Node suite
+        run: npm test
+      - name: Build runtime-only Pages staging
+        run: node scripts/build-pages-site.mjs
+      - name: Verify staged package
+        run: node --test tests/pages-runtime-publish-boundary.test.mjs
+      - name: Configure Pages metadata without deploying
+        uses: actions/configure-pages@v6
+      - name: Upload runtime-only Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: .pages-site
+
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy runtime-only Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v5
